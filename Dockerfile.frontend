@@ -1,0 +1,27 @@
+# Dockerfile.frontend
+# Estágio de build
+FROM node:20-alpine as builder
+
+WORKDIR /app/frontend
+
+# Copie os arquivos package.json e package-lock.json do frontend
+COPY frontend/package*.json ./
+
+# Instale as dependências do frontend
+RUN npm install --legacy-peer-deps
+
+# Copie o restante do código do frontend
+COPY frontend/ ./
+
+# Construa a aplicação React para produção
+RUN npm run build
+
+# Estágio de produção (usando Nginx para servir os arquivos estáticos)
+FROM nginx:alpine
+
+# Copie os arquivos de build do estágio anterior para o diretório de serviço do Nginx
+COPY --from=builder /app/frontend/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

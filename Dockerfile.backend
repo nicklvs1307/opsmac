@@ -1,0 +1,24 @@
+# Dockerfile.backend
+# Use uma imagem base oficial do Node.js
+FROM node:20-alpine
+
+# Defina o diretório de trabalho dentro do contêiner
+WORKDIR /app
+
+# Copie os arquivos package.json e package-lock.json para instalar as dependências
+# Isso aproveita o cache do Docker se as dependências não mudarem
+COPY package*.json ./
+
+# Instale as dependências do projeto principal
+RUN npm install
+
+# Copie o restante do código da aplicação
+COPY . .
+
+# Defina a porta que o aplicativo Node.js irá escutar
+# Certifique-se de que seu server.js escute process.env.PORT ou a porta 5000
+ENV PORT=5000
+EXPOSE 5000
+
+# Comando para iniciar a aplicação
+CMD ["npm", "start"]

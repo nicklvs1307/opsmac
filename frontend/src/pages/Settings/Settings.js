@@ -1,0 +1,871 @@
+import React, { useState, useCallback, useEffect } from 'react';
+import {
+  Box,
+  Paper,
+  Typography,
+  Button,
+  TextField,
+  Grid,
+  Card,
+  CardContent,
+  CardHeader,
+  Switch,
+  Divider,
+  CircularProgress,
+  Avatar,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Chip,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+} from '@mui/material';
+import {
+  Person as PersonIcon,
+  Business as BusinessIcon,
+  Notifications as NotificationsIcon,
+  Security as SecurityIcon,
+  Palette as PaletteIcon,
+  PhotoCamera as PhotoCameraIcon,
+  Save as SaveIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  Add as AddIcon,
+  ContentCopy as ContentCopyIcon,
+} from '@mui/icons-material';
+import { useForm, Controller } from 'react-hook-form';
+import { useAuth } from '../../contexts/AuthContext';
+import { useThemeMode } from '../../contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
+import axiosInstance from '../../api/axiosInstance';
+import toast from 'react-hot-toast';
+
+const Settings = () => {
+  const { user, updateUser } = useAuth();
+  const { mode, toggleTheme } = useThemeMode();
+  const { t, i18n } = useTranslation();
+  const restaurantId = user?.restaurants?.[0]?.id;
+  
+  const [loading, setLoading] = useState(true); // Keep true from current
+  const [apiToken, setApiToken] = useState('');
+  const [activeTab, setActiveTab] = useState('profile');
+  const [changePasswordDialog, setChangePasswordDialog] = useState(false);
+  const [settings, setSettings] = useState({
+    notifications: {
+      email_feedback: true,
+      email_reports: true,
+      sms_alerts: false,
+      push_notifications: true,
+    },
+    appearance: {
+      theme: mode, // Use mode from useThemeMode
+      language: i18n.language, // Use i18n.language
+      timezone: 'America/Sao_Paulo',
+    },
+    business: {
+      auto_reply: true,
+      feedback_moderation: false,
+      qr_expiration: 30,
+      loyalty_program: true,
+    },
+  });
+
+  const fetchApiToken = useCallback(async (id) => {
+    try {
+      const response = await axiosInstance.get(`/api/settings/${id}/api-token`);
+      setApiToken(response.data.api_token || '');
+    } catch (err) {
+      console.error('Error fetching API token:', err);
+      toast.error(t('settings.error_fetching_api_token'));
+    }
+  }, [t]);
+
+  const fetchSettings = useCallback(async (id) => {
+    try {
+      const response = await axiosInstance.get(`/api/settings/${id}`);
+      setSettings(prevSettings => ({
+        notifications: { ...(prevSettings.notifications || {}), ...(response.data.settings?.notifications || {}) },
+        appearance: { ...(prevSettings.appearance || {}), ...(response.data.settings?.appearance || {}) },
+        business: { ...(prevSettings.business || {}), ...(response.data.settings?.business || {}) },
+      }));
+    } catch (err) {
+      console.error('Error fetching settings:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleGenerateApiToken = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance.post(`/api/settings/${restaurantId}/api-token/generate`);
+      setApiToken(response.data.api_token);
+      toast.success(t('settings.new_api_token_generated'));
+    } catch (err) {
+      console.error('Error generating API token:', err);
+      toast.error(t('settings.error_generating_api_token'));
+    } finally {
+      setLoading(false);
+    }
+  }, [restaurantId, t]);
+
+  const handleRevokeApiToken = useCallback(async () => {
+    try {
+      setLoading(true);
+      await axiosInstance.delete(`/api/settings/${restaurantId}/api-token`);
+      setApiToken('');
+      toast.success(t('settings.api_token_revoked'));
+    } catch (err) {
+      console.error('Error revoking API token:', err);
+      toast.error(t('settings.error_revoking_api_token'));
+    } finally {
+      setLoading(false);
+    }
+  }, [restaurantId, t]);
+
+  const {
+    control: profileControl,
+    handleSubmit: handleProfileSubmit,
+    formState: { errors: profileErrors },
+    reset: resetProfile,
+  } = useForm({
+    defaultValues: {
+      name: user?.name || '',
+      email: user?.email || '',
+      phone: user?.phone || '',
+      restaurant_name: user?.restaurant?.name || '',
+      cuisine_type: user?.restaurant?.cuisine_type || '',
+      address: user?.restaurant?.address || '',
+      description: user?.restaurant?.description || '',
+    },
+  });
+
+  const {
+    control: passwordControl,
+    handleSubmit: handlePasswordSubmit,
+    formState: { errors: passwordErrors },
+    reset: resetPassword,
+    watch,
+  } = useForm({
+    defaultValues: {
+      current_password: '',
+      new_password: '',
+      confirm_password: '',
+    },
+  });
+
+  const newPassword = watch('new_password');
+
+  // Combined useEffect for initial data fetching and form reset
+  useEffect(() => {
+    if (user && restaurantId) {
+      fetchSettings(restaurantId);
+      fetchApiToken(restaurantId);
+      resetProfile({
+        name: user.name || '',
+        email: user.email || '',
+        phone: user.phone || '',
+        restaurant_name: user.restaurant?.name || '',
+        cuisine_type: user.restaurant?.cuisine_type || '',
+        address: user.restaurant?.address || '',
+        description: user.restaurant?.description || '',
+      });
+    }
+  }, [user, restaurantId, fetchSettings, fetchApiToken, resetProfile]);
+
+  const onProfileSubmit = async (data) => {
+    try {
+      setLoading(true);
+      
+      const profileData = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+      };
+      
+      const restaurantData = {
+        name: data.restaurant_name,
+        cuisine_type: data.cuisine_type,
+        address: data.address,
+        description: data.description,
+      };
+      
+      await updateUser(profileData, restaurantData); // Use updateUser from current context
+      toast.success(t('settings.profile_updated_successfully')); // Use t() for translation
+    } catch (err) {
+      toast.error(err.response?.data?.message || t('settings.error_updating_profile')); // Use t()
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onPasswordSubmit = async (data) => {
+    try {
+      setLoading(true);
+      
+      await axiosInstance.put('/api/auth/change-password', {
+        current_password: data.current_password,
+        new_password: data.new_password,
+      });
+      
+            toast.success(t('settings.password_changed_successfully')); // Use t()
+      setChangePasswordDialog(false);
+      resetPassword();
+    } catch (err) {
+      toast.error(err.response?.data?.message || t('settings.error_changing_password')); // Use t()
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSettingChange = async (category, setting, value) => {
+    try {
+      const newSettings = {
+        ...settings,
+        [category]: {
+          ...settings[category],
+          [setting]: value,
+        },
+      };
+      
+      setSettings(newSettings);
+      
+      await axiosInstance.put(`/api/settings/${restaurantId}`, { // Use restaurantId
+        category,
+        setting,
+        value,
+      });
+      
+      toast.success(t('settings.setting_updated')); // Use t()
+    } catch (err) {
+      toast.error(t('settings.error_updating_setting')); // Use t()
+      // Revert on error
+      if (restaurantId) { // Only fetch if restaurantId exists
+        fetchSettings(restaurantId);
+      }
+    }
+  };
+
+  const tabs = [
+    { id: 'profile', label: t('settings.profile'), icon: PersonIcon },
+    { id: 'business', label: t('settings.business'), icon: BusinessIcon },
+    { id: 'notifications', label: t('settings.notifications'), icon: NotificationsIcon },
+    { id: 'security', label: t('settings.security'), icon: SecurityIcon },
+    { id: 'appearance', label: t('settings.appearance'), icon: PaletteIcon },
+  ];
+
+  const cuisineTypes = [
+    'Brasileira', 'Italiana', 'Japonesa', 'Chinesa', 'Mexicana', 'Francesa',
+    'Indiana', 'Árabe', 'Vegetariana', 'Vegana', 'Fast Food', 'Pizzaria',
+    'Churrascaria', 'Frutos do Mar', 'Contemporânea', 'Fusion', 'Outros',
+  ];
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'profile':
+        return (
+          <Card>
+            <CardHeader
+              title={t('settings.personal_info')}
+              subheader={t('settings.update_personal_info')}
+            />
+            <CardContent>
+              <Box display="flex" alignItems="center" mb={3}>
+                <Avatar
+                  sx={{ width: 80, height: 80, mr: 2 }}
+                  src={user?.avatar}
+                >
+                  {user?.name?.charAt(0)}
+                </Avatar>
+                <Box>
+                  <Typography variant="h6">{user?.name}</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {user?.role === 'admin' ? t('settings.role_admin') : t('settings.role_user')}
+                  </Typography>
+                  <IconButton size="small" sx={{ mt: 1 }}>
+                    <PhotoCameraIcon />
+                  </IconButton>
+                </Box>
+              </Box>
+              
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name="name"
+                    control={profileControl}
+                    rules={{ required: t('settings.name_required') }}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label={t('settings.full_name')}
+                        fullWidth
+                        error={!!profileErrors.name}
+                        helperText={profileErrors.name?.message}
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name="email"
+                    control={profileControl}
+                    rules={{
+                      required: t('settings.email_required'),
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: t('settings.invalid_email'),
+                      },
+                    }}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label={t('settings.email')}
+                        type="email"
+                        fullWidth
+                        error={!!profileErrors.email}
+                        helperText={profileErrors.email?.message}
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name="phone"
+                    control={profileControl}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label={t('settings.phone')}
+                        fullWidth
+                        placeholder="(11) 99999-9999"
+                      />
+                    )}
+                  />
+                </Grid>
+              </Grid>
+              
+              <Box mt={3}>
+                <Button
+                  variant="contained"
+                  startIcon={<SaveIcon />}
+                  onClick={handleProfileSubmit(onProfileSubmit)}
+                  disabled={loading}
+                >
+                  {loading ? <CircularProgress size={20} /> : t('settings.save_changes')}
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
+        );
+
+      case 'business':
+        return (
+          <Card>
+            <CardHeader
+              title={t('settings.restaurant_info')}
+              subheader={t('settings.configure_restaurant_info')}
+            />
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name="restaurant_name"
+                    control={profileControl}
+                    rules={{ required: t('settings.restaurant_name_required') }}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label={t('settings.restaurant_name')}
+                        fullWidth
+                        error={!!profileErrors.restaurant_name}
+                        helperText={profileErrors.restaurant_name?.message}
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name="cuisine_type"
+                    control={profileControl}
+                    render={({ field }) => (
+                      <FormControl fullWidth>
+                        <InputLabel>{t('settings.cuisine_type')}</InputLabel>
+                        <Select {...field} label={t('settings.cuisine_type')}>
+                          {cuisineTypes.map((type) => (
+                            <MenuItem key={type} value={type}>
+                              {type}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Controller
+                    name="address"
+                    control={profileControl}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label={t('settings.address')}
+                        fullWidth
+                        multiline
+                        rows={2}
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Controller
+                    name="description"
+                    control={profileControl}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label={t('settings.description')}
+                        fullWidth
+                        multiline
+                        rows={3}
+                        placeholder={t('settings.description')}
+                      />
+                    )}
+                  />
+                </Grid>
+              </Grid>
+              
+              <Divider sx={{ my: 3 }} />
+              
+              <Typography variant="h6" gutterBottom>
+                {t('settings.business_settings')}
+              </Typography>
+              
+              <List>
+                <ListItem>
+                  <ListItemText
+                    primary={t('settings.auto_reply')}
+                    secondary={t('settings.send_auto_replies')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      checked={settings.business.auto_reply}
+                      onChange={(e) => handleSettingChange('business', 'auto_reply', e.target.checked)}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+                
+                <ListItem>
+                  <ListItemText
+                    primary={t('settings.feedback_moderation')}
+                    secondary={t('settings.review_feedback_before_publishing')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      checked={settings.business.feedback_moderation}
+                      onChange={(e) => handleSettingChange('business', 'feedback_moderation', e.target.checked)}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+                
+                <ListItem>
+                  <ListItemText
+                    primary={t('settings.loyalty_program')}
+                    secondary={t('settings.activate_loyalty_program')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      checked={settings.business.loyalty_program}
+                      onChange={(e) => handleSettingChange('business', 'loyalty_program', e.target.checked)}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </List>
+              
+              <Box mt={3}>
+                <Button
+                  variant="contained"
+                  startIcon={<SaveIcon />}
+                  onClick={handleProfileSubmit(onProfileSubmit)}
+                  disabled={loading}
+                >
+                  {loading ? <CircularProgress size={20} /> : t('settings.save_changes')}
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
+        );
+
+      case 'notifications':
+        return (
+          <Card>
+            <CardHeader
+              title={t('settings.notification_preferences')}
+              subheader={t('settings.configure_notifications')}
+            />
+            <CardContent>
+              <List>
+                <ListItem>
+                  <ListItemText
+                    primary={t('settings.email_new_feedback')}
+                    secondary={t('settings.receive_email_new_feedback')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      checked={settings.notifications.email_feedback}
+                      onChange={(e) => handleSettingChange('notifications', 'email_feedback', e.target.checked)}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+                
+                <ListItem>
+                  <ListItemText
+                    primary={t('settings.email_reports')}
+                    secondary={t('settings.receive_weekly_reports')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      checked={settings.notifications.email_reports}
+                      onChange={(e) => handleSettingChange('notifications', 'email_reports', e.target.checked)}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+                
+                <ListItem>
+                  <ListItemText
+                    primary={t('settings.sms_alerts')}
+                    secondary={t('settings.receive_important_alerts_sms')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      checked={settings.notifications.sms_alerts}
+                      onChange={(e) => handleSettingChange('notifications', 'sms_alerts', e.target.checked)}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+                
+                <ListItem>
+                  <ListItemText
+                    primary={t('settings.push_notifications')}
+                    secondary={t('settings.receive_browser_notifications')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      checked={settings.notifications.push_notifications}
+                      onChange={(e) => handleSettingChange('notifications', 'push_notifications', e.target.checked)}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </List>
+            </CardContent>
+          </Card>
+        );
+
+      case 'security':
+        return (
+          <Card>
+            <CardHeader
+              title={t('settings.security_settings')}
+              subheader={t('settings.manage_security_settings')}
+            />
+            <CardContent>
+              <Box mb={3}>
+                <Typography variant="h6" gutterBottom>
+                  {t('settings.change_password')}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" gutterBottom>
+                  {t('settings.keep_account_secure')}
+                </Typography>
+                <Button
+                  variant="outlined"
+                  startIcon={<EditIcon />}
+                  onClick={() => setChangePasswordDialog(true)}
+                >
+                  {t('settings.change_password')}
+                </Button>
+              </Box>
+              
+              <Divider sx={{ my: 3 }} />
+              
+              <Box>
+                <Typography variant="h6" gutterBottom>
+                  {t('settings.active_sessions')}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" gutterBottom>
+                  {t('settings.manage_logged_in_sessions')}
+                </Typography>
+                
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary={t('settings.current_browser')}
+                      secondary={t('settings.current_browser_details')}
+                    />
+                    <Chip label={t('settings.current_browser')} color="primary" size="small" />
+                  </ListItem>
+                </List>
+              </Box>
+              {/* API Token Section */}
+              <Divider sx={{ my: 3 }} />
+              <Box>
+                <Typography variant="h6" gutterBottom>
+                  {t('settings.api_token')}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" gutterBottom>
+                  {t('settings.use_public_api')}
+                </Typography>
+                {apiToken ? (
+                  <Box display="flex" alignItems="center">
+                    <TextField
+                      value={apiToken}
+                      fullWidth
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      sx={{ mr: 2 }}
+                    />
+                    <IconButton onClick={() => navigator.clipboard.writeText(apiToken)}>
+                      <ContentCopyIcon />
+                    </IconButton>
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      startIcon={<DeleteIcon />}
+                      onClick={handleRevokeApiToken}
+                      disabled={loading}
+                    >
+                      {t('settings.revoke_token')}
+                    </Button>
+                  </Box>
+                ) : (
+                  <Button
+                    variant="contained"
+                    startIcon={<AddIcon />}
+                    onClick={handleGenerateApiToken}
+                    disabled={loading}
+                  >
+                    {t('settings.generate_new_token')}
+                  </Button>
+                )}
+              </Box>
+            </CardContent>
+          </Card>
+        );
+
+      case 'appearance':
+        return (
+          <Card>
+            <CardHeader
+              title={t('settings.appearance')}
+              subheader={t('settings.personalize_appearance')}
+            />
+            <CardContent>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>{t('settings.theme')}</InputLabel>
+                    <Select
+                      value={settings.appearance.theme}
+                      label={t('settings.theme')}
+                      onChange={(e) => {
+                        handleSettingChange('appearance', 'theme', e.target.value);
+                        toggleTheme(e.target.value); // Toggle theme in context
+                      }}
+                    >
+                      <MenuItem value="light">{t('settings.light')}</MenuItem>
+                      <MenuItem value="dark">{t('settings.dark')}</MenuItem>
+                      <MenuItem value="auto">{t('settings.auto')}</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>{t('settings.language')}</InputLabel>
+                    <Select
+                      value={settings.appearance.language}
+                      label={t('settings.language')}
+                      onChange={(e) => {
+                        handleSettingChange('appearance', 'language', e.target.value);
+                        i18n.changeLanguage(e.target.value); // Change language in i18n
+                      }}
+                    >
+                      <MenuItem value="pt">{t('settings.language_pt')}</MenuItem>
+                      <MenuItem value="en">{t('settings.language_en')}</MenuItem>
+                      <MenuItem value="es">{t('settings.language_es')}</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>{t('settings.timezone')}</InputLabel>
+                    <Select
+                      value={settings.appearance.timezone}
+                      label={t('settings.timezone')}
+                      onChange={(e) => handleSettingChange('appearance', 'timezone', e.target.value)}
+                    >
+                      <MenuItem value="America/Sao_Paulo">{t('settings.timezone_sao_paulo')}</MenuItem>
+                      <MenuItem value="America/New_York">{t('settings.timezone_new_york')}</MenuItem>
+                      <MenuItem value="Europe/London">{t('settings.timezone_london')}</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <Box>
+      <Typography variant="h4" component="h1" gutterBottom>
+        {t('settings.title')}
+      </Typography>
+      
+      <Grid container spacing={3}>
+        {/* Sidebar */}
+        <Grid item xs={12} md={3}>
+          <Paper sx={{ p: 2 }}>
+            <List component="nav">
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                return (
+                  <ListItem
+                    key={tab.id}
+                    button
+                    selected={activeTab === tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    sx={{
+                      borderRadius: 1,
+                      mb: 0.5,
+                      '&.Mui-selected': {
+                        backgroundColor: 'primary.main',
+                        color: 'primary.contrastText',
+                        '&:hover': {
+                          backgroundColor: 'primary.dark',
+                        },
+                      },
+                    }}
+                  >
+                    <Icon sx={{ mr: 2 }} />
+                    <ListItemText primary={tab.label} />
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Paper>
+        </Grid>
+        
+        {/* Content */}
+        <Grid item xs={12} md={9}>
+          {loading ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            renderTabContent()
+          )}
+        </Grid>
+      </Grid>
+
+      {/* Change Password Dialog */}
+      <Dialog
+        open={changePasswordDialog}
+        onClose={() => setChangePasswordDialog(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>{t('settings.change_password')}</DialogTitle>
+        <DialogContent>
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid item xs={12}>
+              <Controller
+                name="current_password"
+                control={passwordControl}
+                rules={{ required: t('settings.current_password_required') }}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label={t('settings.current_password_label')}
+                    type="password"
+                    fullWidth
+                    error={!!passwordErrors.current_password}
+                    helperText={passwordErrors.current_password?.message}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Controller
+                name="new_password"
+                control={passwordControl}
+                rules={{
+                  required: t('settings.new_password_required'),
+                  minLength: {
+                    value: 6,
+                    message: t('settings.new_password_min_length'),
+                  },
+                }}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label={t('settings.new_password_label')}
+                    type="password"
+                    fullWidth
+                    error={!!passwordErrors.new_password}
+                    helperText={passwordErrors.new_password?.message}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Controller
+                name="confirm_password"
+                control={passwordControl}
+                rules={{
+                  required: t('settings.confirm_password_required'),
+                  validate: (value) =>
+                    value === newPassword || t('settings.passwords_do_not_match'),
+                }}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label={t('settings.confirm_password_label')}
+                    type="password"
+                    fullWidth
+                    error={!!passwordErrors.confirm_password}
+                    helperText={passwordErrors.confirm_password?.message}
+                  />
+                )}
+              />
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setChangePasswordDialog(false)}>{t('settings.cancel_button')}</Button>
+          <Button
+            onClick={handlePasswordSubmit(onPasswordSubmit)}
+            variant="contained"
+            disabled={loading}
+          >
+            {loading ? <CircularProgress size={20} /> : t('settings.update_password')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
+  );
+};
+
+export default Settings;

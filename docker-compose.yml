@@ -9,7 +9,7 @@ services:
     image: feedeliza-backend:latest
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=postgresql://postgres:b74996144735db08d6e091f460df4184@postgres:5432/nomedaaplicacao
+      - DATABASE_URL=postgresql://postgres:b74996144735db08d6e091f460df4184@postgres:5432/feedeliza
       - JWT_SECRET=bJ0c8J5UXhGVsI3zbqMnOAQsCGk8BNBG
       # Adicione outras variáveis de ambiente do seu backend aqui, se houver
     deploy:

@@ -5,10 +5,10 @@ FROM node:20-alpine as builder
 WORKDIR /app/frontend
 
 # Copie os arquivos package.json e package-lock.json do frontend
-COPY frontend/package*.json ./
+COPY frontend/package*.json .
 
-# Instale as dependências do frontend
-RUN npm install --legacy-peer-deps
+# Limpe o cache do npm e instale as dependências do frontend
+RUN npm cache clean --force && rm -rf node_modules package-lock.json && npm ci --legacy-peer-deps
 
 # Copie o restante do código do frontend
 COPY frontend/ ./

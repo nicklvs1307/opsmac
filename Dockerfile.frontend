@@ -14,7 +14,7 @@ RUN npm cache clean --force && npm ci --legacy-peer-deps
 COPY frontend/ ./
 
 # Construa a aplicação React para produção
-RUN npm run build
+RUN npm run build && ls -la /app/frontend/build
 
 # Estágio de produção (usando Nginx para servir os arquivos estáticos)
 FROM nginx:alpine

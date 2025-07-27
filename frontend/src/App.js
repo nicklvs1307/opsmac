@@ -13,7 +13,6 @@ import ProtectedRoute from './components/Auth/ProtectedRoute';
 
 // Pages
 import Login from './pages/Auth/Login';
-import Register from './pages/Auth/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 import FeedbackList from './pages/Feedback/FeedbackList';
 import NewFeedback from './pages/Feedback/NewFeedback';
@@ -35,6 +34,7 @@ import SurveyList from './pages/Surveys/SurveyList';
 import SurveyCreate from './pages/Surveys/SurveyCreate';
 import SurveyResults from './pages/Surveys/SurveyResults';
 import SurveyEdit from './pages/Surveys/SurveyEdit';
+import AdminDashboard from './pages/Admin/AdminDashboard';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -56,7 +56,6 @@ function App() {
               <Routes>
                 {/* Public Routes */}
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
                 <Route path="/feedback/:shortUrl" element={<PublicFeedback />} />
                 <Route path="/thank-you" element={<ThankYou />} />
                 <Route path="/public/surveys/:id" element={<PublicSurveyForm />} />
@@ -88,7 +87,7 @@ function App() {
                   <Route path="surveys/:id/results" element={<SurveyResults />} />
                   <Route path="surveys/:id/results" element={<SurveyResults />} />
                 </Route>
-                
+                <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
                 {/* Catch all route */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Routes>

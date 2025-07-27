@@ -192,7 +192,7 @@ module.exports = (sequelize) => {
       beforeValidate: async (qrcode) => {
         // Gerar URL de feedback
         if (!qrcode.feedback_url && qrcode.restaurant_id && qrcode.table_number) {
-          const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+          const baseUrl = process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com';
           qrcode.feedback_url = `${baseUrl}/feedback/${qrcode.restaurant_id}/${qrcode.table_number}`;
         }
         
@@ -328,7 +328,7 @@ module.exports = (sequelize) => {
   };
 
   QRCode.prototype.getShortUrl = function() {
-    const baseUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+    const baseUrl = process.env.BACKEND_URL || 'https://feedelizaapi.towersfy.com';
     return `${baseUrl}/s/${this.short_url}`;
   };
 

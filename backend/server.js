@@ -18,6 +18,7 @@ const checkinRoutes = require('./routes/checkin');
 const publicRoutesV2 = require('./routes/public_v2');
 const surveyRoutes = require('./routes/surveys');
 const publicSurveyRoutes = require('./routes/public_surveys');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,7 +35,7 @@ const limiter = rateLimit({
 // Middlewares
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com',
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -58,6 +59,7 @@ app.use('/api/checkin', checkinRoutes);
 app.use('/api/public/v2', publicRoutesV2);
 app.use('/api/surveys', surveyRoutes);
 app.use('/api/public/surveys', publicSurveyRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');
@@ -157,8 +159,8 @@ const startServer = async () => {
     
     app.listen(PORT, () => {
       console.log(`🚀 Servidor rodando na porta ${PORT}`);
-      console.log(`📊 Dashboard: ${process.env.FRONTEND_URL || 'http://localhost:3000'}`);
-      console.log(`🔗 API: http://localhost:${PORT}/api`);
+      console.log(`📊 Dashboard: ${process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com'}`);
+      console.log(`🔗 API: https://feedelizaapi.towersfy.com/api`);
     });
   } catch (error) {
     console.error('❌ Erro ao iniciar servidor:', error);

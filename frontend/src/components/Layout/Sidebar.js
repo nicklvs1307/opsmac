@@ -168,6 +168,12 @@ const Sidebar = ({ onMobileClose }) => {
       icon: <SettingsIcon />,
       path: '/settings',
       roles: ['admin', 'owner']
+    },
+    {
+      title: 'Admin',
+      icon: <DashboardIcon />,
+      path: '/admin',
+      roles: ['admin']
     }
   ];
 

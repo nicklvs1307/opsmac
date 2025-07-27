@@ -84,7 +84,7 @@ const generateToken = (userId) => {
  *   description: Gerenciamento de autenticação e usuários
  */
 
-/**
+/*
  * @swagger
  * /api/auth/register:
  *   post:
@@ -168,7 +168,7 @@ const generateToken = (userId) => {
  *       500:
  *         description: Erro interno do servidor.
  */
-router.post('/register', authLimiter, registerValidation, async (req, res) => {
+/* router.post('/register', authLimiter, registerValidation, async (req, res) => {
   try {
     // Verificar erros de validação
     const errors = validationResult(req);
@@ -229,7 +229,7 @@ router.post('/register', authLimiter, registerValidation, async (req, res) => {
       message: process.env.NODE_ENV === 'development' ? error.message : 'Erro ao criar usuário'
     });
   }
-});
+}); */
 
 /**
  * @swagger

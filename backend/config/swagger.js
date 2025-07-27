@@ -11,8 +11,8 @@ const options = {
     },
     servers: [
       {
-        url: `http://localhost:${process.env.PORT || 5000}/api`,
-        description: 'Development server',
+        url: `https://feedelizaapi.towersfy.com/api`,
+        description: 'Production server',
       },
     ],
     tags: [

@@ -28,7 +28,10 @@
     "jspdf": "^2.5.1",
     "recharts": "^2.5.0",
     "date-fns": "^2.29.3",
-    "react-i18next": "^15.6.1"
+    "react-i18next": "^15.6.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@chakra-ui/icons": "^2.1.1",
+    "framer-motion": "^11.3.17"
   },
   "scripts": {
     "start": "react-scripts start",

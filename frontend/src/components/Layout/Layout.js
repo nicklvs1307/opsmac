@@ -22,7 +22,7 @@ import Header from './Header';
 
 const drawerWidth = 280;
 
-const Layout = () => {
+const Layout = ({ children }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);

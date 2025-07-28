@@ -21,6 +21,7 @@ const publicSurveyRoutes = require('./routes/public_surveys');
 const adminRoutes = require('./routes/admin');
 
 const app = express();
+app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)
 const PORT = process.env.PORT || 5000;
 
 // Rate limiting

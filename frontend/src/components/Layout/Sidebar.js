@@ -173,7 +173,7 @@ const Sidebar = ({ onMobileClose }) => {
       title: 'Admin',
       icon: <DashboardIcon />,
       path: '/admin',
-      roles: ['admin']
+      roles: ['super_admin']
     }
   ];
 

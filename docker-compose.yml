@@ -40,6 +40,8 @@ services:
     build:
       context: /root/opsmac
       dockerfile: Dockerfile.frontend
+      args:
+        - REACT_APP_API_URL=https://feedelizaapi.towersfy.com/api
     image: feedeliza-frontend:latest
     deploy:
       replicas: 1

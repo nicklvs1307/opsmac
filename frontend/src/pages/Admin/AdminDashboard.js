@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Heading, Tabs, TabList, TabPanels, Tab, TabPanel, FormControl, FormLabel, Input, Button, Select, useToast } from '@chakra-ui/react';
 import axiosInstance from '../../api/axiosInstance';
 
 const AdminDashboard = () => {
   const toast = useToast();
+  const [users, setUsers] = useState([]); // Novo estado para armazenar usuários
 
   // State para o formulário de usuário
   const [userForm, setUserForm] = useState({
@@ -26,6 +27,25 @@ const AdminDashboard = () => {
     website: '',
     owner_id: '',
   });
+
+  // Efeito para carregar usuários quando o componente é montado
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axiosInstance.get('/admin/users');
+        setUsers(response.data);
+      } catch (error) {
+        toast({
+          title: 'Erro ao carregar usuários.',
+          description: error.response?.data?.error || 'Ocorreu um erro ao buscar usuários.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    };
+    fetchUsers();
+  }, [toast]); // Dependência do toast para evitar loop infinito
 
   const handleUserChange = (e) => {
     setUserForm({ ...userForm, [e.target.name]: e.target.value });
@@ -142,8 +162,14 @@ const AdminDashboard = () => {
                 <Input type="text" name="name" value={restaurantForm.name} onChange={handleRestaurantChange} />
               </FormControl>
               <FormControl id="owner_id" mb={4} isRequired>
-                <FormLabel>ID do Proprietário (UUID)</FormLabel>
-                <Input type="text" name="owner_id" value={restaurantForm.owner_id} onChange={handleRestaurantChange} />
+                <FormLabel>Proprietário</FormLabel>
+                <Select name="owner_id" value={restaurantForm.owner_id} onChange={handleRestaurantChange} placeholder="Selecione um proprietário">
+                  {users.map(user => (
+                    <option key={user.id} value={user.id}>
+                      {user.name} ({user.email})
+                    </option>
+                  ))}
+                </Select>
               </FormControl>
               <FormControl id="address" mb={4}>
                 <FormLabel>Endereço</FormLabel>

@@ -87,7 +87,7 @@ function App() {
                   <Route path="surveys/:id/results" element={<SurveyResults />} />
                   <Route path="surveys/:id/results" element={<SurveyResults />} />
                 </Route>
-                <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
+                <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
                 {/* Catch all route */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Routes>

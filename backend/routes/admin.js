@@ -197,4 +197,55 @@ router.post('/restaurants', auth, isAdmin, [
   }
 });
 
+/**
+ * @swagger
+ * /api/admin/users:
+ *   get:
+ *     summary: Listar todos os usuários (Admin)
+ *     tags: [Admin]
+ *     description: Retorna uma lista de todos os usuários no sistema. Apenas administradores podem acessar.
+ *     security:
+ *       - ApiKeyAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de usuários retornada com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                     format: uuid
+ *                     description: ID do usuário.
+ *                   name:
+ *                     type: string
+ *                     description: Nome do usuário.
+ *                   email:
+ *                     type: string
+ *                     format: email
+ *                     description: Email do usuário.
+ *                   role:
+ *                     type: string
+ *                     description: Papel do usuário.
+ *       403:
+ *         description: Acesso negado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.get('/users', auth, isAdmin, async (req, res) => {
+  try {
+    const users = await models.User.findAll({
+      attributes: ['id', 'name', 'email', 'role'], // Seleciona apenas os campos necessários
+      order: [['name', 'ASC']]
+    });
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Erro ao listar usuários (Admin):', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;

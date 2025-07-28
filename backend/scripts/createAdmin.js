@@ -30,7 +30,7 @@ const createAdminUser = async () => {
         name: adminName,
         email: adminEmail,
         password: adminPassword,
-        role: 'admin',
+        role: 'super_admin',
         is_active: true,
         email_verified: true
       });

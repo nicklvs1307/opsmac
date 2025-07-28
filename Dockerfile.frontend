@@ -18,6 +18,8 @@ RUN npm cache clean --force && npm install
 COPY frontend/ ./
 
 # Gera o build de produção do React
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
 RUN npm run build && ls -la /app/frontend/build
 
 # Estágio final para servir os arquivos com NGINX

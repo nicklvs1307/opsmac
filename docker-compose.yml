@@ -47,7 +47,7 @@ services:
         condition: on-failure
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.frontend.rule=Host(feedelizapro.towersfy.com)"
+        - "traefik.http.routers.frontend.rule=Host(`feedelizapro.towersfy.com`)"
         - "traefik.http.routers.frontend.entrypoints=websecure"
         - "traefik.http.routers.frontend.tls.certresolver=letsencryptresolver"
         - "traefik.http.services.frontend.loadbalancer.server.port=80"

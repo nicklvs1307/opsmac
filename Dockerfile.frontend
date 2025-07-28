@@ -7,11 +7,8 @@ WORKDIR /app/frontend
 # Copie os arquivos package.json e package-lock.json do frontend
 COPY frontend/package*.json .
 
-# Remova o package-lock.json para forçar a resolução de dependências
-RUN rm -f package-lock.json
-
 # Limpe o cache do npm e instale as dependências do frontend
-RUN npm cache clean --force && npm install
+RUN npm cache clean --force && npm install --legacy-peer-deps
 
 # Copie o restante do código do frontend
 COPY frontend/ ./

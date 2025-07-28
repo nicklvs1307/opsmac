@@ -31,8 +31,7 @@
     "react-i18next": "^15.6.1",
     "@chakra-ui/react": "^2.8.2",
     "@chakra-ui/icons": "^2.1.1",
-    "framer-motion": "^11.3.17",
-    "tslib": "^2.6.2"
+    "framer-motion": "^11.3.17"
   },
   "overrides": {
     "tslib": "^2.6.2"

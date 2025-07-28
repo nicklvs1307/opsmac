@@ -46,10 +46,6 @@
       "react-app/jest"
     ]
   },
-  "overrides": {
-    "schema-utils": "2.7.1",
-    "terser-webpack-plugin": "5.3.1"
-  },
   "browserslist": {
     "production": [
       ">0.2%",

@@ -12,7 +12,7 @@ RUN apk add --no-cache python3 make g++ libc6-compat
 COPY frontend/package*.json ./
 
 # Instala as dependências
-RUN npm cache clean --force && npm install --legacy-peer-deps
+RUN npm cache clean --force && npm install
 
 # Copia o restante do código-fonte do frontend
 COPY frontend/ ./

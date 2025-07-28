@@ -46,6 +46,11 @@
       "react-app/jest"
     ]
   },
+  "overrides": {
+    "ajv": "6.12.6",
+    "ajv-keywords": "3.5.2",
+    "schema-utils": "2.7.1"
+  },
   "browserslist": {
     "production": [
       ">0.2%",

@@ -1,25 +1,29 @@
 # Dockerfile.frontend
+
 # Estágio de build
 FROM node:20-alpine as builder
 
 WORKDIR /app/frontend
 
-# Copie os arquivos package.json e package-lock.json do frontend
-COPY frontend/package*.json .
+# Adiciona ferramentas necessárias para compilar dependências nativas
+RUN apk add --no-cache python3 make g++ libc6-compat
 
-# Limpe o cache do npm e instale as dependências do frontend
+# Copia os arquivos de dependência
+COPY frontend/package*.json ./
+
+# Instala as dependências
 RUN npm cache clean --force && npm install --legacy-peer-deps
 
-# Copie o restante do código do frontend
+# Copia o restante do código-fonte do frontend
 COPY frontend/ ./
 
-# Construa a aplicação React para produção
+# Gera o build de produção do React
 RUN npm run build && ls -la /app/frontend/build
 
-# Estágio de produção (usando Nginx para servir os arquivos estáticos)
+# Estágio final para servir os arquivos com NGINX
 FROM nginx:alpine
 
-# Copie os arquivos de build do estágio anterior para o diretório de serviço do Nginx
+# Copia os arquivos do build para o NGINX
 COPY --from=builder /app/frontend/build /usr/share/nginx/html
 COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
 

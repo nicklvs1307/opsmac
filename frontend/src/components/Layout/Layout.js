@@ -271,7 +271,7 @@ const Layout = () => {
             },
           }
         }}>
-          <Outlet />
+          {children || <Outlet />}
         </Box>
       </Box>
     </Box>

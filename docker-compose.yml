@@ -8,6 +8,7 @@ services:
     image: feedeliza-backend:latest
     environment:
       - NODE_ENV=production
+      - FRONTEND_URL=https://feedelizapro.towersfy.com
 
       # Conexão com banco de dados (ORMs modernos preferem essas separadas)
       - DB_HOST=postgres
@@ -41,7 +42,7 @@ services:
       context: /root/opsmac
       dockerfile: Dockerfile.frontend
       args:
-        - REACT_APP_API_URL=https://feedelizaapi.towersfy.com/api
+        - REACT_APP_API_URL=https://feedelizaapi.towersfy.com
     image: feedeliza-frontend:latest
     deploy:
       replicas: 1

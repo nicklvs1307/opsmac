@@ -1,14 +1,14 @@
 const axios = require('axios');
 
-const sendWhatsAppMessage = async (instanceUrl, apiKey, phoneNumber, recipient, message) => {
+const sendWhatsAppMessage = async (instanceUrl, apiKey, instanceId, recipientPhoneNumber, message) => {
   try {
-    const url = `${instanceUrl}/message/sendText/${phoneNumber}`;
+    const url = `${instanceUrl}/message/sendText/${instanceId}`;
     const headers = {
       'Content-Type': 'application/json',
       'apikey': apiKey,
     };
     const data = {
-      number: recipient,
+      number: recipientPhoneNumber,
       textMessage: {
         text: message,
       },

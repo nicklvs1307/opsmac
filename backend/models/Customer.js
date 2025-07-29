@@ -151,6 +151,11 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: true
     },
+    last_birthday_message_year: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: 'Ano em que a última mensagem de aniversário foi enviada'
+    },
     metadata: {
       type: DataTypes.JSONB,
       allowNull: true,

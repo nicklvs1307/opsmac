@@ -2,6 +2,7 @@ const express = require('express');
 const { body, query, validationResult } = require('express-validator');
 const { models } = require('../config/database');
 const { auth, checkRestaurantOwnership } = require('../middleware/auth');
+const { sendWhatsAppMessage } = require('../utils/whatsappService'); // Importar a função do whatsappService
 const { Op, fn, col, literal } = require('sequelize');
 
 const router = express.Router();
@@ -64,6 +65,40 @@ router.post('/record', auth, [
       checkin_time: new Date(),
       status: 'active',
     });
+
+    // Enviar mensagem de agradecimento via WhatsApp (se configurado)
+    try {
+      const restaurant = await models.Restaurant.findByPk(restaurantId);
+      if (restaurant && restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
+        const thankYouMessage = `Olá ${customer.name || ''}! 👋\n\nObrigado por fazer check-in no *${restaurant.name}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
+        
+        const whatsappResponse = await sendWhatsAppMessage(
+          restaurant.whatsapp_api_url,
+          restaurant.whatsapp_api_key,
+          restaurant.whatsapp_instance_id,
+          customer.phone,
+          thankYouMessage
+        );
+
+        if (whatsappResponse.success) {
+          console.log('Mensagem de agradecimento enviada com sucesso para', customer.phone);
+          // Opcional: Registrar o envio da mensagem no banco de dados
+          await models.WhatsAppMessage.create({
+            phone_number: customer.phone,
+            message_text: thankYouMessage,
+            message_type: 'checkin_thank_you',
+            status: 'sent',
+            whatsapp_message_id: whatsappResponse.data?.id || null,
+            restaurant_id: restaurant.id,
+            customer_id: customer.id,
+          });
+        } else {
+          console.error('Erro ao enviar mensagem de agradecimento para', customer.phone, ':', whatsappResponse.error);
+        }
+      }
+    } catch (whatsappError) {
+      console.error('Erro inesperado ao tentar enviar mensagem de agradecimento WhatsApp:', whatsappError);
+    }
 
     res.status(201).json({
       message: 'Check-in registrado com sucesso',

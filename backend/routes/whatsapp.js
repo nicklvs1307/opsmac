@@ -2,16 +2,13 @@ const express = require('express');
 const { body, query, validationResult } = require('express-validator');
 const { models } = require('../config/database');
 const { auth, checkRestaurantOwnership, logUserAction } = require('../middleware/auth');
-const axios = require('axios');
+const { sendWhatsAppMessage } = require('../utils/whatsappService'); // Importar a função do whatsappService
 const { Op } = require('sequelize');
 
 const router = express.Router();
 
-// Configuração do WhatsApp Business API
-const WHATSAPP_API_URL = process.env.WHATSAPP_API_URL || 'https://graph.facebook.com/v17.0';
-const WHATSAPP_ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN;
-const WHATSAPP_PHONE_NUMBER_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
-const WHATSAPP_VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
+// Configuração do WhatsApp (Evolution API)
+const WHATSAPP_VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN; // Token de verificação global
 
 // Validações
 const sendFeedbackRequestValidation = [
@@ -59,22 +56,22 @@ router.post('/webhook', async (req, res) => {
   try {
     const body = req.body;
 
-    if (body.object === 'whatsapp_business_account') {
-      body.entry?.forEach(async (entry) => {
-        const changes = entry.changes;
-        
-        changes?.forEach(async (change) => {
-          if (change.field === 'messages') {
-            const messages = change.value.messages;
-            
-            if (messages) {
-              for (const message of messages) {
-                await processIncomingMessage(message, change.value);
-              }
-            }
-          }
+    if (body.instanceId && body.messages) { // Estrutura de webhook da Evolution API
+      // Processar mensagens da Evolution API
+      for (const message of body.messages) {
+        // A Evolution API geralmente envia o instanceId no webhook.
+        // Precisamos mapear esse instanceId para um restaurant_id.
+        // Isso pode ser feito buscando no banco de dados qual restaurante tem essa instanceId.
+        const restaurant = await models.Restaurant.findOne({
+          where: { whatsapp_phone_number: body.instanceId } // Assumindo que instanceId é o número de telefone da instância
         });
-      });
+
+        if (restaurant) {
+          await processIncomingMessage(message, { restaurant_id: restaurant.id }, restaurant);
+        } else {
+          console.warn('Mensagem recebida de instância não mapeada:', body.instanceId);
+        }
+      }
     }
 
     res.status(200).send('EVENT_RECEIVED');
@@ -119,12 +116,7 @@ router.post('/send-feedback-request', auth, sendFeedbackRequestValidation, logUs
       });
     }
 
-    // Verificar se o WhatsApp está configurado
-    if (!WHATSAPP_ACCESS_TOKEN || !WHATSAPP_PHONE_NUMBER_ID) {
-      return res.status(400).json({
-        error: 'WhatsApp não está configurado'
-      });
-    }
+    // As credenciais do WhatsApp serão obtidas do objeto restaurant
 
     // Buscar ou criar cliente
     let customer = await models.Customer.findOne({
@@ -155,8 +147,8 @@ router.post('/send-feedback-request', auth, sendFeedbackRequestValidation, logUs
     
     const messageText = custom_message || defaultMessage;
 
-    // Enviar mensagem via WhatsApp Business API
-    const whatsappResponse = await sendWhatsAppMessage(phone_number, messageText);
+    // Enviar mensagem via Evolution API
+    const whatsappResponse = await sendWhatsAppMessage(restaurant, phone_number, messageText);
 
     if (whatsappResponse.success) {
       // Registrar envio no banco
@@ -269,7 +261,7 @@ router.post('/send-bulk-feedback', auth, [
         const messageText = custom_message || defaultMessage;
 
         // Enviar mensagem
-        const whatsappResponse = await sendWhatsAppMessage(phone_number, messageText);
+        const whatsappResponse = await sendWhatsAppMessage(restaurant, phone_number, messageText);
 
         if (whatsappResponse.success) {
           // Registrar envio
@@ -489,40 +481,40 @@ router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, async (re
 });
 
 // Funções auxiliares
-async function sendWhatsAppMessage(phoneNumber, messageText) {
+async function sendWhatsAppMessage(restaurant, recipientPhoneNumber, messageText) {
   try {
-    const response = await axios.post(
-      `${WHATSAPP_API_URL}/${WHATSAPP_PHONE_NUMBER_ID}/messages`,
-      {
-        messaging_product: 'whatsapp',
-        to: phoneNumber,
-        type: 'text',
-        text: {
-          body: messageText
-        }
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
-          'Content-Type': 'application/json'
-        }
-      }
+    const { whatsapp_api_url, whatsapp_api_key, whatsapp_instance_id, whatsapp_phone_number } = restaurant;
+
+    if (!whatsapp_api_url || !whatsapp_api_key || !whatsapp_instance_id || !whatsapp_phone_number) {
+      throw new Error('Credenciais da Evolution API incompletas para este restaurante.');
+    }
+
+    const response = await require('../utils/whatsappService').sendWhatsAppMessage(
+      whatsapp_api_url,
+      whatsapp_api_key,
+      whatsapp_instance_id, // Pass the instance ID here
+      recipientPhoneNumber,
+      messageText
     );
 
-    return {
-      success: true,
-      message_id: response.data.messages[0].id
-    };
+    if (response.success) {
+      return {
+        success: true,
+        message_id: response.data?.id || 'unknown_id' // Evolution API might return a different ID structure
+      };
+    } else {
+      throw new Error(response.error?.message || 'Erro ao enviar mensagem pela Evolution API');
+    }
   } catch (error) {
-    console.error('Erro ao enviar mensagem WhatsApp:', error.response?.data || error.message);
+    console.error('Erro ao enviar mensagem WhatsApp (Evolution API):', error.message);
     return {
       success: false,
-      error: error.response?.data?.error?.message || error.message
+      error: error.message
     };
   }
 }
 
-async function processIncomingMessage(message, value) {
+async function processIncomingMessage(message, value, restaurant) {
   try {
     const phoneNumber = message.from;
     const messageText = message.text?.body;
@@ -561,7 +553,7 @@ async function processIncomingMessage(message, value) {
 
       if (recentFeedbackRequest) {
         // Process automatic response if it's a reply to a feedback request
-        await processAutomaticFeedbackResponse(message, customer, recentFeedbackRequest);
+        await processAutomaticFeedbackResponse(message, customer, recentFeedbackRequest, restaurant);
       }
 
       // Registrar mensagem recebida
@@ -584,7 +576,7 @@ async function processIncomingMessage(message, value) {
   }
 }
 
-async function processAutomaticFeedbackResponse(message, customer, feedbackRequest) {
+async function processAutomaticFeedbackResponse(message, customer, feedbackRequest, restaurant) {
   try {
     const messageText = message.text.body.toLowerCase();
     
@@ -612,7 +604,8 @@ async function processAutomaticFeedbackResponse(message, customer, feedbackReque
       // Enviar mensagem de agradecimento
       const thankYouMessage = `Obrigado pelo seu feedback! ⭐ Sua avaliação de ${rating} estrela${rating > 1 ? 's' : ''} foi registrada com sucesso. Sua opinião é muito importante para nós! 🙏`;
       
-      await sendWhatsAppMessage(message.from, thankYouMessage);
+      // Use the provided restaurant object to send the message
+      await sendWhatsAppMessage(restaurant, message.from, thankYouMessage);
     }
   } catch (error) {
     console.error('Erro ao processar resposta automática:', error);

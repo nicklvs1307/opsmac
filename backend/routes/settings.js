@@ -107,6 +107,7 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
 router.put('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, [
   body('whatsapp_api_url').optional().isURL().withMessage('URL da API do WhatsApp deve ser um formato válido'),
   body('whatsapp_api_key').optional().isString().withMessage('Chave da API do WhatsApp deve ser uma string'),
+  body('whatsapp_instance_id').optional().isString().withMessage('ID da instância do WhatsApp deve ser uma string'),
   body('whatsapp_phone_number').optional().isString().withMessage('Número de telefone do WhatsApp deve ser uma string'),
 ], async (req, res) => {
   const errors = validationResult(req);
@@ -116,7 +117,7 @@ router.put('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, [
 
   try {
     const { restaurantId } = req.params;
-    const { whatsapp_api_url, whatsapp_api_key, whatsapp_phone_number } = req.body;
+    const { whatsapp_api_url, whatsapp_api_key, whatsapp_instance_id, whatsapp_phone_number } = req.body;
 
     const restaurant = await models.Restaurant.findByPk(restaurantId);
     if (!restaurant) {
@@ -126,6 +127,7 @@ router.put('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, [
     await restaurant.update({
       whatsapp_api_url,
       whatsapp_api_key,
+      whatsapp_instance_id,
       whatsapp_phone_number,
     });
 
@@ -175,7 +177,7 @@ router.get('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, async (req
     const { restaurantId } = req.params;
 
     const restaurant = await models.Restaurant.findByPk(restaurantId, {
-      attributes: ['whatsapp_api_url', 'whatsapp_api_key', 'whatsapp_phone_number'],
+      attributes: ['whatsapp_api_url', 'whatsapp_api_key', 'whatsapp_instance_id', 'whatsapp_phone_number'],
     });
 
     if (!restaurant) {
@@ -230,7 +232,7 @@ router.get('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, async (req
  *       500:
  *         description: Erro interno do servidor.
  */
-router.post('/:restaurantId/whatsapp/send-test', auth, checkRestaurantOwnership, [
+router.post('/:restaurantId/whatsapp/test', auth, checkRestaurantOwnership, [
   body('recipient').isString().notEmpty().withMessage('Destinatário é obrigatório'),
   body('message').isString().notEmpty().withMessage('Mensagem é obrigatória'),
 ], async (req, res) => {
@@ -248,14 +250,14 @@ router.post('/:restaurantId/whatsapp/send-test', auth, checkRestaurantOwnership,
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
-    const { whatsapp_api_url, whatsapp_api_key, whatsapp_phone_number } = restaurant;
+    const { whatsapp_api_url, whatsapp_api_key, whatsapp_instance_id, whatsapp_phone_number } = restaurant;
 
-    if (!whatsapp_api_url || !whatsapp_api_key || !whatsapp_phone_number) {
+    if (!whatsapp_api_url || !whatsapp_api_key || !whatsapp_instance_id || !whatsapp_phone_number) {
       return res.status(400).json({ error: 'Configurações da API do WhatsApp incompletas para este restaurante.' });
     }
 
     const { sendWhatsAppMessage } = require('../utils/whatsappService');
-    const result = await sendWhatsAppMessage(whatsapp_api_url, whatsapp_api_key, whatsapp_phone_number, recipient, message);
+    const result = await sendWhatsAppMessage(whatsapp_api_url, whatsapp_api_key, whatsapp_instance_id, recipient, message);
 
     if (result.success) {
       res.json({ message: 'Mensagem de teste enviada com sucesso!', data: result.data });

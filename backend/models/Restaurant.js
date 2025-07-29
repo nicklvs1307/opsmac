@@ -112,6 +112,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(255),
       allowNull: true
     },
+    whatsapp_instance_id: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      unique: true, // Instância deve ser única
+    },
     whatsapp_phone_number: {
       type: DataTypes.STRING(20),
       allowNull: true,

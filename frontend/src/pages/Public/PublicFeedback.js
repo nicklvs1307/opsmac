@@ -103,7 +103,7 @@ const PublicFeedback = () => {
       setLoading(true);
       setError('');
       
-      const response = await axiosInstance.get(`/qr-codes/public/${qrId}`);
+      const response = await axiosInstance.get(`/api/qr-codes/public/${qrId}`);
       
       if (!response.data.qrCode.is_active) {
         setError('Este QR Code não está mais ativo');
@@ -124,7 +124,7 @@ const PublicFeedback = () => {
       }
       
       // Track QR code scan
-      await axiosInstance.post(`/qr-codes/${qrId}/scan`);
+      await axiosInstance.post(`/api/qr-codes/${qrId}/scan`);
     } catch (err) {
       console.error('Error fetching QR code:', err);
       setError(err.response?.data?.message || 'QR Code não encontrado');

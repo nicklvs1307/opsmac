@@ -99,6 +99,29 @@ module.exports = (sequelize) => {
         }
       }
     },
+    whatsapp_api_url: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      validate: {
+        isUrl: {
+          msg: 'URL da API do WhatsApp deve ser um formato válido'
+        }
+      }
+    },
+    whatsapp_api_key: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    whatsapp_phone_number: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+      validate: {
+        is: {
+          args: /^[\+]?[1-9][\d]{0,15}$/,
+          msg: 'Número de telefone do WhatsApp deve ter um formato válido'
+        }
+      }
+    },
     logo: {
       type: DataTypes.STRING(500),
       allowNull: true

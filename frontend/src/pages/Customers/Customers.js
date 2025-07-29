@@ -121,7 +121,7 @@ const Customers = () => {
 
   const fetchCustomerDetails = async (customerId) => {
     try {
-      const response = await axiosInstance.get(`/customers/${customerId}`);
+      const response = await axiosInstance.get(`/api/customers/${customerId}`);
       setCustomerDetails(response.data);
       setDetailDialog(true);
     } catch (err) {

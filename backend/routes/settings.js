@@ -63,6 +63,211 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
   }
 });
 
+/**
+ * @swagger
+ * /api/settings/{restaurantId}/whatsapp:
+ *   put:
+ *     summary: Atualizar configurações do WhatsApp para um restaurante
+ *     tags: [Settings]
+ *     parameters:
+ *       - in: path
+ *         name: restaurantId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID do restaurante
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               whatsapp_api_url:
+ *                 type: string
+ *                 description: URL da API do WhatsApp (Evolution API)
+ *               whatsapp_api_key:
+ *                 type: string
+ *                 description: Chave da API do WhatsApp
+ *               whatsapp_phone_number:
+ *                 type: string
+ *                 description: Número de telefone do WhatsApp (com código do país)
+ *     responses:
+ *       200:
+ *         description: Configurações do WhatsApp atualizadas com sucesso.
+ *       400:
+ *         description: Dados inválidos.
+ *       403:
+ *         description: Acesso negado.
+ *       404:
+ *         description: Restaurante não encontrado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.put('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, [
+  body('whatsapp_api_url').optional().isURL().withMessage('URL da API do WhatsApp deve ser um formato válido'),
+  body('whatsapp_api_key').optional().isString().withMessage('Chave da API do WhatsApp deve ser uma string'),
+  body('whatsapp_phone_number').optional().isString().withMessage('Número de telefone do WhatsApp deve ser uma string'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { restaurantId } = req.params;
+    const { whatsapp_api_url, whatsapp_api_key, whatsapp_phone_number } = req.body;
+
+    const restaurant = await models.Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
+
+    await restaurant.update({
+      whatsapp_api_url,
+      whatsapp_api_key,
+      whatsapp_phone_number,
+    });
+
+    res.json({ message: 'Configurações do WhatsApp atualizadas com sucesso' });
+  } catch (error) {
+    console.error('Erro ao atualizar configurações do WhatsApp:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+/**
+ * @swagger
+ * /api/settings/{restaurantId}/whatsapp:
+ *   get:
+ *     summary: Obter configurações do WhatsApp para um restaurante
+ *     tags: [Settings]
+ *     parameters:
+ *       - in: path
+ *         name: restaurantId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID do restaurante
+ *     responses:
+ *       200:
+ *         description: Configurações do WhatsApp obtidas com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 whatsapp_api_url:
+ *                   type: string
+ *                 whatsapp_api_key:
+ *                   type: string
+ *                 whatsapp_phone_number:
+ *                   type: string
+ *       403:
+ *         description: Acesso negado.
+ *       404:
+ *         description: Restaurante não encontrado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.get('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, async (req, res) => {
+  try {
+    const { restaurantId } = req.params;
+
+    const restaurant = await models.Restaurant.findByPk(restaurantId, {
+      attributes: ['whatsapp_api_url', 'whatsapp_api_key', 'whatsapp_phone_number'],
+    });
+
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
+
+    res.json(restaurant);
+  } catch (error) {
+    console.error('Erro ao obter configurações do WhatsApp:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+/**
+ * @swagger
+ * /api/settings/{restaurantId}/whatsapp/send-test:
+ *   post:
+ *     summary: Enviar uma mensagem de teste via WhatsApp
+ *     tags: [Settings]
+ *     parameters:
+ *       - in: path
+ *         name: restaurantId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID do restaurante
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - recipient
+ *               - message
+ *             properties:
+ *               recipient:
+ *                 type: string
+ *                 description: Número do destinatário (com código do país, ex: +5511987654321)
+ *               message:
+ *                 type: string
+ *                 description: Mensagem de texto a ser enviada
+ *     responses:
+ *       200:
+ *         description: Mensagem de teste enviada com sucesso.
+ *       400:
+ *         description: Dados inválidos ou configurações do WhatsApp não encontradas.
+ *       403:
+ *         description: Acesso negado.
+ *       404:
+ *         description: Restaurante não encontrado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.post('/:restaurantId/whatsapp/send-test', auth, checkRestaurantOwnership, [
+  body('recipient').isString().notEmpty().withMessage('Destinatário é obrigatório'),
+  body('message').isString().notEmpty().withMessage('Mensagem é obrigatória'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { restaurantId } = req.params;
+    const { recipient, message } = req.body;
+
+    const restaurant = await models.Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
+
+    const { whatsapp_api_url, whatsapp_api_key, whatsapp_phone_number } = restaurant;
+
+    if (!whatsapp_api_url || !whatsapp_api_key || !whatsapp_phone_number) {
+      return res.status(400).json({ error: 'Configurações da API do WhatsApp incompletas para este restaurante.' });
+    }
+
+    const { sendWhatsAppMessage } = require('../utils/whatsappService');
+    const result = await sendWhatsAppMessage(whatsapp_api_url, whatsapp_api_key, whatsapp_phone_number, recipient, message);
+
+    if (result.success) {
+      res.json({ message: 'Mensagem de teste enviada com sucesso!', data: result.data });
+    } else {
+      res.status(500).json({ error: result.error || 'Erro ao enviar mensagem de teste.' });
+    }
+  } catch (error) {
+    console.error('Erro ao enviar mensagem de teste WhatsApp:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;
 
 // @route   POST /api/settings/:restaurantId/api-token/generate

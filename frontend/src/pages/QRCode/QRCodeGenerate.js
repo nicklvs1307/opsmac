@@ -130,7 +130,7 @@ const QRCodeGenerate = () => {
     if (!generatedQRCode) return;
     
     try {
-      const response = await axiosInstance.get(`/qrcode/${generatedQRCode.id}/image`, {
+      const response = await axiosInstance.get(`/api/qrcode/${generatedQRCode.id}/image`, {
         responseType: 'blob',
       });
       

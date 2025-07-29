@@ -104,7 +104,7 @@ const Rewards = () => {
         ...filters,
       };
       
-      const response = await axiosInstance.get(`/rewards/restaurant/${restaurantId}`, { params });
+      const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`, { params });
       
       setRewards(response.data.rewards);
       setTotalPages(response.data.totalPages);

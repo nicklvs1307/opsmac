@@ -111,7 +111,7 @@ export const AuthProvider = ({ children }) => {
           dispatch({
             type: AUTH_ACTIONS.LOAD_USER,
             payload: {
-              user: response.data.user,
+              user: res.data.user,
               token,
             },
           });
@@ -189,7 +189,7 @@ export const AuthProvider = ({ children }) => {
   // Update user function
   const updateUser = async (userData) => {
     try {
-      const response = await axiosInstance.put('/api/auth/profile', userData);
+      const response = await axiosInstance.put('/auth/profile', userData);
       dispatch({
         type: AUTH_ACTIONS.UPDATE_USER,
         payload: response.data.user,
@@ -206,7 +206,7 @@ export const AuthProvider = ({ children }) => {
   // Change password function
   const changePassword = async (currentPassword, newPassword) => {
     try {
-      await axiosInstance.put('/api/auth/change-password', {
+      await axiosInstance.put('/auth/change-password', {
         currentPassword,
         newPassword,
       });

@@ -77,8 +77,8 @@ const NewFeedback = () => {
       setLoadingData(true);
       
       const [customersResponse, qrCodesResponse] = await Promise.all([
-        axiosInstance.get('/api/customers'),
-        restaurantId ? axiosInstance.get(`/api/qrcode/restaurant/${restaurantId}`) : Promise.resolve({ data: { qrcodes: [] } }),
+        axiosInstance.get('/customers'),
+        restaurantId ? axiosInstance.get(`/qrcode/restaurant/${restaurantId}`) : Promise.resolve({ data: { qrcodes: [] } }),
       ]);
       
       setCustomers(customersResponse.data.customers || []);
@@ -126,7 +126,7 @@ const NewFeedback = () => {
 
       console.log('Dados enviados para o feedback:', cleanData);
       
-      await axiosInstance.post('/api/feedback', cleanData);
+      await axiosInstance.post('/feedback', cleanData);
       
       toast.success('Feedback criado com sucesso!');
       navigate('/feedback');

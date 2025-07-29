@@ -107,7 +107,7 @@ const Customers = () => {
         ...filters,
       };
       
-      const response = await axiosInstance.get('/api/customers', { params });
+      const response = await axiosInstance.get('/customers', { params });
       
       setCustomers(response.data.customers);
       setTotalPages(response.data.totalPages);
@@ -121,7 +121,7 @@ const Customers = () => {
 
   const fetchCustomerDetails = async (customerId) => {
     try {
-      const response = await axiosInstance.get(`/api/customers/${customerId}`);
+      const response = await axiosInstance.get(`/customers/${customerId}`);
       setCustomerDetails(response.data);
       setDetailDialog(true);
     } catch (err) {
@@ -174,10 +174,10 @@ const Customers = () => {
       
       if (editDialog) {
         console.log('Tentando PUT para /api/customers/' + selectedCustomer.id, cleanData);
-        await axiosInstance.put(`/api/customers/${selectedCustomer.id}`, cleanData);
+        await axiosInstance.put(`/customers/${selectedCustomer.id}`, cleanData);
         toast.success('Cliente atualizado com sucesso!');
       } else {
-        await axiosInstance.post('/api/customers', cleanData);
+        await axiosInstance.post('/customers', cleanData);
         toast.success('Cliente criado com sucesso!');
       }
       
@@ -191,7 +191,7 @@ const Customers = () => {
 
   const confirmDelete = async () => {
     try {
-      await axiosInstance.delete(`/api/customers/${selectedCustomer.id}`);
+      await axiosInstance.delete(`/customers/${selectedCustomer.id}`);
       
       toast.success('Cliente excluído com sucesso!');
       setDeleteDialog(false);

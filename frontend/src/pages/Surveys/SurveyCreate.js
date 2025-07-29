@@ -6,7 +6,7 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const createSurvey = async (surveyData) => {
-  const { data } = await axiosInstance.post('/api/surveys', surveyData);
+  const { data } = await axiosInstance.post('/surveys', surveyData);
   return data;
 };
 
@@ -124,7 +124,7 @@ const SurveyCreate = () => {
     }
   };
 
-  const deleteMutation = useMutation((id) => axiosInstance.delete(`/api/surveys/${id}`), {
+  const deleteMutation = useMutation((id) => axiosInstance.delete(`/surveys/${id}`), {
     onSuccess: () => {
       queryClient.invalidateQueries('surveys');
       toast.success('Pesquisa apagada com sucesso!');

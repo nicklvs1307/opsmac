@@ -114,7 +114,7 @@ const QRCodeGenerate = () => {
         Object.entries(data).filter(([_, value]) => value !== '' && value !== null)
       );
       
-      const response = await axiosInstance.post('/api/qrcode', { ...cleanData, restaurant_id: restaurantId });
+      const response = await axiosInstance.post('/qrcode', { ...cleanData, restaurant_id: restaurantId });
       
       setGeneratedQRCode(response.data);
       toast.success('QR Code gerado com sucesso!');
@@ -130,7 +130,7 @@ const QRCodeGenerate = () => {
     if (!generatedQRCode) return;
     
     try {
-      const response = await axiosInstance.get(`/api/qrcode/${generatedQRCode.id}/image`, {
+      const response = await axiosInstance.get(`/qrcode/${generatedQRCode.id}/image`, {
         responseType: 'blob',
       });
       
@@ -152,7 +152,7 @@ const QRCodeGenerate = () => {
     if (!generatedQRCode) return;
     
     try {
-      await axiosInstance.post(`/api/qrcode/${generatedQRCode.id}/print`);
+      await axiosInstance.post(`/qrcode/${generatedQRCode.id}/print`);
       toast.success('QR Code enviado para impressão!');
     } catch (err) {
       toast.error('Erro ao imprimir QR Code');

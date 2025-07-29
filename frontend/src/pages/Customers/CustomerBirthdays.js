@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 
 const fetchBirthdays = async () => {
-  const { data } = await axiosInstance.get('/api/customers/birthdays', {
+  const { data } = await axiosInstance.get('/customers/birthdays', {
     headers: {
       'x-api-key': localStorage.getItem('api-key') || '', // Ou de onde você obtém sua API Key
     },

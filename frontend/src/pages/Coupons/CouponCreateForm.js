@@ -34,8 +34,8 @@ const CouponCreateForm = ({ onCouponCreated }) => {
                 setLoading(true);
                 setError('');
                 const [rewardsRes, customersRes] = await Promise.all([
-                    axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`), // Fetch rewards for the current restaurant
-                    axiosInstance.get('/api/customers')
+                    axiosInstance.get(`/rewards/restaurant/${restaurantId}`), // Fetch rewards for the current restaurant
+                    axiosInstance.get('/customers')
                 ]);
                 setRewards(rewardsRes.data.rewards);
                 setCustomers(customersRes.data.customers);
@@ -53,7 +53,7 @@ const CouponCreateForm = ({ onCouponCreated }) => {
 
     const onSubmit = async (data) => {
         try {
-            await axiosInstance.post('/api/coupons', { ...data, restaurant_id: restaurantId });
+            await axiosInstance.post('/coupons', { ...data, restaurant_id: restaurantId });
             toast.success('Cupom criado com sucesso!');
             reset(); // Clear form after successful submission
             if (onCouponCreated) {

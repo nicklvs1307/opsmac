@@ -14,12 +14,12 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const fetchSurveys = async (filters) => {
-  const { data } = await axiosInstance.get('/api/surveys', { params: filters });
+  const { data } = await axiosInstance.get('/surveys', { params: filters });
   return data;
 };
 
 const deleteSurvey = async (id) => {
-  await axiosInstance.delete(`/api/surveys/${id}`);
+  await axiosInstance.delete(`/surveys/${id}`);
 };
 
 const SurveyList = () => {

@@ -104,7 +104,7 @@ const Rewards = () => {
         ...filters,
       };
       
-      const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`, { params });
+      const response = await axiosInstance.get(`/rewards/restaurant/${restaurantId}`, { params });
       
       setRewards(response.data.rewards);
       setTotalPages(response.data.totalPages);
@@ -121,7 +121,7 @@ const Rewards = () => {
       setLoading(true);
       setError('');
       
-      const response = await axiosInstance.get('/api/rewards/analytics');
+      const response = await axiosInstance.get('/rewards/analytics');
       setAnalytics(response.data);
     } catch (err) {
       console.error('Error fetching analytics:', err);
@@ -190,10 +190,10 @@ const Rewards = () => {
       delete cleanData.expires_at;
 
       if (editDialog) {
-        await axiosInstance.put(`/api/rewards/${selectedItem.id}`, cleanData);
+        await axiosInstance.put(`/rewards/${selectedItem.id}`, cleanData);
         toast.success('Recompensa atualizada com sucesso!');
       } else {
-        await axiosInstance.post('/api/rewards', { ...cleanData, restaurant_id: restaurantId });
+        await axiosInstance.post('/rewards', { ...cleanData, restaurant_id: restaurantId });
         toast.success('Recompensa criada com sucesso!');
       }
       
@@ -207,7 +207,7 @@ const Rewards = () => {
 
   const confirmDelete = async () => {
     try {
-      await axiosInstance.delete(`/api/rewards/${selectedItem.id}`);
+      await axiosInstance.delete(`/rewards/${selectedItem.id}`);
       
       toast.success('Recompensa excluída com sucesso!');
       setDeleteDialog(false);

@@ -87,7 +87,7 @@ const AdminDashboard = () => {
   const handleCreateRestaurant = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post('/admin/restaurants', restaurantForm);
+      await axiosInstance.post('/api/admin/restaurants', restaurantForm);
       toast({
         title: 'Restaurante criado.',
         description: "Novo restaurante criado com sucesso.",

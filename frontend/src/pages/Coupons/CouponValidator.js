@@ -23,7 +23,7 @@ const CouponValidator = () => {
 
   const handleRedeem = async (id) => {
     try {
-      const response = await axiosInstance.post(`/coupons/${id}/redeem`);
+      const response = await axiosInstance.post(`/api/coupons/${id}/redeem`);
       return response.data;
     } catch (err) {
       throw new Error(err.response?.data?.error || t('coupon_validator.error_redeeming_coupon'));

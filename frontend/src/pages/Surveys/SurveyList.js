@@ -19,7 +19,7 @@ const fetchSurveys = async (filters) => {
 };
 
 const deleteSurvey = async (id) => {
-  await axiosInstance.delete(`/surveys/${id}`);
+  await axiosInstance.delete(`/api/surveys/${id}`);
 };
 
 const SurveyList = () => {

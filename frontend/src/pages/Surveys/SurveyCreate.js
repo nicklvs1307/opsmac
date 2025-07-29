@@ -124,7 +124,7 @@ const SurveyCreate = () => {
     }
   };
 
-  const deleteMutation = useMutation((id) => axiosInstance.delete(`/surveys/${id}`), {
+  const deleteMutation = useMutation((id) => axiosInstance.delete(`/api/surveys/${id}`), {
     onSuccess: () => {
       queryClient.invalidateQueries('surveys');
       toast.success('Pesquisa apagada com sucesso!');

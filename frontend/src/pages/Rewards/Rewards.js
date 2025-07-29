@@ -207,7 +207,7 @@ const Rewards = () => {
 
   const confirmDelete = async () => {
     try {
-      await axiosInstance.delete(`/rewards/${selectedItem.id}`);
+      await axiosInstance.delete(`/api/rewards/${selectedItem.id}`);
       
       toast.success('Recompensa excluída com sucesso!');
       setDeleteDialog(false);

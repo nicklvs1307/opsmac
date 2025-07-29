@@ -144,7 +144,7 @@ const PublicFeedback = () => {
         source: 'qr_code',
       };
       
-      await axiosInstance.post('/feedback/public', feedbackData);
+      await axiosInstance.post('/api/feedback/public', feedbackData);
       
       setSubmitted(true);
       

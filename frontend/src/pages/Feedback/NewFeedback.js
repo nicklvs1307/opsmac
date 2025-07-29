@@ -126,7 +126,7 @@ const NewFeedback = () => {
 
       console.log('Dados enviados para o feedback:', cleanData);
       
-      await axiosInstance.post('/feedback', cleanData);
+      await axiosInstance.post('/api/feedback', cleanData);
       
       toast.success('Feedback criado com sucesso!');
       navigate('/feedback');

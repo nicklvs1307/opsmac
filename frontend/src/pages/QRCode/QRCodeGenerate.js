@@ -152,7 +152,7 @@ const QRCodeGenerate = () => {
     if (!generatedQRCode) return;
     
     try {
-      await axiosInstance.post(`/qrcode/${generatedQRCode.id}/print`);
+      await axiosInstance.post(`/api/qrcode/${generatedQRCode.id}/print`);
       toast.success('QR Code enviado para impressão!');
     } catch (err) {
       toast.error('Erro ao imprimir QR Code');

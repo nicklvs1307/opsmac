@@ -53,7 +53,7 @@ const CouponCreateForm = ({ onCouponCreated }) => {
 
     const onSubmit = async (data) => {
         try {
-            await axiosInstance.post('/coupons', { ...data, restaurant_id: restaurantId });
+            await axiosInstance.post('/api/coupons', { ...data, restaurant_id: restaurantId });
             toast.success('Cupom criado com sucesso!');
             reset(); // Clear form after successful submission
             if (onCouponCreated) {

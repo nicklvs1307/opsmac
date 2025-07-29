@@ -191,7 +191,7 @@ const Customers = () => {
 
   const confirmDelete = async () => {
     try {
-      await axiosInstance.delete(`/customers/${selectedCustomer.id}`);
+      await axiosInstance.delete(`/api/customers/${selectedCustomer.id}`);
       
       toast.success('Cliente excluído com sucesso!');
       setDeleteDialog(false);

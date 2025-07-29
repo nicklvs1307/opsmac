@@ -481,38 +481,7 @@ router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, async (re
 });
 
 // Funções auxiliares
-async function sendWhatsAppMessage(restaurant, recipientPhoneNumber, messageText) {
-  try {
-    const { whatsapp_api_url, whatsapp_api_key, whatsapp_instance_id, whatsapp_phone_number } = restaurant;
 
-    if (!whatsapp_api_url || !whatsapp_api_key || !whatsapp_instance_id || !whatsapp_phone_number) {
-      throw new Error('Credenciais da Evolution API incompletas para este restaurante.');
-    }
-
-    const response = await require('../utils/whatsappService').sendWhatsAppMessage(
-      whatsapp_api_url,
-      whatsapp_api_key,
-      whatsapp_instance_id, // Pass the instance ID here
-      recipientPhoneNumber,
-      messageText
-    );
-
-    if (response.success) {
-      return {
-        success: true,
-        message_id: response.data?.id || 'unknown_id' // Evolution API might return a different ID structure
-      };
-    } else {
-      throw new Error(response.error?.message || 'Erro ao enviar mensagem pela Evolution API');
-    }
-  } catch (error) {
-    console.error('Erro ao enviar mensagem WhatsApp (Evolution API):', error.message);
-    return {
-      success: false,
-      error: error.message
-    };
-  }
-}
 
 async function processIncomingMessage(message, value, restaurant) {
   try {

@@ -107,7 +107,7 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         setAuthToken(token);
         try {
-          const res = await axiosInstance.get('/auth/me');
+          const res = await axiosInstance.get('/api/auth/me');
           dispatch({
             type: AUTH_ACTIONS.LOAD_USER,
             payload: {
@@ -132,7 +132,7 @@ export const AuthProvider = ({ children }) => {
     try {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: true });
       
-      const response = await axiosInstance.post('/auth/login', {
+      const response = await axiosInstance.post('/api/auth/login', {
         email,
         password,
       });
@@ -160,7 +160,7 @@ export const AuthProvider = ({ children }) => {
     try {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: true });
       
-      const response = await axiosInstance.post('/auth/register', userData);
+      const response = await axiosInstance.post('/api/auth/register', userData);
       const { token, user } = response.data;
       
       setAuthToken(token);
@@ -189,7 +189,7 @@ export const AuthProvider = ({ children }) => {
   // Update user function
   const updateUser = async (userData) => {
     try {
-      const response = await axiosInstance.put('/auth/profile', userData);
+      const response = await axiosInstance.put('/api/auth/profile', userData);
       dispatch({
         type: AUTH_ACTIONS.UPDATE_USER,
         payload: response.data.user,
@@ -206,7 +206,7 @@ export const AuthProvider = ({ children }) => {
   // Change password function
   const changePassword = async (currentPassword, newPassword) => {
     try {
-      await axiosInstance.put('/auth/change-password', {
+      await axiosInstance.put('/api/auth/change-password', {
         currentPassword,
         newPassword,
       });
@@ -222,7 +222,7 @@ export const AuthProvider = ({ children }) => {
   // Forgot password function
   const forgotPassword = async (email) => {
     try {
-      await axiosInstance.post('/auth/forgot-password', { email });
+      await axiosInstance.post('/api/auth/forgot-password', { email });
       toast.success('Email de recuperação enviado!');
       return { success: true };
     } catch (error) {
@@ -235,7 +235,7 @@ export const AuthProvider = ({ children }) => {
   // Reset password function
   const resetPassword = async (token, password) => {
     try {
-      await axiosInstance.post('/auth/reset-password', { token, password });
+      await axiosInstance.post('/api/auth/reset-password', { token, password });
       toast.success('Senha redefinida com sucesso!');
       return { success: true };
     } catch (error) {

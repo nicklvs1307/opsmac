@@ -60,6 +60,9 @@ const Settings = () => {
   const [apiToken, setApiToken] = useState('');
   const [activeTab, setActiveTab] = useState('profile');
   const [changePasswordDialog, setChangePasswordDialog] = useState(false);
+  const [testMessageDialog, setTestMessageDialog] = useState(false);
+  const [testRecipient, setTestRecipient] = useState('');
+  const [testMessage, setTestMessage] = useState('');
   const [settings, setSettings] = useState({
     notifications: {
       email_feedback: true,
@@ -253,6 +256,22 @@ const Settings = () => {
       if (restaurantId) { // Only fetch if restaurantId exists
         fetchSettings(restaurantId);
       }
+    }
+  };
+
+  const sendTestMessage = async () => {
+    try {
+      setLoading(true);
+      await axiosInstance.post(`/api/settings/${restaurantId}/whatsapp/test`, {
+        recipient: testRecipient,
+        message: testMessage,
+      });
+      toast.success(t('settings.test_message_sent_successfully'));
+      setTestMessageDialog(false);
+    } catch (err) {
+      toast.error(err.response?.data?.message || t('settings.error_sending_test_message'));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -722,156 +741,6 @@ const Settings = () => {
                   </FormControl>
                 </Grid>
               </Grid>
-            </CardContent>
-          </Card>
-        );
-
-      case 'whatsapp':
-        return (
-          <Card>
-            <CardHeader
-              title={t('settings.whatsapp_integration')}
-              subheader={t('settings.configure_whatsapp_api')}
-            />
-            <CardContent>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Controller
-                    name="whatsapp_api_url"
-                    control={profileControl}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={t('settings.whatsapp_api_url')}
-                        fullWidth
-                        placeholder="https://your-evolution-api.com"
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    name="whatsapp_api_key"
-                    control={profileControl}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={t('settings.whatsapp_api_key')}
-                        fullWidth
-                        type="password"
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    name="whatsapp_phone_number"
-                    control={profileControl}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={t('settings.whatsapp_phone_number')}
-                        fullWidth
-                        placeholder="5511987654321"
-                      />
-                    )}
-                  />
-                </Grid>
-              </Grid>
-              <Box mt={3}>
-                <Button
-                  variant="contained"
-                  startIcon={<SaveIcon />}
-                  onClick={handleProfileSubmit(onProfileSubmit)} // Usar o mesmo submit para salvar as configurações do WhatsApp
-                  disabled={loading}
-                >
-                  {loading ? <CircularProgress size={20} /> : t('settings.save_whatsapp_settings')}
-                </Button>
-                <Button
-                  variant="outlined"
-                  startIcon={<SendIcon />}
-                  onClick={() => setTestMessageDialog(true)}
-                  disabled={loading}
-                  sx={{ ml: 2 }}
-                >
-                  {t('settings.send_test_message')}
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        );
-
-      case 'whatsapp':
-        return (
-          <Card>
-            <CardHeader
-              title={t('settings.whatsapp_integration')}
-              subheader={t('settings.configure_whatsapp_api')}
-            />
-            <CardContent>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Controller
-                    name="whatsapp_api_url"
-                    control={profileControl}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={t('settings.whatsapp_api_url')}
-                        fullWidth
-                        placeholder="https://your-evolution-api.com"
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    name="whatsapp_api_key"
-                    control={profileControl}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={t('settings.whatsapp_api_key')}
-                        fullWidth
-                        type="password"
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    name="whatsapp_phone_number"
-                    control={profileControl}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={t('settings.whatsapp_phone_number')}
-                        fullWidth
-                        placeholder="5511987654321"
-                      />
-                    )}
-                  />
-                </Grid>
-              </Grid>
-              <Box mt={3}>
-                <Button
-                  variant="contained"
-                  startIcon={<SaveIcon />}
-                  onClick={handleProfileSubmit(onProfileSubmit)} // Usar o mesmo submit para salvar as configurações do WhatsApp
-                  disabled={loading}
-                >
-                  {loading ? <CircularProgress size={20} /> : t('settings.save_whatsapp_settings')}
-                </Button>
-                <Button
-                  variant="outlined"
-                  startIcon={<SendIcon />}
-                  onClick={() => setTestMessageDialog(true)}
-                  disabled={loading}
-                  sx={{ ml: 2 }}
-                >
-                  {t('settings.send_test_message')}
-                </Button>
-              </Box>
             </CardContent>
           </Card>
         );

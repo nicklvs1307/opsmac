@@ -248,6 +248,8 @@ router.post('/:restaurantId/whatsapp/test', auth, checkRestaurantOwnership, [
     const { restaurantId } = req.params;
     const { recipient, message } = req.body;
 
+    console.log('Recebido para teste de WhatsApp:', { recipient, message });
+
     const restaurant = await models.Restaurant.findByPk(restaurantId);
     if (!restaurant) {
       return res.status(404).json({ error: 'Restaurante não encontrado' });

@@ -9,9 +9,7 @@ const sendWhatsAppMessage = async (instanceUrl, apiKey, instanceId, recipientPho
     };
     const data = {
       number: recipientPhoneNumber,
-      textMessage: {
-        text: message,
-      },
+      text: message, // Corrigido para enviar a propriedade 'text' diretamente
     };
 
     const response = await axios.post(url, data, { headers });

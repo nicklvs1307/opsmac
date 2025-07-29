@@ -35,7 +35,7 @@ const CouponCreateForm = ({ onCouponCreated }) => {
                 setError('');
                 const [rewardsRes, customersRes] = await Promise.all([
                     axiosInstance.get(`/rewards/restaurant/${restaurantId}`), // Fetch rewards for the current restaurant
-                    axiosInstance.get('/customers')
+                    axiosInstance.get('/api/customers')
                 ]);
                 setRewards(rewardsRes.data.rewards);
                 setCustomers(customersRes.data.customers);

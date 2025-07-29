@@ -77,7 +77,7 @@ const NewFeedback = () => {
       setLoadingData(true);
       
       const [customersResponse, qrCodesResponse] = await Promise.all([
-        axiosInstance.get('/customers'),
+        axiosInstance.get('/api/customers'),
         restaurantId ? axiosInstance.get(`/qrcode/restaurant/${restaurantId}`) : Promise.resolve({ data: { qrcodes: [] } }),
       ]);
       

@@ -32,7 +32,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axiosInstance.get('/admin/users');
+        const response = await axiosInstance.get('/api/admin/users');
         setUsers(response.data);
       } catch (error) {
         toast({
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
   const handleCreateUser = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post('/admin/users', userForm);
+      await axiosInstance.post('/api/admin/users', userForm);
       toast({
         title: 'Usuário criado.',
         description: "Novo usuário criado com sucesso.",

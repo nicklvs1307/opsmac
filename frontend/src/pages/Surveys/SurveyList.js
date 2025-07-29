@@ -14,7 +14,7 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const fetchSurveys = async (filters) => {
-  const { data } = await axiosInstance.get('/surveys', { params: filters });
+  const { data } = await axiosInstance.get('/api/surveys', { params: filters });
   return data;
 };
 

@@ -14,7 +14,7 @@ const CouponValidator = () => {
 
   const handleValidateCoupon = async (code) => {
     try {
-      const response = await axiosInstance.post('/coupons/validate', { code });
+      const response = await axiosInstance.post('/api/coupons/validate', { code });
       return response.data;
     } catch (err) {
       throw new Error(err.response?.data?.error || t('coupon_validator.error_validating_coupon'));

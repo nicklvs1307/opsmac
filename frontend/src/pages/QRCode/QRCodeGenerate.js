@@ -114,7 +114,7 @@ const QRCodeGenerate = () => {
         Object.entries(data).filter(([_, value]) => value !== '' && value !== null)
       );
       
-      const response = await axiosInstance.post('/qrcode', { ...cleanData, restaurant_id: restaurantId });
+      const response = await axiosInstance.post('/api/qrcode', { ...cleanData, restaurant_id: restaurantId });
       
       setGeneratedQRCode(response.data);
       toast.success('QR Code gerado com sucesso!');

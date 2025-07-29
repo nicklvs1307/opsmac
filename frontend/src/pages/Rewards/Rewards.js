@@ -121,7 +121,7 @@ const Rewards = () => {
       setLoading(true);
       setError('');
       
-      const response = await axiosInstance.get('/rewards/analytics');
+      const response = await axiosInstance.get('/api/rewards/analytics');
       setAnalytics(response.data);
     } catch (err) {
       console.error('Error fetching analytics:', err);
@@ -193,7 +193,7 @@ const Rewards = () => {
         await axiosInstance.put(`/rewards/${selectedItem.id}`, cleanData);
         toast.success('Recompensa atualizada com sucesso!');
       } else {
-        await axiosInstance.post('/rewards', { ...cleanData, restaurant_id: restaurantId });
+        await axiosInstance.post('/api/rewards', { ...cleanData, restaurant_id: restaurantId });
         toast.success('Recompensa criada com sucesso!');
       }
       

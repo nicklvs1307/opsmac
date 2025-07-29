@@ -107,7 +107,7 @@ const Customers = () => {
         ...filters,
       };
       
-      const response = await axiosInstance.get('/customers', { params });
+      const response = await axiosInstance.get('/api/customers', { params });
       
       setCustomers(response.data.customers);
       setTotalPages(response.data.totalPages);
@@ -177,7 +177,7 @@ const Customers = () => {
         await axiosInstance.put(`/customers/${selectedCustomer.id}`, cleanData);
         toast.success('Cliente atualizado com sucesso!');
       } else {
-        await axiosInstance.post('/customers', cleanData);
+        await axiosInstance.post('/api/customers', cleanData);
         toast.success('Cliente criado com sucesso!');
       }
       

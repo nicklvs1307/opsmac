@@ -6,7 +6,7 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const createSurvey = async (surveyData) => {
-  const { data } = await axiosInstance.post('/surveys', surveyData);
+  const { data } = await axiosInstance.post('/api/surveys', surveyData);
   return data;
 };
 

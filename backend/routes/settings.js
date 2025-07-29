@@ -89,9 +89,12 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
  *               whatsapp_api_key:
  *                 type: string
  *                 description: Chave da API do WhatsApp
+ *               whatsapp_instance_id:
+ *                 type: string
+ *                 description: ID da instância da Evolution API (ex: inst_123456)
  *               whatsapp_phone_number:
  *                 type: string
- *                 description: Número de telefone do WhatsApp (com código do país)
+ *                 description: Número de telefone associado à instância do WhatsApp (com código do país, ex: +5511987654321)
  *     responses:
  *       200:
  *         description: Configurações do WhatsApp atualizadas com sucesso.

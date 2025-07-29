@@ -169,6 +169,32 @@ const Settings = () => {
 
   const newPassword = watch('new_password');
 
+  const {
+    control: whatsappControl,
+    handleSubmit: handleWhatsappSubmit,
+    formState: { errors: whatsappErrors },
+    reset: resetWhatsapp,
+  } = useForm({
+    defaultValues: {
+      whatsapp_api_url: '',
+      whatsapp_api_key: '',
+      whatsapp_instance_id: '',
+      whatsapp_phone_number: '',
+    },
+  });
+
+  const onWhatsappSettingsSubmit = async (data) => {
+    try {
+      setLoading(true);
+      await axiosInstance.put(`/api/settings/${restaurantId}/whatsapp`, data);
+      toast.success(t('settings.whatsapp_settings_updated_successfully'));
+    } catch (err) {
+      toast.error(err.response?.data?.message || t('settings.error_updating_whatsapp_settings'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Combined useEffect for initial data fetching and form reset
   useEffect(() => {
     if (user && restaurantId) {
@@ -183,8 +209,19 @@ const Settings = () => {
         address: user.restaurant?.address || '',
         description: user.restaurant?.description || '',
       });
+      // Fetch and set WhatsApp settings separately
+      const fetchWhatsappSettings = async () => {
+        try {
+          const response = await axiosInstance.get(`/api/settings/${restaurantId}/whatsapp`);
+          resetWhatsapp(response.data);
+        } catch (err) {
+          console.error('Error fetching WhatsApp settings:', err);
+          toast.error(t('settings.error_fetching_whatsapp_settings'));
+        }
+      };
+      fetchWhatsappSettings();
     }
-  }, [user, restaurantId, fetchSettings, fetchApiToken, resetProfile]);
+  }, [user, restaurantId, fetchSettings, fetchApiToken, resetProfile, resetWhatsapp, t]);
 
   const onProfileSubmit = async (data) => {
     try {
@@ -757,7 +794,7 @@ const Settings = () => {
                 <Grid item xs={12}>
                   <Controller
                     name="whatsapp_api_url"
-                    control={profileControl}
+                    control={whatsappControl}
                     render={({ field }) => (
                       <TextField
                         {...field}
@@ -771,7 +808,7 @@ const Settings = () => {
                 <Grid item xs={12}>
                   <Controller
                     name="whatsapp_api_key"
-                    control={profileControl}
+                    control={whatsappControl}
                     render={({ field }) => (
                       <TextField
                         {...field}
@@ -784,8 +821,22 @@ const Settings = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <Controller
+                    name="whatsapp_instance_id"
+                    control={whatsappControl}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label={t('settings.whatsapp_instance_id')}
+                        fullWidth
+                        placeholder="Ex: inst_123456"
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Controller
                     name="whatsapp_phone_number"
-                    control={profileControl}
+                    control={whatsappControl}
                     render={({ field }) => (
                       <TextField
                         {...field}
@@ -801,7 +852,7 @@ const Settings = () => {
                 <Button
                   variant="contained"
                   startIcon={<SaveIcon />}
-                  onClick={handleProfileSubmit(onProfileSubmit)} // Usar o mesmo submit para salvar as configurações do WhatsApp
+                  onClick={handleWhatsappSubmit(onWhatsappSettingsSubmit)} // Usar o novo submit handler
                   disabled={loading}
                 >
                   {loading ? <CircularProgress size={20} /> : t('settings.save_whatsapp_settings')}

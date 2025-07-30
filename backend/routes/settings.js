@@ -51,15 +51,38 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
-    // Mesclar as novas configurações com as existentes (deep merge)
-    const updatedSettings = { 
-      ...restaurant.settings,
-      ...settings,
-      whatsapp_messages: { ...restaurant.settings.whatsapp_messages, ...settings.whatsapp_messages },
-      checkin_program_settings: { ...restaurant.settings.checkin_program_settings, ...settings.checkin_program_settings }
-    };
+    // Deep merge para preservar sub-objetos aninhados
+    const lodash = require('lodash');
+    const updatedSettings = lodash.merge({}, restaurant.settings, settings);
 
     await restaurant.update({ settings: updatedSettings });
+
+    // Se as configurações do programa de check-in foram atualizadas, crie ou atualize o QR Code de check-in
+    if (settings.checkin_program_settings) {
+      let checkinQRCode = await models.QRCode.findOne({ 
+        where: { 
+          restaurant_id: restaurantId, 
+          qr_type: 'checkin',
+          is_generic: true
+        } 
+      });
+
+      if (checkinQRCode) {
+        // Atualiza o QR Code existente se necessário
+        await checkinQRCode.update({ is_active: settings.checkin_program_settings.enable_level_progression });
+      } else {
+        // Cria um novo QR Code de check-in genérico
+        checkinQRCode = await models.QRCode.create({
+          restaurant_id: restaurantId,
+          qr_type: 'checkin',
+          is_generic: true,
+          table_number: 0, // Mesa 0 para QR Codes genéricos
+          location_description: 'Check-in Geral',
+          is_active: settings.checkin_program_settings.enable_level_progression,
+          created_by: req.user.userId,
+        });
+      }
+    }
 
     res.json({ message: 'Configurações atualizadas com sucesso', settings: updatedSettings });
   } catch (error) {

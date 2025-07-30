@@ -40,6 +40,7 @@ const CheckinDashboard = () => {
   const [checkinData, setCheckinData] = useState(null);
   const [tabValue, setTabValue] = useState(0);
   const [rewards, setRewards] = useState([]);
+  const [checkinQRCode, setCheckinQRCode] = useState(null);
 
   const {
     control,
@@ -98,6 +99,37 @@ const CheckinDashboard = () => {
     }
   }, [restaurantId, t]);
 
+  const fetchCheckinProgramSettings = useCallback(async () => {
+    if (!restaurantId) return;
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get(`/api/settings/${restaurantId}`);
+      const checkinProgramSettings = response.data.settings?.checkin_program_settings || {};
+      reset(checkinProgramSettings);
+    } catch (err) {
+      console.error('Erro ao buscar configurações do programa de check-in:', err);
+      toast.error(t('Erro ao carregar configurações do programa de fidelidade'));
+    } finally {
+      setLoading(false);
+    }
+  }, [restaurantId, reset, t]);
+
+  const fetchCheckinQRCode = useCallback(async () => {
+    if (!restaurantId) return;
+    try {
+      const response = await axiosInstance.get(`/api/qrcode/restaurant/${restaurantId}`, {
+        params: { qr_type: 'checkin', is_generic: true, limit: 1 }
+      });
+      if (response.data.qrcodes && response.data.qrcodes.length > 0) {
+        setCheckinQRCode(response.data.qrcodes[0]);
+      } else {
+        setCheckinQRCode(null);
+      }
+    } catch (err) {
+      console.error('Erro ao buscar QR Code de check-in:', err);
+    }
+  }, [restaurantId]);
+
   const onSaveCheckinProgram = async (data) => {
     try {
       setLoading(true);
@@ -107,6 +139,7 @@ const CheckinDashboard = () => {
         },
       });
       toast.success(t('relationship.checkin_program_saved_successfully'));
+      fetchCheckinQRCode(); // Atualiza o QR Code após salvar
     } catch (err) {
       console.error('Erro ao salvar programa de check-in:', err);
       toast.error(err.response?.data?.message || t('relationship.error_saving_checkin_program'));
@@ -120,8 +153,10 @@ const CheckinDashboard = () => {
       fetchCheckinData();
     } else if (tabValue === 1) {
       fetchRewards();
+      fetchCheckinProgramSettings();
+      fetchCheckinQRCode();
     }
-  }, [tabValue, fetchCheckinData, fetchRewards]);
+  }, [tabValue, fetchCheckinData, fetchRewards, fetchCheckinProgramSettings, fetchCheckinQRCode]);
 
   const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
@@ -369,6 +404,7 @@ const CheckinDashboard = () => {
           loading={loading}
           onSave={handleSubmit(onSaveCheckinProgram)}
           t={t}
+          checkinQRCode={checkinQRCode}
         />
       )}
     </Box>

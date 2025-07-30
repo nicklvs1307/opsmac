@@ -731,8 +731,6 @@ const RelationshipDashboard = () => {
       </Card>
     </>
   );
-  );
-  );
 
   return (
     <Box>

@@ -343,7 +343,7 @@ const RelationshipDashboard = () => {
           {/* Campanha de Lembrete de Cupom */}
           <Box sx={{ mb: 4 }}>
             <FormControlLabel
-              control=
+              control={
                 <Controller
                   name="coupon_reminder_enabled"
                   control={automaticCampaignsControl}

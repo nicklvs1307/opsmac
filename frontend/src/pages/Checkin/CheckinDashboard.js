@@ -11,30 +11,65 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemIcon
+  ListItemIcon,
+  Tabs,
+  Tab,
 } from '@mui/material';
 import {
   CheckCircleOutline as CheckinIcon,
   AccessTime as TimeIcon,
   People as PeopleIcon,
-  BarChart as BarChartIcon
+  BarChart as BarChartIcon,
+  Stars as StarsIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import axiosInstance from '../../api/axiosInstance';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import CheckinProgram from './CheckinProgram';
+import { useForm, useFieldArray } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const CheckinDashboard = () => {
   const { user } = useAuth();
+  const { t } = useTranslation();
+  const restaurantId = user?.restaurants?.[0]?.id;
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [checkinData, setCheckinData] = useState(null);
+  const [tabValue, setTabValue] = useState(0);
+  const [rewards, setRewards] = useState([]);
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      checkin_cycle_length: 10,
+      checkin_cycle_name: '',
+      enable_ranking: false,
+      enable_level_progression: false,
+      rewards_per_visit: [],
+      checkin_time_restriction: 'unlimited',
+      identification_method: 'phone',
+      points_per_checkin: 1,
+      checkin_limit_per_cycle: 1,
+      allow_multiple_cycles: true,
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'rewards_per_visit',
+  });
 
   const fetchCheckinData = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
-
-      const restaurantId = user?.restaurants?.[0]?.id;
 
       if (!restaurantId) {
         setError('Nenhum restaurante encontrado. Por favor, verifique suas configurações.');
@@ -44,18 +79,49 @@ const CheckinDashboard = () => {
 
       const response = await axiosInstance.get(`/api/checkin/analytics/${restaurantId}`);
       setCheckinData(response.data);
-      console.log('Dados de Check-in recebidos no frontend:', response.data);
     } catch (err) {
       console.error('Erro ao buscar dados de check-in (frontend):', err);
       setError('Erro ao carregar dados de check-in');
     } finally {
       setLoading(false);
     }
-  }, [user]);
+  }, [restaurantId]);
+
+  const fetchRewards = useCallback(async () => {
+    if (!restaurantId) return;
+    try {
+      const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`);
+      setRewards(response.data.rewards);
+    } catch (err) {
+      console.error('Erro ao buscar recompensas:', err);
+      toast.error(t('relationship.error_fetching_rewards'));
+    }
+  }, [restaurantId, t]);
+
+  const onSaveCheckinProgram = async (data) => {
+    try {
+      setLoading(true);
+      await axiosInstance.put(`/api/settings/${restaurantId}`, {
+        settings: {
+          checkin_program_settings: data,
+        },
+      });
+      toast.success(t('relationship.checkin_program_saved_successfully'));
+    } catch (err) {
+      console.error('Erro ao salvar programa de check-in:', err);
+      toast.error(err.response?.data?.message || t('relationship.error_saving_checkin_program'));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    fetchCheckinData();
-  }, [fetchCheckinData]);
+    if (tabValue === 0) {
+      fetchCheckinData();
+    } else if (tabValue === 1) {
+      fetchRewards();
+    }
+  }, [tabValue, fetchCheckinData, fetchRewards]);
 
   const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
@@ -69,103 +135,8 @@ const CheckinDashboard = () => {
     return result.trim();
   };
 
-  if (loading) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
-        <CircularProgress size={60} />
-      </Box>
-    );
-  }
-
-  if (error) {
-    return (
-      <Alert severity="error" sx={{ mb: 2 }}>
-        {error}
-      </Alert>
-    );
-  }
-
-  const MetricCard = ({ title, value, icon, bgColor, iconColor }) => (
-    <Card
-      sx={{
-        height: '100%',
-        background: bgColor,
-        color: 'white',
-        position: 'relative',
-        overflow: 'visible',
-      }}
-    >
-      <CardContent sx={{ pb: 2 }}>
-        <Box display="flex" justifyContent="space-between" alignItems="flex-start">
-          <Box>
-            <Typography
-              variant="body2"
-              sx={{
-                color: 'rgba(255,255,255,0.8)',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                mb: 1,
-              }}
-            >
-              {title}
-            </Typography>
-            <Typography
-              variant="h3"
-              component="div"
-              sx={{
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: '2.5rem',
-                lineHeight: 1,
-              }}
-            >
-              {value}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              bgcolor: iconColor,
-              width: 48,
-              height: 48,
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-            }}
-          >
-            {icon}
-          </Box>
-        </Box>
-      </CardContent>
-    </Card>
-  );
-
-  return (
-    <Box>
-      <Box mb={4}>
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{
-            fontWeight: 'bold',
-            color: '#2c3e50',
-            mb: 1,
-          }}
-        >
-          Dashboard de Check-ins
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{
-            color: '#7f8c8d',
-            mb: 3,
-          }}
-        >
-          Visão geral e análises dos check-ins dos clientes
-        </Typography>
-      </Box>
-
+  const renderAnalytics = () => (
+    <>
       <Grid container spacing={3} mb={4}>
         <Grid item xs={12} sm={6} md={4}>
           <MetricCard
@@ -274,8 +245,137 @@ const CheckinDashboard = () => {
           </Paper>
         </Grid>
       </Grid>
+    </>
+  );
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
+        <CircularProgress size={60} />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Alert severity="error" sx={{ mb: 2 }}>
+        {error}
+      </Alert>
+    );
+  }
+
+  const MetricCard = ({ title, value, icon, bgColor, iconColor }) => (
+    <Card
+      sx={{
+        height: '100%',
+        background: bgColor,
+        color: 'white',
+        position: 'relative',
+        overflow: 'visible',
+      }}
+    >
+      <CardContent sx={{ pb: 2 }}>
+        <Box display="flex" justifyContent="space-between" alignItems="flex-start">
+          <Box>
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'rgba(255,255,255,0.8)',
+                fontSize: '0.875rem',
+                fontWeight: 500,
+                mb: 1,
+              }}
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant="h3"
+              component="div"
+              sx={{
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: '2.5rem',
+                lineHeight: 1,
+              }}
+            >
+              {value}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              bgcolor: iconColor,
+              width: 48,
+              height: 48,
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+            }}
+          >
+            {icon}
+          </Box>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+
+  return (
+    <Box>
+      <Box mb={4}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 'bold',
+            color: '#2c3e50',
+            mb: 1,
+          }}
+        >
+          Dashboard de Check-ins
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color: '#7f8c8d',
+            mb: 3,
+          }}
+        >
+          Visão geral e análises dos check-ins dos clientes
+        </Typography>
+      </Box>
+
+      <Paper sx={{ mb: 3 }}>
+        <Tabs
+          value={tabValue}
+          onChange={(e, newValue) => setTabValue(newValue)}
+          indicatorColor="primary"
+          textColor="primary"
+        >
+          <Tab label="Análise de Check-ins" icon={<BarChartIcon />} />
+          <Tab label="Programa de Fidelidade" icon={<StarsIcon />} />
+        </Tabs>
+      </Paper>
+
+      {tabValue === 0 && renderAnalytics()}
+      {tabValue === 1 && (
+        <CheckinProgram
+          control={control}
+          errors={errors}
+          fields={fields}
+          append={append}
+          remove={remove}
+          rewards={rewards}
+          loading={loading}
+          onSave={handleSubmit(onSaveCheckinProgram)}
+          t={t}
+        />
+      )}
     </Box>
   );
 };
+
+export default CheckinDashboard;
+
 
 export default CheckinDashboard;

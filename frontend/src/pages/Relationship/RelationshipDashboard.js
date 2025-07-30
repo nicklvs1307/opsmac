@@ -7,7 +7,6 @@ import {
   Button,
   TextField,
   CircularProgress,
-  Divider,
   List,
   ListItem,
   ListItemText,
@@ -16,18 +15,12 @@ import {
   CardHeader,
   CardContent,
   FormControlLabel,
-  FormHelperText,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from '@mui/material';
-import { Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useForm, Controller, useFieldArray } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 
 const RelationshipDashboard = () => {
   const { user } = useAuth();
@@ -38,7 +31,6 @@ const RelationshipDashboard = () => {
   const [activeTab, setActiveTab] = useState('manual'); // 'manual' or 'automatic'
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
-  const [rewards, setRewards] = useState([]); // Novo estado para recompensas
 
   // Form para mensagens manuais
   const {
@@ -58,7 +50,6 @@ const RelationshipDashboard = () => {
     control: automaticCampaignsControl,
     handleSubmit: handleAutomaticCampaignsSubmit,
     reset: resetAutomaticCampaignsForm,
-    formState: { errors: automaticCampaignsErrors },
   } = useForm({
     defaultValues: {
       checkin_message_enabled: false,
@@ -69,23 +60,7 @@ const RelationshipDashboard = () => {
       birthday_greeting_text: '',
       feedback_thank_you_enabled: false,
       feedback_thank_you_text: '',
-      // Check-in Program Settings
-      checkin_cycle_length: 10,
-      checkin_cycle_name: '',
-      enable_ranking: false,
-      enable_level_progression: false,
-      rewards_per_visit: [], // Array para armazenar as recompensas por visita
-      checkin_time_restriction: 'unlimited',
-      identification_method: 'phone',
-      points_per_checkin: 1,
-      checkin_limit_per_cycle: 1,
-      allow_multiple_cycles: true,
     },
-  });
-
-  const { fields, append, remove } = useFieldArray({
-    control: automaticCampaignsControl,
-    name: "rewards_per_visit",
   });
 
   const fetchCustomers = useCallback(async () => {
@@ -107,9 +82,7 @@ const RelationshipDashboard = () => {
     try {
       setLoading(true);
       const response = await axiosInstance.get(`/api/settings/${restaurantId}/whatsapp`);
-      // Assumindo que as mensagens personalizadas estão em response.data.settings.whatsapp_messages
       const whatsappMessages = response.data.settings?.whatsapp_messages || {};
-      const checkinProgramSettings = response.data.settings?.checkin_program_settings || {};
 
       resetAutomaticCampaignsForm({
         checkin_message_enabled: whatsappMessages.checkin_message_enabled || false,
@@ -120,17 +93,6 @@ const RelationshipDashboard = () => {
         birthday_greeting_text: whatsappMessages.birthday_greeting_text || '',
         feedback_thank_you_enabled: whatsappMessages.feedback_thank_you_enabled || false,
         feedback_thank_you_text: whatsappMessages.feedback_thank_you_text || '',
-        // Check-in Program Settings
-        checkin_cycle_length: checkinProgramSettings.checkin_cycle_length || 10,
-        checkin_cycle_name: checkinProgramSettings.checkin_cycle_name || '',
-        enable_ranking: checkinProgramSettings.enable_ranking || false,
-        enable_level_progression: checkinProgramSettings.enable_level_progression || false,
-        rewards_per_visit: checkinProgramSettings.rewards_per_visit || [],
-        checkin_time_restriction: checkinProgramSettings.checkin_time_restriction || 'unlimited',
-        identification_method: checkinProgramSettings.identification_method || 'phone',
-        points_per_checkin: checkinProgramSettings.points_per_checkin || 1,
-        checkin_limit_per_cycle: checkinProgramSettings.checkin_limit_per_cycle || 1,
-        allow_multiple_cycles: checkinProgramSettings.allow_multiple_cycles || true,
       });
     } catch (err) {
       console.error('Erro ao buscar configurações do WhatsApp:', err);
@@ -140,22 +102,10 @@ const RelationshipDashboard = () => {
     }
   }, [restaurantId, resetAutomaticCampaignsForm, t]);
 
-  const fetchRewards = useCallback(async () => {
-    if (!restaurantId) return;
-    try {
-      const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`);
-      setRewards(response.data.rewards);
-    } catch (err) {
-      console.error('Erro ao buscar recompensas:', err);
-      toast.error(t('relationship.error_fetching_rewards'));
-    }
-  }, [restaurantId, t]);
-
   useEffect(() => {
     fetchCustomers();
     fetchWhatsappSettings();
-    fetchRewards();
-  }, [fetchCustomers, fetchWhatsappSettings, fetchRewards]);
+  }, [fetchCustomers, fetchWhatsappSettings]);
 
   const onSendManualMessage = async (data) => {
     try {
@@ -178,31 +128,9 @@ const RelationshipDashboard = () => {
   const onSaveAutomaticCampaigns = async (data) => {
     try {
       setLoading(true);
-      // Atualizar apenas a parte de whatsapp_messages e checkin_program_settings dentro de settings
       await axiosInstance.put(`/api/settings/${restaurantId}`, {
         settings: {
-          whatsapp_messages: {
-            checkin_message_enabled: data.checkin_message_enabled,
-            checkin_message_text: data.checkin_message_text,
-            coupon_reminder_enabled: data.coupon_reminder_enabled,
-            coupon_reminder_text: data.coupon_reminder_text,
-            birthday_greeting_enabled: data.birthday_greeting_enabled,
-            birthday_greeting_text: data.birthday_greeting_text,
-            feedback_thank_you_enabled: data.feedback_thank_you_enabled,
-            feedback_thank_you_text: data.feedback_thank_you_text,
-          },
-          checkin_program_settings: {
-            checkin_cycle_length: data.checkin_cycle_length,
-            checkin_cycle_name: data.checkin_cycle_name,
-            enable_ranking: data.enable_ranking,
-            enable_level_progression: data.enable_level_progression,
-            rewards_per_visit: data.rewards_per_visit,
-            checkin_time_restriction: data.checkin_time_restriction,
-            identification_method: data.identification_method,
-            points_per_checkin: data.points_per_checkin,
-            checkin_limit_per_cycle: data.checkin_limit_per_cycle,
-            allow_multiple_cycles: data.allow_multiple_cycles,
-          },
+          whatsapp_messages: data,
         },
       });
       toast.success(t('relationship.automatic_campaigns_saved_successfully'));
@@ -463,275 +391,6 @@ const RelationshipDashboard = () => {
     </>
   );
 
-  const renderCheckinProgramSection = () => (
-    <>
-      <Card>
-        <CardHeader title={t('relationship.checkin_program')} />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-            {t('relationship.checkin_program_description')}
-          </Typography>
-
-          {/* Ciclo de Check-in */}
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" gutterBottom>{t('relationship.checkin_cycle')}</Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <Controller
-                  name="checkin_cycle_length"
-                  control={automaticCampaignsControl} // Usando o mesmo control por enquanto
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={t('relationship.cycle_length')}
-                      type="number"
-                      fullWidth
-                      margin="normal"
-                      helperText={t('relationship.cycle_length_helper')}
-                    />
-                  )}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Controller
-                  name="checkin_cycle_name"
-                  control={automaticCampaignsControl}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={t('relationship.cycle_name')}
-                      fullWidth
-                      margin="normal"
-                      helperText={t('relationship.cycle_name_helper')}
-                    />
-                  )}
-                />
-              </Grid>
-            </Grid>
-            <FormControlLabel
-              control={
-                <Controller
-                  name="enable_ranking"
-                  control={automaticCampaignsControl}
-                  render={({ field }) => (
-                    <Switch
-                      {...field}
-                      checked={field.value}
-                      onChange={(e) => field.onChange(e.target.checked)}
-                    />
-                  )}
-                />
-              }
-              label={t('relationship.enable_ranking')}
-            />
-            <FormControlLabel
-              control={
-                <Controller
-                  name="enable_level_progression"
-                  control={automaticCampaignsControl}
-                  render={({ field }) => (
-                    <Switch
-                      {...field}
-                      checked={field.value}
-                      onChange={(e) => field.onChange(e.target.checked)}
-                    />
-                  )}
-                />
-              }
-              label={t('relationship.enable_level_progression')}
-            />
-          </Box>
-
-          {/* Recompensas por Visita */}
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" gutterBottom>{t('relationship.rewards_per_visit')}</Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              {t('relationship.rewards_per_visit_helper')}
-            </Typography>
-            {fields.map((item, index) => (
-              <Paper key={item.id} sx={{ p: 2, mb: 2, border: '1px solid #eee' }}>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid item xs={12} sm={4}>
-                    <Controller
-                      name={`rewards_per_visit.${index}.visit_count`}
-                      control={automaticCampaignsControl}
-                      rules={{ required: t('relationship.visit_count_required') }}
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('relationship.visit_count')}
-                          type="number"
-                          fullWidth
-                          error={!!automaticCampaignsErrors.rewards_per_visit?.[index]?.visit_count}
-                          helperText={automaticCampaignsErrors.rewards_per_visit?.[index]?.visit_count?.message}
-                        />
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Controller
-                      name={`rewards_per_visit.${index}.reward_id`}
-                      control={automaticCampaignsControl}
-                      rules={{ required: t('relationship.reward_required') }}
-                      render={({ field }) => (
-                        <FormControl fullWidth error={!!automaticCampaignsErrors.rewards_per_visit?.[index]?.reward_id}>
-                          <InputLabel>{t('relationship.select_reward')}</InputLabel>
-                          <Select {...field} label={t('relationship.select_reward')}>
-                            {rewards.map((reward) => (
-                              <MenuItem key={reward.id} value={reward.id}>
-                                {reward.title}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                          <FormHelperText>{automaticCampaignsErrors.rewards_per_visit?.[index]?.reward_id?.message}</FormHelperText>
-                        </FormControl>
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={2}>
-                    <Button
-                      variant="outlined"
-                      color="error"
-                      onClick={() => remove(index)}
-                      startIcon={<DeleteIcon />}
-                    >
-                      {t('relationship.remove')}
-                    </Button>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Controller
-                      name={`rewards_per_visit.${index}.message_template`}
-                      control={automaticCampaignsControl}
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('relationship.message_template')}
-                          fullWidth
-                          multiline
-                          rows={3}
-                          helperText={t('relationship.reward_message_variables')}
-                        />
-                      )}
-                    />
-                  </Grid>
-                </Grid>
-              </Paper>
-            ))}
-            <Button
-              variant="outlined"
-              startIcon={<AddIcon />}
-              onClick={() => append({ visit_count: '', reward_id: '', message_template: '' })}
-            >
-              {t('relationship.add_reward')}
-            </Button>
-          </Box>
-
-          {/* Controle Anti-Fraude */}
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" gutterBottom>{t('relationship.anti_fraud_control')}</Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <Controller
-                  name="checkin_time_restriction"
-                  control={automaticCampaignsControl}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={t('relationship.time_restriction')}
-                      fullWidth
-                      margin="normal"
-                      helperText={t('relationship.time_restriction_helper')}
-                    />
-                  )}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Controller
-                  name="identification_method"
-                  control={automaticCampaignsControl}
-                  render={({ field }) => (
-                    <FormControl fullWidth margin="normal">
-                      <InputLabel>{t('relationship.identification_method')}</InputLabel>
-                      <Select {...field} label={t('relationship.identification_method')}>
-                        <MenuItem value="phone">{t('relationship.method_phone')}</MenuItem>
-                        <MenuItem value="cpf">{t('relationship.method_cpf')}</MenuItem>
-                        <MenuItem value="unique_link">{t('relationship.method_unique_link')}</MenuItem>
-                      </Select>
-                    </FormControl>
-                  )}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-
-          {/* Sistema de Pontuação e Ranking */}
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" gutterBottom>{t('relationship.points_and_ranking')}</Typography>
-            <Controller
-              name="points_per_checkin"
-              control={automaticCampaignsControl}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label={t('relationship.points_per_checkin')}
-                  type="number"
-                  fullWidth
-                  margin="normal"
-                  helperText={t('relationship.points_per_checkin_helper')}
-                />
-              )}
-            />
-          </Box>
-
-          {/* Limite de Check-ins por Ciclo */}
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" gutterBottom>{t('relationship.checkin_limit')}</Typography>
-            <Controller
-              name="checkin_limit_per_cycle"
-              control={automaticCampaignsControl}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label={t('relationship.limit_per_cycle')}
-                  type="number"
-                  fullWidth
-                  margin="normal"
-                  helperText={t('relationship.limit_per_cycle_helper')}
-                />
-              )}
-            />
-            <FormControlLabel
-              control={
-                <Controller
-                  name="allow_multiple_cycles"
-                  control={automaticCampaignsControl}
-                  render={({ field }) => (
-                    <Switch
-                      {...field}
-                      checked={field.value}
-                      onChange={(e) => field.onChange(e.target.checked)}
-                    />
-                  )}
-                />
-              }
-              label={t('relationship.allow_multiple_cycles')}
-            />
-          </Box>
-
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleAutomaticCampaignsSubmit(onSaveAutomaticCampaigns)}
-            disabled={loading}
-            sx={{ mt: 2 }}
-          >
-            {loading ? <CircularProgress size={20} /> : t('relationship.save_checkin_program_button')}
-          </Button>
-        </CardContent>
-      </Card>
-    </>
-  );
-
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
@@ -754,21 +413,17 @@ const RelationshipDashboard = () => {
             >
               {t('relationship.automatic_campaigns_tab')}
             </Button>
-            <Button
-              variant={activeTab === 'checkin_program' ? 'contained' : 'outlined'}
-              onClick={() => setActiveTab('checkin_program')}
-            >
-              {t('relationship.checkin_program_tab')}
-            </Button>
           </Paper>
         </Grid>
       </Grid>
 
       {activeTab === 'manual' && renderManualMessageSection()}
       {activeTab === 'automatic' && renderAutomaticCampaignsSection()}
-      {activeTab === 'checkin_program' && renderCheckinProgramSection()}
     </Box>
   );
 };
+
+export default RelationshipDashboard;
+
 
 export default RelationshipDashboard;

@@ -14,13 +14,6 @@ import {
   ListItemIcon,
   Tabs,
   Tab,
-} from '@mui/material';
-import {
-  CheckCircleOutline as CheckinIcon,
-  AccessTime as TimeIcon,
-  People as PeopleIcon,
-  BarChart as BarChartIcon,
-  Stars as StarsIcon,
   Table,
   TableBody,
   TableCell,
@@ -28,7 +21,13 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { CheckCircleOutline, ExitToApp as ExitToAppIcon } from '@mui/icons-material';
+import {
+  AccessTime as TimeIcon,
+  People as PeopleIcon,
+  BarChart as BarChartIcon,
+  Stars as StarsIcon,
+} from '@mui/icons-material';
+import { CheckCircleOutline as CheckinIcon, ExitToApp as ExitToAppIcon } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import axiosInstance from '../../api/axiosInstance';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';

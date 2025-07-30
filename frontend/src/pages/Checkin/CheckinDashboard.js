@@ -376,6 +376,3 @@ const CheckinDashboard = () => {
 };
 
 export default CheckinDashboard;
-
-
-export default CheckinDashboard;

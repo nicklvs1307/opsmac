@@ -424,6 +424,3 @@ const RelationshipDashboard = () => {
 };
 
 export default RelationshipDashboard;
-
-
-export default RelationshipDashboard;

@@ -254,10 +254,12 @@ router.post('/public', [
 
     // Incrementar total_visits do cliente
     await customer.increment('total_visits');
+    // Fetch the updated customer to get the latest total_visits value
+    await customer.reload();
     console.log('[Public Check-in] total_visits do cliente incrementado para:', customer.total_visits);
 
     // Obter configurações do programa de check-in
-    console.log('[Public Check-in] Configurações do Programa de Check-in:', checkinProgramSettings);
+    console.log('[Public Check-in] Configurações do Programa de Check-in:', JSON.stringify(checkinProgramSettings, null, 2));
     const { 
       checkin_time_restriction = 'unlimited',
       points_per_checkin = 1,
@@ -308,16 +310,22 @@ router.post('/public', [
     console.log('[Public Check-in] Visitas atuais do cliente:', currentVisits);
 
     for (const rewardConfig of visitRewards) {
+      console.log(`[Public Check-in] Processando rewardConfig: ${JSON.stringify(rewardConfig)}`);
       const parsedVisitCount = parseInt(rewardConfig.visit_count, 10);
       console.log(`[Public Check-in] Verificando recompensa para visit_count: ${parsedVisitCount} (parsed) vs currentVisits: ${currentVisits}`);
+      
       if (parsedVisitCount === currentVisits) {
+        console.log(`[Public Check-in] Correspondência encontrada para visit_count: ${currentVisits}. Tentando buscar recompensa com ID: ${rewardConfig.reward_id}`);
         const reward = await models.Reward.findByPk(rewardConfig.reward_id);
+        
         if (reward) {
-          console.log('[Public Check-in] Recompensa encontrada:', reward.title);
+          console.log('[Public Check-in] Recompensa encontrada:', reward.title, 'Objeto Reward:', JSON.stringify(reward));
           try {
+            console.log('[Public Check-in] Tentando gerar cupom para o cliente:', customer.id);
             const newCoupon = await reward.generateCoupon(customer.id);
+            
             if (newCoupon) {
-              console.log('[Public Check-in] Cupom gerado:', newCoupon.code);
+              console.log('[Public Check-in] Cupom gerado com sucesso:', newCoupon.code, 'Objeto Coupon:', JSON.stringify(newCoupon));
               let rewardMessage = rewardConfig.message_template || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
               
               rewardMessage = rewardMessage.replace(/\{\{customer_name\}\}/g, customer.name || '');
@@ -326,9 +334,13 @@ router.post('/public', [
               rewardMessage = rewardMessage.replace(/\{\{coupon_code\}\}/g, newCoupon.code || '');
               rewardMessage = rewardMessage.replace(/\{\{visit_count\}\}/g, currentVisits);
 
+              console.log('[Public Check-in] Mensagem de recompensa formatada:', rewardMessage);
+
               // Verificar se as configurações do WhatsApp estão completas antes de tentar enviar
               if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
-                console.log('[Public Check-in] Tentando enviar mensagem WhatsApp para recompensa...');
+                console.log('[Public Check-in] Configurações de WhatsApp presentes. Tentando enviar mensagem para:', customer.phone);
+                console.log('[Public Check-in] WhatsApp API URL:', restaurant.whatsapp_api_url);
+                console.log('[Public Check-in] WhatsApp Instance ID:', restaurant.whatsapp_instance_id);
                 try {
                   const whatsappResponse = await sendWhatsAppMessage(
                     restaurant.whatsapp_api_url,
@@ -338,20 +350,24 @@ router.post('/public', [
                     rewardMessage
                   );
                   if (whatsappResponse.success) {
-                    console.log(`[Public Check-in] Recompensa de visita enviada com sucesso para ${customer.name} na ${currentVisits}ª visita.`);
+                    console.log(`[Public Check-in] Recompensa de visita enviada com sucesso para ${customer.name} na ${currentVisits}ª visita. Resposta WhatsApp:`, JSON.stringify(whatsappResponse));
                   } else {
-                    console.error(`[Public Check-in] Erro ao enviar recompensa de visita para ${customer.name}:`, whatsappResponse.error);
+                    console.error(`[Public Check-in] Erro ao enviar recompensa de visita para ${customer.name}:`, whatsappResponse.error, 'Resposta WhatsApp:', JSON.stringify(whatsappResponse));
                   }
                 } catch (whatsappSendError) {
-                  console.error(`[Public Check-in] Erro inesperado ao tentar enviar recompensa de visita WhatsApp para ${customer.name}:`, whatsappSendError);
+                  console.error(`[Public Check-in] Erro inesperado ao tentar enviar recompensa de visita WhatsApp para ${customer.name}:`, whatsappSendError.message, 'Stack:', whatsappSendError.stack);
                 }
               } else {
-                console.warn(`[Public Check-in] Configurações de WhatsApp incompletas ou telefone do cliente ausente para enviar recompensa para ${customer.name}.`);
+                console.warn(`[Public Check-in] Configurações de WhatsApp incompletas (URL: ${!!restaurant.whatsapp_api_url}, Key: ${!!restaurant.whatsapp_api_key}, Instance ID: ${!!restaurant.whatsapp_instance_id}) ou telefone do cliente ausente (${customer.phone}) para enviar recompensa para ${customer.name}.`);
               }
+            } else {
+              console.warn('[Public Check-in] generateCoupon retornou null ou undefined. Cupom não gerado.');
             }
           } catch (couponError) {
-            console.error(`[Public Check-in] Erro ao gerar ou enviar cupom de recompensa por visita para ${customer.name}:`, couponError);
+            console.error(`[Public Check-in] Erro ao gerar cupom de recompensa por visita para ${customer.name}:`, couponError.message, 'Stack:', couponError.stack);
           }
+        } else {
+          console.warn(`[Public Check-in] Recompensa com ID ${rewardConfig.reward_id} não encontrada no banco de dados.`);
         }
       }
     }

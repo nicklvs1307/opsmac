@@ -323,7 +323,7 @@ router.post('/send-bulk-feedback', auth, [
 router.post('/send-manual', auth, [
   body('recipient_phone_number')
     .matches(/^\+?[1-9]\d{1,14}$/)
-    .withMessage('Número de telefone do destinatário inválido (formato internacional)')
+    .withMessage('Número de telefone do destinatário inválido (formato internacional)'),
   body('message_text')
     .notEmpty()
     .withMessage('A mensagem não pode ser vazia'),

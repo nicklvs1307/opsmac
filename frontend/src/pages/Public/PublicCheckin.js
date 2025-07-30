@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -23,6 +23,7 @@ const PublicCheckin = () => {
 
   const [loading, setLoading] = useState(false);
   const [restaurantName, setRestaurantName] = useState('');
+  const [identificationMethod, setIdentificationMethod] = useState('phone'); // 'phone' or 'cpf'
 
   const {
     control,
@@ -31,6 +32,7 @@ const PublicCheckin = () => {
   } = useForm({
     defaultValues: {
       phone_number: '',
+      cpf: '',
       customer_name: '',
     },
   });
@@ -38,35 +40,41 @@ const PublicCheckin = () => {
   useEffect(() => {
     if (!restaurantId) {
       toast.error(t('public_checkin.error_no_restaurant_id'));
-      // Optionally redirect to an error page or home
       return;
     }
 
-    const fetchRestaurantName = async () => {
+    const fetchRestaurantData = async () => {
       try {
         setLoading(true);
         const response = await axiosInstance.get(`/public/restaurant/${restaurantId}`);
         setRestaurantName(response.data.name);
+        setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
       } catch (err) {
-        console.error('Error fetching restaurant name:', err);
+        console.error('Error fetching restaurant data:', err);
         toast.error(t('public_checkin.error_fetching_restaurant'));
-        // Optionally redirect or show a generic error
       } finally {
         setLoading(false);
       }
     };
 
-    fetchRestaurantName();
+    fetchRestaurantData();
   }, [restaurantId, t]);
 
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await axiosInstance.post('/api/checkin/public', {
+      const payload = {
         restaurant_id: restaurantId,
-        phone_number: data.phone_number,
         customer_name: data.customer_name,
-      });
+      };
+
+      if (identificationMethod === 'phone') {
+        payload.phone_number = data.phone_number;
+      } else if (identificationMethod === 'cpf') {
+        payload.cpf = data.cpf;
+      }
+
+      const response = await axiosInstance.post('/public/checkin', payload);
       toast.success(t('public_checkin.checkin_success'));
       navigate('/thank-you', { state: { message: t('public_checkin.checkin_thank_you_message') } });
     } catch (err) {
@@ -98,28 +106,56 @@ const PublicCheckin = () => {
       </Box>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="phone_number"
-          control={control}
-          rules={{
-            required: t('public_checkin.phone_required'),
-            pattern: {
-              value: /^\+?[1-9]\d{1,14}$/,
-              message: t('public_checkin.invalid_phone'),
-            },
-          }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={t('public_checkin.phone_number')}
-              fullWidth
-              margin="normal"
-              error={!!errors.phone_number}
-              helperText={errors.phone_number?.message}
-              placeholder="Ex: 5511987654321"
-            />
-          )}
-        />
+        {identificationMethod === 'phone' && (
+          <Controller
+            name="phone_number"
+            control={control}
+            rules={{
+              required: t('public_checkin.phone_required'),
+              pattern: {
+                value: /^\+?\d{1,15}$/,
+                message: t('public_checkin.invalid_phone'),
+              },
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('public_checkin.phone_number')}
+                fullWidth
+                margin="normal"
+                error={!!errors.phone_number}
+                helperText={errors.phone_number?.message}
+                placeholder="Ex: 5511987654321"
+              />
+            )}
+          />
+        )}
+
+        {identificationMethod === 'cpf' && (
+          <Controller
+            name="cpf"
+            control={control}
+            rules={{
+              required: t('public_checkin.cpf_required'),
+              pattern: {
+                value: /^\d{11}$/,
+                message: t('public_checkin.invalid_cpf'),
+              },
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('public_checkin.cpf')}
+                fullWidth
+                margin="normal"
+                error={!!errors.cpf}
+                helperText={errors.cpf?.message}
+                placeholder="Ex: 12345678900"
+              />
+            )}
+          />
+        )}
+
         <Controller
           name="customer_name"
           control={control}

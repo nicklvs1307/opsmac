@@ -132,8 +132,13 @@ router.post('/record', auth, [
 router.post('/public', [
   body('restaurant_id').isUUID().withMessage('ID do restaurante inválido'),
   body('phone_number')
+    .optional()
     .matches(/^\+?\d{1,15}$/)
     .withMessage('Número de telefone inválido (apenas dígitos, com ou sem + inicial, até 15 dígitos)'),
+  body('cpf')
+    .optional()
+    .matches(/^\d{11}$/)
+    .withMessage('CPF inválido (apenas 11 dígitos numéricos)'),
   body('customer_name')
     .optional()
     .trim()
@@ -148,7 +153,7 @@ router.post('/public', [
     });
   }
 
-  const { restaurant_id, phone_number, customer_name } = req.body;
+  const { restaurant_id, phone_number, cpf, customer_name } = req.body;
 
   try {
     const restaurant = await models.Restaurant.findByPk(restaurant_id);
@@ -156,19 +161,39 @@ router.post('/public', [
       return res.status(404).json({ error: 'Restaurante não encontrado.' });
     }
 
+    const identificationMethod = restaurant.settings?.checkin_program_settings?.identification_method || 'phone';
+
+    let customer;
+    let customerSearchCriteria = {};
+    let customerCreationData = { restaurant_id };
+
+    if (identificationMethod === 'phone') {
+      if (!phone_number) {
+        return res.status(400).json({ error: 'Número de telefone é obrigatório para este método de identificação.' });
+      }
+      customerSearchCriteria = { phone: phone_number, restaurant_id };
+      customerCreationData.phone = phone_number;
+      customerCreationData.whatsapp = phone_number; // Assumindo que whatsapp é o mesmo que phone
+    } else if (identificationMethod === 'cpf') {
+      if (!cpf) {
+        return res.status(400).json({ error: 'CPF é obrigatório para este método de identificação.' });
+      }
+      customerSearchCriteria = { cpf, restaurant_id };
+      customerCreationData.cpf = cpf;
+    } else {
+      return res.status(400).json({ error: 'Método de identificação inválido configurado para o restaurante.' });
+    }
+
     // Buscar ou criar cliente
-    let customer = await models.Customer.findOne({
-      where: { phone: phone_number, restaurant_id: restaurant_id } // Filtrar por restaurant_id
-    });
+    customer = await models.Customer.findOne({ where: customerSearchCriteria });
 
     if (!customer) {
-      customer = await models.Customer.create({
-        name: customer_name || 'Cliente Anônimo',
-        phone: phone_number,
-        whatsapp: phone_number,
-        source: 'checkin_qrcode',
-        restaurant_id: restaurant_id
-      });
+      customerCreationData.name = customer_name || 'Cliente Anônimo';
+      customerCreationData.source = 'checkin_qrcode';
+      customer = await models.Customer.create(customerCreationData);
+    } else if (customer_name && customer.name === 'Cliente Anônimo') {
+      // Se o cliente existe e o nome é 'Cliente Anônimo', atualiza com o nome fornecido
+      await customer.update({ name: customer_name });
     }
 
     // Verificar se o cliente já tem um check-in ativo no restaurante
@@ -198,12 +223,7 @@ router.post('/public', [
     const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
     const { 
       checkin_time_restriction = 'unlimited',
-      identification_method = 'phone',
       points_per_checkin = 1,
-      checkin_limit_per_cycle = 1,
-      allow_multiple_cycles = true,
-      enable_ranking = false,
-      enable_level_progression = false
     } = checkinProgramSettings;
 
     // Lógica Anti-Fraude (exemplo: restrição de tempo)
@@ -228,12 +248,7 @@ router.post('/public', [
         if (checkin_time_restriction === '1_per_6_hours') restrictionHours = 6;
 
         if (restrictionHours > 0 && diffHours < restrictionHours) {
-          // Se a restrição for violada, podemos reverter o check-in ou apenas avisar
-          // Por enquanto, vamos apenas logar e não aplicar a recompensa/pontos
           console.warn(`Anti-fraude: Cliente ${customer.id} tentou check-in muito rápido. Último check-in: ${lastCheckinTime.toISOString()}`);
-          // Você pode adicionar uma lógica para deletar o check-in recém-criado aqui se desejar
-          // await checkin.destroy();
-          // return res.status(400).json({ message: 'Check-in muito rápido. Tente novamente mais tarde.' });
         }
       }
     }
@@ -245,7 +260,7 @@ router.post('/public', [
     }
 
     // Lógica de recompensa por visita
-    const visitRewards = restaurant.settings?.visit_rewards || [];
+    const visitRewards = restaurant.settings?.checkin_program_settings?.rewards_per_visit || [];
     const currentVisits = customer.total_visits; // total_visits já foi incrementado
 
     for (const rewardConfig of visitRewards) {
@@ -257,20 +272,25 @@ router.post('/public', [
             if (newCoupon) {
               let rewardMessage = rewardConfig.message_template || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
               
-              rewardMessage = rewardMessage.replace(/\{\{customer_name\}\} /g, customer.name || '');
-              rewardMessage = rewardMessage.replace(/\{\{restaurant_name\}\} /g, restaurant.name || '');
-              rewardMessage = rewardMessage.replace(/\{\{reward_title\}\} /g, reward.title || '');
-              rewardMessage = rewardMessage.replace(/\{\{coupon_code\}\} /g, newCoupon.code || '');
-              rewardMessage = rewardMessage.replace(/\{\{visit_count\}\} /g, currentVisits);
+              rewardMessage = rewardMessage.replace(/\{\{customer_name\}\}/g, customer.name || '');
+              rewardMessage = rewardMessage.replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
+              rewardMessage = rewardMessage.replace(/\{\{reward_title\}\}/g, reward.title || '');
+              rewardMessage = rewardMessage.replace(/\{\{coupon_code\}\}/g, newCoupon.code || '');
+              rewardMessage = rewardMessage.replace(/\{\{visit_count\}\}/g, currentVisits);
 
-              await sendWhatsAppMessage(
-                restaurant.whatsapp_api_url,
-                restaurant.whatsapp_api_key,
-                restaurant.whatsapp_instance_id,
-                customer.phone,
-                rewardMessage
-              );
-              console.log(`Recompensa de visita enviada para ${customer.name} na ${currentVisits}ª visita.`);
+              // Verificar se as configurações do WhatsApp estão completas antes de tentar enviar
+              if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
+                await sendWhatsAppMessage(
+                  restaurant.whatsapp_api_url,
+                  restaurant.whatsapp_api_key,
+                  restaurant.whatsapp_instance_id,
+                  customer.phone,
+                  rewardMessage
+                );
+                console.log(`Recompensa de visita enviada para ${customer.name} na ${currentVisits}ª visita.`);
+              } else {
+                console.warn(`Configurações de WhatsApp incompletas ou telefone do cliente ausente para enviar recompensa para ${customer.name}.`);
+              }
             }
           } catch (couponError) {
             console.error(`Erro ao gerar ou enviar cupom de recompensa por visita para ${customer.name}:`, couponError);
@@ -289,8 +309,8 @@ router.post('/public', [
           let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋\n\nObrigado por fazer check-in no *{{restaurant_name}}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
           
           // Substituir variáveis
-          messageText = messageText.replace(/\{\{customer_name\}\} /g, customer.name || '');
-          messageText = messageText.replace(/\{\{restaurant_name\}\} /g, restaurant.name || '');
+          messageText = messageText.replace(/\{\{customer_name\}\}/g, customer.name || '');
+          messageText = messageText.replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
 
           const whatsappResponse = await sendWhatsAppMessage(
             restaurant.whatsapp_api_url,

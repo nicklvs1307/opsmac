@@ -37,7 +37,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: 'active',
     },
-  }, {
+    expires_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
     tableName: 'checkins',
     timestamps: true,
     underscored: true,

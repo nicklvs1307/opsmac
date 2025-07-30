@@ -117,7 +117,10 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                         <Controller
                           name={`rewards_per_visit.${index}.visit_count`}
                           control={control}
-                          rules={{ required: t('relationship.visit_count_required') }}
+                          rules={{
+                            required: t('relationship.visit_count_required'),
+                            setValueAs: (value) => value === '' ? undefined : Number(value),
+                          }}
                           render={({ field }) => (
                             <TextField
                               {...field}
@@ -203,6 +206,22 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           fullWidth
                           margin="normal"
                           helperText={t('relationship.time_restriction_helper')}
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name="checkin_duration_minutes"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label={t('relationship.checkin_duration_minutes')}
+                          type="number"
+                          fullWidth
+                          margin="normal"
+                          helperText={t('relationship.checkin_duration_minutes_helper')}
                         />
                       )}
                     />

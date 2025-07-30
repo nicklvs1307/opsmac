@@ -34,6 +34,10 @@ router.post('/record', auth, [
       return res.status(400).json({ error: 'Restaurante não encontrado para o usuário autenticado.' });
     }
 
+    const restaurant = await models.Restaurant.findByPk(restaurantId, { attributes: ['settings'] });
+    const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
+    const checkinDurationMinutes = checkinProgramSettings.checkin_duration_minutes || 1440; // Padrão: 24 horas
+
     // Verificar se o cliente pertence ao restaurante do usuário autenticado
     const customer = await models.Customer.findOne({
       where: {
@@ -46,12 +50,13 @@ router.post('/record', auth, [
       return res.status(404).json({ message: 'Cliente não encontrado ou não pertence ao seu restaurante.' });
     }
 
-    // Verificar se o cliente já tem um check-in ativo no restaurante
+    // Verificar se o cliente já tem um check-in ativo e não expirado no restaurante
     const existingCheckin = await models.Checkin.findOne({
       where: {
         customer_id,
         restaurant_id,
         status: 'active',
+        expires_at: { [Op.gt]: new Date() } // Check-in ativo e não expirado
       },
     });
 
@@ -59,10 +64,14 @@ router.post('/record', auth, [
       return res.status(400).json({ message: 'Cliente já possui um check-in ativo neste restaurante.' });
     }
 
+    const checkinTime = new Date();
+    const expiresAt = new Date(checkinTime.getTime() + checkinDurationMinutes * 60 * 1000);
+
     const checkin = await models.Checkin.create({
       customer_id,
       restaurant_id, // Usar o restaurant_id do usuário autenticado
-      checkin_time: new Date(),
+      checkin_time: checkinTime,
+      expires_at: expiresAt,
       status: 'active',
     });
 
@@ -166,7 +175,10 @@ router.post('/public', [
 
     console.log('[Public Check-in] Restaurante encontrado:', restaurant.name, 'Settings:', restaurant.settings);
 
-    const identificationMethod = restaurant.settings?.checkin_program_settings?.identification_method || 'phone';
+    const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
+    const checkinDurationMinutes = checkinProgramSettings.checkin_duration_minutes || 1440; // Padrão: 24 horas
+
+    const identificationMethod = checkinProgramSettings.identification_method || 'phone';
     console.log('[Public Check-in] Método de Identificação:', identificationMethod);
 
     let customer;
@@ -213,24 +225,29 @@ router.post('/public', [
       }
     }
 
-    // Verificar se o cliente já tem um check-in ativo no restaurante
+    // Verificar se o cliente já tem um check-in ativo e não expirado no restaurante
     const existingCheckin = await models.Checkin.findOne({
       where: {
         customer_id: customer.id,
         restaurant_id,
         status: 'active',
+        expires_at: { [Op.gt]: new Date() } // Check-in ativo e não expirado
       },
     });
 
     if (existingCheckin) {
-      console.warn('Cliente já possui um check-in ativo:', customer.id);
+      console.warn('[Public Check-in] Cliente já possui um check-in ativo:', customer.id);
       return res.status(400).json({ message: 'Cliente já possui um check-in ativo neste restaurante.' });
     }
+
+    const checkinTime = new Date();
+    const expiresAt = new Date(checkinTime.getTime() + checkinDurationMinutes * 60 * 1000);
 
     const checkin = await models.Checkin.create({
       customer_id: customer.id,
       restaurant_id,
-      checkin_time: new Date(),
+      checkin_time: checkinTime,
+      expires_at: expiresAt,
       status: 'active',
     });
     console.log('[Public Check-in] Check-in criado:', checkin.id);
@@ -292,8 +309,9 @@ router.post('/public', [
     console.log('[Public Check-in] Visitas atuais do cliente:', currentVisits);
 
     for (const rewardConfig of visitRewards) {
-      console.log(`[Public Check-in] Verificando recompensa para visit_count: ${rewardConfig.visit_count} vs currentVisits: ${currentVisits}`);
-      if (rewardConfig.visit_count === currentVisits) {
+      const parsedVisitCount = parseInt(rewardConfig.visit_count, 10);
+      console.log(`[Public Check-in] Verificando recompensa para visit_count: ${parsedVisitCount} (parsed) vs currentVisits: ${currentVisits}`);
+      if (parsedVisitCount === currentVisits) {
         const reward = await models.Reward.findByPk(rewardConfig.reward_id);
         if (reward) {
           console.log('[Public Check-in] Recompensa encontrada:', reward.title);

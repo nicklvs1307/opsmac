@@ -255,7 +255,7 @@ router.get('/restaurant/:restaurantId', async (req, res) => {
     const { restaurantId } = req.params;
     console.log(`[Public Route] Recebida requisição para /restaurant/${restaurantId}`);
     const restaurant = await models.Restaurant.findByPk(restaurantId, {
-      attributes: ['id', 'name', 'logo_url', 'settings']
+      attributes: ['id', 'name', 'settings']
     });
 
     if (!restaurant) {

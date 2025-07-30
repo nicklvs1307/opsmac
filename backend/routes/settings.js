@@ -67,6 +67,7 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
 
     // Se as configurações do programa de check-in foram atualizadas, crie ou atualize o QR Code de check-in
     if (settings.checkin_program_settings) {
+      // As configurações do programa de check-in foram atualizadas, incluindo checkin_duration_minutes
       let checkinQRCode = await models.QRCode.findOne({ 
         where: { 
           restaurant_id: restaurantId, 

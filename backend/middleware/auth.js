@@ -61,7 +61,6 @@ const auth = async (req, res, next) => {
       name: user.name,
       restaurant_id: null // Default to null
     };
-    console.log('Auth Middleware - req.user (after population):', req.user);
 
     // Se o usuário for um 'owner' ou 'manager', buscar o restaurant_id associado
     if (user.role === 'owner' || user.role === 'manager') {
@@ -70,6 +69,7 @@ const auth = async (req, res, next) => {
         req.user.restaurant_id = restaurant.id;
       }
     }
+    console.log('Auth Middleware - req.user (after population):', req.user);
 
     next();
   } catch (error) {

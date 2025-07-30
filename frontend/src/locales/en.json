@@ -354,6 +354,8 @@
       "anti_fraud_control": "Anti-Fraud Control",
       "time_restriction": "Time Restriction between Check-ins",
       "time_restriction_helper": "e.g., 1 per day, 1 per 6 hours, unlimited.",
+      "checkin_duration_minutes": "Check-in Duration (minutes)",
+      "checkin_duration_minutes_helper": "How long a check-in remains active before expiring automatically (in minutes).",
       "identification_method": "Identification Method",
       "method_phone": "Phone Number",
       "method_cpf": "CPF",

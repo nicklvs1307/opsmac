@@ -253,17 +253,20 @@ router.post('/checkin', apiAuth, [
 router.get('/restaurant/:restaurantId', async (req, res) => {
   try {
     const { restaurantId } = req.params;
+    console.log(`[Public Route] Recebida requisição para /restaurant/${restaurantId}`);
     const restaurant = await models.Restaurant.findByPk(restaurantId, {
       attributes: ['id', 'name', 'logo_url', 'settings']
     });
 
     if (!restaurant) {
+      console.warn(`[Public Route] Restaurante ${restaurantId} não encontrado.`);
       return res.status(404).json({ error: 'Restaurante não encontrado.' });
     }
 
+    console.log(`[Public Route] Restaurante ${restaurantId} encontrado. Retornando dados.`);
     res.json(restaurant);
   } catch (error) {
-    console.error('Erro ao obter informações do restaurante (público):', error);
+    console.error(`[Public Route] Erro ao obter informações do restaurante ${req.params.restaurantId}:`, error);
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });

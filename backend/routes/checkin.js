@@ -155,19 +155,19 @@ router.post('/public', [
 
   const { restaurant_id, phone_number, cpf, customer_name } = req.body;
 
-  console.log('Public Check-in Request:', { restaurant_id, phone_number, cpf, customer_name });
+  console.log('[Public Check-in] Requisição recebida:', { restaurant_id, phone_number, cpf, customer_name });
 
   try {
     const restaurant = await models.Restaurant.findByPk(restaurant_id);
     if (!restaurant) {
-      console.error('Restaurante não encontrado para o ID:', restaurant_id);
+      console.error('[Public Check-in] Restaurante não encontrado para o ID:', restaurant_id);
       return res.status(404).json({ error: 'Restaurante não encontrado.' });
     }
 
-    console.log('Restaurant found:', restaurant.name, 'Settings:', restaurant.settings);
+    console.log('[Public Check-in] Restaurante encontrado:', restaurant.name, 'Settings:', restaurant.settings);
 
     const identificationMethod = restaurant.settings?.checkin_program_settings?.identification_method || 'phone';
-    console.log('Identification Method:', identificationMethod);
+    console.log('[Public Check-in] Método de Identificação:', identificationMethod);
 
     let customer;
     let customerSearchCriteria = {};
@@ -175,7 +175,7 @@ router.post('/public', [
 
     if (identificationMethod === 'phone') {
       if (!phone_number) {
-        console.error('Erro: Número de telefone ausente para identificação por telefone.');
+        console.error('[Public Check-in] Erro: Número de telefone ausente para identificação por telefone.');
         return res.status(400).json({ error: 'Número de telefone é obrigatório para este método de identificação.' });
       }
       customerSearchCriteria = { phone: phone_number, restaurant_id };
@@ -183,33 +183,33 @@ router.post('/public', [
       customerCreationData.whatsapp = phone_number; // Assumindo que whatsapp é o mesmo que phone
     } else if (identificationMethod === 'cpf') {
       if (!cpf) {
-        console.error('Erro: CPF ausente para identificação por CPF.');
+        console.error('[Public Check-in] Erro: CPF ausente para identificação por CPF.');
         return res.status(400).json({ error: 'CPF é obrigatório para este método de identificação.' });
       }
       customerSearchCriteria = { cpf, restaurant_id };
       customerCreationData.cpf = cpf;
     } else {
-      console.error('Erro: Método de identificação inválido configurado:', identificationMethod);
+      console.error('[Public Check-in] Erro: Método de identificação inválido configurado:', identificationMethod);
       return res.status(400).json({ error: 'Método de identificação inválido configurado para o restaurante.' });
     }
 
-    console.log('Customer Search Criteria:', customerSearchCriteria);
+    console.log('[Public Check-in] Critério de busca do cliente:', customerSearchCriteria);
 
     // Buscar ou criar cliente
     customer = await models.Customer.findOne({ where: customerSearchCriteria });
 
     if (!customer) {
-      console.log('Customer not found, creating new one.');
+      console.log('[Public Check-in] Cliente não encontrado, criando novo.');
       customerCreationData.name = customer_name || 'Cliente Anônimo';
       customerCreationData.source = 'checkin_qrcode';
       customer = await models.Customer.create(customerCreationData);
-      console.log('New customer created:', customer.id, customer.name);
+      console.log('[Public Check-in] Novo cliente criado:', customer.id, customer.name);
     } else {
-      console.log('Customer found:', customer.id, customer.name);
+      console.log('[Public Check-in] Cliente encontrado:', customer.id, customer.name);
       if (customer_name && customer.name === 'Cliente Anônimo') {
         // Se o cliente existe e o nome é 'Cliente Anônimo', atualiza com o nome fornecido
         await customer.update({ name: customer_name });
-        console.log('Customer name updated to:', customer_name);
+        console.log('[Public Check-in] Nome do cliente atualizado para:', customer_name);
       }
     }
 
@@ -233,15 +233,15 @@ router.post('/public', [
       checkin_time: new Date(),
       status: 'active',
     });
-    console.log('Check-in created:', checkin.id);
+    console.log('[Public Check-in] Check-in criado:', checkin.id);
 
     // Incrementar total_visits do cliente
     await customer.increment('total_visits');
-    console.log('Customer total_visits incremented to:', customer.total_visits);
+    console.log('[Public Check-in] total_visits do cliente incrementado para:', customer.total_visits);
 
     // Obter configurações do programa de check-in
     const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
-    console.log('Check-in Program Settings:', checkinProgramSettings);
+    console.log('[Public Check-in] Configurações do Programa de Check-in:', checkinProgramSettings);
     const { 
       checkin_time_restriction = 'unlimited',
       points_per_checkin = 1,
@@ -276,26 +276,31 @@ router.post('/public', [
 
     // Lógica de Pontuação
     if (points_per_checkin > 0) {
-      await customer.addLoyaltyPoints(points_per_checkin, 'checkin');
-      console.log(`Cliente ${customer.name} ganhou ${points_per_checkin} pontos por check-in.`);
+      // Verificar se addLoyaltyPoints existe no modelo Customer
+      if (typeof customer.addLoyaltyPoints === 'function') {
+        await customer.addLoyaltyPoints(points_per_checkin, 'checkin');
+        console.log(`[Public Check-in] Cliente ${customer.name} ganhou ${points_per_checkin} pontos por check-in.`);
+      } else {
+        console.warn('[Public Check-in] Método addLoyaltyPoints não encontrado no modelo Customer. Pontos não adicionados.');
+      }
     }
 
     // Lógica de recompensa por visita
     const visitRewards = restaurant.settings?.checkin_program_settings?.rewards_per_visit || [];
-    console.log('Visit Rewards configured:', visitRewards);
+    console.log('[Public Check-in] Recompensas por Visita configuradas:', visitRewards);
     const currentVisits = customer.total_visits; // total_visits já foi incrementado
-    console.log('Current customer visits:', currentVisits);
+    console.log('[Public Check-in] Visitas atuais do cliente:', currentVisits);
 
     for (const rewardConfig of visitRewards) {
-      console.log(`Checking reward for visit_count: ${rewardConfig.visit_count} vs currentVisits: ${currentVisits}`);
+      console.log(`[Public Check-in] Verificando recompensa para visit_count: ${rewardConfig.visit_count} vs currentVisits: ${currentVisits}`);
       if (rewardConfig.visit_count === currentVisits) {
         const reward = await models.Reward.findByPk(rewardConfig.reward_id);
         if (reward) {
-          console.log('Reward found:', reward.title);
+          console.log('[Public Check-in] Recompensa encontrada:', reward.title);
           try {
             const newCoupon = await reward.generateCoupon(customer.id);
             if (newCoupon) {
-              console.log('Coupon generated:', newCoupon.code);
+              console.log('[Public Check-in] Cupom gerado:', newCoupon.code);
               let rewardMessage = rewardConfig.message_template || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
               
               rewardMessage = rewardMessage.replace(/\{\{customer_name\}\}/g, customer.name || '');
@@ -306,7 +311,7 @@ router.post('/public', [
 
               // Verificar se as configurações do WhatsApp estão completas antes de tentar enviar
               if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
-                console.log('Attempting to send WhatsApp message for reward...');
+                console.log('[Public Check-in] Tentando enviar mensagem WhatsApp para recompensa...');
                 try {
                   const whatsappResponse = await sendWhatsAppMessage(
                     restaurant.whatsapp_api_url,
@@ -316,19 +321,19 @@ router.post('/public', [
                     rewardMessage
                   );
                   if (whatsappResponse.success) {
-                    console.log(`Recompensa de visita enviada com sucesso para ${customer.name} na ${currentVisits}ª visita.`);
+                    console.log(`[Public Check-in] Recompensa de visita enviada com sucesso para ${customer.name} na ${currentVisits}ª visita.`);
                   } else {
-                    console.error(`Erro ao enviar recompensa de visita para ${customer.name}:`, whatsappResponse.error);
+                    console.error(`[Public Check-in] Erro ao enviar recompensa de visita para ${customer.name}:`, whatsappResponse.error);
                   }
                 } catch (whatsappSendError) {
-                  console.error(`Erro inesperado ao tentar enviar recompensa de visita WhatsApp para ${customer.name}:`, whatsappSendError);
+                  console.error(`[Public Check-in] Erro inesperado ao tentar enviar recompensa de visita WhatsApp para ${customer.name}:`, whatsappSendError);
                 }
               } else {
-                console.warn(`Configurações de WhatsApp incompletas ou telefone do cliente ausente para enviar recompensa para ${customer.name}.`);
+                console.warn(`[Public Check-in] Configurações de WhatsApp incompletas ou telefone do cliente ausente para enviar recompensa para ${customer.name}.`);
               }
             }
           } catch (couponError) {
-            console.error(`Erro ao gerar ou enviar cupom de recompensa por visita para ${customer.name}:`, couponError);
+            console.error(`[Public Check-in] Erro ao gerar ou enviar cupom de recompensa por visita para ${customer.name}:`, couponError);
           }
         }
       }
@@ -341,7 +346,7 @@ router.post('/public', [
         const customCheckinMessage = restaurant.settings?.whatsapp_messages?.checkin_message_text;
 
         if (checkinMessageEnabled) {
-          console.log('Attempting to send WhatsApp thank you message...');
+          console.log('[Public Check-in] Tentando enviar mensagem de agradecimento WhatsApp...');
           let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋\n\nObrigado por fazer check-in no *{{restaurant_name}}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
           
           // Substituir variáveis
@@ -357,7 +362,7 @@ router.post('/public', [
           );
 
           if (whatsappResponse.success) {
-            console.log('Mensagem de agradecimento de check-in enviada com sucesso para', customer.phone);
+            console.log('[Public Check-in] Mensagem de agradecimento de check-in enviada com sucesso para', customer.phone);
             await models.WhatsAppMessage.create({
               phone_number: customer.phone,
               message_text: messageText,
@@ -368,12 +373,12 @@ router.post('/public', [
               customer_id: customer.id,
             });
           } else {
-            console.error('Erro ao enviar mensagem de agradecimento de check-in para', customer.phone, ':', whatsappResponse.error);
+            console.error('[Public Check-in] Erro ao enviar mensagem de agradecimento de check-in para', customer.phone, ':', whatsappResponse.error);
           }
         }
       }
     } catch (whatsappError) {
-      console.error('Erro inesperado ao tentar enviar mensagem de agradecimento WhatsApp:', whatsappError);
+      console.error('[Public Check-in] Erro inesperado ao tentar enviar mensagem de agradecimento WhatsApp:', whatsappError);
     }
 
     res.status(201).json({
@@ -382,7 +387,7 @@ router.post('/public', [
       customer_total_visits: customer.total_visits // Retornar o total de visitas atualizado
     });
   } catch (error) {
-    console.error('Erro ao registrar check-in público:', error);
+    console.error('[Public Check-in] Erro ao registrar check-in público:', error);
     res.status(500).json({
       error: 'Erro interno do servidor',
       message: process.env.NODE_ENV === 'development' ? error.message : 'Erro ao registrar check-in público'

@@ -70,30 +70,38 @@ router.post('/record', auth, [
     try {
       const restaurant = await models.Restaurant.findByPk(restaurantId);
       if (restaurant && restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
-        const thankYouMessage = `Olá ${customer.name || ''}! 👋\n\nObrigado por fazer check-in no *${restaurant.name}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
-        
-        const whatsappResponse = await sendWhatsAppMessage(
-          restaurant.whatsapp_api_url,
-          restaurant.whatsapp_api_key,
-          restaurant.whatsapp_instance_id,
-          customer.phone,
-          thankYouMessage
-        );
+        const checkinMessageEnabled = restaurant.settings?.whatsapp_messages?.checkin_message_enabled;
+        const customCheckinMessage = restaurant.settings?.whatsapp_messages?.checkin_message_text;
 
-        if (whatsappResponse.success) {
-          console.log('Mensagem de agradecimento enviada com sucesso para', customer.phone);
-          // Opcional: Registrar o envio da mensagem no banco de dados
-          await models.WhatsAppMessage.create({
-            phone_number: customer.phone,
-            message_text: thankYouMessage,
-            message_type: 'checkin_thank_you',
-            status: 'sent',
-            whatsapp_message_id: whatsappResponse.data?.id || null,
-            restaurant_id: restaurant.id,
-            customer_id: customer.id,
-          });
-        } else {
-          console.error('Erro ao enviar mensagem de agradecimento para', customer.phone, ':', whatsappResponse.error);
+        if (checkinMessageEnabled) {
+          let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋\n\nObrigado por fazer check-in no *{{restaurant_name}}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
+          
+          // Substituir variáveis
+          messageText = messageText.replace(/\{\{customer_name\}\} /g, customer.name || '');
+          messageText = messageText.replace(/\{\{restaurant_name\}\} /g, restaurant.name || '');
+
+          const whatsappResponse = await sendWhatsAppMessage(
+            restaurant.whatsapp_api_url,
+            restaurant.whatsapp_api_key,
+            restaurant.whatsapp_instance_id,
+            customer.phone,
+            messageText
+          );
+
+          if (whatsappResponse.success) {
+            console.log('Mensagem de agradecimento de check-in enviada com sucesso para', customer.phone);
+            await models.WhatsAppMessage.create({
+              phone_number: customer.phone,
+              message_text: messageText,
+              message_type: 'checkin_thank_you',
+              status: 'sent',
+              whatsapp_message_id: whatsappResponse.data?.id || null,
+              restaurant_id: restaurant.id,
+              customer_id: customer.id,
+            });
+          } else {
+            console.error('Erro ao enviar mensagem de agradecimento de check-in para', customer.phone, ':', whatsappResponse.error);
+          }
         }
       }
     } catch (whatsappError) {

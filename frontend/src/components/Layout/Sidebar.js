@@ -28,6 +28,7 @@ import {
   CheckCircleOutline as CheckinIcon,
   CardGiftcard,
   Poll as PollIcon,
+  ConnectWithoutContact as ConnectWithoutContactIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
@@ -162,6 +163,12 @@ const Sidebar = ({ onMobileClose }) => {
           path: '/customers/dashboard'
         }
       ]
+    },
+    {
+      title: 'Relacionamento',
+      icon: <ConnectWithoutContactIcon />,
+      path: '/relationship',
+      roles: ['admin', 'owner', 'manager']
     },
     {
       title: 'Configurações',

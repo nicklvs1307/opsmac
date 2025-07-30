@@ -35,6 +35,7 @@ import SurveyCreate from './pages/Surveys/SurveyCreate';
 import SurveyResults from './pages/Surveys/SurveyResults';
 import SurveyEdit from './pages/Surveys/SurveyEdit';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import RelationshipDashboard from './pages/Relationship/RelationshipDashboard';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -86,6 +87,7 @@ function App() {
                   <Route path="surveys/edit/:id" element={<SurveyEdit />} />
                   <Route path="surveys/:id/results" element={<SurveyResults />} />
                   <Route path="surveys/:id/results" element={<SurveyResults />} />
+                  <Route path="relationship" element={<RelationshipDashboard />} />
                 </Route>
                 <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
                 {/* Catch all route */}

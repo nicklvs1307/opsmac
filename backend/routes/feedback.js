@@ -2,6 +2,7 @@ const express = require('express');
 const { body, query, validationResult } = require('express-validator');
 const { models } = require('../config/database');
 const { auth, checkRestaurantOwnership, optionalAuth, logUserAction } = require('../middleware/auth');
+const { sendWhatsAppMessage } = require('../utils/whatsappService'); // Importar a função do whatsappService
 const { Op } = require('sequelize');
 
 const router = express.Router();
@@ -384,15 +385,59 @@ router.post('/', auth, createFeedbackValidation, async (req, res) => {
         {
           model: models.Customer,
           as: 'customer',
-          attributes: ['id', 'name', 'email', 'loyalty_points']
+          attributes: ['id', 'name', 'email', 'loyalty_points', 'phone'] // Adicionado 'phone'
         },
         {
           model: models.Restaurant,
           as: 'restaurant',
-          attributes: ['id', 'name']
+          attributes: ['id', 'name', 'whatsapp_api_url', 'whatsapp_api_key', 'whatsapp_instance_id', 'whatsapp_phone_number', 'settings'] // Adicionado campos do WhatsApp e settings
         }
       ]
     });
+
+    // Enviar mensagem de agradecimento via WhatsApp (se configurado e habilitado)
+    try {
+      if (completeFeedback.customer && completeFeedback.customer.phone && completeFeedback.restaurant) {
+        const restaurant = completeFeedback.restaurant;
+        const customer = completeFeedback.customer;
+
+        const feedbackThankYouEnabled = restaurant.settings?.whatsapp_messages?.feedback_thank_you_enabled;
+        const customFeedbackThankYouMessage = restaurant.settings?.whatsapp_messages?.feedback_thank_you_text;
+
+        if (feedbackThankYouEnabled) {
+          let messageText = customFeedbackThankYouMessage || `Olá {{customer_name}}! 👋\n\nObrigado pelo seu feedback no *{{restaurant_name}}*!\n\nSua opinião é muito importante para nós. 😉`;
+          
+          // Substituir variáveis
+          messageText = messageText.replace(/\{\{customer_name\}\}/g, customer.name || '');
+          messageText = messageText.replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
+
+          const whatsappResponse = await sendWhatsAppMessage(
+            restaurant.whatsapp_api_url,
+            restaurant.whatsapp_api_key,
+            restaurant.whatsapp_instance_id,
+            customer.phone,
+            messageText
+          );
+
+          if (whatsappResponse.success) {
+            console.log('Mensagem de agradecimento de feedback enviada com sucesso para', customer.phone);
+            await models.WhatsAppMessage.create({
+              phone_number: customer.phone,
+              message_text: messageText,
+              message_type: 'feedback_thank_you',
+              status: 'sent',
+              whatsapp_message_id: whatsappResponse.data?.id || null,
+              restaurant_id: restaurant.id,
+              customer_id: customer.id,
+            });
+          } else {
+            console.error('Erro ao enviar mensagem de agradecimento de feedback para', customer.phone, ':', whatsappResponse.error);
+          }
+        }
+      }
+    } catch (whatsappError) {
+      console.error('Erro inesperado ao tentar enviar mensagem de agradecimento de feedback WhatsApp:', whatsappError);
+    }
 
     res.status(201).json({
       message: 'Feedback criado com sucesso',

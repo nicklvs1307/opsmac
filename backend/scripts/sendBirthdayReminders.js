@@ -54,66 +54,78 @@ async function sendBirthdayReminders() {
           continue;
         }
 
-        // Gerar um cupom de cortesia de aniversário (exemplo: 10% de desconto)
-        let birthdayCouponCode = null;
-        let couponMessage = '';
-        try {
-          // Supondo que você tenha uma recompensa padrão para aniversário ou crie uma dinamicamente
-          // Para este exemplo, vamos criar um cupom genérico ou buscar um existente
-          const birthdayReward = await models.Reward.findOne({
-            where: { restaurant_id: restaurant.id, title: 'Aniversário' } // Ou crie um se não existir
-          });
+        const birthdayGreetingEnabled = restaurant.settings?.whatsapp_messages?.birthday_greeting_enabled;
+        const customBirthdayGreetingMessage = restaurant.settings?.whatsapp_messages?.birthday_greeting_text;
 
-          if (birthdayReward) {
-            const newCoupon = await models.Coupon.create({
-              reward_id: birthdayReward.id,
-              customer_id: customer.id,
-              restaurant_id: restaurant.id,
-              code: `ANIVER${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
-              expires_at: new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()) // Válido por 1 ano
+        if (birthdayGreetingEnabled) {
+          // Gerar um cupom de cortesia de aniversário (exemplo: 10% de desconto)
+          let birthdayCouponCode = null;
+          let couponMessagePart = '';
+          try {
+            // Supondo que você tenha uma recompensa padrão para aniversário ou crie uma dinamicamente
+            // Para este exemplo, vamos criar um cupom genérico ou buscar um existente
+            const birthdayReward = await models.Reward.findOne({
+              where: { restaurant_id: restaurant.id, title: 'Aniversário' } // Ou crie um se não existir
             });
-            birthdayCouponCode = newCoupon.code;
-            couponMessage = `\n\nPara comemorar, use seu cupom de presente: *${birthdayCouponCode}*! 🎉`;
-          } else {
-            console.warn(`Restaurante ${restaurant.name} não possui recompensa de aniversário configurada.`);
+
+            if (birthdayReward) {
+              const newCoupon = await models.Coupon.create({
+                reward_id: birthdayReward.id,
+                customer_id: customer.id,
+                restaurant_id: restaurant.id,
+                code: `ANIVER${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
+                expires_at: new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()) // Válido por 1 ano
+              });
+              birthdayCouponCode = newCoupon.code;
+              couponMessagePart = `\n\nPara comemorar, use seu cupom de presente: *{{coupon_code}}*! 🎉`;
+            } else {
+              console.warn(`Restaurante ${restaurant.name} não possui recompensa de aniversário configurada.`);
+            }
+          } catch (couponError) {
+            console.error(`Erro ao gerar cupom de aniversário para ${customer.name}:`, couponError);
+            couponMessagePart = '\n\nFique de olho em nossas promoções especiais para você! 🎉';
           }
-        } catch (couponError) {
-          console.error(`Erro ao gerar cupom de aniversário para ${customer.name}:`, couponError);
-          couponMessage = '\n\nFique de olho em nossas promoções especiais para você! 🎉';
+
+          let messageText = customBirthdayGreetingMessage || `Feliz Aniversário, {{customer_name}}! 🎂\n\nNós do *{{restaurant_name}}* desejamos um dia maravilhoso e cheio de alegria!${couponMessagePart}\n\nEsperamos celebrar com você! 😉`;
+
+          // Substituir variáveis
+          messageText = messageText.replace(/\{\{customer_name\}\}|/g, customer.name || '');
+          messageText = messageText.replace(/\{\{restaurant_name\}\}|/g, restaurant.name || '');
+          if (birthdayCouponCode) {
+            messageText = messageText.replace(/\{\{coupon_code\}\}|/g, birthdayCouponCode);
+          }
+
+          const whatsappResponse = await sendWhatsAppMessage(
+            restaurant.whatsapp_api_url,
+            restaurant.whatsapp_api_key,
+            restaurant.whatsapp_instance_id,
+            customer.phone,
+            messageText
+          );
+
+          if (whatsappResponse.success) {
+            console.log(`Mensagem de aniversário enviada com sucesso para ${customer.name} (${customer.phone})`);
+            await customer.update({
+              last_birthday_message_year: currentYear
+            });
+            // Opcional: Registrar o envio da mensagem no banco de dados
+            await models.WhatsAppMessage.create({
+              phone_number: customer.phone,
+              message_text: messageText,
+              message_type: 'birthday_greeting',
+              status: 'sent',
+              whatsapp_message_id: whatsappResponse.data?.id || null,
+              restaurant_id: restaurant.id,
+              customer_id: customer.id,
+              coupon_id: birthdayCouponCode ? (await models.Coupon.findOne({ where: { code: birthdayCouponCode } }))?.id : null
+            });
+          } else {
+            console.error(`Erro ao enviar mensagem de aniversário para ${customer.name} (${customer.phone}):`, whatsappResponse.error);
+          }
+
+          // Pequeno delay para evitar rate limiting
+          await new Promise(resolve => setTimeout(resolve, 500));
         }
-
-        const birthdayMessage = `Feliz Aniversário, ${customer.name || ''}! 🎂\n\nNós do *${restaurant.name}* desejamos um dia maravilhoso e cheio de alegria!${couponMessage}\n\nEsperamos celebrar com você! 😉`;
-
-        const whatsappResponse = await sendWhatsAppMessage(
-          restaurant.whatsapp_api_url,
-          restaurant.whatsapp_api_key,
-          restaurant.whatsapp_instance_id,
-          customer.phone,
-          birthdayMessage
-        );
-
-        if (whatsappResponse.success) {
-          console.log(`Mensagem de aniversário enviada com sucesso para ${customer.name} (${customer.phone})`);
-          await customer.update({
-            last_birthday_message_year: currentYear
-          });
-          // Opcional: Registrar o envio da mensagem no banco de dados
-          await models.WhatsAppMessage.create({
-            phone_number: customer.phone,
-            message_text: birthdayMessage,
-            message_type: 'birthday_greeting',
-            status: 'sent',
-            whatsapp_message_id: whatsappResponse.data?.id || null,
-            restaurant_id: restaurant.id,
-            customer_id: customer.id,
-            coupon_id: birthdayCouponCode ? (await models.Coupon.findOne({ where: { code: birthdayCouponCode } }))?.id : null
-          });
-        } else {
-          console.error(`Erro ao enviar mensagem de aniversário para ${customer.name} (${customer.phone}):`, whatsappResponse.error);
-        }
-
-        // Pequeno delay para evitar rate limiting
-        await new Promise(resolve => setTimeout(resolve, 500));
 
       } catch (error) {
         console.error(`Erro ao processar cliente ${customer.id} (${customer.name}):`, error);

@@ -317,6 +317,64 @@ router.post('/send-bulk-feedback', auth, [
   }
 });
 
+// @route   POST /api/whatsapp/send-manual
+// @desc    Enviar mensagem manual via WhatsApp
+// @access  Private
+router.post('/send-manual', auth, [
+  body('recipient_phone_number')
+    .matches(/^\+?[1-9]\d{1,14}$/)
+    .withMessage('Número de telefone do destinatário inválido (formato internacional)')
+  body('message_text')
+    .notEmpty()
+    .withMessage('A mensagem não pode ser vazia'),
+  body('restaurant_id')
+    .isUUID()
+    .withMessage('ID do restaurante deve ser um UUID válido'),
+], logUserAction('send_manual_whatsapp_message'), async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        error: 'Dados inválidos',
+        details: errors.array()
+      });
+    }
+
+    const { recipient_phone_number, message_text, restaurant_id } = req.body;
+
+    const restaurant = await models.Restaurant.findByPk(restaurant_id);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
+
+    if (req.user.role !== 'admin' && restaurant.owner_id !== req.user.userId) {
+      return res.status(403).json({ error: 'Acesso negado' });
+    }
+
+    const whatsappResponse = await sendWhatsAppMessage(restaurant, recipient_phone_number, message_text);
+
+    if (whatsappResponse.success) {
+      await models.WhatsAppMessage.create({
+        phone_number: recipient_phone_number,
+        message_text: message_text,
+        message_type: 'manual',
+        status: 'sent',
+        whatsapp_message_id: whatsappResponse.message_id,
+        restaurant_id,
+        sent_by: req.user.userId,
+      });
+
+      res.json({ message: 'Mensagem enviada com sucesso!', whatsapp_message_id: whatsappResponse.message_id });
+    } else {
+      throw new Error(whatsappResponse.error || 'Erro ao enviar mensagem manual');
+    }
+
+  } catch (error) {
+    console.error('Erro ao enviar mensagem manual via WhatsApp:', error);
+    res.status(500).json({ error: 'Erro interno do servidor', message: error.message });
+  }
+});
+
 // @route   GET /api/whatsapp/messages/:restaurantId
 // @desc    Listar mensagens WhatsApp de um restaurante
 // @access  Private

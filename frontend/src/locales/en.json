@@ -131,6 +131,7 @@
       "list_customers": "List Customers",
       "birthdays": "Birthdays",
       "customer_dashboard": "Customer Dashboard",
+      "relationship": "Relationship",
       "settings": "Settings",
       "app_name": "CHECK SYSTEM"
     },
@@ -289,6 +290,36 @@
       "loading": "Loading...",
       "app_name": "FeedbackPro",
       "app_description": "Feedback System for Restaurants"
+    },
+    "relationship": {
+      "title": "Customer Relationship",
+      "manual_messages_tab": "Manual Messages",
+      "automatic_campaigns_tab": "Automatic Campaigns",
+      "manual_messages": "Send Manual Messages",
+      "select_customer": "Select Customer",
+      "no_customers_found": "No customers found.",
+      "send_message": "Send Message",
+      "recipient_phone_number": "Recipient Phone Number",
+      "message_content": "Message Content",
+      "send_message_button": "Send Message",
+      "recipient_required": "Recipient phone number is required.",
+      "message_required": "Message content is required.",
+      "manual_message_sent_successfully": "Manual message sent successfully!",
+      "error_sending_manual_message": "Error sending manual message.",
+      "automatic_campaigns": "Automatic Campaigns",
+      "automatic_campaigns_description": "Configure and personalize automatic WhatsApp messages.",
+      "checkin_thank_you_campaign": "Check-in Thank You Message",
+      "coupon_reminder_campaign": "Coupon Reminder Message",
+      "birthday_greeting_campaign": "Birthday Greeting Message",
+      "message_template": "Message Template",
+      "checkin_message_variables": "Available variables: {{customer_name}}, {{restaurant_name}}",
+      "coupon_reminder_variables": "Available variables: {{customer_name}}, {{restaurant_name}}, {{reward_title}}, {{coupon_code}}, {{expires_at}}",
+      "birthday_greeting_variables": "Available variables: {{customer_name}}, {{restaurant_name}}, {{coupon_code}}",
+      "save_campaigns_button": "Save Campaigns",
+      "automatic_campaigns_saved_successfully": "Automatic campaigns saved successfully!",
+      "error_saving_automatic_campaigns": "Error saving automatic campaigns.",
+      "error_fetching_customers": "Error fetching customers.",
+      "error_fetching_whatsapp_settings": "Error fetching WhatsApp settings."
     }
   }
 }

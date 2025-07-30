@@ -131,6 +131,7 @@
       "list_customers": "Listar Clientes",
       "birthdays": "Aniversariantes",
       "customer_dashboard": "Dashboard de Clientes",
+      "relationship": "Relacionamento",
       "settings": "Configurações",
       "app_name": "Feedeliza+"
     },
@@ -289,6 +290,36 @@
       "loading": "Carregando...",
       "app_name": "Feedeliza+",
       "app_description": "Clientes que voltam, marcas que crescem."
+    },
+    "relationship": {
+      "title": "Relacionamento com Clientes",
+      "manual_messages_tab": "Mensagens Manuais",
+      "automatic_campaigns_tab": "Campanhas Automáticas",
+      "manual_messages": "Enviar Mensagens Manuais",
+      "select_customer": "Selecionar Cliente",
+      "no_customers_found": "Nenhum cliente encontrado.",
+      "send_message": "Enviar Mensagem",
+      "recipient_phone_number": "Número de Telefone do Destinatário",
+      "message_content": "Conteúdo da Mensagem",
+      "send_message_button": "Enviar Mensagem",
+      "recipient_required": "Número de telefone do destinatário é obrigatório.",
+      "message_required": "O conteúdo da mensagem é obrigatório.",
+      "manual_message_sent_successfully": "Mensagem manual enviada com sucesso!",
+      "error_sending_manual_message": "Erro ao enviar mensagem manual.",
+      "automatic_campaigns": "Campanhas Automáticas",
+      "automatic_campaigns_description": "Configure e personalize mensagens automáticas do WhatsApp.",
+      "checkin_thank_you_campaign": "Mensagem de Agradecimento Pós-Check-in",
+      "coupon_reminder_campaign": "Mensagem de Lembrete de Cupom",
+      "birthday_greeting_campaign": "Mensagem de Aniversário",
+      "message_template": "Modelo de Mensagem",
+      "checkin_message_variables": "Variáveis disponíveis: {{customer_name}}, {{restaurant_name}}",
+      "coupon_reminder_variables": "Variáveis disponíveis: {{customer_name}}, {{restaurant_name}}, {{reward_title}}, {{coupon_code}}, {{expires_at}}",
+      "birthday_greeting_variables": "Variáveis disponíveis: {{customer_name}}, {{restaurant_name}}, {{coupon_code}}",
+      "save_campaigns_button": "Salvar Campanhas",
+      "automatic_campaigns_saved_successfully": "Campanhas automáticas salvas com sucesso!",
+      "error_saving_automatic_campaigns": "Erro ao salvar campanhas automáticas.",
+      "error_fetching_customers": "Erro ao carregar clientes.",
+      "error_fetching_whatsapp_settings": "Erro ao carregar configurações do WhatsApp."
     }
   }
 }

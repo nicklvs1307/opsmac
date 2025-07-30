@@ -148,7 +148,13 @@ router.post('/send-feedback-request', auth, sendFeedbackRequestValidation, logUs
     const messageText = custom_message || defaultMessage;
 
     // Enviar mensagem via Evolution API
-    const whatsappResponse = await sendWhatsAppMessage(restaurant, phone_number, messageText);
+    const whatsappResponse = await sendWhatsAppMessage(
+      restaurant.whatsapp_api_url,
+      restaurant.whatsapp_api_key,
+      restaurant.whatsapp_instance_id,
+      phone_number,
+      messageText
+    );
 
     if (whatsappResponse.success) {
       // Registrar envio no banco
@@ -261,7 +267,13 @@ router.post('/send-bulk-feedback', auth, [
         const messageText = custom_message || defaultMessage;
 
         // Enviar mensagem
-        const whatsappResponse = await sendWhatsAppMessage(restaurant, phone_number, messageText);
+        const whatsappResponse = await sendWhatsAppMessage(
+          restaurant.whatsapp_api_url,
+          restaurant.whatsapp_api_key,
+          restaurant.whatsapp_instance_id,
+          phone_number,
+          messageText
+        );
 
         if (whatsappResponse.success) {
           // Registrar envio
@@ -358,7 +370,13 @@ router.post('/send-manual', auth, [
       return res.status(403).json({ error: 'Acesso negado' });
     }
 
-    const whatsappResponse = await sendWhatsAppMessage(restaurant, recipient_phone_number, message_text);
+    const whatsappResponse = await sendWhatsAppMessage(
+      restaurant.whatsapp_api_url,
+      restaurant.whatsapp_api_key,
+      restaurant.whatsapp_instance_id,
+      recipient_phone_number,
+      message_text
+    );
 
     if (whatsappResponse.success) {
       await models.WhatsAppMessage.create({
@@ -639,7 +657,13 @@ async function processAutomaticFeedbackResponse(message, customer, feedbackReque
       const thankYouMessage = `Obrigado pelo seu feedback! ⭐ Sua avaliação de ${rating} estrela${rating > 1 ? 's' : ''} foi registrada com sucesso. Sua opinião é muito importante para nós! 🙏`;
       
       // Use the provided restaurant object to send the message
-      await sendWhatsAppMessage(restaurant, message.from, thankYouMessage);
+      await sendWhatsAppMessage(
+        restaurant.whatsapp_api_url,
+        restaurant.whatsapp_api_key,
+        restaurant.whatsapp_instance_id,
+        message.from,
+        thankYouMessage
+      );
     }
   } catch (error) {
     console.error('Erro ao processar resposta automática:', error);

@@ -46,6 +46,8 @@ module.exports = (sequelize) => {
     timestamps: true,
     underscored: true,
   });
+
+  Checkin.associate = (models) => {
     Checkin.belongsTo(models.Customer, {
       foreignKey: 'customer_id',
       as: 'customer'

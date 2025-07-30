@@ -372,6 +372,7 @@ const CheckinDashboard = () => {
                   </TableCell>
                 </TableRow>
               ))}
+            </TableBody>
           </Table>
         </TableContainer>
       ) : (

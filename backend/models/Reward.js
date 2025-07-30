@@ -268,7 +268,7 @@ module.exports = (sequelize) => {
   };
 
   Reward.prototype.generateCoupon = async function(customerId) {
-    const canUse = await this.canBeUsedBy(customerId);
+    const canUse = await this.canCustomerUse(customerId);
     if (!canUse) {
       throw new Error('Cliente não pode usar esta recompensa');
     }

@@ -51,8 +51,13 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
-    // Mesclar as novas configurações com as existentes
-    const updatedSettings = { ...restaurant.settings, ...settings };
+    // Mesclar as novas configurações com as existentes (deep merge)
+    const updatedSettings = { 
+      ...restaurant.settings,
+      ...settings,
+      whatsapp_messages: { ...restaurant.settings.whatsapp_messages, ...settings.whatsapp_messages },
+      checkin_program_settings: { ...restaurant.settings.checkin_program_settings, ...settings.checkin_program_settings }
+    };
 
     await restaurant.update({ settings: updatedSettings });
 

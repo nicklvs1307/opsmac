@@ -123,6 +123,7 @@ const QRCodeGenerate = () => {
       
       setGeneratedQRCode(response.data);
       toast.success('QR Code gerado com sucesso!');
+      navigate('/qrcode');
     } catch (err) {
       console.error('Error generating QR code:', err);
       toast.error(err.response?.data?.message || 'Erro ao gerar QR Code');

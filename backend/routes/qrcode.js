@@ -190,11 +190,14 @@ router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, [
     if (status) where.status = status;
     if (area) where.area = area;
     if (search) {
+      const searchInt = parseInt(search);
       where[Op.or] = [
-        { table_number: { [Op.eq]: parseInt(search) || 0 } },
         { location_description: { [Op.iLike]: `%${search}%` } },
         { area: { [Op.iLike]: `%${search}%` } }
       ];
+      if (!isNaN(searchInt)) {
+        where[Op.or].push({ table_number: { [Op.eq]: searchInt } });
+      }
     }
 
     const offset = (page - 1) * limit;

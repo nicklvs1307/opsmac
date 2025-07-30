@@ -17,7 +17,12 @@ import {
   CardContent,
   FormControlLabel,
   FormHelperText,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
+import { Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
@@ -336,9 +341,9 @@ const RelationshipDashboard = () => {
           </Box>
 
           {/* Campanha de Lembrete de Cupom */}
-          <Box sx={{ mb: 4}>
+          <Box sx={{ mb: 4 }}>
             <FormControlLabel
-              control={
+              control=
                 <Controller
                   name="coupon_reminder_enabled"
                   control={automaticCampaignsControl}

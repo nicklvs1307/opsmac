@@ -181,7 +181,9 @@ router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, [
       is_active,
       status,
       area,
-      search
+      search,
+      qr_type,
+      is_generic
     } = req.query;
 
     const where = { restaurant_id: restaurantId };
@@ -189,6 +191,8 @@ router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, [
     if (is_active !== undefined) where.is_active = is_active === 'true';
     if (status) where.status = status;
     if (area) where.area = area;
+    if (qr_type) where.qr_type = qr_type;
+    if (is_generic !== undefined) where.is_generic = is_generic === 'true';
     if (search) {
       const searchInt = parseInt(search);
       where[Op.or] = [

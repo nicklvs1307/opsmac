@@ -41,12 +41,11 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: true,
     },
+  }, {
     tableName: 'checkins',
     timestamps: true,
     underscored: true,
   });
-
-  Checkin.associate = (models) => {
     Checkin.belongsTo(models.Customer, {
       foreignKey: 'customer_id',
       as: 'customer'

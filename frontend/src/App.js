@@ -36,6 +36,7 @@ import SurveyResults from './pages/Surveys/SurveyResults';
 import SurveyEdit from './pages/Surveys/SurveyEdit';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import RelationshipDashboard from './pages/Relationship/RelationshipDashboard';
+import PublicCheckin from './pages/Public/PublicCheckin';
 
 // Create query client
 const queryClient = new QueryClient({

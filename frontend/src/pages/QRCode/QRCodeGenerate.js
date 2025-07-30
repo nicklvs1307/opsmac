@@ -67,6 +67,7 @@ const QRCodeGenerate = () => {
       collect_customer_info: true,
       require_rating: true,
       allow_anonymous: true,
+      qr_type: 'feedback', // Novo campo para o tipo de QR Code
     },
   });
 
@@ -74,12 +75,16 @@ const QRCodeGenerate = () => {
 
   React.useEffect(() => {
     // Generate preview URL based on form data
-    if (watchedValues.name) {
+    if (watchedValues.name && restaurantId) {
       const baseUrl = window.location.origin;
-      const slug = watchedValues.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      setPreviewUrl(`${baseUrl}/feedback/${slug}`);
+      if (watchedValues.qr_type === 'checkin') {
+        setPreviewUrl(`${baseUrl}/checkin/public?restaurantId=${restaurantId}`);
+      } else { // Default to feedback
+        const slug = watchedValues.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        setPreviewUrl(`${baseUrl}/feedback/${slug}`);
+      }
     }
-  }, [watchedValues.name]);
+  }, [watchedValues.name, watchedValues.qr_type, restaurantId]);
 
   const handleNext = async () => {
     const fieldsToValidate = getFieldsForStep(activeStep);
@@ -114,7 +119,7 @@ const QRCodeGenerate = () => {
         Object.entries(data).filter(([_, value]) => value !== '' && value !== null)
       );
       
-      const response = await axiosInstance.post('/api/qrcode', { ...cleanData, restaurant_id: restaurantId });
+      const response = await axiosInstance.post('/api/qrcode', { ...cleanData, restaurant_id: restaurantId, qr_type: data.qr_type });
       
       setGeneratedQRCode(response.data);
       toast.success('QR Code gerado com sucesso!');
@@ -164,6 +169,22 @@ const QRCodeGenerate = () => {
       case 0:
         return (
           <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Controller
+                name="qr_type"
+                control={control}
+                rules={{ required: 'Tipo de QR Code é obrigatório' }}
+                render={({ field }) => (
+                  <FormControl fullWidth error={!!errors.qr_type}>
+                    <InputLabel>Tipo de QR Code</InputLabel>
+                    <Select {...field} label="Tipo de QR Code">
+                      <MenuItem value="feedback">Feedback</MenuItem>
+                      <MenuItem value="checkin">Check-in</MenuItem>
+                    </Select>
+                  </FormControl>
+                )}
+              />
+            </Grid>
             <Grid item xs={12} md={6}>
               <Controller
                 name="name"

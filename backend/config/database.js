@@ -36,6 +36,7 @@ const Survey = require('../models/Survey')(sequelize);
 const Question = require('../models/Question')(sequelize);
 const SurveyResponse = require('../models/SurveyResponse')(sequelize);
 const Answer = require('../models/Answer')(sequelize);
+const WhatsAppMessage = require('../models/WhatsAppMessage')(sequelize); // Importar o novo modelo
 
 // Definir associações
 const setupAssociations = () => {
@@ -93,6 +94,9 @@ const setupAssociations = () => {
   Restaurant.hasMany(Checkin, { foreignKey: 'restaurant_id', as: 'checkins' });
   Checkin.belongsTo(Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
 
+  // WhatsAppMessage associations
+  WhatsAppMessage.associate(sequelize.models);
+
   // Survey models associations
   Survey.associate(sequelize.models);
   Question.associate(sequelize.models);
@@ -140,7 +144,8 @@ module.exports = {
     Survey,
     Question,
     SurveyResponse,
-    Answer
+    Answer,
+    WhatsAppMessage // Adicionar o novo modelo aqui
   },
   testConnection,
   syncDatabase

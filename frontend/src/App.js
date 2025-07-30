@@ -60,6 +60,7 @@ function App() {
                 <Route path="/feedback/:shortUrl" element={<PublicFeedback />} />
                 <Route path="/thank-you" element={<ThankYou />} />
                 <Route path="/public/surveys/:id" element={<PublicSurveyForm />} />
+                <Route path="/checkin/public" element={<PublicCheckin />} />
                 
                 {/* Protected Routes */}
                 <Route path="/" element={

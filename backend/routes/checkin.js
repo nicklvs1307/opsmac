@@ -66,6 +66,11 @@ router.post('/record', auth, [
       status: 'active',
     });
 
+    // Incrementar total_visits do cliente
+    if (customer) {
+      await customer.increment('total_visits');
+    }
+
     // Enviar mensagem de agradecimento via WhatsApp (se configurado)
     try {
       const restaurant = await models.Restaurant.findByPk(restaurantId);
@@ -117,6 +122,214 @@ router.post('/record', auth, [
     res.status(500).json({
       error: 'Erro interno do servidor',
       message: process.env.NODE_ENV === 'development' ? error.message : 'Erro ao registrar check-in'
+    });
+  }
+});
+
+// @route   POST /api/checkin/public
+// @desc    Registrar um novo check-in via QR Code (público)
+// @access  Public
+router.post('/public', [
+  body('restaurant_id').isUUID().withMessage('ID do restaurante inválido'),
+  body('phone_number')
+    .matches(/^\+?[1-9]\d{1,14}$/)
+    .withMessage('Número de telefone inválido (formato internacional)'),
+  body('customer_name')
+    .optional()
+    .trim()
+    .isLength({ min: 1, max: 100 })
+    .withMessage('Nome do cliente deve ter entre 1 e 100 caracteres'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: 'Dados inválidos',
+      details: errors.array()
+    });
+  }
+
+  const { restaurant_id, phone_number, customer_name } = req.body;
+
+  try {
+    const restaurant = await models.Restaurant.findByPk(restaurant_id);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado.' });
+    }
+
+    // Buscar ou criar cliente
+    let customer = await models.Customer.findOne({
+      where: { phone: phone_number, restaurant_id: restaurant_id } // Filtrar por restaurant_id
+    });
+
+    if (!customer) {
+      customer = await models.Customer.create({
+        name: customer_name || 'Cliente Anônimo',
+        phone: phone_number,
+        whatsapp: phone_number,
+        source: 'checkin_qrcode',
+        restaurant_id: restaurant_id
+      });
+    }
+
+    // Verificar se o cliente já tem um check-in ativo no restaurante
+    const existingCheckin = await models.Checkin.findOne({
+      where: {
+        customer_id: customer.id,
+        restaurant_id,
+        status: 'active',
+      },
+    });
+
+    if (existingCheckin) {
+      return res.status(400).json({ message: 'Cliente já possui um check-in ativo neste restaurante.' });
+    }
+
+    const checkin = await models.Checkin.create({
+      customer_id: customer.id,
+      restaurant_id,
+      checkin_time: new Date(),
+      status: 'active',
+    });
+
+    // Incrementar total_visits do cliente
+    await customer.increment('total_visits');
+
+    // Obter configurações do programa de check-in
+    const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
+    const { 
+      checkin_time_restriction = 'unlimited',
+      identification_method = 'phone',
+      points_per_checkin = 1,
+      checkin_limit_per_cycle = 1,
+      allow_multiple_cycles = true,
+      enable_ranking = false,
+      enable_level_progression = false
+    } = checkinProgramSettings;
+
+    // Lógica Anti-Fraude (exemplo: restrição de tempo)
+    if (checkin_time_restriction !== 'unlimited') {
+      const lastCheckin = await models.Checkin.findOne({
+        where: {
+          customer_id: customer.id,
+          restaurant_id,
+          status: 'active',
+          id: { [Op.ne]: checkin.id } // Excluir o check-in atual
+        },
+        order: [['checkin_time', 'DESC']]
+      });
+
+      if (lastCheckin) {
+        const now = new Date();
+        const lastCheckinTime = new Date(lastCheckin.checkin_time);
+        const diffHours = Math.abs(now - lastCheckinTime) / 36e5; // Diferença em horas
+
+        let restrictionHours = 0;
+        if (checkin_time_restriction === '1_per_day') restrictionHours = 24;
+        if (checkin_time_restriction === '1_per_6_hours') restrictionHours = 6;
+
+        if (restrictionHours > 0 && diffHours < restrictionHours) {
+          // Se a restrição for violada, podemos reverter o check-in ou apenas avisar
+          // Por enquanto, vamos apenas logar e não aplicar a recompensa/pontos
+          console.warn(`Anti-fraude: Cliente ${customer.id} tentou check-in muito rápido. Último check-in: ${lastCheckinTime.toISOString()}`);
+          // Você pode adicionar uma lógica para deletar o check-in recém-criado aqui se desejar
+          // await checkin.destroy();
+          // return res.status(400).json({ message: 'Check-in muito rápido. Tente novamente mais tarde.' });
+        }
+      }
+    }
+
+    // Lógica de Pontuação
+    if (points_per_checkin > 0) {
+      await customer.addLoyaltyPoints(points_per_checkin, 'checkin');
+      console.log(`Cliente ${customer.name} ganhou ${points_per_checkin} pontos por check-in.`);
+    }
+
+    // Lógica de recompensa por visita
+    const visitRewards = restaurant.settings?.visit_rewards || [];
+    const currentVisits = customer.total_visits; // total_visits já foi incrementado
+
+    for (const rewardConfig of visitRewards) {
+      if (rewardConfig.visit_count === currentVisits) {
+        const reward = await models.Reward.findByPk(rewardConfig.reward_id);
+        if (reward) {
+          try {
+            const newCoupon = await reward.generateCoupon(customer.id);
+            if (newCoupon) {
+              let rewardMessage = rewardConfig.message_template || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
+              
+              rewardMessage = rewardMessage.replace(/\{\{customer_name\}\} /g, customer.name || '');
+              rewardMessage = rewardMessage.replace(/\{\{restaurant_name\}\} /g, restaurant.name || '');
+              rewardMessage = rewardMessage.replace(/\{\{reward_title\}\} /g, reward.title || '');
+              rewardMessage = rewardMessage.replace(/\{\{coupon_code\}\} /g, newCoupon.code || '');
+              rewardMessage = rewardMessage.replace(/\{\{visit_count\}\} /g, currentVisits);
+
+              await sendWhatsAppMessage(
+                restaurant.whatsapp_api_url,
+                restaurant.whatsapp_api_key,
+                restaurant.whatsapp_instance_id,
+                customer.phone,
+                rewardMessage
+              );
+              console.log(`Recompensa de visita enviada para ${customer.name} na ${currentVisits}ª visita.`);
+            }
+          } catch (couponError) {
+            console.error(`Erro ao gerar ou enviar cupom de recompensa por visita para ${customer.name}:`, couponError);
+          }
+        }
+      }
+    }
+
+    // Enviar mensagem de agradecimento pós-check-in (se habilitado)
+    try {
+      if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
+        const checkinMessageEnabled = restaurant.settings?.whatsapp_messages?.checkin_message_enabled;
+        const customCheckinMessage = restaurant.settings?.whatsapp_messages?.checkin_message_text;
+
+        if (checkinMessageEnabled) {
+          let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋\n\nObrigado por fazer check-in no *{{restaurant_name}}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
+          
+          // Substituir variáveis
+          messageText = messageText.replace(/\{\{customer_name\}\} /g, customer.name || '');
+          messageText = messageText.replace(/\{\{restaurant_name\}\} /g, restaurant.name || '');
+
+          const whatsappResponse = await sendWhatsAppMessage(
+            restaurant.whatsapp_api_url,
+            restaurant.whatsapp_api_key,
+            restaurant.whatsapp_instance_id,
+            customer.phone,
+            messageText
+          );
+
+          if (whatsappResponse.success) {
+            console.log('Mensagem de agradecimento de check-in enviada com sucesso para', customer.phone);
+            await models.WhatsAppMessage.create({
+              phone_number: customer.phone,
+              message_text: messageText,
+              message_type: 'checkin_thank_you',
+              status: 'sent',
+              whatsapp_message_id: whatsappResponse.data?.id || null,
+              restaurant_id: restaurant.id,
+              customer_id: customer.id,
+            });
+          } else {
+            console.error('Erro ao enviar mensagem de agradecimento de check-in para', customer.phone, ':', whatsappResponse.error);
+          }
+        }
+      }
+    } catch (whatsappError) {
+      console.error('Erro inesperado ao tentar enviar mensagem de agradecimento WhatsApp:', whatsappError);
+    }
+
+    res.status(201).json({
+      message: 'Check-in registrado com sucesso',
+      checkin,
+      customer_total_visits: customer.total_visits // Retornar o total de visitas atualizado
+    });
+  } catch (error) {
+    console.error('Erro ao registrar check-in público:', error);
+    res.status(500).json({
+      error: 'Erro interno do servidor',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Erro ao registrar check-in público'
     });
   }
 });

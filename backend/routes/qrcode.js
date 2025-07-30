@@ -9,6 +9,9 @@ const router = express.Router();
 
 // Validações
 const createQRCodeValidation = [
+  body('qr_type')
+    .isIn(['feedback', 'checkin'])
+    .withMessage('Tipo de QR Code inválido'),
   body('table_number')
     .isInt({ min: 1 })
     .withMessage('Número da mesa deve ser um número positivo'),
@@ -103,7 +106,8 @@ router.post('/', auth, [
       capacity,
       area,
       settings,
-      custom_fields
+      custom_fields,
+      qr_type // Adicionar qr_type aqui
     } = req.body;
 
     // Verificar se já existe QR Code para esta mesa neste restaurante
@@ -134,7 +138,8 @@ router.post('/', auth, [
         custom_message: '',
         redirect_after_feedback: true
       },
-      custom_fields: custom_fields || {}
+      custom_fields: custom_fields || {},
+      qr_type: qr_type || 'feedback' // Salvar o tipo de QR Code
     });
 
     res.status(201).json({

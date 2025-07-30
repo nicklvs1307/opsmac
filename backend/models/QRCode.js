@@ -27,6 +27,11 @@ module.exports = (sequelize) => {
         }
       }
     },
+    qr_type: {
+      type: DataTypes.ENUM('feedback', 'checkin'),
+      defaultValue: 'feedback',
+      allowNull: false,
+    },
     qr_code_data: {
       type: DataTypes.TEXT,
       allowNull: false
@@ -190,21 +195,33 @@ module.exports = (sequelize) => {
     ],
     hooks: {
       beforeValidate: async (qrcode) => {
-        // Gerar URL de feedback
-        if (!qrcode.feedback_url && qrcode.restaurant_id && qrcode.table_number) {
-          const baseUrl = process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com';
-          qrcode.feedback_url = `${baseUrl}/feedback/${qrcode.restaurant_id}/${qrcode.table_number}`;
-        }
+        const baseUrl = process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com';
         
-        // Gerar dados do QR Code
-        if (!qrcode.qr_code_data && qrcode.restaurant_id && qrcode.table_number && qrcode.feedback_url) {
+        if (qrcode.qr_type === 'checkin') {
+          // Para QR Code de Check-in, a URL aponta para a página pública de check-in
+          qrcode.feedback_url = `${baseUrl}/checkin/public?restaurantId=${qrcode.restaurant_id}`;
           qrcode.qr_code_data = JSON.stringify({
-            type: 'feedback',
+            type: 'checkin',
             restaurant_id: qrcode.restaurant_id,
-            table_number: qrcode.table_number,
             url: qrcode.feedback_url,
             created_at: new Date().toISOString()
           });
+        } else { // Default para feedback
+          // Gerar URL de feedback
+          if (!qrcode.feedback_url && qrcode.restaurant_id && qrcode.table_number) {
+            qrcode.feedback_url = `${baseUrl}/feedback/${qrcode.restaurant_id}/${qrcode.table_number}`;
+          }
+          
+          // Gerar dados do QR Code
+          if (!qrcode.qr_code_data && qrcode.restaurant_id && qrcode.table_number && qrcode.feedback_url) {
+            qrcode.qr_code_data = JSON.stringify({
+              type: 'feedback',
+              restaurant_id: qrcode.restaurant_id,
+              table_number: qrcode.table_number,
+              url: qrcode.feedback_url,
+              created_at: new Date().toISOString()
+            });
+          }
         }
       },
       beforeCreate: async (qrcode) => {

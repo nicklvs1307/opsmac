@@ -257,7 +257,6 @@ router.post('/public', [
     console.log('[Public Check-in] total_visits do cliente incrementado para:', customer.total_visits);
 
     // Obter configurações do programa de check-in
-    const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
     console.log('[Public Check-in] Configurações do Programa de Check-in:', checkinProgramSettings);
     const { 
       checkin_time_restriction = 'unlimited',

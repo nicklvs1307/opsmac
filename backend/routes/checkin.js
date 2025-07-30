@@ -353,21 +353,32 @@ router.post('/public', [
                     console.log(`[Public Check-in] Recompensa de visita enviada com sucesso para ${customer.name} na ${currentVisits}ª visita. Resposta WhatsApp:`, JSON.stringify(whatsappResponse));
                   } else {
                     console.error(`[Public Check-in] Erro ao enviar recompensa de visita para ${customer.name}:`, whatsappResponse.error, 'Resposta WhatsApp:', JSON.stringify(whatsappResponse));
+                    // Adicionar toast de erro para o frontend
+                    // toast.error(`Erro ao enviar recompensa via WhatsApp para ${customer.name}.`);
                   }
                 } catch (whatsappSendError) {
                   console.error(`[Public Check-in] Erro inesperado ao tentar enviar recompensa de visita WhatsApp para ${customer.name}:`, whatsappSendError.message, 'Stack:', whatsappSendError.stack);
+                  // Adicionar toast de erro para o frontend
+                  // toast.error(`Erro inesperado ao enviar recompensa via WhatsApp para ${customer.name}.`);
                 }
               } else {
                 console.warn(`[Public Check-in] Configurações de WhatsApp incompletas (URL: ${!!restaurant.whatsapp_api_url}, Key: ${!!restaurant.whatsapp_api_key}, Instance ID: ${!!restaurant.whatsapp_instance_id}) ou telefone do cliente ausente (${customer.phone}) para enviar recompensa para ${customer.name}.`);
+                // Adicionar toast de aviso para o frontend
+                // toast.warn(`Recompensa gerada, mas não foi possível enviar via WhatsApp para ${customer.name}. Verifique as configurações.`);
               }
             } else {
               console.warn('[Public Check-in] generateCoupon retornou null ou undefined. Cupom não gerado.');
+              // Adicionar toast de erro para o frontend
+              // toast.error('Erro interno: cupom não gerado.');
             }
           } catch (couponError) {
             console.error(`[Public Check-in] Erro ao gerar cupom de recompensa por visita para ${customer.name}:`, couponError.message, 'Stack:', couponError.stack);
-          }
-        } else {
+            // Adicionar toast de erro para o frontend
+            // toast.error(`Erro ao gerar cupom para ${customer.name}.`);
+          }1        } else {
           console.warn(`[Public Check-in] Recompensa com ID ${rewardConfig.reward_id} não encontrada no banco de dados.`);
+          // Adicionar toast de aviso para o frontend
+          // toast.warn(`Recompensa configurada não encontrada para ${customer.name}.`);
         }
       }
     }
@@ -380,7 +391,11 @@ router.post('/public', [
 
         if (checkinMessageEnabled) {
           console.log('[Public Check-in] Tentando enviar mensagem de agradecimento WhatsApp...');
-          let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋\n\nObrigado por fazer check-in no *{{restaurant_name}}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
+          let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋
+
+Obrigado por fazer check-in no *{{restaurant_name}}*!
+
+Como agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
           
           // Substituir variáveis
           messageText = messageText.replace(/\{\{customer_name\}\} /g, customer.name || '');
@@ -407,11 +422,15 @@ router.post('/public', [
             });
           } else {
             console.error('[Public Check-in] Erro ao enviar mensagem de agradecimento de check-in para', customer.phone, ':', whatsappResponse.error);
+            // Adicionar toast de erro para o frontend
+            // toast.error(`Erro ao enviar mensagem de agradecimento via WhatsApp para ${customer.name}.`);
           }
         }
       }
     } catch (whatsappError) {
       console.error('[Public Check-in] Erro inesperado ao tentar enviar mensagem de agradecimento WhatsApp:', whatsappError);
+      // Adicionar toast de erro para o frontend
+      // toast.error(`Erro inesperado ao enviar mensagem de agradecimento via WhatsApp para ${customer.name}.`);
     }
 
     res.status(201).json({
@@ -590,6 +609,37 @@ router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, [
     res.status(500).json({
       error: 'Erro interno do servidor',
       message: process.env.NODE_ENV === 'development' ? error.message : 'Erro ao buscar análises de check-in',
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
+  }
+});
+
+// @route   GET /api/checkin/active/:restaurantId
+// @desc    Obter todos os check-ins ativos para um restaurante
+// @access  Private
+router.get('/active/:restaurantId', auth, checkRestaurantOwnership, async (req, res) => {
+  try {
+    const { restaurantId } = req.params;
+
+    const activeCheckins = await models.Checkin.findAll({
+      where: {
+        restaurant_id: restaurantId,
+        status: 'active',
+      },
+      include: [{
+        model: models.Customer,
+        as: 'customer',
+        attributes: ['id', 'name', 'phone', 'email'], // Incluir apenas os campos necessários do cliente
+      }],
+      order: [['checkin_time', 'ASC']], // Ordenar pelos check-ins mais antigos primeiro
+    });
+
+    res.json({ activeCheckins });
+  } catch (error) {
+    console.error('Erro ao buscar check-ins ativos:', error);
+    res.status(500).json({
+      error: 'Erro interno do servidor',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Erro ao buscar check-ins ativos',
       stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }

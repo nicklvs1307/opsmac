@@ -21,7 +21,14 @@ import {
   People as PeopleIcon,
   BarChart as BarChartIcon,
   Stars as StarsIcon,
-} from '@mui/icons-material';
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
+import { CheckCircleOutline, ExitToApp as ExitToAppIcon } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import axiosInstance from '../../api/axiosInstance';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -41,6 +48,7 @@ const CheckinDashboard = () => {
   const [tabValue, setTabValue] = useState(0);
   const [rewards, setRewards] = useState([]);
   const [checkinQRCode, setCheckinQRCode] = useState(null);
+  const [activeCheckins, setActiveCheckins] = useState([]); // Novo estado para check-ins ativos
 
   const {
     control,
@@ -130,6 +138,20 @@ const CheckinDashboard = () => {
     }
   }, [restaurantId]);
 
+  const fetchActiveCheckins = useCallback(async () => {
+    if (!restaurantId) return;
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get(`/api/checkin/active/${restaurantId}`);
+      setActiveCheckins(response.data.activeCheckins);
+    } catch (err) {
+      console.error('Erro ao buscar check-ins ativos:', err);
+      setError('Erro ao carregar check-ins ativos');
+    } finally {
+      setLoading(false);
+    }
+  }, [restaurantId]);
+
   const onSaveCheckinProgram = async (data) => {
     try {
       setLoading(true);
@@ -148,6 +170,20 @@ const CheckinDashboard = () => {
     }
   };
 
+  const handleCheckout = async (checkinId) => {
+    try {
+      setLoading(true);
+      await axiosInstance.put(`/api/checkin/checkout/${checkinId}`);
+      toast.success('Check-out realizado com sucesso!');
+      fetchActiveCheckins(); // Atualiza a lista após o checkout
+    } catch (err) {
+      console.error('Erro ao realizar check-out:', err);
+      toast.error(err.response?.data?.message || 'Erro ao realizar check-out');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (tabValue === 0) {
       fetchCheckinData();
@@ -155,8 +191,10 @@ const CheckinDashboard = () => {
       fetchRewards();
       fetchCheckinProgramSettings();
       fetchCheckinQRCode();
+    } else if (tabValue === 2) {
+      fetchActiveCheckins();
     }
-  }, [tabValue, fetchCheckinData, fetchRewards, fetchCheckinProgramSettings, fetchCheckinQRCode]);
+  }, [tabValue, fetchCheckinData, fetchRewards, fetchCheckinProgramSettings, fetchCheckinQRCode, fetchActiveCheckins]);
 
   const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
@@ -283,6 +321,67 @@ const CheckinDashboard = () => {
     </>
   );
 
+  const renderActiveCheckins = () => (
+    <Paper
+      sx={{
+        p: 3,
+        borderRadius: 2,
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      }}
+    >
+      <Typography
+        variant="h6"
+        gutterBottom
+        sx={{
+          fontWeight: 600,
+          color: '#2c3e50',
+          mb: 3
+        }}
+      >
+        Check-ins Ativos
+      </Typography>
+      {activeCheckins.length > 0 ? (
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Cliente</TableCell>
+                <TableCell>Telefone</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Hora do Check-in</TableCell>
+                <TableCell>Ações</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {activeCheckins.map((checkin) => (
+                <TableRow key={checkin.id}>
+                  <TableCell>{checkin.customer?.name || 'N/A'}</TableCell>
+                  <TableCell>{checkin.customer?.phone || 'N/A'}</TableCell>
+                  <TableCell>{checkin.customer?.email || 'N/A'}</TableCell>
+                  <TableCell>{new Date(checkin.checkin_time).toLocaleString()}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      size="small"
+                      startIcon={<ExitToAppIcon />}
+                      onClick={() => handleCheckout(checkin.id)}
+                    >
+                      Checkout
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </Table>
+        </TableContainer>
+      ) : (
+        <Typography variant="body2" color="text.secondary">
+          Nenhum check-in ativo encontrado.
+        </Typography>
+      )}
+    </Paper>
+  );
+
   if (loading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
@@ -389,6 +488,7 @@ const CheckinDashboard = () => {
         >
           <Tab label="Análise de Check-ins" icon={<BarChartIcon />} />
           <Tab label="Programa de Fidelidade" icon={<StarsIcon />} />
+          <Tab label="Check-ins Ativos" icon={<CheckinIcon />} />
         </Tabs>
       </Paper>
 
@@ -407,6 +507,7 @@ const CheckinDashboard = () => {
           checkinQRCode={checkinQRCode}
         />
       )}
+      {tabValue === 2 && renderActiveCheckins()}
     </Box>
   );
 };

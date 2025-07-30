@@ -304,6 +304,10 @@
       "checkin_button": "Fazer Check-in Agora",
       "phone_required": "Número de telefone é obrigatório.",
       "invalid_phone": "Formato de número de telefone inválido.",
+      "invalid_phone_country_code": "O número de telefone deve começar com 55 (código do Brasil).",
+      "invalid_phone_ddd": "DDD inválido. Deve ter 2 dígitos.",
+      "invalid_phone_9_digits_ddd_11_28": "Para DDDs de 11 a 28, o número deve ter 9 dígitos após o DDD.",
+      "invalid_phone_8_or_9_digits_other_ddd": "Para outros DDDs, o número deve ter 8 ou 9 dígitos após o DDD."
       "checkin_success": "Check-in realizado com sucesso!",
       "checkin_error": "Erro durante o check-in. Por favor, tente novamente.",
       "checkin_thank_you_message": "Obrigado por fazer check-in!"

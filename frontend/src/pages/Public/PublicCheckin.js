@@ -112,9 +112,33 @@ const PublicCheckin = () => {
             control={control}
             rules={{
               required: t('public_checkin.phone_required'),
-              pattern: {
-                value: /^\+?\d{1,15}$/,
-                message: t('public_checkin.invalid_phone'),
+              validate: (value) => {
+                const cleanedValue = value.replace(/\D/g, '');
+
+                if (!cleanedValue.startsWith('55')) {
+                  return t('public_checkin.invalid_phone_country_code');
+                }
+
+                const ddd = cleanedValue.substring(2, 4);
+                const phoneNumberWithoutCountryCodeAndDDD = cleanedValue.substring(4);
+
+                if (ddd.length !== 2) {
+                  return t('public_checkin.invalid_phone_ddd');
+                }
+
+                const dddNum = parseInt(ddd, 10);
+
+                if (dddNum >= 11 && dddNum <= 28) {
+                  if (phoneNumberWithoutCountryCodeAndDDD.length !== 9) {
+                    return t('public_checkin.invalid_phone_9_digits_ddd_11_28');
+                  }
+                } else {
+                  if (phoneNumberWithoutCountryCodeAndDDD.length !== 8 && phoneNumberWithoutCountryCodeAndDDD.length !== 9) {
+                    return t('public_checkin.invalid_phone_8_or_9_digits_other_ddd');
+                  }
+                }
+
+                return true;
               },
             }}
             render={({ field }) => (

@@ -294,6 +294,7 @@ const RelationshipDashboard = () => {
         </CardContent>
       </Card>
     </>
+  );
 
   const renderAutomaticCampaignsSection = () => (
     <>
@@ -460,6 +461,7 @@ const RelationshipDashboard = () => {
         </CardContent>
       </Card>
     </>
+  );
 
   const renderCheckinProgramSection = () => (
     <>
@@ -728,6 +730,9 @@ const RelationshipDashboard = () => {
         </CardContent>
       </Card>
     </>
+  );
+  );
+  );
 
   return (
     <Box>

@@ -69,7 +69,7 @@ const RelationshipDashboard = () => {
     if (!restaurantId) return;
     try {
       setLoading(true);
-      const response = await axiosInstance.get(`/api/customers/restaurant/${restaurantId}`);
+      const response = await axiosInstance.get(`/api/customers`);
       setCustomers(response.data.customers);
     } catch (err) {
       console.error('Erro ao buscar clientes:', err);

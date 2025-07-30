@@ -347,6 +347,13 @@ router.post('/send-manual', auth, [
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
+    console.log('Credenciais do WhatsApp para envio manual:', {
+      whatsapp_api_url: restaurant.whatsapp_api_url,
+      whatsapp_api_key: restaurant.whatsapp_api_key,
+      whatsapp_instance_id: restaurant.whatsapp_instance_id,
+      whatsapp_phone_number: restaurant.whatsapp_phone_number,
+    });
+
     if (req.user.role !== 'admin' && restaurant.owner_id !== req.user.userId) {
       return res.status(403).json({ error: 'Acesso negado' });
     }

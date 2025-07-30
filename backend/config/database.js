@@ -125,7 +125,7 @@ const syncDatabase = async (force = false) => {
     console.log('✅ Banco de dados sincronizado');
     return true;
   } catch (error) {
-    console.error('❌ Erro ao sincronizar banco:', error.message);
+    console.error('❌ Erro ao sincronizar banco:', error);
     return false;
   }
 };

@@ -45,7 +45,7 @@ const PublicCheckin = () => {
     const fetchRestaurantName = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get(`/api/restaurants/${restaurantId}`);
+        const response = await axiosInstance.get(`/public/restaurant/${restaurantId}`);
         setRestaurantName(response.data.name);
       } catch (err) {
         console.error('Error fetching restaurant name:', err);

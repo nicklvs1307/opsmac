@@ -132,13 +132,13 @@ router.post('/record', auth, [
 router.post('/public', [
   body('restaurant_id').isUUID().withMessage('ID do restaurante inválido'),
   body('phone_number')
-    .matches(/^\+?[1-9]\d{1,14}$/)
-    .withMessage('Número de telefone inválido (formato internacional)'),
+    .matches(/^\+?\d{1,15}$/)
+    .withMessage('Número de telefone inválido (apenas dígitos, com ou sem + inicial, até 15 dígitos)'),
   body('customer_name')
     .optional()
     .trim()
-    .isLength({ min: 1, max: 100 })
-    .withMessage('Nome do cliente deve ter entre 1 e 100 caracteres'),
+    .isLength({ max: 100 })
+    .withMessage('Nome do cliente deve ter no máximo 100 caracteres'),
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

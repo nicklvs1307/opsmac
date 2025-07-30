@@ -217,4 +217,55 @@ router.post('/checkin', apiAuth, [
   }
 });
 
+/**
+ * @swagger
+ * /public/restaurant/{restaurantId}:
+ *   get:
+ *     summary: Obtém informações básicas de um restaurante (público)
+ *     tags: [Public API]
+ *     parameters:
+ *       - in: path
+ *         name: restaurantId
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         description: ID do restaurante.
+ *     responses:
+ *       200:
+ *         description: Informações do restaurante obtidas com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 logo_url:
+ *                   type: string
+ *       404:
+ *         description: Restaurante não encontrado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.get('/restaurant/:restaurantId', async (req, res) => {
+  try {
+    const { restaurantId } = req.params;
+    const restaurant = await models.Restaurant.findByPk(restaurantId, {
+      attributes: ['id', 'name', 'logo_url']
+    });
+
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado.' });
+    }
+
+    res.json(restaurant);
+  } catch (error) {
+    console.error('Erro ao obter informações do restaurante (público):', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;

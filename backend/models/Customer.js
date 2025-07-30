@@ -117,7 +117,7 @@ module.exports = (sequelize) => {
       defaultValue: 'active'
     },
     source: {
-      type: DataTypes.ENUM('qrcode', 'whatsapp', 'tablet', 'web', 'referral', 'social_media'),
+      type: DataTypes.ENUM('qrcode', 'whatsapp', 'tablet', 'web', 'referral', 'social_media', 'checkin_qrcode'),
       allowNull: true
     },
     referral_code: {

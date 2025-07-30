@@ -155,13 +155,19 @@ router.post('/public', [
 
   const { restaurant_id, phone_number, cpf, customer_name } = req.body;
 
+  console.log('Public Check-in Request:', { restaurant_id, phone_number, cpf, customer_name });
+
   try {
     const restaurant = await models.Restaurant.findByPk(restaurant_id);
     if (!restaurant) {
+      console.error('Restaurante não encontrado para o ID:', restaurant_id);
       return res.status(404).json({ error: 'Restaurante não encontrado.' });
     }
 
+    console.log('Restaurant found:', restaurant.name, 'Settings:', restaurant.settings);
+
     const identificationMethod = restaurant.settings?.checkin_program_settings?.identification_method || 'phone';
+    console.log('Identification Method:', identificationMethod);
 
     let customer;
     let customerSearchCriteria = {};
@@ -169,6 +175,7 @@ router.post('/public', [
 
     if (identificationMethod === 'phone') {
       if (!phone_number) {
+        console.error('Erro: Número de telefone ausente para identificação por telefone.');
         return res.status(400).json({ error: 'Número de telefone é obrigatório para este método de identificação.' });
       }
       customerSearchCriteria = { phone: phone_number, restaurant_id };
@@ -176,24 +183,34 @@ router.post('/public', [
       customerCreationData.whatsapp = phone_number; // Assumindo que whatsapp é o mesmo que phone
     } else if (identificationMethod === 'cpf') {
       if (!cpf) {
+        console.error('Erro: CPF ausente para identificação por CPF.');
         return res.status(400).json({ error: 'CPF é obrigatório para este método de identificação.' });
       }
       customerSearchCriteria = { cpf, restaurant_id };
       customerCreationData.cpf = cpf;
     } else {
+      console.error('Erro: Método de identificação inválido configurado:', identificationMethod);
       return res.status(400).json({ error: 'Método de identificação inválido configurado para o restaurante.' });
     }
+
+    console.log('Customer Search Criteria:', customerSearchCriteria);
 
     // Buscar ou criar cliente
     customer = await models.Customer.findOne({ where: customerSearchCriteria });
 
     if (!customer) {
+      console.log('Customer not found, creating new one.');
       customerCreationData.name = customer_name || 'Cliente Anônimo';
       customerCreationData.source = 'checkin_qrcode';
       customer = await models.Customer.create(customerCreationData);
-    } else if (customer_name && customer.name === 'Cliente Anônimo') {
-      // Se o cliente existe e o nome é 'Cliente Anônimo', atualiza com o nome fornecido
-      await customer.update({ name: customer_name });
+      console.log('New customer created:', customer.id, customer.name);
+    } else {
+      console.log('Customer found:', customer.id, customer.name);
+      if (customer_name && customer.name === 'Cliente Anônimo') {
+        // Se o cliente existe e o nome é 'Cliente Anônimo', atualiza com o nome fornecido
+        await customer.update({ name: customer_name });
+        console.log('Customer name updated to:', customer_name);
+      }
     }
 
     // Verificar se o cliente já tem um check-in ativo no restaurante
@@ -206,6 +223,7 @@ router.post('/public', [
     });
 
     if (existingCheckin) {
+      console.warn('Cliente já possui um check-in ativo:', customer.id);
       return res.status(400).json({ message: 'Cliente já possui um check-in ativo neste restaurante.' });
     }
 
@@ -215,12 +233,15 @@ router.post('/public', [
       checkin_time: new Date(),
       status: 'active',
     });
+    console.log('Check-in created:', checkin.id);
 
     // Incrementar total_visits do cliente
     await customer.increment('total_visits');
+    console.log('Customer total_visits incremented to:', customer.total_visits);
 
     // Obter configurações do programa de check-in
     const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
+    console.log('Check-in Program Settings:', checkinProgramSettings);
     const { 
       checkin_time_restriction = 'unlimited',
       points_per_checkin = 1,
@@ -261,15 +282,20 @@ router.post('/public', [
 
     // Lógica de recompensa por visita
     const visitRewards = restaurant.settings?.checkin_program_settings?.rewards_per_visit || [];
+    console.log('Visit Rewards configured:', visitRewards);
     const currentVisits = customer.total_visits; // total_visits já foi incrementado
+    console.log('Current customer visits:', currentVisits);
 
     for (const rewardConfig of visitRewards) {
+      console.log(`Checking reward for visit_count: ${rewardConfig.visit_count} vs currentVisits: ${currentVisits}`);
       if (rewardConfig.visit_count === currentVisits) {
         const reward = await models.Reward.findByPk(rewardConfig.reward_id);
         if (reward) {
+          console.log('Reward found:', reward.title);
           try {
             const newCoupon = await reward.generateCoupon(customer.id);
             if (newCoupon) {
+              console.log('Coupon generated:', newCoupon.code);
               let rewardMessage = rewardConfig.message_template || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
               
               rewardMessage = rewardMessage.replace(/\{\{customer_name\}\}/g, customer.name || '');
@@ -280,6 +306,7 @@ router.post('/public', [
 
               // Verificar se as configurações do WhatsApp estão completas antes de tentar enviar
               if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
+                console.log('Attempting to send WhatsApp message for reward...');
                 await sendWhatsAppMessage(
                   restaurant.whatsapp_api_url,
                   restaurant.whatsapp_api_key,
@@ -287,7 +314,7 @@ router.post('/public', [
                   customer.phone,
                   rewardMessage
                 );
-                console.log(`Recompensa de visita enviada para ${customer.name} na ${currentVisits}ª visita.`);
+                console.log(`Recompensa de visita enviada com sucesso para ${customer.name} na ${currentVisits}ª visita.`);
               } else {
                 console.warn(`Configurações de WhatsApp incompletas ou telefone do cliente ausente para enviar recompensa para ${customer.name}.`);
               }
@@ -306,6 +333,7 @@ router.post('/public', [
         const customCheckinMessage = restaurant.settings?.whatsapp_messages?.checkin_message_text;
 
         if (checkinMessageEnabled) {
+          console.log('Attempting to send WhatsApp thank you message...');
           let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋\n\nObrigado por fazer check-in no *{{restaurant_name}}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
           
           // Substituir variáveis

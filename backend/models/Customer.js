@@ -36,6 +36,17 @@ module.exports = (sequelize) => {
         }
       }
     },
+    cpf: {
+      type: DataTypes.STRING(11),
+      allowNull: true,
+      unique: true,
+      validate: {
+        is: {
+          args: /^\d{11}$/,
+          msg: 'CPF deve conter exatamente 11 dígitos numéricos'
+        }
+      }
+    },
     whatsapp: {
       type: DataTypes.STRING(20),
       allowNull: true,

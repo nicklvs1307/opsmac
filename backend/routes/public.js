@@ -254,7 +254,7 @@ router.get('/restaurant/:restaurantId', async (req, res) => {
   try {
     const { restaurantId } = req.params;
     const restaurant = await models.Restaurant.findByPk(restaurantId, {
-      attributes: ['id', 'name', 'logo_url']
+      attributes: ['id', 'name', 'logo_url', 'settings']
     });
 
     if (!restaurant) {

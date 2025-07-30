@@ -82,8 +82,8 @@ router.post('/record', auth, [
           let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋\n\nObrigado por fazer check-in no *{{restaurant_name}}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
           
           // Substituir variáveis
-          messageText = messageText.replace(/\{\{customer_name\}\} /g, customer.name || '');
-          messageText = messageText.replace(/\{\{restaurant_name\}\} /g, restaurant.name || '');
+          messageText = messageText.replace(/\{\{customer_name\}\}/g, customer.name || '');
+          messageText = messageText.replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
 
           const whatsappResponse = await sendWhatsAppMessage(
             restaurant.whatsapp_api_url,
@@ -307,14 +307,22 @@ router.post('/public', [
               // Verificar se as configurações do WhatsApp estão completas antes de tentar enviar
               if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
                 console.log('Attempting to send WhatsApp message for reward...');
-                await sendWhatsAppMessage(
-                  restaurant.whatsapp_api_url,
-                  restaurant.whatsapp_api_key,
-                  restaurant.whatsapp_instance_id,
-                  customer.phone,
-                  rewardMessage
-                );
-                console.log(`Recompensa de visita enviada com sucesso para ${customer.name} na ${currentVisits}ª visita.`);
+                try {
+                  const whatsappResponse = await sendWhatsAppMessage(
+                    restaurant.whatsapp_api_url,
+                    restaurant.whatsapp_api_key,
+                    restaurant.whatsapp_instance_id,
+                    customer.phone,
+                    rewardMessage
+                  );
+                  if (whatsappResponse.success) {
+                    console.log(`Recompensa de visita enviada com sucesso para ${customer.name} na ${currentVisits}ª visita.`);
+                  } else {
+                    console.error(`Erro ao enviar recompensa de visita para ${customer.name}:`, whatsappResponse.error);
+                  }
+                } catch (whatsappSendError) {
+                  console.error(`Erro inesperado ao tentar enviar recompensa de visita WhatsApp para ${customer.name}:`, whatsappSendError);
+                }
               } else {
                 console.warn(`Configurações de WhatsApp incompletas ou telefone do cliente ausente para enviar recompensa para ${customer.name}.`);
               }
@@ -337,8 +345,8 @@ router.post('/public', [
           let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋\n\nObrigado por fazer check-in no *{{restaurant_name}}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
           
           // Substituir variáveis
-          messageText = messageText.replace(/\{\{customer_name\}\}/g, customer.name || '');
-          messageText = messageText.replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
+          messageText = messageText.replace(/\{\{customer_name\}\} /g, customer.name || '');
+          messageText = messageText.replace(/\{\{restaurant_name\}\} /g, restaurant.name || '');
 
           const whatsappResponse = await sendWhatsAppMessage(
             restaurant.whatsapp_api_url,

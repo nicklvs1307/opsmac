@@ -74,7 +74,7 @@ const PublicCheckin = () => {
         payload.cpf = data.cpf;
       }
 
-      const response = await axiosInstance.post('/public/checkin', payload);
+      const response = await axiosInstance.post('/api/checkin/public', payload);
       toast.success(t('public_checkin.checkin_success'));
       navigate('/thank-you', { state: { message: t('public_checkin.checkin_thank_you_message') } });
     } catch (err) {

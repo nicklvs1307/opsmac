@@ -2,6 +2,7 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const { models } = require('../config/database');
 const { auth, checkRestaurantOwnership } = require('../middleware/auth');
+const lodash = require('lodash');
 
 const router = express.Router();
 
@@ -45,17 +46,24 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
     const { restaurantId } = req.params;
     const { settings } = req.body;
 
+    console.log('Recebido settings do frontend:', JSON.stringify(settings, null, 2));
+
     const restaurant = await models.Restaurant.findByPk(restaurantId);
 
     if (!restaurant) {
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
+    console.log('Configurações atuais do restaurante antes da fusão:', JSON.stringify(restaurant.settings, null, 2));
+
     // Deep merge para preservar sub-objetos aninhados
-    const lodash = require('lodash');
     const updatedSettings = lodash.merge({}, restaurant.settings, settings);
 
+    console.log('Configurações após a fusão:', JSON.stringify(updatedSettings, null, 2));
+
     await restaurant.update({ settings: updatedSettings });
+
+    console.log('Configurações salvas no banco de dados.');
 
     // Se as configurações do programa de check-in foram atualizadas, crie ou atualize o QR Code de check-in
     if (settings.checkin_program_settings) {

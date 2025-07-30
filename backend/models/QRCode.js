@@ -9,11 +9,16 @@ module.exports = (sequelize) => {
     },
     table_number: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true, // Permitir nulo para QR Codes genéricos
       validate: {
-        min: {
-          args: 1,
-          msg: 'Número da mesa deve ser positivo'
+        min: 1,
+        customValidator(value) {
+          if (value === null && !this.is_generic) {
+            throw new Error('O número da mesa é obrigatório para QR Codes não genéricos.');
+          }
+          if (value !== null && value < 1) {
+            throw new Error('O número da mesa deve ser um número positivo.');
+          }
         }
       }
     },
@@ -52,6 +57,11 @@ module.exports = (sequelize) => {
     is_active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
+    },
+    is_generic: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
     },
     location_description: {
       type: DataTypes.STRING(200),

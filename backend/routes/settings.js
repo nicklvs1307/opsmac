@@ -76,7 +76,7 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
           restaurant_id: restaurantId,
           qr_type: 'checkin',
           is_generic: true,
-          table_number: 0, // Mesa 0 para QR Codes genéricos
+          table_number: null, // Usar null para QR Codes genéricos
           location_description: 'Check-in Geral',
           is_active: settings.checkin_program_settings.enable_level_progression,
           created_by: req.user.userId,

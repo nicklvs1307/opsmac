@@ -176,6 +176,7 @@ const Settings = () => {
     reset: resetWhatsapp,
   } = useForm({
     defaultValues: {
+      whatsapp_enabled: false, // Adicionado
       whatsapp_api_url: '',
       whatsapp_api_key: '',
       whatsapp_instance_id: '',
@@ -186,6 +187,7 @@ const Settings = () => {
   const onWhatsappSettingsSubmit = async (data) => {
     try {
       setLoading(true);
+      // O objeto 'data' já inclui o 'whatsapp_enabled' do formulário
       await axiosInstance.put(`/api/settings/${restaurantId}/whatsapp`, data);
       toast.success(t('settings.whatsapp_settings_updated_successfully'));
     } catch (err) {
@@ -213,6 +215,7 @@ const Settings = () => {
       const fetchWhatsappSettings = async () => {
         try {
           const response = await axiosInstance.get(`/api/settings/${restaurantId}/whatsapp`);
+          // A resposta da API agora deve incluir 'whatsapp_enabled'
           resetWhatsapp(response.data);
         } catch (err) {
           console.error('Error fetching WhatsApp settings:', err);
@@ -790,6 +793,27 @@ const Settings = () => {
               subheader={t('settings.configure_whatsapp_api')}
             />
             <CardContent>
+              {/* Seção para Habilitar/Desabilitar o WhatsApp */}
+              <FormControlLabel
+                control={
+                  <Controller
+                    name="whatsapp_enabled"
+                    control={whatsappControl}
+                    render={({ field }) => (
+                      <Switch
+                        {...field}
+                        checked={field.value}
+                        onChange={(e) => field.onChange(e.target.checked)}
+                      />
+                    )}
+                  />
+                }
+                label={t('settings.enable_whatsapp_integration', 'Habilitar Integração com WhatsApp')}
+              />
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                {t('settings.enable_whatsapp_integration_helper', 'Ative para permitir o envio de mensagens automáticas via WhatsApp.')}
+              </Typography>
+
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Controller

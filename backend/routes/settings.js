@@ -150,6 +150,7 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
  *         description: Erro interno do servidor.
  */
 router.put('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, [
+  body('whatsapp_enabled').optional().isBoolean().withMessage('O campo whatsapp_enabled deve ser um booleano'),
   body('whatsapp_api_url').optional().isURL().withMessage('URL da API do WhatsApp deve ser um formato válido'),
   body('whatsapp_api_key').optional().isString().withMessage('Chave da API do WhatsApp deve ser uma string'),
   body('whatsapp_instance_id').optional().isString().withMessage('ID da instância do WhatsApp deve ser uma string'),
@@ -162,14 +163,22 @@ router.put('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, [
 
   try {
     const { restaurantId } = req.params;
-    const { whatsapp_api_url, whatsapp_api_key, whatsapp_instance_id, whatsapp_phone_number } = req.body;
+    const { whatsapp_enabled, whatsapp_api_url, whatsapp_api_key, whatsapp_instance_id, whatsapp_phone_number } = req.body;
 
     const restaurant = await models.Restaurant.findByPk(restaurantId);
     if (!restaurant) {
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
+    // Atualiza as configurações do WhatsApp, incluindo o novo campo
+    const currentSettings = restaurant.settings || {};
+    const updatedSettings = {
+      ...currentSettings,
+      whatsapp_enabled: whatsapp_enabled,
+    };
+
     await restaurant.update({
+      settings: updatedSettings,
       whatsapp_api_url,
       whatsapp_api_key,
       whatsapp_instance_id,
@@ -222,14 +231,20 @@ router.get('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, async (req
     const { restaurantId } = req.params;
 
     const restaurant = await models.Restaurant.findByPk(restaurantId, {
-      attributes: ['whatsapp_api_url', 'whatsapp_api_key', 'whatsapp_instance_id', 'whatsapp_phone_number'],
+      attributes: ['settings', 'whatsapp_api_url', 'whatsapp_api_key', 'whatsapp_instance_id', 'whatsapp_phone_number'],
     });
 
     if (!restaurant) {
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
-    res.json(restaurant);
+    res.json({
+      whatsapp_enabled: restaurant.settings?.whatsapp_enabled || false,
+      whatsapp_api_url: restaurant.whatsapp_api_url,
+      whatsapp_api_key: restaurant.whatsapp_api_key,
+      whatsapp_instance_id: restaurant.whatsapp_instance_id,
+      whatsapp_phone_number: restaurant.whatsapp_phone_number,
+    });
   } catch (error) {
     console.error('Erro ao obter configurações do WhatsApp:', error);
     res.status(500).json({ error: 'Erro interno do servidor' });

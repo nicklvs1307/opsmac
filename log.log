@@ -1,28 +1,75 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      158.4s
-------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.628
-0.628 > Feedeliza+-frontend@1.0.0 build
-0.628 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.628
-3.238 Creating an optimized production build...
-158.0 Failed to compile.
-158.0
-158.0 [eslint]
-158.0 src/pages/Rewards/Rewards.js
-158.0 Syntax error: Unexpected token, expected "," (222:100) (222:100)
-158.0
-158.0
-------
-
- 1 warning found (use docker --debug to expand):
- - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
-Dockerfile.frontend:23
---------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+Iniciando sincronização do banco de dados...
+❌ Erro ao sincronizar banco: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.addColumn (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:184:12)
+    at async Coupon.sync (/app/node_modules/sequelize/lib/model.js:958:11)
+    at async Sequelize.sync (/app/node_modules/sequelize/lib/sequelize.js:377:9)
+    at async syncDatabase (/app/backend/config/database.js:124:5)
+    at async runSync (/app/backend/scripts/syncDb.js:8:19) {
+  name: 'SequelizeDatabaseError',
+  parent: error: unterminated quoted string at or near "';"
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 106,
+    severity: 'ERROR',
+    code: '42601',
+    detail: undefined,
+    hint: undefined,
+    position: '323',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'scan.l',
+    line: '1176',
+    routine: 'scanner_yyerror',
+    sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
+    parameters: undefined
+  },
+  original: error: unterminated quoted string at or near "';"
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 106,
+    severity: 'ERROR',
+    code: '42601',
+    detail: undefined,
+    hint: undefined,
+    position: '323',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'scan.l',
+    line: '1176',
+    routine: 'scanner_yyerror',
+    sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
+    parameters: undefined
+  },
+  sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
+  parameters: {}
+}
+Falha na sincronização do banco de dados.

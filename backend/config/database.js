@@ -121,6 +121,33 @@ const testConnection = async () => {
 // Função para sincronizar banco
 const syncDatabase = async (force = false) => {
   try {
+    // Workaround para adicionar 'spin_the_wheel' ao ENUM de reward_type em cupons
+    const enumName = '"enum_coupons_reward_type"';
+    const newValue = 'spin_the_wheel';
+
+    try {
+      // Verifica se o tipo ENUM já existe
+      const [enumExists] = await sequelize.query(`
+        SELECT 1 FROM pg_type WHERE typname = 'enum_coupons_reward_type';
+      `);
+
+      if (enumExists.length > 0) {
+        // Verifica se o valor já existe no ENUM
+        const [valueExists] = await sequelize.query(`
+          SELECT 1 FROM pg_enum WHERE enumtypid = (SELECT oid FROM pg_type WHERE typname = 'enum_coupons_reward_type') AND enumlabel = '${newValue}';
+        `);
+
+        if (valueExists.length === 0) {
+          // Adiciona o novo valor ao ENUM
+          await sequelize.query(`ALTER TYPE ${enumName} ADD VALUE '${newValue}' AFTER 'gift';`);
+          console.log(`✅ Valor '${newValue}' adicionado ao ENUM ${enumName}.`);
+        }
+      }
+    } catch (alterError) {
+      // Captura erros se o ENUM ainda não existir ou se houver outro problema na alteração
+      console.warn(`⚠️ Aviso: Erro ao tentar adicionar valor ao ENUM (pode ser ignorado se o ENUM ainda não existe ou já foi alterado): ${alterError.message}`);
+    }
+
     await sequelize.sync({ force, alter: !force });
     console.log('✅ Banco de dados sincronizado');
     return true;

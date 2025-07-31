@@ -307,7 +307,7 @@
       "invalid_phone_country_code": "Phone number must start with 55 (Brazil country code).",
       "invalid_phone_ddd": "Invalid DDD. It must have 2 digits.",
       "invalid_phone_9_digits_ddd_11_28": "For DDDs 11-28, the number must have 9 digits after the DDD.",
-      "invalid_phone_8_or_9_digits_other_ddd": "For other DDDs, the number must have 8 or 9 digits after the DDD."
+      "invalid_phone_8_or_9_digits_other_ddd": "For other DDDs, the number must have 8 or 9 digits after the DDD.",
       "checkin_success": "Check-in successful!",
       "checkin_error": "Error during check-in. Please try again.",
       "checkin_thank_you_message": "Thank you for checking in!"

@@ -1,58 +1,82 @@
-rewards:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-Rewards.js:204  POST https://feedelizaapi.towersfy.com/api/rewards 400 (Bad Request)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-$n @ dispatchRequest.js:51
-_request @ Axios.js:187
-request @ Axios.js:40
-(anônimo) @ Axios.js:226
-(anônimo) @ bind.js:5
-(anônimo) @ Rewards.js:204
-(anônimo) @ createFormControl.ts:1258
-await in (anônimo)
-Ne @ react-dom.production.min.js:54
-Fe @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-zn @ react-dom.production.min.js:105
-Ln @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-qn @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ut @ react-dom.production.min.js:73
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "https://feedelizaapi.towersfy.com/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de us
+✅ Conexão com banco de dados estabelecida
+✅ Modelos sincronizados com o banco
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Erro ao criar recompensa: ValidationError [SequelizeValidationError]: Validation error: Pontos necessários deve ser pelo menos 1
+    at InstanceValidator._validate (/app/node_modules/sequelize/lib/instance-validator.js:50:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstanceValidator._validateAndRunHooks (/app/node_modules/sequelize/lib/instance-validator.js:60:7)
+    at async InstanceValidator.validate (/app/node_modules/sequelize/lib/instance-validator.js:54:12)
+    at async model.save (/app/node_modules/sequelize/lib/model.js:2426:7)
+    at async Reward.create (/app/node_modules/sequelize/lib/model.js:1362:12)
+    at async /app/backend/routes/rewards.js:114:20 {
+  errors: [
+    ValidationErrorItem {
+      message: 'Pontos necessários deve ser pelo menos 1',
+      type: 'Validation error',
+      path: 'points_required',
+      value: 0,
+      origin: 'FUNCTION',
+      instance: [Reward],
+      validatorKey: 'min',
+      validatorName: 'min',
+      validatorArgs: [Array],
+      original: [Error]
+    }
+  ]
+}
 
+{"error":"Erro interno do servidor","message":"Erro ao criar recompensa"}
 
 URL da solicitação
 https://feedelizaapi.towersfy.com/api/rewards
 Método da solicitação
 POST
 Código de status
-400 Bad Request
-
-{
-    "error": "Dados inválidos",
-    "details": [
-        {
-            "type": "field",
-            "value": null,
-            "msg": "Valor deve ser um número positivo",
-            "path": "value",
-            "location": "body"
-        },
-        {
-            "type": "field",
-            "value": null,
-            "msg": "Pontos necessários devem ser um número positivo",
-            "path": "points_required",
-            "location": "body"
-        },
-        {
-            "type": "field",
-            "value": null,
-            "msg": "Máximo de usos por cliente deve ser positivo",
-            "path": "max_uses_per_customer",
-            "location": "body"
-        }
-    ]
-}
+500 Internal Server Error

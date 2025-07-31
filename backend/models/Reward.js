@@ -40,13 +40,7 @@ module.exports = (sequelize) => {
     points_required: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      defaultValue: 100,
-      validate: {
-        min: {
-          args: 1,
-          msg: 'Pontos necessários deve ser pelo menos 1'
-        }
-      }
+      defaultValue: 100
     },
     max_uses_per_customer: {
       type: DataTypes.INTEGER,

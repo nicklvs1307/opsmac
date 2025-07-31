@@ -14,26 +14,18 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [result, setResult] = useState(null);
 
-  useEffect(() => {
-    if (winningItem) {
-      // Se já temos o item vencedor do backend, podemos simular o resultado
-      setIsSpinning(true); // Simula um giro rápido
-      setTimeout(() => {
-        setResult(winningItem);
-        setIsSpinning(false);
-        if (onSpinComplete) {
-          onSpinComplete(winningItem);
-        }
-      }, 1500); // Tempo para a animação de giro
-    }
-  }, [winningItem, onSpinComplete]);
+  
 
   const handleSpin = () => {
-    // O giro real e a determinação do item vencedor acontecem no backend.
-    // Este botão apenas inicia a animação e espera o resultado.
     setIsSpinning(true);
     setResult(null);
-    // onSpinComplete será chamado quando o winningItem for recebido via props
+    setTimeout(() => {
+      setResult(winningItem);
+      setIsSpinning(false);
+      if (onSpinComplete) {
+        onSpinComplete(winningItem);
+      }
+    }, 1500); // Tempo para a animação de giro
   };
 
   return (

@@ -1,18 +1,17 @@
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  },
+Suco de Laranja a
+Cupom: LUCAS3189
+📣 Parabéns, Lucas!
+Você acaba de conquistar uma nova recompensa aqui na Tower Test! 🎉
+
+🏆 Recompensa: Roleta
+🎟️ Cupom: LUCAS3189
+📍 Check-in número: 20
+
+Mostre esse cupom no balcão e aproveite sua recompensa!
+Continue participando, porque tem mais prêmios te esperando. 💜
+
+#ClubeRoma #VocêMerece
+
   Checkin {
     dataValues: {
       customer_id: '0bbd5d0d-c188-46ec-ae48-018f65b7dc84',
@@ -116,37 +115,16 @@
     }
   }
 ]
-averageVisitDuration: { avg_duration_seconds: '4118.2293111111111111' }
+averageVisitDuration: { avg_duration_seconds: '3963.9247021276595745' }
 checkinsByDay: [
   { date: 2025-07-30T00:00:00.000Z, count: '8' },
-  { date: 2025-07-31T00:00:00.000Z, count: '37' }
+  { date: 2025-07-31T00:00:00.000Z, count: '39' }
 ]
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
 [Public Check-in] Requisição recebida: {
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc',
   phone_number: '5535998374007',
   cpf: undefined,
-  customer_name: 'Lucas'
+  customer_name: 'Lucas Niquele'
 }
 [Public Check-in] Restaurante encontrado: Tower Test Settings: {
   nps_enabled: true,
@@ -194,8 +172,8 @@ Auth Middleware - req.user (after population): {
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
 [Public Check-in] Cliente encontrado: c0463aa7-193d-42fc-9163-aa9c850a0546 Lucas
-[Public Check-in] Check-in criado: 540e2dc6-92f8-4750-b32f-014e90c0d04b
-[Public Check-in] total_visits do cliente incrementado para: 19
+[Public Check-in] Check-in criado: 23c28b4a-882e-4502-af4b-417f7322cc34
+[Public Check-in] total_visits do cliente incrementado para: 20
 [Public Check-in] Configurações do Programa de Check-in: {
   "enable_ranking": true,
   "rewards_per_visit": [
@@ -489,45 +467,81 @@ Auth Middleware - req.user (after population): {
       '#ClubeRoma #VocêMerece'
   }
 ]
-[Public Check-in] Visitas atuais do cliente: 19
+[Public Check-in] Visitas atuais do cliente: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"17","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 17 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 17 (parsed) vs currentVisits: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"18","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 18 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 18 (parsed) vs currentVisits: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"19","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 19 (parsed) vs currentVisits: 19
-[Public Check-in] Correspondência encontrada para visit_count: 19. Tentando buscar recompensa com ID: 78e2cc60-efba-40fe-8f6d-419ad09dcfe5
-[Public Check-in] Recompensa encontrada: Roleta Objeto Reward: {"id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","title":"Roleta","description":"a","reward_type":"spin_the_wheel","value":null,"wheel_config":{"items":[{"title":"Suco de Laranja","probability":"50"},{"title":"Suco de Laranja b","probability":"50"},{"title":"Suco de Laranja a ","probability":"5"}]},"points_required":0,"max_uses_per_customer":null,"total_uses_limit":null,"current_uses":1,"minimum_purchase":null,"applicable_items":[],"excluded_items":[],"valid_from":null,"valid_until":null,"days_valid":null,"auto_apply":false,"requires_approval":false,"is_active":true,"is_featured":false,"image":null,"terms_conditions":null,"trigger_conditions":{},"notification_settings":{"send_push":false,"send_email":true,"send_whatsapp":false,"custom_message":""},"analytics":{"total_redeemed":0,"redemption_rate":0,"total_generated":1,"average_order_value":0,"customer_satisfaction":0},"restaurant_id":"0e517dc5-4881-45aa-996e-0365012000bc","customer_id":null,"created_by":"211aab5d-fb9a-421b-991c-fcda8bc44051","createdAt":"2025-07-31T20:54:32.808Z","updatedAt":"2025-07-31T20:56:36.584Z"}
+[Public Check-in] Verificando recompensa para visit_count: 19 (parsed) vs currentVisits: 20
+[Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"20","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
+[Public Check-in] Verificando recompensa para visit_count: 20 (parsed) vs currentVisits: 20
+[Public Check-in] Correspondência encontrada para visit_count: 20. Tentando buscar recompensa com ID: 78e2cc60-efba-40fe-8f6d-419ad09dcfe5
+[Public Check-in] Recompensa encontrada: Roleta Objeto Reward: {"id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","title":"Roleta","description":"a","reward_type":"spin_the_wheel","value":null,"wheel_config":{"items":[{"title":"Suco de Laranja","probability":"50"},{"title":"Suco de Laranja b","probability":"50"},{"title":"Suco de Laranja a ","probability":"5"}]},"points_required":0,"max_uses_per_customer":null,"total_uses_limit":null,"current_uses":2,"minimum_purchase":null,"applicable_items":[],"excluded_items":[],"valid_from":null,"valid_until":null,"days_valid":null,"auto_apply":false,"requires_approval":false,"is_active":true,"is_featured":false,"image":null,"terms_conditions":null,"trigger_conditions":{},"notification_settings":{"send_push":false,"send_email":true,"send_whatsapp":false,"custom_message":""},"analytics":{"total_redeemed":0,"redemption_rate":0,"total_generated":2,"average_order_value":0,"customer_satisfaction":0},"restaurant_id":"0e517dc5-4881-45aa-996e-0365012000bc","customer_id":null,"created_by":"211aab5d-fb9a-421b-991c-fcda8bc44051","createdAt":"2025-07-31T20:54:32.808Z","updatedAt":"2025-07-31T21:02:58.743Z"}
 [Public Check-in] Tentando gerar cupom para o cliente: c0463aa7-193d-42fc-9163-aa9c850a0546
-[Public Check-in] Cupom gerado com sucesso: LUCAS8108 Objeto Coupon: {"id":"56e83a36-d3bb-49bf-9267-8cee69cb61b8","generated_at":"2025-07-31T21:02:58.721Z","metadata":{"location":null,"ip_address":null,"session_id":null,"user_agent":null,"device_type":null,"staff_member":null},"notification_sent":false,"reminder_sent":false,"code":"LUCAS8108","reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","customer_id":"c0463aa7-193d-42fc-9163-aa9c850a0546","restaurant_id":"0e517dc5-4881-45aa-996e-0365012000bc","expires_at":null,"status":"active","title":"Suco de Laranja a ","description":"Suco de Laranja a ","value":"0.00","reward_type":"free_item","visit_milestone":19,"updatedAt":"2025-07-31T21:02:58.722Z","createdAt":"2025-07-31T21:02:58.722Z","qr_code_data":"{\"type\":\"coupon\",\"code\":\"LUCAS8108\",\"restaurant_id\":\"0e517dc5-4881-45aa-996e-0365012000bc\",\"expires_at\":null,\"generated_at\":\"2025-07-31T21:02:58.721Z\"}","redeemed_at":null,"cancelled_at":null,"order_value":null,"discount_applied":null,"redemption_location":null,"redemption_method":null,"notes":null,"notification_sent_at":null,"reminder_sent_at":null,"redeemed_by":null}
+[Public Check-in] Cupom gerado com sucesso: LUCAS3189 Objeto Coupon: {"id":"6264cf7b-58c6-4ae1-b6ea-f7408b908994","generated_at":"2025-07-31T21:14:30.399Z","metadata":{"location":null,"ip_address":null,"session_id":null,"user_agent":null,"device_type":null,"staff_member":null},"notification_sent":false,"reminder_sent":false,"code":"LUCAS3189","reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","customer_id":"c0463aa7-193d-42fc-9163-aa9c850a0546","restaurant_id":"0e517dc5-4881-45aa-996e-0365012000bc","expires_at":null,"status":"active","title":"Suco de Laranja a ","description":"Suco de Laranja a ","value":"0.00","reward_type":"free_item","visit_milestone":20,"updatedAt":"2025-07-31T21:14:30.399Z","createdAt":"2025-07-31T21:14:30.399Z","qr_code_data":"{\"type\":\"coupon\",\"code\":\"LUCAS3189\",\"restaurant_id\":\"0e517dc5-4881-45aa-996e-0365012000bc\",\"expires_at\":null,\"generated_at\":\"2025-07-31T21:14:30.399Z\"}","redeemed_at":null,"cancelled_at":null,"order_value":null,"discount_applied":null,"redemption_location":null,"redemption_method":null,"notes":null,"notification_sent_at":null,"reminder_sent_at":null,"redeemed_by":null}
 [Public Check-in] Mensagem de recompensa formatada: 📣 Parabéns, Lucas!
 Você acaba de conquistar uma nova recompensa aqui na Tower Test! 🎉
 🏆 Recompensa: Roleta
-🎟️ Cupom: LUCAS8108
-📍 Check-in número: 19
+🎟️ Cupom: LUCAS3189
+📍 Check-in número: 20
 Mostre esse cupom no balcão e aproveite sua recompensa!
 Continue participando, porque tem mais prêmios te esperando. 💜
 #ClubeRoma #VocêMerece
+[Public Check-in] Objeto rewardEarned enviado para o frontend: null
 [Public Check-in] Configurações de WhatsApp presentes. Tentando enviar mensagem para: 5535998374007
 [Public Check-in] WhatsApp API URL: https://evolution2.towersfy.com
 [Public Check-in] WhatsApp Instance ID: towersfy
 URL construída para Evolution API: https://evolution2.towersfy.com/message/sendText/towersfy
-[Public Check-in] Recompensa de visita enviada com sucesso para Lucas na 19ª visita. Resposta WhatsApp: {"success":true,"data":{"key":{"remoteJid":"553598374007@s.whatsapp.net","fromMe":true,"id":"3EB0FAD8E30CF2D82B6176A3BC0C3774BE17B386"},"pushName":"","status":"PENDING","message":{"conversation":"📣 Parabéns, Lucas!\nVocê acaba de conquistar uma nova recompensa aqui na Tower Test! 🎉\n\n🏆 Recompensa: Roleta\n🎟️ Cupom: LUCAS8108\n📍 Check-in número: 19\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"},"contextInfo":null,"messageType":"conversation","messageTimestamp":1753995779,"instanceId":"84b78b3e-215e-4017-b3df-222bc9c0908d","source":"unknown"}}
-[Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"20","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 20 (parsed) vs currentVisits: 19
+[Public Check-in] Recompensa de visita enviada com sucesso para Lucas na 20ª visita. Resposta WhatsApp: {"success":true,"data":{"key":{"remoteJid":"553598374007@s.whatsapp.net","fromMe":true,"id":"3EB03E77BC183FFFB89288E481DF31D83C9A4F46"},"pushName":"","status":"PENDING","message":{"conversation":"📣 Parabéns, Lucas!\nVocê acaba de conquistar uma nova recompensa aqui na Tower Test! 🎉\n\n🏆 Recompensa: Roleta\n🎟️ Cupom: LUCAS3189\n📍 Check-in número: 20\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"},"contextInfo":null,"messageType":"conversation","messageTimestamp":1753996470,"instanceId":"84b78b3e-215e-4017-b3df-222bc9c0908d","source":"unknown"}}
 [Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"21","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 21 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 21 (parsed) vs currentVisits: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"6","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 6 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 6 (parsed) vs currentVisits: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"1ef6aa44-c5da-4db0-b304-a348757228b9","visit_count":"7","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 7 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 7 (parsed) vs currentVisits: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"7","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 7 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 7 (parsed) vs currentVisits: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"9","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 9 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 9 (parsed) vs currentVisits: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"9","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 9 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 9 (parsed) vs currentVisits: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"21","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 21 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 21 (parsed) vs currentVisits: 20
 [Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"22","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 22 (parsed) vs currentVisits: 19
+[Public Check-in] Verificando recompensa para visit_count: 22 (parsed) vs currentVisits: 20
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}

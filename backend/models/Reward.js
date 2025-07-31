@@ -89,7 +89,7 @@ module.exports = (sequelize) => {
     },
     valid_from: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       defaultValue: DataTypes.NOW
     },
     valid_until: {

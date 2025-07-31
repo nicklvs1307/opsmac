@@ -668,7 +668,7 @@ router.get('/:id/analytics', auth, async (req, res) => {
         [models.sequelize.fn('COUNT', models.sequelize.col('id')), 'total_generated'],
         [models.sequelize.fn('COUNT', models.sequelize.literal('CASE WHEN status = \'redeemed\' THEN 1 END')), 'total_redeemed'],
         [models.sequelize.fn('COUNT', models.sequelize.literal('CASE WHEN status = \'expired\' THEN 1 END')), 'total_expired'],
-        [models.sequelize.fn('SUM', models.sequelize.col('discount_applied')), 'total_discount_given']
+        [models.sequelize.fn('COALESCE', models.sequelize.fn('SUM', models.sequelize.col('discount_applied')), 0), 'total_discount_given']
       ],
       raw: true
     });

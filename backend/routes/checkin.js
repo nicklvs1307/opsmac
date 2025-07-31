@@ -351,13 +351,16 @@ router.post('/public', [
               console.log('[Public Check-in] Mensagem de recompensa formatada:', rewardMessage);
 
               // Armazena os detalhes da recompensa para a resposta da API
+              console.log('[Public Check-in] Objeto rewardEarned enviado para o frontend:', JSON.stringify(rewardEarned, null, 2));
               rewardEarned = {
-                reward_title: reward.title || '',
+                reward_title: newCoupon.title || '',
                 coupon_code: newCoupon.code || '',
                 formatted_message: rewardMessage,
                 visit_count: currentVisits,
-                reward_type: reward.reward_type,
-                wheel_config: reward.wheel_config
+                reward_type: newCoupon.reward_type,
+                wheel_config: reward.wheel_config,
+                value: newCoupon.value || 0,
+                description: newCoupon.description || ''
               };
 
               // Verificar se as configurações do WhatsApp estão completas antes de tentar enviar

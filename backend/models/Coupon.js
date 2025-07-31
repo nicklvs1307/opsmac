@@ -42,7 +42,7 @@ module.exports = (sequelize) => {
       comment: 'Valor do item sorteado na roleta (se aplicável)'
     },
     reward_type: {
-      type: DataTypes.ENUM('discount_percentage', 'discount_fixed', 'free_item', 'points', 'cashback', 'gift', 'spin_the_wheel'),
+      type: DataTypes.STRING,
       allowNull: true,
       comment: 'Tipo de recompensa do item sorteado na roleta (se aplicável)'
     },

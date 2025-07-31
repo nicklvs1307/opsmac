@@ -20,24 +20,24 @@ const createRewardValidation = [
     .isIn(['discount_percentage', 'discount_fixed', 'free_item', 'points_multiplier', 'cashback', 'spin_the_wheel'])
     .withMessage('Tipo de recompensa inválido'),
   body('value')
-    .optional()
-    .not().isEmpty().isFloat({ min: 0 })
+    .optional({ nullable: true })
+    .isFloat({ min: 0 })
     .withMessage('Valor deve ser um número positivo'),
   body('wheel_config')
     .optional()
     .isObject()
     .withMessage('Configuração da roleta deve ser um objeto válido'),
   body('points_required')
-    .optional()
-    .not().isEmpty().isInt({ min: 0 })
+    .optional({ nullable: true })
+    .isInt({ min: 0 })
     .withMessage('Pontos necessários devem ser um número positivo'),
   body('min_order_value')
     .optional()
     .isFloat({ min: 0 })
     .withMessage('Valor mínimo do pedido deve ser positivo'),
   body('max_uses_per_customer')
-    .optional()
-    .not().isEmpty().isInt({ min: 1 })
+    .optional({ nullable: true })
+    .isInt({ min: 1 })
     .withMessage('Máximo de usos por cliente deve ser positivo'),
   body('max_total_uses')
     .optional()

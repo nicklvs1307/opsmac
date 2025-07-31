@@ -25,12 +25,17 @@ module.exports = (sequelize) => {
       allowNull: true
     },
     reward_type: {
-      type: DataTypes.ENUM('discount_percentage', 'discount_fixed', 'free_item', 'points', 'cashback', 'gift'),
+      type: DataTypes.ENUM('discount_percentage', 'discount_fixed', 'free_item', 'points', 'cashback', 'gift', 'spin_the_wheel'),
       allowNull: false
     },
     value: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false
+    },
+    wheel_config: {
+      type: DataTypes.JSONB,
+      allowNull: true,
+      defaultValue: {}
     },
     points_required: {
       type: DataTypes.INTEGER,
@@ -279,9 +284,40 @@ module.exports = (sequelize) => {
     }
     
     const { models } = sequelize;
+    const { spinWheel } = require('../utils/wheelService'); // Importar o serviço da roleta
+
+    // Buscar o cliente para obter o nome
+    const customer = await models.Customer.findByPk(customerId);
+    if (!customer) {
+      throw new Error('Cliente não encontrado.');
+    }
+    const customerName = customer.name || 'CLIENTE';
+
+    let couponRewardId = this.id;
+    let couponTitle = this.title;
+    let couponDescription = this.description;
+    let couponValue = this.value;
+    let couponRewardType = this.reward_type;
+
+    if (this.reward_type === 'spin_the_wheel') {
+      if (!this.wheel_config || !this.wheel_config.items || this.wheel_config.items.length === 0) {
+        throw new Error('Configuração da roleta inválida ou vazia.');
+      }
+      const winningItem = spinWheel(this.wheel_config);
+      if (!winningItem) {
+        throw new Error('Não foi possível sortear um item da roleta.');
+      }
+      // Usar as propriedades do item sorteado para o cupom
+      couponTitle = winningItem.title;
+      couponDescription = winningItem.description || winningItem.title;
+      couponValue = winningItem.value || 0; // Valor do item sorteado
+      couponRewardType = winningItem.reward_type || 'free_item'; // Tipo do item sorteado
+      // Se o item sorteado tiver um reward_id próprio, usar ele. Caso contrário, usa o da roleta.
+      couponRewardId = winningItem.reward_id || this.id;
+    }
     
-    // Gerar código único do cupom
-    const couponCode = this.generateCouponCode();
+    // Gerar código único do cupom usando o nome do cliente
+    const couponCode = this.generateCouponCode(customerName);
     
     // Calcular data de expiração
     let expiresAt = this.valid_until;
@@ -292,11 +328,15 @@ module.exports = (sequelize) => {
     
     const coupon = await models.Coupon.create({
       code: couponCode,
-      reward_id: this.id,
+      reward_id: couponRewardId, // Usar o ID da recompensa da roleta ou do item sorteado
       customer_id: customerId,
       restaurant_id: this.restaurant_id,
       expires_at: expiresAt,
       status: 'active',
+      title: couponTitle, // Adicionar título do cupom
+      description: couponDescription, // Adicionar descrição do cupom
+      value: couponValue, // Adicionar valor do cupom
+      reward_type: couponRewardType, // Adicionar tipo do cupom
       ...extraData, // Adicionar dados extras, como visit_milestone
     });
     
@@ -311,11 +351,10 @@ module.exports = (sequelize) => {
     return coupon;
   };
 
-  Reward.prototype.generateCouponCode = function() {
-    const prefix = this.reward_type.substring(0, 3).toUpperCase();
-    const timestamp = Date.now().toString(36).toUpperCase();
-    const random = Math.random().toString(36).substring(2, 6).toUpperCase();
-    return `${prefix}${timestamp}${random}`;
+  Reward.prototype.generateCouponCode = function(customerName) {
+    const cleanedName = customerName.replace(/[^a-zA-Z0-9]/g, '').toUpperCase().substring(0, 5); // Pega as 5 primeiras letras/números
+    const randomNumber = Math.floor(1000 + Math.random() * 9000); // Número aleatório de 4 dígitos
+    return `${cleanedName}${randomNumber}`;
   };
 
   Reward.prototype.updateAnalytics = async function(action, orderValue = 0) {

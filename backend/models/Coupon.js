@@ -26,6 +26,26 @@ module.exports = (sequelize) => {
         }
       }
     },
+    title: {
+      type: DataTypes.STRING(150),
+      allowNull: true,
+      comment: 'Título do item sorteado na roleta (se aplicável)'
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: 'Descrição do item sorteado na roleta (se aplicável)'
+    },
+    value: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true,
+      comment: 'Valor do item sorteado na roleta (se aplicável)'
+    },
+    reward_type: {
+      type: DataTypes.ENUM('discount_percentage', 'discount_fixed', 'free_item', 'points', 'cashback', 'gift', 'spin_the_wheel'),
+      allowNull: true,
+      comment: 'Tipo de recompensa do item sorteado na roleta (se aplicável)'
+    },
     status: {
       type: DataTypes.ENUM('active', 'redeemed', 'expired', 'cancelled'),
       defaultValue: 'active'

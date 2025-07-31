@@ -17,11 +17,15 @@ const createRewardValidation = [
     .isLength({ min: 1, max: 500 })
     .withMessage('Descrição deve ter entre 1 e 500 caracteres'),
   body('reward_type')
-    .isIn(['discount_percentage', 'discount_fixed', 'free_item', 'points_multiplier', 'cashback'])
+    .isIn(['discount_percentage', 'discount_fixed', 'free_item', 'points_multiplier', 'cashback', 'spin_the_wheel'])
     .withMessage('Tipo de recompensa inválido'),
   body('value')
     .isFloat({ min: 0 })
     .withMessage('Valor deve ser um número positivo'),
+  body('wheel_config')
+    .optional()
+    .isObject()
+    .withMessage('Configuração da roleta deve ser um objeto válido'),
   body('points_required')
     .optional()
     .isInt({ min: 0 })
@@ -102,6 +106,7 @@ router.post('/', auth, createRewardValidation, logUserAction('create_reward'), a
       trigger_conditions,
       applicable_days,
       applicable_hours,
+      wheel_config, // Adicionado
       // restaurant_id // Removido do req.body
     } = req.body;
 
@@ -114,12 +119,13 @@ router.post('/', auth, createRewardValidation, logUserAction('create_reward'), a
       min_order_value: min_order_value || 0,
       max_uses_per_customer: max_uses_per_customer || null,
       max_total_uses: max_total_uses || null,
-      valid_from: valid_from ? new Date(valid_from) : new Date(),
+      valid_from: valid_from ? new Date(valid_from) : null,
       valid_until: valid_until ? new Date(valid_until) : null,
       auto_apply: auto_apply || false,
       trigger_conditions: trigger_conditions || {},
       applicable_days: applicable_days || [0, 1, 2, 3, 4, 5, 6], // Todos os dias por padrão
       applicable_hours: applicable_hours || { start: '00:00', end: '23:59' },
+      wheel_config: wheel_config || {}, // Adicionado
       restaurant_id: restaurantId, // Usar o restaurant_id do usuário autenticado
       created_by: req.user.userId
     });
@@ -332,6 +338,11 @@ router.put('/:id', auth, updateRewardValidation, logUserAction('update_reward'),
 
     const { id } = req.params;
     const updateData = req.body;
+
+    // Garantir que wheel_config seja um objeto se presente
+    if (updateData.wheel_config && typeof updateData.wheel_config !== 'object') {
+      return res.status(400).json({ error: 'Configuração da roleta deve ser um objeto válido.' });
+    }
 
     const user = await models.User.findByPk(req.user.userId, {
       include: [{ model: models.Restaurant, as: 'restaurants' }]

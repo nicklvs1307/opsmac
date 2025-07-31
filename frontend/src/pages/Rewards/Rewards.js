@@ -38,7 +38,7 @@ import {
   Search as SearchIcon,
   Star as StarIcon,
 } from '@mui/icons-material';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import axiosInstance from '../../api/axiosInstance';
@@ -71,18 +71,25 @@ const Rewards = () => {
     control,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
       title: '',
       description: '',
-      reward_type: 'discount',
+      reward_type: 'discount_percentage',
       value: '',
       points_required: '',
       max_uses: '',
       expires_at: '',
       status: 'active',
+      wheel_config: { items: [] }, // Adicionado
     },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'wheel_config.items',
   });
 
   useEffect(() => {
@@ -177,6 +184,10 @@ const Rewards = () => {
           if (key === 'expires_at') {
             return value !== '' && value !== null;
           }
+          // Incluir wheel_config se for do tipo spin_the_wheel
+          if (key === 'wheel_config' && data.reward_type !== 'spin_the_wheel') {
+            return false; // Não incluir se não for roleta
+          }
           return value !== '' && value !== null;
         })
       );
@@ -190,7 +201,7 @@ const Rewards = () => {
       delete cleanData.expires_at;
 
       if (editDialog) {
-        await axiosInstance.put(`/rewards/${selectedItem.id}`, cleanData);
+        await axiosInstance.put(`/api/rewards/${selectedItem.id}`, cleanData);
         toast.success('Recompensa atualizada com sucesso!');
       } else {
         await axiosInstance.post('/api/rewards', { ...cleanData, restaurant_id: restaurantId });
@@ -203,6 +214,18 @@ const Rewards = () => {
     } catch (err) {
       toast.error(err.response?.data?.message || 'Erro ao salvar recompensa');
     }
+  };
+
+  const handleEdit = () => {
+    // Ao editar, resetar o formulário com os dados do item selecionado
+    // Certificar-se de que wheel_config.items é um array, mesmo que vazio
+    reset({
+      ...selectedItem,
+      max_uses: selectedItem.max_uses_per_customer,
+      expires_at: selectedItem.valid_until ? format(new Date(selectedItem.valid_until), 'yyyy-MM-dd'T'HH:mm') : '',
+      wheel_config: selectedItem.wheel_config || { items: [] },
+    });
+    setEditDialog(true);
   };
 
   const confirmDelete = async () => {
@@ -571,11 +594,71 @@ const Rewards = () => {
                       <SelectMenuItem value="free_item">Item Grátis</SelectMenuItem>
                       <SelectMenuItem value="points_multiplier">Multiplicador de Pontos</SelectMenuItem>
                       <SelectMenuItem value="cashback">Cashback</SelectMenuItem>
+                      <SelectMenuItem value="spin_the_wheel">Roleta de Prêmios</SelectMenuItem>
                     </Select>
                   </FormControl>
                 )}
               />
             </Grid>
+            {watch('reward_type') === 'spin_the_wheel' && (
+              <Grid item xs={12}>
+                <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+                  Configuração da Roleta
+                </Typography>
+                {fields.map((item, index) => (
+                  <Paper key={item.id} sx={{ p: 2, mb: 2, border: '1px solid #eee' }}>
+                    <Grid container spacing={2} alignItems="center">
+                      <Grid item xs={12} sm={6}>
+                        <Controller
+                          name={`wheel_config.items.${index}.title`}
+                          control={control}
+                          rules={{ required: 'Título do item é obrigatório' }}
+                          render={({ field }) => (
+                            <TextField
+                              {...field}
+                              label="Título do Item"
+                              fullWidth
+                            />
+                          )}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={4}>
+                        <Controller
+                          name={`wheel_config.items.${index}.probability`}
+                          control={control}
+                          rules={{ required: 'Probabilidade é obrigatória', min: 0 }}
+                          render={({ field }) => (
+                            <TextField
+                              {...field}
+                              label="Probabilidade"
+                              type="number"
+                              fullWidth
+                            />
+                          )}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={2}>
+                        <Button
+                          variant="outlined"
+                          color="error"
+                          onClick={() => remove(index)}
+                          startIcon={<DeleteIcon />}
+                        >
+                          Remover
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                ))}
+                <Button
+                  variant="outlined"
+                  startIcon={<AddIcon />}
+                  onClick={() => append({ title: '', probability: 0 })}
+                >
+                  Adicionar Item à Roleta
+                </Button>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <Controller
                 name="description"
@@ -591,72 +674,80 @@ const Rewards = () => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="value"
-                control={control}
-                rules={{ required: 'Valor é obrigatório' }}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Valor (%)"
-                    type="number"
-                    fullWidth
-                    error={!!errors.value}
-                    helperText={errors.value?.message}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="points_required"
-                control={control}
-                rules={{ required: 'Pontos são obrigatórios' }}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Pontos Necessários"
-                    type="number"
-                    fullWidth
-                    error={!!errors.points_required}
-                    helperText={errors.points_required?.message}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="max_uses"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Usos Máximos"
-                    type="number"
-                    fullWidth
-                    helperText="Deixe em branco para ilimitado"
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name="expires_at"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Data de Expiração"
-                    type="datetime-local"
-                    fullWidth
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                )}
-              />
-            </Grid>
+            {watch('reward_type') !== 'spin_the_wheel' && (
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="value"
+                  control={control}
+                  rules={{ required: 'Valor é obrigatório' }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Valor (%)"
+                      type="number"
+                      fullWidth
+                      error={!!errors.value}
+                      helperText={errors.value?.message}
+                    />
+                  )}
+                />
+              </Grid>
+            )}
+            {watch('reward_type') !== 'spin_the_wheel' && (
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="points_required"
+                  control={control}
+                  rules={{ required: 'Pontos são obrigatórios' }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Pontos Necessários"
+                      type="number"
+                      fullWidth
+                      error={!!errors.points_required}
+                      helperText={errors.points_required?.message}
+                    />
+                  )}
+                />
+              </Grid>
+            )}
+            {watch('reward_type') !== 'spin_the_wheel' && (
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="max_uses"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Usos Máximos"
+                      type="number"
+                      fullWidth
+                      helperText="Deixe em branco para ilimitado"
+                    />
+                  )}
+                />
+              </Grid>
+            )}
+            {watch('reward_type') !== 'spin_the_wheel' && (
+              <Grid item xs={12} md={6}>
+                <Controller
+                  name="expires_at"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Data de Expiração"
+                      type="datetime-local"
+                      fullWidth
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  )}
+                />
+              </Grid>
+            )}
             <Grid item xs={12} md={6}>
               <Controller
                 name="status"

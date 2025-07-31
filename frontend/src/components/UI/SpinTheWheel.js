@@ -29,7 +29,6 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
   };
 
   return (
-    <>
     <Paper sx={{ p: 4, textAlign: 'center', borderRadius: 3, boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
       <Typography variant="h5" gutterBottom>
         Gire a Roleta!
@@ -176,7 +175,8 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
           )}
         </Box>
 
-      <Box sx={{ mt: 3, textAlign: 'left', color: 'rgba(255, 255, 255, 0.8)' }}>
+      
+    <Box sx={{ mt: 3, textAlign: 'left', color: 'rgba(255, 255, 255, 0.8)' }}>
         <Typography variant="subtitle2" sx={{ color: 'inherit' }}>Itens da Roleta:</Typography>
         <List dense>
           {wheelConfig?.items?.map((item, index) => (
@@ -187,7 +187,6 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
         </List>
       </Box>
     </Paper>
-    </>
   );
 };
 

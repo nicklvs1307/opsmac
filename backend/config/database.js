@@ -121,33 +121,40 @@ const testConnection = async () => {
 // Função para sincronizar banco
 const syncDatabase = async (force = false) => {
   try {
-    // Workaround para adicionar 'spin_the_wheel' ao ENUM de reward_type em cupons
-    const enumName = '"enum_coupons_reward_type"';
-    const newValue = 'spin_the_wheel';
+    const enumName = '"public"."enum_coupons_reward_type"';
+    const enumValues = ['discount_percentage', 'discount_fixed', 'free_item', 'points', 'cashback', 'gift', 'spin_the_wheel'];
 
+    // 1. Verificar e Criar o Tipo ENUM se não existir
     try {
-      // Verifica se o tipo ENUM já existe
       const [enumExists] = await sequelize.query(`
         SELECT 1 FROM pg_type WHERE typname = 'enum_coupons_reward_type';
       `);
 
-      if (enumExists.length > 0) {
-        // Verifica se o valor já existe no ENUM
-        const [valueExists] = await sequelize.query(`
-          SELECT 1 FROM pg_enum WHERE enumtypid = (SELECT oid FROM pg_type WHERE typname = 'enum_coupons_reward_type') AND enumlabel = '${newValue}';
-        `);
-
-        if (valueExists.length === 0) {
-          // Adiciona o novo valor ao ENUM
-          await sequelize.query(`ALTER TYPE ${enumName} ADD VALUE $${newValue}$ AFTER 'gift';`);
-          console.log(`✅ Valor '${newValue}' adicionado ao ENUM ${enumName}.`);
+      if (enumExists.length === 0) {
+        // Cria o ENUM com todos os valores
+        const createEnumSql = `CREATE TYPE ${enumName} AS ENUM(${enumValues.map(v => `'${v}'`).join(', ')});`;
+        await sequelize.query(createEnumSql);
+        console.log(`✅ ENUM ${enumName} criado com valores iniciais.`);
+      } else {
+        // 2. Se o ENUM já existe, verificar e adicionar novos valores
+        for (const value of enumValues) {
+          const [valueExists] = await sequelize.query(`
+            SELECT 1 FROM pg_enum WHERE enumtypid = (SELECT oid FROM pg_type WHERE typname = 'enum_coupons_reward_type') AND enumlabel = '${value}';
+          `);
+          if (valueExists.length === 0) {
+            // Adiciona o novo valor ao ENUM existente
+            // A posição 'AFTER' pode precisar ser ajustada dependendo da ordem desejada
+            // Para simplicidade, adicionamos no final.
+            await sequelize.query(`ALTER TYPE ${enumName} ADD VALUE $${value}$;`);
+            console.log(`✅ Valor '${value}' adicionado ao ENUM ${enumName}.`);
+          }
         }
       }
-    } catch (alterError) {
-      // Captura erros se o ENUM ainda não existir ou se houver outro problema na alteração
-      console.warn(`⚠️ Aviso: Erro ao tentar adicionar valor ao ENUM (pode ser ignorado se o ENUM ainda não existe ou já foi alterado): ${alterError.message}`);
+    } catch (enumError) {
+      console.warn(`⚠️ Aviso: Erro ao gerenciar ENUM ${enumName}. Isso pode ser normal se o ENUM já estiver em um estado consistente ou se houver migrações pendentes. Erro: ${enumError.message}`);
     }
 
+    // Sincronizar o restante do esquema do banco de dados
     await sequelize.sync({ force, alter: !force });
     console.log('✅ Banco de dados sincronizado');
     return true;

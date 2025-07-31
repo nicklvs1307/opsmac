@@ -39,11 +39,11 @@ const createRewardValidation = [
     .isInt({ min: 1 })
     .withMessage('Máximo de usos totais deve ser positivo'),
   body('valid_from')
-    .optional()
+    .optional({ checkFalsy: true })
     .isISO8601()
     .withMessage('Data de início inválida'),
   body('valid_until')
-    .optional()
+    .optional({ checkFalsy: true })
     .isISO8601()
     .withMessage('Data de fim inválida')
 ];
@@ -195,6 +195,77 @@ router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, [
     });
   } catch (error) {
     console.error('Erro ao listar recompensas:', error);
+    res.status(500).json({
+      error: 'Erro interno do servidor'
+    });
+  }
+});
+
+// @route   GET /api/rewards/:id/analytics
+// @desc    Obter análises de uma recompensa
+// @access  Private
+router.get('/:id/analytics', auth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { start_date, end_date } = req.query;
+
+    const user = await models.User.findByPk(req.user.userId, {
+      include: [{ model: models.Restaurant, as: 'restaurants' }]
+    });
+
+    const restaurantId = user?.restaurants?.[0]?.id;
+    if (!restaurantId) {
+      return res.status(400).json({ error: 'Restaurante não encontrado para o usuário autenticado.' });
+    }
+
+    const reward = await models.Reward.findOne({
+      where: {
+        id: id,
+        restaurant_id: restaurantId // Filtrar por restaurant_id
+      },
+      include: [
+        {
+          model: models.Restaurant,
+          as: 'restaurant',
+          attributes: ['id', 'name']
+        }
+      ]
+    });
+
+    if (!reward) {
+      return res.status(404).json({
+        error: 'Recompensa não encontrada ou não pertence ao seu restaurante.'
+      });
+    }
+
+    const dateFilter = {};
+    if (start_date || end_date) {
+      dateFilter.generated_at = {};
+      if (start_date) dateFilter.generated_at[Op.gte] = new Date(start_date);
+      if (end_date) dateFilter.generated_at[Op.lte] = new Date(end_date);
+    }
+
+    // Estatísticas dos cupons
+    const couponWhere = { reward_id: id, restaurant_id: restaurantId, ...dateFilter }; // Filtrar cupons por restaurant_id
+    const couponStats = await models.Coupon.findAll({
+      where: couponWhere,
+      attributes: [
+        [models.sequelize.fn('COUNT', models.sequelize.col('id')), 'total_generated'],
+        [models.sequelize.fn('COUNT', models.sequelize.literal('CASE WHEN status = \'redeemed\' THEN 1 END')), 'total_redeemed'],
+        [models.sequelize.fn('COUNT', models.sequelize.literal('CASE WHEN status = \'expired\' THEN 1 END')), 'total_expired'],
+        [models.sequelize.fn('COALESCE', models.sequelize.fn('SUM', models.sequelize.col('discount_applied')), 0), 'total_discount_given']
+      ],
+      raw: true
+    });
+
+    res.json({
+      reward_analytics: {
+        ...reward.analytics,
+        ...couponStats[0]
+      }
+    });
+  } catch (error) {
+    console.error('Erro ao buscar análises da recompensa:', error);
     res.status(500).json({
       error: 'Erro interno do servidor'
     });

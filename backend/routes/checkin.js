@@ -297,7 +297,7 @@ router.post('/public', [
     if (points_per_checkin > 0) {
       // Verificar se addLoyaltyPoints existe no modelo Customer
       if (typeof customer.addLoyaltyPoints === 'function') {
-        await customer.addLoyaltyPoints(points_per_checkin, 'checkin');
+        await customer.addLoyaltyPoints(parseInt(points_per_checkin, 10), 'checkin');
         console.log(`[Public Check-in] Cliente ${customer.name} ganhou ${points_per_checkin} pontos por check-in.`);
       } else {
         console.warn('[Public Check-in] Método addLoyaltyPoints não encontrado no modelo Customer. Pontos não adicionados.');

@@ -133,10 +133,10 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
  *                 description: Chave da API do WhatsApp
  *               whatsapp_instance_id:
  *                 type: string
- *                 description: ID da instância da Evolution API (ex: inst_123456)
+ *                 description: 'ID da instância da Evolution API (ex: inst_123456)'
  *               whatsapp_phone_number:
  *                 type: string
- *                 description: Número de telefone associado à instância do WhatsApp (com código do país, ex: +5511987654321)
+ *                 description: 'Número de telefone associado à instância do WhatsApp (com código do país, ex: +5511987654321)'
  *     responses:
  *       200:
  *         description: Configurações do WhatsApp atualizadas com sucesso.
@@ -276,7 +276,7 @@ router.get('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, async (req
  *             properties:
  *               recipient:
  *                 type: string
- *                 description: Número do destinatário (com código do país, ex: +5511987654321)
+ *                 description: 'Número do destinatário (com código do país, ex: +5511987654321)'
  *               message:
  *                 type: string
  *                 description: Mensagem de texto a ser enviada

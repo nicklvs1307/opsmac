@@ -174,7 +174,6 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
             </Typography>
           )}
         </Box>
-      )
 
       <Box sx={{ mt: 3, textAlign: 'left', color: 'rgba(255, 255, 255, 0.8)' }}>
         <Typography variant="subtitle2" sx={{ color: 'inherit' }}>Itens da Roleta:</Typography>

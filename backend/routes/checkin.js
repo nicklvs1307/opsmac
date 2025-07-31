@@ -355,7 +355,9 @@ router.post('/public', [
                 reward_title: reward.title || '',
                 coupon_code: newCoupon.code || '',
                 formatted_message: rewardMessage,
-                visit_count: currentVisits
+                visit_count: currentVisits,
+                reward_type: reward.reward_type,
+                wheel_config: reward.wheel_config
               };
 
               // Verificar se as configurações do WhatsApp estão completas antes de tentar enviar

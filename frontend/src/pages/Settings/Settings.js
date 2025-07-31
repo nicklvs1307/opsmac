@@ -19,6 +19,7 @@ import {
   DialogContent,
   DialogActions,
   FormControl,
+  FormControlLabel, // Adicionado
   InputLabel,
   Select,
   MenuItem,

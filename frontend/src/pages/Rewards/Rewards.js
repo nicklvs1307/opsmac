@@ -44,6 +44,7 @@ import { ptBR } from 'date-fns/locale';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
+import SpinTheWheel from '../../components/UI/SpinTheWheel';
 
 const Rewards = () => {
   const { user } = useAuth();
@@ -602,6 +603,7 @@ const Rewards = () => {
                 <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
                   Configuração da Roleta
                 </Typography>
+                <SpinTheWheel wheelConfig={watch('wheel_config')} />
                 {fields.map((item, index) => (
                   <Paper key={item.id} sx={{ p: 2, mb: 2, border: '1px solid #eee' }}>
                     <Grid container spacing={2} alignItems="center">

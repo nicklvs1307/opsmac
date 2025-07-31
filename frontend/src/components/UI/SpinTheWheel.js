@@ -29,6 +29,7 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
   };
 
   return (
+    <>
     <Paper sx={{ p: 4, textAlign: 'center', borderRadius: 3, boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
       <Typography variant="h5" gutterBottom>
         Gire a Roleta!
@@ -186,7 +187,7 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
         </List>
       </Box>
     </Paper>
-  </>
+    </>
   );
 };
 

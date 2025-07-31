@@ -38,9 +38,13 @@ const PublicReward = () => {
       sx={{
         minHeight: '100vh',
         display: 'flex',
+        flexDirection: 'column', // Adicionado para alinhar o conteúdo verticalmente
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+        background: 'radial-gradient(circle at 50% 50%, #1A1A2E 0%, #0A0A1A 100%)', // Fundo do body
+        color: '#fff', // Cor do texto do body
+        fontFamily: 'Poppins, sans-serif', // Fonte do body
+        padding: '20px', // Padding do body
       }}
     >
       <Container maxWidth="sm">

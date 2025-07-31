@@ -1,547 +1,446 @@
-Suco de Laranja a
-Cupom: LUCAS3189
-📣 Parabéns, Lucas!
-Você acaba de conquistar uma nova recompensa aqui na Tower Test! 🎉
-
-🏆 Recompensa: Roleta
-🎟️ Cupom: LUCAS3189
-📍 Check-in número: 20
-
-Mostre esse cupom no balcão e aproveite sua recompensa!
-Continue participando, porque tem mais prêmios te esperando. 💜
-
-#ClubeRoma #VocêMerece
-
-  Checkin {
-    dataValues: {
-      customer_id: '0bbd5d0d-c188-46ec-ae48-018f65b7dc84',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    _previousDataValues: {
-      customer_id: '0bbd5d0d-c188-46ec-ae48-018f65b7dc84',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: [Array],
-      includeNames: [Array],
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roleta Premiada - Roma Pizzaria</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #FFD700;
+      --gold-dark: #FFAA00;
+      --red: #E63946;
+      --blue: #1D3557;
+      --light-blue: #457B9D;
+      --cream: #F1FAEE;
     }
-  },
-  Checkin {
-    dataValues: {
-      customer_id: 'fcc873c0-c553-4b7b-9118-7df02b105fda',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    _previousDataValues: {
-      customer_id: 'fcc873c0-c553-4b7b-9118-7df02b105fda',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: [Array],
-      includeNames: [Array],
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
+
+    body {
+      background-color: #0A0A1A;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      padding: 20px;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-image: radial-gradient(circle at 50% 50%, #1A1A2E 0%, #0A0A1A 100%);
     }
-  },
-  Checkin {
-    dataValues: {
-      customer_id: '292c7b7d-8828-42e0-98ec-b677f6c5ea00',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    _previousDataValues: {
-      customer_id: '292c7b7d-8828-42e0-98ec-b677f6c5ea00',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: [Array],
-      includeNames: [Array],
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
+
+    .container {
+      max-width: 500px;
+      position: relative;
+      z-index: 1;
+      padding: 0 15px;
     }
-  }
-]
-averageVisitDuration: { avg_duration_seconds: '3963.9247021276595745' }
-checkinsByDay: [
-  { date: 2025-07-30T00:00:00.000Z, count: '8' },
-  { date: 2025-07-31T00:00:00.000Z, count: '39' }
-]
-[Public Check-in] Requisição recebida: {
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc',
-  phone_number: '5535998374007',
-  cpf: undefined,
-  customer_name: 'Lucas Niquele'
-}
-[Public Check-in] Restaurante encontrado: Tower Test Settings: {
-  nps_enabled: true,
-  tablet_mode: false,
-  auto_response: true,
-  rewards_enabled: true,
-  feedback_enabled: true,
-  whatsapp_enabled: true,
-  whatsapp_messages: {
-    checkin_message_text: '',
-    coupon_reminder_text: '',
-    birthday_greeting_text: '',
-    checkin_message_enabled: false,
-    coupon_reminder_enabled: false,
-    feedback_thank_you_text: '',
-    birthday_greeting_enabled: false,
-    feedback_thank_you_enabled: false
-  },
-  feedback_thank_you_text: '',
-  checkin_program_settings: {
-    enable_ranking: true,
-    rewards_per_visit: [
-      [Object], [Object],
-      [Object], [Object],
-      [Object], [Object],
-      [Object], [Object],
-      [Object], [Object],
-      [Object], [Object]
-    ],
-    checkin_cycle_name: 'Check in Roma ',
-    points_per_checkin: '1',
-    checkin_cycle_length: '6',
-    allow_multiple_cycles: true,
-    identification_method: 'phone',
-    checkin_limit_per_cycle: '',
-    checkin_duration_minutes: '60',
-    checkin_time_restriction: 'unlimited',
-    enable_level_progression: true
-  },
-  feedback_thank_you_enabled: false
-}
-[Public Check-in] Método de Identificação: phone
-[Public Check-in] Critério de busca do cliente: {
-  phone: '5535998374007',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-[Public Check-in] Cliente encontrado: c0463aa7-193d-42fc-9163-aa9c850a0546 Lucas
-[Public Check-in] Check-in criado: 23c28b4a-882e-4502-af4b-417f7322cc34
-[Public Check-in] total_visits do cliente incrementado para: 20
-[Public Check-in] Configurações do Programa de Check-in: {
-  "enable_ranking": true,
-  "rewards_per_visit": [
-    {
-      "reward_id": "78e2cc60-efba-40fe-8f6d-419ad09dcfe5",
-      "visit_count": "17",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "78e2cc60-efba-40fe-8f6d-419ad09dcfe5",
-      "visit_count": "18",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "78e2cc60-efba-40fe-8f6d-419ad09dcfe5",
-      "visit_count": "19",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "78e2cc60-efba-40fe-8f6d-419ad09dcfe5",
-      "visit_count": "20",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "78e2cc60-efba-40fe-8f6d-419ad09dcfe5",
-      "visit_count": "21",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "6490c076-ae77-4d72-a64c-85d5b588bc6f",
-      "visit_count": "6",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "1ef6aa44-c5da-4db0-b304-a348757228b9",
-      "visit_count": "7",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "6490c076-ae77-4d72-a64c-85d5b588bc6f",
-      "visit_count": "7",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "6490c076-ae77-4d72-a64c-85d5b588bc6f",
-      "visit_count": "9",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "6490c076-ae77-4d72-a64c-85d5b588bc6f",
-      "visit_count": "9",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "6490c076-ae77-4d72-a64c-85d5b588bc6f",
-      "visit_count": "21",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
-    },
-    {
-      "reward_id": "6490c076-ae77-4d72-a64c-85d5b588bc6f",
-      "visit_count": "22",
-      "message_template": "📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"
+
+    h1 {
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+      font-size: 2rem;
     }
-  ],
-  "checkin_cycle_name": "Check in Roma ",
-  "points_per_checkin": "1",
-  "checkin_cycle_length": "6",
-  "allow_multiple_cycles": true,
-  "identification_method": "phone",
-  "checkin_limit_per_cycle": "",
-  "checkin_duration_minutes": "60",
-  "checkin_time_restriction": "unlimited",
-  "enable_level_progression": true
-}
-[Public Check-in] Cliente Lucas ganhou 1 pontos por check-in.
-[Public Check-in] Recompensas por Visita configuradas: [
-  {
-    reward_id: '78e2cc60-efba-40fe-8f6d-419ad09dcfe5',
-    visit_count: '17',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '78e2cc60-efba-40fe-8f6d-419ad09dcfe5',
-    visit_count: '18',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '78e2cc60-efba-40fe-8f6d-419ad09dcfe5',
-    visit_count: '19',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '78e2cc60-efba-40fe-8f6d-419ad09dcfe5',
-    visit_count: '20',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '78e2cc60-efba-40fe-8f6d-419ad09dcfe5',
-    visit_count: '21',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '6490c076-ae77-4d72-a64c-85d5b588bc6f',
-    visit_count: '6',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '1ef6aa44-c5da-4db0-b304-a348757228b9',
-    visit_count: '7',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '6490c076-ae77-4d72-a64c-85d5b588bc6f',
-    visit_count: '7',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '6490c076-ae77-4d72-a64c-85d5b588bc6f',
-    visit_count: '9',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '6490c076-ae77-4d72-a64c-85d5b588bc6f',
-    visit_count: '9',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '6490c076-ae77-4d72-a64c-85d5b588bc6f',
-    visit_count: '21',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  },
-  {
-    reward_id: '6490c076-ae77-4d72-a64c-85d5b588bc6f',
-    visit_count: '22',
-    message_template: '📣 Parabéns, {{customer_name}}!\n' +
-      'Você acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n' +
-
-      '\n' +
-      '🏆 Recompensa: {{reward_title}}\n' +
-      '🎟️ Cupom: {{coupon_code}}\n' +
-      '📍 Check-in número: {{visit_count}}\n' +
-
-      '\n' +
-      'Mostre esse cupom no balcão e aproveite sua recompensa!\n' +
-      'Continue participando, porque tem mais prêmios te esperando. 💜\n' +
-
-      '\n' +
-      '#ClubeRoma #VocêMerece'
-  }
-]
-[Public Check-in] Visitas atuais do cliente: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"17","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 17 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"18","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 18 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"19","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 19 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"20","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 20 (parsed) vs currentVisits: 20
-[Public Check-in] Correspondência encontrada para visit_count: 20. Tentando buscar recompensa com ID: 78e2cc60-efba-40fe-8f6d-419ad09dcfe5
-[Public Check-in] Recompensa encontrada: Roleta Objeto Reward: {"id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","title":"Roleta","description":"a","reward_type":"spin_the_wheel","value":null,"wheel_config":{"items":[{"title":"Suco de Laranja","probability":"50"},{"title":"Suco de Laranja b","probability":"50"},{"title":"Suco de Laranja a ","probability":"5"}]},"points_required":0,"max_uses_per_customer":null,"total_uses_limit":null,"current_uses":2,"minimum_purchase":null,"applicable_items":[],"excluded_items":[],"valid_from":null,"valid_until":null,"days_valid":null,"auto_apply":false,"requires_approval":false,"is_active":true,"is_featured":false,"image":null,"terms_conditions":null,"trigger_conditions":{},"notification_settings":{"send_push":false,"send_email":true,"send_whatsapp":false,"custom_message":""},"analytics":{"total_redeemed":0,"redemption_rate":0,"total_generated":2,"average_order_value":0,"customer_satisfaction":0},"restaurant_id":"0e517dc5-4881-45aa-996e-0365012000bc","customer_id":null,"created_by":"211aab5d-fb9a-421b-991c-fcda8bc44051","createdAt":"2025-07-31T20:54:32.808Z","updatedAt":"2025-07-31T21:02:58.743Z"}
-[Public Check-in] Tentando gerar cupom para o cliente: c0463aa7-193d-42fc-9163-aa9c850a0546
-[Public Check-in] Cupom gerado com sucesso: LUCAS3189 Objeto Coupon: {"id":"6264cf7b-58c6-4ae1-b6ea-f7408b908994","generated_at":"2025-07-31T21:14:30.399Z","metadata":{"location":null,"ip_address":null,"session_id":null,"user_agent":null,"device_type":null,"staff_member":null},"notification_sent":false,"reminder_sent":false,"code":"LUCAS3189","reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","customer_id":"c0463aa7-193d-42fc-9163-aa9c850a0546","restaurant_id":"0e517dc5-4881-45aa-996e-0365012000bc","expires_at":null,"status":"active","title":"Suco de Laranja a ","description":"Suco de Laranja a ","value":"0.00","reward_type":"free_item","visit_milestone":20,"updatedAt":"2025-07-31T21:14:30.399Z","createdAt":"2025-07-31T21:14:30.399Z","qr_code_data":"{\"type\":\"coupon\",\"code\":\"LUCAS3189\",\"restaurant_id\":\"0e517dc5-4881-45aa-996e-0365012000bc\",\"expires_at\":null,\"generated_at\":\"2025-07-31T21:14:30.399Z\"}","redeemed_at":null,"cancelled_at":null,"order_value":null,"discount_applied":null,"redemption_location":null,"redemption_method":null,"notes":null,"notification_sent_at":null,"reminder_sent_at":null,"redeemed_by":null}
-[Public Check-in] Mensagem de recompensa formatada: 📣 Parabéns, Lucas!
-Você acaba de conquistar uma nova recompensa aqui na Tower Test! 🎉
-🏆 Recompensa: Roleta
-🎟️ Cupom: LUCAS3189
-📍 Check-in número: 20
-Mostre esse cupom no balcão e aproveite sua recompensa!
-Continue participando, porque tem mais prêmios te esperando. 💜
-#ClubeRoma #VocêMerece
-[Public Check-in] Objeto rewardEarned enviado para o frontend: null
-[Public Check-in] Configurações de WhatsApp presentes. Tentando enviar mensagem para: 5535998374007
-[Public Check-in] WhatsApp API URL: https://evolution2.towersfy.com
-[Public Check-in] WhatsApp Instance ID: towersfy
-URL construída para Evolution API: https://evolution2.towersfy.com/message/sendText/towersfy
-[Public Check-in] Recompensa de visita enviada com sucesso para Lucas na 20ª visita. Resposta WhatsApp: {"success":true,"data":{"key":{"remoteJid":"553598374007@s.whatsapp.net","fromMe":true,"id":"3EB03E77BC183FFFB89288E481DF31D83C9A4F46"},"pushName":"","status":"PENDING","message":{"conversation":"📣 Parabéns, Lucas!\nVocê acaba de conquistar uma nova recompensa aqui na Tower Test! 🎉\n\n🏆 Recompensa: Roleta\n🎟️ Cupom: LUCAS3189\n📍 Check-in número: 20\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"},"contextInfo":null,"messageType":"conversation","messageTimestamp":1753996470,"instanceId":"84b78b3e-215e-4017-b3df-222bc9c0908d","source":"unknown"}}
-[Public Check-in] Processando rewardConfig: {"reward_id":"78e2cc60-efba-40fe-8f6d-419ad09dcfe5","visit_count":"21","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 21 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"6","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 6 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"1ef6aa44-c5da-4db0-b304-a348757228b9","visit_count":"7","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 7 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"7","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 7 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"9","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 9 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"9","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 9 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"21","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 21 (parsed) vs currentVisits: 20
-[Public Check-in] Processando rewardConfig: {"reward_id":"6490c076-ae77-4d72-a64c-85d5b588bc6f","visit_count":"22","message_template":"📣 Parabéns, {{customer_name}}!\nVocê acaba de conquistar uma nova recompensa aqui na {{restaurant_name}}! 🎉\n\n🏆 Recompensa: {{reward_title}}\n🎟️ Cupom: {{coupon_code}}\n📍 Check-in número: {{visit_count}}\n\nMostre esse cupom no balcão e aproveite sua recompensa!\nContinue participando, porque tem mais prêmios te esperando. 💜\n\n#ClubeRoma #VocêMerece"}
-[Public Check-in] Verificando recompensa para visit_count: 22 (parsed) vs currentVisits: 20
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
+
+    h2 {
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+
+    .roleta-container {
+      position: relative;
+      margin: 20px auto;
+      width: 300px;
+      height: 300px;
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+    }
+
+    #roleta {
+      border-radius: 50%;
+      border: 12px solid var(--gold);
+      box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      user-select: none;
+      background: var(--cream);
+      transition: transform 0.1s;
+      position: relative;
+      z-index: 1;
+    }
+
+    #roleta:active {
+      transform: scale(0.98);
+    }
+
+    .seta {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-top: 30px solid var(--gold);
+      z-index: 10;
+      filter: drop-shadow(0 0 5px var(--gold));
+    }
+
+    .seta::after {
+      content: '';
+      position: absolute;
+      top: -33px;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      background: var(--gold);
+      border-radius: 50%;
+      z-index: -1;
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    .btn-roleta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #000;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 12px 25px;
+      border-radius: 50px;
+      border: none;
+      margin-top: 15px;
+      user-select: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-roleta:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+    }
+
+    .btn-roleta:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    .btn-roleta:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .resultado {
+      margin: 20px auto 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gold);
+      min-height: 40px;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s ease;
+      max-width: 90%;
+      word-wrap: break-word;
+    }
+
+    .resultado strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .logo {
+      max-width: 160px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+    }
+
+    .decoracao {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .decoracao::before,
+    .decoracao::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.05);
+    }
+
+    .decoracao::before {
+      width: 250px;
+      height: 250px;
+      top: -100px;
+      right: -100px;
+    }
+
+    .decoracao::after {
+      width: 180px;
+      height: 180px;
+      bottom: -80px;
+      left: -80px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 400px) {
+      .roleta-container {
+        width: 280px;
+        height: 280px;
+      }
+      
+      #roleta {
+        width: 280px;
+        height: 280px;
+      }
+      
+      .resultado {
+        font-size: 16px;
+        padding: 12px;
+      }
+      
+      .btn-roleta {
+        font-size: 15px;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="decoracao"></div>
+  <div class="container">
+    <img src="https://via.placeholder.com/160x60?text=Roma+Pizzaria" alt="Roma Pizzaria" class="logo">
+    <h1>Roma Pizzaria</h1>
+    <h2>Roleta Premiada</h2>
+    <p class="subtitle">Gire a roleta e ganhe prêmios especiais!</p>
+
+    <div class="roleta-container">
+      <canvas id="roleta" width="300" height="300"></canvas>
+      <div class="seta"></div>
+    </div>
+
+    <button id="btnGirar" class="btn btn-roleta">GIRAR ROLETA</button>
+    <div id="resultado" class="resultado pulse"></div>
+  </div>
+
+  <script>
+    // Prêmios atualizados conforme solicitado
+    const premios = [
+      { texto: '10% Desconto', cor: '#E63946', corTexto: '#FFF' },
+      { texto: 'Chopp 325ml', cor: '#1D3557', corTexto: '#FFF' },
+      { texto: '5% Desconto', cor: '#FFD700', corTexto: '#000' },
+      { texto: 'Suco Natural', cor: '#457B9D', corTexto: '#FFF' },
+      { texto: '50% OFF', cor: '#A8DADC', corTexto: '#000' },
+      { texto: 'Rodízio Grátis', cor: '#F4A261', corTexto: '#000' },
+      { texto: 'Borda Recheada', cor: '#2A9D8F', corTexto: '#FFF' },
+      { texto: 'Chopp 500ml', cor: '#7209B7', corTexto: '#FFF' },
+      { texto: 'Cupom Surpresa', cor: '#FF6D00', corTexto: '#FFF' }
+    ];
+
+    const emojis = ['🔥', '🍺', '💲', '🧃', '🎉', '🍕', '🧀', '🍻', '🎁'];
+    const canvas = document.getElementById('roleta');
+    const ctx = canvas.getContext('2d');
+    const numSetores = premios.length;
+    const anguloSetor = (2 * Math.PI) / numSetores;
+    const centroX = canvas.width / 2;
+    const centroY = canvas.height / 2;
+    const raio = centroX - 15;
+
+    let anguloAtual = 0;
+    let animando = false;
+    let ultimoPremio = null;
+
+    function desenharRoleta(anguloRotacao = 0) {
+      ctx.save();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.translate(centroX, centroY);
+      ctx.rotate(anguloRotacao);
+      ctx.translate(-centroX, -centroY);
+
+      for (let i = 0; i < numSetores; i++) {
+        const angInicio = i * anguloSetor;
+        const angFim = angInicio + anguloSetor;
+
+        ctx.fillStyle = premios[i].cor;
+        ctx.beginPath();
+        ctx.moveTo(centroX, centroY);
+        ctx.arc(centroX, centroY, raio, angInicio, angFim);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(centroX, centroY);
+        ctx.lineTo(centroX + raio * Math.cos(angInicio), centroY + raio * Math.sin(angInicio));
+        ctx.stroke();
+
+        ctx.save();
+        ctx.fillStyle = premios[i].corTexto;
+        ctx.font = 'bold 11px Poppins';
+        ctx.translate(centroX, centroY);
+        
+        const angMeio = angInicio + anguloSetor / 2;
+        ctx.rotate(angMeio);
+        
+        const textRadius = raio * 0.55;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        const palavras = premios[i].texto.split(' ');
+        if (palavras.length > 2) {
+          ctx.font = 'bold 9px Poppins';
+          palavras.forEach((palavra, idx) => {
+            ctx.fillText(palavra, textRadius, (idx - (palavras.length-1)/2) * 12);
+          });
+        } else if (palavras.length > 1) {
+          ctx.font = 'bold 10px Poppins';
+          palavras.forEach((palavra, idx) => {
+            ctx.fillText(palavra, textRadius, (idx * 12) - 6);
+          });
+        } else {
+          ctx.font = 'bold 11px Poppins';
+          ctx.fillText(premios[i].texto, textRadius, 0);
+        }
+        
+        ctx.restore();
+      }
+
+      ctx.fillStyle = '#FFD700';
+      ctx.beginPath();
+      ctx.arc(centroX, centroY, 15, 0, 2 * Math.PI);
+      ctx.fill();
+      
+      ctx.strokeStyle = '#FFF';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.beginPath();
+      ctx.arc(centroX, centroY, 8, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    desenharRoleta();
+
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    function determinarPremio() {
+      const anguloAjustado = (anguloAtual + Math.PI/2) % (2 * Math.PI);
+      if (anguloAjustado < 0) anguloAjustado += 2 * Math.PI;
+      
+      const indice = Math.floor(anguloAjustado / anguloSetor) % numSetores;
+      return numSetores - 1 - indice;
+    }
+
+    function animarGiro(rotacaoDestino, duracao = 5000) {
+      const inicio = performance.now();
+      const anguloInicial = anguloAtual;
+
+      return new Promise(resolve => {
+        function animar(time) {
+          let tempoDecorrido = time - inicio;
+          if (tempoDecorrido > duracao) tempoDecorrido = duracao;
+
+          const t = tempoDecorrido / duracao;
+          const easedT = easeOutQuart(t);
+
+          anguloAtual = anguloInicial + (rotacaoDestino - anguloInicial) * easedT;
+
+          desenharRoleta(anguloAtual);
+
+          if (tempoDecorrido < duracao) {
+            requestAnimationFrame(animar);
+          } else {
+            anguloAtual = rotacaoDestino;
+            desenharRoleta(anguloAtual);
+            ultimoPremio = determinarPremio();
+            resolve();
+          }
+        }
+        requestAnimationFrame(animar);
+      });
+    }
+
+    const btnGirar = document.getElementById('btnGirar');
+    const resultado = document.getElementById('resultado');
+
+    btnGirar.addEventListener('click', async () => {
+      if (animando) return;
+
+      animando = true;
+      btnGirar.disabled = true;
+      resultado.textContent = '';
+
+      const premioIndex = Math.floor(Math.random() * numSetores);
+      const voltas = 5 + Math.floor(Math.random() * 3);
+      const anguloDestino = 
+        (2 * Math.PI * voltas) + 
+        (Math.PI - (premioIndex * anguloSetor)) - 
+        (anguloSetor / 2);
+
+      await animarGiro(anguloDestino, 5000);
+
+      const premioGanhador = premios[ultimoPremio];
+      const emojiGanhador = emojis[ultimoPremio];
+      resultado.innerHTML = `Parabéns! Você ganhou: <strong>${premioGanhador.texto} ${emojiGanhador}</strong>`;
+      
+      btnGirar.disabled = false;
+      animando = false;
+    });
+
+    // Redimensionamento responsivo
+    window.addEventListener('resize', function() {
+      if (window.innerWidth < 400) {
+        canvas.width = 280;
+        canvas.height = 280;
+      } else {
+        canvas.width = 300;
+        canvas.height = 300;
+      }
+      desenharRoleta(anguloAtual);
+    });
+  </script>
+</body>
+</html>

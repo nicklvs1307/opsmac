@@ -244,13 +244,19 @@ module.exports = (sequelize) => {
     return true;
   };
 
-  Reward.prototype.canCustomerUse = async function(customerId) {
+  Reward.prototype.canCustomerUse = async function(customerId, extraData = {}) {
     if (!this.isValid()) return false;
     
     // Verificar se o cliente pode usar esta recompensa
     if (this.customer_id && this.customer_id !== customerId) return false;
+
+    // Se for uma recompensa por visita, a verificação de duplicata já foi feita na rota de check-in.
+    // Portanto, podemos pular a verificação genérica de max_uses_per_customer.
+    if (extraData && extraData.visit_milestone) {
+      return true;
+    }
     
-    // Verificar limite de uso por cliente
+    // Verificação padrão para outros tipos de recompensa
     if (this.max_uses_per_customer) {
       const { models } = sequelize;
       const usageCount = await models.Coupon.count({
@@ -267,7 +273,7 @@ module.exports = (sequelize) => {
   };
 
   Reward.prototype.generateCoupon = async function(customerId, extraData = {}) {
-    const canUse = await this.canCustomerUse(customerId);
+    const canUse = await this.canCustomerUse(customerId, extraData); // Passar extraData
     if (!canUse) {
       throw new Error('Cliente não pode usar esta recompensa');
     }

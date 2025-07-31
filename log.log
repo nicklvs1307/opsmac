@@ -1,20 +1,28 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      172.2s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      158.4s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.682
-0.682 > Feedeliza+-frontend@1.0.0 build
-0.682 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.682
-3.983 Creating an optimized production build...
-171.1 Failed to compile.
-171.1
-171.1 [eslint]
-171.1 src/pages/Rewards/Rewards.js
-171.1 Syntax error: Identifier 'handleEdit' has already been declared. (219:8) (219:8)
-171.1
-171.1
+0.628
+0.628 > Feedeliza+-frontend@1.0.0 build
+0.628 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.628
+3.238 Creating an optimized production build...
+158.0 Failed to compile.
+158.0
+158.0 [eslint]
+158.0 src/pages/Rewards/Rewards.js
+158.0 Syntax error: Unexpected token, expected "," (222:100) (222:100)
+158.0
+158.0
 ------
 
  1 warning found (use docker --debug to expand):
  - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
 ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

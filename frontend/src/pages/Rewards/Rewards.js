@@ -219,7 +219,7 @@ const Rewards = () => {
     reset({
       ...selectedItem,
       max_uses: selectedItem.max_uses_per_customer,
-      expires_at: selectedItem.valid_until ? format(new Date(selectedItem.valid_until), 'yyyy-MM-dd'T'HH:mm') : '',
+      expires_at: selectedItem.valid_until ? format(new Date(selectedItem.valid_until), 'yyyy-MM-ddTHH:mm') : '',
       wheel_config: selectedItem.wheel_config || { items: [] },
     });
     setEditDialog(true);

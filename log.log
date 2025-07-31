@@ -1,16 +1,18 @@
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       170.9s
+------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.732
-0.732 > Feedeliza+-frontend@1.0.0 build
-0.732 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.732
-4.386 Creating an optimized production build...
-180.7 Failed to compile.
-180.7
-180.7 [eslint]
-180.7 src/components/UI/SpinTheWheel.js
-180.7 Syntax error: Unexpected token, expected "}" (179:11) (179:11)
-180.7
-180.7
+0.610
+0.610 > Feedeliza+-frontend@1.0.0 build
+0.610 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.610
+3.234 Creating an optimized production build...
+170.3 Failed to compile.
+170.3
+170.3 [eslint]
+170.3 src/components/UI/SpinTheWheel.js
+170.3 Syntax error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (178:6) (178:6)
+170.3
+170.3
 ------
 
  1 warning found (use docker --debug to expand):

@@ -1,18 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       175.1s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       171.4s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.608
-0.608 > Feedeliza+-frontend@1.0.0 build
-0.608 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.608
-3.166 Creating an optimized production build...
-174.7 Failed to compile.
-174.7
-174.7 [eslint]
-174.7 src/components/UI/SpinTheWheel.js
-174.7 Syntax error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (178:6) (178:6)
-174.7
-174.7
+0.627
+0.627 > Feedeliza+-frontend@1.0.0 build
+0.627 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.627
+2.896 Creating an optimized production build...
+171.0 Failed to compile.
+171.0
+171.0 [eslint]
+171.0 src/components/UI/SpinTheWheel.js
+171.0 Syntax error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (179:4) (179:4)
+171.0
+171.0
 ------
 
  1 warning found (use docker --debug to expand):

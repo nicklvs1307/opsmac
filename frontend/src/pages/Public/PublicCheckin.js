@@ -75,8 +75,16 @@ const PublicCheckin = () => {
       }
 
       const response = await axiosInstance.post('/api/checkin/public', payload);
+      
+      if (response.data.reward_earned) {
+        // Se uma recompensa foi ganha, redireciona para a página de recompensa
+        navigate('/recompensa-ganha', { state: { reward_earned: response.data.reward_earned } });
+      } else {
+        // Caso contrário, redireciona para a página de agradecimento
+        navigate('/thank-you', { state: { message: t('public_checkin.checkin_thank_you_message') } });
+      }
+
       toast.success(t('public_checkin.checkin_success'));
-      navigate('/thank-you', { state: { message: t('public_checkin.checkin_thank_you_message') } });
     } catch (err) {
       console.error('Error during check-in:', err);
       toast.error(err.response?.data?.message || t('public_checkin.checkin_error'));

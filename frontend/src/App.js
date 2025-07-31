@@ -37,6 +37,7 @@ import SurveyEdit from './pages/Surveys/SurveyEdit';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import RelationshipDashboard from './pages/Relationship/RelationshipDashboard';
 import PublicCheckin from './pages/Public/PublicCheckin';
+import PublicReward from './pages/Public/PublicReward'; // Adicionado
 
 // Create query client
 const queryClient = new QueryClient({
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/thank-you" element={<ThankYou />} />
                 <Route path="/public/surveys/:id" element={<PublicSurveyForm />} />
                 <Route path="/checkin/public" element={<PublicCheckin />} />
+                <Route path="/recompensa-ganha" element={<PublicReward />} />
                 
                 {/* Protected Routes */}
                 <Route path="/" element={

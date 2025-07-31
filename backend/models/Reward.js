@@ -256,8 +256,7 @@ module.exports = (sequelize) => {
       const usageCount = await models.Coupon.count({
         where: {
           reward_id: this.id,
-          customer_id: customerId,
-          status: 'redeemed'
+          customer_id: customerId
         }
       });
       

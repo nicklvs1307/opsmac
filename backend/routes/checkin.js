@@ -168,6 +168,7 @@ router.post('/public', [
 
   try {
     const restaurant = await models.Restaurant.findByPk(restaurant_id);
+    let rewardEarned = null; // Variável para armazenar a recompensa ganha
     if (!restaurant) {
       console.error('[Public Check-in] Restaurante não encontrado para o ID:', restaurant_id);
       return res.status(404).json({ error: 'Restaurante não encontrado.' });
@@ -349,6 +350,14 @@ router.post('/public', [
 
               console.log('[Public Check-in] Mensagem de recompensa formatada:', rewardMessage);
 
+              // Armazena os detalhes da recompensa para a resposta da API
+              rewardEarned = {
+                reward_title: reward.title || '',
+                coupon_code: newCoupon.code || '',
+                formatted_message: rewardMessage,
+                visit_count: currentVisits
+              };
+
               // Verificar se as configurações do WhatsApp estão completas antes de tentar enviar
               if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
                 console.log('[Public Check-in] Configurações de WhatsApp presentes. Tentando enviar mensagem para:', customer.phone);
@@ -396,60 +405,30 @@ router.post('/public', [
       }
     }
 
-    // Enviar mensagem de agradecimento pós-check-in (se habilitado)
-    try {
-      if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
-        const checkinMessageEnabled = restaurant.settings?.whatsapp_messages?.checkin_message_enabled;
-        const customCheckinMessage = restaurant.settings?.whatsapp_messages?.checkin_message_text;
+    // Enviar mensagem de agradecimento pós-check-in (se habilitado e se nenhuma recompensa foi ganha)
+    if (!rewardEarned) {
+      try {
+        if (restaurant.settings?.whatsapp_enabled && restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
+          const checkinMessageEnabled = restaurant.settings?.whatsapp_messages?.checkin_message_enabled;
+          const customCheckinMessage = restaurant.settings?.whatsapp_messages?.checkin_message_text;
 
-        if (checkinMessageEnabled) {
-          console.log('[Public Check-in] Tentando enviar mensagem de agradecimento WhatsApp...');
-          let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋
-
-Obrigado por fazer check-in no *{{restaurant_name}}*!
-
-Como agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
-          
-          // Substituir variáveis
-          messageText = messageText.replace(/\{\{customer_name\}\} /g, customer.name || '');
-          messageText = messageText.replace(/\{\{restaurant_name\}\} /g, restaurant.name || '');
-
-          const whatsappResponse = await sendWhatsAppMessage(
-            restaurant.whatsapp_api_url,
-            restaurant.whatsapp_api_key,
-            restaurant.whatsapp_instance_id,
-            customer.phone,
-            messageText
-          );
-
-          if (whatsappResponse.success) {
-            console.log('[Public Check-in] Mensagem de agradecimento de check-in enviada com sucesso para', customer.phone);
-            await models.WhatsAppMessage.create({
-              phone_number: customer.phone,
-              message_text: messageText,
-              message_type: 'checkin_thank_you',
-              status: 'sent',
-              whatsapp_message_id: whatsappResponse.data?.id || null,
-              restaurant_id: restaurant.id,
-              customer_id: customer.id,
-            });
-          } else {
-            console.error('[Public Check-in] Erro ao enviar mensagem de agradecimento de check-in para', customer.phone, ':', whatsappResponse.error);
-            // Adicionar toast de erro para o frontend
-            // toast.error(`Erro ao enviar mensagem de agradecimento via WhatsApp para ${customer.name}.`);
+          if (checkinMessageEnabled && customCheckinMessage) {
+            console.log('[Public Check-in] Tentando enviar mensagem de agradecimento WhatsApp...');
+            let messageText = customCheckinMessage.replace(/\{\{customer_name\}\}/g, customer.name || '').replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
+            
+            await sendWhatsAppMessage(restaurant.whatsapp_api_url, restaurant.whatsapp_api_key, restaurant.whatsapp_instance_id, customer.phone, messageText);
           }
         }
+      } catch (whatsappError) {
+        console.error('[Public Check-in] Erro inesperado ao tentar enviar mensagem de agradecimento WhatsApp:', whatsappError);
       }
-    } catch (whatsappError) {
-      console.error('[Public Check-in] Erro inesperado ao tentar enviar mensagem de agradecimento WhatsApp:', whatsappError);
-      // Adicionar toast de erro para o frontend
-      // toast.error(`Erro inesperado ao enviar mensagem de agradecimento via WhatsApp para ${customer.name}.`);
     }
 
     res.status(201).json({
       message: 'Check-in registrado com sucesso',
       checkin,
-      customer_total_visits: customer.total_visits // Retornar o total de visitas atualizado
+      customer_total_visits: customer.total_visits,
+      reward_earned: rewardEarned // Retorna a recompensa ganha (ou null)
     });
   } catch (error) {
     console.error('[Public Check-in] Erro ao registrar check-in público:', error);

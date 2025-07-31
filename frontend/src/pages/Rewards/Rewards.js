@@ -158,10 +158,7 @@ const Rewards = () => {
     setCreateDialog(true);
   };
 
-  const handleEdit = () => {
-    reset(selectedItem);
-    setEditDialog(true);
-  };
+  
 
   const handleDelete = () => {
     setDeleteDialog(true);

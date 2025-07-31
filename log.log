@@ -95,3 +95,100 @@ Generated Swagger Specs (first 500 chars): {
   sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
   parameters: {}
 }
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "https://feedelizaapi.towersfy.com/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de us
+✅ Conexão com banco de dados estabelecida
+❌ Erro ao iniciar servidor: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.addColumn (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:184:12)
+    at async Coupon.sync (/app/node_modules/sequelize/lib/model.js:958:11)
+    at async Sequelize.sync (/app/node_modules/sequelize/lib/sequelize.js:377:9)
+    at async startServer (/app/backend/server.js:158:5) {
+  name: 'SequelizeDatabaseError',
+  parent: error: unterminated quoted string at or near "';"
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 106,
+    severity: 'ERROR',
+    code: '42601',
+    detail: undefined,
+    hint: undefined,
+    position: '323',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'scan.l',
+    line: '1176',
+    routine: 'scanner_yyerror',
+    sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
+    parameters: undefined
+  },
+  original: error: unterminated quoted string at or near "';"
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 106,
+    severity: 'ERROR',
+    code: '42601',
+    detail: undefined,
+    hint: undefined,
+    position: '323',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'scan.l',
+    line: '1176',
+    routine: 'scanner_yyerror',
+    sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
+    parameters: undefined
+  },
+  sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
+  parameters: {}
+}

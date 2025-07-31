@@ -155,7 +155,7 @@ const startServer = async () => {
     console.log('✅ Conexão com banco de dados estabelecida');
     
     // Sincronizar modelos
-    await sequelize.sync({ alter: true });
+    await sequelize.sync();
     console.log('✅ Modelos sincronizados com o banco');
     
     app.listen(PORT, () => {

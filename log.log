@@ -1,97 +1,174 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
-Generated Swagger Specs (first 500 chars): {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Check Test API",
-    "version": "1.0.0",
-    "description": "API documentation for the Check Test application."
-  },
-  "servers": [
-    {
-      "url": "https://feedelizaapi.towersfy.com/api",
-      "description": "Production server"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Public API",
-      "description": "Endpoints acessíveis via API Token para integração externa."
-    },
-    {
-      "name": "Admin",
-      "description": "Gerenciamento de us
-✅ Conexão com banco de dados estabelecida
-❌ Erro ao iniciar servidor: Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.addColumn (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:184:12)
-    at async Coupon.sync (/app/node_modules/sequelize/lib/model.js:958:11)
-    at async Sequelize.sync (/app/node_modules/sequelize/lib/sequelize.js:377:9)
-    at async startServer (/app/backend/server.js:158:5) {
-  name: 'SequelizeDatabaseError',
-  parent: error: unterminated quoted string at or near "';"
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 106,
-    severity: 'ERROR',
-    code: '42601',
-    detail: undefined,
-    hint: undefined,
-    position: '323',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'scan.l',
-    line: '1176',
-    routine: 'scanner_yyerror',
-    sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
-    parameters: undefined
-  },
-  original: error: unterminated quoted string at or near "';"
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 106,
-    severity: 'ERROR',
-    code: '42601',
-    detail: undefined,
-    hint: undefined,
-    position: '323',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'scan.l',
-    line: '1176',
-    routine: 'scanner_yyerror',
-    sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
-    parameters: undefined
-  },
-  sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
-  parameters: {}
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/rewards
+Método da solicitação
+POST
+Código de status
+400 Bad Request
+
+{
+    "error": "Dados inválidos",
+    "details": [
+        {
+            "type": "field",
+            "value": null,
+            "msg": "Valor deve ser um número positivo",
+            "path": "value",
+            "location": "body"
+        },
+        {
+            "type": "field",
+            "value": null,
+            "msg": "Pontos necessários devem ser um número positivo",
+            "path": "points_required",
+            "location": "body"
+        },
+        {
+            "type": "field",
+            "value": null,
+            "msg": "Máximo de usos por cliente deve ser positivo",
+            "path": "max_uses_per_customer",
+            "location": "body"
+        }
+    ]
 }
+
+rewards:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+Rewards.js:204  POST https://feedelizaapi.towersfy.com/api/rewards 400 (Bad Request)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+$n @ dispatchRequest.js:51
+_request @ Axios.js:187
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ Rewards.js:204
+(anônimo) @ createFormControl.ts:1258
+await in (anônimo)
+Ne @ react-dom.production.min.js:54
+Fe @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+Ln @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73
+rewards:1 Blocked aria-hidden on an element because its descendant retained focus. The focus must not be hidden from assistive technology users. Avoid using aria-hidden on a focused element or its ancestor. Consider using the inert attribute instead, which will also prevent focus. For more details, see the aria-hidden section of the WAI-ARIA specification at https://w3c.github.io/aria/#aria-hidden.
+Element with focus: <button.MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-1v5ug2l>
+Ancestor with aria-hidden: <div#root> <div id=​"root">​…​</div>​<div class=​"App">​…​</div>​<div class=​"MuiBox-root css-k008qs">​…​</div>​flex<header class=​"MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-17ae4yp" style>​…​</header>​flex<nav class=​"MuiBox-root css-40ybrh">​…​</nav>​<main class=​"MuiBox-root css-epqafq">​…​</main>​<div class=​"MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-i6s8oy">​</div>​flex<div class=​"MuiBox-root css-25zp2g">​…​</div>​<div class=​"MuiBox-root css-0">​…​</div>​<div class=​"MuiBox-root css-v08z5u">​…​</div>​flex<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-65549w">​…​</div>​<div class=​"MuiBox-root css-0">​…​</div>​<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-8n9u51">​…​</div>​<h6 class=​"MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1jqy3s7">​Filtros​</h6>​<div class=​"MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-isbt42">​…​</div>​flex<div class=​"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-4 css-19egsyp">​…​</div>​<div class=​"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-3 css-1ha4th6">​…​</div>​<div class=​"MuiFormControl-root MuiFormControl-fullWidth css-tzsjye">​…​</div>​flex<label class=​"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1yvq851" data-shrink=​"false">​Tipo​</label>​<div class=​"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9xlkat">​…​</div>​flex<div tabindex=​"0" role=​"combobox" aria-controls=​":​r1h:​" aria-expanded=​"false" aria-haspopup=​"listbox" class=​"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1jthfyt">​…​</div>​<input aria-invalid=​"false" aria-hidden=​"true" tabindex=​"-1" class=​"MuiSelect-nativeInput css-1k3x8v3" value>​<svg class=​"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-m9m7cd" focusable=​"false" aria-hidden=​"true" viewBox=​"0 0 24 24" data-testid=​"ArrowDropDownIcon">​…​</svg>​<fieldset aria-hidden=​"true" class=​"MuiOutlinedInput-notchedOutline css-igs3ac">​…​</fieldset>​</div>​</div>​</div>​<div class=​"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-3 css-1ha4th6">​…​</div>​<div class=​"MuiFormControl-root MuiFormControl-fullWidth css-tzsjye">​…​</div>​flex<label class=​"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1yvq851" data-shrink=​"false">​Status​</label>​<div class=​"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9xlkat">​…​</div>​flex<div tabindex=​"0" role=​"combobox" aria-controls=​":​r1i:​" aria-expanded=​"false" aria-haspopup=​"listbox" class=​"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1jthfyt">​…​</div>​<input aria-invalid=​"false" aria-hidden=​"true" tabindex=​"-1" class=​"MuiSelect-nativeInput css-1k3x8v3" value>​<svg class=​"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-m9m7cd" focusable=​"false" aria-hidden=​"true" viewBox=​"0 0 24 24" data-testid=​"ArrowDropDownIcon">​…​</svg>​<fieldset aria-hidden=​"true" class=​"MuiOutlinedInput-notchedOutline css-igs3ac">​…​</fieldset>​</div>​</div>​</div>​</div>​</div>​<div class=​"MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-1h77wgb">​…​</div>​flex</div>​</div>​</div>​</main>​</div>​<div id=​"_rht_toaster" style=​"position:​ fixed;​ z-index:​ 9999;​ inset:​ 16px;​ pointer-events:​ none;​">​</div>​</div>​</div>​
+Rewards.js:131  GET https://feedelizaapi.towersfy.com/api/rewards/analytics 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+$n @ dispatchRequest.js:51
+_request @ Axios.js:187
+request @ Axios.js:40
+Un.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+W @ Rewards.js:131
+(anônimo) @ Rewards.js:99
+nl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Rewards.js:134 Error fetching analytics: wr {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+W @ Rewards.js:134
+await in W
+(anônimo) @ Rewards.js:99
+nl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+CheckinDashboard.js:176  PUT https://feedelizaapi.towersfy.com/api/checkin/checkout/ab655606-e12b-4c0d-94d2-a2b46700f28b 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+$n @ dispatchRequest.js:51
+_request @ Axios.js:187
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ CheckinDashboard.js:176
+onClick @ CheckinDashboard.js:368
+Ne @ react-dom.production.min.js:54
+Fe @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+Ln @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73
+CheckinDashboard.js:180 Erro ao realizar check-out: wr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ CheckinDashboard.js:180
+await in (anônimo)
+onClick @ CheckinDashboard.js:368
+Ne @ react-dom.production.min.js:54
+Fe @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+Ln @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73
+Rewards.js:131  GET https://feedelizaapi.towersfy.com/api/rewards/analytics 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+$n @ dispatchRequest.js:51
+_request @ Axios.js:187
+request @ Axios.js:40
+Un.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+W @ Rewards.js:131
+(anônimo) @ Rewards.js:99
+nl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Rewards.js:134 Error fetching analytics: wr {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+W @ Rewards.js:134
+await in W
+(anônimo) @ Rewards.js:99
+nl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Rewards.js:204  POST https://feedelizaapi.towersfy.com/api/rewards 400 (Bad Request)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+$n @ dispatchRequest.js:51
+_request @ Axios.js:187
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ Rewards.js:204
+(anônimo) @ createFormControl.ts:1258
+await in (anônimo)
+Ne @ react-dom.production.min.js:54
+Fe @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+Ln @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73

@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
     },
     value: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: true
     },
     wheel_config: {
       type: DataTypes.JSONB,
@@ -39,7 +39,7 @@ module.exports = (sequelize) => {
     },
     points_required: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       defaultValue: 100,
       validate: {
         min: {
@@ -50,13 +50,7 @@ module.exports = (sequelize) => {
     },
     max_uses_per_customer: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      validate: {
-        min: {
-          args: 1,
-          msg: 'Máximo de usos deve ser pelo menos 1'
-        }
-      }
+      allowNull: true
     },
     total_uses_limit: {
       type: DataTypes.INTEGER,

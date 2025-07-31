@@ -139,7 +139,7 @@ const syncDatabase = async (force = false) => {
 
         if (valueExists.length === 0) {
           // Adiciona o novo valor ao ENUM
-          await sequelize.query(`ALTER TYPE ${enumName} ADD VALUE '${newValue}' AFTER 'gift';`);
+          await sequelize.query(`ALTER TYPE ${enumName} ADD VALUE $${newValue}$ AFTER 'gift';`);
           console.log(`✅ Valor '${newValue}' adicionado ao ENUM ${enumName}.`);
         }
       }

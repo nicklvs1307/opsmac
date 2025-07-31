@@ -6,7 +6,7 @@ Iniciando sincronização do banco de dados...
     at async PostgresQueryInterface.addColumn (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:184:12)
     at async Coupon.sync (/app/node_modules/sequelize/lib/model.js:958:11)
     at async Sequelize.sync (/app/node_modules/sequelize/lib/sequelize.js:377:9)
-    at async syncDatabase (/app/backend/config/database.js:124:5)
+    at async syncDatabase (/app/backend/config/database.js:151:5)
     at async runSync (/app/backend/scripts/syncDb.js:8:19) {
   name: 'SequelizeDatabaseError',
   parent: error: unterminated quoted string at or near "';"

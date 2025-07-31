@@ -186,6 +186,7 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
         </List>
       </Box>
     </Paper>
+  </>
   );
 };
 

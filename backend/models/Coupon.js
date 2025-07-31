@@ -110,6 +110,11 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: true
     },
+    visit_milestone: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: 'O número da visita (marco) em que este cupom foi concedido.'
+    },
     reward_id: {
       type: DataTypes.UUID,
       allowNull: false,

@@ -56,8 +56,13 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
 
     console.log('Configurações atuais do restaurante antes da fusão:', JSON.stringify(restaurant.settings, null, 2));
 
-    // Deep merge para preservar sub-objetos aninhados
+    // Deep merge para preservar sub-objetos aninhados, com exceção de 'rewards_per_visit'
     const updatedSettings = lodash.merge({}, restaurant.settings, settings);
+
+    // Se 'rewards_per_visit' foi enviado pelo frontend, substitua o array inteiro
+    if (settings.checkin_program_settings && Array.isArray(settings.checkin_program_settings.rewards_per_visit)) {
+      updatedSettings.checkin_program_settings.rewards_per_visit = settings.checkin_program_settings.rewards_per_visit;
+    }
 
     console.log('Configurações após a fusão:', JSON.stringify(updatedSettings, null, 2));
 

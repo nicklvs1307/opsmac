@@ -267,7 +267,7 @@ module.exports = (sequelize) => {
     return true;
   };
 
-  Reward.prototype.generateCoupon = async function(customerId) {
+  Reward.prototype.generateCoupon = async function(customerId, extraData = {}) {
     const canUse = await this.canCustomerUse(customerId);
     if (!canUse) {
       throw new Error('Cliente não pode usar esta recompensa');
@@ -291,7 +291,8 @@ module.exports = (sequelize) => {
       customer_id: customerId,
       restaurant_id: this.restaurant_id,
       expires_at: expiresAt,
-      status: 'active'
+      status: 'active',
+      ...extraData, // Adicionar dados extras, como visit_milestone
     });
     
     // Incrementar contador de usos

@@ -315,6 +315,19 @@ router.post('/public', [
       console.log(`[Public Check-in] Verificando recompensa para visit_count: ${parsedVisitCount} (parsed) vs currentVisits: ${currentVisits}`);
       
       if (parsedVisitCount === currentVisits) {
+        // Verificar se o cliente já recebeu esta recompensa específica
+        const existingCoupon = await models.Coupon.findOne({
+          where: {
+            customer_id: customer.id,
+            reward_id: rewardConfig.reward_id,
+            visit_milestone: parsedVisitCount,
+          },
+        });
+
+        if (existingCoupon) {
+          console.log(`[Public Check-in] Cliente ${customer.name} já recebeu a recompensa para ${parsedVisitCount} visitas.`);
+          continue; // Pular para a próxima configuração de recompensa
+        }
         console.log(`[Public Check-in] Correspondência encontrada para visit_count: ${currentVisits}. Tentando buscar recompensa com ID: ${rewardConfig.reward_id}`);
         const reward = await models.Reward.findByPk(rewardConfig.reward_id);
         
@@ -322,7 +335,7 @@ router.post('/public', [
           console.log('[Public Check-in] Recompensa encontrada:', reward.title, 'Objeto Reward:', JSON.stringify(reward));
           try {
             console.log('[Public Check-in] Tentando gerar cupom para o cliente:', customer.id);
-            const newCoupon = await reward.generateCoupon(customer.id);
+            const newCoupon = await reward.generateCoupon(customer.id, { visit_milestone: parsedVisitCount });
             
             if (newCoupon) {
               console.log('[Public Check-in] Cupom gerado com sucesso:', newCoupon.code, 'Objeto Coupon:', JSON.stringify(newCoupon));

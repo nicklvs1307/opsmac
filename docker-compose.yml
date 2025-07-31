@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build:
-      context: /root/opsmac
+      context: .
       dockerfile: Dockerfile.backend
     image: feedeliza-backend:latest
     environment:
@@ -39,7 +39,7 @@ services:
 
   frontend:
     build:
-      context: /root/opsmac
+      context: .
       dockerfile: Dockerfile.frontend
       args:
         - REACT_APP_API_URL=https://feedelizaapi.towersfy.com

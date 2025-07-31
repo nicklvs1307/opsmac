@@ -154,11 +154,9 @@ const startServer = async () => {
     await sequelize.authenticate();
     console.log('✅ Conexão com banco de dados estabelecida');
     
-    // Sincronizar modelos (apenas em desenvolvimento)
-    if (process.env.NODE_ENV === 'development') {
-      await sequelize.sync({ alter: true });
-      console.log('✅ Modelos sincronizados com o banco');
-    }
+    // Sincronizar modelos
+    await sequelize.sync({ alter: true });
+    console.log('✅ Modelos sincronizados com o banco');
     
     app.listen(PORT, () => {
       console.log(`🚀 Servidor rodando na porta ${PORT}`);

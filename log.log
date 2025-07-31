@@ -1,15 +1,66 @@
-Iniciando sincronização do banco de dados...
-❌ Erro ao sincronizar banco: Error
+  },
+  original: error: column "reward_type" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 112,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '199',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `UPDATE "coupons" SET "status"=$1,"updated_at"=$2 WHERE "restaurant_id" = $3 AND "status" = $4 AND "expires_at" < '2025-07-31 17:59:41.180 +00:00' RETURNING "id","code","title","description","value","reward_type","status","generated_at","expires_at","redeemed_at","cancelled_at","order_value","discount_applied","redemption_location","redemption_method","notes","metadata","qr_code_data","notification_sent","notification_sent_at","reminder_sent","reminder_sent_at","visit_milestone","reward_id","customer_id","restaurant_id","redeemed_by","created_at","updated_at"`,
+    parameters: [
+      'expired',
+      '2025-07-31 17:59:41.182 +00:00',
+      '0e517dc5-4881-45aa-996e-0365012000bc',
+      'active'
+    ]
+  },
+  sql: `UPDATE "coupons" SET "status"=$1,"updated_at"=$2 WHERE "restaurant_id" = $3 AND "status" = $4 AND "expires_at" < '2025-07-31 17:59:41.180 +00:00' RETURNING "id","code","title","description","value","reward_type","status","generated_at","expires_at","redeemed_at","cancelled_at","order_value","discount_applied","redemption_location","redemption_method","notes","metadata","qr_code_data","notification_sent","notification_sent_at","reminder_sent","reminder_sent_at","visit_milestone","reward_id","customer_id","restaurant_id","redeemed_by","created_at","updated_at"`,
+  parameters: [
+    'expired',
+    '2025-07-31 17:59:41.182 +00:00',
+    '0e517dc5-4881-45aa-996e-0365012000bc',
+
+    'active'
+  ]
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Erro ao listar cupons: Error
     at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
     at /app/node_modules/sequelize/lib/sequelize.js:315:28
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.addColumn (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:184:12)
-    at async Coupon.sync (/app/node_modules/sequelize/lib/model.js:958:11)
-    at async Sequelize.sync (/app/node_modules/sequelize/lib/sequelize.js:377:9)
-    at async syncDatabase (/app/backend/config/database.js:158:5)
-    at async runSync (/app/backend/scripts/syncDb.js:8:19) {
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Coupon.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Coupon.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async /app/backend/routes/coupons.js:121:42 {
   name: 'SequelizeDatabaseError',
-  parent: error: unterminated quoted string at or near "';"
+  parent: error: column Coupon.reward_type does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -19,12 +70,12 @@ Iniciando sincronização do banco de dados...
       at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
       at Readable.push (node:internal/streams/readable:392:5)
       at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 106,
+    length: 117,
     severity: 'ERROR',
-    code: '42601',
+    code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '323',
+    position: '100',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,
@@ -33,13 +84,13 @@ Iniciando sincronização do banco de dados...
     column: undefined,
     dataType: undefined,
     constraint: undefined,
-    file: 'scan.l',
-    line: '1176',
-    routine: 'scanner_yyerror',
-    sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Coupon"."id", "Coupon"."code", "Coupon"."title", "Coupon"."description", "Coupon"."value", "Coupon"."reward_type", "Coupon"."status", "Coupon"."generated_at", "Coupon"."expires_at", "Coupon"."redeemed_at", "Coupon"."cancelled_at", "Coupon"."order_value", "Coupon"."discount_applied", "Coupon"."redemption_location", "Coupon"."redemption_method", "Coupon"."notes", "Coupon"."metadata", "Coupon"."qr_code_data", "Coupon"."notification_sent", "Coupon"."notification_sent_at", "Coupon"."reminder_sent", "Coupon"."reminder_sent_at", "Coupon"."visit_milestone", "Coupon"."reward_id", "Coupon"."customer_id", "Coupon"."restaurant_id", "Coupon"."redeemed_by", "Coupon"."created_at" AS "createdAt", "Coupon"."updated_at" AS "updatedAt", "reward"."id" AS "reward.id", "reward"."title" AS "reward.title", "reward"."reward_type" AS "reward.reward_type", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."email" AS "customer.email" FROM "coupons" AS "Coupon" LEFT OUTER JOIN "rewards" AS "reward" ON "Coupon"."reward_id" = "reward"."id" LEFT OUTER JOIN "customers" AS "customer" ON "Coupon"."customer_id" = "customer"."id" WHERE "Coupon"."restaurant_id" = '0e517dc5-4881-45aa-996e-0365012000bc' ORDER BY "createdAt" DESC LIMIT 10 OFFSET 0;`,
     parameters: undefined
   },
-  original: error: unterminated quoted string at or near "';"
+  original: error: column Coupon.reward_type does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -49,12 +100,12 @@ Iniciando sincronização do banco de dados...
       at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
       at Readable.push (node:internal/streams/readable:392:5)
       at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 106,
+    length: 117,
     severity: 'ERROR',
-    code: '42601',
+    code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '323',
+    position: '100',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,
@@ -63,13 +114,388 @@ Iniciando sincronização do banco de dados...
     column: undefined,
     dataType: undefined,
     constraint: undefined,
-    file: 'scan.l',
-    line: '1176',
-    routine: 'scanner_yyerror',
-    sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Coupon"."id", "Coupon"."code", "Coupon"."title", "Coupon"."description", "Coupon"."value", "Coupon"."reward_type", "Coupon"."status", "Coupon"."generated_at", "Coupon"."expires_at", "Coupon"."redeemed_at", "Coupon"."cancelled_at", "Coupon"."order_value", "Coupon"."discount_applied", "Coupon"."redemption_location", "Coupon"."redemption_method", "Coupon"."notes", "Coupon"."metadata", "Coupon"."qr_code_data", "Coupon"."notification_sent", "Coupon"."notification_sent_at", "Coupon"."reminder_sent", "Coupon"."reminder_sent_at", "Coupon"."visit_milestone", "Coupon"."reward_id", "Coupon"."customer_id", "Coupon"."restaurant_id", "Coupon"."redeemed_by", "Coupon"."created_at" AS "createdAt", "Coupon"."updated_at" AS "updatedAt", "reward"."id" AS "reward.id", "reward"."title" AS "reward.title", "reward"."reward_type" AS "reward.reward_type", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."email" AS "customer.email" FROM "coupons" AS "Coupon" LEFT OUTER JOIN "rewards" AS "reward" ON "Coupon"."reward_id" = "reward"."id" LEFT OUTER JOIN "customers" AS "customer" ON "Coupon"."customer_id" = "customer"."id" WHERE "Coupon"."restaurant_id" = '0e517dc5-4881-45aa-996e-0365012000bc' ORDER BY "createdAt" DESC LIMIT 10 OFFSET 0;`,
     parameters: undefined
   },
-  sql: `DO 'BEGIN CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM(''discount_percentage'', ''discount_fixed'', ''free_item'', ''points'', ''cashback'', ''gift'', ''spin_the_wheel''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE "public"."coupons" ADD COLUMN "reward_type" "public"."enum_coupons_reward_type"';`,
+  sql: `SELECT "Coupon"."id", "Coupon"."code", "Coupon"."title", "Coupon"."description", "Coupon"."value", "Coupon"."reward_type", "Coupon"."status", "Coupon"."generated_at", "Coupon"."expires_at", "Coupon"."redeemed_at", "Coupon"."cancelled_at", "Coupon"."order_value", "Coupon"."discount_applied", "Coupon"."redemption_location", "Coupon"."redemption_method", "Coupon"."notes", "Coupon"."metadata", "Coupon"."qr_code_data", "Coupon"."notification_sent", "Coupon"."notification_sent_at", "Coupon"."reminder_sent", "Coupon"."reminder_sent_at", "Coupon"."visit_milestone", "Coupon"."reward_id", "Coupon"."customer_id", "Coupon"."restaurant_id", "Coupon"."redeemed_by", "Coupon"."created_at" AS "createdAt", "Coupon"."updated_at" AS "updatedAt", "reward"."id" AS "reward.id", "reward"."title" AS "reward.title", "reward"."reward_type" AS "reward.reward_type", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."email" AS "customer.email" FROM "coupons" AS "Coupon" LEFT OUTER JOIN "rewards" AS "reward" ON "Coupon"."reward_id" = "reward"."id" LEFT OUTER JOIN "customers" AS "customer" ON "Coupon"."customer_id" = "customer"."id" WHERE "Coupon"."restaurant_id" = '0e517dc5-4881-45aa-996e-0365012000bc' ORDER BY "createdAt" DESC LIMIT 10 OFFSET 0;`,
   parameters: {}
 }
-Falha na sincronização do banco de dados.
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+totalCheckins: 41
+mostFrequentCustomers: [
+  Checkin {
+    dataValues: {
+      customer_id: 'c0463aa7-193d-42fc-9163-aa9c850a0546',
+      checkin_count: '16',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: 'c0463aa7-193d-42fc-9163-aa9c850a0546',
+      checkin_count: '16',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  },
+  Checkin {
+    dataValues: {
+      customer_id: 'db819d2e-b0ee-4a65-8f5c-aca7cfd41a17',
+      checkin_count: '14',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: 'db819d2e-b0ee-4a65-8f5c-aca7cfd41a17',
+      checkin_count: '14',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  },
+  Checkin {
+    dataValues: {
+      customer_id: 'd11fc920-e0e3-4335-98c6-73acf48b06ad',
+      checkin_count: '3',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: 'd11fc920-e0e3-4335-98c6-73acf48b06ad',
+      checkin_count: '3',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  },
+  Checkin {
+    dataValues: {
+      customer_id: '89faa009-4362-4bd1-8fc3-fa77657f20f9',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: '89faa009-4362-4bd1-8fc3-fa77657f20f9',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  },
+  Checkin {
+    dataValues: {
+      customer_id: 'aa439eb6-375d-4d64-a485-3ba157ca285f',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: 'aa439eb6-375d-4d64-a485-3ba157ca285f',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  },
+  Checkin {
+    dataValues: {
+      customer_id: 'dad3d33f-5ebe-47b9-972a-74d95730ad17',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: 'dad3d33f-5ebe-47b9-972a-74d95730ad17',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  },
+  Checkin {
+    dataValues: {
+      customer_id: 'eea6a099-edc3-456a-a14c-bea7bac9d6fe',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: 'eea6a099-edc3-456a-a14c-bea7bac9d6fe',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  },
+  Checkin {
+    dataValues: {
+      customer_id: '0bbd5d0d-c188-46ec-ae48-018f65b7dc84',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: '0bbd5d0d-c188-46ec-ae48-018f65b7dc84',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  },
+  Checkin {
+    dataValues: {
+      customer_id: 'fcc873c0-c553-4b7b-9118-7df02b105fda',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: 'fcc873c0-c553-4b7b-9118-7df02b105fda',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  },
+  Checkin {
+    dataValues: {
+      customer_id: '292c7b7d-8828-42e0-98ec-b677f6c5ea00',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: '292c7b7d-8828-42e0-98ec-b677f6c5ea00',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+averageVisitDuration: { avg_duration_seconds: '3267.1169512195121951' }
+checkinsByDay: [
+  { date: 2025-07-30T00:00:00.000Z, count: '8' },
+  { date: 2025-07-31T00:00:00.000Z, count: '33' }
+]
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}

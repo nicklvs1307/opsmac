@@ -51,11 +51,13 @@ const Rewards = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
   const [tabValue, setTabValue] = useState(0);
   const [rewards, setRewards] = useState([]);
-  const [analytics, setAnalytics] = useState(null);
+  const [analytics, setAnalytics] = useState(null); // For main analytics tab
+  const [selectedRewardAnalytics, setSelectedRewardAnalytics] = useState(null); // For selected reward's analytics
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [filters, setFilters] = useState({
     search: '',
     status: '',
@@ -100,6 +102,12 @@ const Rewards = () => {
     }
   }, [tabValue, page, filters]);
 
+  useEffect(() => {
+    if (detailsModalOpen && detailsModalTab === 1 && selectedItem?.id) {
+      fetchSelectedRewardAnalytics(selectedItem.id);
+    }
+  }, [detailsModalOpen, detailsModalTab, selectedItem?.id]);
+
   const fetchRewards = async () => {
     try {
       setLoading(true);
@@ -133,6 +141,20 @@ const Rewards = () => {
     } catch (err) {
       console.error('Error fetching analytics:', err);
       setError('Erro ao carregar analytics');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchSelectedRewardAnalytics = async (rewardId) => {
+    try {
+      setLoading(true);
+      setError('');
+      const response = await axiosInstance.get(`/api/rewards/${rewardId}/analytics`);
+      setSelectedRewardAnalytics(response.data);
+    } catch (err) {
+      console.error(`Error fetching analytics for reward ${rewardId}:`, err);
+      setError('Erro ao carregar analytics da recompensa');
     } finally {
       setLoading(false);
     }
@@ -191,7 +213,7 @@ const Rewards = () => {
         }
       }
 
-      if (editDialog) {
+      if (detailsModalOpen && detailsModalTab === 0) {
         await axiosInstance.put(`/api/rewards/${selectedItem.id}`, cleanData);
         toast.success('Recompensa atualizada com sucesso!');
       } else {
@@ -200,7 +222,7 @@ const Rewards = () => {
       }
       
       setCreateDialog(false);
-      setEditDialog(false);
+      setDetailsModalOpen(false);
       fetchRewards();
     } catch (err) {
       console.error('Error saving reward:', err); // Log the full error for debugging
@@ -780,7 +802,7 @@ const Rewards = () => {
           )}
 
           {/* Análises Tab Content */}
-          {detailsModalTab === 1 && !createDialog && selectedItem && (
+          {detailsModalTab === 1 && !createDialog && selectedItem && selectedRewardAnalytics && (
             <Box sx={{ mt: 2 }}>
               <Typography variant="h6" gutterBottom>
                 Análises de Cupons
@@ -789,7 +811,7 @@ const Rewards = () => {
                 <Grid item xs={12} sm={6}>
                   <Paper sx={{ p: 2, textAlign: 'center' }}>
                     <Typography variant="h5" color="primary">
-                      {selectedItem.analytics?.total_generated || 0}
+                      {selectedRewardAnalytics.total_generated || 0}
                     </Typography>
                     <Typography variant="body2">Cupons Gerados</Typography>
                   </Paper>
@@ -797,7 +819,7 @@ const Rewards = () => {
                 <Grid item xs={12} sm={6}>
                   <Paper sx={{ p: 2, textAlign: 'center' }}>
                     <Typography variant="h5" color="success">
-                      {selectedItem.analytics?.total_redeemed || 0}
+                      {selectedRewardAnalytics.total_redeemed || 0}
                     </Typography>
                     <Typography variant="body2">Cupons Resgatados</Typography>
                   </Paper>
@@ -805,7 +827,7 @@ const Rewards = () => {
                 <Grid item xs={12} sm={6}>
                   <Paper sx={{ p: 2, textAlign: 'center' }}>
                     <Typography variant="h5" color="info">
-                      {(selectedItem.analytics?.redemption_rate || 0).toFixed(2)}%
+                      {(selectedRewardAnalytics.redemption_rate || 0).toFixed(2)}%
                     </Typography>
                     <Typography variant="body2">Taxa de Resgate</Typography>
                   </Paper>
@@ -813,7 +835,7 @@ const Rewards = () => {
                 <Grid item xs={12} sm={6}>
                   <Paper sx={{ p: 2, textAlign: 'center' }}>
                     <Typography variant="h5" color="warning">
-                      R$ {(selectedItem.analytics?.average_order_value || 0).toFixed(2)}
+                      R$ {(selectedRewardAnalytics.average_order_value || 0).toFixed(2)}
                     </Typography>
                     <Typography variant="body2">Valor Médio do Pedido</Typography>
                   </Paper>

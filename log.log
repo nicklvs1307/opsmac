@@ -1,36 +1,27 @@
-=> ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      169.9s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      163.1s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.765
-0.765 > Feedeliza+-frontend@1.0.0 build
-0.765 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.765
-4.443 Creating an optimized production build...
-168.9 Failed to compile.
-168.9
-168.9 [eslint]
-168.9 src/components/UI/SpinTheWheel.js
-168.9   Line 39:10:   'wheelConfig' is not defined     no-undef
-168.9   Line 39:26:   'wheelConfig' is not defined     no-undef
-168.9   Line 39:47:   'wheelConfig' is not defined     no-undef
-168.9   Line 56:22:   'wheelConfig' is not defined     no-undef
-168.9   Line 60:28:   'wheelConfig' is not defined     no-undef
-168.9   Line 68:5:    'wheelConfig' is not defined     no-undef
-168.9   Line 142:7:   'wheelConfig' is not defined     no-undef
-168.9   Line 147:7:   'wheelConfig' is not defined     no-undef
-168.9   Line 180:18:  'onSpinComplete' is not defined  no-undef
-168.9   Line 180:34:  'winningItem' is not defined     no-undef
-168.9   Line 251:10:  'result' is not defined          no-undef
-168.9   Line 280:18:  'result' is not defined          no-undef
-168.9   Line 283:14:  'result' is not defined          no-undef
-168.9   Line 285:25:  'result' is not defined          no-undef
-168.9   Line 288:14:  'result' is not defined          no-undef
-168.9   Line 290:18:  'result' is not defined          no-undef
-168.9   Line 299:14:  'wheelConfig' is not defined     no-undef
-168.9
-168.9 Search for the keywords to learn more about each error.
-168.9
-168.9
+0.743
+0.743 > Feedeliza+-frontend@1.0.0 build
+0.743 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.743
+3.010 Creating an optimized production build...
+162.8 Failed to compile.
+162.8
+162.8 [eslint]
+162.8 src/components/UI/SpinTheWheel.js
+162.8   Line 39:10:  'wheelConfig' is not defined  no-undef
+162.8   Line 39:26:  'wheelConfig' is not defined  no-undef
+162.8   Line 39:47:  'wheelConfig' is not defined  no-undef
+162.8   Line 56:22:  'wheelConfig' is not defined  no-undef
+162.8   Line 60:28:  'wheelConfig' is not defined  no-undef
+162.8   Line 68:5:   'wheelConfig' is not defined  no-undef
+162.8   Line 142:7:  'wheelConfig' is not defined  no-undef
+162.8   Line 147:7:  'wheelConfig' is not defined  no-undef
+162.8
+162.8 Search for the keywords to learn more about each error.
+162.8
+162.8
 ------
 
  1 warning found (use docker --debug to expand):

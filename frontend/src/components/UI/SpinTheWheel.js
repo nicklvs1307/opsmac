@@ -1,24 +1,21 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import {
   Box,
-  Button,
   Typography,
   Paper,
   List,
   ListItem,
   ListItemText,
 } from '@mui/material';
-import { Casino as CasinoIcon } from '@mui/icons-material';
 
 const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
-  
   const canvasRef = useRef(null);
-  const rotationRef = useRef(0); // Current rotation in degrees
+  const rotationRef = useRef(0);
   const animationFrameId = useRef(null);
 
-  const wheelSize = 300; // px
+  const wheelSize = 300;
   const center = wheelSize / 2;
-  const radius = center - 15; // Account for border
+  const radius = center - 15;
 
   const getRandomColor = useCallback(() => {
     const letters = '0123456789ABCDEF';
@@ -36,8 +33,7 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
 
     ctx.clearRect(0, 0, wheelSize, wheelSize);
 
-    if (!wheelConfig || !wheelConfig.items || wheelConfig.items.length === 0) {
-      // Draw a placeholder if no items
+    if (!items || items.length === 0) {
       ctx.beginPath();
       ctx.arc(center, center, radius, 0, 2 * Math.PI);
       ctx.fillStyle = '#F1FAEE';
@@ -53,22 +49,20 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
       return;
     }
 
-    const numItems = wheelConfig.items.length;
-    const segmentAngle = (2 * Math.PI) / numItems; // Equal segments
+    const numItems = items.length;
+    const segmentAngle = (2 * Math.PI) / numItems;
 
     let startAngle = 0;
-    const assignedColors = wheelConfig.items.map(item => item.color || getRandomColor());
+    const assignedColors = items.map(item => item.color || getRandomColor());
 
-    // Apply overall rotation to the canvas context
     ctx.save();
     ctx.translate(center, center);
-    ctx.rotate((currentRotation * Math.PI) / 180); // Convert degrees to radians
+    ctx.rotate((currentRotation * Math.PI) / 180);
     ctx.translate(-center, -center);
 
-    wheelConfig.items.forEach((item, index) => {
+    items.forEach((item, index) => {
       const endAngle = startAngle + segmentAngle;
 
-      // Draw segment
       ctx.beginPath();
       ctx.moveTo(center, center);
       ctx.arc(center, center, radius, startAngle, endAngle);
@@ -76,31 +70,27 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
       ctx.fillStyle = assignedColors[index];
       ctx.fill();
 
-      // Draw segment border
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      // Draw text
       ctx.save();
-      ctx.translate(center, center); // Move origin to center of wheel
+      ctx.translate(center, center);
       const midAngle = startAngle + segmentAngle / 2;
-      ctx.rotate(midAngle); // Rotate context to the middle of the segment
+      ctx.rotate(midAngle);
 
-      // Now, translate along the rotated axis to the text position
-      const textRadius = radius * 0.65; // Position text further out
+      const textRadius = radius * 0.65;
       ctx.translate(textRadius, 0);
 
-      // Counter-rotate the context to make the text upright relative to the viewer
-      ctx.rotate(-midAngle); 
+      ctx.rotate(-midAngle);
 
       ctx.fillStyle = item.colorText || (assignedColors[index] === '#000000' ? '#FFFFFF' : '#000000');
-      ctx.font = 'bold 12px Poppins'; // Ensure Poppins is loaded or fallback
+      ctx.font = 'bold 12px Poppins';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
       const text = item.title;
-      const maxTextWidth = radius * 0.8; // Max width for text, relative to the upright context
+      const maxTextWidth = radius * 0.8;
       const words = text.split(' ');
       let line = '';
       const lines = [];
@@ -118,18 +108,17 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
       }
       lines.push(line);
 
-      const lineHeight = 14; // px
+      const lineHeight = 14;
       let yOffset = -((lines.length - 1) * lineHeight) / 2;
 
       lines.forEach((l, i) => {
-        ctx.fillText(l.trim(), 0, yOffset + i * lineHeight); // Draw at (0, yOffset) in the upright context
+        ctx.fillText(l.trim(), 0, yOffset + i * lineHeight);
       });
 
-      ctx.restore(); // Restore context for this segment
+      ctx.restore();
       startAngle = endAngle;
     });
 
-    // Draw center circle
     ctx.beginPath();
     ctx.arc(center, center, 20, 0, 2 * Math.PI);
     ctx.fillStyle = '#FFD700';
@@ -138,22 +127,26 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
     ctx.lineWidth = 3;
     ctx.stroke();
 
-    ctx.restore(); // Restore overall canvas context
-  }, [wheelConfig, getRandomColor, center, radius, wheelSize]);
+    ctx.restore();
+  }, [items, getRandomColor, center, radius, wheelSize]);
 
-  // Redraw wheel whenever wheelConfig changes (for real-time preview)
   useEffect(() => {
     drawWheel(rotationRef.current);
-  }, [wheelConfig, drawWheel]);
+  }, [items, drawWheel]);
 
-  // Animation for spinning
   const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
 
   const animateSpin = useCallback((winningItem, duration = 5000) => {
     const numItems = items.length;
-    const segmentAngle = 360 / numItems;
+    if (numItems === 0) return;
+
+    const segmentAngleDegrees = 360 / numItems;
     const winningIndex = items.findIndex(item => item.title === winningItem.title);
-    const targetRotation = (360 * 5) + (360 - (winningIndex * segmentAngle) - (segmentAngle / 2));
+    
+    if (winningIndex === -1) return;
+
+    const targetAngle = 360 - (winningIndex * segmentAngleDegrees) - (segmentAngleDegrees / 2);
+    const targetRotation = (360 * 5) + targetAngle;
 
     const start = performance.now();
     const initialRotation = rotationRef.current;
@@ -180,13 +173,11 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
   }, [drawWheel, onSpinFinish, items]);
 
   useEffect(() => {
-    if (isSpinning) {
+    if (isSpinning && items && items.length > 0) {
       const winningItem = items[Math.floor(Math.random() * items.length)];
       animateSpin(winningItem);
     }
   }, [isSpinning, items, animateSpin]);
-
-  
 
   return (
     <Paper sx={{ p: 4, textAlign: 'center', borderRadius: 3, boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
@@ -194,7 +185,7 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
         <Typography variant="h5" gutterBottom>
           Gire a Roleta!
         </Typography>
-        <Box // .roleta-container
+        <Box
           sx={{
             position: 'relative',
             margin: '20px auto',
@@ -217,7 +208,7 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
               zIndex: 1,
             }}
           />
-          <Box // .seta - Pointer
+          <Box
             sx={{
               position: 'absolute',
               top: -25,
@@ -230,7 +221,7 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
               borderTop: '30px solid #FFD700',
               zIndex: 10,
               filter: 'drop-shadow(0 0 5px #FFD700)',
-              '&::after': { // Pseudo-elemento para o círculo da seta
+              '&::after': {
                 content: '""',
                 position: 'absolute',
                 top: -33,
@@ -245,10 +236,6 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
             }}
           />
         </Box>
-
-        
-
-        
 
         <Box sx={{ mt: 3, textAlign: 'left', color: 'rgba(255, 255, 255, 0.8)' }}>
           <Typography variant="subtitle2" sx={{ color: 'inherit' }}>Itens da Roleta:</Typography>

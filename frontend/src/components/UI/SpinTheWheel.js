@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { Box, Typography, Paper, List, ListItem, ListItemText } from '@mui/material';
 
 const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
@@ -35,6 +35,14 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
     return luminance > 0.5 ? '#000000' : '#FFFFFF';
   }, []);
 
+  const coloredItems = useMemo(() => 
+    items.map(item => ({
+      ...item,
+      color: item.color || getRandomHexColor(),
+      textColor: item.textColor || getContrastingTextColor(item.color)
+    })), 
+  [items, getRandomHexColor, getContrastingTextColor]);
+
   const drawWheel = useCallback((currentRotation = 0) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -42,7 +50,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
 
     ctx.clearRect(0, 0, wheelSize, wheelSize);
 
-    if (!items || items.length === 0) {
+    if (!coloredItems || coloredItems.length === 0) {
       return;
     }
 
@@ -51,15 +59,15 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
     ctx.rotate(currentRotation); // Apply the overall wheel rotation
     ctx.translate(-center, -center); // Move origin back
 
-    const numItems = items.length;
+    const numItems = coloredItems.length;
     const segmentAngle = (2 * Math.PI) / numItems;
     let startAngle = 0; // Segments start from 0 relative to the rotated canvas
 
-    items.forEach((item, index) => {
+    coloredItems.forEach((item, index) => {
       const endAngle = startAngle + segmentAngle;
 
-      const segmentColor = item.color || getRandomHexColor();
-      const textColor = item.textColor || getContrastingTextColor(segmentColor);
+      const segmentColor = item.color;
+      const textColor = item.textColor;
 
       ctx.fillStyle = segmentColor;
       ctx.beginPath();
@@ -131,7 +139,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
     ctx.fill();
 
     ctx.restore(); // Restore the canvas to its original unrotated state
-  }, [items, center, radius, wheelSize, getRandomHexColor, getContrastingTextColor]);
+  }, [coloredItems, center, radius, wheelSize]);
 
   useEffect(() => {
     drawWheel(rotationRef.current);
@@ -149,24 +157,27 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
       if (progress > 1) progress = 1;
 
       const easedProgress = easeOutQuart(progress);
-      rotationRef.current = initialRotationRadians + (targetRotationRadians - initialRotationRadians) * easedProgress;
-
-      drawWheel(rotationRef.current);
+      const newRotation = initialRotationRadians + (targetRotationRadians - initialRotationRadians) * easedProgress;
+      
+      rotationRef.current = newRotation;
+      drawWheel(newRotation);
 
       if (progress < 1) {
         animationFrameId.current = requestAnimationFrame(animate);
       } else {
-        // Ensure the final rotation is exactly the target rotation
-        rotationRef.current = targetRotationRadians; // Ensure final position is exact
-        drawWheel(rotationRef.current); // Draw one last time at final position
+        rotationRef.current = targetRotationRadians;
+        drawWheel(targetRotationRadians);
         if (onAnimationComplete) {
-          // Add a small delay to ensure the final frame is rendered before callback
           setTimeout(() => {
             onAnimationComplete();
-          }, 100); // 100ms delay
+          }, 100);
         }
       }
     };
+    
+    if (animationFrameId.current) {
+      cancelAnimationFrame(animationFrameId.current);
+    }
     animationFrameId.current = requestAnimationFrame(animate);
   }, [drawWheel, onAnimationComplete]);
 

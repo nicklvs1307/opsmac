@@ -301,14 +301,15 @@ router.get('/analytics/restaurant/:restaurantId', auth, checkRestaurantOwnership
         const coupons_by_type = await models.Coupon.findAll({
             where: { restaurant_id: restaurantId },
             attributes: [
-                [sequelize.fn('COUNT', sequelize.col('Coupon.id')), 'count']
+                [sequelize.fn('COUNT', sequelize.col('Coupon.id')), 'count'],
+                [sequelize.col('reward.reward_type'), 'type']
             ],
             include: [{
                 model: models.Reward,
                 as: 'reward',
-                attributes: ['reward_type'],
+                attributes: [], // No need to select attributes here, as we are selecting it in the main query
             }],
-            group: ['reward.reward_type', 'reward.id']
+            group: ['reward.reward_type']
         });
 
         const redeemed_by_day = await models.Coupon.findAll({

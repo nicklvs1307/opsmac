@@ -72,31 +72,27 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
 
       ctx.save();
       ctx.fillStyle = textColor;
-      ctx.font = 'bold 11px Poppins'; // Using Poppins as per example.html
       ctx.translate(center, center);
       
       const angMeio = startAngle + segmentAngle / 2;
       ctx.rotate(angMeio);
       
-      const textRadius = radius * 0.55;
+      const textRadius = radius * 0.65; // Increased radius for text
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       
-      const palavras = (item.name || item.title).split(' ');
-      if (palavras.length > 2) {
-        ctx.font = 'bold 9px Poppins';
-        palavras.forEach((palavra, idx) => {
-          ctx.fillText(palavra, textRadius, (idx - (palavras.length-1)/2) * 12);
-        });
-      } else if (palavras.length > 1) {
-        ctx.font = 'bold 10px Poppins';
-        palavras.forEach((palavra, idx) => {
-          ctx.fillText(palavra, textRadius, (idx * 12) - 6);
-        });
-      } else {
-        ctx.font = 'bold 11px Poppins';
-        ctx.fillText(item.name || item.title, textRadius, 0);
+      const text = item.name || item.title;
+      let fontSize = 16; // Start with a larger font size
+      ctx.font = `bold ${fontSize}px Poppins`;
+
+      // Adjust font size to fit within the segment
+      const maxTextWidth = radius * Math.sin(segmentAngle / 2) * 2 * 0.9; // 90% of segment width
+      while (ctx.measureText(text).width > maxTextWidth && fontSize > 8) {
+        fontSize -= 1;
+        ctx.font = `bold ${fontSize}px Poppins`;
       }
+
+      ctx.fillText(text, textRadius, 0);
       
       ctx.restore();
 
@@ -127,7 +123,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
 
   const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
 
-  const animateSpin = useCallback((targetRotation, duration = 5000) => {
+  const animateSpin = useCallback((targetRotation, duration = 8000) => {
     const start = performance.now();
     const initialRotation = rotationRef.current;
 
@@ -144,6 +140,9 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
       if (progress < 1) {
         animationFrameId.current = requestAnimationFrame(animate);
       } else {
+        // Ensure the final rotation is exactly the target rotation
+        rotationRef.current = targetRotation;
+        drawWheel(rotationRef.current);
         if (onAnimationComplete) {
           onAnimationComplete();
         }

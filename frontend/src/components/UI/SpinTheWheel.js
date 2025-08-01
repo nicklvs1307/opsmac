@@ -10,6 +10,31 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
   const center = wheelSize / 2;
   const radius = center - 15;
 
+  // Function to generate a random hex color
+  const getRandomHexColor = useCallback(() => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }, []);
+
+  // Function to determine contrasting text color (black or white)
+  const getContrastingTextColor = useCallback((hexColor) => {
+    if (!hexColor) return '#000000'; // Default to black if no color provided
+
+    const r = parseInt(hexColor.substring(1, 3), 16);
+    const g = parseInt(hexColor.substring(3, 5), 16);
+    const b = parseInt(hexColor.substring(5, 7), 16);
+
+    // Calculate luminance (Y = 0.2126 R + 0.7152 G + 0.0722 B)
+    const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+
+    // Use a threshold to decide between black and white
+    return luminance > 0.5 ? '#000000' : '#FFFFFF';
+  }, []);
+
   const drawWheel = useCallback((currentRotation = 0) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -25,15 +50,13 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
     const segmentAngle = (2 * Math.PI) / numItems;
     let startAngle = 0;
 
-    ctx.save();
-    ctx.translate(center, center);
-    ctx.rotate((currentRotation * Math.PI) / 180);
-    ctx.translate(-center, -center);
-
     items.forEach((item, index) => {
       const endAngle = startAngle + segmentAngle;
 
-      ctx.fillStyle = item.color;
+      const segmentColor = item.color || getRandomHexColor();
+      const textColor = item.textColor || getContrastingTextColor(segmentColor);
+
+      ctx.fillStyle = segmentColor;
       ctx.beginPath();
       ctx.moveTo(center, center);
       ctx.arc(center, center, radius, startAngle, endAngle);
@@ -48,7 +71,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
       ctx.stroke();
 
       ctx.save();
-      ctx.fillStyle = item.textColor;
+      ctx.fillStyle = textColor;
       ctx.font = 'bold 11px Poppins'; // Using Poppins as per example.html
       ctx.translate(center, center);
       
@@ -96,7 +119,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
     ctx.fill();
 
     ctx.restore();
-  }, [items, center, radius, wheelSize]);
+  }, [items, center, radius, wheelSize, getRandomHexColor, getContrastingTextColor]);
 
   useEffect(() => {
     drawWheel();

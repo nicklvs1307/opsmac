@@ -171,32 +171,29 @@ const Rewards = () => {
 
   const onSubmit = async (data) => {
     try {
-      const cleanData = Object.fromEntries(
-        Object.entries(data).filter(([key, value]) => {
-          if (key === 'value' || key === 'points_required') {
-            return value !== '' && value !== null;
-          }
-          if (key === 'max_uses') {
-            return value !== '' && value !== null;
-          }
-          if (key === 'expires_at') {
-            return value !== '' && value !== null;
-          }
-          // Incluir wheel_config se for do tipo spin_the_wheel
-          if (key === 'wheel_config' && data.reward_type !== 'spin_the_wheel') {
-            return false; // Não incluir se não for roleta
-          }
-          return value !== '' && value !== null;
-        })
-      );
+      const cleanData = { ...data };
 
-      cleanData.value = parseFloat(cleanData.value);
-      cleanData.points_required = parseInt(cleanData.points_required);
-      cleanData.max_uses_per_customer = cleanData.max_uses ? parseInt(cleanData.max_uses) : null;
+      // Handle numerical fields, convert empty strings to null
+      cleanData.value = cleanData.value !== '' ? parseFloat(cleanData.value) : null;
+      cleanData.points_required = cleanData.points_required !== '' ? parseInt(cleanData.points_required) : null;
+      cleanData.max_uses_per_customer = cleanData.max_uses !== '' ? parseInt(cleanData.max_uses) : null;
       cleanData.valid_until = cleanData.expires_at ? new Date(cleanData.expires_at) : null;
-      
+
       delete cleanData.max_uses;
       delete cleanData.expires_at;
+
+      // Ensure wheel_config is only sent if reward_type is spin_the_wheel
+      if (cleanData.reward_type !== 'spin_the_wheel') {
+        delete cleanData.wheel_config;
+      } else {
+        // Ensure wheel_config.items are properly formatted (e.g., probability as number)
+        if (cleanData.wheel_config && cleanData.wheel_config.items) {
+          cleanData.wheel_config.items = cleanData.wheel_config.items.map(item => ({
+            ...item,
+            probability: parseFloat(item.probability) // Ensure probability is a number
+          }));
+        }
+      }
 
       if (editDialog) {
         await axiosInstance.put(`/api/rewards/${selectedItem.id}`, cleanData);
@@ -210,6 +207,7 @@ const Rewards = () => {
       setEditDialog(false);
       fetchRewards();
     } catch (err) {
+      console.error('Error saving reward:', err); // Log the full error for debugging
       toast.error(err.response?.data?.message || 'Erro ao salvar recompensa');
     }
   };

@@ -124,15 +124,7 @@ const Customers = () => {
     }
   };
 
-  const fetchCustomerDetails = async (customerId) => {
-    try {
-      const response = await axiosInstance.get(`/api/customers/${customerId}`);
-      setCustomerDetails(response.data);
-      setDetailDialog(true);
-    } catch (err) {
-      toast.error('Erro ao carregar detalhes do cliente');
-    }
-  };
+  
 
   const handleFilterChange = (field, value) => {
     setFilters(prev => ({ ...prev, [field]: value }));
@@ -466,10 +458,7 @@ const Customers = () => {
         onClose={handleMenuClose}
       >
         
-        <MenuItem onClick={handleEdit}>
-          <EditIcon sx={{ mr: 1 }} />
-          Editar
-        </MenuItem>
+        
         <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
           <DeleteIcon sx={{ mr: 1 }} />
           Excluir

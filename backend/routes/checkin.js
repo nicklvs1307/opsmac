@@ -335,7 +335,6 @@ router.post('/public', [
         if (reward) {
           console.log('[Public Check-in] Recompensa encontrada:', reward.title, 'Objeto Reward:', JSON.stringify(reward));
           try {
-            console.log('[Public Check-in] Tentando gerar cupom para o cliente:', customer.id);
             if (reward.reward_type === 'wheel') {
               // Se a recompensa for do tipo 'roleta', não gere o cupom ainda.
               // Apenas retorne a configuração da roleta para o frontend.
@@ -347,81 +346,54 @@ router.post('/public', [
                 visit_count: currentVisits,
                 customer_id: customer.id, // Envia o ID do cliente para o frontend
                 description: reward.description,
-                // Não há coupon_code ou formatted_message aqui
               };
-              // Pula a geração de cupom e o envio de mensagem do WhatsApp por enquanto
             } else {
               // Para outros tipos de recompensa, gere o cupom imediatamente
               const newCoupon = await reward.generateCoupon(customer.id, { visit_milestone: parsedVisitCount });
 
               if (newCoupon) {
-              console.log('[Public Check-in] Cupom gerado com sucesso:', newCoupon.code, 'Objeto Coupon:', JSON.stringify(newCoupon));
-              let rewardMessage = rewardConfig.message_template || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
-              
-              rewardMessage = rewardMessage.replace(/\{\{customer_name\}\}/g, customer.name || '');
-              rewardMessage = rewardMessage.replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
-              rewardMessage = rewardMessage.replace(/\{\{reward_title\}\}/g, reward.title || '');
-              rewardMessage = rewardMessage.replace(/\{\{coupon_code\}\}/g, newCoupon.code || '');
-              rewardMessage = rewardMessage.replace(/\{\{visit_count\}\}/g, currentVisits);
+                console.log('[Public Check-in] Cupom gerado com sucesso:', newCoupon.code, 'Objeto Coupon:', JSON.stringify(newCoupon));
+                let rewardMessage = rewardConfig.message_template || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
+                
+                rewardMessage = rewardMessage.replace(/\{\{customer_name\}\}/g, customer.name || '');
+                rewardMessage = rewardMessage.replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
+                rewardMessage = rewardMessage.replace(/\{\{reward_title\}\}/g, reward.title || '');
+                rewardMessage = rewardMessage.replace(/\{\{coupon_code\}\}/g, newCoupon.code || '');
+                rewardMessage = rewardMessage.replace(/\{\{visit_count\}\}/g, currentVisits);
 
-              console.log('[Public Check-in] Mensagem de recompensa formatada:', rewardMessage);
+                rewardEarned = {
+                  reward_title: newCoupon.title || '',
+                  coupon_code: newCoupon.code || '',
+                  formatted_message: rewardMessage,
+                  visit_count: currentVisits,
+                  reward_type: newCoupon.reward_type,
+                  wheel_config: reward.wheel_config,
+                  value: newCoupon.value || 0,
+                  description: newCoupon.description || ''
+                };
 
-              // Armazena os detalhes da recompensa para a resposta da API
-              console.log('[Public Check-in] Objeto rewardEarned enviado para o frontend:', JSON.stringify(rewardEarned, null, 2));
-              rewardEarned = {
-                reward_title: newCoupon.title || '',
-                coupon_code: newCoupon.code || '',
-                formatted_message: rewardMessage,
-                visit_count: currentVisits,
-                reward_type: newCoupon.reward_type,
-                wheel_config: reward.wheel_config,
-                value: newCoupon.value || 0,
-                description: newCoupon.description || ''
-              };
-
-              // Verificar se as configurações do WhatsApp estão completas antes de tentar enviar
-              if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
-                console.log('[Public Check-in] Configurações de WhatsApp presentes. Tentando enviar mensagem para:', customer.phone);
-                console.log('[Public Check-in] WhatsApp API URL:', restaurant.whatsapp_api_url);
-                console.log('[Public Check-in] WhatsApp Instance ID:', restaurant.whatsapp_instance_id);
-                try {
-                  const whatsappResponse = await sendWhatsAppMessage(
-                    restaurant.whatsapp_api_url,
-                    restaurant.whatsapp_api_key,
-                    restaurant.whatsapp_instance_id,
-                    customer.phone,
-                    rewardMessage
-                  );
-                  if (whatsappResponse.success) {
-                    console.log(`[Public Check-in] Recompensa de visita enviada com sucesso para ${customer.name} na ${currentVisits}ª visita. Resposta WhatsApp:`, JSON.stringify(whatsappResponse));
-                  } else {
-                    console.error(`[Public Check-in] Erro ao enviar recompensa de visita para ${customer.name}:`, whatsappResponse.error, 'Resposta WhatsApp:', JSON.stringify(whatsappResponse));
-                    // Adicionar toast de erro para o frontend
-                    // toast.error(`Erro ao enviar recompensa via WhatsApp para ${customer.name}.`);
+                if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
+                  try {
+                    await sendWhatsAppMessage(
+                      restaurant.whatsapp_api_url,
+                      restaurant.whatsapp_api_key,
+                      restaurant.whatsapp_instance_id,
+                      customer.phone,
+                      rewardMessage
+                    );
+                  } catch (whatsappSendError) {
+                    console.error(`[Public Check-in] Erro inesperado ao tentar enviar recompensa de visita WhatsApp para ${customer.name}:`, whatsappSendError.message, 'Stack:', whatsappSendError.stack);
                   }
-                } catch (whatsappSendError) {
-                  console.error(`[Public Check-in] Erro inesperado ao tentar enviar recompensa de visita WhatsApp para ${customer.name}:`, whatsappSendError.message, 'Stack:', whatsappSendError.stack);
-                  // Adicionar toast de erro para o frontend
-                  // toast.error(`Erro inesperado ao enviar recompensa via WhatsApp para ${customer.name}.`);
                 }
               } else {
-                console.warn(`[Public Check-in] Configurações de WhatsApp incompletas (URL: ${!!restaurant.whatsapp_api_url}, Key: ${!!restaurant.whatsapp_api_key}, Instance ID: ${!!restaurant.whatsapp_instance_id}) ou telefone do cliente ausente (${customer.phone}) para enviar recompensa para ${customer.name}.`);
-                // Adicionar toast de aviso para o frontend
-                // toast.warn(`Recompensa gerada, mas não foi possível enviar via WhatsApp para ${customer.name}. Verifique as configurações.`);
+                console.warn('[Public Check-in] generateCoupon retornou null ou undefined. Cupom não gerado.');
               }
-            } else {
-              console.warn('[Public Check-in] generateCoupon retornou null ou undefined. Cupom não gerado.');
-              // Adicionar toast de erro para o frontend
-              // toast.error('Erro interno: cupom não gerado.');
             }
           } catch (couponError) {
             console.error(`[Public Check-in] Erro ao gerar cupom de recompensa por visita para ${customer.name}:`, couponError.message, 'Stack:', couponError.stack);
-            // Adicionar toast de erro para o frontend
-            // toast.error(`Erro ao gerar cupom para ${customer.name}.`);
-          }1        } else {
+          }
+        } else {
           console.warn(`[Public Check-in] Recompensa com ID ${rewardConfig.reward_id} não encontrada no banco de dados.`);
-          // Adicionar toast de aviso para o frontend
-          // toast.warn(`Recompensa configurada não encontrada para ${customer.name}.`);
         }
       }
     }

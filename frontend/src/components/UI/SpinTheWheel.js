@@ -10,9 +10,8 @@ import {
 } from '@mui/material';
 import { Casino as CasinoIcon } from '@mui/icons-material';
 
-const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
-  const [isSpinning, setIsSpinning] = useState(false);
-  const [result, setResult] = useState(null);
+const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
+  
   const canvasRef = useRef(null);
   const rotationRef = useRef(0); // Current rotation in degrees
   const animationFrameId = useRef(null);
@@ -150,7 +149,12 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
   // Animation for spinning
   const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
 
-  const animateSpin = useCallback((targetRotation, duration = 5000) => {
+  const animateSpin = useCallback((winningItem, duration = 5000) => {
+    const numItems = items.length;
+    const segmentAngle = 360 / numItems;
+    const winningIndex = items.findIndex(item => item.title === winningItem.title);
+    const targetRotation = (360 * 5) + (360 - (winningIndex * segmentAngle) - (segmentAngle / 2));
+
     const start = performance.now();
     const initialRotation = rotationRef.current;
 
@@ -167,10 +171,8 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
       if (progress < 1) {
         animationFrameId.current = requestAnimationFrame(animate);
       } else {
-        setIsSpinning(false);
-        setResult(winningItem);
-        if (onSpinComplete) {
-          onSpinComplete(winningItem);
+        if (onSpinFinish) {
+          onSpinFinish(winningItem);
         }
       }
     };
@@ -178,62 +180,13 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
   }, [drawWheel, onSpinComplete, winningItem]);
 
   useEffect(() => {
-    if (result && winningItem && !isSpinning) {
-      const numItems = wheelConfig.items.length;
-      if (numItems === 0) return; // No items to spin to
-
-      const segmentAngleDegrees = 360 / numItems;
-      let currentAngleDegrees = 0;
-      let winningSegment = null;
-
-      for (let i = 0; i < numItems; i++) {
-        const item = wheelConfig.items[i];
-        if (item.title === winningItem.title) {
-          winningSegment = {
-            start: currentAngleDegrees,
-            end: currentAngleDegrees + segmentAngleDegrees,
-            mid: currentAngleDegrees + segmentAngleDegrees / 2,
-          };
-          break;
-        }
-        currentAngleDegrees += segmentAngleDegrees;
-      }
-
-      if (winningSegment) {
-        const baseRotations = 5; // 5 full spins
-        const targetRotation = (baseRotations * 360) - winningSegment.mid; // Rotate counter-clockwise
-
-        const currentFullRotations = Math.floor(rotationRef.current / 360);
-        const adjustedTargetRotation = (currentFullRotations + baseRotations) * 360 - winningSegment.mid;
-
-        animateSpin(adjustedTargetRotation);
-      }
+    if (isSpinning) {
+      const winningItem = items[Math.floor(Math.random() * items.length)];
+      animateSpin(winningItem);
     }
-  }, [result, winningItem, wheelConfig, isSpinning, animateSpin]);
+  }, [isSpinning, items, animateSpin]);
 
-  const handleSpin = () => {
-    if (isSpinning || !wheelConfig || !wheelConfig.items || wheelConfig.items.length === 0) return;
-
-    setIsSpinning(true);
-    setResult(null);
-    // The actual winningItem should come from the backend after an API call.
-    // For preview mode, we don't spin, just show the wheel.
-    // For actual spin, winningItem will be provided by parent component.
-    if (!winningItem) {
-      console.warn("No winningItem provided. Wheel will not animate to a specific result.");
-      // Simulate a random win for demonstration if no winningItem is provided
-      const randomIndex = Math.floor(Math.random() * wheelConfig.items.length);
-      const simulatedWinningItem = wheelConfig.items[randomIndex];
-      // This part would be replaced by an actual API call that returns the winning item
-      setTimeout(() => {
-        setResult(simulatedWinningItem);
-        setIsSpinning(false);
-        if (onSpinComplete) {
-          onSpinComplete(simulatedWinningItem);
-        }
-      }, 2000); // Simulate API call delay
-    }
-  };
+  
 
   return (
     <Paper sx={{ p: 4, textAlign: 'center', borderRadius: 3, boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
@@ -293,44 +246,7 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
           />
         </Box>
 
-        <Button
-            variant="contained"
-            onClick={handleSpin}
-            disabled={isSpinning || result}
-            startIcon={<CasinoIcon />}
-            sx={{
-              background: 'linear-gradient(135deg, #FFD700, #FFAA00)',
-              color: '#000',
-              fontWeight: 600,
-              fontSize: '16px',
-              padding: '12px 25px',
-              borderRadius: '50px',
-              border: 'none',
-              marginTop: '15px',
-              userSelect: 'none',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 15px rgba(255, 215, 0, 0.4)',
-              textTransform: 'uppercase',
-              letterSpacing: '1px',
-              position: 'relative',
-              overflow: 'hidden',
-              '&:hover:not(:disabled)': {
-                transform: 'translateY(-3px)',
-                boxShadow: '0 6px 20px rgba(255, 215, 0, 0.6)',
-                background: 'linear-gradient(135deg, #FFD700, #FFAA00)', // Manter o gradiente no hover
-              },
-              '&:active:not(:disabled)': {
-                transform: 'translateY(1px)',
-              },
-              '&:disabled': {
-                opacity: 0.7,
-                cursor: 'not-allowed',
-                transform: 'none !important',
-              },
-            }}
-          >
-            {isSpinning ? 'Girando...' : 'GIRAR ROLETA'}
-          </Button>
+        
 
         {result && (
           <Box

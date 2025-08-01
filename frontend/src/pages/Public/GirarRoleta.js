@@ -14,6 +14,7 @@ const GirarRoleta = () => {
 
   const [loading, setLoading] = useState(false);
   const [winningItem, setWinningItem] = useState(null);
+  const [apiResponseRewardEarned, setApiResponseRewardEarned] = useState(null);
   const [finalReward, setFinalReward] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
 
@@ -34,7 +35,8 @@ const GirarRoleta = () => {
         customer_id: reward_earned.customer_id,
       });
       setWinningItem(response.data.wonItem);
-      setFinalReward(response.data.reward_earned);
+      setApiResponseRewardEarned(response.data.reward_earned);
+      setLoading(false); // Stop loading here, as animation will start
     } catch (err) {
       console.error('Error spinning wheel:', err);
       toast.error(err.response?.data?.message || t('girar_roleta.error_spinning'));
@@ -44,8 +46,10 @@ const GirarRoleta = () => {
   };
 
   const handleAnimationComplete = () => {
+    setFinalReward(apiResponseRewardEarned);
     toast.success(t('girar_roleta.win_message'));
-    navigate('/recompensa-ganha', { state: { reward_earned: finalReward } });
+    navigate('/recompensa-ganha', { state: { reward_earned: apiResponseRewardEarned } });
+    setIsSpinning(false); // Animation complete, allow spinning again if needed
   };
 
   return (

@@ -40,68 +40,11 @@ const WhatsAppMessage = require('../models/WhatsAppMessage')(sequelize); // Impo
 
 // Definir associações
 const setupAssociations = () => {
-  // User - Restaurant (1:N)
-  User.hasMany(Restaurant, { foreignKey: 'owner_id', as: 'restaurants' });
-  Restaurant.belongsTo(User, { foreignKey: 'owner_id', as: 'owner' });
-  
-  // Restaurant - Feedback (1:N)
-  Restaurant.hasMany(Feedback, { foreignKey: 'restaurant_id', as: 'feedbacks' });
-  Feedback.belongsTo(Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
-  
-  // Customer - Feedback (1:N)
-  Customer.hasMany(Feedback, { foreignKey: 'customer_id', as: 'feedbacks' });
-  Feedback.belongsTo(Customer, { foreignKey: 'customer_id', as: 'customer' });
-  
-  // Restaurant - Customer (N:M através de Feedback)
-  Restaurant.belongsToMany(Customer, { 
-    through: Feedback, 
-    foreignKey: 'restaurant_id',
-    otherKey: 'customer_id',
-    as: 'customers'
+  Object.keys(sequelize.models).forEach(modelName => {
+    if (sequelize.models[modelName].associate) {
+      sequelize.models[modelName].associate(sequelize.models);
+    }
   });
-  Customer.belongsToMany(Restaurant, { 
-    through: Feedback, 
-    foreignKey: 'customer_id',
-    otherKey: 'restaurant_id',
-    as: 'restaurants'
-  });
-  
-  // Customer - Reward (1:N)
-  Customer.hasMany(Reward, { foreignKey: 'customer_id', as: 'rewards' });
-  Reward.belongsTo(Customer, { foreignKey: 'customer_id', as: 'customer' });
-  
-  // Restaurant - Reward (1:N)
-  Restaurant.hasMany(Reward, { foreignKey: 'restaurant_id', as: 'rewards' });
-  Reward.belongsTo(Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
-  
-  // Reward - Coupon (1:1)
-  Reward.hasOne(Coupon, { foreignKey: 'reward_id', as: 'coupon' });
-  Coupon.belongsTo(Reward, { foreignKey: 'reward_id', as: 'reward' });
-
-  // Customer - Coupon (1:N)
-  Customer.hasMany(Coupon, { foreignKey: 'customer_id', as: 'coupons' });
-  Coupon.belongsTo(Customer, { foreignKey: 'customer_id', as: 'customer' });
-  
-  // Restaurant - QRCode (1:N)
-  Restaurant.hasMany(QRCode, { foreignKey: 'restaurant_id', as: 'qrcodes' });
-  QRCode.belongsTo(Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
-
-  // Customer - Checkin (1:N)
-  Customer.hasMany(Checkin, { foreignKey: 'customer_id', as: 'checkins' });
-  Checkin.belongsTo(Customer, { foreignKey: 'customer_id', as: 'customer' });
-
-  // Restaurant - Checkin (1:N)
-  Restaurant.hasMany(Checkin, { foreignKey: 'restaurant_id', as: 'checkins' });
-  Checkin.belongsTo(Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
-
-  // WhatsAppMessage associations
-  WhatsAppMessage.associate(sequelize.models);
-
-  // Survey models associations
-  Survey.associate(sequelize.models);
-  Question.associate(sequelize.models);
-  Answer.associate(sequelize.models);
-  SurveyResponse.associate(sequelize.models);
 };
 
 setupAssociations();

@@ -397,7 +397,6 @@ const CustomerDetail = () => {
           <Button onClick={handleClearCheckins} color="warning" variant="contained">
             Limpar Check-ins
           </Button>
-        </Button>
         </DialogActions>
       </Dialog>
 

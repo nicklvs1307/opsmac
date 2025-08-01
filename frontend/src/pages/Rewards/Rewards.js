@@ -61,11 +61,9 @@ const Rewards = () => {
     status: '',
     type: '',
   });
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
+  
   const [createDialog, setCreateDialog] = useState(false);
-  const [editDialog, setEditDialog] = useState(false);
-  const [analyticsDialog, setAnalyticsDialog] = useState(false);
+  
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [detailsModalTab, setDetailsModalTab] = useState(0); // 0 for config, 1 for analytics
 
@@ -145,19 +143,18 @@ const Rewards = () => {
     setPage(1);
   };
 
-  const handleMenuOpen = (event, item) => {
-    setAnchorEl(event.currentTarget);
-    setSelectedItem(item);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    setSelectedItem(null);
-  };
+  
 
   const handleCreate = () => {
     reset();
     setCreateDialog(true);
+  };
+
+  const handleCardClick = (reward) => {
+    setSelectedItem(reward);
+    reset(reward); // Populate form with reward data
+    setDetailsModalTab(0); // Default to config tab
+    setDetailsModalOpen(true);
   };
 
   
@@ -166,9 +163,7 @@ const Rewards = () => {
     setDeleteDialog(true);
   };
 
-  const handleAnalytics = () => {
-    setAnalyticsDialog(true);
-  };
+  
 
   const onSubmit = async (data) => {
     try {
@@ -213,15 +208,9 @@ const Rewards = () => {
     }
   };
 
-  const handleEdit = () => {
-    setDetailsModalTab(0); // Open on config tab
-    setDetailsModalOpen(true);
-  };
+  
 
-  const handleAnalytics = () => {
-    setDetailsModalTab(1); // Open on analytics tab
-    setDetailsModalOpen(true);
-  };
+  
 
   const confirmDelete = async () => {
     try {
@@ -389,11 +378,7 @@ const Rewards = () => {
                 </Typography>
               </CardContent>
               
-              <CardActions>
-                <Button size="small" onClick={(e) => handleMenuOpen(e, reward)}>
-                  Ações
-                </Button>
-              </CardActions>
+              
             </Card>
           </Grid>
         ))}
@@ -527,7 +512,7 @@ const Rewards = () => {
         </Box>
       )}
 
-      {/* Action Menu - REMOVED */}
+      
 
       {/* Create/Edit/Details Dialog */}
       <Dialog
@@ -885,10 +870,6 @@ const Rewards = () => {
         </DialogActions>
       </Dialog>
     </Box>
-  );
-};
-
-export default Rewards;
   );
 };
 

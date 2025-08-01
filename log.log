@@ -1,43 +1,28 @@
- => ERROR [builder 5/7] RUN npm cache clean --force && npm install                            36.2s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      164.1s
 ------
- > [builder 5/7] RUN npm cache clean --force && npm install:
-0.831 npm warn using --force Recommended protections disabled.
-14.78 npm warn deprecated w3c-hr-time@1.0.2: Use your platform's native performance.now() and performance.timeOrigin.
-15.56 npm warn deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
-15.56 npm warn deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
-15.76 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
-15.83 npm warn deprecated rollup-plugin-terser@7.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
-16.00 npm warn deprecated workbox-cacheable-response@6.6.0: workbox-background-sync@6.6.0
-16.30 npm warn deprecated q@1.5.1: You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-16.30 npm warn deprecated
-16.30 npm warn deprecated (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
-17.84 npm warn deprecated workbox-google-analytics@6.6.0: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
-19.30 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
-19.68 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
-21.04 npm warn deprecated domexception@2.0.1: Use your platform's native DOMException instead
-22.61 npm warn deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
-23.32 npm warn deprecated svgo@1.3.2: This SVGO version is no longer supported. Upgrade to v2.x.x.
-24.47 npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
-24.53 npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
-26.17 npm warn deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
-26.18 npm warn deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
-26.18 npm warn deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
-26.24 npm warn deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
-26.24 npm warn deprecated @babel/plugin-proposal-private-methods@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-private-methods instead.
-30.51 npm warn deprecated @babel/plugin-proposal-private-property-in-object@7.21.11: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-private-property-in-object instead.
-35.94 npm warn tar TAR_ENTRY_ERROR ENOSPC: no space left on device, write
-35.94 npm warn tar TAR_ENTRY_ERROR ENOSPC: no space left on device, write
-35.94 npm error A complete log of this run can be found in: /root/.npm/_logs/2025-08-01T18_09_08_678Z-debug-0.log
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.774
+0.774 > Feedeliza+-frontend@1.0.0 build
+0.774 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.774
+4.252 Creating an optimized production build...
+163.0 Failed to compile.
+163.0
+163.1 [eslint]
+163.1 src/pages/Rewards/Rewards.js
+163.1 Syntax error: Identifier 'handleAnalytics' has already been declared. (221:8) (221:8)
+163.1
+163.1
 ------
 
  1 warning found (use docker --debug to expand):
  - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
-Dockerfile.frontend:15
+Dockerfile.frontend:23
 --------------------
-  13 |
-  14 |     # Instala as dependências
-  15 | >>> RUN npm cache clean --force && npm install
-  16 |
-  17 |     # Copia o restante do código-fonte do frontend
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
 --------------------
-ERROR: failed to solve: process "/bin/sh -c npm cache clean --force && npm install" did not complete successfully: exit code: 1
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

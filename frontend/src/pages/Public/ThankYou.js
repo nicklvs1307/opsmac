@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Box } from '@mui/material';
+import { Box, Container, Paper, Button, Typography } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ThankYouCard from '../../components/UI/ThankYouCard';
 import { useTranslation } from 'react-i18next';

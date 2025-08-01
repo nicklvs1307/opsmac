@@ -1,18 +1,20 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      154.9s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      157.3s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.685
-0.685 > Feedeliza+-frontend@1.0.0 build
-0.685 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.685
-3.434 Creating an optimized production build...
-154.5 Failed to compile.
-154.5
-154.5 [eslint]
-154.5 src/components/UI/SpinTheWheel.js
-154.5 Syntax error: Unexpected token (196:10) (196:10)
-154.5
-154.5
+0.628
+0.628 > Feedeliza+-frontend@1.0.0 build
+0.628 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.628
+3.587 Creating an optimized production build...
+156.6 Failed to compile.
+156.6
+156.6 [eslint]
+156.6 src/pages/Public/ThankYou.js
+156.6   Line 69:12:  'Typography' is not defined  react/jsx-no-undef
+156.6
+156.6 Search for the keywords to learn more about each error.
+156.6
+156.6
 ------
 
  1 warning found (use docker --debug to expand):

@@ -50,8 +50,9 @@ const PublicReward = () => {
       <Container maxWidth="sm">
         {reward_earned.reward_type === 'spin_the_wheel' ? (
           <SpinTheWheel
-            wheelConfig={reward_earned.wheel_config}
+            items={reward_earned.wheel_config.items}
             winningItem={{
+              name: reward_earned.reward_title,
               title: reward_earned.reward_title,
               description: reward_earned.formatted_message,
               coupon_code: reward_earned.coupon_code,

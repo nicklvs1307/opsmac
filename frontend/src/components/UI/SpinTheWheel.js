@@ -157,10 +157,13 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
         animationFrameId.current = requestAnimationFrame(animate);
       } else {
         // Ensure the final rotation is exactly the target rotation
-        rotationRef.current = targetRotationRadians;
-        drawWheel(rotationRef.current);
+        rotationRef.current = targetRotationRadians; // Ensure final position is exact
+        drawWheel(rotationRef.current); // Draw one last time at final position
         if (onAnimationComplete) {
-          onAnimationComplete();
+          // Add a small delay to ensure the final frame is rendered before callback
+          setTimeout(() => {
+            onAnimationComplete();
+          }, 100); // 100ms delay
         }
       }
     };

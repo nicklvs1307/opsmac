@@ -54,8 +54,8 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
       return;
     }
 
-    let totalProbability = wheelConfig.items.reduce((sum, item) => sum + item.probability, 0);
-    if (totalProbability === 0) totalProbability = 1; // Avoid division by zero
+    const numItems = wheelConfig.items.length;
+    const segmentAngle = (2 * Math.PI) / numItems; // Equal segments
 
     let startAngle = 0;
     const assignedColors = wheelConfig.items.map(item => item.color || getRandomColor());
@@ -67,7 +67,6 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
     ctx.translate(-center, -center);
 
     wheelConfig.items.forEach((item, index) => {
-      const segmentAngle = (item.probability / totalProbability) * 2 * Math.PI;
       const endAngle = startAngle + segmentAngle;
 
       // Draw segment
@@ -85,20 +84,24 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
 
       // Draw text
       ctx.save();
-      ctx.translate(center, center);
+      ctx.translate(center, center); // Move origin to center of wheel
       const midAngle = startAngle + segmentAngle / 2;
-      ctx.rotate(midAngle); // Rotate to the middle of the segment
+      ctx.rotate(midAngle); // Rotate context to the middle of the segment
 
-      ctx.fillStyle = item.colorText || (assignedColors[index] === '#000000' ? '#FFFFFF' : '#000000'); // Dynamic text color
-      ctx.font = 'bold 12px Poppins'; // Adjust font size as needed
+      // Now, translate along the rotated axis to the text position
+      const textRadius = radius * 0.65; // Position text further out
+      ctx.translate(textRadius, 0);
+
+      // Counter-rotate the context to make the text upright relative to the viewer
+      ctx.rotate(-midAngle); 
+
+      ctx.fillStyle = item.colorText || (assignedColors[index] === '#000000' ? '#FFFFFF' : '#000000');
+      ctx.font = 'bold 12px Poppins'; // Ensure Poppins is loaded or fallback
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
-      const textRadius = radius * 0.65; // Position text further out
       const text = item.title;
-
-      // Handle long text by splitting or adjusting font size
-      const maxTextWidth = radius * 0.8; // Max width for text
+      const maxTextWidth = radius * 0.8; // Max width for text, relative to the upright context
       const words = text.split(' ');
       let line = '';
       const lines = [];
@@ -120,10 +123,10 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
       let yOffset = -((lines.length - 1) * lineHeight) / 2;
 
       lines.forEach((l, i) => {
-        ctx.fillText(l.trim(), textRadius, yOffset + i * lineHeight);
+        ctx.fillText(l.trim(), 0, yOffset + i * lineHeight); // Draw at (0, yOffset) in the upright context
       });
 
-      ctx.restore();
+      ctx.restore(); // Restore context for this segment
       startAngle = endAngle;
     });
 
@@ -136,7 +139,7 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
     ctx.lineWidth = 3;
     ctx.stroke();
 
-    ctx.restore(); // Restore canvas context to original state
+    ctx.restore(); // Restore overall canvas context
   }, [wheelConfig, getRandomColor, center, radius, wheelSize]);
 
   // Redraw wheel whenever wheelConfig changes (for real-time preview)
@@ -176,15 +179,15 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
 
   useEffect(() => {
     if (result && winningItem && !isSpinning) {
-      // Calculate target rotation to land on the winning item
-      let totalProbability = wheelConfig.items.reduce((sum, item) => sum + item.probability, 0);
-      if (totalProbability === 0) totalProbability = 1;
+      const numItems = wheelConfig.items.length;
+      if (numItems === 0) return; // No items to spin to
 
+      const segmentAngleDegrees = 360 / numItems;
       let currentAngleDegrees = 0;
       let winningSegment = null;
 
-      for (const item of wheelConfig.items) {
-        const segmentAngleDegrees = (item.probability / totalProbability) * 360;
+      for (let i = 0; i < numItems; i++) {
+        const item = wheelConfig.items[i];
         if (item.title === winningItem.title) {
           winningSegment = {
             start: currentAngleDegrees,
@@ -197,13 +200,9 @@ const SpinTheWheel = ({ wheelConfig, onSpinComplete, winningItem }) => {
       }
 
       if (winningSegment) {
-        // We want the pointer (at 0 degrees, top) to point to the middle of the winning segment.
-        // The wheel rotates clockwise. So, if the mid-angle is 90 degrees, we need to rotate the wheel -90 degrees.
-        // Add multiple full rotations to make it spin visibly.
         const baseRotations = 5; // 5 full spins
         const targetRotation = (baseRotations * 360) - winningSegment.mid; // Rotate counter-clockwise
 
-        // Adjust for current rotation to ensure it always spins forward
         const currentFullRotations = Math.floor(rotationRef.current / 360);
         const adjustedTargetRotation = (currentFullRotations + baseRotations) * 360 - winningSegment.mid;
 

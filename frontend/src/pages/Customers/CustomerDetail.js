@@ -150,7 +150,7 @@ const CustomerDetail = () => {
               </Typography>
               {customer.preferences && (
                 <Typography variant="body1" gutterBottom>
-                  <strong>Preferências:</strong> {customer.preferences}
+                  <strong>Preferências:</strong> {typeof customer.preferences === 'object' ? JSON.stringify(customer.preferences) : customer.preferences}
                 </Typography>
               )}
               <Button

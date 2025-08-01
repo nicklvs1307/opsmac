@@ -748,4 +748,68 @@ router.post('/:id/reset-visits', auth, async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/customers/{id}/clear-checkins:
+ *   post:
+ *     summary: Limpa todos os check-ins de um cliente
+ *     tags: [Customers]
+ *     description: Remove todos os registros de check-in de um cliente específico.
+ *     security:
+ *       - ApiKeyAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID do cliente cujos check-ins serão limpos.
+ *         example: "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+ *     responses:
+ *       200:
+ *         description: Check-ins do cliente limpos com sucesso.
+ *       401:
+ *         description: Não autorizado.
+ *       404:
+ *         description: Cliente não encontrado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.post('/:id/clear-checkins', auth, async (req, res) => {
+  try {
+    const user = await models.User.findByPk(req.user.userId, {
+      include: [{ model: models.Restaurant, as: 'restaurants' }]
+    });
+    const restaurantId = user?.restaurants?.[0]?.id;
+    if (!restaurantId) {
+      return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
+    }
+
+    const customer = await Customer.findOne({
+      where: {
+        id: req.params.id,
+        restaurant_id: restaurantId
+      }
+    });
+
+    if (!customer) {
+      return res.status(404).json({ error: 'Cliente não encontrado ou não pertence ao seu restaurante.' });
+    }
+
+    // Deletar todos os check-ins associados a este cliente e restaurante
+    await models.Checkin.destroy({
+      where: {
+        customer_id: req.params.id,
+        restaurant_id: restaurantId
+      }
+    });
+
+    res.json({ message: 'Check-ins do cliente limpos com sucesso.' });
+  } catch (error) {
+    console.error('Erro ao limpar check-ins do cliente:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;

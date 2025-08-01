@@ -18,6 +18,8 @@ import {
   ListItem,
   ListItemText,
   Divider,
+  TextField,
+  DialogContentText,
 } from '@mui/material';
 import {
   Email as EmailIcon,
@@ -29,6 +31,8 @@ import {
   Redeem as RedeemIcon,
   Poll as PollIcon,
   RotateLeft as ResetIcon,
+  DeleteForever as DeleteForeverIcon,
+  Edit as EditIcon,
 } from '@mui/icons-material';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -42,6 +46,9 @@ const CustomerDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [resetConfirmOpen, setResetConfirmOpen] = useState(false);
+  const [clearCheckinsConfirmOpen, setClearCheckinsConfirmOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editFormData, setEditFormData] = useState({});
 
   useEffect(() => {
     const fetchCustomerDetails = async () => {
@@ -77,6 +84,71 @@ const CustomerDetail = () => {
     }
   };
 
+  const handleClearCheckins = async () => {
+    try {
+      setLoading(true);
+      await axiosInstance.post(`/api/customers/${id}/clear-checkins`);
+      toast.success('Check-ins do cliente limpos com sucesso!');
+      setClearCheckinsConfirmOpen(false);
+      // Atualizar o estado do cliente para refletir a mudança
+      setCustomer(prev => ({ ...prev, checkins: [] }));
+    } catch (err) {
+      console.error('Error clearing checkins:', err);
+      toast.error(err.response?.data?.message || 'Erro ao limpar check-ins.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEditClick = () => {
+    setEditFormData({
+      name: customer.name || '',
+      email: customer.email || '',
+      phone: customer.phone || '',
+      birth_date: customer.birth_date ? format(new Date(customer.birth_date), 'yyyy-MM-dd') : '',
+      gender: customer.gender || '',
+      cpf: customer.cpf || '',
+      whatsapp: customer.whatsapp || '',
+      loyalty_points: customer.loyalty_points || 0,
+      total_visits: customer.total_visits || 0,
+      total_spent: customer.total_spent || 0,
+      customer_segment: customer.customer_segment || '',
+      status: customer.status || '',
+      source: customer.source || '',
+      referral_code: customer.referral_code || '',
+      notes: customer.notes || '',
+      tags: customer.tags || [],
+      marketing_consent: customer.marketing_consent || false,
+      email_verified: customer.email_verified || false,
+      phone_verified: customer.phone_verified || false,
+      gdpr_consent: customer.gdpr_consent || false,
+    });
+    setEditModalOpen(true);
+  };
+
+  const handleEditFormChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setEditFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleEditSubmit = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance.put(`/api/customers/${id}`, editFormData);
+      setCustomer(response.data);
+      toast.success('Cliente atualizado com sucesso!');
+      setEditModalOpen(false);
+    } catch (err) {
+      console.error('Error updating customer:', err);
+      toast.error(err.response?.data?.message || 'Erro ao atualizar cliente.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
@@ -107,6 +179,14 @@ const CustomerDetail = () => {
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
         Detalhes do Cliente: {customer.name}
+        <Button
+          variant="contained"
+          startIcon={<EditIcon />}
+          onClick={handleEditClick}
+          sx={{ ml: 3 }}
+        >
+          Editar Cliente
+        </Button>
       </Typography>
 
       <Grid container spacing={3} mt={2}>
@@ -161,6 +241,15 @@ const CustomerDetail = () => {
                 sx={{ mt: 3 }}
               >
                 Resetar Visitas
+              </Button>
+              <Button
+                variant="outlined"
+                color="warning"
+                startIcon={<DeleteForeverIcon />}
+                onClick={() => setClearCheckinsConfirmOpen(true)}
+                sx={{ mt: 3, ml: 2 }}
+              >
+                Limpar Check-ins
               </Button>
             </CardContent>
           </Card>
@@ -289,6 +378,229 @@ const CustomerDetail = () => {
           <Button onClick={() => setResetConfirmOpen(false)}>Cancelar</Button>
           <Button onClick={handleResetVisits} color="error" variant="contained">
             Resetar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Dialog de Confirmação de Limpeza de Check-ins */}
+      <Dialog
+        open={clearCheckinsConfirmOpen}
+        onClose={() => setClearCheckinsConfirmOpen(false)}
+      >
+        <DialogTitle>Confirmar Limpeza de Check-ins</DialogTitle>
+        <DialogContent>
+          <Typography>Tem certeza que deseja limpar TODOS os check-ins para este cliente?</Typography>
+          <Typography color="error">Esta ação não pode ser desfeita.</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setClearCheckinsConfirmOpen(false)}>Cancelar</Button>
+          <Button onClick={handleClearCheckins} color="warning" variant="contained">
+            Limpar Check-ins
+          </Button>
+        </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Dialog de Edição de Cliente */}
+      <Dialog open={editModalOpen} onClose={() => setEditModalOpen(false)} fullWidth maxWidth="md">
+        <DialogTitle>Editar Cliente</DialogTitle>
+        <DialogContent>
+          <DialogContentText mb={3}>
+            Preencha os campos abaixo para atualizar os dados do cliente.
+          </DialogContentText>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="name"
+                label="Nome"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={editFormData.name || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="email"
+                label="Email"
+                type="email"
+                fullWidth
+                variant="outlined"
+                value={editFormData.email || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="phone"
+                label="Telefone"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={editFormData.phone || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="whatsapp"
+                label="WhatsApp"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={editFormData.whatsapp || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="cpf"
+                label="CPF"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={editFormData.cpf || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="birth_date"
+                label="Data de Nascimento"
+                type="date"
+                fullWidth
+                variant="outlined"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={editFormData.birth_date || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="gender"
+                label="Gênero"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={editFormData.gender || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="loyalty_points"
+                label="Pontos de Fidelidade"
+                type="number"
+                fullWidth
+                variant="outlined"
+                value={editFormData.loyalty_points || 0}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="total_visits"
+                label="Total de Visitas"
+                type="number"
+                fullWidth
+                variant="outlined"
+                value={editFormData.total_visits || 0}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="total_spent"
+                label="Total Gasto"
+                type="number"
+                fullWidth
+                variant="outlined"
+                value={editFormData.total_spent || 0}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="customer_segment"
+                label="Segmento do Cliente"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={editFormData.customer_segment || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="status"
+                label="Status"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={editFormData.status || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="source"
+                label="Fonte"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={editFormData.source || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                margin="dense"
+                name="referral_code"
+                label="Código de Referência"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={editFormData.referral_code || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                margin="dense"
+                name="notes"
+                label="Notas"
+                type="text"
+                fullWidth
+                multiline
+                rows={3}
+                variant="outlined"
+                value={editFormData.notes || ''}
+                onChange={handleEditFormChange}
+              />
+            </Grid>
+            {/* Adicionar mais campos conforme necessário, como tags, consentimentos, etc. */}
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setEditModalOpen(false)}>Cancelar</Button>
+          <Button onClick={handleEditSubmit} color="primary" variant="contained">
+            Salvar
           </Button>
         </DialogActions>
       </Dialog>

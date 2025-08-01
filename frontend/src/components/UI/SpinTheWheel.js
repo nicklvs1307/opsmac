@@ -46,9 +46,14 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
       return;
     }
 
+    ctx.save(); // Save the unrotated state
+    ctx.translate(center, center); // Move origin to center
+    ctx.rotate(currentRotation); // Apply the overall wheel rotation
+    ctx.translate(-center, -center); // Move origin back
+
     const numItems = items.length;
     const segmentAngle = (2 * Math.PI) / numItems;
-    let startAngle = 0;
+    let startAngle = 0; // Segments start from 0 relative to the rotated canvas
 
     items.forEach((item, index) => {
       const endAngle = startAngle + segmentAngle;
@@ -125,11 +130,11 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
     ctx.arc(center, center, 8, 0, 2 * Math.PI);
     ctx.fill();
 
-    ctx.restore();
+    ctx.restore(); // Restore the canvas to its original unrotated state
   }, [items, center, radius, wheelSize, getRandomHexColor, getContrastingTextColor]);
 
   useEffect(() => {
-    drawWheel();
+    drawWheel(rotationRef.current);
   }, [drawWheel]);
 
   const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);

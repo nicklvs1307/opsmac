@@ -260,6 +260,10 @@ module.exports = (sequelize) => {
       foreignKey: 'customer_id',
       as: 'checkins'
     });
+    Customer.hasMany(models.SurveyResponse, {
+      foreignKey: 'customer_id',
+      as: 'survey_responses'
+    });
     Customer.belongsTo(models.Restaurant, {
       foreignKey: 'restaurant_id',
       as: 'restaurant',

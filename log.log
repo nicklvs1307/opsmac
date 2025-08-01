@@ -1,30 +1,73 @@
-=> ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      179.4s
-------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.870
-0.870 > Feedeliza+-frontend@1.0.0 build
-0.870 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.870
-4.549 Creating an optimized production build...
-178.3 Failed to compile.
-178.3
-178.4 [eslint]
-178.4 src/pages/Customers/Customers.js
-178.4   Line 130:7:  'setCustomerDetails' is not defined  no-undef
-178.4
-178.4 Search for the keywords to learn more about each error.
-178.4
-178.4
-------
 
- 1 warning found (use docker --debug to expand):
- - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
-Dockerfile.frontend:23
---------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+{"error":"Erro interno do servidor"}
+
+Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingError]: SurveyResponse is not associated to Customer!
+
+    at Customer._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:565:13)
+
+    at Customer._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+
+    at /app/node_modules/sequelize/lib/model.js:421:37
+
+    at Array.map (<anonymous>)
+
+    at Customer._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+
+    at Customer.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+    at async Customer.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+
+    at async /app/backend/routes/customers.js:696:22
+
+Auth Middleware - req.user (after population): {
+
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+
+  email: 'lucas@teste.com',
+
+  role: 'owner',
+
+  name: 'Lucas Niquele',
+
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+
+  Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingError]: SurveyResponse is not associated to Customer!
+
+    at Customer._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:565:13)
+
+    at Customer._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+
+    at /app/node_modules/sequelize/lib/model.js:421:37
+
+    at Array.map (<anonymous>)
+
+    at Customer._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+
+    at Customer.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+    at async Customer.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+
+    at async /app/backend/routes/customers.js:696:22
+
+Auth Middleware - req.user (after population): {
+
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+
+  email: 'lucas@teste.com',
+
+  role: 'owner',
+
+  name: 'Lucas Niquele',
+
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+
+  URL da solicitação
+https://feedelizaapi.towersfy.com/api/customers/c0463aa7-193d-42fc-9163-aa9c850a0546/details
+Método da solicitação
+GET
+Código de status
+500 Internal Server Erro

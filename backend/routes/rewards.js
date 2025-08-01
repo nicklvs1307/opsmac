@@ -131,4 +131,49 @@ router.post('/spin-wheel', [
     }
 });
 
+// Rota para obter analytics de recompensas e cupons
+router.get('/analytics', auth, async (req, res) => {
+    try {
+        const user = await models.User.findByPk(req.user.userId, {
+            include: [{ model: models.Restaurant, as: 'restaurants' }]
+        });
+
+        const restaurantId = user?.restaurants?.[0]?.id;
+        if (!restaurantId) {
+            return res.status(400).json({ error: 'Restaurante não encontrado para o usuário autenticado.' });
+        }
+
+        // Total de recompensas
+        const totalRewards = await models.Reward.count({
+            where: { restaurant_id: restaurantId }
+        });
+
+        // Recompensas ativas
+        const activeRewards = await models.Reward.count({
+            where: { restaurant_id: restaurantId, is_active: true }
+        });
+
+        // Total de cupons gerados
+        const totalCoupons = await models.Coupon.count({
+            where: { restaurant_id: restaurantId }
+        });
+
+        // Cupons resgatados
+        const redeemedCoupons = await models.Coupon.count({
+            where: { restaurant_id: restaurantId, status: 'redeemed' }
+        });
+
+        res.json({
+            total_rewards: totalRewards,
+            active_rewards: activeRewards,
+            total_coupons: totalCoupons,
+            redeemed_coupons: redeemedCoupons,
+        });
+
+    } catch (error) {
+        console.error('Erro ao buscar analytics de recompensas:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
 module.exports = router;

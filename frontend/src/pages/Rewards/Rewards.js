@@ -65,8 +65,9 @@ const Rewards = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [createDialog, setCreateDialog] = useState(false);
   const [editDialog, setEditDialog] = useState(false);
-  const [deleteDialog, setDeleteDialog] = useState(false);
   const [analyticsDialog, setAnalyticsDialog] = useState(false);
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+  const [detailsModalTab, setDetailsModalTab] = useState(0); // 0 for config, 1 for analytics
 
   const {
     control,
@@ -213,15 +214,13 @@ const Rewards = () => {
   };
 
   const handleEdit = () => {
-    // Ao editar, resetar o formulário com os dados do item selecionado
-    // Certificar-se de que wheel_config.items é um array, mesmo que vazio
-    reset({
-      ...selectedItem,
-      max_uses: selectedItem.max_uses_per_customer,
-      expires_at: selectedItem.valid_until ? format(new Date(selectedItem.valid_until), 'yyyy-MM-ddTHH:mm') : '',
-      wheel_config: selectedItem.wheel_config || { items: [] },
-    });
-    setEditDialog(true);
+    setDetailsModalTab(0); // Open on config tab
+    setDetailsModalOpen(true);
+  };
+
+  const handleAnalytics = () => {
+    setDetailsModalTab(1); // Open on analytics tab
+    setDetailsModalOpen(true);
   };
 
   const confirmDelete = async () => {
@@ -243,6 +242,7 @@ const Rewards = () => {
       case 'free_item': return 'success';
       case 'points_multiplier': return 'warning';
       case 'cashback': return 'info';
+      case 'spin_the_wheel': return 'secondary'; // New color for wheel
       default: return 'default';
     }
   };
@@ -254,6 +254,7 @@ const Rewards = () => {
       case 'free_item': return 'Item Grátis';
       case 'points_multiplier': return 'Multiplicador de Pontos';
       case 'cashback': return 'Cashback';
+      case 'spin_the_wheel': return 'Roleta de Prêmios'; // New label for wheel
       default: return type;
     }
   };
@@ -335,18 +336,12 @@ const Rewards = () => {
       <Grid container spacing={3}>
         {rewards.map((reward) => (
           <Grid item xs={12} sm={6} md={4} key={reward.id}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer' }} onClick={() => handleCardClick(reward)}>
               <CardContent sx={{ flexGrow: 1 }}>
                 <Box display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
                   <Avatar sx={{ bgcolor: 'primary.main' }}>
                     <RewardIcon />
                   </Avatar>
-                  <IconButton
-                    size="small"
-                    onClick={(e) => handleMenuOpen(e, reward)}
-                  >
-                    <MoreVertIcon />
-                  </IconButton>
                 </Box>
                 
                 <Typography variant="h6" gutterBottom noWrap>
@@ -532,294 +527,354 @@ const Rewards = () => {
         </Box>
       )}
 
-      {/* Action Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={handleEdit}>
-          <EditIcon sx={{ mr: 1 }} />
-          Editar
-        </MenuItem>
-        <MenuItem onClick={handleAnalytics}>
-          <AnalyticsIcon sx={{ mr: 1 }} />
-          Ver Analytics
-        </MenuItem>
-        <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
-          <DeleteIcon sx={{ mr: 1 }} />
-          Excluir
-        </MenuItem>
-      </Menu>
+      {/* Action Menu - REMOVED */}
 
-      {/* Create/Edit Dialog */}
+      {/* Create/Edit/Details Dialog */}
       <Dialog
-        open={createDialog || editDialog}
+        open={createDialog || detailsModalOpen}
         onClose={() => {
           setCreateDialog(false);
-          setEditDialog(false);
+          setDetailsModalOpen(false);
+          setSelectedItem(null); // Clear selected item when closing
+          reset(); // Reset form when closing
         }}
         maxWidth="md"
         fullWidth
       >
         <DialogTitle>
-          {editDialog ? 'Editar Recompensa' : 'Nova Recompensa'}
+          {createDialog ? 'Nova Recompensa' : 'Detalhes da Recompensa'}
         </DialogTitle>
         <DialogContent>
-          <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name="title"
-                control={control}
-                rules={{ required: 'Nome é obrigatório' }}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Nome"
-                    fullWidth
-                    error={!!errors.name}
-                    helperText={errors.name?.message}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name="reward_type"
-                control={control}
-                rules={{ required: 'Tipo é obrigatório' }}
-                render={({ field }) => (
-                  <FormControl fullWidth error={!!errors.type}>
-                    <InputLabel>Tipo</InputLabel>
-                    <Select {...field} label="Tipo">
-                      <SelectMenuItem value="discount_percentage">Desconto (%)</SelectMenuItem>
-                      <SelectMenuItem value="discount_fixed">Desconto Fixo</SelectMenuItem>
-                      <SelectMenuItem value="free_item">Item Grátis</SelectMenuItem>
-                      <SelectMenuItem value="points_multiplier">Multiplicador de Pontos</SelectMenuItem>
-                      <SelectMenuItem value="cashback">Cashback</SelectMenuItem>
-                      <SelectMenuItem value="spin_the_wheel">Roleta de Prêmios</SelectMenuItem>
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Grid>
-            {watch('reward_type') === 'spin_the_wheel' && (
-              <Grid item xs={12}>
-                <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                  Configuração da Roleta
-                </Typography>
-                <SpinTheWheel wheelConfig={watch('wheel_config')} />
-                {fields.map((item, index) => (
-                  <Paper key={item.id} sx={{ p: 2, mb: 2, border: '1px solid #eee' }}>
-                    <Grid container spacing={2} alignItems="center">
-                      <Grid item xs={12} sm={6}>
-                        <Controller
-                          name={`wheel_config.items.${index}.title`}
-                          control={control}
-                          rules={{ required: 'Título do item é obrigatório' }}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label="Título do Item"
-                              fullWidth
-                            />
-                          )}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={4}>
-                        <Controller
-                          name={`wheel_config.items.${index}.probability`}
-                          control={control}
-                          rules={{ required: 'Probabilidade é obrigatória', min: 0 }}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label="Probabilidade"
-                              type="number"
-                              fullWidth
-                            />
-                          )}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <Controller
-                          name={`wheel_config.items.${index}.color`}
-                          control={control}
-                          rules={{ required: 'Cor do segmento é obrigatória' }}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label="Cor do Segmento (Hex)"
-                              fullWidth
-                              placeholder="Ex: #FFD700"
-                            />
-                          )}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <Controller
-                          name={`wheel_config.items.${index}.textColor`}
-                          control={control}
-                          rules={{ required: 'Cor do texto é obrigatória' }}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label="Cor do Texto (Hex)"
-                              fullWidth
-                              placeholder="Ex: #FFFFFF"
-                            />
-                          )}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                        <Button
-                          variant="outlined"
-                          color="error"
-                          onClick={() => remove(index)}
-                          startIcon={<DeleteIcon />}
-                        >
-                          Remover
-                        </Button>
-                      </Grid>
-                    </Grid>
-                  </Paper>
-                ))}
-                <Button
-                  variant="outlined"
-                  startIcon={<AddIcon />}
-                  onClick={() => append({ title: '', probability: 0 })}
-                >
-                  Adicionar Item à Roleta
-                </Button>
-              </Grid>
-            )}
-            <Grid item xs={12}>
-              <Controller
-                name="description"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Descrição"
-                    multiline
-                    rows={3}
-                    fullWidth
-                  />
-                )}
-              />
-            </Grid>
-            {watch('reward_type') !== 'spin_the_wheel' && (
-              <Grid item xs={12} md={4}>
-                <Controller
-                  name="value"
-                  control={control}
-                  rules={{ required: 'Valor é obrigatório' }}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label="Valor (%)"
-                      type="number"
-                      fullWidth
-                      error={!!errors.value}
-                      helperText={errors.value?.message}
-                    />
-                  )}
-                />
-              </Grid>
-            )}
-            {watch('reward_type') !== 'spin_the_wheel' && (
-              <Grid item xs={12} md={4}>
-                <Controller
-                  name="points_required"
-                  control={control}
-                  rules={{ required: 'Pontos são obrigatórios' }}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label="Pontos Necessários"
-                      type="number"
-                      fullWidth
-                      error={!!errors.points_required}
-                      helperText={errors.points_required?.message}
-                    />
-                  )}
-                />
-              </Grid>
-            )}
-            {watch('reward_type') !== 'spin_the_wheel' && (
-              <Grid item xs={12} md={4}>
-                <Controller
-                  name="max_uses"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label="Usos Máximos"
-                      type="number"
-                      fullWidth
-                      helperText="Deixe em branco para ilimitado"
-                    />
-                  )}
-                />
-              </Grid>
-            )}
-            {watch('reward_type') !== 'spin_the_wheel' && (
+          {!createDialog && (
+            <Tabs
+              value={detailsModalTab}
+              onChange={(e, newValue) => setDetailsModalTab(newValue)}
+              indicatorColor="primary"
+              textColor="primary"
+              sx={{ mb: 2 }}
+            >
+              <Tab label="Configurações" />
+              <Tab label="Análises" />
+            </Tabs>
+          )}
+
+          {/* Configurações Tab Content */}
+          {(createDialog || detailsModalTab === 0) && (
+            <Grid container spacing={2} sx={{ mt: 1 }}>
               <Grid item xs={12} md={6}>
                 <Controller
-                  name="expires_at"
+                  name="title"
                   control={control}
+                  rules={{ required: 'Nome é obrigatório' }}
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label="Data de Expiração"
-                      type="datetime-local"
+                      label="Nome"
                       fullWidth
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
+                      error={!!errors.name}
+                      helperText={errors.name?.message}
                     />
                   )}
                 />
               </Grid>
-            )}
-            <Grid item xs={12} md={6}>
-              <Controller
-                name="status"
-                control={control}
-                render={({ field }) => (
-                  <FormControl fullWidth>
-                    <InputLabel>Status</InputLabel>
-                    <Select {...field} label="Status">
-                      <SelectMenuItem value="active">Ativo</SelectMenuItem>
-                      <SelectMenuItem value="inactive">Inativo</SelectMenuItem>
-                    </Select>
-                  </FormControl>
-                )}
-              />
+              <Grid item xs={12} md={6}>
+                <Controller
+                  name="reward_type"
+                  control={control}
+                  rules={{ required: 'Tipo é obrigatório' }}
+                  render={({ field }) => (
+                    <FormControl fullWidth error={!!errors.type}>
+                      <InputLabel>Tipo</InputLabel>
+                      <Select {...field} label="Tipo">
+                        <SelectMenuItem value="discount_percentage">Desconto (%)</SelectMenuItem>
+                        <SelectMenuItem value="discount_fixed">Desconto Fixo</SelectMenuItem>
+                        <SelectMenuItem value="free_item">Item Grátis</SelectMenuItem>
+                        <SelectMenuItem value="points_multiplier">Multiplicador de Pontos</SelectMenuItem>
+                        <SelectMenuItem value="cashback">Cashback</SelectMenuItem>
+                        <SelectMenuItem value="spin_the_wheel">Roleta de Prêmios</SelectMenuItem>
+                      </Select>
+                    </FormControl>
+                  )}
+                />
+              </Grid>
+              {watch('reward_type') === 'spin_the_wheel' && (
+                <Grid item xs={12}>
+                  <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+                    Configuração da Roleta
+                  </Typography>
+                  <SpinTheWheel items={watch('wheel_config.items')} />
+                  {fields.map((item, index) => (
+                    <Paper key={item.id} sx={{ p: 2, mb: 2, border: '1px solid #eee' }}>
+                      <Grid container spacing={2} alignItems="center">
+                        <Grid item xs={12} sm={6}>
+                          <Controller
+                            name={`wheel_config.items.${index}.title`}
+                            control={control}
+                            rules={{ required: 'Título do item é obrigatório' }}
+                            render={({ field }) => (
+                              <TextField
+                                {...field}
+                                label="Título do Item"
+                                fullWidth
+                              />
+                            )}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                          <Controller
+                            name={`wheel_config.items.${index}.probability`}
+                            control={control}
+                            rules={{ required: 'Probabilidade é obrigatória', min: 0 }}
+                            render={({ field }) => (
+                              <TextField
+                                {...field}
+                                label="Probabilidade"
+                                type="number"
+                                fullWidth
+                              />
+                            )}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <Controller
+                            name={`wheel_config.items.${index}.color`}
+                            control={control}
+                            rules={{ required: 'Cor do segmento é obrigatória' }}
+                            render={({ field }) => (
+                              <TextField
+                                {...field}
+                                label="Cor do Segmento (Hex)"
+                                fullWidth
+                                placeholder="Ex: #FFD700"
+                              />
+                            )}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <Controller
+                            name={`wheel_config.items.${index}.textColor`}
+                            control={control}
+                            rules={{ required: 'Cor do texto é obrigatória' }}
+                            render={({ field }) => (
+                              <TextField
+                                {...field}
+                                label="Cor do Texto (Hex)"
+                                fullWidth
+                                placeholder="Ex: #FFFFFF"
+                              />
+                            )}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={2}>
+                          <Button
+                            variant="outlined"
+                            color="error"
+                            onClick={() => remove(index)}
+                            startIcon={<DeleteIcon />}
+                          >
+                            Remover
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+                  ))}
+                  <Button
+                    variant="outlined"
+                    startIcon={<AddIcon />}
+                    onClick={() => append({ title: '', probability: 0 })}
+                  >
+                    Adicionar Item à Roleta
+                  </Button>
+                </Grid>
+              )}
+              <Grid item xs={12}>
+                <Controller
+                  name="description"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Descrição"
+                      multiline
+                      rows={3}
+                      fullWidth
+                    />
+                  )}
+                />
+              </Grid>
+              {watch('reward_type') !== 'spin_the_wheel' && (
+                <Grid item xs={12} md={4}>
+                  <Controller
+                    name="value"
+                    control={control}
+                    rules={{ required: 'Valor é obrigatório' }}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label="Valor (%)"
+                        type="number"
+                        fullWidth
+                        error={!!errors.value}
+                        helperText={errors.value?.message}
+                      />
+                    )}
+                  />
+                </Grid>
+              )}
+              {watch('reward_type') !== 'spin_the_wheel' && (
+                <Grid item xs={12} md={4}>
+                  <Controller
+                    name="points_required"
+                    control={control}
+                    rules={{ required: 'Pontos são obrigatórios' }}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label="Pontos Necessários"
+                        type="number"
+                        fullWidth
+                        error={!!errors.points_required}
+                        helperText={errors.points_required?.message}
+                      />
+                    )}
+                  />
+                </Grid>
+              )}
+              {watch('reward_type') !== 'spin_the_wheel' && (
+                <Grid item xs={12} md={4}>
+                  <Controller
+                    name="max_uses"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label="Usos Máximos"
+                        type="number"
+                        fullWidth
+                        helperText="Deixe em branco para ilimitado"
+                      />
+                    )}
+                  />
+                </Grid>
+              )}
+              {watch('reward_type') !== 'spin_the_wheel' && (
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name="expires_at"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label="Data de Expiração"
+                        type="datetime-local"
+                        fullWidth
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    )}
+                  />
+                </Grid>
+              )}
+              <Grid item xs={12} md={6}>
+                <Controller
+                  name="status"
+                  control={control}
+                  render={({ field }) => (
+                    <FormControl fullWidth>
+                      <InputLabel>Status</InputLabel>
+                      <Select {...field} label="Status">
+                        <SelectMenuItem value="active">Ativo</SelectMenuItem>
+                        <SelectMenuItem value="inactive">Inativo</SelectMenuItem>
+                      </Select>
+                    </FormControl>
+                  )}
+                />
+              </Grid>
             </Grid>
-          </Grid>
+          )}
+
+          {/* Análises Tab Content */}
+          {detailsModalTab === 1 && !createDialog && selectedItem && (
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="h6" gutterBottom>
+                Análises de Cupons
+              </Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <Paper sx={{ p: 2, textAlign: 'center' }}>
+                    <Typography variant="h5" color="primary">
+                      {selectedItem.analytics?.total_generated || 0}
+                    </Typography>
+                    <Typography variant="body2">Cupons Gerados</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Paper sx={{ p: 2, textAlign: 'center' }}>
+                    <Typography variant="h5" color="success">
+                      {selectedItem.analytics?.total_redeemed || 0}
+                    </Typography>
+                    <Typography variant="body2">Cupons Resgatados</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Paper sx={{ p: 2, textAlign: 'center' }}>
+                    <Typography variant="h5" color="info">
+                      {(selectedItem.analytics?.redemption_rate || 0).toFixed(2)}%
+                    </Typography>
+                    <Typography variant="body2">Taxa de Resgate</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Paper sx={{ p: 2, textAlign: 'center' }}>
+                    <Typography variant="h5" color="warning">
+                      R$ {(selectedItem.analytics?.average_order_value || 0).toFixed(2)}
+                    </Typography>
+                    <Typography variant="body2">Valor Médio do Pedido</Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+              <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  startIcon={<DeleteIcon />}
+                  onClick={() => {
+                    setDetailsModalOpen(false); // Close details modal first
+                    setDeleteDialog(true); // Open delete confirmation
+                  }}
+                >
+                  Excluir Recompensa
+                </Button>
+              </Box>
+            </Box>
+          )}
         </DialogContent>
         <DialogActions>
           <Button
             onClick={() => {
               setCreateDialog(false);
-              setEditDialog(false);
+              setDetailsModalOpen(false);
+              setSelectedItem(null);
+              reset();
             }}
           >
             Cancelar
           </Button>
-          <Button onClick={handleSubmit(onSubmit)} variant="contained">
-            {editDialog ? 'Atualizar' : 'Criar'}
-          </Button>
+          {detailsModalTab === 0 && ( // Only show Save button on Configurações tab
+            <Button onClick={handleSubmit(onSubmit)} variant="contained">
+              {createDialog ? 'Criar' : 'Atualizar'}
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
 
       {/* Delete Dialog */}
-      <Dialog open={deleteDialog} onClose={() => { setDeleteDialog(false); handleMenuClose(); }}>
+      <Dialog open={deleteDialog} onClose={() => { setDeleteDialog(false); }}>
         <DialogTitle>Confirmar Exclusão</DialogTitle>
         <DialogContent>
           <Typography>
-            Tem certeza que deseja excluir a recompensa "{selectedItem?.name}"? Esta ação não pode ser desfeita.
+            Tem certeza que deseja excluir a recompensa "{selectedItem?.title}"? Esta ação não pode ser desfeita.
           </Typography>
         </DialogContent>
         <DialogActions>
@@ -830,6 +885,10 @@ const Rewards = () => {
         </DialogActions>
       </Dialog>
     </Box>
+  );
+};
+
+export default Rewards;
   );
 };
 

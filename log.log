@@ -1,17 +1,46 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-/app/backend/routes/checkin.js:417
-          } catch (couponError) {
-            ^^^^^
-SyntaxError: Unexpected token 'catch'
-    at wrapSafe (node:internal/modules/cjs/loader:1472:18)
-    at Module._compile (node:internal/modules/cjs/loader:1501:20)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/server.js:17:23)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-Node.js v20.19.4
+=> ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      169.9s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.765
+0.765 > Feedeliza+-frontend@1.0.0 build
+0.765 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.765
+4.443 Creating an optimized production build...
+168.9 Failed to compile.
+168.9
+168.9 [eslint]
+168.9 src/components/UI/SpinTheWheel.js
+168.9   Line 39:10:   'wheelConfig' is not defined     no-undef
+168.9   Line 39:26:   'wheelConfig' is not defined     no-undef
+168.9   Line 39:47:   'wheelConfig' is not defined     no-undef
+168.9   Line 56:22:   'wheelConfig' is not defined     no-undef
+168.9   Line 60:28:   'wheelConfig' is not defined     no-undef
+168.9   Line 68:5:    'wheelConfig' is not defined     no-undef
+168.9   Line 142:7:   'wheelConfig' is not defined     no-undef
+168.9   Line 147:7:   'wheelConfig' is not defined     no-undef
+168.9   Line 180:18:  'onSpinComplete' is not defined  no-undef
+168.9   Line 180:34:  'winningItem' is not defined     no-undef
+168.9   Line 251:10:  'result' is not defined          no-undef
+168.9   Line 280:18:  'result' is not defined          no-undef
+168.9   Line 283:14:  'result' is not defined          no-undef
+168.9   Line 285:25:  'result' is not defined          no-undef
+168.9   Line 288:14:  'result' is not defined          no-undef
+168.9   Line 290:18:  'result' is not defined          no-undef
+168.9   Line 299:14:  'wheelConfig' is not defined     no-undef
+168.9
+168.9 Search for the keywords to learn more about each error.
+168.9
+168.9
+------
+
+ 1 warning found (use docker --debug to expand):
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

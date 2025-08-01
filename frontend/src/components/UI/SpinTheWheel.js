@@ -177,7 +177,7 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
       }
     };
     animationFrameId.current = requestAnimationFrame(animate);
-  }, [drawWheel, onSpinComplete, winningItem]);
+  }, [drawWheel, onSpinFinish, items]);
 
   useEffect(() => {
     if (isSpinning) {
@@ -248,55 +248,12 @@ const SpinTheWheel = ({ items, onSpinFinish, isSpinning }) => {
 
         
 
-        {result && (
-          <Box
-            sx={{
-              margin: '20px auto 0',
-              fontSize: '18px',
-              fontWeight: 600,
-              color: '#FFD700',
-              minHeight: '40px',
-              textShadow: '0 0 8px rgba(255, 215, 0, 0.5)',
-              padding: '15px',
-              background: 'rgba(0, 0, 0, 0.4)',
-              borderRadius: '10px',
-              border: '1px solid rgba(255, 215, 0, 0.2)',
-              backdropFilter: 'blur(5px)',
-              boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',
-              transition: 'all 0.5s ease',
-              maxWidth: '90%',
-              wordWrap: 'break-word',
-              animation: 'pulse 2s infinite', // Adicionar animação pulse
-              '@keyframes pulse': { // Definir keyframes para a animação
-                '0%': { transform: 'scale(1)', opacity: 1 },
-                '50%': { transform: 'scale(1.05)', opacity: 0.8 },
-                '100%': { transform: 'scale(1)', opacity: 1 },
-              },
-            }}
-          >
-            <Typography variant="inherit" component="span">
-              Parabéns! Você ganhou:{" "}
-              <strong style={{ color: 'white', fontWeight: 700 }}>
-                {result.title}
-              </strong>
-            </Typography>
-            {result.coupon_code && (
-              <Typography variant="body1" sx={{ mt: 1, color: 'text.secondary' }}>
-                Cupom: {result.coupon_code}
-              </Typography>
-            )}
-            {result.description && (
-              <Typography variant="body2" sx={{ mt: 1, color: 'text.secondary' }}>
-                {result.description}
-              </Typography>
-            )}
-          </Box>
-        )}
+        
 
         <Box sx={{ mt: 3, textAlign: 'left', color: 'rgba(255, 255, 255, 0.8)' }}>
           <Typography variant="subtitle2" sx={{ color: 'inherit' }}>Itens da Roleta:</Typography>
           <List dense>
-            {wheelConfig?.items?.map((item, index) => (
+            {items?.map((item, index) => (
               <ListItem key={index} disablePadding>
                 <ListItemText primary={`${item.title} (${item.probability}%)`} sx={{ color: 'inherit' }} />
               </ListItem>

@@ -192,8 +192,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
         
         // Replicate example.html's target angle calculation
         // (2 * Math.PI * voltas) + (Math.PI - (premioIndex * anguloSetor)) - (anguloSetor / 2);
-        const targetRotationRadians = 
-          const targetRotationRadians =
+        const targetRotationRadians =
           (2 * Math.PI * randomSpins) + 
           (Math.PI / 2 - (winningIndex * segmentAngleRadians + segmentAngleRadians / 2));
 

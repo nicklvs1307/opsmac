@@ -10,15 +10,6 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
   const center = wheelSize / 2;
   const radius = center - 15;
 
-  const getRandomColor = useCallback(() => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }, []);
-
   const drawWheel = useCallback((currentRotation = 0) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -33,7 +24,6 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
     const numItems = items.length;
     const segmentAngle = (2 * Math.PI) / numItems;
     let startAngle = 0;
-    const assignedColors = items.map(item => item.color || getRandomColor());
 
     ctx.save();
     ctx.translate(center, center);
@@ -42,27 +32,71 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
 
     items.forEach((item, index) => {
       const endAngle = startAngle + segmentAngle;
+
+      ctx.fillStyle = item.color;
       ctx.beginPath();
       ctx.moveTo(center, center);
       ctx.arc(center, center, radius, startAngle, endAngle);
       ctx.closePath();
-      ctx.fillStyle = assignedColors[index];
       ctx.fill();
 
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(center, center);
+      ctx.lineTo(center + radius * Math.cos(startAngle), center + radius * Math.sin(startAngle));
+      ctx.stroke();
+
       ctx.save();
+      ctx.fillStyle = item.textColor;
+      ctx.font = 'bold 11px Poppins'; // Using Poppins as per example.html
       ctx.translate(center, center);
-      ctx.rotate(startAngle + segmentAngle / 2);
-      ctx.textAlign = 'right';
-      ctx.fillStyle = '#fff';
-      ctx.font = 'bold 14px Arial';
-      ctx.fillText(item.name || item.title, radius - 10, 10);
+      
+      const angMeio = startAngle + segmentAngle / 2;
+      ctx.rotate(angMeio);
+      
+      const textRadius = radius * 0.55;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      
+      const palavras = (item.name || item.title).split(' ');
+      if (palavras.length > 2) {
+        ctx.font = 'bold 9px Poppins';
+        palavras.forEach((palavra, idx) => {
+          ctx.fillText(palavra, textRadius, (idx - (palavras.length-1)/2) * 12);
+        });
+      } else if (palavras.length > 1) {
+        ctx.font = 'bold 10px Poppins';
+        palavras.forEach((palavra, idx) => {
+          ctx.fillText(palavra, textRadius, (idx * 12) - 6);
+        });
+      } else {
+        ctx.font = 'bold 11px Poppins';
+        ctx.fillText(item.name || item.title, textRadius, 0);
+      }
+      
       ctx.restore();
 
       startAngle = endAngle;
     });
 
+    // Draw center circle
+    ctx.fillStyle = '#FFD700';
+    ctx.beginPath();
+    ctx.arc(center, center, 15, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    ctx.strokeStyle = '#FFF';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.beginPath();
+    ctx.arc(center, center, 8, 0, 2 * Math.PI);
+    ctx.fill();
+
     ctx.restore();
-  }, [items, getRandomColor, center, radius, wheelSize]);
+  }, [items, center, radius, wheelSize]);
 
   useEffect(() => {
     drawWheel();
@@ -110,24 +144,62 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
   }, [winningItem, items, animateSpin]);
 
   return (
-    <Paper sx={{ p: 4, textAlign: 'center' }}>
-      <Box>
-        <Typography variant="h5" gutterBottom>Gire a Roleta!</Typography>
-        <Box sx={{ position: 'relative', margin: '20px auto', width: wheelSize, height: wheelSize }}>
-          <canvas ref={canvasRef} width={wheelSize} height={wheelSize} />
-        </Box>
-        <Box sx={{ mt: 3, textAlign: 'left' }}>
-          <Typography variant="subtitle2">Itens da Roleta:</Typography>
-          <List dense>
-            {items?.map((item, index) => (
-              <ListItem key={index} disablePadding>
-                <ListItemText primary={`${item.name || item.title} (${item.probability}%)`} />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </Box>
-    </Paper>
+    <Box
+      className="roleta-container" // Class for external styling if needed
+      sx={{
+        position: 'relative',
+        margin: '20px auto',
+        width: wheelSize,
+        height: wheelSize,
+        filter: 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.3))',
+      }}
+    >
+      <canvas
+        id="roleta" // ID as in example.html
+        ref={canvasRef}
+        width={wheelSize}
+        height={wheelSize}
+        style={{
+          borderRadius: '50%',
+          border: '12px solid #FFD700', // var(--gold)
+          boxShadow: '0 0 30px rgba(255, 215, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.5)',
+          cursor: 'pointer',
+          userSelect: 'none',
+          background: '#F1FAEE', // var(--cream)
+          transition: 'transform 0.1s',
+          position: 'relative',
+          zIndex: 1,
+        }}
+      />
+      <Box
+        className="seta" // Class for external styling if needed
+        sx={{
+          position: 'absolute',
+          top: -25,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: 0,
+          height: 0,
+          borderLeft: '18px solid transparent',
+          borderRight: '18px solid transparent',
+          borderTop: '30px solid #FFD700', // var(--gold)
+          zIndex: 10,
+          filter: 'drop-shadow(0 0 5px #FFD700)', // var(--gold)
+          '&::after': { // Pseudo-element for the dot on the arrow
+            content: '""',
+            position: 'absolute',
+            top: -33,
+            left: -10,
+            width: 20,
+            height: 20,
+            background: '#FFD700', // var(--gold)
+            borderRadius: '50%',
+            zIndex: -1,
+            boxShadow: '0 0 10px #FFD700', // var(--gold)
+          }
+        }}
+      />
+    </Box>
   );
 };
 

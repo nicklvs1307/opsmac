@@ -643,6 +643,36 @@ const Rewards = () => {
                           )}
                         />
                       </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <Controller
+                          name={`wheel_config.items.${index}.color`}
+                          control={control}
+                          rules={{ required: 'Cor do segmento é obrigatória' }}
+                          render={({ field }) => (
+                            <TextField
+                              {...field}
+                              label="Cor do Segmento (Hex)"
+                              fullWidth
+                              placeholder="Ex: #FFD700"
+                            />
+                          )}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <Controller
+                          name={`wheel_config.items.${index}.textColor`}
+                          control={control}
+                          rules={{ required: 'Cor do texto é obrigatória' }}
+                          render={({ field }) => (
+                            <TextField
+                              {...field}
+                              label="Cor do Texto (Hex)"
+                              fullWidth
+                              placeholder="Ex: #FFFFFF"
+                            />
+                          )}
+                        />
+                      </Grid>
                       <Grid item xs={12} sm={2}>
                         <Button
                           variant="outlined"

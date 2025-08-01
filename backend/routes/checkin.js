@@ -366,7 +366,7 @@ router.post('/public', [
                   coupon_code: newCoupon.code || '',
                   formatted_message: rewardMessage,
                   visit_count: currentVisits,
-                  reward_type: newCoupon.reward_type,
+                  reward_type: reward.reward_type, // Corrigido: Usar o tipo da recompensa original
                   wheel_config: reward.wheel_config,
                   value: newCoupon.value || 0,
                   description: newCoupon.description || ''

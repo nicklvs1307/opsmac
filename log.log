@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roleta Premiada - Roma Pizzaria</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #FFD700;
+      --gold-dark: #FFAA00;
+      --red: #E63946;
+      --blue: #1D3557;
+      --light-blue: #457B9D;
+      --cream: #F1FAEE;
+    }
+
+    body {
+      background-color: #0A0A1A;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      padding: 20px;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-image: radial-gradient(circle at 50% 50%, #1A1A2E 0%, #0A0A1A 100%);
+    }
+
+    .container {
+      max-width: 500px;
+      position: relative;
+      z-index: 1;
+      padding: 0 15px;
+    }
+
+    h1 {
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+      font-size: 2rem;
+    }
+
+    h2 {
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+
+    .roleta-container {
+      position: relative;
+      margin: 20px auto;
+      width: 300px;
+      height: 300px;
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+    }
+
+    #roleta {
+      border-radius: 50%;
+      border: 12px solid var(--gold);
+      box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      user-select: none;
+      background: var(--cream);
+      transition: transform 0.1s;
+      position: relative;
+      z-index: 1;
+    }
+
+    #roleta:active {
+      transform: scale(0.98);
+    }
+
+    .seta {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-top: 30px solid var(--gold);
+      z-index: 10;
+      filter: drop-shadow(0 0 5px var(--gold));
+    }
+
+    .seta::after {
+      content: '';
+      position: absolute;
+      top: -33px;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      background: var(--gold);
+      border-radius: 50%;
+      z-index: -1;
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    .btn-roleta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #000;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 12px 25px;
+      border-radius: 50px;
+      border: none;
+      margin-top: 15px;
+      user-select: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-roleta:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+    }
+
+    .btn-roleta:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    .btn-roleta:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .resultado {
+      margin: 20px auto 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gold);
+      min-height: 40px;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s ease;
+      max-width: 90%;
+      word-wrap: break-word;
+    }
+
+    .resultado strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .logo {
+      max-width: 160px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+    }
+
+    .decoracao {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .decoracao::before,
+    .decoracao::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.05);
+    }
+
+    .decoracao::before {
+      width: 250px;
+      height: 250px;
+      top: -100px;
+      right: -100px;
+    }
+
+    .decoracao::after {
+      width: 180px;
+      height: 180px;
+      bottom: -80px;
+      left: -80px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 400px) {
+      .roleta-container {
+        width: 280px;
+        height: 280px;
+      }
+      
+      #roleta {
+        width: 280px;
+        height: 280px;
+      }
+      
+      .resultado {
+        font-size: 16px;
+        padding: 12px;
+      }
+      
+      .btn-roleta {
+        font-size: 15px;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="decoracao"></div>
+  <div class="container">
+    <img src="https://via.placeholder.com/160x60?text=Roma+Pizzaria" alt="Roma Pizzaria" class="logo">
+    <h1>Roma Pizzaria</h1>
+    <h2>Roleta Premiada</h2>
+    <p class="subtitle">Gire a roleta e ganhe prêmios especiais!</p>
+
+    <div class="roleta-container">
+      <canvas id="roleta" width="300" height="300"></canvas>
+      <div class="seta"></div>
+    </div>
+
+    <button id="btnGirar" class="btn btn-roleta">GIRAR ROLETA</button>
+    <div id="resultado" class="resultado pulse"></div>
+  </div>
+
+  <script>
+    // Prêmios atualizados conforme solicitado
+    const premios = [
+      { texto: '10% Desconto', cor: '#E63946', corTexto: '#FFF' },
+      { texto: 'Chopp 325ml', cor: '#1D3557', corTexto: '#FFF' },
+      { texto: '5% Desconto', cor: '#FFD700', corTexto: '#000' },
+      { texto: 'Suco Natural', cor: '#457B9D', corTexto: '#FFF' },
+      { texto: '50% OFF', cor: '#A8DADC', corTexto: '#000' },
+      { texto: 'Rodízio Grátis', cor: '#F4A261', corTexto: '#000' },
+      { texto: 'Borda Recheada', cor: '#2A9D8F', corTexto: '#FFF' },
+      { texto: 'Chopp 500ml', cor: '#7209B7', corTexto: '#FFF' },
+      { texto: 'Cupom Surpresa', cor: '#FF6D00', corTexto: '#FFF' }
+    ];
+
+    const emojis = ['🔥', '🍺', '💲', '🧃', '🎉', '🍕', '🧀', '🍻', '🎁'];
+    const canvas = document.getElementById('roleta');
+    const ctx = canvas.getContext('2d');
+    const numSetores = premios.length;
+    const anguloSetor = (2 * Math.PI) / numSetores;
+    const centroX = canvas.width / 2;
+    const centroY = canvas.height / 2;
+    const raio = centroX - 15;
+
+    let anguloAtual = 0;
+    let animando = false;
+    let ultimoPremio = null;
+
+    function desenharRoleta(anguloRotacao = 0) {
+      ctx.save();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.translate(centroX, centroY);
+      ctx.rotate(anguloRotacao);
+      ctx.translate(-centroX, -centroY);
+
+      for (let i = 0; i < numSetores; i++) {
+        const angInicio = i * anguloSetor;
+        const angFim = angInicio + anguloSetor;
+
+        ctx.fillStyle = premios[i].cor;
+        ctx.beginPath();
+        ctx.moveTo(centroX, centroY);
+        ctx.arc(centroX, centroY, raio, angInicio, angFim);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(centroX, centroY);
+        ctx.lineTo(centroX + raio * Math.cos(angInicio), centroY + raio * Math.sin(angInicio));
+        ctx.stroke();
+
+        ctx.save();
+        ctx.fillStyle = premios[i].corTexto;
+        ctx.font = 'bold 11px Poppins';
+        ctx.translate(centroX, centroY);
+        
+        const angMeio = angInicio + anguloSetor / 2;
+        ctx.rotate(angMeio);
+        
+        const textRadius = raio * 0.55;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        const palavras = premios[i].texto.split(' ');
+        if (palavras.length > 2) {
+          ctx.font = 'bold 9px Poppins';
+          palavras.forEach((palavra, idx) => {
+            ctx.fillText(palavra, textRadius, (idx - (palavras.length-1)/2) * 12);
+          });
+        } else if (palavras.length > 1) {
+          ctx.font = 'bold 10px Poppins';
+          palavras.forEach((palavra, idx) => {
+            ctx.fillText(palavra, textRadius, (idx * 12) - 6);
+          });
+        } else {
+          ctx.font = 'bold 11px Poppins';
+          ctx.fillText(premios[i].texto, textRadius, 0);
+        }
+        
+        ctx.restore();
+      }
+
+      ctx.fillStyle = '#FFD700';
+      ctx.beginPath();
+      ctx.arc(centroX, centroY, 15, 0, 2 * Math.PI);
+      ctx.fill();
+      
+      ctx.strokeStyle = '#FFF';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.beginPath();
+      ctx.arc(centroX, centroY, 8, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    desenharRoleta();
+
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    function determinarPremio() {
+      const anguloAjustado = (anguloAtual + Math.PI/2) % (2 * Math.PI);
+      if (anguloAjustado < 0) anguloAjustado += 2 * Math.PI;
+      
+      const indice = Math.floor(anguloAjustado / anguloSetor) % numSetores;
+      return numSetores - 1 - indice;
+    }
+
+    function animarGiro(rotacaoDestino, duracao = 5000) {
+      const inicio = performance.now();
+      const anguloInicial = anguloAtual;
+
+      return new Promise(resolve => {
+        function animar(time) {
+          let tempoDecorrido = time - inicio;
+          if (tempoDecorrido > duracao) tempoDecorrido = duracao;
+
+          const t = tempoDecorrido / duracao;
+          const easedT = easeOutQuart(t);
+
+          anguloAtual = anguloInicial + (rotacaoDestino - anguloInicial) * easedT;
+
+          desenharRoleta(anguloAtual);
+
+          if (tempoDecorrido < duracao) {
+            requestAnimationFrame(animar);
+          } else {
+            anguloAtual = rotacaoDestino;
+            desenharRoleta(anguloAtual);
+            ultimoPremio = determinarPremio();
+            resolve();
+          }
+        }
+        requestAnimationFrame(animar);
+      });
+    }
+
+    const btnGirar = document.getElementById('btnGirar');
+    const resultado = document.getElementById('resultado');
+
+    btnGirar.addEventListener('click', async () => {
+      if (animando) return;
+
+      animando = true;
+      btnGirar.disabled = true;
+      resultado.textContent = '';
+
+      const premioIndex = Math.floor(Math.random() * numSetores);
+      const voltas = 5 + Math.floor(Math.random() * 3);
+      const anguloDestino = 
+        (2 * Math.PI * voltas) + 
+        (Math.PI - (premioIndex * anguloSetor)) - 
+        (anguloSetor / 2);
+
+      await animarGiro(anguloDestino, 5000);
+
+      const premioGanhador = premios[ultimoPremio];
+      const emojiGanhador = emojis[ultimoPremio];
+      resultado.innerHTML = `Parabéns! Você ganhou: <strong>${premioGanhador.texto} ${emojiGanhador}</strong>`;
+      
+      btnGirar.disabled = false;
+      animando = false;
+    });
+
+    // Redimensionamento responsivo
+    window.addEventListener('resize', function() {
+      if (window.innerWidth < 400) {
+        canvas.width = 280;
+        canvas.height = 280;
+      } else {
+        canvas.width = 300;
+        canvas.height = 300;
+      }
+      desenharRoleta(anguloAtual);
+    });
+  </script>
+</body>
+</html>

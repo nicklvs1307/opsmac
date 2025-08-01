@@ -359,6 +359,13 @@ const Rewards = () => {
                   {reward.description}
                 </Typography>
                 
+                {reward.reward_type === 'spin_the_wheel' && reward.wheel_config?.items?.length > 0 && (
+                  <Box sx={{ my: 2 }}>
+                    <Typography variant="subtitle2" gutterBottom>Itens da Roleta:</Typography>
+                    <SpinTheWheel items={reward.wheel_config.items} />
+                  </Box>
+                )}
+
                 <Box display="flex" gap={1} mb={2}>
                   <Chip
                     label={getTypeLabel(reward.type)}

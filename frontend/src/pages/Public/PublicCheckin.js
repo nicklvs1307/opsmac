@@ -79,7 +79,7 @@ const PublicCheckin = () => {
       const { reward_earned } = response.data;
 
       if (reward_earned) {
-        if (reward_earned.reward_type === 'wheel') {
+        if (reward_earned.reward_type === 'spin_the_wheel') {
           // Se a recompensa for uma roleta, redireciona para a página da roleta
           navigate('/girar-roleta', { state: { reward_earned } });
         } else {

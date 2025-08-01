@@ -101,8 +101,8 @@ router.post('/spin-wheel', [
 
     try {
         const reward = await models.Reward.findByPk(reward_id);
-        if (!reward || reward.reward_type !== 'wheel') {
-            return res.status(404).json({ error: 'Recompensa da roleta não encontrada.' });
+        if (!reward || reward.reward_type !== 'spin_the_wheel') {
+            return res.status(404).json({ error: 'Recompensa da roleta não encontrada ou não é do tipo roleta.' });
         }
 
         const customer = await models.Customer.findByPk(customer_id);
@@ -110,29 +110,18 @@ router.post('/spin-wheel', [
             return res.status(404).json({ error: 'Cliente não encontrado.' });
         }
 
-        const wonItem = spinWheel(reward.wheel_config);
-
-        const coupon = await models.Coupon.create({
-            customer_id: customer.id,
-            reward_id: reward.id,
-            restaurant_id: reward.restaurant_id,
-            code: `WHEEL-${Date.now()}`.substring(0, 15),
-            title: wonItem.name,
-            description: `Prêmio da roleta: ${wonItem.name}`,
-            reward_type: 'free_item',
-            value: wonItem.value || null,
-            status: 'active',
-            expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-        });
+        // A lógica de sorteio e geração de cupom já está no método generateCoupon do modelo Reward
+        const coupon = await reward.generateCoupon(customer.id);
 
         res.status(200).json({
             message: 'Você ganhou um prêmio!',
-            wonItem: wonItem,
+            wonItem: { title: coupon.title, description: coupon.description, value: coupon.value, reward_type: coupon.reward_type }, // Retorna os detalhes do item sorteado/cupom
             reward_earned: {
                 reward_title: coupon.title,
                 coupon_code: coupon.code,
                 description: coupon.description,
                 value: coupon.value,
+                reward_type: coupon.reward_type,
             },
         });
 

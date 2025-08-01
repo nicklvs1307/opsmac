@@ -335,7 +335,7 @@ router.post('/public', [
         if (reward) {
           console.log('[Public Check-in] Recompensa encontrada:', reward.title, 'Objeto Reward:', JSON.stringify(reward));
           try {
-            if (reward.reward_type === 'wheel') {
+            if (reward.reward_type === 'spin_the_wheel') {
               // Se a recompensa for do tipo 'roleta', não gere o cupom ainda.
               // Apenas retorne a configuração da roleta para o frontend.
               rewardEarned = {

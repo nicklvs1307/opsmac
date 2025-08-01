@@ -1,13 +1,59 @@
 const express = require('express');
 const { body, query, validationResult } = require('express-validator');
 const { models } = require('../config/database');
-const { auth, checkRestaurantOwnership, logUserAction } = require('../middleware/auth');
+const { auth, checkRestaurantOwnership } = require('../middleware/auth');
 const { Op } = require('sequelize');
 const { spinWheel } = require('../utils/wheelService');
 
 const router = express.Router();
 
-// ... (código das outras rotas permanece o mesmo)
+// Rota para listar recompensas de um restaurante
+router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, async (req, res) => {
+  try {
+    const { restaurantId } = req.params;
+    const { page = 1, limit = 12 } = req.query;
+    const offset = (page - 1) * limit;
+
+    const { count, rows } = await models.Reward.findAndCountAll({
+      where: { restaurant_id: restaurantId },
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+      order: [['createdAt', 'DESC']],
+    });
+
+    res.json({
+      rewards: rows,
+      pagination: {
+        total_items: count,
+        total_pages: Math.ceil(count / limit),
+        current_page: parseInt(page),
+      },
+    });
+  } catch (error) {
+    console.error('Erro ao listar recompensas:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+// Rota para criar uma nova recompensa
+router.post('/', auth, async (req, res) => {
+    const { restaurant_id, ...rewardData } = req.body;
+    const user = await models.User.findByPk(req.user.userId, { include: [{ model: models.Restaurant, as: 'restaurants' }] });
+    const userRestaurantId = user?.restaurants?.[0]?.id;
+
+    if (!userRestaurantId) {
+        return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
+    }
+
+    try {
+        const reward = await models.Reward.create({ ...rewardData, restaurant_id: userRestaurantId });
+        res.status(201).json(reward);
+    } catch (error) {
+        console.error('Erro ao criar recompensa:', error);
+        res.status(500).json({ error: 'Erro ao criar recompensa' });
+    }
+});
+
 
 // @route   POST /api/rewards/spin-wheel
 // @desc    Gira a roleta, cria o cupom e retorna o prêmio
@@ -43,16 +89,16 @@ router.post('/spin-wheel', [
             code: `WHEEL-${Date.now()}`.substring(0, 15),
             title: wonItem.name,
             description: `Prêmio da roleta: ${wonItem.name}`,
-            reward_type: 'free_item', // Assumindo que o prêmio é um item grátis
+            reward_type: 'free_item',
             value: wonItem.value || null,
             status: 'active',
-            expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Expira em 30 dias
+            expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
         });
 
         res.status(200).json({
             message: 'Você ganhou um prêmio!',
-            wonItem: wonItem, // O item que foi sorteado
-            reward_earned: { // Os detalhes do cupom gerado
+            wonItem: wonItem,
+            reward_earned: {
                 reward_title: coupon.title,
                 coupon_code: coupon.code,
                 description: coupon.description,
@@ -65,5 +111,7 @@ router.post('/spin-wheel', [
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
 });
+
+// Adicione outras rotas de rewards (PUT, DELETE, etc.) aqui se necessário
 
 module.exports = router;

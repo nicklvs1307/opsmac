@@ -49,7 +49,6 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
       ctx.fillStyle = assignedColors[index];
       ctx.fill();
 
-      // Adicionando o texto
       ctx.save();
       ctx.translate(center, center);
       ctx.rotate(startAngle + segmentAngle / 2);

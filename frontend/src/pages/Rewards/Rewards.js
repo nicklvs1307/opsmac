@@ -115,7 +115,7 @@ const Rewards = () => {
       const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`, { params });
       
       setRewards(response.data.rewards);
-      setTotalPages(response.data.totalPages);
+      setTotalPages(response.data.pagination.total_pages);
     } catch (err) {
       console.error('Error fetching rewards:', err);
       setError('Erro ao carregar recompensas');

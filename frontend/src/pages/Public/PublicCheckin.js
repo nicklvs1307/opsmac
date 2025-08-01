@@ -110,15 +110,81 @@ const PublicCheckin = () => {
   }
 
   return (
-    <Container component={Paper} elevation={3} sx={{ p: 4, mt: 5 }}>
-      <Box sx={{ textAlign: 'center', mb: 3 }}>
-        <Typography variant="h5" component="h1" gutterBottom>
-          {t('public_checkin.welcome_to')} {restaurantName || t('public_checkin.our_restaurant')}
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {t('public_checkin.please_checkin')}
-        </Typography>
+    <Box sx={{ 
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      background: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)', // Gradiente suave para melhor aparência
+      py: { xs: 4, sm: 6, md: 8 },
+      px: 2, // Padding horizontal para mobile
+    }}>
+      {/* Logo ou ícone do restaurante */}
+      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+        <img 
+          src="/logo192.png" 
+          alt="Logo" 
+          style={{ 
+            height: '70px', 
+            width: 'auto',
+            filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
+          }} 
+        />
       </Box>
+      
+      <Container maxWidth="sm">
+        <Paper elevation={0} sx={{ 
+          p: { xs: 4, md: 5 }, 
+          borderRadius: 4, 
+          boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)', 
+          border: '1px solid rgba(0, 0, 0, 0.05)',
+          position: 'relative',
+          overflow: 'hidden',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '4px',
+            background: 'linear-gradient(90deg, #3f51b5, #2196f3)', // Barra colorida no topo
+            zIndex: 1,
+          },
+          backdropFilter: 'blur(10px)', // Efeito de vidro fosco
+        }}>
+          <Box sx={{ textAlign: 'center', mb: 4 }}>
+            <Typography 
+              variant="h4" 
+              component="h1" 
+              gutterBottom
+              sx={{ 
+                fontWeight: 800, 
+                background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                mb: 2,
+                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' }, // Responsivo
+                letterSpacing: '-0.5px',
+              }}
+            >
+              {t('public_checkin.welcome_to')} {restaurantName || t('public_checkin.our_restaurant')}
+            </Typography>
+            <Typography 
+              variant="body1" 
+              color="text.secondary"
+              sx={{ 
+                maxWidth: '90%', 
+                mx: 'auto',
+                fontSize: { xs: '0.95rem', sm: '1rem', md: '1.1rem' },
+                lineHeight: 1.6,
+                opacity: 0.85,
+              }}
+            >
+              {t('public_checkin.please_checkin')}
+            </Typography>
+          </Box>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         {identificationMethod === 'phone' && (
@@ -165,6 +231,34 @@ const PublicCheckin = () => {
                 error={!!errors.phone_number}
                 helperText={errors.phone_number?.message}
                 placeholder="Ex: 5511987654321"
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    borderRadius: 2,
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(63, 81, 181, 0.3)',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#3f51b5',
+                    },
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                    '&:hover': {
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                    },
+                  }
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: 'text.secondary',
+                    '&.Mui-focused': {
+                      color: '#3f51b5',
+                    },
+                  }
+                }}
               />
             )}
           />
@@ -190,6 +284,34 @@ const PublicCheckin = () => {
                 error={!!errors.cpf}
                 helperText={errors.cpf?.message}
                 placeholder="Ex: 12345678900"
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    borderRadius: 2,
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(63, 81, 181, 0.3)',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#3f51b5',
+                    },
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                    '&:hover': {
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                    },
+                  }
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: 'text.secondary',
+                    '&.Mui-focused': {
+                      color: '#3f51b5',
+                    },
+                  }
+                }}
               />
             )}
           />
@@ -207,6 +329,34 @@ const PublicCheckin = () => {
               error={!!errors.customer_name}
               helperText={errors.customer_name?.message}
               placeholder={t('public_checkin.name_optional')}
+              variant="outlined"
+              InputProps={{
+                sx: {
+                  borderRadius: 2,
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(0, 0, 0, 0.1)',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(63, 81, 181, 0.3)',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#3f51b5',
+                  },
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                  '&:hover': {
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                  },
+                }
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: 'text.secondary',
+                  '&.Mui-focused': {
+                    color: '#3f51b5',
+                  },
+                }
+              }}
             />
           )}
         />
@@ -215,14 +365,45 @@ const PublicCheckin = () => {
           variant="contained"
           color="primary"
           fullWidth
-          sx={{ mt: 3 }}
           disabled={loading}
+          sx={{ 
+            mt: 4, 
+            py: 1.8, 
+            fontSize: { xs: '1rem', md: '1.1rem' }, 
+            borderRadius: 3, 
+            boxShadow: '0px 8px 20px rgba(63, 81, 181, 0.3)', 
+            background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)',
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              boxShadow: '0px 10px 25px rgba(63, 81, 181, 0.4)',
+              transform: 'translateY(-2px)'
+            },
+            '&:active': {
+              transform: 'translateY(1px)'
+            }
+          }}
         >
-          {loading ? <CircularProgress size={20} /> : t('public_checkin.checkin_button')}
+          {loading ? 
+            <CircularProgress size={24} color="inherit" /> : 
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span>{t('public_checkin.checkin_button')}</span>
+            </Box>
+          }
         </Button>
+        
+        <Box textAlign="center" mt={4} sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}>
+          <Typography variant="caption" color="text.disabled" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+            <span>Powered by</span> 
+            <span style={{ fontWeight: 'bold', background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              Sistema de Feedback
+            </span>
+          </Typography>
+        </Box>
       </form>
-    </Container>
-  );
+          </Paper>
+        </Container>
+      </Box>
+    );
 };
 
 export default PublicCheckin;

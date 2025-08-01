@@ -146,28 +146,129 @@ const PublicSurveyForm = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      bgcolor: '#f0f2f5', // Um fundo suave para destacar o Paper
+      background: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)', // Gradiente suave para melhor aparência
       py: { xs: 2, sm: 4, md: 6 },
+      px: 2, // Padding horizontal para mobile
     }}>
+      {/* Logo ou ícone do restaurante poderia ser adicionado aqui */}
+      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+        <img 
+          src="/logo192.png" 
+          alt="Logo" 
+          style={{ 
+            height: '60px', 
+            width: 'auto',
+            filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
+          }} 
+        />
+      </Box>
       <Container maxWidth="sm">
         <Paper sx={{ 
           p: { xs: 3, md: 6 }, 
-          elevation: 12, // Maior elevação para um efeito flutuante
+          elevation: 0, // Sem elevação para um design mais clean
           borderRadius: 4, 
           width: '100%',
-          boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.1)', // Sombra mais pronunciada
+          boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)', // Sombra mais suave
+          border: '1px solid rgba(0, 0, 0, 0.05)', // Borda sutil
+          position: 'relative',
+          overflow: 'hidden',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '4px',
+            background: 'linear-gradient(90deg, #3f51b5, #2196f3)', // Barra colorida no topo
+            zIndex: 1,
+          },
+          backdropFilter: 'blur(10px)', // Efeito de vidro fosco (funciona em navegadores modernos)
         }}>
-          <Typography variant="h3" component="h1" gutterBottom textAlign="center" sx={{ fontWeight: 'bold', color: 'primary.main', mb: 2 }}>
+          <Typography 
+            variant="h3" 
+            component="h1" 
+            gutterBottom 
+            textAlign="center" 
+            sx={{ 
+              fontWeight: 800, 
+              background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              mb: 2,
+              fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' }, // Responsivo
+              letterSpacing: '-0.5px',
+            }}
+          >
             {survey.title}
           </Typography>
-          <Typography variant="body1" color="text.secondary" gutterBottom textAlign="center" sx={{ mb: 5 }}>
+          <Typography 
+            variant="body1" 
+            color="text.secondary" 
+            gutterBottom 
+            textAlign="center" 
+            sx={{ 
+              mb: 5, 
+              maxWidth: '90%', 
+              mx: 'auto',
+              fontSize: { xs: '0.95rem', sm: '1rem', md: '1.1rem' },
+              lineHeight: 1.6,
+              opacity: 0.85,
+            }}
+          >
             {survey.description}
           </Typography>
 
           <form onSubmit={handleSubmit}>
             {survey.questions.sort((a, b) => a.order - b.order).map((question) => (
-              <Paper key={question.id} elevation={3} sx={{ p: { xs: 2, md: 3 }, mb: 4, borderRadius: 2, border: '1px solid #e0e0e0' }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 2, color: 'text.primary' }}>{`${question.order}. ${question.question_text}`}</Typography>
+              <Paper 
+                key={question.id} 
+                elevation={0} 
+                sx={{ 
+                  p: { xs: 3, md: 4 }, 
+                  mb: 4, 
+                  borderRadius: 2, 
+                  border: '1px solid rgba(0, 0, 0, 0.08)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.08)',
+                    transform: 'translateY(-2px)',
+                  },
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  backdropFilter: 'blur(8px)',
+                }}>
+                <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
+                  <Box
+                    sx={{
+                      width: 28,
+                      height: 28,
+                      borderRadius: '50%',
+                      bgcolor: 'primary.main',
+                      color: 'white',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 'bold',
+                      mr: 2,
+                      flexShrink: 0,
+                      fontSize: '0.9rem',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                    }}
+                  >
+                    {question.order}
+                  </Box>
+                  <Typography 
+                    variant="h6" 
+                    sx={{ 
+                      color: 'text.primary',
+                      fontWeight: 600,
+                      lineHeight: 1.3,
+                      fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' },
+                    }}
+                  >
+                    {question.question_text}
+                  </Typography>
+                </Box>
                 {
                   question.question_type === 'text' || question.question_type === 'textarea' ? (
                     <TextField
@@ -301,16 +402,39 @@ const PublicSurveyForm = () => {
               fullWidth
               size="large"
               disabled={submitting}
-              sx={{ mt: 6, py: 1.8, fontSize: '1.2rem', borderRadius: 3, boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.2)' }}
+              sx={{ 
+                mt: 6, 
+                py: 2, 
+                fontSize: { xs: '1.1rem', md: '1.2rem' }, 
+                borderRadius: 3, 
+                boxShadow: '0px 8px 20px rgba(63, 81, 181, 0.3)', 
+                background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  boxShadow: '0px 10px 25px rgba(63, 81, 181, 0.4)',
+                  transform: 'translateY(-2px)'
+                },
+                '&:active': {
+                  transform: 'translateY(1px)'
+                }
+              }}
             >
-              {submitting ? <CircularProgress size={24} color="inherit" /> : 'Enviar Respostas'}
+              {submitting ? 
+                <CircularProgress size={24} color="inherit" /> : 
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span>Enviar Respostas</span>
+                </Box>
+              }
             </Button>
           </form>
         </Paper>
 
-        <Box textAlign="center" mt={4}>
-          <Typography variant="caption" color="text.disabled">
-            Powered by Sistema de Feedback
+        <Box textAlign="center" mt={4} sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}>
+          <Typography variant="caption" color="text.disabled" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+            <span>Powered by</span> 
+            <span style={{ fontWeight: 'bold', background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              Sistema de Feedback
+            </span>
           </Typography>
         </Box>
       </Container>

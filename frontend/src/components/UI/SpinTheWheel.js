@@ -55,7 +55,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
       ctx.textAlign = 'right';
       ctx.fillStyle = '#fff';
       ctx.font = 'bold 14px Arial';
-      ctx.fillText(item.name, radius - 10, 10);
+      ctx.fillText(item.name || item.title, radius - 10, 10);
       ctx.restore();
 
       startAngle = endAngle;
@@ -99,7 +99,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
     if (winningItem && items && items.length > 0) {
       const numItems = items.length;
       const segmentAngleDegrees = 360 / numItems;
-      const winningIndex = items.findIndex(item => item.name === winningItem.name);
+      const winningIndex = items.findIndex(item => (item.name || item.title) === (winningItem.name || winningItem.title));
 
       if (winningIndex !== -1) {
         const targetAngle = 360 - (winningIndex * segmentAngleDegrees) - (segmentAngleDegrees / 2);
@@ -121,7 +121,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
           <List dense>
             {items?.map((item, index) => (
               <ListItem key={index} disablePadding>
-                <ListItemText primary={`${item.name} (${item.probability}%)`} />
+                <ListItemText primary={`${item.name || item.title} (${item.probability}%)`} />
               </ListItem>
             ))}
           </List>

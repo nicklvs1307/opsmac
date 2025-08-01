@@ -682,4 +682,70 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+// Rota para obter detalhes completos de um cliente
+router.get('/:id/details', auth, async (req, res) => {
+  try {
+    const user = await models.User.findByPk(req.user.userId, {
+      include: [{ model: models.Restaurant, as: 'restaurants' }]
+    });
+    const restaurantId = user?.restaurants?.[0]?.id;
+    if (!restaurantId) {
+      return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
+    }
+
+    const customer = await Customer.findOne({
+      where: {
+        id: req.params.id,
+        restaurant_id: restaurantId
+      },
+      include: [
+        { model: models.Checkin, as: 'checkins', limit: 10, order: [['checkin_time', 'DESC']] },
+        { model: models.Feedback, as: 'feedbacks', limit: 10, order: [['created_at', 'DESC']] },
+        { model: models.Coupon, as: 'coupons', where: { status: 'redeemed' }, required: false, limit: 10, order: [['updatedAt', 'DESC']] },
+        { model: models.SurveyResponse, as: 'survey_responses', limit: 10, order: [['created_at', 'DESC']] }
+      ]
+    });
+
+    if (!customer) {
+      return res.status(404).json({ error: 'Cliente não encontrado ou não pertence ao seu restaurante.' });
+    }
+
+    res.json(customer);
+  } catch (error) {
+    console.error('Erro ao buscar detalhes do cliente:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+// Rota para resetar as visitas de um cliente
+router.post('/:id/reset-visits', auth, async (req, res) => {
+  try {
+    const user = await models.User.findByPk(req.user.userId, {
+      include: [{ model: models.Restaurant, as: 'restaurants' }]
+    });
+    const restaurantId = user?.restaurants?.[0]?.id;
+    if (!restaurantId) {
+      return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
+    }
+
+    const customer = await Customer.findOne({
+      where: {
+        id: req.params.id,
+        restaurant_id: restaurantId
+      }
+    });
+
+    if (!customer) {
+      return res.status(404).json({ error: 'Cliente não encontrado ou não pertence ao seu restaurante.' });
+    }
+
+    await customer.update({ total_visits: 0 });
+
+    res.json({ message: 'Visitas do cliente resetadas com sucesso.', customer });
+  } catch (error) {
+    console.error('Erro ao resetar visitas do cliente:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;

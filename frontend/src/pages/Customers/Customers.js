@@ -47,6 +47,7 @@ import {
   Add as AddIcon,
 } from '@mui/icons-material';
 import { useForm, Controller } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import axiosInstance from '../../api/axiosInstance';
@@ -69,7 +70,11 @@ const Customers = () => {
   const [editDialog, setEditDialog] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [detailDialog, setDetailDialog] = useState(false);
-  const [customerDetails, setCustomerDetails] = useState(null);
+  const navigate = useNavigate();
+
+  const handleRowClick = (customerId) => {
+    navigate(`/customers/${customerId}/details`);
+  };
 
   const {
     control,
@@ -160,10 +165,7 @@ const Customers = () => {
     handleMenuClose();
   };
 
-  const handleView = () => {
-    fetchCustomerDetails(selectedCustomer.id);
-    handleMenuClose();
-  };
+  
 
   const onSubmit = async (data) => {
     console.log('onSubmit chamado. editDialog:', editDialog, 'data:', data);
@@ -326,7 +328,7 @@ const Customers = () => {
           </TableHead>
           <TableBody>
             {customers.map((customer) => (
-              <TableRow key={customer.id} hover>
+              <TableRow key={customer.id} hover onClick={() => handleRowClick(customer.id)} sx={{ cursor: 'pointer' }}>
                 <TableCell>
                   <Box display="flex" alignItems="center" gap={2}>
                     <Avatar sx={{ bgcolor: 'primary.main' }}>
@@ -463,10 +465,7 @@ const Customers = () => {
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleView}>
-          <ViewIcon sx={{ mr: 1 }} />
-          Ver Detalhes
-        </MenuItem>
+        
         <MenuItem onClick={handleEdit}>
           <EditIcon sx={{ mr: 1 }} />
           Editar
@@ -704,103 +703,7 @@ const Customers = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Customer Details Dialog */}
-      <Dialog
-        open={detailDialog}
-        onClose={() => setDetailDialog(false)}
-        maxWidth="md"
-        fullWidth
-      >
-        <DialogTitle>Detalhes do Cliente</DialogTitle>
-        <DialogContent>
-          {customerDetails && (
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
-                <Card>
-                  <CardContent>
-                    <Box display="flex" alignItems="center" gap={2} mb={2}>
-                      <Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>
-                        {customerDetails.name?.charAt(0) || 'C'}
-                      </Avatar>
-                      <Box>
-                        <Typography variant="h6">{customerDetails.name}</Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          Cliente desde {format(new Date(customerDetails.created_at), 'MMMM yyyy', { locale: ptBR })}
-                        </Typography>
-                      </Box>
-                    </Box>
-                    
-                    <Box>
-                      {customerDetails.email && (
-                        <Typography variant="body2" gutterBottom>
-                          <EmailIcon fontSize="small" sx={{ mr: 1, verticalAlign: 'middle' }} />
-                          {customerDetails.email}
-                        </Typography>
-                      )}
-                      {customerDetails.phone && (
-                        <Typography variant="body2" gutterBottom>
-                          <PhoneIcon fontSize="small" sx={{ mr: 1, verticalAlign: 'middle' }} />
-                          {customerDetails.phone}
-                        </Typography>
-                      )}
-                      {customerDetails.birth_date && (
-                        <Typography variant="body2" gutterBottom>
-                          <strong>Nascimento:</strong> {format(new Date(customerDetails.birth_date), 'dd/MM/yyyy', { locale: ptBR })}
-                        </Typography>
-                      )}
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              
-              <Grid item xs={12} md={6}>
-                <Card>
-                  <CardContent>
-                    <Typography variant="h6" gutterBottom>
-                      Estatísticas
-                    </Typography>
-                    <Box>
-                      <Typography variant="body2" gutterBottom>
-                        <strong>Total de Visitas:</strong> {customerDetails.total_visits || 0}
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        <strong>Total de Feedbacks:</strong> {customerDetails.total_feedbacks || 0}
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        <strong>Avaliação Média:</strong> {customerDetails.average_rating?.toFixed(1) || 'N/A'}
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        <strong>Pontos de Fidelidade:</strong> {customerDetails.loyalty_points || 0}
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        <strong>Última Visita:</strong> {customerDetails.last_visit ? format(new Date(customerDetails.last_visit), 'dd/MM/yyyy', { locale: ptBR }) : 'Nunca'}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              
-              {customerDetails.preferences && (
-                <Grid item xs={12}>
-                  <Card>
-                    <CardContent>
-                      <Typography variant="h6" gutterBottom>
-                        Preferências
-                      </Typography>
-                      <Typography variant="body2">
-                        {customerDetails.preferences}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              )}
-            </Grid>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDetailDialog(false)}>Fechar</Button>
-        </DialogActions>
-      </Dialog>
+      
 
       {/* Delete Dialog */}
       <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>

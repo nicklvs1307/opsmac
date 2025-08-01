@@ -23,6 +23,7 @@ import Rewards from './pages/Rewards/Rewards';
 import Coupons from './pages/Coupons/Coupons';
 import CouponCreateForm from './pages/Coupons/CouponCreateForm';
 import Customers from './pages/Customers/Customers';
+import CustomerDetail from './pages/Customers/CustomerDetail';
 import CustomerBirthdays from './pages/Customers/CustomerBirthdays';
 import CustomerDashboard from './pages/Customers/CustomerDashboard';
 import Settings from './pages/Settings/Settings';
@@ -84,6 +85,7 @@ function App() {
                   <Route path="coupons" element={<Coupons />} />
                   <Route path="coupons/new" element={<CouponCreateForm />} />
                   <Route path="customers" element={<Customers />} />
+                  <Route path="customers/:id/details" element={<CustomerDetail />} />
                   <Route path="customers/birthdays" element={<CustomerBirthdays />} />
                   <Route path="customers/dashboard" element={<CustomerDashboard />} />
                   <Route path="settings" element={<Settings />} />

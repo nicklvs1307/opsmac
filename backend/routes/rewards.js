@@ -7,7 +7,7 @@ const { spinWheel } = require('../utils/wheelService');
 
 const router = express.Router();
 
-// Rota para listar recompensas de um restaurante
+// Rota para LISTAR recompensas de um restaurante
 router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, async (req, res) => {
   try {
     const { restaurantId } = req.params;
@@ -35,18 +35,18 @@ router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, async (r
   }
 });
 
-// Rota para criar uma nova recompensa
+// Rota para CRIAR uma nova recompensa
 router.post('/', auth, async (req, res) => {
-    const { restaurant_id, ...rewardData } = req.body;
+    const rewardData = req.body;
     const user = await models.User.findByPk(req.user.userId, { include: [{ model: models.Restaurant, as: 'restaurants' }] });
-    const userRestaurantId = user?.restaurants?.[0]?.id;
+    const restaurantId = user?.restaurants?.[0]?.id;
 
-    if (!userRestaurantId) {
+    if (!restaurantId) {
         return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
     }
 
     try {
-        const reward = await models.Reward.create({ ...rewardData, restaurant_id: userRestaurantId });
+        const reward = await models.Reward.create({ ...rewardData, restaurant_id: restaurantId });
         res.status(201).json(reward);
     } catch (error) {
         console.error('Erro ao criar recompensa:', error);
@@ -54,10 +54,40 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
+// Rota para ATUALIZAR uma recompensa
+router.put('/:id', auth, async (req, res) => {
+    const { id } = req.params;
+    const updateData = req.body;
+    try {
+        const reward = await models.Reward.findByPk(id);
+        if (!reward) {
+            return res.status(404).json({ error: 'Recompensa não encontrada.' });
+        }
+        await reward.update(updateData);
+        res.json(reward);
+    } catch (error) {
+        console.error('Erro ao atualizar recompensa:', error);
+        res.status(500).json({ error: 'Erro ao atualizar recompensa' });
+    }
+});
 
-// @route   POST /api/rewards/spin-wheel
-// @desc    Gira a roleta, cria o cupom e retorna o prêmio
-// @access  Public
+// Rota para DELETAR uma recompensa
+router.delete('/:id', auth, async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await models.Reward.destroy({ where: { id: id } });
+        if (result === 0) {
+            return res.status(404).json({ error: 'Recompensa não encontrada.' });
+        }
+        res.status(204).send();
+    } catch (error) {
+        console.error('Erro ao deletar recompensa:', error);
+        res.status(500).json({ error: 'Erro ao deletar recompensa' });
+    }
+});
+
+
+// Rota para a ROLETA
 router.post('/spin-wheel', [
     body('reward_id').isUUID().withMessage('ID da recompensa inválido'),
     body('customer_id').isUUID().withMessage('ID do cliente inválido'),
@@ -111,7 +141,5 @@ router.post('/spin-wheel', [
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
 });
-
-// Adicione outras rotas de rewards (PUT, DELETE, etc.) aqui se necessário
 
 module.exports = router;

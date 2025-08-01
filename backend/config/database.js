@@ -100,8 +100,8 @@ const setupAssociations = () => {
   // Survey models associations
   Survey.associate(sequelize.models);
   Question.associate(sequelize.models);
-  SurveyResponse.associate(sequelize.models);
   Answer.associate(sequelize.models);
+  SurveyResponse.associate(sequelize.models);
 };
 
 setupAssociations();

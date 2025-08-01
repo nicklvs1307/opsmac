@@ -77,7 +77,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
       const angMeio = startAngle + segmentAngle / 2;
       ctx.rotate(angMeio);
       
-      const textRadius = radius * 0.55; // Adjusted radius for text
+      const textRadius = radius * 0.5; // Adjusted radius for text to give more margin
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       
@@ -86,7 +86,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
       ctx.font = `bold ${fontSize}px Poppins`;
 
       // Adjust font size to fit within the segment, or truncate if too long
-      const maxTextWidth = radius * Math.sin(segmentAngle / 2) * 2 * 0.9; // 90% of segment width
+      const maxTextWidth = radius * Math.sin(segmentAngle / 2) * 2 * 0.8; // 80% of segment width
       while (ctx.measureText(text).width > maxTextWidth && fontSize > 8) {
         fontSize -= 1;
         ctx.font = `bold ${fontSize}px Poppins`;
@@ -134,9 +134,9 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
 
   const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
 
-  const animateSpin = useCallback((targetRotation, duration = 5000) => {
+  const animateSpin = useCallback((targetRotationRadians, duration = 5000) => {
     const start = performance.now();
-    const initialRotation = rotationRef.current;
+    const initialRotationRadians = rotationRef.current;
 
     const animate = (currentTime) => {
       const elapsed = currentTime - start;
@@ -144,7 +144,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
       if (progress > 1) progress = 1;
 
       const easedProgress = easeOutQuart(progress);
-      rotationRef.current = initialRotation + (targetRotation - initialRotation) * easedProgress;
+      rotationRef.current = initialRotationRadians + (targetRotationRadians - initialRotationRadians) * easedProgress;
 
       drawWheel(rotationRef.current);
 
@@ -152,7 +152,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
         animationFrameId.current = requestAnimationFrame(animate);
       } else {
         // Ensure the final rotation is exactly the target rotation
-        rotationRef.current = targetRotation;
+        rotationRef.current = targetRotationRadians;
         drawWheel(rotationRef.current);
         if (onAnimationComplete) {
           onAnimationComplete();
@@ -165,16 +165,20 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
   useEffect(() => {
     if (winningItem && items && items.length > 0) {
       const numItems = items.length;
-      const segmentAngleDegrees = 360 / numItems;
+      const segmentAngleRadians = (2 * Math.PI) / numItems;
       const winningIndex = items.findIndex(item => (item.name || item.title) === (winningItem.name || winningItem.title));
 
       if (winningIndex !== -1) {
-        // Calculate target angle to align the winning item at the top
-        // The 270 is to account for the canvas's 0 degree being at the right, and we want the arrow at the top (90 degrees from right)
-        // We add 360 * 5 for multiple spins
-        const targetAngle = 270 - (winningIndex * segmentAngleDegrees) - (segmentAngleDegrees / 2);
-        const targetRotation = (360 * 5) + targetAngle;
-        animateSpin(targetRotation);
+        const randomSpins = 5 + Math.floor(Math.random() * 3); // 5 to 7 full spins as in example.html
+        
+        // Replicate example.html's target angle calculation
+        // (2 * Math.PI * voltas) + (Math.PI - (premioIndex * anguloSetor)) - (anguloSetor / 2);
+        const targetRotationRadians = 
+          (2 * Math.PI * randomSpins) + 
+          (Math.PI - (winningIndex * segmentAngleRadians)) - 
+          (segmentAngleRadians / 2);
+
+        animateSpin(targetRotationRadians);
       }
     }
   }, [winningItem, items, animateSpin]);

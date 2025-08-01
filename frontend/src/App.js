@@ -38,6 +38,7 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import RelationshipDashboard from './pages/Relationship/RelationshipDashboard';
 import PublicCheckin from './pages/Public/PublicCheckin';
 import PublicReward from './pages/Public/PublicReward'; // Adicionado
+import GirarRoleta from './pages/Public/GirarRoleta'; // Adicionado
 
 // Create query client
 const queryClient = new QueryClient({
@@ -63,6 +64,7 @@ function App() {
                 <Route path="/thank-you" element={<ThankYou />} />
                 <Route path="/public/surveys/:id" element={<PublicSurveyForm />} />
                 <Route path="/checkin/public" element={<PublicCheckin />} />
+                <Route path="/girar-roleta" element={<GirarRoleta />} />
                 <Route path="/recompensa-ganha" element={<PublicReward />} />
                 
                 {/* Protected Routes */}

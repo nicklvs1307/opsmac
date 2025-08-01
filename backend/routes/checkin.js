@@ -336,9 +336,25 @@ router.post('/public', [
           console.log('[Public Check-in] Recompensa encontrada:', reward.title, 'Objeto Reward:', JSON.stringify(reward));
           try {
             console.log('[Public Check-in] Tentando gerar cupom para o cliente:', customer.id);
-            const newCoupon = await reward.generateCoupon(customer.id, { visit_milestone: parsedVisitCount });
-            
-            if (newCoupon) {
+            if (reward.reward_type === 'wheel') {
+              // Se a recompensa for do tipo 'roleta', não gere o cupom ainda.
+              // Apenas retorne a configuração da roleta para o frontend.
+              rewardEarned = {
+                reward_id: reward.id, // Envia o ID do prêmio para o frontend
+                reward_title: reward.title,
+                reward_type: reward.reward_type,
+                wheel_config: reward.wheel_config,
+                visit_count: currentVisits,
+                customer_id: customer.id, // Envia o ID do cliente para o frontend
+                description: reward.description,
+                // Não há coupon_code ou formatted_message aqui
+              };
+              // Pula a geração de cupom e o envio de mensagem do WhatsApp por enquanto
+            } else {
+              // Para outros tipos de recompensa, gere o cupom imediatamente
+              const newCoupon = await reward.generateCoupon(customer.id, { visit_milestone: parsedVisitCount });
+
+              if (newCoupon) {
               console.log('[Public Check-in] Cupom gerado com sucesso:', newCoupon.code, 'Objeto Coupon:', JSON.stringify(newCoupon));
               let rewardMessage = rewardConfig.message_template || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
               

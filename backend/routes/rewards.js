@@ -700,4 +700,65 @@ router.post('/redeem', [
   }
 });
 
+// @route   POST /api/rewards/spin-wheel
+// @desc    Gira a roleta e gera o cupom para o item ganho
+// @access  Public (ou autenticado, dependendo da sua lógica de segurança)
+router.post('/spin-wheel', [
+    body('reward_id').isUUID().withMessage('ID da recompensa inválido'),
+    body('customer_id').isUUID().withMessage('ID do cliente inválido'),
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: 'Dados inválidos', details: errors.array() });
+    }
+
+    const { reward_id, customer_id } = req.body;
+
+    try {
+        const reward = await models.Reward.findByPk(reward_id);
+        if (!reward || reward.reward_type !== 'wheel') {
+            return res.status(404).json({ error: 'Recompensa da roleta não encontrada.' });
+        }
+
+        const customer = await models.Customer.findByPk(customer_id);
+        if (!customer) {
+            return res.status(404).json({ error: 'Cliente não encontrado.' });
+        }
+
+        // Lógica para girar a roleta (você pode ter um serviço para isso)
+        const { spinWheel } = require('../utils/wheelService');
+        const wonItem = spinWheel(reward.wheel_config);
+
+        // Crie um cupom baseado no item ganho
+        const coupon = await models.Coupon.create({
+            customer_id: customer.id,
+            reward_id: reward.id,
+            restaurant_id: reward.restaurant_id,
+            code: `WHEEL-${Date.now()}`.substring(0, 15), // Código de exemplo
+            title: wonItem.name, // Nome do item ganho
+            description: `Prêmio da roleta: ${wonItem.name}`,
+            reward_type: 'free_item', // Ou o tipo que fizer sentido
+            value: wonItem.value || null,
+            status: 'active',
+            // Defina a expiração, se aplicável
+            expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Exemplo: 30 dias
+        });
+
+        // Retorne os detalhes do prêmio ganho
+        res.status(201).json({
+            message: 'Você ganhou um prêmio!',
+            reward_earned: {
+                reward_title: coupon.title,
+                coupon_code: coupon.code,
+                description: coupon.description,
+                value: coupon.value,
+            },
+        });
+
+    } catch (error) {
+        console.error('Erro ao girar a roleta:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
 module.exports = router;

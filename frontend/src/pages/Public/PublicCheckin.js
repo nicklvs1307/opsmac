@@ -75,10 +75,17 @@ const PublicCheckin = () => {
       }
 
       const response = await axiosInstance.post('/api/checkin/public', payload);
-      
-      if (response.data.reward_earned) {
-        // Se uma recompensa foi ganha, redireciona para a página de recompensa
-        navigate('/recompensa-ganha', { state: { reward_earned: response.data.reward_earned } });
+
+      const { reward_earned } = response.data;
+
+      if (reward_earned) {
+        if (reward_earned.reward_type === 'wheel') {
+          // Se a recompensa for uma roleta, redireciona para a página da roleta
+          navigate('/girar-roleta', { state: { reward_earned } });
+        } else {
+          // Se for outra recompensa, redireciona para a página de recompensa ganha
+          navigate('/recompensa-ganha', { state: { reward_earned } });
+        }
       } else {
         // Caso contrário, redireciona para a página de agradecimento
         navigate('/thank-you', { state: { message: t('public_checkin.checkin_thank_you_message') } });

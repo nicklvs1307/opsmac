@@ -14,6 +14,7 @@ const GirarRoleta = () => {
 
   const [loading, setLoading] = useState(false);
   const [winningItem, setWinningItem] = useState(null);
+  const [finalReward, setFinalReward] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
 
   if (!reward_earned || !reward_earned.wheel_config) {
@@ -33,6 +34,7 @@ const GirarRoleta = () => {
         customer_id: reward_earned.customer_id,
       });
       setWinningItem(response.data.wonItem);
+      setFinalReward(response.data.reward_earned);
     } catch (err) {
       console.error('Error spinning wheel:', err);
       toast.error(err.response?.data?.message || t('girar_roleta.error_spinning'));
@@ -41,23 +43,9 @@ const GirarRoleta = () => {
     }
   };
 
-  const handleAnimationComplete = async () => {
-    try {
-      const response = await axiosInstance.post('/api/rewards/create-coupon-from-wheel', {
-        reward_id: reward_earned.reward_id,
-        customer_id: reward_earned.customer_id,
-        won_item: winningItem,
-      });
-
-      toast.success(t('girar_roleta.win_message'));
-      navigate('/recompensa-ganha', { state: { reward_earned: response.data.reward_earned } });
-
-    } catch (err) {
-      console.error('Error creating coupon:', err);
-      toast.error(err.response?.data?.message || t('girar_roleta.error_finalizing'));
-    } finally {
-      setLoading(false);
-    }
+  const handleAnimationComplete = () => {
+    toast.success(t('girar_roleta.win_message'));
+    navigate('/recompensa-ganha', { state: { reward_earned: finalReward } });
   };
 
   return (
@@ -83,7 +71,7 @@ const GirarRoleta = () => {
           onClick={handleSpinClick}
           disabled={isSpinning || loading}
         >
-          {loading ? <CircularProgress size={24} /> : t('girar_roleta.spin_button')}
+          {loading && !winningItem ? <CircularProgress size={24} /> : t('girar_roleta.spin_button')}
         </Button>
       </Box>
     </Container>

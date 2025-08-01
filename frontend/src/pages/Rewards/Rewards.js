@@ -65,6 +65,7 @@ const Rewards = () => {
   });
   
   const [createDialog, setCreateDialog] = useState(false);
+  const [deleteDialog, setDeleteDialog] = useState(false);
   
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [detailsModalTab, setDetailsModalTab] = useState(0); // 0 for config, 1 for analytics

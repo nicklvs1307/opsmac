@@ -1,18 +1,25 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      164.1s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      166.7s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.774
-0.774 > Feedeliza+-frontend@1.0.0 build
-0.774 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.774
-4.252 Creating an optimized production build...
-163.0 Failed to compile.
-163.0
-163.1 [eslint]
-163.1 src/pages/Rewards/Rewards.js
-163.1 Syntax error: Identifier 'handleAnalytics' has already been declared. (221:8) (221:8)
-163.1
-163.1
+0.747
+0.747 > Feedeliza+-frontend@1.0.0 build
+0.747 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.747
+3.259 Creating an optimized production build...
+166.3 Failed to compile.
+166.3
+166.3 [eslint]
+166.3 src/pages/Rewards/Rewards.js
+166.3   Line 185:5:   'setDeleteDialog' is not defined  no-undef
+166.3   Line 242:7:   'setDeleteDialog' is not defined  no-undef
+166.3   Line 851:21:  'setDeleteDialog' is not defined  no-undef
+166.3   Line 880:21:  'deleteDialog' is not defined     no-undef
+166.3   Line 880:52:  'setDeleteDialog' is not defined  no-undef
+166.3   Line 888:34:  'setDeleteDialog' is not defined  no-undef
+166.3
+166.3 Search for the keywords to learn more about each error.
+166.3
+166.3
 ------
 
  1 warning found (use docker --debug to expand):

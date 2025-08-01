@@ -269,6 +269,10 @@ module.exports = (sequelize) => {
       as: 'restaurant',
       onDelete: 'CASCADE'
     });
+    Customer.hasMany(models.Coupon, {
+      foreignKey: 'customer_id',
+      as: 'coupons'
+    });
   };
 
   // Função para gerar código de referência

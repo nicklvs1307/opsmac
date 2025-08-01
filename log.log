@@ -1,32 +1,3 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
-Generated Swagger Specs (first 500 chars): {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Check Test API",
-    "version": "1.0.0",
-    "description": "API documentation for the Check Test application."
-  },
-  "servers": [
-    {
-      "url": "https://feedelizaapi.towersfy.com/api",
-      "description": "Production server"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Public API",
-      "description": "Endpoints acessíveis via API Token para integração externa."
-    },
-    {
-      "name": "Admin",
-      "description": "Gerenciamento de us
-✅ Conexão com banco de dados estabelecida
-✅ Modelos sincronizados com o banco
-🚀 Servidor rodando na porta 5000
-📊 Dashboard: https://feedelizapro.towersfy.com
-🔗 API: https://feedelizaapi.towersfy.com/api
 Auth Middleware - req.user (after population): {
   userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
   email: 'lucas@teste.com',
@@ -41,21 +12,7 @@ Auth Middleware - req.user (after population): {
   name: 'Lucas Niquele',
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingError]: SurveyResponse is not associated to Customer!
+Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Coupon is not associated to Customer!
     at Customer._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:565:13)
     at Customer._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
     at /app/node_modules/sequelize/lib/model.js:421:37
@@ -65,3 +22,88 @@ Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingErro
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async Customer.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
     at async /app/backend/routes/customers.js:696:22
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Coupon is not associated to Customer!
+    at Customer._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:565:13)
+    at Customer._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at Customer._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at Customer.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Customer.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async /app/backend/routes/customers.js:696:22
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Coupon is not associated to Customer!
+    at Customer._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:565:13)
+    at Customer._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at Customer._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at Customer.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Customer.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async /app/backend/routes/customers.js:696:22
+
+    URL da solicitação
+https://feedelizaapi.towersfy.com/api/customers/fbd21682-3b82-443a-8c0a-6233524ed3b2/details
+Método da solicitação
+GET
+Código de status
+500 Internal Server Erro
+
+{"error":"Erro interno do servidor"}

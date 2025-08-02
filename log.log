@@ -1,20 +1,4 @@
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/api-token
-Método da solicitação
-GET
-Código de status
-404 Not Found
-{"error":"Rota não encontrada"}
-
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/whatsapp
-Método da solicitação
-GET
-Código de status
-404 Not Found
-{"error":"Rota não encontrada"}
-
-URL da solicitação
 https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo
 Método da solicitação
 POST
@@ -22,71 +6,29 @@ Código de status
 500 Internal Server Error
 {"error":"Erro interno do servidor","message":"Algo deu errado"}
 
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/qrcode/restaurant/0e517dc5-4881-45aa-996e-0365012000bc?page=1&limit=12&search=&status=active
-Método da solicitação
-GET
-Código de status
-400 Bad Request
-{
-    "error": "Parâmetros inválidos",
-    "details": [
-        {
-            "type": "field",
-            "value": "active",
-            "msg": "Invalid value",
-            "path": "status",
-            "location": "query"
-        }
-    ]
-}
+--
+
+Ações da Pesquisa
+Pesquisa Criada com Sucesso!
+ID da Pesquisa: c50ed65d-8c4c-4e33-9162-3646949cb136
+
+Link Público: /public/surveys/c50ed65d-8c4c-4e33-9162-3646949cb136
+https://feedelizapro.towersfy.com/public/surveys/c50ed65d-8c4c-4e33-9162-3646949cb136
+Error fetching survey: TypeError: Cannot read properties of undefined (reading 'forEach')
+    at PublicSurveyForm.js:53:24
+
 
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/feedback/restaurant/0e517dc5-4881-45aa-996e-0365012000bc?page=1&limit=10&type=criticism&status=pending&source=qr_code
+https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo
 Método da solicitação
-GET
+POST
 Código de status
-400 Bad Request
+200 OK
 {
-    "error": "Parâmetros inválidos",
-    "details": [
-        {
-            "type": "field",
-            "value": "qr_code",
-            "msg": "Invalid value",
-            "path": "source",
-            "location": "query"
-        }
-    ]
+    "message": "Logo atualizado com sucesso!",
+    "logo_url": "/uploads/logo-1754177345660-915639366.jpeg"
 }
-
-
-PublicSurveyForm.js:62 Error fetching survey: TypeError: Cannot read properties of undefined (reading 'name')
-    at PublicSurveyForm.js:49:43
-(anônimo)	@	PublicSurveyForm.js:62
-await in (anônimo)		
-(anônimo)	@	PublicSurveyForm.js:69
-
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/qrcode/restaurant/0e517dc5-4881-45aa-996e-0365012000bc?page=1&limit=12&search=&status=expired
-Método da solicitação
-GET
-Código de status
-400 Bad Reques
-{
-    "error": "Parâmetros inválidos",
-    "details": [
-        {
-            "type": "field",
-            "value": "expired",
-            "msg": "Invalid value",
-            "path": "status",
-            "location": "query"
-        }
-    ]
 }
-
-Erro: Error: ENOENT: no such file or directory, open 'backend/public/uploads/logo-1754172975738-529808887.jpeg'
 
 Auth Middleware - req.user (after population): {
 
@@ -100,4 +42,7 @@ Auth Middleware - req.user (after population): {
 
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 
-  
+}
+
+Multer destination path: /app/backend/public/uploads
+

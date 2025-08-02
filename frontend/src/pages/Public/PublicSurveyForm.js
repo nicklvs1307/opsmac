@@ -50,7 +50,7 @@ const PublicSurveyForm = () => {
         setRestaurantLogo(data.restaurant.logo);
         // Initialize answers state
         const initialAnswers = {};
-        data.questions.forEach(q => {
+        data.survey.questions.forEach(q => {
           if (q.question_type === 'checkboxes') {
             initialAnswers[q.id] = [];
           } else {

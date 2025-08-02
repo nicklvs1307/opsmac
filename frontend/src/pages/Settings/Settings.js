@@ -51,6 +51,13 @@ import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
+const getFullImageUrl = (relativePath) => {
+  if (!relativePath) return '';
+  const baseUrl = axiosInstance.defaults.baseURL;
+  // Garante que não haja barras duplas se baseUrl já terminar com uma
+  return `${baseUrl}${relativePath.startsWith('/') ? relativePath : `/${relativePath}`}`;
+};
+
 const Settings = () => {
   const { user, updateUser, setUser } = useAuth();
   const { mode, toggleTheme } = useThemeMode();
@@ -58,14 +65,14 @@ const Settings = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
   
   const [loading, setLoading] = useState(true); // Keep true from current
-  const [apiToken, setApiToken] = useState('');
+  const [apiToken, setApiToken, setLogoPreview] = useState(getFullImageUrl(user?.restaurant?.logo) || '');
   const [activeTab, setActiveTab] = useState('profile');
   const [changePasswordDialog, setChangePasswordDialog] = useState(false);
   const [testMessageDialog, setTestMessageDialog] = useState(false);
   const [testRecipient, setTestRecipient] = useState('');
   const [testMessage, setTestMessage] = useState('');
   const [selectedLogo, setSelectedLogo] = useState(null);
-  const [logoPreview, setLogoPreview] = useState(user?.restaurant?.logo || '');
+  const [logoPreview, setLogoPreview] = useState(getFullImageUrl(user?.restaurant?.logo) || '');
   const [settings, setSettings] = useState({
     notifications: {
       email_feedback: true,
@@ -87,7 +94,7 @@ const Settings = () => {
   });
 
   useEffect(() => {
-    setLogoPreview(user?.restaurant?.logo || '');
+    setLogoPreview(getFullImageUrl(user?.restaurant?.logo) || '');
   }, [user]);
 
   const handleLogoChange = (event) => {
@@ -115,6 +122,7 @@ const Settings = () => {
       const updatedUser = { ...user, restaurant: updatedRestaurant };
       setUser(updatedUser);
       setSelectedLogo(null);
+      setLogoPreview(getFullImageUrl(response.data.logo_url)); // Atualiza a prévia com a URL completa
     } catch (err) {
       toast.error(err.response?.data?.message || t('settings.error_uploading_logo'));
     } finally {

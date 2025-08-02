@@ -302,14 +302,6 @@ module.exports = (sequelize) => {
       if (!this.wheel_config || !this.wheel_config.items || this.wheel_config.items.length === 0) {
         throw new Error('Configuração da roleta inválida ou vazia.');
       }
-
-      // Garantir que todos os itens tenham um ID único antes de sortear
-      this.wheel_config.items.forEach(item => {
-        if (!item.id) {
-          item.id = uuidv4();
-        }
-      });
-
       winningItem = spinWheel(this.wheel_config);
       if (!winningItem) {
         throw new Error('Não foi possível sortear um item da roleta.');
@@ -355,7 +347,7 @@ module.exports = (sequelize) => {
     analytics.total_generated = (analytics.total_generated || 0) + 1;
     await this.update({ analytics });
     
-    return { coupon, winningItem };
+    return { coupon, winningItem, winningIndex };
   };
 
   Reward.prototype.generateCouponCode = function(customerName) {

@@ -182,24 +182,21 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
   }, [drawWheel, onAnimationComplete]);
 
   useEffect(() => {
-    if (winningItem && items && items.length > 0) {
+    if (winningIndex !== -1 && items && items.length > 0) {
       const numItems = items.length;
       const segmentAngleRadians = (2 * Math.PI) / numItems;
-      const winningIndex = items.findIndex(item => item.id === winningItem.id);
+      
+      const randomSpins = 5 + Math.floor(Math.random() * 3); // 5 to 7 full spins as in example.html
+      
+      // Replicate example.html's target angle calculation
+      // (2 * Math.PI * voltas) + (Math.PI - (premioIndex * anguloSetor)) - (anguloSetor / 2);
+      const targetRotationRadians =
+        (2 * Math.PI * randomSpins) + 
+        (Math.PI / 2 - (winningIndex * segmentAngleRadians + segmentAngleRadians / 2));
 
-      if (winningIndex !== -1) {
-        const randomSpins = 5 + Math.floor(Math.random() * 3); // 5 to 7 full spins as in example.html
-        
-        // Replicate example.html's target angle calculation
-        // (2 * Math.PI * voltas) + (Math.PI - (premioIndex * anguloSetor)) - (anguloSetor / 2);
-        const targetRotationRadians =
-          (2 * Math.PI * randomSpins) + 
-          (Math.PI / 2 - (winningIndex * segmentAngleRadians + segmentAngleRadians / 2));
-
-        animateSpin(targetRotationRadians);
-      }
+      animateSpin(targetRotationRadians);
     }
-  }, [winningItem, items, animateSpin]);
+  }, [winningIndex, items, animateSpin]);
 
   return (
     <Box

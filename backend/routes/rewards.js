@@ -111,12 +111,12 @@ router.post('/spin-wheel', [
         }
 
         // A lógica de sorteio e geração de cupom já está no método generateCoupon do modelo Reward
-        const { coupon, winningItem } = await reward.generateCoupon(customer.id);
+        const { coupon, winningItem, winningIndex } = await reward.generateCoupon(customer.id);
 
         res.status(200).json({
             message: 'Você ganhou um prêmio!',
             wonItem: winningItem, // Retorna o objeto completo do item sorteado
-            wheelItems: reward.wheel_config.items, // Retorna todos os itens da roleta com seus IDs
+            winningIndex: winningIndex, // Retorna o índice do item sorteado
             reward_earned: {
                 reward_title: coupon.title,
                 coupon_code: coupon.code,

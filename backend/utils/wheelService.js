@@ -14,15 +14,16 @@ const spinWheel = (wheelConfig) => {
 
   let randomNumber = Math.random() * totalProbability;
 
-  for (const item of wheelConfig.items) {
+  for (let i = 0; i < wheelConfig.items.length; i++) {
+    const item = wheelConfig.items[i];
     if (randomNumber < item.probability) {
-      return item; // Retorna o item sorteado
+      return { winningItem: item, winningIndex: i }; // Retorna o item sorteado e seu índice
     }
     randomNumber -= item.probability;
   }
 
-  // Fallback: Se por algum motivo não cair em nenhum, retorna o último item
-  return wheelConfig.items[wheelConfig.items.length - 1];
+  // Fallback: Se por algum motivo não cair em nenhum, retorna o último item e seu índice
+  return { winningItem: wheelConfig.items[wheelConfig.items.length - 1], winningIndex: wheelConfig.items.length - 1 };
 };
 
 module.exports = { spinWheel };

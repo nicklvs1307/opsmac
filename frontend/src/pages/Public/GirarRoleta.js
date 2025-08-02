@@ -37,8 +37,6 @@ const GirarRoleta = () => {
       });
       setWinningItem(response.data.wonItem);
       setApiResponseRewardEarned(response.data.reward_earned);
-      // Usar os itens da roleta retornados pela API para garantir consistência
-      setWheelItems(response.data.wheelItems);
       setLoading(false); // Stop loading here, as animation will start
     } catch (err) {
       console.error('Error spinning wheel:', err);
@@ -64,8 +62,9 @@ const GirarRoleta = () => {
 
       <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
         <SpinTheWheel
-          items={wheelItems || reward_earned.wheel_config.items} // Usar wheelItems se disponível, senão o original
+          items={reward_earned.wheel_config.items}
           winningItem={winningItem}
+          winningIndex={winningIndex} // Passando o winningIndex
           onAnimationComplete={handleAnimationComplete}
         />
       </Box>

@@ -297,6 +297,7 @@ module.exports = (sequelize) => {
     let couponValue = this.value;
     let couponRewardType = this.reward_type;
     let winningItem = null;
+    let winningIndex = null;
 
     if (this.reward_type === 'spin_the_wheel') {
       if (!this.wheel_config || !this.wheel_config.items || this.wheel_config.items.length === 0) {

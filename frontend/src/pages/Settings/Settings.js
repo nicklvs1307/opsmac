@@ -52,7 +52,7 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const Settings = () => {
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, setUser } = useAuth();
   const { mode, toggleTheme } = useThemeMode();
   const { t, i18n } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
@@ -64,6 +64,8 @@ const Settings = () => {
   const [testMessageDialog, setTestMessageDialog] = useState(false);
   const [testRecipient, setTestRecipient] = useState('');
   const [testMessage, setTestMessage] = useState('');
+  const [selectedLogo, setSelectedLogo] = useState(null);
+  const [logoPreview, setLogoPreview] = useState(user?.restaurant?.logo || '');
   const [settings, setSettings] = useState({
     notifications: {
       email_feedback: true,
@@ -83,6 +85,42 @@ const Settings = () => {
       loyalty_program: true,
     },
   });
+
+  useEffect(() => {
+    setLogoPreview(user?.restaurant?.logo || '');
+  }, [user]);
+
+  const handleLogoChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedLogo(file);
+      setLogoPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleLogoUpload = async () => {
+    if (!selectedLogo) return;
+    setLoading(true);
+    const formData = new FormData();
+    formData.append('logo', selectedLogo);
+
+    try {
+      const response = await axiosInstance.post(`/api/settings/${restaurantId}/logo`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      toast.success(t('settings.logo_updated_successfully'));
+      const updatedRestaurant = { ...user.restaurant, logo: response.data.logo_url };
+      const updatedUser = { ...user, restaurant: updatedRestaurant };
+      setUser(updatedUser);
+      setSelectedLogo(null);
+    } catch (err) {
+      toast.error(err.response?.data?.message || t('settings.error_uploading_logo'));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchApiToken = useCallback(async (id) => {
     try {

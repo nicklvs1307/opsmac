@@ -16,6 +16,7 @@ router.post(
         body('type', 'O tipo da pesquisa é obrigatório').not().isEmpty(),
         body('title', 'O título é obrigatório para pesquisas personalizadas').if(body('type').equals('custom')).not().isEmpty(),
         body('questions', 'Perguntas são obrigatórias para pesquisas personalizadas').if(body('type').equals('custom')).isArray({ min: 1 }),
+        body('status', 'Status inválido').optional().isIn(['draft', 'active', 'inactive', 'archived']),
     ],
     async (req, res) => {
         console.log('Surveys Route - req.user:', req.user);
@@ -24,7 +25,7 @@ router.post(
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { type, title, description, questions } = req.body;
+        const { type, title, description, questions, status } = req.body;
         const { userId: user_id, restaurant_id } = req.user;
 
         try {
@@ -32,11 +33,11 @@ router.post(
             let questionsData = [];
 
             if (type === 'custom') {
-                surveyData = { title, description, type, restaurant_id, created_by: user_id };
+                surveyData = { title, description, type, restaurant_id, created_by: user_id, status };
                 questionsData = questions;
             } else if (surveyTemplates[type]) {
                 const template = surveyTemplates[type];
-                surveyData = { ...template, type, restaurant_id, created_by: user_id };
+                surveyData = { ...template, type, restaurant_id, created_by: user_id, status };
                 questionsData = template.questions;
             } else {
                 return res.status(400).json({ msg: 'Tipo de pesquisa inválido' });
@@ -75,14 +76,15 @@ router.put(
         body('title', 'O título é obrigatório').not().isEmpty(),
         body('description', 'A descrição é obrigatória').not().isEmpty(),
         body('questions', 'Perguntas são obrigatórias').isArray({ min: 1 }),
+        body('status', 'Status inválido').optional().isIn(['draft', 'active', 'inactive', 'archived']),
     ],
     async (req, res) => {
-        const errors = validationResult(req);
+        const errors = validation.validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { title, description, questions } = req.body;
+        const { title, description, questions, status } = req.body;
         const { id } = req.params;
         const { restaurant_id } = req.user;
 
@@ -101,6 +103,9 @@ router.put(
             // Update survey details
             survey.title = title;
             survey.description = description;
+            if (status) {
+                survey.status = status;
+            }
             await survey.save();
 
             // Update questions: This is a simplified approach.

@@ -46,7 +46,7 @@ router.post('/', auth, async (req, res) => {
     }
 
     try {
-        const reward = await models.Reward.create({ ...rewardData, restaurant_id: restaurantId });
+        const reward = await models.Reward.create({ ...rewardData, restaurant_id: restaurantId, created_by: req.user.userId });
         res.status(201).json(reward);
     } catch (error) {
         console.error('Erro ao criar recompensa:', error);

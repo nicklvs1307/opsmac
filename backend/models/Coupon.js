@@ -427,5 +427,12 @@ module.exports = (sequelize) => {
     });
   };
 
+  Coupon.associate = (models) => {
+    Coupon.belongsTo(models.Reward, { foreignKey: 'reward_id', as: 'reward' });
+    Coupon.belongsTo(models.Customer, { foreignKey: 'customer_id', as: 'customer' });
+    Coupon.belongsTo(models.Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
+    Coupon.belongsTo(models.User, { foreignKey: 'redeemed_by', as: 'redeemedByUser' });
+  };
+
   return Coupon;
 };

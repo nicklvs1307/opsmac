@@ -302,7 +302,8 @@ module.exports = (sequelize) => {
       if (!this.wheel_config || !this.wheel_config.items || this.wheel_config.items.length === 0) {
         throw new Error('Configuração da roleta inválida ou vazia.');
       }
-      winningItem = spinWheel(this.wheel_config);
+      const { winningItem: spunItem, winningIndex } = spinWheel(this.wheel_config);
+      winningItem = spunItem;
       if (!winningItem) {
         throw new Error('Não foi possível sortear um item da roleta.');
       }
@@ -411,6 +412,10 @@ module.exports = (sequelize) => {
     }
     
     return true;
+  };
+
+  Reward.associate = (models) => {
+    Reward.hasMany(models.Coupon, { foreignKey: 'reward_id', as: 'coupons' });
   };
 
   return Reward;

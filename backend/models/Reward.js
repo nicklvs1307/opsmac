@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize) => {
   const Reward = sequelize.define('Reward', {
@@ -51,7 +52,7 @@ module.exports = (sequelize) => {
       allowNull: true,
       validate: {
         min: {
-          args: 1,
+          args: [1],
           msg: 'Limite total de usos deve ser pelo menos 1'
         }
       }
@@ -65,7 +66,7 @@ module.exports = (sequelize) => {
       allowNull: true,
       validate: {
         min: {
-          args: 0,
+          args: [0],
           msg: 'Compra mínima deve ser positiva'
         }
       }
@@ -94,7 +95,7 @@ module.exports = (sequelize) => {
       allowNull: true,
       validate: {
         min: {
-          args: 1,
+          args: [1],
           msg: 'Dias válidos deve ser pelo menos 1'
         }
       }
@@ -206,6 +207,15 @@ module.exports = (sequelize) => {
       }
     ],
     hooks: {
+      beforeSave: (reward) => {
+        if (reward.reward_type === 'spin_the_wheel' && reward.wheel_config && reward.wheel_config.items) {
+          reward.wheel_config.items.forEach(item => {
+            if (!item.id) {
+              item.id = uuidv4();
+            }
+          });
+        }
+      },
       beforeCreate: (reward) => {
         // Definir data de validade baseada em dias_valid
         if (reward.days_valid && !reward.valid_until) {
@@ -286,12 +296,13 @@ module.exports = (sequelize) => {
     let couponDescription = this.description;
     let couponValue = this.value;
     let couponRewardType = this.reward_type;
+    let winningItem = null;
 
     if (this.reward_type === 'spin_the_wheel') {
       if (!this.wheel_config || !this.wheel_config.items || this.wheel_config.items.length === 0) {
         throw new Error('Configuração da roleta inválida ou vazia.');
       }
-      const winningItem = spinWheel(this.wheel_config);
+      winningItem = spinWheel(this.wheel_config);
       if (!winningItem) {
         throw new Error('Não foi possível sortear um item da roleta.');
       }
@@ -336,7 +347,7 @@ module.exports = (sequelize) => {
     analytics.total_generated = (analytics.total_generated || 0) + 1;
     await this.update({ analytics });
     
-    return coupon;
+    return { coupon, winningItem };
   };
 
   Reward.prototype.generateCouponCode = function(customerName) {

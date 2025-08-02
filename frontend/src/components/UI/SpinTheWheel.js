@@ -185,7 +185,7 @@ const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
     if (winningItem && items && items.length > 0) {
       const numItems = items.length;
       const segmentAngleRadians = (2 * Math.PI) / numItems;
-      const winningIndex = items.findIndex(item => (item.name || item.title) === (winningItem.name || winningItem.title));
+      const winningIndex = items.findIndex(item => item.id === winningItem.id);
 
       if (winningIndex !== -1) {
         const randomSpins = 5 + Math.floor(Math.random() * 3); // 5 to 7 full spins as in example.html

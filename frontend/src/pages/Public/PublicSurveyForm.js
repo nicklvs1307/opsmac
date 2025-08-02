@@ -33,6 +33,8 @@ const PublicSurveyForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [survey, setSurvey] = useState(null);
+  const [restaurantName, setRestaurantName] = useState('');
+  const [restaurantLogo, setRestaurantLogo] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -43,7 +45,9 @@ const PublicSurveyForm = () => {
       try {
         setLoading(true);
         const { data } = await axiosInstance.get(`/api/public/surveys/${id}`);
-        setSurvey(data);
+        setSurvey(data.survey);
+        setRestaurantName(data.restaurant.name);
+        setRestaurantLogo(data.restaurant.logo);
         // Initialize answers state
         const initialAnswers = {};
         data.questions.forEach(q => {
@@ -152,15 +156,27 @@ const PublicSurveyForm = () => {
     }}>
       {/* Logo ou ícone do restaurante poderia ser adicionado aqui */}
       <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
-        <img 
-          src="/logo192.png" 
-          alt="Logo" 
-          style={{ 
-            height: '60px', 
-            width: 'auto',
-            filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
-          }} 
-        />
+        {restaurantLogo ? (
+          <img 
+            src={restaurantLogo} 
+            alt={restaurantName || "Restaurant Logo"} 
+            style={{ 
+              height: '60px', 
+              width: 'auto',
+              filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
+            }} 
+          />
+        ) : (
+          <img 
+            src="/logo192.png" 
+            alt="Default Logo" 
+            style={{ 
+              height: '60px', 
+              width: 'auto',
+              filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
+            }} 
+          />
+        )}
       </Box>
       <Container maxWidth="sm">
         <Paper sx={{ 

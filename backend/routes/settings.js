@@ -332,6 +332,37 @@ router.post('/:restaurantId/whatsapp/test', auth, checkRestaurantOwnership, [
   }
 });
 
+// @route   POST /api/settings/:restaurantId/logo
+// @desc    Upload de logo do restaurante
+// @access  Private
+router.post('/:restaurantId/logo', auth, checkRestaurantOwnership, upload.single('logo'), async (req, res) => {
+  try {
+    const { restaurantId } = req.params;
+    if (!req.file) {
+      return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
+    }
+
+    const restaurant = await models.Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
+
+    // A URL completa para o frontend
+    const logoUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+
+    await restaurant.update({ logo: logoUrl });
+
+    res.json({ 
+      message: 'Logo atualizado com sucesso!', 
+      logo_url: logoUrl 
+    });
+
+  } catch (error) {
+    console.error('Erro ao fazer upload do logo:', error);
+    res.status(500).json({ error: 'Erro interno do servidor ao fazer upload do logo.' });
+  }
+});
+
 module.exports = router;
 
 // @route   POST /api/settings/:restaurantId/api-token/generate

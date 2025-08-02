@@ -91,7 +91,7 @@ const Coupons = () => {
       const response = await axiosInstance.get(`/api/coupons/restaurant/${restaurantId}`, { params });
       
       setCoupons(response.data.coupons);
-      setTotalPages(response.data.pagination.total_pages);
+      setTotalPages(response.data.totalPages);
     } catch (err) {
       console.error('Error fetching coupons:', err);
       setError('Erro ao carregar cupons');

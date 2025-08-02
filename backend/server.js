@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/api/', limiter);
 
 // Servir arquivos estáticos
-app.use('/uploads', express.static('uploads'));
+app.use(express.static('public'));
 
 // Rotas
 app.use('/api/auth', authRoutes);

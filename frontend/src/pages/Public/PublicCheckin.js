@@ -23,6 +23,7 @@ const PublicCheckin = () => {
 
   const [loading, setLoading] = useState(false);
   const [restaurantName, setRestaurantName] = useState('');
+  const [restaurantLogo, setRestaurantLogo] = useState('');
   const [identificationMethod, setIdentificationMethod] = useState('phone'); // 'phone' or 'cpf'
 
   const {
@@ -48,6 +49,7 @@ const PublicCheckin = () => {
         setLoading(true);
         const response = await axiosInstance.get(`/public/restaurant/${restaurantId}`);
         setRestaurantName(response.data.name);
+        setRestaurantLogo(response.data.logo); // Corrigido para response.data.logo
         setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
       } catch (err) {
         console.error('Error fetching restaurant data:', err);
@@ -122,15 +124,27 @@ const PublicCheckin = () => {
     }}>
       {/* Logo ou ícone do restaurante */}
       <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
-        <img 
-          src="/logo192.png" 
-          alt="Logo" 
-          style={{ 
-            height: '70px', 
-            width: 'auto',
-            filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
-          }} 
-        />
+        {restaurantLogo ? (
+          <img 
+            src={restaurantLogo} 
+            alt="Restaurant Logo" 
+            style={{ 
+              height: '70px', 
+              width: 'auto',
+              filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
+            }} 
+          />
+        ) : (
+          <img 
+            src="/logo192.png" 
+            alt="Default Logo" 
+            style={{ 
+              height: '70px', 
+              width: 'auto',
+              filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
+            }} 
+          />
+        )}
       </Box>
       
       <Container maxWidth="sm">

@@ -437,6 +437,36 @@ const Settings = () => {
               subheader={t('settings.configure_restaurant_info')}
             />
             <CardContent>
+              <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
+                <Avatar
+                  sx={{ width: 120, height: 120, mb: 2, border: '2px solid', borderColor: 'divider' }}
+                  src={logoPreview}
+                >
+                  <BusinessIcon sx={{ fontSize: 60 }} />
+                </Avatar>
+                <input
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  id="logo-upload-input"
+                  type="file"
+                  onChange={handleLogoChange}
+                />
+                <label htmlFor="logo-upload-input">
+                  <Button variant="outlined" component="span" startIcon={<PhotoCameraIcon />}>
+                    {t('settings.change_logo')}
+                  </Button>
+                </label>
+                {selectedLogo && (
+                  <Button
+                    variant="contained"
+                    onClick={handleLogoUpload}
+                    disabled={loading}
+                    sx={{ mt: 1 }}
+                  >
+                    {loading ? <CircularProgress size={20} /> : t('settings.upload_logo')}
+                  </Button>
+                )}
+              </Box>
               <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                   <Controller

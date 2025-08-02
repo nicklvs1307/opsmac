@@ -293,7 +293,7 @@ const FeedbackList = () => {
                 onChange={(e) => handleFilterChange('source', e.target.value)}
               >
                 <MenuItem value="">Todas</MenuItem>
-                <MenuItem value="qr_code">QR Code</MenuItem>
+                <MenuItem value="qrcode">QR Code</MenuItem>
                 <MenuItem value="whatsapp">WhatsApp</MenuItem>
                 <MenuItem value="manual">Manual</MenuItem>
                 <MenuItem value="website">Website</MenuItem>

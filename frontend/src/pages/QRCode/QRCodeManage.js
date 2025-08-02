@@ -257,9 +257,11 @@ const QRCodeManage = () => {
                 onChange={(e) => handleFilterChange('status', e.target.value)}
               >
                 <SelectMenuItem value="">Todos</SelectMenuItem>
-                <SelectMenuItem value="active">Ativo</SelectMenuItem>
+                <SelectMenuItem value="available">Disponível</SelectMenuItem>
+                <SelectMenuItem value="occupied">Ocupado</SelectMenuItem>
+                <SelectMenuItem value="reserved">Reservado</SelectMenuItem>
+                <SelectMenuItem value="maintenance">Manutenção</SelectMenuItem>
                 <SelectMenuItem value="inactive">Inativo</SelectMenuItem>
-                <SelectMenuItem value="expired">Expirado</SelectMenuItem>
               </Select>
             </FormControl>
           </Grid>

@@ -17,6 +17,11 @@ router.get('/:id', async (req, res) => {
                     model: models.Question,
                     as: 'questions',
                     attributes: ['id', 'question_text', 'question_type', 'options', 'order'],
+                },
+                {
+                    model: models.Restaurant,
+                    as: 'restaurant',
+                    attributes: ['name', 'logo'],
                 }
             ],
             attributes: ['id', 'title', 'description', 'type'],
@@ -26,7 +31,7 @@ router.get('/:id', async (req, res) => {
             return res.status(404).json({ msg: 'Pesquisa não encontrada ou inativa' });
         }
 
-        res.json(survey);
+        res.json({ survey, restaurant: survey.restaurant });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');

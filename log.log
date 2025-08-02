@@ -1,48 +1,28 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo
-Método da solicitação
-POST
-Código de status
-500 Internal Server Error
-{"error":"Erro interno do servidor","message":"Algo deu errado"}
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                       168.1s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.630
+0.630 > Feedeliza+-frontend@1.0.0 build
+0.630 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.630
+4.297 Creating an optimized production build...
+167.0 Failed to compile.
+167.0
+167.0 [eslint]
+167.0 src/pages/Settings/Settings.js
+167.0 Syntax error: Identifier 'setLogoPreview' has already been declared. (75:22) (75:22)
+167.0
+167.0
+------
 
---
-
-Ações da Pesquisa
-Pesquisa Criada com Sucesso!
-ID da Pesquisa: c50ed65d-8c4c-4e33-9162-3646949cb136
-
-Link Público: /public/surveys/c50ed65d-8c4c-4e33-9162-3646949cb136
-https://feedelizapro.towersfy.com/public/surveys/c50ed65d-8c4c-4e33-9162-3646949cb136
-Error fetching survey: TypeError: Cannot read properties of undefined (reading 'forEach')
-    at PublicSurveyForm.js:53:24
-
-
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo
-Método da solicitação
-POST
-Código de status
-200 OK
-{
-    "message": "Logo atualizado com sucesso!",
-    "logo_url": "/uploads/logo-1754177345660-915639366.jpeg"
-}
-}
-
-Auth Middleware - req.user (after population): {
-
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-
-  email: 'lucas@teste.com',
-
-  role: 'owner',
-
-  name: 'Lucas Niquele',
-
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-
-}
-
-Multer destination path: /app/backend/public/uploads
-
+ 1 warning found (use docker --debug to expand):
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

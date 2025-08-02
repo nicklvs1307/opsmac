@@ -65,7 +65,7 @@ const Settings = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
   
   const [loading, setLoading] = useState(true); // Keep true from current
-  const [apiToken, setApiToken, setLogoPreview] = useState(getFullImageUrl(user?.restaurant?.logo) || '');
+  const [apiToken, setApiToken] = useState('');
   const [activeTab, setActiveTab] = useState('profile');
   const [changePasswordDialog, setChangePasswordDialog] = useState(false);
   const [testMessageDialog, setTestMessageDialog] = useState(false);

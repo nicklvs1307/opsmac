@@ -2,6 +2,7 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const { models } = require('../config/database');
 const { auth, checkRestaurantOwnership } = require('../middleware/auth');
+const upload = require('../middleware/upload');
 const lodash = require('lodash');
 
 const router = express.Router();

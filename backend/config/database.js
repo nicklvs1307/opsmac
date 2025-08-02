@@ -39,9 +39,6 @@ const Answer = require('../models/Answer')(sequelize);
 const WhatsAppMessage = require('../models/WhatsAppMessage')(sequelize); // Importar o novo modelo
 
 // Definir associações
-Coupon.belongsTo(Reward, { foreignKey: 'reward_id', as: 'reward' });
-Reward.hasMany(Coupon, { foreignKey: 'reward_id', as: 'coupons' });
-
 const setupAssociations = () => {
   Object.keys(sequelize.models).forEach(modelName => {
     if (sequelize.models[modelName].associate) {

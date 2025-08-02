@@ -34,6 +34,10 @@ const GirarRoleta = () => {
         reward_id: reward_earned.reward_id,
         customer_id: reward_earned.customer_id,
       });
+      console.log('Dados da Roleta para Debug:', {
+        items: reward_earned.wheel_config.items,
+        winningItemFromApi: response.data.wonItem,
+      });
       setWinningItem(response.data.wonItem);
       setApiResponseRewardEarned(response.data.reward_earned);
       setLoading(false); // Stop loading here, as animation will start

@@ -1,29 +1,24 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/bui
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                       172.6s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.805
-0.805 > Feedeliza+-frontend@1.0.0 build
-0.805 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scr
-0.805
-4.071 Creating an optimized production build...
-175.9 Failed to compile.
-175.9
-175.9 [eslint]
-175.9 src/components/UI/SpinTheWheel.js
-175.9   Line 185:9:   'winningIndex' is not defined  no-undef
-175.9   Line 195:25:  'winningIndex' is not defined  no-undef
-175.9   Line 199:7:   'winningIndex' is not defined  no-undef
-175.9
-175.9 src/pages/Public/GirarRoleta.js
-175.9   Line 67:25:  'winningIndex' is not defined  no-undef
-175.9
-175.9 Search for the keywords to learn more about each error.
-175.9
-175.9
+0.618
+0.618 > Feedeliza+-frontend@1.0.0 build
+0.618 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.618
+3.509 Creating an optimized production build...
+171.6 Failed to compile.
+171.6
+171.6 [eslint]
+171.6 src/pages/Public/GirarRoleta.js
+171.6   Line 67:25:  'winningIndex' is not defined  no-undef
+171.6
+171.6 Search for the keywords to learn more about each error.
+171.6
+171.6
 ------
 
  1 warning found (use docker --debug to expand):
- - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
 Dockerfile.frontend:23
 --------------------
   21 |     ARG REACT_APP_API_URL
@@ -32,124 +27,5 @@ Dockerfile.frontend:23
   24 |
   25 |     # Estágio final para servir os arquivos com NGINX
 --------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /
-plete successfully: exit code: 1
-
-deu erro 
-
-Analisando os dois códigos (o React SpinTheWheel.js e o HTML puro exemplo.html), posso identificar algumas diferenças que podem estar afetando a fluidez da animação:
-
-Problemas no Componente React:
-Cálculo do Ângulo Destino:
-
-No exemplo.html, o cálculo do ângulo destino é mais preciso e considera a posição exata do setor premiado.
-
-No React, o cálculo pode não estar alinhando perfeitamente com o centro do setor.
-
-Função de Easing:
-
-Ambos usam easeOutQuart, mas a implementação no React pode estar sendo afetada pela reconciliação do React.
-
-RequestAnimationFrame:
-
-No React, o animation frame está sendo controlado manualmente, o que pode causar conflitos com o ciclo de renderização do React.
-
-Atualização de Estado:
-
-O uso de rotationRef.current pode não estar sincronizado perfeitamente com as renderizações.
-
-Soluções Propostas:
-Ajuste no Cálculo do Ângulo:
-
-javascript
-// Substitua no useEffect que calcula o targetRotationRadians
-const targetRotationRadians = 
-  (2 * Math.PI * randomSpins) + 
-  (Math.PI - (winningIndex * segmentAngleRadians)) - 
-  (segmentAngleRadians / 2);
-Otimização da Animação:
-
-javascript
-const animateSpin = useCallback((targetRotationRadians, duration = 5000) => {
-  const start = performance.now();
-  const initialRotationRadians = rotationRef.current;
-
-  const animate = (currentTime) => {
-    const elapsed = currentTime - start;
-    let progress = elapsed / duration;
-    if (progress > 1) progress = 1;
-
-    const easedProgress = easeOutQuart(progress);
-    const newRotation = initialRotationRadians + (targetRotationRadians - initialRotationRadians) * easedProgress;
-    
-    rotationRef.current = newRotation;
-    drawWheel(newRotation);
-
-    if (progress < 1) {
-      animationFrameId.current = requestAnimationFrame(animate);
-    } else {
-      rotationRef.current = targetRotationRadians;
-      drawWheel(targetRotationRadians);
-      if (onAnimationComplete) {
-        setTimeout(onAnimationComplete, 100);
-      }
-    }
-  };
-  
-  // Cancelar animação anterior se existir
-  if (animationFrameId.current) {
-    cancelAnimationFrame(animationFrameId.current);
-  }
-  animationFrameId.current = requestAnimationFrame(animate);
-}, [drawWheel, onAnimationComplete]);
-Verifique o FPS:
-Adicione um contador de FPS para diagnosticar problemas de performance:
-
-javascript
-let frameCount = 0;
-let lastFpsUpdate = performance.now();
-
-// Dentro da função animate:
-frameCount++;
-if (currentTime - lastFpsUpdate >= 1000) {
-  console.log(`FPS: ${frameCount}`);
-  frameCount = 0;
-  lastFpsUpdate = currentTime;
-}
-UseMemo para Cores:
-Evite recálculos desnecessários de cores:
-
-javascript
-const coloredItems = useMemo(() => 
-  items.map(item => ({
-    ...item,
-    color: item.color || getRandomHexColor(),
-    textColor: item.textColor || getContrastingTextColor(item.color)
-  })), 
-[items, getRandomHexColor, getContrastingTextColor]);
-Verifique o Componente Pai:
-Certifique-se que o componente pai não está causando re-renders desnecessários durante a animação.
-
-Comparação Direta:
-HTML Puro:
-
-Animação direta no canvas sem interferência de virtual DOM
-
-Cálculos matemáticos puros sem overhead do React
-
-React:
-
-Possível overhead da reconciliação
-
-Re-renders podem interferir na animação
-
-Recomendação Final:
-Se a performance ainda não for satisfatória, considere:
-
-Extrair a lógica da animação para um hook customizado
-
-Usar React.memo no componente
-
-Ou implementar como Web Component e incorporar no React
-
-A versão React já está bem próxima da original, mas pequenas diferenças na implementação podem afetar a percepção de fluidez. Os ajustes acima devem ajudar a igualar a experiência.
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+root@ServerAgents:~/opsmac#

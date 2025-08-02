@@ -17,7 +17,7 @@ const GirarRoleta = () => {
   const [apiResponseRewardEarned, setApiResponseRewardEarned] = useState(null);
   const [finalReward, setFinalReward] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [wheelItems, setWheelItems] = useState(reward_earned.wheel_config.items);
+  const [winningIndex, setWinningIndex] = useState(-1);
 
   if (!reward_earned || !reward_earned.wheel_config) {
     return (

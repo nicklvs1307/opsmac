@@ -1,87 +1,155 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo
-Método da solicitação
-POST
-Código de status
-500 Internal Server Error
-{"error":"Erro interno do servidor","message":"Algo deu errado"}
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/bui
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.805
+0.805 > Feedeliza+-frontend@1.0.0 build
+0.805 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scr
+0.805
+4.071 Creating an optimized production build...
+175.9 Failed to compile.
+175.9
+175.9 [eslint]
+175.9 src/components/UI/SpinTheWheel.js
+175.9   Line 185:9:   'winningIndex' is not defined  no-undef
+175.9   Line 195:25:  'winningIndex' is not defined  no-undef
+175.9   Line 199:7:   'winningIndex' is not defined  no-undef
+175.9
+175.9 src/pages/Public/GirarRoleta.js
+175.9   Line 67:25:  'winningIndex' is not defined  no-undef
+175.9
+175.9 Search for the keywords to learn more about each error.
+175.9
+175.9
+------
 
---
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/coupons/restaurant/0e517dc5-4881-45aa-996e-0365012000bc?page=1&limit=10&search=&status=&type=
-Método da solicitação
-GET
-Código de status
-500 Internal Server Error
+ 1 warning found (use docker --debug to expand):
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /
+plete successfully: exit code: 1
 
-{"error":"Erro interno do servidor"}
+deu erro 
 
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/coupons/analytics/restaurant/0e517dc5-4881-45aa-996e-0365012000bc
-Método da solicitação
-GET
-Código de status
-500 Internal Server Error
-{"error":"Erro interno do servidor"}
+Analisando os dois códigos (o React SpinTheWheel.js e o HTML puro exemplo.html), posso identificar algumas diferenças que podem estar afetando a fluidez da animação:
 
+Problemas no Componente React:
+Cálculo do Ângulo Destino:
 
-girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: Array(7)0: {title: 'Suco de Laranja', probability: '10'}1: {title: 'Suco de Laranja', probability: '10'}2: {title: 'Suco de Laranja', probability: '10'}3: {title: 'Suco de Laranja', probability: '40'}4: {title: 'Suco de Laranja', probability: '10'}5: {title: 'Suco de Laranja', probability: '10'}6: {title: 'Suco de abacate', probability: '10'}length: 7[[Prototype]]: Array(0)at: ƒ at()concat: ƒ concat()constructor: ƒ Array()copyWithin: ƒ copyWithin()entries: ƒ entries()every: ƒ every()fill: ƒ fill()filter: ƒ filter()find: ƒ find()findIndex: ƒ findIndex()findLast: ƒ findLast()findLastIndex: ƒ findLastIndex()flat: ƒ flat()flatMap: ƒ flatMap()forEach: ƒ forEach()includes: ƒ includes()indexOf: ƒ indexOf()join: ƒ join()keys: ƒ keys()lastIndexOf: ƒ lastIndexOf()length: 0map: ƒ map()pop: ƒ pop()push: ƒ push()reduce: ƒ reduce()reduceRight: ƒ reduceRight()reverse: ƒ reverse()shift: ƒ shift()slice: ƒ slice()some: ƒ some()sort: ƒ sort()splice: ƒ splice()toLocaleString: ƒ toLocaleString()toReversed: ƒ toReversed()toSorted: ƒ toSorted()toSpliced: ƒ toSpliced()toString: ƒ toString()unshift: ƒ unshift()values: ƒ values()with: ƒ with()Symbol(Symbol.iterator): ƒ values()Symbol(Symbol.unscopables): {at: true, copyWithin: true, entries: true, fill: true, find: true, …}[[Prototype]]: ObjectwinningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+No exemplo.html, o cálculo do ângulo destino é mais preciso e considera a posição exata do setor premiado.
 
-{
-    "items": [
-        {
-            "title": "Suco de Laranja",
-            "probability": "10"
-        },
-        {
-            "title": "Suco de Laranja",
-            "probability": "10"
-        },
-        {
-            "title": "Suco de Laranja",
-            "probability": "10"
-        },
-        {
-            "title": "Suco de Laranja",
-            "probability": "40"
-        },
-        {
-            "title": "Suco de Laranja",
-            "probability": "10"
-        },
-        {
-            "title": "Suco de Laranja",
-            "probability": "10"
-        },
-        {
-            "title": "Suco de abacate",
-            "probability": "10"
-        }
-    ],
-    "winningItemFromApi": {
-        "title": "Suco de abacate",
-        "probability": "10"
+No React, o cálculo pode não estar alinhando perfeitamente com o centro do setor.
+
+Função de Easing:
+
+Ambos usam easeOutQuart, mas a implementação no React pode estar sendo afetada pela reconciliação do React.
+
+RequestAnimationFrame:
+
+No React, o animation frame está sendo controlado manualmente, o que pode causar conflitos com o ciclo de renderização do React.
+
+Atualização de Estado:
+
+O uso de rotationRef.current pode não estar sincronizado perfeitamente com as renderizações.
+
+Soluções Propostas:
+Ajuste no Cálculo do Ângulo:
+
+javascript
+// Substitua no useEffect que calcula o targetRotationRadians
+const targetRotationRadians = 
+  (2 * Math.PI * randomSpins) + 
+  (Math.PI - (winningIndex * segmentAngleRadians)) - 
+  (segmentAngleRadians / 2);
+Otimização da Animação:
+
+javascript
+const animateSpin = useCallback((targetRotationRadians, duration = 5000) => {
+  const start = performance.now();
+  const initialRotationRadians = rotationRef.current;
+
+  const animate = (currentTime) => {
+    const elapsed = currentTime - start;
+    let progress = elapsed / duration;
+    if (progress > 1) progress = 1;
+
+    const easedProgress = easeOutQuart(progress);
+    const newRotation = initialRotationRadians + (targetRotationRadians - initialRotationRadians) * easedProgress;
+    
+    rotationRef.current = newRotation;
+    drawWheel(newRotation);
+
+    if (progress < 1) {
+      animationFrameId.current = requestAnimationFrame(animate);
+    } else {
+      rotationRef.current = targetRotationRadians;
+      drawWheel(targetRotationRadians);
+      if (onAnimationComplete) {
+        setTimeout(onAnimationComplete, 100);
+      }
     }
+  };
+  
+  // Cancelar animação anterior se existir
+  if (animationFrameId.current) {
+    cancelAnimationFrame(animationFrameId.current);
+  }
+  animationFrameId.current = requestAnimationFrame(animate);
+}, [drawWheel, onAnimationComplete]);
+Verifique o FPS:
+Adicione um contador de FPS para diagnosticar problemas de performance:
+
+javascript
+let frameCount = 0;
+let lastFpsUpdate = performance.now();
+
+// Dentro da função animate:
+frameCount++;
+if (currentTime - lastFpsUpdate >= 1000) {
+  console.log(`FPS: ${frameCount}`);
+  frameCount = 0;
+  lastFpsUpdate = currentTime;
 }
+UseMemo para Cores:
+Evite recálculos desnecessários de cores:
 
-/girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
-/checkin/public?restaurantId=0e517dc5-4881-45aa-996e-0365012000bc:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-GirarRoleta.js:37 Dados da Roleta para Debug: {items: Array(7), winningItemFromApi: {…}}
+javascript
+const coloredItems = useMemo(() => 
+  items.map(item => ({
+    ...item,
+    color: item.color || getRandomHexColor(),
+    textColor: item.textColor || getContrastingTextColor(item.color)
+  })), 
+[items, getRandomHexColor, getContrastingTextColor]);
+Verifique o Componente Pai:
+Certifique-se que o componente pai não está causando re-renders desnecessários durante a animação.
 
-/girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: Array(7)0: {title: 'Suco de Laranja', probability: '10'}1: {title: 'Suco de Laranja', probability: '10'}2: {title: 'Suco de Laranja', probability: '10'}3: {title: 'Suco de Laranja', probability: '40'}4: {title: 'Suco de Laranja', probability: '10'}5: {title: 'Suco de Laranja', probability: '10'}6: {title: 'Suco de abacate', probability: '10'}length: 7[[Prototype]]: Array(0)winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
-/checkin/public?restaurantId=0e517dc5-4881-45aa-996e-0365012000bc:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-GirarRoleta.js:37 Dados da Roleta para Debug: {items: Array(7), winningItemFromApi: {…}}items: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+Comparação Direta:
+HTML Puro:
 
+Animação direta no canvas sem interferência de virtual DOM
 
-/girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: Array(7)0: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object1: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object2: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object3: probability: "40"title: "Suco de Laranja"[[Prototype]]: Object4: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object5: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object6: {title: 'Suco de abacate', probability: '10'}length: 7[[Prototype]]: Array(0)winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
-/checkin/public?restaurantId=0e517dc5-4881-45aa-996e-0365012000bc:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-GirarRoleta.js:37 Dados da Roleta para Debug: {items: Array(7), winningItemFromApi: {…}}items: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+Cálculos matemáticos puros sem overhead do React
 
-/girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: Array(7)0: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object1: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object2: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object3: probability: "40"title: "Suco de Laranja"[[Prototype]]: Object4: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object5: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object6: {title: 'Suco de abacate', probability: '10'}length: 7[[Prototype]]: Array(0)winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
-/checkin/public?restaurantId=0e517dc5-4881-45aa-996e-0365012000bc:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-GirarRoleta.js:37 Dados da Roleta para Debug: {items: Array(7), winningItemFromApi: {…}}items: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+React:
+
+Possível overhead da reconciliação
+
+Re-renders podem interferir na animação
+
+Recomendação Final:
+Se a performance ainda não for satisfatória, considere:
+
+Extrair a lógica da animação para um hook customizado
+
+Usar React.memo no componente
+
+Ou implementar como Web Component e incorporar no React
+
+A versão React já está bem próxima da original, mas pequenas diferenças na implementação podem afetar a percepção de fluidez. Os ajustes acima devem ajudar a igualar a experiência.

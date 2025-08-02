@@ -64,7 +64,7 @@ const GirarRoleta = () => {
         <SpinTheWheel
           items={reward_earned.wheel_config.items}
           winningItem={winningItem}
-          winningIndex={winningIndex} // Passando o winningIndex
+          winningIndex={winningIndex} // Passando o winningIndex para o componente SpinTheWheel
           onAnimationComplete={handleAnimationComplete}
         />
       </Box>

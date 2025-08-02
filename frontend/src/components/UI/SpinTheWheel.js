@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { Box, Typography, Paper, List, ListItem, ListItemText } from '@mui/material';
 
-const SpinTheWheel = ({ items, winningItem, onAnimationComplete }) => {
+const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete }) => {
   const canvasRef = useRef(null);
   const rotationRef = useRef(0);
   const animationFrameId = useRef(null);

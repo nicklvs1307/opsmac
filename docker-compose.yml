@@ -36,6 +36,8 @@ services:
 
     networks:
       - towersfy_network
+    volumes:
+      - uploads_data:/app/backend/public/uploads
 
   frontend:
     build:
@@ -60,3 +62,6 @@ services:
 networks:
   towersfy_network:
     external: true # Usando a rede existente do Traefik
+
+volumes:
+  uploads_data:

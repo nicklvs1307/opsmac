@@ -2,12 +2,12 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const { models } = require('../config/database');
 const { auth, checkRestaurantOwnership } = require('../middleware/auth');
-const upload = require('../middleware/upload');
+const upload = require('../middleware/upload'); // Garantir que esta linha exista
 const lodash = require('lodash');
 
 const router = express.Router();
 
-// Rota para obter configurações
+// Rota para obter configurações do restaurante
 router.get('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) => {
   try {
     const { restaurantId } = req.params;
@@ -24,7 +24,7 @@ router.get('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
   }
 });
 
-// Rota para atualizar configurações
+// Rota para atualizar configurações do restaurante
 router.put('/:restaurantId', auth, checkRestaurantOwnership, [
   body('settings').isObject().withMessage('Configurações devem ser um objeto')
 ], async (req, res) => {
@@ -44,7 +44,7 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
   }
 });
 
-// Rota para upload de logo
+// Rota para upload de logo do restaurante
 router.post('/:restaurantId/logo', auth, checkRestaurantOwnership, upload.single('logo'), async (req, res) => {
   try {
     const { restaurantId } = req.params;
@@ -67,5 +67,6 @@ router.post('/:restaurantId/logo', auth, checkRestaurantOwnership, upload.single
   }
 });
 
-// Outras rotas de settings...
+// ... (outras rotas de settings podem ser adicionadas aqui se existirem)
+
 module.exports = router;

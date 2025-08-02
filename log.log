@@ -1,17 +1,87 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-/app/backend/routes/settings.js:338
-router.post('/:restaurantId/logo', auth, checkRestaurantOwnership, upload.single('logo'), async (req, res) => {
-                                                                   ^
-ReferenceError: upload is not defined
-    at Object.<anonymous> (/app/backend/routes/settings.js:338:68)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/server.js:15:24)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-Node.js v20.19.4
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo
+Método da solicitação
+POST
+Código de status
+500 Internal Server Error
+{"error":"Erro interno do servidor","message":"Algo deu errado"}
+
+--
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/coupons/restaurant/0e517dc5-4881-45aa-996e-0365012000bc?page=1&limit=10&search=&status=&type=
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+
+{"error":"Erro interno do servidor"}
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/coupons/analytics/restaurant/0e517dc5-4881-45aa-996e-0365012000bc
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+{"error":"Erro interno do servidor"}
+
+
+girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: Array(7)0: {title: 'Suco de Laranja', probability: '10'}1: {title: 'Suco de Laranja', probability: '10'}2: {title: 'Suco de Laranja', probability: '10'}3: {title: 'Suco de Laranja', probability: '40'}4: {title: 'Suco de Laranja', probability: '10'}5: {title: 'Suco de Laranja', probability: '10'}6: {title: 'Suco de abacate', probability: '10'}length: 7[[Prototype]]: Array(0)at: ƒ at()concat: ƒ concat()constructor: ƒ Array()copyWithin: ƒ copyWithin()entries: ƒ entries()every: ƒ every()fill: ƒ fill()filter: ƒ filter()find: ƒ find()findIndex: ƒ findIndex()findLast: ƒ findLast()findLastIndex: ƒ findLastIndex()flat: ƒ flat()flatMap: ƒ flatMap()forEach: ƒ forEach()includes: ƒ includes()indexOf: ƒ indexOf()join: ƒ join()keys: ƒ keys()lastIndexOf: ƒ lastIndexOf()length: 0map: ƒ map()pop: ƒ pop()push: ƒ push()reduce: ƒ reduce()reduceRight: ƒ reduceRight()reverse: ƒ reverse()shift: ƒ shift()slice: ƒ slice()some: ƒ some()sort: ƒ sort()splice: ƒ splice()toLocaleString: ƒ toLocaleString()toReversed: ƒ toReversed()toSorted: ƒ toSorted()toSpliced: ƒ toSpliced()toString: ƒ toString()unshift: ƒ unshift()values: ƒ values()with: ƒ with()Symbol(Symbol.iterator): ƒ values()Symbol(Symbol.unscopables): {at: true, copyWithin: true, entries: true, fill: true, find: true, …}[[Prototype]]: ObjectwinningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+
+{
+    "items": [
+        {
+            "title": "Suco de Laranja",
+            "probability": "10"
+        },
+        {
+            "title": "Suco de Laranja",
+            "probability": "10"
+        },
+        {
+            "title": "Suco de Laranja",
+            "probability": "10"
+        },
+        {
+            "title": "Suco de Laranja",
+            "probability": "40"
+        },
+        {
+            "title": "Suco de Laranja",
+            "probability": "10"
+        },
+        {
+            "title": "Suco de Laranja",
+            "probability": "10"
+        },
+        {
+            "title": "Suco de abacate",
+            "probability": "10"
+        }
+    ],
+    "winningItemFromApi": {
+        "title": "Suco de abacate",
+        "probability": "10"
+    }
+}
+
+/girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+/checkin/public?restaurantId=0e517dc5-4881-45aa-996e-0365012000bc:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+GirarRoleta.js:37 Dados da Roleta para Debug: {items: Array(7), winningItemFromApi: {…}}
+
+/girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: Array(7)0: {title: 'Suco de Laranja', probability: '10'}1: {title: 'Suco de Laranja', probability: '10'}2: {title: 'Suco de Laranja', probability: '10'}3: {title: 'Suco de Laranja', probability: '40'}4: {title: 'Suco de Laranja', probability: '10'}5: {title: 'Suco de Laranja', probability: '10'}6: {title: 'Suco de abacate', probability: '10'}length: 7[[Prototype]]: Array(0)winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+/checkin/public?restaurantId=0e517dc5-4881-45aa-996e-0365012000bc:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+GirarRoleta.js:37 Dados da Roleta para Debug: {items: Array(7), winningItemFromApi: {…}}items: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+
+
+/girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: Array(7)0: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object1: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object2: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object3: probability: "40"title: "Suco de Laranja"[[Prototype]]: Object4: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object5: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object6: {title: 'Suco de abacate', probability: '10'}length: 7[[Prototype]]: Array(0)winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+/checkin/public?restaurantId=0e517dc5-4881-45aa-996e-0365012000bc:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+GirarRoleta.js:37 Dados da Roleta para Debug: {items: Array(7), winningItemFromApi: {…}}items: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+
+/girar-roleta:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+GirarRoleta.js:37 Dados da Roleta para Debug: Objectitems: Array(7)0: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object1: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object2: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object3: probability: "40"title: "Suco de Laranja"[[Prototype]]: Object4: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object5: probability: "10"title: "Suco de Laranja"[[Prototype]]: Object6: {title: 'Suco de abacate', probability: '10'}length: 7[[Prototype]]: Array(0)winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object
+/checkin/public?restaurantId=0e517dc5-4881-45aa-996e-0365012000bc:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+GirarRoleta.js:37 Dados da Roleta para Debug: {items: Array(7), winningItemFromApi: {…}}items: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]winningItemFromApi: {title: 'Suco de abacate', probability: '10'}[[Prototype]]: Object

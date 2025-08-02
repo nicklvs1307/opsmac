@@ -116,6 +116,7 @@ router.post('/spin-wheel', [
         res.status(200).json({
             message: 'Você ganhou um prêmio!',
             wonItem: winningItem, // Retorna o objeto completo do item sorteado
+            wheelItems: reward.wheel_config.items, // Retorna todos os itens da roleta com seus IDs
             reward_earned: {
                 reward_title: coupon.title,
                 coupon_code: coupon.code,

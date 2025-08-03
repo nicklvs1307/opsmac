@@ -194,6 +194,22 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
               {/* Controle Anti-Fraude */}
               <Box sx={{ mb: 4 }}>
                 <Typography variant="h6" gutterBottom>{t('relationship.anti_fraud_control')}</Typography>
+                <FormControlLabel
+                  control={
+                    <Controller
+                      name="settings.checkin_requires_table"
+                      control={control}
+                      render={({ field }) => (
+                        <Switch
+                          {...field}
+                          checked={!!field.value} // Garante que o valor seja booleano
+                          onChange={(e) => field.onChange(e.target.checked)}
+                        />
+                      )}
+                    />
+                  }
+                  label="Exigir número da mesa no check-in"
+                />
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <Controller

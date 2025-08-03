@@ -167,7 +167,8 @@ module.exports = (sequelize) => {
         rewards_enabled: true,
         auto_response: true,
         nps_enabled: true,
-        tablet_mode: false
+        tablet_mode: false,
+        checkin_requires_table: false
       }
     },
     is_active: {

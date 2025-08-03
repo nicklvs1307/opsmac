@@ -537,28 +537,6 @@ const ThankYouCard = ({
             >
               Compartilhar
             </Button>
-            
-            <Button
-              variant="contained"
-              startIcon={<HomeIcon />}
-              onClick={handleHome}
-              size="large"
-              sx={{
-                borderRadius: 2,
-                px: 3,
-                py: 1,
-                textTransform: 'none',
-                fontWeight: 600,
-                boxShadow: `0 4px 14px ${alpha(theme.palette.primary.main, 0.4)}`,
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-2px)',
-                  boxShadow: `0 6px 20px ${alpha(theme.palette.primary.main, 0.6)}`,
-                },
-              }}
-            >
-              Página Inicial
-            </Button>
           </Box>
         </Fade>
 

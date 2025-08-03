@@ -25,10 +25,6 @@ const ThankYou = () => {
     }
   };
   
-  const handleHome = () => {
-    navigate('/');
-  };
-
   return (
     <Box sx={{ 
       minHeight: '100vh',
@@ -61,7 +57,6 @@ const ThankYou = () => {
             rating={rating}
             reward={reward}
             onShare={handleShare}
-            onHome={handleHome}
           />
         </Box>
         

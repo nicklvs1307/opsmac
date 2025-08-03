@@ -11,6 +11,11 @@ const fetchSurvey = async (id) => {
   return data;
 };
 
+const fetchRewards = async () => {
+    const { data } = await axiosInstance.get('/api/rewards?is_active=true');
+    return data;
+};
+
 const updateSurvey = async ({ id, surveyData }) => {
   const { data } = await axiosInstance.put(`/api/surveys/${id}`, surveyData);
   return data;
@@ -23,18 +28,24 @@ const SurveyEdit = () => {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [rewardId, setRewardId] = useState('');
+  const [couponValidityDays, setCouponValidityDays] = useState('');
   const [questions, setQuestions] = useState([]);
 
   const { data: survey, isLoading, isError, error } = useQuery(['survey', id], () => fetchSurvey(id), {
     onSuccess: (data) => {
       setTitle(data.title);
       setDescription(data.description);
+      setRewardId(data.reward_id || '');
+      setCouponValidityDays(data.coupon_validity_days || '');
       setQuestions(data.questions || []); // Populate questions
     },
     onError: (err) => {
       toast.error(`Erro ao carregar pesquisa: ${err.response.data.msg || err.message}`);
     }
   });
+
+  const { data: rewards, isLoading: isLoadingRewards } = useQuery('rewards', fetchRewards);
 
   const mutation = useMutation(updateSurvey, {
     onSuccess: () => {
@@ -91,6 +102,8 @@ const SurveyEdit = () => {
     const surveyData = {
       title,
       description,
+      reward_id: rewardId || null,
+      coupon_validity_days: couponValidityDays ? parseInt(couponValidityDays, 10) : null,
       questions: questions.map((q, index) => ({ ...q, order: index + 1 })), // Ensure order is correct
     };
     mutation.mutate({ id, surveyData });
@@ -105,6 +118,32 @@ const SurveyEdit = () => {
       <Paper elevation={3} sx={{ p: 4 }}>
         <TextField fullWidth label="Título" value={title} onChange={(e) => setTitle(e.target.value)} sx={{ mb: 2 }} />
         <TextField fullWidth label="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} sx={{ mb: 2 }} />
+
+        <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel>Recompensa (Opcional)</InputLabel>
+            <Select value={rewardId} label="Recompensa (Opcional)" onChange={(e) => setRewardId(e.target.value)}>
+                <MenuItem value=""><em>Nenhuma</em></MenuItem>
+                {isLoadingRewards ? (
+                    <MenuItem disabled>Carregando recompensas...</MenuItem>
+                ) : (
+                    rewards?.map((reward) => (
+                        <MenuItem key={reward.id} value={reward.id}>{reward.title}</MenuItem>
+                    ))
+                )}
+            </Select>
+        </FormControl>
+
+        <TextField
+            fullWidth
+            label="Dias de Validade do Cupom (Opcional)"
+            type="number"
+            value={couponValidityDays}
+            onChange={(e) => setCouponValidityDays(e.target.value)}
+            sx={{ mb: 2 }}
+            InputProps={{
+                inputProps: { min: 1 }
+            }}
+        />
 
         <Typography variant="h5" sx={{ mt: 3, mb: 2 }}>Perguntas</Typography>
         {questions.map((question, qIndex) => (

@@ -87,7 +87,27 @@ router.post(
 
             await models.Answer.bulkCreate(answerRecords);
 
-            res.status(201).json({ msg: 'Respostas enviadas com sucesso!', responseId: newSurveyResponse.id });
+            let generatedCoupon = null;
+            if (survey.reward_id && customer_id) {
+                const reward = await models.Reward.findByPk(survey.reward_id);
+                if (reward && await reward.canCustomerUse(customer_id)) {
+                    const { coupon } = await reward.generateCoupon(customer_id, {
+                        coupon_validity_days: survey.coupon_validity_days, // Passando a validade do cupom
+                        metadata: {
+                            source: 'survey_response',
+                            survey_id: surveyId,
+                            response_id: newSurveyResponse.id
+                        }
+                    });
+                    generatedCoupon = coupon;
+                }
+            }
+
+            res.status(201).json({ 
+                msg: 'Respostas enviadas com sucesso!', 
+                responseId: newSurveyResponse.id,
+                coupon: generatedCoupon
+            });
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');

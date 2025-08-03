@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, Button, Paper, Stepper, Step, StepLabel, StepContent, CircularProgress, Select, MenuItem, FormControl, InputLabel, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
@@ -10,16 +10,25 @@ const createSurvey = async (surveyData) => {
   return data;
 };
 
+const fetchRewards = async () => {
+    const { data } = await axiosInstance.get('/api/rewards?is_active=true');
+    return data;
+};
+
 const SurveyCreate = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [surveyType, setSurveyType] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [rewardId, setRewardId] = useState('');
+  const [couponValidityDays, setCouponValidityDays] = useState('');
   const [questions, setQuestions] = useState([]);
   const [createdSurveyId, setCreatedSurveyId] = useState(null);
   const [openQrCodeDialog, setOpenQrCodeDialog] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
+  const { data: rewards, isLoading: isLoadingRewards } = useQuery('rewards', fetchRewards);
 
   const mutation = useMutation(createSurvey, {
     onSuccess: (data) => {
@@ -50,6 +59,8 @@ const SurveyCreate = () => {
         type: surveyType,
         title,
         description,
+        reward_id: rewardId || null,
+        coupon_validity_days: couponValidityDays ? parseInt(couponValidityDays, 10) : null,
         questions
     };
     mutation.mutate(surveyData);
@@ -76,7 +87,31 @@ const SurveyCreate = () => {
         return (
             <Box sx={{ mb: 3 }}>
                 <TextField fullWidth label="Título" value={title} onChange={(e) => setTitle(e.target.value)} sx={{ mb: 2 }} />
-                <TextField fullWidth label="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} />
+                <TextField fullWidth label="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} sx={{ mb: 2 }} />
+                <FormControl fullWidth sx={{ mb: 2 }}>
+                    <InputLabel>Recompensa (Opcional)</InputLabel>
+                    <Select value={rewardId} label="Recompensa (Opcional)" onChange={(e) => setRewardId(e.target.value)}>
+                        <MenuItem value=""><em>Nenhuma</em></MenuItem>
+                        {isLoadingRewards ? (
+                            <MenuItem disabled>Carregando recompensas...</MenuItem>
+                        ) : (
+                            rewards?.map((reward) => (
+                                <MenuItem key={reward.id} value={reward.id}>{reward.title}</MenuItem>
+                            ))
+                        )}
+                    </Select>
+                </FormControl>
+                <TextField
+                    fullWidth
+                    label="Dias de Validade do Cupom (Opcional)"
+                    type="number"
+                    value={couponValidityDays}
+                    onChange={(e) => setCouponValidityDays(e.target.value)}
+                    sx={{ mb: 2 }}
+                    InputProps={{
+                        inputProps: { min: 1 }
+                    }}
+                />
                 {/* A lógica para adicionar perguntas personalizadas será adicionada aqui */}
             </Box>
         )

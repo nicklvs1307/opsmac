@@ -25,6 +25,7 @@ const PublicCheckin = () => {
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantLogo, setRestaurantLogo] = useState('');
   const [identificationMethod, setIdentificationMethod] = useState('phone'); // 'phone' or 'cpf'
+  const [requiresTable, setRequiresTable] = useState(false);
 
   const {
     control,
@@ -51,6 +52,7 @@ const PublicCheckin = () => {
         setRestaurantName(response.data.name);
         setRestaurantLogo(response.data.logo); // Corrigido para response.data.logo
         setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
+        setRequiresTable(response.data.settings?.checkin_requires_table || false);
       } catch (err) {
         console.error('Error fetching restaurant data:', err);
         toast.error(t('public_checkin.error_fetching_restaurant'));
@@ -68,6 +70,7 @@ const PublicCheckin = () => {
       const payload = {
         restaurant_id: restaurantId,
         customer_name: data.customer_name,
+        table_number: data.table_number,
       };
 
       if (identificationMethod === 'phone') {
@@ -374,6 +377,52 @@ const PublicCheckin = () => {
             />
           )}
         />
+
+        {requiresTable && (
+          <Controller
+            name="table_number"
+            control={control}
+            rules={{ required: t('public_checkin.table_number_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('public_checkin.table_number')}
+                fullWidth
+                margin="normal"
+                error={!!errors.table_number}
+                helperText={errors.table_number?.message}
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    borderRadius: 2,
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(63, 81, 181, 0.3)',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#3f51b5',
+                    },
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                    '&:hover': {
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                    },
+                  }
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: 'text.secondary',
+                    '&.Mui-focused': {
+                      color: '#3f51b5',
+                    },
+                  }
+                }}
+              />
+            )}
+          />
+        )}
         <Button
           type="submit"
           variant="contained"

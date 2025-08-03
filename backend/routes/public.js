@@ -161,6 +161,7 @@ router.post('/feedback', apiAuth, [
  */
 router.post('/checkin', apiAuth, [
   body('customer_id').isUUID().withMessage('ID do cliente inválido'),
+  body('table_number').optional().isString().withMessage('Número da mesa inválido'),
   // Removido a validação de restaurant_id do body, pois será obtido do req.restaurant
 ], async (req, res) => {
   const errors = validationResult(req);
@@ -169,7 +170,7 @@ router.post('/checkin', apiAuth, [
   }
 
   const restaurant_id = req.restaurant.id; // Obter restaurant_id do objeto req.restaurant
-  const { customer_id } = req.body;
+  const { customer_id, table_number } = req.body;
 
   try {
     // Verificar se o cliente pertence ao restaurante
@@ -200,6 +201,7 @@ router.post('/checkin', apiAuth, [
     const checkin = await models.Checkin.create({
       customer_id,
       restaurant_id,
+      table_number, // Adicionado
       checkin_time: new Date(),
       status: 'active',
     });

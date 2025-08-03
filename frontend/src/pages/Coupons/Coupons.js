@@ -85,8 +85,11 @@ const Coupons = () => {
       const params = {
         page,
         limit: 10,
-        ...filters,
       };
+
+      if (filters.search) params.search = filters.search;
+      if (filters.status) params.status = filters.status;
+      if (filters.type) params.type = filters.type;
       
       const response = await axiosInstance.get(`/api/coupons/restaurant/${restaurantId}`, { params });
       

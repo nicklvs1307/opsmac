@@ -86,6 +86,7 @@ const Rewards = () => {
       max_uses: '',
       expires_at: '',
       status: 'active',
+      coupon_validity_days: '', // Adicionado
       wheel_config: { items: [] }, // Adicionado
     },
   });
@@ -196,6 +197,7 @@ const Rewards = () => {
       cleanData.value = cleanData.value !== '' ? parseFloat(cleanData.value) : null;
       cleanData.points_required = cleanData.points_required !== '' ? parseInt(cleanData.points_required) : null;
       cleanData.max_uses_per_customer = cleanData.max_uses !== '' ? parseInt(cleanData.max_uses) : null;
+      cleanData.coupon_validity_days = cleanData.coupon_validity_days !== '' ? parseInt(cleanData.coupon_validity_days) : null;
       cleanData.valid_until = cleanData.expires_at ? new Date(cleanData.expires_at) : null;
 
       delete cleanData.max_uses;
@@ -773,17 +775,36 @@ const Rewards = () => {
                     render={({ field }) => (
                       <TextField
                         {...field}
-                        label="Data de Expiração"
+                        label="Data de Expiração da Recompensa"
                         type="datetime-local"
                         fullWidth
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        helperText="Quando a recompensa não poderá mais ser ganha."
                       />
                     )}
                   />
                 </Grid>
               )}
+              <Grid item xs={12} md={6}>
+                <Controller
+                  name="coupon_validity_days"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Dias de Validade do Cupom"
+                      type="number"
+                      fullWidth
+                      helperText="Por quantos dias o cupom será válido após ser gerado."
+                      InputProps={{
+                          inputProps: { min: 1 }
+                      }}
+                    />
+                  )}
+                />
+              </Grid>
               <Grid item xs={12} md={6}>
                 <Controller
                   name="status"

@@ -28,6 +28,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    table_number: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      comment: 'The table number provided by the customer during check-in.',
+    },
     checkout_time: {
       type: DataTypes.DATE,
       allowNull: true,

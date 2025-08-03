@@ -1,10 +1,26 @@
-root@ServerAgents:~/opsmac# docker exec a720ae1b9443 ls -la /app/public/uploads
-total 92
-drwxrwxrwx    1 root     root          4096 Aug  3 13:49 .
-drwxr-xr-x    1 root     root          4096 Aug  3 13:46 ..
--rw-r--r--    1 root     root         13209 Aug  3 13:47 logo-1754228879399-252048315.jpeg
--rw-r--r--    1 root     root         13209 Aug  3 13:48 logo-1754228883546-810308368.jpeg
--rw-r--r--    1 root     root         13209 Aug  3 13:49 logo-1754228945554-310627789.jpeg
--rw-r--r--    1 root     root         13209 Aug  3 13:49 logo-1754228948946-114759995.jpeg
--rw-r--r--    1 root     root         13209 Aug  3 13:49 logo-1754228959378-145743426.jpeg
-root@ServerAgents:~/opsmac#
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                        17.0s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.762
+0.762 > Feedeliza+-frontend@1.0.0 build
+0.762 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.762
+4.321 Creating an optimized production build...
+16.77 Failed to compile.
+16.77
+16.77 Module not found: Error: Can't resolve '../../contexts/AuthContext' in '/app/frontend/src/pages/Fidelidade/Checkin'
+16.77
+16.77
+------
+
+ 1 warning found (use docker --debug to expand):
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

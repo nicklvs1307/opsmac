@@ -111,7 +111,7 @@ const Header = ({ onMobileNavOpen }) => {
             >
               <Avatar
                 alt={user?.name || 'João Silva'}
-                src={user?.avatar}
+                src={user?.restaurant?.logo || user?.avatar}
                 sx={{ 
                   width: 40, 
                   height: 40,
@@ -121,7 +121,7 @@ const Header = ({ onMobileNavOpen }) => {
                   fontSize: '1rem'
                 }}
               >
-                {(user?.name || 'João Silva').charAt(0).toUpperCase()}
+                {!user?.restaurant?.logo && (user?.name || 'João Silva').charAt(0).toUpperCase()}
               </Avatar>
             </IconButton>
           </Tooltip>

@@ -175,7 +175,9 @@ module.exports = (sequelize) => {
         tablet_mode: false,
         checkin_requires_table: false,
         checkin_program_settings: {},
-        survey_program_settings: {}
+        survey_program_settings: {},
+        primary_color: '#3f51b5', // Cor primária padrão (azul Material Design)
+        secondary_color: '#f50057', // Cor secundária padrão (rosa Material Design)
       }
     },
     is_active: {

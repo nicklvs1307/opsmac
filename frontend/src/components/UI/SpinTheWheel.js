@@ -36,11 +36,14 @@ const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete })
   }, []);
 
   const coloredItems = useMemo(() => 
-    items.map(item => ({
-      ...item,
-      color: item.color || getRandomHexColor(),
-      textColor: item.textColor || getContrastingTextColor(item.color)
-    })), 
+    items.map(item => {
+      const randomColor = getRandomHexColor();
+      return {
+        ...item,
+        color: randomColor,
+        textColor: getContrastingTextColor(randomColor)
+      };
+    }), 
   [items, getRandomHexColor, getContrastingTextColor]);
 
   const drawWheel = useCallback((currentRotation = 0) => {

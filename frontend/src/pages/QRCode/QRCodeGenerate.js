@@ -25,6 +25,7 @@ import {
   Download as DownloadIcon,
   Print as PrintIcon,
   Preview as PreviewIcon,
+  ContentCopy as ContentCopyIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
@@ -81,8 +82,8 @@ const QRCodeGenerate = () => {
         // Para check-in, precisamos do slug do restaurante
         const fetchRestaurantSlug = async () => {
           try {
-            const response = await axiosInstance.get(`/api/restaurants/${restaurantId}`);
-            const restaurantSlug = response.data.restaurant.slug;
+            const response = await axiosInstance.get(`/api/settings/${restaurantId}`);
+            const restaurantSlug = response.data.slug;
             setPreviewUrl(`${baseUrl}/checkin/public/${restaurantSlug}`);
           } catch (error) {
             console.error('Erro ao buscar slug do restaurante:', error);
@@ -438,6 +439,14 @@ const QRCodeGenerate = () => {
                 Ações
               </Typography>
               <Box display="flex" flexDirection="column" gap={2}>
+                <Button
+                  variant="outlined"
+                  startIcon={<ContentCopyIcon />}
+                  onClick={() => navigator.clipboard.writeText(generatedQRCode.url).then(() => toast.success('Link copiado!'))}
+                  fullWidth
+                >
+                  Copiar Link
+                </Button>
                 <Button
                   variant="contained"
                   startIcon={<DownloadIcon />}

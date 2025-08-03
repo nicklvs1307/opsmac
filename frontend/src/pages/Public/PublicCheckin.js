@@ -22,6 +22,8 @@ const PublicCheckin = () => {
   const [loading, setLoading] = useState(false);
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantLogo, setRestaurantLogo] = useState('');
+  const [primaryColor, setPrimaryColor] = useState('#3f51b5'); // Default Material Blue
+  const [secondaryColor, setSecondaryColor] = useState('#f50057'); // Default Material Pink
   const [identificationMethod, setIdentificationMethod] = useState('phone'); // 'phone' or 'cpf'
   const [requiresTable, setRequiresTable] = useState(false);
 
@@ -48,9 +50,11 @@ const PublicCheckin = () => {
         setLoading(true);
         const response = await axiosInstance.get(`/public/restaurant/${restaurantSlug}`);
         setRestaurantName(response.data.name);
-        setRestaurantLogo(response.data.logo); // Corrigido para response.data.logo
+        setRestaurantLogo(response.data.logo);
         setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
         setRequiresTable(response.data.settings?.checkin_requires_table || false);
+        setPrimaryColor(response.data.settings?.primary_color || '#3f51b5');
+        setSecondaryColor(response.data.settings?.secondary_color || '#f50057');
       } catch (err) {
         console.error('Error fetching restaurant data:', err);
         toast.error(t('public_checkin.error_fetching_restaurant'));
@@ -118,7 +122,7 @@ const PublicCheckin = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      background: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)', // Gradiente suave para melhor aparência
+      background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`, // Gradiente suave para melhor aparência
       py: { xs: 4, sm: 6, md: 8 },
       px: 2, // Padding horizontal para mobile
     }}>
@@ -162,7 +166,7 @@ const PublicCheckin = () => {
             left: 0,
             right: 0,
             height: '4px',
-            background: 'linear-gradient(90deg, #3f51b5, #2196f3)', // Barra colorida no topo
+            background: `linear-gradient(90deg, ${primaryColor}, ${secondaryColor})`, // Barra colorida no topo
             zIndex: 1,
           },
           backdropFilter: 'blur(10px)', // Efeito de vidro fosco
@@ -174,7 +178,7 @@ const PublicCheckin = () => {
               gutterBottom
               sx={{ 
                 fontWeight: 800, 
-                background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)',
+                background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`,
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -253,10 +257,10 @@ const PublicCheckin = () => {
                       borderColor: 'rgba(0, 0, 0, 0.1)',
                     },
                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: 'rgba(63, 81, 181, 0.3)',
+                      borderColor: alpha(primaryColor, 0.3),
                     },
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#3f51b5',
+                      borderColor: primaryColor,
                     },
                     transition: 'all 0.3s ease',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
@@ -269,7 +273,7 @@ const PublicCheckin = () => {
                   sx: {
                     color: 'text.secondary',
                     '&.Mui-focused': {
-                      color: '#3f51b5',
+                      color: primaryColor,
                     },
                   }
                 }}
@@ -306,10 +310,10 @@ const PublicCheckin = () => {
                       borderColor: 'rgba(0, 0, 0, 0.1)',
                     },
                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: 'rgba(63, 81, 181, 0.3)',
+                      borderColor: alpha(primaryColor, 0.3),
                     },
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#3f51b5',
+                      borderColor: primaryColor,
                     },
                     transition: 'all 0.3s ease',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
@@ -322,7 +326,7 @@ const PublicCheckin = () => {
                   sx: {
                     color: 'text.secondary',
                     '&.Mui-focused': {
-                      color: '#3f51b5',
+                      color: primaryColor,
                     },
                   }
                 }}
@@ -396,10 +400,10 @@ const PublicCheckin = () => {
                       borderColor: 'rgba(0, 0, 0, 0.1)',
                     },
                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: 'rgba(63, 81, 181, 0.3)',
+                      borderColor: alpha(primaryColor, 0.3),
                     },
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#3f51b5',
+                      borderColor: primaryColor,
                     },
                     transition: 'all 0.3s ease',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
@@ -412,7 +416,7 @@ const PublicCheckin = () => {
                   sx: {
                     color: 'text.secondary',
                     '&.Mui-focused': {
-                      color: '#3f51b5',
+                      color: primaryColor,
                     },
                   }
                 }}
@@ -431,11 +435,11 @@ const PublicCheckin = () => {
             py: 1.8, 
             fontSize: { xs: '1rem', md: '1.1rem' }, 
             borderRadius: 3, 
-            boxShadow: '0px 8px 20px rgba(63, 81, 181, 0.3)', 
-            background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)',
+            boxShadow: `0px 8px 20px ${alpha(primaryColor, 0.3)}`, 
+            background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`,
             transition: 'all 0.3s ease',
             '&:hover': {
-              boxShadow: '0px 10px 25px rgba(63, 81, 181, 0.4)',
+              boxShadow: `0px 10px 25px ${alpha(primaryColor, 0.4)}`,
               transform: 'translateY(-2px)'
             },
             '&:active': {
@@ -454,7 +458,7 @@ const PublicCheckin = () => {
         <Box textAlign="center" mt={4} sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}>
           <Typography variant="caption" color="text.disabled" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
             <span>Powered by</span> 
-            <span style={{ fontWeight: 'bold', background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            <span style={{ fontWeight: 'bold', background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Sistema de Feedback
             </span>
           </Typography>

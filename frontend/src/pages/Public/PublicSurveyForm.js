@@ -35,6 +35,8 @@ const PublicSurveyForm = () => {
   const [survey, setSurvey] = useState(null);
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantLogo, setRestaurantLogo] = useState('');
+  const [primaryColor, setPrimaryColor] = useState('#3f51b5'); // Default Material Blue
+  const [secondaryColor, setSecondaryColor] = useState('#f50057'); // Default Material Pink
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -48,6 +50,8 @@ const PublicSurveyForm = () => {
         setSurvey(data.survey);
         setRestaurantName(data.restaurant.name);
         setRestaurantLogo(data.restaurant.logo);
+        setPrimaryColor(data.restaurant.settings?.primary_color || '#3f51b5');
+        setSecondaryColor(data.restaurant.settings?.secondary_color || '#f50057');
         // Initialize answers state
         const initialAnswers = {};
         data.survey.questions.forEach(q => {
@@ -150,7 +154,7 @@ const PublicSurveyForm = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      background: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)', // Gradiente suave para melhor aparência
+      background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`, // Gradiente suave para melhor aparência
       py: { xs: 2, sm: 4, md: 6 },
       px: 2, // Padding horizontal para mobile
     }}>
@@ -195,7 +199,7 @@ const PublicSurveyForm = () => {
             left: 0,
             right: 0,
             height: '4px',
-            background: 'linear-gradient(90deg, #3f51b5, #2196f3)', // Barra colorida no topo
+            background: `linear-gradient(90deg, ${primaryColor}, ${secondaryColor})`, // Barra colorida no topo
             zIndex: 1,
           },
           backdropFilter: 'blur(10px)', // Efeito de vidro fosco (funciona em navegadores modernos)
@@ -207,7 +211,7 @@ const PublicSurveyForm = () => {
             textAlign="center" 
             sx={{ 
               fontWeight: 800, 
-              background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)',
+              background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`,
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -259,7 +263,7 @@ const PublicSurveyForm = () => {
                       width: 28,
                       height: 28,
                       borderRadius: '50%',
-                      bgcolor: 'primary.main',
+                      bgcolor: primaryColor,
                       color: 'white',
                       display: 'flex',
                       alignItems: 'center',
@@ -423,11 +427,11 @@ const PublicSurveyForm = () => {
                 py: 2, 
                 fontSize: { xs: '1.1rem', md: '1.2rem' }, 
                 borderRadius: 3, 
-                boxShadow: '0px 8px 20px rgba(63, 81, 181, 0.3)', 
-                background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)',
+                boxShadow: `0px 8px 20px ${alpha(primaryColor, 0.3)}`, 
+                background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`,
                 transition: 'all 0.3s ease',
                 '&:hover': {
-                  boxShadow: '0px 10px 25px rgba(63, 81, 181, 0.4)',
+                  boxShadow: `0px 10px 25px ${alpha(primaryColor, 0.4)}`,
                   transform: 'translateY(-2px)'
                 },
                 '&:active': {
@@ -448,7 +452,7 @@ const PublicSurveyForm = () => {
         <Box textAlign="center" mt={4} sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}>
           <Typography variant="caption" color="text.disabled" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
             <span>Powered by</span> 
-            <span style={{ fontWeight: 'bold', background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            <span style={{ fontWeight: 'bold', background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Sistema de Feedback
             </span>
           </Typography>

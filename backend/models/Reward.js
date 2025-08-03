@@ -304,8 +304,6 @@ module.exports = (sequelize) => {
         throw new Error('Configuração da roleta inválida ou vazia.');
       }
       const { winningItem: spunItem, winningIndex: spunIndex } = spinWheel(this.wheel_config);
-      console.log('Inside Reward.js generateCoupon - spunItem:', spunItem);
-      console.log('Inside Reward.js generateCoupon - spunIndex:', spunIndex);
       winningItem = spunItem;
       winningIndex = spunIndex;
       if (!winningItem) {

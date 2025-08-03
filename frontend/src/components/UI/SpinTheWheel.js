@@ -183,7 +183,6 @@ const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete })
 
   useEffect(() => {
     if (winningIndex !== -1 && items && items.length > 0) {
-      console.log('SpinTheWheel - Received winningIndex:', winningIndex);
       const numItems = items.length;
       const segmentAngleRadians = (2 * Math.PI) / numItems;
       
@@ -201,7 +200,6 @@ const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete })
       targetOffset = (targetOffset % (2 * Math.PI) + (2 * Math.PI)) % (2 * Math.PI);
 
       const targetRotationRadians = (2 * Math.PI * randomSpins) + targetOffset;
-      console.log('SpinTheWheel - Calculated targetRotationRadians:', targetRotationRadians);
 
       animateSpin(targetRotationRadians);
     }

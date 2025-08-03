@@ -150,10 +150,10 @@ router.post('/spin-wheel', [
         console.log('Winning item from spinWheel:', winningItem);
         console.log('Winning index from spinWheel:', winningIndex);
 
-        res.status(200).json({
+        const responsePayload = {
             message: 'Você ganhou um prêmio!',
-            wonItem: winningItem, // Retorna o objeto completo do item sorteado
-            winningIndex: winningIndex, // Retorna o índice do item sorteado
+            wonItem: winningItem,
+            winningIndex: winningIndex,
             reward_earned: {
                 reward_title: coupon.title,
                 coupon_code: coupon.code,
@@ -161,7 +161,8 @@ router.post('/spin-wheel', [
                 value: coupon.value,
                 reward_type: coupon.reward_type,
             },
-        });
+        };
+        res.status(200).json(responsePayload);
 
     } catch (error) {
         console.error('Erro ao girar a roleta:', error);

@@ -35,6 +35,7 @@ const SurveyCreate = () => {
       queryClient.invalidateQueries('surveys');
       toast.success('Pesquisa criada com sucesso!');
       setCreatedSurveyId(data.id); // Armazena o ID da pesquisa criada
+      setCreatedSurveySlug(data.slug); // Armazena o slug da pesquisa criada
       setActiveStep(3); // Avança para um novo passo para exibir as opções
     },
     onError: (error) => {
@@ -121,10 +122,10 @@ const SurveyCreate = () => {
         return (
           <Box>
             <Typography variant="h6" gutterBottom>Pesquisa Criada com Sucesso!</Typography>
-            {createdSurveyId && (
+            {createdSurveyId && createdSurveySlug && (
               <Box sx={{ mb: 3 }}>
                 <Typography variant="body1">ID da Pesquisa: <strong>{createdSurveyId}</strong></Typography>
-                <Typography variant="body1">Link Público: <a href={`/public/surveys/${createdSurveyId}`} target="_blank" rel="noopener noreferrer">{`/public/surveys/${createdSurveyId}`}</a></Typography>
+                <Typography variant="body1">Link Público: <a href={`/public/surveys/${createdSurveySlug}`} target="_blank" rel="noopener noreferrer">{`/public/surveys/${createdSurveySlug}`}</a></Typography>
                 <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
                   <Button variant="outlined" onClick={handleCopyLink}>Copiar Link</Button>
                   <Button variant="outlined" onClick={() => setOpenQrCodeDialog(true)}>Gerar QR Code</Button>
@@ -146,7 +147,7 @@ const SurveyCreate = () => {
                     <Typography variant="caption" color="text.secondary">Integrar seu módulo de QR Code aqui</Typography>
                   </Paper>
                 </Box>
-                <Typography variant="body2" textAlign="center">Link: <a href={`/public/surveys/${createdSurveyId}`} target="_blank" rel="noopener noreferrer">{`/public/surveys/${createdSurveyId}`}</a></Typography>
+                <Typography variant="body2" textAlign="center">Link: <a href={`/public/surveys/${createdSurveySlug}`} target="_blank" rel="noopener noreferrer">{`/public/surveys/${createdSurveySlug}`}</a></Typography>
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setOpenQrCodeDialog(false)}>Fechar</Button>
@@ -177,7 +178,7 @@ const SurveyCreate = () => {
   };
 
   const handleCopyLink = () => {
-    const publicLink = `${window.location.origin}/public/surveys/${createdSurveyId}`;
+    const publicLink = `${window.location.origin}/public/surveys/${createdSurveySlug}`;
     navigator.clipboard.writeText(publicLink)
       .then(() => {
         toast.success('Link copiado para a área de transferência!');

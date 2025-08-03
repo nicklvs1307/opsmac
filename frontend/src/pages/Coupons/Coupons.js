@@ -54,7 +54,12 @@ const Coupons = () => {
   useEffect(() => {
     if (tabValue === 0) {
       expireCoupons();
-      fetchCoupons();
+      // Reset page to 1 when filters change
+      if (page !== 1 && (filters.search || filters.status || filters.type)) {
+        setPage(1);
+      } else {
+        fetchCoupons();
+      }
     }
   }, [tabValue, page, filters]);
 

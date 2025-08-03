@@ -20,6 +20,11 @@ module.exports = (sequelize) => {
         }
       }
     },
+    slug: {
+      type: DataTypes.STRING(150),
+      allowNull: true,
+      unique: true,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: true

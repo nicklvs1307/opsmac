@@ -3,6 +3,7 @@ const { auth } = require('../middleware/auth');
 const { models } = require('../config/database');
 const { body, validationResult } = require('express-validator');
 const { surveyTemplates } = require('../utils/surveyTemplates');
+const { generateUniqueSlug } = require('../utils/slugGenerator');
 
 const router = express.Router();
 
@@ -33,11 +34,11 @@ router.post(
             let questionsData = [];
 
             if (type === 'custom') {
-                surveyData = { title, description, type, restaurant_id, created_by: user_id, status };
+                surveyData = { title, description, type, restaurant_id, created_by: user_id, status, slug: await generateUniqueSlug(models.Survey, title) };
                 questionsData = questions;
             } else if (surveyTemplates[type]) {
                 const template = surveyTemplates[type];
-                surveyData = { ...template, type, restaurant_id, created_by: user_id, status };
+                surveyData = { ...template, type, restaurant_id, created_by: user_id, status, slug: await generateUniqueSlug(models.Survey, template.title) };
                 questionsData = template.questions;
             } else {
                 return res.status(400).json({ msg: 'Tipo de pesquisa inválido' });
@@ -106,6 +107,7 @@ router.put(
             if (status) {
                 survey.status = status;
             }
+            survey.slug = await generateUniqueSlug(models.Survey, title, survey.slug); // Update slug on title change
             await survey.save();
 
             // Update questions: This is a simplified approach.

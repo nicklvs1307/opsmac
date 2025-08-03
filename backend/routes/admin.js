@@ -2,6 +2,7 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const { models } = require('../config/database');
 const { auth } = require('../middleware/auth');
+const { generateUniqueSlug } = require('../utils/slugGenerator');
 
 const router = express.Router();
 
@@ -188,7 +189,8 @@ router.post('/restaurants', auth, isAdmin, [
     }
 
     const restaurant = await models.Restaurant.create({
-      name, address, city, state, zip_code, phone, email, website, owner_id
+      name, address, city, state, zip_code, phone, email, website, owner_id,
+      slug: await generateUniqueSlug(models.Restaurant, name)
     });
     res.status(201).json({ message: 'Restaurante criado com sucesso', restaurant });
   } catch (error) {

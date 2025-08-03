@@ -30,7 +30,7 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const PublicSurveyForm = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const [survey, setSurvey] = useState(null);
   const [restaurantName, setRestaurantName] = useState('');
@@ -44,7 +44,7 @@ const PublicSurveyForm = () => {
     const fetchSurvey = async () => {
       try {
         setLoading(true);
-        const { data } = await axiosInstance.get(`/api/public/surveys/${id}`);
+        const { data } = await axiosInstance.get(`/api/public/surveys/${slug}`);
         setSurvey(data.survey);
         setRestaurantName(data.restaurant.name);
         setRestaurantLogo(data.restaurant.logo);
@@ -67,7 +67,7 @@ const PublicSurveyForm = () => {
     };
 
     fetchSurvey();
-  }, [id]);
+  }, [slug]);
 
   const handleAnswerChange = (questionId, value) => {
     setAnswers(prev => ({
@@ -104,7 +104,7 @@ const PublicSurveyForm = () => {
     }));
 
     try {
-      await axiosInstance.post(`/api/public/surveys/${id}/responses`, { answers: formattedAnswers });
+      await axiosInstance.post(`/api/public/surveys/${slug}/responses`, { answers: formattedAnswers });
       toast.success('Sua resposta foi enviada com sucesso!');
       navigate('/thank-you'); // Redirecionar para uma página de agradecimento
     } catch (err) {

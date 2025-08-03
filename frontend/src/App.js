@@ -63,8 +63,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/feedback/:shortUrl" element={<PublicFeedback />} />
                 <Route path="/thank-you" element={<ThankYou />} />
-                <Route path="/public/surveys/:id" element={<PublicSurveyForm />} />
-                <Route path="/checkin/public" element={<PublicCheckin />} />
+                <Route path="/public/surveys/:slug" element={<PublicSurveyForm />} />
+                <Route path="/checkin/public/:restaurantSlug" element={<PublicCheckin />} />
                 <Route path="/girar-roleta" element={<GirarRoleta />} />
                 <Route path="/recompensa-ganha" element={<PublicReward />} />
                 

@@ -120,13 +120,20 @@ router.post('/feedback', apiAuth, [
 
 /**
  * @swagger
- * /public/checkin:
+ * /public/checkin/{restaurantSlug}:
  *   post:
  *     summary: Registra um novo check-in público
  *     tags: [Public API]
  *     description: Permite que um cliente registre um check-in em um restaurante específico.
  *     security:
  *       - ApiKeyAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: restaurantSlug
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: Slug do restaurante.
  *     requestBody:
  *       required: true
  *       content:
@@ -135,16 +142,11 @@ router.post('/feedback', apiAuth, [
  *             type: object
  *             required:
  *               - customer_id
- *               - restaurant_id
  *             properties:
  *               customer_id:
  *                 type: string
  *                 format: uuid
  *                 description: ID do cliente que está fazendo o check-in.
- *               restaurant_id:
- *                 type: string
- *                 format: uuid
- *                 description: ID do restaurante onde o check-in está sendo feito.
  *     responses:
  *       201:
  *         description: Check-in registrado com sucesso.
@@ -159,27 +161,24 @@ router.post('/feedback', apiAuth, [
  *       500:
  *         description: Erro interno do servidor.
  */
-router.post('/checkin', apiAuth, [
+router.post('/checkin/:restaurantSlug', apiAuth, [
   body('customer_id').isUUID().withMessage('ID do cliente inválido'),
   body('table_number').optional().isString().withMessage('Número da mesa inválido'),
-  // Removido a validação de restaurant_id do body, pois será obtido do req.restaurant
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const restaurant_id = req.restaurant.id; // Obter restaurant_id do objeto req.restaurant
+  const { restaurantSlug } = req.params;
   const { customer_id, table_number } = req.body;
 
   try {
-    // Verificar se o cliente pertence ao restaurante
-    const customer = await models.Customer.findOne({
-      where: {
-        id: customer_id,
-        restaurant_id: restaurant_id
-      }
-    });
+    const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
+    if (!restaurant) {
+      return res.status(404).json({ message: 'Restaurante não encontrado.' });
+    }
+    const restaurant_id = restaurant.id; // Obter restaurant_id do objeto restaurant encontrado pelo slug
 
     if (!customer) {
       return res.status(404).json({ message: 'Cliente não encontrado ou não pertence a este restaurante.' });
@@ -221,18 +220,17 @@ router.post('/checkin', apiAuth, [
 
 /**
  * @swagger
- * /public/restaurant/{restaurantId}:
+ * /public/restaurant/{restaurantSlug}:
  *   get:
- *     summary: Obtém informações básicas de um restaurante (público)
+ *     summary: Obtém informações básicas de um restaurante (público) por slug
  *     tags: [Public API]
  *     parameters:
  *       - in: path
- *         name: restaurantId
+ *         name: restaurantSlug
  *         required: true
  *         schema:
  *           type: string
- *           format: uuid
- *         description: ID do restaurante.
+ *           description: Slug do restaurante.
  *     responses:
  *       200:
  *         description: Informações do restaurante obtidas com sucesso.
@@ -247,21 +245,24 @@ router.post('/checkin', apiAuth, [
  *                   type: string
  *                 logo_url:
  *                   type: string
+ *                 slug:
+ *                   type: string
  *       404:
  *         description: Restaurante não encontrado.
  *       500:
  *         description: Erro interno do servidor.
  */
-router.get('/restaurant/:restaurantId', async (req, res) => {
+router.get('/restaurant/:restaurantSlug', async (req, res) => {
   try {
-    const { restaurantId } = req.params;
-    console.log(`[Public Route] Recebida requisição para /restaurant/${restaurantId}`);
-    const restaurant = await models.Restaurant.findByPk(restaurantId, {
-      attributes: ['id', 'name', 'settings']
+    const { restaurantSlug } = req.params;
+    console.log(`[Public Route] Recebida requisição para /restaurant/${restaurantSlug}`);
+    const restaurant = await models.Restaurant.findOne({
+      where: { slug: restaurantSlug },
+      attributes: ['id', 'name', 'settings', 'slug']
     });
 
     if (!restaurant) {
-      console.warn(`[Public Route] Restaurante ${restaurantId} não encontrado.`);
+      console.warn(`[Public Route] Restaurante ${restaurantSlug} não encontrado.`);
       return res.status(404).json({ error: 'Restaurante não encontrado.' });
     }
 

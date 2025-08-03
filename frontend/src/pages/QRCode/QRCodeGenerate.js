@@ -78,10 +78,23 @@ const QRCodeGenerate = () => {
     if (watchedValues.name && restaurantId) {
       const baseUrl = window.location.origin;
       if (watchedValues.qr_type === 'checkin') {
-        setPreviewUrl(`${baseUrl}/checkin/public?restaurantId=${restaurantId}`);
+        // Para check-in, precisamos do slug do restaurante
+        const fetchRestaurantSlug = async () => {
+          try {
+            const response = await axiosInstance.get(`/api/restaurants/${restaurantId}`);
+            const restaurantSlug = response.data.restaurant.slug;
+            setPreviewUrl(`${baseUrl}/checkin/public/${restaurantSlug}`);
+          } catch (error) {
+            console.error('Erro ao buscar slug do restaurante:', error);
+            toast.error('Erro ao gerar URL de check-in. Tente novamente.');
+          }
+        };
+        fetchRestaurantSlug();
       } else { // Default to feedback
+        // Para feedback, precisamos do slug da pesquisa (se for uma pesquisa existente)
+        // Ou geramos um slug temporário para preview
         const slug = watchedValues.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-        setPreviewUrl(`${baseUrl}/feedback/${slug}`);
+        setPreviewUrl(`${baseUrl}/public/surveys/${slug}`);
       }
     }
   }, [watchedValues.name, watchedValues.qr_type, restaurantId]);

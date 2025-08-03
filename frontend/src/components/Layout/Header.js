@@ -85,7 +85,7 @@ const Header = ({ onMobileNavOpen }) => {
             <Typography 
               variant="body2" 
               sx={{ 
-                color: 'white',
+                color: theme.palette.text.primary,
                 fontWeight: 600,
                 lineHeight: 1.2
               }}
@@ -95,7 +95,7 @@ const Header = ({ onMobileNavOpen }) => {
             <Typography 
               variant="caption" 
               sx={{ 
-                color: 'rgba(255,255,255,0.8)',
+                color: theme.palette.text.secondary,
                 fontSize: '0.75rem'
               }}
             >

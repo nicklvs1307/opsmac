@@ -5,13 +5,13 @@ const { body, validationResult } = require('express-validator');
 
 const router = express.Router();
 
-// @route   GET /public/surveys/:id
-// @desc    Get a public survey by ID
+// @route   GET /public/surveys/:slug
+// @desc    Get a public survey by slug
 // @access  Public
-router.get('/:id', async (req, res) => {
+router.get('/:slug', async (req, res) => {
     try {
-        const survey = await models.Survey.findByPk(req.params.id, {
-            where: { status: 'active' }, // Only active surveys can be accessed publicly
+        const survey = await models.Survey.findOne({
+            where: { slug: req.params.slug, status: 'active' }, // Only active surveys can be accessed publicly
             include: [
                 {
                     model: models.Question,
@@ -21,10 +21,10 @@ router.get('/:id', async (req, res) => {
                 {
                     model: models.Restaurant,
                     as: 'restaurant',
-                    attributes: ['name', 'logo'],
+                    attributes: ['name', 'logo', 'slug'], // Incluir slug do restaurante
                 }
             ],
-            attributes: ['id', 'title', 'description', 'type'],
+            attributes: ['id', 'title', 'description', 'type', 'slug'],
         });
 
         if (!survey) {
@@ -38,11 +38,11 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// @route   POST /public/surveys/:id/responses
+// @route   POST /public/surveys/:slug/responses
 // @desc    Submit responses for a public survey
 // @access  Public
 router.post(
-    '/:id/responses',
+    '/:slug/responses',
     [
         body('answers', 'As respostas são obrigatórias').isArray({ min: 1 }),
         body('customer_id').optional().isUUID().withMessage('ID do cliente inválido'),
@@ -54,11 +54,11 @@ router.post(
         }
 
         const { answers, customer_id } = req.body;
-        const surveyId = req.params.id;
+        const surveySlug = req.params.slug;
 
         try {
-            const survey = await models.Survey.findByPk(surveyId, {
-                where: { status: 'active' },
+            const survey = await models.Survey.findOne({
+                where: { slug: surveySlug, status: 'active' },
                 include: [{ model: models.Question, as: 'questions' }]
             });
 

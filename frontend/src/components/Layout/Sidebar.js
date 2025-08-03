@@ -76,12 +76,12 @@ const Sidebar = ({ onMobileClose }) => {
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: 'Programa de Check-in',
+          title: 'Check-in',
           icon: <CheckinIcon />,
           path: '/fidelity/checkin'
         },
         {
-          title: 'Pesquisas de Satisfação',
+          title: 'Satisfação',
           icon: <PollIcon />,
           path: '/fidelity/surveys',
           submenu: [
@@ -261,7 +261,7 @@ const Sidebar = ({ onMobileClose }) => {
                     transition: 'all 0.2s ease',
                     '&.Mui-selected': {
                       background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-                      color: 'white',
+                      color: mode === 'light' ? '#333' : 'white', // Ajuste de contraste
                       boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
                       transform: 'translateY(-1px)',
                       '&:hover': {

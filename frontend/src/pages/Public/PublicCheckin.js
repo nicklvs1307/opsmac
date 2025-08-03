@@ -17,9 +17,7 @@ import toast from 'react-hot-toast';
 const PublicCheckin = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const restaurantId = queryParams.get('restaurantId');
+  const { restaurantSlug } = useParams();
 
   const [loading, setLoading] = useState(false);
   const [restaurantName, setRestaurantName] = useState('');
@@ -40,7 +38,7 @@ const PublicCheckin = () => {
   });
 
   useEffect(() => {
-    if (!restaurantId) {
+    if (!restaurantSlug) {
       toast.error(t('public_checkin.error_no_restaurant_id'));
       return;
     }
@@ -48,7 +46,7 @@ const PublicCheckin = () => {
     const fetchRestaurantData = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get(`/public/restaurant/${restaurantId}`);
+        const response = await axiosInstance.get(`/public/restaurant/${restaurantSlug}`);
         setRestaurantName(response.data.name);
         setRestaurantLogo(response.data.logo); // Corrigido para response.data.logo
         setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
@@ -62,13 +60,12 @@ const PublicCheckin = () => {
     };
 
     fetchRestaurantData();
-  }, [restaurantId, t]);
+  }, [restaurantSlug, t]);
 
   const onSubmit = async (data) => {
     try {
       setLoading(true);
       const payload = {
-        restaurant_id: restaurantId,
         customer_name: data.customer_name,
         table_number: data.table_number,
       };
@@ -79,7 +76,7 @@ const PublicCheckin = () => {
         payload.cpf = data.cpf;
       }
 
-      const response = await axiosInstance.post('/api/checkin/public', payload);
+      const response = await axiosInstance.post(`/api/checkin/public/${restaurantSlug}`, payload);
 
       const { reward_earned } = response.data;
 

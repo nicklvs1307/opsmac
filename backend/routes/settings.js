@@ -12,12 +12,12 @@ router.get('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
   try {
     const { restaurantId } = req.params;
     const restaurant = await models.Restaurant.findByPk(restaurantId, {
-      attributes: ['id', 'name', 'settings', 'logo']
+      attributes: ['id', 'name', 'settings', 'logo', 'slug']
     });
     if (!restaurant) {
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
-    res.json({ settings: restaurant.settings, logo: restaurant.logo });
+    res.json({ settings: restaurant.settings, logo: restaurant.logo, slug: restaurant.slug });
   } catch (error) {
     console.error('Erro ao obter configurações:', error);
     res.status(500).json({ error: 'Erro interno do servidor' });

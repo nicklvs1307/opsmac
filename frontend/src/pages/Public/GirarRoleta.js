@@ -39,6 +39,7 @@ const GirarRoleta = () => {
       setApiResponseRewardEarned(response.data.reward_earned);
       setLoading(false); // Stop loading here, as animation will start
       
+      console.log('GirarRoleta - response.data.winningIndex from backend:', response.data.winningIndex);
       // Usar o winningIndex diretamente do backend
       setWinningIndex(response.data.winningIndex);
 

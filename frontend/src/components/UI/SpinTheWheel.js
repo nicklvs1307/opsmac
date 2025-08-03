@@ -192,9 +192,8 @@ const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete })
       const winningSegmentCenterAngle = (winningIndex * segmentAngleRadians) + (segmentAngleRadians / 2);
 
       // Calcular o deslocamento necessário para alinhar o centro do segmento vencedor com o ponteiro (12 horas)
-      // O ponteiro está em Math.PI / 2 (90 graus) no sentido anti-horário a partir de 0 (3 horas).
-      // Como a rotação é no sentido horário, precisamos ajustar.
-      let targetOffset = (Math.PI / 2) - winningSegmentCenterAngle;
+      // O ponteiro está em 3 * Math.PI / 2 (270 graus ou -90 graus) no sentido horário a partir de 0 (3 horas).
+      let targetOffset = (3 * Math.PI / 2) - winningSegmentCenterAngle;
 
       // Garantir que o targetOffset seja positivo e dentro de 0 a 2*PI
       targetOffset = (targetOffset % (2 * Math.PI) + (2 * Math.PI)) % (2 * Math.PI);

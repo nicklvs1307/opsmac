@@ -553,6 +553,7 @@ const Rewards = () => {
           {createDialog ? 'Nova Recompensa' : 'Detalhes da Recompensa'}
         </DialogTitle>
         <DialogContent>
+          <form onSubmit={handleSubmit(onSubmit)}>
           {!createDialog && (
             <Tabs
               value={detailsModalTab}
@@ -857,6 +858,7 @@ const Rewards = () => {
               </Box>
             </Box>
           )}
+          </form>
         </DialogContent>
         <DialogActions>
           <Button

@@ -36,40 +36,74 @@ router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, async (r
 });
 
 // Rota para CRIAR uma nova recompensa
-router.post('/', auth, async (req, res) => {
-    const rewardData = req.body;
-    const user = await models.User.findByPk(req.user.userId, { include: [{ model: models.Restaurant, as: 'restaurants' }] });
-    const restaurantId = user?.restaurants?.[0]?.id;
+router.post(
+    '/',
+    auth,
+    [
+        body('title', 'Título da recompensa é obrigatório').not().isEmpty(),
+        body('reward_type', 'Tipo de recompensa inválido').isIn(['discount_percentage', 'discount_fixed', 'free_item', 'points', 'cashback', 'gift', 'spin_the_wheel']),
+        body('wheel_config', 'Configuração da roleta é obrigatória para recompensas do tipo spin_the_wheel').if(body('reward_type').equals('spin_the_wheel')).not().isEmpty(),
+        body('wheel_config.items', 'Itens da roleta são obrigatórios').if(body('reward_type').equals('spin_the_wheel')).isArray({ min: 1 }),
+        body('wheel_config.items.*.name', 'Nome do item da roleta é obrigatório').if(body('reward_type').equals('spin_the_wheel')).not().isEmpty(),
+        body('wheel_config.items.*.probability', 'Probabilidade do item da roleta é obrigatória e deve ser um número').if(body('reward_type').equals('spin_the_wheel')).isFloat({ min: 0 }),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
 
-    if (!restaurantId) {
-        return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
-    }
+        const rewardData = req.body;
+        const user = await models.User.findByPk(req.user.userId, { include: [{ model: models.Restaurant, as: 'restaurants' }] });
+        const restaurantId = user?.restaurants?.[0]?.id;
 
-    try {
-        const reward = await models.Reward.create({ ...rewardData, restaurant_id: restaurantId, created_by: req.user.userId });
-        res.status(201).json(reward);
-    } catch (error) {
-        console.error('Erro ao criar recompensa:', error);
-        res.status(500).json({ error: 'Erro ao criar recompensa' });
+        if (!restaurantId) {
+            return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
+        }
+
+        try {
+            const reward = await models.Reward.create({ ...rewardData, restaurant_id: restaurantId, created_by: req.user.userId });
+            res.status(201).json(reward);
+        } catch (error) {
+            console.error('Erro ao criar recompensa:', error);
+            res.status(500).json({ error: 'Erro ao criar recompensa' });
+        }
     }
-});
+);
 
 // Rota para ATUALIZAR uma recompensa
-router.put('/:id', auth, async (req, res) => {
-    const { id } = req.params;
-    const updateData = req.body;
-    try {
-        const reward = await models.Reward.findByPk(id);
-        if (!reward) {
-            return res.status(404).json({ error: 'Recompensa não encontrada.' });
+router.put(
+    '/:id',
+    auth,
+    [
+        body('title', 'Título da recompensa é obrigatório').optional().not().isEmpty(),
+        body('reward_type', 'Tipo de recompensa inválido').optional().isIn(['discount_percentage', 'discount_fixed', 'free_item', 'points', 'cashback', 'gift', 'spin_the_wheel']),
+        body('wheel_config', 'Configuração da roleta é obrigatória para recompensas do tipo spin_the_wheel').if(body('reward_type').equals('spin_the_wheel')).optional().not().isEmpty(),
+        body('wheel_config.items', 'Itens da roleta são obrigatórios').if(body('reward_type').equals('spin_the_wheel')).optional().isArray({ min: 1 }),
+        body('wheel_config.items.*.name', 'Nome do item da roleta é obrigatório').if(body('reward_type').equals('spin_the_wheel')).optional().not().isEmpty(),
+        body('wheel_config.items.*.probability', 'Probabilidade do item da roleta é obrigatória e deve ser um número').if(body('reward_type').equals('spin_the_wheel')).optional().isFloat({ min: 0 }),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
-        await reward.update(updateData);
-        res.json(reward);
-    } catch (error) {
-        console.error('Erro ao atualizar recompensa:', error);
-        res.status(500).json({ error: 'Erro ao atualizar recompensa' });
+
+        const { id } = req.params;
+        const updateData = req.body;
+        try {
+            const reward = await models.Reward.findByPk(id);
+            if (!reward) {
+                return res.status(404).json({ error: 'Recompensa não encontrada.' });
+            }
+            await reward.update(updateData);
+            res.json(reward);
+        } catch (error) {
+            console.error('Erro ao atualizar recompensa:', error);
+            res.status(500).json({ error: 'Erro ao atualizar recompensa' });
+        }
     }
-});
+);
 
 // Rota para DELETAR uma recompensa
 router.delete('/:id', auth, async (req, res) => {
@@ -112,6 +146,9 @@ router.post('/spin-wheel', [
 
         // A lógica de sorteio e geração de cupom já está no método generateCoupon do modelo Reward
         const { coupon, winningItem, winningIndex } = await reward.generateCoupon(customer.id);
+        console.log('Wheel config items sent to spinWheel:', reward.wheel_config.items);
+        console.log('Winning item from spinWheel:', winningItem);
+        console.log('Winning index from spinWheel:', winningIndex);
 
         res.status(200).json({
             message: 'Você ganhou um prêmio!',

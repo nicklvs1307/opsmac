@@ -15,6 +15,9 @@ RUN npm install
 # Copie o restante do código da aplicação
 COPY . .
 
+# Crie o diretório de uploads e defina as permissões
+RUN mkdir -p public/uploads && chmod -R 777 public/uploads
+
 # Defina a porta que o aplicativo Node.js irá escutar
 # Certifique-se de que seu server.js escute process.env.PORT ou a porta 5000
 ENV PORT=5000

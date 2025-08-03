@@ -39,11 +39,8 @@ const GirarRoleta = () => {
       setApiResponseRewardEarned(response.data.reward_earned);
       setLoading(false); // Stop loading here, as animation will start
       
-      // Calcular o winningIndex
-      const index = reward_earned.wheel_config.items.findIndex(
-        (item) => item.id === response.data.wonItem.id
-      );
-      setWinningIndex(index);
+      // Usar o winningIndex diretamente do backend
+      setWinningIndex(response.data.winningIndex);
 
     } catch (err) {
       console.error('Error spinning wheel:', err);

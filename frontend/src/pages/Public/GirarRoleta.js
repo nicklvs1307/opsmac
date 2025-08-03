@@ -38,6 +38,13 @@ const GirarRoleta = () => {
       setWinningItem(response.data.wonItem);
       setApiResponseRewardEarned(response.data.reward_earned);
       setLoading(false); // Stop loading here, as animation will start
+      
+      // Calcular o winningIndex
+      const index = reward_earned.wheel_config.items.findIndex(
+        (item) => item.id === response.data.wonItem.id
+      );
+      setWinningIndex(index);
+
     } catch (err) {
       console.error('Error spinning wheel:', err);
       toast.error(err.response?.data?.message || t('girar_roleta.error_spinning'));

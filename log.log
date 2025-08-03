@@ -1,29 +1,28 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                       155.9s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                       160.2s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.636
-0.636 > Feedeliza+-frontend@1.0.0 build
-0.636 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.636
-3.740 Creating an optimized production build...
-154.8 Failed to compile.
-154.8
-154.8 [eslint]
-154.8 src/pages/Fidelidade/Avaliacoes/SurveyCreate.js
-154.8   Line 38:7:     'setCreatedSurveySlug' is not defined  no-undef
-154.8   Line 125:33:   'createdSurveySlug' is not defined     no-undef
-154.8   Line 128:87:   'createdSurveySlug' is not defined     no-undef
-154.8   Line 128:170:  'createdSurveySlug' is not defined     no-undef
-154.8   Line 150:98:   'createdSurveySlug' is not defined     no-undef
-154.8   Line 150:181:  'createdSurveySlug' is not defined     no-undef
-154.8   Line 181:68:   'createdSurveySlug' is not defined     no-undef
-154.8
-154.8 src/pages/Public/PublicCheckin.js
-154.8   Line 20:30:  'useParams' is not defined  no-undef
-154.8
-154.8 Search for the keywords to learn more about each error.
-154.8
-154.8
+0.770
+0.770 > Feedeliza+-frontend@1.0.0 build
+0.770 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.770
+3.717 Creating an optimized production build...
+159.2 Failed to compile.
+159.2
+159.2 [eslint]
+159.2 src/pages/Public/PublicCheckin.js
+159.2   Line 260:36:  'alpha' is not defined  no-undef
+159.2   Line 313:36:  'alpha' is not defined  no-undef
+159.2   Line 403:36:  'alpha' is not defined  no-undef
+159.2   Line 438:40:  'alpha' is not defined  no-undef
+159.2   Line 442:43:  'alpha' is not defined  no-undef
+159.2
+159.2 src/pages/Public/PublicSurveyForm.js
+159.2   Line 430:44:  'alpha' is not defined  no-undef
+159.2   Line 434:47:  'alpha' is not defined  no-undef
+159.2
+159.2 Search for the keywords to learn more about each error.
+159.2
+159.2
 ------
 
  1 warning found (use docker --debug to expand):

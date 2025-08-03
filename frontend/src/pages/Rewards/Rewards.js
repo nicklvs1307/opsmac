@@ -226,7 +226,6 @@ const Rewards = () => {
       setDetailsModalOpen(false);
       fetchRewards();
     } catch (err) {
-      console.error('Error saving reward:', err); // Log the full error for debugging
       toast.error(err.response?.data?.message || 'Erro ao salvar recompensa');
     }
   };

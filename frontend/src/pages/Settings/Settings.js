@@ -290,10 +290,21 @@ const Settings = () => {
         description: data.description,
       };
       
-      await updateUser(profileData, restaurantData); // Use updateUser from current context
-      toast.success(t('settings.profile_updated_successfully')); // Use t() for translation
+      // Update user profile
+      await updateUser(profileData);
+
+      // Update restaurant profile
+      if (restaurantId) {
+        await axiosInstance.put(`/api/settings/${restaurantId}/profile`, restaurantData);
+        // Update user context with new restaurant data
+        const updatedRestaurant = { ...user.restaurant, ...restaurantData };
+        const updatedUser = { ...user, restaurant: updatedRestaurant };
+        setUser(updatedUser);
+      }
+
+      toast.success(t('settings.profile_updated_successfully'));
     } catch (err) {
-      toast.error(err.response?.data?.message || t('settings.error_updating_profile')); // Use t()
+      toast.error(err.response?.data?.message || t('settings.error_updating_profile'));
     } finally {
       setLoading(false);
     }

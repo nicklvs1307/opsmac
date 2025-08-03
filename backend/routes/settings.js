@@ -48,6 +48,7 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
 router.post('/:restaurantId/logo', auth, checkRestaurantOwnership, upload.single('logo'), async (req, res) => {
   try {
     const { restaurantId } = req.params;
+    console.log('Received logo upload request. req.file:', req.file);
     if (!req.file) {
       return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
     }

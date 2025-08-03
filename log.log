@@ -1,17 +1,40 @@
-feedelizaapi.towersf…55-539146799.jpeg:1 
- GET https://feedelizaapi.towersfy.com/uploads/logo-1754226421955-539146799.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
-Image		
-xl	@	react-dom.production.min.js:261
-bl	@	react-dom.production.min.js:259
-yl	@	react-dom.production.min.js:258
-(anônimo)	@	react-dom.production.min.js:282
-wc	@	react-dom.production.min.js:280
-lc	@	react-dom.production.min.js:272
-Vo	@	react-dom.production.min.js:127
-(anônimo)	@	react-dom.production.min.js:266
 URL da solicitação
-https://feedelizaapi.towersfy.com/uploads/logo-1754226531768-839252991.jpeg
+https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo
 Método da solicitação
-GET
+POST
 Código de status
-404 Not Found
+500 Internal Server Error
+
+{"error":"Erro interno do servidor","message":"Algo deu errado"}
+
+settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+feedelizaapi.towersfy.com/uploads/logo-1754226602548-519544703.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754226602548-519544703.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
+Image
+xl @ react-dom.production.min.js:261
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Settings.js:115  POST https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+$n @ dispatchRequest.js:51
+_request @ Axios.js:187
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+z @ Settings.js:115
+Ne @ react-dom.production.min.js:54
+Be @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+Ln @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73

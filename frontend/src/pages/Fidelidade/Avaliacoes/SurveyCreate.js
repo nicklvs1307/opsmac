@@ -24,6 +24,7 @@ const SurveyCreate = () => {
   const [couponValidityDays, setCouponValidityDays] = useState('');
   const [questions, setQuestions] = useState([]);
   const [createdSurveyId, setCreatedSurveyId] = useState(null);
+  const [createdSurveySlug, setCreatedSurveySlug] = useState(null);
   const [openQrCodeDialog, setOpenQrCodeDialog] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();

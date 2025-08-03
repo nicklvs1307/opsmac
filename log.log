@@ -1,16 +1,29 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                        17.0s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                       155.9s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.762
-0.762 > Feedeliza+-frontend@1.0.0 build
-0.762 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.762
-4.321 Creating an optimized production build...
-16.77 Failed to compile.
-16.77
-16.77 Module not found: Error: Can't resolve '../../contexts/AuthContext' in '/app/frontend/src/pages/Fidelidade/Checkin'
-16.77
-16.77
+0.636
+0.636 > Feedeliza+-frontend@1.0.0 build
+0.636 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.636
+3.740 Creating an optimized production build...
+154.8 Failed to compile.
+154.8
+154.8 [eslint]
+154.8 src/pages/Fidelidade/Avaliacoes/SurveyCreate.js
+154.8   Line 38:7:     'setCreatedSurveySlug' is not defined  no-undef
+154.8   Line 125:33:   'createdSurveySlug' is not defined     no-undef
+154.8   Line 128:87:   'createdSurveySlug' is not defined     no-undef
+154.8   Line 128:170:  'createdSurveySlug' is not defined     no-undef
+154.8   Line 150:98:   'createdSurveySlug' is not defined     no-undef
+154.8   Line 150:181:  'createdSurveySlug' is not defined     no-undef
+154.8   Line 181:68:   'createdSurveySlug' is not defined     no-undef
+154.8
+154.8 src/pages/Public/PublicCheckin.js
+154.8   Line 20:30:  'useParams' is not defined  no-undef
+154.8
+154.8 Search for the keywords to learn more about each error.
+154.8
+154.8
 ------
 
  1 warning found (use docker --debug to expand):

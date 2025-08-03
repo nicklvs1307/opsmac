@@ -4,7 +4,7 @@ const path = require('path');
 // Configuração de armazenamento
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'backend/public/uploads/');
+    cb(null, 'public/uploads/'); // Caminho corrigido
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);

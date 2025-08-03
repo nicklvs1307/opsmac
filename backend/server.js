@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const path = require('path'); // Adicionado
 require('dotenv').config();
 
 const { sequelize } = require('./config/database');
@@ -45,7 +46,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/api/', limiter);
 
 // Servir arquivos estáticos
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Rotas
 app.use('/api/auth', authRoutes);

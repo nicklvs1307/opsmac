@@ -1,28 +1,268 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                       168.1s
-------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.630
-0.630 > Feedeliza+-frontend@1.0.0 build
-0.630 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.630
-4.297 Creating an optimized production build...
-167.0 Failed to compile.
-167.0
-167.0 [eslint]
-167.0 src/pages/Settings/Settings.js
-167.0 Syntax error: Identifier 'setLogoPreview' has already been declared. (75:22) (75:22)
-167.0
-167.0
-------
-
- 1 warning found (use docker --debug to expand):
- - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
-Dockerfile.frontend:23
---------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+checkin/public?restaurantId=0e517dc5-4881-45aa-996e-0365012000bc:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+SpinTheWheel.js:186 SpinTheWheel - Received winningIndex: 3
+SpinTheWheel.js:204 SpinTheWheel - Calculated targetRotationRadians: 36.12831551628262
+SpinTheWheel.js:186 SpinTheWheel - Received winningIndex: 6
+SpinTheWheel.js:204 SpinTheWheel - Calculated targetRotationRadians: 39.71870712038524
+SpinTheWheel.js:186 SpinTheWheel - Received winningIndex: 3
+SpinTheWheel.js:204 SpinTheWheel - Calculated targetRotationRadians: 42.411500823462205
+{message: "Você ganhou um prêmio!",…}
+message
+: 
+"Você ganhou um prêmio!"
+reward_earned
+: 
+{reward_title: "Suco de Laranja 3", coupon_code: "LUCAS2211", description: "Suco de Laranja 3",…}
+coupon_code
+: 
+"LUCAS2211"
+description
+: 
+"Suco de Laranja 3"
+reward_title
+: 
+"Suco de Laranja 3"
+reward_type
+: 
+"free_item"
+value
+: 
+"0.00"
+winningIndex
+: 
+null
+wonItem
+: 
+{id: "cd3c2c87-0a38-4ca7-8339-6f6e6f990679", color: "#abcf8a", title: "Suco de Laranja 3",…}
+color
+: 
+"#abcf8a"
+id
+: 
+"cd3c2c87-0a38-4ca7-8339-6f6e6f990679"
+probability
+: 
+10
+textColor
+: 
+"#121211"
+title
+: 
+"Suco de Laranja 3"
+{
+    "message": "Você ganhou um prêmio!",
+    "wonItem": {
+        "id": "cd3c2c87-0a38-4ca7-8339-6f6e6f990679",
+        "color": "#abcf8a",
+        "title": "Suco de Laranja 3",
+        "textColor": "#121211",
+        "probability": 10
+    },
+    "winningIndex": null,
+    "reward_earned": {
+        "reward_title": "Suco de Laranja 3",
+        "coupon_code": "LUCAS2211",
+        "description": "Suco de Laranja 3",
+        "value": "0.00",
+        "reward_type": "free_item"
+    }
+}
+  {
+    id: '1e4bbe2c-ef29-4ac8-b5b5-a4c6f7f96ab5',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 6',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '287f2ce3-699f-4757-8f0b-45994850e287',
+    color: '#abcf8a',
+    title: 'Suco de abacate 7',
+    textColor: '#121211',
+    probability: 10
+  }
+]
+Winning item from spinWheel: {
+  id: 'eda6d361-98d2-404e-bb3a-e63a1afb4fa8',
+  color: '#abcf8a',
+  title: 'Suco de Laranja 4',
+  textColor: '#121211',
+  probability: 40
+}
+Winning index from spinWheel: null
+Wheel config items sent to spinWheel: [
+  {
+    id: '98cbbee9-613b-4ed0-a715-adb8092523dc',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 1',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '22b9e4e0-484a-4e60-89ca-166126fa2d21',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 2',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: 'cd3c2c87-0a38-4ca7-8339-6f6e6f990679',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 3',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: 'eda6d361-98d2-404e-bb3a-e63a1afb4fa8',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 4',
+    textColor: '#121211',
+    probability: 40
+  },
+  {
+    id: '30b62fec-add7-467f-afaf-bb443946ac44',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 5',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '1e4bbe2c-ef29-4ac8-b5b5-a4c6f7f96ab5',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 6',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '287f2ce3-699f-4757-8f0b-45994850e287',
+    color: '#abcf8a',
+    title: 'Suco de abacate 7',
+    textColor: '#121211',
+    probability: 10
+  }
+]
+Winning item from spinWheel: {
+  id: '287f2ce3-699f-4757-8f0b-45994850e287',
+  color: '#abcf8a',
+  title: 'Suco de abacate 7',
+  textColor: '#121211',
+  probability: 10
+}
+Winning index from spinWheel: null
+Wheel config items sent to spinWheel: [
+  {
+    id: '98cbbee9-613b-4ed0-a715-adb8092523dc',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 1',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '22b9e4e0-484a-4e60-89ca-166126fa2d21',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 2',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: 'cd3c2c87-0a38-4ca7-8339-6f6e6f990679',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 3',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: 'eda6d361-98d2-404e-bb3a-e63a1afb4fa8',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 4',
+    textColor: '#121211',
+    probability: 40
+  },
+  {
+    id: '30b62fec-add7-467f-afaf-bb443946ac44',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 5',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '1e4bbe2c-ef29-4ac8-b5b5-a4c6f7f96ab5',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 6',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '287f2ce3-699f-4757-8f0b-45994850e287',
+    color: '#abcf8a',
+    title: 'Suco de abacate 7',
+    textColor: '#121211',
+    probability: 10
+  }
+]
+Winning item from spinWheel: {
+  id: 'eda6d361-98d2-404e-bb3a-e63a1afb4fa8',
+  color: '#abcf8a',
+  title: 'Suco de Laranja 4',
+  textColor: '#121211',
+  probability: 40
+}
+Winning index from spinWheel: null
+Wheel config items sent to spinWheel: [
+  {
+    id: '98cbbee9-613b-4ed0-a715-adb8092523dc',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 1',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '22b9e4e0-484a-4e60-89ca-166126fa2d21',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 2',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: 'cd3c2c87-0a38-4ca7-8339-6f6e6f990679',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 3',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: 'eda6d361-98d2-404e-bb3a-e63a1afb4fa8',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 4',
+    textColor: '#121211',
+    probability: 40
+  },
+  {
+    id: '30b62fec-add7-467f-afaf-bb443946ac44',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 5',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '1e4bbe2c-ef29-4ac8-b5b5-a4c6f7f96ab5',
+    color: '#abcf8a',
+    title: 'Suco de Laranja 6',
+    textColor: '#121211',
+    probability: 10
+  },
+  {
+    id: '287f2ce3-699f-4757-8f0b-45994850e287',
+    color: '#abcf8a',
+    title: 'Suco de abacate 7',
+    textColor: '#121211',
+    probability: 10
+  }
+]
+Winning item from spinWheel: {
+  id: 'cd3c2c87-0a38-4ca7-8339-6f6e6f990679',
+  color: '#abcf8a',
+  title: 'Suco de Laranja 3',
+  textColor: '#121211',
+  probability: 10
+}
+Winning index from spinWheel: null

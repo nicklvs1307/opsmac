@@ -303,8 +303,11 @@ module.exports = (sequelize) => {
       if (!this.wheel_config || !this.wheel_config.items || this.wheel_config.items.length === 0) {
         throw new Error('Configuração da roleta inválida ou vazia.');
       }
-      const { winningItem: spunItem, winningIndex } = spinWheel(this.wheel_config);
+      const { winningItem: spunItem, winningIndex: spunIndex } = spinWheel(this.wheel_config);
+      console.log('Inside Reward.js generateCoupon - spunItem:', spunItem);
+      console.log('Inside Reward.js generateCoupon - spunIndex:', spunIndex);
       winningItem = spunItem;
+      winningIndex = spunIndex;
       if (!winningItem) {
         throw new Error('Não foi possível sortear um item da roleta.');
       }

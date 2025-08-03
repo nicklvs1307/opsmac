@@ -30,11 +30,11 @@ import Settings from './pages/Settings/Settings';
 import PublicFeedback from './pages/Public/PublicFeedback';
 import ThankYou from './pages/Public/ThankYou';
 import PublicSurveyForm from './pages/Public/PublicSurveyForm';
-import CheckinDashboard from './pages/Checkin/CheckinDashboard';
-import SurveyList from './pages/Surveys/SurveyList';
-import SurveyCreate from './pages/Surveys/SurveyCreate';
-import SurveyResults from './pages/Surveys/SurveyResults';
-import SurveyEdit from './pages/Surveys/SurveyEdit';
+import CheckinDashboard from './pages/Fidelidade/Checkin/CheckinDashboard';
+import SurveyList from './pages/Fidelidade/Avaliacoes/SurveyList';
+import SurveyCreate from './pages/Fidelidade/Avaliacoes/SurveyCreate';
+import SurveyResults from './pages/Fidelidade/Avaliacoes/SurveyResults';
+import SurveyEdit from './pages/Fidelidade/Avaliacoes/SurveyEdit';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import RelationshipDashboard from './pages/Relationship/RelationshipDashboard';
 import PublicCheckin from './pages/Public/PublicCheckin';
@@ -89,12 +89,12 @@ function App() {
                   <Route path="customers/birthdays" element={<CustomerBirthdays />} />
                   <Route path="customers/dashboard" element={<CustomerDashboard />} />
                   <Route path="settings" element={<Settings />} />
-                  <Route path="checkin" element={<CheckinDashboard />} />
-                  <Route path="surveys" element={<SurveyList />} />
-                  <Route path="surveys/new" element={<SurveyCreate />} />
-                  <Route path="surveys/edit/:id" element={<SurveyEdit />} />
-                  <Route path="surveys/:id/results" element={<SurveyResults />} />
-                  <Route path="surveys/:id/results" element={<SurveyResults />} />
+                  <Route path="fidelity/checkin" element={<CheckinDashboard />} />
+                  <Route path="fidelity/surveys" element={<SurveyList />} />
+                  <Route path="fidelity/surveys/new" element={<SurveyCreate />} />
+                  <Route path="fidelity/surveys/edit/:id" element={<SurveyEdit />} />
+                  <Route path="fidelity/surveys/:id/results" element={<SurveyResults />} />
+                  
                   <Route path="relationship" element={<RelationshipDashboard />} />
                 </Route>
                 <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />

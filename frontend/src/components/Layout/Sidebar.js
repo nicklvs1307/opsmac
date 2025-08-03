@@ -70,10 +70,34 @@ const Sidebar = ({ onMobileClose }) => {
       roles: ['admin', 'owner', 'manager']
     },
     {
-      title: 'Check-in',
-      icon: <CheckinIcon />,
-      path: '/checkin',
-      roles: ['admin', 'owner', 'manager']
+      title: 'Fidelidade',
+      icon: <CheckinIcon />, // Usando CheckinIcon por enquanto, pode ser alterado
+      path: '/fidelity',
+      roles: ['admin', 'owner', 'manager'],
+      submenu: [
+        {
+          title: 'Programa de Check-in',
+          icon: <CheckinIcon />,
+          path: '/fidelity/checkin'
+        },
+        {
+          title: 'Pesquisas de Satisfação',
+          icon: <PollIcon />,
+          path: '/fidelity/surveys',
+          submenu: [
+            {
+              title: 'Listar Pesquisas',
+              icon: <ListIcon />,
+              path: '/fidelity/surveys'
+            },
+            {
+              title: 'Nova Pesquisa',
+              icon: <AddIcon />,
+              path: '/fidelity/surveys/new'
+            }
+          ]
+        }
+      ]
     },
     {
       title: 'Feedbacks',
@@ -93,24 +117,7 @@ const Sidebar = ({ onMobileClose }) => {
         }
       ]
     },
-    {
-      title: 'Pesquisas',
-      icon: <PollIcon />,
-      path: '/surveys',
-      roles: ['admin', 'owner'],
-      submenu: [
-        {
-          title: 'Listar Pesquisas',
-          icon: <ListIcon />,
-          path: '/surveys'
-        },
-        {
-          title: 'Nova Pesquisa',
-          icon: <AddIcon />,
-          path: '/surveys/new'
-        }
-      ]
-    },
+    
     {
       title: 'QR Codes',
       icon: <QrCodeIcon />,

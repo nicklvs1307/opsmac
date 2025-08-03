@@ -168,7 +168,9 @@ module.exports = (sequelize) => {
         auto_response: true,
         nps_enabled: true,
         tablet_mode: false,
-        checkin_requires_table: false
+        checkin_requires_table: false,
+        checkin_program_settings: {},
+        survey_program_settings: {}
       }
     },
     is_active: {

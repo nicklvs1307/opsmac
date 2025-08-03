@@ -52,7 +52,7 @@ const SurveyEdit = () => {
       queryClient.invalidateQueries(['survey', id]);
       queryClient.invalidateQueries('surveys');
       toast.success('Pesquisa atualizada com sucesso!');
-      navigate('/surveys'); // Redireciona para a lista de pesquisas
+      navigate('/fidelity/surveys'); // Redireciona para a lista de pesquisas
     },
     onError: (err) => {
       toast.error(`Erro ao atualizar pesquisa: ${err.response.data.msg || err.message}`);

@@ -115,7 +115,9 @@
     },
     "sidebar": {
       "dashboard": "Dashboard",
-      "checkin": "Check-in",
+      "fidelity_program": "Programa de Fidelidade",
+      "checkin_program": "Programa de Check-in",
+      "satisfaction_surveys": "Pesquisas de Satisfação",
       "feedbacks": "Feedbacks",
       "feedback_list": "Lista de Feedbacks",
       "new_feedback": "Novo Feedback",

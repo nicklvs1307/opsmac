@@ -50,6 +50,7 @@ import { useThemeMode } from '../../contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
+import ProfilePictureUpload from '../../components/UI/ProfilePictureUpload';
 
 const getFullImageUrl = (relativePath) => {
   if (!relativePath) return '';
@@ -416,6 +417,14 @@ const Settings = () => {
                 </Box>
               </Box>
               
+              <ProfilePictureUpload
+                currentAvatar={user?.avatar}
+                onUploadSuccess={(newAvatarUrl) => {
+                  setUser(prevUser => ({ ...prevUser, avatar: newAvatarUrl }));
+                  toast.success(t('settings.avatar_updated_successfully'));
+                }}
+              />
+
               <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                   <Controller

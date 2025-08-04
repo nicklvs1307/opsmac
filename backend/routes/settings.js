@@ -99,6 +99,33 @@ router.post('/:restaurantId/api-token/generate', auth, checkRestaurantOwnership,
   }
 });
 
+// Rota para upload de avatar do usuário
+router.post('/profile/avatar', auth, upload.single('avatar'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'Nenhum arquivo de avatar enviado.' });
+    }
+
+    const userId = req.user.id; // Assumindo que o ID do usuário está em req.user.id
+    const user = await models.User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
+    const avatarUrl = `/uploads/${req.file.filename}`;
+    await user.update({ avatar: avatarUrl });
+
+    res.json({
+      message: 'Avatar atualizado com sucesso!',
+      avatar_url: avatarUrl
+    });
+  } catch (error) {
+    console.error('Erro ao fazer upload do avatar:', error);
+    res.status(500).json({ error: 'Erro interno do servidor ao fazer upload do avatar.' });
+  }
+});
+
 // Rota para revogar o token da API
 router.delete('/:restaurantId/api-token', auth, checkRestaurantOwnership, async (req, res) => {
   try {

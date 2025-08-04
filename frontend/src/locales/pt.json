@@ -96,7 +96,8 @@
       "send_button": "Enviar",
       "whatsapp_settings_updated_successfully": "Configurações do WhatsApp atualizadas com sucesso!",
       "error_updating_whatsapp_settings": "Erro ao atualizar configurações do WhatsApp",
-      "error_fetching_whatsapp_settings": "Erro ao carregar configurações do WhatsApp"
+      "error_fetching_whatsapp_settings": "Erro ao carregar configurações do WhatsApp",
+      "avatar_updated_successfully": "Avatar atualizado com sucesso!"
     },
     "login_form": {
       "enter_account": "Entrar na sua conta",

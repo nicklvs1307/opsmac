@@ -32,6 +32,9 @@ services:
         - "traefik.http.routers.backend.rule=Host(`feedelizaapi.towersfy.com`)"
         - "traefik.http.routers.backend.entrypoints=websecure"
         - "traefik.http.routers.backend.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.backend-uploads.rule=Host(`feedelizaapi.towersfy.com`) && PathPrefix(`/uploads`)"
+        - "traefik.http.routers.backend-uploads.entrypoints=websecure"
+        - "traefik.http.routers.backend-uploads.tls.certresolver=letsencryptresolver"
         - "traefik.http.services.backend.loadbalancer.server.port=5000"
 
     networks:

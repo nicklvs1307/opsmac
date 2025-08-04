@@ -36,7 +36,7 @@ const limiter = rateLimit({
 });
 
 // Middlewares
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com',
   credentials: true

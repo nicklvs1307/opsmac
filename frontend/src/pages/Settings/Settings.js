@@ -129,7 +129,8 @@ const Settings = () => {
       setLogoPreview(getFullImageUrl(response.data.logo_url)); // Atualiza a prévia com a URL completa
     } catch (err) {
       console.error('[Settings] Logo upload error:', err.response?.data || err.message);
-      toast.error(err.response?.data?.message || t('settings.error_uploading_logo'));
+      const errorMessage = err.response?.data?.message || (typeof t === 'function' ? t('settings.error_uploading_logo') : 'Erro desconhecido ao fazer upload do logo.');
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

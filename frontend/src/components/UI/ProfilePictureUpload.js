@@ -31,7 +31,7 @@ const ProfilePictureUpload = ({ currentAvatar, onUploadSuccess }) => {
     formData.append('avatar', selectedFile);
 
     try {
-      const response = await axiosInstance.post('/api/settings/test-avatar', formData, {
+      const response = await axiosInstance.post('/api/settings/profile/avatar', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

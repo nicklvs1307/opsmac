@@ -1,145 +1,3 @@
-settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-(function () {
-  // Intercepta fetch()
-  const originalFetch = window.fetch;
-  window.fetch = async (...args) => {
-    console.log('%c[FETCH] Requisição:', 'color: #4caf50', ...args);
-
-    try {
-      const response = await originalFetch(...args);
-      const clone = response.clone();
-
-      clone.text().then(text => {
-        console.log('%c[FETCH] Resposta:', 'color: #2196f3', {
-          url: clone.url,
-          status: clone.status,
-          body: text
-        });
-      });
-
-      return response;
-    } catch (err) {
-      console.error('%c[FETCH] Erro:', 'color: red', err);
-      throw err;
-    }
-  };
-
-  // Intercepta XMLHttpRequest (usado por axios, jQuery, etc)
-  const originalOpen = XMLHttpRequest.prototype.open;
-  const originalSend = XMLHttpRequest.prototype.send;
-
-  XMLHttpRequest.prototype.open = function (method, url, ...rest) {
-    this._method = method;
-    this._url = url;
-    return originalOpen.call(this, method, url, ...rest);
-  };
-
-  XMLHttpRequest.prototype.send = function (body) {
-    const startTime = Date.now();
-    const xhr = this;
-
-    const logResponse = () => {
-      const duration = Date.now() - startTime;
-      console.log('%c[XHR] Requisição:', 'color: #fbc02d', {
-        method: xhr._method,
-        url: xhr._url,
-        body: body
-      });
-      console.log('%c[XHR] Resposta:', 'color: #03a9f4', {
-        status: xhr.status,
-        response: xhr.response,
-        tempo: `${duration}ms`
-      });
-    };
-
-    this.addEventListener('loadend', logResponse);
-    return originalSend.call(this, body);
-  };
-
-  console.log('%c[INTERCEPTADOR ATIVADO] Todas as requisições e respostas serão logadas no console.', 'color: #673ab7; font-weight: bold');
-})();
-
-VM246:58 [INTERCEPTADOR ATIVADO] Todas as requisições e respostas serão logadas no console.
-undefined
-ProfilePictureUpload.js:17 [ProfilePictureUpload] Selected file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}
-VM246:55  POST https://feedelizaapi.towersfy.com/api/settings/profile/avatar 404 (Not Found)
-XMLHttpRequest.send @ VM246:55
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ln @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:226
-(anônimo) @ bind.js:5
-onClick @ ProfilePictureUpload.js:34
-Ne @ react-dom.production.min.js:54
-Be @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-zn @ react-dom.production.min.js:105
-$n @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-qn @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ut @ react-dom.production.min.js:73
-ProfilePictureUpload.js:46 [ProfilePictureUpload] Upload error: {error: 'Usuário não encontrado.'}
-onClick @ ProfilePictureUpload.js:46
-await in onClick
-Ne @ react-dom.production.min.js:54
-Be @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-zn @ react-dom.production.min.js:105
-$n @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-qn @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ut @ react-dom.production.min.js:73
-VM246:42 [XHR] Requisição: {method: 'POST', url: 'https://feedelizaapi.towersfy.com/api/settings/profile/avatar', body: FormData}
-VM246:47 [XHR] Resposta: {status: 404, response: '{"error":"Usuário não encontrado."}', tempo: '563ms'}
-VM246:42 [XHR] Requisição: {method: 'PUT', url: 'https://feedelizaapi.towersfy.com/api/auth/profile', body: '{"name":"Lucas Niquele","email":"lucas@teste.com","phone":"3597989898"}'}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"message":"Perfil atualizado com sucesso","user":…s@teste.com","phone":"3597989898","avatar":null}}', tempo: '606ms'}
-VM246:42 [XHR] Requisição: {method: 'PUT', url: 'https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/profile', body: '{"name":"Roma Pizzaria & Chopperia","cuisine_type"…Pizzaria","address":"Avenida2","description":"z"}'}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"message":"Informações do restaurante atualizadas…08.026Z","updatedAt":"2025-08-04T22:26:37.254Z"}}', tempo: '2368ms'}
-VM246:42 [XHR] Requisição: {method: 'GET', url: 'https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/whatsapp', body: null}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"whatsapp_api_url":"https://evolution2.towersfy.c…towersfy","whatsapp_phone_number":"553597694939"}', tempo: '2453ms'}
-VM246:42 [XHR] Requisição: {method: 'GET', url: 'https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc', body: null}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"settings":{"nps_enabled":true,"tablet_mode":fals…s/logo-1754346397233-227577498.jpeg","slug":null}', tempo: '2463ms'}
-VM246:42 [XHR] Requisição: {method: 'GET', url: 'https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/api-token', body: null}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"api_token":"c8e6ceb0cf0f707a3a195448418ccde0"}', tempo: '2462ms'}
-Settings.js:106 [Settings] Selected logo file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}
-Settings.js:122 [Settings] Logo upload success response: {message: 'Logo atualizado com sucesso!', logo_url: '/uploads/logo-1754348635460-670530059.jpeg'}
-Settings.js:130 [Settings] Logo upload error: u is not a function
-z @ Settings.js:130
-await in z
-Ne @ react-dom.production.min.js:54
-Be @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-zn @ react-dom.production.min.js:105
-$n @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-qn @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ut @ react-dom.production.min.js:73
-VM246:42 [XHR] Requisição: {method: 'POST', url: 'https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo', body: FormData}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"message":"Logo atualizado com sucesso!","logo_url":"/uploads/logo-1754348635460-670530059.jpeg"}', tempo: '2202ms'}
-VM246:42 [XHR] Requisição: {method: 'PUT', url: 'https://feedelizaapi.towersfy.com/api/auth/profile', body: '{"name":"Lucas Niquele","email":"lucas@teste.com","phone":"3597989898"}'}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"message":"Perfil atualizado com sucesso","user":…s@teste.com","phone":"3597989898","avatar":null}}', tempo: '2303ms'}
-VM246:42 [XHR] Requisição: {method: 'PUT', url: 'https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/profile', body: '{"name":"Roma Pizzaria & Chopperia","cuisine_type"…Pizzaria","address":"Avenida2","description":"z"}'}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"message":"Informações do restaurante atualizadas…08.026Z","updatedAt":"2025-08-04T23:03:55.471Z"}}', tempo: '514ms'}
-VM246:42 [XHR] Requisição: {method: 'GET', url: 'https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/api-token', body: null}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"api_token":"c8e6ceb0cf0f707a3a195448418ccde0"}', tempo: '617ms'}
-VM246:42 [XHR] Requisição: {method: 'GET', url: 'https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/whatsapp', body: null}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"whatsapp_api_url":"https://evolution2.towersfy.c…towersfy","whatsapp_phone_number":"553597694939"}', tempo: '745ms'}
-VM246:42 [XHR] Requisição: {method: 'GET', url: 'https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc', body: null}
-VM246:47 [XHR] Resposta: {status: 200, response: '{"settings":{"nps_enabled":true,"tablet_mode":fals…s/logo-1754348635460-670530059.jpeg","slug":null}', tempo: '820ms'}
-
-
 > Feedeliza+@1.0.0 start
 > node backend/server.js
 Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
@@ -204,7 +62,7 @@ Auth Middleware - req.user (after population): {
   name: 'Lucas Niquele',
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
-Auth Middleware - req.user (after population): {
+[Avatar Upload] Route hit. req.user: {
   userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
   email: 'lucas@teste.com',
   role: 'owner',
@@ -253,6 +111,15 @@ Auth Middleware - req.user (after population): {
   name: 'Lucas Niquele',
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
+[Logo Upload] Restaurant ID: 0e517dc5-4881-45aa-996e-0365012000bc, Uploaded filename: logo-1754349754793-40737188.jpeg
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+[Logo Upload] Restaurant ID: 0e517dc5-4881-45aa-996e-0365012000bc, Uploaded filename: logo-1754349767919-309519832.jpeg
 Auth Middleware - req.user (after population): {
   userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
   email: 'lucas@teste.com',
@@ -288,53 +155,72 @@ Auth Middleware - req.user (after population): {
   name: 'Lucas Niquele',
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-[Logo Upload] Restaurant ID: 0e517dc5-4881-45aa-996e-0365012000bc, Uploaded filename: logo-1754348635460-670530059.jpeg
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
+
+settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+ProfilePictureUpload.js:17 [ProfilePictureUpload] Selected file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}
+ProfilePictureUpload.js:34  POST https://feedelizaapi.towersfy.com/api/settings/test-avatar 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ln @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+onClick @ ProfilePictureUpload.js:34
+Ne @ react-dom.production.min.js:54
+Be @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+$n @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73
+ProfilePictureUpload.js:46 [ProfilePictureUpload] Upload error: {error: 'Usuário não encontrado.'}
+onClick @ ProfilePictureUpload.js:46
+await in onClick
+Ne @ react-dom.production.min.js:54
+Be @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+$n @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73
+Settings.js:106 [Settings] Selected logo file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}
+Settings.js:122 [Settings] Logo upload success response: {message: 'Logo atualizado com sucesso!', logo_url: '/uploads/logo-1754349754793-40737188.jpeg'}
+Settings.js:131 [Settings] Logo upload error: u is not a function
+z @ Settings.js:131
+await in z
+Ne @ react-dom.production.min.js:54
+Be @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+$n @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73
+Settings.js:122 [Settings] Logo upload success response: {message: 'Logo atualizado com sucesso!', logo_url: '/uploads/logo-1754349767919-309519832.jpeg'}
+Settings.js:131 [Settings] Logo upload error: u is not a function
+z @ Settings.js:131
+await in z
+Ne @ react-dom.production.min.js:54
+Be @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+$n @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73

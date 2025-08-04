@@ -75,9 +75,87 @@ router.post(
             }
 
             const newSurveyResponse = await models.SurveyResponse.create({
-                survey_id: surveyId,
+                survey_id: survey.id,
                 customer_id: customer_id || null,
             });
+
+            let feedbackRating = null;
+            let feedbackNpsScore = null;
+            let feedbackComment = [];
+            let feedbackType = 'general'; // Default type
+            let isAnonymous = !customer_id;
+
+            for (const ans of answers) {
+                const question = survey.questions.find(q => q.id === ans.question_id);
+                if (question) {
+                    if (question.question_type === 'ratings' || question.question_type === 'csat') {
+                        feedbackRating = parseInt(ans.answer_value);
+                    } else if (question.question_type === 'nps') {
+                        feedbackNpsScore = parseInt(ans.answer_value);
+                    } else if (question.question_type === 'text' || question.question_type === 'textarea') {
+                        feedbackComment.push(ans.answer_value);
+                    }
+                }
+            }
+
+            // Infer feedback_type based on rating/nps_score if not explicitly set
+            if (feedbackRating !== null) {
+                if (feedbackRating >= 4) {
+                    feedbackType = 'compliment';
+                } else if (feedbackRating <= 2) {
+                    feedbackType = 'complaint';
+                }
+            } else if (feedbackNpsScore !== null) {
+                if (feedbackNpsScore >= 9) {
+                    feedbackType = 'compliment'; // Promoters
+                } else if (feedbackNpsScore <= 6) {
+                    feedbackType = 'complaint'; // Detractors
+                }
+            }
+
+            const feedbackData = {
+                restaurant_id: survey.restaurant_id,
+                customer_id: customer_id || null,
+                rating: feedbackRating,
+                nps_score: feedbackNpsScore,
+                comment: feedbackComment.join('\n'), // Join comments if multiple text fields
+                feedback_type: feedbackType,
+                source: 'web', // Assuming web for public surveys
+                is_anonymous: isAnonymous,
+                // You can add more fields here if needed, e.g., metadata from req.headers
+            };
+
+            await models.Feedback.create(feedbackData);
+
+            let generatedCoupon = null;
+            if (survey.reward_id && customer_id) {
+                const reward = await models.Reward.findByPk(survey.reward_id);
+                if (reward && await reward.canCustomerUse(customer_id)) {
+                    const { coupon } = await reward.generateCoupon(customer_id, {
+                        coupon_validity_days: survey.coupon_validity_days, // Passando a validade do cupom
+                        metadata: {
+                            source: 'survey_response',
+                            survey_id: survey.id,
+                            response_id: newSurveyResponse.id
+                        }
+                    });
+                    generatedCoupon = coupon;
+                }
+            }
+
+            res.status(201).json({
+                msg: 'Respostas enviadas com sucesso!',
+                responseId: newSurveyResponse.id,
+                coupon: generatedCoupon
+            });
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
+
+module.exports = router;
 
             const answerRecords = answers.map(ans => ({
                 response_id: newSurveyResponse.id,

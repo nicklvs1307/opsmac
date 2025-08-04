@@ -135,7 +135,7 @@ const SurveyCreate = () => {
                 </Box>
               </Box>
             )}
-            <Button variant="contained" onClick={() => navigate('/fidelity/surveys')} sx={{ mt: 2 }}>Ver Todas as Pesquisas</Button>
+            <Button variant="contained" onClick={() => navigate('/satisfaction/surveys')} sx={{ mt: 2 }}>Ver Todas as Pesquisas</Button>
 
             {/* QR Code Dialog */}
             <Dialog open={openQrCodeDialog} onClose={() => setOpenQrCodeDialog(false)}>
@@ -165,7 +165,7 @@ const SurveyCreate = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('surveys');
       toast.success('Pesquisa apagada com sucesso!');
-      navigate('/fidelity/surveys');
+      navigate('/satisfaction/surveys');
     },
     onError: (error) => {
       toast.error(`Erro ao apagar pesquisa: ${error.response.data.msg || error.message}`);

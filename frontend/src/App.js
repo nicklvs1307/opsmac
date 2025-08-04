@@ -14,9 +14,9 @@ import ProtectedRoute from './components/Auth/ProtectedRoute';
 // Pages
 import Login from './pages/Auth/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
-import FeedbackList from './pages/Feedback/FeedbackList';
-import NewFeedback from './pages/Feedback/NewFeedback';
-import FeedbackDetail from './pages/Feedback/FeedbackDetail';
+import FeedbackList from './pages/Satisfacao/Feedback/FeedbackList';
+import NewFeedback from './pages/Satisfacao/Feedback/NewFeedback';
+import FeedbackDetail from './pages/Satisfacao/Feedback/FeedbackDetail';
 import QRCodeManage from './pages/QRCode/QRCodeManage';
 import QRCodeGenerate from './pages/QRCode/QRCodeGenerate';
 import Rewards from './pages/Rewards/Rewards';
@@ -31,11 +31,14 @@ import PublicFeedback from './pages/Public/PublicFeedback';
 import ThankYou from './pages/Public/ThankYou';
 import PublicSurveyForm from './pages/Public/PublicSurveyForm';
 import CheckinDashboard from './pages/Fidelidade/Checkin/CheckinDashboard';
-import SurveyList from './pages/Fidelidade/Avaliacoes/SurveyList';
-import SurveyCreate from './pages/Fidelidade/Avaliacoes/SurveyCreate';
-import SurveyResults from './pages/Fidelidade/Avaliacoes/SurveyResults';
-import SurveyEdit from './pages/Fidelidade/Avaliacoes/SurveyEdit';
+import SurveyList from './pages/Satisfacao/Avaliacoes/SurveyList';
+import SurveyCreate from './pages/Satisfacao/Avaliacoes/SurveyCreate';
+import SurveyResults from './pages/Satisfacao/Avaliacoes/SurveyResults';
+import SurveyEdit from './pages/Satisfacao/Avaliacoes/SurveyEdit';
+import AnaliseSatisfacao from './pages/Satisfacao/Analise/AnaliseSatisfacao';
+import ProgramaFidelidade from './pages/Satisfacao/Fidelidade/ProgramaFidelidade';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import SatisfacaoDashboard from './pages/Satisfacao/SatisfacaoDashboard';
 import RelationshipDashboard from './pages/Relationship/RelationshipDashboard';
 import PublicCheckin from './pages/Public/PublicCheckin';
 import PublicReward from './pages/Public/PublicReward'; // Adicionado
@@ -76,9 +79,10 @@ function App() {
                 }>
                   <Route index element={<Navigate to="/dashboard" replace />} />
                   <Route path="dashboard" element={<Dashboard />} />
-                  <Route path="feedback" element={<FeedbackList />} />
-                  <Route path="feedback/new" element={<NewFeedback />} />
-                  <Route path="feedback/:id" element={<FeedbackDetail />} />
+                  <Route path="satisfaction" element={<SatisfacaoDashboard />} />
+                  <Route path="satisfaction/feedback" element={<FeedbackList />} />
+                  <Route path="satisfaction/feedback/new" element={<NewFeedback />} />
+                  <Route path="satisfaction/feedback/:id" element={<FeedbackDetail />} />
                   <Route path="qrcodes" element={<QRCodeManage />} />
                   <Route path="qrcodes/new" element={<QRCodeGenerate />} />
                   <Route path="rewards" element={<Rewards />} />
@@ -90,10 +94,12 @@ function App() {
                   <Route path="customers/dashboard" element={<CustomerDashboard />} />
                   <Route path="settings" element={<Settings />} />
                   <Route path="fidelity/checkin" element={<CheckinDashboard />} />
-                  <Route path="fidelity/surveys" element={<SurveyList />} />
-                  <Route path="fidelity/surveys/new" element={<SurveyCreate />} />
-                  <Route path="fidelity/surveys/edit/:id" element={<SurveyEdit />} />
-                  <Route path="fidelity/surveys/:id/results" element={<SurveyResults />} />
+                  <Route path="satisfaction/surveys" element={<SurveyList />} />
+                  <Route path="satisfaction/surveys/new" element={<SurveyCreate />} />
+                  <Route path="satisfaction/surveys/edit/:id" element={<SurveyEdit />} />
+                  <Route path="satisfaction/surveys/:id/results" element={<SurveyResults />} />
+                  <Route path="satisfaction/analysis" element={<AnaliseSatisfacao />} />
+                  <Route path="satisfaction/loyalty" element={<ProgramaFidelidade />} />
                   
                   <Route path="relationship" element={<RelationshipDashboard />} />
                 </Route>

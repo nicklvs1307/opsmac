@@ -352,10 +352,10 @@ const PublicSurveyForm = () => {
                                 height: '40px',
                                 borderRadius: '50%',
                                 fontWeight: 'bold',
-                                bgcolor: parseInt(answers[question.id]) === num ? 'primary.main' : 'transparent',
-                                color: parseInt(answers[question.id]) === num ? 'white' : 'primary.main',
+                                bgcolor: primaryColor,
+                                color: parseInt(answers[question.id]) === num ? 'white' : primaryColor,
                                 '&:hover': {
-                                  bgcolor: 'primary.light',
+                                  bgcolor: secondaryColor,
                                   color: 'white',
                                 },
                               }}

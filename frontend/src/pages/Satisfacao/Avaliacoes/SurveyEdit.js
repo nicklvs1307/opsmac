@@ -52,7 +52,7 @@ const SurveyEdit = () => {
       queryClient.invalidateQueries(['survey', id]);
       queryClient.invalidateQueries('surveys');
       toast.success('Pesquisa atualizada com sucesso!');
-      navigate('/fidelity/surveys'); // Redireciona para a lista de pesquisas
+      navigate('/satisfaction/surveys'); // Redireciona para a lista de pesquisas
     },
     onError: (err) => {
       toast.error(`Erro ao atualizar pesquisa: ${err.response.data.msg || err.message}`);
@@ -209,7 +209,7 @@ const SurveyEdit = () => {
           <Button variant="contained" onClick={handleSubmit} disabled={mutation.isLoading}>
             {mutation.isLoading ? <CircularProgress size={24} /> : 'Salvar Alterações'}
           </Button>
-          <Button variant="outlined" onClick={() => navigate('/surveys')} sx={{ ml: 2 }}>Cancelar</Button>
+          <Button variant="outlined" onClick={() => navigate('/satisfaction/surveys')} sx={{ ml: 2 }}>Cancelar</Button>
         </Box>
       </Paper>
     </Box>

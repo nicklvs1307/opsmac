@@ -74,7 +74,7 @@ const SurveyList = () => {
         <Button
           variant="contained"
           component={RouterLink}
-          to="/fidelity/surveys/new"
+          to="/satisfaction/surveys/new"
           startIcon={<AddIcon />}
         >
           Nova Pesquisa
@@ -135,10 +135,10 @@ const SurveyList = () => {
                       <TableCell>{survey.status}</TableCell>
                       <TableCell align="right">
                         <Box sx={{ display: 'flex', gap: 0.5, justifyContent: 'flex-end' }}>
-                          <IconButton component={RouterLink} to={`/fidelity/surveys/${survey.id}/results`} color="primary" aria-label="Ver Resultados">
+                          <IconButton component={RouterLink} to={`/satisfaction/surveys/${survey.id}/results`} color="primary" aria-label="Ver Resultados">
                             <BarChartIcon />
                           </IconButton>
-                          <IconButton component={RouterLink} to={`/fidelity/surveys/edit/${survey.id}`} color="info" aria-label="Editar Pesquisa">
+                          <IconButton component={RouterLink} to={`/satisfaction/surveys/edit/${survey.id}`} color="info" aria-label="Editar Pesquisa">
                             <EditIcon />
                           </IconButton>
                           <IconButton color="secondary" aria-label="Gerar QR Code" onClick={() => toast('Funcionalidade de QR Code em breve!', { icon: '💡' })}> {/* Placeholder for QR Code */}

@@ -113,10 +113,25 @@
       "demo_credentials_title": "Credenciais de demonstração:",
       "demo_credentials_text": "Email: admin@restaurant.com | Senha: 123456"
     },
+    "satisfaction": {
+      "dashboard_title": "Dashboard de Satisfação",
+      "dashboard_description": "Visão geral das métricas e ferramentas de satisfação do cliente.",
+      "surveys_description": "Crie e gerencie suas pesquisas de satisfação.",
+      "manage_surveys": "Gerenciar Pesquisas",
+      "feedbacks_description": "Visualize e responda aos feedbacks dos clientes.",
+      "view_feedbacks": "Ver Feedbacks",
+      "analysis_description": "Analise dados e tendências de satisfação.",
+      "view_analysis": "Ver Análise",
+      "loyalty_description": "Configure programas de fidelidade baseados na satisfação.",
+      "configure_loyalty": "Configurar Fidelidade"
+    },
     "sidebar": {
       "dashboard": "Dashboard",
       "fidelity_program": "Programa de Fidelidade",
       "checkin_program": "Programa de Check-in",
+      "satisfaction": "Satisfação",
+      "satisfaction_analysis": "Análise de Satisfação",
+      "loyalty_program_satisfaction": "Programa de Fidelidade (Satisfação)",
       "satisfaction_surveys": "Pesquisas de Satisfação",
       "feedbacks": "Feedbacks",
       "feedback_list": "Lista de Feedbacks",

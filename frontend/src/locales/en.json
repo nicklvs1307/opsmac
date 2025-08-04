@@ -113,10 +113,24 @@
       "demo_credentials_title": "Demo credentials:",
       "demo_credentials_text": "Email: admin@restaurant.com | Password: 123456"
     },
-    "sidebar": {
+    "satisfaction": {
+      "dashboard_title": "Satisfaction Dashboard",
+      "dashboard_description": "Overview of your customer satisfaction metrics and tools.",
+      "surveys_description": "Create and manage your satisfaction surveys.",
+      "manage_surveys": "Manage Surveys",
+      "feedbacks_description": "View and respond to customer feedbacks.",
+      "view_feedbacks": "View Feedbacks",
+      "analysis_description": "Analyze satisfaction data and trends.",
+      "view_analysis": "View Analysis",
+      "loyalty_description": "Configure loyalty programs based on satisfaction.",
+      "configure_loyalty": "Configure Loyalty"
+    },
       "dashboard": "Dashboard",
       "fidelity_program": "Fidelity Program",
       "checkin_program": "Check-in Program",
+      "satisfaction": "Satisfaction",
+      "satisfaction_analysis": "Satisfaction Analysis",
+      "loyalty_program_satisfaction": "Loyalty Program (Satisfaction)",
       "satisfaction_surveys": "Satisfaction Surveys",
       "feedbacks": "Feedbacks",
       "feedback_list": "Feedback List",

@@ -3,7 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography, Paper, CircularProgress, Alert, Grid } from '@mui/material';
 import { useQuery } from 'react-query';
-import axiosInstance from '../../../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 
 const fetchSurveyResults = async (surveyId) => {
   const { data } = await axiosInstance.get(`/api/surveys/${surveyId}/results`);

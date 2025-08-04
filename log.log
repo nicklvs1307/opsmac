@@ -1,17 +1,27 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-/app/backend/routes/public_surveys.js:166
-            await models.Answer.bulkCreate(answerRecords);
-            ^^^^^
-SyntaxError: await is only valid in async functions and the top level bodies of modules
-    at wrapSafe (node:internal/modules/cjs/loader:1472:18)
-    at Module._compile (node:internal/modules/cjs/loader:1501:20)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/server.js:22:28)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-Node.js v20.19.4
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                        11.6s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.595
+0.595 > Feedeliza+-frontend@1.0.0 build
+0.595 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.595
+3.849 Creating an optimized production build...
+11.35 Failed to compile.
+11.35
+11.35 Module not found: Error: You attempted to import ../../../api/axiosInstance which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
+11.35 You can either move it inside src/, or add a symlink to it from project's node_modules/.
+11.35
+11.35
+------
+
+ 1 warning found (use docker --debug to expand):
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

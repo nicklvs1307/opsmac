@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Button, Paper, Stepper, Step, StepLabel, StepContent, CircularProgress, Select, MenuItem, FormControl, InputLabel, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import axiosInstance from '../../../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const createSurvey = async (surveyData) => {

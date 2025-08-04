@@ -180,7 +180,8 @@
       "share_button": "Compartilhar",
       "home_button": "Página Inicial",
       "footer_message": "Obrigado por escolher nosso restaurante!",
-      "powered_by": "Powered by Feedeliza+"
+      "powered_by": "Powered by Feedeliza+",
+      "powered_by_feedback_system": "Powered by Feedback System"
     },
     "coupon_validator_card": {
       "enter_coupon_code": "Por favor, insira um código de cupom",

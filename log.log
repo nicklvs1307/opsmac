@@ -1,17 +1,16 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                        11.6s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                        17.1s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.595
-0.595 > Feedeliza+-frontend@1.0.0 build
-0.595 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.595
-3.849 Creating an optimized production build...
-11.35 Failed to compile.
-11.35
-11.35 Module not found: Error: You attempted to import ../../../api/axiosInstance which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
-11.35 You can either move it inside src/, or add a symlink to it from project's node_modules/.
-11.35
-11.35
+0.688
+0.688 > Feedeliza+-frontend@1.0.0 build
+0.688 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.688
+3.824 Creating an optimized production build...
+16.82 Failed to compile.
+16.82
+16.82 Module not found: Error: Can't resolve '../../api/axiosInstance' in '/app/frontend/src/pages/Fidelidade/Avaliacoes'
+16.82
+16.82
 ------
 
  1 warning found (use docker --debug to expand):

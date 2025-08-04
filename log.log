@@ -1,12 +1,166 @@
 URL da solicitação
-https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg
+https://feedelizaapi.towersfy.com/uploads/logo-1754318064403-310654252.jpeg
 Método da solicitação
 GET
 Código de status
 404 Not Found
+Política do referenciador
+strict-origin-when-cross-origin
+access-control-allow-credentials
+true
+access-control-allow-origin
+https://feedelizapro.towersfy.com
+content-length
+32
+content-security-policy
+default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+content-type
+application/json; charset=utf-8
+cross-origin-opener-policy
+same-origin
+cross-origin-resource-policy
+same-origin
+date
+Mon, 04 Aug 2025 14:37:04 GMT
+etag
+W/"20-lqMP793B2qh+2ehS8/rb5p5RKXg"
+origin-agent-cluster
+?1
+referrer-policy
+no-referrer
+strict-transport-security
+max-age=15552000; includeSubDomains
+vary
+Origin
+x-content-type-options
+nosniff
+x-dns-prefetch-control
+off
+x-download-options
+noopen
+x-frame-options
+SAMEORIGIN
+x-permitted-cross-domain-policies
+none
+x-xss-protection
+0
+:authority
+feedelizaapi.towersfy.com
+:method
+GET
+:path
+/uploads/logo-1754318064403-310654252.jpeg
+:scheme
+https
+accept
+image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+accept-encoding
+gzip, deflate, br, zstd
+accept-language
+pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7
+cookie
+rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1%2BpzWyqqnBio1%2Bb5PKENmptNxzvZEDusYQ%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX1%2Bf2vBbcMEu3ftu9OECzuMvS9ubHDX8nec%3D; ajs_user_id=92c74dc4dd48bea61187e2f609bef3cdee4e98970f1bc3cd6d0f0bc111b9c13c; ajs_anonymous_id=1e85b06d-bee3-49c2-999e-82f236619bc0; intercom-device-id-y10e7138=67103adb-59d4-4559-be39-2a5472cbff81; mp_70b8ea94d623dd857fb555a76d11f944_mixpanel=%7B%22distinct_id%22%3A%20%221e85b06d-bee3-49c2-999e-82f236619bc0%22%2C%22%24device_id%22%3A%20%221e85b06d-bee3-49c2-999e-82f236619bc0%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Fapp.towersfy.com%2F%22%2C%22%24initial_referring_domain%22%3A%20%22app.towersfy.com%22%2C%22__mps%22%3A%20%7B%7D%2C%22__mpso%22%3A%20%7B%7D%2C%22__mpus%22%3A%20%7B%7D%2C%22__mpa%22%3A%20%7B%7D%2C%22__mpu%22%3A%20%7B%7D%2C%22__mpr%22%3A%20%5B%5D%2C%22__mpap%22%3A%20%5B%5D%2C%22%24user_id%22%3A%20%2292c74dc4dd48bea61187e2f609bef3cdee4e98970f1bc3cd6d0f0bc111b9c13c%22%7D; cb_user_id=null; cb_group_id=null; cb_anonymous_id=%229241eb44-5453-4a30-97e9-c8f4419fb2ab%22; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BjVvhQQ1lrFyyAAUAjFbhDweqwSblZISUXoF%2F3vey7F8gBPlHCOHfC8nupebP%2FrHaakyy8dSw5nw%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX180E3e8n2AEyqH7UlHXoEEtsfS15v6beYtJW1qe%2Fy6lN8M6QxAvB%2FYLQ%2BoNGxKiNvZ8rBymF8XWP40GIGAftjKjKWmeAw%2BBIjPajjXQDUn1kNsyV5LCkhVtOWSDtTcZxOw22%2FIZmthx2IdMgKL2X%2FlxEA8JNUFCjgg%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX1%2FFYYqDZjbRjRkIt5evQ3malKsNw7blbfiHQCDkUh5Wfp7NCUs9Ck6Jabz%2F4wPJtUAaLMk%2Bt7%2BoOvLX0rGZFvh9uRFTOWZ3GqGqSOMKUtq5h6acSqxQimQzX1ujbXl%2FvQLzDmJ28KEpDw%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%22449cbcea2808803e9cfb25e96d6a67b3bf02fdf2ca434e33fb23a85de435da14%237e7754c7-92fd-4502-bbc7-8105c69a1a7f%22%2C%22%24sesid%22%3A%5Bnull%2Cnull%2Cnull%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fn8n.towersfy.com%2Fsetup%22%7D%7D; rl_session=RudderEncrypt%3AU2FsdGVkX19A%2F%2Bieuc1N2F8pCbJnG2TB1yvGgZGoLH1NdJ7VMvfoQnJ49quHasgXX1y2NaQUQvl8yAjJCPaitaqKFxDZ6BI3F9%2B7YbSNokynp5zLDQmt4yMJAYeg4r5Cj%2Fnl6HkxwtwqUlGZLXjsPw%3D%3D
+priority
+u=1, i
+referer
+https://feedelizapro.towersfy.com/
+sec-ch-ua
+"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"
+sec-ch-ua-mobile
+?0
+sec-ch-ua-platform
+"Windows"
+sec-fetch-dest
+image
+sec-fetch-mode
+no-cors
+sec-fetch-site
+same-site
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
 
+URL da solicitação
+https://feedelizaapi.towersfy.com/uploads/logo-1754318064403-310654252.jpeg
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Política do referenciador
+strict-origin-when-cross-origin
+access-control-allow-credentials
+true
+access-control-allow-origin
+https://feedelizapro.towersfy.com
+content-length
+32
+content-security-policy
+default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+content-type
+application/json; charset=utf-8
+cross-origin-opener-policy
+same-origin
+cross-origin-resource-policy
+same-origin
+date
+Mon, 04 Aug 2025 14:37:04 GMT
+etag
+W/"20-lqMP793B2qh+2ehS8/rb5p5RKXg"
+origin-agent-cluster
+?1
+referrer-policy
+no-referrer
+strict-transport-security
+max-age=15552000; includeSubDomains
+vary
+Origin
+x-content-type-options
+nosniff
+x-dns-prefetch-control
+off
+x-download-options
+noopen
+x-frame-options
+SAMEORIGIN
+x-permitted-cross-domain-policies
+none
+x-xss-protection
+0
+:authority
+feedelizaapi.towersfy.com
+:method
+GET
+:path
+/uploads/logo-1754318064403-310654252.jpeg
+:scheme
+https
+accept
+image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+accept-encoding
+gzip, deflate, br, zstd
+accept-language
+pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7
+cookie
+rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1%2BpzWyqqnBio1%2Bb5PKENmptNxzvZEDusYQ%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX1%2Bf2vBbcMEu3ftu9OECzuMvS9ubHDX8nec%3D; ajs_user_id=92c74dc4dd48bea61187e2f609bef3cdee4e98970f1bc3cd6d0f0bc111b9c13c; ajs_anonymous_id=1e85b06d-bee3-49c2-999e-82f236619bc0; intercom-device-id-y10e7138=67103adb-59d4-4559-be39-2a5472cbff81; mp_70b8ea94d623dd857fb555a76d11f944_mixpanel=%7B%22distinct_id%22%3A%20%221e85b06d-bee3-49c2-999e-82f236619bc0%22%2C%22%24device_id%22%3A%20%221e85b06d-bee3-49c2-999e-82f236619bc0%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Fapp.towersfy.com%2F%22%2C%22%24initial_referring_domain%22%3A%20%22app.towersfy.com%22%2C%22__mps%22%3A%20%7B%7D%2C%22__mpso%22%3A%20%7B%7D%2C%22__mpus%22%3A%20%7B%7D%2C%22__mpa%22%3A%20%7B%7D%2C%22__mpu%22%3A%20%7B%7D%2C%22__mpr%22%3A%20%5B%5D%2C%22__mpap%22%3A%20%5B%5D%2C%22%24user_id%22%3A%20%2292c74dc4dd48bea61187e2f609bef3cdee4e98970f1bc3cd6d0f0bc111b9c13c%22%7D; cb_user_id=null; cb_group_id=null; cb_anonymous_id=%229241eb44-5453-4a30-97e9-c8f4419fb2ab%22; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BjVvhQQ1lrFyyAAUAjFbhDweqwSblZISUXoF%2F3vey7F8gBPlHCOHfC8nupebP%2FrHaakyy8dSw5nw%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX180E3e8n2AEyqH7UlHXoEEtsfS15v6beYtJW1qe%2Fy6lN8M6QxAvB%2FYLQ%2BoNGxKiNvZ8rBymF8XWP40GIGAftjKjKWmeAw%2BBIjPajjXQDUn1kNsyV5LCkhVtOWSDtTcZxOw22%2FIZmthx2IdMgKL2X%2FlxEA8JNUFCjgg%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX1%2FFYYqDZjbRjRkIt5evQ3malKsNw7blbfiHQCDkUh5Wfp7NCUs9Ck6Jabz%2F4wPJtUAaLMk%2Bt7%2BoOvLX0rGZFvh9uRFTOWZ3GqGqSOMKUtq5h6acSqxQimQzX1ujbXl%2FvQLzDmJ28KEpDw%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%22449cbcea2808803e9cfb25e96d6a67b3bf02fdf2ca434e33fb23a85de435da14%237e7754c7-92fd-4502-bbc7-8105c69a1a7f%22%2C%22%24sesid%22%3A%5Bnull%2Cnull%2Cnull%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fn8n.towersfy.com%2Fsetup%22%7D%7D; rl_session=RudderEncrypt%3AU2FsdGVkX19A%2F%2Bieuc1N2F8pCbJnG2TB1yvGgZGoLH1NdJ7VMvfoQnJ49quHasgXX1y2NaQUQvl8yAjJCPaitaqKFxDZ6BI3F9%2B7YbSNokynp5zLDQmt4yMJAYeg4r5Cj%2Fnl6HkxwtwqUlGZLXjsPw%3D%3D
+priority
+u=1, i
+referer
+https://feedelizapro.towersfy.com/
+sec-ch-ua
+"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"
+sec-ch-ua-mobile
+?0
+sec-ch-ua-platform
+"Windows"
+sec-fetch-dest
+image
+sec-fetch-mode
+no-cors
+sec-fetch-site
+same-site
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
 settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
+feedelizaapi.towersfy.com/uploads/logo-1754318064403-310654252.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754318064403-310654252.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
 Image
 xl @ react-dom.production.min.js:261
 bl @ react-dom.production.min.js:259
@@ -16,27 +170,49 @@ wc @ react-dom.production.min.js:280
 lc @ react-dom.production.min.js:272
 Vo @ react-dom.production.min.js:127
 (anônimo) @ react-dom.production.min.js:266
-feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo
+Método da solicitação
+POST
+Código de status
+200 OK
+Endereço remoto
+95.217.16.187:443
+{
+    "message": "Logo atualizado com sucesso!",
+    "logo_url": "/uploads/logo-1754318363922-103959961.jpeg"
+}
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/uploads/logo-1754318064403-310654252.jpeg
+Método da solicitação
+GET
+Código de status
+404 Not Found
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/logo
+Método da solicitação
+OPTIONS
+Código de status
+204 No Content
+Endereço remoto
+95.217.16.187:443
+
+
+settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+feedelizaapi.towersfy.com/uploads/logo-1754318064403-310654252.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754318064403-310654252.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
 Image
 xl @ react-dom.production.min.js:261
 bl @ react-dom.production.min.js:259
 yl @ react-dom.production.min.js:258
 (anônimo) @ react-dom.production.min.js:282
 wc @ react-dom.production.min.js:280
-oc @ react-dom.production.min.js:269
-j @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
-Image
-xl @ react-dom.production.min.js:261
-bl @ react-dom.production.min.js:259
-yl @ react-dom.production.min.js:258
-(anônimo) @ react-dom.production.min.js:282
-wc @ react-dom.production.min.js:280
-oc @ react-dom.production.min.js:269
-j @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+feedelizaapi.towersfy.com/uploads/logo-1754318064403-310654252.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754318064403-310654252.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
 Image
 xl @ react-dom.production.min.js:261
 bl @ react-dom.production.min.js:259

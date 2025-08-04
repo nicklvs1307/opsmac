@@ -53,7 +53,7 @@ import toast from 'react-hot-toast';
 
 const getFullImageUrl = (relativePath) => {
   if (!relativePath) return '';
-  const baseUrl = axiosInstance.defaults.baseURL;
+  const baseUrl = axiosInstance.defaults.baseURL.replace('/api', '');
   // Garante que não haja barras duplas se baseUrl já terminar com uma
   return `${baseUrl}${relativePath.startsWith('/') ? relativePath : `/${relativePath}`}`;
 };

@@ -101,8 +101,9 @@ router.post('/:restaurantId/api-token/generate', auth, checkRestaurantOwnership,
 });
 
 // Rota para upload de avatar do usuário
-router.post('/profile/avatar', auth, upload.single('avatar'), async (req, res) => {
+router.post('/test-avatar', auth, upload.single('avatar'), async (req, res) => {
   try {
+    console.log('[Avatar Upload] Route hit. req.user:', req.user);
     if (!req.file) {
       return res.status(400).json({ error: 'Nenhum arquivo de avatar enviado.' });
     }
@@ -614,7 +615,5 @@ router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, [
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
-
-module.exports = router;
 
 module.exports = router;

@@ -124,6 +124,7 @@ const Settings = () => {
       const updatedRestaurant = { ...user.restaurant, logo: response.data.logo_url };
       const updatedUser = { ...user, restaurant: updatedRestaurant };
       setUser(updatedUser);
+      console.log('[Settings] Before calling setUser, setUser is:', setUser);
       setSelectedLogo(null);
       setLogoPreview(getFullImageUrl(response.data.logo_url)); // Atualiza a prévia com a URL completa
     } catch (err) {

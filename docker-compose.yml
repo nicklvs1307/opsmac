@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build:
-      context: .
+      context: /root/opsmac
       dockerfile: Dockerfile.backend
     image: feedeliza-backend:latest
     environment:
@@ -44,7 +44,7 @@ services:
 
   frontend:
     build:
-      context: .
+      context: /root/opsmac
       dockerfile: Dockerfile.frontend
       args:
         - REACT_APP_API_URL=https://feedelizaapi.towersfy.com
@@ -58,6 +58,10 @@ services:
         - "traefik.http.routers.frontend.rule=Host(`feedelizapro.towersfy.com`)"
         - "traefik.http.routers.frontend.entrypoints=websecure"
         - "traefik.http.routers.frontend.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.uploads.rule=Host(`feedelizapro.towersfy.com`) && PathPrefix(`/uploads`)"
+        - "traefik.http.routers.uploads.entrypoints=websecure"
+        - "traefik.http.routers.uploads.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.uploads.loadbalancer.server.port=5000"
         - "traefik.http.services.frontend.loadbalancer.server.port=80"
     networks:
       - towersfy_network

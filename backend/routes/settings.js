@@ -55,6 +55,7 @@ router.post('/:restaurantId/logo', auth, checkRestaurantOwnership, upload.single
     if (!restaurant) {
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
+    console.log(`[Logo Upload] Restaurant ID: ${restaurantId}, Uploaded filename: ${req.file.filename}`);
     const logoUrl = `/uploads/${req.file.filename}`;
     await restaurant.update({ logo: logoUrl });
     res.json({ 
@@ -113,6 +114,7 @@ router.post('/profile/avatar', auth, upload.single('avatar'), async (req, res) =
       return res.status(404).json({ error: 'Usuário não encontrado.' });
     }
 
+    console.log(`[Avatar Upload] User ID: ${userId}, Uploaded filename: ${req.file.filename}`);
     const avatarUrl = `/uploads/${req.file.filename}`;
     await user.update({ avatar: avatarUrl });
 

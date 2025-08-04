@@ -1,10 +1,8 @@
 URL da solicitação
-https://feedelizaapi.towersfy.com/settings/profile/avatar
+https://feedelizaapi.towersfy.com/api/settings/profile/avatar
 Método da solicitação
 POST
 Código de status
 404 Not Found
-Endereço remoto
-95.217.16.187:443
 
-{"error":"Rota não encontrada"}
+{"error":"Usuário não encontrado."}

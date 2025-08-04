@@ -103,6 +103,7 @@ const Settings = () => {
     if (file) {
       setSelectedLogo(file);
       setLogoPreview(URL.createObjectURL(file));
+      console.log('[Settings] Selected logo file:', file);
     }
   };
 
@@ -118,6 +119,7 @@ const Settings = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log('[Settings] Logo upload success response:', response.data);
       toast.success(t('settings.logo_updated_successfully'));
       const updatedRestaurant = { ...user.restaurant, logo: response.data.logo_url };
       const updatedUser = { ...user, restaurant: updatedRestaurant };
@@ -125,6 +127,7 @@ const Settings = () => {
       setSelectedLogo(null);
       setLogoPreview(getFullImageUrl(response.data.logo_url)); // Atualiza a prévia com a URL completa
     } catch (err) {
+      console.error('[Settings] Logo upload error:', err.response?.data || err.message);
       toast.error(err.response?.data?.message || t('settings.error_uploading_logo'));
     } finally {
       setLoading(false);

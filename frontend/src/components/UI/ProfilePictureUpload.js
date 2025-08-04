@@ -14,6 +14,7 @@ const ProfilePictureUpload = ({ currentAvatar, onUploadSuccess }) => {
       setPreview(URL.createObjectURL(file));
       setMessage('');
       setError('');
+      console.log('[ProfilePictureUpload] Selected file:', file);
     } else {
       setSelectedFile(null);
       setPreview(currentAvatar || '');
@@ -35,13 +36,14 @@ const ProfilePictureUpload = ({ currentAvatar, onUploadSuccess }) => {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log('[ProfilePictureUpload] Upload success response:', response.data);
       setMessage(response.data.message);
       setError('');
       if (onUploadSuccess) {
         onUploadSuccess(response.data.avatar_url);
       }
     } catch (err) {
-      console.error('Erro ao fazer upload do avatar:', err);
+      console.error('[ProfilePictureUpload] Upload error:', err.response?.data || err.message);
       setError(err.response?.data?.error || 'Erro ao fazer upload do avatar.');
       setMessage('');
     }

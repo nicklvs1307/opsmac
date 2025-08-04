@@ -1,16 +1,18 @@
-=> ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                        16.2s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                       166.6s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.825
-0.825 > Feedeliza+-frontend@1.0.0 build
-0.825 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.825
-4.071 Creating an optimized production build...
-16.05 Failed to compile.
-16.05
-16.05 Module not found: Error: Can't resolve '../../contexts/AuthContext' in '/app/frontend/src/pages/Satisfacao/Feedback'
-16.05
-16.05
+0.801
+0.801 > Feedeliza+-frontend@1.0.0 build
+0.801 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.801
+4.102 Creating an optimized production build...
+165.5 Failed to compile.
+165.5
+165.5 Module parse failed: Cannot parse JSON: Unexpected token "}" (0x7D) in JSON at position 19164 while parsing near "...Settings\"\n    }\n  }\n}"
+165.5 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+165.5 Error: Cannot parse JSON: Unexpected token "}" (0x7D) in JSON at position 19164 while parsing near "...Settings\"\n    }\n  }\n}"
+165.5
+165.5
 ------
 
  1 warning found (use docker --debug to expand):
@@ -23,4 +25,3 @@ Dockerfile.frontend:23
   24 |
   25 |     # Estágio final para servir os arquivos com NGINX
 --------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

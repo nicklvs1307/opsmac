@@ -125,6 +125,7 @@
       "loyalty_description": "Configure loyalty programs based on satisfaction.",
       "configure_loyalty": "Configure Loyalty"
     },
+    "sidebar": {
       "dashboard": "Dashboard",
       "fidelity_program": "Fidelity Program",
       "checkin_program": "Check-in Program",
@@ -310,7 +311,7 @@
     "public_checkin": {
       "error_no_restaurant_id": "Restaurant ID not found in URL. Please use a valid QR Code.",
       "error_fetching_restaurant": "Error fetching restaurant details.",
-      "loading_restaurant": "Loading restaurant details...",
+      "loading_restaurant": "Loading restaurant details...!",
       "welcome_to": "Welcome to",
       "our_restaurant": "our restaurant",
       "please_checkin": "Please enter your phone number to check-in.",
@@ -322,7 +323,7 @@
       "invalid_phone": "Invalid phone number format.",
       "invalid_phone_country_code": "Phone number must start with 55 (Brazil country code).",
       "invalid_phone_ddd": "Invalid DDD. It must have 2 digits.",
-      "invalid_phone_9_digits_ddd_11_28": "For DDDs 11-28, the number must have 9 digits after the DDD.",
+      "invalid_phone_9_digits_ddd_11-28": "For DDDs 11-28, the number must have 9 digits after the DDD.",
       "invalid_phone_8_or_9_digits_other_ddd": "For other DDDs, the number must have 8 or 9 digits after the DDD.",
       "checkin_success": "Check-in successful!",
       "checkin_error": "Error during check-in. Please try again.",

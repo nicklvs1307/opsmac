@@ -293,7 +293,6 @@ router.post('/:restaurantId/whatsapp/test', auth, checkRestaurantOwnership, [
  *       500:
  *         description: Erro interno do servidor.
  */
-const router = express.Router();
 
 // Rota para upload de avatar do usuário (MOVIDA PARA O INÍCIO)
 router.post('/profile/avatar', auth, upload.single('avatar'), async (req, res) => {
@@ -615,5 +614,7 @@ router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, [
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
+
+module.exports = router;
 
 module.exports = router;

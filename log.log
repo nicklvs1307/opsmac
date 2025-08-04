@@ -1,16 +1,16 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                        15.9s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       16.2s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.628
-0.628 > Feedeliza+-frontend@1.0.0 build
-0.628 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.628
-3.987 Creating an optimized production build...
-15.72 Failed to compile.
-15.72
-15.72 Module not found: Error: Can't resolve '../../api/axiosInstance' in '/app/frontend/src/pages/Fidelidade/Avaliacoes'
-15.72
-15.72
+0.753
+0.753 > Feedeliza+-frontend@1.0.0 build
+0.753 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.753
+4.089 Creating an optimized production build...
+16.05 Failed to compile.
+16.05
+16.06 Module not found: Error: Can't resolve '../../api/axiosInstance' in '/app/frontend/src/pages/Fidelidade/Avaliacoes'
+16.06
+16.06
 ------
 
  1 warning found (use docker --debug to expand):

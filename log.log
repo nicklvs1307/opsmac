@@ -1,26 +1,48 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       17.2s
-------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.895
-0.895 > Feedeliza+-frontend@1.0.0 build
-0.895 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.895
-4.356 Creating an optimized production build...
-16.98 Failed to compile.
-16.98
-16.98 Module not found: Error: Can't resolve '../../api/axiosInstance' in '/app/frontend/src/pages/Fidelidade/Avaliacoes'
-16.98
-16.98
-------
+URL da solicitação
+https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg
+Método da solicitação
+GET
+Código de status
+404 Not Found
 
- 1 warning found (use docker --debug to expand):
- - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
-Dockerfile.frontend:23
---------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
+Image
+xl @ react-dom.production.min.js:261
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
+Image
+xl @ react-dom.production.min.js:261
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+j @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
+Image
+xl @ react-dom.production.min.js:261
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+j @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg:1  GET https://feedelizaapi.towersfy.com/uploads/logo-1754315519946-494607893.jpeg net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin 404 (Not Found)
+Image
+xl @ react-dom.production.min.js:261
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+j @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14

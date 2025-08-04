@@ -70,67 +70,50 @@ const Sidebar = ({ onMobileClose }) => {
       roles: ['admin', 'owner', 'manager']
     },
     {
-      title: t('sidebar.fidelity'),
-      icon: <CheckinIcon />,
+      title: 'Fidelidade',
+      icon: <CheckinIcon />, // Usando CheckinIcon por enquanto, pode ser alterado
       path: '/fidelity',
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: t('sidebar.checkin'),
+          title: 'Check-in',
           icon: <CheckinIcon />,
           path: '/fidelity/checkin'
+        },
+        {
+          title: 'Satisfação',
+          icon: <PollIcon />,
+          path: '/fidelity/surveys',
+          submenu: [
+            {
+              title: 'Listar Pesquisas',
+              icon: <ListIcon />,
+              path: '/fidelity/surveys'
+            },
+            {
+              title: 'Nova Pesquisa',
+              icon: <AddIcon />,
+              path: '/fidelity/surveys/new'
+            }
+          ]
         }
       ]
     },
     {
-      title: t('sidebar.satisfaction'),
-      icon: <PollIcon />,
-      path: '/satisfaction',
+      title: 'Feedbacks',
+      icon: <FeedbackIcon />,
+      path: '/feedback',
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: t('sidebar.surveys'),
-          icon: <PollIcon />,
-          path: '/satisfaction/surveys',
-          submenu: [
-            {
-              title: t('sidebar.list_surveys'),
-              icon: <ListIcon />,
-              path: '/satisfaction/surveys'
-            },
-            {
-              title: t('sidebar.new_survey'),
-              icon: <AddIcon />,
-              path: '/satisfaction/surveys/new'
-            }
-          ]
+          title: 'Lista de Feedbacks',
+          icon: <ListIcon />,
+          path: '/feedback'
         },
         {
-          title: t('sidebar.feedbacks'),
-          icon: <FeedbackIcon />,
-          path: '/satisfaction/feedback',
-          submenu: [
-            {
-              title: t('sidebar.list_feedbacks'),
-              icon: <ListIcon />,
-              path: '/satisfaction/feedback'
-            },
-            {
-              title: t('sidebar.new_feedback'),
-              icon: <AddIcon />,
-              path: '/satisfaction/feedback/new'
-            }
-          ]
-        },
-        {
-          title: t('sidebar.satisfaction_analysis'),
-          icon: <AnalyticsIcon />,
-          path: '/satisfaction/analysis'
-        },
-        {
-          title: t('sidebar.loyalty_program_satisfaction'),
-          icon: <CardGiftcard />,
-          path: '/satisfaction/loyalty'
+          title: 'Novo Feedback',
+          icon: <AddIcon />,
+          path: '/feedback/new'
         }
       ]
     },
@@ -263,9 +246,10 @@ const Sidebar = ({ onMobileClose }) => {
               <Tooltip title={item.title} placement="right" arrow enterDelay={500}>
                 <ListItemButton
                   onClick={() => {
-                    handleClick(item.path); // Navega para o dashboard do módulo
                     if (item.submenu) {
                       handleMenuToggle(item.title);
+                    } else {
+                      handleClick(item.path);
                     }
                   }}
                   selected={!item.submenu && isActive(item.path)}

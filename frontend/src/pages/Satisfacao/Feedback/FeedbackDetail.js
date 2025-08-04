@@ -167,7 +167,7 @@ const FeedbackDetail = () => {
       <Box>
         <Button
           startIcon={<ArrowBackIcon />}
-          onClick={() => navigate('/feedback')}
+          onClick={() => navigate('/satisfaction/feedback')}
           sx={{ mb: 2 }}
         >
           Voltar
@@ -186,7 +186,7 @@ const FeedbackDetail = () => {
         <Box display="flex" alignItems="center" gap={2}>
           <Button
             startIcon={<ArrowBackIcon />}
-            onClick={() => navigate('/feedback')}
+            onClick={() => navigate('/satisfaction/feedback')}
           >
             Voltar
           </Button>
@@ -208,7 +208,7 @@ const FeedbackDetail = () => {
           <Button
             variant="outlined"
             startIcon={<EditIcon />}
-            onClick={() => navigate(`/feedback/${id}/edit`)}
+            onClick={() => navigate(`/satisfaction/feedback/${id}/edit`)}
           >
             Editar
           </Button>

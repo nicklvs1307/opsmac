@@ -1,28 +1,16 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                       160.2s
+=> ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                                                                        16.2s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.770
-0.770 > Feedeliza+-frontend@1.0.0 build
-0.770 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.770
-3.717 Creating an optimized production build...
-159.2 Failed to compile.
-159.2
-159.2 [eslint]
-159.2 src/pages/Public/PublicCheckin.js
-159.2   Line 260:36:  'alpha' is not defined  no-undef
-159.2   Line 313:36:  'alpha' is not defined  no-undef
-159.2   Line 403:36:  'alpha' is not defined  no-undef
-159.2   Line 438:40:  'alpha' is not defined  no-undef
-159.2   Line 442:43:  'alpha' is not defined  no-undef
-159.2
-159.2 src/pages/Public/PublicSurveyForm.js
-159.2   Line 430:44:  'alpha' is not defined  no-undef
-159.2   Line 434:47:  'alpha' is not defined  no-undef
-159.2
-159.2 Search for the keywords to learn more about each error.
-159.2
-159.2
+0.825
+0.825 > Feedeliza+-frontend@1.0.0 build
+0.825 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.825
+4.071 Creating an optimized production build...
+16.05 Failed to compile.
+16.05
+16.05 Module not found: Error: Can't resolve '../../contexts/AuthContext' in '/app/frontend/src/pages/Satisfacao/Feedback'
+16.05
+16.05
 ------
 
  1 warning found (use docker --debug to expand):

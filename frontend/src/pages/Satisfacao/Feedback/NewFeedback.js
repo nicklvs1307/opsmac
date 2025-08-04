@@ -24,7 +24,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../../contexts/AuthContext';
 
 const NewFeedback = () => {
   const navigate = useNavigate();

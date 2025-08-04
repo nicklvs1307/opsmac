@@ -35,6 +35,7 @@ import SurveyList from './pages/Fidelidade/Avaliacoes/SurveyList';
 import SurveyCreate from './pages/Fidelidade/Avaliacoes/SurveyCreate';
 import SurveyResults from './pages/Fidelidade/Avaliacoes/SurveyResults';
 import SurveyEdit from './pages/Fidelidade/Avaliacoes/SurveyEdit';
+import SatisfactionDashboard from './pages/Fidelidade/Avaliacoes/SatisfactionDashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import RelationshipDashboard from './pages/Relationship/RelationshipDashboard';
 import PublicCheckin from './pages/Public/PublicCheckin';
@@ -76,7 +77,6 @@ function App() {
                 }>
                   <Route index element={<Navigate to="/dashboard" replace />} />
                   <Route path="dashboard" element={<Dashboard />} />
-                  <Route path="feedback" element={<FeedbackList />} />
                   <Route path="feedback/new" element={<NewFeedback />} />
                   <Route path="feedback/:id" element={<FeedbackDetail />} />
                   <Route path="qrcodes" element={<QRCodeManage />} />
@@ -90,7 +90,7 @@ function App() {
                   <Route path="customers/dashboard" element={<CustomerDashboard />} />
                   <Route path="settings" element={<Settings />} />
                   <Route path="fidelity/checkin" element={<CheckinDashboard />} />
-                  <Route path="fidelity/surveys" element={<SurveyList />} />
+                  <Route path="fidelity/satisfaction" element={<SatisfactionDashboard />} />
                   <Route path="fidelity/surveys/new" element={<SurveyCreate />} />
                   <Route path="fidelity/surveys/edit/:id" element={<SurveyEdit />} />
                   <Route path="fidelity/surveys/:id/results" element={<SurveyResults />} />

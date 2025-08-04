@@ -83,37 +83,7 @@ const Sidebar = ({ onMobileClose }) => {
         {
           title: 'Satisfação',
           icon: <PollIcon />,
-          path: '/fidelity/surveys',
-          submenu: [
-            {
-              title: 'Listar Pesquisas',
-              icon: <ListIcon />,
-              path: '/fidelity/surveys'
-            },
-            {
-              title: 'Nova Pesquisa',
-              icon: <AddIcon />,
-              path: '/fidelity/surveys/new'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      title: 'Feedbacks',
-      icon: <FeedbackIcon />,
-      path: '/feedback',
-      roles: ['admin', 'owner', 'manager'],
-      submenu: [
-        {
-          title: 'Lista de Feedbacks',
-          icon: <ListIcon />,
-          path: '/feedback'
-        },
-        {
-          title: 'Novo Feedback',
-          icon: <AddIcon />,
-          path: '/feedback/new'
+          path: '/fidelity/satisfaction'
         }
       ]
     },

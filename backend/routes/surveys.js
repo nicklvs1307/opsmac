@@ -325,4 +325,70 @@ router.get(
     }
 );
 
+// @route   GET /api/surveys/analytics/:restaurantId
+// @desc    Get satisfaction analytics for a restaurant
+// @access  Private
+router.get('/analytics/:restaurantId', auth, async (req, res) => {
+    const { restaurantId } = req.params;
+
+    // Optional: Add checkRestaurantOwnership middleware if needed
+
+    try {
+        const totalResponses = await models.SurveyResponse.count({
+            include: [{
+                model: models.Survey,
+                where: { restaurant_id: restaurantId },
+                attributes: []
+            }]
+        });
+
+        // Simplified example for average NPS and CSAT
+        // A more accurate implementation would involve complex queries
+        const allAnswers = await models.Answer.findAll({
+            include: [{
+                model: models.Question,
+                attributes: ['question_type'],
+                include: [{
+                    model: models.Survey,
+                    where: { restaurant_id: restaurantId },
+                    attributes: []
+                }]
+            }]
+        });
+
+        let npsSum = 0;
+        let npsCount = 0;
+        let csatSum = 0;
+        let csatCount = 0;
+
+        allAnswers.forEach(answer => {
+            if (answer.Question) {
+                const value = parseInt(answer.answer_value, 10);
+                if (!isNaN(value)) {
+                    if (answer.Question.question_type === 'nps') {
+                        npsSum += value;
+                        npsCount++;
+                    } else if (answer.Question.question_type === 'csat') {
+                        csatSum += value;
+                        csatCount++;
+                    }
+                }
+            }
+        });
+
+        const averageNps = npsCount > 0 ? npsSum / npsCount : null;
+        const averageCsat = csatCount > 0 ? csatSum / csatCount : null;
+
+        res.json({
+            totalResponses,
+            averageNps,
+            averageCsat
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;

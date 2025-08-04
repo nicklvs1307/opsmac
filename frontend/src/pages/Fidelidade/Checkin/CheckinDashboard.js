@@ -488,7 +488,7 @@ const CheckinDashboard = () => {
           textColor="primary"
         >
           <Tab label="Análise de Check-ins" icon={<BarChartIcon />} />
-          <Tab label="Programa de Fidelidade" icon={<StarsIcon />} />
+          <Tab label="Configurações Checkin" icon={<StarsIcon />} />
           <Tab label="Check-ins Ativos" icon={<CheckinIcon />} />
         </Tabs>
       </Paper>

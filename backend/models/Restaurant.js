@@ -4,6 +4,7 @@ const { Model, DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   class Restaurant extends Model {
     static associate(models) {
+      console.log('Modelos recebidos por Restaurant.associate:', Object.keys(models));
       Restaurant.belongsTo(models.User, { foreignKey: 'owner_id', as: 'owner' });
       Restaurant.hasMany(models.NpsCriterion, { as: 'npsCriteria', foreignKey: 'restaurant_id' });
       // Adicione outras associações aqui se necessário

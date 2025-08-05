@@ -10,7 +10,7 @@ const router = express.Router();
 // Rota para upload de avatar do usuário
 router.post('/profile/avatar', auth, upload.single('avatar'), async (req, res) => {
   try {
-    console.log('Hit POST /profile/avatar route'); // Debug log
+    
     if (!req.file) {
       return res.status(400).json({ error: 'Nenhum arquivo de avatar enviado.' });
     }
@@ -76,7 +76,7 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
 // Rota para upload de logo do restaurante
 router.post('/:restaurantId/logo', auth, checkRestaurantOwnership, upload.single('logo'), async (req, res) => {
   try {
-    console.log('Hit POST /:restaurantId/logo route'); // Debug log
+    
     const { restaurantId } = req.params;
     if (!req.file) {
       return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
@@ -307,7 +307,7 @@ router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, [
   }
 
   try {
-    console.log('Hit PUT /:restaurantId/profile route'); // Debug log
+    
     const { restaurantId } = req.params;
     const { name, cuisine_type, address, description } = req.body;
 

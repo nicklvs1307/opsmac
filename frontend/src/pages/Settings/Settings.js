@@ -47,9 +47,9 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthContext';
 import { useThemeMode } from '../../contexts/ThemeContext';
-
+import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
-
+import toast from 'react-hot-toast';
 import ProfilePictureUpload from '../../components/UI/ProfilePictureUpload';
 
 const getFullImageUrl = (relativePath) => {
@@ -120,7 +120,7 @@ const Settings = () => {
         },
       });
       console.log('[Settings] Logo upload success response:', response.data);
-      alert('Logo updated successfully!');
+      toast.success(t('settings.logo_updated_successfully'));
       const updatedRestaurant = { ...user.restaurant, logo: response.data.logo_url };
       const updatedUser = { ...user, restaurant: updatedRestaurant };
       setUser(updatedUser);
@@ -129,7 +129,7 @@ const Settings = () => {
       setLogoPreview(getFullImageUrl(response.data.logo_url)); // Atualiza a prévia com a URL completa
     } catch (err) {
       console.error('[Settings] Logo upload error:', err.response?.data || err.message);
-      alert(err.response?.data?.message || 'Error uploading logo.');
+      toast.error(err.response?.data?.message || t('settings.error_uploading_logo'));
     } finally {
       setLoading(false);
     }
@@ -141,7 +141,7 @@ const Settings = () => {
       setApiToken(response.data.api_token || '');
     } catch (err) {
       console.error('Error fetching API token:', err);
-      alert('Error fetching API token.');
+      toast.error(t('settings.error_fetching_api_token'));
     }
   }, [t]);
 
@@ -165,10 +165,10 @@ const Settings = () => {
       setLoading(true);
       const response = await axiosInstance.post(`/api/settings/${restaurantId}/api-token/generate`);
       setApiToken(response.data.api_token);
-      alert('New API token generated successfully!');
+      toast.success(t('settings.new_api_token_generated'));
     } catch (err) {
       console.error('Error generating API token:', err);
-      alert('Error generating API token.');
+      toast.error(t('settings.error_generating_api_token'));
     } finally {
       setLoading(false);
     }
@@ -179,7 +179,7 @@ const Settings = () => {
       setLoading(true);
       await axiosInstance.delete(`/api/settings/${restaurantId}/api-token`);
       setApiToken('');
-      alert('API token revoked successfully!');
+      toast.success(t('settings.api_token_revoked'));
     } catch (err) {
       console.error('Error revoking API token:', err);
       toast.error(t('settings.error_revoking_api_token'));
@@ -241,9 +241,9 @@ const Settings = () => {
       setLoading(true);
       // O objeto 'data' já inclui o 'whatsapp_enabled' do formulário
       await axiosInstance.put(`/api/settings/${restaurantId}/whatsapp`, data);
-      alert('WhatsApp settings updated successfully!');
+      toast.success(t('settings.whatsapp_settings_updated_successfully'));
     } catch (err) {
-      alert(err.response?.data?.message || 'Error updating WhatsApp settings.');
+      toast.error(err.response?.data?.message || t('settings.error_updating_whatsapp_settings'));
     } finally {
       setLoading(false);
     }
@@ -271,7 +271,7 @@ const Settings = () => {
           resetWhatsapp(response.data);
         } catch (err) {
           console.error('Error fetching WhatsApp settings:', err);
-          alert('Error fetching WhatsApp settings.');
+          toast.error(t('settings.error_fetching_whatsapp_settings'));
         }
       };
       fetchWhatsappSettings();
@@ -307,9 +307,9 @@ const Settings = () => {
         setUser(updatedUser);
       }
 
-      alert('Profile updated successfully!');
+      toast.success(t('settings.profile_updated_successfully'));
     } catch (err) {
-      alert(err.response?.data?.message || 'Error updating profile.');
+      toast.error(err.response?.data?.message || t('settings.error_updating_profile'));
     } finally {
       setLoading(false);
     }
@@ -324,11 +324,11 @@ const Settings = () => {
         new_password: data.new_password,
       });
       
-            alert('Password changed successfully!');
+            toast.success(t('settings.password_changed_successfully')); // Use t()
       setChangePasswordDialog(false);
       resetPassword();
     } catch (err) {
-      alert(err.response?.data?.message || 'Error changing password.');
+      toast.error(err.response?.data?.message || t('settings.error_changing_password')); // Use t()
     } finally {
       setLoading(false);
     }
@@ -352,9 +352,9 @@ const Settings = () => {
         value,
       });
       
-      alert('Setting updated!');
+      toast.success(t('settings.setting_updated')); // Use t()
     } catch (err) {
-      alert('Error updating setting.');
+      toast.error(t('settings.error_updating_setting')); // Use t()
       // Revert on error
       if (restaurantId) { // Only fetch if restaurantId exists
         fetchSettings(restaurantId);
@@ -369,10 +369,10 @@ const Settings = () => {
         recipient: testRecipient,
         message: testMessage,
       });
-      alert('Test message sent successfully!');
+      toast.success(t('settings.test_message_sent_successfully'));
       setTestMessageDialog(false);
     } catch (err) {
-      alert(err.response?.data?.message || 'Error sending test message.');
+      toast.error(err.response?.data?.message || t('settings.error_sending_test_message'));
     } finally {
       setLoading(false);
     }
@@ -425,8 +425,7 @@ const Settings = () => {
                 currentAvatar={user?.avatar}
                 onUploadSuccess={(newAvatarUrl) => {
                   setUser(prevUser => ({ ...prevUser, avatar: newAvatarUrl }));
-                  const successMessage = typeof t === 'function' ? t('settings.avatar_updated_successfully') : 'Avatar updated successfully!';
-                  toast.success(successMessage);
+                  toast.success(t('settings.avatar_updated_successfully'));
                 }}
               />
 

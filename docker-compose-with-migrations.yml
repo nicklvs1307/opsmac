@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  # NOVO SERVIÇO PARA MIGRAÇÕES
+  migrations:
+    build:
+      context: /root/opsmac
+      dockerfile: Dockerfile.backend
+    image: feedeliza-backend:latest # Usará a mesma imagem do backend
+    depends_on:
+      # Garante que o banco de dados esteja pronto antes de rodar as migrações
+      # Assumindo que seu serviço de DB se chama 'postgres' na rede do Swarm
+      - postgres 
+    environment:
+      # Variáveis de ambiente para a conexão com o banco de dados
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=feedeliza
+      - DB_USER=postgres
+      - DB_PASSWORD=b74996144735db08d6e091f460df4184
+      # Certifique-se de que todas as variáveis de ambiente necessárias para a conexão com o DB estejam aqui
+    command: npx sequelize-cli db:migrate # O comando para rodar as migrações
+    networks:
+      - towersfy_network
+    volumes:
+      - .:/app # Mapeie o volume para que o config/config.js e as migrações sejam acessíveis
+    deploy:
+      # Configurações de deploy para o Swarm
+      replicas: 1
+      restart_policy:
+        condition: on-failure # Tenta reiniciar se a migração falhar
+      labels:
+        # Adicione labels se precisar de roteamento Traefik para este serviço (geralmente não é necessário para migrações)
+        # - "traefik.enable=false" # Exemplo para desabilitar Traefik para este serviço
+        - "com.docker.swarm.service.name=feedeliza_migrations" # Nome do serviço no Swarm
+
+  backend:
+    build:
+      context: /root/opsmac
+      dockerfile: Dockerfile.backend
+    image: feedeliza-backend:latest
+    environment:
+      - NODE_ENV=production
+      - FRONTEND_URL=https://feedelizapro.towersfy.com
+
+      # Conexão com banco de dados (ORMs modernos preferem essas separadas)
+      - DB_HOST=postgres # Continua usando o nome do serviço do DB
+      - DB_PORT=5432
+      - DB_NAME=feedeliza
+      - DB_USER=postgres
+      - DB_PASSWORD=b74996144735db08d6e091f460df4184
+
+      # URL padrão para fallback (alguns ORMs preferem a URL direta)
+      - DATABASE_URL=postgresql://postgres:b74996144735db08d6e091f460df4184@postgres:5432/feedeliza
+
+      # Segurança
+      - JWT_SECRET=bJ0c8J5UXhGVsI3zbqMnOAQsCGk8BNBG
+
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.backend.rule=Host(`feedelizaapi.towersfy.com`)"
+        - "traefik.http.routers.backend.entrypoints=websecure"
+        - "traefik.http.routers.backend.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.backend.loadbalancer.server.port=5000"
+        - "traefik.http.routers.backend-uploads.rule=Host(`feedelizaapi.towersfy.com`) && PathPrefix(`/uploads`)"
+        - "traefik.http.routers.backend-uploads.entrypoints=websecure"
+        - "traefik.http.routers.backend-uploads.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.backend-uploads.priority=100"
+
+    networks:
+      - towersfy_network
+    volumes:
+      - uploads_data:/app/backend/public/uploads
+    depends_on:
+      - migrations # Adicionado: Garante que as migrações rodem antes do backend
+
+  frontend:
+    build:
+      context: /root/opsmac
+      dockerfile: Dockerfile.frontend
+      args:
+        - REACT_APP_API_URL=https://feedelizaapi.towersfy.com
+    image: feedeliza-frontend:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.frontend.rule=Host(`feedelizapro.towersfy.com`)"
+        - "traefik.http.routers.frontend.entrypoints=websecure"
+        - "traefik.http.routers.frontend.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.frontend.loadbalancer.server.port=80"
+    networks:
+      - towersfy_network
+
+networks:
+  towersfy_network:
+    external: true # Usando a rede existente do Traefik
+
+volumes:
+  uploads_data:

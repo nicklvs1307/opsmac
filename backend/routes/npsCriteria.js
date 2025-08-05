@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { models } = require('../config/database');
 const { NpsCriterion } = models;
-const auth = require('../../../middleware/auth');
+const auth = require('../middleware/auth');
 const { body, validationResult } = require('express-validator');
 
 // @route   GET /api/nps-criteria

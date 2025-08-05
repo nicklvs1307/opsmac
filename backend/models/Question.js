@@ -34,9 +34,13 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    nps_criterion: {
-      type: DataTypes.STRING,
+    nps_criterion_id: {
+      type: DataTypes.UUID,
       allowNull: true,
+      references: {
+        model: 'NpsCriterions', // Nome da tabela, não do modelo
+        key: 'id'
+      }
     }
   }, {
     sequelize,

@@ -1,18 +1,82 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-/app/node_modules/express/lib/router/route.js:216
-        throw new Error(msg);
-
-^
-Error: Route.get() requires a callback function but got a [object Object]
-    at Route.<computed> [as get] (/app/node_modules/express/lib/router/route.js:216:15)
-    at proto.<computed> [as get] (/app/node_modules/express/lib/router/index.js:521:19)
-    at Object.<anonymous> (/app/backend/routes/npsCriteria.js:12:8)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/server.js:24:27)
-Node.js v20.19.4
+satisfaction:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+SurveyList.js:17  GET https://feedelizaapi.towersfy.com/api/surveys?search= 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ln @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ SurveyList.js:17
+(anônimo) @ SurveyList.js:32
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+SurveyList.js:17  GET https://feedelizaapi.towersfy.com/api/surveys?search= 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ln @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ SurveyList.js:17
+(anônimo) @ SurveyList.js:32
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 wr {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+h @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+wc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266

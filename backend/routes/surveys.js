@@ -52,9 +52,9 @@ router.post(
                         ...q,
                         survey_id: survey.id,
                     };
-                    // Apenas adicione nps_criterion se for uma pergunta NPS
-                    if (q.question_type === 'nps' && q.nps_criterion) {
-                        questionToCreate.nps_criterion = q.nps_criterion;
+                    // Apenas adicione nps_criterion_id se for uma pergunta NPS
+                    if (q.question_type === 'nps' && q.nps_criterion_id) {
+                        questionToCreate.nps_criterion_id = q.nps_criterion_id;
                     }
                     await models.Question.create(questionToCreate);
                 }
@@ -127,9 +127,9 @@ router.put(
                         ...q,
                         survey_id: survey.id,
                     };
-                    // Apenas adicione nps_criterion se for uma pergunta NPS
-                    if (q.question_type === 'nps' && q.nps_criterion) {
-                        questionToCreate.nps_criterion = q.nps_criterion;
+                    // Apenas adicione nps_criterion_id se for uma pergunta NPS
+                    if (q.question_type === 'nps' && q.nps_criterion_id) {
+                        questionToCreate.nps_criterion_id = q.nps_criterion_id;
                     }
                     await models.Question.create(questionToCreate);
                 }

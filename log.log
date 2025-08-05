@@ -5,7 +5,7 @@
       ^
 Error: Restaurant.hasMany called with something that's not a subclass of Sequelize.Model
     at Restaurant.hasMany (/app/node_modules/sequelize/lib/associations/mixin.js:13:13)
-    at Restaurant.associate (/app/backend/models/Restaurant.js:353:16)
+    at Restaurant.associate (/app/backend/models/Restaurant.js:348:16)
     at /app/backend/config/database.js:45:35
     at Array.forEach (<anonymous>)
     at setupAssociations (/app/backend/config/database.js:43:33)

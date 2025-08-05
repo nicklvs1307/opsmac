@@ -331,4 +331,47 @@ router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, [
   }
 });
 
+
+// Rota para obter os critérios de NPS do restaurante
+router.get('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, async (req, res) => {
+  try {
+    const { restaurantId } = req.params;
+    const restaurant = await models.Restaurant.findByPk(restaurantId, {
+      attributes: ['nps_criteria']
+    });
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
+    res.json({ nps_criteria: restaurant.nps_criteria || [] });
+  } catch (error) {
+    console.error('Erro ao obter critérios de NPS:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+// Rota para atualizar os critérios de NPS do restaurante
+router.put('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, [
+  body('nps_criteria').isArray().withMessage('Critérios de NPS devem ser um array')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { restaurantId } = req.params;
+    const { nps_criteria } = req.body;
+    const restaurant = await models.Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
+
+    await restaurant.update({ nps_criteria });
+    res.json({ message: 'Critérios de NPS atualizados com sucesso!', nps_criteria: restaurant.nps_criteria });
+  } catch (error) {
+    console.error('Erro ao atualizar critérios de NPS:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;

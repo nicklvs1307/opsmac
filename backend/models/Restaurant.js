@@ -240,6 +240,30 @@ module.exports = (sequelize) => {
         }
       }
     },
+    total_promoters: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+      validate: {
+        min: 0
+      }
+    },
+    total_neutrals: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+      validate: {
+        min: 0
+      }
+    },
+    total_detractors: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+      validate: {
+        min: 0
+      }
+    },
     owner_id: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -252,6 +276,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(255),
       allowNull: true,
       unique: true,
+    },
+    nps_criteria: {
+      type: DataTypes.JSONB,
+      allowNull: false,
+      defaultValue: [],
     }
   }, {
     tableName: 'restaurants',
@@ -285,6 +314,7 @@ module.exports = (sequelize) => {
         [sequelize.fn('COUNT', sequelize.col('id')), 'total'],
         [sequelize.fn('AVG', sequelize.col('rating')), 'average'],
         [sequelize.fn('COUNT', sequelize.literal('CASE WHEN nps_score >= 9 THEN 1 END')), 'promoters'],
+        [sequelize.fn('COUNT', sequelize.literal('CASE WHEN nps_score BETWEEN 7 AND 8 THEN 1 END')), 'passives'], // Adicionado para neutros
         [sequelize.fn('COUNT', sequelize.literal('CASE WHEN nps_score <= 6 THEN 1 END')), 'detractors']
       ],
       raw: true
@@ -293,13 +323,17 @@ module.exports = (sequelize) => {
     if (feedbackStats && feedbackStats.total > 0) {
       const total = parseInt(feedbackStats.total);
       const promoters = parseInt(feedbackStats.promoters || 0);
+      const passives = parseInt(feedbackStats.passives || 0); // Adicionado para neutros
       const detractors = parseInt(feedbackStats.detractors || 0);
       const npsScore = Math.round(((promoters - detractors) / total) * 100);
 
       await this.update({
         total_feedbacks: total,
         average_rating: parseFloat(feedbackStats.average || 0).toFixed(2),
-        nps_score: npsScore
+        nps_score: npsScore,
+        total_promoters: promoters,
+        total_neutrals: passives,
+        total_detractors: detractors
       });
     }
 

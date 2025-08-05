@@ -72,7 +72,7 @@ const syncDatabase = async (force = false) => {
     await sequelize.query(`CREATE TYPE IF NOT EXISTS "public"."enum_coupons_reward_type" AS ENUM('discount_percentage', 'discount_fixed', 'free_item', 'points', 'cashback', 'gift', 'spin_the_wheel');`);
     console.log('✅ Tipo ENUM "enum_coupons_reward_type" verificado/criado.');
 
-    await sequelize.sync({ force });
+    await sequelize.sync({ alter: !force });
     console.log('✅ Banco de dados sincronizado');
     return true;
   } catch (error) {

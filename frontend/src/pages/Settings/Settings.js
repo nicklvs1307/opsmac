@@ -93,6 +93,8 @@ const Settings = () => {
       loyalty_program: true,
     },
   });
+  const [npsCriteria, setNpsCriteria] = useState([]);
+  const [newCriterion, setNewCriterion] = useState('');
 
   useEffect(() => {
     setLogoPreview(getFullImageUrl(user?.restaurant?.logo) || '');
@@ -159,6 +161,49 @@ const Settings = () => {
       setLoading(false);
     }
   }, []);
+
+  const fetchNpsCriteria = useCallback(async (id) => {
+    try {
+      const response = await axiosInstance.get(`/api/settings/${id}/nps-criteria`);
+      setNpsCriteria(response.data.nps_criteria || []);
+    } catch (err) {
+      console.error('Error fetching NPS criteria:', err);
+      toast.error(t('settings.error_fetching_nps_criteria'));
+    }
+  }, [t]);
+
+  const handleAddCriterion = async () => {
+    if (newCriterion.trim() && !npsCriteria.includes(newCriterion.trim())) {
+      const updatedCriteria = [...npsCriteria, newCriterion.trim()];
+      try {
+        setLoading(true);
+        await axiosInstance.put(`/api/settings/${restaurantId}/nps-criteria`, { nps_criteria: updatedCriteria });
+        setNpsCriteria(updatedCriteria);
+        setNewCriterion('');
+        toast.success(t('settings.nps_criterion_added_successfully'));
+      } catch (err) {
+        console.error('Error adding NPS criterion:', err);
+        toast.error(err.response?.data?.message || t('settings.error_adding_nps_criterion'));
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleRemoveCriterion = async (criterionToRemove) => {
+    const updatedCriteria = npsCriteria.filter(c => c !== criterionToRemove);
+    try {
+      setLoading(true);
+      await axiosInstance.put(`/api/settings/${restaurantId}/nps-criteria`, { nps_criteria: updatedCriteria });
+      setNpsCriteria(updatedCriteria);
+      toast.success(t('settings.nps_criterion_removed_successfully'));
+    } catch (err) {
+      console.error('Error removing NPS criterion:', err);
+      toast.error(err.response?.data?.message || t('settings.error_removing_nps_criterion'));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleGenerateApiToken = useCallback(async () => {
     try {
@@ -254,6 +299,7 @@ const Settings = () => {
     if (user && restaurantId) {
       fetchSettings(restaurantId);
       fetchApiToken(restaurantId);
+      fetchNpsCriteria(restaurantId); // Add this line
       resetProfile({
         name: user.name || '',
         email: user.email || '',
@@ -276,7 +322,7 @@ const Settings = () => {
       };
       fetchWhatsappSettings();
     }
-  }, [user, restaurantId, fetchSettings, fetchApiToken, resetProfile, resetWhatsapp, t]);
+  }, [user, restaurantId, fetchSettings, fetchApiToken, fetchNpsCriteria, resetProfile, resetWhatsapp, t]);
 
   const onProfileSubmit = async (data) => {
     try {
@@ -385,6 +431,7 @@ const Settings = () => {
     { id: 'security', label: t('settings.security'), icon: SecurityIcon },
     { id: 'appearance', label: t('settings.appearance'), icon: PaletteIcon },
     { id: 'whatsapp', label: t('settings.whatsapp'), icon: WhatsAppIcon },
+    { id: 'nps_criteria', label: t('settings.nps_criteria'), icon: AddIcon },
   ];
 
   const cuisineTypes = [
@@ -992,6 +1039,63 @@ const Settings = () => {
                   {t('settings.send_test_message')}
                 </Button>
               </Box>
+            </CardContent>
+          </Card>
+        );
+
+      case 'nps_criteria':
+        return (
+          <Card>
+            <CardHeader
+              title={t('settings.nps_criteria_title')}
+              subheader={t('settings.nps_criteria_subheader')}
+            />
+            <CardContent>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                {t('settings.nps_criteria_description')}
+              </Typography>
+              <Box display="flex" alignItems="center" mb={3}>
+                <TextField
+                  label={t('settings.new_criterion_label')}
+                  variant="outlined"
+                  fullWidth
+                  value={newCriterion}
+                  onChange={(e) => setNewCriterion(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleAddCriterion();
+                    }
+                  }}
+                  sx={{ mr: 2 }}
+                />
+                <Button
+                  variant="contained"
+                  startIcon={<AddIcon />}
+                  onClick={handleAddCriterion}
+                  disabled={loading || !newCriterion.trim()}
+                >
+                  {t('settings.add_criterion_button')}
+                </Button>
+              </Box>
+              <List>
+                {npsCriteria.map((criterion, index) => (
+                  <ListItem
+                    key={index}
+                    secondaryAction={
+                      <IconButton edge="end" aria-label="delete" onClick={() => handleRemoveCriterion(criterion)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    }
+                  >
+                    <ListItemText primary={criterion} />
+                  </ListItem>
+                ))}
+                {npsCriteria.length === 0 && (
+                  <ListItem>
+                    <ListItemText secondary={t('settings.no_nps_criteria_added')} />
+                  </ListItem>
+                )}
+              </List>
             </CardContent>
           </Card>
         );

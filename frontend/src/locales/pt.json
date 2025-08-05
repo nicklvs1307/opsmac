@@ -97,7 +97,18 @@
       "whatsapp_settings_updated_successfully": "Configurações do WhatsApp atualizadas com sucesso!",
       "error_updating_whatsapp_settings": "Erro ao atualizar configurações do WhatsApp",
       "error_fetching_whatsapp_settings": "Erro ao carregar configurações do WhatsApp",
-      "avatar_updated_successfully": "Avatar atualizado com sucesso!"
+      "avatar_updated_successfully": "Avatar atualizado com sucesso!",
+      "nps_criteria_title": "Critérios de NPS",
+      "nps_criteria_subheader": "Defina critérios personalizados para o feedback de NPS",
+      "nps_criteria_description": "Estes critérios serão usados nas pesquisas de NPS para coletar feedback mais específico dos seus clientes.",
+      "new_criterion_label": "Nome do Novo Critério",
+      "add_criterion_button": "Adicionar Critério",
+      "nps_criterion_added_successfully": "Critério de NPS adicionado com sucesso!",
+      "error_adding_nps_criterion": "Erro ao adicionar critério de NPS",
+      "nps_criterion_removed_successfully": "Critério de NPS removido com sucesso!",
+      "error_removing_nps_criterion": "Erro ao remover critério de NPS",
+      "no_nps_criteria_added": "Nenhum critério de NPS adicionado ainda.",
+      "error_fetching_nps_criteria": "Erro ao carregar critérios de NPS"
     },
     "login_form": {
       "enter_account": "Entrar na sua conta",

@@ -209,7 +209,7 @@ module.exports = (sequelize) => {
         
         if (qrcode.qr_type === 'checkin') {
           // Para QR Code de Check-in, a URL aponta para a página pública de check-in
-          qrcode.feedback_url = `${baseUrl}/checkin/public?restaurantId=${qrcode.restaurant_id}`;
+          qrcode.feedback_url = `${baseUrl}/checkin/public/${qrcode.restaurant_id}`;
           qrcode.qr_code_data = JSON.stringify({
             type: 'checkin',
             restaurant_id: qrcode.restaurant_id,

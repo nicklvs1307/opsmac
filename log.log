@@ -1,6 +1,11 @@
-root@ServerAgents:~/opsmac# npx sequelize-cli db:migrate
+npm warn exec The following package was not found and will be installed: sequelize-cli@6.6.3
 
-Sequelize CLI [Node: 18.20.8, CLI: 6.6.3, ORM: 6.37.7]
+Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
 
 Loaded configuration file "config/config.js".
+
 Using environment "development".
+
+== 20250805131129-add_nps_columns_to_restaurants: migrating =======
+
+ERROR: column "total_promoters" of relation "restaurants" already exists

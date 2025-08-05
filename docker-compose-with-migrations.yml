@@ -23,7 +23,7 @@ services:
     networks:
       - towersfy_network
     volumes:
-      - .:/app # Mapeie o volume para que o config/config.js e as migrações sejam acessíveis
+      - /root/opsmac:/app # Mapeie o volume para que o config/config.js e as migrações sejam acessíveis
     deploy:
       # Configurações de deploy para o Swarm
       replicas: 1
@@ -74,6 +74,7 @@ services:
     networks:
       - towersfy_network
     volumes:
+      - /root/opsmac:/app # Mapeie o volume para que o código da aplicação seja acessível
       - uploads_data:/app/backend/public/uploads
     depends_on:
       - migrations # Adicionado: Garante que as migrações rodem antes do backend

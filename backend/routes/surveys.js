@@ -48,10 +48,15 @@ router.post(
 
             if (questionsData && questionsData.length > 0) {
                 for (const q of questionsData) {
-                    await models.Question.create({
+                    const questionToCreate = {
                         ...q,
                         survey_id: survey.id,
-                    });
+                    };
+                    // Apenas adicione nps_criterion se for uma pergunta NPS
+                    if (q.question_type === 'nps' && q.nps_criterion) {
+                        questionToCreate.nps_criterion = q.nps_criterion;
+                    }
+                    await models.Question.create(questionToCreate);
                 }
             }
 
@@ -118,10 +123,15 @@ router.put(
 
             if (questions && questions.length > 0) {
                 for (const q of questions) {
-                    await models.Question.create({
+                    const questionToCreate = {
                         ...q,
                         survey_id: survey.id,
-                    });
+                    };
+                    // Apenas adicione nps_criterion se for uma pergunta NPS
+                    if (q.question_type === 'nps' && q.nps_criterion) {
+                        questionToCreate.nps_criterion = q.nps_criterion;
+                    }
+                    await models.Question.create(questionToCreate);
                 }
             }
 

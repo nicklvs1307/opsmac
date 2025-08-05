@@ -1,17 +1,14 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
-/app/node_modules/sequelize/lib/associations/mixin.js:13
-      throw new Error(`${this.name}.hasMany called with something that's not a subclass of Sequelize.Model`);
-      ^
-Error: Restaurant.hasMany called with something that's not a subclass of Sequelize.Model
-    at Restaurant.hasMany (/app/node_modules/sequelize/lib/associations/mixin.js:13:13)
-    at Restaurant.associate (/app/backend/models/Restaurant.js:8:18)
-    at /app/backend/config/database.js:45:35
-    at Array.forEach (<anonymous>)
-    at setupAssociations (/app/backend/config/database.js:43:33)
-    at Object.<anonymous> (/app/backend/config/database.js:50:1)
+/app/backend/server.js:67
+app.use('/api/nps-criteria', npsCriteriaRoutes);
+                             ^
+ReferenceError: npsCriteriaRoutes is not defined
+    at Object.<anonymous> (/app/backend/server.js:67:30)
     at Module._compile (node:internal/modules/cjs/loader:1529:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
     at Module.load (node:internal/modules/cjs/loader:1275:32)
     at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49
 Node.js v20.19.4

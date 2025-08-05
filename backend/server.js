@@ -21,6 +21,7 @@ const publicRoutesV2 = require('./routes/public_v2');
 const surveyRoutes = require('./routes/surveys');
 const publicSurveyRoutes = require('./routes/public_surveys');
 const adminRoutes = require('./routes/admin');
+const npsCriteriaRoutes = require('./routes/npsCriteria');
 
 const app = express();
 app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)

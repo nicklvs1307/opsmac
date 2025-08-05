@@ -78,7 +78,7 @@ const syncDatabase = async (force = false) => {
     `);
     console.log('✅ Tipo ENUM "enum_coupons_reward_type" verificado/criado.');
 
-    await sequelize.sync({ alter: !force });
+    await sequelize.sync({ force });
     console.log('✅ Banco de dados sincronizado');
     return true;
   } catch (error) {

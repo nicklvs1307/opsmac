@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
     order: {
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    nps_criterion: {
+      type: DataTypes.STRING,
+      allowNull: true,
     }
   }, {
     sequelize,

@@ -120,7 +120,8 @@ const Settings = () => {
         },
       });
       console.log('[Settings] Logo upload success response:', response.data);
-      toast.success(t('settings.logo_updated_successfully'));
+      const successMessage = typeof t === 'function' ? t('settings.logo_updated_successfully') : 'Logo updated successfully!';
+      toast.success(successMessage);
       const updatedRestaurant = { ...user.restaurant, logo: response.data.logo_url };
       const updatedUser = { ...user, restaurant: updatedRestaurant };
       setUser(updatedUser);
@@ -426,7 +427,8 @@ const Settings = () => {
                 currentAvatar={user?.avatar}
                 onUploadSuccess={(newAvatarUrl) => {
                   setUser(prevUser => ({ ...prevUser, avatar: newAvatarUrl }));
-                  toast.success(t('settings.avatar_updated_successfully'));
+                  const successMessage = typeof t === 'function' ? t('settings.avatar_updated_successfully') : 'Avatar updated successfully!';
+                  toast.success(successMessage);
                 }}
               />
 

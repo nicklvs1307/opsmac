@@ -1,27 +1,7 @@
 settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-ProfilePictureUpload.js:17 [ProfilePictureUpload] Selected file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}lastModified: 1749061307722lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília) {}name: "download.jpeg"size: 13209type: "image/jpeg"webkitRelativePath: ""[[Prototype]]: File
-ProfilePictureUpload.js:34  POST https://feedelizaapi.towersfy.com/api/settings/profile/avatar 404 (Not Found)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ln @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:226
-(anônimo) @ bind.js:5
-onClick @ ProfilePictureUpload.js:34
-Ne @ react-dom.production.min.js:54
-Be @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-zn @ react-dom.production.min.js:105
-$n @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-qn @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ut @ react-dom.production.min.js:73
-ProfilePictureUpload.js:46 [ProfilePictureUpload] Upload error: {error: 'Usuário não encontrado.'}
+ProfilePictureUpload.js:17 [ProfilePictureUpload] Selected file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}
+ProfilePictureUpload.js:39 [ProfilePictureUpload] Upload success response: {message: 'Avatar atualizado com sucesso!', avatar_url: '/uploads/avatar-1754351891861-876186007.jpeg'}
+ProfilePictureUpload.js:46 [ProfilePictureUpload] Upload error: u is not a function
 onClick @ ProfilePictureUpload.js:46
 await in onClick
 Ne @ react-dom.production.min.js:54
@@ -35,8 +15,32 @@ Me @ react-dom.production.min.js:52
 qn @ react-dom.production.min.js:109
 Qt @ react-dom.production.min.js:74
 Ut @ react-dom.production.min.js:73
-Settings.js:106 [Settings] Selected logo file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}lastModified: 1749061307722lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília) {}name: "download.jpeg"size: 13209type: "image/jpeg"webkitRelativePath: ""[[Prototype]]: File
-Settings.js:122 [Settings] Logo upload success response: {message: 'Logo atualizado com sucesso!', logo_url: '/uploads/logo-1754350878915-991747118.jpeg'}
+Settings.js:304  PUT https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/profile 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ln @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+ne @ Settings.js:304
+await in ne
+(anônimo) @ createFormControl.ts:1258
+await in (anônimo)
+Ne @ react-dom.production.min.js:54
+Be @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+$n @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73
+Settings.js:106 [Settings] Selected logo file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}
+Settings.js:122 [Settings] Logo upload success response: {message: 'Logo atualizado com sucesso!', logo_url: '/uploads/logo-1754351933527-355118157.jpeg'}
 Settings.js:131 [Settings] Logo upload error: u is not a function
 z @ Settings.js:131
 await in z
@@ -51,10 +55,7 @@ Me @ react-dom.production.min.js:52
 qn @ react-dom.production.min.js:109
 Qt @ react-dom.production.min.js:74
 Ut @ react-dom.production.min.js:73
-
-Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)Entenda o erro
-ProfilePictureUpload.js:17 [ProfilePictureUpload] Selected file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}lastModified: 1749061307722lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília) {}name: "download.jpeg"size: 13209type: "image/jpeg"webkitRelativePath: ""[[Prototype]]: File
-ProfilePictureUpload.js:34  POST https://feedelizaapi.towersfy.com/api/settings/profile/avatar 404 (Not Found)
+Settings.js:304  PUT https://feedelizaapi.towersfy.com/api/settings/0e517dc5-4881-45aa-996e-0365012000bc/profile 404 (Not Found)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ln @ dispatchRequest.js:51
@@ -63,7 +64,10 @@ _request @ Axios.js:163
 request @ Axios.js:40
 (anônimo) @ Axios.js:226
 (anônimo) @ bind.js:5
-onClick @ ProfilePictureUpload.js:34
+ne @ Settings.js:304
+await in ne
+(anônimo) @ createFormControl.ts:1258
+await in (anônimo)
 Ne @ react-dom.production.min.js:54
 Be @ react-dom.production.min.js:54
 (anônimo) @ react-dom.production.min.js:55
@@ -74,24 +78,8 @@ cc @ react-dom.production.min.js:273
 Me @ react-dom.production.min.js:52
 qn @ react-dom.production.min.js:109
 Qt @ react-dom.production.min.js:74
-Ut @ react-dom.production.min.js:73Entenda o erro
-ProfilePictureUpload.js:46 [ProfilePictureUpload] Upload error: {error: 'Usuário não encontrado.'}
-onClick @ ProfilePictureUpload.js:46
-await in onClick
-Ne @ react-dom.production.min.js:54
-Be @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-zn @ react-dom.production.min.js:105
-$n @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-qn @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ut @ react-dom.production.min.js:73Entenda o erro
-Settings.js:106 [Settings] Selected logo file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}lastModified: 1749061307722lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília) {}name: "download.jpeg"size: 13209type: "image/jpeg"webkitRelativePath: ""[[Prototype]]: File
-Settings.js:122 [Settings] Logo upload success response: {message: 'Logo atualizado com sucesso!', logo_url: '/uploads/logo-1754350878915-991747118.jpeg'}
-Settings.js:131 [Settings] Logo upload error: u is not a function
+Ut @ react-dom.production.min.js:73
+
 
 > Feedeliza+@1.0.0 start
 > node backend/server.js
@@ -157,6 +145,7 @@ Auth Middleware - req.user (after population): {
   name: 'Lucas Niquele',
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
+[Avatar Upload] User ID: 211aab5d-fb9a-421b-991c-fcda8bc44051, Uploaded filename: avatar-1754351891861-876186007.jpeg
 Auth Middleware - req.user (after population): {
   userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
   email: 'lucas@teste.com',
@@ -192,21 +181,7 @@ Auth Middleware - req.user (after population): {
   name: 'Lucas Niquele',
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-[Logo Upload] Restaurant ID: 0e517dc5-4881-45aa-996e-0365012000bc, Uploaded filename: logo-1754350878915-991747118.jpeg
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
+[Logo Upload] Restaurant ID: 0e517dc5-4881-45aa-996e-0365012000bc, Uploaded filename: logo-1754351933527-355118157.jpeg
 Auth Middleware - req.user (after population): {
   userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
   email: 'lucas@teste.com',

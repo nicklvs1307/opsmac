@@ -520,4 +520,103 @@ router.post('/:restaurantId/whatsapp/test', auth, checkRestaurantOwnership, [
   }
 });
 
+
+
+/**
+ * @swagger
+ * /api/settings/{restaurantId}/profile:
+ *   put:
+ *     summary: Atualizar informações de perfil do restaurante
+ *     tags: [Settings]
+ *     description: Atualiza o nome, tipo de cozinha, endereço e descrição de um restaurante específico.
+ *     security:
+ *       - ApiKeyAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: restaurantId
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         description: ID do restaurante.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Novo nome do restaurante.
+ *                 example: Meu Restaurante Incrível
+ *               cuisine_type:
+ *                 type: string
+ *                 description: Novo tipo de cozinha do restaurante.
+ *                 example: Italiana
+ *               address:
+ *                 type: string
+ *                 description: Novo endereço do restaurante.
+ *                 example: Rua Exemplo, 123
+ *               description:
+ *                 type: string
+ *                 description: Nova descrição do restaurante.
+ *                 example: Um lugar aconchegante com a melhor comida italiana da cidade.
+ *     responses:
+ *       200:
+ *         description: Informações do restaurante atualizadas com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Informações do restaurante atualizadas com sucesso
+ *                 restaurant:
+ *                   $ref: '#/components/schemas/Restaurant'
+ *       400:
+ *         description: Dados inválidos.
+ *       401:
+ *         description: Não autorizado.
+ *       404:
+ *         description: Restaurante não encontrado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, [
+  body('name').optional().trim().isLength({ min: 2 }).withMessage('Nome do restaurante deve ter pelo menos 2 caracteres'),
+  body('cuisine_type').optional().trim().isString().withMessage('Tipo de cozinha inválido'),
+  body('address').optional().trim().isString().withMessage('Endereço inválido'),
+  body('description').optional().trim().isString().withMessage('Descrição inválida'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { restaurantId } = req.params;
+    const { name, cuisine_type, address, description } = req.body;
+
+    const restaurant = await models.Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
+
+    const updateData = {};
+    if (name !== undefined) updateData.name = name;
+    if (cuisine_type !== undefined) updateData.cuisine_type = cuisine_type;
+    if (address !== undefined) updateData.address = address;
+    if (description !== undefined) updateData.description = description;
+
+    await restaurant.update(updateData);
+
+    res.json({ message: 'Informações do restaurante atualizadas com sucesso', restaurant });
+  } catch (error) {
+    console.error('Erro ao atualizar informações do restaurante:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;

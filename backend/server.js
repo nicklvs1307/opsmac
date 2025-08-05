@@ -72,53 +72,11 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpecs = require('./config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
-// Rota para obter e atualizar dados do restaurante
-const { auth, checkRestaurantOwnership } = require('./middleware/auth');
-const { models } = require('./config/database');
+const restaurantRoutes = require('./routes/restaurant');
+const healthRoutes = require('./routes/health');
 
-// Obter dados do restaurante
-app.get('/api/restaurant/:restaurantId', auth, checkRestaurantOwnership, async (req, res) => {
-  try {
-    const { restaurantId } = req.params;
-    const restaurant = await models.Restaurant.findByPk(restaurantId);
-    
-    if (!restaurant) {
-      return res.status(404).json({ error: 'Restaurante não encontrado' });
-    }
-    
-    res.json(restaurant);
-  } catch (error) {
-    console.error('Erro ao obter dados do restaurante:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
-
-// Atualizar dados do restaurante
-app.put('/api/restaurant/:restaurantId', auth, checkRestaurantOwnership, async (req, res) => {
-  try {
-    const { restaurantId } = req.params;
-    const restaurant = await models.Restaurant.findByPk(restaurantId);
-    
-    if (!restaurant) {
-      return res.status(404).json({ error: 'Restaurante não encontrado' });
-    }
-    
-    await restaurant.update(req.body);
-    res.json(restaurant);
-  } catch (error) {
-    console.error('Erro ao atualizar dados do restaurante:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
-
-// Rota de health check
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime()
-  });
-});
+app.use('/api/restaurant', restaurantRoutes);
+app.use('/api/health', healthRoutes);
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {

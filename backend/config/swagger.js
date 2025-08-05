@@ -1,5 +1,6 @@
 const swaggerJsdoc = require('swagger-jsdoc');
 const path = require('path');
+require('dotenv').config();
 
 const options = {
   definition: {
@@ -11,7 +12,7 @@ const options = {
     },
     servers: [
       {
-        url: `https://feedelizaapi.towersfy.com/api`,
+        url: `${process.env.BACKEND_URL || 'https://feedelizaapi.towersfy.com'}/api`,
         description: 'Production server',
       },
     ],

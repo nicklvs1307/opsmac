@@ -164,7 +164,7 @@ router.post('/public', [
 
   const { restaurant_id, phone_number, cpf, customer_name } = req.body;
 
-  console.log('[Public Check-in] Requisição recebida:', { restaurant_id, phone_number, cpf, customer_name });
+  
 
   try {
     const restaurant = await models.Restaurant.findByPk(restaurant_id);

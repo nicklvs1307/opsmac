@@ -7,13 +7,7 @@ const { generateUniqueSlug } = require('../utils/slugGenerator');
 const router = express.Router();
 
 // Middleware para verificar se o usuário é admin
-const isAdmin = (req, res, next) => {
-  if (req.user && (req.user.role === 'admin' || req.user.role === 'super_admin')) {
-    next();
-  } else {
-    res.status(403).json({ error: 'Acesso negado. Apenas administradores podem realizar esta ação.' });
-  }
-};
+const { isAdmin } = require('../middleware/adminAuth');
 
 /**
  * @swagger

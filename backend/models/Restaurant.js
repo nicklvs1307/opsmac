@@ -277,11 +277,6 @@ module.exports = (sequelize) => {
       allowNull: true,
       unique: true,
     },
-    nps_criteria: {
-      type: DataTypes.JSONB,
-      allowNull: false,
-      defaultValue: [],
-    }
   }, {
     tableName: 'restaurants',
     indexes: [

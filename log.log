@@ -1,6 +1,17 @@
-npm warn exec The following package was not found and will be installed: sequelize-cli@6.6.3
-Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
-Loaded configuration file "config/config.js".
-Using environment "development".
-== 20250805131513-add_nps_criterion_to_questions: migrating =======
-ERROR: column "nps_criterion" of relation "questions" already exists
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+/app/node_modules/sequelize/lib/associations/mixin.js:13
+      throw new Error(`${this.name}.hasMany called with something that's not a subclass of Sequelize.Model`);
+      ^
+Error: Restaurant.hasMany called with something that's not a subclass of Sequelize.Model
+    at Restaurant.hasMany (/app/node_modules/sequelize/lib/associations/mixin.js:13:13)
+    at Restaurant.associate (/app/backend/models/Restaurant.js:353:16)
+    at /app/backend/config/database.js:45:35
+    at Array.forEach (<anonymous>)
+    at setupAssociations (/app/backend/config/database.js:43:33)
+    at Object.<anonymous> (/app/backend/config/database.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+Node.js v20.19.4

@@ -1,11 +1,15 @@
-npm warn exec The following package was not found and will be installed: sequelize-cli@6.6.3
+root@ServerAgents:~/opsmac# docker exec -it 044744898a67 /bin/sh
+/app # npx sequelize-cli db:migrate:undo:all
+Need to install the following packages:
+sequelize-cli@6.6.3
+Ok to proceed? (y) y
+
 
 Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
 
 Loaded configuration file "config/config.js".
+Using environment "production".
 
-Using environment "development".
+ERROR: The server does not support SSL connections
 
-== 20250805131129-add_nps_columns_to_restaurants: migrating =======
-
-ERROR: column "total_promoters" of relation "restaurants" already exists
+/app #

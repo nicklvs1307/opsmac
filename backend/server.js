@@ -64,6 +64,7 @@ app.use('/api/public/v2', publicRoutesV2);
 app.use('/api/surveys', surveyRoutes);
 app.use('/api/public/surveys', publicSurveyRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/nps-criteria', npsCriteriaRoutes);
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');

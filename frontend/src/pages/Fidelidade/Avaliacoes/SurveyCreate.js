@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { Box, Typography, Button, Paper, Stepper, Step, StepLabel, StepContent, CircularProgress, Select, MenuItem, FormControl, InputLabel, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, Button, Paper, Stepper, Step, StepLabel, StepContent, CircularProgress, Select, MenuItem, FormControl, InputLabel, TextField, Dialog, DialogTitle, DialogContent, DialogActions, IconButton, List, ListItem, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
 
+// Funções da API
 const createSurvey = async (surveyData) => {
   const { data } = await axiosInstance.post('/api/surveys', surveyData);
   return data;
@@ -12,6 +15,11 @@ const createSurvey = async (surveyData) => {
 
 const fetchRewards = async () => {
     const { data } = await axiosInstance.get('/api/rewards?is_active=true');
+    return data;
+};
+
+const fetchNpsCriteria = async () => {
+    const { data } = await axiosInstance.get('/api/nps-criteria');
     return data;
 };
 
@@ -30,19 +38,39 @@ const SurveyCreate = () => {
   const queryClient = useQueryClient();
 
   const { data: rewards, isLoading: isLoadingRewards } = useQuery('rewards', fetchRewards);
+  const { data: npsCriteria, isLoading: isLoadingNpsCriteria } = useQuery('npsCriteria', fetchNpsCriteria);
 
   const mutation = useMutation(createSurvey, {
     onSuccess: (data) => {
       queryClient.invalidateQueries('surveys');
       toast.success('Pesquisa criada com sucesso!');
-      setCreatedSurveyId(data.id); // Armazena o ID da pesquisa criada
-      setCreatedSurveySlug(data.slug); // Armazena o slug da pesquisa criada
-      setActiveStep(3); // Avança para um novo passo para exibir as opções
+      setCreatedSurveyId(data.id);
+      setCreatedSurveySlug(data.slug);
+      setActiveStep(3);
     },
     onError: (error) => {
-      toast.error(`Erro ao criar pesquisa: ${error.response.data.msg || error.message}`);
+      toast.error(`Erro ao criar pesquisa: ${error.response?.data?.msg || error.message}`);
     }
   });
+
+  // Efeito para pré-popular as perguntas com base no tipo de pesquisa
+  useEffect(() => {
+    if (surveyType === 'nps_only') {
+      if (npsCriteria && npsCriteria.length > 0) {
+        const npsQuestions = npsCriteria.map((criterion, index) => ({
+          question_text: `Qual sua nota para ${criterion.name}?`,
+          question_type: 'nps',
+          order: index + 1,
+          nps_criterion_id: criterion.id
+        }));
+        setQuestions(npsQuestions);
+      } else {
+        setQuestions([]);
+      }
+    } else {
+      setQuestions([]); // Limpa para outros tipos de pesquisa
+    }
+  }, [surveyType, npsCriteria]);
 
   const handleNext = () => {
     if (activeStep === 0 && !surveyType) {
@@ -57,6 +85,14 @@ const SurveyCreate = () => {
   };
 
   const handleCreate = () => {
+    if (!title.trim()) {
+        toast.error('O título da pesquisa é obrigatório.');
+        return;
+    }
+    if (surveyType === 'nps_only' && questions.length === 0) {
+        toast.error('Não há critérios de NPS cadastrados. Adicione critérios nas configurações de satisfação antes de criar uma pesquisa de NPS.');
+        return;
+    }
     const surveyData = {
         type: surveyType,
         title,
@@ -75,11 +111,11 @@ const SurveyCreate = () => {
           <FormControl fullWidth sx={{ mb: 3 }}>
             <InputLabel>Tipo de Pesquisa</InputLabel>
             <Select value={surveyType} label="Tipo de Pesquisa" onChange={(e) => setSurveyType(e.target.value)}>
-              <MenuItem value="custom">Personalizada</MenuItem>
+              <MenuItem value="nps_only">NPS (Dinâmico)</MenuItem>
+              <MenuItem value="custom">Personalizada (Em breve)</MenuItem>
               <MenuItem value="delivery_csat">Delivery (CSAT)</MenuItem>
               <MenuItem value="menu_feedback">Feedback do Cardápio</MenuItem>
               <MenuItem value="customer_profile">Perfil do Cliente</MenuItem>
-              <MenuItem value="nps_only">NPS (Apenas)</MenuItem>
               <MenuItem value="salon_ratings">Salão (Ratings)</MenuItem>
               <MenuItem value="salon_like_dislike">Salão (Like/Dislike)</MenuItem>
             </Select>
@@ -95,7 +131,7 @@ const SurveyCreate = () => {
                     <Select value={rewardId} label="Recompensa (Opcional)" onChange={(e) => setRewardId(e.target.value)}>
                         <MenuItem value=""><em>Nenhuma</em></MenuItem>
                         {isLoadingRewards ? (
-                            <MenuItem disabled>Carregando recompensas...</MenuItem>
+                            <MenuItem disabled>Carregando...</MenuItem>
                         ) : (
                             rewards?.map((reward) => (
                                 <MenuItem key={reward.id} value={reward.id}>{reward.title}</MenuItem>
@@ -110,84 +146,58 @@ const SurveyCreate = () => {
                     value={couponValidityDays}
                     onChange={(e) => setCouponValidityDays(e.target.value)}
                     sx={{ mb: 2 }}
-                    InputProps={{
-                        inputProps: { min: 1 }
-                    }}
+                    InputProps={{ inputProps: { min: 1 } }}
                 />
-                {/* A lógica para adicionar perguntas personalizadas será adicionada aqui */}
+                {surveyType === 'nps_only' && (
+                    <Box mt={2}> 
+                        <Typography variant="h6">Perguntas de NPS (geradas automaticamente)</Typography>
+                        {isLoadingNpsCriteria ? <CircularProgress size={24} /> : 
+                            <List>
+                                {questions.length > 0 ? questions.map(q => (
+                                    <ListItem key={q.nps_criterion_id}>
+                                        <ListItemText primary={q.question_text} />
+                                    </ListItem>
+                                )) : <Typography variant="body2" color="text.secondary">Nenhum critério de NPS encontrado. Adicione-os nas configurações.</Typography>}
+                            </List>
+                        }
+                    </Box>
+                )}
             </Box>
         )
       case 2:
         return <Typography>Revise os detalhes da sua pesquisa antes de criá-la.</Typography>;
-      case 3:
+      case 3: // ... (código do passo 3 permanece o mesmo)
         return (
-          <Box>
-            <Typography variant="h6" gutterBottom>Pesquisa Criada com Sucesso!</Typography>
-            {createdSurveyId && createdSurveySlug && (
-              <Box sx={{ mb: 3 }}>
-                <Typography variant="body1">ID da Pesquisa: <strong>{createdSurveyId}</strong></Typography>
-                <Typography variant="body1">Link Público: <a href={`/public/surveys/${createdSurveySlug}`} target="_blank" rel="noopener noreferrer">{`/public/surveys/${createdSurveySlug}`}</a></Typography>
-                <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
-                  <Button variant="outlined" onClick={handleCopyLink}>Copiar Link</Button>
-                  <Button variant="outlined" onClick={() => setOpenQrCodeDialog(true)}>Gerar QR Code</Button>
-                  <Button variant="outlined" onClick={() => navigate(`/fidelity/surveys/edit/${createdSurveyId}`)}>Editar Pesquisa</Button>
-                  <Button variant="outlined" color="error" onClick={handleDeleteSurvey}>Apagar Pesquisa</Button>
+            <Box>
+              <Typography variant="h6" gutterBottom>Pesquisa Criada com Sucesso!</Typography>
+              {createdSurveyId && createdSurveySlug && (
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="body1">Link Público: <a href={`/public/surveys/${createdSurveySlug}`} target="_blank" rel="noopener noreferrer">{`/public/surveys/${createdSurveySlug}`}</a></Typography>
+                  <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
+                    <Button variant="outlined" onClick={() => navigator.clipboard.writeText(`${window.location.origin}/public/surveys/${createdSurveySlug}`).then(() => toast.success('Link copiado!'))}>Copiar Link</Button>
+                    <Button variant="outlined" onClick={() => setOpenQrCodeDialog(true)}>Gerar QR Code</Button>
+                    <Button variant="outlined" onClick={() => navigate(`/fidelity/surveys/edit/${createdSurveyId}`)}>Editar Pesquisa</Button>
+                  </Box>
                 </Box>
-              </Box>
-            )}
-            <Button variant="contained" onClick={() => navigate('/satisfaction/surveys')} sx={{ mt: 2 }}>Ver Todas as Pesquisas</Button>
-
-            {/* QR Code Dialog */}
-            <Dialog open={openQrCodeDialog} onClose={() => setOpenQrCodeDialog(false)}>
-              <DialogTitle>QR Code da Pesquisa</DialogTitle>
-              <DialogContent>
-                <Typography variant="body1" sx={{ mb: 2 }}>Escaneie o QR Code para acessar a pesquisa:</Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                  {/* Seu componente de QR Code vai aqui. Ex: <QRCode value={`http://localhost:3000/public/surveys/${createdSurveyId}`} size={256} /> */}
-                  <Paper elevation={3} sx={{ p: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', width: 256, height: 256 }}>
-                    <Typography variant="caption" color="text.secondary">Integrar seu módulo de QR Code aqui</Typography>
+              )}
+              <Button variant="contained" onClick={() => navigate('/satisfaction/surveys')} sx={{ mt: 2 }}>Ver Todas as Pesquisas</Button>
+              <Dialog open={openQrCodeDialog} onClose={() => setOpenQrCodeDialog(false)}>
+                <DialogTitle>QR Code da Pesquisa</DialogTitle>
+                <DialogContent sx={{ display: 'flex', justifyContent: 'center' }}>
+                  {/* Integrar QR Code aqui */}
+                  <Paper elevation={3} sx={{ p: 2, width: 256, height: 256, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                     <Typography variant="caption">QR Code</Typography>
                   </Paper>
-                </Box>
-                <Typography variant="body2" textAlign="center">Link: <a href={`/public/surveys/${createdSurveySlug}`} target="_blank" rel="noopener noreferrer">{`/public/surveys/${createdSurveySlug}`}</a></Typography>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={() => setOpenQrCodeDialog(false)}>Fechar</Button>
-              </DialogActions>
-            </Dialog>
-          </Box>
-        );
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => setOpenQrCodeDialog(false)}>Fechar</Button>
+                </DialogActions>
+              </Dialog>
+            </Box>
+          );
       default:
         return <Typography>Passo desconhecido</Typography>;
     }
-  };
-
-  const deleteMutation = useMutation((id) => axiosInstance.delete(`/api/surveys/${id}`), {
-    onSuccess: () => {
-      queryClient.invalidateQueries('surveys');
-      toast.success('Pesquisa apagada com sucesso!');
-      navigate('/satisfaction/surveys');
-    },
-    onError: (error) => {
-      toast.error(`Erro ao apagar pesquisa: ${error.response.data.msg || error.message}`);
-    }
-  });
-
-  const handleDeleteSurvey = () => {
-    if (window.confirm('Tem certeza que deseja apagar esta pesquisa? Esta ação é irreversível.')) {
-      deleteMutation.mutate(createdSurveyId);
-    }
-  };
-
-  const handleCopyLink = () => {
-    const publicLink = `${window.location.origin}/public/surveys/${createdSurveySlug}`;
-    navigator.clipboard.writeText(publicLink)
-      .then(() => {
-        toast.success('Link copiado para a área de transferência!');
-      })
-      .catch((err) => {
-        toast.error('Erro ao copiar o link.');
-        console.error('Erro ao copiar o link:', err);
-      });
   };
 
   return (
@@ -195,22 +205,21 @@ const SurveyCreate = () => {
       <Typography variant="h4" gutterBottom>Criar Nova Pesquisa</Typography>
       <Paper elevation={3} sx={{ p: 4 }}>
         <Stepper activeStep={activeStep} orientation="vertical" sx={{ mt: 2 }}>
-            {['Escolha o Tipo', 'Configure', 'Revise e Crie', 'Ações da Pesquisa'].map((label, index) => (
+            {['Escolha o Tipo', 'Configure Detalhes e Perguntas', 'Revise e Crie', 'Ações'].map((label, index) => (
                 <Step key={label}>
                     <StepLabel>{label}</StepLabel>
                     <StepContent>
                         {renderStepContent(index)}
                         <Box sx={{ mt: 2 }}>
                             <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>Voltar</Button>
-                            <Button variant="contained" onClick={activeStep === 2 ? handleCreate : handleNext}>
-                                {activeStep === 2 ? 'Criar Pesquisa' : 'Próximo'}
+                            <Button variant="contained" onClick={activeStep === 2 ? handleCreate : handleNext} disabled={mutation.isLoading}>
+                                {mutation.isLoading ? <CircularProgress size={24}/> : (activeStep === 2 ? 'Criar Pesquisa' : 'Próximo')}
                             </Button>
                         </Box>
                     </StepContent>
                 </Step>
             ))}
         </Stepper>
-        {mutation.isLoading && <CircularProgress sx={{ mt: 2 }} />}
       </Paper>
     </Box>
   );

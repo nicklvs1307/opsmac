@@ -48,6 +48,7 @@ module.exports = (sequelize) => {
   Question.associate = (models) => {
     Question.belongsTo(models.Survey, { foreignKey: 'survey_id' });
     Question.hasMany(models.Answer, { foreignKey: 'question_id', as: 'answers', onDelete: 'CASCADE' });
+    Question.belongsTo(models.NpsCriterion, { foreignKey: 'nps_criterion_id', as: 'npsCriterion' });
   };
 
   return Question;

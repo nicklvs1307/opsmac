@@ -349,5 +349,9 @@ module.exports = (sequelize) => {
     return this.is_active && this.settings.feedback_enabled && this.isSubscriptionActive();
   };
 
+  Restaurant.associate = (models) => {
+    Restaurant.hasMany(models.NpsCriterion, { as: 'npsCriteria', foreignKey: 'restaurant_id' });
+  };
+
   return Restaurant;
 };

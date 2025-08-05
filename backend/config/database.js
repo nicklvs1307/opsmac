@@ -40,7 +40,6 @@ const WhatsAppMessage = require('../models/WhatsAppMessage')(sequelize); // Impo
 
 // Definir associações
 const setupAssociations = () => {
-  console.log('Modelos conhecidos pelo Sequelize antes de associar:', Object.keys(sequelize.models));
   Object.keys(sequelize.models).forEach(modelName => {
     if (sequelize.models[modelName].associate) {
       sequelize.models[modelName].associate(sequelize.models);

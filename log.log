@@ -1,15 +1,6 @@
-root@ServerAgents:~/opsmac# docker exec -it 044744898a67 /bin/sh
-/app # npx sequelize-cli db:migrate:undo:all
-Need to install the following packages:
-sequelize-cli@6.6.3
-Ok to proceed? (y) y
-
-
+npm warn exec The following package was not found and will be installed: sequelize-cli@6.6.3
 Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
-
 Loaded configuration file "config/config.js".
-Using environment "production".
-
-ERROR: The server does not support SSL connections
-
-/app #
+Using environment "development".
+== 20250805131513-add_nps_criterion_to_questions: migrating =======
+ERROR: column "nps_criterion" of relation "questions" already exists

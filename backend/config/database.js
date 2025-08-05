@@ -36,7 +36,8 @@ const Survey = require('../models/Survey')(sequelize);
 const Question = require('../models/Question')(sequelize);
 const SurveyResponse = require('../models/SurveyResponse')(sequelize);
 const Answer = require('../models/Answer')(sequelize);
-const WhatsAppMessage = require('../models/WhatsAppMessage')(sequelize); // Importar o novo modelo
+const WhatsAppMessage = require('../models/WhatsAppMessage')(sequelize);
+const NpsCriterion = require('../models/NpsCriterion')(sequelize);
 
 // Definir associações
 const setupAssociations = () => {

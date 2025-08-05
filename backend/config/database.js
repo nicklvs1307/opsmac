@@ -64,20 +64,6 @@ const testConnection = async () => {
 // Função para sincronizar banco
 const syncDatabase = async (force = false) => {
   try {
-    // Criar ENUM type manualmente se não existir, para evitar problemas com alter: true no Postgres
-    
-
-    
-
-    await sequelize.query(`
-      DO $ BEGIN
-        CREATE TYPE "public"."enum_coupons_reward_type" AS ENUM('discount_percentage', 'discount_fixed', 'free_item', 'points', 'cashback', 'gift', 'spin_the_wheel');
-      EXCEPTION
-        WHEN duplicate_object THEN null;
-      END $;
-    `);
-    console.log('✅ Tipo ENUM "enum_coupons_reward_type" verificado/criado.');
-
     await sequelize.sync({ force });
     console.log('✅ Banco de dados sincronizado');
     return true;
@@ -102,7 +88,8 @@ module.exports = {
     Question,
     SurveyResponse,
     Answer,
-    WhatsAppMessage // Adicionar o novo modelo aqui
+    WhatsAppMessage,
+    NpsCriterion
   },
   testConnection,
   syncDatabase

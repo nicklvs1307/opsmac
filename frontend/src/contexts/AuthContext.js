@@ -254,6 +254,7 @@ export const AuthProvider = ({ children }) => {
     changePassword,
     forgotPassword,
     resetPassword,
+    dispatch, // Expose dispatch
   };
 
   return (

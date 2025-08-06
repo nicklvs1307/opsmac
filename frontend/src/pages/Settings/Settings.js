@@ -60,7 +60,7 @@ const getFullImageUrl = (relativePath) => {
 };
 
 const Settings = () => {
-  const { user, updateUser, setUser } = useAuth();
+  const { user, updateUser, dispatch } = useAuth();
   const { mode, toggleTheme } = useThemeMode();
   const { t, i18n } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
@@ -125,8 +125,7 @@ const Settings = () => {
       toast.success(t('settings.logo_updated_successfully'));
       const updatedRestaurant = { ...user.restaurant, logo: response.data.logo_url };
       const updatedUser = { ...user, restaurant: updatedRestaurant };
-      setUser(updatedUser);
-      console.log('[Settings] Before calling setUser, setUser is:', setUser);
+      dispatch({ type: 'UPDATE_USER', payload: updatedUser });
       setSelectedLogo(null);
       setLogoPreview(getFullImageUrl(response.data.logo_url)); // Atualiza a prévia com a URL completa
     } catch (err) {
@@ -350,7 +349,7 @@ const Settings = () => {
         // Update user context with new restaurant data
         const updatedRestaurant = { ...user.restaurant, ...restaurantData };
         const updatedUser = { ...user, restaurant: updatedRestaurant };
-        setUser(updatedUser);
+        dispatch({ type: 'UPDATE_USER', payload: updatedUser });
       }
 
       toast.success(t('settings.profile_updated_successfully'));

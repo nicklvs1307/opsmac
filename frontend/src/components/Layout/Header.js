@@ -348,7 +348,6 @@ const Header = ({ onMobileNavOpen }) => {
         </Box>
       </Menu>
     </Box>
-  </Box>
   );
 };
 

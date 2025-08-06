@@ -31,12 +31,15 @@ const LoginForm = ({
   error = '',
   showDemoCredentials = true,
   logoComponent,
-  appName = t('app_name'),
-  appDescription = t('app_description'),
+  appName,
+  appDescription,
 }) => {
   const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
+
+  const finalAppName = appName || t('login.app_name');
+  const finalAppDescription = appDescription || t('login.app_description');
 
   const {
     control,
@@ -129,7 +132,7 @@ const LoginForm = ({
                 },
               }}
             >
-              {appName}
+              {finalAppName}
             </Typography>
             <Typography 
               variant="body1" 
@@ -148,7 +151,7 @@ const LoginForm = ({
                 },
               }}
             >
-              {appDescription}
+              {finalAppDescription}
             </Typography>
           </>
         )}

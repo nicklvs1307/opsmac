@@ -262,7 +262,7 @@ const PublicSurveyForm = () => {
                     boxShadow: '0 5px 15px rgba(0, 0, 0, 0.08)',
                     transform: 'translateY(-2px)',
                   },
-                  background: 'rgba(255, 255, 255, 0.8)',
+                  background: alpha(backgroundColor, 0.8),
                   backdropFilter: 'blur(8px)',
                 }}>
                 <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
@@ -315,6 +315,25 @@ const PublicSurveyForm = () => {
                           },
                         }
                       }}
+                      InputProps={{
+                        sx: {
+                          borderRadius: 2,
+                          '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: 'rgba(0, 0, 0, 0.1)',
+                          },
+                          '&:hover .MuiOutlinedInput-notchedOutline': {
+                            borderColor: alpha(primaryColor, 0.3),
+                          },
+                          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: primaryColor,
+                          },
+                          transition: 'all 0.3s ease',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                          '&:hover': {
+                            boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                          },
+                        }
+                      }}
                     />
                   ) : question.question_type === 'radio' ? (
                     <RadioGroup
@@ -343,7 +362,11 @@ const PublicSurveyForm = () => {
                     </FormGroup>
                   ) : question.question_type === 'dropdown' ? (
                     <FormControl fullWidth variant="outlined">
-                      <InputLabel sx={{ color: textColor }}>Selecione uma opção</InputLabel>
+                      <InputLabel sx={{ color: textColor,
+                        '&.Mui-focused': {
+                          color: primaryColor,
+                        },
+                      }}>Selecione uma opção</InputLabel>
                       <Select
                         value={answers[question.id] || ''}
                         label="Selecione uma opção"
@@ -511,7 +534,7 @@ const PublicSurveyForm = () => {
         </Paper>
 
         <Box textAlign="center" mt={4} sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}>
-          <Typography variant="caption" color="text.disabled" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+          <Typography variant="caption" color={textColor} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
             <span>Powered by</span> 
             <span style={{ fontWeight: 'bold', color: primaryColor }}>
               Sistema de Feedback

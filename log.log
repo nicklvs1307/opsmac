@@ -1,18 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      166.0s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      170.6s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.638
-0.638 > Feedeliza+-frontend@1.0.0 build
-0.638 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.638
-4.108 Creating an optimized production build...
-165.0 Failed to compile.
-165.0
-165.0 [eslint]
-165.0 src/pages/Public/PublicCheckin.js
-165.0 Syntax error: Unexpected token (482:29) (482:29)
-165.0
-165.0
+0.662
+0.662 > Feedeliza+-frontend@1.0.0 build
+0.662 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.662
+4.052 Creating an optimized production build...
+169.8 Failed to compile.
+169.8
+169.8 [eslint]
+169.8 src/pages/Public/PublicCheckin.js
+169.8 Syntax error: Unexpected token (482:29) (482:29)
+169.8
+169.8
 ------
 
  1 warning found (use docker --debug to expand):

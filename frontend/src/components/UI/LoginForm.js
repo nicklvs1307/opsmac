@@ -31,8 +31,8 @@ const LoginForm = ({
   error = '',
   showDemoCredentials = true,
   logoComponent,
-  appName = 'FeedbackPro',
-  appDescription = 'Sistema de Feedback para Restaurantes',
+  appName = {t('app_name')},
+  appDescription = {t('app_description')},
 }) => {
   const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
@@ -196,7 +196,7 @@ const LoginForm = ({
             },
           }}
         >
-          Entrar na sua conta
+          {t('login_form.enter_account')}
         </Typography>
 
         {error && (
@@ -230,10 +230,10 @@ const LoginForm = ({
           name="email"
           control={control}
           rules={{
-            required: 'Email é obrigatório',
+            required: t('login_form.email_required'),
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Email inválido',
+              message: t('login_form.invalid_email'),
             },
           }}
           render={({ field }) => (
@@ -241,7 +241,7 @@ const LoginForm = ({
               {...field}
               margin="normal"
               fullWidth
-              label="Email"
+              label={t('login_form.email_label')}
               type="email"
               autoComplete="email"
               autoFocus
@@ -285,10 +285,10 @@ const LoginForm = ({
           name="password"
           control={control}
           rules={{
-            required: 'Senha é obrigatória',
+            required: t('login_form.password_required'),
             minLength: {
               value: 6,
-              message: 'Senha deve ter pelo menos 6 caracteres',
+              message: t('login_form.password_min_length'),
             },
           }}
           render={({ field }) => (
@@ -296,7 +296,7 @@ const LoginForm = ({
               {...field}
               margin="normal"
               fullWidth
-              label="Senha"
+              label={t('login_form.password_label')}
               type={showPassword ? 'text' : 'password'}
               autoComplete="current-password"
               error={!!errors.password}
@@ -401,7 +401,7 @@ const LoginForm = ({
           {loading ? (
             <CircularProgress size={24} color="inherit" />
           ) : (
-            'Entrar'
+            t('login_form.login_button')
           )}
         </Button>
 
@@ -437,11 +437,11 @@ const LoginForm = ({
               },
             }}
           >
-            Esqueceu sua senha?
+            {t('login_form.forgot_password')}
           </Link>
           
           <Typography variant="body2" color="text.secondary">
-            Não tem uma conta?{' '}
+            {t('login_form.no_account_question')} 
             <Link 
               component={RouterLink} 
               to="/register" 
@@ -457,7 +457,7 @@ const LoginForm = ({
                 },
               }}
             >
-              Cadastre-se aqui
+              {t('login_form.register_here')}
             </Link>
           </Typography>
         </Box>

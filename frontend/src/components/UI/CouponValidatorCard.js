@@ -40,7 +40,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
 
   const handleValidate = async () => {
     if (!couponCode.trim()) {
-      setError('Por favor, insira um código de cupom');
+      setError(t('coupon_validator_card.enter_coupon_code'));
       return;
     }
 
@@ -58,8 +58,8 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
           setCoupon({
             is_valid: Math.random() > 0.3, // Simulação
             code: couponCode,
-            reward: { title: 'Desconto Simulado' },
-            customer: { name: 'Cliente Teste' },
+            reward: { title: t('coupon_validator_card.simulated_discount') },
+            customer: { name: t('coupon_validator_card.test_customer') },
             status: ['active', 'redeemed', 'expired'][Math.floor(Math.random() * 3)],
             expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
           });
@@ -68,7 +68,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
         return;
       }
     } catch (err) {
-      setError(err.message || 'Erro ao validar cupom');
+      setError(err.message || t('coupon_validator_card.error_validating_coupon'));
     } finally {
       setLoading(false);
     }
@@ -98,9 +98,9 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
 
   const getStatusLabel = (status) => {
     switch (status) {
-      case 'active': return 'Ativo';
-      case 'redeemed': return 'Resgatado';
-      case 'expired': return 'Expirado';
+      case 'active': return t('coupon_validator_card.status_active');
+      case 'redeemed': return t('coupon_validator_card.status_redeemed');
+      case 'expired': return t('coupon_validator_card.status_expired');
       default: return status;
     }
   };
@@ -153,7 +153,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
               WebkitTextFillColor: 'transparent',
             }}
           >
-            Validador de Cupons
+            {t('coupon_validator_card.title')}
           </Typography>
         </Box>
 
@@ -185,14 +185,14 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
         >
           <TextField
             fullWidth
-            label="Código do Cupom"
+            label={t('coupon_validator_card.coupon_code_label')}
             value={couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleValidate()}
-            placeholder="Digite o código do cupom"
+            placeholder={t('coupon_validator_card.coupon_code_placeholder')}
             InputProps={{
               endAdornment: couponCode && (
-                <Tooltip title={copied ? "Copiado!" : "Copiar código"}>
+                <Tooltip title={copied ? t('coupon_validator_card.copied_tooltip') : t('coupon_validator_card.copy_code_tooltip')}>
                   <IconButton onClick={handleCopyCode} size="small">
                     <ContentCopyIcon fontSize="small" color={copied ? "primary" : "action"} />
                   </IconButton>
@@ -219,10 +219,10 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                 }
               }}
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : 'Validar'}
+              {loading ? <CircularProgress size={24} color="inherit" /> : t('coupon_validator_card.validate_button')}
             </Button>
             {coupon && (
-              <Tooltip title="Limpar e validar outro cupom">
+              <Tooltip title={t('coupon_validator_card.clear_and_validate_another')}>
                 <IconButton 
                   onClick={handleReset} 
                   sx={{ ml: 1 }}
@@ -308,7 +308,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                     color: coupon.is_valid ? theme.palette.success.main : theme.palette.error.main
                   }}
                 >
-                  {coupon.is_valid ? 'Cupom Válido' : 'Cupom Inválido'}
+                  {coupon.is_valid ? t('coupon_validator_card.coupon_valid') : t('coupon_validator_card.coupon_invalid')}
                 </Typography>
               </Box>
 
@@ -327,7 +327,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
-                    Código
+                    {t('coupon_validator_card.code_label')}
                   </Typography>
                   <Typography 
                     variant="body1"
@@ -351,10 +351,10 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
-                    Recompensa
+                    {t('coupon_validator_card.reward_label')}
                   </Typography>
                   <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                    {coupon.reward?.title || 'N/A'}
+                    {coupon.reward?.title || t('coupon_validator_card.not_available')}
                   </Typography>
                 </Box>
 
@@ -364,10 +364,10 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
-                    Cliente
+                    {t('coupon_validator_card.customer_label')}
                   </Typography>
                   <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                    {coupon.customer?.name || 'N/A'}
+                    {coupon.customer?.name || t('coupon_validator_card.not_available')}
                   </Typography>
                 </Box>
 
@@ -377,7 +377,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
-                    Status
+                    {t('coupon_validator_card.status_label')}
                   </Typography>
                   <Chip
                     label={getStatusLabel(coupon.status)}
@@ -397,7 +397,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
-                    Expira em
+                    {t('coupon_validator_card.expires_in_label')}
                   </Typography>
                   <Typography variant="body1" sx={{ fontWeight: 600 }}>
                     {coupon.expires_at 
@@ -425,7 +425,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                         }
                       }}
                     >
-                      {loading ? <CircularProgress size={24} color="inherit" /> : 'Utilizar Cupom'}
+                      {loading ? <CircularProgress size={24} color="inherit" /> : t('coupon_validator_card.use_coupon_button')}
                     </Button>
                   </Box>
                 )}

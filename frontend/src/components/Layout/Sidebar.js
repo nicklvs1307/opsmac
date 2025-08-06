@@ -64,24 +64,24 @@ const Sidebar = ({ onMobileClose }) => {
 
   const menuItems = [
     {
-      title: 'Dashboard',
+      title: t('sidebar.dashboard'),
       icon: <DashboardIcon />,
       path: '/dashboard',
       roles: ['admin', 'owner', 'manager']
     },
     {
-      title: 'Fidelidade',
+      title: t('sidebar.fidelity_program'),
       icon: <CheckinIcon />, // Usando CheckinIcon por enquanto, pode ser alterado
       path: '/fidelity',
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: 'Check-in',
+          title: t('sidebar.checkin_program'),
           icon: <CheckinIcon />,
           path: '/fidelity/checkin'
         },
         {
-          title: 'Satisfação',
+          title: t('sidebar.satisfaction'),
           icon: <PollIcon />,
           path: '/fidelity/satisfaction'
         }
@@ -89,78 +89,78 @@ const Sidebar = ({ onMobileClose }) => {
     },
     
     {
-      title: 'QR Codes',
+      title: t('sidebar.qr_codes'),
       icon: <QrCodeIcon />,
       path: '/qrcodes',
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: 'Gerenciar QR Codes',
+          title: t('sidebar.manage_qr_codes'),
           icon: <ListIcon />,
           path: '/qrcodes'
         },
         {
-          title: 'Gerar QR Code',
+          title: t('sidebar.generate_qr_code'),
           icon: <AddIcon />,
           path: '/qrcodes/new'
         }
       ]
     },
     {
-      title: 'Recompensas',
+      title: t('sidebar.rewards'),
       icon: <RewardsIcon />,
       path: '/rewards',
       roles: ['admin', 'owner', 'manager']
     },
     {
-      title: 'Cupons',
+      title: t('sidebar.coupons'),
       icon: <RewardsIcon />,
       path: '/coupons',
       roles: ['admin', 'owner', 'manager']
     },
     {
-      title: 'Clientes',
+      title: t('sidebar.customers'),
       icon: <PeopleIcon />,
       path: '/customers',
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: 'Listar Clientes',
+          title: t('sidebar.list_customers'),
           icon: <ListIcon />,
           path: '/customers'
         },
         {
-          title: 'Aniversariantes',
+          title: t('sidebar.birthdays'),
           icon: <CardGiftcard />,
           path: '/customers/birthdays'
         },
         {
-          title: 'Dashboard de Clientes',
+          title: t('sidebar.customer_dashboard'),
           icon: <AnalyticsIcon />,
           path: '/customers/dashboard'
         }
       ]
     },
     {
-      title: 'Relacionamento',
+      title: t('sidebar.relationship'),
       icon: <ConnectWithoutContactIcon />,
       path: '/relationship',
       roles: ['admin', 'owner', 'manager']
     },
     {
-      title: 'Integrações',
+      title: t('sidebar.integrations'),
       icon: <ConnectWithoutContactIcon />,
       path: '/integrations',
       roles: ['admin', 'owner', 'manager']
     },
     {
-      title: 'Configurações',
+      title: t('sidebar.settings'),
       icon: <SettingsIcon />,
       path: '/settings',
       roles: ['admin', 'owner']
     },
     {
-      title: 'Admin',
+      title: t('sidebar.admin'),
       icon: <DashboardIcon />,
       path: '/admin',
       roles: ['super_admin']

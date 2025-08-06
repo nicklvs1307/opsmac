@@ -82,7 +82,7 @@ const Coupons = () => {
       handleMenuClose();
     } catch (err) {
       console.error('Error redeeming coupon:', err);
-      setError('Erro ao resgatar cupom');
+      setError(t('coupons.redeem_error'));
     }
   };
 
@@ -106,7 +106,7 @@ const Coupons = () => {
       setTotalPages(response.data.pagination.total_pages);
     } catch (err) {
       console.error('Error fetching coupons:', err);
-      setError('Erro ao carregar cupons');
+      setError(t('coupons.fetch_error'));
     } finally {
       setLoading(false);
     }
@@ -135,11 +135,11 @@ const Coupons = () => {
 
   const getStatusLabel = (status) => {
     switch (status) {
-      case 'active': return 'Ativo';
-      case 'inactive': return 'Inativo';
-      case 'expired': return 'Expirado';
-      case 'used': return 'Usado';
-      case 'pending': return 'Pendente';
+      case 'active': return t('coupons.status_active');
+      case 'inactive': return t('coupons.status_inactive');
+      case 'expired': return t('coupons.status_expired');
+      case 'used': return t('coupons.status_used');
+      case 'pending': return t('coupons.status_pending');
       default: return status;
     }
   };
@@ -149,13 +149,13 @@ const Coupons = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Código</TableCell>
-            <TableCell>Cliente</TableCell>
-            <TableCell>Recompensa</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Criado</TableCell>
-            <TableCell>Expira</TableCell>
-            <TableCell>Ações</TableCell>
+            <TableCell>{t('coupons.table_header_code')}</TableCell>
+            <TableCell>{t('coupons.table_header_customer')}</TableCell>
+            <TableCell>{t('coupons.table_header_reward')}</TableCell>
+            <TableCell>{t('coupons.table_header_status')}</TableCell>
+            <TableCell>{t('coupons.table_header_created')}</TableCell>
+            <TableCell>{t('coupons.table_header_expires')}</TableCell>
+            <TableCell>{t('coupons.table_header_actions')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -166,8 +166,8 @@ const Coupons = () => {
                   {coupon.code}
                 </Typography>
               </TableCell>
-              <TableCell>{coupon.customer?.name || 'N/A'}</TableCell>
-              <TableCell>{coupon.reward?.title || 'N/A'}</TableCell>
+              <TableCell>{coupon.customer?.name || t('common.na')}</TableCell>
+              <TableCell>{coupon.reward?.title || t('common.na')}</TableCell>
               <TableCell>
                 <Chip
                   label={getStatusLabel(coupon.status)}
@@ -181,7 +181,7 @@ const Coupons = () => {
               <TableCell>
                 {coupon.expires_at
                   ? format(new Date(coupon.expires_at), 'dd/MM/yyyy', { locale: ptBR })
-                  : 'Sem expiração'
+                  : t('coupons.no_expiration')
                 }
               </TableCell>
               <TableCell>
@@ -210,7 +210,7 @@ const Coupons = () => {
   return (
     <Box>
       <Typography variant="h4" component="h1" sx={{ mb: 3 }}>
-        Gerenciamento de Cupons
+        {t('coupons.title')}
       </Typography>
 
       <Paper sx={{ mb: 3 }}>
@@ -220,10 +220,10 @@ const Coupons = () => {
           indicatorColor="primary"
           textColor="primary"
         >
-          <Tab label="Lista de Cupons" icon={<ListIcon />} />
-          <Tab label="Análise" icon={<AnalyticsIcon />} />
-          <Tab label="Validador" icon={<CheckCircleIcon />} />
-          <Tab label="Criar Cupom" icon={<AddIcon />} />
+          <Tab label={t('coupons.tab_list')} icon={<ListIcon />} />
+          <Tab label={t('coupons.tab_analytics')} icon={<AnalyticsIcon />} />
+          <Tab label={t('coupons.tab_validator')} icon={<CheckCircleIcon />} />
+          <Tab label={t('coupons.tab_create')} icon={<AddIcon />} />
         </Tabs>
       </Paper>
 
@@ -241,11 +241,11 @@ const Coupons = () => {
       {totalPages > 1 && (
         <Box display="flex" justifyContent="flex-end" alignItems="center" mt={3} gap={2}>
           <FormControl size="small">
-            <InputLabel id="items-per-page-label">Itens por Página</InputLabel>
+            <InputLabel id="items-per-page-label">{t('coupons.items_per_page_label')}</InputLabel>
             <Select
               labelId="items-per-page-label"
               value={itemsPerPage}
-              label="Itens por Página"
+              label={t('coupons.items_per_page_label')}
               onChange={(e) => setItemsPerPage(e.target.value)}
             >
               <MenuItem value={5}>5</MenuItem>
@@ -268,8 +268,8 @@ const Coupons = () => {
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={() => handleRedeem(selectedItem.id)}>Utilizar Cupom</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Invalidar Cupom</MenuItem>
+        <MenuItem onClick={() => handleRedeem(selectedItem.id)}>{t('coupons.redeem_coupon_button')}</MenuItem>
+        <MenuItem onClick={handleMenuClose}>{t('coupons.invalidate_coupon_button')}</MenuItem>
       </Menu>
     </Box>
   );

@@ -185,7 +185,7 @@ const CustomerCard = ({ customer, index, showRanking = true }) => {
                     fontSize: '0.7rem'
                   }}
                 >
-                  Feedbacks
+                  {t('customer_card.feedbacks')}
                 </Typography>
               </Box>
             </Grid>
@@ -209,7 +209,7 @@ const CustomerCard = ({ customer, index, showRanking = true }) => {
                     fontSize: '0.7rem'
                   }}
                 >
-                  Cupons
+                  {t('customer_card.coupons')}
                 </Typography>
               </Box>
             </Grid>

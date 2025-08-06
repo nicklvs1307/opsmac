@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useTranslation } from 'react-i18next';
 
 const fetchSurvey = async (id) => {
   const { data } = await axiosInstance.get(`/api/surveys/${id}`);
@@ -25,6 +26,7 @@ const SurveyEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
@@ -43,7 +45,7 @@ const SurveyEdit = () => {
       setQuestions(data.questions || []); // Populate questions
     },
     onError: (err) => {
-      toast.error(`Erro ao carregar pesquisa: ${err.response.data.msg || err.message}`);
+      toast.error(t('survey_edit.load_error', { message: err.response.data.msg || err.message }));
     }
   });
 
@@ -53,11 +55,11 @@ const SurveyEdit = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(['survey', id]);
       queryClient.invalidateQueries('surveys');
-      toast.success('Pesquisa atualizada com sucesso!');
+      toast.success(t('survey_edit.update_success'));
       navigate('/satisfaction/surveys'); // Redireciona para a lista de pesquisas
     },
     onError: (err) => {
-      toast.error(`Erro ao atualizar pesquisa: ${err.response.data.msg || err.message}`);
+      toast.error(t('survey_edit.update_error', { message: err.response.data.msg || err.message }));
     }
   });
 
@@ -117,18 +119,18 @@ const SurveyEdit = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>Editar Pesquisa</Typography>
+      <Typography variant="h4" gutterBottom>{t('survey_edit.title')}</Typography>
       <Paper elevation={3} sx={{ p: 4 }}>
-        <TextField fullWidth label="Título" value={title} onChange={(e) => setTitle(e.target.value)} sx={{ mb: 2 }} />
-        <TextField fullWidth label="Slug" value={slug} onChange={(e) => setSlug(e.target.value)} sx={{ mb: 2 }} helperText="O slug é usado na URL da pesquisa. Use apenas letras, números e hífens." />
-        <TextField fullWidth label="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} sx={{ mb: 2 }} />
+        <TextField fullWidth label={t('survey_edit.title_label')} value={title} onChange={(e) => setTitle(e.target.value)} sx={{ mb: 2 }} />
+        <TextField fullWidth label={t('survey_edit.slug_label')} value={slug} onChange={(e) => setSlug(e.target.value)} sx={{ mb: 2 }} helperText={t('survey_edit.slug_helper')} />
+        <TextField fullWidth label={t('survey_edit.description_label')} value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} sx={{ mb: 2 }} />
 
         <FormControl fullWidth sx={{ mb: 2 }}>
-            <InputLabel>Recompensa (Opcional)</InputLabel>
-            <Select value={rewardId} label="Recompensa (Opcional)" onChange={(e) => setRewardId(e.target.value)}>
-                <MenuItem value=""><em>Nenhuma</em></MenuItem>
+            <InputLabel>{t('survey_edit.reward_label')}</InputLabel>
+            <Select value={rewardId} label={t('survey_edit.reward_label')} onChange={(e) => setRewardId(e.target.value)}>
+                <MenuItem value=""><em>{t('common.none')}</em></MenuItem>
                 {isLoadingRewards ? (
-                    <MenuItem disabled>Carregando recompensas...</MenuItem>
+                    <MenuItem disabled>{t('survey_edit.loading_rewards')}</MenuItem>
                 ) : (
                     rewards?.map((reward) => (
                         <MenuItem key={reward.id} value={reward.id}>{reward.title}</MenuItem>
@@ -139,7 +141,7 @@ const SurveyEdit = () => {
 
         <TextField
             fullWidth
-            label="Dias de Validade do Cupom (Opcional)"
+            label={t('survey_edit.coupon_validity_days_label')}
             type="number"
             value={couponValidityDays}
             onChange={(e) => setCouponValidityDays(e.target.value)}
@@ -149,38 +151,38 @@ const SurveyEdit = () => {
             }}
         />
 
-        <Typography variant="h5" sx={{ mt: 3, mb: 2 }}>Perguntas</Typography>
+        <Typography variant="h5" sx={{ mt: 3, mb: 2 }}>{t('survey_edit.questions_title')}</Typography>
         {questions.map((question, qIndex) => (
           <Paper key={question.id} elevation={1} sx={{ p: 3, mb: 3 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-              <Typography variant="h6">Pergunta {qIndex + 1}</Typography>
+              <Typography variant="h6">{t('survey_edit.question_number', { number: qIndex + 1 })}</Typography>
               <IconButton color="error" onClick={() => handleRemoveQuestion(qIndex)}>
                 <DeleteIcon />
               </IconButton>
             </Box>
             <TextField
               fullWidth
-              label="Texto da Pergunta"
+              label={t('survey_edit.question_text_label')}
               value={question.question_text}
               onChange={(e) => handleQuestionChange(qIndex, 'question_text', e.target.value)}
               sx={{ mb: 2 }}
             />
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>Tipo de Pergunta</InputLabel>
+              <InputLabel>{t('survey_edit.question_type_label')}</InputLabel>
               <Select
                 value={question.question_type}
-                label="Tipo de Pergunta"
+                label={t('survey_edit.question_type_label')}
                 onChange={(e) => handleQuestionChange(qIndex, 'question_type', e.target.value)}
               >
-                <MenuItem value="text">Texto Curto</MenuItem>
-                <MenuItem value="textarea">Texto Longo</MenuItem>
-                <MenuItem value="radio">Múltipla Escolha (Única)</MenuItem>
-                <MenuItem value="checkboxes">Múltipla Escolha (Múltipla)</MenuItem>
-                <MenuItem value="dropdown">Dropdown</MenuItem>
-                <MenuItem value="nps">NPS</MenuItem>
-                <MenuItem value="csat">CSAT</MenuItem>
-                <MenuItem value="ratings">Avaliação (Estrelas)</MenuItem>
-                <MenuItem value="like_dislike">Gostei/Não Gostei</MenuItem>
+                <MenuItem value="text">{t('survey_edit.question_type_text')}</MenuItem>
+                <MenuItem value="textarea">{t('survey_edit.question_type_textarea')}</MenuItem>
+                <MenuItem value="radio">{t('survey_edit.question_type_radio')}</MenuItem>
+                <MenuItem value="checkboxes">{t('survey_edit.question_type_checkboxes')}</MenuItem>
+                <MenuItem value="dropdown">{t('survey_edit.question_type_dropdown')}</MenuItem>
+                <MenuItem value="nps">{t('survey_edit.question_type_nps')}</MenuItem>
+                <MenuItem value="csat">{t('survey_edit.question_type_csat')}</MenuItem>
+                <MenuItem value="ratings">{t('survey_edit.question_type_ratings')}</MenuItem>
+                <MenuItem value="like_dislike">{t('survey_edit.question_type_like_dislike')}</MenuItem>
               </Select>
             </FormControl>
 
@@ -188,12 +190,12 @@ const SurveyEdit = () => {
               question.question_type === 'checkboxes' ||
               question.question_type === 'dropdown') && (
               <Box sx={{ mt: 2 }}>
-                <Typography variant="subtitle1" gutterBottom>Opções:</Typography>
+                <Typography variant="subtitle1" gutterBottom>{t('survey_edit.options_title')}</Typography>
                 {question.options.map((option, optIndex) => (
                   <Box key={optIndex} sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                     <TextField
                       fullWidth
-                      label={`Opção ${optIndex + 1}`}
+                      label={t('survey_edit.option_label', { number: optIndex + 1 })}
                       value={option}
                       onChange={(e) => handleOptionChange(qIndex, optIndex, e.target.value)}
                     />
@@ -202,18 +204,18 @@ const SurveyEdit = () => {
                     </IconButton>
                   </Box>
                 ))}
-                <Button variant="outlined" onClick={() => handleAddOption(qIndex)} sx={{ mt: 1 }}>Adicionar Opção</Button>
+                <Button variant="outlined" onClick={() => handleAddOption(qIndex)} sx={{ mt: 1 }}>{t('survey_edit.add_option_button')}</Button>
               </Box>
             )}
           </Paper>
         ))}
-        <Button variant="contained" onClick={handleAddQuestion} sx={{ mb: 2 }}>Adicionar Pergunta</Button>
+        <Button variant="contained" onClick={handleAddQuestion} sx={{ mb: 2 }}>{t('survey_edit.add_question_button')}</Button>
 
         <Box sx={{ mt: 3 }}>
           <Button variant="contained" onClick={handleSubmit} disabled={mutation.isLoading}>
-            {mutation.isLoading ? <CircularProgress size={24} /> : 'Salvar Alterações'}
+            {mutation.isLoading ? <CircularProgress size={24} /> : t('survey_edit.save_changes_button')}
           </Button>
-          <Button variant="outlined" onClick={() => navigate('/satisfaction/surveys')} sx={{ ml: 2 }}>Cancelar</Button>
+          <Button variant="outlined" onClick={() => navigate('/satisfaction/surveys')} sx={{ ml: 2 }}>{t('common.cancel')}</Button>
         </Box>
       </Paper>
     </Box>

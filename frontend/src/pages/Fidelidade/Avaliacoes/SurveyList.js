@@ -15,6 +15,7 @@ import toast from 'react-hot-toast';
 import QRCode from 'qrcode.react';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
+import { useTranslation } from 'react-i18next';
 
 const fetchSurveys = async (filters) => {
   const { data } = await axiosInstance.get('/api/surveys', { params: filters });
@@ -37,26 +38,27 @@ const SurveyList = () => {
   });
   const [qrCodeValue, setQrCodeValue] = useState(null);
   const [isQrModalOpen, setQrModalOpen] = useState(false);
+  const { t } = useTranslation();
 
   const { data: surveys, isLoading, error, refetch } = useQuery(['surveys', filters], () => fetchSurveys(filters));
 
   const deleteMutation = useMutation(deleteSurvey, {
     onSuccess: () => {
       queryClient.invalidateQueries('surveys');
-      toast.success('Pesquisa apagada com sucesso!');
+      toast.success(t('survey_list.delete_success'));
     },
     onError: (err) => {
-      toast.error(`Erro ao apagar pesquisa: ${err.response.data.msg || err.message}`);
+      toast.error(t('survey_list.delete_error', { message: err.response.data.msg || err.message }));
     },
   });
 
   const updateStatusMutation = useMutation(updateSurveyStatus, {
     onSuccess: () => {
       queryClient.invalidateQueries('surveys');
-      toast.success('Status da pesquisa atualizado com sucesso!');
+      toast.success(t('survey_list.status_update_success'));
     },
     onError: (err) => {
-      toast.error(`Erro ao atualizar status: ${err.response.data.msg || err.message}`);
+      toast.error(t('survey_list.status_update_error', { message: err.response.data.msg || err.message }));
     },
   });
 
@@ -66,7 +68,7 @@ const SurveyList = () => {
   };
 
   const handleDelete = (id) => {
-    if (window.confirm('Tem certeza que deseja apagar esta pesquisa? Esta ação é irreversível.')) {
+    if (window.confirm(t('survey_list.delete_confirm'))) {
       deleteMutation.mutate(id);
     }
   };
@@ -75,11 +77,11 @@ const SurveyList = () => {
     const publicLink = `${window.location.origin}/public/surveys/${slug}`;
     navigator.clipboard.writeText(publicLink)
       .then(() => {
-        toast.success('Link copiado para a área de transferência!');
+        toast.success(t('survey_list.copy_link_success'));
       })
       .catch((err) => {
-        toast.error('Erro ao copiar o link.');
-        console.error('Erro ao copiar o link:', err);
+        toast.error(t('survey_list.copy_link_error'));
+        console.error(t('survey_list.copy_link_error_console'), err);
       });
   };
 
@@ -100,30 +102,30 @@ const SurveyList = () => {
   return (
     <Box sx={{ p: 3 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4">Pesquisas</Typography>
+        <Typography variant="h4">{t('survey_list.title')}</Typography>
         <Button
           variant="contained"
           component={RouterLink}
           to="/fidelity/surveys/new"
           startIcon={<AddIcon />}
         >
-          Nova Pesquisa
+          {t('survey_list.new_survey_button')}
         </Button>
       </Box>
 
       {/* Filters */}
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" gutterBottom>
-          Filtros
-        </Typography>
+            {t('survey_list.filters_title')}
+          </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <TextField
               fullWidth
-              label="Buscar"
+              label={t('survey_list.search_label')}
               value={filters.search}
               onChange={(e) => handleFilterChange('search', e.target.value)}
-              placeholder="Buscar por título..."
+              placeholder={t('survey_list.search_placeholder')}
               InputProps={{
                 startAdornment: <SearchIcon sx={{ mr: 1, color: 'action.active' }} />,
               }}
@@ -144,17 +146,17 @@ const SurveyList = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Título</TableCell>
-                  <TableCell>Tipo</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell align="right">Ações</TableCell>
+                  <TableCell>{t('survey_list.table_header_title')}</TableCell>
+                  <TableCell>{t('survey_list.table_header_type')}</TableCell>
+                  <TableCell>{t('survey_list.table_header_status')}</TableCell>
+                  <TableCell align="right">{t('survey_list.table_header_actions')}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {surveys.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={4} align="center">
-                      Nenhuma pesquisa encontrada.
+                      {t('survey_list.no_surveys_found')}
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -165,26 +167,26 @@ const SurveyList = () => {
                       <TableCell>{survey.status}</TableCell>
                       <TableCell align="right">
                         <Box sx={{ display: 'flex', gap: 0.5, justifyContent: 'flex-end' }}>
-                          <IconButton component={RouterLink} to={`/fidelity/surveys/${survey.id}/results`} color="primary" aria-label="Ver Resultados">
+                          <IconButton component={RouterLink} to={`/fidelity/surveys/${survey.id}/results`} color="primary" aria-label={t('survey_list.view_results_aria_label')}>
                             <BarChartIcon />
                           </IconButton>
-                          <IconButton component={RouterLink} to={`/fidelity/surveys/edit/${survey.id}`} color="info" aria-label="Editar Pesquisa">
+                          <IconButton component={RouterLink} to={`/fidelity/surveys/edit/${survey.id}`} color="info" aria-label={t('survey_list.edit_survey_aria_label')}>
                             <EditIcon />
                           </IconButton>
                           <IconButton 
                             color={survey.status === 'active' ? 'success' : 'default'}
-                            aria-label="Ativar/Desativar Pesquisa"
+                            aria-label={t('survey_list.toggle_status_aria_label')}
                             onClick={() => handleToggleStatus(survey.id, survey.status)}
                           >
                             {survey.status === 'active' ? <ToggleOnIcon /> : <ToggleOffIcon />}
                           </IconButton>
-                          <IconButton color="secondary" aria-label="Gerar QR Code" onClick={() => handleGenerateQrCode(survey.id)}>
+                          <IconButton color="secondary" aria-label={t('survey_list.generate_qr_code_aria_label')} onClick={() => handleGenerateQrCode(survey.id)}>
                             <QrCodeIcon />
                           </IconButton>
-                          <IconButton color="default" aria-label="Copiar Link" onClick={() => handleCopyLink(survey.slug)}>
+                          <IconButton color="default" aria-label={t('survey_list.copy_link_aria_label')} onClick={() => handleCopyLink(survey.slug)}>
                             <ContentCopyIcon />
                           </IconButton>
-                          <IconButton color="error" aria-label="Apagar Pesquisa" onClick={() => handleDelete(survey.id)}>
+                          <IconButton color="error" aria-label={t('survey_list.delete_survey_aria_label')} onClick={() => handleDelete(survey.id)}>
                             <DeleteIcon />
                           </IconButton>
                         </Box>
@@ -215,9 +217,9 @@ const SurveyList = () => {
           onClick={() => setQrModalOpen(false)}
         >
           <Paper sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-            <Typography variant="h6">Aponte a câmera para o QR Code</Typography>
+            <Typography variant="h6">{t('survey_list.qr_code_modal_title')}</Typography>
             <QRCode value={qrCodeValue} size={256} />
-            <Button variant="contained" onClick={() => setQrModalOpen(false)}>Fechar</Button>
+            <Button variant="contained" onClick={() => setQrModalOpen(false)}>{t('common.close')}</Button>
           </Paper>
         </Box>
       )}

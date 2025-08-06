@@ -81,7 +81,7 @@ const CheckinDashboard = () => {
       setError('');
 
       if (!restaurantId) {
-        setError('Nenhum restaurante encontrado. Por favor, verifique suas configurações.');
+        setError(t('checkin_dashboard.no_restaurant_found'));
         setLoading(false);
         return;
       }
@@ -90,7 +90,7 @@ const CheckinDashboard = () => {
       setCheckinData(response.data);
     } catch (err) {
       console.error('Erro ao buscar dados de check-in (frontend):', err);
-      setError('Erro ao carregar dados de check-in');
+      setError(t('checkin_dashboard.error_loading_checkin_data'));
     } finally {
       setLoading(false);
     }
@@ -125,7 +125,7 @@ const CheckinDashboard = () => {
 
     } catch (err) {
       console.error('Erro ao buscar dados do restaurante:', err);
-      toast.error(t('Erro ao carregar dados do restaurante'));
+      toast.error(t('checkin_dashboard.error_loading_restaurant_data'));
     } finally {
       setLoading(false);
     }
@@ -141,7 +141,7 @@ const CheckinDashboard = () => {
       setActiveCheckins(response.data.activeCheckins);
     } catch (err) {
       console.error('Erro ao buscar check-ins ativos:', err);
-      setError('Erro ao carregar check-ins ativos');
+      setError(t('checkin_dashboard.error_loading_active_checkins'));
     } finally {
       setLoading(false);
     }
@@ -174,11 +174,11 @@ const CheckinDashboard = () => {
     try {
       setLoading(true);
       await axiosInstance.put(`/api/checkin/checkout/${checkinId}`);
-      toast.success('Check-out realizado com sucesso!');
+      toast.success(t('checkin_dashboard.checkout_success'));
       fetchActiveCheckins(); // Atualiza a lista após o checkout
     } catch (err) {
       console.error('Erro ao realizar check-out:', err);
-      toast.error(err.response?.data?.message || 'Erro ao realizar check-out');
+      toast.error(err.response?.data?.message || t('checkin_dashboard.checkout_error'));
     } finally {
       setLoading(false);
     }
@@ -212,7 +212,7 @@ const CheckinDashboard = () => {
       <Grid container spacing={3} mb={4}>
         <Grid item xs={12} sm={6} md={4}>
           <MetricCard
-            title="Total de Check-ins"
+            title={t('checkin_dashboard.total_checkins_title')}
             value={checkinData?.total_checkins || 0}
             icon={<CheckinIcon sx={{ color: 'white' }} />}
             bgColor="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
@@ -221,7 +221,7 @@ const CheckinDashboard = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <MetricCard
-            title="Tempo Médio de Visita"
+            title={t('checkin_dashboard.average_visit_time_title')}
             value={formatDuration(checkinData?.average_visit_duration_seconds || 0)}
             icon={<TimeIcon sx={{ color: 'white' }} />}
             bgColor="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
@@ -248,7 +248,7 @@ const CheckinDashboard = () => {
                 mb: 3
               }}
             >
-              Check-ins por Dia (Últimos 30 Dias)
+              {t('checkin_dashboard.checkins_by_day_title')}
             </Typography>
             {checkinData?.checkins_by_day && checkinData.checkins_by_day.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>
@@ -270,7 +270,7 @@ const CheckinDashboard = () => {
               </ResponsiveContainer>
             ) : (
               <Typography variant="body2" color="text.secondary">
-                Dados de check-ins por dia não disponíveis.
+                {t('checkin_dashboard.no_daily_checkin_data')}
               </Typography>
             )}
           </Paper>
@@ -293,7 +293,7 @@ const CheckinDashboard = () => {
                 mb: 3
               }}
             >
-              Clientes Mais Frequentes
+              {t('checkin_dashboard.most_frequent_customers_title')}
             </Typography>
             {checkinData?.most_frequent_customers && checkinData.most_frequent_customers.length > 0 ? (
               <List>
@@ -304,14 +304,14 @@ const CheckinDashboard = () => {
                     </ListItemIcon>
                     <ListItemText
                       primary={customer.customer.name}
-                      secondary={`Check-ins: ${customer.checkin_count}`}
+                      secondary={t('checkin_dashboard.checkins_count', { count: customer.checkin_count })}
                     />
                   </ListItem>
                 ))}
               </List>
             ) : (
               <Typography variant="body2" color="text.secondary">
-                Nenhum cliente frequente disponível.
+                {t('checkin_dashboard.no_frequent_customers')}
               </Typography>
             )}
           </Paper>
@@ -337,26 +337,26 @@ const CheckinDashboard = () => {
           mb: 3
         }}
       >
-        Check-ins Ativos
+        {t('checkin_dashboard.active_checkins_title')}
       </Typography>
       {activeCheckins.length > 0 ? (
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Cliente</TableCell>
-                <TableCell>Telefone</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Hora do Check-in</TableCell>
-                <TableCell>Ações</TableCell>
+                <TableCell>{t('checkin_dashboard.table_header_customer')}</TableCell>
+                <TableCell>{t('checkin_dashboard.table_header_phone')}</TableCell>
+                <TableCell>{t('checkin_dashboard.table_header_email')}</TableCell>
+                <TableCell>{t('checkin_dashboard.table_header_checkin_time')}</TableCell>
+                <TableCell>{t('checkin_dashboard.table_header_actions')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {activeCheckins.map((checkin) => (
                 <TableRow key={checkin.id}>
-                  <TableCell>{checkin.customer?.name || 'N/A'}</TableCell>
-                  <TableCell>{checkin.customer?.phone || 'N/A'}</TableCell>
-                  <TableCell>{checkin.customer?.email || 'N/A'}</TableCell>
+                  <TableCell>{checkin.customer?.name || t('common.na')}</TableCell>
+                  <TableCell>{checkin.customer?.phone || t('common.na')}</TableCell>
+                  <TableCell>{checkin.customer?.email || t('common.na')}</TableCell>
                   <TableCell>{new Date(checkin.checkin_time).toLocaleString()}</TableCell>
                   <TableCell>
                     <Button
@@ -366,7 +366,7 @@ const CheckinDashboard = () => {
                       startIcon={<ExitToAppIcon />}
                       onClick={() => handleCheckout(checkin.id)}
                     >
-                      Checkout
+                      {t('checkin_dashboard.checkout_button')}
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -376,7 +376,7 @@ const CheckinDashboard = () => {
         </TableContainer>
       ) : (
         <Typography variant="body2" color="text.secondary">
-          Nenhum check-in ativo encontrado.
+          {t('checkin_dashboard.no_active_checkins')}
         </Typography>
       )}
     </Paper>
@@ -466,7 +466,7 @@ const CheckinDashboard = () => {
             mb: 1,
           }}
         >
-          Dashboard de Check-ins
+          {t('checkin_dashboard.main_title')}
         </Typography>
         <Typography
           variant="body1"
@@ -475,7 +475,7 @@ const CheckinDashboard = () => {
             mb: 3,
           }}
         >
-          Visão geral e análises dos check-ins dos clientes
+          {t('checkin_dashboard.main_description')}
         </Typography>
       </Box>
 
@@ -486,9 +486,9 @@ const CheckinDashboard = () => {
           indicatorColor="primary"
           textColor="primary"
         >
-          <Tab label="Análise de Check-ins" icon={<BarChartIcon />} />
-          <Tab label="Configurações Checkin" icon={<StarsIcon />} />
-          <Tab label="Check-ins Ativos" icon={<CheckinIcon />} />
+          <Tab label={t('checkin_dashboard.tab_analytics')} icon={<BarChartIcon />} />
+          <Tab label={t('checkin_dashboard.tab_settings')} icon={<StarsIcon />} />
+          <Tab label={t('checkin_dashboard.tab_active_checkins')} icon={<CheckinIcon />} />
         </Tabs>
       </Paper>
 

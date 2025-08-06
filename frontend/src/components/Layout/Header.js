@@ -99,18 +99,18 @@ const Header = ({ onMobileNavOpen }) => {
                 fontSize: '0.75rem'
               }}
             >
-              Administrador
+              {user?.role === 'admin' ? t('header.admin_role') : t('header.user_role')}
             </Typography>
           </Box>
           
           {/* User Avatar */}
-          <Tooltip title="Perfil">
+          <Tooltip title={t('header.profile_tooltip')}>
             <IconButton
               onClick={handleProfileMenuOpen}
               sx={{ p: 0 }}
             >
               <Avatar
-                alt={user?.name || 'João Silva'}
+                alt={user?.name || t('header.user_placeholder')}
                 src={user?.restaurant?.logo || user?.avatar}
                 sx={{ 
                   width: 40, 
@@ -121,7 +121,7 @@ const Header = ({ onMobileNavOpen }) => {
                   fontSize: '1rem'
                 }}
               >
-                {!user?.restaurant?.logo && (user?.name || 'João Silva').charAt(0).toUpperCase()}
+                {!user?.restaurant?.logo && (user?.name || t('header.user_placeholder')).charAt(0).toUpperCase()}
               </Avatar>
             </IconButton>
           </Tooltip>
@@ -172,7 +172,7 @@ const Header = ({ onMobileNavOpen }) => {
               color: theme.palette.text.primary,
             }}
           >
-            {user?.name || 'Usuário'}
+            {user?.name || t('header.user_placeholder')}
           </Typography>
           <Typography 
             variant="body2" 
@@ -194,7 +194,7 @@ const Header = ({ onMobileNavOpen }) => {
                 display: 'inline-block',
               }} 
             />
-            {user?.email || 'email@exemplo.com'}
+            {user?.email || t('header.email_placeholder')}
           </Typography>
         </Box>
         <Divider />
@@ -203,7 +203,7 @@ const Header = ({ onMobileNavOpen }) => {
             <PersonIcon fontSize="small" sx={{ color: theme.palette.primary.main }} />
           </ListItemIcon>
           <Typography variant="body2" sx={{ fontWeight: 500 }}>
-            Perfil
+            {t('header.profile_menu_title')}
           </Typography>
         </MenuItem>
         <MenuItem onClick={() => handleNavigate('/settings')} sx={{ py: 1 }}>
@@ -211,7 +211,7 @@ const Header = ({ onMobileNavOpen }) => {
             <SettingsIcon fontSize="small" sx={{ color: theme.palette.info.main }} />
           </ListItemIcon>
           <Typography variant="body2" sx={{ fontWeight: 500 }}>
-            Configurações
+            {t('header.settings_menu_title')}
           </Typography>
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
@@ -220,7 +220,7 @@ const Header = ({ onMobileNavOpen }) => {
             <LogoutIcon fontSize="small" sx={{ color: theme.palette.error.main }} />
           </ListItemIcon>
           <Typography variant="body2" sx={{ fontWeight: 500 }}>
-            Sair
+            {t('header.logout_menu_title')}
           </Typography>
         </MenuItem>
       </Menu>
@@ -268,7 +268,7 @@ const Header = ({ onMobileNavOpen }) => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Box sx={{ px: 2, py: 1.5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>Notificações</Typography>
+          <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>{t('header.notifications_title')}</Typography>
           <Typography 
             variant="caption" 
             sx={{ 
@@ -280,7 +280,14 @@ const Header = ({ onMobileNavOpen }) => {
               fontWeight: 500,
             }}
           >
-            3 novas
+            {t('header.notifications_count', { count: 3 })}
+          </Typography>
+        </Box>
+        <Divider sx={{ my: 0.5 }} />
+        <MenuItem sx={{ py: 1.5 }}>
+          <Box sx={{ width: '100%' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
+              {t('header.notifications_count', { count: 3 })}
           </Typography>
         </Box>
         <Divider sx={{ my: 0.5 }} />
@@ -288,14 +295,14 @@ const Header = ({ onMobileNavOpen }) => {
           <Box sx={{ width: '100%' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
               <Typography variant="body2" sx={{ fontWeight: 600, color: theme.palette.primary.main }}>
-                Novo feedback recebido
+                {t('header.new_feedback_title')}
               </Typography>
               <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                Agora mesmo
+                {t('header.new_feedback_time')}
               </Typography>
             </Box>
             <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block' }}>
-              Cliente deixou um novo feedback com 5 estrelas
+              {t('header.new_feedback_description')}
             </Typography>
           </Box>
         </MenuItem>
@@ -303,14 +310,14 @@ const Header = ({ onMobileNavOpen }) => {
           <Box sx={{ width: '100%' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
               <Typography variant="body2" sx={{ fontWeight: 600, color: theme.palette.success.main }}>
-                Novo cupom resgatado
+                {t('header.new_coupon_title')}
               </Typography>
               <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                5 min atrás
+                {t('header.new_coupon_time')}
               </Typography>
             </Box>
             <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block' }}>
-              Cliente resgatou o cupom de desconto
+              {t('header.new_coupon_description')}
             </Typography>
           </Box>
         </MenuItem>
@@ -318,14 +325,14 @@ const Header = ({ onMobileNavOpen }) => {
           <Box sx={{ width: '100%' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
               <Typography variant="body2" sx={{ fontWeight: 600, color: theme.palette.warning.main }}>
-                Alerta de NPS
+                {t('header.nps_alert_title')}
               </Typography>
               <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                1 hora atrás
+                {t('header.nps_alert_time')}
               </Typography>
             </Box>
             <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block' }}>
-              Seu NPS caiu 5 pontos na última semana
+              {t('header.nps_alert_description')}
             </Typography>
           </Box>
         </MenuItem>

@@ -36,17 +36,17 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Slug do Restaurante */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>Slug do Restaurante</Typography>
+                <Typography variant="h6" gutterBottom>{t('checkin_program.slug_title')}</Typography>
                 <Controller
                   name="restaurant_slug"
                   control={control}
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label="Slug do Restaurante"
+                      label={t('checkin_program.slug_label')}
                       fullWidth
                       margin="normal"
-                      helperText="O slug é usado na URL de check-in. Use apenas letras, números e hífens."
+                      helperText={t('checkin_program.slug_helper')}
                     />
                   )}
                 />
@@ -54,7 +54,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Personalização Visual */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>Personalização Visual (Páginas Públicas)</Typography>
+                <Typography variant="h6" gutterBottom>{t('checkin_program.visual_customization_title')}</Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <Controller
@@ -63,10 +63,10 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Cor Primária (Botões, Destaques)"
+                          label={t('checkin_program.primary_color_label')}
                           fullWidth
                           margin="normal"
-                          helperText="Ex: #3f51b5 ou red"
+                          helperText={t('checkin_program.color_helper')}
                         />
                       )}
                     />
@@ -78,10 +78,10 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Cor Secundária (Botões, Destaques)"
+                          label={t('checkin_program.secondary_color_label')}
                           fullWidth
                           margin="normal"
-                          helperText="Ex: #f50057 ou blue"
+                          helperText={t('checkin_program.color_helper_secondary')}
                         />
                       )}
                     />
@@ -93,10 +93,10 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Cor do Texto"
+                          label={t('checkin_program.text_color_label')}
                           fullWidth
                           margin="normal"
-                          helperText="Ex: #333333 ou black"
+                          helperText={t('checkin_program.color_helper_text')}
                         />
                       )}
                     />
@@ -108,10 +108,10 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Cor de Fundo"
+                          label={t('checkin_program.background_color_label')}
                           fullWidth
                           margin="normal"
-                          helperText="Ex: #ffffff ou lightgray"
+                          helperText={t('checkin_program.color_helper_background')}
                         />
                       )}
                     />
@@ -123,10 +123,10 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="URL da Imagem de Fundo (Opcional)"
+                          label={t('checkin_program.background_image_url_label')}
                           fullWidth
                           margin="normal"
-                          helperText="Cole a URL de uma imagem para usar como fundo"
+                          helperText={t('checkin_program.background_image_url_helper')}
                         />
                       )}
                     />
@@ -308,7 +308,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       )}
                     />
                   }
-                  label="Exigir número da mesa no check-in"
+                  label={t('checkin_program.require_table_number')}
                 />
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
@@ -429,7 +429,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
         </Grid>
         <Grid item xs={12} md={4}>
           <Card>
-            <CardHeader title="QR Code de Check-in" />
+            <CardHeader title={t('checkin_program.qr_code_title')} />
             <CardContent>
               {checkinQRCode ? (
                 <Box textAlign="center">
@@ -439,7 +439,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                   </Typography>
                   <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center', gap: 1 }}>
                     <Button variant="outlined" onClick={() => navigator.clipboard.writeText(checkinQRCode.url)}>
-                      Copiar Link
+                      {t('checkin_program.copy_link_button')}
                     </Button>
                     <Button variant="contained" onClick={() => {
                       const canvas = document.querySelector('canvas');
@@ -451,12 +451,12 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       downloadLink.click();
                       document.body.removeChild(downloadLink);
                     }}>
-                      Baixar QR Code
+                      {t('checkin_program.download_qr_code_button')}
                     </Button>
                   </Box>
                 </Box>
               ) : (
-                <Typography>Salve o programa de fidelidade para gerar o QR Code.</Typography>
+                <Typography>{t('checkin_program.save_to_generate_qr_code')}</Typography>
               )}
             </CardContent>
           </Card>

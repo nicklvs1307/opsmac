@@ -162,7 +162,7 @@
       "customer_dashboard": "Customer Dashboard",
       "relationship": "Relationship",
       "settings": "Settings",
-      "app_name": "CHECK SYSTEM"
+      "app_name": "CHECK"
     },
     "thank_you": {
       "share_title": "I rated {restaurant}",
@@ -215,7 +215,8 @@
       "customer_label": "Customer",
       "status_label": "Status",
       "expires_in_label": "Expires in",
-      "does_not_expire": "Does not expire"
+      "does_not_expire": "Does not expire",
+      "use_coupon_button": "Use Coupon"
     },
     "public_feedback": {
       "invalid_qr_code": "Invalid QR Code",
@@ -257,9 +258,26 @@
       "excellent": "Excellent"
     },
     "layout": {
-      "app_initial": "C",
       "app_name": "CHECK",
-      "open_drawer_aria_label": "open drawer"
+      "app_initial": "C",
+      "open_drawer_aria_label": "open drawer",
+      "dashboard": "Dashboard",
+      "fidelity_program": "Fidelity",
+      "checkin_program": "Check-in",
+      "satisfaction": "Satisfaction",
+      "qr_codes": "QR Codes",
+      "manage_qr_codes": "Manage QR Codes",
+      "generate_qr_code": "Generate QR Code",
+      "rewards": "Rewards",
+      "coupons": "Coupons",
+      "customers": "Customers",
+      "list_customers": "List Customers",
+      "birthdays": "Birthdays",
+      "customer_dashboard": "Customer Dashboard",
+      "relationship": "Relationship",
+      "integrations": "Integrations",
+      "settings": "Settings",
+      "admin": "Admin"
     },
     "metric_card": {
       "trend_text": "{{trend}}% compared to previous period"
@@ -267,12 +285,11 @@
     "customer_card": {
       "feedbacks": "Feedbacks",
       "coupons": "Coupons",
-      "stars": "{{rating}} stars"
+      "stars": "{{rating}} stars",
+      "simulated_discount": "Simulated Discount",
+      "test_customer": "Test Customer"
     },
     "header": {
-      "admin_role": "Administrator",
-      "user_role": "User",
-      "profile_tooltip": "Profile",
       "profile_menu_title": "Profile",
       "settings_menu_title": "Settings",
       "logout_menu_title": "Logout",
@@ -287,7 +304,13 @@
       "nps_alert_title": "NPS Alert",
       "nps_alert_time": "1 hour ago",
       "nps_alert_description": "Your NPS dropped 5 points last week",
-      "view_all_notifications": "View all notifications"
+      "view_all_notifications": "View all notifications",
+      "admin_role": "Administrator",
+      "user_role": "User",
+      "profile_tooltip": "Profile",
+      "user_placeholder": "User",
+      "email_placeholder": "email@example.com",
+      "notifications_count": "{{count}} new"
     },
     "dashboard": {
       "overview_title": "Overview",

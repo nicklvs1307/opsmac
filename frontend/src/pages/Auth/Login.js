@@ -38,7 +38,7 @@ const Login = () => {
         alignItems="center"
         minHeight="100vh"
       >
-        <Typography>Carregando...</Typography>
+        <Typography>{t('login.loading')}</Typography>
       </Box>
     );
   }

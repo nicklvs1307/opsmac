@@ -6,6 +6,7 @@ import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useTranslation } from 'react-i18next';
 
 // Funções da API
 const createSurvey = async (surveyData) => {
@@ -37,6 +38,7 @@ const SurveyCreate = () => {
   const [openQrCodeDialog, setOpenQrCodeDialog] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const { data: rewards, isLoading: isLoadingRewards } = useQuery('rewards', fetchRewards);
   const { data: npsCriteria, isLoading: isLoadingNpsCriteria } = useQuery('npsCriteria', fetchNpsCriteria);
@@ -44,13 +46,13 @@ const SurveyCreate = () => {
   const mutation = useMutation(createSurvey, {
     onSuccess: (data) => {
       queryClient.invalidateQueries('surveys');
-      toast.success('Pesquisa criada com sucesso!');
+      toast.success(t('survey_create.success_message'));
       setCreatedSurveyId(data.id);
       setCreatedSurveySlug(data.slug);
       setActiveStep(3);
     },
     onError: (error) => {
-      toast.error(`Erro ao criar pesquisa: ${error.response?.data?.msg || error.message}`);
+      toast.error(t('survey_create.error_message', { message: error.response?.data?.msg || error.message }));
     }
   });
 
@@ -59,7 +61,7 @@ const SurveyCreate = () => {
     if (surveyType === 'nps_only') {
       if (npsCriteria && npsCriteria.length > 0) {
         const npsQuestions = npsCriteria.map((criterion, index) => ({
-          question_text: `Qual sua nota para ${criterion.name}?`,
+          question_text: t('survey_create.nps_question_text', { name: criterion.name }),
           question_type: 'nps',
           order: index + 1,
           nps_criterion_id: criterion.id
@@ -75,7 +77,7 @@ const SurveyCreate = () => {
 
   const handleNext = () => {
     if (activeStep === 0 && !surveyType) {
-        toast.error('Por favor, selecione um tipo de pesquisa.');
+        toast.error(t('survey_create.select_type_error'));
         return;
     }
     setActiveStep((prev) => prev + 1);
@@ -87,11 +89,11 @@ const SurveyCreate = () => {
 
   const handleCreate = () => {
     if (!title.trim()) {
-        toast.error('O título da pesquisa é obrigatório.');
+        toast.error(t('survey_create.title_required_error'));
         return;
     }
     if (surveyType === 'nps_only' && questions.length === 0) {
-        toast.error('Não há critérios de NPS cadastrados. Adicione critérios nas configurações de satisfação antes de criar uma pesquisa de NPS.');
+        toast.error(t('survey_create.no_nps_criteria_error'));
         return;
     }
     const surveyData = {
@@ -111,30 +113,30 @@ const SurveyCreate = () => {
       case 0:
         return (
           <FormControl fullWidth sx={{ mb: 3 }}>
-            <InputLabel>Tipo de Pesquisa</InputLabel>
-            <Select value={surveyType} label="Tipo de Pesquisa" onChange={(e) => setSurveyType(e.target.value)}>
-              <MenuItem value="nps_only">NPS (Dinâmico)</MenuItem>
-              <MenuItem value="custom">Personalizada (Em breve)</MenuItem>
-              <MenuItem value="delivery_csat">Delivery (CSAT)</MenuItem>
-              <MenuItem value="menu_feedback">Feedback do Cardápio</MenuItem>
-              <MenuItem value="customer_profile">Perfil do Cliente</MenuItem>
-              <MenuItem value="salon_ratings">Salão (Ratings)</MenuItem>
-              <MenuItem value="salon_like_dislike">Salão (Like/Dislike)</MenuItem>
+            <InputLabel>{t('survey_create.survey_type_label')}</InputLabel>
+            <Select value={surveyType} label={t('survey_create.survey_type_label')} onChange={(e) => setSurveyType(e.target.value)}>
+              <MenuItem value="nps_only">{t('survey_create.type_nps_dynamic')}</MenuItem>
+              <MenuItem value="custom">{t('survey_create.type_custom_soon')}</MenuItem>
+              <MenuItem value="delivery_csat">{t('survey_create.type_delivery_csat')}</MenuItem>
+              <MenuItem value="menu_feedback">{t('survey_create.type_menu_feedback')}</MenuItem>
+              <MenuItem value="customer_profile">{t('survey_create.type_customer_profile')}</MenuItem>
+              <MenuItem value="salon_ratings">{t('survey_create.type_salon_ratings')}</MenuItem>
+              <MenuItem value="salon_like_dislike">{t('survey_create.type_salon_like_dislike')}</MenuItem>
             </Select>
           </FormControl>
         );
       case 1:
         return (
             <Box sx={{ mb: 3 }}>
-                <TextField fullWidth label="Título" value={title} onChange={(e) => setTitle(e.target.value)} sx={{ mb: 2 }} />
-                <TextField fullWidth label="Slug" value={slug} onChange={(e) => setSlug(e.target.value)} sx={{ mb: 2 }} helperText="O slug é usado na URL da pesquisa. Use apenas letras, números e hífens." />
-                <TextField fullWidth label="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} sx={{ mb: 2 }} />
+                <TextField fullWidth label={t('survey_create.title_label')} value={title} onChange={(e) => setTitle(e.target.value)} sx={{ mb: 2 }} />
+                <TextField fullWidth label={t('survey_create.slug_label')} value={slug} onChange={(e) => setSlug(e.target.value)} sx={{ mb: 2 }} helperText={t('survey_create.slug_helper')} />
+                <TextField fullWidth label={t('survey_create.description_label')} value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} sx={{ mb: 2 }} />
                 <FormControl fullWidth sx={{ mb: 2 }}>
-                    <InputLabel>Recompensa (Opcional)</InputLabel>
-                    <Select value={rewardId} label="Recompensa (Opcional)" onChange={(e) => setRewardId(e.target.value)}>
-                        <MenuItem value=""><em>Nenhuma</em></MenuItem>
+                    <InputLabel>{t('survey_create.reward_label')}</InputLabel>
+                    <Select value={rewardId} label={t('survey_create.reward_label')} onChange={(e) => setRewardId(e.target.value)}>
+                        <MenuItem value=""><em>{t('common.none')}</em></MenuItem>
                         {isLoadingRewards ? (
-                            <MenuItem disabled>Carregando...</MenuItem>
+                            <MenuItem disabled>{t('survey_create.loading_rewards')}</MenuItem>
                         ) : (
                             rewards?.map((reward) => (
                                 <MenuItem key={reward.id} value={reward.id}>{reward.title}</MenuItem>
@@ -144,7 +146,7 @@ const SurveyCreate = () => {
                 </FormControl>
                 <TextField
                     fullWidth
-                    label="Dias de Validade do Cupom (Opcional)"
+                    label={t('survey_create.coupon_validity_days_label')}
                     type="number"
                     value={couponValidityDays}
                     onChange={(e) => setCouponValidityDays(e.target.value)}
@@ -153,14 +155,14 @@ const SurveyCreate = () => {
                 />
                 {surveyType === 'nps_only' && (
                     <Box mt={2}> 
-                        <Typography variant="h6">Perguntas de NPS (geradas automaticamente)</Typography>
+                        <Typography variant="h6">{t('survey_create.nps_questions_title')}</Typography>
                         {isLoadingNpsCriteria ? <CircularProgress size={24} /> : 
                             <List>
                                 {questions.length > 0 ? questions.map(q => (
                                     <ListItem key={q.nps_criterion_id}>
                                         <ListItemText primary={q.question_text} />
                                     </ListItem>
-                                )) : <Typography variant="body2" color="text.secondary">Nenhum critério de NPS encontrado. Adicione-os nas configurações.</Typography>}
+                                )) : <Typography variant="body2" color="text.secondary">{t('survey_create.no_nps_criteria_found')}</Typography>}
                             </List>
                         }
                     </Box>
@@ -168,47 +170,47 @@ const SurveyCreate = () => {
             </Box>
         )
       case 2:
-        return <Typography>Revise os detalhes da sua pesquisa antes de criá-la.</Typography>;
+        return <Typography>{t('survey_create.review_details')}</Typography>;
       case 3: // ... (código do passo 3 permanece o mesmo)
         return (
             <Box>
-              <Typography variant="h6" gutterBottom>Pesquisa Criada com Sucesso!</Typography>
+              <Typography variant="h6" gutterBottom>{t('survey_create.created_success_title')}</Typography>
               {createdSurveyId && createdSurveySlug && (
                 <Box sx={{ mb: 3 }}>
-                  <Typography variant="body1">Link Público: <a href={`/public/surveys/${createdSurveySlug}`} target="_blank" rel="noopener noreferrer">{`/public/surveys/${createdSurveySlug}`}</a></Typography>
+                  <Typography variant="body1">{t('survey_create.public_link_label')} <a href={`/public/surveys/${createdSurveySlug}`} target="_blank" rel="noopener noreferrer">{`/public/surveys/${createdSurveySlug}`}</a></Typography>
                   <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
-                    <Button variant="outlined" onClick={() => navigator.clipboard.writeText(`${window.location.origin}/public/surveys/${createdSurveySlug}`).then(() => toast.success('Link copiado!'))}>Copiar Link</Button>
-                    <Button variant="outlined" onClick={() => setOpenQrCodeDialog(true)}>Gerar QR Code</Button>
-                    <Button variant="outlined" onClick={() => navigate(`/fidelity/surveys/edit/${createdSurveyId}`)}>Editar Pesquisa</Button>
+                    <Button variant="outlined" onClick={() => navigator.clipboard.writeText(`${window.location.origin}/public/surveys/${createdSurveySlug}`).then(() => toast.success(t('common.link_copied')))}>{t('common.copy_link')}</Button>
+                    <Button variant="outlined" onClick={() => setOpenQrCodeDialog(true)}>{t('survey_create.generate_qr_code_button')}</Button>
+                    <Button variant="outlined" onClick={() => navigate(`/fidelity/surveys/edit/${createdSurveyId}`)}>{t('survey_create.edit_survey_button')}</Button>
                   </Box>
                 </Box>
               )}
-              <Button variant="contained" onClick={() => navigate('/satisfaction/surveys')} sx={{ mt: 2 }}>Ver Todas as Pesquisas</Button>
+              <Button variant="contained" onClick={() => navigate('/satisfaction/surveys')} sx={{ mt: 2 }}>{t('survey_create.view_all_surveys_button')}</Button>
               <Dialog open={openQrCodeDialog} onClose={() => setOpenQrCodeDialog(false)}>
-                <DialogTitle>QR Code da Pesquisa</DialogTitle>
+                <DialogTitle>{t('survey_create.qr_code_dialog_title')}</DialogTitle>
                 <DialogContent sx={{ display: 'flex', justifyContent: 'center' }}>
                   {/* Integrar QR Code aqui */}
                   <Paper elevation={3} sx={{ p: 2, width: 256, height: 256, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                     <Typography variant="caption">QR Code</Typography>
+                     <Typography variant="caption">{t('common.qr_code')}</Typography>
                   </Paper>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={() => setOpenQrCodeDialog(false)}>Fechar</Button>
+                  <Button onClick={() => setOpenQrCodeDialog(false)}>{t('common.close')}</Button>
                 </DialogActions>
               </Dialog>
             </Box>
           );
       default:
-        return <Typography>Passo desconhecido</Typography>;
+        return <Typography>{t('survey_create.unknown_step')}</Typography>;
     }
   };
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>Criar Nova Pesquisa</Typography>
+      <Typography variant="h4" gutterBottom>{t('survey_create.main_title')}</Typography>
       <Paper elevation={3} sx={{ p: 4 }}>
         <Stepper activeStep={activeStep} orientation="vertical" sx={{ mt: 2 }}>
-            {['Escolha o Tipo', 'Configure Detalhes e Perguntas', 'Revise e Crie', 'Ações'].map((label, index) => (
+            {[t('survey_create.step_choose_type'), 'Configure Detalhes e Perguntas', 'Revise e Crie', 'Ações'].map((label, index) => (
                 <Step key={label}>
                     <StepLabel>{label}</StepLabel>
                     <StepContent>

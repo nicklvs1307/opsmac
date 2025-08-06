@@ -216,7 +216,8 @@
       "customer_label": "Cliente",
       "status_label": "Status",
       "expires_in_label": "Expira em",
-      "does_not_expire": "Não expira"
+      "does_not_expire": "Não expira",
+      "use_coupon_button": "Utilizar Cupom"
     },
     "public_feedback": {
       "invalid_qr_code": "QR Code inválido",
@@ -258,9 +259,26 @@
       "excellent": "Excelente"
     },
     "layout": {
-      "app_initial": "C",
       "app_name": "CHECK",
-      "open_drawer_aria_label": "abrir gaveta"
+      "app_initial": "C",
+      "open_drawer_aria_label": "abrir gaveta",
+      "dashboard": "Dashboard",
+      "fidelity_program": "Fidelidade",
+      "checkin_program": "Check-in",
+      "satisfaction": "Satisfação",
+      "qr_codes": "QR Codes",
+      "manage_qr_codes": "Gerenciar QR Codes",
+      "generate_qr_code": "Gerar QR Code",
+      "rewards": "Recompensas",
+      "coupons": "Cupons",
+      "customers": "Clientes",
+      "list_customers": "Listar Clientes",
+      "birthdays": "Aniversariantes",
+      "customer_dashboard": "Dashboard de Clientes",
+      "relationship": "Relacionamento",
+      "integrations": "Integrações",
+      "settings": "Configurações",
+      "admin": "Admin"
     },
     "metric_card": {
       "trend_text": "{{trend}}% em relação ao período anterior"
@@ -268,12 +286,11 @@
     "customer_card": {
       "feedbacks": "Feedbacks",
       "coupons": "Cupons",
-      "stars": "{{rating}} estrelas"
+      "stars": "{{rating}} estrelas",
+      "simulated_discount": "Desconto Simulado",
+      "test_customer": "Cliente Teste"
     },
     "header": {
-      "admin_role": "Administrador",
-      "user_role": "Usuário",
-      "profile_tooltip": "Perfil",
       "profile_menu_title": "Perfil",
       "settings_menu_title": "Configurações",
       "logout_menu_title": "Sair",
@@ -288,7 +305,13 @@
       "nps_alert_title": "Alerta de NPS",
       "nps_alert_time": "1 hora atrás",
       "nps_alert_description": "Seu NPS caiu 5 pontos na última semana",
-      "view_all_notifications": "Ver todas as notificações"
+      "view_all_notifications": "Ver todas as notificações",
+      "admin_role": "Administrador",
+      "user_role": "Usuário",
+      "profile_tooltip": "Perfil",
+      "user_placeholder": "Usuário",
+      "email_placeholder": "email@exemplo.com",
+      "notifications_count": "{{count}} novas"
     },
     "dashboard": {
       "overview_title": "Visão Geral",

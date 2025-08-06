@@ -258,7 +258,7 @@ router.get('/restaurant/:restaurantSlug', async (req, res) => {
     console.log(`[Public Route] Recebida requisição para /restaurant/${restaurantSlug}`);
     const restaurant = await models.Restaurant.findOne({
       where: { slug: restaurantSlug },
-      attributes: ['id', 'name', 'settings', 'slug']
+      attributes: ['id', 'name', 'settings', 'slug', 'logo'] // Incluído 'logo'
     });
 
     if (!restaurant) {
@@ -266,7 +266,7 @@ router.get('/restaurant/:restaurantSlug', async (req, res) => {
       return res.status(404).json({ error: 'Restaurante não encontrado.' });
     }
 
-    console.log(`[Public Route] Restaurante ${restaurantId} encontrado. Retornando dados.`);
+    console.log(`[Public Route] Restaurante ${restaurantSlug} encontrado. Retornando dados.`);
     res.json(restaurant);
   } catch (error) {
     console.error(`[Public Route] Erro ao obter informações do restaurante ${req.params.restaurantId}:`, error);

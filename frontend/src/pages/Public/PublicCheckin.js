@@ -53,7 +53,7 @@ const PublicCheckin = () => {
         setRestaurantName(response.data.name);
         setRestaurantLogo(response.data.logo);
         setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
-        setRequiresTable(response.data.settings?.checkin_requires_table || false);
+        setRequiresTable(response.data.settings?.checkin_program_settings?.checkin_requires_table || false);
         setPrimaryColor(response.data.settings?.primary_color || '#3f51b5');
         setSecondaryColor(response.data.settings?.secondary_color || '#f50057');
       } catch (err) {

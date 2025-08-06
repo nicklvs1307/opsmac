@@ -1,51 +1,48 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      156.6s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      153.1s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.707
-0.707 > Feedelizapro-frontend@1.0.0 build
-0.707 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.707
-3.848 Creating an optimized production build...
-155.7 Failed to compile.
-155.7
-155.7 [eslint]
-155.7 src/components/Layout/Header.js
-155.7 Syntax error: Expected corresponding JSX closing tag for <Box>. (291:10) (291:10)
-155.7
-155.7 src/components/UI/LoginForm.js
-155.7 Syntax error: Unexpected token (34:15) (34:15)
-155.7
-155.7 src/pages/Coupons/Coupons.js
-155.7   Line 85:16:   't' is not defined  no-undef
-155.7   Line 109:16:  't' is not defined  no-undef
-155.7   Line 138:29:  't' is not defined  no-undef
-155.7   Line 139:31:  't' is not defined  no-undef
-155.7   Line 140:30:  't' is not defined  no-undef
-155.7   Line 141:27:  't' is not defined  no-undef
-155.7   Line 142:30:  't' is not defined  no-undef
-155.7   Line 152:25:  't' is not defined  no-undef
-155.7   Line 153:25:  't' is not defined  no-undef
-155.7   Line 154:25:  't' is not defined  no-undef
-155.7   Line 155:25:  't' is not defined  no-undef
-155.7   Line 156:25:  't' is not defined  no-undef
-155.7   Line 157:25:  't' is not defined  no-undef
-155.7   Line 158:25:  't' is not defined  no-undef
-155.7   Line 169:52:  't' is not defined  no-undef
-155.7   Line 170:51:  't' is not defined  no-undef
-155.7   Line 184:21:  't' is not defined  no-undef
-155.7   Line 213:10:  't' is not defined  no-undef
-155.7   Line 223:23:  't' is not defined  no-undef
-155.7   Line 224:23:  't' is not defined  no-undef
-155.7   Line 225:23:  't' is not defined  no-undef
-155.7   Line 226:23:  't' is not defined  no-undef
-155.7   Line 244:52:  't' is not defined  no-undef
-155.7   Line 248:22:  't' is not defined  no-undef
-155.7   Line 271:66:  't' is not defined  no-undef
-155.7   Line 272:46:  't' is not defined  no-undef
-155.7
-155.7 Search for the keywords to learn more about each error.
-155.7
-155.7
+0.558
+0.558 > feedeliza-plus@1.0.0 build
+0.558 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.558
+2.581 Creating an optimized production build...
+151.5 Failed to compile.
+151.5
+151.5 [eslint]
+151.5 src/components/Layout/Header.js
+151.5 Syntax error: Unterminated JSX contents. (350:10) (350:10)
+151.5
+151.5 src/pages/Coupons/Coupons.js
+151.5   Line 57:17:  'useTranslation' is not defined  no-undef
+151.5
+151.5 src/pages/Integrations/IntegrationsPage.js
+151.5   Line 61:10:  't' is not defined  no-undef
+151.5   Line 67:23:  't' is not defined  no-undef
+151.5   Line 71:23:  't' is not defined  no-undef
+151.5   Line 72:23:  't' is not defined  no-undef
+151.5   Line 73:23:  't' is not defined  no-undef
+151.5   Line 74:23:  't' is not defined  no-undef
+151.5   Line 75:23:  't' is not defined  no-undef
+151.5
+151.5 src/pages/Public/PublicSurveyForm.js
+151.5   Line 74:45:    't' is not defined  no-undef
+151.5   Line 119:21:   't' is not defined  no-undef
+151.5   Line 123:43:   't' is not defined  no-undef
+151.5   Line 124:46:   't' is not defined  no-undef
+151.5   Line 147:70:   't' is not defined  no-undef
+151.5   Line 306:30:   't' is not defined  no-undef
+151.5   Line 369:27:   't' is not defined  no-undef
+151.5   Line 372:32:   't' is not defined  no-undef
+151.5   Line 393:110:  't' is not defined  no-undef
+151.5   Line 423:65:   't' is not defined  no-undef
+151.5   Line 475:57:   't' is not defined  no-undef
+151.5   Line 493:59:   't' is not defined  no-undef
+151.5   Line 529:26:   't' is not defined  no-undef
+151.5   Line 540:16:   't' is not defined  no-undef
+151.5
+151.5 Search for the keywords to learn more about each error.
+151.5
+151.5
 ------
 
  1 warning found (use docker --debug to expand):

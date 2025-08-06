@@ -29,6 +29,7 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const PublicSurveyForm = () => {
   const { slug } = useParams();

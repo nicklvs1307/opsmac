@@ -148,6 +148,12 @@ const Sidebar = ({ onMobileClose }) => {
       roles: ['admin', 'owner', 'manager']
     },
     {
+      title: 'Integrações',
+      icon: <ConnectWithoutContactIcon />,
+      path: '/integrations',
+      roles: ['admin', 'owner', 'manager']
+    },
+    {
       title: 'Configurações',
       icon: <SettingsIcon />,
       path: '/settings',

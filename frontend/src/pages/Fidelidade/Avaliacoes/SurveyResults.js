@@ -33,6 +33,13 @@ const SurveyResults = () => {
   }
 
   const { survey, totalResponses, npsScore, csatAverage, ratingsAverage } = data;
+  const npsCriteriaScores = data.restaurant?.nps_criteria_scores || {};
+
+  const calculateNPS = (promoters, passives, detractors) => {
+    const total = promoters + passives + detractors;
+    if (total === 0) return 0;
+    return ((promoters - detractors) / total) * 100;
+  };
 
   return (
     <Box sx={{ p: 3 }}>
@@ -53,7 +60,7 @@ const SurveyResults = () => {
         {npsScore !== null && (
           <Grid item xs={12} md={4}>
             <Paper elevation={3} sx={{ p: 3, textAlign: 'center' }}>
-              <Typography variant="subtitle1" color="text.secondary">NPS Score</Typography>
+              <Typography variant="subtitle1" color="text.secondary">NPS Geral da Pesquisa</Typography>
               <Typography variant="h3">{npsScore.toFixed(0)}</Typography>
             </Paper>
           </Grid>
@@ -76,12 +83,39 @@ const SurveyResults = () => {
         )}
       </Grid>
 
+      {Object.keys(npsCriteriaScores).length > 0 && (
+        <Box sx={{ mt: 5 }}>
+          <Typography variant="h5" gutterBottom>NPS por Critério</Typography>
+          <Grid container spacing={3}>
+            {Object.entries(npsCriteriaScores).map(([criterionId, scores]) => (
+              <Grid item xs={12} md={6} key={criterionId}>
+                <Paper elevation={3} sx={{ p: 3 }}>
+                  <Typography variant="h6" gutterBottom>
+                    {survey.questions.find(q => q.npsCriterion?.id === criterionId)?.npsCriterion?.name || `Critério ID: ${criterionId}`}
+                  </Typography>
+                  <Typography variant="body1">Promotores: {scores.promoters}</Typography>
+                  <Typography variant="body1">Passivos: {scores.passives}</Typography>
+                  <Typography variant="body1">Detratores: {scores.detractors}</Typography>
+                  <Typography variant="body1">Total: {scores.total}</Typography>
+                  <Typography variant="h6" sx={{ mt: 1 }}>
+                    NPS: {calculateNPS(scores.promoters, scores.passives, scores.detractors).toFixed(0)}
+                  </Typography>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
+
       <Box sx={{ mt: 5 }}>
         <Typography variant="h5" gutterBottom>Detalhes das Perguntas</Typography>
         {survey.questions.map((question) => (
           <Paper key={question.id} elevation={2} sx={{ p: 3, mb: 3 }}>
             <Typography variant="h6" gutterBottom>{question.question_text}</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>Tipo: {question.question_type}</Typography>
+            {question.question_type === 'nps' && question.npsCriterion && (
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>Critério NPS: {question.npsCriterion.name}</Typography>
+            )}
             {question.question_type === 'text' || question.question_type === 'textarea' ? (
               <Box sx={{ mt: 1 }}>
                 <Typography variant="subtitle2" gutterBottom>Respostas:</Typography>

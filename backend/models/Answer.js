@@ -30,10 +30,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    nps_criterion: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+    
   }, {
     sequelize,
     modelName: 'Answer',

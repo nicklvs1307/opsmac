@@ -18,6 +18,9 @@ import {
   MenuItem,
   Tabs,
   Tab,
+  FormControl,
+  InputLabel,
+  Select,
 } from '@mui/material';
 import {
   MoreVert as MoreVertIcon,
@@ -42,6 +45,7 @@ const Coupons = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [page, setPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [filters, setFilters] = useState({
     search: '',
@@ -55,13 +59,13 @@ const Coupons = () => {
     if (tabValue === 0) {
       expireCoupons();
       // Reset page to 1 when filters change
-      if (page !== 1 && (filters.search || filters.status || filters.type)) {
+      if (page !== 1 && (filters.search || filters.status || filters.type || itemsPerPage !== 10)) {
         setPage(1);
       } else {
         fetchCoupons();
       }
     }
-  }, [tabValue, page, filters]);
+  }, [tabValue, page, itemsPerPage, filters]);
 
   const expireCoupons = async () => {
     try {
@@ -89,7 +93,7 @@ const Coupons = () => {
       
       const params = {
         page,
-        limit: 10,
+        limit: itemsPerPage,
       };
 
       if (filters.search) params.search = filters.search;
@@ -99,7 +103,7 @@ const Coupons = () => {
       const response = await axiosInstance.get(`/api/coupons/restaurant/${restaurantId}`, { params });
       
       setCoupons(response.data.coupons);
-      setTotalPages(response.data.totalPages);
+      setTotalPages(response.data.pagination.total_pages);
     } catch (err) {
       console.error('Error fetching coupons:', err);
       setError('Erro ao carregar cupons');
@@ -235,7 +239,21 @@ const Coupons = () => {
       {tabValue === 3 && <CouponCreateForm onCouponCreated={fetchCoupons} />}
 
       {totalPages > 1 && (
-        <Box display="flex" justifyContent="center" mt={3}>
+        <Box display="flex" justifyContent="flex-end" alignItems="center" mt={3} gap={2}>
+          <FormControl size="small">
+            <InputLabel id="items-per-page-label">Itens por Página</InputLabel>
+            <Select
+              labelId="items-per-page-label"
+              value={itemsPerPage}
+              label="Itens por Página"
+              onChange={(e) => setItemsPerPage(e.target.value)}
+            >
+              <MenuItem value={5}>5</MenuItem>
+              <MenuItem value={10}>10</MenuItem>
+              <MenuItem value={25}>25</MenuItem>
+              <MenuItem value={50}>50</MenuItem>
+            </Select>
+          </FormControl>
           <Pagination
             count={totalPages}
             page={page}

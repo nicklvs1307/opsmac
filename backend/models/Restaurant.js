@@ -55,7 +55,7 @@ module.exports = (sequelize) => {
     cover_image: { type: DataTypes.STRING(500), allowNull: true },
     opening_hours: { type: DataTypes.JSONB, allowNull: true, defaultValue: { monday: { open: '09:00', close: '22:00', closed: false }, tuesday: { open: '09:00', close: '22:00', closed: false }, wednesday: { open: '09:00', close: '22:00', closed: false }, thursday: { open: '09:00', close: '22:00', closed: false }, friday: { open: '09:00', close: '22:00', closed: false }, saturday: { open: '09:00', close: '22:00', closed: false }, sunday: { open: '09:00', close: '22:00', closed: false } } },
     social_media: { type: DataTypes.JSONB, allowNull: true, defaultValue: { facebook: '', instagram: '', twitter: '', whatsapp: '' } },
-    settings: { type: DataTypes.JSONB, allowNull: true, defaultValue: { feedback_enabled: true, whatsapp_enabled: false, rewards_enabled: true, auto_response: true, nps_enabled: true, tablet_mode: false, checkin_requires_table: false, checkin_program_settings: {}, survey_program_settings: {}, primary_color: '#3f51b5', secondary_color: '#f50057' } },
+    settings: { type: DataTypes.JSONB, allowNull: true, defaultValue: { feedback_enabled: true, whatsapp_enabled: false, rewards_enabled: true, auto_response: true, nps_enabled: true, tablet_mode: false, checkin_requires_table: false, checkin_program_settings: {}, survey_program_settings: {}, primary_color: '#3f51b5', secondary_color: '#f50057', integrations: {} } },
     is_active: { type: DataTypes.BOOLEAN, defaultValue: true },
     subscription_plan: { type: DataTypes.ENUM('free', 'basic', 'premium', 'enterprise'), defaultValue: 'free' },
     subscription_expires: { type: DataTypes.DATE, allowNull: true },
@@ -68,6 +68,7 @@ module.exports = (sequelize) => {
     total_detractors: { type: DataTypes.INTEGER, defaultValue: 0, allowNull: false, validate: { min: 0 } },
     owner_id: { type: DataTypes.UUID, allowNull: false, references: { model: 'users', key: 'id' } },
     api_token: { type: DataTypes.STRING(255), allowNull: true, unique: true },
+    nps_criteria_scores: { type: DataTypes.JSONB, allowNull: true, defaultValue: {} },
   }, {
     sequelize,
     modelName: 'Restaurant',

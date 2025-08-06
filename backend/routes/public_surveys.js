@@ -59,7 +59,15 @@ router.post(
         try {
             const survey = await models.Survey.findOne({
                 where: { slug: surveySlug, status: 'active' },
-                include: [{ model: models.Question, as: 'questions' }]
+                include: [{
+                    model: models.Question,
+                    as: 'questions',
+                    include: [{
+                        model: models.NpsCriterion,
+                        as: 'npsCriterion',
+                        attributes: ['id', 'name']
+                    }]
+                }]
             });
 
             if (!survey) {
@@ -85,6 +93,8 @@ router.post(
             let feedbackType = 'general'; // Default type
             let isAnonymous = !customer_id;
 
+            const npsScoresByCriterion = {};
+
             for (const ans of answers) {
                 const question = survey.questions.find(q => q.id === ans.question_id);
                 if (question) {
@@ -92,6 +102,29 @@ router.post(
                         feedbackRating = parseInt(ans.answer_value);
                     } else if (question.question_type === 'nps') {
                         feedbackNpsScore = parseInt(ans.answer_value);
+                        if (question.npsCriterion) {
+                            const criterionId = question.npsCriterion.id;
+                            const score = parseInt(ans.answer_value);
+                            let category = '';
+                            if (score >= 9) {
+                                category = 'promoters';
+                            } else if (score >= 7) {
+                                category = 'passives';
+                            } else {
+                                category = 'detractors';
+                            }
+
+                            if (!npsScoresByCriterion[criterionId]) {
+                                npsScoresByCriterion[criterionId] = {
+                                    promoters: 0,
+                                    passives: 0,
+                                    detractors: 0,
+                                    total: 0,
+                                };
+                            }
+                            npsScoresByCriterion[criterionId][category]++;
+                            npsScoresByCriterion[criterionId].total++;
+                        }
                     } else if (question.question_type === 'text' || question.question_type === 'textarea') {
                         feedbackComment.push(ans.answer_value);
                     }
@@ -126,6 +159,24 @@ router.post(
             };
 
             await models.Feedback.create(feedbackData);
+
+            // Update NPS scores by criterion in Restaurant settings
+            const restaurant = await models.Restaurant.findByPk(survey.restaurant_id);
+            if (restaurant) {
+                const currentNpsScores = restaurant.nps_criteria_scores || {};
+                for (const criterionId in npsScoresByCriterion) {
+                    if (npsScoresByCriterion.hasOwnProperty(criterionId)) {
+                        const newScores = npsScoresByCriterion[criterionId];
+                        currentNpsScores[criterionId] = {
+                            promoters: (currentNpsScores[criterionId]?.promoters || 0) + newScores.promoters,
+                            passives: (currentNpsScores[criterionId]?.passives || 0) + newScores.passives,
+                            detractors: (currentNpsScores[criterionId]?.detractors || 0) + newScores.detractors,
+                            total: (currentNpsScores[criterionId]?.total || 0) + newScores.total,
+                        };
+                    }
+                }
+                await restaurant.update({ nps_criteria_scores: currentNpsScores });
+            }
 
             let generatedCoupon = null;
             if (survey.reward_id && customer_id) {

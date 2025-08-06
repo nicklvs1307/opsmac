@@ -236,6 +236,11 @@ router.get('/:id/results', auth, async (req, res) => {
                         {
                             model: models.Answer,
                             as: 'answers',
+                        },
+                        {
+                            model: models.NpsCriterion,
+                            as: 'npsCriterion',
+                            attributes: ['id', 'name']
                         }
                     ]
                 },
@@ -249,6 +254,11 @@ router.get('/:id/results', auth, async (req, res) => {
                             include: [
                                 {
                                     model: models.Question,
+                                    include: [{
+                                        model: models.NpsCriterion,
+                                        as: 'npsCriterion',
+                                        attributes: ['id', 'name']
+                                    }]
                                 }
                             ]
                         },
@@ -258,6 +268,11 @@ router.get('/:id/results', auth, async (req, res) => {
                             attributes: ['id', 'name', 'email', 'phone']
                         }
                     ]
+                },
+                {
+                    model: models.Restaurant,
+                    as: 'restaurant',
+                    attributes: ['nps_criteria_scores']
                 }
             ]
         });

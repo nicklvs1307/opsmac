@@ -107,24 +107,14 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
       identification_method,
       points_per_checkin,
       checkin_limit_per_cycle,
-      allow_multiple_cycles
+      allow_multiple_cycles,
+      settings: newSettings // Captura o objeto settings do body
     } = req.body;
 
-    const settings = {
-      checkin_cycle_length,
-      checkin_cycle_name,
-      enable_ranking,
-      enable_level_progression,
-      rewards_per_visit,
-      checkin_time_restriction,
-      checkin_duration_minutes,
-      identification_method,
-      points_per_checkin,
-      checkin_limit_per_cycle,
-      allow_multiple_cycles
-    };
+    // Mescla as configurações existentes com as novas
+    const updatedSettings = { ...restaurant.settings, ...newSettings };
 
-    await restaurant.update({ slug: restaurant_slug, settings });
+    await restaurant.update({ slug: restaurant_slug, settings: updatedSettings });
     res.json(restaurant);
   } catch (error) {
     console.error('Erro ao atualizar dados do restaurante:', error);

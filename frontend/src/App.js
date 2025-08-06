@@ -38,6 +38,7 @@ import SurveyEdit from './pages/Fidelidade/Avaliacoes/SurveyEdit';
 import SatisfactionDashboard from './pages/Fidelidade/Avaliacoes/SatisfactionDashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import RelationshipDashboard from './pages/Relationship/RelationshipDashboard';
+import IntegrationsPage from './pages/Integrations/IntegrationsPage';
 import PublicCheckin from './pages/Public/PublicCheckin';
 import PublicReward from './pages/Public/PublicReward'; // Adicionado
 import GirarRoleta from './pages/Public/GirarRoleta'; // Adicionado
@@ -97,6 +98,7 @@ function App() {
                   <Route path="fidelity/surveys/:id/results" element={<SurveyResults />} />
                   
                   <Route path="relationship" element={<RelationshipDashboard />} />
+                  <Route path="integrations" element={<IntegrationsPage />} />
                 </Route>
                 <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
                 {/* Catch all route */}

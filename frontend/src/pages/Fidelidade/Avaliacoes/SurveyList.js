@@ -50,8 +50,8 @@ const SurveyList = () => {
     }
   };
 
-  const handleCopyLink = (surveyId) => {
-    const publicLink = `${window.location.origin}/public/surveys/${surveyId}`;
+  const handleCopyLink = (slug) => {
+    const publicLink = `${window.location.origin}/public/surveys/${slug}`;
     navigator.clipboard.writeText(publicLink)
       .then(() => {
         toast.success('Link copiado para a área de transferência!');
@@ -153,7 +153,7 @@ const SurveyList = () => {
                           <IconButton color="secondary" aria-label="Gerar QR Code" onClick={() => handleGenerateQrCode(survey.id)}>
                             <QrCodeIcon />
                           </IconButton>
-                          <IconButton color="default" aria-label="Copiar Link" onClick={() => handleCopyLink(survey.id)}>
+                          <IconButton color="default" aria-label="Copiar Link" onClick={() => handleCopyLink(survey.slug)}>
                             <ContentCopyIcon />
                           </IconButton>
                           <IconButton color="error" aria-label="Apagar Pesquisa" onClick={() => handleDelete(survey.id)}>

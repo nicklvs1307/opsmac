@@ -125,18 +125,18 @@ const CheckinDashboard = () => {
   const fetchCheckinQRCode = useCallback(async () => {
     if (!restaurantId) return;
     try {
-      const response = await axiosInstance.get(`/api/qrcode/restaurant/${restaurantId}`, {
-        params: { qr_type: 'checkin', is_generic: true, limit: 1 }
-      });
-      if (response.data.qrcodes && response.data.qrcodes.length > 0) {
-        setCheckinQRCode(response.data.qrcodes[0]);
+      const restaurantSlug = user?.restaurants?.[0]?.slug;
+      if (restaurantSlug) {
+        const checkinUrl = `${window.location.origin}/checkin/public/${restaurantSlug}`;
+        setCheckinQRCode({ url: checkinUrl });
       } else {
         setCheckinQRCode(null);
+        console.warn('Slug do restaurante não encontrado, não foi possível gerar o QR Code de check-in.');
       }
     } catch (err) {
-      console.error('Erro ao buscar QR Code de check-in:', err);
+      console.error('Erro ao gerar QR Code de check-in:', err);
     }
-  }, [restaurantId]);
+  }, [restaurantId, user]);
 
   const fetchActiveCheckins = useCallback(async () => {
     if (!restaurantId) return;

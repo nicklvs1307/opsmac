@@ -179,7 +179,7 @@ const CheckinDashboard = () => {
     }
   };
 
-  useEffect(() => {
+    useEffect(() => {
     if (tabValue === 0) {
       fetchCheckinData();
     } else if (tabValue === 1) {

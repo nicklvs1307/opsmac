@@ -1,98 +1,30 @@
-      customer_id: '292c7b7d-8828-42e0-98ec-b677f6c5ea00',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    _previousDataValues: {
-      customer_id: '292c7b7d-8828-42e0-98ec-b677f6c5ea00',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: [Array],
-      includeNames: [Array],
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  }
-]
-averageVisitDuration: { avg_duration_seconds: '6691.2522500000000000' }
-checkinsByDay: [
-  { date: 2025-07-30T00:00:00.000Z, count: '5' },
-  { date: 2025-07-31T00:00:00.000Z, count: '7' },
-  { date: 2025-08-03T00:00:00.000Z, count: '4' }
-]
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-/app/backend/routes/surveys.js:88
-        const errors = validation.validationResult(req);
-                       ^
-ReferenceError: validation is not defined
-    at /app/backend/routes/surveys.js:88:24
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Node.js v20.19.4
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      158.2s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.621
+0.621 > Feedeliza+-frontend@1.0.0 build
+0.621 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.621
+3.767 Creating an optimized production build...
+157.3 Failed to compile.
+157.3
+157.3 [eslint]
+157.3 src/pages/Fidelidade/Checkin/CheckinDashboard.js
+157.3   Line 159:7:  'fetchCheckinQRCode' is not defined  no-undef
+157.3
+157.3 Search for the keywords to learn more about each error.
+157.3
+157.3
+------
+
+ 1 warning found (use docker --debug to expand):
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

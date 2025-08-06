@@ -140,7 +140,7 @@ const SurveyList = () => {
             <CircularProgress />
           </Box>
         ) : error ? (
-          <Alert severity="error">Erro ao carregar pesquisas: {error.message}</Alert>
+          <Alert severity="error">{t('common.error_loading_surveys')}: {error.message}</Alert>
         ) : (
           <TableContainer sx={{ overflowX: 'auto' }}>
             <Table>

@@ -287,13 +287,6 @@ const Header = ({ onMobileNavOpen }) => {
         <MenuItem sx={{ py: 1.5 }}>
           <Box sx={{ width: '100%' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
-              {t('header.notifications_count', { count: 3 })}
-          </Typography>
-        </Box>
-        <Divider sx={{ my: 0.5 }} />
-        <MenuItem sx={{ py: 1.5 }}>
-          <Box sx={{ width: '100%' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
               <Typography variant="body2" sx={{ fontWeight: 600, color: theme.palette.primary.main }}>
                 {t('header.new_feedback_title')}
               </Typography>

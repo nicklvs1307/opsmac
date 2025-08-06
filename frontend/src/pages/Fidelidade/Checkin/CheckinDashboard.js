@@ -89,7 +89,7 @@ const CheckinDashboard = () => {
       const response = await axiosInstance.get(`/api/checkin/analytics/${restaurantId}`);
       setCheckinData(response.data);
     } catch (err) {
-      console.error('Erro ao buscar dados de check-in (frontend):', err);
+      console.error(t('checkin_dashboard.error_fetching_checkin_data_console'), err);
       setError(t('checkin_dashboard.error_loading_checkin_data'));
     } finally {
       setLoading(false);
@@ -102,7 +102,7 @@ const CheckinDashboard = () => {
       const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`);
       setRewards(response.data.rewards);
     } catch (err) {
-      console.error('Erro ao buscar recompensas:', err);
+      console.error(t('checkin_dashboard.error_fetching_rewards_console'), err);
       toast.error(t('relationship.error_fetching_rewards'));
     }
   }, [restaurantId, t]);
@@ -124,7 +124,7 @@ const CheckinDashboard = () => {
       }
 
     } catch (err) {
-      console.error('Erro ao buscar dados do restaurante:', err);
+      console.error(t('checkin_dashboard.error_fetching_restaurant_data_console'), err);
       toast.error(t('checkin_dashboard.error_loading_restaurant_data'));
     } finally {
       setLoading(false);
@@ -140,7 +140,7 @@ const CheckinDashboard = () => {
       const response = await axiosInstance.get(`/api/checkin/active/${restaurantId}`);
       setActiveCheckins(response.data.activeCheckins);
     } catch (err) {
-      console.error('Erro ao buscar check-ins ativos:', err);
+      console.error(t('checkin_dashboard.error_fetching_active_checkins_console'), err);
       setError(t('checkin_dashboard.error_loading_active_checkins'));
     } finally {
       setLoading(false);
@@ -150,20 +150,20 @@ const CheckinDashboard = () => {
   const onSaveCheckinProgram = async (data) => {
     try {
       setLoading(true);
-      // Salva as configurações do programa de check-in
+      // {t('checkin_dashboard.save_checkin_program_settings')}
       await axiosInstance.put(`/api/settings/${restaurantId}`, {
         settings: {
           checkin_program_settings: data,
         },
       });
-      // Salva o slug do restaurante
+      // {t('checkin_dashboard.save_restaurant_slug')}
       await axiosInstance.put(`/api/settings/${restaurantId}/profile`, {
         slug: data.restaurant_slug,
       });
       toast.success(t('relationship.checkin_program_saved_successfully'));
-      fetchRestaurantData(); // Atualiza os dados do restaurante após salvar
+      fetchRestaurantData(); // {t('checkin_dashboard.update_restaurant_data_after_save')}
     } catch (err) {
-      console.error('Erro ao salvar programa de check-in:', err);
+      console.error(t('checkin_dashboard.error_saving_checkin_program_console'), err);
       toast.error(err.response?.data?.message || t('relationship.error_saving_checkin_program'));
     } finally {
       setLoading(false);
@@ -175,9 +175,9 @@ const CheckinDashboard = () => {
       setLoading(true);
       await axiosInstance.put(`/api/checkin/checkout/${checkinId}`);
       toast.success(t('checkin_dashboard.checkout_success'));
-      fetchActiveCheckins(); // Atualiza a lista após o checkout
+      fetchActiveCheckins(); // {t('checkin_dashboard.update_active_checkins_after_checkout')}
     } catch (err) {
-      console.error('Erro ao realizar check-out:', err);
+      console.error(t('checkin_dashboard.error_checkout_console'), err);
       toast.error(err.response?.data?.message || t('checkin_dashboard.checkout_error'));
     } finally {
       setLoading(false);

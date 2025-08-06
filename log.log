@@ -1,20 +1,51 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      173.2s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      156.6s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.624
-0.624 > Feedelizapro-frontend@1.0.0 build
-0.624 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.624
-3.931 Creating an optimized production build...
-172.2 Failed to compile.
-172.2
-172.2 [eslint]
-172.2 src/pages/Settings/Settings.js
-172.2   Line 473:19:  'setUser' is not defined  no-undef
-172.2
-172.2 Search for the keywords to learn more about each error.
-172.2
-172.2
+0.707
+0.707 > Feedelizapro-frontend@1.0.0 build
+0.707 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.707
+3.848 Creating an optimized production build...
+155.7 Failed to compile.
+155.7
+155.7 [eslint]
+155.7 src/components/Layout/Header.js
+155.7 Syntax error: Expected corresponding JSX closing tag for <Box>. (291:10) (291:10)
+155.7
+155.7 src/components/UI/LoginForm.js
+155.7 Syntax error: Unexpected token (34:15) (34:15)
+155.7
+155.7 src/pages/Coupons/Coupons.js
+155.7   Line 85:16:   't' is not defined  no-undef
+155.7   Line 109:16:  't' is not defined  no-undef
+155.7   Line 138:29:  't' is not defined  no-undef
+155.7   Line 139:31:  't' is not defined  no-undef
+155.7   Line 140:30:  't' is not defined  no-undef
+155.7   Line 141:27:  't' is not defined  no-undef
+155.7   Line 142:30:  't' is not defined  no-undef
+155.7   Line 152:25:  't' is not defined  no-undef
+155.7   Line 153:25:  't' is not defined  no-undef
+155.7   Line 154:25:  't' is not defined  no-undef
+155.7   Line 155:25:  't' is not defined  no-undef
+155.7   Line 156:25:  't' is not defined  no-undef
+155.7   Line 157:25:  't' is not defined  no-undef
+155.7   Line 158:25:  't' is not defined  no-undef
+155.7   Line 169:52:  't' is not defined  no-undef
+155.7   Line 170:51:  't' is not defined  no-undef
+155.7   Line 184:21:  't' is not defined  no-undef
+155.7   Line 213:10:  't' is not defined  no-undef
+155.7   Line 223:23:  't' is not defined  no-undef
+155.7   Line 224:23:  't' is not defined  no-undef
+155.7   Line 225:23:  't' is not defined  no-undef
+155.7   Line 226:23:  't' is not defined  no-undef
+155.7   Line 244:52:  't' is not defined  no-undef
+155.7   Line 248:22:  't' is not defined  no-undef
+155.7   Line 271:66:  't' is not defined  no-undef
+155.7   Line 272:46:  't' is not defined  no-undef
+155.7
+155.7 Search for the keywords to learn more about each error.
+155.7
+155.7
 ------
 
  1 warning found (use docker --debug to expand):
@@ -28,213 +59,3 @@ Dockerfile.frontend:23
   25 |     # Estágio final para servir os arquivos com NGINX
 --------------------
 ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
-
-
-settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-Settings.js:108 [Settings] Selected logo file: File
-Settings.js:124 [Settings] Logo upload success response: Object
-Settings.js:133 [Settings] Logo upload error: u is not a function
-B @ Settings.js:133
-Settings.js:124 [Settings] Logo upload success response: {message: 'Logo atualizado com sucesso!', logo_url: '/uploads/logo-1754506348265-323553210.jpeg'}
-Settings.js:133 [Settings] Logo upload error: u is not a function
-B @ Settings.js:133
-await in B
-Ne @ react-dom.production.min.js:54
-Be @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-zn @ react-dom.production.min.js:105
-Ln @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-qn @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ut @ react-dom.production.min.js:73
-Settings.js:108 [Settings] Selected logo file: File {name: 'download.jpeg', lastModified: 1749061307722, lastModifiedDate: Wed Jun 04 2025 15:21:47 GMT-0300 (Horário Padrão de Brasília), webkitRelativePath: '', size: 13209, …}
-Settings.js:124 [Settings] Logo upload success response: {message: 'Logo atualizado com sucesso!', logo_url: '/uploads/logo-1754506356113-647920866.jpeg'}
-Settings.js:133 [Settings] Logo upload error: u is not a function
-B @ Settings.js:133
-await in B
-Ne @ react-dom.production.min.js:54
-Be @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-zn @ react-dom.production.min.js:105
-Ln @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-qn @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ut @ react-dom.production.min.js:73
-
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
-Generated Swagger Specs (first 500 chars): {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Check Test API",
-    "version": "1.0.0",
-    "description": "API documentation for the Check Test application."
-  },
-  "servers": [
-    {
-      "url": "http://localhost:5000/api",
-      "description": "Production server"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Public API",
-      "description": "Endpoints acessíveis via API Token para integração externa."
-    },
-    {
-      "name": "Admin",
-      "description": "Gerenciamento de usuários e res
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-📊 Dashboard: https://feedelizapro.towersfy.com
-🔗 API: https://feedelizaapi.towersfy.com/api
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-[Logo Upload] Restaurant ID: 0e517dc5-4881-45aa-996e-0365012000bc, Uploaded filename: logo-1754506241479-868047742.jpeg
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-[Logo Upload] Restaurant ID: 0e517dc5-4881-45aa-996e-0365012000bc, Uploaded filename: logo-1754506348265-323553210.jpeg
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-[Logo Upload] Restaurant ID: 0e517dc5-4881-45aa-996e-0365012000bc, Uploaded filename: logo-1754506356113-647920866.jpeg
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}
-Auth Middleware - req.user (after population): {
-  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  email: 'lucas@teste.com',
-  role: 'owner',
-  name: 'Lucas Niquele',
-  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
-}

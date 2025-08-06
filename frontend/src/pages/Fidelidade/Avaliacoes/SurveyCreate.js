@@ -210,15 +210,15 @@ const SurveyCreate = () => {
       <Typography variant="h4" gutterBottom>{t('survey_create.main_title')}</Typography>
       <Paper elevation={3} sx={{ p: 4 }}>
         <Stepper activeStep={activeStep} orientation="vertical" sx={{ mt: 2 }}>
-            {[t('survey_create.step_choose_type'), 'Configure Detalhes e Perguntas', 'Revise e Crie', 'Ações'].map((label, index) => (
+            {[t('survey_create.step_choose_type'), t('survey_create.step_configure_details'), t('survey_create.step_review_and_create'), t('survey_create.step_actions')].map((label, index) => (
                 <Step key={label}>
                     <StepLabel>{label}</StepLabel>
                     <StepContent>
                         {renderStepContent(index)}
                         <Box sx={{ mt: 2 }}>
-                            <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>Voltar</Button>
+                            <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>{t('common.back')}</Button>
                             <Button variant="contained" onClick={activeStep === 2 ? handleCreate : handleNext} disabled={mutation.isLoading}>
-                                {mutation.isLoading ? <CircularProgress size={24}/> : (activeStep === 2 ? 'Criar Pesquisa' : 'Próximo')}
+                                {mutation.isLoading ? <CircularProgress size={24}/> : (activeStep === 2 ? t('survey_create.create_survey_button') : t('common.next'))}
                             </Button>
                         </Box>
                     </StepContent>

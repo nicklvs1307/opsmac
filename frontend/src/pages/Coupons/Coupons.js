@@ -54,6 +54,7 @@ const Coupons = () => {
   });
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (tabValue === 0) {

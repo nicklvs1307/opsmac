@@ -470,9 +470,9 @@ const Settings = () => {
   ];
 
   const cuisineTypes = [
-    'Brasileira', 'Italiana', 'Japonesa', 'Chinesa', 'Mexicana', 'Francesa',
-    'Indiana', 'Árabe', 'Vegetariana', 'Vegana', 'Fast Food', 'Pizzaria',
-    'Churrascaria', 'Frutos do Mar', 'Contemporânea', 'Fusion', 'Outros',
+        t('settings.cuisine_type_brazilian'),     t('settings.cuisine_type_italian'),     t('settings.cuisine_type_japanese'),     t('settings.cuisine_type_chinese'),     t('settings.cuisine_type_mexican'),     t('settings.cuisine_type_french'),
+        t('settings.cuisine_type_indian'), t('settings.cuisine_type_arabic'),         t('settings.cuisine_type_vegetarian'),         t('settings.cuisine_type_vegan'), t('settings.cuisine_type_fast_food'),     t('settings.cuisine_type_pizza'),
+    t('settings.cuisine_type_steakhouse'),     t('settings.cuisine_type_seafood'),         t('settings.cuisine_type_contemporary'), t('settings.cuisine_type_fusion'), t('settings.cuisine_type_other'),,
   ];
 
   const renderTabContent = () => {

@@ -71,7 +71,7 @@ const PublicSurveyForm = () => {
         setAnswers(initialAnswers);
       } catch (err) {
         console.error('Error fetching survey:', err);
-        setError(err.response?.data?.msg || 'Pesquisa não encontrada ou inativa.');
+        setError(err.response?.data?.msg || t('public_survey.survey_not_found_or_inactive'));
       } finally {
         setLoading(false);
       }
@@ -116,12 +116,12 @@ const PublicSurveyForm = () => {
 
     try {
       await axiosInstance.post(`/api/public/surveys/${slug}/responses`, { answers: formattedAnswers });
-      toast.success('Sua resposta foi enviada com sucesso!');
-      navigate('/thank-you'); // Redirecionar para uma página de agradecimento
+      toast.success(t('public_survey.submit_success_message'));
+      navigate('/thank-you'); // {t('public_survey.redirect_to_thank_you_page')}
     } catch (err) {
       console.error('Error submitting answers:', err);
-      setError(err.response?.data?.msg || 'Erro ao enviar respostas.');
-      toast.error(err.response?.data?.msg || 'Erro ao enviar respostas.');
+      setError(err.response?.data?.msg || t('public_survey.submit_error_message'));
+      toast.error(err.response?.data?.msg || t('public_survey.submit_error_message'));
     } finally {
       setSubmitting(false);
     }
@@ -144,7 +144,7 @@ const PublicSurveyForm = () => {
           <Alert severity="error" sx={{ mb: 3 }}>
             {error}
           </Alert>
-          <Button variant="contained" onClick={() => navigate('/')}>Voltar ao Início</Button>
+          <Button variant="contained" onClick={() => navigate('/')}>{t('common.back_to_home')}</Button>
         </Box>
       </Container>
     );
@@ -303,7 +303,7 @@ const PublicSurveyForm = () => {
                       fullWidth
                       multiline={question.question_type === 'textarea'}
                       rows={question.question_type === 'textarea' ? 4 : 1}
-                      label="Sua Resposta"
+                      label={t('public_survey.your_answer_label')}
                       value={answers[question.id] || ''}
                       onChange={(e) => handleAnswerChange(question.id, e.target.value)}
                       variant="outlined"
@@ -366,10 +366,10 @@ const PublicSurveyForm = () => {
                         '&.Mui-focused': {
                           color: primaryColor,
                         },
-                      }}>Selecione uma opção</InputLabel>
+                      }}>{t('public_survey.select_option_label')}</InputLabel>
                       <Select
                         value={answers[question.id] || ''}
-                        label="Selecione uma opção"
+                        label={t('public_survey.select_option_label')}
                         onChange={(e) => handleAnswerChange(question.id, e.target.value)}
                         sx={{ color: textColor,
                           '& .MuiOutlinedInput-notchedOutline': {
@@ -390,7 +390,7 @@ const PublicSurveyForm = () => {
                     </FormControl>
                   ) : question.question_type === 'nps' ? (
                     <Box sx={{ width: '100%', mt: 2 }}>
-                      <Typography variant="body2" gutterBottom textAlign="center" sx={{ color: textColor }}>0 = Nada provável, 10 = Extremamente provável</Typography>
+                      <Typography variant="body2" gutterBottom textAlign="center" sx={{ color: textColor }}>{t('public_survey.nps_scale_description')}</Typography>
                       <Grid container spacing={1} justifyContent="center">
                         {[...Array(11).keys()].map((num) => (
                           <Grid item key={num}>
@@ -420,7 +420,7 @@ const PublicSurveyForm = () => {
                     </Box>
                   ) : question.question_type === 'csat' ? (
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
-                      <Typography variant="body2" gutterBottom>1 = Muito Insatisfeito, 5 = Muito Satisfeito</Typography>
+                      <Typography variant="body2" gutterBottom>{t('public_survey.csat_scale_description')}</Typography>
                       <Rating
                         name={`csat-rating-${question.id}`}
                         value={parseInt(answers[question.id]) || 0}
@@ -472,7 +472,7 @@ const PublicSurveyForm = () => {
                           },
                         }}
                       >
-                        <ThumbUpIcon sx={{ mr: 1 }} /> Gostei
+                        <ThumbUpIcon sx={{ mr: 1 }} /> {t('public_survey.like_button')}
                       </ToggleButton>
                       <ToggleButton 
                         value="dislike" 
@@ -490,7 +490,7 @@ const PublicSurveyForm = () => {
                           },
                         }}
                       >
-                        <ThumbDownIcon sx={{ mr: 1 }} /> Não Gostei
+                        <ThumbDownIcon sx={{ mr: 1 }} /> {t('public_survey.dislike_button')}
                       </ToggleButton>
                     </ToggleButtonGroup>
                   ) : null
@@ -526,7 +526,7 @@ const PublicSurveyForm = () => {
               {submitting ? 
                 <CircularProgress size={24} color="inherit" /> : 
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span>Enviar Respostas</span>
+                  <span>{t('public_survey.submit_button')}</span>
                 </Box>
               }
             </Button>
@@ -537,7 +537,7 @@ const PublicSurveyForm = () => {
           <Typography variant="caption" color={textColor} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
             <span>Powered by</span> 
             <span style={{ fontWeight: 'bold', color: primaryColor }}>
-              Sistema de Feedback
+              {t('public_survey.powered_by_feedback_system')}
             </span>
           </Typography>
         </Box>

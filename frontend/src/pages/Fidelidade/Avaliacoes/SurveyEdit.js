@@ -56,7 +56,7 @@ const SurveyEdit = () => {
       queryClient.invalidateQueries(['survey', id]);
       queryClient.invalidateQueries('surveys');
       toast.success(t('survey_edit.update_success'));
-      navigate('/satisfaction/surveys'); // Redireciona para a lista de pesquisas
+      navigate('/satisfaction/surveys'); // {t('survey_edit.redirect_to_list')}
     },
     onError: (err) => {
       toast.error(t('survey_edit.update_error', { message: err.response.data.msg || err.message }));
@@ -115,7 +115,7 @@ const SurveyEdit = () => {
   };
 
   if (isLoading) return <CircularProgress />;
-  if (isError) return <Typography color="error">Erro: {error.message}</Typography>;
+  if (isError) return <Typography color="error">{t('common.error')}: {error.message}</Typography>;
 
   return (
     <Box sx={{ p: 3 }}>

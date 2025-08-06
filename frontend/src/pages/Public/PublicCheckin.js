@@ -468,7 +468,7 @@ const PublicCheckin = () => {
           <Typography variant="caption" color={textColor} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
             <span>Powered by</span> 
             <span style={{ fontWeight: 'bold', color: primaryColor }}>
-              Sistema de Feedback
+              {t('public_checkin.powered_by_feedback_system')}
             </span>
           </Typography>
         </Box>

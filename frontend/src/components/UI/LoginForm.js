@@ -31,8 +31,8 @@ const LoginForm = ({
   error = '',
   showDemoCredentials = true,
   logoComponent,
-  appName = {t('app_name')},
-  appDescription = {t('app_description')},
+  appName = t('app_name'),
+  appDescription = t('app_description'),
 }) => {
   const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);

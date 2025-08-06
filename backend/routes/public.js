@@ -161,8 +161,10 @@ router.post('/feedback', apiAuth, [
  *       500:
  *         description: Erro interno do servidor.
  */
-router.post('/checkin/:restaurantSlug', apiAuth, [
-  body('customer_id').isUUID().withMessage('ID do cliente inválido'),
+router.post('/checkin/:restaurantSlug', [
+  body('customer_name').optional().isString().withMessage('Nome do cliente inválido'),
+  body('phone_number').optional().isString().withMessage('Número de telefone inválido'),
+  body('cpf').optional().isString().withMessage('CPF inválido'),
   body('table_number').optional().isString().withMessage('Número da mesa inválido'),
 ], async (req, res) => {
   const errors = validationResult(req);
@@ -171,23 +173,36 @@ router.post('/checkin/:restaurantSlug', apiAuth, [
   }
 
   const { restaurantSlug } = req.params;
-  const { customer_id, table_number } = req.body;
+  const { customer_name, phone_number, cpf, table_number } = req.body;
 
   try {
     const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
     if (!restaurant) {
       return res.status(404).json({ message: 'Restaurante não encontrado.' });
     }
-    const restaurant_id = restaurant.id; // Obter restaurant_id do objeto restaurant encontrado pelo slug
+    const restaurant_id = restaurant.id;
 
-    if (!customer) {
-      return res.status(404).json({ message: 'Cliente não encontrado ou não pertence a este restaurante.' });
+    let customer = null;
+    if (phone_number) {
+      customer = await models.Customer.findOrCreate({
+        where: { phone: phone_number, restaurant_id },
+        defaults: { name: customer_name || 'Cliente Check-in', restaurant_id, phone: phone_number }
+      });
+      customer = customer[0]; // findOrCreate returns [instance, created]
+    } else if (cpf) {
+      customer = await models.Customer.findOrCreate({
+        where: { cpf, restaurant_id },
+        defaults: { name: customer_name || 'Cliente Check-in', restaurant_id, cpf }
+      });
+      customer = customer[0];
+    } else {
+      return res.status(400).json({ message: 'Número de telefone ou CPF é obrigatório para o check-in.' });
     }
 
     // Verificar se o cliente já tem um check-in ativo no restaurante
     const existingCheckin = await models.Checkin.findOne({
       where: {
-        customer_id,
+        customer_id: customer.id,
         restaurant_id,
         status: 'active',
       },
@@ -198,7 +213,7 @@ router.post('/checkin/:restaurantSlug', apiAuth, [
     }
 
     const checkin = await models.Checkin.create({
-      customer_id,
+      customer_id: customer.id,
       restaurant_id,
       table_number, // Adicionado
       checkin_time: new Date(),

@@ -215,7 +215,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                 <FormControlLabel
                   control={
                     <Controller
-                      name="settings.checkin_requires_table"
+                      name="checkin_requires_table"
                       control={control}
                       render={({ field }) => (
                         <Switch

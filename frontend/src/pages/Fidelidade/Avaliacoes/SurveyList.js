@@ -12,6 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
+import QRCode from 'qrcode.react';
 
 const fetchSurveys = async (filters) => {
   const { data } = await axiosInstance.get('/api/surveys', { params: filters });
@@ -28,6 +29,8 @@ const SurveyList = () => {
   const [filters, setFilters] = useState({
     search: '',
   });
+  const [qrCodeValue, setQrCodeValue] = useState(null);
+  const [isQrModalOpen, setQrModalOpen] = useState(false);
 
   const { data: surveys, isLoading, error, refetch } = useQuery(['surveys', filters], () => fetchSurveys(filters));
 
@@ -57,6 +60,12 @@ const SurveyList = () => {
         toast.error('Erro ao copiar o link.');
         console.error('Erro ao copiar o link:', err);
       });
+  };
+
+  const handleGenerateQrCode = (surveyId) => {
+    const publicLink = `${window.location.origin}/public/surveys/${surveyId}`;
+    setQrCodeValue(publicLink);
+    setQrModalOpen(true);
   };
 
   const handleFilterChange = (field, value) => {
@@ -141,7 +150,7 @@ const SurveyList = () => {
                           <IconButton component={RouterLink} to={`/fidelity/surveys/edit/${survey.id}`} color="info" aria-label="Editar Pesquisa">
                             <EditIcon />
                           </IconButton>
-                          <IconButton color="secondary" aria-label="Gerar QR Code" onClick={() => toast('Funcionalidade de QR Code em breve!', { icon: '💡' })}> {/* Placeholder for QR Code */}
+                          <IconButton color="secondary" aria-label="Gerar QR Code" onClick={() => handleGenerateQrCode(survey.id)}>
                             <QrCodeIcon />
                           </IconButton>
                           <IconButton color="default" aria-label="Copiar Link" onClick={() => handleCopyLink(survey.id)}>
@@ -160,6 +169,30 @@ const SurveyList = () => {
           </TableContainer>
         )}
       </Paper>
+
+      {isQrModalOpen && (
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1300, // Ensure it's above other content
+          }}
+          onClick={() => setQrModalOpen(false)}
+        >
+          <Paper sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+            <Typography variant="h6">Aponte a câmera para o QR Code</Typography>
+            <QRCode value={qrCodeValue} size={256} />
+            <Button variant="contained" onClick={() => setQrModalOpen(false)}>Fechar</Button>
+          </Paper>
+        </Box>
+      )}
     </Box>
   );
 };

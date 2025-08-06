@@ -300,12 +300,15 @@ router.get('/restaurant/:restaurantSlug', async (req, res) => {
  *       500:
  *         description: Erro interno do servidor.
  */
-router.get('/surveys/:slug', async (req, res) => {
+router.get('/surveys/:identifier', async (req, res) => {
   try {
-    const { slug } = req.params;
+    const { identifier } = req.params;
     const survey = await models.Survey.findOne({
       where: {
-        slug,
+        [models.Sequelize.Op.or]: [
+          { id: identifier },
+          { slug: identifier }
+        ],
         status: 'active',
       },
       include: [

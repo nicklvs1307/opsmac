@@ -333,10 +333,27 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
             <CardContent>
               {checkinQRCode ? (
                 <Box textAlign="center">
-                  <QRCode value={checkinQRCode.feedback_url} size={200} />
+                  <QRCode value={checkinQRCode.url} size={200} />
                   <Typography variant="caption" display="block" mt={2}>
-                    {checkinQRCode.feedback_url}
+                    {checkinQRCode.url}
                   </Typography>
+                  <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center', gap: 1 }}>
+                    <Button variant="outlined" onClick={() => navigator.clipboard.writeText(checkinQRCode.url)}>
+                      Copiar Link
+                    </Button>
+                    <Button variant="contained" onClick={() => {
+                      const canvas = document.querySelector('canvas');
+                      const pngUrl = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+                      let downloadLink = document.createElement('a');
+                      downloadLink.href = pngUrl;
+                      downloadLink.download = 'checkin-qrcode.png';
+                      document.body.appendChild(downloadLink);
+                      downloadLink.click();
+                      document.body.removeChild(downloadLink);
+                    }}>
+                      Baixar QR Code
+                    </Button>
+                  </Box>
                 </Box>
               ) : (
                 <Typography>Salve o programa de fidelidade para gerar o QR Code.</Typography>

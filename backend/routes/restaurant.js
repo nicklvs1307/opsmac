@@ -95,7 +95,35 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
-    await restaurant.update(req.body);
+    const { 
+      checkin_cycle_length,
+      checkin_cycle_name,
+      enable_ranking,
+      enable_level_progression,
+      rewards_per_visit,
+      checkin_time_restriction,
+      checkin_duration_minutes,
+      identification_method,
+      points_per_checkin,
+      checkin_limit_per_cycle,
+      allow_multiple_cycles
+    } = req.body;
+
+    const settings = {
+      checkin_cycle_length,
+      checkin_cycle_name,
+      enable_ranking,
+      enable_level_progression,
+      rewards_per_visit,
+      checkin_time_restriction,
+      checkin_duration_minutes,
+      identification_method,
+      points_per_checkin,
+      checkin_limit_per_cycle,
+      allow_multiple_cycles
+    };
+
+    await restaurant.update({ settings });
     res.json(restaurant);
   } catch (error) {
     console.error('Erro ao atualizar dados do restaurante:', error);

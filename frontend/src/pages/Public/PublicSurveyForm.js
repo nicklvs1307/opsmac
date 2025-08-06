@@ -288,7 +288,7 @@ const PublicSurveyForm = () => {
                   <Typography 
                     variant="h6" 
                     sx={{ 
-                      color: 'text.primary',
+                      color: textColor,
                       fontWeight: 600,
                       lineHeight: 1.3,
                       fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' },
@@ -307,6 +307,14 @@ const PublicSurveyForm = () => {
                       value={answers[question.id] || ''}
                       onChange={(e) => handleAnswerChange(question.id, e.target.value)}
                       variant="outlined"
+                      InputLabelProps={{
+                        sx: {
+                          color: textColor,
+                          '&.Mui-focused': {
+                            color: primaryColor,
+                          },
+                        }
+                      }}
                     />
                   ) : question.question_type === 'radio' ? (
                     <RadioGroup
@@ -314,7 +322,7 @@ const PublicSurveyForm = () => {
                       onChange={(e) => handleAnswerChange(question.id, e.target.value)}
                     >
                       {question.options.map((option, index) => (
-                        <FormControlLabel key={index} value={option} control={<Radio />} label={option} />
+                        <FormControlLabel key={index} value={option} control={<Radio sx={{ color: primaryColor }} />} label={<Typography sx={{ color: textColor }}>{option}</Typography>} />
                       ))}
                     </RadioGroup>
                   ) : question.question_type === 'checkboxes' ? (
@@ -326,28 +334,40 @@ const PublicSurveyForm = () => {
                             <Checkbox
                               checked={(answers[question.id] || []).includes(option)}
                               onChange={() => handleCheckboxChange(question.id, option)}
+                              sx={{ color: primaryColor }}
                             />
                           }
-                          label={option}
+                          label={<Typography sx={{ color: textColor }}>{option}</Typography>}
                         />
                       ))}
                     </FormGroup>
                   ) : question.question_type === 'dropdown' ? (
                     <FormControl fullWidth variant="outlined">
-                      <InputLabel>Selecione uma opção</InputLabel>
+                      <InputLabel sx={{ color: textColor }}>Selecione uma opção</InputLabel>
                       <Select
                         value={answers[question.id] || ''}
                         label="Selecione uma opção"
                         onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+                        sx={{ color: textColor,
+                          '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: 'rgba(0, 0, 0, 0.1)',
+                          },
+                          '&:hover .MuiOutlinedInput-notchedOutline': {
+                            borderColor: alpha(primaryColor, 0.3),
+                          },
+                          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: primaryColor,
+                          },
+                        }}
                       >
                         {question.options.map((option, index) => (
-                          <MenuItem key={index} value={option}>{option}</MenuItem>
+                          <MenuItem key={index} value={option} sx={{ color: textColor }}>{option}</MenuItem>
                         ))}
                       </Select>
                     </FormControl>
                   ) : question.question_type === 'nps' ? (
                     <Box sx={{ width: '100%', mt: 2 }}>
-                      <Typography variant="body2" gutterBottom textAlign="center">0 = Nada provável, 10 = Extremamente provável</Typography>
+                      <Typography variant="body2" gutterBottom textAlign="center" sx={{ color: textColor }}>0 = Nada provável, 10 = Extremamente provável</Typography>
                       <Grid container spacing={1} justifyContent="center">
                         {[...Array(11).keys()].map((num) => (
                           <Grid item key={num}>
@@ -359,11 +379,13 @@ const PublicSurveyForm = () => {
                                 height: '40px',
                                 borderRadius: '50%',
                                 fontWeight: 'bold',
-                                bgcolor: primaryColor,
+                                bgcolor: parseInt(answers[question.id]) === num ? primaryColor : 'transparent',
                                 color: parseInt(answers[question.id]) === num ? 'white' : primaryColor,
+                                borderColor: primaryColor,
                                 '&:hover': {
-                                  bgcolor: secondaryColor,
+                                  bgcolor: primaryColor,
                                   color: 'white',
+                                  borderColor: primaryColor,
                                 },
                               }}
                             >
@@ -384,7 +406,7 @@ const PublicSurveyForm = () => {
                         }}
                         max={5}
                         size="large"
-                        sx={{ '& .MuiRating-iconFilled': { color: '#ffb400' } }} // Cor das estrelas
+                        sx={{ '& .MuiRating-iconFilled': { color: primaryColor } }} // Cor das estrelas
                       />
                     </Box>
                   ) : question.question_type === 'ratings' ? (
@@ -397,7 +419,7 @@ const PublicSurveyForm = () => {
                         }}
                         max={5}
                         size="large"
-                        sx={{ '& .MuiRating-iconFilled': { color: '#ffb400' } }} // Cor das estrelas
+                        sx={{ '& .MuiRating-iconFilled': { color: primaryColor } }} // Cor das estrelas
                       />
                     </Box>
                   ) : question.question_type === 'like_dislike' ? (
@@ -411,10 +433,40 @@ const PublicSurveyForm = () => {
                       }}
                       sx={{ mt: 2, display: 'flex', justifyContent: 'center', width: '100%' }}
                     >
-                      <ToggleButton value="like" aria-label="gostei" sx={{ flexGrow: 1, py: 1.5, borderRadius: '8px !important' }}>
+                      <ToggleButton 
+                        value="like" 
+                        aria-label="gostei" 
+                        sx={{
+                          flexGrow: 1, 
+                          py: 1.5, 
+                          borderRadius: '8px !important',
+                          color: answers[question.id] === 'like' ? 'white' : primaryColor,
+                          bgcolor: answers[question.id] === 'like' ? primaryColor : 'transparent',
+                          borderColor: primaryColor + ' !important',
+                          '&:hover': {
+                            bgcolor: primaryColor,
+                            color: 'white',
+                          },
+                        }}
+                      >
                         <ThumbUpIcon sx={{ mr: 1 }} /> Gostei
                       </ToggleButton>
-                      <ToggleButton value="dislike" aria-label="não gostei" sx={{ flexGrow: 1, py: 1.5, borderRadius: '8px !important' }}>
+                      <ToggleButton 
+                        value="dislike" 
+                        aria-label="não gostei" 
+                        sx={{
+                          flexGrow: 1, 
+                          py: 1.5, 
+                          borderRadius: '8px !important',
+                          color: answers[question.id] === 'dislike' ? 'white' : primaryColor,
+                          bgcolor: answers[question.id] === 'dislike' ? primaryColor : 'transparent',
+                          borderColor: primaryColor + ' !important',
+                          '&:hover': {
+                            bgcolor: primaryColor,
+                            color: 'white',
+                          },
+                        }}
+                      >
                         <ThumbDownIcon sx={{ mr: 1 }} /> Não Gostei
                       </ToggleButton>
                     </ToggleButtonGroup>

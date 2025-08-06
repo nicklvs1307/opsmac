@@ -279,7 +279,7 @@ const PublicCheckin = () => {
                 }}
                 InputLabelProps={{
                   sx: {
-                    color: 'text.secondary',
+                    color: textColor,
                     '&.Mui-focused': {
                       color: primaryColor,
                     },
@@ -332,7 +332,305 @@ const PublicCheckin = () => {
                 }}
                 InputLabelProps={{
                   sx: {
-                    color: 'text.secondary',
+                    color: textColor,
+                    '&.Mui-focused': {
+                      color: primaryColor,
+                    },
+                  }
+                }}
+              />
+            )}
+          />
+        )}
+
+        <Controller
+          name="customer_name"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label={t('public_checkin.your_name')}
+              fullWidth
+              margin="normal"
+              error={!!errors.customer_name}
+              helperText={errors.customer_name?.message}
+              placeholder={t('public_checkin.name_optional')}
+              variant="outlined"
+              InputProps={{
+                sx: {
+                  borderRadius: 2,
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(0, 0, 0, 0.1)',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: alpha(primaryColor, 0.3),
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: primaryColor,
+                  },
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                  '&:hover': {
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                  },
+                }
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: textColor,
+                  '&.Mui-focused': {
+                    color: primaryColor,
+                  },
+                }
+              }}
+            />
+          )}
+        />
+
+        {requiresTable && (
+          <Controller
+            name="table_number"
+            control={control}
+            rules={{ required: t('public_checkin.table_number_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('public_checkin.table_number')}
+                fullWidth
+                margin="normal"
+                error={!!errors.table_number}
+                helperText={errors.table_number?.message}
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    borderRadius: 2,
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: alpha(primaryColor, 0.3),
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: primaryColor,
+                    },
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                    '&:hover': {
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                    },
+                  }
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: textColor,
+                    '&.Mui-focused': {
+                      color: primaryColor,
+                    },
+                  }
+                }}
+              />
+            )}
+          />
+        )}
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          disabled={loading}
+          sx={{ 
+            mt: 4, 
+            py: 1.8, 
+            fontSize: { xs: '1rem', md: '1.1rem' }, 
+            borderRadius: 3, 
+            boxShadow: `0px 8px 20px ${alpha(primaryColor, 0.3)}`, 
+            backgroundColor: primaryColor,
+            color: textColor,
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              boxShadow: `0px 10px 25px ${alpha(primaryColor, 0.4)}`,
+              transform: 'translateY(-2px)',
+              backgroundColor: primaryColor, // Mantém a cor no hover
+            },
+            '&:active': {
+              transform: 'translateY(1px)'
+            }
+          }}
+        >
+          {loading ? 
+            <CircularProgress size={24} color="inherit" /> : 
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span>{t('public_checkin.checkin_button')}</span>
+            </Box>
+          }
+        </Button>
+        
+        <Box textAlign="center" mt={4} sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}>
+          <Typography variant="caption" color={textColor} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+            <span>Powered by</span> 
+            <span style={{ fontWeight: 'bold', color: primaryColor }}>
+              Sistema de Feedback
+            </span>
+          </Typography>
+        </Box>
+      </form>
+          </Paper>
+        </Container>
+      </Box>
+    );
+};
+
+export default PublicCheckin;}>
+          <Box sx={{ textAlign: 'center', mb: 4 }}>
+            <Typography 
+              variant="h4" 
+              component="h1" 
+              gutterBottom
+              sx={{ 
+                fontWeight: 800, 
+                color: textColor,
+                mb: 2,
+                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' }, // Responsivo
+                letterSpacing: '-0.5px',
+              }}
+            >
+              {t('public_checkin.welcome_to')} {restaurantName || t('public_checkin.our_restaurant')}
+            </Typography>
+            <Typography 
+              variant="body1" 
+              color={textColor}
+              sx={{ 
+                maxWidth: '90%', 
+                mx: 'auto',
+                fontSize: { xs: '0.95rem', sm: '1rem', md: '1.1rem' },
+                lineHeight: 1.6,
+                opacity: 0.85,
+              }}
+            >
+              {t('public_checkin.please_checkin')}
+            </Typography>
+          </Box>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {identificationMethod === 'phone' && (
+          <Controller
+            name="phone_number"
+            control={control}
+            rules={{
+              required: t('public_checkin.phone_required'),
+              validate: (value) => {
+                const cleanedValue = value.replace(/\D/g, '');
+
+                if (!cleanedValue.startsWith('55')) {
+                  return t('public_checkin.invalid_phone_country_code');
+                }
+
+                const ddd = cleanedValue.substring(2, 4);
+                const phoneNumberWithoutCountryCodeAndDDD = cleanedValue.substring(4);
+
+                if (ddd.length !== 2) {
+                  return t('public_checkin.invalid_phone_ddd');
+                }
+
+                const dddNum = parseInt(ddd, 10);
+
+                if (dddNum >= 11 && dddNum <= 28) {
+                  if (phoneNumberWithoutCountryCodeAndDDD.length !== 9) {
+                    return t('public_checkin.invalid_phone_9_digits_ddd_11_28');
+                  }
+                } else {
+                  if (phoneNumberWithoutCountryCodeAndDDD.length !== 8 && phoneNumberWithoutCountryCodeAndDDD.length !== 9) {
+                    return t('public_checkin.invalid_phone_8_or_9_digits_other_ddd');
+                  }
+                }
+
+                return true;
+              },
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('public_checkin.phone_number')}
+                fullWidth
+                margin="normal"
+                error={!!errors.phone_number}
+                helperText={errors.phone_number?.message}
+                placeholder="Ex: 5511987654321"
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    borderRadius: 2,
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: alpha(primaryColor, 0.3),
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: primaryColor,
+                    },
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                    '&:hover': {
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                    },
+                  }
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: textColor,
+                    '&.Mui-focused': {
+                      color: primaryColor,
+                    },
+                  }
+                }}
+              />
+            )}
+          />
+        )}
+
+        {identificationMethod === 'cpf' && (
+          <Controller
+            name="cpf"
+            control={control}
+            rules={{
+              required: t('public_checkin.cpf_required'),
+              pattern: {
+                value: /^\d{11}$/,
+                message: t('public_checkin.invalid_cpf'),
+              },
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('public_checkin.cpf')}
+                fullWidth
+                margin="normal"
+                error={!!errors.cpf}
+                helperText={errors.cpf?.message}
+                placeholder="Ex: 12345678900"
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    borderRadius: 2,
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: alpha(primaryColor, 0.3),
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: primaryColor,
+                    },
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                    '&:hover': {
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                    },
+                  }
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: textColor,
                     '&.Mui-focused': {
                       color: primaryColor,
                     },
@@ -422,7 +720,7 @@ const PublicCheckin = () => {
                 }}
                 InputLabelProps={{
                   sx: {
-                    color: 'text.secondary',
+                    color: textColor,
                     '&.Mui-focused': {
                       color: primaryColor,
                     },

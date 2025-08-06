@@ -284,7 +284,7 @@ router.get('/restaurant/:restaurantSlug', async (req, res) => {
     console.log(`[Public Route] Restaurante ${restaurantSlug} encontrado. Retornando dados.`);
     res.json(restaurant);
   } catch (error) {
-    console.error(`[Public Route] Erro ao obter informações do restaurante ${req.params.restaurantId}:`, error);
+    console.error(`[Public Route] Erro ao obter informações do restaurante ${restaurantSlug}:`, error);
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });

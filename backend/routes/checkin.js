@@ -135,24 +135,14 @@ router.post('/record', auth, [
   }
 });
 
-// @route   POST /api/checkin/public
+// @route   POST /api/checkin/public/:restaurantSlug
 // @desc    Registrar um novo check-in via QR Code (público)
 // @access  Public
-router.post('/public', [
-  body('restaurant_id').isUUID().withMessage('ID do restaurante inválido'),
-  body('phone_number')
-    .optional()
-    .matches(/^\+?\d{1,15}$/)
-    .withMessage('Número de telefone inválido (apenas dígitos, com ou sem + inicial, até 15 dígitos)'),
-  body('cpf')
-    .optional()
-    .matches(/^\d{11}$/)
-    .withMessage('CPF inválido (apenas 11 dígitos numéricos)'),
-  body('customer_name')
-    .optional()
-    .trim()
-    .isLength({ max: 100 })
-    .withMessage('Nome do cliente deve ter no máximo 100 caracteres'),
+router.post('/public/:restaurantSlug', [
+  body('customer_name').optional().isString().withMessage('Nome do cliente inválido'),
+  body('phone_number').optional().isString().withMessage('Número de telefone inválido'),
+  body('cpf').optional().isString().withMessage('CPF inválido'),
+  body('table_number').optional().isString().withMessage('Número da mesa inválido'),
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -162,15 +152,14 @@ router.post('/public', [
     });
   }
 
-  const { restaurant_id, phone_number, cpf, customer_name } = req.body;
-
-  
+  const { restaurantSlug } = req.params; // Extrair restaurantSlug dos parâmetros da URL
+  const { phone_number, cpf, customer_name, table_number } = req.body; // Extrair outros dados do corpo da requisição
 
   try {
-    const restaurant = await models.Restaurant.findByPk(restaurant_id);
+    const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
     let rewardEarned = null; // Variável para armazenar a recompensa ganha
     if (!restaurant) {
-      console.error('[Public Check-in] Restaurante não encontrado para o ID:', restaurant_id);
+      console.error('[Public Check-in] Restaurante não encontrado para o slug:', restaurantSlug);
       return res.status(404).json({ error: 'Restaurante não encontrado.' });
     }
 
@@ -184,14 +173,14 @@ router.post('/public', [
 
     let customer;
     let customerSearchCriteria = {};
-    let customerCreationData = { restaurant_id };
+    let customerCreationData = { restaurant_id: restaurant.id }; // Usar o ID do restaurante encontrado
 
     if (identificationMethod === 'phone') {
       if (!phone_number) {
         console.error('[Public Check-in] Erro: Número de telefone ausente para identificação por telefone.');
         return res.status(400).json({ error: 'Número de telefone é obrigatório para este método de identificação.' });
       }
-      customerSearchCriteria = { phone: phone_number, restaurant_id };
+      customerSearchCriteria = { phone: phone_number, restaurant_id: restaurant.id };
       customerCreationData.phone = phone_number;
       customerCreationData.whatsapp = phone_number; // Assumindo que whatsapp é o mesmo que phone
     } else if (identificationMethod === 'cpf') {
@@ -199,7 +188,7 @@ router.post('/public', [
         console.error('[Public Check-in] Erro: CPF ausente para identificação por CPF.');
         return res.status(400).json({ error: 'CPF é obrigatório para este método de identificação.' });
       }
-      customerSearchCriteria = { cpf, restaurant_id };
+      customerSearchCriteria = { cpf, restaurant_id: restaurant.id };
       customerCreationData.cpf = cpf;
     } else {
       console.error('[Public Check-in] Erro: Método de identificação inválido configurado:', identificationMethod);
@@ -230,7 +219,7 @@ router.post('/public', [
     const existingCheckin = await models.Checkin.findOne({
       where: {
         customer_id: customer.id,
-        restaurant_id,
+        restaurant_id: restaurant.id,
         status: 'active',
         expires_at: { [Op.gt]: new Date() } // Check-in ativo e não expirado
       },
@@ -246,7 +235,8 @@ router.post('/public', [
 
     const checkin = await models.Checkin.create({
       customer_id: customer.id,
-      restaurant_id,
+      restaurant_id: restaurant.id,
+      table_number,
       checkin_time: checkinTime,
       expires_at: expiresAt,
       status: 'active',
@@ -271,7 +261,7 @@ router.post('/public', [
       const lastCheckin = await models.Checkin.findOne({
         where: {
           customer_id: customer.id,
-          restaurant_id,
+          restaurant_id: restaurant.id,
           status: 'active',
           id: { [Op.ne]: checkin.id } // Excluir o check-in atual
         },

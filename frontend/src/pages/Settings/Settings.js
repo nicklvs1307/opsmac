@@ -54,8 +54,8 @@ import ProfilePictureUpload from '../../components/UI/ProfilePictureUpload';
 
 const getFullImageUrl = (relativePath) => {
   if (!relativePath) return '';
-  // Always use the frontend domain for images
-  const baseUrl = window.location.origin;
+  // Use the backend API URL for images
+  const baseUrl = process.env.REACT_APP_API_URL || '';
   return `${baseUrl}${relativePath.startsWith('/') ? relativePath : `/${relativePath}`}`;
 };
 

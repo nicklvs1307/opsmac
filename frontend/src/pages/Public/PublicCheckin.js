@@ -54,7 +54,7 @@ const PublicCheckin = () => {
         setLoading(true);
         const response = await axiosInstance.get(`/public/restaurant/${restaurantSlug}`);
         setRestaurantName(response.data.name);
-        setRestaurantLogo(response.data.logo);
+        setRestaurantLogo(`${process.env.REACT_APP_API_URL}${response.data.logo}`);
         setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
         setRequiresTable(response.data.settings?.checkin_program_settings?.checkin_requires_table || false);
         setPrimaryColor(response.data.settings?.primary_color || '#3f51b5');

@@ -53,7 +53,7 @@ const PublicSurveyForm = () => {
         const { data } = await axiosInstance.get(`/api/public/surveys/${slug}`);
         setSurvey(data.survey);
         setRestaurantName(data.restaurant.name);
-        setRestaurantLogo(data.restaurant.logo);
+        setRestaurantLogo(`${process.env.REACT_APP_API_URL}${data.restaurant.logo}`);
         setPrimaryColor(data.restaurant.settings?.primary_color || '#3f51b5');
         setSecondaryColor(data.restaurant.settings?.secondary_color || '#f50057');
         setTextColor(data.restaurant.settings?.text_color || '#333333');

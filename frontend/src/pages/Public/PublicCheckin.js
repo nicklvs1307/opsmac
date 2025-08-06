@@ -675,9 +675,9 @@ export default PublicCheckin;}>
               }}
               InputLabelProps={{
                 sx: {
-                  color: 'text.secondary',
+                  color: textColor,
                   '&.Mui-focused': {
-                    color: '#3f51b5',
+                    color: primaryColor,
                   },
                 }
               }}

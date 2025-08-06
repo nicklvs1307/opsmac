@@ -52,6 +52,88 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                 />
               </Box>
 
+              {/* Personalização Visual */}
+              <Box sx={{ mb: 4 }}>
+                <Typography variant="h6" gutterBottom>Personalização Visual (Páginas Públicas)</Typography>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name="primary_color"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Cor Primária (Botões, Destaques)"
+                          fullWidth
+                          margin="normal"
+                          helperText="Ex: #3f51b5 ou red"
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name="secondary_color"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Cor Secundária (Botões, Destaques)"
+                          fullWidth
+                          margin="normal"
+                          helperText="Ex: #f50057 ou blue"
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name="text_color"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Cor do Texto"
+                          fullWidth
+                          margin="normal"
+                          helperText="Ex: #333333 ou black"
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name="background_color"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Cor de Fundo"
+                          fullWidth
+                          margin="normal"
+                          helperText="Ex: #ffffff ou lightgray"
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Controller
+                      name="background_image_url"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label="URL da Imagem de Fundo (Opcional)"
+                          fullWidth
+                          margin="normal"
+                          helperText="Cole a URL de uma imagem para usar como fundo"
+                        />
+                      )}
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
+
               {/* Ciclo de Check-in */}
               <Box sx={{ mb: 4 }}>
                 <Typography variant="h6" gutterBottom>{t('relationship.checkin_cycle')}</Typography>

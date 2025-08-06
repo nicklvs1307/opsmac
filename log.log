@@ -1,30 +1,49 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      158.2s
-------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.621
-0.621 > Feedeliza+-frontend@1.0.0 build
-0.621 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.621
-3.767 Creating an optimized production build...
-157.3 Failed to compile.
-157.3
-157.3 [eslint]
-157.3 src/pages/Fidelidade/Checkin/CheckinDashboard.js
-157.3   Line 159:7:  'fetchCheckinQRCode' is not defined  no-undef
-157.3
-157.3 Search for the keywords to learn more about each error.
-157.3
-157.3
-------
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/checkin/public/checkin
+Método da solicitação
+POST
+Código de status
+404 Not Found
 
- 1 warning found (use docker --debug to expand):
- - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 4)
-Dockerfile.frontend:23
---------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+{"error":"Rota não encontrada"}
+
+checkin:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+PublicCheckin.js:84  POST https://feedelizaapi.towersfy.com/api/checkin/public/checkin 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ln @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ PublicCheckin.js:84
+(anônimo) @ createFormControl.ts:1258
+await in (anônimo)
+Ne @ react-dom.production.min.js:54
+Be @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+$n @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73
+PublicCheckin.js:103 Error during check-in: wr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ PublicCheckin.js:103
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1258
+await in (anônimo)
+Ne @ react-dom.production.min.js:54
+Be @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+$n @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+qn @ react-dom.production.min.js:109
+Qt @ react-dom.production.min.js:74
+Ut @ react-dom.production.min.js:73

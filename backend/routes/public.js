@@ -273,7 +273,7 @@ router.get('/restaurant/:restaurantSlug', async (req, res) => {
     console.log(`[Public Route] Recebida requisição para /restaurant/${restaurantSlug}`);
     const restaurant = await models.Restaurant.findOne({
       where: { slug: restaurantSlug },
-      attributes: ['id', 'name', 'settings', 'slug', 'logo'] // Incluído 'logo'
+      attributes: ['id', 'name', 'settings', 'slug', 'logo']
     });
 
     if (!restaurant) {

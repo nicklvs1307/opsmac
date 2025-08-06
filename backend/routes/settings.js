@@ -55,7 +55,12 @@ router.get('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
 
 // Rota para atualizar configurações do restaurante
 router.put('/:restaurantId', auth, checkRestaurantOwnership, [
-  body('settings').isObject().withMessage('Configurações devem ser um objeto')
+  body('settings').isObject().withMessage('Configurações devem ser um objeto'),
+  body('settings.primary_color').optional().isString(),
+  body('settings.secondary_color').optional().isString(),
+  body('settings.text_color').optional().isString(),
+  body('settings.background_color').optional().isString(),
+  body('settings.background_image_url').optional().isURL().withMessage('URL da imagem de fundo inválida'),
 ], async (req, res) => {
   try {
     const { restaurantId } = req.params;

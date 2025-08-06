@@ -274,4 +274,58 @@ router.get('/restaurant/:restaurantSlug', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /public/surveys/{slug}:
+ *   get:
+ *     summary: Obtém uma pesquisa pública por slug
+ *     tags: [Public API]
+ *     description: Retorna os detalhes de uma pesquisa específica se ela estiver ativa.
+ *     parameters:
+ *       - in: path
+ *         name: slug
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: O slug único da pesquisa.
+ *     responses:
+ *       200:
+ *         description: Detalhes da pesquisa.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Survey'
+ *       404:
+ *         description: Pesquisa não encontrada ou inativa.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.get('/surveys/:slug', async (req, res) => {
+  try {
+    const { slug } = req.params;
+    const survey = await models.Survey.findOne({
+      where: {
+        slug,
+        status: 'active',
+      },
+      include: [
+        {
+          model: models.Question,
+          as: 'questions',
+          attributes: ['id', 'text', 'type', 'options'],
+        },
+      ],
+    });
+
+    if (!survey) {
+      return res.status(404).json({ msg: 'Pesquisa não encontrada ou inativa.' });
+    }
+
+    res.json(survey);
+  } catch (error) {
+    console.error('Erro ao buscar pesquisa pública:', error);
+    res.status(500).json({ msg: 'Erro interno do servidor.' });
+  }
+});
+
 module.exports = router;

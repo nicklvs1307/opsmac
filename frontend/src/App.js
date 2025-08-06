@@ -91,6 +91,7 @@ function App() {
                   <Route path="settings" element={<Settings />} />
                   <Route path="fidelity/checkin" element={<CheckinDashboard />} />
                   <Route path="fidelity/satisfaction" element={<SatisfactionDashboard />} />
+                  <Route path="fidelity/surveys" element={<SurveyList />} />
                   <Route path="fidelity/surveys/new" element={<SurveyCreate />} />
                   <Route path="fidelity/surveys/edit/:id" element={<SurveyEdit />} />
                   <Route path="fidelity/surveys/:id/results" element={<SurveyResults />} />

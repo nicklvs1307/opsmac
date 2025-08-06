@@ -69,7 +69,7 @@ const auth = async (req, res, next) => {
         req.user.restaurant_id = restaurant.id;
       }
     }
-    
+    console.log('Auth Middleware - req.user (after population):', req.user);
 
     next();
   } catch (error) {

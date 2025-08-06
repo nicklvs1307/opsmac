@@ -99,6 +99,19 @@
       "error_fetching_whatsapp_settings": "Erro ao carregar configurações do WhatsApp",
       "avatar_updated_successfully": "Avatar atualizado com sucesso!",
       "nps_criteria_title": "Critérios de NPS",
+      "integrations": {
+        "google_my_business": {
+          "step5_primary": "5. Autenticação:",
+          "step5_secondary": "A autenticação é feita via tokens OAuth 2.0. É necessário ter uma conta Google, um perfil no Google Meu Negócio, criar um projeto no Google API Console e solicitar acesso à API."
+        },
+        "page_title": "Integrações",
+        "tabs_aria_label": "abas de integração",
+        "ifood_tab": "Ifood",
+        "uairango_tab": "Uai Rango",
+        "google_my_business_tab": "Google Meu Negócio",
+        "saipos_tab": "Saipos",
+        "delivery_much_tab": "Delivery Much"
+      },
       "nps_criteria_subheader": "Defina critérios personalizados para o feedback de NPS",
       "nps_criteria_description": "Estes critérios serão usados nas pesquisas de NPS para coletar feedback mais específico dos seus clientes.",
       "new_criterion_label": "Nome do Novo Critério",

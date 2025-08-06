@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, TextField, Button, CircularProgress } from '@mui/material';
+import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthContext';
 import axiosInstance from '../../api/axiosInstance';
@@ -101,15 +102,63 @@ const GoogleMyBusinessIntegration = () => {
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="5. Autenticação:"
-              secondary="A autenticação é feita via tokens OAuth 2.0. É necessário ter uma conta Google, um perfil no Google Meu Negócio, criar um projeto no Google API Console e solicitar acesso à API."
+              primary={t('integrations.google_my_business.step5_primary')}
+              secondary={t('integrations.google_my_business.step5_secondary')}
             />
           </ListItem>
         </List>
         <Divider sx={{ my: 2 }} />
         <Typography variant="body2" color="text.secondary">
-          Para mais informações e documentação detalhada, consulte a documentação oficial da Google Business Profile API.
+          {t('integrations.google_my_business.documentation_link')}
         </Typography>
+      </Paper>
+
+      <Paper sx={{ p: 3 }}>
+        <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
+          {t('integrations.google_my_business.credentials_title')}
+        </Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="google_my_business_client_id"
+            control={control}
+            rules={{ required: t('integrations.google_my_business.client_id_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('integrations.google_my_business.client_id_label')}
+                fullWidth
+                margin="normal"
+                error={!!errors.google_my_business_client_id}
+                helperText={errors.google_my_business_client_id ? errors.google_my_business_client_id.message : ''}
+              />
+            )}
+          />
+          <Controller
+            name="google_my_business_client_secret"
+            control={control}
+            rules={{ required: t('integrations.google_my_business.client_secret_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('integrations.google_my_business.client_secret_label')}
+                fullWidth
+                margin="normal"
+                type="password"
+                error={!!errors.google_my_business_client_secret}
+                helperText={errors.google_my_business_client_secret ? errors.google_my_business_client_secret.message : ''}
+              />
+            )}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            disabled={loading}
+          >
+            {loading ? <CircularProgress size={24} /> : t('integrations.google_my_business.save_button')}
+          </Button>
+        </form>
       </Paper>
     </Box>
   );

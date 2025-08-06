@@ -1,55 +1,196 @@
-import React from 'react';
-import { Box, Typography, Paper, List, ListItem, ListItemText, Divider } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, TextField, Button, CircularProgress } from '@mui/material';
+import { useForm, Controller } from 'react-hook-form';
+import { useAuth } from '../../contexts/AuthContext';
+import axiosInstance from '../../api/axiosInstance';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const DeliveryMuchIntegration = () => {
+  const { user } = useAuth();
+  const { t } = useTranslation();
+  const restaurantId = user?.restaurants?.[0]?.id;
+  const [loading, setLoading] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      delivery_much_client_id: '',
+      delivery_much_client_secret: '',
+      delivery_much_username: '',
+      delivery_much_password: '',
+    },
+  });
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      if (!restaurantId) return;
+      setLoading(true);
+      try {
+        const response = await axiosInstance.get(`/api/settings/${restaurantId}`);
+        const dmSettings = response.data.settings?.integrations?.delivery_much || {};
+        reset(dmSettings);
+      } catch (error) {
+        toast.error(t('integrations.delivery_much.error_loading_settings'));
+        console.error('Error loading Delivery Much settings:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSettings();
+  }, [restaurantId, reset, t]);
+
+  const onSubmit = async (data) => {
+    if (!restaurantId) return;
+    setLoading(true);
+    try {
+      await axiosInstance.put(`/api/settings/${restaurantId}`, {
+        settings: {
+          integrations: {
+            delivery_much: data,
+          },
+        },
+      });
+      toast.success(t('integrations.delivery_much.settings_saved_successfully'));
+    } catch (error) {
+      toast.error(t('integrations.delivery_much.error_saving_settings'));
+      console.error('Error saving Delivery Much settings:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Box>
       <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Configurações da Integração com o Delivery Much
+        {t('integrations.delivery_much.title')}
       </Typography>
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="body1" sx={{ mb: 2 }}>
-          A API Delivery Much permite a comunicação entre sistemas externos (PDVs, ERPs) e a plataforma Delivery Much para gerenciar pedidos, produtos e outras operações.
+          {t('integrations.delivery_much.description')}
         </Typography>
         <Typography variant="h6" component="h3" sx={{ mb: 1 }}>
-          Pontos Chave para Integração:
+          {t('integrations.delivery_much.features_and_requirements_title')}
         </Typography>
         <List dense>
           <ListItem>
             <ListItemText
-              primary="1. Autenticação OAuth2:"
-              secondary="Utiliza o fluxo 'Resource Owner Password Credentials' (password grant) com client_id, client_secret, username e password da loja. Retorna um JWT."
+              primary={t('integrations.delivery_much.step1_primary')}
+              secondary={t('integrations.delivery_much.step1_secondary')}
             />
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="2. Ambientes Separados:"
-              secondary="Possui ambientes distintos para desenvolvimento/teste e produção, com URLs de autenticação e API separadas."
+              primary={t('integrations.delivery_much.step2_primary')}
+              secondary={t('integrations.delivery_much.step2_secondary')}
             />
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="3. Comunicação Segura:"
-              secondary="Toda a comunicação deve ser feita via HTTPS."
+              primary={t('integrations.delivery_much.step3_primary')}
+              secondary={t('integrations.delivery_much.step3_secondary')}
             />
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="4. Documentação e Credenciais:"
-              secondary="A Delivery Much oferece um 'Portal do Desenvolvedor' e documentação via coleção Postman. Credenciais de desenvolvimento são fornecidas pela equipe de Engenharia, e as de produção após homologação e assinatura de termo."
+              primary={t('integrations.delivery_much.step4_primary')}
+              secondary={t('integrations.delivery_much.step4_secondary')}
             />
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="5. Funcionalidades:"
-              secondary="Inclui recebimento de pedidos, criação de pedidos de teste, gerenciamento de produtos e informações sobre o fluxo de pedidos e meios de pagamento."
+              primary={t('integrations.delivery_much.step5_primary')}
+              secondary={t('integrations.delivery_much.step5_secondary')}
             />
           </ListItem>
         </List>
         <Divider sx={{ my: 2 }} />
         <Typography variant="body2" color="text.secondary">
-          Para iniciar a integração, o primeiro passo é entrar em contato com a Delivery Much para obter as credenciais e a documentação detalhada.
+          {t('integrations.delivery_much.documentation_link')}
         </Typography>
+      </Paper>
+
+      <Paper sx={{ p: 3 }}>
+        <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
+          {t('integrations.delivery_much.credentials_title')}
+        </Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="delivery_much_client_id"
+            control={control}
+            rules={{ required: t('integrations.delivery_much.client_id_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('integrations.delivery_much.client_id_label')}
+                fullWidth
+                margin="normal"
+                error={!!errors.delivery_much_client_id}
+                helperText={errors.delivery_much_client_id ? errors.delivery_much_client_id.message : ''}
+              />
+            )}
+          />
+          <Controller
+            name="delivery_much_client_secret"
+            control={control}
+            rules={{ required: t('integrations.delivery_much.client_secret_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('integrations.delivery_much.client_secret_label')}
+                fullWidth
+                margin="normal"
+                type="password"
+                error={!!errors.delivery_much_client_secret}
+                helperText={errors.delivery_much_client_secret ? errors.delivery_much_client_secret.message : ''}
+              />
+            )}
+          />
+          <Controller
+            name="delivery_much_username"
+            control={control}
+            rules={{ required: t('integrations.delivery_much.username_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('integrations.delivery_much.username_label')}
+                fullWidth
+                margin="normal"
+                error={!!errors.delivery_much_username}
+                helperText={errors.delivery_much_username ? errors.delivery_much_username.message : ''}
+              />
+            )}
+          />
+          <Controller
+            name="delivery_much_password"
+            control={control}
+            rules={{ required: t('integrations.delivery_much.password_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('integrations.delivery_much.password_label')}
+                fullWidth
+                margin="normal"
+                type="password"
+                error={!!errors.delivery_much_password}
+                helperText={errors.delivery_much_password ? errors.delivery_much_password.message : ''}
+              />
+            )}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            disabled={loading}
+          >
+            {loading ? <CircularProgress size={24} /> : t('integrations.delivery_much.save_button')}
+          </Button>
+        </form>
       </Paper>
     </Box>
   );

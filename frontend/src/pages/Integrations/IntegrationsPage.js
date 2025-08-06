@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Box,
   Typography,
@@ -57,21 +58,21 @@ const IntegrationsPage = () => {
   return (
     <Box sx={{ width: '100%' }}>
       <Typography variant="h4" component="h1" sx={{ mb: 3 }}>
-        Integrações
+        {t('integrations.page_title')}
       </Typography>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="abas de integração"
+          aria-label={t('integrations.tabs_aria_label')}
           variant="scrollable"
           scrollButtons="auto"
         >
-          <Tab label="Ifood" icon={<IfoodIcon />} {...a11yProps(0)} />
-          <Tab label="Uai Rango" icon={<UaiRangoIcon />} {...a11yProps(1)} />
-          <Tab label="Google Meu Negócio" icon={<GoogleMyBusinessIcon />} {...a11yProps(2)} />
-          <Tab label="Saipos" icon={<SaiposIcon />} {...a11yProps(3)} />
-          <Tab label="Delivery Much" icon={<DeliveryMuchIcon />} {...a11yProps(4)} />
+          <Tab label={t('integrations.ifood_tab')} icon={<IfoodIcon />} {...a11yProps(0)} />
+          <Tab label={t('integrations.uairango_tab')} icon={<UaiRangoIcon />} {...a11yProps(1)} />
+          <Tab label={t('integrations.google_my_business_tab')} icon={<GoogleMyBusinessIcon />} {...a11yProps(2)} />
+          <Tab label={t('integrations.saipos_tab')} icon={<SaiposIcon />} {...a11yProps(3)} />
+          <Tab label={t('integrations.delivery_much_tab')} icon={<DeliveryMuchIcon />} {...a11yProps(4)} />
         </Tabs>
       </Paper>
       <TabPanel value={value} index={0}>

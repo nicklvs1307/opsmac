@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, TextField, Button, CircularProgress } from '@mui/material';
+import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthContext';
 import axiosInstance from '../../api/axiosInstance';
@@ -116,6 +117,54 @@ const IfoodIntegration = () => {
         <Typography variant="body2" color="text.secondary">
           {t('integrations.ifood.documentation_link')}
         </Typography>
+      </Paper>
+
+      <Paper sx={{ p: 3 }}>
+        <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
+          {t('integrations.ifood.credentials_title')}
+        </Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="ifood_client_id"
+            control={control}
+            rules={{ required: t('integrations.ifood.client_id_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('integrations.ifood.client_id_label')}
+                fullWidth
+                margin="normal"
+                error={!!errors.ifood_client_id}
+                helperText={errors.ifood_client_id ? errors.ifood_client_id.message : ''}
+              />
+            )}
+          />
+          <Controller
+            name="ifood_client_secret"
+            control={control}
+            rules={{ required: t('integrations.ifood.client_secret_required') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('integrations.ifood.client_secret_label')}
+                fullWidth
+                margin="normal"
+                type="password"
+                error={!!errors.ifood_client_secret}
+                helperText={errors.ifood_client_secret ? errors.ifood_client_secret.message : ''}
+              />
+            )}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            disabled={loading}
+          >
+            {loading ? <CircularProgress size={24} /> : t('integrations.ifood.save_button')}
+          </Button>
+        </form>
       </Paper>
     </Box>
   );

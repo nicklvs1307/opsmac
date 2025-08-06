@@ -99,6 +99,19 @@
       "error_fetching_whatsapp_settings": "Error fetching WhatsApp settings",
       "avatar_updated_successfully": "Avatar updated successfully!",
       "nps_criteria_title": "NPS Criteria",
+      "integrations": {
+        "google_my_business": {
+          "step5_primary": "5. Authentication:",
+          "step5_secondary": "Authentication is done via OAuth 2.0 tokens. You need a Google account, a Google My Business profile, create a project in Google API Console, and request API access."
+        },
+        "page_title": "Integrations",
+        "tabs_aria_label": "integration tabs",
+        "ifood_tab": "Ifood",
+        "uairango_tab": "Uai Rango",
+        "google_my_business_tab": "Google My Business",
+        "saipos_tab": "Saipos",
+        "delivery_much_tab": "Delivery Much"
+      },
       "nps_criteria_subheader": "Define custom criteria for NPS feedback",
       "nps_criteria_description": "These criteria will be used in NPS surveys to gather more specific feedback from your customers.",
       "new_criterion_label": "New Criterion Name",

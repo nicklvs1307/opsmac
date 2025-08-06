@@ -107,36 +107,31 @@ const CheckinDashboard = () => {
     }
   }, [restaurantId, t]);
 
-  const fetchCheckinProgramSettings = useCallback(async () => {
+  const fetchRestaurantData = useCallback(async () => {
     if (!restaurantId) return;
     try {
       setLoading(true);
       const response = await axiosInstance.get(`/api/settings/${restaurantId}`);
-      const checkinProgramSettings = response.data.settings?.checkin_program_settings || {};
-      reset(checkinProgramSettings);
+      const { settings, slug } = response.data;
+      const checkinProgramSettings = settings?.checkin_program_settings || {};
+      reset({ ...checkinProgramSettings, restaurant_slug: slug });
+
+      if (slug) {
+        const checkinUrl = `${window.location.origin}/checkin/public/${slug}`;
+        setCheckinQRCode({ url: checkinUrl });
+      } else {
+        setCheckinQRCode(null);
+      }
+
     } catch (err) {
-      console.error('Erro ao buscar configurações do programa de check-in:', err);
-      toast.error(t('Erro ao carregar configurações do programa de fidelidade'));
+      console.error('Erro ao buscar dados do restaurante:', err);
+      toast.error(t('Erro ao carregar dados do restaurante'));
     } finally {
       setLoading(false);
     }
   }, [restaurantId, reset, t]);
 
-  const fetchCheckinQRCode = useCallback(async () => {
-    if (!restaurantId) return;
-    try {
-      const restaurantSlug = user?.restaurants?.[0]?.slug;
-      if (restaurantSlug) {
-        const checkinUrl = `${window.location.origin}/checkin/public/${restaurantSlug}`;
-        setCheckinQRCode({ url: checkinUrl });
-      } else {
-        setCheckinQRCode(null);
-        console.warn('Slug do restaurante não encontrado, não foi possível gerar o QR Code de check-in.');
-      }
-    } catch (err) {
-      console.error('Erro ao gerar QR Code de check-in:', err);
-    }
-  }, [restaurantId, user]);
+  
 
   const fetchActiveCheckins = useCallback(async () => {
     if (!restaurantId) return;
@@ -189,12 +184,11 @@ const CheckinDashboard = () => {
       fetchCheckinData();
     } else if (tabValue === 1) {
       fetchRewards();
-      fetchCheckinProgramSettings();
-      fetchCheckinQRCode();
+      fetchRestaurantData();
     } else if (tabValue === 2) {
       fetchActiveCheckins();
     }
-  }, [tabValue, fetchCheckinData, fetchRewards, fetchCheckinProgramSettings, fetchCheckinQRCode, fetchActiveCheckins]);
+  }, [tabValue, fetchCheckinData, fetchRewards, fetchRestaurantData, fetchActiveCheckins]);
 
   const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);

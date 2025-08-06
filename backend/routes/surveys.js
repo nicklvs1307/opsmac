@@ -85,7 +85,7 @@ router.put(
         body('status', 'Status inválido').optional().isIn(['draft', 'active', 'inactive', 'archived']),
     ],
     async (req, res) => {
-        const errors = validation.validationResult(req);
+        const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }

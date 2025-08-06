@@ -300,3 +300,4 @@ Segmentação de clientes	Criar ações específicas para cada faixa de nota
 Automatização de respostas	Mensagens automáticas baseadas na nota recebida
 Métricas por dimensão	NPS por canal, loja, horário, produto, etc.
 Integração com CRM	Conectar NPS com campanhas e recuperação
+

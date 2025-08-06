@@ -156,7 +156,7 @@ const CheckinDashboard = () => {
         },
       });
       toast.success(t('relationship.checkin_program_saved_successfully'));
-      fetchCheckinQRCode(); // Atualiza o QR Code após salvar
+      fetchRestaurantData(); // Atualiza os dados do restaurante após salvar
     } catch (err) {
       console.error('Erro ao salvar programa de check-in:', err);
       toast.error(err.response?.data?.message || t('relationship.error_saving_checkin_program'));

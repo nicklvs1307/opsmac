@@ -74,6 +74,8 @@ const Settings = () => {
   const [testMessage, setTestMessage] = useState('');
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [logoPreview, setLogoPreview] = useState(getFullImageUrl(user?.restaurant?.logo) || '');
+  const [selectedAvatarFile, setSelectedAvatarFile] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(getFullImageUrl(user?.avatar) || '');
   const [settings, setSettings] = useState({
     notifications: {
       email_feedback: true,
@@ -131,6 +133,40 @@ const Settings = () => {
     } catch (err) {
       console.error('[Settings] Logo upload error:', err.response?.data || err.message);
       toast.error(err.response?.data?.message || t('settings.error_uploading_logo'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAvatarChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedAvatarFile(file);
+      setAvatarPreview(URL.createObjectURL(file));
+      console.log('[Settings] Selected avatar file:', file);
+    }
+  };
+
+  const handleAvatarUpload = async () => {
+    if (!selectedAvatarFile) return;
+    setLoading(true);
+    const formData = new FormData();
+    formData.append('avatar', selectedAvatarFile);
+
+    try {
+      const response = await axiosInstance.post('/api/settings/profile/avatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('[Settings] Avatar upload success response:', response.data);
+      toast.success(t('settings.avatar_updated_successfully'));
+      dispatch({ type: 'UPDATE_USER', payload: { avatar: response.data.avatar_url } });
+      setSelectedAvatarFile(null);
+      setAvatarPreview(getFullImageUrl(response.data.avatar_url)); // Atualiza a prévia com a URL completa
+    } catch (err) {
+      console.error('[Settings] Avatar upload error:', err.response?.data || err.message);
+      toast.error(err.response?.data?.message || t('settings.error_uploading_avatar'));
     } finally {
       setLoading(false);
     }
@@ -449,31 +485,36 @@ const Settings = () => {
               subheader={t('settings.update_personal_info')}
             />
             <CardContent>
-              <Box display="flex" alignItems="center" mb={3}>
+              <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
                 <Avatar
-                  sx={{ width: 80, height: 80, mr: 2 }}
-                  src={user?.avatar}
+                  sx={{ width: 120, height: 120, mb: 2, border: '2px solid', borderColor: 'divider' }}
+                  src={avatarPreview}
                 >
                   {user?.name?.charAt(0)}
                 </Avatar>
-                <Box>
-                  <Typography variant="h6">{user?.name}</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {user?.role === 'admin' ? t('settings.role_admin') : t('settings.role_user')}
-                  </Typography>
-                  <IconButton size="small" sx={{ mt: 1 }}>
-                    <PhotoCameraIcon />
-                  </IconButton>
-                </Box>
+                <input
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  id="avatar-upload-input"
+                  type="file"
+                  onChange={handleAvatarChange}
+                />
+                <label htmlFor="avatar-upload-input">
+                  <Button variant="outlined" component="span" startIcon={<PhotoCameraIcon />}>
+                    {t('settings.change_avatar')}
+                  </Button>
+                </label>
+                {selectedAvatarFile && (
+                  <Button
+                    variant="contained"
+                    onClick={handleAvatarUpload}
+                    disabled={loading}
+                    sx={{ mt: 1 }}
+                  >
+                    {loading ? <CircularProgress size={20} /> : t('settings.upload_avatar')}
+                  </Button>
+                )}
               </Box>
-              
-              <ProfilePictureUpload
-                currentAvatar={user?.avatar}
-                onUploadSuccess={(newAvatarUrl) => {
-                  dispatch({ type: 'UPDATE_USER', payload: { avatar: newAvatarUrl } });
-                  toast.success(t('settings.avatar_updated_successfully'));
-                }}
-              />
 
               <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>

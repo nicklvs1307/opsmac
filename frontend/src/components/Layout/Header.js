@@ -126,6 +126,7 @@ const Header = ({ onMobileNavOpen }) => {
             </IconButton>
           </Tooltip>
         </Box>
+      </Box>
 
       {/* Profile Menu */}
       <Menu

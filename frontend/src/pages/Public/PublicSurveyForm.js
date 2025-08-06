@@ -32,6 +32,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 const PublicSurveyForm = () => {
+  const { t } = useTranslation();
   const { slug } = useParams();
   const navigate = useNavigate();
   const [survey, setSurvey] = useState(null);

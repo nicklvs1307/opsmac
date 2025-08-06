@@ -35,6 +35,7 @@ import axiosInstance from '../../api/axiosInstance';
 import { useAuth } from '../../contexts/AuthContext';
 import CouponAnalytics from './CouponAnalytics';
 import CouponValidator from './CouponValidator';
+import { useTranslation } from 'react-i18next';
 import CouponCreateForm from './CouponCreateForm';
 
 const Coupons = () => {

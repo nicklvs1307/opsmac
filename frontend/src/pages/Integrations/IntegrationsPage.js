@@ -49,6 +49,7 @@ function a11yProps(index) {
 }
 
 const IntegrationsPage = () => {
+  const { t } = useTranslation();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {

@@ -150,10 +150,15 @@ const CheckinDashboard = () => {
   const onSaveCheckinProgram = async (data) => {
     try {
       setLoading(true);
+      // Salva as configurações do programa de check-in
       await axiosInstance.put(`/api/settings/${restaurantId}`, {
         settings: {
           checkin_program_settings: data,
         },
+      });
+      // Salva o slug do restaurante
+      await axiosInstance.put(`/api/settings/${restaurantId}/profile`, {
+        slug: data.restaurant_slug,
       });
       toast.success(t('relationship.checkin_program_saved_successfully'));
       fetchRestaurantData(); // Atualiza os dados do restaurante após salvar

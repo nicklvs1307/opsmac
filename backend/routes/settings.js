@@ -300,6 +300,7 @@ router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, [
   body('cuisine_type').optional().trim().isString().withMessage('Tipo de cozinha inválido'),
   body('address').optional().trim().isString().withMessage('Endereço inválido'),
   body('description').optional().trim().isString().withMessage('Descrição inválida'),
+  body('slug').optional().trim().isString().withMessage('Slug inválido'),
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -309,7 +310,7 @@ router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, [
   try {
     
     const { restaurantId } = req.params;
-    const { name, cuisine_type, address, description } = req.body;
+    const { name, cuisine_type, address, description, slug } = req.body;
 
     const restaurant = await models.Restaurant.findByPk(restaurantId);
     if (!restaurant) {
@@ -321,6 +322,7 @@ router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, [
     if (cuisine_type !== undefined) updateData.cuisine_type = cuisine_type;
     if (address !== undefined) updateData.address = address;
     if (description !== undefined) updateData.description = description;
+    if (slug !== undefined) updateData.slug = slug;
 
     await restaurant.update(updateData);
 

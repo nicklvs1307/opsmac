@@ -1,3 +1,11 @@
+Integração com o google meu negocio
+integração com o iFood
+Integração com a Saipos (sistem de gestaõ )
+Integração com o Uai Rango
+Integração com o Delivery Mutch
+
+------- 
+
 📝 Objetivo
 Segmentar clientes com base em seu comportamento de compra, frequência, valor gasto, canal usado, preferências e localização, para permitir campanhas personalizadas e automações de marketing.
 

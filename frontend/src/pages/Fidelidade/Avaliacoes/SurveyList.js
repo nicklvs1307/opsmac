@@ -13,6 +13,8 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import QRCode from 'qrcode.react';
+import ToggleOnIcon from '@mui/icons-material/ToggleOn';
+import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 
 const fetchSurveys = async (filters) => {
   const { data } = await axiosInstance.get('/api/surveys', { params: filters });
@@ -21,6 +23,10 @@ const fetchSurveys = async (filters) => {
 
 const deleteSurvey = async (id) => {
   await axiosInstance.delete(`/api/surveys/${id}`);
+};
+
+const updateSurveyStatus = async ({ id, status }) => {
+  await axiosInstance.patch(`/api/surveys/${id}/status`, { status });
 };
 
 const SurveyList = () => {
@@ -43,6 +49,21 @@ const SurveyList = () => {
       toast.error(`Erro ao apagar pesquisa: ${err.response.data.msg || err.message}`);
     },
   });
+
+  const updateStatusMutation = useMutation(updateSurveyStatus, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('surveys');
+      toast.success('Status da pesquisa atualizado com sucesso!');
+    },
+    onError: (err) => {
+      toast.error(`Erro ao atualizar status: ${err.response.data.msg || err.message}`);
+    },
+  });
+
+  const handleToggleStatus = (id, currentStatus) => {
+    const newStatus = currentStatus === 'active' ? 'draft' : 'active';
+    updateStatusMutation.mutate({ id, status: newStatus });
+  };
 
   const handleDelete = (id) => {
     if (window.confirm('Tem certeza que deseja apagar esta pesquisa? Esta ação é irreversível.')) {
@@ -149,6 +170,13 @@ const SurveyList = () => {
                           </IconButton>
                           <IconButton component={RouterLink} to={`/fidelity/surveys/edit/${survey.id}`} color="info" aria-label="Editar Pesquisa">
                             <EditIcon />
+                          </IconButton>
+                          <IconButton 
+                            color={survey.status === 'active' ? 'success' : 'default'}
+                            aria-label="Ativar/Desativar Pesquisa"
+                            onClick={() => handleToggleStatus(survey.id, survey.status)}
+                          >
+                            {survey.status === 'active' ? <ToggleOnIcon /> : <ToggleOffIcon />}
                           </IconButton>
                           <IconButton color="secondary" aria-label="Gerar QR Code" onClick={() => handleGenerateQrCode(survey.id)}>
                             <QrCodeIcon />

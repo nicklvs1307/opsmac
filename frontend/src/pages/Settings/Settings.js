@@ -470,7 +470,7 @@ const Settings = () => {
               <ProfilePictureUpload
                 currentAvatar={user?.avatar}
                 onUploadSuccess={(newAvatarUrl) => {
-                  setUser(prevUser => ({ ...prevUser, avatar: newAvatarUrl }));
+                  dispatch({ type: 'UPDATE_USER', payload: { avatar: newAvatarUrl } });
                   toast.success(t('settings.avatar_updated_successfully'));
                 }}
               />

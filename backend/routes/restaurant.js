@@ -96,6 +96,7 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
     }
 
     const { 
+      restaurant_slug,
       checkin_cycle_length,
       checkin_cycle_name,
       enable_ranking,
@@ -123,7 +124,7 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
       allow_multiple_cycles
     };
 
-    await restaurant.update({ settings });
+    await restaurant.update({ slug: restaurant_slug, settings });
     res.json(restaurant);
   } catch (error) {
     console.error('Erro ao atualizar dados do restaurante:', error);

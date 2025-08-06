@@ -27,6 +27,7 @@ const SurveyCreate = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [surveyType, setSurveyType] = useState('');
   const [title, setTitle] = useState('');
+  const [slug, setSlug] = useState('');
   const [description, setDescription] = useState('');
   const [rewardId, setRewardId] = useState('');
   const [couponValidityDays, setCouponValidityDays] = useState('');
@@ -96,6 +97,7 @@ const SurveyCreate = () => {
     const surveyData = {
         type: surveyType,
         title,
+        slug,
         description,
         reward_id: rewardId || null,
         coupon_validity_days: couponValidityDays ? parseInt(couponValidityDays, 10) : null,
@@ -125,6 +127,7 @@ const SurveyCreate = () => {
         return (
             <Box sx={{ mb: 3 }}>
                 <TextField fullWidth label="Título" value={title} onChange={(e) => setTitle(e.target.value)} sx={{ mb: 2 }} />
+                <TextField fullWidth label="Slug" value={slug} onChange={(e) => setSlug(e.target.value)} sx={{ mb: 2 }} helperText="O slug é usado na URL da pesquisa. Use apenas letras, números e hífens." />
                 <TextField fullWidth label="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} sx={{ mb: 2 }} />
                 <FormControl fullWidth sx={{ mb: 2 }}>
                     <InputLabel>Recompensa (Opcional)</InputLabel>

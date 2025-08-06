@@ -34,6 +34,24 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                 {t('relationship.checkin_program_description')}
               </Typography>
 
+              {/* Slug do Restaurante */}
+              <Box sx={{ mb: 4 }}>
+                <Typography variant="h6" gutterBottom>Slug do Restaurante</Typography>
+                <Controller
+                  name="restaurant_slug"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Slug do Restaurante"
+                      fullWidth
+                      margin="normal"
+                      helperText="O slug é usado na URL de check-in. Use apenas letras, números e hífens."
+                    />
+                  )}
+                />
+              </Box>
+
               {/* Ciclo de Check-in */}
               <Box sx={{ mb: 4 }}>
                 <Typography variant="h6" gutterBottom>{t('relationship.checkin_cycle')}</Typography>

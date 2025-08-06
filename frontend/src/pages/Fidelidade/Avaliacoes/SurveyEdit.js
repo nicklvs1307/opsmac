@@ -27,6 +27,7 @@ const SurveyEdit = () => {
   const queryClient = useQueryClient();
 
   const [title, setTitle] = useState('');
+  const [slug, setSlug] = useState('');
   const [description, setDescription] = useState('');
   const [rewardId, setRewardId] = useState('');
   const [couponValidityDays, setCouponValidityDays] = useState('');
@@ -35,6 +36,7 @@ const SurveyEdit = () => {
   const { data: survey, isLoading, isError, error } = useQuery(['survey', id], () => fetchSurvey(id), {
     onSuccess: (data) => {
       setTitle(data.title);
+      setSlug(data.slug);
       setDescription(data.description);
       setRewardId(data.reward_id || '');
       setCouponValidityDays(data.coupon_validity_days || '');
@@ -101,6 +103,7 @@ const SurveyEdit = () => {
   const handleSubmit = () => {
     const surveyData = {
       title,
+      slug,
       description,
       reward_id: rewardId || null,
       coupon_validity_days: couponValidityDays ? parseInt(couponValidityDays, 10) : null,
@@ -117,6 +120,7 @@ const SurveyEdit = () => {
       <Typography variant="h4" gutterBottom>Editar Pesquisa</Typography>
       <Paper elevation={3} sx={{ p: 4 }}>
         <TextField fullWidth label="Título" value={title} onChange={(e) => setTitle(e.target.value)} sx={{ mb: 2 }} />
+        <TextField fullWidth label="Slug" value={slug} onChange={(e) => setSlug(e.target.value)} sx={{ mb: 2 }} helperText="O slug é usado na URL da pesquisa. Use apenas letras, números e hífens." />
         <TextField fullWidth label="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} sx={{ mb: 2 }} />
 
         <FormControl fullWidth sx={{ mb: 2 }}>

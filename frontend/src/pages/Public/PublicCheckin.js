@@ -57,11 +57,11 @@ const PublicCheckin = () => {
         setRestaurantLogo(`${process.env.REACT_APP_API_URL}${response.data.logo}`);
         setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
         setRequiresTable(response.data.settings?.checkin_program_settings?.checkin_requires_table || false);
-        setPrimaryColor(response.data.settings?.primary_color || '#3f51b5');
-        setSecondaryColor(response.data.settings?.secondary_color || '#f50057');
-        setTextColor(response.data.settings?.text_color || '#333333');
-        setBackgroundColor(response.data.settings?.background_color || '#ffffff');
-        setBackgroundImageUrl(response.data.settings?.background_image_url || null);
+        setPrimaryColor(response.data.settings?.checkin_program_settings?.primary_color || '#3f51b5');
+        setSecondaryColor(response.data.settings?.checkin_program_settings?.secondary_color || '#f50057');
+        setTextColor(response.data.settings?.checkin_program_settings?.text_color || '#333333');
+        setBackgroundColor(response.data.settings?.checkin_program_settings?.background_color || '#ffffff');
+        setBackgroundImageUrl(response.data.settings?.checkin_program_settings?.background_image_url || null);
       } catch (err) {
         console.error('Error fetching restaurant data:', err);
         toast.error(t('public_checkin.error_fetching_restaurant'));

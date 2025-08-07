@@ -4,12 +4,13 @@ import { Box, Typography, Paper, Tabs, Tab } from '@mui/material';
 import { BarChart as BarChartIcon, Settings as SettingsIcon, List as ListIcon, Feedback as FeedbackIcon } from '@mui/icons-material';
 import SurveyList from './SurveyList';
 import FeedbackList from '../../Feedback/FeedbackList';
-
 import SatisfactionAnalytics from './SatisfactionAnalytics';
 import SatisfactionSettings from './SatisfactionSettings';
+import { useTranslation } from 'react-i18next';
 
 const SatisfactionDashboard = () => {
   const [tabValue, setTabValue] = useState(0);
+  const { t } = useTranslation();
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -27,7 +28,7 @@ const SatisfactionDashboard = () => {
             mb: 1,
           }}
         >
-          Dashboard de Satisfação
+          {t('satisfaction.dashboard_title')}
         </Typography>
         <Typography
           variant="body1"
@@ -36,7 +37,7 @@ const SatisfactionDashboard = () => {
             mb: 3,
           }}
         >
-          Gerencie e analise a satisfação dos seus clientes.
+          {t('satisfaction.dashboard_description')}
         </Typography>
       </Box>
 
@@ -49,10 +50,10 @@ const SatisfactionDashboard = () => {
           variant="scrollable"
           scrollButtons="auto"
         >
-          <Tab label="Análise de Satisfação" icon={<BarChartIcon />} />
-          <Tab label="Configurações" icon={<SettingsIcon />} />
-          <Tab label="Pesquisas" icon={<ListIcon />} />
-          <Tab label="Feedbacks" icon={<FeedbackIcon />} />
+          <Tab label={t('satisfaction.tab_analytics')} icon={<BarChartIcon />} />
+          <Tab label={t('satisfaction.tab_settings')} icon={<SettingsIcon />} />
+          <Tab label={t('satisfaction.tab_surveys')} icon={<ListIcon />} />
+          <Tab label={t('satisfaction.tab_feedbacks')} icon={<FeedbackIcon />} />
         </Tabs>
       </Paper>
 

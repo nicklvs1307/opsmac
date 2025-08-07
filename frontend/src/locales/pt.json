@@ -174,7 +174,13 @@
       "analysis_description": "Analise dados e tendências de satisfação.",
       "view_analysis": "Ver Análise",
       "loyalty_description": "Configure programas de fidelidade baseados na satisfação.",
-      "configure_loyalty": "Configurar Fidelidade"
+      "configure_loyalty": "Configurar Fidelidade",
+      "main_title": "Dashboard de Satisfação",
+      "main_description": "Gerencie e analise a satisfação dos seus clientes.",
+      "tab_analytics": "Análise de Satisfação",
+      "tab_settings": "Configurações",
+      "tab_surveys": "Pesquisas",
+      "tab_feedbacks": "Feedbacks"
     },
     "sidebar": {
       "dashboard": "Dashboard",
@@ -304,8 +310,8 @@
       "app_initial": "C",
       "open_drawer_aria_label": "abrir gaveta",
       "dashboard": "Dashboard",
-      "fidelity_program": "Fidelidade",
-      "checkin_program": "Check-in",
+      "fidelity_program": "Programa de Fidelidade",
+      "checkin_program": "Programa de Check-in",
       "satisfaction": "Satisfação",
       "qr_codes": "QR Codes",
       "manage_qr_codes": "Gerenciar QR Codes",
@@ -370,9 +376,7 @@
       "no_customers_found": "Nenhum cliente encontrado",
       "customers_feedback_received": "Os clientes aparecerão aqui conforme os feedbacks forem recebidos.",
       "nps_performance_title": "Desempenho do NPS",
-      "nps_data_not_available": "Dados de tendência NPS não disponíveis.",
-      "rating_distribution_title": "Distribuição de Avaliações",
-      "rating_distribution_data_not_available": "Dados de distribuição de avaliações não disponíveis.",
+      "nps_data_not_available": "Dados de distribuição de avaliações não disponíveis.",
       "stars_rating": "{{rating}} estrelas"
     },
     "coupon_validator": {
@@ -444,7 +448,9 @@
       "automatic_campaigns_saved_successfully": "Campanhas automáticas salvas com sucesso!",
       "error_saving_automatic_campaigns": "Erro ao salvar campanhas automáticas.",
       "error_fetching_customers": "Erro ao carregar clientes.",
-      "error_fetching_whatsapp_settings": "Erro ao carregar configurações do WhatsApp.",
+      "error_fetching_whatsapp_settings": "Erro ao carregar configurações do WhatsApp."
+    },
+    "checkin_program": {
       "checkin_program_tab": "Programa de Check-in",
       "checkin_program": "Configurações do Programa de Check-in",
       "checkin_program_description": "Configure seu programa de fidelidade de clientes baseado em check-ins.",
@@ -480,7 +486,26 @@
       "select_reward": "Selecionar Recompensa",
       "remove": "Remover",
       "add_reward": "Adicionar Recompensa",
-      "reward_message_variables": "Variáveis disponíveis: {{customer_name}}, {{restaurant_name}}, {{reward_title}}, {{coupon_code}}, {{visit_count}}"
+      "reward_message_variables": "Variáveis disponíveis: {{customer_name}}, {{restaurant_name}}, {{reward_title}}, {{coupon_code}}, {{visit_count}}",
+      "slug_title": "Slug do Restaurante",
+      "slug_label": "Slug",
+      "slug_helper": "Identificador único para o seu restaurante na URL de check-in.",
+      "visual_customization_title": "Personalização Visual",
+      "primary_color_label": "Cor Primária",
+      "color_helper": "Cor principal para elementos de destaque.",
+      "secondary_color_label": "Cor Secundária",
+      "color_helper_secondary": "Cor secundária para detalhes e acentos.",
+      "text_color_label": "Cor do Texto",
+      "color_helper_text": "Cor do texto principal na página de check-in.",
+      "background_color_label": "Cor de Fundo",
+      "color_helper_background": "Cor de fundo da página de check-in.",
+      "background_image_url_label": "URL da Imagem de Fundo",
+      "background_image_url_helper": "URL de uma imagem para usar como fundo da página de check-in.",
+      "require_table_number": "Exigir número da mesa no check-in",
+      "qr_code_title": "QR Code do Check-in",
+      "copy_link_button": "Copiar Link",
+      "download_qr_code_button": "Baixar QR Code",
+      "save_to_generate_qr_code": "Salve as configurações para gerar o QR Code."
     },
     "public_survey": {
       "survey_not_found_or_inactive": "Pesquisa não encontrada ou inativa",
@@ -499,7 +524,18 @@
       "powered_by_text": "Desenvolvido por"
     },
     "common": {
-      "back_to_home": "Voltar para a página inicial"
+      "back_to_home": "Voltar para a página inicial",
+      "na": "N/A",
+      "none": "Nenhuma",
+      "link_copied": "Link copiado!",
+      "copy_link": "Copiar Link",
+      "qr_code": "QR Code",
+      "close": "Fechar",
+      "back": "Voltar",
+      "next": "Avançar",
+      "error": "Erro",
+      "cancel": "Cancelar",
+      "error_loading_surveys": "Erro ao carregar pesquisas"
     },
     "satisfaction_settings": {
       "personalization_title": "Personalização da Página de Pesquisa",
@@ -525,6 +561,31 @@
       "criterion_name_label": "Nome do Critério",
       "cancel_button": "Cancelar",
       "save_button": "Salvar"
+    },
+    "coupons": {
+      "redeem_error": "Erro ao resgatar o cupom.",
+      "fetch_error": "Erro ao buscar cupons.",
+      "status_active": "Ativo",
+      "status_inactive": "Inativo",
+      "status_expired": "Expirado",
+      "status_used": "Usado",
+      "status_pending": "Pendente",
+      "table_header_code": "Código",
+      "table_header_customer": "Cliente",
+      "table_header_reward": "Recompensa",
+      "table_header_status": "Status",
+      "table_header_created": "Criado em",
+      "table_header_expires": "Expira em",
+      "table_header_actions": "Ações",
+      "no_expiration": "Não expira",
+      "title": "Cupons",
+      "tab_list": "Lista de Cupons",
+      "tab_analytics": "Análises",
+      "tab_validator": "Validador",
+      "tab_create": "Criar Cupom",
+      "items_per_page_label": "Itens por página",
+      "redeem_coupon_button": "Resgatar Cupom",
+      "invalidate_coupon_button": "Invalidar Cupom"
     }
   }
 }

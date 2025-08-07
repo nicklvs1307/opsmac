@@ -31,7 +31,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
             <CardHeader title={t('checkin_program.title')} />
             <CardContent>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                {t('relationship.checkin_program_description')}
+                {t('checkin_program.checkin_program_description')}
               </Typography>
 
               {/* Slug do Restaurante */}
@@ -144,7 +144,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Ciclo de Check-in */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('relationship.checkin_cycle')}</Typography>
+                <Typography variant="h6" gutterBottom>{t('checkin_program.checkin_cycle')}</Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <Controller
@@ -153,11 +153,11 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label={t('relationship.cycle_length')}
+                          label={t('checkin_program.cycle_length')}
                           type="number"
                           fullWidth
                           margin="normal"
-                          helperText={t('relationship.cycle_length_helper')}
+                          helperText={t('checkin_program.cycle_length_helper')}
                         />
                       )}
                     />
@@ -169,10 +169,10 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label={t('relationship.cycle_name')}
+                          label={t('checkin_program.cycle_name')}
                           fullWidth
                           margin="normal"
-                          helperText={t('relationship.cycle_name_helper')}
+                          helperText={t('checkin_program.cycle_name_helper')}
                         />
                       )}
                     />
@@ -192,7 +192,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       )}
                     />
                   }
-                  label={t('relationship.enable_ranking')}
+                  label={t('checkin_program.enable_ranking')}
                 />
                 <FormControlLabel
                   control={
@@ -208,15 +208,15 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       )}
                     />
                   }
-                  label={t('relationship.enable_level_progression')}
+                  label={t('checkin_program.enable_level_progression')}
                 />
               </Box>
 
               {/* Recompensas por Visita */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('relationship.rewards_per_visit')}</Typography>
+                <Typography variant="h6" gutterBottom>{t('checkin_program.rewards_per_visit')}</Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                  {t('relationship.rewards_per_visit_helper')}
+                  {t('checkin_program.rewards_per_visit_helper')}
                 </Typography>
                 {fields.map((item, index) => (
                   <Paper key={item.id} sx={{ p: 2, mb: 2, border: '1px solid #eee' }}>
@@ -226,13 +226,13 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           name={`rewards_per_visit.${index}.visit_count`}
                           control={control}
                           rules={{
-                            required: t('relationship.visit_count_required'),
+                            required: t('checkin_program.visit_count_required'),
                             setValueAs: (value) => value === '' ? undefined : Number(value),
                           }}
                           render={({ field }) => (
                             <TextField
                               {...field}
-                              label={t('relationship.visit_count')}
+                              label={t('checkin_program.visit_count')}
                               type="number"
                               fullWidth
                               error={!!errors.rewards_per_visit?.[index]?.visit_count}
@@ -245,11 +245,11 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                         <Controller
                           name={`rewards_per_visit.${index}.reward_id`}
                           control={control}
-                          rules={{ required: t('relationship.reward_required') }}
+                          rules={{ required: t('checkin_program.reward_required') }}
                           render={({ field }) => (
                             <FormControl fullWidth error={!!errors.rewards_per_visit?.[index]?.reward_id}>
-                              <InputLabel>{t('relationship.select_reward')}</InputLabel>
-                              <Select {...field} label={t('relationship.select_reward')}>
+                              <InputLabel>{t('checkin_program.select_reward')}</InputLabel>
+                              <Select {...field} label={t('checkin_program.select_reward')}>
                                 {rewards.map((reward) => (
                                   <MenuItem key={reward.id} value={reward.id}>
                                     {reward.title}
@@ -268,7 +268,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           onClick={() => remove(index)}
                           startIcon={<DeleteIcon />}
                         >
-                          {t('relationship.remove')}
+                          {t('checkin_program.remove')}
                         </Button>
                       </Grid>
                       <Grid item xs={12}>
@@ -278,11 +278,11 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           render={({ field }) => (
                             <TextField
                               {...field}
-                              label={t('relationship.message_template')}
+                              label={t('checkin_program.message_template')}
                               fullWidth
                               multiline
                               rows={3}
-                              helperText={t('relationship.reward_message_variables')}
+                              helperText={t('checkin_program.reward_message_variables')}
                             />
                           )}
                         />
@@ -295,13 +295,13 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                   startIcon={<AddIcon />}
                   onClick={() => append({ visit_count: '', reward_id: '', message_template: '' })}
                 >
-                  {t('relationship.add_reward')}
+                  {t('checkin_program.add_reward')}
                 </Button>
               </Box>
 
               {/* Controle Anti-Fraude */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('relationship.anti_fraud_control')}</Typography>
+                <Typography variant="h6" gutterBottom>{t('checkin_program.anti_fraud_control')}</Typography>
                 <FormControlLabel
                   control={
                     <Controller
@@ -326,10 +326,10 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label={t('relationship.time_restriction')}
+                          label={t('checkin_program.time_restriction')}
                           fullWidth
                           margin="normal"
-                          helperText={t('relationship.time_restriction_helper')}
+                          helperText={t('checkin_program.time_restriction_helper')}
                         />
                       )}
                     />
@@ -341,11 +341,11 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label={t('relationship.checkin_duration_minutes')}
+                          label={t('checkin_program.checkin_duration_minutes')}
                           type="number"
                           fullWidth
                           margin="normal"
-                          helperText={t('relationship.checkin_duration_minutes_helper')}
+                          helperText={t('checkin_program.checkin_duration_minutes_helper')}
                         />
                       )}
                     />
@@ -356,11 +356,11 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       control={control}
                       render={({ field }) => (
                         <FormControl fullWidth margin="normal">
-                          <InputLabel>{t('relationship.identification_method')}</InputLabel>
-                          <Select {...field} label={t('relationship.identification_method')}>
-                            <MenuItem value="phone">{t('relationship.method_phone')}</MenuItem>
-                            <MenuItem value="cpf">{t('relationship.method_cpf')}</MenuItem>
-                            <MenuItem value="unique_link">{t('relationship.method_unique_link')}</MenuItem>
+                          <InputLabel>{t('checkin_program.identification_method')}</InputLabel>
+                          <Select {...field} label={t('checkin_program.identification_method')}>
+                            <MenuItem value="phone">{t('checkin_program.method_phone')}</MenuItem>
+                            <MenuItem value="cpf">{t('checkin_program.method_cpf')}</MenuItem>
+                            <MenuItem value="unique_link">{t('checkin_program.method_unique_link')}</MenuItem>
                           </Select>
                         </FormControl>
                       )}
@@ -371,18 +371,18 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Sistema de Pontuação e Ranking */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('relationship.points_and_ranking')}</Typography>
+                <Typography variant="h6" gutterBottom>{t('checkin_program.points_and_ranking')}</Typography>
                 <Controller
                   name="points_per_checkin"
                   control={control}
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={t('relationship.points_per_checkin')}
+                      label={t('checkin_program.points_per_checkin')}
                       type="number"
                       fullWidth
                       margin="normal"
-                      helperText={t('relationship.points_per_checkin_helper')}
+                      helperText={t('checkin_program.points_per_checkin_helper')}
                     />
                   )}
                 />
@@ -390,18 +390,18 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Limite de Check-ins por Ciclo */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('relationship.checkin_limit')}</Typography>
+                <Typography variant="h6" gutterBottom>{t('checkin_program.checkin_limit')}</Typography>
                 <Controller
                   name="checkin_limit_per_cycle"
                   control={control}
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={t('relationship.limit_per_cycle')}
+                      label={t('checkin_program.limit_per_cycle')}
                       type="number"
                       fullWidth
                       margin="normal"
-                      helperText={t('relationship.limit_per_cycle_helper')}
+                      helperText={t('checkin_program.limit_per_cycle_helper')}
                     />
                   )}
                 />
@@ -419,7 +419,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       )}
                     />
                   }
-                  label={t('relationship.allow_multiple_cycles')}
+                  label={t('checkin_program.allow_multiple_cycles')}
                 />
               </Box>
 
@@ -430,7 +430,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                 disabled={loading}
                 sx={{ mt: 2 }}
               >
-                {loading ? <CircularProgress size={20} /> : t('relationship.save_checkin_program_button')}
+                {loading ? <CircularProgress size={20} /> : t('checkin_program.save_checkin_program_button')}
               </Button>
             </CardContent>
           </Card>

@@ -58,8 +58,8 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
           setCoupon({
             is_valid: Math.random() > 0.3, // Simulação
             code: couponCode,
-            reward: { title: t('coupon_validator_card.simulated_discount') },
-            customer: { name: t('coupon_validator_card.test_customer') },
+            reward: { title: t('customer_card.simulated_discount') },
+            customer: { name: t('customer_card.test_customer') },
             status: ['active', 'redeemed', 'expired'][Math.floor(Math.random() * 3)],
             expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
           });

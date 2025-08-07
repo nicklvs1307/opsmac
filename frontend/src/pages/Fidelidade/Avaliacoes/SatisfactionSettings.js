@@ -228,12 +228,12 @@ const SatisfactionSettings = () => {
       </Paper>
 
       <Dialog open={!!editCriterion} onClose={() => setEditCriterion(null)} fullWidth maxWidth="sm">
-        <DialogTitle>Editar Critério</DialogTitle>
+        <DialogTitle>{t('satisfaction_settings.edit_criterion_title')}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            label="Nome do Critério"
+            label={t('satisfaction_settings.criterion_name_label')}
             type="text"
             fullWidth
             variant="standard"
@@ -242,9 +242,9 @@ const SatisfactionSettings = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setEditCriterion(null)}>Cancelar</Button>
+          <Button onClick={() => setEditCriterion(null)}>{t('satisfaction_settings.cancel_button')}</Button>
           <Button onClick={handleUpdate} disabled={isSubmitting}>
-            {isSubmitting ? <CircularProgress size={24} /> : 'Salvar'}
+            {isSubmitting ? <CircularProgress size={24} /> : t('satisfaction_settings.save_button')}
           </Button>
         </DialogActions>
       </Dialog>

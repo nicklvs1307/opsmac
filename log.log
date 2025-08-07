@@ -1,18 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      155.1s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      166.1s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.758
-0.758 > feedeliza-plus@1.0.0 build
-0.758 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.758
-3.403 Creating an optimized production build...
-154.6 Failed to compile.
-154.6
-154.6 [eslint]
-154.6 src/pages/Fidelidade/Avaliacoes/SatisfactionSettings.js
-154.6 Syntax error: Only one default export allowed per module. (259:0) (259:undefined)
-154.6
-154.6
+0.801
+0.801 > feedeliza-plus@1.0.0 build
+0.801 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.801
+4.112 Creating an optimized production build...
+165.1 Failed to compile.
+165.1
+165.1 Module parse failed: Cannot parse JSON: Unexpected token "," (0x2C) in JSON at position 33231 while parsing near "...alidar Cupom\"\n    },,\n      \"redeem_coup..."
+165.1 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+165.1 Error: Cannot parse JSON: Unexpected token "," (0x2C) in JSON at position 33231 while parsing near "...alidar Cupom\"\n    },,\n      \"redeem_coup..."
+165.1
+165.1
 ------
 Dockerfile.frontend:23
 --------------------

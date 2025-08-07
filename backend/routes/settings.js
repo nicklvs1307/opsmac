@@ -56,12 +56,45 @@ router.get('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
 // Rota para atualizar configurações do restaurante
 router.put('/:restaurantId', auth, checkRestaurantOwnership, [
   body('settings').isObject().withMessage('Configurações devem ser um objeto'),
+  // Validação para configurações gerais (se houver)
   body('settings.primary_color').optional().isString(),
   body('settings.secondary_color').optional().isString(),
   body('settings.text_color').optional().isString(),
   body('settings.background_color').optional().isString(),
   body('settings.background_image_url').optional().isURL().withMessage('URL da imagem de fundo inválida'),
+
+  // Validação para checkin_program_settings
+  body('settings.checkin_program_settings').optional().isObject().withMessage('Configurações do programa de check-in devem ser um objeto'),
+  body('settings.checkin_program_settings.primary_color').optional().isString(),
+  body('settings.checkin_program_settings.secondary_color').optional().isString(),
+  body('settings.checkin_program_settings.text_color').optional().isString(),
+  body('settings.checkin_program_settings.background_color').optional().isString(),
+  body('settings.checkin_program_settings.background_image_url').optional().isURL().withMessage('URL da imagem de fundo do check-in inválida'),
+  body('settings.checkin_program_settings.checkin_cycle_length').optional().isInt(),
+  body('settings.checkin_program_settings.checkin_cycle_name').optional().isString(),
+  body('settings.checkin_program_settings.enable_ranking').optional().isBoolean(),
+  body('settings.checkin_program_settings.enable_level_progression').optional().isBoolean(),
+  body('settings.checkin_program_settings.rewards_per_visit').optional().isArray(),
+  body('settings.checkin_program_settings.checkin_time_restriction').optional().isString(),
+  body('settings.checkin_program_settings.identification_method').optional().isString(),
+  body('settings.checkin_program_settings.points_per_checkin').optional().isInt(),
+  body('settings.checkin_program_settings.checkin_limit_per_cycle').optional().isInt(),
+  body('settings.checkin_program_settings.allow_multiple_cycles').optional().isBoolean(),
+  body('settings.checkin_program_settings.checkin_requires_table').optional().isBoolean(),
+
+  // Validação para survey_program_settings
+  body('settings.survey_program_settings').optional().isObject().withMessage('Configurações do programa de pesquisa devem ser um objeto'),
+  body('settings.survey_program_settings.background_color').optional().isString(),
+  body('settings.survey_program_settings.text_color').optional().isString(),
+  body('settings.survey_program_settings.primary_color').optional().isString(),
+  body('settings.survey_program_settings.background_image_url').optional().isURL().withMessage('URL da imagem de fundo da pesquisa inválida'),
+
 ], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const { restaurantId } = req.params;
     const { settings } = req.body;
@@ -69,7 +102,10 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
     if (!restaurant) {
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
+
+    // Use lodash.merge para mesclar profundamente as configurações existentes com as novas
     const updatedSettings = lodash.merge({}, restaurant.settings, settings);
+
     await restaurant.update({ settings: updatedSettings });
     res.json({ message: 'Configurações atualizadas com sucesso', settings: updatedSettings });
   } catch (error) {

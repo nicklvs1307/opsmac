@@ -66,7 +66,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           label={t('checkin_program.primary_color_label')}
                           fullWidth
                           margin="normal"
+                          type="color"
                           helperText={t('checkin_program.color_helper')}
+                          InputLabelProps={{ shrink: true }}
                         />
                       )}
                     />
@@ -81,7 +83,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           label={t('checkin_program.secondary_color_label')}
                           fullWidth
                           margin="normal"
+                          type="color"
                           helperText={t('checkin_program.color_helper_secondary')}
+                          InputLabelProps={{ shrink: true }}
                         />
                       )}
                     />
@@ -96,7 +100,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           label={t('checkin_program.text_color_label')}
                           fullWidth
                           margin="normal"
+                          type="color"
                           helperText={t('checkin_program.color_helper_text')}
+                          InputLabelProps={{ shrink: true }}
                         />
                       )}
                     />
@@ -111,7 +117,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           label={t('checkin_program.background_color_label')}
                           fullWidth
                           margin="normal"
+                          type="color"
                           helperText={t('checkin_program.color_helper_background')}
+                          InputLabelProps={{ shrink: true }}
                         />
                       )}
                     />

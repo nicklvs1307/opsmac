@@ -56,11 +56,11 @@ const PublicSurveyForm = () => {
         setSurvey(data.survey);
         setRestaurantName(data.restaurant.name);
         setRestaurantLogo(`${process.env.REACT_APP_API_URL}${data.restaurant.logo}`);
-        setPrimaryColor(data.restaurant.settings?.primary_color || '#3f51b5');
-        setSecondaryColor(data.restaurant.settings?.secondary_color || '#f50057');
-        setTextColor(data.restaurant.settings?.text_color || '#333333');
-        setBackgroundColor(data.restaurant.settings?.background_color || '#ffffff');
-        setBackgroundImageUrl(data.restaurant.settings?.background_image_url || null);
+        setPrimaryColor(data.restaurant.settings?.survey_program_settings?.primary_color || '#3f51b5');
+        setSecondaryColor(data.restaurant.settings?.survey_program_settings?.secondary_color || '#f50057');
+        setTextColor(data.restaurant.settings?.survey_program_settings?.text_color || '#333333');
+        setBackgroundColor(data.restaurant.settings?.survey_program_settings?.background_color || '#ffffff');
+        setBackgroundImageUrl(data.restaurant.settings?.survey_program_settings?.background_image_url || null);
         // Initialize answers state
         const initialAnswers = {};
         data.survey.questions.forEach(q => {

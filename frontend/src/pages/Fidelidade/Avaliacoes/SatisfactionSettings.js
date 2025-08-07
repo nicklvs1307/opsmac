@@ -150,21 +150,21 @@ const SatisfactionSettings = () => {
               <Controller
                 name="background_color"
                 control={control}
-                render={({ field }) => <TextField {...field} label="Cor de Fundo" fullWidth />}
+                render={({ field }) => <TextField {...field} label="Cor de Fundo" fullWidth type="color" InputLabelProps={{ shrink: true }} />}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Controller
                 name="text_color"
                 control={control}
-                render={({ field }) => <TextField {...field} label="Cor do Texto" fullWidth />}
+                render={({ field }) => <TextField {...field} label="Cor do Texto" fullWidth type="color" InputLabelProps={{ shrink: true }} />}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Controller
                 name="primary_color"
                 control={control}
-                render={({ field }) => <TextField {...field} label="Cor de Destaque" fullWidth />}
+                render={({ field }) => <TextField {...field} label="Cor de Destaque" fullWidth type="color" InputLabelProps={{ shrink: true }} />}
               />
             </Grid>
             <Grid item xs={12}>

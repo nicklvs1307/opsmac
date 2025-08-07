@@ -254,6 +254,3 @@ const SatisfactionSettings = () => {
 };
 
 export default SatisfactionSettings;
-
-
-export default SatisfactionSettings;

@@ -1,20 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      163.8s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      155.1s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.730
-0.730 > feedeliza-plus@1.0.0 build
-0.730 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.730
-3.975 Creating an optimized production build...
-162.7 Failed to compile.
-162.7
-162.7 [eslint]
-162.7 src/pages/Fidelidade/Avaliacoes/SatisfactionSettings.js
-162.7   Line 45:74:  'fetchNpsCriteria' is not defined  no-undef
-162.7
-162.7 Search for the keywords to learn more about each error.
-162.7
-162.7
+0.758
+0.758 > feedeliza-plus@1.0.0 build
+0.758 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.758
+3.403 Creating an optimized production build...
+154.6 Failed to compile.
+154.6
+154.6 [eslint]
+154.6 src/pages/Fidelidade/Avaliacoes/SatisfactionSettings.js
+154.6 Syntax error: Only one default export allowed per module. (259:0) (259:undefined)
+154.6
+154.6
 ------
 Dockerfile.frontend:23
 --------------------

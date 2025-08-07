@@ -165,7 +165,7 @@ const PublicSurveyForm = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor + ' !important',
       backgroundImage: backgroundImageUrl ? `url(${backgroundImageUrl})` : 'none',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -178,7 +178,7 @@ const PublicSurveyForm = () => {
         {restaurantLogo ? (
           <img 
             src={restaurantLogo} 
-            alt={restaurantName || "Restaurant Logo"} 
+            alt={restaurantName || t('public_survey.restaurant_logo_alt')} 
             style={{ 
               height: '100px', 
               width: '100px',
@@ -190,7 +190,7 @@ const PublicSurveyForm = () => {
         ) : (
           <img 
             src="/logo192.png" 
-            alt="Default Logo" 
+            alt={t('public_survey.default_logo_alt')} 
             style={{ 
               height: '100px', 
               width: '100px',
@@ -221,7 +221,7 @@ const PublicSurveyForm = () => {
             background: `linear-gradient(90deg, ${primaryColor}, ${secondaryColor})`, // Barra colorida no topo
             zIndex: 1,
           },
-          background: alpha(theme.palette.background.paper, 0.8), // Transparência aqui
+          background: alpha(backgroundColor, 0.8), // Transparência aqui
           backdropFilter: 'blur(10px)', // Efeito de vidro fosco (funciona em navegadores modernos)
         }}>
           <Typography 
@@ -544,7 +544,7 @@ const PublicSurveyForm = () => {
 
         <Box textAlign="center" mt={4} sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}>
           <Typography variant="caption" color={textColor} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-            <span>Powered by</span> 
+            <span>{t('public_survey.powered_by_text')}</span> 
             <span style={{ fontWeight: 'bold', color: primaryColor }}>
               {t('public_survey.powered_by_feedback_system')}
             </span>

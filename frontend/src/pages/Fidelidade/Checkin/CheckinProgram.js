@@ -28,7 +28,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
           <Card>
-            <CardHeader title={t('relationship.checkin_program')} />
+            <CardHeader title={t('checkin_program.title')} />
             <CardContent>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
                 {t('relationship.checkin_program_description')}
@@ -36,7 +36,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Slug do Restaurante */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('checkin_program.slug_title')}</Typography>
+                                <Typography variant="h6" gutterBottom>{t('checkin_program.slug_title')}</Typography>
                 <Controller
                   name="restaurant_slug"
                   control={control}

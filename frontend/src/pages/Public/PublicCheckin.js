@@ -144,7 +144,7 @@ const PublicCheckin = () => {
         {restaurantLogo ? (
           <img 
             src={restaurantLogo} 
-            alt="Restaurant Logo" 
+            alt={t('public_checkin.restaurant_logo_alt')} 
             style={{ 
               height: '100px', 
               width: '100px',
@@ -156,7 +156,7 @@ const PublicCheckin = () => {
         ) : (
           <img 
             src="/logo192.png" 
-            alt="Default Logo" 
+            alt={t('public_checkin.default_logo_alt')} 
             style={{ 
               height: '100px', 
               width: '100px',
@@ -473,7 +473,7 @@ const PublicCheckin = () => {
         
         <Box textAlign="center" mt={4} sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}>
           <Typography variant="caption" color={textColor} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-            <span>Powered by</span> 
+            <span>{t('public_checkin.powered_by_text')}</span> 
             <span style={{ fontWeight: 'bold', color: primaryColor }}>
               {t('public_checkin.powered_by_feedback_system')}
             </span>

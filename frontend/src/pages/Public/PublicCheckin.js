@@ -10,6 +10,7 @@ import {
   Container,
   alpha,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
@@ -19,6 +20,7 @@ const PublicCheckin = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { restaurantSlug } = useParams();
+  const theme = useTheme();
 
   const [loading, setLoading] = useState(false);
   const [restaurantName, setRestaurantName] = useState('');
@@ -144,8 +146,10 @@ const PublicCheckin = () => {
             src={restaurantLogo} 
             alt="Restaurant Logo" 
             style={{ 
-              height: '70px', 
-              width: 'auto',
+              height: '100px', 
+              width: '100px',
+              borderRadius: '50%',
+              objectFit: 'cover',
               filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
             }} 
           />
@@ -154,8 +158,10 @@ const PublicCheckin = () => {
             src="/logo192.png" 
             alt="Default Logo" 
             style={{ 
-              height: '70px', 
-              width: 'auto',
+              height: '100px', 
+              width: '100px',
+              borderRadius: '50%',
+              objectFit: 'cover',
               filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
             }} 
           />
@@ -180,6 +186,7 @@ const PublicCheckin = () => {
             background: `linear-gradient(90deg, ${primaryColor}, ${secondaryColor})`, // Barra colorida no topo
             zIndex: 1,
           },
+          background: alpha(theme.palette.background.paper, 0.8), // Transparência aqui
           backdropFilter: 'blur(10px)', // Efeito de vidro fosco
         }}>
           <Box sx={{ textAlign: 'center', mb: 4 }}>

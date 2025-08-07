@@ -24,6 +24,7 @@ import {
   Slider,
   alpha,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -35,6 +36,7 @@ const PublicSurveyForm = () => {
   const { t } = useTranslation();
   const { slug } = useParams();
   const navigate = useNavigate();
+  const theme = useTheme();
   const [survey, setSurvey] = useState(null);
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantLogo, setRestaurantLogo] = useState('');
@@ -178,8 +180,10 @@ const PublicSurveyForm = () => {
             src={restaurantLogo} 
             alt={restaurantName || "Restaurant Logo"} 
             style={{ 
-              height: '60px', 
-              width: 'auto',
+              height: '100px', 
+              width: '100px',
+              borderRadius: '50%',
+              objectFit: 'cover',
               filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
             }} 
           />
@@ -188,8 +192,10 @@ const PublicSurveyForm = () => {
             src="/logo192.png" 
             alt="Default Logo" 
             style={{ 
-              height: '60px', 
-              width: 'auto',
+              height: '100px', 
+              width: '100px',
+              borderRadius: '50%',
+              objectFit: 'cover',
               filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
             }} 
           />
@@ -215,6 +221,7 @@ const PublicSurveyForm = () => {
             background: `linear-gradient(90deg, ${primaryColor}, ${secondaryColor})`, // Barra colorida no topo
             zIndex: 1,
           },
+          background: alpha(theme.palette.background.paper, 0.8), // Transparência aqui
           backdropFilter: 'blur(10px)', // Efeito de vidro fosco (funciona em navegadores modernos)
         }}>
           <Typography 

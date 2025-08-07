@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAuth } from '../../../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 // Funções da API
 const fetchNpsCriteria = async () => {
@@ -29,6 +30,7 @@ const deleteNpsCriterion = (id) => {
 const SatisfactionSettings = () => {
   const queryClient = useQueryClient();
   const { user } = useAuth();
+  const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
   const [newCriterionName, setNewCriterionName] = useState('');

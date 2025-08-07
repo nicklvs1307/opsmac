@@ -1,18 +1,43 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      166.1s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      163.0s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.801
-0.801 > feedeliza-plus@1.0.0 build
-0.801 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.801
-4.112 Creating an optimized production build...
-165.1 Failed to compile.
-165.1
-165.1 Module parse failed: Cannot parse JSON: Unexpected token "," (0x2C) in JSON at position 33231 while parsing near "...alidar Cupom\"\n    },,\n      \"redeem_coup..."
-165.1 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
-165.1 Error: Cannot parse JSON: Unexpected token "," (0x2C) in JSON at position 33231 while parsing near "...alidar Cupom\"\n    },,\n      \"redeem_coup..."
-165.1
-165.1
+0.641
+0.641 > feedeliza-plus@1.0.0 build
+0.641 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.641
+2.945 Creating an optimized production build...
+162.4 Failed to compile.
+162.4
+162.4 [eslint]
+162.4 src/pages/Fidelidade/Avaliacoes/SatisfactionSettings.js
+162.4   Line 71:21:   't' is not defined  no-undef
+162.4   Line 73:48:   't' is not defined  no-undef
+162.4   Line 87:48:   't' is not defined  no-undef
+162.4   Line 95:21:   't' is not defined  no-undef
+162.4   Line 103:21:  't' is not defined  no-undef
+162.4   Line 111:21:  't' is not defined  no-undef
+162.4   Line 119:19:  't' is not defined  no-undef
+162.4   Line 128:21:  't' is not defined  no-undef
+162.4   Line 136:24:  't' is not defined  no-undef
+162.4   Line 145:12:  't' is not defined  no-undef
+162.4   Line 153:69:  't' is not defined  no-undef
+162.4   Line 160:69:  't' is not defined  no-undef
+162.4   Line 167:69:  't' is not defined  no-undef
+162.4   Line 174:69:  't' is not defined  no-undef
+162.4   Line 179:70:  't' is not defined  no-undef
+162.4   Line 186:12:  't' is not defined  no-undef
+162.4   Line 189:12:  't' is not defined  no-undef
+162.4   Line 195:20:  't' is not defined  no-undef
+162.4   Line 202:62:  't' is not defined  no-undef
+162.4   Line 209:38:  't' is not defined  no-undef
+162.4   Line 231:23:  't' is not defined  no-undef
+162.4   Line 236:20:  't' is not defined  no-undef
+162.4   Line 245:59:  't' is not defined  no-undef
+162.4   Line 247:62:  't' is not defined  no-undef
+162.4
+162.4 Search for the keywords to learn more about each error.
+162.4
+162.4
 ------
 Dockerfile.frontend:23
 --------------------

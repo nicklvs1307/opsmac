@@ -160,6 +160,15 @@ router.post(
 
             await models.Feedback.create(feedbackData);
 
+            // Se houver um customer_id, atualize as estatísticas do cliente
+            if (customer_id) {
+                const customer = await models.Customer.findByPk(customer_id);
+                if (customer) {
+                    await customer.updateStats();
+                    console.log(`[Public Survey] Estatísticas do cliente ${customer_id} atualizadas após resposta de pesquisa.`);
+                }
+            }
+
             // Update NPS scores by criterion in Restaurant settings
             const restaurant = await models.Restaurant.findByPk(survey.restaurant_id);
             if (restaurant) {

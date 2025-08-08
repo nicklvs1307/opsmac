@@ -155,6 +155,12 @@ router.post('/users', auth, isAdmin, [
  *                 format: uuid
  *                 description: ID do proprietário do restaurante (deve ser um usuário existente).
  *                 example: 123e4567-e89b-12d3-a456-426614174000
+ *               enabled_modules:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Lista de módulos habilitados para o restaurante.
+ *                 example: ["customer_segmentation", "ifood_integration"]
  *     responses:
  *       201:
  *         description: Restaurante criado com sucesso.
@@ -168,13 +174,14 @@ router.post('/users', auth, isAdmin, [
 router.post('/restaurants', auth, isAdmin, [
   body('name').trim().notEmpty().withMessage('Nome do restaurante é obrigatório'),
   body('owner_id').isUUID().withMessage('ID do proprietário inválido'),
+  body('enabled_modules').optional().isArray().withMessage('Módulos habilitados deve ser um array'),
 ], async (req, res) => {
-  const errors = validationResult(req);
+  const errors = validation.validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, address, city, state, zip_code, phone, email, website, owner_id } = req.body;
+  const { name, address, city, state, zip_code, phone, email, website, owner_id, enabled_modules } = req.body;
 
   try {
     const owner = await models.User.findByPk(owner_id);
@@ -184,7 +191,8 @@ router.post('/restaurants', auth, isAdmin, [
 
     const restaurant = await models.Restaurant.create({
       name, address, city, state, zip_code, phone, email, website, owner_id,
-      slug: await generateUniqueSlug(models.Restaurant, name)
+      slug: await generateUniqueSlug(models.Restaurant, name),
+      settings: { enabled_modules: enabled_modules || [] } // Define os módulos habilitados
     });
     res.status(201).json({ message: 'Restaurante criado com sucesso', restaurant });
   } catch (error) {

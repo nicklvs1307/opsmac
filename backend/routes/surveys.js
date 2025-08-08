@@ -225,7 +225,261 @@ router.delete(
 // @route   GET /api/surveys/:id/results
 // @desc    Get results for a specific survey
 // @access  Private
-router.get('/:id/results', auth, async (req, res) => {
+const router = express.Router();
+
+// Middleware para verificar se o módulo de Pesquisas/Feedback está habilitado
+async function checkSurveysFeedbackModuleEnabled(req, res, next) {
+  let restaurantId;
+  let restaurant;
+
+  // Tenta obter restaurantId do usuário autenticado (para rotas privadas)
+  if (req.user && req.user.restaurants && req.user.restaurants[0]) {
+    restaurantId = req.user.restaurants[0].id;
+    restaurant = await models.Restaurant.findByPk(restaurantId);
+  } else if (req.params.restaurantId) { // Para rotas com restaurantId nos parâmetros
+    restaurantId = req.params.restaurantId;
+    restaurant = await models.Restaurant.findByPk(restaurantId);
+  }
+
+  if (!restaurantId || !restaurant) {
+    console.warn('ID do restaurante não encontrado ou restaurante não encontrado para verificação do módulo.');
+    return res.status(400).json({ error: 'Restaurante não encontrado ou ID do restaurante ausente.' });
+  }
+
+  if (!restaurant.settings?.enabled_modules?.includes('surveys_feedback')) {
+    console.warn(`Módulo de Pesquisas/Feedback não habilitado para o restaurante ${restaurantId}.`);
+    return res.status(403).json({ error: 'Módulo de Pesquisas/Feedback não habilitado para este restaurante.' });
+  }
+  req.restaurant = restaurant; // Anexa o objeto do restaurante à requisição para uso posterior
+  next();
+}
+
+// @route   POST api/surveys
+// @desc    Create a new survey from a template or custom
+// @access  Private
+router.post(
+    '/',
+    auth,
+    checkSurveysFeedbackModuleEnabled,
+    [
+        body('type', 'O tipo da pesquisa é obrigatório').not().isEmpty(),
+        body('title', 'O título é obrigatório para pesquisas personalizadas').if(body('type').equals('custom')).not().isEmpty(),
+        body('questions', 'Perguntas são obrigatórias para pesquisas personalizadas').if(body('type').equals('custom')).isArray({ min: 1 }),
+        body('status', 'Status inválido').optional().isIn(['draft', 'active', 'inactive', 'archived']),
+        body('slug', 'Slug é obrigatório e deve ser único').not().isEmpty(),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const { type, title, slug, description, questions, status } = req.body;
+        // O restaurant_id agora vem de req.restaurant
+        const { userId: user_id } = req.user;
+        const restaurant_id = req.restaurant.id;
+
+        try {
+            // Verificar se o slug já existe
+            const existingSurvey = await models.Survey.findOne({ where: { slug } });
+            if (existingSurvey) {
+                return res.status(400).json({ errors: [{ msg: 'Este slug já está em uso. Por favor, escolha outro.' }] });
+            }
+
+            let surveyData = {};
+            let questionsData = [];
+
+            if (type === 'custom') {
+                surveyData = { title, description, type, restaurant_id, created_by: user_id, status: status || 'active', slug };
+                questionsData = questions;
+            } else if (surveyTemplates[type]) {
+                const template = surveyTemplates[type];
+                surveyData = { ...template, type, restaurant_id, created_by: user_id, status: status || 'active', slug: await generateUniqueSlug(models.Survey, template.title) };
+                questionsData = template.questions;
+            } else {
+                return res.status(400).json({ msg: 'Tipo de pesquisa inválido' });
+            }
+
+            const survey = await models.Survey.create(surveyData);
+
+            if (questionsData && questionsData.length > 0) {
+                for (const q of questionsData) {
+                    const questionToCreate = {
+                        ...q,
+                        survey_id: survey.id,
+                    };
+                    // Apenas adicione nps_criterion_id se for uma pergunta NPS
+                    if (q.question_type === 'nps' && q.nps_criterion_id) {
+                        questionToCreate.nps_criterion_id = q.nps_criterion_id;
+                    }
+                    await models.Question.create(questionToCreate);
+                }
+            }
+
+            const newSurvey = await models.Survey.findByPk(survey.id, {
+                include: ['questions']
+            });
+
+            res.status(201).json(newSurvey);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
+
+// @route   PUT /api/surveys/:id
+// @desc    Update an existing survey
+// @access  Private
+router.put(
+    '/:id',
+    auth,
+    checkSurveysFeedbackModuleEnabled,
+    [
+        body('title', 'O título é obrigatório').not().isEmpty(),
+        body('description', 'A descrição é obrigatória').not().isEmpty(),
+        body('questions', 'Perguntas são obrigatórias').isArray({ min: 1 }),
+        body('status', 'Status inválido').optional().isIn(['draft', 'active', 'inactive', 'archived']),
+        body('slug', 'Slug é obrigatório e deve ser único').not().isEmpty(),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const { title, slug, description, questions, status } = req.body;
+        const { id } = req.params;
+        // O restaurant_id agora vem de req.restaurant
+        const restaurant_id = req.restaurant.id;
+
+        try {
+            let survey = await models.Survey.findByPk(id);
+
+            if (!survey) {
+                return res.status(404).json({ msg: 'Pesquisa não encontrada' });
+            }
+
+            // Verificar se o novo slug já existe em outra pesquisa
+            const existingSurvey = await models.Survey.findOne({ where: { slug, id: { [models.Sequelize.Op.ne]: id } } });
+            if (existingSurvey) {
+                return res.status(400).json({ errors: [{ msg: 'Este slug já está em uso. Por favor, escolha outro.' }] });
+            }
+
+            // Ensure the user owns the survey's restaurant
+            if (survey.restaurant_id !== restaurant_id) {
+                return res.status(403).json({ msg: 'Não autorizado a editar esta pesquisa' });
+            }
+
+            // Update survey details
+            survey.title = title;
+            survey.slug = slug;
+            survey.description = description;
+            if (status) {
+                survey.status = status;
+            }
+            await survey.save();
+
+            // Update questions: This is a simplified approach.
+            // For a robust solution, you'd compare existing questions,
+            // add new ones, update changed ones, and delete removed ones.
+            // For now, we'll just delete all existing questions and recreate them.
+            await models.Question.destroy({ where: { survey_id: survey.id } });
+
+            if (questions && questions.length > 0) {
+                for (const q of questions) {
+                    const questionToCreate = {
+                        ...q,
+                        survey_id: survey.id,
+                    };
+                    // Apenas adicione nps_criterion_id se for uma pergunta NPS
+                    if (q.question_type === 'nps' && q.nps_criterion_id) {
+                        questionToCreate.nps_criterion_id = q.nps_criterion_id;
+                    }
+                    await models.Question.create(questionToCreate);
+                }
+            }
+
+            const updatedSurvey = await models.Survey.findByPk(survey.id, {
+                include: ['questions']
+            });
+
+            res.json(updatedSurvey);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
+
+// @route   PATCH /api/surveys/:id/status
+// @desc    Update survey status
+// @access  Private
+router.patch('/:id/status', auth, checkSurveysFeedbackModuleEnabled, [
+    body('status', 'Status é obrigatório').isIn(['active', 'draft']).not().isEmpty(),
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const survey = await models.Survey.findByPk(req.params.id);
+        if (!survey) {
+            return res.status(404).json({ msg: 'Pesquisa não encontrada' });
+        }
+
+        if (survey.restaurant_id !== req.restaurant.id) { // Usar req.restaurant.id
+            return res.status(403).json({ msg: 'Não autorizado' });
+        }
+
+        survey.status = req.body.status;
+        await survey.save();
+        res.json(survey);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route   DELETE /api/surveys/:id
+// @desc    Delete a survey
+// @access  Private
+router.delete(
+    '/:id',
+    auth,
+    checkSurveysFeedbackModuleEnabled,
+    async (req, res) => {
+        const { id } = req.params;
+        // O restaurant_id agora vem de req.restaurant
+        const restaurant_id = req.restaurant.id;
+
+        try {
+            const survey = await models.Survey.findByPk(id);
+
+            if (!survey) {
+                return res.status(404).json({ msg: 'Pesquisa não encontrada' });
+            }
+
+            // Ensure the user owns the survey's restaurant
+            if (survey.restaurant_id !== restaurant_id) {
+                return res.status(403).json({ msg: 'Não autorizado a apagar esta pesquisa' });
+            }
+
+            await survey.destroy(); // This will also delete associated questions and responses due to CASCADE
+
+            res.json({ msg: 'Pesquisa removida com sucesso' });
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
+
+// @route   GET /api/surveys/:id/results
+// @desc    Get results for a specific survey
+// @access  Private
+router.get('/:id/results', auth, checkSurveysFeedbackModuleEnabled, async (req, res) => {
     try {
         const survey = await models.Survey.findByPk(req.params.id, {
             include: [
@@ -347,6 +601,124 @@ router.get('/:id/results', auth, async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
+// @route   GET api/surveys
+// @desc    Get all surveys for the logged in user's restaurant
+// @access  Private
+router.get('/', auth, checkSurveysFeedbackModuleEnabled, async (req, res) => {
+    try {
+        const surveys = await models.Survey.findAll({
+            where: { 
+                restaurant_id: req.restaurant.id, // Usar req.restaurant.id
+                status: { [models.Sequelize.Op.in]: ['active', 'draft'] }
+            },
+            include: ['questions']
+        });
+        res.json(surveys);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route   GET /api/surveys/:id
+// @desc    Get a single survey by ID
+// @access  Private
+router.get(
+    '/:id',
+    auth,
+    checkSurveysFeedbackModuleEnabled,
+    async (req, res) => {
+        try {
+            const survey = await models.Survey.findByPk(req.params.id, {
+                include: ['questions']
+            });
+
+            if (!survey) {
+                return res.status(404).json({ msg: 'Pesquisa não encontrada' });
+            }
+
+            // Ensure the user owns the survey's restaurant
+            if (survey.restaurant_id !== req.restaurant.id) { // Usar req.restaurant.id
+                return res.status(403).json({ msg: 'Não autorizado a acessar esta pesquisa' });
+            }
+
+            res.json(survey);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
+
+// @route   GET /api/surveys/analytics/:restaurantId
+// @desc    Get satisfaction analytics for a restaurant
+// @access  Private
+router.get('/analytics/:restaurantId', auth, checkSurveysFeedbackModuleEnabled, async (req, res) => {
+    const { restaurantId } = req.params;
+
+    // O restaurante já está disponível em req.restaurant devido ao middleware checkSurveysFeedbackModuleEnabled
+    // Optional: Add checkRestaurantOwnership middleware if needed
+
+    try {
+        const totalResponses = await models.SurveyResponse.count({
+            include: [{
+                model: models.Survey,
+                where: { restaurant_id: req.restaurant.id }, // Usar req.restaurant.id
+                attributes: []
+            }]
+        });
+
+        // Simplified example for average NPS and CSAT
+        // A more accurate implementation would involve complex queries
+        const allAnswers = await models.Answer.findAll({
+            include: [{
+                model: models.Question,
+                attributes: ['question_type'],
+                include: [{
+                    model: models.Survey,
+                    where: { restaurant_id: req.restaurant.id }, // Usar req.restaurant.id
+                    attributes: []
+                }]
+            }]
+        });
+
+        let npsSum = 0;
+        let npsCount = 0;
+        let csatSum = 0;
+        let csatCount = 0;
+
+        allAnswers.forEach(answer => {
+            if (answer.Question) {
+                const value = parseInt(answer.answer_value, 10);
+                if (!isNaN(value)) {
+                    if (answer.Question.question_type === 'nps') {
+                        npsSum += value;
+                        npsCount++;
+                    } else if (answer.Question.question_type === 'csat') {
+                        csatSum += value;
+                        csatCount++;
+                    }
+                }
+            }
+        });
+
+        const averageNps = npsCount > 0 ? npsSum / npsCount : null;
+        const averageCsat = csatCount > 0 ? csatSum / csatCount : null;
+
+        res.json({
+            totalResponses,
+            averageNps,
+            averageCsat
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+module.exports = router;
 
 // @route   GET api/surveys
 // @desc    Get all surveys for the logged in user's restaurant

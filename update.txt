@@ -9,6 +9,10 @@ Integração com o Delivery Mutch
 📝 Objetivo
 Segmentar clientes com base em seu comportamento de compra, frequência, valor gasto, canal usado, preferências e localização, para permitir campanhas personalizadas e automações de marketing.
 
+**Status Atual da Segmentação de Clientes e NPS:**
+- Backend: Implementação inicial concluída (modelo de dados atualizado, serviço de segmentação criado, gatilhos para atualização em check-in e respostas de pesquisa).
+- Pendências: Depuração do script de atualização em massa (`updateCustomerSegments.js`) e integração com a interface do usuário (UI) para visualização e gerenciamento dos segmentos.
+
 1. CRITÉRIOS DE SEGMENTAÇÃO
 Sua função precisa considerar no mínimo estes 35 critérios, divididos em categorias:
 

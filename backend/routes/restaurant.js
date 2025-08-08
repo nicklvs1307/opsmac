@@ -108,11 +108,17 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
       points_per_checkin,
       checkin_limit_per_cycle,
       allow_multiple_cycles,
-      settings: newSettings // Captura o objeto settings do body
+      settings: newSettings, // Captura o objeto settings do body
+      enabled_modules // Captura o enabled_modules do body
     } = req.body;
 
     // Mescla as configurações existentes com as novas
     const updatedSettings = { ...restaurant.settings, ...newSettings };
+
+    // Se enabled_modules for fornecido, atualiza no settings
+    if (enabled_modules !== undefined) {
+      updatedSettings.enabled_modules = enabled_modules;
+    }
 
     await restaurant.update({ slug: restaurant_slug, settings: updatedSettings });
     res.json(restaurant);

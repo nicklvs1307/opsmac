@@ -179,6 +179,84 @@ module.exports = (sequelize) => {
         location_data: null
       }
     },
+    // Novos campos para segmentação e NPS
+    rfv_score: {
+      type: DataTypes.JSONB,
+      allowNull: true,
+      defaultValue: {
+        recency: null,
+        frequency: null,
+        monetary: null
+      },
+      comment: 'Pontuação RFV (Recência, Frequência, Valor)'
+    },
+    nps_segment: {
+      type: DataTypes.ENUM('promoter', 'passive', 'detractor', 'unknown'),
+      allowNull: true,
+      defaultValue: 'unknown',
+      comment: 'Segmento NPS do cliente'
+    },
+    last_purchase_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: 'Data da última compra/check-in'
+    },
+    total_orders: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      comment: 'Número total de pedidos/check-ins'
+    },
+    average_ticket: {
+      type: DataTypes.DECIMAL(10, 2),
+      defaultValue: 0.00,
+      comment: 'Ticket médio do cliente'
+    },
+    last_ticket_value: {
+      type: DataTypes.DECIMAL(10, 2),
+      defaultValue: 0.00,
+      comment: 'Valor do último pedido/check-in'
+    },
+    most_bought_products: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: [],
+      comment: 'Lista de produtos mais comprados (placeholder)'
+    },
+    most_bought_categories: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: [],
+      comment: 'Lista de categorias mais compradas (placeholder)'
+    },
+    purchase_behavior_tags: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: [],
+      comment: 'Tags de comportamento de compra (ex: weekend_shopper)'
+    },
+    location_details: {
+      type: DataTypes.JSONB,
+      allowNull: true,
+      defaultValue: {
+        neighborhood: null,
+        city: null,
+        zone: null,
+        distance_from_store: null
+      },
+      comment: 'Detalhes de localização do cliente'
+    },
+    preferred_communication_channel: {
+      type: DataTypes.ENUM('whatsapp', 'email', 'sms', 'push_notification', 'none'),
+      allowNull: true,
+      defaultValue: 'none',
+      comment: 'Canal de comunicação preferido do cliente'
+    },
+    campaign_interaction_history: {
+      type: DataTypes.JSONB,
+      allowNull: true,
+      defaultValue: {},
+      comment: 'Histórico de interação com campanhas'
+    },
     restaurant_id: {
       type: DataTypes.UUID,
       allowNull: true, // Pode ser false se todo cliente precisar de um restaurante
@@ -228,6 +306,19 @@ module.exports = (sequelize) => {
       },
       {
         fields: ['last_visit']
+      },
+      // Novos índices para os campos de segmentação
+      {
+        fields: ['nps_segment']
+      },
+      {
+        fields: ['last_purchase_date']
+      },
+      {
+        fields: ['total_orders']
+      },
+      {
+        fields: ['average_ticket']
       }
     ],
     hooks: {
@@ -312,26 +403,31 @@ module.exports = (sequelize) => {
     return newPoints;
   };
 
-  Customer.prototype.updateSegment = async function() {
-    let segment = 'new';
-    
-    if (this.total_visits === 0) {
-      segment = 'new';
-    } else if (this.total_visits >= 20 || this.total_spent >= 1000) {
-      segment = 'vip';
-    } else if (this.total_visits >= 5) {
-      segment = 'regular';
-    } else if (this.last_visit && 
-               new Date() - new Date(this.last_visit) > 90 * 24 * 60 * 60 * 1000) {
-      segment = 'inactive';
-    }
-    
-    if (segment !== this.customer_segment) {
-      await this.update({ customer_segment: segment });
-    }
-    
-    return segment;
-  };
+  // Este método será substituído por uma lógica de segmentação mais avançada
+  // Importar o serviço de segmentação de clientes
+  const { segmentCustomer } = require('../utils/customerSegmentationService');
+
+  // Este método será substituído por uma lógica de segmentação mais avançada
+  // Customer.prototype.updateSegment = async function() {
+  //   let segment = 'new';
+      
+  //   if (this.total_visits === 0) {
+  //     segment = 'new';
+  //   } else if (this.total_visits >= 20 || this.total_spent >= 1000) {
+  //     segment = 'vip';
+  //   } else if (this.total_visits >= 5) {
+  //     segment = 'regular';
+  //   } else if (this.last_visit && 
+  //              new Date() - new Date(this.last_visit) > 90 * 24 * 60 * 60 * 1000) {
+  //     segment = 'inactive';
+  //   }
+      
+  //   if (segment !== this.customer_segment) {
+  //     await this.update({ customer_segment: segment });
+  //   }
+      
+  //   return segment;
+  // };
 
   Customer.prototype.updateStats = async function() {
     const { models } = sequelize;
@@ -368,12 +464,48 @@ module.exports = (sequelize) => {
       }
     }
 
+    // Atualizar total_orders e last_purchase_date com base em check-ins e survey responses
+    const latestCheckin = await models.Checkin.findOne({
+      where: { customer_id: this.id },
+      order: [['checkin_time', 'DESC']]
+    });
+
+    const latestSurveyResponse = await models.SurveyResponse.findOne({
+      where: { customer_id: this.id },
+      order: [['created_at', 'DESC']]
+    });
+
+    let lastActivityDate = null;
+    if (latestCheckin && latestSurveyResponse) {
+      lastActivityDate = new Date(Math.max(latestCheckin.checkin_time.getTime(), latestSurveyResponse.created_at.getTime()));
+    } else if (latestCheckin) {
+      lastActivityDate = latestCheckin.checkin_time;
+    } else if (latestSurveyResponse) {
+      lastActivityDate = latestSurveyResponse.created_at;
+    }
+
+    if (lastActivityDate) {
+      updates.last_purchase_date = lastActivityDate;
+    }
+
+    const totalCheckins = await models.Checkin.count({
+      where: { customer_id: this.id }
+    });
+    const totalSurveyResponses = await models.SurveyResponse.count({
+      where: { customer_id: this.id }
+    });
+    updates.total_orders = totalCheckins + totalSurveyResponses; // Considerando check-ins e respostas como "pedidos" para fins de frequência
+
+    // TODO: Implementar cálculo de average_ticket, last_ticket_value, most_bought_products, most_bought_categories
+    // Isso dependerá da existência de um modelo de Pedido/Ordem
+
     if (Object.keys(updates).length > 0) {
       await this.update(updates);
     }
 
-    // Atualizar segmento
-    await this.updateSegment();
+    // Chamar o serviço de segmentação para atualizar todos os campos de segmentação
+    const updatedCustomer = await segmentCustomer(this, models);
+    await this.update(updatedCustomer.dataValues); // Salvar as atualizações do segmento
 
     return this;
   };

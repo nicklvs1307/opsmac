@@ -7,10 +7,40 @@ const { Op, fn, col, literal } = require('sequelize');
 
 const router = express.Router();
 
+// Middleware para verificar se o módulo de Check-in está habilitado
+async function checkCheckinModuleEnabled(req, res, next) {
+  let restaurantId;
+  let restaurant;
+
+  // Tenta obter restaurantId do usuário autenticado (para rotas privadas)
+  if (req.user && req.user.restaurants && req.user.restaurants[0]) {
+    restaurantId = req.user.restaurants[0].id;
+    restaurant = await models.Restaurant.findByPk(restaurantId);
+  } else if (req.params.restaurantSlug) { // Para rotas públicas com slug
+    restaurant = await models.Restaurant.findOne({ where: { slug: req.params.restaurantSlug } });
+    restaurantId = restaurant ? restaurant.id : null;
+  } else if (req.params.restaurantId) { // Para rotas com restaurantId nos parâmetros
+    restaurantId = req.params.restaurantId;
+    restaurant = await models.Restaurant.findByPk(restaurantId);
+  }
+
+  if (!restaurantId || !restaurant) {
+    console.warn('ID do restaurante não encontrado ou restaurante não encontrado para verificação do módulo.');
+    return res.status(400).json({ error: 'Restaurante não encontrado ou ID do restaurante ausente.' });
+  }
+
+  if (!restaurant.settings?.enabled_modules?.includes('checkin_program')) {
+    console.warn(`Módulo de Check-in não habilitado para o restaurante ${restaurantId}.`);
+    return res.status(403).json({ error: 'Módulo de Check-in não habilitado para este restaurante.' });
+  }
+  req.restaurant = restaurant; // Anexa o objeto do restaurante à requisição para uso posterior
+  next();
+}
+
 // @route   POST /api/checkin/record
 // @desc    Registrar um novo check-in
 // @access  Private
-router.post('/record', auth, [
+router.post('/record', auth, checkCheckinModuleEnabled, [
   body('customer_id').isUUID().withMessage('ID do cliente inválido'),
   // Removido a validação de restaurant_id do body, pois será obtido do usuário
 ], async (req, res) => {
@@ -25,16 +55,10 @@ router.post('/record', auth, [
   const { customer_id } = req.body;
 
   try {
-    const user = await models.User.findByPk(req.user.userId, {
-      include: [{ model: models.Restaurant, as: 'restaurants' }]
-    });
+    // O restaurante já está disponível em req.restaurant devido ao middleware checkCheckinModuleEnabled
+    const restaurantId = req.restaurant.id;
+    const restaurant = req.restaurant;
 
-    const restaurantId = user?.restaurants?.[0]?.id;
-    if (!restaurantId) {
-      return res.status(400).json({ error: 'Restaurante não encontrado para o usuário autenticado.' });
-    }
-
-    const restaurant = await models.Restaurant.findByPk(restaurantId, { attributes: ['settings'] });
     const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
     const checkinDurationMinutes = checkinProgramSettings.checkin_duration_minutes || 1440; // Padrão: 24 horas
 
@@ -82,7 +106,7 @@ router.post('/record', auth, [
 
     // Enviar mensagem de agradecimento via WhatsApp (se configurado)
     try {
-      const restaurant = await models.Restaurant.findByPk(restaurantId);
+      // O restaurante já está disponível em req.restaurant
       if (restaurant && restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
         const checkinMessageEnabled = restaurant.settings?.whatsapp_messages?.checkin_message_enabled;
         const customCheckinMessage = restaurant.settings?.whatsapp_messages?.checkin_message_text;
@@ -138,7 +162,7 @@ router.post('/record', auth, [
 // @route   POST /api/checkin/public/:restaurantSlug
 // @desc    Registrar um novo check-in via QR Code (público)
 // @access  Public
-router.post('/public/:restaurantSlug', [
+router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
   body('customer_name').optional().isString().withMessage('Nome do cliente inválido'),
   body('phone_number').optional().isString().withMessage('Número de telefone inválido'),
   body('cpf').optional().isString().withMessage('CPF inválido'),
@@ -152,16 +176,13 @@ router.post('/public/:restaurantSlug', [
     });
   }
 
+  // O restaurante já está disponível em req.restaurant devido ao middleware checkCheckinModuleEnabled
+  const restaurant = req.restaurant;
   const { restaurantSlug } = req.params; // Extrair restaurantSlug dos parâmetros da URL
   const { phone_number, cpf, customer_name, table_number } = req.body; // Extrair outros dados do corpo da requisição
 
   try {
-    const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
     let rewardEarned = null; // Variável para armazenar a recompensa ganha
-    if (!restaurant) {
-      console.error('[Public Check-in] Restaurante não encontrado para o slug:', restaurantSlug);
-      return res.status(404).json({ error: 'Restaurante não encontrado.' });
-    }
 
     console.log('[Public Check-in] Restaurante encontrado:', restaurant.name, 'Settings:', restaurant.settings);
 
@@ -248,6 +269,10 @@ router.post('/public/:restaurantSlug', [
     // Fetch the updated customer to get the latest total_visits value
     await customer.reload();
     console.log('[Public Check-in] total_visits do cliente incrementado para:', customer.total_visits);
+
+    // Atualizar estatísticas e segmentação do cliente
+    await customer.updateStats();
+    console.log('[Public Check-in] Estatísticas e segmentação do cliente atualizadas.');
 
     // Obter configurações do programa de check-in
     console.log('[Public Check-in] Configurações do Programa de Check-in:', JSON.stringify(checkinProgramSettings, null, 2));
@@ -425,18 +450,12 @@ router.post('/public/:restaurantSlug', [
 // @route   PUT /api/checkin/checkout/:checkinId
 // @desc    Registrar o check-out de um cliente
 // @access  Private
-router.put('/checkout/:checkinId', auth, async (req, res) => {
+router.put('/checkout/:checkinId', auth, checkCheckinModuleEnabled, async (req, res) => {
   const { checkinId } = req.params;
 
   try {
-    const user = await models.User.findByPk(req.user.userId, {
-      include: [{ model: models.Restaurant, as: 'restaurants' }]
-    });
-
-    const restaurantId = user?.restaurants?.[0]?.id;
-    if (!restaurantId) {
-      return res.status(400).json({ error: 'Restaurante não encontrado para o usuário autenticado.' });
-    }
+    // O restaurante já está disponível em req.restaurant devido ao middleware checkCheckinModuleEnabled
+    const restaurantId = req.restaurant.id;
 
     const checkin = await models.Checkin.findOne({
       where: {
@@ -470,7 +489,7 @@ router.put('/checkout/:checkinId', auth, async (req, res) => {
 // @route   GET /api/checkin/analytics/:restaurantId
 // @desc    Obter dados analíticos de check-in para o dashboard
 // @access  Private
-router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, [
+router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, checkCheckinModuleEnabled, [
   query('period')
     .optional()
     .isIn(['7d', '30d', '90d', '1y', 'all'])
@@ -484,8 +503,8 @@ router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, [
     });
   }
 
-  const { restaurantId } = req.params;
-  const { period = '30d' } = req.query;
+  // O restaurante já está disponível em req.restaurant devido ao middleware checkCheckinModuleEnabled
+  const restaurantId = req.restaurant.id;
 
   let startDate = null;
   if (period !== 'all') {
@@ -592,9 +611,10 @@ router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, [
 // @route   GET /api/checkin/active/:restaurantId
 // @desc    Obter todos os check-ins ativos para um restaurante
 // @access  Private
-router.get('/active/:restaurantId', auth, checkRestaurantOwnership, async (req, res) => {
+router.get('/active/:restaurantId', auth, checkRestaurantOwnership, checkCheckinModuleEnabled, async (req, res) => {
   try {
-    const { restaurantId } = req.params;
+    // O restaurante já está disponível em req.restaurant devido ao middleware checkCheckinModuleEnabled
+    const restaurantId = req.restaurant.id;
 
     const activeCheckins = await models.Checkin.findAll({
       where: {

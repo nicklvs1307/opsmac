@@ -22,6 +22,11 @@ const surveyRoutes = require('./routes/surveys');
 const publicSurveyRoutes = require('./routes/public_surveys');
 const adminRoutes = require('./routes/admin');
 const npsCriteriaRoutes = require('./routes/npsCriteria');
+const ifoodRoutes = require('./routes/ifood');
+const googleMyBusinessRoutes = require('./routes/googleMyBusiness');
+const saiposRoutes = require('./routes/saipos');
+const uaiRangoRoutes = require('./routes/uaiRango');
+const deliveryMuchRoutes = require('./routes/deliveryMuch');
 
 const app = express();
 app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)
@@ -66,6 +71,11 @@ app.use('/api/surveys', surveyRoutes);
 app.use('/api/public/surveys', publicSurveyRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/nps-criteria', npsCriteriaRoutes);
+app.use('/api/ifood', ifoodRoutes);
+app.use('/api/google-my-business', googleMyBusinessRoutes);
+app.use('/api/saipos', saiposRoutes);
+app.use('/api/uai-rango', uaiRangoRoutes);
+app.use('/api/delivery-much', deliveryMuchRoutes);
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');

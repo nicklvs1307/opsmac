@@ -458,61 +458,7 @@ const CheckinDashboard = () => {
     );
   }
 
-  const MetricCard = ({ title, value, icon, bgColor, iconColor }) => (
-    <Card
-      sx={{
-        height: '100%',
-        background: bgColor,
-        color: 'white',
-        position: 'relative',
-        overflow: 'visible',
-      }}
-    >
-      <CardContent sx={{ pb: 2 }}>
-        <Box display="flex" justifyContent="space-between" alignItems="flex-start">
-          <Box>
-            <Typography
-              variant="body2"
-              sx={{
-                color: 'rgba(255,255,255,0.8)',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                mb: 1,
-              }}
-            >
-              {title}
-            </Typography>
-            <Typography
-              variant="h3"
-              component="div"
-              sx={{
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: '2.5rem',
-                lineHeight: 1,
-              }}
-            >
-              {value}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              bgcolor: iconColor,
-              width: 48,
-              height: 48,
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-            }}
-          >
-            {icon}
-          </Box>
-        </Box>
-      </CardContent>
-    </Card>
-  );
+  
 
   return (
     <Box>

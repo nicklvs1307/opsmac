@@ -81,6 +81,34 @@ const SurveyList = () => {
     updateStatusMutation.mutate({ id, status: newStatus });
   };
 
+  const handleDelete = (id) => {
+    if (window.confirm(t('survey_list.delete_confirm'))) {
+      deleteMutation.mutate(id);
+    }
+  };
+
+  const handleCopyLink = (slug) => {
+    const publicLink = `${window.location.origin}/public/surveys/${slug}`;
+    navigator.clipboard.writeText(publicLink)
+      .then(() => {
+        toast.success(t('survey_list.copy_link_success'));
+      })
+      .catch((err) => {
+        toast.error(t('survey_list.copy_link_error'));
+        console.error(t('survey_list.copy_link_error_console'), err);
+      });
+  };
+
+  const handleGenerateQrCode = (surveyId) => {
+    const publicLink = `${window.location.origin}/public/surveys/${surveyId}`;
+    setQrCodeValue(publicLink);
+    setQrModalOpen(true);
+  };
+
+  const handleFilterChange = (field, value) => {
+    setFilters(prev => ({ ...prev, [field]: value }));
+  };
+
   useEffect(() => {
     refetch();
   }, [filters, refetch]);
@@ -95,12 +123,6 @@ const SurveyList = () => {
       </Box>
     );
   }
-
-  const handleDelete = (id) => {
-    if (window.confirm(t('survey_list.delete_confirm'))) {
-      deleteMutation.mutate(id);
-    }
-  };
 
   return (
     <Box sx={{ p: 3 }}>

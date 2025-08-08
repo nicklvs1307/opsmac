@@ -1,23 +1,26 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      164.2s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      157.4s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.632
-0.632 > feedeliza-plus@1.0.0 build
-0.632 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.632
-2.817 Creating an optimized production build...
-163.8 Failed to compile.
-163.8
-163.8 [eslint]
-163.8 src/pages/Fidelidade/Avaliacoes/SurveyList.js
-163.8   Line 112:3:  React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-163.8
-163.8 src/pages/Fidelidade/Checkin/CheckinDashboard.js
-163.8 Syntax error: 'import' and 'export' may only appear at the top level. (519:0) (519:undefined)
-163.8
-163.8 Search for the keywords to learn more about each error.
-163.8
-163.8
+0.651
+0.651 > feedeliza-plus@1.0.0 build
+0.651 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.651
+3.015 Creating an optimized production build...
+157.1 Failed to compile.
+157.1
+157.1 [eslint]
+157.1 src/pages/Fidelidade/Avaliacoes/SurveyList.js
+157.1   Line 84:3:     React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
+157.1   Line 130:32:   'handleFilterChange' is not defined                                                                                           no-undef
+157.1   Line 186:130:  'handleGenerateQrCode' is not defined                                                                                         no-undef
+157.1   Line 189:121:  'handleCopyLink' is not defined                                                                                               no-undef
+157.1
+157.1 src/pages/Fidelidade/Checkin/CheckinDashboard.js
+157.1 Syntax error: 'import' and 'export' may only appear at the top level. (575:0) (575:undefined)
+157.1
+157.1 Search for the keywords to learn more about each error.
+157.1
+157.1
 ------
 Dockerfile.frontend:23
 --------------------

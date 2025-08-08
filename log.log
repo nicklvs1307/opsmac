@@ -1,23 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      154.8s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      158.8s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.592
-0.592 > feedeliza-plus@1.0.0 build
-0.592 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.592
-3.063 Creating an optimized production build...
-154.5 Failed to compile.
-154.5
-154.5 [eslint]
-154.5 src/pages/Fidelidade/Avaliacoes/SurveyList.js
-154.5   Line 112:3:  React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-154.5
-154.5 src/pages/Fidelidade/Checkin/CheckinDashboard.js
-154.5 Syntax error: 'import' and 'export' may only appear at the top level. (521:0) (521:undefined)
-154.5
-154.5 Search for the keywords to learn more about each error.
-154.5
-154.5
+0.638
+0.638 > feedeliza-plus@1.0.0 build
+0.638 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.638
+2.866 Creating an optimized production build...
+158.5 Failed to compile.
+158.5
+158.5 [eslint]
+158.5 src/pages/Fidelidade/Avaliacoes/SurveyList.js
+158.5 Syntax error: Identifier 'surveys' has already been declared. (48:16) (48:16)
+158.5
+158.5
 ------
 Dockerfile.frontend:23
 --------------------

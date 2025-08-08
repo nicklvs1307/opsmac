@@ -45,8 +45,6 @@ const SurveyList = () => {
 
   const { data: surveys, isLoading, error, refetch } = useQuery(['surveys', filters], () => fetchSurveys(filters));
 
-  const { data: surveys, isLoading, error, refetch } = useQuery(['surveys', filters], () => fetchSurveys(filters));
-
   const deleteMutation = useMutation(deleteSurvey, {
     onSuccess: () => {
       queryClient.invalidateQueries('surveys');

@@ -1,16 +1,30 @@
 
 import React, { useState } from 'react';
-import { Box, Typography, Paper, Tabs, Tab } from '@mui/material';
+import { Box, Typography, Paper, Tabs, Tab, Alert } from '@mui/material';
 import { BarChart as BarChartIcon, Settings as SettingsIcon, List as ListIcon, Feedback as FeedbackIcon } from '@mui/icons-material';
 import SurveyList from './SurveyList';
 import FeedbackList from '../../Feedback/FeedbackList';
 import SatisfactionAnalytics from './SatisfactionAnalytics';
 import SatisfactionSettings from './SatisfactionSettings';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../contexts/AuthContext'; // Importar useAuth
 
 const SatisfactionDashboard = () => {
   const [tabValue, setTabValue] = useState(0);
   const { t } = useTranslation();
+  const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);

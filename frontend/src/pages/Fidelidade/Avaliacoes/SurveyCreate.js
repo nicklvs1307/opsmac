@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Button, Paper, Stepper, Step, StepLabel, StepContent, CircularProgress, Select, MenuItem, FormControl, InputLabel, TextField, Dialog, DialogTitle, DialogContent, DialogActions, IconButton, List, ListItem, ListItemText } from '@mui/material';
+import { Box, Typography, Button, Paper, Stepper, Step, StepLabel, StepContent, CircularProgress, Select, MenuItem, FormControl, InputLabel, TextField, Dialog, DialogTitle, DialogContent, DialogActions, IconButton, List, ListItem, ListItemText, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import axiosInstance from '../../../api/axiosInstance';
@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../contexts/AuthContext'; // Importar useAuth
 
 // Funções da API
 const createSurvey = async (surveyData) => {
@@ -39,6 +40,19 @@ const SurveyCreate = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { t } = useTranslation();
+  const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   const { data: rewards, isLoading: isLoadingRewards } = useQuery('rewards', fetchRewards);
   const { data: npsCriteria, isLoading: isLoadingNpsCriteria } = useQuery('npsCriteria', fetchNpsCriteria);

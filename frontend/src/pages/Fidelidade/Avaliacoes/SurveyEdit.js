@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Button, Paper, CircularProgress, TextField, FormControl, InputLabel, Select, MenuItem, IconButton } from '@mui/material';
+import { Box, Typography, Button, Paper, CircularProgress, TextField, FormControl, InputLabel, Select, MenuItem, IconButton, Alert } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../contexts/AuthContext'; // Importar useAuth
 
 const fetchSurvey = async (id) => {
   const { data } = await axiosInstance.get(`/api/surveys/${id}`);
@@ -27,6 +28,19 @@ const SurveyEdit = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { t } = useTranslation();
+  const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');

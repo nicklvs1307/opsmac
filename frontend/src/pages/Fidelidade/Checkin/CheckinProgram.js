@@ -17,12 +17,30 @@ import {
   Select,
   MenuItem,
   CircularProgress,
+  Alert, // Adicionado Alert
 } from '@mui/material';
 import { Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { Controller } from 'react-hook-form';
 import QRCode from 'qrcode.react';
+import { useAuth } from '../../../contexts/AuthContext'; // Adicionado useAuth
+import { useTranslation } from 'react-i18next'; // Adicionado useTranslation
 
-const CheckinProgram = ({ control, errors, fields, append, remove, rewards, loading, onSave, t, checkinQRCode }) => {
+const CheckinProgram = ({ control, errors, fields, append, remove, rewards, loading, onSave, checkinQRCode }) => {
+  const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const { t } = useTranslation(); // Obter função de tradução
+  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+
+  // Verifica se o módulo de check-in está habilitado
+  if (!enabledModules.includes('checkin_program')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.checkin_program') })}
+        </Alert>
+      </Box>
+    );
+  }
+
   return (
     <>
       <Grid container spacing={3}>

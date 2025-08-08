@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { Box, Typography, Paper, CircularProgress, Alert, Grid } from '@mui/material';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../../api/axiosInstance';
+import { useAuth } from '../../../contexts/AuthContext'; // Importar useAuth
+import { useTranslation } from 'react-i18next'; // Importar useTranslation
 
 const fetchSurveyResults = async (surveyId) => {
   const { data } = await axiosInstance.get(`/api/surveys/${surveyId}/results`);
@@ -12,6 +14,21 @@ const fetchSurveyResults = async (surveyId) => {
 
 const SurveyResults = () => {
   const { id } = useParams();
+  const { t } = useTranslation(); // Obter função de tradução
+  const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
+
   const { data, isLoading, error } = useQuery(['surveyResults', id], () => fetchSurveyResults(id));
 
   if (isLoading) {

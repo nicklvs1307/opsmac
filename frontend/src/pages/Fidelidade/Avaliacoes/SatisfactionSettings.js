@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Paper, TextField, Button, List, ListItem, ListItemText, IconButton, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, Grid } from '@mui/material';
+import { Box, Typography, Paper, TextField, Button, List, ListItem, ListItemText, IconButton, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, Grid, Alert } from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
 import axiosInstance from '../../../api/axiosInstance';
@@ -32,6 +32,18 @@ const SatisfactionSettings = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
+  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   const [newCriterionName, setNewCriterionName] = useState('');
   const [editCriterion, setEditCriterion] = useState(null);

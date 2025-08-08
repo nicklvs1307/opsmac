@@ -16,6 +16,7 @@ import QRCode from 'qrcode.react';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../contexts/AuthContext'; // Importar useAuth
 
 const fetchSurveys = async (filters) => {
   const { data } = await axiosInstance.get('/api/surveys', { params: filters });
@@ -39,6 +40,19 @@ const SurveyList = () => {
   const [qrCodeValue, setQrCodeValue] = useState(null);
   const [isQrModalOpen, setQrModalOpen] = useState(false);
   const { t } = useTranslation();
+  const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   const { data: surveys, isLoading, error, refetch } = useQuery(['surveys', filters], () => fetchSurveys(filters));
 

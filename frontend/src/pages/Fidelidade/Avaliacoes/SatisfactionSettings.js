@@ -34,17 +34,6 @@ const SatisfactionSettings = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
   const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
 
-  // Verifica se o módulo de pesquisas/feedback está habilitado
-  if (!enabledModules.includes('surveys_feedback')) {
-    return (
-      <Box sx={{ p: 4 }}>
-        <Alert severity="warning">
-          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
-        </Alert>
-      </Box>
-    );
-  }
-
   const [newCriterionName, setNewCriterionName] = useState('');
   const [editCriterion, setEditCriterion] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -151,6 +140,17 @@ const SatisfactionSettings = () => {
       deleteMutation.mutate(id);
     }
   };
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   return (
     <Box p={3}>

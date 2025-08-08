@@ -43,17 +43,6 @@ const SurveyCreate = () => {
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
   const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
 
-  // Verifica se o módulo de pesquisas/feedback está habilitado
-  if (!enabledModules.includes('surveys_feedback')) {
-    return (
-      <Box sx={{ p: 4 }}>
-        <Alert severity="warning">
-          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
-        </Alert>
-      </Box>
-    );
-  }
-
   const { data: rewards, isLoading: isLoadingRewards } = useQuery('rewards', fetchRewards);
   const { data: npsCriteria, isLoading: isLoadingNpsCriteria } = useQuery('npsCriteria', fetchNpsCriteria);
 
@@ -88,6 +77,17 @@ const SurveyCreate = () => {
       setQuestions([]); // Limpa para outros tipos de pesquisa
     }
   }, [surveyType, npsCriteria]);
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   const handleNext = () => {
     if (activeStep === 0 && !surveyType) {

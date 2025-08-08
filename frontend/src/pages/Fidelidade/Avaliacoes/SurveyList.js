@@ -43,17 +43,6 @@ const SurveyList = () => {
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
   const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
 
-  // Verifica se o módulo de pesquisas/feedback está habilitado
-  if (!enabledModules.includes('surveys_feedback')) {
-    return (
-      <Box sx={{ p: 4 }}>
-        <Alert severity="warning">
-          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
-        </Alert>
-      </Box>
-    );
-  }
-
   const { data: surveys, isLoading, error, refetch } = useQuery(['surveys', filters], () => fetchSurveys(filters));
 
   const deleteMutation = useMutation(deleteSurvey, {
@@ -75,6 +64,17 @@ const SurveyList = () => {
       toast.error(t('survey_list.status_update_error', { message: err.response.data.msg || err.message }));
     },
   });
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   const handleToggleStatus = (id, currentStatus) => {
     const newStatus = currentStatus === 'active' ? 'draft' : 'active';

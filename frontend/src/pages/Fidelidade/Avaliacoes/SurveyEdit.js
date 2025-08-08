@@ -31,17 +31,6 @@ const SurveyEdit = () => {
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
   const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
 
-  // Verifica se o módulo de pesquisas/feedback está habilitado
-  if (!enabledModules.includes('surveys_feedback')) {
-    return (
-      <Box sx={{ p: 4 }}>
-        <Alert severity="warning">
-          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
-        </Alert>
-      </Box>
-    );
-  }
-
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
   const [description, setDescription] = useState('');
@@ -76,6 +65,17 @@ const SurveyEdit = () => {
       toast.error(t('survey_edit.update_error', { message: err.response.data.msg || err.message }));
     }
   });
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   const handleAddQuestion = () => {
     setQuestions([...questions, {

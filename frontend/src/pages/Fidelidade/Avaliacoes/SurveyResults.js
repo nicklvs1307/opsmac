@@ -18,6 +18,8 @@ const SurveyResults = () => {
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
   const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
 
+  const { data, isLoading, error } = useQuery(['surveyResults', id], () => fetchSurveyResults(id));
+
   // Verifica se o módulo de pesquisas/feedback está habilitado
   if (!enabledModules.includes('surveys_feedback')) {
     return (
@@ -28,8 +30,6 @@ const SurveyResults = () => {
       </Box>
     );
   }
-
-  const { data, isLoading, error } = useQuery(['surveyResults', id], () => fetchSurveyResults(id));
 
   if (isLoading) {
     return (

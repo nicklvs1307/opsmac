@@ -1,16 +1,16 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       17.1s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       18.9s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.598
-0.598 > feedeliza-plus@1.0.0 build
-0.598 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.598
-3.022 Creating an optimized production build...
-16.88 Failed to compile.
-16.88
-16.88 Module not found: Error: Can't resolve '@hookform/resolvers/yup' in '/app/frontend/src/pages/Admin'
-16.88
-16.88
+0.698
+0.698 > feedeliza-plus@1.0.0 build
+0.698 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.698
+3.706 Creating an optimized production build...
+18.63 Failed to compile.
+18.63
+18.64 Module not found: Error: Can't resolve '@hookform/resolvers/yup' in '/app/frontend/src/pages/Admin'
+18.64
+18.64
 ------
 Dockerfile.frontend:23
 --------------------

@@ -45,6 +45,8 @@ const SurveyList = () => {
 
   const { data: surveys, isLoading, error, refetch } = useQuery(['surveys', filters], () => fetchSurveys(filters));
 
+  const { data: surveys, isLoading, error, refetch } = useQuery(['surveys', filters], () => fetchSurveys(filters));
+
   const deleteMutation = useMutation(deleteSurvey, {
     onSuccess: () => {
       queryClient.invalidateQueries('surveys');
@@ -54,6 +56,64 @@ const SurveyList = () => {
       toast.error(t('survey_list.delete_error', { message: err.response.data.msg || err.message }));
     },
   });
+
+  const updateStatusMutation = useMutation(updateSurveyStatus, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('surveys');
+      toast.success(t('survey_list.status_update_success'));
+    },
+    onError: (err) => {
+      toast.error(t('survey_list.status_update_error', { message: err.response.data.msg || err.message }));
+    },
+  });
+
+  const handleToggleStatus = (id, currentStatus) => {
+    const newStatus = currentStatus === 'active' ? 'draft' : 'active';
+    updateStatusMutation.mutate({ id, status: newStatus });
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm(t('survey_list.delete_confirm'))) {
+      deleteMutation.mutate(id);
+    }
+  };
+
+  const handleCopyLink = (slug) => {
+    const publicLink = `${window.location.origin}/public/surveys/${slug}`;
+    navigator.clipboard.writeText(publicLink)
+      .then(() => {
+        toast.success(t('survey_list.copy_link_success'));
+      })
+      .catch((err) => {
+        toast.error(t('survey_list.copy_link_error'));
+        console.error(t('survey_list.copy_link_error_console'), err);
+      });
+  };
+
+  const handleGenerateQrCode = (surveyId) => {
+    const publicLink = `${window.location.origin}/public/surveys/${surveyId}`;
+    setQrCodeValue(publicLink);
+    setQrModalOpen(true);
+  };
+
+  const handleFilterChange = (field, value) => {
+    setFilters(prev => ({ ...prev, [field]: value }));
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [filters, refetch]);
+
+  // Verifica se o módulo de pesquisas/feedback está habilitado
+  if (!enabledModules.includes('surveys_feedback')) {
+    return (
+      <Box sx={{ p: 4 }}>
+        <Alert severity="warning">
+          {t('common.module_not_enabled', { moduleName: t('modules.surveys_feedback') })}
+        </Alert>
+      </Box>
+    );
+  }
 
   const updateStatusMutation = useMutation(updateSurveyStatus, {
     onSuccess: () => {

@@ -1,18 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      158.8s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      159.2s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.638
-0.638 > feedeliza-plus@1.0.0 build
-0.638 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.638
-2.866 Creating an optimized production build...
-158.5 Failed to compile.
-158.5
-158.5 [eslint]
-158.5 src/pages/Fidelidade/Avaliacoes/SurveyList.js
-158.5 Syntax error: Identifier 'surveys' has already been declared. (48:16) (48:16)
-158.5
-158.5
+0.623
+0.623 > feedeliza-plus@1.0.0 build
+0.623 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.623
+2.939 Creating an optimized production build...
+158.8 Failed to compile.
+158.8
+158.8 [eslint]
+158.8 src/pages/Fidelidade/Avaliacoes/SurveyList.js
+158.8 Syntax error: Identifier 'updateStatusMutation' has already been declared. (116:8) (116:8)
+158.8
+158.8
 ------
 Dockerfile.frontend:23
 --------------------

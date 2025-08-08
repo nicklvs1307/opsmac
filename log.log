@@ -1,79 +1,23 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      162.0s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      164.2s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.690
-0.690 > feedeliza-plus@1.0.0 build
-0.690 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.690
-3.652 Creating an optimized production build...
-161.6 Failed to compile.
-161.6
-161.6 [eslint]
-161.6 src/pages/Admin/AdminDashboard.js
-161.6   Line 212:42:  'FormHelperText' is not defined  react/jsx-no-undef
-161.6   Line 266:52:  'FormHelperText' is not defined  react/jsx-no-undef
-161.6   Line 410:59:  'FormHelperText' is not defined  react/jsx-no-undef
-161.6
-161.6 src/pages/Fidelidade/Avaliacoes/SatisfactionSettings.js
-161.6   Line 48:51:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 49:45:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 50:43:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 51:59:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 53:67:   React Hook "useForm" is called conditionally. React Hooks must be called in the exact same order in every component render      react-hooks/rules-of-hooks
-161.6   Line 62:3:    React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render    react-hooks/rules-of-hooks
-161.6   Line 75:50:   React Hook "useQuery" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 106:26:  React Hook "useMutation" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-161.6   Line 114:26:  React Hook "useMutation" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-161.6   Line 122:26:  React Hook "useMutation" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-161.6
-161.6 src/pages/Fidelidade/Avaliacoes/SurveyCreate.js
-161.6   Line 57:58:  React Hook "useQuery" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?     react-hooks/rules-of-hooks
-161.6   Line 58:66:  React Hook "useQuery" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?     react-hooks/rules-of-hooks
-161.6   Line 60:20:  React Hook "useMutation" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
-161.6   Line 74:3:   React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?    react-hooks/rules-of-hooks
-161.6
-161.6 src/pages/Fidelidade/Avaliacoes/SurveyEdit.js
-161.6   Line 45:29:  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 46:27:  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 47:41:  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 48:35:  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 49:55:  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 50:37:  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 52:55:  React Hook "useQuery" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 66:58:  React Hook "useQuery" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 68:20:  React Hook "useMutation" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-161.6
-161.6 src/pages/Fidelidade/Avaliacoes/SurveyList.js
-161.6   Line 57:56:  React Hook "useQuery" is called conditionally. React Hooks must be called in the exact same order in every component render     react-hooks/rules-of-hooks
-161.6   Line 59:26:  React Hook "useMutation" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-161.6   Line 69:32:  React Hook "useMutation" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-161.6   Line 112:3:  React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render    react-hooks/rules-of-hooks
-161.6
-161.6 src/pages/Fidelidade/Avaliacoes/SurveyResults.js
-161.6   Line 32:38:  React Hook "useQuery" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-161.6
-161.6 src/pages/Fidelidade/Checkin/CheckinDashboard.js
-161.6   Line 57:33:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render       react-hooks/rules-of-hooks
-161.6   Line 58:29:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render       react-hooks/rules-of-hooks
-161.6   Line 59:41:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render       react-hooks/rules-of-hooks
-161.6   Line 60:35:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render       react-hooks/rules-of-hooks
-161.6   Line 61:33:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render       react-hooks/rules-of-hooks
-161.6   Line 62:45:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render       react-hooks/rules-of-hooks
-161.6   Line 63:47:   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render       react-hooks/rules-of-hooks
-161.6   Line 70:7:    React Hook "useForm" is called conditionally. React Hooks must be called in the exact same order in every component render        react-hooks/rules-of-hooks
-161.6   Line 85:38:   React Hook "useFieldArray" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
-161.6   Line 90:28:   React Hook "useCallback" is called conditionally. React Hooks must be called in the exact same order in every component render    react-hooks/rules-of-hooks
-161.6   Line 111:24:  React Hook "useCallback" is called conditionally. React Hooks must be called in the exact same order in every component render    react-hooks/rules-of-hooks
-161.6   Line 122:31:  React Hook "useCallback" is called conditionally. React Hooks must be called in the exact same order in every component render    react-hooks/rules-of-hooks
-161.6   Line 148:31:  React Hook "useCallback" is called conditionally. React Hooks must be called in the exact same order in every component render    react-hooks/rules-of-hooks
-161.6   Line 199:5:   React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render      react-hooks/rules-of-hooks
-161.6
-161.6 src/pages/Public/PublicSurveyForm.js
-161.6 Syntax error: Identifier 'React' has already been declared. (30:7) (30:7)
-161.6
-161.6 Search for the keywords to learn more about each error.
-161.6
-161.6
+0.632
+0.632 > feedeliza-plus@1.0.0 build
+0.632 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.632
+2.817 Creating an optimized production build...
+163.8 Failed to compile.
+163.8
+163.8 [eslint]
+163.8 src/pages/Fidelidade/Avaliacoes/SurveyList.js
+163.8   Line 112:3:  React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
+163.8
+163.8 src/pages/Fidelidade/Checkin/CheckinDashboard.js
+163.8 Syntax error: 'import' and 'export' may only appear at the top level. (519:0) (519:undefined)
+163.8
+163.8 Search for the keywords to learn more about each error.
+163.8
+163.8
 ------
 Dockerfile.frontend:23
 --------------------

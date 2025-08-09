@@ -91,6 +91,11 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
+    fetchUsers();
+    fetchRestaurants();
+  }, []);
+
+  useEffect(() => {
     if (tabValue === 2) {
       fetchUsers();
     }

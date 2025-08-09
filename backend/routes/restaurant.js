@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { auth, checkRestaurantOwnership, isAdmin } = require('../middleware/auth');
+const { auth, checkRestaurantOwnership } = require('../middleware/auth');
 const { models } = require('../config/database');
 
 /**
@@ -10,34 +10,7 @@ const { models } = require('../config/database');
  *   description: Gerenciamento de restaurantes
  */
 
-/**
- * @swagger
- * /api/restaurant:
- *   get:
- *     summary: Obtém todos os restaurantes (somente admin)
- *     tags: [Restaurant]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Lista de restaurantes
- *       403:
- *         description: Acesso negado
- *       500:
- *         description: Erro interno do servidor
- */
-router.get('/', auth, isAdmin, async (req, res) => {
-  try {
-    const restaurants = await models.Restaurant.findAll({
-      include: [{ model: models.User, as: 'owner', attributes: ['name', 'email'] }],
-      order: [['name', 'ASC']]
-    });
-    res.json(restaurants);
-  } catch (error) {
-    console.error('Erro ao obter restaurantes:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
+
 
 /**
  * @swagger

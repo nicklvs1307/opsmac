@@ -67,7 +67,7 @@ const AdminDashboard = () => {
   const fetchRestaurants = async () => {
     setLoading(true);
     try {
-      const response = await axiosInstance.get('/api/restaurant');
+      const response = await axiosInstance.get('/api/admin/restaurants');
       setRestaurants(response.data);
     } catch (error) {
       toast.error(t('admin_dashboard.error_loading_restaurants_description'));

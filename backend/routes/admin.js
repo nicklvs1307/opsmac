@@ -354,4 +354,67 @@ router.put('/restaurants/:id/modules', auth, isAdmin, [
   }
 });
 
+/**
+ * @swagger
+ * /api/admin/users/{id}:
+ *   put:
+ *     summary: Atualiza um usuário (Admin)
+ *     tags: [Admin]
+ *     description: Permite que um administrador atualize os dados de um usuário.
+ *     security:
+ *       - ApiKeyAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         description: ID do usuário.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               phone:
+ *                 type: string
+ *               role:
+ *                 type: string
+ *                 enum: [owner, admin, employee]
+ *     responses:
+ *       200:
+ *         description: Usuário atualizado com sucesso.
+ *       400:
+ *         description: Dados inválidos.
+ *       403:
+ *         description: Acesso negado.
+ *       404:
+ *         description: Usuário não encontrado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.put('/users/:id', auth, isAdmin, async (req, res) => {
+  try {
+    const user = await models.User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+
+    const { name, email, phone, role } = req.body;
+    await user.update({ name, email, phone, role });
+
+    res.status(200).json({ message: 'Usuário atualizado com sucesso', user });
+  } catch (error) {
+    console.error('Erro ao atualizar usuário (Admin):', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;

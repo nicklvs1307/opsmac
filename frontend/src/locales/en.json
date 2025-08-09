@@ -492,7 +492,11 @@
       "manage_modules_for": "Manage modules for {{name}}",
       "modules_updated_success": "Modules updated successfully!",
       "modules_updated_error": "Error updating modules.",
-      "error_loading_restaurants_description": "Error loading restaurants."
+      "error_loading_restaurants_description": "Error loading restaurants.",
+      "user_updated_success": "User updated successfully!",
+      "restaurant_updated_success": "Restaurant updated successfully!",
+      "edit_user_title": "Edit User",
+      "edit_restaurant_title": "Edit Restaurant"
     }
   }
 }

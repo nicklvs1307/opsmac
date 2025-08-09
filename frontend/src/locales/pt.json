@@ -735,7 +735,11 @@
       "manage_modules_for": "Gerenciar módulos para {{name}}",
       "modules_updated_success": "Módulos atualizados com sucesso!",
       "modules_updated_error": "Erro ao atualizar módulos.",
-      "error_loading_restaurants_description": "Erro ao carregar restaurantes."
+      "error_loading_restaurants_description": "Erro ao carregar restaurantes.",
+      "user_updated_success": "Usuário atualizado com sucesso!",
+      "restaurant_updated_success": "Restaurante atualizado com sucesso!",
+      "edit_user_title": "Editar Usuário",
+      "edit_restaurant_title": "Editar Restaurante"
     }
   }
 }

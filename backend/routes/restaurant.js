@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { auth, checkRestaurantOwnership, isAdmin } = require('../middleware/auth');
-const { models } = require('../models');
+const { models } = require('../config/database');
 
 /**
  * @swagger

@@ -91,9 +91,13 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    fetchUsers();
-    fetchRestaurants();
-  }, [t]);
+    if (tabValue === 2) {
+      fetchUsers();
+    }
+    if (tabValue === 3) {
+      fetchRestaurants();
+    }
+  }, [tabValue]);
 
   // Funções de Ação
   const handleCreateUser = async (data) => {
@@ -168,7 +172,92 @@ const AdminDashboard = () => {
   const renderCreateUserTab = () => (
     <Box component="form" onSubmit={handleUserSubmit(handleCreateUser)} sx={{ mt: 3 }}>
       <Grid container spacing={2}>
-        {/* Campos do formulário de usuário */}
+        <Grid item xs={12} sm={6}>
+          <Controller
+            name="name"
+            control={userControl}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('admin_dashboard.name_label')}
+                fullWidth
+                margin="normal"
+                error={!!userErrors.name}
+                helperText={userErrors.name ? userErrors.name.message : ''}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Controller
+            name="email"
+            control={userControl}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('admin_dashboard.email_label')}
+                fullWidth
+                margin="normal"
+                type="email"
+                error={!!userErrors.email}
+                helperText={userErrors.email ? userErrors.email.message : ''}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Controller
+            name="password"
+            control={userControl}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('admin_dashboard.password_label')}
+                fullWidth
+                margin="normal"
+                type="password"
+                error={!!userErrors.password}
+                helperText={userErrors.password ? userErrors.password.message : ''}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Controller
+            name="phone"
+            control={userControl}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('admin_dashboard.user_phone_label')}
+                fullWidth
+                margin="normal"
+                error={!!userErrors.phone}
+                helperText={userErrors.phone ? userErrors.phone.message : ''}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Controller
+            name="role"
+            control={userControl}
+            render={({ field }) => (
+              <FormControl fullWidth margin="normal" error={!!userErrors.role}>
+                <InputLabel>{t('admin_dashboard.role_label')}</InputLabel>
+                <Select
+                  {...field}
+                  label={t('admin_dashboard.role_label')}
+                >
+                  <MenuItem value="owner">{t('admin_dashboard.role_owner')}</MenuItem>
+                  <MenuItem value="admin">{t('admin_dashboard.role_admin')}</MenuItem>
+                  <MenuItem value="employee">{t('admin_dashboard.role_employee')}</MenuItem>
+                </Select>
+                {userErrors.role && <FormHelperText>{userErrors.role.message}</FormHelperText>}
+              </FormControl>
+            )}
+          />
+        </Grid>
       </Grid>
       <Button type="submit" variant="contained" color="primary" sx={{ mt: 3 }} disabled={creatingUser}>
         {creatingUser ? <CircularProgress size={24} /> : t('admin_dashboard.create_user_button')}
@@ -179,7 +268,73 @@ const AdminDashboard = () => {
   const renderCreateRestaurantTab = () => (
     <Box component="form" onSubmit={handleRestaurantSubmit(handleCreateRestaurant)} sx={{ mt: 3 }}>
       <Grid container spacing={2}>
-        {/* Campos do formulário de restaurante */}
+        <Grid item xs={12} sm={6}>
+          <Controller
+            name="name"
+            control={restaurantControl}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('admin_dashboard.restaurant_name_label')}
+                fullWidth
+                margin="normal"
+                error={!!restaurantErrors.name}
+                helperText={restaurantErrors.name ? restaurantErrors.name.message : ''}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Controller
+            name="owner_id"
+            control={restaurantControl}
+            render={({ field }) => (
+              <FormControl fullWidth margin="normal" error={!!restaurantErrors.owner_id}>
+                <InputLabel>{t('admin_dashboard.owner_label')}</InputLabel>
+                <Select
+                  {...field}
+                  label={t('admin_dashboard.owner_label')}
+                  defaultValue=""
+                >
+                  <MenuItem value="">{t('admin_dashboard.select_owner_placeholder')}</MenuItem>
+                  {loadingUsers ? (
+                    <MenuItem disabled><CircularProgress size={20} /></MenuItem>
+                  ) : (
+                    users.map(user => (
+                      <MenuItem key={user.id} value={user.id}>
+                        {user.name} ({user.email})
+                      </MenuItem>
+                    ))
+                  )}
+                </Select>
+                {restaurantErrors.owner_id && <FormHelperText>{restaurantErrors.owner_id.message}</FormHelperText>}
+              </FormControl>
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Controller
+            name="enabled_modules"
+            control={restaurantControl}
+            render={({ field }) => (
+              <FormControl fullWidth margin="normal" error={!!restaurantErrors.enabled_modules}>
+                <InputLabel>{t('admin_dashboard.enabled_modules_label')}</InputLabel>
+                <Select
+                  {...field}
+                  label={t('admin_dashboard.enabled_modules_label')}
+                  multiple
+                  value={field.value || []} // Garante que o valor seja um array
+                  renderValue={(selected) => selected.join(', ')}
+                >
+                  {availableModules.map(moduleName => (
+                    <MenuItem key={moduleName} value={moduleName}>{t(`modules.${moduleName}`)}</MenuItem>
+                  ))}
+                </Select>
+                {restaurantErrors.enabled_modules && <FormHelperText>{restaurantErrors.enabled_modules.message}</FormHelperText>}
+              </FormControl>
+            )}
+          />
+        </Grid>
       </Grid>
       <Button type="submit" variant="contained" color="primary" sx={{ mt: 3 }} disabled={creatingRestaurant}>
         {creatingRestaurant ? <CircularProgress size={24} /> : t('admin_dashboard.create_restaurant_button')}
@@ -222,23 +377,17 @@ const AdminDashboard = () => {
             <TableCell>{t('admin_dashboard.list_header_restaurant')}</TableCell>
             <TableCell>{t('admin_dashboard.list_header_owner')}</TableCell>
             <TableCell>{t('admin_dashboard.list_header_modules')}</TableCell>
-            <TableCell align="right">{t('admin_dashboard.list_header_actions')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {loadingRestaurants ? (
-            <TableRow><TableCell colSpan={4} align="center"><CircularProgress /></TableCell></TableRow>
+            <TableRow><TableCell colSpan={3} align="center"><CircularProgress /></TableCell></TableRow>
           ) : (
             restaurants.map(restaurant => (
-              <TableRow key={restaurant.id}>
+              <TableRow key={restaurant.id} hover onClick={() => handleOpenModal(restaurant)} sx={{ cursor: 'pointer' }}>
                 <TableCell>{restaurant.name}</TableCell>
                 <TableCell>{restaurant.owner?.name || 'N/A'}</TableCell>
                 <TableCell>{(restaurant.settings?.enabled_modules || []).join(', ')}</TableCell>
-                <TableCell align="right">
-                  <Button variant="outlined" onClick={() => handleOpenModal(restaurant)}>
-                    {t('admin_dashboard.manage_modules_button')}
-                  </Button>
-                </TableCell>
               </TableRow>
             ))
           )}

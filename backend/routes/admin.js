@@ -252,4 +252,106 @@ router.get('/users', auth, isAdmin, async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/admin/restaurants:
+ *   get:
+ *     summary: Listar todos os restaurantes (Admin)
+ *     tags: [Admin]
+ *     description: Retorna uma lista de todos os restaurantes no sistema. Apenas administradores podem acessar.
+ *     security:
+ *       - ApiKeyAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de restaurantes retornada com sucesso.
+ *       403:
+ *         description: Acesso negado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.get('/restaurants', auth, isAdmin, async (req, res) => {
+  try {
+    const restaurants = await models.Restaurant.findAll({
+      include: [{ model: models.User, as: 'owner', attributes: ['name', 'email'] }],
+      order: [['name', 'ASC']]
+    });
+    res.status(200).json(restaurants);
+  } catch (error) {
+    console.error('Erro ao listar restaurantes (Admin):', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+/**
+ * @swagger
+ * /api/admin/restaurants/{id}/modules:
+ *   put:
+ *     summary: Atualizar módulos de um restaurante (Admin)
+ *     tags: [Admin]
+ *     description: Permite que um administrador atualize os módulos habilitados para um restaurante específico.
+ *     security:
+ *       - ApiKeyAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         description: ID do restaurante.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - enabled_modules
+ *             properties:
+ *               enabled_modules:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Lista completa dos módulos que devem estar habilitados.
+ *                 example: ["customer_segmentation", "surveys_feedback"]
+ *     responses:
+ *       200:
+ *         description: Módulos do restaurante atualizados com sucesso.
+ *       400:
+ *         description: Dados inválidos.
+ *       403:
+ *         description: Acesso negado.
+ *       404:
+ *         description: Restaurante não encontrado.
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+router.put('/restaurants/:id/modules', auth, isAdmin, [
+  body('enabled_modules').isArray().withMessage('enabled_modules deve ser um array'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const restaurant = await models.Restaurant.findByPk(req.params.id);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
+
+    // O update do Sequelize não lida bem com a atualização de um campo JSON aninhado diretamente.
+    // É mais seguro buscar o registro, modificar o campo e depois salvar.
+    const currentSettings = restaurant.settings || {};
+    currentSettings.enabled_modules = req.body.enabled_modules;
+
+    await restaurant.update({ settings: currentSettings });
+
+    res.status(200).json({ message: 'Módulos atualizados com sucesso', restaurant });
+  } catch (error) {
+    console.error('Erro ao atualizar módulos do restaurante (Admin):', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;

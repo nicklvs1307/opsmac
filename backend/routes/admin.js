@@ -347,6 +347,7 @@ router.put('/restaurants/:id/modules', auth, isAdmin, [
     console.log('Updating modules with:', currentSettings);
     restaurant.set('settings', currentSettings);
     await restaurant.save();
+    console.log('Updated restaurant:', restaurant.toJSON());
 
     res.status(200).json({ message: 'Módulos atualizados com sucesso', restaurant });
   } catch (error) {

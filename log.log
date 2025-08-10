@@ -103,10 +103,97 @@ Updating modules with: {
   enabled_modules: [
     'customer_segmentation',
     'ifood_integration',
+    'google_my_business_integration'
+  ]
+}
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}
+Updating modules with: {
+  nps_enabled: true,
+  tablet_mode: false,
+  auto_response: true,
+  rewards_enabled: true,
+  feedback_enabled: true,
+  whatsapp_enabled: false,
+  whatsapp_messages: {
+    checkin_message_text: '',
+    coupon_reminder_text: '',
+    birthday_greeting_text: '',
+    checkin_message_enabled: false,
+    coupon_reminder_enabled: false,
+    feedback_thank_you_text: '',
+    birthday_greeting_enabled: false,
+    feedback_thank_you_enabled: false
+  },
+  feedback_thank_you_text: '',
+  survey_program_settings: {
+    text_color: '#0c0c0d',
+    primary_color: '#d67171',
+    background_color: '#14ff3b',
+    background_image_url: 'https://i.ibb.co/Q7C007Cr/delicious-pizza-studio.jpg'
+  },
+  checkin_program_settings: {
+    settings: { checkin_requires_table: true },
+    text_color: '#8f0000',
+    primary_color: '#ff0000',
+    enable_ranking: true,
+    restaurant_slug: 'checkin-roma-pizzaria',
+    secondary_color: '#330264',
+    background_color: '#ffffff',
+    rewards_per_visit: [ [Object], [Object], [Object], [Object] ],
+    checkin_cycle_name: 'Check in Roma ',
+    points_per_checkin: '1',
+    background_image_url: 'https://i.ibb.co/Q7C007Cr/delicious-pizza-studio.jpg',
+    checkin_cycle_length: '6',
+    allow_multiple_cycles: true,
+    identification_method: 'phone',
+    checkin_requires_table: false,
+    checkin_limit_per_cycle: '1',
+    checkin_duration_minutes: '60',
+    checkin_time_restriction: '1',
+    enable_level_progression: true
+  },
+  feedback_thank_you_enabled: false,
+  enabled_modules: [
+    'customer_segmentation',
+    'ifood_integration',
     'google_my_business_integration',
     'saipos_integration',
-    'uai_rango_integration',
     'delivery_much_integration',
+    'uai_rango_integration',
     'checkin_program',
     'surveys_feedback',
     'coupons_rewards',
@@ -120,3 +207,33 @@ Auth Middleware - req.user (after population): {
   name: 'Super Admin',
   restaurant_id: null
 }
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Módulo de Check-in não habilitado para o restaurante 0e517dc5-4881-45aa-996e-0365012000bc.
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Módulo de Check-in não habilitado para o restaurante 0e517dc5-4881-45aa-996e-0365012000bc.

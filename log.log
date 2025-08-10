@@ -1,19 +1,17 @@
-admin:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AdminDashboard.js:70  GET https://feedelizaapi.towersfy.com/api/admin/restaurants 404 (Not Found)
-(anonymous) @ xhr.js:195
-xhr @ xhr.js:15
-go @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anonymous) @ Axios.js:213
-(anonymous) @ bind.js:5
-E @ AdminDashboard.js:70
-(anonymous) @ AdminDashboard.js:81
-rl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anonymous) @ react-dom.production.min.js:282
-wc @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anonymous) @ react-dom.production.min.js:266
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+/app/backend/routes/surveys.js:228
+const router = express.Router();
+      ^
+SyntaxError: Identifier 'router' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1472:18)
+    at Module._compile (node:internal/modules/cjs/loader:1501:20)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Module.require (node:internal/modules/cjs/loader:1298:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/backend/server.js:21:22)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+Node.js v20.19.4

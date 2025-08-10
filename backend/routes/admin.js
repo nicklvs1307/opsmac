@@ -344,6 +344,7 @@ router.put('/restaurants/:id/modules', auth, isAdmin, [
     const currentSettings = restaurant.settings || {};
     currentSettings.enabled_modules = req.body.enabled_modules;
 
+    console.log('Updating modules with:', currentSettings);
     await restaurant.update({ settings: currentSettings });
 
     res.status(200).json({ message: 'Módulos atualizados com sucesso', restaurant });

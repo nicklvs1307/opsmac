@@ -1,29 +1,122 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
-node:internal/modules/cjs/loader:1215
-
-  throw err;
-  ^
-Error: Cannot find module 'googleapis'
-Require stack:
-- /app/backend/utils/googleMyBusinessService.js
-- /app/backend/routes/googleMyBusiness.js
-- /app/backend/server.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1212:15)
-    at Module._load (node:internal/modules/cjs/loader:1043:27)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/utils/googleMyBusinessService.js:1:20)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    '/app/backend/utils/googleMyBusinessService.js',
-    '/app/backend/routes/googleMyBusiness.js',
-    '/app/backend/server.js'
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}
+Updating modules with: {
+  nps_enabled: true,
+  tablet_mode: false,
+  auto_response: true,
+  rewards_enabled: true,
+  feedback_enabled: true,
+  whatsapp_enabled: false,
+  whatsapp_messages: {
+    checkin_message_text: '',
+    coupon_reminder_text: '',
+    birthday_greeting_text: '',
+    checkin_message_enabled: false,
+    coupon_reminder_enabled: false,
+    feedback_thank_you_text: '',
+    birthday_greeting_enabled: false,
+    feedback_thank_you_enabled: false
+  },
+  feedback_thank_you_text: '',
+  survey_program_settings: {
+    text_color: '#0c0c0d',
+    primary_color: '#d67171',
+    background_color: '#14ff3b',
+    background_image_url: 'https://i.ibb.co/Q7C007Cr/delicious-pizza-studio.jpg'
+  },
+  checkin_program_settings: {
+    settings: { checkin_requires_table: true },
+    text_color: '#8f0000',
+    primary_color: '#ff0000',
+    enable_ranking: true,
+    restaurant_slug: 'checkin-roma-pizzaria',
+    secondary_color: '#330264',
+    background_color: '#ffffff',
+    rewards_per_visit: [ [Object], [Object], [Object], [Object] ],
+    checkin_cycle_name: 'Check in Roma ',
+    points_per_checkin: '1',
+    background_image_url: 'https://i.ibb.co/Q7C007Cr/delicious-pizza-studio.jpg',
+    checkin_cycle_length: '6',
+    allow_multiple_cycles: true,
+    identification_method: 'phone',
+    checkin_requires_table: false,
+    checkin_limit_per_cycle: '1',
+    checkin_duration_minutes: '60',
+    checkin_time_restriction: '1',
+    enable_level_progression: true
+  },
+  feedback_thank_you_enabled: false,
+  enabled_modules: [
+    'customer_segmentation',
+    'ifood_integration',
+    'google_my_business_integration',
+    'saipos_integration',
+    'uai_rango_integration',
+    'delivery_much_integration',
+    'checkin_program',
+    'surveys_feedback',
+    'coupons_rewards',
+    'whatsapp_messaging'
   ]
 }
-Node.js v20.19.4
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
+}

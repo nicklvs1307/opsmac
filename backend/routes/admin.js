@@ -339,15 +339,7 @@ router.put('/restaurants/:id/modules', auth, isAdmin, [
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
-    // O update do Sequelize não lida bem com a atualização de um campo JSON aninhado diretamente.
-    // É mais seguro buscar o registro, modificar o campo e depois salvar.
-    const currentSettings = restaurant.settings || {};
-    currentSettings.enabled_modules = req.body.enabled_modules;
-
-    console.log('Updating modules with:', currentSettings);
-    restaurant.set('settings', currentSettings);
-    await restaurant.save();
-    console.log('Updated restaurant:', restaurant.toJSON());
+    await restaurant.update({ 'settings.enabled_modules': req.body.enabled_modules });
 
     res.status(200).json({ message: 'Módulos atualizados com sucesso', restaurant });
   } catch (error) {

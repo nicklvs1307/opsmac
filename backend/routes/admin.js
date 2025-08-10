@@ -272,7 +272,6 @@ router.get('/users', auth, isAdmin, async (req, res) => {
 router.get('/restaurants', auth, isAdmin, async (req, res) => {
   try {
     const restaurants = await models.Restaurant.findAll({
-      include: [{ model: models.User, as: 'owner', attributes: ['name', 'email'] }],
       order: [['name', 'ASC']]
     });
     res.status(200).json(restaurants);
@@ -417,4 +416,10 @@ router.put('/users/:id', auth, isAdmin, async (req, res) => {
   }
 });
 
+
+router.get('/test', (req, res) => {
+    res.send('Admin test route');
+});
+
 module.exports = router;
+

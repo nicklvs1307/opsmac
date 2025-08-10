@@ -54,160 +54,19 @@ Auth Middleware - req.user (after population): {
   name: 'Super Admin',
   restaurant_id: null
 }
-Updating modules with: {
-  nps_enabled: true,
-  tablet_mode: false,
-  auto_response: true,
-  rewards_enabled: true,
-  feedback_enabled: true,
-  whatsapp_enabled: false,
-  whatsapp_messages: {
-    checkin_message_text: '',
-    coupon_reminder_text: '',
-    birthday_greeting_text: '',
-    checkin_message_enabled: false,
-    coupon_reminder_enabled: false,
-    feedback_thank_you_text: '',
-    birthday_greeting_enabled: false,
-    feedback_thank_you_enabled: false
-  },
-  feedback_thank_you_text: '',
-  survey_program_settings: {
-    text_color: '#0c0c0d',
-    primary_color: '#d67171',
-    background_color: '#14ff3b',
-    background_image_url: 'https://i.ibb.co/Q7C007Cr/delicious-pizza-studio.jpg'
-  },
-  checkin_program_settings: {
-    settings: { checkin_requires_table: true },
-    text_color: '#8f0000',
-    primary_color: '#ff0000',
-    enable_ranking: true,
-    restaurant_slug: 'checkin-roma-pizzaria',
-    secondary_color: '#330264',
-    background_color: '#ffffff',
-    rewards_per_visit: [ [Object], [Object], [Object], [Object] ],
-    checkin_cycle_name: 'Check in Roma ',
-    points_per_checkin: '1',
-    background_image_url: 'https://i.ibb.co/Q7C007Cr/delicious-pizza-studio.jpg',
-    checkin_cycle_length: '6',
-    allow_multiple_cycles: true,
-    identification_method: 'phone',
-    checkin_requires_table: false,
-    checkin_limit_per_cycle: '1',
-    checkin_duration_minutes: '60',
-    checkin_time_restriction: '1',
-    enable_level_progression: true
-  },
-  feedback_thank_you_enabled: false,
-  enabled_modules: [
-    'customer_segmentation',
-    'ifood_integration',
-    'google_my_business_integration',
-    'saipos_integration',
-    'uai_rango_integration',
-    'delivery_much_integration'
-  ]
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
 }
-Updated restaurant: {
-  id: '0e517dc5-4881-45aa-996e-0365012000bc',
-  name: 'Roma Pizzaria & Chopperia',
-  slug: 'checkin-roma-pizzaria',
-  description: 'z',
-  cuisine_type: 'Pizzaria',
-  address: 'Avenida2',
-  city: 'Andradas',
-  state: 'MG',
-  zip_code: '37795000',
-  phone: '37317759',
-  email: 'emailres@test.com',
-  website: 'www.rest.com',
-  whatsapp_api_url: 'https://evolution2.towersfy.com',
-  whatsapp_api_key: '5C2130CCF54C-425B-B2B9-AD168BB24E73',
-  whatsapp_instance_id: 'towersfy',
-  whatsapp_phone_number: '553597694939',
-  logo: '/uploads/logo-1754507683202-373460055.jpeg',
-  cover_image: null,
-  opening_hours: {
-    friday: { open: '09:00', close: '22:00', closed: false },
-    monday: { open: '09:00', close: '22:00', closed: false },
-    sunday: { open: '09:00', close: '22:00', closed: false },
-    tuesday: { open: '09:00', close: '22:00', closed: false },
-    saturday: { open: '09:00', close: '22:00', closed: false },
-    thursday: { open: '09:00', close: '22:00', closed: false },
-    wednesday: { open: '09:00', close: '22:00', closed: false }
-  },
-  social_media: { twitter: '', facebook: '', whatsapp: '', instagram: '' },
-  settings: {
-    nps_enabled: true,
-    tablet_mode: false,
-    auto_response: true,
-    rewards_enabled: true,
-    feedback_enabled: true,
-    whatsapp_enabled: false,
-    whatsapp_messages: {
-      checkin_message_text: '',
-      coupon_reminder_text: '',
-      birthday_greeting_text: '',
-      checkin_message_enabled: false,
-      coupon_reminder_enabled: false,
-      feedback_thank_you_text: '',
-      birthday_greeting_enabled: false,
-      feedback_thank_you_enabled: false
-    },
-    feedback_thank_you_text: '',
-    survey_program_settings: {
-      text_color: '#0c0c0d',
-      primary_color: '#d67171',
-      background_color: '#14ff3b',
-      background_image_url: 'https://i.ibb.co/Q7C007Cr/delicious-pizza-studio.jpg'
-    },
-    checkin_program_settings: {
-      settings: [Object],
-      text_color: '#8f0000',
-      primary_color: '#ff0000',
-      enable_ranking: true,
-      restaurant_slug: 'checkin-roma-pizzaria',
-      secondary_color: '#330264',
-      background_color: '#ffffff',
-      rewards_per_visit: [Array],
-      checkin_cycle_name: 'Check in Roma ',
-      points_per_checkin: '1',
-      background_image_url: 'https://i.ibb.co/Q7C007Cr/delicious-pizza-studio.jpg',
-      checkin_cycle_length: '6',
-      allow_multiple_cycles: true,
-      identification_method: 'phone',
-      checkin_requires_table: false,
-      checkin_limit_per_cycle: '1',
-      checkin_duration_minutes: '60',
-      checkin_time_restriction: '1',
-      enable_level_progression: true
-    },
-    feedback_thank_you_enabled: false,
-    enabled_modules: [
-      'customer_segmentation',
-      'ifood_integration',
-      'google_my_business_integration',
-      'saipos_integration',
-      'uai_rango_integration',
-      'delivery_much_integration'
-    ]
-  },
-  is_active: true,
-  subscription_plan: 'free',
-  subscription_expires: null,
-  total_tables: 0,
-  average_rating: '5.00',
-  total_feedbacks: 3,
-  nps_score: 0,
-  total_promoters: 0,
-  total_neutrals: 0,
-  total_detractors: 0,
-  owner_id: '211aab5d-fb9a-421b-991c-fcda8bc44051',
-  api_token: 'c8e6ceb0cf0f707a3a195448418ccde0',
-  nps_criteria_scores: {},
-  createdAt: 2025-07-29T12:12:08.026Z,
-  updatedAt: 2025-08-08T10:44:45.960Z
+Auth Middleware - req.user (after population): {
+  userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
+  email: 'admin1@example.com',
+  role: 'super_admin',
+  name: 'Super Admin',
+  restaurant_id: null
 }
 Auth Middleware - req.user (after population): {
   userId: '00b75d88-761d-4fd7-af99-1bc96173c395',
@@ -230,7 +89,52 @@ Auth Middleware - req.user (after population): {
   name: 'Lucas Niquele',
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
-Módulo de Check-in não habilitado para o restaurante 0e517dc5-4881-45aa-996e-0365012000bc.
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+/app/backend/routes/checkin.js:510
+  if (period !== 'all') {
+  ^
+ReferenceError: period is not defined
+    at /app/backend/routes/checkin.js:510:3
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Node.js v20.19.4
+
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
 Auth Middleware - req.user (after population): {
   userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
   email: 'lucas@teste.com',
@@ -245,7 +149,52 @@ Auth Middleware - req.user (after population): {
   name: 'Lucas Niquele',
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
-Módulo de Check-in não habilitado para o restaurante 0e517dc5-4881-45aa-996e-0365012000bc.
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+/app/backend/routes/checkin.js:510
+  if (period !== 'all') {
+  ^
+ReferenceError: period is not defined
+    at /app/backend/routes/checkin.js:510:3
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Node.js v20.19.4
+
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
 Auth Middleware - req.user (after population): {
   userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
   email: 'lucas@teste.com',
@@ -267,3 +216,21 @@ Auth Middleware - req.user (after population): {
   name: 'Lucas Niquele',
   restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
 }
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+/app/backend/routes/checkin.js:510
+  if (period !== 'all') {
+  ^
+ReferenceError: period is not defined
+    at /app/backend/routes/checkin.js:510:3
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Node.js v20.19.4
+

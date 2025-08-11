@@ -3,12 +3,12 @@ const router = express.Router();
 const { auth } = require('../middleware/auth');
 const { models } = require('../config/database');
 const QRCode = require('qrcode'); // Assuming qrcode library is available
+require('dotenv').config(); // Load environment variables
 
-// Helper function to generate QR code URL (simplified for now)
+// Helper function to generate QR code URL
 const generateQrCodeUrl = (tableId) => {
-  // In a real application, this would point to your public dine-in menu frontend
-  // e.g., `${process.env.FRONTEND_PUBLIC_URL}/menu/dine-in/${tableId}`
-  return `http://your-frontend-domain/menu/dine-in/${tableId}`;
+  const frontendBaseUrl = process.env.FRONTEND_PUBLIC_URL || 'http://localhost:3000'; // Fallback for development
+  return `${frontendBaseUrl}/menu/dine-in/${tableId}`;
 };
 
 // Create a new table

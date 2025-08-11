@@ -52,6 +52,11 @@ const Stock = () => {
       queryClient.invalidateQueries(['stockHistory', selectedProductId]);
       setOpenMovementDialog(false);
       reset();
+      toast.success('Movimentação de estoque realizada com sucesso!'); // Added toast
+    },
+    onError: (error) => { // Added error handling
+      console.error('Erro ao realizar movimentação de estoque:', error);
+      toast.error(`Erro ao realizar movimentação: ${error.response?.data?.msg || error.message}`);
     },
   });
 

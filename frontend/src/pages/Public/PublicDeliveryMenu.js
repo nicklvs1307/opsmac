@@ -17,6 +17,10 @@ const PublicDeliveryMenu = () => {
     () => fetchDeliveryMenu(restaurantSlug),
     {
       enabled: !!restaurantSlug,
+      onError: (error) => { // Added error handling
+        console.error('Erro ao carregar cardápio de delivery:', error);
+        toast.error(`Erro ao carregar cardápio: ${error.response?.data?.msg || error.message}`);
+      }
     }
   );
 

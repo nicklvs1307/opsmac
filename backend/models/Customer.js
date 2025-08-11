@@ -496,8 +496,37 @@ module.exports = (sequelize) => {
     });
     updates.total_orders = totalCheckins + totalSurveyResponses; // Considerando check-ins e respostas como "pedidos" para fins de frequência
 
-    // TODO: Implementar cálculo de average_ticket, last_ticket_value, most_bought_products, most_bought_categories
-    // Isso dependerá da existência de um modelo de Pedido/Ordem
+    // Implement cálculo de average_ticket, last_ticket_value, most_bought_products, most_bought_categories
+    const customerOrders = await models.Order.findAll({
+      where: { customer_id: this.id },
+      order: [['order_date', 'DESC']],
+    });
+
+    if (customerOrders.length > 0) {
+      const totalOrdersAmount = customerOrders.reduce((sum, order) => sum + parseFloat(order.total_amount), 0);
+      updates.average_ticket = (totalOrdersAmount / customerOrders.length).toFixed(2);
+      updates.last_ticket_value = parseFloat(customerOrders[0].total_amount).toFixed(2);
+
+      const productCounts = {};
+      const categoryCounts = {};
+
+      customerOrders.forEach(order => {
+        if (order.items && Array.isArray(order.items)) {
+          order.items.forEach(item => {
+            // Assuming item has 'name' and 'category' properties
+            if (item.name) {
+              productCounts[item.name] = (productCounts[item.name] || 0) + (item.quantity || 1);
+            }
+            if (item.category) {
+              categoryCounts[item.category] = (categoryCounts[item.category] || 0) + (item.quantity || 1);
+            }
+          });
+        }
+      });
+
+      updates.most_bought_products = Object.keys(productCounts).sort((a, b) => productCounts[b] - productCounts[a]).slice(0, 5); // Top 5
+      updates.most_bought_categories = Object.keys(categoryCounts).sort((a, b) => categoryCounts[b] - categoryCounts[a]).slice(0, 5); // Top 5
+    }
 
     if (Object.keys(updates).length > 0) {
       await this.update(updates);

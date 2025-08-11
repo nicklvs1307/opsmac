@@ -28,6 +28,10 @@ const saiposRoutes = require('./routes/saipos');
 const uaiRangoRoutes = require('./routes/uaiRango');
 const deliveryMuchRoutes = require('./routes/deliveryMuch');
 const productRoutes = require('./routes/products');
+const publicProductsRoutes = require('./routes/public_products');
+const stockRoutes = require('./routes/stock');
+const tablesRoutes = require('./routes/tables');
+const publicDineInMenuRoutes = require('./routes/public_dine_in_menu');
 
 const app = express();
 app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)
@@ -78,6 +82,10 @@ app.use('/api/saipos', saiposRoutes);
 app.use('/api/uai-rango', uaiRangoRoutes);
 app.use('/api/delivery-much', deliveryMuchRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/public/products', publicProductsRoutes);
+app.use('/api/stock', stockRoutes);
+app.use('/api/tables', tablesRoutes);
+app.use('/public/menu/dine-in', publicDineInMenuRoutes);
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');

@@ -66,18 +66,19 @@ const Products = () => {
                 <TableCell>Descrição</TableCell>
                 <TableCell>Preço</TableCell>
                 <TableCell>SKU</TableCell>
+                <TableCell>Ficha Técnica</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={4} align="center">
+                  <TableCell colSpan={5} align="center">
                     <CircularProgress />
                   </TableCell>
                 </TableRow>
               ) : isError ? (
                 <TableRow>
-                  <TableCell colSpan={4} align="center">
+                  <TableCell colSpan={5} align="center">
                     <Alert severity="error">Erro ao carregar produtos.</Alert>
                   </TableCell>
                 </TableRow>
@@ -88,6 +89,9 @@ const Products = () => {
                     <TableCell>{product.description}</TableCell>
                     <TableCell>{product.price}</TableCell>
                     <TableCell>{product.sku}</TableCell>
+                    <TableCell>
+                      {product.technicalSpecification ? JSON.stringify(product.technicalSpecification.details) : 'N/A'}
+                    </TableCell>
                   </TableRow>
                 ))
               )}
@@ -123,6 +127,22 @@ const Products = () => {
               control={control}
               defaultValue=""
               render={({ field }) => <TextField {...field} label="SKU" fullWidth margin="normal" />}
+            />
+            <Controller
+              name="technicalSpecification"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Ficha Técnica (JSON)"
+                  fullWidth
+                  margin="normal"
+                  multiline
+                  rows={4}
+                  helperText="Insira os detalhes da ficha técnica em formato JSON, ex: {'peso': '10kg', 'dimensoes': '1x2x3m'}"
+                />
+              )}
             />
           </form>
         </DialogContent>

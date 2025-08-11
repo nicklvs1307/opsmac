@@ -42,7 +42,12 @@ import IntegrationsPage from './pages/Integrations/IntegrationsPage';
 import PublicCheckin from './pages/Public/PublicCheckin';
 import PublicReward from './pages/Public/PublicReward'; // Adicionado
 import GirarRoleta from './pages/Public/GirarRoleta'; // Adicionado
+import PublicMenu from './pages/Public/PublicMenu'; // New import for Public Menu
+import PublicDeliveryMenu from './pages/Public/PublicDeliveryMenu';
+import PublicDineInMenu from './pages/Public/PublicDineInMenu';
 import Products from './pages/ERP/Products';
+import Stock from './pages/ERP/Stock';
+import Tables from './pages/ERP/Tables';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -70,6 +75,9 @@ function App() {
                 <Route path="/checkin/public/:restaurantSlug" element={<PublicCheckin />} />
                 <Route path="/girar-roleta" element={<GirarRoleta />} />
                 <Route path="/recompensa-ganha" element={<PublicReward />} />
+                <Route path="/menu/:restaurantSlug" element={<PublicMenu />} /> {/* New Public Menu Route */}
+                <Route path="/menu/delivery/:restaurantSlug" element={<PublicDeliveryMenu />} />
+                <Route path="/menu/dine-in/:tableId" element={<PublicDineInMenu />} />
                 
                 {/* Protected Routes */}
                 <Route path="/" element={
@@ -101,6 +109,8 @@ function App() {
                   <Route path="relationship" element={<RelationshipDashboard />} />
                   <Route path="integrations" element={<IntegrationsPage />} />
                   <Route path="erp/products" element={<Products />} />
+                  <Route path="erp/stock" element={<Stock />} />
+                  <Route path="erp/tables" element={<Tables />} />
                 </Route>
                 <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
                 {/* Catch all route */}

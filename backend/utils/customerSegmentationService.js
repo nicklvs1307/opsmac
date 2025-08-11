@@ -37,9 +37,9 @@ const determineNPSSegment = async (customer, models) => {
       where: { type: 'nps_only' } // Assuming 'nps_only' type for NPS surveys
     }, {
       model: models.Answer,
-      where: { '$answers.Question.question_type$': 'nps' },
       include: [{
         model: models.Question,
+        where: { question_type: 'nps' }, // Filter directly on Question model
         attributes: []
       }]
     }],

@@ -23,6 +23,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       unique: true
     },
+    category: { // New field for product category
+      type: DataTypes.STRING,
+      allowNull: true, // Category can be null initially
+    },
     restaurant_id: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -43,10 +47,10 @@ module.exports = (sequelize) => {
       as: 'restaurant'
     });
     // Associação com a ficha técnica
-    // Product.hasOne(models.TechnicalSpecification, {
-    //   foreignKey: 'product_id',
-    //   as: 'technicalSpecification'
-    // });
+    Product.hasOne(models.TechnicalSpecification, {
+      foreignKey: 'product_id',
+      as: 'technicalSpecification'
+    });
   };
 
   return Product;

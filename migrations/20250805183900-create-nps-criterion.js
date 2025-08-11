@@ -1,8 +1,8 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const tables = await queryInterface.showAllTables();
-    if (!tables.includes('NpsCriterions')) {
+    const tableExists = await queryInterface.tableExists('NpsCriterions');
+    if (!tableExists) {
       await queryInterface.createTable('NpsCriterions', {
         id: {
           type: Sequelize.UUID,
@@ -28,6 +28,9 @@ module.exports = {
     }
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('NpsCriterions');
+    const tableExists = await queryInterface.tableExists('NpsCriterions');
+    if (tableExists) {
+      await queryInterface.dropTable('NpsCriterions');
+    }
   }
 };

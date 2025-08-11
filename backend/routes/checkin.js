@@ -505,7 +505,7 @@ router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, checkChec
 
   // O restaurante já está disponível em req.restaurant devido ao middleware checkCheckinModuleEnabled
   const restaurantId = req.restaurant.id;
-  const { period } = req.query;
+  const { period = 'all' } = req.query;
 
   let startDate = null;
   if (period !== 'all') {

@@ -7,6 +7,34 @@ const { generateUniqueSlug } = require('../utils/slugGenerator');
 
 const router = express.Router();
 
+// @route   GET api/surveys
+// @desc    Get all surveys for the logged in user's restaurant
+// @access  Private
+router.get('/', auth, async (req, res) => {
+    const { search } = req.query;
+    const { restaurant_id } = req.user;
+
+    try {
+        const where = {
+            restaurant_id,
+            status: { [models.Sequelize.Op.in]: ['active', 'draft'] }
+        };
+
+        if (search) {
+            where.title = { [models.Sequelize.Op.iLike]: `%${search}%` };
+        }
+
+        const surveys = await models.Survey.findAll({
+            where,
+            include: ['questions']
+        });
+        res.json(surveys);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 // @route   POST api/surveys
 // @desc    Create a new survey from a template or custom
 // @access  Private

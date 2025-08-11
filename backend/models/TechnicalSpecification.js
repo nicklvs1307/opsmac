@@ -1,7 +1,7 @@
 'use strict';
 const { DataTypes } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes, Sequelize) => {
   const TechnicalSpecification = sequelize.define('TechnicalSpecification', {
     id: {
       type: DataTypes.UUID,

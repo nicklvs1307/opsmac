@@ -1,1 +1,10 @@
-common.module_not_enabled
+Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
+
+Loaded configuration file "config/config.js".
+
+Using environment "development".
+
+== 20250811113834-add-rfv-score-to-customers: migrating =======
+
+ERROR: column "rfv_score" of relation "customers" already exists
+

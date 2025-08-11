@@ -177,6 +177,8 @@
       "integrations": "Integrations",
       "erp": "ERP",
       "products": "Products",
+      "stock": "Stock",
+      "tables": "Tables",
       "settings": "Settings",
       "app_name": "CHECK"
     },

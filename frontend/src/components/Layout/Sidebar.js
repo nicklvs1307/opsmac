@@ -163,6 +163,16 @@ const Sidebar = ({ onMobileClose }) => {
           title: t('sidebar.products'),
           icon: <ListIcon />,
           path: '/erp/products'
+        },
+        {
+          title: t('sidebar.stock'), // New
+          icon: <ListIcon />, // Consider a more specific icon like <InventoryIcon />
+          path: '/erp/stock'
+        },
+        {
+          title: t('sidebar.tables'), // New
+          icon: <ListIcon />, // Consider a more specific icon like <TableBarIcon />
+          path: '/erp/tables'
         }
       ]
     },

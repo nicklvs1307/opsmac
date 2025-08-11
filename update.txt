@@ -313,3 +313,6 @@ Automatização de respostas	Mensagens automáticas baseadas na nota recebida
 Métricas por dimensão	NPS por canal, loja, horário, produto, etc.
 Integração com CRM	Conectar NPS com campanhas e recuperação
 
+SISTEMA ERP 
+COM FUNÇÕES DE CADASTRO DE PRODUTO, CADASTRO DE FICHA TECNICA, CAIXA PDV, CARDAPIO DIGITAL
+FUNÇÃO PARA CARDAPIO ESPECIFICO PARA TABLETS, COM MANUSEIO SIMPLES PARA O CLIENTE

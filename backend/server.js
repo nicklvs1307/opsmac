@@ -27,6 +27,7 @@ const googleMyBusinessRoutes = require('./routes/googleMyBusiness');
 const saiposRoutes = require('./routes/saipos');
 const uaiRangoRoutes = require('./routes/uaiRango');
 const deliveryMuchRoutes = require('./routes/deliveryMuch');
+const productRoutes = require('./routes/products');
 
 const app = express();
 app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)
@@ -76,6 +77,7 @@ app.use('/api/google-my-business', googleMyBusinessRoutes);
 app.use('/api/saipos', saiposRoutes);
 app.use('/api/uai-rango', uaiRangoRoutes);
 app.use('/api/delivery-much', deliveryMuchRoutes);
+app.use('/api/products', productRoutes);
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');

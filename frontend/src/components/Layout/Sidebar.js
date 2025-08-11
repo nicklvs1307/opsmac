@@ -154,6 +154,19 @@ const Sidebar = ({ onMobileClose }) => {
       roles: ['admin', 'owner', 'manager']
     },
     {
+      title: t('sidebar.erp'),
+      icon: <DashboardIcon />,
+      path: '/erp',
+      roles: ['admin', 'owner', 'manager'],
+      submenu: [
+        {
+          title: t('sidebar.products'),
+          icon: <ListIcon />,
+          path: '/erp/products'
+        }
+      ]
+    },
+    {
       title: t('sidebar.settings'),
       icon: <SettingsIcon />,
       path: '/settings',

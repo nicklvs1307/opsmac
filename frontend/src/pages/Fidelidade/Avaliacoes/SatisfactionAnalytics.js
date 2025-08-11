@@ -45,6 +45,11 @@ const fetchSatisfactionAnalytics = async (restaurantId) => {
   return data;
 };
 
+const fetchNpsCriteria = async () => {
+  const { data } = await axiosInstance.get('/api/nps-criteria');
+  return data;
+};
+
 const SatisfactionAnalytics = () => {
   const { user } = useAuth();
   const restaurantId = user?.restaurants?.[0]?.id;
@@ -56,6 +61,14 @@ const SatisfactionAnalytics = () => {
       enabled: !!restaurantId, // Only run the query if restaurantId is available
     }
   );
+
+  const { data: npsCriteria } = useQuery('npsCriteria', fetchNpsCriteria);
+
+  const getCriterionName = (criterionId) => {
+    if (!npsCriteria) return criterionId;
+    const criterion = npsCriteria.find(c => c.id === criterionId);
+    return criterion ? criterion.name : criterionId;
+  };
 
   if (isLoading) {
     return (
@@ -101,6 +114,31 @@ const SatisfactionAnalytics = () => {
           />
         </Grid>
       </Grid>
+
+      {/* NPS Scores by Criterion */}
+      <Paper sx={{ p: 3, mt: 3 }}>
+        <Typography variant="h6" gutterBottom>
+          NPS por Critério
+        </Typography>
+        {data?.npsCriteriaScores && Object.keys(data.npsCriteriaScores).length > 0 ? (
+          <Grid container spacing={2}>
+            {Object.entries(data.npsCriteriaScores).map(([criterionId, scores]) => (
+              <Grid item xs={12} md={6} key={criterionId}>
+                <Paper sx={{ p: 2, border: '1px solid #eee' }}>
+                  <Typography variant="subtitle1">{getCriterionName(criterionId)}</Typography>
+                  <Typography>Promotores: {scores.promoters}</Typography>
+                  <Typography>Passivos: {scores.passives}</Typography>
+                  <Typography>Detratores: {scores.detractors}</Typography>
+                  <Typography>Total: {scores.total}</Typography>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <Typography>Nenhum dado de NPS por critério disponível.</Typography>
+        )}
+      </Paper>
+
       {/* More charts and data visualizations can be added here */}
     </Box>
   );

@@ -42,6 +42,7 @@ import IntegrationsPage from './pages/Integrations/IntegrationsPage';
 import PublicCheckin from './pages/Public/PublicCheckin';
 import PublicReward from './pages/Public/PublicReward'; // Adicionado
 import GirarRoleta from './pages/Public/GirarRoleta'; // Adicionado
+import Products from './pages/ERP/Products';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -99,6 +100,7 @@ function App() {
                   
                   <Route path="relationship" element={<RelationshipDashboard />} />
                   <Route path="integrations" element={<IntegrationsPage />} />
+                  <Route path="erp/products" element={<Products />} />
                 </Route>
                 <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
                 {/* Catch all route */}

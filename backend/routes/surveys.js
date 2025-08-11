@@ -301,10 +301,13 @@ router.get('/analytics/:restaurantId', auth, async (req, res) => {
         const averageNps = npsCount > 0 ? npsSum / npsCount : null;
         const averageCsat = csatCount > 0 ? csatSum / csatCount : null;
 
+        const restaurant = await models.Restaurant.findByPk(restaurantId);
+
         res.json({
             totalResponses,
             averageNps,
-            averageCsat
+            averageCsat,
+            npsCriteriaScores: restaurant?.nps_criteria_scores || {}
         });
 
     } catch (err) {

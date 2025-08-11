@@ -1,10 +1,321 @@
-Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+notNull Violation: Feedback.rating cannot be null
 
-Loaded configuration file "config/config.js".
 
-Using environment "development".
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+notNull Violation: Feedback.rating cannot be null
 
-== 20250811113834-add-rfv-score-to-customers: migrating =======
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/public/surveys/conhecendo-nosso-cliente/responses
+Método da solicitação
+POST
+Código de status
+500 Internal Server Error
+Endereço remoto
+95.217.16.187:443
 
-ERROR: column "rfv_score" of relation "customers" already exists
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/products
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+Endereço remoto
+95.217.16.187:443
 
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+notNull Violation: Feedback.rating cannot be null
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+notNull Violation: Feedback.rating cannot be null
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+relation "Product" does not exist
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+relation "Product" does not exist
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+relation "Product" does not exist
+Auth Middleware - req.user (after population): {
+  userId: '211aab5d-fb9a-421b-991c-fcda8bc44051',
+  email: 'lucas@teste.com',
+  role: 'owner',
+  name: 'Lucas Niquele',
+  restaurant_id: '0e517dc5-4881-45aa-996e-0365012000bc'
+}
+relation "Product" does not exist

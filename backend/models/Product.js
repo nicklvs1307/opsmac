@@ -32,6 +32,9 @@ module.exports = (sequelize) => {
       }
     }
     // Você pode adicionar um campo category_id aqui depois
+  }, {
+    freezeTableName: true, // Model tableName will be the same as the model name
+    tableName: 'products' // Explicitly define the table name
   });
 
   Product.associate = (models) => {

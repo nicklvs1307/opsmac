@@ -21,7 +21,7 @@ router.get('/:slug', async (req, res) => {
                 {
                     model: models.Restaurant,
                     as: 'restaurant',
-                    attributes: ['name', 'logo', 'slug'], // Incluir slug do restaurante
+                    attributes: ['name', 'logo', 'slug', 'settings'], // Incluir slug e settings do restaurante
                 }
             ],
             attributes: ['id', 'title', 'description', 'type', 'slug'],

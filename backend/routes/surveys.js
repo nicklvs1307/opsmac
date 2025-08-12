@@ -12,7 +12,7 @@ const router = express.Router();
 // @access  Private
 router.get('/', auth, async (req, res) => {
     const { search } = req.query;
-    const { restaurant_id } = req.user;
+    const restaurant_id = req.user.restaurants[0].id;
 
     try {
         const where = {
@@ -55,7 +55,8 @@ router.post(
         }
 
         const { type, title, slug, description, questions, status } = req.body;
-        const { userId: user_id, restaurant_id } = req.user;
+        const { userId: user_id } = req.user;
+        const restaurant_id = req.user.restaurants[0].id;
 
         try {
             // Verificar se o slug já existe
@@ -127,7 +128,7 @@ router.put(
 
         const { title, slug, description, questions, status } = req.body;
         const { id } = req.params;
-        const { restaurant_id } = req.user;
+        const restaurant_id = req.user.restaurants[0].id;
 
         try {
             let survey = await models.Survey.findByPk(id);
@@ -205,7 +206,7 @@ router.patch('/:id/status', auth, [
             return res.status(404).json({ msg: 'Pesquisa não encontrada' });
         }
 
-        if (survey.restaurant_id !== req.user.restaurant_id) {
+        if (survey.restaurant_id !== req.user.restaurants[0].id) {
             return res.status(403).json({ msg: 'Não autorizado' });
         }
 
@@ -226,7 +227,7 @@ router.delete(
     auth,
     async (req, res) => {
         const { id } = req.params;
-        const { restaurant_id } = req.user;
+        const restaurant_id = req.user.restaurants[0].id;
 
         try {
             const survey = await models.Survey.findByPk(id);

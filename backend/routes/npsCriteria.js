@@ -11,7 +11,7 @@ const { body, validationResult } = require('express-validator');
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
-    const restaurantId = req.user.restaurant_id;
+    const restaurantId = req.user.restaurants[0].id;
     if (!restaurantId) {
       return res.status(403).json({ msg: 'Usuário não está associado a um restaurante.' });
     }
@@ -39,7 +39,7 @@ router.post('/',
     }
 
     const { name } = req.body;
-    const restaurantId = req.user.restaurant_id;
+    const restaurantId = req.user.restaurants[0].id;
 
     try {
       const existingCriterion = await NpsCriterion.findOne({ where: { name, restaurant_id: restaurantId } });
@@ -71,7 +71,7 @@ router.put('/:id',
 
     const { name } = req.body;
     const { id } = req.params;
-    const restaurantId = req.user.restaurant_id;
+    const restaurantId = req.user.restaurants[0].id;
 
     try {
       let criterion = await NpsCriterion.findOne({ where: { id, restaurant_id: restaurantId } });
@@ -96,7 +96,7 @@ router.put('/:id',
 router.delete('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
-    const restaurantId = req.user.restaurant_id;
+    const restaurantId = req.user.restaurants[0].id;
 
     const criterion = await NpsCriterion.findOne({ where: { id, restaurant_id: restaurantId } });
 

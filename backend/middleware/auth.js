@@ -4,79 +4,48 @@ const { models } = require('../config/database');
 // Middleware de autenticação
 const auth = async (req, res, next) => {
   try {
-    // Obter token do header
     const authHeader = req.header('Authorization');
-    
     if (!authHeader) {
-      return res.status(401).json({
-        error: 'Acesso negado. Token não fornecido'
-      });
+      return res.status(401).json({ error: 'Acesso negado. Token não fornecido' });
     }
 
-    // Verificar formato do token (Bearer <token>)
-    const token = authHeader.startsWith('Bearer ') 
-      ? authHeader.slice(7) 
-      : authHeader;
-
+    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : authHeader;
     if (!token) {
-      return res.status(401).json({
-        error: 'Acesso negado. Token inválido'
-      });
+      return res.status(401).json({ error: 'Acesso negado. Token inválido' });
     }
 
-    // Verificar e decodificar token
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
-      if (error.name === 'TokenExpiredError') {
-        return res.status(401).json({
-          error: 'Token expirado'
-        });
-      }
-      return res.status(401).json({
-        error: 'Token inválido'
-      });
+      return res.status(401).json({ error: 'Token inválido ou expirado' });
     }
 
-    // Verificar se usuário existe e está ativo
-    const user = await models.User.findByPk(decoded.userId);
-    if (!user) {
-      return res.status(401).json({
-        error: 'Usuário não encontrado'
-      });
+    const user = await models.User.findByPk(decoded.userId, {
+      include: [{
+        model: models.Restaurant,
+        as: 'restaurants',
+        attributes: ['id', 'name', 'slug'], // Otimiza a consulta para trazer apenas o necessário
+      }]
+    });
+
+    if (!user || !user.is_active) {
+      return res.status(401).json({ error: 'Acesso negado. Usuário não encontrado ou inativo' });
     }
 
-    if (!user.is_active) {
-      return res.status(401).json({
-        error: 'Conta desativada'
-      });
-    }
-
-    // Adicionar dados do usuário à requisição
+    // Popula req.user com os dados necessários, incluindo a lista de restaurantes.
     req.user = {
       userId: user.id,
       email: user.email,
       role: user.role,
       name: user.name,
-      restaurant_id: null // Default to null
+      restaurants: user.restaurants || [],
     };
-
-    // Se o usuário for um 'owner' ou 'manager', buscar o restaurant_id associado
-    if (user.role === 'owner' || user.role === 'manager') {
-      const restaurant = await models.Restaurant.findOne({ where: { owner_id: user.id } });
-      if (restaurant) {
-        req.user.restaurant_id = restaurant.id;
-      }
-    }
-    console.log('Auth Middleware - req.user (after population):', req.user);
 
     next();
   } catch (error) {
     console.error('Erro no middleware de autenticação:', error);
-    res.status(500).json({
-      error: 'Erro interno do servidor'
-    });
+    res.status(500).json({ error: 'Erro interno do servidor' });
   }
 };
 

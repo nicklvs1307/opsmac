@@ -26,7 +26,7 @@ const getRestaurantId = (req, res, next) => {
 
 // Criar um novo produto
 router.post('/', auth, getRestaurantId, async (req, res) => {
-  const { name, description, price, sku, technicalSpecification } = req.body; // Added technicalSpecification
+  const { name, description, price, sku } = req.body;
   const { restaurantId } = req;
 
   try {
@@ -37,13 +37,6 @@ router.post('/', auth, getRestaurantId, async (req, res) => {
       sku,
       restaurant_id: restaurantId
     });
-
-    if (technicalSpecification) { // If technicalSpecification data is provided
-      await models.TechnicalSpecification.create({
-        product_id: product.id,
-        details: technicalSpecification // Assuming technicalSpecification is a JSON object
-      });
-    }
 
     res.status(201).json(product);
   } catch (error) {
@@ -103,7 +96,7 @@ router.get('/:id', auth, getRestaurantId, async (req, res) => {
 // Atualizar um produto
 router.put('/:id', auth, getRestaurantId, async (req, res) => {
   const { id } = req.params;
-  const { name, description, price, sku, technicalSpecification } = req.body; // Added technicalSpecification
+  const { name, description, price, sku } = req.body; // Removed technicalSpecification
   const { restaurantId } = req;
 
   try {
@@ -118,20 +111,6 @@ router.put('/:id', auth, getRestaurantId, async (req, res) => {
     product.sku = sku;
 
     await product.save();
-
-    if (technicalSpecification) {
-      // Find or create the technical specification
-      const [spec, created] = await models.TechnicalSpecification.findOrCreate({
-        where: { product_id: product.id },
-        defaults: { details: technicalSpecification }
-      });
-
-      if (!created) {
-        // If it already exists, update the details
-        spec.details = technicalSpecification;
-        await spec.save();
-      }
-    }
 
     res.json(product);
   } catch (error) {

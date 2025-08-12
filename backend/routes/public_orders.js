@@ -33,6 +33,14 @@ router.post(
         return res.status(404).json({ msg: 'Restaurante não encontrado.' });
       }
 
+      // Add validation for restaurant and POS status
+      if (!restaurant.is_open) {
+        return res.status(403).json({ msg: 'O restaurante está fechado e não pode receber pedidos no momento.' });
+      }
+      if (restaurant.pos_status === 'closed') {
+        return res.status(403).json({ msg: 'O sistema de pedidos está temporariamente indisponível. Tente novamente mais tarde.' });
+      }
+
       // Create the order
       const order = await models.Order.create({
         restaurant_id,

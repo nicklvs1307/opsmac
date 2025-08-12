@@ -57,6 +57,18 @@ module.exports = (sequelize) => {
     social_media: { type: DataTypes.JSONB, allowNull: true, defaultValue: { facebook: '', instagram: '', twitter: '', whatsapp: '' } },
     settings: { type: DataTypes.JSONB, allowNull: true, defaultValue: { feedback_enabled: true, whatsapp_enabled: false, rewards_enabled: true, auto_response: true, nps_enabled: true, tablet_mode: false, checkin_requires_table: false, checkin_program_settings: {}, survey_program_settings: {}, primary_color: '#3f51b5', secondary_color: '#f50057', integrations: {}, enabled_modules: [] } },
     is_active: { type: DataTypes.BOOLEAN, defaultValue: true },
+    is_open: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true, // Default to open
+      allowNull: false,
+      comment: 'Indicates if the restaurant is currently open for new orders/interactions'
+    },
+    pos_status: {
+      type: DataTypes.ENUM('open', 'closed'),
+      defaultValue: 'closed', // Default to closed
+      allowNull: false,
+      comment: 'Status of the Point of Sale (POS) cash register for order processing'
+    },
     subscription_plan: { type: DataTypes.ENUM('free', 'basic', 'premium', 'enterprise'), defaultValue: 'free' },
     subscription_expires: { type: DataTypes.DATE, allowNull: true },
     total_tables: { type: DataTypes.INTEGER, defaultValue: 0, validate: { min: { args: [0], msg: 'Número de mesas não pode ser negativo' } } },

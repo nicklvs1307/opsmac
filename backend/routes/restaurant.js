@@ -131,3 +131,124 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
 });
 
 module.exports = router;
+
+/**
+ * @swagger
+ * /api/restaurant/{restaurantId}/status/open:
+ *   put:
+ *     summary: Atualiza o status de abertura/fechamento do restaurante
+ *     tags: [Restaurant]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: restaurantId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do restaurante
+ *       - in: body
+ *         name: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             is_open:
+ *               type: boolean
+ *               description: True para abrir, False para fechar o restaurante
+ *     responses:
+ *       200:
+ *         description: Status de abertura atualizado com sucesso
+ *       400:
+ *         description: Requisição inválida
+ *       401:
+ *         description: Não autorizado
+ *       403:
+ *         description: Acesso negado
+ *       404:
+ *         description: Restaurante não encontrado
+ *       500:
+ *         description: Erro interno do servidor
+ */
+router.put('/:restaurantId/status/open', auth, checkRestaurantOwnership, async (req, res) => {
+  try {
+    const { restaurantId } = req.params;
+    const { is_open } = req.body;
+
+    if (typeof is_open !== 'boolean') {
+      return res.status(400).json({ error: 'O campo is_open deve ser um booleano.' });
+    }
+
+    const restaurant = await models.Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado.' });
+    }
+
+    await restaurant.update({ is_open });
+    res.json({ message: 'Status de abertura do restaurante atualizado com sucesso.', is_open: restaurant.is_open });
+  } catch (error) {
+    console.error('Erro ao atualizar status de abertura do restaurante:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+/**
+ * @swagger
+ * /api/restaurant/{restaurantId}/pos-status:
+ *   put:
+ *     summary: Atualiza o status do PDV (Ponto de Venda) do restaurante
+ *     tags: [Restaurant]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: restaurantId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do restaurante
+ *       - in: body
+ *         name: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             pos_status:
+ *               type: string
+ *               enum: [open, closed]
+ *               description: Status do PDV (open ou closed)
+ *     responses:
+ *       200:
+ *         description: Status do PDV atualizado com sucesso
+ *       400:
+ *         description: Requisição inválida
+ *       401:
+ *         description: Não autorizado
+ *       403:
+ *         description: Acesso negado
+ *       404:
+ *         description: Restaurante não encontrado
+ *       500:
+ *         description: Erro interno do servidor
+ */
+router.put('/:restaurantId/pos-status', auth, checkRestaurantOwnership, async (req, res) => {
+  try {
+    const { restaurantId } = req.params;
+    const { pos_status } = req.body;
+
+    if (!['open', 'closed'].includes(pos_status)) {
+      return res.status(400).json({ error: 'O campo pos_status deve ser 'open' ou 'closed'.' });
+    }
+
+    const restaurant = await models.Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ error: 'Restaurante não encontrado.' });
+    }
+
+    await restaurant.update({ pos_status });
+    res.json({ message: 'Status do PDV atualizado com sucesso.', pos_status: restaurant.pos_status });
+  } catch (error) {
+    console.error('Erro ao atualizar status do PDV do restaurante:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});

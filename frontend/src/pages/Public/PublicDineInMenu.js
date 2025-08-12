@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
+import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, alpha } from '@mui/material';
 import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
+import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, LocalDining as LocalDiningIcon, Call as CallIcon, Receipt as ReceiptIcon } from '@mui/icons-material';
 
 const fetchDineInMenu = async (tableId) => {
   const { data } = await axiosInstance.get(`/public/menu/dine-in/${tableId}`);
-  return data;
+  
+  // Agrupar produtos por categoria
+  const groupedByCategory = data.reduce((acc, product) => {
+    const category = product.category || 'Outros';
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(product);
+    return acc;
+  }, {});
+  
+  return { products: data, categories: groupedByCategory };
 };
 
 const startTableSession = async (tableId) => {
@@ -31,18 +43,54 @@ const getSessionStatus = async (sessionId) => {
 
 const PublicDineInMenu = () => {
   const { tableId } = useParams();
+  const theme = useTheme();
   const [sessionId, setSessionId] = useState(localStorage.getItem(`tableSession_${tableId}`));
   const [openWaiterDialog, setOpenWaiterDialog] = useState(false);
   const [waiterCallDescription, setWaiterCallDescription] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
+  const [cartOpen, setCartOpen] = useState(false);
 
   // Query for menu items
-  const { data: menuItems, isLoading: isLoadingMenu, isError: isErrorMenu } = useQuery(
+  const { data: menuData, isLoading: isLoadingMenu, isError: isErrorMenu } = useQuery(
     ['dineInMenu', tableId],
     () => fetchDineInMenu(tableId),
     {
       enabled: !!tableId,
     }
   );
+  
+  const handleCategoryChange = (event, newValue) => {
+    setSelectedCategory(newValue);
+  };
+  
+  const addToCart = (item) => {
+    const existingItem = cartItems.find(cartItem => cartItem.id === item.id);
+    
+    if (existingItem) {
+      setCartItems(cartItems.map(cartItem => 
+        cartItem.id === item.id 
+          ? { ...cartItem, quantity: cartItem.quantity + 1 } 
+          : cartItem
+      ));
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+  };
+  
+  const removeFromCart = (itemId) => {
+    const existingItem = cartItems.find(item => item.id === itemId);
+    
+    if (existingItem.quantity === 1) {
+      setCartItems(cartItems.filter(item => item.id !== itemId));
+    } else {
+      setCartItems(cartItems.map(item => 
+        item.id === itemId 
+          ? { ...item, quantity: item.quantity - 1 } 
+          : item
+      ));
+    }
+  };
 
   // Mutation to start session
   const sessionMutation = useMutation(() => startTableSession(tableId), {
@@ -114,7 +162,7 @@ const PublicDineInMenu = () => {
     );
   }
 
-  if (!menuItems || menuItems.length === 0) {
+  if (!menuData || !menuData.products || menuData.products.length === 0) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Typography variant="h6">Nenhum item encontrado para este cardápio de salão.</Typography>
@@ -122,82 +170,275 @@ const PublicDineInMenu = () => {
     );
   }
 
+  // Extrair categorias do menuData
+  const categories = menuData ? Object.keys(menuData.categories) : [];
+  
   return (
-    <Box p={3}>
-      <Typography variant="h4" gutterBottom align="center">
-        Cardápio da Mesa
-      </Typography>
-
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#f5f5f5' }}>
+      {/* Header */}
+      <AppBar position="fixed" sx={{ bgcolor: '#8B0000' }}>
+        <Toolbar>
+          <RestaurantIcon sx={{ mr: 1 }} />
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            MESA {tableId}
+          </Typography>
+          <IconButton 
+            color="inherit" 
+            onClick={() => setCartOpen(!cartOpen)}
+            sx={{ position: 'relative' }}
+          >
+            <ShoppingCartIcon />
+            {cartItems.length > 0 && (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  bgcolor: 'white',
+                  color: '#8B0000',
+                  borderRadius: '50%',
+                  width: 18,
+                  height: 18,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 12,
+                  fontWeight: 'bold'
+                }}
+              >
+                {cartItems.reduce((total, item) => total + item.quantity, 0)}
+              </Box>
+            )}
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      
+      {/* Espaço para compensar a AppBar fixa */}
+      <Toolbar />
+      
+      {/* Conteúdo principal */}
+      <Container maxWidth="lg" sx={{ flexGrow: 1, py: 2 }}>
+        {sessionStatus && (
+          <Alert severity="info" sx={{ mb: 2 }}>
+            Status da Sessão: {sessionStatus.status.replace(/_/g, ' ')}
+            {sessionStatus.pending_calls && sessionStatus.pending_calls.length > 0 && (
+              <>
+                <br />
+                Chamadas Pendentes: {sessionStatus.pending_calls.map(call => call.type).join(', ')}
+              </>
+            )}
+          </Alert>
+        )}
+        
+        {/* Tabs de categorias */}
+        <Paper sx={{ mb: 2, borderRadius: 2, overflow: 'hidden' }}>
+          <Tabs 
+            value={selectedCategory} 
+            onChange={handleCategoryChange} 
+            variant="scrollable"
+            scrollButtons="auto"
+            sx={{
+              bgcolor: '#8B0000',
+              '& .MuiTab-root': { color: 'white' },
+              '& .Mui-selected': { color: 'white', fontWeight: 'bold' },
+              '& .MuiTabs-indicator': { backgroundColor: 'white' }
+            }}
+          >
+            {categories.map((category, index) => (
+              <Tab label={category} key={index} />
+            ))}
+          </Tabs>
+        </Paper>
+        
+        {/* Lista de produtos da categoria selecionada */}
+        {categories.length > 0 && (
+          <Box>
+            {categories.map((category, index) => (
+              <Box key={category} sx={{ display: selectedCategory === index ? 'block' : 'none' }}>
+                <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold', color: '#8B0000' }}>
+                  {category}
+                </Typography>
+                <Grid container spacing={2}>
+                  {menuData.categories[category].map((item) => (
+                    <Grid item xs={12} sm={6} md={4} key={item.id}>
+                      <Card sx={{ 
+                        display: 'flex', 
+                        height: '100%', 
+                        borderRadius: 2,
+                        overflow: 'hidden',
+                        boxShadow: 3
+                      }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                          <CardMedia
+                            component="img"
+                            height="140"
+                            image={item.imageUrl || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`}
+                            alt={item.name}
+                          />
+                          <CardContent sx={{ flexGrow: 1 }}>
+                            <Typography gutterBottom variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
+                              {item.name}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                              {item.description}
+                            </Typography>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                              <Typography variant="h6" color="#8B0000" fontWeight="bold">
+                                R$ {Number(item.price).toFixed(2)}
+                              </Typography>
+                              <Button 
+                                variant="contained" 
+                                size="small" 
+                                onClick={() => addToCart(item)}
+                                sx={{ 
+                                  bgcolor: '#8B0000', 
+                                  '&:hover': { bgcolor: '#6B0000' } 
+                                }}
+                              >
+                                Adicionar
+                              </Button>
+                            </Box>
+                          </CardContent>
+                        </Box>
+                      </Card>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Box>
+            ))}
+          </Box>
+        )}
+      </Container>
+      
+      {/* Barra de ações inferior */}
       {sessionId && (
-        <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center', gap: 2 }}>
-          <Button variant="contained" onClick={() => setOpenWaiterDialog(true)}>
+        <Paper 
+          elevation={3} 
+          sx={{ 
+            position: 'fixed', 
+            bottom: 0, 
+            left: 0, 
+            right: 0, 
+            p: 2,
+            display: 'flex',
+            justifyContent: 'space-around',
+            zIndex: 1100
+          }}
+        >
+          <Button 
+            variant="contained" 
+            startIcon={<CallIcon />}
+            onClick={() => setOpenWaiterDialog(true)}
+            sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
+          >
             Chamar Garçom
           </Button>
-          <Button variant="contained" onClick={() => requestBillMutation.mutate(sessionId)}>
+          <Button 
+            variant="contained" 
+            startIcon={<ReceiptIcon />}
+            onClick={() => requestBillMutation.mutate(sessionId)}
+            sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
+          >
             Solicitar Conta
           </Button>
-        </Box>
+        </Paper>
       )}
-
-      {sessionStatus && (
-        <Alert severity="info" sx={{ mb: 2 }}>
-          Status da Sessão: {sessionStatus.status.replace(/_/g, ' ')}
-          {sessionStatus.pending_calls && sessionStatus.pending_calls.length > 0 && (
-            <>
-              <br />
-              Chamadas Pendentes: {sessionStatus.pending_calls.map(call => call.type).join(', ')}
-            </>
-          )}
-        </Alert>
-      )}
-
-      <Grid container spacing={3}>
-        {menuItems.map((item) => (
-          <Grid item xs={12} sm={6} md={4} key={item.id}>
-            <Card>
-              {/* You might add an image here if product has an image field */}
-              {/* <CardMedia
-                component="img"
-                height="140"
-                image={item.imageUrl || '/placeholder.png'}
-                alt={item.name}
-              /> */}
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {item.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {item.description}
-                </Typography>
-                <Typography variant="h6" color="primary" mt={2}>
-                  R$ {Number(item.price).toFixed(2)}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
 
       {/* Dialog for Call Waiter */}
       <Dialog open={openWaiterDialog} onClose={() => setOpenWaiterDialog(false)}>
-        <DialogTitle>Chamar Garçom</DialogTitle>
-        <DialogContent>
+        <DialogTitle sx={{ bgcolor: '#8B0000', color: 'white' }}>Chamar Garçom</DialogTitle>
+        <DialogContent sx={{ pt: 2 }}>
           <TextField
             autoFocus
             margin="dense"
             label="Mensagem (opcional)"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             value={waiterCallDescription}
             onChange={(e) => setWaiterCallDescription(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenWaiterDialog(false)}>Cancelar</Button>
-          <Button onClick={() => callWaiterMutation.mutate({ sessionId, description: waiterCallDescription })}>
+          <Button 
+            variant="contained"
+            onClick={() => callWaiterMutation.mutate({ sessionId, description: waiterCallDescription })}
+            sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
+          >
             Enviar Chamada
           </Button>
+        </DialogActions>
+      </Dialog>
+      
+      {/* Carrinho de compras */}
+      <Dialog 
+        open={cartOpen} 
+        onClose={() => setCartOpen(false)}
+        fullWidth
+        maxWidth="sm"
+      >
+        <DialogTitle sx={{ bgcolor: '#8B0000', color: 'white' }}>
+          Carrinho de Compras
+        </DialogTitle>
+        <DialogContent>
+          {cartItems.length === 0 ? (
+            <Box sx={{ py: 4, textAlign: 'center' }}>
+              <Typography variant="body1">Seu carrinho está vazio</Typography>
+            </Box>
+          ) : (
+            <Box sx={{ mt: 2 }}>
+              {cartItems.map(item => (
+                <Paper key={item.id} sx={{ mb: 2, p: 2 }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Box>
+                      <Typography variant="subtitle1" fontWeight="bold">{item.name}</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        R$ {Number(item.price).toFixed(2)} x {item.quantity}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Button 
+                        size="small" 
+                        variant="outlined" 
+                        onClick={() => removeFromCart(item.id)}
+                        sx={{ minWidth: '30px', p: 0 }}
+                      >
+                        -
+                      </Button>
+                      <Typography>{item.quantity}</Typography>
+                      <Button 
+                        size="small" 
+                        variant="outlined" 
+                        onClick={() => addToCart(item)}
+                        sx={{ minWidth: '30px', p: 0 }}
+                      >
+                        +
+                      </Button>
+                    </Box>
+                  </Box>
+                </Paper>
+              ))}
+              <Divider sx={{ my: 2 }} />
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+                <Typography variant="h6">Total:</Typography>
+                <Typography variant="h6" fontWeight="bold">
+                  R$ {cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0).toFixed(2)}
+                </Typography>
+              </Box>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setCartOpen(false)}>Fechar</Button>
+          {cartItems.length > 0 && (
+            <Button 
+              variant="contained" 
+              sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
+            >
+              Finalizar Pedido
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </Box>

@@ -83,26 +83,20 @@ const checkRestaurantOwnership = async (req, res, next) => {
     }
 
     // Admins podem acessar qualquer restaurante
-    if (req.user.role === 'admin') {
+    if (req.user.role === 'admin' || req.user.role === 'super_admin') {
       return next();
     }
 
-    // Verificar se o usuário é dono do restaurante
-    const restaurant = await models.Restaurant.findOne({
-      where: {
-        id: restaurantId,
-        owner_id: req.user.userId
-      }
-    });
+    // Verificar se o usuário está associado a este restaurante
+    const isAssociated = req.user.restaurants.some(r => r.id === restaurantId);
 
-    if (!restaurant) {
+    if (!isAssociated) {
       return res.status(403).json({
         error: 'Acesso negado. Você não tem permissão para acessar este restaurante'
       });
     }
 
-    // Adicionar restaurante à requisição
-    req.restaurant = restaurant;
+    // If the user is an owner/manager and is associated, proceed
     next();
   } catch (error) {
     console.error('Erro ao verificar propriedade do restaurante:', error);

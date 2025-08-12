@@ -51,7 +51,7 @@ router.get('/', auth, getRestaurantId, async (req, res) => {
   const { category } = req.query; // Get category from query parameters
 
   try {
-    let whereClause = { restaurant_id };
+    let whereClause = { restaurant_id: restaurantId };
     if (category) {
       whereClause.category = category; // Add category to where clause if provided
     }

@@ -73,7 +73,7 @@ const PublicDeliveryMenu = () => {
                   {item.description}
                 </Typography>
                 <Typography variant="h6" color="primary" mt={2}>
-                  R$ {item.price.toFixed(2)}
+                  R$ {Number(item.price).toFixed(2)}
                 </Typography>
               </CardContent>
             </Card>

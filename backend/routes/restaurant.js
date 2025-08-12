@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { auth, checkRestaurantOwnership } = require('../middleware/auth');
+const { auth, checkRestaurantOwnership, authorize } = require('../middleware/auth');
 const { models } = require('../config/database');
 
 /**

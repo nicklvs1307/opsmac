@@ -1,14 +1,39 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
-/app/backend/server.js:91
-app.use('/api/orders', ordersRoutes);
-                       ^
-ReferenceError: Cannot access 'ordersRoutes' before initialization
-    at Object.<anonymous> (/app/backend/server.js:91:24)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+/app/backend/routes/restaurant.js:240
+      return res.status(400).json({ error: 'O campo pos_status deve ser 'open' ou 'closed'.' });
+                                                                         ^^^^
+SyntaxError: Unexpected identifier 'open'
+    at wrapSafe (node:internal/modules/cjs/loader:1472:18)
+    at Module._compile (node:internal/modules/cjs/loader:1501:20)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
     at Module.load (node:internal/modules/cjs/loader:1275:32)
     at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
-    at node:internal/main/run_main_module:28:49
+    at Module.require (node:internal/modules/cjs/loader:1298:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/backend/server.js:99:26)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
 Node.js v20.19.4

@@ -237,7 +237,7 @@ router.put('/:restaurantId/pos-status', auth, checkRestaurantOwnership, async (r
     const { pos_status } = req.body;
 
     if (!['open', 'closed'].includes(pos_status)) {
-      return res.status(400).json({ error: 'O campo pos_status deve ser 'open' ou 'closed'.' });
+      return res.status(400).json({ error: `O campo pos_status deve ser 'open' ou 'closed'.` });
     }
 
     const restaurant = await models.Restaurant.findByPk(restaurantId);

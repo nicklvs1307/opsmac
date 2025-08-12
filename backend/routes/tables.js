@@ -14,7 +14,7 @@ const generateQrCodeUrl = (tableId) => {
 // Create a new table
 router.post('/', auth, async (req, res) => {
   const { table_number } = req.body;
-  const { restaurant_id } = req.user;
+  const restaurant_id = req.user.restaurants[0].id;
 
   if (!table_number) {
     return res.status(400).json({ msg: 'Table number is required.' });
@@ -47,7 +47,7 @@ router.post('/', auth, async (req, res) => {
 
 // Get all tables for a restaurant
 router.get('/', auth, async (req, res) => {
-  const { restaurant_id } = req.user;
+  const restaurant_id = req.user.restaurants[0].id;
 
   try {
     const tables = await models.Table.findAll({
@@ -64,7 +64,7 @@ router.get('/', auth, async (req, res) => {
 // Get a specific table
 router.get('/:id', auth, async (req, res) => {
   const { id } = req.params;
-  const { restaurant_id } = req.user;
+  const restaurant_id = req.user.restaurants[0].id;
 
   try {
     const table = await models.Table.findOne({
@@ -84,7 +84,7 @@ router.get('/:id', auth, async (req, res) => {
 router.put('/:id', auth, async (req, res) => {
   const { id } = req.params;
   const { table_number } = req.body;
-  const { restaurant_id } = req.user;
+  const restaurant_id = req.user.restaurants[0].id;
 
   try {
     let table = await models.Table.findOne({
@@ -115,7 +115,7 @@ router.put('/:id', auth, async (req, res) => {
 // Delete a table
 router.delete('/:id', auth, async (req, res) => {
   const { id } = req.params;
-  const { restaurant_id } = req.user;
+  const restaurant_id = req.user.restaurants[0].id;
 
   try {
     const table = await models.Table.findOne({
@@ -136,7 +136,7 @@ router.delete('/:id', auth, async (req, res) => {
 // Generate QR code URL for a table (re-generate or get existing)
 router.post('/:id/generate-qr', auth, async (req, res) => {
   const { id } = req.params;
-  const { restaurant_id } = req.user;
+  const restaurant_id = req.user.restaurants[0].id;
 
   try {
     let table = await models.Table.findOne({

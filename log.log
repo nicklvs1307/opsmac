@@ -1,11 +1,9 @@
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/stock
+https://feedelizaapi.towersfy.com/api/tables
 Método da solicitação
 GET
 Código de status
-400 Bad Request
+500 Internal Server Error
 Endereço remoto
 95.217.16.187:443
-
-{"msg":"User is not associated with any restaurant."}
-
+Server Error

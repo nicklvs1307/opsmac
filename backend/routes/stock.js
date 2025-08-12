@@ -5,7 +5,6 @@ const { models } = require('../config/database');
 
 // Get current stock for all products or a specific product
 router.get('/', auth, async (req, res) => {
-  // Correctly get the restaurant ID from the authenticated user
   const restaurantId = req.user?.restaurants?.[0]?.id;
 
   if (!restaurantId) {

@@ -450,32 +450,60 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
 // @route   PUT /api/checkin/checkout/:checkinId
 // @desc    Registrar o check-out de um cliente
 // @access  Private
-router.put('/checkout/:checkinId', auth, checkCheckinModuleEnabled, async (req, res) => {
+router.put('/checkout/:checkinId', auth, async (req, res) => {
   const { checkinId } = req.params;
+  const user = req.user;
 
   try {
-    // O restaurante já está disponível em req.restaurant devido ao middleware checkCheckinModuleEnabled
-    const restaurantId = req.restaurant.id;
-
     const checkin = await models.Checkin.findOne({
       where: {
         id: checkinId,
         status: 'active',
-        restaurant_id: restaurantId // Filtrar por restaurant_id
       },
+      include: [{
+        model: models.Restaurant,
+        as: 'restaurant',
+        attributes: ['id', 'settings'] // Apenas buscar os campos necessários
+      }]
     });
 
     if (!checkin) {
-      return res.status(404).json({ message: 'Check-in ativo não encontrado ou não pertence ao seu restaurante.' });
+      return res.status(404).json({ message: 'Check-in ativo não encontrado.' });
     }
 
+    const restaurant = checkin.restaurant;
+
+    if (!restaurant) {
+      // Este caso é improvável se a integridade dos dados for mantida, mas é uma boa verificação.
+      return res.status(404).json({ message: 'Restaurante associado ao check-in não encontrado.' });
+    }
+
+    // 1. Verificar se o usuário autenticado é dono do restaurante
+    const isOwner = user.is_admin || user.restaurants.some(r => r.id === restaurant.id);
+    if (!isOwner) {
+      return res.status(403).json({ error: 'Acesso negado a este restaurante.' });
+    }
+
+    // 2. Verificar se o módulo de Check-in está habilitado para o restaurante
+    if (!restaurant.settings?.enabled_modules?.includes('checkin_program')) {
+      return res.status(403).json({ error: 'Módulo de Check-in não habilitado para este restaurante.' });
+    }
+
+    // A verificação `checkin.restaurant_id === restaurant.id` já é garantida pelo `findOne`
+    // e pelo `include`, então não é necessário um `if` explícito aqui.
+
+    // Lógica de checkout
     checkin.checkout_time = new Date();
     checkin.status = 'completed';
     await checkin.save();
 
+    // Remover o objeto 'restaurant' da resposta final para não expor dados desnecessários
+    const checkinResponse = checkin.toJSON();
+    delete checkinResponse.restaurant;
+
     res.json({
       message: 'Check-out registrado com sucesso',
-      checkin
+      checkin: checkinResponse
     });
   } catch (error) {
     console.error('Erro ao registrar check-out:', error);

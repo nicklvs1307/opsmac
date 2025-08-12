@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
       }
     },
     qr_type: {
-      type: DataTypes.ENUM('feedback', 'checkin'),
+      type: DataTypes.ENUM('feedback', 'checkin', 'menu'),
       defaultValue: 'feedback',
       allowNull: false,
     },
@@ -208,30 +208,43 @@ module.exports = (sequelize) => {
         const baseUrl = process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com';
         
         if (qrcode.qr_type === 'checkin') {
-          // Para QR Code de Check-in, a URL aponta para a página pública de check-in
-          qrcode.feedback_url = `${baseUrl}/checkin/public/${qrcode.restaurant_id}`;
+          const restaurant = await sequelize.models.Restaurant.findByPk(qrcode.restaurant_id);
+          if (!restaurant) throw new Error('Restaurante não encontrado para gerar URL de check-in.');
+          qrcode.feedback_url = `${baseUrl}/checkin/public/${restaurant.slug}`;
           qrcode.qr_code_data = JSON.stringify({
             type: 'checkin',
-            restaurant_id: qrcode.restaurant_id,
+            restaurant_slug: restaurant.slug,
             url: qrcode.feedback_url,
             created_at: new Date().toISOString()
           });
-        } else { // Default para feedback
-          // Gerar URL de feedback
-          if (!qrcode.feedback_url && qrcode.restaurant_id && qrcode.table_number) {
-            qrcode.feedback_url = `${baseUrl}/feedback/${qrcode.restaurant_id}/${qrcode.table_number}`;
-          }
-          
-          // Gerar dados do QR Code
-          if (!qrcode.qr_code_data && qrcode.restaurant_id && qrcode.table_number && qrcode.feedback_url) {
+        } else if (qrcode.qr_type === 'menu') {
+            const table = await sequelize.models.Table.findOne({ where: { restaurant_id: qrcode.restaurant_id, table_number: qrcode.table_number } });
+            let tableId;
+            if (!table) {
+              // Se a mesa não existir, crie uma. Isso garante que o QR code sempre aponte para uma mesa válida.
+              const newTable = await sequelize.models.Table.create({
+                restaurant_id: qrcode.restaurant_id,
+                table_number: qrcode.table_number,
+              });
+              tableId = newTable.id;
+            } else {
+              tableId = table.id;
+            }
+            qrcode.feedback_url = `${baseUrl}/menu/dine-in/${tableId}`;
             qrcode.qr_code_data = JSON.stringify({
-              type: 'feedback',
-              restaurant_id: qrcode.restaurant_id,
-              table_number: qrcode.table_number,
+              type: 'menu',
+              table_id: tableId,
               url: qrcode.feedback_url,
               created_at: new Date().toISOString()
             });
-          }
+        } else { // Default to feedback
+          qrcode.feedback_url = `${baseUrl}/feedback/new?qrCodeId=${qrcode.id}`;
+          qrcode.qr_code_data = JSON.stringify({
+            type: 'feedback',
+            qr_code_id: qrcode.id,
+            url: qrcode.feedback_url,
+            created_at: new Date().toISOString()
+          });
         }
       },
       beforeCreate: async (qrcode) => {

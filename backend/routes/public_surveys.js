@@ -158,7 +158,11 @@ router.post(
                 // You can add more fields here if needed, e.g., metadata from req.headers
             };
 
-            await models.Feedback.create(feedbackData);
+            // Apenas crie um registro de feedback se uma avaliação (rating) foi fornecida,
+            // pois é um campo obrigatório no modelo Feedback.
+            if (feedbackRating !== null) {
+                await models.Feedback.create(feedbackData);
+            }
 
             // Se houver um customer_id, atualize as estatísticas do cliente
             if (customer_id) {
@@ -209,8 +213,12 @@ router.post(
                 coupon: generatedCoupon
             });
         } catch (err) {
-            console.error(err.message);
-            res.status(500).send('Server Error');
+            console.error('Erro detalhado ao enviar respostas da pesquisa:', err);
+            res.status(500).json({ 
+                error: 'Erro ao enviar respostas.',
+                message: process.env.NODE_ENV === 'development' ? err.message : 'Ocorreu um erro inesperado.',
+                stack: process.env.NODE_ENV === 'development' ? err.stack : undefined 
+            });
         }
     }
 );

@@ -751,6 +751,39 @@ const Settings = () => {
               </Box>
             </CardContent>
           </Card>
+
+          <Card sx={{ mt: 3 }}>
+            <CardHeader
+              title="Link do Cardápio de Delivery"
+              subheader="Compartilhe este link com seus clientes para que eles possam ver seu cardápio online."
+            />
+            <CardContent>
+              {user?.restaurant?.slug ? (
+                <Box display="flex" alignItems="center">
+                  <TextField
+                    value={`${window.location.origin}/menu/delivery/${user.restaurant.slug}`}
+                    fullWidth
+                    InputProps={{
+                      readOnly: true,
+                    }}
+                    sx={{ mr: 2 }}
+                  />
+                  <IconButton 
+                    onClick={() => {
+                      navigator.clipboard.writeText(`${window.location.origin}/menu/delivery/${user.restaurant.slug}`);
+                      toast.success('Link copiado!');
+                    }}
+                  >
+                    <ContentCopyIcon />
+                  </IconButton>
+                </Box>
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  O link do seu cardápio aparecerá aqui assim que as informações do seu restaurante estiverem salvas.
+                </Typography>
+              )}
+            </CardContent>
+          </Card>
         );
 
       case 'notifications':

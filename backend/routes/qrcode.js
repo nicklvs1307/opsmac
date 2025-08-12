@@ -10,7 +10,7 @@ const router = express.Router();
 // Validações
 const createQRCodeValidation = [
   body('qr_type')
-    .isIn(['feedback', 'checkin'])
+    .isIn(['feedback', 'checkin', 'menu'])
     .withMessage('Tipo de QR Code inválido'),
   body('table_number')
     .isInt({ min: 1 })

@@ -5,26 +5,36 @@ const { models } = require('../config/database');
 
 // Get current stock for all products or a specific product
 router.get('/', auth, async (req, res) => {
-  const { restaurant_id } = req.user;
-  const { product_id } = req.query; // Optional: filter by product_id
+  // Correctly get the restaurant ID from the authenticated user
+  const restaurantId = req.user?.restaurants?.[0]?.id;
+
+  if (!restaurantId) {
+    return res.status(400).json({ msg: 'User is not associated with any restaurant.' });
+  }
 
   try {
-    let whereClause = {};
-    if (product_id) {
-      whereClause.product_id = product_id;
-    }
-
-    const stocks = await models.Stock.findAll({
-      where: whereClause,
+    const products = await models.Product.findAll({
+      where: { restaurant_id: restaurantId },
       include: [{
-        model: models.Product,
-        as: 'product',
-        where: { restaurant_id } // Ensure stock belongs to user's restaurant
-      }]
+        model: models.Stock,
+        as: 'stock',
+        required: false // Use a LEFT JOIN to include products even without stock entries
+      }],
+      order: [['name', 'ASC']] // Order products by name
     });
-    res.json(stocks);
+
+    // Map the result to the desired format
+    const stockList = products.map(product => ({
+      id: product.id, // Keep product id for keys and actions
+      product_id: product.id,
+      name: product.name,
+      sku: product.sku,
+      quantity: product.stock ? product.stock.quantity : 0
+    }));
+
+    res.json(stockList);
   } catch (error) {
-    console.error(error.message);
+    console.error('Error fetching stock list:', error);
     res.status(500).send('Server Error');
   }
 });

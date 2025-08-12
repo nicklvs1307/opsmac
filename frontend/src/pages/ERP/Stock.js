@@ -33,10 +33,6 @@ const Stock = () => {
     enabled: !!restaurantId,
   });
 
-  const { data: products, isLoading: isLoadingProducts } = useQuery('products', () => axiosInstance.get('/api/products').then(res => res.data), {
-    enabled: !!restaurantId,
-  });
-
   const { data: stockHistory, isLoading: isLoadingHistory, isError: isErrorHistory } = useQuery(
     ['stockHistory', selectedProductId],
     () => fetchStockHistory(selectedProductId),
@@ -104,7 +100,7 @@ const Stock = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {isLoadingStocks || isLoadingProducts ? (
+              {isLoadingStocks ? (
                 <TableRow>
                   <TableCell colSpan={4} align="center">
                     <CircularProgress />
@@ -116,22 +112,28 @@ const Stock = () => {
                     <Alert severity="error">Erro ao carregar estoque.</Alert>
                   </TableCell>
                 </TableRow>
-              ) : (
-                stocks.map((stock) => (
-                  <TableRow key={stock.id}>
-                    <TableCell>{stock.product?.name}</TableCell>
-                    <TableCell>{stock.product?.sku}</TableCell>
-                    <TableCell>{stock.quantity}</TableCell>
+              ) : stocks && stocks.length > 0 ? (
+                stocks.map((product) => (
+                  <TableRow key={product.id}>
+                    <TableCell>{product.name}</TableCell>
+                    <TableCell>{product.sku}</TableCell>
+                    <TableCell>{product.quantity}</TableCell>
                     <TableCell>
-                      <Button size="small" onClick={() => handleOpenMovementDialog(stock.product_id)}>
+                      <Button size="small" onClick={() => handleOpenMovementDialog(product.id)}>
                         Movimentar
                       </Button>
-                      <Button size="small" onClick={() => handleOpenHistoryDialog(stock.product_id)} sx={{ ml: 1 }}>
+                      <Button size="small" onClick={() => handleOpenHistoryDialog(product.id)} sx={{ ml: 1 }}>
                         Histórico
                       </Button>
                     </TableCell>
                   </TableRow>
                 ))
+              ) : (
+                <TableRow>
+                    <TableCell colSpan={4} align="center">
+                        <Typography>Nenhum produto encontrado. Adicione produtos na aba 'Produtos' para controlar o estoque.</Typography>
+                    </TableCell>
+                </TableRow>
               )}
             </TableBody>
           </Table>

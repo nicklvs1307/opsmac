@@ -79,26 +79,25 @@ const QRCodeGenerate = () => {
     if (watchedValues.name && restaurantId) {
       const baseUrl = window.location.origin;
       if (watchedValues.qr_type === 'checkin') {
-        // Para check-in, precisamos do slug do restaurante
         const fetchRestaurantSlug = async () => {
           try {
-            const response = await axiosInstance.get(`/api/settings/${restaurantId}`);
+            const response = await axiosInstance.get(`/api/restaurant/settings`);
             const restaurantSlug = response.data.slug;
             setPreviewUrl(`${baseUrl}/checkin/public/${restaurantSlug}`);
           } catch (error) {
             console.error('Erro ao buscar slug do restaurante:', error);
-            toast.error('Erro ao gerar URL de check-in. Tente novamente.');
           }
         };
         fetchRestaurantSlug();
+      } else if (watchedValues.qr_type === 'menu') {
+        const tableNumber = watchedValues.table_number || 'X';
+        setPreviewUrl(`${baseUrl}/menu/table/preview-for-table-${tableNumber}`);
       } else { // Default to feedback
-        // Para feedback, precisamos do slug da pesquisa (se for uma pesquisa existente)
-        // Ou geramos um slug temporário para preview
-        const slug = watchedValues.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-        setPreviewUrl(`${baseUrl}/public/surveys/${slug}`);
+        const qrCodeId = 'preview-id';
+        setPreviewUrl(`${baseUrl}/feedback/new?qrCodeId=${qrCodeId}`);
       }
     }
-  }, [watchedValues.name, watchedValues.qr_type, restaurantId]);
+  }, [watchedValues.name, watchedValues.qr_type, watchedValues.table_number, restaurantId]);
 
   const handleNext = async () => {
     const fieldsToValidate = getFieldsForStep(activeStep);
@@ -195,6 +194,7 @@ const QRCodeGenerate = () => {
                     <Select {...field} label="Tipo de QR Code">
                       <MenuItem value="feedback">Feedback</MenuItem>
                       <MenuItem value="checkin">Check-in</MenuItem>
+                      <MenuItem value="menu">Cardápio</MenuItem>
                     </Select>
                   </FormControl>
                 )}
@@ -238,12 +238,21 @@ const QRCodeGenerate = () => {
               <Controller
                 name="table_number"
                 control={control}
+                rules={{
+                  required: watchedValues.qr_type === 'menu' ? 'Número da mesa é obrigatório para QR Code de cardápio.' : false,
+                  min: {
+                    value: 1,
+                    message: 'Número da mesa deve ser positivo.'
+                  }
+                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
                     label="Número da Mesa"
                     type="number"
                     fullWidth
+                    error={!!errors.table_number}
+                    helperText={errors.table_number?.message}
                     placeholder="Ex: 1, 2, 3..."
                   />
                 )}

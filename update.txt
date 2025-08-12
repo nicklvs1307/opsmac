@@ -26,9 +26,24 @@ As seções detalhadas sobre "CRITÉRIOS DE SEGMENTAÇÃO", "AGRUPAMENTOS PADRÕ
 
 
 dentro do modulo erp eu preciso
-um modulo financeiro onde tenha, acerto de entregadores
-acerto de garçons, contas, categorias, lançamentos financeiros, fornecedores, frente de caixa, formas de pagamento
+um modulo financeiro onde tenha:
+ acerto de entregadores
+acerto de garçons
+ contas
+  categorias
+   lançamentos financeiros
+   fornecedores
+    frente de caixa
+     formas de pagamento
 e metodos de pagamento
 
 no modulo estoque, quero grupos por ingrediente, movimentações de estoque, ficha tecnica, ingredientes e insumos, notas de entrada e ordens de compra
 
+nos relatorios do erp quero 
+cupons gerados, 
+dre gerencial
+fluxo de caixa
+historico de posição de estoque
+lista de comptas
+posição de estoquete
+venda por periodo

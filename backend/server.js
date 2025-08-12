@@ -97,6 +97,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 const restaurantRoutes = require('./routes/restaurant');
 const healthRoutes = require('./routes/health');
+const ordersRoutes = require('./routes/orders');
 
 app.use('/api/restaurant', restaurantRoutes);
 app.use('/api/health', healthRoutes);

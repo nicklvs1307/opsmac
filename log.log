@@ -1,28 +1,16 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   163.6s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   156.6s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.709
-0.709 > feedeliza-plus@1.0.0 build
-0.709 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.709
-3.809 Creating an optimized production build...
-162.6 Failed to compile.
-162.6
-162.6 [eslint]
-162.6 src/pages/Fidelidade/Avaliacoes/SurveyCreate.js
-162.6 Syntax error: Unexpected token (335:88) (335:88)
-162.6
-162.6 src/pages/Public/PublicDeliveryMenu.js
-162.6   Line 404:24:  'handleCheckout' is not defined  no-undef
-162.6
-162.6 src/pages/Public/PublicDineInMenu.js
-162.6   Line 101:7:  'toast' is not defined  no-undef
-162.6   Line 128:7:  'toast' is not defined  no-undef
-162.6   Line 137:7:  'toast' is not defined  no-undef
-162.6
-162.6 Search for the keywords to learn more about each error.
-162.6
-162.6
+0.636
+0.636 > feedeliza-plus@1.0.0 build
+0.636 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.636
+2.985 Creating an optimized production build...
+156.2 Failed to compile.
+156.2
+156.2 Attempted import error: './pages/Fidelidade/Avaliacoes/SurveyCreate' does not contain a default export (imported as 'SurveyCreate').
+156.2
+156.2
 ------
 Dockerfile.frontend:23
 --------------------

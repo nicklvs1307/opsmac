@@ -331,3 +331,5 @@ const SurveyCreate = () => {
     </Box>
   );
 };
+
+export default SurveyCreate;

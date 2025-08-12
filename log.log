@@ -1,37 +1,62 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   169.8s
-------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.784
-0.784 > feedeliza-plus@1.0.0 build
-0.784 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.784
-3.765 Creating an optimized production build...
-168.8 Failed to compile.
-168.8
-168.8 [eslint]
-168.8 src/pages/ERP/Products.js
-168.8   Line 100:40:  'handleOpenTechSpecDialog' is not defined    no-undef
-168.8   Line 158:21:  'openTechSpecDialog' is not defined          no-undef
-168.8   Line 158:50:  'handleCloseTechSpecDialog' is not defined   no-undef
-168.8   Line 159:38:  'selectedProductForTechSpec' is not defined  no-undef
-168.8   Line 162:24:  'selectedProductForTechSpec' is not defined  no-undef
-168.8   Line 167:28:  'handleCloseTechSpecDialog' is not defined   no-undef
-168.8   Line 283:12:  'FormControl' is not defined                 react/jsx-no-undef
-168.8   Line 284:14:  'InputLabel' is not defined                  react/jsx-no-undef
-168.8   Line 285:14:  'Select' is not defined                      react/jsx-no-undef
-168.8   Line 291:18:  'MenuItem' is not defined                    react/jsx-no-undef
-168.8   Line 305:12:  'IconButton' is not defined                  react/jsx-no-undef
-168.8
-168.8 Search for the keywords to learn more about each error.
-168.8
-168.8
-------
-Dockerfile.frontend:23
---------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/orders
+Método da solicitação
+GET
+Código de status
+403 Forbidden
+Endereço remoto
+95.217.16.187:443
+{"error":"Acesso negado. Permissões insuficientes"}
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/ingredients
+Método da solicitação
+GET
+Código de status
+403 Forbidden
+Endereço remoto
+95.217.16.187:443
+
+{"error":"Acesso negado. Permissões insuficientes"}
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
+WHERE parameter "restaurant_id" has invalid "undefined" value
+WHERE parameter "restaurant_id" has invalid "undefined" value
+WHERE parameter "restaurant_id" has invalid "undefined" value
+WHERE parameter "restaurant_id" has invalid "undefined" value
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/products
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+Endereço remoto
+95.217.16.187:443
+Server Error

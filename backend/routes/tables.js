@@ -5,6 +5,27 @@ const { models } = require('../config/database');
 const QRCode = require('qrcode'); // Assuming qrcode library is available
 require('dotenv').config(); // Load environment variables
 
+// Middleware para obter o ID do restaurante do usuário autenticado
+const getRestaurantId = (req, res, next) => {
+  let restaurantId = req.user?.restaurants?.[0]?.id; // Default for owner/manager
+
+  // If user is admin or super_admin, allow them to specify restaurant_id
+  if (req.user.role === 'admin' || req.user.role === 'super_admin') {
+    restaurantId = req.query.restaurant_id || req.body.restaurant_id || restaurantId;
+  }
+
+  if (!restaurantId) {
+    return res.status(400).json({ msg: 'ID do restaurante é obrigatório ou usuário não associado a nenhum restaurante.' });
+  }
+  req.restaurantId = restaurantId;
+
+  console.log('getRestaurantId Middleware - req.user.role:', req.user.role);
+  console.log('getRestaurantId Middleware - req.user.restaurants:', req.user.restaurants);
+  console.log('getRestaurantId Middleware - final restaurantId:', req.restaurantId);
+
+  next();
+};
+
 // Helper function to generate QR code URL
 const generateQrCodeUrl = (tableId) => {
   const frontendBaseUrl = process.env.FRONTEND_PUBLIC_URL || 'http://localhost:3000'; // Fallback for development
@@ -12,9 +33,9 @@ const generateQrCodeUrl = (tableId) => {
 };
 
 // Create a new table
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, getRestaurantId, async (req, res) => {
   const { table_number } = req.body;
-  const restaurant_id = req.user.restaurants[0].id;
+  const { restaurantId } = req;
 
   if (!table_number) {
     return res.status(400).json({ msg: 'Table number is required.' });
@@ -46,12 +67,12 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Get all tables for a restaurant
-router.get('/', auth, async (req, res) => {
-  const restaurant_id = req.user.restaurants[0].id;
+router.get('/', auth, getRestaurantId, async (req, res) => {
+  const { restaurantId } = req;
 
   try {
     const tables = await models.Table.findAll({
-      where: { restaurant_id },
+      where: { restaurant_id: restaurantId },
       order: [['table_number', 'ASC']]
     });
     res.json(tables);
@@ -62,13 +83,13 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get a specific table
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', auth, getRestaurantId, async (req, res) => {
   const { id } = req.params;
-  const restaurant_id = req.user.restaurants[0].id;
+  const { restaurantId } = req;
 
   try {
     const table = await models.Table.findOne({
-      where: { id, restaurant_id }
+      where: { id, restaurant_id: restaurantId }
     });
     if (!table) {
       return res.status(404).json({ msg: 'Table not found.' });
@@ -81,14 +102,14 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Update a table
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', auth, getRestaurantId, async (req, res) => {
   const { id } = req.params;
   const { table_number } = req.body;
-  const restaurant_id = req.user.restaurants[0].id;
+  const { restaurantId } = req;
 
   try {
     let table = await models.Table.findOne({
-      where: { id, restaurant_id }
+      where: { id, restaurant_id: restaurantId }
     });
     if (!table) {
       return res.status(404).json({ msg: 'Table not found.' });
@@ -113,13 +134,13 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // Delete a table
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', auth, getRestaurantId, async (req, res) => {
   const { id } = req.params;
-  const restaurant_id = req.user.restaurants[0].id;
+  const { restaurantId } = req;
 
   try {
     const table = await models.Table.findOne({
-      where: { id, restaurant_id }
+      where: { id, restaurant_id: restaurantId }
     });
     if (!table) {
       return res.status(404).json({ msg: 'Table not found.' });
@@ -134,13 +155,13 @@ router.delete('/:id', auth, async (req, res) => {
 });
 
 // Generate QR code URL for a table (re-generate or get existing)
-router.post('/:id/generate-qr', auth, async (req, res) => {
+router.post('/:id/generate-qr', auth, getRestaurantId, async (req, res) => {
   const { id } = req.params;
-  const restaurant_id = req.user.restaurants[0].id;
+  const { restaurantId } = req;
 
   try {
     let table = await models.Table.findOne({
-      where: { id, restaurant_id }
+      where: { id, restaurant_id: restaurantId }
     });
     if (!table) {
       return res.status(404).json({ msg: 'Table not found.' });

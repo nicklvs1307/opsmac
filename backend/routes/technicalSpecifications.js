@@ -6,9 +6,15 @@ const { models } = require('../config/database');
 
 // Middleware para obter o ID do restaurante do usuário autenticado
 const getRestaurantId = (req, res, next) => {
-  const restaurantId = req.user?.restaurants?.[0]?.id;
+  let restaurantId = req.user?.restaurants?.[0]?.id; // Default for owner/manager
+
+  // If user is admin or super_admin, allow them to specify restaurant_id
+  if (req.user.role === 'admin' || req.user.role === 'super_admin') {
+    restaurantId = req.query.restaurant_id || req.body.restaurant_id || restaurantId;
+  }
+
   if (!restaurantId) {
-    return res.status(400).json({ msg: 'Usuário não associado a nenhum restaurante.' });
+    return res.status(400).json({ msg: 'ID do restaurante é obrigatório ou usuário não associado a nenhum restaurante.' });
   }
   req.restaurantId = restaurantId;
   next();

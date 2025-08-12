@@ -3,13 +3,30 @@ const router = express.Router();
 const { auth } = require('../middleware/auth');
 const { models } = require('../config/database');
 
-// Get current stock for all products or a specific product
-router.get('/', auth, async (req, res) => {
-  const restaurantId = req.user?.restaurants?.[0]?.id;
+// Middleware para obter o ID do restaurante do usuário autenticado
+const getRestaurantId = (req, res, next) => {
+  let restaurantId = req.user?.restaurants?.[0]?.id; // Default for owner/manager
+
+  // If user is admin or super_admin, allow them to specify restaurant_id
+  if (req.user.role === 'admin' || req.user.role === 'super_admin') {
+    restaurantId = req.query.restaurant_id || req.body.restaurant_id || restaurantId;
+  }
 
   if (!restaurantId) {
-    return res.status(400).json({ msg: 'User is not associated with any restaurant.' });
+    return res.status(400).json({ msg: 'ID do restaurante é obrigatório ou usuário não associado a nenhum restaurante.' });
   }
+  req.restaurantId = restaurantId;
+
+  console.log('getRestaurantId Middleware - req.user.role:', req.user.role);
+  console.log('getRestaurantId Middleware - req.user.restaurants:', req.user.restaurants);
+  console.log('getRestaurantId Middleware - final restaurantId:', req.restaurantId);
+
+  next();
+};
+
+// Get current stock for all products or a specific product
+router.get('/', auth, getRestaurantId, async (req, res) => {
+  const { restaurantId } = req;
 
   try {
     const products = await models.Product.findAll({
@@ -39,9 +56,9 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Add or remove stock (create a stock movement)
-router.post('/move', auth, async (req, res) => {
+router.post('/move', auth, getRestaurantId, async (req, res) => {
   const { product_id, type, quantity, description } = req.body;
-  const { restaurant_id } = req.user;
+  const { restaurantId } = req;
 
   // Basic validation
   if (!product_id || !type || !quantity) {
@@ -95,14 +112,14 @@ router.post('/move', auth, async (req, res) => {
 });
 
 // Get stock movement history for a product
-router.get('/history/:product_id', auth, async (req, res) => {
+router.get('/history/:product_id', auth, getRestaurantId, async (req, res) => {
   const { product_id } = req.params;
-  const { restaurant_id } = req.user;
+  const { restaurantId } = req;
 
   try {
     // Verify product belongs to the restaurant
     const product = await models.Product.findOne({
-      where: { id: product_id, restaurant_id }
+      where: { id: product_id, restaurant_id: restaurantId }
     });
     if (!product) {
       return res.status(404).json({ msg: 'Product not found or does not belong to your restaurant.' });

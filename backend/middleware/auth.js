@@ -42,6 +42,9 @@ const auth = async (req, res, next) => {
       restaurants: user.restaurants || [],
     };
 
+    console.log('Auth Middleware - req.user.role:', req.user.role);
+    console.log('Auth Middleware - req.user.restaurants:', req.user.restaurants);
+
     next();
   } catch (error) {
     console.error('Erro no middleware de autenticação:', error);

@@ -72,7 +72,7 @@ const getRestaurantId = (req, res, next) => {
 router.post(
   '/',
   auth,
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId,
   [
     body('name').notEmpty().withMessage('Nome é obrigatório').isLength({ min: 2, max: 100 }).withMessage('Nome deve ter entre 2 e 100 caracteres'),
@@ -127,7 +127,7 @@ router.post(
 router.get(
   '/',
   auth,
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId,
   async (req, res) => {
     const { restaurantId } = req;
@@ -174,7 +174,7 @@ router.get(
 router.get(
   '/:id',
   auth,
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId,
   async (req, res) => {
     const { id } = req.params;
@@ -241,7 +241,7 @@ router.get(
 router.put(
   '/:id',
   auth,
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId,
   [
     body('name').optional().notEmpty().withMessage('Nome é obrigatório').isLength({ min: 2, max: 100 }).withMessage('Nome deve ter entre 2 e 100 caracteres'),
@@ -308,7 +308,7 @@ router.put(
 router.delete(
   '/:id',
   auth,
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId,
   async (req, res) => {
     const { id } = req.params;

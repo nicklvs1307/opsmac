@@ -170,7 +170,7 @@ module.exports = router;
  *       500:
  *         description: Erro interno do servidor
  */
-router.put('/:restaurantId/status/open', auth, checkRestaurantOwnership, async (req, res) => {
+router.put('/:restaurantId/status/open', auth, authorize('admin', 'owner', 'manager'), async (req, res) => {
   try {
     const { restaurantId } = req.params;
     const { is_open } = req.body;
@@ -231,7 +231,7 @@ router.put('/:restaurantId/status/open', auth, checkRestaurantOwnership, async (
  *       500:
  *         description: Erro interno do servidor
  */
-router.put('/:restaurantId/pos-status', auth, checkRestaurantOwnership, async (req, res) => {
+router.put('/:restaurantId/pos-status', auth, authorize('admin', 'owner', 'manager'), async (req, res) => {
   try {
     const { restaurantId } = req.params;
     const { pos_status } = req.body;

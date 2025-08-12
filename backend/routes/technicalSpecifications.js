@@ -84,7 +84,7 @@ const getRestaurantId = (req, res, next) => {
 router.post(
   '/',
   auth,
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId,
   [
     body('product_id').isUUID().withMessage('ID do produto inválido.'),
@@ -178,7 +178,7 @@ router.post(
 router.get(
   '/:productId',
   auth,
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId,
   async (req, res) => {
     const { productId } = req.params;
@@ -284,7 +284,7 @@ router.get(
 router.put(
   '/:productId',
   auth,
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId,
   [
     body('recipe_ingredients').isArray({ min: 1 }).withMessage('Deve haver pelo menos um ingrediente de receita.'),
@@ -376,7 +376,7 @@ router.put(
 router.delete(
   '/:productId',
   auth,
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId,
   async (req, res) => {
     const { productId } = req.params;

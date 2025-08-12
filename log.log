@@ -55,65 +55,9 @@ Auth Middleware - req.user.restaurants: [
     isNewRecord: false
   }
 ]
-Auth Middleware - req.user.role: owner
-Auth Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-getRestaurantId Middleware - req.user.role: owner
-getRestaurantId Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-getRestaurantId Middleware - final restaurantId: 0e517dc5-4881-45aa-996e-0365012000bc
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
 Auth Middleware - req.user.role: owner
 Auth Middleware - req.user.restaurants: [
   Restaurant {
@@ -172,6 +116,9 @@ Auth Middleware - req.user.restaurants: [
     isNewRecord: false
   }
 ]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
 Auth Middleware - req.user.role: owner
 Auth Middleware - req.user.restaurants: [
   Restaurant {
@@ -230,6 +177,73 @@ Auth Middleware - req.user.restaurants: [
     isNewRecord: false
   }
 ]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
 Auth Middleware - req.user.role: owner
 Auth Middleware - req.user.restaurants: [
   Restaurant {
@@ -288,96 +302,9 @@ Auth Middleware - req.user.restaurants: [
     isNewRecord: false
   }
 ]
-getRestaurantId Middleware - req.user.role: owner
-getRestaurantId Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-getRestaurantId Middleware - final restaurantId: 0e517dc5-4881-45aa-996e-0365012000bc
-Auth Middleware - req.user.role: owner
-Auth Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-getRestaurantId Middleware - req.user.role: owner
-getRestaurantId Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-getRestaurantId Middleware - final restaurantId: 0e517dc5-4881-45aa-996e-0365012000bc
-restaurant_id is not defined
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
 Auth Middleware - req.user.role: owner
 Auth Middleware - req.user.restaurants: [
   Restaurant {
@@ -497,6 +424,7 @@ getRestaurantId Middleware - req.user.restaurants: [
   }
 ]
 getRestaurantId Middleware - final restaurantId: 0e517dc5-4881-45aa-996e-0365012000bc
+restaurant_id is not defined
 Auth Middleware - req.user.role: owner
 Auth Middleware - req.user.restaurants: [
   Restaurant {
@@ -526,6 +454,134 @@ Auth Middleware - req.user.restaurants: [
     isNewRecord: false
   }
 ]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
 Auth Middleware - req.user.role: owner
 Auth Middleware - req.user.restaurants: [
   Restaurant {
@@ -584,6 +640,223 @@ getRestaurantId Middleware - req.user.restaurants: [
     isNewRecord: false
   }
 ]
+getRestaurantId Middleware - final restaurantId: 0e517dc5-4881-45aa-996e-0365012000bc
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+Authorize Middleware - Checking roles: [ [ 'admin', 'owner', 'manager' ] ]
+Authorize Middleware - User role: owner
+Authorize Middleware - Role not authorized: owner
+Auth Middleware - req.user.role: owner
+Auth Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+getRestaurantId Middleware - req.user.role: owner
+getRestaurantId Middleware - req.user.restaurants: [
+  Restaurant {
+    dataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    _previousDataValues: {
+      id: '0e517dc5-4881-45aa-996e-0365012000bc',
+      name: 'Roma Pizzaria & Chopperia',
+      slug: 'roma-pizzaria'
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+restaurant_id is not defined
 getRestaurantId Middleware - final restaurantId: 0e517dc5-4881-45aa-996e-0365012000bc
 Auth Middleware - req.user.role: owner
 Auth Middleware - req.user.restaurants: [
@@ -645,179 +918,3 @@ getRestaurantId Middleware - req.user.restaurants: [
 ]
 getRestaurantId Middleware - final restaurantId: 0e517dc5-4881-45aa-996e-0365012000bc
 restaurant_id is not defined
-Auth Middleware - req.user.role: owner
-Auth Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-getRestaurantId Middleware - req.user.role: owner
-getRestaurantId Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-restaurant_id is not defined
-getRestaurantId Middleware - final restaurantId: 0e517dc5-4881-45aa-996e-0365012000bc
-Auth Middleware - req.user.role: owner
-Auth Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-Auth Middleware - req.user.role: owner
-Auth Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-Auth Middleware - req.user.role: owner
-Auth Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]
-Auth Middleware - req.user.role: owner
-Auth Middleware - req.user.restaurants: [
-  Restaurant {
-    dataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    _previousDataValues: {
-      id: '0e517dc5-4881-45aa-996e-0365012000bc',
-      name: 'Roma Pizzaria & Chopperia',
-      slug: 'roma-pizzaria'
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: undefined,
-      includeNames: undefined,
-      includeMap: undefined,
-      includeValidated: true,
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-]

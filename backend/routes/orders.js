@@ -74,8 +74,8 @@ router.get(
 // PUT /api/orders/:id/status - Update order status
 router.put(
   '/:id/status',
-  auth,
-  authorize(['admin', 'owner', 'manager']),
+  auth, // Requires authentication
+  authorize('admin', 'owner', 'manager'), // Only authorized roles can access
   getRestaurantId, // Add this middleware
   async (req, res) => {
     const { id } = req.params;

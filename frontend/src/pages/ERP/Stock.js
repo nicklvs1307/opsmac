@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
 import axiosInstance from '../../api/axiosInstance';
 import { useAuth } from '../../contexts/AuthContext';
+import toast from 'react-hot-toast';
 
 const fetchStocks = async (restaurantId) => {
   const { data } = await axiosInstance.get('/api/stock');

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid } from '@mui/material';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
+import toast from 'react-hot-toast';
 
 const fetchDeliveryMenu = async (restaurantSlug) => {
   const { data } = await axiosInstance.get(`/api/public/products/delivery/${restaurantSlug}`);

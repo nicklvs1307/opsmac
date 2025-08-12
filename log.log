@@ -1,22 +1,37 @@
-dentro do modulo erp eu preciso
-um modulo financeiro onde tenha:
- acerto de entregadores
-acerto de garçons
- contas
-  categorias
-   lançamentos financeiros
-   fornecedores
-    frente de caixa
-     formas de pagamento
-e metodos de pagamento
-
-no modulo estoque, quero grupos por ingrediente, movimentações de estoque, ficha tecnica, ingredientes e insumos, notas de entrada e ordens de compra
-
-nos relatorios do erp quero 
-cupons gerados, 
-dre gerencial
-fluxo de caixa
-historico de posição de estoque
-lista de comptas
-posição de estoquete
-venda por periodo
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   169.8s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.784
+0.784 > feedeliza-plus@1.0.0 build
+0.784 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.784
+3.765 Creating an optimized production build...
+168.8 Failed to compile.
+168.8
+168.8 [eslint]
+168.8 src/pages/ERP/Products.js
+168.8   Line 100:40:  'handleOpenTechSpecDialog' is not defined    no-undef
+168.8   Line 158:21:  'openTechSpecDialog' is not defined          no-undef
+168.8   Line 158:50:  'handleCloseTechSpecDialog' is not defined   no-undef
+168.8   Line 159:38:  'selectedProductForTechSpec' is not defined  no-undef
+168.8   Line 162:24:  'selectedProductForTechSpec' is not defined  no-undef
+168.8   Line 167:28:  'handleCloseTechSpecDialog' is not defined   no-undef
+168.8   Line 283:12:  'FormControl' is not defined                 react/jsx-no-undef
+168.8   Line 284:14:  'InputLabel' is not defined                  react/jsx-no-undef
+168.8   Line 285:14:  'Select' is not defined                      react/jsx-no-undef
+168.8   Line 291:18:  'MenuItem' is not defined                    react/jsx-no-undef
+168.8   Line 305:12:  'IconButton' is not defined                  react/jsx-no-undef
+168.8
+168.8 Search for the keywords to learn more about each error.
+168.8
+168.8
+------
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

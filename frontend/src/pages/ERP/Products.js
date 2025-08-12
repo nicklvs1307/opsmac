@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress, Alert, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
+import { Box, Typography, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress, Alert, Dialog, DialogTitle, DialogContent, DialogActions, TextField, FormControl, InputLabel, Select, MenuItem, IconButton } from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, RestaurantMenu as RestaurantMenuIcon } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
@@ -22,6 +22,8 @@ const Products = () => {
   const queryClient = useQueryClient();
 
   const [open, setOpen] = useState(false);
+  const [openTechSpecDialog, setOpenTechSpecDialog] = useState(false);
+  const [selectedProductForTechSpec, setSelectedProductForTechSpec] = useState(null);
 
   const { data: products, isLoading, isError } = useQuery('products', () => fetchProducts(restaurantId), {
     enabled: !!restaurantId,
@@ -47,6 +49,16 @@ const Products = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleOpenTechSpecDialog = (product) => {
+    setSelectedProductForTechSpec(product);
+    setOpenTechSpecDialog(true);
+  };
+
+  const handleCloseTechSpecDialog = () => {
+    setOpenTechSpecDialog(false);
+    setSelectedProductForTechSpec(null);
   };
 
   return (

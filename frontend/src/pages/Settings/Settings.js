@@ -588,6 +588,7 @@ const Settings = () => {
 
       case 'business':
         return (
+          <>
           <Card>
             <CardHeader
               title={t('settings.restaurant_info')}
@@ -784,6 +785,7 @@ const Settings = () => {
               )}
             </CardContent>
           </Card>
+          </>
         );
 
       case 'notifications':

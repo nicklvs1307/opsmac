@@ -1,21 +1,27 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/checkin/checkout/e30e8c3f-2576-4446-a20c-5f7a7aa50416
-Método da solicitação
-PUT
-Código de status
-400 Bad Request
-Endereço remoto
-95.217.16.187:443
-
-{"error":"Restaurante não encontrado ou ID do restaurante ausente."}
-
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/public/surveys/conhecendo-nosso-cliente/responses
-Método da solicitação
-POST
-Código de status
-500 Internal Server Error
-Endereço remoto
-95.217.16.187:443
-Server Error
-Erro ao enviar respostas.
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      159.
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.771
+0.771 > feedeliza-plus@1.0.0 build
+0.771 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.771
+3.503 Creating an optimized production build...
+157.3 Failed to compile.
+157.3
+157.3 [eslint]
+157.3 src/pages/Settings/Settings.js
+157.3 Syntax error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX
+agment <>...</>? (755:10) (755:10)
+157.3
+157.3
+------
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not
+plete successfully: exit code: 1

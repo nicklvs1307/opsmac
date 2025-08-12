@@ -50,6 +50,7 @@ import Stock from './pages/ERP/Stock';
 import Tables from './pages/ERP/Tables';
 import Orders from './pages/ERP/Orders';
 import Pdv from './pages/ERP/Pdv';
+import Ingredients from './pages/ERP/Ingredients';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -115,6 +116,7 @@ function App() {
                   <Route path="erp/tables" element={<Tables />} />
                   <Route path="erp/orders" element={<Orders />} />
                   <Route path="erp/pdv" element={<Pdv />} />
+                  <Route path="erp/ingredients" element={<Ingredients />} />
                 </Route>
                 <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
                 {/* Catch all route */}

@@ -29,6 +29,7 @@ import {
   CardGiftcard,
   Poll as PollIcon,
   ConnectWithoutContact as ConnectWithoutContactIcon,
+  PointOfSale as PointOfSaleIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
@@ -173,6 +174,16 @@ const Sidebar = ({ onMobileClose }) => {
           title: t('sidebar.tables'), // New
           icon: <ListIcon />, // Consider a more specific icon like <TableBarIcon />
           path: '/erp/tables'
+        },
+        {
+          title: t('sidebar.pdv'), // New
+          icon: <PointOfSaleIcon />,
+          path: '/erp/pdv'
+        },
+        {
+          title: t('sidebar.ingredients'), // New
+          icon: <ListIcon />,
+          path: '/erp/ingredients'
         }
       ]
     },

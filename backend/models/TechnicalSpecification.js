@@ -18,11 +18,6 @@ module.exports = (sequelize, DataTypes, Sequelize) => {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     },
-    details: {
-      type: DataTypes.JSONB,
-      allowNull: true,
-      defaultValue: {},
-    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -43,6 +38,11 @@ module.exports = (sequelize, DataTypes, Sequelize) => {
     TechnicalSpecification.belongsTo(models.Product, {
       foreignKey: 'product_id',
       as: 'product',
+    });
+    // Add new association
+    TechnicalSpecification.hasMany(models.RecipeIngredient, {
+      foreignKey: 'technical_specification_id',
+      as: 'recipeIngredients'
     });
   };
 

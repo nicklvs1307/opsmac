@@ -37,6 +37,9 @@ const SurveyCreate = () => {
   const [createdSurveyId, setCreatedSurveyId] = useState(null);
   const [createdSurveySlug, setCreatedSurveySlug] = useState(null);
   const [openQrCodeDialog, setOpenQrCodeDialog] = useState(false);
+  const [openQuestionDialog, setOpenQuestionDialog] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState({ question_text: '', question_type: 'text', nps_criterion_id: null });
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { t } = useTranslation();
@@ -58,6 +61,33 @@ const SurveyCreate = () => {
       toast.error(t('survey_create.error_message', { message: error.response?.data?.msg || error.message }));
     }
   });
+
+  const handleOpenQuestionDialog = () => {
+    setCurrentQuestion({ question_text: '', question_type: 'text', nps_criterion_id: null });
+    setOpenQuestionDialog(true);
+  };
+
+  const handleCloseQuestionDialog = () => {
+    setOpenQuestionDialog(false);
+  };
+
+  const handleSaveQuestion = () => {
+    if (!currentQuestion.question_text.trim()) {
+      toast.error(t('survey_create.question_text_required_error'));
+      return;
+    }
+    if (currentQuestion.question_type === 'nps' && !currentQuestion.nps_criterion_id) {
+      toast.error(t('survey_create.nps_criterion_required_error'));
+      return;
+    }
+    setQuestions([...questions, { ...currentQuestion, order: questions.length + 1 }]);
+    handleCloseQuestionDialog();
+  };
+
+  const handleRemoveQuestion = (index) => {
+    const newQuestions = questions.filter((_, i) => i !== index);
+    setQuestions(newQuestions);
+  };
 
   // Efeito para pré-popular as perguntas com base no tipo de pesquisa
   useEffect(() => {
@@ -167,20 +197,26 @@ const SurveyCreate = () => {
                     sx={{ mb: 2 }}
                     InputProps={{ inputProps: { min: 1 } }}
                 />
-                {surveyType === 'nps_only' && (
-                    <Box mt={2}> 
-                        <Typography variant="h6">{t('survey_create.nps_questions_title')}</Typography>
-                        {isLoadingNpsCriteria ? <CircularProgress size={24} /> : 
-                            <List>
-                                {questions.length > 0 ? questions.map(q => (
-                                    <ListItem key={q.nps_criterion_id}>
-                                        <ListItemText primary={q.question_text} />
-                                    </ListItem>
-                                )) : <Typography variant="body2" color="text.secondary">{t('survey_create.no_nps_criteria_found')}</Typography>}
-                            </List>
-                        }
-                    </Box>
-                )}
+                <Box mt={4}>
+                    <Typography variant="h6">{t('survey_create.questions_title')}</Typography>
+                    <List>
+                        {questions.map((q, index) => (
+                            <ListItem key={index} secondaryAction={
+                                <IconButton edge="end" aria-label="delete" onClick={() => handleRemoveQuestion(index)}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            }>
+                                <ListItemText primary={q.question_text} secondary={`${t('survey_create.question_type_label')}: ${q.question_type}`} />
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Button
+                        startIcon={<AddCircleOutlineIcon />}
+                        onClick={handleOpenQuestionDialog}
+                    >
+                        {t('survey_create.add_question_button')}
+                    </Button>
+                </Box>
             </Box>
         )
       case 2:
@@ -240,8 +276,60 @@ const SurveyCreate = () => {
             ))}
         </Stepper>
       </Paper>
-    </Box>
-  );
-};
+    );
+  }
 
-export default SurveyCreate;
+  return (
+    <Box sx={{ p: 3 }}>
+      <Dialog open={openQuestionDialog} onClose={handleCloseQuestionDialog} fullWidth maxWidth="sm">
+        <DialogTitle>{t('survey_create.add_question_dialog_title')}</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label={t('survey_create.question_text_label')}
+            fullWidth
+            value={currentQuestion.question_text}
+            onChange={(e) => setCurrentQuestion({ ...currentQuestion, question_text: e.target.value })}
+            sx={{ mb: 2 }}
+          />
+          <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel>{t('survey_create.question_type_label')}</InputLabel>
+            <Select
+              value={currentQuestion.question_type}
+              label={t('survey_create.question_type_label')}
+              onChange={(e) => setCurrentQuestion({ ...currentQuestion, question_type: e.target.value, nps_criterion_id: null })}
+            >
+              <MenuItem value="text">{t('survey_create.question_type_text')}</MenuItem>
+              <MenuItem value="textarea">{t('survey_create.question_type_textarea')}</MenuItem>
+              <MenuItem value="ratings">{t('survey_create.question_type_ratings')}</MenuItem>
+              <MenuItem value="nps">{t('survey_create.question_type_nps')}</MenuItem>
+              <MenuItem value="csat">{t('survey_create.question_type_csat')}</MenuItem>
+            </Select>
+          </FormControl>
+          {currentQuestion.question_type === 'nps' && (
+            <FormControl fullWidth>
+              <InputLabel>{t('survey_create.nps_criterion_label')}</InputLabel>
+              <Select
+                value={currentQuestion.nps_criterion_id}
+                label={t('survey_create.nps_criterion_label')}
+                onChange={(e) => setCurrentQuestion({ ...currentQuestion, nps_criterion_id: e.target.value })}
+              >
+                {isLoadingNpsCriteria ? (
+                  <MenuItem disabled>{t('survey_create.loading_criteria')}</MenuItem>
+                ) : (
+                  npsCriteria?.map((criterion) => (
+                    <MenuItem key={criterion.id} value={criterion.id}>{criterion.name}</MenuItem>
+                  ))
+                )}
+              </Select>
+            </FormControl>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseQuestionDialog}>{t('common.cancel')}</Button>
+          <Button onClick={handleSaveQuestion} variant="contained">{t('common.save')}</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Typography variant="h4" gutterBottom>{t('survey_create.main_title')}</Typography>

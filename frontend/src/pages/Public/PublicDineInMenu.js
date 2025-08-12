@@ -50,6 +50,10 @@ const PublicDineInMenu = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [notes, setNotes] = useState('');
 
   // Query for menu items
   const { data: menuData, isLoading: isLoadingMenu, isError: isErrorMenu } = useQuery(
@@ -89,6 +93,48 @@ const PublicDineInMenu = () => {
           ? { ...item, quantity: item.quantity - 1 } 
           : item
       ));
+    }
+  };
+
+  const handleCheckout = async () => {
+    if (cartItems.length === 0) {
+      toast.error('Seu carrinho está vazio.');
+      return;
+    }
+
+    const totalAmount = cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0);
+
+    const orderData = {
+      restaurant_id: menuData.products[0].restaurant_id, // Assuming all products belong to the same restaurant
+      delivery_type: 'dine_in', // This component is for dine-in menu
+      total_amount: totalAmount,
+      items: cartItems.map(item => ({
+        product_id: item.id,
+        name: item.name,
+        quantity: item.quantity,
+        price: Number(item.price),
+      })),
+      customer_details: {
+        name: customerName,
+        phone: customerPhone,
+      },
+      payment_method: paymentMethod,
+      notes: notes,
+      table_id: tableId, // Include table ID for dine-in orders
+    };
+
+    try {
+      await axiosInstance.post('/api/public/orders', orderData);
+      toast.success('Pedido realizado com sucesso!');
+      setCartItems([]);
+      setCartOpen(false);
+      setCustomerName('');
+      setCustomerPhone('');
+      setPaymentMethod('');
+      setNotes('');
+    } catch (error) {
+      console.error('Erro ao finalizar pedido:', error);
+      toast.error(`Erro ao finalizar pedido: ${error.response?.data?.msg || error.message}`);
     }
   };
 
@@ -426,6 +472,40 @@ const PublicDineInMenu = () => {
                   R$ {cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0).toFixed(2)}
                 </Typography>
               </Box>
+              
+              <Box sx={{ mt: 3 }}>
+                <Typography variant="h6" gutterBottom>Detalhes para o Pedido</Typography>
+                <TextField
+                  label="Seu Nome (opcional)"
+                  fullWidth
+                  margin="normal"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                />
+                <TextField
+                  label="Seu Telefone (opcional)"
+                  fullWidth
+                  margin="normal"
+                  value={customerPhone}
+                  onChange={(e) => setCustomerPhone(e.target.value)}
+                />
+                <TextField
+                  label="Método de Pagamento (Ex: Dinheiro, Cartão, Pix)"
+                  fullWidth
+                  margin="normal"
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                <TextField
+                  label="Observações (Ex: Sem cebola)"
+                  fullWidth
+                  margin="normal"
+                  multiline
+                  rows={2}
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                />
+              </Box>
             </Box>
           )}
         </DialogContent>
@@ -435,6 +515,7 @@ const PublicDineInMenu = () => {
             <Button 
               variant="contained" 
               sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
+              onClick={handleCheckout}
             >
               Finalizar Pedido
             </Button>

@@ -439,10 +439,11 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
       reward_earned: rewardEarned // Retorna a recompensa ganha (ou null)
     });
   } catch (error) {
-    console.error('[Public Check-in] Erro ao registrar check-in público:', error);
+    console.error('[Public Check-in] Erro detalhado ao registrar check-in público:', error);
     res.status(500).json({
       error: 'Erro interno do servidor',
-      message: process.env.NODE_ENV === 'development' ? error.message : 'Erro ao registrar check-in público'
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Erro ao registrar check-in público',
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
     });
   }
 });

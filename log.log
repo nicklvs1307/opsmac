@@ -1,9 +1,13 @@
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/tables
+https://feedelizaapi.towersfy.com/api/checkin/public/roma-pizzaria
 Método da solicitação
-GET
+POST
 Código de status
 500 Internal Server Error
 Endereço remoto
 95.217.16.187:443
-Server Error
+
+{
+    "error": "Erro interno do servidor",
+    "message": "Erro ao registrar check-in público"
+}

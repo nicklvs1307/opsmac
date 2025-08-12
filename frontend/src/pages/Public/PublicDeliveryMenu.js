@@ -29,6 +29,11 @@ const PublicDeliveryMenu = () => {
   const [cartItems, setCartItems] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [notes, setNotes] = useState('');
   
   const handleCategoryChange = (event, newValue) => {
     setSelectedCategory(newValue);
@@ -341,6 +346,52 @@ const PublicDeliveryMenu = () => {
                   R$ {cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0).toFixed(2)}
                 </Typography>
               </Box>
+              
+              <Box sx={{ mt: 3 }}>
+                <Typography variant="h6" gutterBottom>Detalhes para o Pedido</Typography>
+                <TextField
+                  label="Seu Nome Completo"
+                  fullWidth
+                  margin="normal"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                  required
+                />
+                <TextField
+                  label="Seu Telefone (com DDD)"
+                  fullWidth
+                  margin="normal"
+                  value={customerPhone}
+                  onChange={(e) => setCustomerPhone(e.target.value)}
+                  required
+                />
+                <TextField
+                  label="Endereço de Entrega Completo"
+                  fullWidth
+                  margin="normal"
+                  multiline
+                  rows={3}
+                  value={deliveryAddress}
+                  onChange={(e) => setDeliveryAddress(e.target.value)}
+                  required
+                />
+                <TextField
+                  label="Método de Pagamento (Ex: Dinheiro, Cartão, Pix)"
+                  fullWidth
+                  margin="normal"
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                <TextField
+                  label="Observações (Ex: Sem cebola, Troco para R$50)"
+                  fullWidth
+                  margin="normal"
+                  multiline
+                  rows={2}
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                />
+              </Box>
             </Box>
           )}
         </DialogContent>
@@ -350,9 +401,7 @@ const PublicDeliveryMenu = () => {
             <Button 
               variant="contained" 
               sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
-              onClick={() => window.open('https://wa.me/5500000000000?text=' + encodeURIComponent(`Olá, gostaria de fazer um pedido:
-${cartItems.map(item => `${item.quantity}x ${item.name} - R$ ${(Number(item.price) * item.quantity).toFixed(2)}`).join('\n')}
-Total: R$ ${cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0).toFixed(2)}`), '_blank')}
+              onClick={handleCheckout}
             >
               Finalizar Pedido
             </Button>

@@ -276,11 +276,8 @@ const SurveyCreate = () => {
             ))}
         </Stepper>
       </Paper>
-    );
-  }
 
-  return (
-    <Box sx={{ p: 3 }}>
+      {/* Dialog for adding/editing questions */}
       <Dialog open={openQuestionDialog} onClose={handleCloseQuestionDialog} fullWidth maxWidth="sm">
         <DialogTitle>{t('survey_create.add_question_dialog_title')}</DialogTitle>
         <DialogContent>
@@ -331,5 +328,6 @@ const SurveyCreate = () => {
           <Button onClick={handleSaveQuestion} variant="contained">{t('common.save')}</Button>
         </DialogActions>
       </Dialog>
-
-      <Typography variant="h4" gutterBottom>{t('survey_create.main_title')}</Typography>
+    </Box>
+  );
+};

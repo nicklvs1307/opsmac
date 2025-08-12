@@ -1,13 +1,35 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/checkin/public/roma-pizzaria
-Método da solicitação
-POST
-Código de status
-500 Internal Server Error
-Endereço remoto
-95.217.16.187:443
-
-{
-    "error": "Erro interno do servidor",
-    "message": "Erro ao registrar check-in público"
-}
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   163.6s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.709
+0.709 > feedeliza-plus@1.0.0 build
+0.709 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.709
+3.809 Creating an optimized production build...
+162.6 Failed to compile.
+162.6
+162.6 [eslint]
+162.6 src/pages/Fidelidade/Avaliacoes/SurveyCreate.js
+162.6 Syntax error: Unexpected token (335:88) (335:88)
+162.6
+162.6 src/pages/Public/PublicDeliveryMenu.js
+162.6   Line 404:24:  'handleCheckout' is not defined  no-undef
+162.6
+162.6 src/pages/Public/PublicDineInMenu.js
+162.6   Line 101:7:  'toast' is not defined  no-undef
+162.6   Line 128:7:  'toast' is not defined  no-undef
+162.6   Line 137:7:  'toast' is not defined  no-undef
+162.6
+162.6 Search for the keywords to learn more about each error.
+162.6
+162.6
+------
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

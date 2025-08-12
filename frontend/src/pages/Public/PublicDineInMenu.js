@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, alpha } from '@mui/material';
 import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
+import toast from 'react-hot-toast';
 import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, LocalDining as LocalDiningIcon, Call as CallIcon, Receipt as ReceiptIcon } from '@mui/icons-material';
 
 const fetchDineInMenu = async (tableId) => {

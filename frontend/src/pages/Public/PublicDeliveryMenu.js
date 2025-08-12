@@ -67,6 +67,49 @@ const PublicDeliveryMenu = () => {
     }
   };
 
+  const handleCheckout = async () => {
+    if (!customerName || !customerPhone || !deliveryAddress) {
+      toast.error('Por favor, preencha seu nome, telefone e endereço de entrega.');
+      return;
+    }
+
+    const totalAmount = cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0);
+
+    const orderData = {
+      restaurant_id: menuData.products[0].restaurant_id, // Assuming all products belong to the same restaurant
+      delivery_type: 'delivery', // This component is for delivery menu
+      total_amount: totalAmount,
+      items: cartItems.map(item => ({
+        product_id: item.id,
+        name: item.name,
+        quantity: item.quantity,
+        price: Number(item.price),
+      })),
+      customer_details: {
+        name: customerName,
+        phone: customerPhone,
+      },
+      delivery_address: { address: deliveryAddress },
+      payment_method: paymentMethod,
+      notes: notes,
+    };
+
+    try {
+      await axiosInstance.post('/api/public/orders', orderData);
+      toast.success('Pedido realizado com sucesso!');
+      setCartItems([]);
+      setCartOpen(false);
+      setCustomerName('');
+      setCustomerPhone('');
+      setDeliveryAddress('');
+      setPaymentMethod('');
+      setNotes('');
+    } catch (error) {
+      console.error('Erro ao finalizar pedido:', error);
+      toast.error(`Erro ao finalizar pedido: ${error.response?.data?.msg || error.message}`);
+    }
+  };
+
   const { data: menuData, isLoading, isError } = useQuery(
     ['deliveryMenu', restaurantSlug],
     () => fetchDeliveryMenu(restaurantSlug),

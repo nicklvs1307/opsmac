@@ -57,11 +57,7 @@ router.get('/', auth, getRestaurantId, async (req, res) => {
     }
 
     const products = await models.Product.findAll({
-      where: whereClause,
-      include: [{
-        model: models.TechnicalSpecification,
-        as: 'technicalSpecification'
-      }]
+      where: whereClause
     });
     res.json(products);
   } catch (error) {

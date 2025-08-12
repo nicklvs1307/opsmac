@@ -51,6 +51,10 @@ module.exports = (sequelize) => {
       foreignKey: 'product_id',
       as: 'technicalSpecification'
     });
+    Product.hasOne(models.Stock, { // Adicionando a associação que faltava
+      foreignKey: 'product_id',
+      as: 'stock'
+    });
   };
 
   return Product;

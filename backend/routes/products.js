@@ -61,7 +61,7 @@ router.get('/', auth, getRestaurantId, async (req, res) => {
     });
     res.json(products);
   } catch (error) {
-    console.error(error.message);
+    console.error('Error fetching products:', error);
     res.status(500).send('Server Error');
   }
 });

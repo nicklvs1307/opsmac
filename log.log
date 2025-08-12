@@ -3,7 +3,7 @@
 /app/backend/server.js:91
 app.use('/api/orders', ordersRoutes);
                        ^
-ReferenceError: ordersRoutes is not defined
+ReferenceError: Cannot access 'ordersRoutes' before initialization
     at Object.<anonymous> (/app/backend/server.js:91:24)
     at Module._compile (node:internal/modules/cjs/loader:1529:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)

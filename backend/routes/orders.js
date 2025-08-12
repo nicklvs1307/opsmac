@@ -29,7 +29,7 @@ const getRestaurantId = (req, res, next) => {
 router.get(
   '/',
   auth, // Requires authentication
-  authorize(['admin', 'owner', 'manager']),
+  authorize('admin', 'owner', 'manager'),
   getRestaurantId, // Add this middleware
   async (req, res) => {
     const { status, platform, delivery_type, search } = req.query;

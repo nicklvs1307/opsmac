@@ -1,30 +1,106 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      164.2s
-------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.571
-0.571 > feedeliza-plus@1.0.0 build
-0.571 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.571
-2.658 Creating an optimized production build...
-163.9 Failed to compile.
-163.9
-163.9 [eslint]
-163.9 src/pages/Public/PublicDeliveryMenu.js
-163.9   Line 26:17:  'useTranslation' is not defined  no-undef
-163.9
-163.9 src/pages/Public/PublicDineInMenu.js
-163.9   Line 45:17:  'useTranslation' is not defined  no-undef
-163.9
-163.9 Search for the keywords to learn more about each error.
-163.9
-163.9
-------
-Dockerfile.frontend:23
---------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/tables
+Método da solicitação
+POST
+Código de status
+500 Internal Server Error
+tables:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+feedelizaapi.towersfy.com/api/tables:1  Failed to load resource: the server responded with a status of 500 ()
+mutation.js:106 Vr
+(anônimo) @ mutation.js:106
+Tables.js:15  POST https://feedelizaapi.towersfy.com/api/tables 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+uZ @ Tables.js:15
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ useMutation.js:41
+A @ Tables.js:80
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Ne @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+Ln @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+$t @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+Tables.js:80 Vr {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ mutation.js:106
+Promise.catch
+t.execute @ mutation.js:102
+r.mutate @ mutationObserver.js:83
+(anônimo) @ useMutation.js:41
+A @ Tables.js:80
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Ne @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+Ln @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+$t @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist
+column Table.restaurantId does not exist

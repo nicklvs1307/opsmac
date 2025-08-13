@@ -7,17 +7,17 @@ require('dotenv').config(); // Load environment variables
 
 // Middleware para obter o ID do restaurante do usuário autenticado
 const getRestaurantId = (req, res, next) => {
-  let restaurantId = req.user?.restaurants?.[0]?.id; // Default for owner/manager
+  let restaurant_id = req.user?.restaurants?.[0]?.id; // Default for owner/manager
 
   // If user is admin or super_admin, allow them to specify restaurant_id
   if (req.user.role === 'admin' || req.user.role === 'super_admin') {
-    restaurantId = req.query.restaurant_id || req.body.restaurant_id || restaurantId;
+    restaurant_id = req.query.restaurant_id || req.body.restaurant_id || restaurant_id;
   }
 
-  if (!restaurantId) {
+  if (!restaurant_id) {
     return res.status(400).json({ msg: 'ID do restaurante é obrigatório ou usuário não associado a nenhum restaurante.' });
   }
-  req.restaurantId = restaurantId;
+  req.restaurant_id = restaurant_id;
 
   next();
 };
@@ -31,7 +31,7 @@ const generateQrCodeUrl = (tableId) => {
 // Create a new table
 router.post('/', auth, getRestaurantId, async (req, res) => {
   const { table_number } = req.body;
-  const { restaurantId } = req;
+  const { restaurant_id } = req;
 
   if (!table_number) {
     return res.status(400).json({ msg: 'Table number is required.' });
@@ -39,14 +39,14 @@ router.post('/', auth, getRestaurantId, async (req, res) => {
 
   try {
     const existingTable = await models.Table.findOne({
-      where: { restaurantId, table_number }
+      where: { restaurant_id, table_number }
     });
     if (existingTable) {
       return res.status(400).json({ msg: 'Table with this number already exists for this restaurant.' });
     }
 
     const table = await models.Table.create({
-      restaurantId,
+      restaurant_id,
       table_number
     });
 
@@ -64,11 +64,11 @@ router.post('/', auth, getRestaurantId, async (req, res) => {
 
 // Get all tables for a restaurant
 router.get('/', auth, getRestaurantId, async (req, res) => {
-  const { restaurantId } = req;
+  const { restaurant_id } = req;
 
   try {
     const tables = await models.Table.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurant_id },
       order: [['table_number', 'ASC']]
     });
     res.json(tables);
@@ -81,11 +81,11 @@ router.get('/', auth, getRestaurantId, async (req, res) => {
 // Get a specific table
 router.get('/:id', auth, getRestaurantId, async (req, res) => {
   const { id } = req.params;
-  const { restaurantId } = req;
+  const { restaurant_id } = req;
 
   try {
     const table = await models.Table.findOne({
-      where: { id, restaurant_id: restaurantId }
+      where: { id, restaurant_id }
     });
     if (!table) {
       return res.status(404).json({ msg: 'Table not found.' });
@@ -101,11 +101,11 @@ router.get('/:id', auth, getRestaurantId, async (req, res) => {
 router.put('/:id', auth, getRestaurantId, async (req, res) => {
   const { id } = req.params;
   const { table_number } = req.body;
-  const { restaurantId } = req;
+  const { restaurant_id } = req;
 
   try {
     let table = await models.Table.findOne({
-      where: { id, restaurant_id: restaurantId }
+      where: { id, restaurant_id }
     });
     if (!table) {
       return res.status(404).json({ msg: 'Table not found.' });
@@ -132,11 +132,11 @@ router.put('/:id', auth, getRestaurantId, async (req, res) => {
 // Delete a table
 router.delete('/:id', auth, getRestaurantId, async (req, res) => {
   const { id } = req.params;
-  const { restaurantId } = req;
+  const { restaurant_id } = req;
 
   try {
     const table = await models.Table.findOne({
-      where: { id, restaurant_id: restaurantId }
+      where: { id, restaurant_id }
     });
     if (!table) {
       return res.status(404).json({ msg: 'Table not found.' });
@@ -153,11 +153,11 @@ router.delete('/:id', auth, getRestaurantId, async (req, res) => {
 // Generate QR code URL for a table (re-generate or get existing)
 router.post('/:id/generate-qr', auth, getRestaurantId, async (req, res) => {
   const { id } = req.params;
-  const { restaurantId } = req;
+  const { restaurant_id } = req;
 
   try {
     let table = await models.Table.findOne({
-      where: { id, restaurant_id: restaurantId }
+      where: { id, restaurant_id }
     });
     if (!table) {
       return res.status(404).json({ msg: 'Table not found.' });

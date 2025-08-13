@@ -1,8 +1,5 @@
 import CategoryManagement from '../../components/ERP/CategoryManagement';
 import ProductManagement from '../../components/ERP/ProductManagement';
-
-import CategoryManagement from '../../components/ERP/CategoryManagement';
-import ProductManagement from '../../components/ERP/ProductManagement';
 import React, { useState } from 'react';
 import { Box, Typography, Tabs, Tab } from '@mui/material';
 import { useTranslation } from 'react-i18next';

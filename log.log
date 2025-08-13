@@ -1,25 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   168.0s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   163.3s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.668
-0.668 > feedeliza-plus@1.0.0 build
-0.668 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.668
-3.349 Creating an optimized production build...
-167.0 Failed to compile.
-167.0
-167.0 [eslint]
-167.0 src/pages/ERP/Menu.js
-167.0 Syntax error: Identifier 'TabPanel' has already been declared. (70:9) (70:9)
-167.0
-167.0 src/pages/ERP/Pdv.js
-167.0   Line 407:18:  'List' is not defined          react/jsx-no-undef
-167.0   Line 409:22:  'ListItem' is not defined      react/jsx-no-undef
-167.0   Line 419:24:  'ListItemText' is not defined  react/jsx-no-undef
-167.0
-167.0 Search for the keywords to learn more about each error.
-167.0
-167.0
+0.600
+0.600 > feedeliza-plus@1.0.0 build
+0.600 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.600
+2.678 Creating an optimized production build...
+163.0 Failed to compile.
+163.0
+163.0 [eslint]
+163.0 src/pages/ERP/Menu.js
+163.0 Syntax error: Identifier 'CategoryManagement' has already been declared. (4:7) (4:7)
+163.0
+163.0
 ------
 Dockerfile.frontend:23
 --------------------
@@ -30,14 +23,3 @@ Dockerfile.frontend:23
   25 |     # Estágio final para servir os arquivos com NGINX
 --------------------
 ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
-
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/technical-specifications/9b03a6f3-c3db-460e-a89c-b527c6157456
-Método da solicitação
-GET
-Código de status
-404 Not Found
-Endereço remoto
-95.217.16.187:443
-
-{"msg":"Ficha técnica não encontrada para este produto."}

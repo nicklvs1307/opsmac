@@ -609,7 +609,7 @@
       "delete_success": "Product deleted successfully!",
       "delete_error": "Error deleting product.",
       "confirm_delete_title": "Confirm Deletion",
-      "confirm_delete_message": "Are you sure you want to delete the product "{{productName}}" ?"
+      "confirm_delete_message": "Are you sure you want to delete the product {{productName}} ?"
     },
     "pdv": {
       "title": "POS Panel",

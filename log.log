@@ -1,18 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   163.3s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   166.4s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.600
-0.600 > feedeliza-plus@1.0.0 build
-0.600 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.600
-2.678 Creating an optimized production build...
-163.0 Failed to compile.
-163.0
-163.0 [eslint]
-163.0 src/pages/ERP/Menu.js
-163.0 Syntax error: Identifier 'CategoryManagement' has already been declared. (4:7) (4:7)
-163.0
-163.0
+0.656
+0.656 > feedeliza-plus@1.0.0 build
+0.656 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.656
+3.025 Creating an optimized production build...
+166.1 Failed to compile.
+166.1
+166.1 Module parse failed: Cannot parse JSON: Unexpected token "}" (0x7D) in JSON at position 34964 while parsing near "...one.\"\n    }\n  }\n}\n  }"
+166.1 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+166.1 Error: Cannot parse JSON: Unexpected token "}" (0x7D) in JSON at position 34964 while parsing near "...one.\"\n    }\n  }\n}\n  }"
+166.1
+166.1
 ------
 Dockerfile.frontend:23
 --------------------

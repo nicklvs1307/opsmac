@@ -40,6 +40,18 @@ const PublicDeliveryMenu = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [favorites, setFavorites] = useState([]);
   
+  // Carregar favoritos do localStorage ao iniciar
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('favoriteItems');
+    if (savedFavorites) {
+      try {
+        setFavorites(JSON.parse(savedFavorites));
+      } catch (e) {
+        console.error('Erro ao carregar favoritos:', e);
+      }
+    }
+  }, []);
+  
   // Estados para feedback e confirmação
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -211,17 +223,7 @@ const PublicDeliveryMenu = () => {
   // Extrair categorias do menuData
   const categories = menuData ? Object.keys(menuData.categories) : [];
   
-  // Carregar favoritos do localStorage ao iniciar
-  useEffect(() => {
-    const savedFavorites = localStorage.getItem('favoriteItems');
-    if (savedFavorites) {
-      try {
-        setFavorites(JSON.parse(savedFavorites));
-      } catch (e) {
-        console.error('Erro ao carregar favoritos:', e);
-      }
-    }
-  }, []);
+  
   
   // Adicionar ou remover dos favoritos
   const toggleFavorite = (itemId) => {

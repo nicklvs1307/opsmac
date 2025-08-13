@@ -39,14 +39,14 @@ router.post('/', auth, getRestaurantId, async (req, res) => {
 
   try {
     const existingTable = await models.Table.findOne({
-      where: { restaurant_id, table_number }
+      where: { restaurantId, table_number }
     });
     if (existingTable) {
       return res.status(400).json({ msg: 'Table with this number already exists for this restaurant.' });
     }
 
     const table = await models.Table.create({
-      restaurant_id,
+      restaurantId,
       table_number
     });
 
@@ -57,7 +57,7 @@ router.post('/', auth, getRestaurantId, async (req, res) => {
 
     res.status(201).json(table);
   } catch (error) {
-    // console.error(error.message);
+    console.error(error.message);
     res.status(500).send('Server Error');
   }
 });

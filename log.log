@@ -1,27 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      162.3s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      164.3s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.679
-0.679 > feedeliza-plus@1.0.0 build
-0.679 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.679
-3.208 Creating an optimized production build...
-161.6 Failed to compile.
-161.6
-161.6 [eslint]
-161.6 src/pages/Public/PublicDineInMenu.js
-161.6   Line 765:22:   'SearchOffIcon' is not defined           react/jsx-no-undef
-161.6   Line 777:47:   'ArrowBackIcon' is not defined           react/jsx-no-undef
-161.6   Line 836:12:   'BottomNavigation' is not defined        react/jsx-no-undef
-161.6   Line 853:14:   'BottomNavigationAction' is not defined  react/jsx-no-undef
-161.6   Line 865:14:   'BottomNavigationAction' is not defined  react/jsx-no-undef
-161.6   Line 896:14:   'BottomNavigationAction' is not defined  react/jsx-no-undef
-161.6   Line 1029:18:  'CloseIcon' is not defined               react/jsx-no-undef
-161.6   Line 1145:26:  'DeleteIcon' is not defined              react/jsx-no-undef
-161.6
-161.6 Search for the keywords to learn more about each error.
-161.6
-161.6
+0.624
+0.624 > feedeliza-plus@1.0.0 build
+0.624 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.624
+3.508 Creating an optimized production build...
+163.9 Failed to compile.
+163.9
+163.9 Module parse failed: Cannot parse JSON: Unexpected token "{" (0x7B) in JSON at position 35538 while parsing near "...products found for \"{{searchTerm}}\"\",\n  ..."
+163.9 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+163.9 Error: Cannot parse JSON: Unexpected token "{" (0x7B) in JSON at position 35538 while parsing near "...products found for \"{{searchTerm}}\"\",\n  ..."
+163.9
+163.9
 ------
 Dockerfile.frontend:23
 --------------------

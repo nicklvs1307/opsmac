@@ -1,0 +1,433 @@
+import React, { useState } from 'react';
+import { Box, Button, TextField, List, ListItem, ListItemText, IconButton, Typography, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox } from '@mui/material';
+import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, Image as ImageIcon } from '@mui/icons-material';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useTranslation } from 'react-i18next';
+import axiosInstance from '../../api/axiosInstance';
+import toast from 'react-hot-toast';
+
+const fetchProducts = async () => {
+  const { data } = await axiosInstance.get('/products');
+  return data;
+};
+
+const fetchCategories = async () => {
+  const { data } = await axiosInstance.get('/categories');
+  return data;
+};
+
+const createProduct = async (newProduct) => {
+  const { data } = await axiosInstance.post('/products', newProduct);
+  return data;
+};
+
+const updateProduct = async ({ id, ...updatedProduct }) => {
+  const { data } = await axiosInstance.put(`/products/${id}`, updatedProduct);
+  return data;
+};
+
+const deleteProduct = async (id) => {
+  await axiosInstance.delete(`/products/${id}`);
+};
+
+const ProductManagement = () => {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const { data: products, isLoading: isLoadingProducts, isError: isErrorProducts } = useQuery('products', fetchProducts);
+  const { data: categories, isLoading: isLoadingCategories, isError: isErrorCategories } = useQuery('categories', fetchCategories);
+
+  const [productForm, setProductForm] = useState({
+    name: '',
+    description: '',
+    price: '',
+    sku: '',
+    category_id: '',
+    is_pizza: false,
+    pizza_type: '',
+    available_for_delivery: true,
+    available_for_dine_in: true,
+    available_for_online_order: true,
+    available_for_digital_menu: true,
+    image_url: '',
+  });
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
+
+  const addProductMutation = useMutation(createProduct, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('products');
+      setProductForm({
+        name: '',
+        description: '',
+        price: '',
+        sku: '',
+        category_id: '',
+        is_pizza: false,
+        pizza_type: '',
+        available_for_delivery: true,
+        available_for_dine_in: true,
+        available_for_online_order: true,
+        available_for_digital_menu: true,
+        image_url: '',
+      });
+      toast.success(t('product_management.add_success'));
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.msg || t('product_management.add_error'));
+    },
+  });
+
+  const updateProductMutation = useMutation(updateProduct, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('products');
+      setEditingProduct(null);
+      setProductForm({
+        name: '',
+        description: '',
+        price: '',
+        sku: '',
+        category_id: '',
+        is_pizza: false,
+        pizza_type: '',
+        available_for_delivery: true,
+        available_for_dine_in: true,
+        available_for_online_order: true,
+        available_for_digital_menu: true,
+        image_url: '',
+      });
+      toast.success(t('product_management.update_success'));
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.msg || t('product_management.update_error'));
+    },
+  });
+
+  const deleteProductMutation = useMutation(deleteProduct, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('products');
+      toast.success(t('product_management.delete_success'));
+      setOpenDeleteDialog(false);
+      setProductToDelete(null);
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.msg || t('product_management.delete_error'));
+    },
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setProductForm({
+      ...productForm,
+      [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  const handleAddProduct = () => {
+    addProductMutation.mutate(productForm);
+  };
+
+  const handleEditClick = (product) => {
+    setEditingProduct(product);
+    setProductForm({
+      name: product.name || '',
+      description: product.description || '',
+      price: product.price || '',
+      sku: product.sku || '',
+      category_id: product.category_id || '',
+      is_pizza: product.is_pizza || false,
+      pizza_type: product.pizza_type || '',
+      available_for_delivery: product.available_for_delivery || false,
+      available_for_dine_in: product.available_for_dine_in || false,
+      available_for_online_order: product.available_for_online_order || false,
+      available_for_digital_menu: product.available_for_digital_menu || false,
+      image_url: product.image_url || '',
+    });
+  };
+
+  const handleUpdateProduct = () => {
+    if (editingProduct) {
+      updateProductMutation.mutate({ id: editingProduct.id, ...productForm });
+    }
+  };
+
+  const handleDeleteClick = (product) => {
+    setProductToDelete(product);
+    setOpenDeleteDialog(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (productToDelete) {
+      deleteProductMutation.mutate(productToDelete.id);
+    }
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('productImage', file);
+
+    try {
+      const { data } = await axiosInstance.post('/products/upload-image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setProductForm({ ...productForm, image_url: data.imageUrl });
+      toast.success(t('product_management.upload_success'));
+    } catch (error) {
+      toast.error(error.response?.data?.msg || t('product_management.upload_error'));
+    }
+  };
+
+  if (isLoadingProducts || isLoadingCategories) return <Typography>{t('common.loading')}</Typography>;
+  if (isErrorProducts || isErrorCategories) return <Typography>{t('common.error_loading_data')}</Typography>;
+
+  return (
+    <Box sx={{ mt: 3 }}>
+      <Typography variant="h5" gutterBottom>{t('product_management.title')}</Typography>
+      <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
+        <Typography variant="h6" gutterBottom>{editingProduct ? t('product_management.edit_product') : t('product_management.add_new_product')}</Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <TextField
+            label={t('product_management.product_name')}
+            name="name"
+            variant="outlined"
+            fullWidth
+            value={productForm.name}
+            onChange={handleInputChange}
+          />
+          <TextField
+            label={t('product_management.description')}
+            name="description"
+            variant="outlined"
+            fullWidth
+            multiline
+            rows={3}
+            value={productForm.description}
+            onChange={handleInputChange}
+          />
+          <TextField
+            label={t('product_management.price')}
+            name="price"
+            variant="outlined"
+            fullWidth
+            type="number"
+            value={productForm.price}
+            onChange={handleInputChange}
+          />
+          <TextField
+            label={t('product_management.sku')}
+            name="sku"
+            variant="outlined"
+            fullWidth
+            value={productForm.sku}
+            onChange={handleInputChange}
+          />
+          <FormControl fullWidth variant="outlined">
+            <InputLabel>{t('product_management.category')}</InputLabel>
+            <Select
+              name="category_id"
+              value={productForm.category_id}
+              onChange={handleInputChange}
+              label={t('product_management.category')}
+            >
+              <MenuItem value="">{t('product_management.select_category')}</MenuItem>
+              {categories.map((category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={productForm.is_pizza}
+                onChange={handleInputChange}
+                name="is_pizza"
+              />
+            }
+            label={t('product_management.is_pizza')}
+          />
+
+          {productForm.is_pizza && (
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>{t('product_management.pizza_type')}</InputLabel>
+              <Select
+                name="pizza_type"
+                value={productForm.pizza_type}
+                onChange={handleInputChange}
+                label={t('product_management.pizza_type')}
+              >
+                <MenuItem value="">{t('product_management.select_pizza_type')}</MenuItem>
+                <MenuItem value="variable_price">{t('product_management.variable_price_pizza')}</MenuItem>
+                <MenuItem value="fixed_price">{t('product_management.fixed_price_pizza')}</MenuItem>
+              </Select>
+            </FormControl>
+          )}
+
+          <Typography variant="subtitle1" sx={{ mt: 2 }}>{t('product_management.availability')}</Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, flexWrap: 'wrap' }}>
+            <FormControlLabel
+              control={<Checkbox checked={productForm.available_for_delivery} onChange={handleInputChange} name="available_for_delivery" />}
+              label={t('product_management.available_for_delivery')}
+            />
+            <FormControlLabel
+              control={<Checkbox checked={productForm.available_for_dine_in} onChange={handleInputChange} name="available_for_dine_in" />}
+              label={t('product_management.available_for_dine_in')}
+            />
+            <FormControlLabel
+              control={<Checkbox checked={productForm.available_for_online_order} onChange={handleInputChange} name="available_for_online_order" />}
+              label={t('product_management.available_for_online_order')}
+            />
+            <FormControlLabel
+              control={<Checkbox checked={productForm.available_for_digital_menu} onChange={handleInputChange} name="available_for_digital_menu" />}
+              label={t('product_management.available_for_digital_menu')}
+            />
+          </Box>
+
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Button
+              variant="outlined"
+              component="label"
+              startIcon={<ImageIcon />}
+            >
+              {t('product_management.upload_image')}
+              <input
+                type="file"
+                hidden
+                accept="image/*"
+                onChange={handleImageUpload}
+              />
+            </Button>
+            {productForm.image_url && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="body2">{t('product_management.image_uploaded')}</Typography>
+                <IconButton onClick={() => window.open(productForm.image_url, '_blank')}>
+                  <ImageIcon />
+                </IconButton>
+                <IconButton onClick={() => setProductForm({ ...productForm, image_url: '' })} color="error">
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
+            )}
+          </Box>
+
+          {editingProduct ? (
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<EditIcon />}
+              onClick={handleUpdateProduct}
+              disabled={updateProductMutation.isLoading}
+            >
+              {t('product_management.update_button')}
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              onClick={handleAddProduct}
+              disabled={addProductMutation.isLoading}
+            >
+              {t('product_management.add_button')}
+            </Button>
+          )}
+          {editingProduct && (
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={() => {
+                setEditingProduct(null);
+                setProductForm({
+                  name: '',
+                  description: '',
+                  price: '',
+                  sku: '',
+                  category_id: '',
+                  is_pizza: false,
+                  pizza_type: '',
+                  available_for_delivery: true,
+                  available_for_dine_in: true,
+                  available_for_online_order: true,
+                  available_for_digital_menu: true,
+                  image_url: '',
+                });
+              }}
+            >
+              {t('common.cancel')}
+            </Button>
+          )}
+        </Box>
+      </Paper>
+
+      <Typography variant="h6" gutterBottom>{t('product_management.existing_products')}</Typography>
+      <Paper elevation={2} sx={{ p: 3 }}>
+        {products.length === 0 ? (
+          <Typography>{t('product_management.no_products')}</Typography>
+        ) : (
+          <List>
+            {products.map((product) => (
+              <ListItem
+                key={product.id}
+                secondaryAction={
+                  <Box>
+                    <IconButton edge="end" aria-label="edit" onClick={() => handleEditClick(product)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteClick(product)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
+                }
+              >
+                <ListItemText 
+                  primary={product.name}
+                  secondary={
+                    <>
+                      <Typography component="span" variant="body2" color="text.primary">
+                        {t('product_management.price')}: {product.price} | {t('product_management.category')}: {product.category ? product.category.name : t('common.none')}
+                      </Typography>
+                      {product.is_pizza && (
+                        <Typography component="span" variant="body2" color="text.secondary" sx={{ display: 'block' }}>
+                          {t('product_management.is_pizza')}: {t('common.yes')} | {t('product_management.pizza_type')}: {t(`product_management.${product.pizza_type}`)}
+                        </Typography>
+                      )}
+                    </>
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
+
+      <Dialog
+        open={openDeleteDialog}
+        onClose={() => setOpenDeleteDialog(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{t('product_management.confirm_delete_title')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {t('product_management.confirm_delete_message', { productName: productToDelete?.name })}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDeleteDialog(false)}>{t('common.cancel')}</Button>
+          <Button onClick={handleConfirmDelete} color="error" autoFocus>
+            {t('common.delete')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
+  );
+};
+
+export default ProductManagement;

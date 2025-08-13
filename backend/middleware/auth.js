@@ -42,9 +42,6 @@ const auth = async (req, res, next) => {
       restaurants: user.restaurants || [],
     };
 
-    console.log('Auth Middleware - req.user.role:', req.user.role);
-    console.log('Auth Middleware - req.user.restaurants:', req.user.restaurants);
-
     next();
   } catch (error) {
     console.error('Erro no middleware de autenticação:', error);
@@ -55,24 +52,18 @@ const auth = async (req, res, next) => {
 // Middleware para verificar roles específicos
 const authorize = (...roles) => {
   return (req, res, next) => {
-    console.log('Authorize Middleware - Checking roles:', roles);
-    console.log('Authorize Middleware - User role:', req.user?.role);
-
     if (!req.user) {
-      console.log('Authorize Middleware - No user found in req.user');
       return res.status(401).json({
         error: 'Acesso negado. Usuário não autenticado'
       });
     }
 
     if (!roles.includes(req.user.role)) {
-      console.log('Authorize Middleware - Role not authorized:', req.user.role);
       return res.status(403).json({
         error: 'Acesso negado. Permissões insuficientes'
       });
     }
 
-    console.log('Authorize Middleware - Role authorized. Proceeding.');
     next();
   };
 };

@@ -45,12 +45,13 @@ import GirarRoleta from './pages/Public/GirarRoleta'; // Adicionado
 import PublicMenu from './pages/Public/PublicMenu'; // New import for Public Menu
 import PublicDeliveryMenu from './pages/Public/PublicDeliveryMenu';
 import PublicDineInMenu from './pages/Public/PublicDineInMenu';
-import Products from './pages/ERP/Products';
+import TechnicalSpecifications from './pages/ERP/Products';
 import Stock from './pages/ERP/Stock';
 import Tables from './pages/ERP/Tables';
 import Orders from './pages/ERP/Orders';
 import Pdv from './pages/ERP/Pdv';
 import Ingredients from './pages/ERP/Ingredients';
+import Menu from './pages/ERP/Menu';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -111,7 +112,8 @@ function App() {
                   
                   <Route path="relationship" element={<RelationshipDashboard />} />
                   <Route path="integrations" element={<IntegrationsPage />} />
-                  <Route path="erp/products" element={<Products />} />
+                  <Route path="erp/menu" element={<Menu />} />
+                  <Route path="erp/technical-specifications" element={<TechnicalSpecifications />} />
                   <Route path="erp/stock" element={<Stock />} />
                   <Route path="erp/tables" element={<Tables />} />
                   <Route path="erp/orders" element={<Orders />} />

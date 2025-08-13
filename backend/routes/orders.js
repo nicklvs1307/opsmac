@@ -18,10 +18,6 @@ const getRestaurantId = (req, res, next) => {
   }
   req.restaurantId = restaurantId;
 
-  console.log('getRestaurantId Middleware - req.user.role:', req.user.role);
-  console.log('getRestaurantId Middleware - req.user.restaurants:', req.user.restaurants);
-  console.log('getRestaurantId Middleware - final restaurantId:', req.restaurantId);
-
   next();
 };
 

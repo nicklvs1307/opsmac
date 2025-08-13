@@ -19,10 +19,6 @@ const getRestaurantId = (req, res, next) => {
   }
   req.restaurantId = restaurantId;
 
-  console.log('getRestaurantId Middleware - req.user.role:', req.user.role);
-  console.log('getRestaurantId Middleware - req.user.restaurants:', req.user.restaurants);
-  console.log('getRestaurantId Middleware - final restaurantId:', req.restaurantId);
-
   next();
 };
 
@@ -61,7 +57,7 @@ router.post('/', auth, getRestaurantId, async (req, res) => {
 
     res.status(201).json(table);
   } catch (error) {
-    console.error(error.message);
+    // console.error(error.message);
     res.status(500).send('Server Error');
   }
 });
@@ -77,7 +73,7 @@ router.get('/', auth, getRestaurantId, async (req, res) => {
     });
     res.json(tables);
   } catch (error) {
-    console.error(error.message);
+    // console.error(error.message);
     res.status(500).send('Server Error');
   }
 });
@@ -96,7 +92,7 @@ router.get('/:id', auth, getRestaurantId, async (req, res) => {
     }
     res.json(table);
   } catch (error) {
-    console.error(error.message);
+    // console.error(error.message);
     res.status(500).send('Server Error');
   }
 });
@@ -128,7 +124,7 @@ router.put('/:id', auth, getRestaurantId, async (req, res) => {
     await table.save();
     res.json(table);
   } catch (error) {
-    console.error(error.message);
+    // console.error(error.message);
     res.status(500).send('Server Error');
   }
 });
@@ -149,7 +145,7 @@ router.delete('/:id', auth, getRestaurantId, async (req, res) => {
     await table.destroy();
     res.json({ msg: 'Table deleted successfully.' });
   } catch (error) {
-    console.error(error.message);
+    // console.error(error.message);
     res.status(500).send('Server Error');
   }
 });
@@ -173,7 +169,7 @@ router.post('/:id/generate-qr', auth, getRestaurantId, async (req, res) => {
 
     res.json({ qr_code_url });
   } catch (error) {
-    console.error(error.message);
+    // console.error(error.message);
     res.status(500).send('Server Error');
   }
 });

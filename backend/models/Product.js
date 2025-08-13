@@ -23,10 +23,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       unique: true
     },
-    category: { // New field for product category
-      type: DataTypes.STRING,
-      allowNull: true, // Category can be null initially
-    },
     restaurant_id: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -34,8 +30,48 @@ module.exports = (sequelize) => {
         model: 'restaurants',
         key: 'id'
       }
-    }
-    // Você pode adicionar um campo category_id aqui depois
+    },
+    category_id: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: 'Categories',
+        key: 'id',
+      },
+    },
+    is_pizza: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    pizza_type: {
+      type: DataTypes.ENUM('variable_price', 'fixed_price'),
+      allowNull: true,
+    },
+    available_for_delivery: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false,
+    },
+    available_for_dine_in: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false,
+    },
+    available_for_online_order: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false,
+    },
+    available_for_digital_menu: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false,
+    },
+    image_url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   }, {
     freezeTableName: true, // Model tableName will be the same as the model name
     tableName: 'products' // Explicitly define the table name
@@ -45,6 +81,10 @@ module.exports = (sequelize) => {
     Product.belongsTo(models.Restaurant, {
       foreignKey: 'restaurant_id',
       as: 'restaurant'
+    });
+    Product.belongsTo(models.Category, {
+      foreignKey: 'category_id',
+      as: 'category'
     });
     // Associação com a ficha técnica
     Product.hasOne(models.TechnicalSpecification, {

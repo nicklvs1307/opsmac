@@ -142,7 +142,7 @@ router.post(
 
       res.status(201).json({ msg: 'Ficha técnica criada com sucesso!', technicalSpecificationId: technicalSpecification.id });
     } catch (error) {
-      console.error('Erro ao criar ficha técnica:', error);
+      // console.error('Erro ao criar ficha técnica:', error);
       res.status(500).json({ msg: 'Erro interno do servidor.', error: error.message });
     }
   }
@@ -221,7 +221,7 @@ router.get(
 
       res.json(technicalSpecification);
     } catch (error) {
-      console.error('Erro ao obter ficha técnica:', error);
+      // console.error('Erro ao obter ficha técnica:', error);
       res.status(500).json({ msg: 'Erro interno do servidor.', error: error.message });
     }
   }
@@ -340,7 +340,7 @@ router.put(
 
       res.json({ msg: 'Ficha técnica atualizada com sucesso!', technicalSpecificationId: technicalSpecification.id });
     } catch (error) {
-      console.error('Erro ao atualizar ficha técnica:', error);
+      // console.error('Erro ao atualizar ficha técnica:', error);
       res.status(500).json({ msg: 'Erro interno do servidor.', error: error.message });
     }
   }
@@ -401,7 +401,7 @@ router.delete(
       await technicalSpecification.destroy();
       res.status(204).send();
     } catch (error) {
-      console.error('Erro ao deletar ficha técnica:', error);
+      // console.error('Erro ao deletar ficha técnica:', error);
       res.status(500).json({ msg: 'Erro interno do servidor.', error: error.message });
     }
   }

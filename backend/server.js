@@ -36,6 +36,7 @@ const publicOrdersRoutes = require('./routes/public_orders');
 const ordersRoutes = require('./routes/orders');
 const ingredientsRoutes = require('./routes/ingredients');
 const technicalSpecificationsRoutes = require('./routes/technicalSpecifications');
+const categoriesRoutes = require('./routes/categories');
 
 const app = express();
 app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)
@@ -94,6 +95,7 @@ app.use('/public/menu/dine-in', publicDineInMenuRoutes);
 app.use('/api/orders', ordersRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
 app.use('/api/technical-specifications', technicalSpecificationsRoutes);
+app.use('/api/categories', categoriesRoutes);
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');

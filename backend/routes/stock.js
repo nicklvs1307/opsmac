@@ -17,10 +17,6 @@ const getRestaurantId = (req, res, next) => {
   }
   req.restaurantId = restaurantId;
 
-  console.log('getRestaurantId Middleware - req.user.role:', req.user.role);
-  console.log('getRestaurantId Middleware - req.user.restaurants:', req.user.restaurants);
-  console.log('getRestaurantId Middleware - final restaurantId:', req.restaurantId);
-
   next();
 };
 
@@ -50,7 +46,7 @@ router.get('/', auth, getRestaurantId, async (req, res) => {
 
     res.json(stockList);
   } catch (error) {
-    console.error('Error fetching stock list:', error);
+    // console.error('Error fetching stock list:', error);
     res.status(500).send('Server Error');
   }
 });
@@ -106,7 +102,7 @@ router.post('/move', auth, getRestaurantId, async (req, res) => {
 
     res.status(200).json({ msg: 'Stock updated successfully', current_stock: stock.quantity });
   } catch (error) {
-    console.error(error.message);
+    // console.error(error.message);
     res.status(500).send('Server Error');
   }
 });
@@ -131,7 +127,7 @@ router.get('/history/:product_id', auth, getRestaurantId, async (req, res) => {
     });
     res.json(history);
   } catch (error) {
-    console.error(error.message);
+    // console.error(error.message);
     res.status(500).send('Server Error');
   }
 });

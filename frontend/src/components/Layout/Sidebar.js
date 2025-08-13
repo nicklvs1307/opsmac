@@ -161,9 +161,9 @@ const Sidebar = ({ onMobileClose }) => {
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: t('sidebar.products'),
+          title: t('sidebar.menu'),
           icon: <ListIcon />,
-          path: '/erp/products'
+          path: '/erp/menu'
         },
         {
           title: t('sidebar.stock'), // New
@@ -184,6 +184,11 @@ const Sidebar = ({ onMobileClose }) => {
           title: t('sidebar.ingredients'), // New
           icon: <ListIcon />,
           path: '/erp/ingredients'
+        },
+        {
+          title: t('sidebar.technical_specifications'), // New
+          icon: <ListIcon />,
+          path: '/erp/technical-specifications'
         }
       ]
     },

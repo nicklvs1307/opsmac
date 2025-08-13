@@ -4,7 +4,7 @@ import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia,
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, Search as SearchIcon, LocalDining as LocalDiningIcon, Phone as PhoneIcon, Add as AddIcon, Remove as RemoveIcon } from '@mui/icons-material';
+import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, Search as SearchIcon, LocalDining as LocalDiningIcon, Phone as PhoneIcon } from '@mui/icons-material';
 
 const fetchDeliveryMenu = async (restaurantSlug) => {
   const { data } = await axiosInstance.get(`/api/public/products/delivery/${restaurantSlug}`);
@@ -28,8 +28,6 @@ const PublicDeliveryMenu = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [openProductModal, setOpenProductModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
@@ -124,22 +122,7 @@ const PublicDeliveryMenu = () => {
     }
   );
 
-  const { data: restaurantDetails, isLoading: isLoadingRestaurant, isError: isErrorRestaurant } = useQuery(
-    ['restaurantDetails', restaurantSlug],
-    async () => {
-      const { data } = await axiosInstance.get(`/api/public/restaurant/${restaurantSlug}`);
-      return data;
-    },
-    {
-      enabled: !!restaurantSlug,
-      onError: (error) => {
-        console.error('Erro ao carregar detalhes do restaurante:', error);
-        toast.error(`Erro ao carregar detalhes do restaurante: ${error.response?.data?.msg || error.message}`);
-      }
-    }
-  );
-
-  if (isLoading || isLoadingRestaurant) {
+  if (isLoading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <CircularProgress />
@@ -147,7 +130,7 @@ const PublicDeliveryMenu = () => {
     );
   }
 
-  if (isError || isErrorRestaurant) {
+  if (isError) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Alert severity="error">Erro ao carregar o cardápio. Verifique o link ou tente novamente mais tarde.</Alert>
@@ -155,7 +138,7 @@ const PublicDeliveryMenu = () => {
     );
   }
 
-  if (!menuData || !menuData.products || menuData.products.length === 0 || !restaurantDetails) {
+  if (!menuData || !menuData.products || menuData.products.length === 0) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Typography variant="h6">Nenhum item encontrado para este cardápio de delivery.</Typography>
@@ -178,13 +161,11 @@ const PublicDeliveryMenu = () => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#f5f5f5' }}>
       {/* Header */}
-      <AppBar position="fixed" sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000' }}>
+      <AppBar position="fixed" sx={{ bgcolor: '#8B0000' }}>
         <Toolbar>
-          {restaurantDetails.logo && (
-            <img src={restaurantDetails.logo} alt={restaurantDetails.name} style={{ height: 40, marginRight: 10 }} />
-          )}
+          <RestaurantIcon sx={{ mr: 1 }} />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {restaurantDetails.name}
+            DON FONSECA
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: 'rgba(255,255,255,0.15)', borderRadius: 1, px: 1, mr: 2 }}>
             <SearchIcon sx={{ color: 'white', mr: 1 }} />
@@ -242,7 +223,7 @@ const PublicDeliveryMenu = () => {
             p: 3, 
             mb: 3, 
             borderRadius: 2,
-            backgroundImage: `linear-gradient(to right, ${restaurantDetails.settings?.primary_color || '#8B0000'}, ${restaurantDetails.settings?.secondary_color || '#D10000'})`,
+            backgroundImage: 'linear-gradient(to right, #8B0000, #D10000)',
             color: 'white',
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row' },
@@ -281,10 +262,10 @@ const PublicDeliveryMenu = () => {
             variant="scrollable"
             scrollButtons="auto"
             sx={{
-              bgcolor: restaurantDetails.settings?.primary_color || '#8B0000',
+              bgcolor: '#8B0000',
               '& .MuiTab-root': { color: 'white' },
               '& .Mui-selected': { color: 'white', fontWeight: 'bold' },
-              '& .MuiTabs-indicator': { backgroundColor: restaurantDetails.settings?.secondary_color || 'white' }
+              '& .MuiTabs-indicator': { backgroundColor: 'white' }
             }}
           >
             {categories.map((category, index) => (
@@ -310,11 +291,11 @@ const PublicDeliveryMenu = () => {
                         borderRadius: 2,
                         overflow: 'hidden',
                         boxShadow: 3
-                      }} onClick={() => { setSelectedProduct(item); setOpenProductModal(true); }}>
+                      }}>
                         <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                           <CardMedia
                             component="img"
-                            sx={{ height: 180, objectFit: 'cover' }}
+                            height="140"
                             image={item.imageUrl || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`}
                             alt={item.name}
                           />
@@ -329,24 +310,17 @@ const PublicDeliveryMenu = () => {
                               <Typography variant="h6" color="#8B0000" fontWeight="bold">
                                 R$ {Number(item.price).toFixed(2)}
                               </Typography>
-                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <IconButton
-                                  size="small"
-                                  onClick={() => removeFromCart(item.id)}
-                                  disabled={!cartItems.find(cartItem => cartItem.id === item.id)}
-                                >
-                                  <RemoveIcon />
-                                </IconButton>
-                                <Typography variant="body1">
-                                  {cartItems.find(cartItem => cartItem.id === item.id)?.quantity || 0}
-                                </Typography>
-                                <IconButton
-                                  size="small"
-                                  onClick={() => addToCart(item)}
-                                >
-                                  <AddIcon />
-                                </IconButton>
-                              </Box>
+                              <Button 
+                                variant="contained" 
+                                size="small" 
+                                onClick={() => addToCart(item)}
+                                sx={{ 
+                                  bgcolor: '#8B0000', 
+                                  '&:hover': { bgcolor: '#6B0000' } 
+                                }}
+                              >
+                                Adicionar
+                              </Button>
                             </Box>
                           </CardContent>
                         </Box>
@@ -367,7 +341,7 @@ const PublicDeliveryMenu = () => {
         fullWidth
         maxWidth="sm"
       >
-        <DialogTitle sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000', color: 'white' }}>
+        <DialogTitle sx={{ bgcolor: '#8B0000', color: 'white' }}>
           Carrinho de Compras
         </DialogTitle>
         <DialogContent>
@@ -409,7 +383,7 @@ const PublicDeliveryMenu = () => {
                 </Paper>
               ))}
               <Divider sx={{ my: 2 }} />
-              <Box sx={{ display: 'flex', justifyContent: 'space_between', mb: 2 }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                 <Typography variant="h6">Total:</Typography>
                 <Typography variant="h6" fontWeight="bold">
                   R$ {cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0).toFixed(2)}
@@ -469,73 +443,12 @@ const PublicDeliveryMenu = () => {
           {cartItems.length > 0 && (
             <Button 
               variant="contained" 
-              sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000', '&:hover': { bgcolor: alpha(restaurantDetails.settings?.primary_color || '#8B0000', 0.8) } }}
+              sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
               onClick={handleCheckout}
             >
               Finalizar Pedido
             </Button>
           )}
-        </DialogActions>
-      </Dialog>
-
-      {/* Product Details Dialog */}
-      <Dialog
-        open={openProductModal}
-        onClose={() => setOpenProductModal(false)}
-        fullWidth
-        maxWidth="sm"
-      >
-        <DialogTitle sx={{ bgcolor: theme.palette.primary.main, color: 'white' }}>
-          {selectedProduct?.name}
-        </DialogTitle>
-        <DialogContent dividers>
-          {selectedProduct?.imageUrl && (
-            <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
-              <img
-                src={selectedProduct.imageUrl}
-                alt={selectedProduct.name}
-                style={{ maxWidth: '100%', maxHeight: 300, objectFit: 'contain' }}
-              />
-            </Box>
-          )}
-          <Typography variant="h6" gutterBottom>
-            {selectedProduct?.name}
-          </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-            {selectedProduct?.description}
-          </Typography>
-          <Typography variant="h5" color="primary" fontWeight="bold">
-            R$ {Number(selectedProduct?.price).toFixed(2)}
-          </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
-            <IconButton
-              onClick={() => removeFromCart(selectedProduct?.id)}
-              disabled={!cartItems.find(item => item.id === selectedProduct?.id)}
-            >
-              <RemoveIcon />
-            </IconButton>
-            <Typography variant="h6" sx={{ mx: 1 }}>
-              {cartItems.find(item => item.id === selectedProduct?.id)?.quantity || 0}
-            </Typography>
-            <IconButton onClick={() => addToCart(selectedProduct)}>
-              <AddIcon />
-            </IconButton>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenProductModal(false)}>
-            {t('common.close')}
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000', '&:hover': { bgcolor: alpha(restaurantDetails.settings?.primary_color || '#8B0000', 0.8) } }}
-            onClick={() => {
-              addToCart(selectedProduct);
-              setOpenProductModal(false);
-            }}
-          >
-            {t('common.add_to_cart')}
-          </Button>
         </DialogActions>
       </Dialog>
     </Box>

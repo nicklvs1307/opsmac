@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, alpha } from '@mui/material';
 import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
-import toast from 'react-hot-toast';
-import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, LocalDining as LocalDiningIcon, Call as CallIcon, Receipt as ReceiptIcon, Add as AddIcon, Remove as RemoveIcon } from '@mui/icons-material';
+import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, LocalDining as LocalDiningIcon, Call as CallIcon, Receipt as ReceiptIcon } from '@mui/icons-material';
 
 const fetchDineInMenu = async (tableId) => {
   const { data } = await axiosInstance.get(`/public/menu/dine-in/${tableId}`);
@@ -51,12 +50,6 @@ const PublicDineInMenu = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [openProductModal, setOpenProductModal] = useState(false);
-  const [customerName, setCustomerName] = useState('');
-  const [customerPhone, setCustomerPhone] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('');
-  const [notes, setNotes] = useState('');
 
   // Query for menu items
   const { data: menuData, isLoading: isLoadingMenu, isError: isErrorMenu } = useQuery(
@@ -64,21 +57,6 @@ const PublicDineInMenu = () => {
     () => fetchDineInMenu(tableId),
     {
       enabled: !!tableId,
-    }
-  );
-
-  const { data: restaurantDetails, isLoading: isLoadingRestaurant, isError: isErrorRestaurant } = useQuery(
-    ['restaurantDetails', menuData?.products?.[0]?.restaurant_id],
-    async () => {
-      const { data } = await axiosInstance.get(`/api/public/restaurant/${menuData.products[0].restaurant_id}`);
-      return data;
-    },
-    {
-      enabled: !!menuData?.products?.[0]?.restaurant_id,
-      onError: (error) => {
-        console.error('Erro ao carregar detalhes do restaurante:', error);
-        toast.error(`Erro ao carregar detalhes do restaurante: ${error.response?.data?.msg || error.message}`);
-      }
     }
   );
   
@@ -111,48 +89,6 @@ const PublicDineInMenu = () => {
           ? { ...item, quantity: item.quantity - 1 } 
           : item
       ));
-    }
-  };
-
-  const handleCheckout = async () => {
-    if (cartItems.length === 0) {
-      toast.error('Seu carrinho está vazio.');
-      return;
-    }
-
-    const totalAmount = cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0);
-
-    const orderData = {
-      restaurant_id: menuData.products[0].restaurant_id, // Assuming all products belong to the same restaurant
-      delivery_type: 'dine_in', // This component is for dine-in menu
-      total_amount: totalAmount,
-      items: cartItems.map(item => ({
-        product_id: item.id,
-        name: item.name,
-        quantity: item.quantity,
-        price: Number(item.price),
-      })),
-      customer_details: {
-        name: customerName,
-        phone: customerPhone,
-      },
-      payment_method: paymentMethod,
-      notes: notes,
-      table_id: tableId, // Include table ID for dine-in orders
-    };
-
-    try {
-      await axiosInstance.post('/api/public/orders', orderData);
-      toast.success('Pedido realizado com sucesso!');
-      setCartItems([]);
-      setCartOpen(false);
-      setCustomerName('');
-      setCustomerPhone('');
-      setPaymentMethod('');
-      setNotes('');
-    } catch (error) {
-      console.error('Erro ao finalizar pedido:', error);
-      toast.error(`Erro ao finalizar pedido: ${error.response?.data?.msg || error.message}`);
     }
   };
 
@@ -210,7 +146,7 @@ const PublicDineInMenu = () => {
     }
   }, [tableId, sessionId, sessionMutation]);
 
-  if (isLoadingMenu || isLoadingRestaurant) {
+  if (isLoadingMenu) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <CircularProgress />
@@ -218,7 +154,7 @@ const PublicDineInMenu = () => {
     );
   }
 
-  if (isErrorMenu || isErrorRestaurant) {
+  if (isErrorMenu) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Alert severity="error">Erro ao carregar o cardápio. Verifique o link ou tente novamente mais tarde.</Alert>
@@ -226,7 +162,7 @@ const PublicDineInMenu = () => {
     );
   }
 
-  if (!menuData || !menuData.products || menuData.products.length === 0 || !restaurantDetails) {
+  if (!menuData || !menuData.products || menuData.products.length === 0) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Typography variant="h6">Nenhum item encontrado para este cardápio de salão.</Typography>
@@ -240,13 +176,11 @@ const PublicDineInMenu = () => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#f5f5f5' }}>
       {/* Header */}
-      <AppBar position="fixed" sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000' }}>
+      <AppBar position="fixed" sx={{ bgcolor: '#8B0000' }}>
         <Toolbar>
-          {restaurantDetails.logo && (
-            <img src={restaurantDetails.logo} alt={restaurantDetails.name} style={{ height: 40, marginRight: 10 }} />
-          )}
+          <RestaurantIcon sx={{ mr: 1 }} />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {restaurantDetails.name} - MESA {tableId}
+            MESA {tableId}
           </Typography>
           <IconButton 
             color="inherit" 
@@ -304,10 +238,10 @@ const PublicDineInMenu = () => {
             variant="scrollable"
             scrollButtons="auto"
             sx={{
-              bgcolor: restaurantDetails.settings?.primary_color || '#8B0000',
+              bgcolor: '#8B0000',
               '& .MuiTab-root': { color: 'white' },
               '& .Mui-selected': { color: 'white', fontWeight: 'bold' },
-              '& .MuiTabs-indicator': { backgroundColor: restaurantDetails.settings?.secondary_color || 'white' }
+              '& .MuiTabs-indicator': { backgroundColor: 'white' }
             }}
           >
             {categories.map((category, index) => (
@@ -333,11 +267,11 @@ const PublicDineInMenu = () => {
                         borderRadius: 2,
                         overflow: 'hidden',
                         boxShadow: 3
-                      }} onClick={() => { setSelectedProduct(item); setOpenProductModal(true); }}>
+                      }}>
                         <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                           <CardMedia
                             component="img"
-                            sx={{ height: 180, objectFit: 'cover' }}
+                            height="140"
                             image={item.imageUrl || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`}
                             alt={item.name}
                           />
@@ -352,24 +286,17 @@ const PublicDineInMenu = () => {
                               <Typography variant="h6" color="#8B0000" fontWeight="bold">
                                 R$ {Number(item.price).toFixed(2)}
                               </Typography>
-                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <IconButton
-                                  size="small"
-                                  onClick={() => removeFromCart(item.id)}
-                                  disabled={!cartItems.find(cartItem => cartItem.id === item.id)}
-                                >
-                                  <RemoveIcon />
-                                </IconButton>
-                                <Typography variant="body1">
-                                  {cartItems.find(cartItem => cartItem.id === item.id)?.quantity || 0}
-                                </Typography>
-                                <IconButton
-                                  size="small"
-                                  onClick={() => addToCart(item)}
-                                >
-                                  <AddIcon />
-                                </IconButton>
-                              </Box>
+                              <Button 
+                                variant="contained" 
+                                size="small" 
+                                onClick={() => addToCart(item)}
+                                sx={{ 
+                                  bgcolor: '#8B0000', 
+                                  '&:hover': { bgcolor: '#6B0000' } 
+                                }}
+                              >
+                                Adicionar
+                              </Button>
                             </Box>
                           </CardContent>
                         </Box>
@@ -402,7 +329,7 @@ const PublicDineInMenu = () => {
             variant="contained" 
             startIcon={<CallIcon />}
             onClick={() => setOpenWaiterDialog(true)}
-            sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000', '&:hover': { bgcolor: alpha(restaurantDetails.settings?.primary_color || '#8B0000', 0.8) } }}
+            sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
           >
             Chamar Garçom
           </Button>
@@ -410,7 +337,7 @@ const PublicDineInMenu = () => {
             variant="contained" 
             startIcon={<ReceiptIcon />}
             onClick={() => requestBillMutation.mutate(sessionId)}
-            sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000', '&:hover': { bgcolor: alpha(restaurantDetails.settings?.primary_color || '#8B0000', 0.8) } }}
+            sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
           >
             Solicitar Conta
           </Button>
@@ -419,7 +346,7 @@ const PublicDineInMenu = () => {
 
       {/* Dialog for Call Waiter */}
       <Dialog open={openWaiterDialog} onClose={() => setOpenWaiterDialog(false)}>
-        <DialogTitle sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000', color: 'white' }}>Chamar Garçom</DialogTitle>
+        <DialogTitle sx={{ bgcolor: '#8B0000', color: 'white' }}>Chamar Garçom</DialogTitle>
         <DialogContent sx={{ pt: 2 }}>
           <TextField
             autoFocus
@@ -437,7 +364,7 @@ const PublicDineInMenu = () => {
           <Button 
             variant="contained"
             onClick={() => callWaiterMutation.mutate({ sessionId, description: waiterCallDescription })}
-            sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000', '&:hover': { bgcolor: alpha(restaurantDetails.settings?.primary_color || '#8B0000', 0.8) } }}
+            sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
           >
             Enviar Chamada
           </Button>
@@ -451,7 +378,7 @@ const PublicDineInMenu = () => {
         fullWidth
         maxWidth="sm"
       >
-        <DialogTitle sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000', color: 'white' }}>
+        <DialogTitle sx={{ bgcolor: '#8B0000', color: 'white' }}>
           Carrinho de Compras
         </DialogTitle>
         <DialogContent>
@@ -499,40 +426,6 @@ const PublicDineInMenu = () => {
                   R$ {cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0).toFixed(2)}
                 </Typography>
               </Box>
-              
-              <Box sx={{ mt: 3 }}>
-                <Typography variant="h6" gutterBottom>Detalhes para o Pedido</Typography>
-                <TextField
-                  label="Seu Nome (opcional)"
-                  fullWidth
-                  margin="normal"
-                  value={customerName}
-                  onChange={(e) => setCustomerName(e.target.value)}
-                />
-                <TextField
-                  label="Seu Telefone (opcional)"
-                  fullWidth
-                  margin="normal"
-                  value={customerPhone}
-                  onChange={(e) => setCustomerPhone(e.target.value)}
-                />
-                <TextField
-                  label="Método de Pagamento (Ex: Dinheiro, Cartão, Pix)"
-                  fullWidth
-                  margin="normal"
-                  value={paymentMethod}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                />
-                <TextField
-                  label="Observações (Ex: Sem cebola)"
-                  fullWidth
-                  margin="normal"
-                  multiline
-                  rows={2}
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                />
-              </Box>
             </Box>
           )}
         </DialogContent>
@@ -541,72 +434,11 @@ const PublicDineInMenu = () => {
           {cartItems.length > 0 && (
             <Button 
               variant="contained" 
-              sx={{ bgcolor: restaurantDetails.settings?.primary_color || '#8B0000', '&:hover': { bgcolor: alpha(restaurantDetails.settings?.primary_color || '#8B0000', 0.8) } }}
-              onClick={handleCheckout}
+              sx={{ bgcolor: '#8B0000', '&:hover': { bgcolor: '#6B0000' } }}
             >
               Finalizar Pedido
             </Button>
           )}
-        </DialogActions>
-      </Dialog>
-
-      {/* Product Details Dialog */}
-      <Dialog
-        open={openProductModal}
-        onClose={() => setOpenProductModal(false)}
-        fullWidth
-        maxWidth="sm"
-      >
-        <DialogTitle sx={{ bgcolor: theme.palette.primary.main, color: 'white' }}>
-          {selectedProduct?.name}
-        </DialogTitle>
-        <DialogContent dividers>
-          {selectedProduct?.imageUrl && (
-            <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
-              <img
-                src={selectedProduct.imageUrl}
-                alt={selectedProduct.name}
-                style={{ maxWidth: '100%', maxHeight: 300, objectFit: 'contain' }}
-              />
-            </Box>
-          )}
-          <Typography variant="h6" gutterBottom>
-            {selectedProduct?.name}
-          </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-            {selectedProduct?.description}
-          </Typography>
-          <Typography variant="h5" color="primary" fontWeight="bold">
-            R$ {Number(selectedProduct?.price).toFixed(2)}
-          </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
-            <IconButton
-              onClick={() => removeFromCart(selectedProduct?.id)}
-              disabled={!cartItems.find(item => item.id === selectedProduct?.id)}
-            >
-              <RemoveIcon />
-            </IconButton>
-            <Typography variant="h6" sx={{ mx: 1 }}>
-              {cartItems.find(item => item.id === selectedProduct?.id)?.quantity || 0}
-            </Typography>
-            <IconButton onClick={() => addToCart(selectedProduct)}>
-              <AddIcon />
-            </IconButton>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenProductModal(false)}>
-            Fechar
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => {
-              addToCart(selectedProduct);
-              setOpenProductModal(false);
-            }}
-          >
-            Adicionar ao Carrinho
-          </Button>
         </DialogActions>
       </Dialog>
     </Box>

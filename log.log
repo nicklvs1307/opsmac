@@ -1,5 +1,48 @@
-Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
-Loaded configuration file "config/config.js".
-Using environment "development".
-== 20250812163722-add-web-menu-platform-to-orders: reverting =======
-ERROR: invalid input value for enum enum_orders_platform: "web_menu"
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/products
+Método da solicitação
+POST
+Código de status
+400 Bad Request
+Endereço remoto
+95.217.16.187:443
+
+{
+    "errors": [
+        {
+            "type": "field",
+            "value": "",
+            "msg": "URL da imagem inválida",
+            "path": "image_url",
+            "location": "body"
+        }
+    ]
+}
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/products
+Método da solicitação
+POST
+Código de status
+400 Bad Request
+Endereço remoto
+95.217.16.187:443
+
+{
+    "errors": [
+        {
+            "type": "field",
+            "value": "",
+            "msg": "Tipo de pizza inválido",
+            "path": "pizza_type",
+            "location": "body"
+        },
+        {
+            "type": "field",
+            "value": "/uploads/productImage-1755093344554-771607527.jpg",
+            "msg": "URL da imagem inválida",
+            "path": "image_url",
+            "location": "body"
+        }
+    ]
+}

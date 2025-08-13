@@ -55,7 +55,7 @@ router.post(
     body('available_for_dine_in').isBoolean().withMessage('available_for_dine_in deve ser um booleano').optional({ nullable: true }),
     body('available_for_online_order').isBoolean().withMessage('available_for_online_order deve ser um booleano').optional({ nullable: true }),
     body('available_for_digital_menu').isBoolean().withMessage('available_for_digital_menu deve ser um booleano').optional({ nullable: true }),
-    body('image_url').isURL().withMessage('URL da imagem inválida').optional({ nullable: true }),
+    body('image_url').isString().withMessage('URL da imagem inválida').optional({ nullable: true }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -185,7 +185,7 @@ router.put(
     body('available_for_dine_in').isBoolean().withMessage('available_for_dine_in deve ser um booleano').optional({ nullable: true }),
     body('available_for_online_order').isBoolean().withMessage('available_for_online_order deve ser um booleano').optional({ nullable: true }),
     body('available_for_digital_menu').isBoolean().withMessage('available_for_digital_menu deve ser um booleano').optional({ nullable: true }),
-    body('image_url').isURL().withMessage('URL da imagem inválida').optional({ nullable: true }),
+    body('image_url').isString().withMessage('URL da imagem inválida').optional({ nullable: true }),
   ],
   async (req, res) => {
     const errors = validationResult(req);

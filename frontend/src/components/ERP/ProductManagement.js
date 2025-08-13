@@ -115,6 +115,14 @@ const ProductManagement = () => {
     },
   });
 
+  useEffect(() => {
+    if (productForm.is_pizza && !productForm.pizza_type) {
+      setProductForm(prev => ({ ...prev, pizza_type: 'variable_price' }));
+    } else if (!productForm.is_pizza && productForm.pizza_type) {
+      setProductForm(prev => ({ ...prev, pizza_type: '' }));
+    }
+  }, [productForm.is_pizza, productForm.pizza_type]);
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setProductForm({
@@ -124,6 +132,10 @@ const ProductManagement = () => {
   };
 
   const handleAddProduct = () => {
+    if (productForm.is_pizza && !productForm.pizza_type) {
+      toast.error(t('product_management.select_pizza_type')); // Assuming this translation key exists
+      return;
+    }
     addProductMutation.mutate(productForm);
   };
 
@@ -136,7 +148,7 @@ const ProductManagement = () => {
       sku: product.sku || '',
       category_id: product.category_id || '',
       is_pizza: product.is_pizza || false,
-      pizza_type: product.pizza_type || '',
+      pizza_type: product.is_pizza ? (product.pizza_type || 'variable_price') : '',
       available_for_delivery: product.available_for_delivery || false,
       available_for_dine_in: product.available_for_dine_in || false,
       available_for_online_order: product.available_for_online_order || false,
@@ -147,6 +159,10 @@ const ProductManagement = () => {
 
   const handleUpdateProduct = () => {
     if (editingProduct) {
+      if (productForm.is_pizza && !productForm.pizza_type) {
+        toast.error(t('product_management.select_pizza_type')); // Assuming this translation key exists
+        return;
+      }
       updateProductMutation.mutate({ id: editingProduct.id, ...productForm });
     }
   };
@@ -175,7 +191,7 @@ const ProductManagement = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      setProductForm({ ...productForm, image_url: data.imageUrl });
+      setProductForm({ ...productForm, image_url: `${process.env.REACT_APP_API_URL}${data.imageUrl}` });
       toast.success(t('product_management.upload_success'));
     } catch (error) {
       toast.error(error.response?.data?.msg || t('product_management.upload_error'));

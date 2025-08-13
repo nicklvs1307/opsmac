@@ -11,6 +11,7 @@ module.exports = {
       defaultValue: { recency: null, frequency: null, monetary: null },
       comment: 'Pontuação RFV (Recência, Frequência, Valor)'
     });
+    }
     if (!columns.nps_segment) {
       await queryInterface.addColumn('customers', 'nps_segment', {
       type: Sequelize.ENUM('promoter', 'passive', 'detractor', 'unknown'),
@@ -18,30 +19,35 @@ module.exports = {
       defaultValue: 'unknown',
       comment: 'Segmento NPS do cliente'
     });
+    }
     if (!columns.last_purchase_date) {
       await queryInterface.addColumn('customers', 'last_purchase_date', {
       type: Sequelize.DATE,
       allowNull: true,
       comment: 'Data da última compra/check-in'
     });
+    }
     if (!columns.total_orders) {
       await queryInterface.addColumn('customers', 'total_orders', {
       type: Sequelize.INTEGER,
       defaultValue: 0,
       comment: 'Número total de pedidos/check-ins'
     });
+    }
     if (!columns.average_ticket) {
       await queryInterface.addColumn('customers', 'average_ticket', {
       type: Sequelize.DECIMAL(10, 2),
       defaultValue: 0.00,
       comment: 'Ticket médio do cliente'
     });
+    }
     if (!columns.last_ticket_value) {
       await queryInterface.addColumn('customers', 'last_ticket_value', {
       type: Sequelize.DECIMAL(10, 2),
       defaultValue: 0.00,
       comment: 'Valor do último pedido/check-in'
     });
+    }
     if (!columns.most_bought_products) {
       await queryInterface.addColumn('customers', 'most_bought_products', {
       type: Sequelize.ARRAY(Sequelize.STRING),
@@ -49,6 +55,7 @@ module.exports = {
       defaultValue: [],
       comment: 'Lista de produtos mais comprados (placeholder)'
     });
+    }
     if (!columns.most_bought_categories) {
       await queryInterface.addColumn('customers', 'most_bought_categories', {
       type: Sequelize.ARRAY(Sequelize.STRING),
@@ -56,6 +63,7 @@ module.exports = {
       defaultValue: [],
       comment: 'Lista de categorias mais compradas (placeholder)'
     });
+    }
     if (!columns.purchase_behavior_tags) {
       await queryInterface.addColumn('customers', 'purchase_behavior_tags', {
       type: Sequelize.ARRAY(Sequelize.STRING),
@@ -63,6 +71,7 @@ module.exports = {
       defaultValue: [],
       comment: 'Tags de comportamento de compra (ex: weekend_shopper)'
     });
+    }
     if (!columns.location_details) {
       await queryInterface.addColumn('customers', 'location_details', {
       type: Sequelize.JSONB,
@@ -70,6 +79,7 @@ module.exports = {
       defaultValue: { neighborhood: null, city: null, zone: null, distance_from_store: null },
       comment: 'Detalhes de localização do cliente'
     });
+    }
     if (!columns.preferred_communication_channel) {
       await queryInterface.addColumn('customers', 'preferred_communication_channel', {
       type: Sequelize.ENUM('whatsapp', 'email', 'sms', 'push_notification', 'none'),
@@ -77,6 +87,7 @@ module.exports = {
       defaultValue: 'none',
       comment: 'Canal de comunicação preferido do cliente'
     });
+    }
     if (!columns.campaign_interaction_history) {
       await queryInterface.addColumn('customers', 'campaign_interaction_history', {
       type: Sequelize.JSONB,
@@ -84,6 +95,7 @@ module.exports = {
       defaultValue: {},
       comment: 'Histórico de interação com campanhas'
     });
+    }
   },
 
   async down (queryInterface, Sequelize) {
@@ -124,4 +136,5 @@ module.exports = {
     if (columns.campaign_interaction_history) {
       await queryInterface.removeColumn('customers', 'campaign_interaction_history');
     }
+  }
 };

@@ -54,4 +54,5 @@ module.exports = {
     if (tableExists) {
       await queryInterface.dropTable('tables');
     }
+  }
 };

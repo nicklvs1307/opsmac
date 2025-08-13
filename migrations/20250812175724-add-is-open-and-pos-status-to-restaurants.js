@@ -10,12 +10,14 @@ module.exports = {
       defaultValue: true,
       allowNull: false,
     });
+    }
     if (!columns.pos_status) {
       await queryInterface.addColumn('restaurants', 'pos_status', {
       type: Sequelize.ENUM('open', 'closed'),
       defaultValue: 'closed',
       allowNull: false,
     });
+    }
   },
 
   async down (queryInterface, Sequelize) {
@@ -26,4 +28,5 @@ module.exports = {
     if (columns.is_open) {
       await queryInterface.removeColumn('restaurants', 'is_open');
     }
+  }
 };

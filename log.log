@@ -4,7 +4,6 @@ Loaded configuration file "config/config.js".
 
 Using environment "development".
 
-== 20250812235923-update-product-for-menu: reverting =======
+== 20250812235850-create-category: reverting =======
 
 ERROR: Unexpected token ','
-

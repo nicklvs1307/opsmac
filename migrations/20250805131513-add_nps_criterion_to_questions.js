@@ -17,4 +17,5 @@ module.exports = {
     if (columns.nps_criterion) {
       await queryInterface.removeColumn('questions', 'nps_criterion');
     }
+  }
 };

@@ -6,7 +6,9 @@ module.exports = {
     const columns = await queryInterface.describeTable('technical_specifications');
     if (columns.details) {
       await queryInterface.removeColumn('technical_specifications', 'details');
-    },
+    }
+
+  },
 
   async down (queryInterface, Sequelize) {
     const columns = await queryInterface.describeTable('technical_specifications');
@@ -16,5 +18,6 @@ module.exports = {
       allowNull: true,
       defaultValue: {},
     });
+    }
   }
 };

@@ -57,4 +57,5 @@ module.exports = {
     if (tableExists) {
       await queryInterface.dropTable('waiter_calls');
     }
+  }
 };

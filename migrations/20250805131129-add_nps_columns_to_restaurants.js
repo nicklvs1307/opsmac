@@ -46,4 +46,5 @@ module.exports = {
     if (columns.total_detractors) {
       await queryInterface.removeColumn('restaurants', 'total_detractors');
     }
+  }
 };

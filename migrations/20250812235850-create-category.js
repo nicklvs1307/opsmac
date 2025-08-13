@@ -34,6 +34,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    }
 
     await queryInterface.addConstraint('Categories', {
       fields: ['name', 'restaurant_id'],

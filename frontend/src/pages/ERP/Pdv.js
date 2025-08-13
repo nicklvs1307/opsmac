@@ -9,18 +9,18 @@ import { useTranslation } from 'react-i18next';
 
 const fetchOrders = async ({ queryKey }) => {
   const [, filterStatus] = queryKey;
-  const { data } = await axiosInstance.get(`/orders${filterStatus ? `?status=${filterStatus}` : ''}`);
+  const { data } = await axiosInstance.get(`/api/orders${filterStatus ? `?status=${filterStatus}` : ''}`);
   return data;
 };
 
 const fetchRestaurantStatus = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/restaurant/${restaurantId}`);
+  const { data } = await axiosInstance.get(`/api/restaurant/${restaurantId}`);
   return data;
 };
 
 const fetchProducts = async ({ queryKey }) => {
   const [, restaurantId, categoryId, searchTerm] = queryKey;
-  let url = `/products?restaurant_id=${restaurantId}`;
+  let url = `/api/products?restaurant_id=${restaurantId}`;
   if (categoryId) {
     url += `&category_id=${categoryId}`;
   }
@@ -32,27 +32,27 @@ const fetchProducts = async ({ queryKey }) => {
 };
 
 const fetchCategories = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/categories?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(`/api/categories?restaurant_id=${restaurantId}`);
   return data;
 };
 
 const updateOrderStatus = async ({ orderId, status }) => {
-  const { data } = await axiosInstance.put(`/orders/${orderId}/status`, { status });
+  const { data } = await axiosInstance.put(`/api/orders/${orderId}/status`, { status });
   return data;
 };
 
 const updateRestaurantOpenStatus = async ({ restaurantId, is_open }) => {
-  const { data } = await axiosInstance.put(`/restaurant/${restaurantId}/status/open`, { is_open });
+  const { data } = await axiosInstance.put(`/api/restaurant/${restaurantId}/status/open`, { is_open });
   return data;
 };
 
 const updateRestaurantPosStatus = async ({ restaurantId, pos_status }) => {
-  const { data } = await axiosInstance.put(`/restaurant/${restaurantId}/pos-status`, { pos_status });
+  const { data } = await axiosInstance.put(`/api/restaurant/${restaurantId}/pos-status`, { pos_status });
   return data;
 };
 
 const createOrder = async (orderData) => {
-  const { data } = await axiosInstance.post('/public/orders', orderData);
+  const { data } = await axiosInstance.post('/api/public/orders', orderData);
   return data;
 };
 

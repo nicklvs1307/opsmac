@@ -7,27 +7,27 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const fetchProducts = async () => {
-  const { data } = await axiosInstance.get('/products');
+  const { data } = await axiosInstance.get('/api/products');
   return data;
 };
 
 const fetchCategories = async () => {
-  const { data } = await axiosInstance.get('/categories');
+  const { data } = await axiosInstance.get('/api/categories');
   return data;
 };
 
 const createProduct = async (newProduct) => {
-  const { data } = await axiosInstance.post('/products', newProduct);
+  const { data } = await axiosInstance.post('/api/products', newProduct);
   return data;
 };
 
 const updateProduct = async ({ id, ...updatedProduct }) => {
-  const { data } = await axiosInstance.put(`/products/${id}`, updatedProduct);
+  const { data } = await axiosInstance.put(`/api/products/${id}`, updatedProduct);
   return data;
 };
 
 const deleteProduct = async (id) => {
-  await axiosInstance.delete(`/products/${id}`);
+  await axiosInstance.delete(`/api/products/${id}`);
 };
 
 const ProductManagement = () => {
@@ -170,7 +170,7 @@ const ProductManagement = () => {
     formData.append('productImage', file);
 
     try {
-      const { data } = await axiosInstance.post('/products/upload-image', formData, {
+      const { data } = await axiosInstance.post('/api/products/upload-image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

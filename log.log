@@ -1,25 +1,880 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                   166.4s
-------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.656
-0.656 > feedeliza-plus@1.0.0 build
-0.656 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.656
-3.025 Creating an optimized production build...
-166.1 Failed to compile.
-166.1
-166.1 Module parse failed: Cannot parse JSON: Unexpected token "}" (0x7D) in JSON at position 34964 while parsing near "...one.\"\n    }\n  }\n}\n  }"
-166.1 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
-166.1 Error: Cannot parse JSON: Unexpected token "}" (0x7D) in JSON at position 34964 while parsing near "...one.\"\n    }\n  }\n}\n  }"
-166.1
-166.1
-------
-Dockerfile.frontend:23
---------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+menu:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+CategoryManagement.js:10  GET https://feedelizaapi.towersfy.com/categories 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+GJ @ CategoryManagement.js:10
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+w @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+CategoryManagement.js:10  GET https://feedelizaapi.towersfy.com/categories 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+GJ @ CategoryManagement.js:10
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+w @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+w @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+ProductManagement.js:15  GET https://feedelizaapi.towersfy.com/categories 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+nZ @ ProductManagement.js:15
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+ProductManagement.js:10  GET https://feedelizaapi.towersfy.com/products 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+rZ @ ProductManagement.js:10
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+ProductManagement.js:15  GET https://feedelizaapi.towersfy.com/categories 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+nZ @ ProductManagement.js:15
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+ProductManagement.js:10  GET https://feedelizaapi.towersfy.com/products 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+rZ @ ProductManagement.js:10
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+ProductManagement.js:10  GET https://feedelizaapi.towersfy.com/products 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+rZ @ ProductManagement.js:10
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+ProductManagement.js:15  GET https://feedelizaapi.towersfy.com/categories 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+nZ @ ProductManagement.js:15
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+ProductManagement.js:10  GET https://feedelizaapi.towersfy.com/products 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+rZ @ ProductManagement.js:10
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+ProductManagement.js:15  GET https://feedelizaapi.towersfy.com/categories 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+nZ @ ProductManagement.js:15
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Pdv.js:12  GET https://feedelizaapi.towersfy.com/orders 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+zJ @ Pdv.js:12
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Pdv.js:17  GET https://feedelizaapi.towersfy.com/restaurant/0e517dc5-4881-45aa-996e-0365012000bc 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ Pdv.js:17
+enabled @ Pdv.js:92
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Pdv.js:30  GET https://feedelizaapi.towersfy.com/products?restaurant_id=0e517dc5-4881-45aa-996e-0365012000bc 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+DJ @ Pdv.js:30
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Pdv.js:35  GET https://feedelizaapi.towersfy.com/categories?restaurant_id=0e517dc5-4881-45aa-996e-0365012000bc 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ Pdv.js:35
+enabled @ Pdv.js:115
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Pdv.js:17  GET https://feedelizaapi.towersfy.com/restaurant/0e517dc5-4881-45aa-996e-0365012000bc 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ Pdv.js:17
+enabled @ Pdv.js:92
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Pdv.js:12  GET https://feedelizaapi.towersfy.com/orders 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+zJ @ Pdv.js:12
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Pdv.js:30  GET https://feedelizaapi.towersfy.com/products?restaurant_id=0e517dc5-4881-45aa-996e-0365012000bc 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+DJ @ Pdv.js:30
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Pdv.js:35  GET https://feedelizaapi.towersfy.com/categories?restaurant_id=0e517dc5-4881-45aa-996e-0365012000bc 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ Pdv.js:35
+enabled @ Pdv.js:115
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+TechnicalSpecificationManagement.js:16  GET https://feedelizaapi.towersfy.com/ingredients 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+bJ @ TechnicalSpecificationManagement.js:16
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+TechnicalSpecificationManagement.js:11  GET https://feedelizaapi.towersfy.com/products 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+yJ @ TechnicalSpecificationManagement.js:11
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+TechnicalSpecificationManagement.js:16  GET https://feedelizaapi.towersfy.com/ingredients 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+bJ @ TechnicalSpecificationManagement.js:16
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+TechnicalSpecificationManagement.js:11  GET https://feedelizaapi.towersfy.com/products 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+yJ @ TechnicalSpecificationManagement.js:11
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 Vr {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266

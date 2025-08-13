@@ -7,22 +7,22 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const fetchCategories = async () => {
-  const { data } = await axiosInstance.get('/categories');
+  const { data } = await axiosInstance.get('/api/categories');
   return data;
 };
 
 const createCategory = async (newCategory) => {
-  const { data } = await axiosInstance.post('/categories', newCategory);
+  const { data } = await axiosInstance.post('/api/categories', newCategory);
   return data;
 };
 
 const updateCategory = async ({ id, name }) => {
-  const { data } = await axiosInstance.put(`/categories/${id}`, { name });
+  const { data } = await axiosInstance.put(`/api/categories/${id}`, { name });
   return data;
 };
 
 const deleteCategory = async (id) => {
-  await axiosInstance.delete(`/categories/${id}`);
+  await axiosInstance.delete(`/api/categories/${id}`);
 };
 
 const CategoryManagement = () => {

@@ -8,33 +8,33 @@ import { useTranslation } from 'react-i18next';
 
 // Fetch functions
 const fetchProducts = async () => {
-  const { data } = await axiosInstance.get('/products');
+  const { data } = await axiosInstance.get('/api/products');
   return data;
 };
 
 const fetchIngredients = async () => {
-  const { data } = await axiosInstance.get('/ingredients');
+  const { data } = await axiosInstance.get('/api/ingredients');
   return data;
 };
 
 const fetchTechnicalSpecification = async (productId) => {
   if (!productId) return null;
-  const { data } = await axiosInstance.get(`/technical-specifications/${productId}`);
+  const { data } = await axiosInstance.get(`/api/technical-specifications/${productId}`);
   return data;
 };
 
 const createTechnicalSpecification = async (data) => {
-  const { data: response } = await axiosInstance.post('/technical-specifications', data);
+  const { data: response } = await axiosInstance.post('/api/technical-specifications', data);
   return response;
 };
 
 const updateTechnicalSpecification = async ({ productId, recipe_ingredients }) => {
-  const { data } = await axiosInstance.put(`/technical-specifications/${productId}`, { recipe_ingredients });
+  const { data } = await axiosInstance.put(`/api/technical-specifications/${productId}`, { recipe_ingredients });
   return data;
 };
 
 const deleteTechnicalSpecification = async (productId) => {
-  await axiosInstance.delete(`/technical-specifications/${productId}`);
+  await axiosInstance.delete(`/api/technical-specifications/${productId}`);
 };
 
 const TechnicalSpecificationManagement = () => {

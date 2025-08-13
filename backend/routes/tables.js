@@ -24,7 +24,7 @@ const getRestaurantId = (req, res, next) => {
 
 // Helper function to generate QR code URL
 const generateQrCodeUrl = (tableId) => {
-  const frontendBaseUrl = process.env.FRONTEND_PUBLIC_URL || 'http://localhost:3000'; // Fallback for development
+  const frontendBaseUrl = process.env.FRONTEND_URL || 'http://localhost:3000'; // Fallback for development
   return `${frontendBaseUrl}/menu/dine-in/${tableId}`;
 };
 

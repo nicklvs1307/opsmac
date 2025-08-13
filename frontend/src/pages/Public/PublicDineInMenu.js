@@ -6,19 +6,17 @@ import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, LocalDining as LocalDiningIcon, Call as CallIcon, Receipt as ReceiptIcon, Search as SearchIcon, Info as InfoIcon, Star as StarIcon, StarBorder as StarBorderIcon, Add as AddIcon, Remove as RemoveIcon, Notifications as NotificationsIcon, NotificationsActive as NotificationsActiveIcon, Clear as ClearIcon, KeyboardArrowUp as KeyboardArrowUpIcon, Send as SendIcon, AddShoppingCart as AddShoppingCartIcon, SearchOff as SearchOffIcon, ArrowBack as ArrowBackIcon, Close as CloseIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
-// ... (imports e funções de API permanecem os mesmos)
-
 const fetchDineInMenu = async (tableId) => {
     const { data } = await axiosInstance.get(`/public/menu/dine-in/${tableId}`);
-    const groupedByCategory = data.reduce((acc, product) => {
-      const category = product.category || 'Outros';
+    const groupedByCategory = data.products.reduce((acc, product) => {
+      const category = product.Category?.name || 'Outros';
       if (!acc[category]) {
         acc[category] = [];
       }
       acc[category].push(product);
       return acc;
     }, {});
-    return { products: data, categories: groupedByCategory };
+    return { ...data, categories: groupedByCategory };
   };
   
   const startTableSession = async (tableId) => {
@@ -71,6 +69,20 @@ const PublicDineInMenu = () => {
     { enabled: !!tableId }
   );
 
+  const addToCart = (item) => {
+    setCartItems((prevItems) => {
+      const isItemInCart = prevItems.find((cartItem) => cartItem.id === item.id);
+      if (isItemInCart) {
+        return prevItems.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      }
+      return [...prevItems, { ...item, quantity: 1 }];
+    });
+  };
+
   const categories = menuData ? Object.keys(menuData.categories) : [];
 
   if (isLoadingMenu) {
@@ -81,22 +93,25 @@ const PublicDineInMenu = () => {
     return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><Alert severity="error">Erro ao carregar o cardápio.</Alert></Box>;
   }
 
+  const restaurant = menuData?.restaurant;
+  const table = menuData?.table;
+
   return (
     <ThemeProvider theme={premiumTheme}>
-      <Box sx={{ display: 'grid', gridTemplateRows: '90px 1fr 80px', height: '100vh', maxWidth: '1024px', margin: '0 auto', backgroundColor: 'white', boxShadow: '0 0 30px rgba(0,0,0,0.08)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ display: 'grid', gridTemplateRows: '90px 1fr auto', height: '100vh', maxWidth: '1024px', margin: '0 auto', backgroundColor: 'white', boxShadow: '0 0 30px rgba(0,0,0,0.08)', position: 'relative', overflow: 'hidden' }}>
         {/* Header */}
         <AppBar position="static" sx={{ background: 'linear-gradient(135deg, #1A1A1A, #000)', boxShadow: '0 2px 15px rgba(0,0,0,0.1)', zIndex: 10 }}>
           <Toolbar sx={{ justifyContent: 'space-between', padding: '0 25px' }}>
             <Typography variant="h4" sx={{ color: 'accent.main', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <RestaurantIcon sx={{ color: 'primary.main' }} />
-              DON FONSECA
+            {restaurant?.logo ? <img src={restaurant.logo} alt={restaurant.name} height="40" /> : <RestaurantIcon sx={{ color: 'primary.main' }} />}
+              {restaurant?.name || 'DON FONSECA'}
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
               <IconButton sx={{ backgroundColor: 'rgba(255,255,255,0.1)', color: 'white', '&:hover': { backgroundColor: 'primary.main', transform: 'scale(1.1)' } }} onClick={() => setOpenWaiterDialog(true)}>
                 <NotificationsIcon />
               </IconButton>
               <Typography sx={{ backgroundColor: 'primary.main', padding: '8px 18px', borderRadius: '30px', fontWeight: 600 }}>
-                MESA {tableId}
+                MESA {table?.table_number || tableId}
               </Typography>
             </Box>
           </Toolbar>
@@ -124,7 +139,8 @@ const PublicDineInMenu = () => {
             )}
             {categories.map((category, index) => (
               <Box key={index} sx={{ display: selectedCategory === index ? 'block' : 'none' }}>
-                <Typography variant="h4" sx={{ mb: 3 }}>{category}</Typography>
+                <Typography variant="h4" sx={{ mb: 1, fontWeight: 'bold' }}>{category}</Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>{menuData.categories[category][0]?.Category?.description || ''}</Typography>
                 <Grid container spacing={3}>
                   {menuData.categories[category].map(item => (
                     <Grid item xs={12} sm={6} md={4} key={item.id}>
@@ -139,7 +155,7 @@ const PublicDineInMenu = () => {
                           <Typography variant="body2" color="text.secondary" sx={{ mb: 2, minHeight: '60px' }}>{item.description}</Typography>
                           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Typography variant="h6" sx={{ fontWeight: 800, color: 'primary.main' }}>R$ {Number(item.price).toFixed(2)}</Typography>
-                            <Button variant="contained" startIcon={<AddIcon />} sx={{ background: 'linear-gradient(135deg, #E31837, #FF4757)', borderRadius: '8px', fontWeight: 600, boxShadow: '0 3px 10px rgba(227, 24, 55, 0.3)', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 5px 15px rgba(227, 24, 55, 0.4)' } }}>Adicionar</Button>
+                            <Button onClick={() => addToCart(item)} variant="contained" startIcon={<AddIcon />} sx={{ background: 'linear-gradient(135deg, #E31837, #FF4757)', borderRadius: '8px', fontWeight: 600, boxShadow: '0 3px 10px rgba(227, 24, 55, 0.3)', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 5px 15px rgba(227, 24, 55, 0.4)' } }}>Adicionar</Button>
                           </Box>
                         </CardContent>
                       </Card>
@@ -152,10 +168,11 @@ const PublicDineInMenu = () => {
         </Box>
 
         {/* Footer */}
-        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, display: { xs: 'block', md: 'none' } }} elevation={3}>
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, display: { xs: 'block', md: 'none' }, zIndex: 10, borderTop: '1px solid #eee' }} elevation={3}>
           <BottomNavigation showLabels>
             <BottomNavigationAction label="Cardápio" icon={<RestaurantIcon />} />
             <BottomNavigationAction label="Buscar" icon={<SearchIcon />} />
+            <BottomNavigationAction label="Chamar Garçom" icon={<NotificationsIcon />} onClick={() => setOpenWaiterDialog(true)} />
             <BottomNavigationAction label="Carrinho" icon={<ShoppingCartIcon />} onClick={() => setCartOpen(true)} />
             <BottomNavigationAction label="Conta" icon={<ReceiptIcon />} />
           </BottomNavigation>

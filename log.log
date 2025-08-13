@@ -1,20 +1,20 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      169.3s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      165.4s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.671
-0.671 > feedeliza-plus@1.0.0 build
-0.671 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.671
-3.277 Creating an optimized production build...
-168.0 Failed to compile.
-168.0
-168.0 [eslint]
-168.0 src/components/ERP/ProductManagement.js
-168.0   Line 118:3:  'useEffect' is not defined  no-undef
-168.0
-168.0 Search for the keywords to learn more about each error.
-168.0
-168.0
+0.744
+0.744 > feedeliza-plus@1.0.0 build
+0.744 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.744
+3.539 Creating an optimized production build...
+164.2 Failed to compile.
+164.2
+164.2 [eslint]
+164.2 src/pages/Public/PublicDeliveryMenu.js
+164.2   Line 227:3:  React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+164.2
+164.2 Search for the keywords to learn more about each error.
+164.2
+164.2
 ------
 Dockerfile.frontend:23
 --------------------

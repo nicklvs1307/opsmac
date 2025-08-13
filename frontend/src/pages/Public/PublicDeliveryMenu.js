@@ -211,18 +211,6 @@ const PublicDeliveryMenu = () => {
   // Extrair categorias do menuData
   const categories = menuData ? Object.keys(menuData.categories) : [];
   
-  // Adicionar ou remover dos favoritos
-  const toggleFavorite = (itemId) => {
-    if (favorites.includes(itemId)) {
-      setFavorites(favorites.filter(id => id !== itemId));
-    } else {
-      setFavorites([...favorites, itemId]);
-    }
-    
-    // Salvar favoritos no localStorage
-    localStorage.setItem('favoriteItems', JSON.stringify([...favorites]));
-  };
-  
   // Carregar favoritos do localStorage ao iniciar
   useEffect(() => {
     const savedFavorites = localStorage.getItem('favoriteItems');
@@ -234,6 +222,18 @@ const PublicDeliveryMenu = () => {
       }
     }
   }, []);
+  
+  // Adicionar ou remover dos favoritos
+  const toggleFavorite = (itemId) => {
+    if (favorites.includes(itemId)) {
+      setFavorites(favorites.filter(id => id !== itemId));
+    } else {
+      setFavorites([...favorites, itemId]);
+    }
+    
+    // Salvar favoritos no localStorage
+    localStorage.setItem('favoriteItems', JSON.stringify([...favorites]));
+  };
   
   // Filtrar produtos pelo termo de busca
   const filterProducts = (products) => {

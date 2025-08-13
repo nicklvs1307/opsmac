@@ -42,6 +42,7 @@ const getSessionStatus = async (sessionId) => {
 };
 
 const PublicDineInMenu = () => {
+  const { t } = useTranslation();
   const { tableId } = useParams();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

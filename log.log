@@ -1,18 +1,27 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      164.3s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      163.2s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.624
-0.624 > feedeliza-plus@1.0.0 build
-0.624 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.624
-3.508 Creating an optimized production build...
-163.9 Failed to compile.
-163.9
-163.9 Module parse failed: Cannot parse JSON: Unexpected token "{" (0x7B) in JSON at position 35538 while parsing near "...products found for \"{{searchTerm}}\"\",\n  ..."
-163.9 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
-163.9 Error: Cannot parse JSON: Unexpected token "{" (0x7B) in JSON at position 35538 while parsing near "...products found for \"{{searchTerm}}\"\",\n  ..."
-163.9
-163.9
+0.698
+0.698 > feedeliza-plus@1.0.0 build
+0.698 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.698
+3.001 Creating an optimized production build...
+162.0 Failed to compile.
+162.0
+162.0 [eslint]
+162.0 src/pages/Public/PublicDeliveryMenu.js
+162.0   Line 304:32:  't' is not defined  no-undef
+162.0
+162.0 src/pages/Public/PublicDineInMenu.js
+162.0   Line 355:34:  't' is not defined  no-undef
+162.0   Line 471:16:  't' is not defined  no-undef
+162.0   Line 480:16:  't' is not defined  no-undef
+162.0   Line 767:24:  't' is not defined  no-undef
+162.0   Line 770:24:  't' is not defined  no-undef
+162.0
+162.0 Search for the keywords to learn more about each error.
+162.0
+162.0
 ------
 Dockerfile.frontend:23
 --------------------

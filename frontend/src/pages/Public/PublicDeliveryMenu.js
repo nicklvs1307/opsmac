@@ -23,6 +23,7 @@ const fetchDeliveryMenu = async (restaurantSlug) => {
 };
 
 const PublicDeliveryMenu = () => {
+  const { t } = useTranslation();
   const { restaurantSlug } = useParams();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

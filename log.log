@@ -1,10 +1,34 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/tables
-Método da solicitação
-POST
-Código de status
-500 Internal Server Error
-Endereço remoto
-95.217.16.187:443
-
-Server Error
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      162.3s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.679
+0.679 > feedeliza-plus@1.0.0 build
+0.679 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.679
+3.208 Creating an optimized production build...
+161.6 Failed to compile.
+161.6
+161.6 [eslint]
+161.6 src/pages/Public/PublicDineInMenu.js
+161.6   Line 765:22:   'SearchOffIcon' is not defined           react/jsx-no-undef
+161.6   Line 777:47:   'ArrowBackIcon' is not defined           react/jsx-no-undef
+161.6   Line 836:12:   'BottomNavigation' is not defined        react/jsx-no-undef
+161.6   Line 853:14:   'BottomNavigationAction' is not defined  react/jsx-no-undef
+161.6   Line 865:14:   'BottomNavigationAction' is not defined  react/jsx-no-undef
+161.6   Line 896:14:   'BottomNavigationAction' is not defined  react/jsx-no-undef
+161.6   Line 1029:18:  'CloseIcon' is not defined               react/jsx-no-undef
+161.6   Line 1145:26:  'DeleteIcon' is not defined              react/jsx-no-undef
+161.6
+161.6 Search for the keywords to learn more about each error.
+161.6
+161.6
+------
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

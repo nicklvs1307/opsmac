@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, alpha, Badge, useMediaQuery, Zoom, Fade, Chip, Slide, Fab, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
+import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, alpha, Badge, useMediaQuery, Zoom, Fade, Chip, Slide, Fab, List, ListItem, ListItemText, ListItemAvatar, Avatar, BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
-import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, LocalDining as LocalDiningIcon, Call as CallIcon, Receipt as ReceiptIcon, Search as SearchIcon, Info as InfoIcon, Star as StarIcon, StarBorder as StarBorderIcon, Add as AddIcon, Remove as RemoveIcon, Notifications as NotificationsIcon, NotificationsActive as NotificationsActiveIcon, Clear as ClearIcon, KeyboardArrowUp as KeyboardArrowUpIcon, Send as SendIcon, AddShoppingCart as AddShoppingCartIcon } from '@mui/icons-material';
+import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, LocalDining as LocalDiningIcon, Call as CallIcon, Receipt as ReceiptIcon, Search as SearchIcon, Info as InfoIcon, Star as StarIcon, StarBorder as StarBorderIcon, Add as AddIcon, Remove as RemoveIcon, Notifications as NotificationsIcon, NotificationsActive as NotificationsActiveIcon, Clear as ClearIcon, KeyboardArrowUp as KeyboardArrowUpIcon, Send as SendIcon, AddShoppingCart as AddShoppingCartIcon, SearchOff as SearchOffIcon, ArrowBack as ArrowBackIcon, Close as CloseIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
 const fetchDineInMenu = async (tableId) => {
   const { data } = await axiosInstance.get(`/public/menu/dine-in/${tableId}`);
@@ -352,7 +352,7 @@ const PublicDineInMenu = () => {
                   }}
                 >
                   <TextField
-                    placeholder={isMobile ? "Buscar" : "Buscar item..."}
+                    placeholder={t('common.search_item_placeholder')}
                     variant="standard"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -468,7 +468,7 @@ const PublicDineInMenu = () => {
         {searchTerm && (
           <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Typography variant="subtitle1">
-              Resultados para: <strong>{searchTerm}</strong>
+              {t('common.search_results_for')}: <strong>{searchTerm}</strong>
             </Typography>
             <Button 
               size="small" 
@@ -477,7 +477,7 @@ const PublicDineInMenu = () => {
               color="primary"
               variant="outlined"
             >
-              Limpar
+              {t('common.clear_search')}
             </Button>
           </Box>
         )}
@@ -764,10 +764,10 @@ const PublicDineInMenu = () => {
                   <>
                     <SearchOffIcon sx={{ fontSize: 70, color: '#d76d77', mb: 2, opacity: 0.8 }} />
                     <Typography variant="h6" sx={{ color: '#3a1c71', fontWeight: 'medium' }}>
-                      Nenhum produto encontrado para "{searchTerm}"
+                      {t('common.no_products_found_for_search', { searchTerm })}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ mt: 1, mb: 3, maxWidth: 400, mx: 'auto' }}>
-                      Tente buscar com outros termos ou navegue pelas categorias disponíveis
+                      {t('common.try_other_terms_or_browse_categories')}
                     </Typography>
                   </>
                 )}

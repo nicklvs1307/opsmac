@@ -301,7 +301,7 @@ const PublicDeliveryMenu = () => {
               >
                 <SearchIcon sx={{ color: 'white', mr: 0.5, fontSize: isMobile ? 18 : 24 }} />
                 <TextField
-                  placeholder={isMobile ? "Buscar" : "Buscar item..."}
+                  placeholder={t('common.search_item_placeholder')}
                   variant="standard"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}

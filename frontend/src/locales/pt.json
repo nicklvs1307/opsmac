@@ -542,7 +542,12 @@
       "next": "Avançar",
       "error": "Erro",
       "cancel": "Cancelar",
-      "error_loading_surveys": "Erro ao carregar pesquisas"
+      "error_loading_surveys": "Erro ao carregar pesquisas",
+      "search_item_placeholder": "Buscar item...",
+      "search_results_for": "Resultados para",
+      "clear_search": "Limpar",
+      "no_products_found_for_search": "Nenhum produto encontrado para \"{{searchTerm}}\"",
+      "try_other_terms_or_browse_categories": "Tente buscar com outros termos ou navegue pelas categorias disponíveis"
     },
     "satisfaction_settings": {
       "personalization_title": "Personalização da Página de Pesquisa",

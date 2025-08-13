@@ -47,3 +47,17 @@ historico de posição de estoque
 lista de comptas
 posição de estoquete
 venda por periodo
+
+
+criar um novo cupom, e usar o cupom ara disparo de mensagem com segmentação de Clientes
+disparo de mensagens via whatsapp
+
+na parte do kanban onde sera visualizado os pedidos, precisa ter o botão abrir caixa (frente de caixa)
+quando clicado nesse botão tem que aparecer um popup de abertura de frente de caixa, com o valor em dinheiro que sera aberto o caixa e observações, com o obtão salvar e cancelar
+depois de aberto o caixa esse botão tera mais opções nele, quando clicado tem que aparecer aberto a x tempo, e o valr em dinheiro (esse valor em dinheiro tem que ser somado ao pedidos que forem em dinheiro), tem que ter as opções retirada de frente de caixa caso precise fazer alguma retirada tem que ter um popup se a retirada é pagamento ou sangria o valor da retirada e a categoria essas categorias terao que ser cadastradas pelo usuario
+tera que ter o reforço de frente de caixa caso a frente de caixa precise de um reforço ou o proprietario colocou mais uma quantida de dinheiro depois que o caixa foi aberto e o valor do reforço
+tem que ter no mesmo botão o resumo parcial, isso ira mostrar os valores, em dinheiro, pix, cartão e etc, as formas de pagamento também serao cadastrados pelo usuario
+e a ultima opção sera o fechar frente de caixa, os valores para o fechamento de caixa tem que bater, tanto em dinheiro, cartão e etc
+ depois desse botão criado, vamos para o proximo passo um botão também com venda de balcão sem cliente
+ depois uma barra de pesquisa para pesquisar o nome do cliente ou numero de telefone, nessa pesquisa tem que aparecer o endereço do cliente, quando o usuario clicar em cima do endereço ele vai para o pedido, para poder escolher os itens no pdv ja com o cliente selecionado ja com o endereço
+  

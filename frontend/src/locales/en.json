@@ -721,5 +721,25 @@
       "delete_ts_button": "Delete Technical Specification",
       "confirm_delete_title": "Confirm Deletion",
       "confirm_delete_message": "Are you sure you want to delete this technical specification? This action cannot be undone."
+    },
+    "common": {
+      "back_to_home": "Back to home page",
+      "na": "N/A",
+      "none": "None",
+      "link_copied": "Link copied!",
+      "copy_link": "Copy Link",
+      "qr_code": "QR Code",
+      "close": "Close",
+      "back": "Back",
+      "next": "Next",
+      "error": "Error",
+      "cancel": "Cancel",
+      "error_loading_surveys": "Error loading surveys",
+      "search_item_placeholder": "Search item...",
+      "search_results_for": "Results for",
+      "clear_search": "Clear Search",
+      "no_products_found_for_search": "No products found for "{{searchTerm}}"",
+      "try_other_terms_or_browse_categories": "Try searching with other terms or browse available categories"
     }
-  }}
+  }
+}

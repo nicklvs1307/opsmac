@@ -14,6 +14,7 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL', // If category is deleted, set category_id to null
     });
+    }
 
     if (!columns.is_pizza) {
       await queryInterface.addColumn('products', 'is_pizza', {
@@ -21,12 +22,14 @@ module.exports = {
       defaultValue: false,
       allowNull: false,
     });
+    }
 
     if (!columns.pizza_type) {
       await queryInterface.addColumn('products', 'pizza_type', {
       type: Sequelize.ENUM('variable_price', 'fixed_price'),
       allowNull: true,
     });
+    }
 
     if (!columns.available_for_delivery) {
       await queryInterface.addColumn('products', 'available_for_delivery', {
@@ -34,6 +37,7 @@ module.exports = {
       defaultValue: true,
       allowNull: false,
     });
+    }
 
     if (!columns.available_for_dine_in) {
       await queryInterface.addColumn('products', 'available_for_dine_in', {
@@ -41,6 +45,7 @@ module.exports = {
       defaultValue: true,
       allowNull: false,
     });
+    }
 
     if (!columns.available_for_online_order) {
       await queryInterface.addColumn('products', 'available_for_online_order', {
@@ -48,6 +53,7 @@ module.exports = {
       defaultValue: true,
       allowNull: false,
     });
+    }
 
     if (!columns.available_for_digital_menu) {
       await queryInterface.addColumn('products', 'available_for_digital_menu', {
@@ -55,22 +61,41 @@ module.exports = {
       defaultValue: true,
       allowNull: false,
     });
+    }
 
     if (!columns.image_url) {
       await queryInterface.addColumn('products', 'image_url', {
       type: Sequelize.STRING,
       allowNull: true,
     });
+    }
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn('products', 'image_url');
-    await queryInterface.removeColumn('products', 'available_for_digital_menu');
-    await queryInterface.removeColumn('products', 'available_for_online_order');
-    await queryInterface.removeColumn('products', 'available_for_dine_in');
-    await queryInterface.removeColumn('products', 'available_for_delivery');
-    await queryInterface.removeColumn('products', 'pizza_type');
-    await queryInterface.removeColumn('products', 'is_pizza');
-    await queryInterface.removeColumn('products', 'category_id');
+    const columns = await queryInterface.describeTable('products');
+    if (columns.image_url) {
+      await queryInterface.removeColumn('products', 'image_url');
+    }
+    if (columns.available_for_digital_menu) {
+      await queryInterface.removeColumn('products', 'available_for_digital_menu');
+    }
+    if (columns.available_for_online_order) {
+      await queryInterface.removeColumn('products', 'available_for_online_order');
+    }
+    if (columns.available_for_dine_in) {
+      await queryInterface.removeColumn('products', 'available_for_dine_in');
+    }
+    if (columns.available_for_delivery) {
+      await queryInterface.removeColumn('products', 'available_for_delivery');
+    }
+    if (columns.pizza_type) {
+      await queryInterface.removeColumn('products', 'pizza_type');
+    }
+    if (columns.is_pizza) {
+      await queryInterface.removeColumn('products', 'is_pizza');
+    }
+    if (columns.category_id) {
+      await queryInterface.removeColumn('products', 'category_id');
+    }
   },
 };

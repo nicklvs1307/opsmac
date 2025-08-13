@@ -19,7 +19,7 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=b74996144735db08d6e091f460df4184
       # Certifique-se de que todas as variáveis de ambiente necessárias para a conexão com o DB estejam aqui
-    command: npx sequelize-cli db:migrate # O comando para rodar as migrações
+    command: ["/bin/sh", "-c", "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate"] # O comando para rodar as migrações
     networks:
       - towersfy_network
     volumes:

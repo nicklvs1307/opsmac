@@ -1,27 +1,23 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      163.2s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      164.2s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.698
-0.698 > feedeliza-plus@1.0.0 build
-0.698 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.698
-3.001 Creating an optimized production build...
-162.0 Failed to compile.
-162.0
-162.0 [eslint]
-162.0 src/pages/Public/PublicDeliveryMenu.js
-162.0   Line 304:32:  't' is not defined  no-undef
-162.0
-162.0 src/pages/Public/PublicDineInMenu.js
-162.0   Line 355:34:  't' is not defined  no-undef
-162.0   Line 471:16:  't' is not defined  no-undef
-162.0   Line 480:16:  't' is not defined  no-undef
-162.0   Line 767:24:  't' is not defined  no-undef
-162.0   Line 770:24:  't' is not defined  no-undef
-162.0
-162.0 Search for the keywords to learn more about each error.
-162.0
-162.0
+0.571
+0.571 > feedeliza-plus@1.0.0 build
+0.571 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.571
+2.658 Creating an optimized production build...
+163.9 Failed to compile.
+163.9
+163.9 [eslint]
+163.9 src/pages/Public/PublicDeliveryMenu.js
+163.9   Line 26:17:  'useTranslation' is not defined  no-undef
+163.9
+163.9 src/pages/Public/PublicDineInMenu.js
+163.9   Line 45:17:  'useTranslation' is not defined  no-undef
+163.9
+163.9 Search for the keywords to learn more about each error.
+163.9
+163.9
 ------
 Dockerfile.frontend:23
 --------------------

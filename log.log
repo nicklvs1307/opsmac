@@ -1,9 +1,5 @@
 Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
-
 Loaded configuration file "config/config.js".
-
 Using environment "development".
-
-== 20250812235850-create-category: reverting =======
-
-ERROR: Unexpected token ','
+== 20250812163722-add-web-menu-platform-to-orders: reverting =======
+ERROR: invalid input value for enum enum_orders_platform: "web_menu"

@@ -53,6 +53,8 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('waiter_calls');
-  }
+    const tableExists = await queryInterface.tableExists('waiter_calls');
+    if (tableExists) {
+      await queryInterface.dropTable('waiter_calls');
+    }
 };

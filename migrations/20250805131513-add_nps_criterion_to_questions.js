@@ -13,6 +13,8 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeColumn('questions', 'nps_criterion');
-  }
+    const columns = await queryInterface.describeTable('questions');
+    if (columns.nps_criterion) {
+      await queryInterface.removeColumn('questions', 'nps_criterion');
+    }
 };

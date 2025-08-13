@@ -36,9 +36,14 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeColumn('restaurants', 'total_promoters');
-    await queryInterface.removeColumn('restaurants', 'total_neutrals');
-    await queryInterface.removeColumn('restaurants', 'total_detractors');
-    // await queryInterface.removeColumn('restaurants', 'nps_criteria');
-  }
+    const columns = await queryInterface.describeTable('restaurants');
+    if (columns.total_promoters) {
+      await queryInterface.removeColumn('restaurants', 'total_promoters');
+    }
+    if (columns.total_neutrals) {
+      await queryInterface.removeColumn('restaurants', 'total_neutrals');
+    }
+    if (columns.total_detractors) {
+      await queryInterface.removeColumn('restaurants', 'total_detractors');
+    }
 };

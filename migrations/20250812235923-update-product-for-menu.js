@@ -2,7 +2,9 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn('products', 'category_id', {
+    const columns = await queryInterface.describeTable('products');
+    if (!columns.category_id) {
+      await queryInterface.addColumn('products', 'category_id', {
       type: Sequelize.UUID,
       allowNull: true, // Temporarily allow null, will be updated later if needed
       references: {
@@ -13,42 +15,49 @@ module.exports = {
       onDelete: 'SET NULL', // If category is deleted, set category_id to null
     });
 
-    await queryInterface.addColumn('products', 'is_pizza', {
+    if (!columns.is_pizza) {
+      await queryInterface.addColumn('products', 'is_pizza', {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
       allowNull: false,
     });
 
-    await queryInterface.addColumn('products', 'pizza_type', {
+    if (!columns.pizza_type) {
+      await queryInterface.addColumn('products', 'pizza_type', {
       type: Sequelize.ENUM('variable_price', 'fixed_price'),
       allowNull: true,
     });
 
-    await queryInterface.addColumn('products', 'available_for_delivery', {
+    if (!columns.available_for_delivery) {
+      await queryInterface.addColumn('products', 'available_for_delivery', {
       type: Sequelize.BOOLEAN,
       defaultValue: true,
       allowNull: false,
     });
 
-    await queryInterface.addColumn('products', 'available_for_dine_in', {
+    if (!columns.available_for_dine_in) {
+      await queryInterface.addColumn('products', 'available_for_dine_in', {
       type: Sequelize.BOOLEAN,
       defaultValue: true,
       allowNull: false,
     });
 
-    await queryInterface.addColumn('products', 'available_for_online_order', {
+    if (!columns.available_for_online_order) {
+      await queryInterface.addColumn('products', 'available_for_online_order', {
       type: Sequelize.BOOLEAN,
       defaultValue: true,
       allowNull: false,
     });
 
-    await queryInterface.addColumn('products', 'available_for_digital_menu', {
+    if (!columns.available_for_digital_menu) {
+      await queryInterface.addColumn('products', 'available_for_digital_menu', {
       type: Sequelize.BOOLEAN,
       defaultValue: true,
       allowNull: false,
     });
 
-    await queryInterface.addColumn('products', 'image_url', {
+    if (!columns.image_url) {
+      await queryInterface.addColumn('products', 'image_url', {
       type: Sequelize.STRING,
       allowNull: true,
     });

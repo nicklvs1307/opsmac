@@ -2,7 +2,9 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Categories', {
+    const tableExists = await queryInterface.tableExists('Categories');
+    if (!tableExists) {
+      await queryInterface.createTable('Categories', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,

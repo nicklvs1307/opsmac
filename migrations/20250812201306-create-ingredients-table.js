@@ -3,7 +3,9 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('ingredients', {
+    const tableExists = await queryInterface.tableExists('ingredients');
+    if (!tableExists) {
+      await queryInterface.createTable('ingredients', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,

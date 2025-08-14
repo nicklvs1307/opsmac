@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { models } = require('../config/database');
-const { generateEscPosCommands } = require('../../utils/thermalPrinterService');
+const { generateEscPosCommands } = require('../utils/thermalPrinterService');
 
 router.post('/order', async (req, res) => {
   const { cartItems, sessionId, restaurant_id, table_id } = req.body;

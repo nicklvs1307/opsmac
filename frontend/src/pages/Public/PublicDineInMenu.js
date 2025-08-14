@@ -109,7 +109,7 @@ const PublicDineInMenu = () => {
     const handleCheckout = () => {
         if (sessionId && menuData?.restaurant && menuData?.table) {
             orderMutation.mutate({ 
-                cartItems, 
+                cartItems: cartItems.map(item => ({ product_id: item.id, quantity: item.quantity, price: item.price, name: item.name })), 
                 sessionId, 
                 restaurant_id: menuData.restaurant.id,
                 table_id: menuData.table.id

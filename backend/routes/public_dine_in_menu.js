@@ -8,7 +8,7 @@ router.get('/:restaurantSlug/:tableNumber', async (req, res) => {
 
     const restaurant = await models.Restaurant.findOne({ 
       where: { slug: restaurantSlug },
-      attributes: ['id', 'name', 'logo']
+            attributes: ['id', 'name', 'logo']
     });
 
     if (!restaurant) {

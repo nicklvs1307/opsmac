@@ -8,7 +8,10 @@ router.get('/:restaurantSlug', async (req, res) => {
     const { restaurantSlug } = req.params;
     const { category } = req.query; // Get category from query parameters
 
-    const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
+    const restaurant = await models.Restaurant.findOne({ 
+      where: { slug: restaurantSlug },
+      attributes: ['id', 'name', 'logo']
+    });
     if (!restaurant) {
       return res.status(404).json({ msg: 'Restaurante não encontrado' });
     }
@@ -35,7 +38,10 @@ router.get('/delivery/:restaurantSlug', async (req, res) => {
     const { restaurantSlug } = req.params;
     const { category } = req.query; // Get category from query parameters
 
-    const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
+    const restaurant = await models.Restaurant.findOne({ 
+      where: { slug: restaurantSlug },
+      attributes: ['id', 'name', 'logo']
+    });
     if (!restaurant) {
       return res.status(404).json({ msg: 'Restaurante não encontrado' });
     }
@@ -64,7 +70,10 @@ router.get('/:restaurantSlug/:productId', async (req, res) => {
   try {
     const { restaurantSlug, productId } = req.params;
 
-    const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
+    const restaurant = await models.Restaurant.findOne({ 
+      where: { slug: restaurantSlug },
+      attributes: ['id', 'name', 'logo']
+    });
     if (!restaurant) {
       return res.status(404).json({ msg: 'Restaurante não encontrado' });
     }

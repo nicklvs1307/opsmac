@@ -77,7 +77,7 @@ const PublicDeliveryMenu = () => {
         restaurant_id: menuData.restaurant.id,
         delivery_type: 'delivery',
         total_amount: cartTotal,
-        items: cartItems,
+        items: cartItems.map(item => ({ product_id: item.id, quantity: item.quantity, price: item.price, name: item.name })),
         customer_details: { name: customerName, phone: customerPhone },
         delivery_address: { address: deliveryAddress }, // Simplificado, pode ser um objeto mais complexo
         payment_method: paymentMethod,

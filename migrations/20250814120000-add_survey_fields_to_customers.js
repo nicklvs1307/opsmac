@@ -1,9 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn('customers', 'last_survey_completed_at', {
-      type: Sequelize.DATE,
-      allowNull: true,
-    });
+    // last_survey_completed_at is assumed to exist or be handled elsewhere
     await queryInterface.addColumn('customers', 'last_survey_id', {
       type: Sequelize.UUID,
       allowNull: true,

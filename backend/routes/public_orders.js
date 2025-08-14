@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { models } = require('../config/database');
 const { body, validationResult } = require('express-validator');
-const { generateEscPosCommands } = require('../../utils/thermalPrinterService');
+
 
 // POST /api/public/orders - Create a new order from public menu
 
@@ -59,10 +59,10 @@ router.post(
       });
 
       // Generate and log ESC/POS commands
-      const escPosCommands = generateEscPosCommands(order, restaurant.name);
-      console.log('--- ESC/POS COMMANDS GENERATED ---');
-      console.log(escPosCommands);
-      console.log('----------------------------------');
+      // const escPosCommands = generateEscPosCommands(order, restaurant.name);
+      // console.log('--- ESC/POS COMMANDS GENERATED ---');
+      // console.log(escPosCommands);
+      // console.log('----------------------------------');
 
       res.status(201).json({ msg: 'Pedido criado com sucesso!', orderId: order.id });
     } catch (error) {

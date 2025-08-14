@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, useMediaQuery, Zoom, Fade, Chip, Slide, Fab, List, ListItem, ListItemText, ListItemAvatar, Avatar, BottomNavigation, BottomNavigationAction, ThemeProvider, createTheme, InputAdornment } from '@mui/material';
-import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, Search as SearchIcon, Add as AddIcon, Remove as RemoveIcon, Close as CloseIcon } from '@mui/icons-material';
+import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, Search as SearchIcon, Add as AddIcon, Remove as RemoveIcon, Close as CloseIcon, Person as PersonIcon, Phone as PhoneIcon, Home as HomeIcon, Payment as PaymentIcon, Notes as NotesIcon } from '@mui/icons-material';
+import toast from 'react-hot-toast';
 
 const fetchDeliveryMenu = async (restaurantSlug) => {
     const { data } = await axiosInstance.get(`/api/public/products/delivery/${restaurantSlug}`);
-    const groupedByCategory = data.reduce((acc, product) => {
-      const category = product.Category?.name || 'Outros';
+    const groupedByCategory = data.products.reduce((acc, product) => {
+      const category = product.category?.name || 'Outros';
       if (!acc[category]) {
         acc[category] = [];
       }
       acc[category].push(product);
       return acc;
     }, {});
-    return { products: data, categories: groupedByCategory, restaurant: data[0]?.restaurant };
-  };
+    return { ...data, categories: groupedByCategory };
+};
+
+const createDeliveryOrder = async (orderData) => {
+    const { data } = await axiosInstance.post('/api/public/orders', orderData);
+    return data;
+};
 
 const deliveryTheme = createTheme({
   palette: {
@@ -33,10 +39,17 @@ const PublicDeliveryMenu = () => {
   const { restaurantSlug } = useParams();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [cartItems, setCartItems] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [notes, setNotes] = useState('');
 
   const { data: menuData, isLoading, isError } = useQuery(
     ['deliveryMenu', restaurantSlug],
@@ -44,33 +57,58 @@ const PublicDeliveryMenu = () => {
     { enabled: !!restaurantSlug }
   );
 
+  const orderMutation = useMutation(createDeliveryOrder, {
+      onSuccess: () => {
+          toast.success('Pedido realizado com sucesso!');
+          setCartItems([]);
+          setCartOpen(false);
+      },
+      onError: () => {
+          toast.error('Erro ao realizar o pedido.');
+      }
+  });
+
+  const handleCheckout = () => {
+    if (!customerName || !customerPhone || !deliveryAddress) {
+        toast.error('Por favor, preencha seu nome, telefone e endereço.');
+        return;
+    }
+    const orderData = {
+        restaurant_id: menuData.restaurant.id,
+        delivery_type: 'delivery',
+        total_amount: cartTotal,
+        items: cartItems,
+        customer_details: { name: customerName, phone: customerPhone },
+        delivery_address: { address: deliveryAddress }, // Simplificado, pode ser um objeto mais complexo
+        payment_method: paymentMethod,
+        notes: notes,
+    };
+    orderMutation.mutate(orderData);
+  };
+
   const addToCart = (item) => {
     setCartItems((prev) => {
       const exist = prev.find((x) => x.id === item.id);
       if (exist) {
-        return prev.map((x) =>
-          x.id === item.id ? { ...exist, quantity: exist.quantity + 1 } : x
-        );
+        return prev.map((x) => x.id === item.id ? { ...exist, quantity: exist.quantity + 1 } : x);
       }
       return [...prev, { ...item, quantity: 1 }];
     });
   };
 
   const removeFromCart = (item) => {
-    setCartItems((prev) =>
-      prev.reduce((acc, x) => {
+    setCartItems((prev) => prev.reduce((acc, x) => {
         if (x.id === item.id) {
-          if (x.quantity === 1) return acc;
-          return [...acc, { ...x, quantity: x.quantity - 1 }];
+            if (x.quantity === 1) return acc;
+            return [...acc, { ...x, quantity: x.quantity - 1 }];
         }
         return [...acc, x];
-      }, [])
-    );
+    }, []));
   };
 
   const filteredProducts = menuData?.products.filter(p => 
-    (p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.description.toLowerCase().includes(searchTerm.toLowerCase())) &&
-    (selectedCategory === 'all' || p.Category?.name === selectedCategory)
+    (p.name.toLowerCase().includes(searchTerm.toLowerCase()) || (p.description && p.description.toLowerCase().includes(searchTerm.toLowerCase()))) &&
+    (selectedCategory === 'all' || p.category?.name === selectedCategory)
   );
 
   const cartTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -84,10 +122,10 @@ const PublicDeliveryMenu = () => {
       <Box sx={{ maxWidth: '500px', margin: '0 auto', backgroundColor: '#F8F8F8', minHeight: '100vh' }}>
         <AppBar position="sticky" sx={{ backgroundColor: 'white', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
           <Toolbar>
-            <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1 }}>
-              <RestaurantIcon sx={{ color: 'accent.main' }} />
-              {menuData.restaurant?.name || 'Don Fonseca'}
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                {menuData.restaurant?.logo ? <img src={menuData.restaurant.logo} alt={menuData.restaurant.name} style={{ height: '40px', width: 'auto'}} /> : <RestaurantIcon sx={{ color: 'accent.main' }} />}
+                <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700 }}>{menuData.restaurant?.name || 'Don Fonseca'}</Typography>
+            </Box>
             <Box sx={{ flexGrow: 1 }} />
             <IconButton onClick={() => setCartOpen(true)}>
               <ShoppingCartIcon />
@@ -123,12 +161,12 @@ const PublicDeliveryMenu = () => {
           </Box>
         </Box>
 
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ p: 2, pb: 12 }}>
           <Grid container spacing={2}>
             {filteredProducts?.map(item => (
               <Grid item xs={12} sm={6} key={item.id}>
                 <Card sx={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                  <CardMedia component="img" height="140" image={item.imageUrl || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} />
+                  <CardMedia component="img" height="140" image={item.image_url || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} />
                   <CardContent>
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>{item.name}</Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ minHeight: 40 }}>{item.description}</Typography>
@@ -143,7 +181,7 @@ const PublicDeliveryMenu = () => {
           </Grid>
         </Box>
 
-        {totalItemsInCart > 0 && (
+        {totalItemsInCart > 0 && !cartOpen && (
           <Paper sx={{ position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)', width: 'calc(100% - 32px)', maxWidth: 500, borderRadius: '50px', p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'primary.main', color: 'white', boxShadow: '0 8px 24px rgba(0,0,0,0.2)' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Chip label={totalItemsInCart} sx={{ backgroundColor: 'white', color: 'primary.main', fontWeight: 700 }} />
@@ -161,7 +199,7 @@ const PublicDeliveryMenu = () => {
           <DialogContent dividers>
             {cartItems.map(item => (
               <Box key={item.id} sx={{ display: 'flex', alignItems: 'center', mb: 2, gap: 2 }}>
-                <Avatar src={item.imageUrl} sx={{ width: 80, height: 80, borderRadius: '10px' }} />
+                <Avatar src={item.image_url} sx={{ width: 80, height: 80, borderRadius: '10px' }} />
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography sx={{ fontWeight: 700 }}>{item.name}</Typography>
                   <Typography color="primary" sx={{ fontWeight: 700 }}>R$ {(item.price * item.quantity).toFixed(2)}</Typography>
@@ -173,6 +211,15 @@ const PublicDeliveryMenu = () => {
                 </Box>
               </Box>
             ))}
+            <Divider sx={{ my: 2 }} />
+            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>Informações para Entrega</Typography>
+            <Grid container spacing={2}>
+                <Grid item xs={12}><TextField fullWidth label="Nome Completo" value={customerName} onChange={e => setCustomerName(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><PersonIcon /></InputAdornment> }} /></Grid>
+                <Grid item xs={12}><TextField fullWidth label="Telefone (WhatsApp)" value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><PhoneIcon /></InputAdornment> }} /></Grid>
+                <Grid item xs={12}><TextField fullWidth label="Endereço Completo" value={deliveryAddress} onChange={e => setDeliveryAddress(e.target.value)} multiline rows={3} InputProps={{ startAdornment: <InputAdornment position="start"><HomeIcon /></InputAdornment> }} /></Grid>
+                <Grid item xs={12}><TextField fullWidth label="Forma de Pagamento" value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><PaymentIcon /></InputAdornment> }} /></Grid>
+                <Grid item xs={12}><TextField fullWidth label="Observações (opcional)" value={notes} onChange={e => setNotes(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><NotesIcon /></InputAdornment> }} /></Grid>
+            </Grid>
           </DialogContent>
           <DialogActions sx={{ flexDirection: 'column', p: 2 }}>
             <Box sx={{ width: '100%' }}>
@@ -181,7 +228,9 @@ const PublicDeliveryMenu = () => {
               <Divider sx={{ my: 1 }} />
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}><Typography variant="h6" sx={{ fontWeight: 700 }}>Total</Typography><Typography variant="h6" sx={{ fontWeight: 700 }}>R$ {(cartTotal + 5).toFixed(2)}</Typography></Box>
             </Box>
-            <Button fullWidth variant="contained" sx={{ mt: 2, py: 1.5, borderRadius: '12px', fontWeight: 700 }}>Finalizar Pedido</Button>
+            <Button onClick={handleCheckout} fullWidth variant="contained" sx={{ mt: 2, py: 1.5, borderRadius: '12px', fontWeight: 700 }} disabled={orderMutation.isLoading}>
+                {orderMutation.isLoading ? <CircularProgress size={24} color="inherit" /> : 'Finalizar Pedido'}
+            </Button>
           </DialogActions>
         </Dialog>
 

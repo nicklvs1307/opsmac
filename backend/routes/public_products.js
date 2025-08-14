@@ -18,8 +18,11 @@ router.get('/:restaurantSlug', async (req, res) => {
       whereClause.category = category; // Add category to where clause if provided
     }
 
-    const products = await models.Product.findAll({ where: whereClause });
-    res.json(products);
+    const products = await models.Product.findAll({ 
+      where: whereClause,
+      include: [{ model: models.Category, as: 'category', attributes: ['name'] }]
+    });
+    res.json({ products, restaurant });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
@@ -45,8 +48,11 @@ router.get('/delivery/:restaurantSlug', async (req, res) => {
     // Optionally, add a filter for products available for delivery if a flag is added to Product model
     // whereClause.is_available_for_delivery = true;
 
-    const products = await models.Product.findAll({ where: whereClause });
-    res.json(products);
+    const products = await models.Product.findAll({ 
+      where: whereClause,
+      include: [{ model: models.Category, as: 'category', attributes: ['name'] }]
+    });
+    res.json({ products, restaurant });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');

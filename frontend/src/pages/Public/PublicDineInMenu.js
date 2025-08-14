@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 const fetchDineInMenu = async (restaurantSlug, tableNumber) => {
     const { data } = await axiosInstance.get(`/public/menu/dine-in/${restaurantSlug}/${tableNumber}`);
     const groupedByCategory = data.products.reduce((acc, product) => {
-      const category = product.Category?.name || 'Outros';
+      const category = product.category?.name || 'Outros';
       if (!acc[category]) {
         acc[category] = [];
       }
@@ -21,6 +21,11 @@ const fetchDineInMenu = async (restaurantSlug, tableNumber) => {
 
 const callWaiter = async ({ sessionId, description }) => {
     const { data } = await axiosInstance.post(`/public/menu/dine-in/${sessionId}/call-waiter`, { description });
+    return data;
+};
+
+const createOrder = async (orderData) => {
+    const { data } = await axiosInstance.post('/api/public/dine-in/order', orderData);
     return data;
 };
 
@@ -51,8 +56,22 @@ const PublicDineInMenu = () => {
     const { data: menuData, isLoading, isError } = useQuery(
         ['dineInMenu', restaurantSlug, tableNumber],
         () => fetchDineInMenu(restaurantSlug, tableNumber),
-        { enabled: !!restaurantSlug && !!tableNumber }
+        { 
+            enabled: !!restaurantSlug && !!tableNumber,
+            onSuccess: (data) => {
+                if (!sessionId) {
+                    startSessionMutation.mutate(data.table.id);
+                }
+            }
+        }
     );
+
+    const startSessionMutation = useMutation(startTableSession, {
+        onSuccess: (data) => {
+            setSessionId(data.session.id);
+            localStorage.setItem(`tableSession_${restaurantSlug}_${tableNumber}`, data.session.id);
+        }
+    });
 
     const callWaiterMutation = useMutation(callWaiter, {
         onSuccess: () => {
@@ -65,9 +84,31 @@ const PublicDineInMenu = () => {
         }
     });
 
+    const orderMutation = useMutation(createOrder, {
+        onSuccess: () => {
+            toast.success('Pedido enviado para a cozinha!');
+            setCartItems([]);
+            setCartOpen(false);
+        },
+        onError: () => {
+            toast.error('Erro ao enviar o pedido.');
+        }
+    });
+
     const handleCallWaiter = () => {
         if (sessionId) {
             callWaiterMutation.mutate({ sessionId, description: waiterCallDescription });
+        }
+    };
+
+    const handleCheckout = () => {
+        if (sessionId && menuData?.restaurant && menuData?.table) {
+            orderMutation.mutate({ 
+                cartItems, 
+                sessionId, 
+                restaurant_id: menuData.restaurant.id,
+                table_id: menuData.table.id
+            });
         }
     };
 
@@ -80,6 +121,22 @@ const PublicDineInMenu = () => {
             return [...prev, { ...item, quantity: 1 }];
         });
     };
+
+    const removeFromCart = (item) => {
+        setCartItems((prev) => prev.reduce((acc, x) => {
+            if (x.id === item.id) {
+                if (x.quantity === 1) return acc;
+                return [...acc, { ...x, quantity: x.quantity - 1 }];
+            }
+            return [...acc, x];
+        }, []));
+    };
+
+    const deleteFromCart = (item) => {
+        setCartItems((prev) => prev.filter((x) => x.id !== item.id));
+    };
+
+    const cartTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
     const categories = menuData ? Object.keys(menuData.categories) : [];
 
@@ -166,16 +223,37 @@ const PublicDineInMenu = () => {
                     </BottomNavigation>
                 </Paper>
 
-                <Dialog open={cartOpen} onClose={() => setCartOpen(false)} fullWidth maxWidth="sm" PaperProps={{ sx: { borderRadius: '15px', maxHeight: '80vh' } }}>
+                <Dialog open={cartOpen} onClose={() => setCartOpen(false)} fullWidth maxWidth="sm" PaperProps={{ sx: { borderRadius: '15px', maxHeight: '80vh', display: 'flex', flexDirection: 'column' } }}>
                     <DialogTitle sx={{ background: 'linear-gradient(135deg, #1A1A1A, #000)', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         Meu Pedido
                         <IconButton onClick={() => setCartOpen(false)} sx={{ color: 'white' }}><CloseIcon /></IconButton>
                     </DialogTitle>
-                    <DialogContent sx={{ padding: '20px' }}>
-                        {/* Conteúdo do carrinho aqui */}
+                    <DialogContent dividers sx={{ flex: 1, overflowY: 'auto' }}>
+                        {cartItems.length === 0 ? (
+                            <Typography>Seu carrinho está vazio.</Typography>
+                        ) : (
+                            <List>
+                                {cartItems.map(item => (
+                                    <ListItem key={item.id} secondaryAction={<IconButton edge="end" onClick={() => deleteFromCart(item)}><DeleteIcon /></IconButton>}>
+                                        <ListItemAvatar><Avatar src={item.image_url} /></ListItemAvatar>
+                                        <ListItemText primary={item.name} secondary={`R$ ${Number(item.price).toFixed(2)}`} />
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <IconButton size="small" onClick={() => removeFromCart(item)}><RemoveIcon /></IconButton>
+                                            <Typography>{item.quantity}</Typography>
+                                            <IconButton size="small" onClick={() => addToCart(item)}><AddIcon /></IconButton>
+                                        </Box>
+                                    </ListItem>
+                                ))}
+                            </List>
+                        )}
                     </DialogContent>
                     <DialogActions sx={{ padding: '20px', backgroundColor: '#f9f9f9', borderTop: '1px solid #eee' }}>
-                        <Button fullWidth variant="contained" sx={{ mt: 2, background: 'linear-gradient(135deg, #E31837, #FF4757)', padding: '15px', fontWeight: 600 }}>Finalizar Pedido</Button>
+                        <Box sx={{ width: '100%' }}>
+                            <Typography variant="h6">Total: R$ {cartTotal.toFixed(2)}</Typography>
+                            <Button onClick={handleCheckout} fullWidth variant="contained" sx={{ mt: 2, background: 'linear-gradient(135deg, #E31837, #FF4757)', padding: '15px', fontWeight: 600 }} disabled={cartItems.length === 0}>
+                                Realizar Pedido
+                            </Button>
+                        </Box>
                     </DialogActions>
                 </Dialog>
 

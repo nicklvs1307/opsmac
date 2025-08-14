@@ -92,6 +92,7 @@ app.use('/api/public/orders', publicOrdersRoutes);
 app.use('/api/stock', stockRoutes);
 app.use('/api/tables', tablesRoutes);
 app.use('/public/menu/dine-in', publicDineInMenuRoutes);
+app.use('/api/public/dine-in', publicDineInOrdersRoutes);
 app.use('/api/orders', ordersRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
 app.use('/api/technical-specifications', technicalSpecificationsRoutes);

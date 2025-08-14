@@ -136,7 +136,7 @@ const PublicDeliveryMenu = () => {
         <AppBar position="sticky" sx={{ backgroundColor: 'white', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
           <Toolbar>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                {restaurantData?.logo ? <img src={`${API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ height: '40px', width: 'auto'}} /> : <RestaurantIcon sx={{ color: 'accent.main' }} />}
+                {restaurantData?.logo ? <img src={`${API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ height: '40px', width: '40px', objectFit: 'contain', borderRadius: '50%' }} /> : <RestaurantIcon sx={{ color: 'accent.main' }} />}
                 <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700 }}>{restaurantData?.name || 'Don Fonseca'}</Typography>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
@@ -179,7 +179,7 @@ const PublicDeliveryMenu = () => {
             {filteredProducts?.map(item => (
               <Grid item xs={12} sm={6} key={item.id}>
                 <Card sx={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                  <CardMedia component="img" height="140" image={item.image_url ? `${API_URL}${item.image_url}` : `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} />
+                  <CardMedia component="img" height="140" image={item.image_url || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} />
                   <CardContent>
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>{item.name}</Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ minHeight: 40 }}>{item.description}</Typography>
@@ -212,7 +212,7 @@ const PublicDeliveryMenu = () => {
           <DialogContent dividers>
             {cartItems.map(item => (
               <Box key={item.id} sx={{ display: 'flex', alignItems: 'center', mb: 2, gap: 2 }}>
-                <Avatar src={item.image_url ? `${API_URL}${item.image_url}`: ''} sx={{ width: 80, height: 80, borderRadius: '10px' }} />
+                <Avatar src={item.image_url ? item.image_url: ''} sx={{ width: 80, height: 80, borderRadius: '10px' }} />
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography sx={{ fontWeight: 700 }}>{item.name}</Typography>
                   <Typography color="primary" sx={{ fontWeight: 700 }}>R$ {(item.price * item.quantity).toFixed(2)}</Typography>

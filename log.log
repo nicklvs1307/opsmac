@@ -1,27 +1,14 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      162.7s
-------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.777
-0.777 > feedeliza-plus@1.0.0 build
-0.777 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.777
-3.210 Creating an optimized production build...
-162.1 Failed to compile.
-162.1
-162.1 [eslint]
-162.1 src/pages/Public/PublicDineInMenu.js
-162.1   Line 69:46:  'startTableSession' is not defined  no-undef
-162.1
-162.1 Search for the keywords to learn more about each error.
-162.1
-162.1
-------
-Dockerfile.frontend:23
---------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+/app/backend/server.js:95
+app.use('/api/public/dine-in', publicDineInOrdersRoutes);
+                               ^
+ReferenceError: publicDineInOrdersRoutes is not defined
+    at Object.<anonymous> (/app/backend/server.js:95:32)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49
+Node.js v20.19.4

@@ -32,6 +32,7 @@ const publicProductsRoutes = require('./routes/public_products');
 const stockRoutes = require('./routes/stock');
 const tablesRoutes = require('./routes/tables');
 const publicDineInMenuRoutes = require('./routes/public_dine_in_menu');
+const publicDineInOrdersRoutes = require('./routes/public_dine_in_orders');
 const publicOrdersRoutes = require('./routes/public_orders');
 const ordersRoutes = require('./routes/orders');
 const ingredientsRoutes = require('./routes/ingredients');

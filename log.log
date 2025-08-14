@@ -1,18 +1,18 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      178.6s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      168.6s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.795
-0.795 > feedeliza-plus@1.0.0 build
-0.795 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.795
-3.803 Creating an optimized production build...
-177.5 Failed to compile.
-177.5
-177.5 [eslint]
-177.5 src/pages/Public/PublicCheckin.js
-177.5 Syntax error: 'return' outside of function. (604:4) (604:4)
-177.5
-177.5
+0.720
+0.720 > feedeliza-plus@1.0.0 build
+0.720 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.720
+3.637 Creating an optimized production build...
+166.7 Failed to compile.
+166.7
+166.7 [eslint]
+166.7 src/pages/Public/PublicCheckin.js
+166.7 Syntax error: Only one default export allowed per module. (565:0) (565:undefined)
+166.7
+166.7
 ------
 Dockerfile.frontend:23
 --------------------

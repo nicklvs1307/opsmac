@@ -559,7 +559,3 @@ const PublicCheckin = () => {
 
 export default PublicCheckin;
 
-
-  
-
-export default PublicCheckin;

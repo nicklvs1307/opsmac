@@ -29,6 +29,11 @@ const createOrder = async (orderData) => {
     return data;
 };
 
+const startTableSession = async (tableId) => {
+    const { data } = await axiosInstance.post(`/public/menu/dine-in/${tableId}/start-session`);
+    return data;
+};
+
 const premiumTheme = createTheme({
     palette: {
       primary: { main: '#E31837' },

@@ -1,21 +1,20 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      163.7s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      162.7s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.635
-0.635 > feedeliza-plus@1.0.0 build
-0.635 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.635
-3.650 Creating an optimized production build...
-162.6 Failed to compile.
-162.6
-162.6 [eslint]
-162.6 src/pages/Public/PublicDeliveryMenu.js
-162.6   Line 154:80:  React Hook "useMediaQuery" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
-162.6   Line 154:94:  'theme' is not defined                                                                                                                                                                           no-undef
-162.6
-162.6 Search for the keywords to learn more about each error.
-162.6
-162.6
+0.777
+0.777 > feedeliza-plus@1.0.0 build
+0.777 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.777
+3.210 Creating an optimized production build...
+162.1 Failed to compile.
+162.1
+162.1 [eslint]
+162.1 src/pages/Public/PublicDineInMenu.js
+162.1   Line 69:46:  'startTableSession' is not defined  no-undef
+162.1
+162.1 Search for the keywords to learn more about each error.
+162.1
+162.1
 ------
 Dockerfile.frontend:23
 --------------------

@@ -1,45 +1,28 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/public/menu/dine-in/roma-pizzaria/15
-Método da solicitação
-GET
-Código de status
-500 Internal Server Error
-Endereço remoto
-95.217.16.187:443
-
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
-Generated Swagger Specs (first 500 chars): {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Check Test API",
-    "version": "1.0.0",
-    "description": "API documentation for the Check Test application."
-  },
-  "servers": [
-    {
-      "url": "http://localhost:5000/api",
-      "description": "Production server"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Public API",
-      "description": "Endpoints acessíveis via API Token para integração externa."
-    },
-    {
-      "name": "Admin",
-      "description": "Gerenciamento de usuários e res
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-📊 Dashboard: https://feedelizapro.towersfy.com
-🔗 API: https://feedelizaapi.towersfy.com/api
-column category.description does not exist
-column category.description does not exist
-column category.description does not exist
-column category.description does not exist
-column category.description does not exist
-column category.description does not exist
-column category.description does not exist
-column category.description does not exist
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      163.7s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.635
+0.635 > feedeliza-plus@1.0.0 build
+0.635 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.635
+3.650 Creating an optimized production build...
+162.6 Failed to compile.
+162.6
+162.6 [eslint]
+162.6 src/pages/Public/PublicDeliveryMenu.js
+162.6   Line 154:80:  React Hook "useMediaQuery" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+162.6   Line 154:94:  'theme' is not defined                                                                                                                                                                           no-undef
+162.6
+162.6 Search for the keywords to learn more about each error.
+162.6
+162.6
+------
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

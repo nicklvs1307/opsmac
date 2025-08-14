@@ -31,6 +31,8 @@ const deliveryTheme = createTheme({
 
 const PublicDeliveryMenu = () => {
   const { restaurantSlug } = useParams();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [cartItems, setCartItems] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -151,7 +153,7 @@ const PublicDeliveryMenu = () => {
           </Paper>
         )}
 
-        <Dialog open={cartOpen} onClose={() => setCartOpen(false)} fullScreen={useMediaQuery(theme.breakpoints.down('sm'))} PaperProps={{ sx: { borderRadius: { sm: '24px' } } }}>
+        <Dialog open={cartOpen} onClose={() => setCartOpen(false)} fullScreen={isMobile} PaperProps={{ sx: { borderRadius: { sm: '24px' } } }}>
           <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             Seu Pedido
             <IconButton onClick={() => setCartOpen(false)}><CloseIcon /></IconButton>

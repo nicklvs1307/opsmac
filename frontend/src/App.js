@@ -81,7 +81,7 @@ function App() {
                 <Route path="/recompensa-ganha" element={<PublicReward />} />
                 <Route path="/menu/:restaurantSlug" element={<PublicMenu />} /> {/* New Public Menu Route */}
                 <Route path="/menu/delivery/:restaurantSlug" element={<PublicDeliveryMenu />} />
-                <Route path="/menu/dine-in/:tableId" element={<PublicDineInMenu />} />
+                <Route path="/menu/:restaurantSlug/:tableNumber" element={<PublicDineInMenu />} />
                 
                 {/* Protected Routes */}
                 <Route path="/" element={

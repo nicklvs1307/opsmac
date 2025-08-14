@@ -6,8 +6,8 @@ import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, LocalDining as LocalDiningIcon, Call as CallIcon, Receipt as ReceiptIcon, Search as SearchIcon, Info as InfoIcon, Star as StarIcon, StarBorder as StarBorderIcon, Add as AddIcon, Remove as RemoveIcon, Notifications as NotificationsIcon, NotificationsActive as NotificationsActiveIcon, Clear as ClearIcon, KeyboardArrowUp as KeyboardArrowUpIcon, Send as SendIcon, AddShoppingCart as AddShoppingCartIcon, SearchOff as SearchOffIcon, ArrowBack as ArrowBackIcon, Close as CloseIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
-const fetchDineInMenu = async (tableId) => {
-    const { data } = await axiosInstance.get(`/public/menu/dine-in/${tableId}`);
+const fetchDineInMenu = async (restaurantSlug, tableNumber) => {
+    const { data } = await axiosInstance.get(`/public/menu/dine-in/${restaurantSlug}/${tableNumber}`);
     const groupedByCategory = data.products.reduce((acc, product) => {
       const category = product.Category?.name || 'Outros';
       if (!acc[category]) {
@@ -52,11 +52,11 @@ const premiumTheme = createTheme({
 
 const PublicDineInMenu = () => {
   const { t } = useTranslation();
-  const { tableId } = useParams();
+  const { restaurantSlug, tableNumber } = useParams();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const [sessionId, setSessionId] = useState(localStorage.getItem(`tableSession_${tableId}`));
+  const [sessionId, setSessionId] = useState(localStorage.getItem(`tableSession_${restaurantSlug}_${tableNumber}`));
   const [openWaiterDialog, setOpenWaiterDialog] = useState(false);
   const [waiterCallDescription, setWaiterCallDescription] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(0);
@@ -64,9 +64,9 @@ const PublicDineInMenu = () => {
   const [cartOpen, setCartOpen] = useState(false);
 
   const { data: menuData, isLoading: isLoadingMenu, isError: isErrorMenu } = useQuery(
-    ['dineInMenu', tableId],
-    () => fetchDineInMenu(tableId),
-    { enabled: !!tableId }
+    ['dineInMenu', restaurantSlug, tableNumber],
+    () => fetchDineInMenu(restaurantSlug, tableNumber),
+    { enabled: !!restaurantSlug && !!tableNumber }
   );
 
   const addToCart = (item) => {
@@ -111,7 +111,7 @@ const PublicDineInMenu = () => {
                 <NotificationsIcon />
               </IconButton>
               <Typography sx={{ backgroundColor: 'primary.main', padding: '8px 18px', borderRadius: '30px', fontWeight: 600 }}>
-                MESA {table?.table_number || tableId}
+                MESA {table?.table_number || tableNumber}
               </Typography>
             </Box>
           </Toolbar>

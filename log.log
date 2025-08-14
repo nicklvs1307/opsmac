@@ -1,22 +1,3 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/tables
-Método da solicitação
-POST
-Código de status
-201 Created
-Endereço remoto
-95.217.16.187:443
-{
-    "id": "825b66c0-1b60-4ccf-b289-f815c715fd1d",
-    "restaurant_id": "0e517dc5-4881-45aa-996e-0365012000bc",
-    "table_number": 1,
-    "updatedAt": "2025-08-14T00:07:36.839Z",
-    "createdAt": "2025-08-14T00:07:36.817Z",
-    "qr_code_url": "https://feedelizapro.towersfy.com/menu/dine-in/825b66c0-1b60-4ccf-b289-f815c715fd1d"
-}
-
-Erro ao carregar o cardápio.
-
 > Feedeliza+@1.0.0 start
 > node backend/server.js
 Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
@@ -45,8 +26,93 @@ Generated Swagger Specs (first 500 chars): {
 🚀 Servidor rodando na porta 5000
 📊 Dashboard: https://feedelizapro.towersfy.com
 🔗 API: https://feedelizaapi.towersfy.com/api
-invalid input syntax for type uuid: "15"
-invalid input syntax for type uuid: "15"
-invalid input syntax for type uuid: "1"
-invalid input syntax for type uuid: "1"
-https://feedelizapro.towersfy.com/menu/dine-in/825b66c0-1b60-4ccf-b289-f815c715fd1d
+Category is associated to Product using an alias. You've included an alias (Category), but it does not match the alias(es) defined in your association (category).
+Category is associated to Product using an alias. You've included an alias (Category), but it does not match the alias(es) defined in your association (category).
+Category is associated to Product using an alias. You've included an alias (Category), but it does not match the alias(es) defined in your association (category).
+Category is associated to Product using an alias. You've included an alias (Category), but it does not match the alias(es) defined in your association (category).
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/public/menu/dine-in/2a99dbeb-87b6-4227-bf59-16c998e8bb48
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+Endereço remoto
+95.217.16.187:443
+
+2a99dbeb-87b6-4227-bf59-16c998e8bb48:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+PublicDineInMenu.js:10  GET https://feedelizaapi.towersfy.com/public/menu/dine-in/2a99dbeb-87b6-4227-bf59-16c998e8bb48 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ PublicDineInMenu.js:10
+JJ.enabled @ PublicDineInMenu.js:68
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+PublicDineInMenu.js:10  GET https://feedelizaapi.towersfy.com/public/menu/dine-in/2a99dbeb-87b6-4227-bf59-16c998e8bb48 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ PublicDineInMenu.js:10
+JJ.enabled @ PublicDineInMenu.js:68
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 Vr {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14

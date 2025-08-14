@@ -12,12 +12,17 @@ router.get('/:tableId', async (req, res) => {
       return res.status(404).json({ msg: 'Mesa não encontrada.' });
     }
 
-    // Fetch products associated with the restaurant of this table
-    const products = await models.Product.findAll({
-      where: { restaurant_id: table.restaurant_id }
+    const restaurant = await models.Restaurant.findByPk(table.restaurant_id, {
+      attributes: ['id', 'name', 'logo'] // Apenas os campos necessários
     });
 
-    res.json(products);
+    // Fetch products associated with the restaurant of this table
+    const products = await models.Product.findAll({
+      where: { restaurant_id: table.restaurant_id },
+      include: [{ model: models.Category, as: 'Category', attributes: ['name', 'description'] }]
+    });
+
+    res.json({ products, table, restaurant });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');

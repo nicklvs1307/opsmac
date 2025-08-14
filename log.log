@@ -3,64 +3,19 @@ https://feedelizaapi.towersfy.com/api/tables
 Método da solicitação
 POST
 Código de status
-500 Internal Server Error
-tables:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-feedelizaapi.towersfy.com/api/tables:1  Failed to load resource: the server responded with a status of 500 ()
-mutation.js:106 Vr
-(anônimo) @ mutation.js:106
-Tables.js:15  POST https://feedelizaapi.towersfy.com/api/tables 500 (Internal Server Error)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-go @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:226
-(anônimo) @ bind.js:5
-uZ @ Tables.js:15
-fn @ mutation.js:132
-c @ retryer.js:95
-u @ retryer.js:156
-t.executeMutation @ mutation.js:126
-(anônimo) @ mutation.js:86
-Promise.then
-t.execute @ mutation.js:85
-r.mutate @ mutationObserver.js:83
-(anônimo) @ useMutation.js:41
-A @ Tables.js:80
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Ne @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-Ln @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-$t @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
-Tables.js:80 Vr {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ mutation.js:106
-Promise.catch
-t.execute @ mutation.js:102
-r.mutate @ mutationObserver.js:83
-(anônimo) @ useMutation.js:41
-A @ Tables.js:80
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Ne @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-Ln @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-$t @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
+201 Created
+Endereço remoto
+95.217.16.187:443
+{
+    "id": "825b66c0-1b60-4ccf-b289-f815c715fd1d",
+    "restaurant_id": "0e517dc5-4881-45aa-996e-0365012000bc",
+    "table_number": 1,
+    "updatedAt": "2025-08-14T00:07:36.839Z",
+    "createdAt": "2025-08-14T00:07:36.817Z",
+    "qr_code_url": "https://feedelizapro.towersfy.com/menu/dine-in/825b66c0-1b60-4ccf-b289-f815c715fd1d"
+}
+
+Erro ao carregar o cardápio.
 
 > Feedeliza+@1.0.0 start
 > node backend/server.js
@@ -90,17 +45,8 @@ Generated Swagger Specs (first 500 chars): {
 🚀 Servidor rodando na porta 5000
 📊 Dashboard: https://feedelizapro.towersfy.com
 🔗 API: https://feedelizaapi.towersfy.com/api
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
-column Table.restaurantId does not exist
+invalid input syntax for type uuid: "15"
+invalid input syntax for type uuid: "15"
+invalid input syntax for type uuid: "1"
+invalid input syntax for type uuid: "1"
+https://feedelizapro.towersfy.com/menu/dine-in/825b66c0-1b60-4ccf-b289-f815c715fd1d

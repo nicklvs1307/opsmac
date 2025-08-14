@@ -19,6 +19,11 @@ const fetchDineInMenu = async (restaurantSlug, tableNumber) => {
     return { ...data, categories: groupedByCategory };
 };
 
+const fetchRestaurantData = async (restaurantSlug) => {
+    const { data } = await axiosInstance.get(`/public/restaurant/${restaurantSlug}`);
+    return data;
+};
+
 const callWaiter = async ({ sessionId, description }) => {
     const { data } = await axiosInstance.post(`/public/menu/dine-in/${sessionId}/call-waiter`, { description });
     return data;
@@ -69,6 +74,12 @@ const PublicDineInMenu = () => {
                 }
             }
         }
+    );
+
+    const { data: restaurantData } = useQuery(
+        ['restaurantData', restaurantSlug],
+        () => fetchRestaurantData(restaurantSlug),
+        { enabled: !!restaurantSlug }
     );
 
     const startSessionMutation = useMutation(startTableSession, {
@@ -148,8 +159,8 @@ const PublicDineInMenu = () => {
     if (isLoading) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><CircularProgress /></Box>;
     if (isError) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><Alert severity="error">Erro ao carregar o cardápio.</Alert></Box>;
 
-    const restaurant = menuData?.restaurant;
     const table = menuData?.table;
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
     return (
         <ThemeProvider theme={premiumTheme}>
@@ -157,9 +168,9 @@ const PublicDineInMenu = () => {
                 <AppBar position="static" sx={{ background: 'linear-gradient(135deg, #1A1A1A, #000)', boxShadow: '0 2px 15px rgba(0,0,0,0.1)', zIndex: 10 }}>
                     <Toolbar sx={{ justifyContent: 'space-between', padding: { xs: '0 16px', md: '0 25px' }, height: '90px' }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                            {restaurant?.logo ? <img src={restaurant.logo} alt={restaurant.name} style={{ height: '40px', width: 'auto', objectFit: 'contain' }} /> : <RestaurantIcon sx={{ color: 'primary.main', fontSize: '2rem' }} />}
+                            {restaurantData?.logo ? <img src={`${API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ height: '40px', width: 'auto', objectFit: 'contain' }} /> : <RestaurantIcon sx={{ color: 'primary.main', fontSize: '2rem' }} />}
                             <Typography variant={isMobile ? 'h6' : 'h4'} sx={{ color: 'accent.main', fontWeight: 700 }}>
-                                {restaurant?.name || 'DON FONSECA'}
+                                {restaurantData?.name || 'DON FONSECA'}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
@@ -198,7 +209,7 @@ const PublicDineInMenu = () => {
                                         <Grid item xs={12} sm={6} md={4} key={item.id}>
                                             <Card sx={{ borderRadius: '12px', boxShadow: '0 5px 15px rgba(0,0,0,0.05)', transition: 'all 0.4s', '&:hover': { transform: 'translateY(-8px)', boxShadow: '0 12px 25px rgba(0,0,0,0.1)' }, position: 'relative', border: '1px solid #f0f0f0' }}>
                                                 <Box sx={{ height: '180px', position: 'relative', overflow: 'hidden' }}>
-                                                    <CardMedia component="img" height="180" image={item.image_url || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} />
+                                                    <CardMedia component="img" height="180" image={item.image_url ? `${API_URL}${item.image_url}` : `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} />
                                                     <Box sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50%', background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)' }} />
                                                 </Box>
                                                 <CardContent sx={{ padding: '20px' }}>
@@ -240,7 +251,7 @@ const PublicDineInMenu = () => {
                             <List>
                                 {cartItems.map(item => (
                                     <ListItem key={item.id} secondaryAction={<IconButton edge="end" onClick={() => deleteFromCart(item)}><DeleteIcon /></IconButton>}>
-                                        <ListItemAvatar><Avatar src={item.image_url} /></ListItemAvatar>
+                                        <ListItemAvatar><Avatar src={item.image_url ? `${API_URL}${item.image_url}` : ''} /></ListItemAvatar>
                                         <ListItemText primary={item.name} secondary={`R$ ${Number(item.price).toFixed(2)}`} />
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <IconButton size="small" onClick={() => removeFromCart(item)}><RemoveIcon /></IconButton>

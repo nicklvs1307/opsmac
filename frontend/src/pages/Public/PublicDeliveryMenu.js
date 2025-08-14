@@ -19,6 +19,11 @@ const fetchDeliveryMenu = async (restaurantSlug) => {
     return { ...data, categories: groupedByCategory };
 };
 
+const fetchRestaurantData = async (restaurantSlug) => {
+    const { data } = await axiosInstance.get(`/public/restaurant/${restaurantSlug}`);
+    return data;
+};
+
 const createDeliveryOrder = async (orderData) => {
     const { data } = await axiosInstance.post('/api/public/orders', orderData);
     return data;
@@ -57,6 +62,12 @@ const PublicDeliveryMenu = () => {
     { enabled: !!restaurantSlug }
   );
 
+  const { data: restaurantData } = useQuery(
+    ['restaurantData', restaurantSlug],
+    () => fetchRestaurantData(restaurantSlug),
+    { enabled: !!restaurantSlug }
+  );
+
   const orderMutation = useMutation(createDeliveryOrder, {
       onSuccess: () => {
           toast.success('Pedido realizado com sucesso!');
@@ -74,12 +85,12 @@ const PublicDeliveryMenu = () => {
         return;
     }
     const orderData = {
-        restaurant_id: menuData.restaurant.id,
+        restaurant_id: restaurantData.id,
         delivery_type: 'delivery',
         total_amount: cartTotal,
         items: cartItems.map(item => ({ product_id: item.id, quantity: item.quantity, price: item.price, name: item.name })),
         customer_details: { name: customerName, phone: customerPhone },
-        delivery_address: { address: deliveryAddress }, // Simplificado, pode ser um objeto mais complexo
+        delivery_address: { address: deliveryAddress },
         payment_method: paymentMethod,
         notes: notes,
     };
@@ -117,14 +128,16 @@ const PublicDeliveryMenu = () => {
   if (isLoading) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><CircularProgress /></Box>;
   if (isError) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><Alert severity="error">Erro ao carregar cardápio.</Alert></Box>;
 
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
   return (
     <ThemeProvider theme={deliveryTheme}>
       <Box sx={{ maxWidth: '500px', margin: '0 auto', backgroundColor: '#F8F8F8', minHeight: '100vh' }}>
         <AppBar position="sticky" sx={{ backgroundColor: 'white', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
           <Toolbar>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                {menuData.restaurant?.logo ? <img src={menuData.restaurant.logo} alt={menuData.restaurant.name} style={{ height: '40px', width: 'auto'}} /> : <RestaurantIcon sx={{ color: 'accent.main' }} />}
-                <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700 }}>{menuData.restaurant?.name || 'Don Fonseca'}</Typography>
+                {restaurantData?.logo ? <img src={`${API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ height: '40px', width: 'auto'}} /> : <RestaurantIcon sx={{ color: 'accent.main' }} />}
+                <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700 }}>{restaurantData?.name || 'Don Fonseca'}</Typography>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
             <IconButton onClick={() => setCartOpen(true)}>
@@ -155,7 +168,7 @@ const PublicDeliveryMenu = () => {
         <Box sx={{ px: 2, pb: 2, position: 'sticky', top: 130, zIndex: 800, backgroundColor: '#F8F8F8' }}>
           <Box sx={{ display: 'flex', overflowX: 'auto', gap: 1, pb: 1 }}>
             <Chip label="Tudo" onClick={() => setSelectedCategory('all')} color={selectedCategory === 'all' ? 'primary' : 'default'} />
-            {Object.keys(menuData.categories).map(cat => (
+            {menuData && Object.keys(menuData.categories).map(cat => (
               <Chip key={cat} label={cat} onClick={() => setSelectedCategory(cat)} color={selectedCategory === cat ? 'primary' : 'default'} />
             ))}
           </Box>
@@ -166,7 +179,7 @@ const PublicDeliveryMenu = () => {
             {filteredProducts?.map(item => (
               <Grid item xs={12} sm={6} key={item.id}>
                 <Card sx={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                  <CardMedia component="img" height="140" image={item.image_url || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} />
+                  <CardMedia component="img" height="140" image={item.image_url ? `${API_URL}${item.image_url}` : `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} />
                   <CardContent>
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>{item.name}</Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ minHeight: 40 }}>{item.description}</Typography>
@@ -199,7 +212,7 @@ const PublicDeliveryMenu = () => {
           <DialogContent dividers>
             {cartItems.map(item => (
               <Box key={item.id} sx={{ display: 'flex', alignItems: 'center', mb: 2, gap: 2 }}>
-                <Avatar src={item.image_url} sx={{ width: 80, height: 80, borderRadius: '10px' }} />
+                <Avatar src={item.image_url ? `${API_URL}${item.image_url}`: ''} sx={{ width: 80, height: 80, borderRadius: '10px' }} />
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography sx={{ fontWeight: 700 }}>{item.name}</Typography>
                   <Typography color="primary" sx={{ fontWeight: 700 }}>R$ {(item.price * item.quantity).toFixed(2)}</Typography>

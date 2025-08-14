@@ -115,20 +115,20 @@ const ProductManagement = () => {
     },
   });
 
-  useEffect(() => {
-    if (productForm.is_pizza && !productForm.pizza_type) {
-      setProductForm(prev => ({ ...prev, pizza_type: 'variable_price' }));
-    } else if (!productForm.is_pizza && productForm.pizza_type) {
-      setProductForm(prev => ({ ...prev, pizza_type: '' }));
-    }
-  }, [productForm.is_pizza, productForm.pizza_type]);
+  
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setProductForm({
+    const newFormState = {
       ...productForm,
       [name]: type === 'checkbox' ? checked : value,
-    });
+    };
+
+    if (name === 'is_pizza' && !checked) {
+      newFormState.pizza_type = '';
+    }
+
+    setProductForm(newFormState);
   };
 
   const handleAddProduct = () => {

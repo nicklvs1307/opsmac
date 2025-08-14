@@ -3,17 +3,8 @@ https://feedelizaapi.towersfy.com/api/public/orders
 Método da solicitação
 POST
 Código de status
-400 Bad Request
+500 Internal Server Error
 Endereço remoto
 95.217.16.187:443
-{
-    "errors": [
-        {
-            "type": "field",
-            "msg": "ID do produto inválido.",
-            "path": "items[0].product_id",
-            "location": "body"
-        }
-    ]
-}
 
+{"msg":"Erro ao criar pedido.","error":"item.price.toFixed is not a function"}

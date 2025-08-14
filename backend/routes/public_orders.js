@@ -46,12 +46,12 @@ const generateComandaContent = (order, restaurantName) => {
   comanda += `ITENS:
 `;
   order.items.forEach((item, index) => {
-    comanda += `${item.quantity}x ${item.name} - R$ ${item.price.toFixed(2)}
+    comanda += `${item.quantity}x ${item.name} - R$ ${parseFloat(item.price).toFixed(2)}
 `;
   });
   comanda += `---------------------------
 `;
-  comanda += `TOTAL: R$ ${order.total_amount.toFixed(2)}
+  comanda += `TOTAL: R$ ${parseFloat(order.total_amount).toFixed(2)}
 `;
   comanda += `---------------------------
 `;

@@ -28,7 +28,7 @@ router.get('/:restaurantSlug/:tableNumber', async (req, res) => {
 
     const products = await models.Product.findAll({
       where: { restaurant_id: restaurant.id },
-      include: [{ model: models.Category, as: 'category', attributes: ['name', 'description'] }]
+      include: [{ model: models.Category, as: 'category', attributes: ['name'] }]
     });
 
     res.json({ products, table, restaurant });

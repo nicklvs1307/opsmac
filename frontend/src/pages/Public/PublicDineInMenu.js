@@ -139,8 +139,7 @@ const PublicDineInMenu = () => {
             )}
             {categories.map((category, index) => (
               <Box key={index} sx={{ display: selectedCategory === index ? 'block' : 'none' }}>
-                <Typography variant="h4" sx={{ mb: 1, fontWeight: 'bold' }}>{category}</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>{menuData.categories[category][0]?.Category?.description || ''}</Typography>
+                <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold' }}>{category}</Typography>
                 <Grid container spacing={3}>
                   {menuData.categories[category].map(item => (
                     <Grid item xs={12} sm={6} md={4} key={item.id}>

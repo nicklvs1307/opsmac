@@ -257,13 +257,21 @@ module.exports = (sequelize) => {
       defaultValue: {},
       comment: 'Histórico de interação com campanhas'
     },
-    restaurant_id: {
+    last_survey_completed_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: 'Data da última pesquisa respondida'
+    },
+    last_survey_id: {
       type: DataTypes.UUID,
-      allowNull: true, // Pode ser false se todo cliente precisar de um restaurante
+      allowNull: true,
       references: {
-        model: 'restaurants',
-        key: 'id'
-      }
+        model: 'Surveys', // Referencia a tabela Surveys
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+      comment: 'ID da última pesquisa respondida'
     }
   }, {
     tableName: 'customers',
@@ -363,6 +371,10 @@ module.exports = (sequelize) => {
     Customer.hasMany(models.Coupon, {
       foreignKey: 'customer_id',
       as: 'coupons'
+    });
+    Customer.belongsTo(models.Survey, {
+      foreignKey: 'last_survey_id',
+      as: 'lastSurvey'
     });
   };
 

@@ -45,6 +45,7 @@ import GirarRoleta from './pages/Public/GirarRoleta'; // Adicionado
 import PublicMenu from './pages/Public/PublicMenu'; // New import for Public Menu
 import PublicDeliveryMenu from './pages/Public/PublicDeliveryMenu';
 import PublicDineInMenu from './pages/Public/PublicDineInMenu';
+import CustomerRegistration from './pages/Public/CustomerRegistration';
 import TechnicalSpecifications from './pages/ERP/Products';
 import Stock from './pages/ERP/Stock';
 import Tables from './pages/ERP/Tables';
@@ -75,13 +76,14 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/feedback/:shortUrl" element={<PublicFeedback />} />
                 <Route path="/thank-you" element={<ThankYou />} />
-                <Route path="/public/surveys/:slug" element={<PublicSurveyForm />} />
+                <Route path="/public/surveys/:restaurantSlug/:customerId?" element={<PublicSurveyForm />} />
                 <Route path="/checkin/public/:restaurantSlug" element={<PublicCheckin />} />
                 <Route path="/girar-roleta" element={<GirarRoleta />} />
                 <Route path="/recompensa-ganha" element={<PublicReward />} />
                 <Route path="/menu/:restaurantSlug" element={<PublicMenu />} /> {/* New Public Menu Route */}
                 <Route path="/menu/delivery/:restaurantSlug" element={<PublicDeliveryMenu />} />
                 <Route path="/menu/:restaurantSlug/:tableNumber" element={<PublicDineInMenu />} />
+                <Route path="/register" element={<CustomerRegistration />} />
                 
                 {/* Protected Routes */}
                 <Route path="/" element={

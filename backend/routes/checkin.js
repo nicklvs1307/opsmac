@@ -167,6 +167,7 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
   body('phone_number').optional().isString().withMessage('Número de telefone inválido'),
   body('cpf').optional().isString().withMessage('CPF inválido'),
   body('table_number').optional().isString().withMessage('Número da mesa inválido'),
+  body('coupon_id').optional().isUUID().withMessage('ID do cupom inválido'), // New validation
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -179,7 +180,7 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
   // O restaurante já está disponível em req.restaurant devido ao middleware checkCheckinModuleEnabled
   const restaurant = req.restaurant;
   const { restaurantSlug } = req.params; // Extrair restaurantSlug dos parâmetros da URL
-  const { phone_number, cpf, customer_name, table_number } = req.body; // Extrair outros dados do corpo da requisição
+  const { phone_number, cpf, customer_name, table_number, coupon_id } = req.body; // Extrair outros dados do corpo da requisição, incluindo coupon_id
 
   try {
     let rewardEarned = null; // Variável para armazenar a recompensa ganha
@@ -258,6 +259,7 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
       customer_id: customer.id,
       restaurant_id: restaurant.id,
       table_number,
+      coupon_id, // Include coupon_id here
       checkin_time: checkinTime,
       expires_at: expiresAt,
       status: 'active',

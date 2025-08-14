@@ -379,3 +379,43 @@ router.post('/validate', auth, async (req, res) => {
         });
     }
 });
+
+router.post('/public/validate', async (req, res) => {
+    try {
+        const { code, restaurantSlug } = req.body; // Expecting restaurantSlug for public validation
+
+        if (!code || !restaurantSlug) {
+            return res.status(400).json({ error: 'Código do cupom e slug do restaurante são obrigatórios.' });
+        }
+
+        const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
+        if (!restaurant) {
+            return res.status(404).json({ error: 'Restaurante não encontrado.' });
+        }
+
+        const coupon = await models.Coupon.findOne({
+            where: { code, restaurant_id: restaurant.id }, // Filter by restaurant_id
+            include: [
+                { model: models.Reward, as: 'reward' },
+                { model: models.Customer, as: 'customer' },
+            ]
+        });
+
+        if (!coupon) {
+            return res.status(404).json({ error: 'Cupom não encontrado ou não pertence a este restaurante.' });
+        }
+
+        res.json({
+            ...coupon.toJSON(),
+            is_valid: coupon.status === 'active' && (!coupon.expires_at || new Date() < new Date(coupon.expires_at))
+        });
+
+    } catch (error) {
+        console.error('Erro ao validar cupom público:', error);
+        res.status(500).json({
+            error: 'Erro interno do servidor'
+        });
+    }
+});
+
+module.exports = router;

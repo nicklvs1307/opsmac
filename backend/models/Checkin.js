@@ -33,6 +33,16 @@ module.exports = (sequelize) => {
       allowNull: true,
       comment: 'The table number provided by the customer during check-in.',
     },
+    coupon_id: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: 'coupons', // refers to the 'coupons' table
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+    },
     checkout_time: {
       type: DataTypes.DATE,
       allowNull: true,
@@ -60,6 +70,10 @@ module.exports = (sequelize) => {
     Checkin.belongsTo(models.Restaurant, {
       foreignKey: 'restaurant_id',
       as: 'restaurant'
+    });
+    Checkin.belongsTo(models.Coupon, {
+      foreignKey: 'coupon_id',
+      as: 'coupon'
     });
   };
 

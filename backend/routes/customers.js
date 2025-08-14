@@ -812,4 +812,37 @@ router.post('/:id/clear-checkins', auth, async (req, res) => {
   }
 });
 
+router.post('/public/register', async (req, res) => {
+  const { name, phone, birth_date } = req.body;
+
+  // Basic validation
+  if (!name || !phone || !birth_date) {
+    return res.status(400).json({ msg: 'Nome, telefone e data de nascimento são obrigatórios.' });
+  }
+
+  try {
+    // Check if customer with this phone already exists
+    let customer = await Customer.findOne({ where: { phone: phone } });
+
+    if (customer) {
+      // If customer exists, update their info if necessary
+      await customer.update({ name, birth_date });
+      return res.status(200).json({ msg: 'Cliente atualizado com sucesso!', customer });
+    } else {
+      // Create new customer
+      customer = await Customer.create({ name, phone, birth_date });
+      return res.status(201).json({ msg: 'Cliente registrado com sucesso!', customer });
+    }
+  } catch (error) {
+    console.error('Erro ao registrar/atualizar cliente:', error);
+    if (error instanceof ValidationError) {
+      return res.status(400).json({
+        msg: 'Erro de validação',
+        details: error.errors.map(err => err.message)
+      });
+    }
+    res.status(500).json({ msg: 'Erro interno do servidor.' });
+  }
+});
+
 module.exports = router;

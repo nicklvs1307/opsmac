@@ -432,6 +432,7 @@ module.exports = (sequelize) => {
     Coupon.belongsTo(models.Customer, { foreignKey: 'customer_id', as: 'customer' });
     Coupon.belongsTo(models.Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
     Coupon.belongsTo(models.User, { foreignKey: 'redeemed_by', as: 'redeemedByUser' });
+    Coupon.hasOne(models.Checkin, { foreignKey: 'coupon_id', as: 'checkin' }); // New association
   };
 
   return Coupon;

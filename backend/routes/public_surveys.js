@@ -2,8 +2,96 @@
 const express = require('express');
 const { models } = require('../config/database');
 const { body, validationResult } = require('express-validator');
+const { Op } = require('sequelize');
 
 const router = express.Router();
+
+// @route   GET /public/surveys/next/:restaurantSlug/:customerId?
+// @desc    Get the next survey for a given customer and restaurant
+// @access  Public
+router.get('/next/:restaurantSlug/:customerId?', async (req, res) => {
+    try {
+        const { restaurantSlug, customerId } = req.params;
+
+        const restaurant = await models.Restaurant.findOne({
+            where: { slug: restaurantSlug },
+            attributes: ['id', 'name', 'logo', 'slug', 'settings'],
+        });
+
+        if (!restaurant) {
+            return res.status(404).json({ msg: 'Restaurante não encontrado.' });
+        }
+
+        let customer = null;
+        if (customerId) {
+            customer = await models.Customer.findByPk(customerId, {
+                attributes: ['id', 'last_survey_id', 'last_survey_completed_at'],
+            });
+        }
+
+        const commonSurveyOptions = {
+            where: { restaurant_id: restaurant.id, status: 'active' },
+            include: [
+                {
+                    model: models.Question,
+                    as: 'questions',
+                    attributes: ['id', 'question_text', 'question_type', 'options', 'order'],
+                },
+                {
+                    model: models.Restaurant,
+                    as: 'restaurant',
+                    attributes: ['name', 'logo', 'slug', 'settings'],
+                }
+            ],
+            attributes: ['id', 'title', 'description', 'type', 'slug', 'rotation_group', 'reward_id', 'coupon_validity_days'],
+        };
+
+        let targetSurvey = null;
+
+        // Try to find a survey based on rotation logic
+        if (customer && customer.last_survey_id) {
+            const lastSurvey = await models.Survey.findByPk(customer.last_survey_id);
+            if (lastSurvey && lastSurvey.rotation_group) {
+                // Find another survey in the same rotation group
+                const surveysInGroup = await models.Survey.findAll({
+                    ...commonSurveyOptions,
+                    where: {
+                        ...commonSurveyOptions.where,
+                        rotation_group: lastSurvey.rotation_group,
+                        id: { [Op.ne]: lastSurvey.id }, // Not the last one
+                    },
+                });
+
+                if (surveysInGroup.length > 0) {
+                    // Simple rotation: pick the next one in the group, or random if only one left
+                    targetSurvey = surveysInGroup[0]; // For simplicity, pick the first available
+                }
+            }
+        }
+
+        // Fallback: if no specific rotation survey found, get a random active one
+        if (!targetSurvey) {
+            const allActiveSurveys = await models.Survey.findAll({
+                ...commonSurveyOptions,
+                order: models.sequelize.literal('RANDOM()'), // Get a random one
+                limit: 1,
+            });
+            if (allActiveSurveys.length > 0) {
+                targetSurvey = allActiveSurveys[0];
+            }
+        }
+
+        if (!targetSurvey) {
+            return res.status(404).json({ msg: 'Nenhuma pesquisa ativa encontrada para este restaurante.' });
+        }
+
+        res.json({ survey: targetSurvey, restaurant: targetSurvey.restaurant });
+
+    } catch (err) {
+        console.error('Erro ao buscar próxima pesquisa:', err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 // @route   GET /public/surveys/:slug
 // @desc    Get a public survey by slug
@@ -170,6 +258,13 @@ router.post(
                 if (customer) {
                     await customer.updateStats();
                     console.log(`[Public Survey] Estatísticas do cliente ${customer_id} atualizadas após resposta de pesquisa.`);
+
+                    // Update last_survey_id and last_survey_completed_at for the customer
+                    await customer.update({
+                        last_survey_id: survey.id,
+                        last_survey_completed_at: new Date(),
+                    });
+                    console.log(`[Public Survey] Cliente ${customer_id} atualizado com last_survey_id: ${survey.id}`);
                 }
             }
 

@@ -2,61 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { models } = require('../config/database');
 const { body, validationResult } = require('express-validator');
-
-// Helper function to generate comanda content
-const generateComandaContent = (order, restaurantName) => {
-  let comanda = `--- COMANDA DE PEDIDO ---
-`;
-  comanda += `Restaurante: ${restaurantName}
-`;
-  comanda += `Pedido ID: ${order.id.substring(0, 8).toUpperCase()}
-`;
-  comanda += `Data/Hora: ${new Date(order.order_date).toLocaleString('pt-BR')}
-`;
-  comanda += `---------------------------
-`;
-  comanda += `Cliente: ${order.customer_details.name}
-`;
-  comanda += `Telefone: ${order.customer_details.phone}
-`;
-  if (order.delivery_type === 'delivery' && order.delivery_address) {
-    comanda += `Endereço: ${order.delivery_address.street}, ${order.delivery_address.number}
-`;
-    if (order.delivery_address.complement) {
-      comanda += `Complemento: ${order.delivery_address.complement}
-`;
-    }
-    comanda += `Bairro: ${order.delivery_address.neighborhood}
-`;
-    comanda += `Cidade: ${order.delivery_address.city} - ${order.delivery_address.state}
-`;
-    comanda += `CEP: ${order.delivery_address.zip_code}
-`;
-  }
-  comanda += `Tipo: ${order.delivery_type.toUpperCase()}
-`;
-  comanda += `Pagamento: ${order.payment_method}
-`;
-  if (order.notes) {
-    comanda += `Observações: ${order.notes}
-`;
-  }
-  comanda += `---------------------------
-`;
-  comanda += `ITENS:
-`;
-  order.items.forEach((item, index) => {
-    comanda += `${item.quantity}x ${item.name} - R$ ${parseFloat(item.price).toFixed(2)}
-`;
-  });
-  comanda += `---------------------------
-`;
-  comanda += `TOTAL: R$ ${parseFloat(order.total_amount).toFixed(2)}
-`;
-  comanda += `---------------------------
-`;
-  return comanda;
-};
+const { generateEscPosCommands } = require('../../utils/thermalPrinterService');
 
 // POST /api/public/orders - Create a new order from public menu
 
@@ -112,11 +58,11 @@ router.post(
         external_order_id: `WEB-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`, // Generate a unique ID for internal orders
       });
 
-      // Generate and log comanda content
-      const comandaContent = generateComandaContent(order, restaurant.name);
-      console.log('--- COMANDA GERADA ---');
-      console.log(comandaContent);
-      console.log('----------------------');
+      // Generate and log ESC/POS commands
+      const escPosCommands = generateEscPosCommands(order, restaurant.name);
+      console.log('--- ESC/POS COMMANDS GENERATED ---');
+      console.log(escPosCommands);
+      console.log('----------------------------------');
 
       res.status(201).json({ msg: 'Pedido criado com sucesso!', orderId: order.id });
     } catch (error) {

@@ -1,18 +1,16 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       20.9s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       21.4s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.656
-0.656 > feedeliza-plus@1.0.0 build
-0.656 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.656
-3.458 Creating an optimized production build...
-20.72 Failed to compile.
-20.72
-20.72 [eslint]
-20.72 src/App.js
-20.72 Syntax error: Identifier 'React' has already been declared. (11:7) (11:7)
-20.72
-20.72
+0.717
+0.717 > feedeliza-plus@1.0.0 build
+0.717 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.717
+3.920 Creating an optimized production build...
+21.12 Failed to compile.
+21.12
+21.12 Module not found: Error: Can't resolve '../../pages/Pdv/Pdv.css' in '/app/frontend/src/pages/ERP'
+21.12
+21.12
 ------
 Dockerfile.frontend:23
 --------------------

@@ -2,7 +2,12 @@
 const express = require('express');
 console.log('labels.js: typeof express:', typeof express);
 console.log('labels.js: typeof express.Router:', typeof express.Router);
-const router = express.Router();
+
+// Diagnostic: Create a new express instance and router from it
+const tempApp = express();
+const router = express.Router(); // Keep this line as it is the original
+console.log('labels.js: typeof tempApp:', typeof tempApp);
+console.log('labels.js: typeof router after express.Router():', typeof router, 'router instanceof express.Router:', router instanceof express.Router);
 const { body, validationResult } = require('express-validator');
 const { Op } = require('sequelize');
 const { Product, Ingredient, User, Restaurant, PrintedLabel, LossRecord, Stock, StockMovement, sequelize, StockCount, StockCountItem, ProductionRecord, ProductionRecordItem } = require('../models');

@@ -1,5 +1,7 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
+labels.js: typeof express: function
+labels.js: typeof express.Router: function
 labels.js: typeof router before export: function router instanceof express.Router: false
 server.js: labelRoutes type: function labelRoutes instanceof Router: false
 Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
@@ -29,50 +31,7 @@ Generated Swagger Specs (first 500 chars): {
 📊 Dashboard: https://feedelizapro.towersfy.com
 🔗 API: https://feedelizaapi.towersfy.com/api
 notNull Violation: PrintedLabel.user_id cannot be null
-notNull Violation: PrintedLabel.user_id cannot be null
-notNull Violation: StockCount.user_id cannot be null
-totalCheckins: 1
-mostFrequentCustomers: [
-  Checkin {
-    dataValues: {
-      customer_id: '1db7e117-c16d-4672-ad45-3eb7e5ee1e0b',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    _previousDataValues: {
-      customer_id: '1db7e117-c16d-4672-ad45-3eb7e5ee1e0b',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: [Array],
-      includeNames: [Array],
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  }
-]
-averageVisitDuration: { avg_duration_seconds: '372.0070000000000000' }
-checkinsByDay: [ { date: 2025-08-15T00:00:00.000Z, count: '1' } ]
-notNull Violation: PrintedLabel.user_id cannot be null
 table name "user->restaurants->npsCriteria->questions->Survey->responses->c" specified more than once
 table name "user->restaurants->npsCriteria->questions->Survey->responses->c" specified more than once
+notNull Violation: ProductionRecord.user_id cannot be null
 notNull Violation: StockCount.user_id cannot be null
-notNull Violation: ProductionRecord.user_id cannot be null
-notNull Violation: ProductionRecord.user_id cannot be null

@@ -99,12 +99,6 @@ app.use('/api/orders', ordersRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
 app.use('/api/technical-specifications', technicalSpecificationsRoutes);
 app.use('/api/categories', categoriesRoutes);
-
-// Swagger UI
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./config/swagger');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 app.use('/api/labels', labelRoutes);
 
 const restaurantRoutes = require('./routes/restaurant');

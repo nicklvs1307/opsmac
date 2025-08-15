@@ -1,17 +1,34 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-/app/node_modules/express/lib/router/index.js:469
-      throw new TypeError('Router.use() requires a middleware function but got a ' + gettype(fn))
-      ^
-TypeError: Router.use() requires a middleware function but got a Object
-    at Function.use (/app/node_modules/express/lib/router/index.js:469:13)
-    at Object.<anonymous> (/app/backend/routes/labels.js:23:8)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/server.js:41:21)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-Node.js v20.19.4
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/users
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+
+{"error":"Rota não encontrada"}
+
+Exclusão de etiquetas nao funcionando, produção de etiquetas nao funcionando,  contagem de produtos nao funcionando, e hitorico também não eu clico no botão desses itens e nao acontece nada
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/stock-counts
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+
+{"error":"Rota não encontrada"}
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/productions
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+
+{"error":"Rota não encontrada"} 

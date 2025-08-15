@@ -38,6 +38,7 @@ const ordersRoutes = require('./routes/orders');
 const ingredientsRoutes = require('./routes/ingredients');
 const technicalSpecificationsRoutes = require('./routes/technicalSpecifications');
 const categoriesRoutes = require('./routes/categories');
+const labelRoutes = require('./routes/labels');
 
 const app = express();
 app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)
@@ -98,12 +99,13 @@ app.use('/api/orders', ordersRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
 app.use('/api/technical-specifications', technicalSpecificationsRoutes);
 app.use('/api/categories', categoriesRoutes);
-app.use('/api/labels', labelRoutes);
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use('/api/labels', labelRoutes);
 
 const restaurantRoutes = require('./routes/restaurant');
 const healthRoutes = require('./routes/health');

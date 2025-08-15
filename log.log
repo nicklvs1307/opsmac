@@ -3,7 +3,7 @@
 /app/backend/server.js:101
 app.use('/api/labels', labelRoutes);
                        ^
-ReferenceError: Cannot access 'labelRoutes' before initialization
+ReferenceError: labelRoutes is not defined
     at Object.<anonymous> (/app/backend/server.js:101:24)
     at Module._compile (node:internal/modules/cjs/loader:1529:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)

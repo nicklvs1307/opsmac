@@ -2,6 +2,8 @@
 > node backend/server.js
 labels.js: typeof express: function
 labels.js: typeof express.Router: function
+labels.js: typeof tempApp: function
+labels.js: typeof router after express.Router(): function router instanceof express.Router: false
 labels.js: typeof router before export: function router instanceof express.Router: false
 server.js: labelRoutes type: function labelRoutes instanceof Router: false
 Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
@@ -33,5 +35,4 @@ Generated Swagger Specs (first 500 chars): {
 notNull Violation: PrintedLabel.user_id cannot be null
 table name "user->restaurants->npsCriteria->questions->Survey->responses->c" specified more than once
 table name "user->restaurants->npsCriteria->questions->Survey->responses->c" specified more than once
-notNull Violation: ProductionRecord.user_id cannot be null
 notNull Violation: StockCount.user_id cannot be null

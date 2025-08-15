@@ -72,6 +72,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    default_expiration_days: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    default_label_status: {
+      type: DataTypes.ENUM('RESFRIADO', 'CONGELADO', 'AMBIENTE'),
+      allowNull: true,
+    },
   }, {
     freezeTableName: true, // Model tableName will be the same as the model name
     tableName: 'products' // Explicitly define the table name
@@ -91,9 +99,25 @@ module.exports = (sequelize) => {
       foreignKey: 'product_id',
       as: 'technicalSpecification'
     });
-    Product.hasOne(models.Stock, { // Adicionando a associação que faltava
-      foreignKey: 'product_id',
+    
+    // Associação polimórfica com Stock
+    Product.hasOne(models.Stock, {
+      foreignKey: 'stockable_id',
+      constraints: false,
+      scope: {
+        stockable_type: 'Product'
+      },
       as: 'stock'
+    });
+
+    // Associação polimórfica com StockMovement
+    Product.hasMany(models.StockMovement, {
+      foreignKey: 'stockable_id',
+      constraints: false,
+      scope: {
+        stockable_type: 'Product'
+      },
+      as: 'stockMovements'
     });
   };
 

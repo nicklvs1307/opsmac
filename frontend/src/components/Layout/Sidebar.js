@@ -193,6 +193,12 @@ const Sidebar = ({ onMobileClose }) => {
       ]
     },
     {
+      title: t('sidebar.labels'), // New
+      icon: <QrCodeIcon />,
+      path: '/labels/dashboard',
+      roles: ['admin', 'owner', 'manager']
+    },
+    {
       title: t('sidebar.settings'),
       icon: <SettingsIcon />,
       path: '/settings',

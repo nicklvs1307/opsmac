@@ -1,0 +1,63 @@
+/* Table Styles */
+
+.table-container {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid #EEEEEE;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #EEEEEE;
+    color: #555;
+    font-size: 14px;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:hover td {
+    background-color: #F9F9F9;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-active {
+    background-color: #E6FFFA;
+    color: #38A169;
+}
+
+.status-inactive {
+    background-color: #FFE5E5;
+    color: #E53E3E;
+}
+
+/* Action buttons container */
+.action-buttons {
+    white-space: nowrap; /* Prevent buttons from wrapping */
+}

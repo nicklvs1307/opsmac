@@ -1,0 +1,107 @@
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    font-size: 14px;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-danger {
+    background-color: #FF5C5C;
+    color: #FFFFFF;
+}
+
+.btn-danger:hover {
+    background-color: #E04848;
+}
+
+.btn-secondary {
+    background-color: #EEEEEE;
+    color: #333333;
+}
+
+.btn-secondary:hover {
+    background-color: #DDDDDD;
+}
+
+.btn i {
+    margin-right: 5px; /* Space between icon and text */
+}
+
+.btn:disabled {
+    background-color: #E0E0E0;
+    color: #AAAAAA;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Action buttons */
+.btn-action {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.btn-action:hover {
+    color: #FF5C5C;
+}
+
+.btn-edit:hover {
+    color: #3182CE; /* Blue */
+}
+
+.btn-delete:hover {
+    color: #E53E3E; /* Red */
+}
+
+/* Quantity control buttons */
+.quantity-control .btn {
+    min-width: 40px;
+    padding: 8px 12px;
+    font-size: 16px;
+    line-height: 1;
+    background-color: #F0F0F0;
+    border: 1px solid #D0D0D0;
+    color: #555;
+}
+
+.quantity-control .btn:hover {
+    background-color: #E0E0E0;
+}
+
+/* Print button */
+#imprimir-final-btn {
+    background-color: #FF5C5C;
+    border-color: #FF5C5C;
+    color: #FFFFFF;
+    padding: 12px 30px;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#imprimir-final-btn:hover {
+    background-color: #E04848;
+    border-color: #E04848;
+}
+
+#imprimir-final-btn i {
+    margin-right: 8px;
+}

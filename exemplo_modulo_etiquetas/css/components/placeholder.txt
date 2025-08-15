@@ -1,0 +1,1 @@
+This is a placeholder file to ensure the components directory is created. This file can be deleted once component CSS files are added.

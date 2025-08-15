@@ -7,15 +7,13 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    product_id: {
+    stockable_id: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'products',
-        key: 'id'
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+    },
+    stockable_type: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     type: { // 'in' for incoming, 'out' for outgoing
       type: DataTypes.ENUM('in', 'out'),
@@ -37,14 +35,32 @@ module.exports = (sequelize) => {
     // You might add user_id who performed the movement, order_id, etc.
   }, {
     freezeTableName: true,
-    tableName: 'stock_movements'
+    tableName: 'stock_movements',
+    indexes: [
+      {
+        fields: ['stockable_id', 'stockable_type']
+      }
+    ]
   });
 
   StockMovement.associate = (models) => {
     StockMovement.belongsTo(models.Product, {
-      foreignKey: 'product_id',
+      foreignKey: 'stockable_id',
+      constraints: false,
       as: 'product'
     });
+    StockMovement.belongsTo(models.Ingredient, {
+      foreignKey: 'stockable_id',
+      constraints: false,
+      as: 'ingredient'
+    });
+  };
+
+  // Helper method to get the associated stockable item (Product or Ingredient)
+  StockMovement.prototype.getStockable = function(options) {
+    if (!this.stockable_type) return Promise.resolve(null);
+    const mixinMethodName = `get${this.stockable_type}`;
+    return this[mixinMethodName](options);
   };
 
   return StockMovement;

@@ -1,0 +1,118 @@
+/* Styles specific to the login page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #F9F9F9; /* Match main background */
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.login-box {
+    background-color: #FFFFFF;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-logo img {
+    height: 40px;
+    margin-bottom: 30px;
+}
+
+.login-box h2 {
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #333333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555555;
+    font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #DDDDDD;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    border-color: #FF5C5C;
+    outline: none;
+}
+
+.password-group {
+    position: relative;
+}
+
+.password-group input[type="password"] {
+    padding-right: 40px; /* Space for the icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Adjust based on label height */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #AAAAAA;
+}
+
+/* Add styles for the eye icon (using a class like .icon-eye) */
+.toggle-password i {
+    font-size: 18px;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background-color: #FF5C5C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Add some space above the button */
+}
+
+.btn-login:hover {
+    background-color: #E04848;
+}
+
+.login-footer {
+    margin-top: 30px;
+    font-size: 12px;
+    color: #888888;
+    text-align: center;
+    line-height: 1.6;
+}

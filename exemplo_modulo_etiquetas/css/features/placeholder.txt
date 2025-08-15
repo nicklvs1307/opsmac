@@ -1,0 +1,1 @@
+This is a placeholder file to ensure the features directory is created. This file can be deleted once feature-specific CSS files are added.

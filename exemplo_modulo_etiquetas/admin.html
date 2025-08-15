@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrativo - Etiquetafy</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/admin.css"> <!-- Será criado em seguida -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="assets/images/logo.svg" alt="Etiquetafy Logo" class="logo-img">
+                <h2>Etiquetafy</h2>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li id="nav-dashboard"><a href="index.html"><i class="fas fa-home"></i> Início</a></li>
+                    <li id="nav-funcionarios" class="active"><a href="#"><i class="fas fa-users"></i> Funcionários</a></li>
+                    <li id="nav-categorias"><a href="#"><i class="fas fa-tags"></i> Categorias</a></li>
+                    <li id="nav-produtos"><a href="#"><i class="fas fa-box"></i> Produtos</a></li>
+                    <li id="nav-estoque"><a href="#"><i class="fas fa-warehouse"></i> Estoque</a></li>
+                    <li id="nav-perdas"><a href="#"><i class="fas fa-trash-alt"></i> Perdas</a></li>
+                    <li id="nav-relatorios"><a href="#"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div></div>
+                <div class="user-info">
+                    <span class="user-avatar">A</span>
+                    <span id="user-display-name">Administrador</span> <i class="icon-arrow-down"></i>
+                </div>
+            </header>
+
+            <!-- Seção de Funcionários -->
+            <section id="funcionarios-section" class="content-section" style="display: block;">
+                <div class="section-header with-button">
+                    <div>
+                        <h2>Gerenciar Funcionários</h2>
+                        <p>Cadastre e gerencie os funcionários responsáveis pela impressão de etiquetas.</p>
+                    </div>
+                    <button id="btn-novo-funcionario" class="btn btn-primary"><i class="fas fa-plus"></i> Novo Funcionário</button>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="search-funcionario-input" placeholder="Buscar funcionário pelo nome ou cargo">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="table-container">
+                    <table id="funcionarios-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Cargo</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados serão carregados via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Modal para adicionar/editar funcionário -->
+                <!-- Adicione este código antes do fechamento da tag body -->
+                
+                <!-- Modal de Funcionário -->
+                <div id="modal-funcionario" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 id="modal-funcionario-title">Novo Funcionário</h2>
+                            <span class="close-modal">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-funcionario">
+                                <input type="hidden" id="funcionario-id">
+                                <div class="form-group">
+                                    <label for="funcionario-nome">Nome*</label>
+                                    <input type="text" id="funcionario-nome" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="funcionario-cargo">Cargo</label>
+                                    <input type="text" id="funcionario-cargo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="funcionario-email">Email</label>
+                                    <input type="email" id="funcionario-email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="funcionario-telefone">Telefone</label>
+                                    <input type="tel" id="funcionario-telefone">
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <div class="radio-group">
+                                        <input type="radio" id="funcionario-status-ativo" name="funcionario-status" value="1" checked>
+                                        <label for="funcionario-status-ativo">Ativo</label>
+                                        <input type="radio" id="funcionario-status-inativo" name="funcionario-status" value="0">
+                                        <label for="funcionario-status-inativo">Inativo</label>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="btn-cancelar-funcionario" class="btn-secondary">Cancelar</button>
+                                    <button type="submit" class="btn-primary">Salvar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scripts -->
+                <script src="js/admin.js"></script>
+                <script src="js/categorias-produtos.js"></script>
+            </section>
+
+            <!-- Seção de Categorias -->
+            <section id="categorias-section" class="content-section" style="display: none;">
+                <div class="section-header with-button">
+                    <div>
+                        <h2>Gerenciar Categorias</h2>
+                        <p>Cadastre e gerencie as categorias de produtos para impressão de etiquetas.</p>
+                    </div>
+                    <button id="btn-nova-categoria" class="btn btn-primary"><i class="fas fa-plus"></i> Nova Categoria</button>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="search-categoria-input" placeholder="Buscar categoria pelo nome">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="table-container">
+                    <table id="categorias-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Ícone</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados serão carregados via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Modal para adicionar/editar categoria -->
+                <div id="modal-categoria" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-categoria-title">Nova Categoria</h3>
+                            <span class="close-modal">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-categoria">
+                                <input type="hidden" id="categoria-id">
+                                <div class="form-group">
+                                    <label for="categoria-nome">Nome*</label>
+                                    <input type="text" id="categoria-nome" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoria-icone">Ícone</label>
+                                    <input type="text" id="categoria-icone" placeholder="assets/icons/nome-do-icone.svg">
+                                </div>
+                                <div class="form-group" id="categoria-status-group">
+                                    <label>Status</label>
+                                    <div class="radio-group">
+                                        <label>
+                                            <input type="radio" name="categoria-status" value="1" checked>
+                                            Ativa
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="categoria-status" value="0">
+                                            Inativa
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="btn-cancelar-categoria" class="btn btn-secondary">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Produtos -->
+            <section id="produtos-section" class="content-section" style="display: none;">
+                <div class="section-header with-button">
+                    <div>
+                        <h2>Gerenciar Produtos</h2>
+                        <p>Cadastre e gerencie os produtos para impressão de etiquetas.</p>
+                    </div>
+                    <button id="btn-novo-produto" class="btn btn-primary"><i class="fas fa-plus"></i> Novo Produto</button>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="search-produto-input" placeholder="Buscar produto pelo nome ou código">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="table-container">
+                    <table id="produtos-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Código</th>
+                                <th>Categoria</th>
+                                <th>Validade Padrão</th>
+                                <th>Status Padrão</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados serão carregados via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Modal para adicionar/editar produto -->
+                <div id="modal-produto" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-produto-title">Novo Produto</h3>
+                            <span class="close-modal">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-produto">
+                                <input type="hidden" id="produto-id">
+                                <div class="form-group">
+                                    <label for="produto-nome">Nome*</label>
+                                    <input type="text" id="produto-nome" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="produto-codigo">Código</label>
+                                    <input type="text" id="produto-codigo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="produto-categoria">Categoria*</label>
+                                    <select id="produto-categoria" required>
+                                        <option value="">Selecione uma categoria</option>
+                                        <!-- Opções serão carregadas via JavaScript -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="produto-validade">Validade Padrão (dias)</label>
+                                    <input type="number" id="produto-validade" min="1" value="3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="produto-status-padrao">Status Padrão</label>
+                                    <select id="produto-status-padrao">
+                                        <option value="RESFRIADO">RESFRIADO</option>
+                                        <option value="CONGELADO">CONGELADO</option>
+                                        <option value="AMBIENTE">AMBIENTE</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="produto-status-group">
+                                    <label>Status</label>
+                                    <div class="radio-group">
+                                        <label>
+                                            <input type="radio" name="produto-status" value="1" checked>
+                                            Ativo
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="produto-status" value="0">
+                                            Inativo
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="btn-cancelar-produto" class="btn btn-secondary">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Relatórios -->
+            <section id="relatorios-section" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <div>
+                        <h2>Relatórios</h2>
+                        <p>Visualize relatórios de impressões de etiquetas.</p>
+                    </div>
+                </div>
+                
+                <div class="filter-container">
+                    <div class="form-group">
+                        <label for="relatorio-data-inicio">Data Início</label>
+                        <input type="date" id="relatorio-data-inicio">
+                    </div>
+                    <div class="form-group">
+                        <label for="relatorio-data-fim">Data Fim</label>
+                        <input type="date" id="relatorio-data-fim">
+                    </div>
+                    <div class="form-group">
+                        <label for="relatorio-funcionario">Funcionário</label>
+                        <select id="relatorio-funcionario">
+                            <option value="">Todos</option>
+                            <!-- Opções serão carregadas via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="relatorio-produto">Produto</label>
+                        <select id="relatorio-produto">
+                            <option value="">Todos</option>
+                            <!-- Opções serão carregadas via JavaScript -->
+                        </select>
+                    </div>
+                    <button id="btn-filtrar-relatorio" class="btn btn-primary">Filtrar</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="relatorios-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Produto</th>
+                                <th>Responsável</th>
+                                <th>Validade</th>
+                                <th>Quantidade</th>
+                                <th>Lote</th>
+                                <th>SIF</th>
+                                <th>Medida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados serão carregados via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção de Estoque -->
+            <section id="estoque-section" class="content-section" style="display: none;">
+                <div class="section-header with-button">
+                    <div>
+                        <h2>Gerenciar Estoque</h2>
+                        <p>Registre entradas e saídas de produtos para controle de estoque.</p>
+                    </div>
+                    <button id="btn-nova-movimentacao" class="btn btn-primary"><i class="fas fa-plus"></i> Nova Movimentação</button>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="search-estoque-input" placeholder="Buscar movimentação pelo nome do produto">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="table-container">
+                    <table id="estoque-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Tipo</th>
+                                <th>Quantidade</th>
+                                <th>Data</th>
+                                <th>Observação</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados serão carregados via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Modal para adicionar/editar movimentação de estoque -->
+                <div id="modal-estoque" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-estoque-title">Nova Movimentação de Estoque</h3>
+                            <span class="close-modal">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-estoque">
+                                <input type="hidden" id="estoque-id">
+                                <div class="form-group">
+                                    <label for="estoque-produto">Produto*</label>
+                                    <select id="estoque-produto" required>
+                                        <option value="">Selecione um produto</option>
+                                        <!-- Opções serão carregadas via JavaScript -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estoque-tipo">Tipo de Movimentação*</label>
+                                    <select id="estoque-tipo" required>
+                                        <option value="entrada">Entrada</option>
+                                        <option value="saida">Saída</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estoque-quantidade">Quantidade*</label>
+                                    <input type="number" id="estoque-quantidade" min="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estoque-observacao">Observação</label>
+                                    <input type="text" id="estoque-observacao">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="btn-cancelar-estoque" class="btn btn-secondary">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Perdas -->
+            <section id="perdas-section" class="content-section" style="display: none;">
+                <div class="section-header with-button">
+                    <div>
+                        <h2>Gerenciar Perdas</h2>
+                        <p>Registre perdas de produtos por vencimento, avaria ou outros motivos.</p>
+                    </div>
+                    <button id="btn-nova-perda" class="btn btn-primary"><i class="fas fa-plus"></i> Nova Perda</button>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="search-perda-input" placeholder="Buscar perda pelo nome do produto">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="table-container">
+                    <table id="perdas-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Motivo</th>
+                                <th>Data</th>
+                                <th>Observação</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados serão carregados via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Modal para adicionar/editar perda -->
+                <div id="modal-perda" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-perda-title">Novo Registro de Perda</h3>
+                            <span class="close-modal">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-perda">
+                                <input type="hidden" id="perda-id">
+                                <div class="form-group">
+                                    <label for="perda-produto">Produto*</label>
+                                    <select id="perda-produto" required>
+                                        <option value="">Selecione um produto</option>
+                                        <!-- Opções serão carregadas via JavaScript -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="perda-quantidade">Quantidade*</label>
+                                    <input type="number" id="perda-quantidade" min="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="perda-motivo">Motivo*</label>
+                                    <select id="perda-motivo" required>
+                                        <option value="vencimento">Vencimento</option>
+                                        <option value="avaria">Avaria</option>
+                                        <option value="qualidade">Problema de Qualidade</option>
+                                        <option value="outro">Outro</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="perda-observacao">Observação</label>
+                                    <input type="text" id="perda-observacao">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="btn-cancelar-perda" class="btn btn-secondary">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/admin-new.js"></script>
+    <script type="module" src="js/admin-funcionarios.js"></script>
+    <!-- Script para gerenciamento de funcionários -->
+    <script src="js/admin.js"></script>
+    <!-- Scripts para gerenciamento de estoque e perdas -->
+    <script src="js/estoque.js"></script>
+    <script src="js/perdas.js"></script>
+    <script src="js/categorias-produtos.js"></script>
+</body>
+</html>

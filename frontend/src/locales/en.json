@@ -182,7 +182,8 @@
       "settings": "Settings",
       "admin": "Admin",
       "app_name": "CHECK",
-      "technical_specifications": "Technical Specifications"
+      "technical_specifications": "Technical Specifications",
+      "labels": "Labels"
     },
     "thank_you": {
       "share_title": "I rated {restaurant}",

@@ -7,33 +7,48 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    product_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      unique: true, // Each product should have only one stock entry
-      references: {
-        model: 'products',
-        key: 'id'
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
-    },
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
     },
-    // You might add location, warehouse_id, etc. here if needed
+    stockable_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    stockable_type: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     freezeTableName: true,
-    tableName: 'stocks'
+    tableName: 'stocks',
+    indexes: [
+      {
+        unique: true,
+        fields: ['stockable_id', 'stockable_type']
+      }
+    ]
   });
 
   Stock.associate = (models) => {
     Stock.belongsTo(models.Product, {
-      foreignKey: 'product_id',
+      foreignKey: 'stockable_id',
+      constraints: false,
       as: 'product'
     });
+    Stock.belongsTo(models.Ingredient, {
+      foreignKey: 'stockable_id',
+      constraints: false,
+      as: 'ingredient'
+    });
+  };
+
+  // Helper method to get the associated stockable item (Product or Ingredient)
+  Stock.prototype.getStockable = function(options) {
+    if (!this.stockable_type) return Promise.resolve(null);
+    const mixinMethodName = `get${this.stockable_type}`;
+    return this[mixinMethodName](options);
   };
 
   return Stock;

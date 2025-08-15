@@ -1,0 +1,25 @@
+/* Main CSS file that imports all modular CSS files */
+
+/* Base styles */
+@import 'reset.css';
+@import 'base.css';
+
+/* Layout components */
+@import 'layout.css';
+
+/* UI Components */
+@import 'components/buttons.css';
+@import 'components/cards.css';
+@import 'components/forms.css';
+@import 'components/tables.css';
+@import 'components/modals.css';
+
+/* Feature-specific styles */
+@import 'features/etiquetas.css';
+@import 'features/validades.css';
+
+/* Utilities */
+@import 'utilities.css';
+
+/* Responsive styles */
+@import 'responsive.css';

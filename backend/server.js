@@ -98,6 +98,7 @@ app.use('/api/orders', ordersRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
 app.use('/api/technical-specifications', technicalSpecificationsRoutes);
 app.use('/api/categories', categoriesRoutes);
+app.use('/api/labels', labelRoutes);
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');

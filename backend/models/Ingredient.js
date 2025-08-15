@@ -12,6 +12,26 @@ module.exports = (sequelize) => {
         foreignKey: 'ingredient_id',
         as: 'recipeIngredients'
       });
+
+      // Associação polimórfica com Stock
+      Ingredient.hasOne(models.Stock, {
+        foreignKey: 'stockable_id',
+        constraints: false,
+        scope: {
+          stockable_type: 'Ingredient'
+        },
+        as: 'stock'
+      });
+
+      // Associação polimórfica com StockMovement
+      Ingredient.hasMany(models.StockMovement, {
+        foreignKey: 'stockable_id',
+        constraints: false,
+        scope: {
+          stockable_type: 'Ingredient'
+        },
+        as: 'stockMovements'
+      });
     }
   }
   Ingredient.init({
@@ -52,7 +72,15 @@ module.exports = (sequelize) => {
         model: 'restaurants',
         key: 'id'
       }
-    }
+    },
+    default_expiration_days: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    default_label_status: {
+      type: DataTypes.ENUM('RESFRIADO', 'CONGELADO', 'AMBIENTE'),
+      allowNull: true,
+    },
   }, {
     sequelize,
     modelName: 'Ingredient',

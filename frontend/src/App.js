@@ -53,6 +53,8 @@ import Orders from './pages/ERP/Orders';
 import Pdv from './pages/ERP/Pdv';
 import Ingredients from './pages/ERP/Ingredients';
 import Menu from './pages/ERP/Menu';
+import LabelsDashboard from './pages/Labels/LabelsDashboard';
+import PrintLabel from './pages/Labels/PrintLabel';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -121,6 +123,8 @@ function App() {
                   <Route path="erp/orders" element={<Orders />} />
                   <Route path="erp/pdv" element={<Pdv />} />
                   <Route path="erp/ingredients" element={<Ingredients />} />
+                  <Route path="labels/dashboard" element={<LabelsDashboard />} />
+                  <Route path="labels/print" element={<PrintLabel />} />
                 </Route>
                 <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
                 {/* Catch all route */}

@@ -1,0 +1,77 @@
+/* Responsive Styles */
+
+/* Responsive adjustments for medium screens */
+@media (max-width: 992px) { /* Adjust breakpoint as needed */
+    .imprimir-container {
+        flex-direction: column; /* Stack items vertically */
+        gap: 30px;
+    }
+
+    .etiqueta-preview-container,
+    .etiqueta-form-container {
+        flex-basis: 100%; /* Take full width when stacked */
+        min-width: unset; /* Remove min-width constraint */
+    }
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #EEEEEE;
+    }
+    
+    .main-content {
+        padding: 20px;
+    }
+    
+    .top-cards,
+    .service-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header.with-button {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .section-header.with-button > div:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-container .form-group {
+        width: 100%;
+    }
+}
+
+/* Responsive adjustments for extra small screens */
+@media (max-width: 600px) { /* Adjust breakpoint for form grid */
+    .form-grid {
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: 15px;
+    }
+
+    .form-actions {
+        flex-direction: column; /* Stack actions vertically */
+        align-items: stretch; /* Make button full width */
+        gap: 15px;
+    }
+
+    .form-actions .btn-primary {
+        order: -1; /* Move print button to the top */
+    }
+}

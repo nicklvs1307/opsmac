@@ -1,0 +1,25 @@
+/* Validades Feature Styles */
+
+/* Monitoria de Validades Section */
+.validade-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Date tags */
+.date-tag.red {
+    background-color: #FFE5E5;
+    color: #E53E3E;
+}
+
+.date-tag.orange {
+    background-color: #FFF5E5;
+    color: #DD6B20;
+}
+
+.date-tag.green {
+    background-color: #E6FFFA;
+    color: #38A169;
+}

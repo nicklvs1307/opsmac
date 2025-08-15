@@ -214,7 +214,8 @@
       "settings": "Configurações",
       "admin": "Admin",
       "app_name": "Feedeliza+",
-      "technical_specifications": "Fichas Técnicas"
+      "technical_specifications": "Fichas Técnicas",
+      "labels": "Etiquetas"
     },
     "thank_you": {
       "share_title": "Avaliei o {{restaurant}}",

@@ -1,0 +1,121 @@
+/* Etiquetas Feature Styles */
+
+/* Imprimir Etiqueta Section */
+.imprimir-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Add space below header */
+}
+
+.imprimir-header h2 {
+    margin-bottom: 0;
+    margin-left: 15px;
+}
+
+.imprimir-container {
+    display: flex;
+    gap: 40px; /* Increased gap */
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    align-items: flex-start; /* Align items at the top */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.etiqueta-preview-container {
+    flex-basis: 45%; /* Adjust width */
+    min-width: 320px;
+}
+
+/* Improved etiqueta preview styling */
+.etiqueta-preview {
+    border: 1px solid #E0E0E0;
+    padding: 25px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.etiqueta-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background-color: #FF5C5C;
+}
+
+.etiqueta-preview .preview-product-name {
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0 0 5px 0;
+    color: #222;
+    text-transform: uppercase;
+}
+
+.etiqueta-preview .preview-status {
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    color: #444;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.etiqueta-preview .preview-hr {
+    border: none;
+    border-top: 1px solid #EEEEEE;
+    margin: 15px 0;
+}
+
+.etiqueta-preview .preview-dates {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px 15px;
+    margin-bottom: 15px;
+}
+
+.etiqueta-preview .preview-dates p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.etiqueta-preview .preview-dates p:nth-child(odd) {
+    text-align: left;
+    font-weight: 600;
+    color: #444;
+}
+
+.etiqueta-preview .preview-dates p:nth-child(even) {
+    font-weight: 500;
+    color: #222;
+}
+
+.etiqueta-preview .preview-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.etiqueta-preview .preview-info p {
+    margin: 2px 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #444;
+}
+
+.etiqueta-preview .preview-info p:first-child span {
+    font-weight: 600;
+}
+
+.etiqueta-form-container {
+    flex-basis: 55%; /* Adjust width */
+    min-width: 300px; /* Ensure form has some minimum width */
+}

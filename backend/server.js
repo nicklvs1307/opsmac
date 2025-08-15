@@ -103,8 +103,7 @@ app.use('/api/labels', labelRoutes);
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./config/swagger');
-const labelRoutes = require('./routes/labels');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const restaurantRoutes = require('./routes/restaurant');
 const healthRoutes = require('./routes/health');

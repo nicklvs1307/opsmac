@@ -1,5 +1,7 @@
 'use strict';
 const express = require('express');
+console.log('labels.js: typeof express:', typeof express);
+console.log('labels.js: typeof express.Router:', typeof express.Router);
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const { Op } = require('sequelize');

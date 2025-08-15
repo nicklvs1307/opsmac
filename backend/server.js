@@ -100,7 +100,7 @@ app.use('/api/orders', ordersRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
 app.use('/api/technical-specifications', technicalSpecificationsRoutes);
 app.use('/api/categories', categoriesRoutes);
-app.use('/api/labels', labelRoutes);
+app.use('/labels', labelRoutes);
 
 const restaurantRoutes = require('./routes/restaurant');
 const healthRoutes = require('./routes/health');

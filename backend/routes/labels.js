@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const { Op } = require('sequelize');
-const { Product, Ingredient, User, PrintedLabel, LossRecord, Stock, StockMovement, sequelize, StockCount, StockCountItem, ProductionRecord, ProductionRecordItem } = require('../models');
+const { Product, Ingredient, User, Restaurant, PrintedLabel, LossRecord, Stock, StockMovement, sequelize, StockCount, StockCountItem, ProductionRecord, ProductionRecordItem } = require('../models');
 const { auth } = require('../middleware/auth');
 const adminAuth = require('../middleware/adminAuth');
 
@@ -644,4 +644,5 @@ router.patch('/items/:type/:id', auth, getRestaurantId, [ // Add middleware
     }
 });
 
+console.log('labels.js: typeof router before export:', typeof router, 'router instanceof express.Router:', router instanceof express.Router);
 module.exports = router;

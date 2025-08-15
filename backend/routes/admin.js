@@ -176,7 +176,7 @@ router.post('/restaurants', auth, isAdmin, [
   body('owner_id').isUUID().withMessage('ID do proprietário inválido'),
   body('enabled_modules').optional().isArray().withMessage('Módulos habilitados deve ser um array'),
 ], async (req, res) => {
-  const errors = validation.validationResult(req);
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
@@ -417,4 +417,3 @@ router.get('/test', (req, res) => {
 });
 
 module.exports = router;
-

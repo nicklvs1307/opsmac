@@ -26,26 +26,49 @@ Generated Swagger Specs (first 500 chars): {
 🚀 Servidor rodando na porta 5000
 📊 Dashboard: https://feedelizapro.towersfy.com
 🔗 API: https://feedelizaapi.towersfy.com/api
-/app/backend/routes/admin.js:179
-  const errors = validation.validationResult(req);
-                 ^
-ReferenceError: validation is not defined
-    at /app/backend/routes/admin.js:179:18
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+Erro ao criar restaurante (Admin): ValidationError [SequelizeValidationError]: notNull Violation: Restaurant.address cannot be null,
+notNull Violation: Restaurant.city cannot be null,
+notNull Violation: Restaurant.state cannot be null
+    at InstanceValidator._validate (/app/node_modules/sequelize/lib/instance-validator.js:50:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Node.js v20.19.4
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/admin/restaurants
-Método da solicitação
-POST
-Código de status
-502 Bad Gateway
-{name: "Towersfy", owner_id: "83afb51c-11bf-4745-86e4-a2e8ab792bae"}
-name
-: 
-"Towersfy"
-owner_id
-: 
-"83afb51c-11bf-4745-86e4-a2e8ab792bae"
+    at async InstanceValidator._validateAndRunHooks (/app/node_modules/sequelize/lib/instance-validator.js:60:7)
+    at async InstanceValidator.validate (/app/node_modules/sequelize/lib/instance-validator.js:54:12)
+    at async Restaurant.save (/app/node_modules/sequelize/lib/model.js:2426:7)
+    at async Restaurant.create (/app/node_modules/sequelize/lib/model.js:1362:12)
+    at async /app/backend/routes/admin.js:192:24 {
+  errors: [
+    ValidationErrorItem {
+      message: 'Restaurant.address cannot be null',
+      type: 'notNull Violation',
+      path: 'address',
+      value: null,
+      origin: 'CORE',
+      instance: [Restaurant],
+      validatorKey: 'is_null',
+      validatorName: null,
+      validatorArgs: []
+    },
+    ValidationErrorItem {
+      message: 'Restaurant.city cannot be null',
+      type: 'notNull Violation',
+      path: 'city',
+      value: null,
+      origin: 'CORE',
+      instance: [Restaurant],
+      validatorKey: 'is_null',
+      validatorName: null,
+      validatorArgs: []
+    },
+    ValidationErrorItem {
+      message: 'Restaurant.state cannot be null',
+      type: 'notNull Violation',
+      path: 'state',
+      value: null,
+      origin: 'CORE',
+      instance: [Restaurant],
+      validatorKey: 'is_null',
+      validatorName: null,
+      validatorArgs: []
+    }
+  ]
+}

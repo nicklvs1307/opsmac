@@ -30,6 +30,9 @@ const userSchema = (t, editingUser) => yup.object().shape({
 
 const restaurantSchema = (t) => yup.object().shape({
   name: yup.string().required(t('admin_dashboard.restaurant_name_required')),
+  address: yup.string().required(t('admin_dashboard.address_required')),
+  city: yup.string().required(t('admin_dashboard.city_required')),
+  state: yup.string().required(t('admin_dashboard.state_required')),
   owner_id: yup.string().uuid(t('admin_dashboard.owner_id_invalid')).required(t('admin_dashboard.owner_id_required')),
 });
 
@@ -305,6 +308,9 @@ const AdminDashboard = () => {
         <DialogTitle>{editingRestaurant ? t('admin_dashboard.edit_restaurant_title') : t('admin_dashboard.create_restaurant_tab')}</DialogTitle>
         <DialogContent>
           <Controller name="name" control={restaurantControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.restaurant_name_label')} fullWidth margin="normal" />} />
+          <Controller name="address" control={restaurantControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.address_label')} fullWidth margin="normal" />} />
+          <Controller name="city" control={restaurantControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.city_label')} fullWidth margin="normal" />} />
+          <Controller name="state" control={restaurantControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.state_label')} fullWidth margin="normal" />} />
           <Controller name="owner_id" control={restaurantControl} render={({ field }) => (
             <FormControl fullWidth margin="normal">
               <InputLabel>{t('admin_dashboard.owner_label')}</InputLabel>

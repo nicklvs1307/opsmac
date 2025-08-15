@@ -26,10 +26,6 @@ import {
   QuestionAnswer as QuestionAnswerIcon,
   PersonAdd as PersonAddIcon,
   CheckCircle as CheckCircleIcon,
-  ShoppingCart as ShoppingCartIcon, // Added
-  Category as CategoryIcon, // Added
-  Label as LabelIcon, // Added
-  CheckCircleOutline as CheckCircleOutlineIcon, // Added
 } from '@mui/icons-material';
 // Importando o componente MetricCard reutilizável
 import MetricCard from '../../components/UI/MetricCard';
@@ -151,7 +147,7 @@ const Dashboard = () => {
               mb: 1
             }}
           >
-            {t('dashboard.general_overview_title')}
+            {t('dashboard.overview_title')}
           </Typography>
           <Typography 
             variant="body1" 
@@ -160,7 +156,7 @@ const Dashboard = () => {
               mb: 3
             }}
           >
-            {t('dashboard.general_welcome_message')}
+            {t('dashboard.welcome_message')}
           </Typography>
       </Box>
 
@@ -168,43 +164,43 @@ const Dashboard = () => {
       <Grid container spacing={3} mb={4}>
         <Grid item xs={12} sm={6} md={3}>
           <MetricCard
-            title={t('dashboard.total_orders')}
-            value={data.overview?.total_orders || 0}
-            icon={<ShoppingCartIcon />}
-            bgColor="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
-            iconColor="rgba(255,255,255,0.2)"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <MetricCard
-            title={t('dashboard.total_products')}
-            value={data.overview?.total_products || 0}
-            icon={<CategoryIcon />}
+            title="Promotores"
+            value={data.overview?.promoters || 0}
+            icon={<ThumbUpIcon />}
             bgColor="linear-gradient(135deg, #a8e063 0%, #56ab2f 100%)"
             iconColor="rgba(255,255,255,0.2)"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <MetricCard
-            title={t('dashboard.total_labels_printed')}
-            value={data.overview?.total_labels_printed || 0}
-            icon={<LabelIcon />}
+            title="Neutros"
+            value={data.overview?.neutrals || 0}
+            icon={<ThumbsUpDownIcon />}
             bgColor="linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)"
             iconColor="rgba(255,255,255,0.2)"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <MetricCard
-            title={t('dashboard.total_checkins')}
-            value={data.overview?.total_checkins || 0}
-            icon={<CheckCircleOutlineIcon />}
+            title="Detratores"
+            value={data.overview?.detractors || 0}
+            icon={<ThumbDownIcon />}
+            bgColor="linear-gradient(135deg, #ff8177 0%, #ff867a 100%)"
+            iconColor="rgba(255,255,255,0.2)"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <MetricCard
+            title="Respostas"
+            value={data.overview?.total_answers || 0}
+            icon={<QuestionAnswerIcon />}
             bgColor="linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
             iconColor="rgba(255,255,255,0.2)"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <MetricCard
-            title={t('dashboard.total_customers')}
+            title="Cadastros"
             value={data.overview?.total_customers || 0}
             icon={<PersonAddIcon />}
             bgColor="linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)"
@@ -213,19 +209,19 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <MetricCard
-            title={t('dashboard.total_surveys')}
-            value={data.overview?.total_answers || 0} // Re-using total_answers for total surveys
-            icon={<QuestionAnswerIcon />}
-            bgColor="linear-gradient(135deg, #ff8177 0%, #ff867a 100%)"
+            title="Cupons Gerados"
+            value={data.overview?.coupons_generated || 0}
+            icon={<CouponIcon />}
+            bgColor="linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
             iconColor="rgba(255,255,255,0.2)"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <MetricCard
-            title={t('dashboard.nps_score')}
-            value={data.overview?.nps_score || 0} // Assuming NPS score is available
-            icon={<SmileyIcon />}
-            bgColor="linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+            title="Cupons Utilizados"
+            value={data.overview?.coupons_used || 0}
+            icon={<CheckCircleIcon />}
+            bgColor="linear-gradient(135deg, #69ff97 0%, #00e4ff 100%)"
             iconColor="rgba(255,255,255,0.2)"
           />
         </Grid>

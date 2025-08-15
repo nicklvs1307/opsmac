@@ -30,8 +30,6 @@ import {
   Poll as PollIcon,
   ConnectWithoutContact as ConnectWithoutContactIcon,
   PointOfSale as PointOfSaleIcon,
-  Inventory as InventoryIcon, // Added
-  LocalMall as OrdersIcon, // Added (using LocalMall for orders)
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
@@ -73,179 +71,74 @@ const Sidebar = ({ onMobileClose }) => {
       roles: ['admin', 'owner', 'manager']
     },
     {
-      title: t('sidebar.operations_management'), // New category
-      icon: <SettingsIcon />, // Placeholder icon, can be changed
-      path: '/operations', // No direct path, just a category
+      title: t('sidebar.fidelity_program'),
+      icon: <CheckinIcon />, // Usando CheckinIcon por enquanto, pode ser alterado
+      path: '/fidelity',
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: t('sidebar.products_menu'), // Subcategory
+          title: t('sidebar.checkin_program'),
+          icon: <CheckinIcon />,
+          path: '/fidelity/checkin'
+        },
+        {
+          title: t('sidebar.satisfaction'),
+          icon: <PollIcon />,
+          path: '/fidelity/satisfaction'
+        }
+      ]
+    },
+    
+    {
+      title: t('sidebar.qr_codes'),
+      icon: <QrCodeIcon />,
+      path: '/qrcodes',
+      roles: ['admin', 'owner', 'manager'],
+      submenu: [
+        {
+          title: t('sidebar.manage_qr_codes'),
           icon: <ListIcon />,
-          path: '/products-menu', // No direct path
-          submenu: [
-            {
-              title: t('sidebar.digital_menu'),
-              icon: <ListIcon />,
-              path: '/erp/menu'
-            },
-            {
-              title: t('sidebar.technical_specifications'),
-              icon: <ListIcon />,
-              path: '/erp/technical-specifications'
-            },
-            {
-              title: t('sidebar.ingredients'),
-              icon: <ListIcon />,
-              path: '/erp/ingredients'
-            }
-          ]
+          path: '/qrcodes'
         },
         {
-          title: t('sidebar.stock'), // Subcategory
-          icon: <InventoryIcon />, // Using InventoryIcon
-          path: '/stock-management', // No direct path
-          submenu: [
-            {
-              title: t('sidebar.stock_control'),
-              icon: <ListIcon />,
-              path: '/erp/stock'
-            },
-            {
-              title: t('sidebar.stock_count'),
-              icon: <ListIcon />,
-              path: '/labels/stock-counts'
-            },
-            {
-              title: t('sidebar.production'),
-              icon: <ListIcon />,
-              path: '/labels/productions'
-            }
-          ]
-        },
-        {
-          title: t('sidebar.sales_orders'), // Subcategory
-          icon: <PointOfSaleIcon />,
-          path: '/sales-orders', // No direct path
-          submenu: [
-            {
-              title: t('sidebar.pdv'),
-              icon: <PointOfSaleIcon />,
-              path: '/erp/pdv'
-            },
-            {
-              title: t('sidebar.orders'),
-              icon: <OrdersIcon />,
-              path: '/erp/orders'
-            },
-            {
-              title: t('sidebar.tables'),
-              icon: <ListIcon />,
-              path: '/erp/tables'
-            }
-          ]
-        },
-        {
-          title: t('sidebar.labels'), // Subcategory
-          icon: <QrCodeIcon />,
-          path: '/labels-management', // No direct path
-          submenu: [
-            {
-              title: t('sidebar.labels_dashboard'),
-              icon: <DashboardIcon />,
-              path: '/labels/dashboard'
-            },
-            {
-              title: t('sidebar.labels_admin'),
-              icon: <SettingsIcon />,
-              path: '/labels/admin'
-            }
-          ]
+          title: t('sidebar.generate_qr_code'),
+          icon: <AddIcon />,
+          path: '/qrcodes/new'
         }
       ]
     },
     {
-      title: t('sidebar.marketing_loyalty'), // New category
-      icon: <CardGiftcard />, // Placeholder icon
-      path: '/marketing-loyalty', // No direct path
+      title: t('sidebar.rewards'),
+      icon: <RewardsIcon />,
+      path: '/rewards',
+      roles: ['admin', 'owner', 'manager']
+    },
+    {
+      title: t('sidebar.coupons'),
+      icon: <RewardsIcon />,
+      path: '/coupons',
+      roles: ['admin', 'owner', 'manager']
+    },
+    {
+      title: t('sidebar.customers'),
+      icon: <PeopleIcon />,
+      path: '/customers',
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: t('sidebar.customers'), // Subcategory
-          icon: <PeopleIcon />,
-          path: '/customers-management', // No direct path
-          submenu: [
-            {
-              title: t('sidebar.list_customers'),
-              icon: <ListIcon />,
-              path: '/customers'
-            },
-            {
-              title: t('sidebar.birthdays'),
-              icon: <CardGiftcard />,
-              path: '/customers/birthdays'
-            },
-            {
-              title: t('sidebar.customer_dashboard'),
-              icon: <AnalyticsIcon />,
-              path: '/customers/dashboard'
-            }
-          ]
+          title: t('sidebar.list_customers'),
+          icon: <ListIcon />,
+          path: '/customers'
         },
         {
-          title: t('sidebar.loyalty_programs'), // Subcategory
-          icon: <CheckinIcon />,
-          path: '/loyalty-programs', // No direct path
-          submenu: [
-            {
-              title: t('sidebar.checkin_program'),
-              icon: <CheckinIcon />,
-              path: '/fidelity/checkin'
-            },
-            {
-              title: t('sidebar.rewards'),
-              icon: <RewardsIcon />,
-              path: '/rewards'
-            },
-            {
-              title: t('sidebar.coupons'),
-              icon: <RewardsIcon />,
-              path: '/coupons'
-            }
-          ]
+          title: t('sidebar.birthdays'),
+          icon: <CardGiftcard />,
+          path: '/customers/birthdays'
         },
         {
-          title: t('sidebar.surveys_feedback'), // Subcategory
-          icon: <PollIcon />,
-          path: '/surveys-feedback', // No direct path
-          submenu: [
-            {
-              title: t('sidebar.satisfaction_dashboard'),
-              icon: <PollIcon />,
-              path: '/fidelity/satisfaction'
-            },
-            {
-              title: t('sidebar.survey_list'),
-              icon: <ListIcon />,
-              path: '/fidelity/surveys'
-            }
-          ]
-        },
-        {
-          title: t('sidebar.qr_codes'), // Subcategory
-          icon: <QrCodeIcon />,
-          path: '/qr-codes-management', // No direct path
-          submenu: [
-            {
-              title: t('sidebar.manage_qr_codes'),
-              icon: <ListIcon />,
-              path: '/qrcodes'
-            },
-            {
-              title: t('sidebar.generate_qr_code'),
-              icon: <AddIcon />,
-              path: '/qrcodes/new'
-            }
-          ]
+          title: t('sidebar.customer_dashboard'),
+          icon: <AnalyticsIcon />,
+          path: '/customers/dashboard'
         }
       ]
     },
@@ -260,6 +153,72 @@ const Sidebar = ({ onMobileClose }) => {
       icon: <ConnectWithoutContactIcon />,
       path: '/integrations',
       roles: ['admin', 'owner', 'manager']
+    },
+    {
+      title: t('sidebar.erp'),
+      icon: <DashboardIcon />,
+      path: '/erp',
+      roles: ['admin', 'owner', 'manager'],
+      submenu: [
+        {
+          title: t('sidebar.menu'),
+          icon: <ListIcon />,
+          path: '/erp/menu'
+        },
+        {
+          title: t('sidebar.stock'), // New
+          icon: <ListIcon />, // Consider a more specific icon like <InventoryIcon />
+          path: '/erp/stock'
+        },
+        {
+          title: t('sidebar.tables'), // New
+          icon: <ListIcon />, // Consider a more specific icon like <TableBarIcon />
+          path: '/erp/tables'
+        },
+        {
+          title: t('sidebar.pdv'), // New
+          icon: <PointOfSaleIcon />,
+          path: '/erp/pdv'
+        },
+        {
+          title: t('sidebar.ingredients'), // New
+          icon: <ListIcon />,
+          path: '/erp/ingredients'
+        },
+        {
+          title: t('sidebar.technical_specifications'), // New
+          icon: <ListIcon />,
+          path: '/erp/technical-specifications'
+        }
+      ]
+    },
+    {
+      title: t('sidebar.labels'), // New
+      icon: <QrCodeIcon />,
+      path: '/labels',
+      roles: ['admin', 'owner', 'manager'],
+      submenu: [
+        {
+          title: t('sidebar.labels_dashboard'),
+          icon: <DashboardIcon />,
+          path: '/labels/dashboard'
+        },
+        {
+          title: t('sidebar.labels_admin'),
+          icon: <SettingsIcon />,
+          path: '/labels/admin'
+        },
+        {
+          title: t('sidebar.labels_stock_count'),
+          icon: <ListIcon />,
+          path: '/labels/stock-counts'
+        },
+        {
+          title: t('sidebar.labels_production'),
+          icon: <ListIcon />,
+          path: '/labels/productions'
+        }
+      ]
     },
     {
       title: t('sidebar.settings'),

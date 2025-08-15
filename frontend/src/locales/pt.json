@@ -219,23 +219,7 @@
       "labels_dashboard": "Painel",
       "labels_admin": "Administração",
       "labels_stock_count": "Contagem de Estoque",
-      "labels_production": "Produção",
-      "operations_management": "Gestão de Operações",
-      "products_menu": "Produtos e Cardápio",
-      "digital_menu": "Cardápio Digital",
-      "stock_control": "Controle de Estoque",
-      "stock_count": "Contagem de Estoque",
-      "production": "Produção",
-      "sales_orders": "Vendas e Pedidos",
-      "orders": "Pedidos",
-      "labels_management": "Gestão de Etiquetas",
-      "marketing_loyalty": "Marketing e Fidelidade",
-      "customers_management": "Gestão de Clientes",
-      "loyalty_programs": "Programas de Fidelidade",
-      "surveys_feedback": "Pesquisas e Feedback",
-      "satisfaction_dashboard": "Painel de Satisfação",
-      "survey_list": "Lista de Pesquisas",
-      "qr_codes_management": "Gestão de QR Codes"
+      "labels_production": "Produção"
     },
     "thank_you": {
       "share_title": "Avaliei o {{restaurant}}",
@@ -403,15 +387,7 @@
       "customers_feedback_received": "Os clientes aparecerão aqui conforme os feedbacks forem recebidos.",
       "nps_performance_title": "Desempenho do NPS",
       "nps_data_not_available": "Dados de distribuição de avaliações não disponíveis.",
-      "stars_rating": "{{rating}} estrelas",
-      "general_overview_title": "Visão Geral do Sistema",
-      "general_welcome_message": "Bem-vindo ao seu painel de controle completo.",
-      "total_orders": "Total de Pedidos",
-      "total_products": "Total de Produtos",
-      "total_labels_printed": "Total de Etiquetas Impressas",
-      "total_checkins": "Total de Check-ins",
-      "total_surveys": "Total de Pesquisas",
-      "nps_score": "Pontuação NPS"
+      "stars_rating": "{{rating}} estrelas"
     },
     "coupon_validator": {
       "error_validating_coupon": "Erro ao validar cupom",

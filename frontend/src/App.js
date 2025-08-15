@@ -55,6 +55,9 @@ import Ingredients from './pages/ERP/Ingredients';
 import Menu from './pages/ERP/Menu';
 import LabelsDashboard from './pages/Labels/LabelsDashboard';
 import PrintLabel from './pages/Labels/PrintLabel';
+import LabelsAdmin from './pages/Labels/LabelsAdmin';
+import StockCountList from './pages/Labels/StockCountList';
+import StockCountDetail from './pages/Labels/StockCountDetail';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -125,6 +128,11 @@ function App() {
                   <Route path="erp/ingredients" element={<Ingredients />} />
                   <Route path="labels/dashboard" element={<LabelsDashboard />} />
                   <Route path="labels/print" element={<PrintLabel />} />
+                  <Route path="labels/admin" element={<LabelsAdmin />} />
+                  <Route path="labels/stock-counts" element={<StockCountList />} />
+                  <Route path="labels/stock-counts/:id" element={<StockCountDetail />} />
+                  <Route path="labels/productions" element={<ProductionList />} />
+                  <Route path="labels/productions/new" element={<ProductionCreate />} />
                 </Route>
                 <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
                 {/* Catch all route */}

@@ -183,7 +183,11 @@
       "admin": "Admin",
       "app_name": "CHECK",
       "technical_specifications": "Technical Specifications",
-      "labels": "Labels"
+      "labels": "Labels",
+      "labels_dashboard": "Dashboard",
+      "labels_admin": "Admin",
+      "labels_stock_count": "Stock Count",
+      "labels_production": "Production"
     },
     "thank_you": {
       "share_title": "I rated {restaurant}",

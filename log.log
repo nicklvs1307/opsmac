@@ -1,10 +1,27 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/public/surveys/next/pesquisa-de-nps/
-Método da solicitação
-GET
-Código de status
-404 Not Found
-Endereço remoto
-95.217.16.187:443
-
-{"error":"Rota não encontrada"}
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      163.0s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.794
+0.794 > feedeliza-plus@1.0.0 build
+0.794 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.794
+4.202 Creating an optimized production build...
+162.0 Failed to compile.
+162.0
+162.0 [eslint]
+162.0 src/pages/Labels/LabelsDashboard.js
+162.0   Line 30:30:  'Link' is not defined  react/jsx-no-undef
+162.0
+162.0 Search for the keywords to learn more about each error.
+162.0
+162.0
+------
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

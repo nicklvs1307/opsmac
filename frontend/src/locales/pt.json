@@ -215,7 +215,11 @@
       "admin": "Admin",
       "app_name": "Feedeliza+",
       "technical_specifications": "Fichas Técnicas",
-      "labels": "Etiquetas"
+      "labels": "Etiquetas",
+      "labels_dashboard": "Painel",
+      "labels_admin": "Administração",
+      "labels_stock_count": "Contagem de Estoque",
+      "labels_production": "Produção"
     },
     "thank_you": {
       "share_title": "Avaliei o {{restaurant}}",

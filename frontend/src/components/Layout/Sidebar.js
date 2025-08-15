@@ -195,8 +195,30 @@ const Sidebar = ({ onMobileClose }) => {
     {
       title: t('sidebar.labels'), // New
       icon: <QrCodeIcon />,
-      path: '/labels/dashboard',
-      roles: ['admin', 'owner', 'manager']
+      path: '/labels',
+      roles: ['admin', 'owner', 'manager'],
+      submenu: [
+        {
+          title: t('sidebar.labels_dashboard'),
+          icon: <DashboardIcon />,
+          path: '/labels/dashboard'
+        },
+        {
+          title: t('sidebar.labels_admin'),
+          icon: <SettingsIcon />,
+          path: '/labels/admin'
+        },
+        {
+          title: t('sidebar.labels_stock_count'),
+          icon: <ListIcon />,
+          path: '/labels/stock-counts'
+        },
+        {
+          title: t('sidebar.labels_production'),
+          icon: <ListIcon />,
+          path: '/labels/productions'
+        }
+      ]
     },
     {
       title: t('sidebar.settings'),

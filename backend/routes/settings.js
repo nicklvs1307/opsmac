@@ -380,12 +380,12 @@ router.get('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, async 
   try {
     const { restaurantId } = req.params;
     const restaurant = await models.Restaurant.findByPk(restaurantId, {
-      attributes: ['nps_criteria']
+      attributes: ['nps_criteria_scores']
     });
     if (!restaurant) {
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
-    res.json({ nps_criteria: restaurant.nps_criteria || [] });
+    res.json({ nps_criteria: restaurant.nps_criteria_scores || [] });
   } catch (error) {
     console.error('Erro ao obter critérios de NPS:', error);
     res.status(500).json({ error: 'Erro interno do servidor' });
@@ -409,8 +409,8 @@ router.put('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, [
       return res.status(404).json({ error: 'Restaurante não encontrado' });
     }
 
-    await restaurant.update({ nps_criteria });
-    res.json({ message: 'Critérios de NPS atualizados com sucesso!', nps_criteria: restaurant.nps_criteria });
+    await restaurant.update({ nps_criteria_scores: nps_criteria });
+    res.json({ message: 'Critérios de NPS atualizados com sucesso!', nps_criteria: restaurant.nps_criteria_scores });
   } catch (error) {
     console.error('Erro ao atualizar critérios de NPS:', error);
     res.status(500).json({ error: 'Erro interno do servidor' });

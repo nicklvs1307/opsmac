@@ -72,3 +72,817 @@ notNull Violation: Restaurant.state cannot be null
     }
   ]
 }
+Erro ao buscar dados do dashboard: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Customer.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/dashboard.js:163:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 121,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '442',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:04:30.627 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+    parameters: undefined
+  },
+  original: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 121,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '442',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:04:30.627 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+    parameters: undefined
+  },
+  sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:04:30.627 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+  parameters: {}
+}
+totalCheckins: 0
+mostFrequentCustomers: []
+averageVisitDuration: { avg_duration_seconds: null }
+checkinsByDay: []
+Erro ao buscar dados do dashboard: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Customer.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/dashboard.js:163:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 121,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '442',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:05:45.506 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+    parameters: undefined
+  },
+  original: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 121,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '442',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:05:45.506 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+    parameters: undefined
+  },
+  sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:05:45.506 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+  parameters: {}
+}
+Erro ao buscar dados do dashboard: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Customer.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/dashboard.js:163:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 121,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '442',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:06:08.019 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+    parameters: undefined
+  },
+  original: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 121,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '442',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:06:08.019 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+    parameters: undefined
+  },
+  sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:06:08.019 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+  parameters: {}
+}
+totalCheckins: 0
+mostFrequentCustomers: []
+averageVisitDuration: { avg_duration_seconds: null }
+checkinsByDay: []
+[Public Route] Recebida requisição para /restaurant/roma-pizzaria
+[Public Route] Restaurante roma-pizzaria não encontrado.
+[Public Route] Recebida requisição para /restaurant/roma-pizzaria
+[Public Route] Restaurante roma-pizzaria não encontrado.
+[Public Route] Recebida requisição para /restaurant/towersfy
+[Public Route] Restaurante towersfy encontrado. Retornando dados.
+Erro ao buscar dados do dashboard: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Customer.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/dashboard.js:163:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 121,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '442',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:06:56.348 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+    parameters: undefined
+  },
+  original: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 121,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '442',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:06:56.348 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+    parameters: undefined
+  },
+  sql: `SELECT "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment", COUNT("feedbacks"."id") AS "feedback_count", AVG("feedbacks"."rating") AS "avg_rating" FROM "customers" AS "Customer" INNER JOIN "feedbacks" AS "feedbacks" ON "Customer"."id" = "feedbacks"."customer_id" AND "feedbacks"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "feedbacks"."created_at" >= '2025-07-16 01:06:56.348 +00:00' WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' GROUP BY "Customer"."id", "Customer"."name", "Customer"."email", "Customer"."customer_segment" ORDER BY feedback_count DESC LIMIT 10;`,
+  parameters: {}
+}
+Erro ao obter critérios de NPS: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Restaurant.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Restaurant.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async Restaurant.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/settings.js:382:24 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  original: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+  parameters: {}
+}
+[Logo Upload] Restaurant ID: 219289ba-d468-4b6f-b4ce-dc386fa4bbda, Uploaded filename: logo-1755220037618-987176105.png
+Erro ao obter critérios de NPS: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Restaurant.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Restaurant.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async Restaurant.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/settings.js:382:24 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  original: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+  parameters: {}
+}
+Erro ao obter critérios de NPS: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Restaurant.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Restaurant.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async Restaurant.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/settings.js:382:24 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  original: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+  parameters: {}
+}
+Erro ao obter critérios de NPS: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Restaurant.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Restaurant.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async Restaurant.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/settings.js:382:24 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  original: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+  parameters: {}
+}
+Erro ao obter critérios de NPS: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Restaurant.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Restaurant.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async Restaurant.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/settings.js:382:24 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  original: error: column "nps_criteria" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '8',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  sql: `SELECT "nps_criteria" FROM "restaurants" AS "Restaurant" WHERE "Restaurant"."id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+  parameters: {}
+}
+[Public Route] Recebida requisição para /restaurant/towersfy
+[Public Route] Restaurante towersfy encontrado. Retornando dados.
+Erro ao buscar clientes: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Customer.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Customer.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 0)
+    at async Customer.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async /app/backend/routes/customers.js:320:29 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 120,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '65',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT count(*) AS "count" FROM "customers" AS "Customer" WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  original: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 120,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '65',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT count(*) AS "count" FROM "customers" AS "Customer" WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  sql: `SELECT count(*) AS "count" FROM "customers" AS "Customer" WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+  parameters: {}
+}
+Erro ao buscar clientes: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Customer.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Customer.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 0)
+    at async Customer.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async /app/backend/routes/customers.js:320:29 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 120,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '65',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT count(*) AS "count" FROM "customers" AS "Customer" WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  original: error: column Customer.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 120,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '65',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT count(*) AS "count" FROM "customers" AS "Customer" WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+    parameters: undefined
+  },
+  sql: `SELECT count(*) AS "count" FROM "customers" AS "Customer" WHERE "Customer"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda';`,
+  parameters: {}
+}

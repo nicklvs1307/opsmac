@@ -272,6 +272,16 @@ module.exports = (sequelize) => {
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',
       comment: 'ID da última pesquisa respondida'
+    },
+    restaurant_id: { // Add this field
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: 'restaurants',
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
     }
   }, {
     tableName: 'customers',

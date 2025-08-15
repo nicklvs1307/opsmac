@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom'; // Assuming you use React Router
 // import apiClient from '../../api/axiosInstance'; // Create this to call your backend
 import './LabelsDashboard.css'; // We will create this CSS file

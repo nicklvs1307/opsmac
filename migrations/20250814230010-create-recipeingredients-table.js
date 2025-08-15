@@ -33,11 +33,11 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 4),
         allowNull: false,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },

@@ -203,6 +203,7 @@ const Pdv = () => {
   }, [calculateSubtotal, calculateServiceTax]);
 
   const handleAddToCart = (product) => {
+    console.log('Product image:', product.image);
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id);
       if (existingItem) {
@@ -471,8 +472,9 @@ const Pdv = () => {
                   </div>
                 </div>
 
-                {/* Order Section */}
-                <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
+                <div className="order-column-wrapper">
+                  {/* Order Section */}
+                  <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
                   <div className="order-header">
                     <h3 className="order-title">Comanda Atual</h3>
                     <button className="order-clear" onClick={clearOrder}>
@@ -502,29 +504,31 @@ const Pdv = () => {
                       ))
                     )}
                   </div>
-                  <div className="order-summary">
-                    <div className="summary-row">
-                      <span className="summary-label">Subtotal:</span>
-                      <span className="summary-value" id="subtotal">R$ {calculateSubtotal.toFixed(2).replace('.', ',')}</span>
-                    </div>
-                    <div className="summary-row">
-                      <span className="summary-label">Taxa de Serviço:</span>
-                      <span className="summary-value" id="serviceTax">R$ {calculateServiceTax.toFixed(2).replace('.', ',')}</span>
-                    </div>
-                    <div className="summary-row total-row">
-                      <span className="summary-label">Total:</span>
-                      <span className="summary-value total-value" id="total">R$ {calculateFinalTotal.toFixed(2).replace('.', ',')}</span>
-                    </div>
+                </div>
+
+                <div className="order-summary">
+                  <div className="summary-row">
+                    <span className="summary-label">Subtotal:</span>
+                    <span className="summary-value" id="subtotal">R$ {calculateSubtotal.toFixed(2).replace('.', ',')}</span>
                   </div>
-                  <div className="order-actions">
-                    <button className="btn btn-outline" onClick={openPaymentModal}>
-                      <PaymentsIcon /> Pagamento
-                    </button>
-                    <button className="btn btn-success" onClick={handlePlaceOrder} disabled={createOrderMutation.isLoading || cartItems.length === 0 || !paymentMethod}>
-                      <CheckCircleIcon /> Finalizar
-                    </button>
+                  <div className="summary-row">
+                    <span className="summary-label">Taxa de Serviço:</span>
+                    <span className="summary-value" id="serviceTax">R$ {calculateServiceTax.toFixed(2).replace('.', ',')}</span>
+                  </div>
+                  <div className="summary-row total-row">
+                    <span className="summary-label">Total:</span>
+                    <span className="summary-value total-value" id="total">R$ {calculateFinalTotal.toFixed(2).replace('.', ',')}</span>
                   </div>
                 </div>
+                <div className="order-actions">
+                  <button className="btn btn-outline" onClick={openPaymentModal}>
+                    <PaymentsIcon /> Pagamento
+                  </button>
+                  <button className="btn btn-success" onClick={handlePlaceOrder} disabled={createOrderMutation.isLoading || cartItems.length === 0 || !paymentMethod}>
+                    <CheckCircleIcon /> Finalizar
+                  </button>
+                </div>
+              </div>
               </div>
             </div>
 

@@ -48,11 +48,19 @@
         
 
         /* PDV Container */
-                .pdv-container {
-            display: grid;
-            grid-template-columns: 1fr 350px;
+                                .pdv-container {
+            display: flex;
+            flex-direction: row;
             height: 100vh;
             overflow: hidden;
+        }
+
+        .order-column-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 350px; /* Fixed width for the order column */
+            border-left: 1px solid #eee;
+            background: white;
         }
 
         /* Products Section */
@@ -131,12 +139,13 @@
         }
 
         /* Order Section */
-        .order-section {
+                .order-section {
             background: white;
-            border-left: 1px solid #eee;
+            /* border-left: 1px solid #eee; */ /* Removed as it's now on order-column-wrapper */
             display: flex;
             flex-direction: column;
             height: 100%;
+            flex-grow: 1;
         }
 
         .order-header {

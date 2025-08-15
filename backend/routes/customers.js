@@ -813,16 +813,16 @@ router.post('/:id/clear-checkins', auth, async (req, res) => {
 });
 
 router.post('/public/register', async (req, res) => {
-  const { name, phone, birth_date } = req.body;
+  const { name, phone, birth_date, restaurant_id } = req.body; // Add restaurant_id
 
   // Basic validation
-  if (!name || !phone || !birth_date) {
-    return res.status(400).json({ msg: 'Nome, telefone e data de nascimento são obrigatórios.' });
+  if (!name || !phone || !birth_date || !restaurant_id) { // Add restaurant_id to validation
+    return res.status(400).json({ msg: 'Nome, telefone, data de nascimento e ID do restaurante são obrigatórios.' });
   }
 
   try {
-    // Check if customer with this phone already exists
-    let customer = await Customer.findOne({ where: { phone: phone } });
+    // Check if customer with this phone already exists for this restaurant
+    let customer = await models.Customer.findOne({ where: { phone: phone, restaurant_id: restaurant_id } }); // Filter by restaurant_id
 
     if (customer) {
       // If customer exists, update their info if necessary
@@ -830,7 +830,7 @@ router.post('/public/register', async (req, res) => {
       return res.status(200).json({ msg: 'Cliente atualizado com sucesso!', customer });
     } else {
       // Create new customer
-      customer = await Customer.create({ name, phone, birth_date });
+      customer = await models.Customer.create({ name, phone, birth_date, restaurant_id }); // Save restaurant_id
       return res.status(201).json({ msg: 'Cliente registrado com sucesso!', customer });
     }
   } catch (error) {

@@ -38,7 +38,7 @@ const ordersRoutes = require('./routes/orders');
 const ingredientsRoutes = require('./routes/ingredients');
 const technicalSpecificationsRoutes = require('./routes/technicalSpecifications');
 const categoriesRoutes = require('./routes/categories');
-const labelRoutes = require('./routes/labels');
+const labelRoutes = require('./routes/labels_test');
 console.log('server.js: labelRoutes type:', typeof labelRoutes, 'labelRoutes instanceof Router:', labelRoutes instanceof express.Router);
 
 const app = express();

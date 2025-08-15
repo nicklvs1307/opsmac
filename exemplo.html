@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor de Pedidos - Restaurante</title>
+    <title>Gestor Kanban de Pedidos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -19,6 +19,7 @@
             --gray: #95A5A6;
             --light-gray: #ECF0F1;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --column-width: 320px;
         }
 
         * {
@@ -29,16 +30,17 @@
         }
 
         body {
-            background-color: var(--light-gray);
+            background-color: #f0f2f5;
             color: var(--dark);
             height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
         .header {
             background-color: white;
-            padding: 15px 20px;
+            padding: 12px 20px;
             box-shadow: var(--shadow);
             display: flex;
             justify-content: space-between;
@@ -48,9 +50,15 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
         }
 
         .search-bar {
@@ -62,28 +70,31 @@
 
         .search-bar input {
             width: 100%;
-            padding: 10px 15px 10px 40px;
+            padding: 8px 15px 8px 35px;
             border: 1px solid #ddd;
-            border-radius: 25px;
+            border-radius: 20px;
             font-size: 0.9rem;
+            background-color: #f5f5f5;
         }
 
         .search-bar i {
             position: absolute;
-            left: 15px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
+            font-size: 0.9rem;
         }
 
         .user-info {
             display: flex;
             align-items: center;
+            font-size: 0.9rem;
         }
 
         .user-avatar {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background-color: var(--primary);
             color: white;
@@ -92,6 +103,7 @@
             justify-content: center;
             margin-left: 10px;
             font-weight: bold;
+            font-size: 0.8rem;
         }
 
         .main-container {
@@ -100,238 +112,191 @@
             overflow: hidden;
         }
 
-        .sidebar {
-            width: 250px;
-            background-color: white;
-            border-right: 1px solid #eee;
-            padding: 20px 0;
-            overflow-y: auto;
-        }
-
-        .nav-tabs {
+        .kanban-board {
             display: flex;
-            border-bottom: 1px solid #eee;
-            padding: 0 20px;
-        }
-
-        .nav-tab {
-            padding: 10px 15px;
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--gray);
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .nav-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-
-        .nav-tab i {
-            margin-right: 8px;
-        }
-
-        .content {
             flex-grow: 1;
-            padding: 20px;
-            overflow-y: auto;
+            padding: 15px;
+            overflow-x: auto;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .kanban-column {
+            width: var(--column-width);
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 12px;
+            flex-shrink: 0;
+            height: 100%;
             display: flex;
             flex-direction: column;
         }
 
-        .status-cards {
+        .column-header {
             display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding-bottom: 10px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 6px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        .status-card {
-            min-width: 120px;
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
+        .column-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
         }
 
-        .status-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .status-card.active {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .status-count {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .status-label {
+        .column-title i {
+            margin-right: 8px;
             font-size: 0.8rem;
         }
 
-        .orders-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
+        .column-count {
+            background-color: #e0e0e0;
+            color: var(--dark);
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .column-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .order-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: var(--shadow);
-            overflow: hidden;
+            padding: 12px;
+            cursor: grab;
             transition: all 0.2s;
+            border-left: 4px solid var(--primary);
+        }
+
+        .order-card:active {
+            cursor: grabbing;
         }
 
         .order-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
 
         .order-header {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            margin-bottom: 8px;
         }
 
         .order-id {
             font-weight: bold;
+            font-size: 0.85rem;
             color: var(--primary);
         }
 
-        .order-status {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .status-preparing {
-            background-color: rgba(46, 134, 222, 0.1);
-            color: var(--info);
-        }
-
-        .status-waiting {
-            background-color: rgba(255, 159, 67, 0.1);
-            color: var(--warning);
-        }
-
-        .status-delivery {
-            background-color: rgba(29, 209, 161, 0.1);
-            color: var(--success);
-        }
-
-        .status-delivered {
-            background-color: rgba(149, 165, 166, 0.1);
+        .order-time {
+            font-size: 0.7rem;
             color: var(--gray);
-        }
-
-        .order-body {
-            padding: 15px;
+            background-color: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 10px;
         }
 
         .customer-info {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .customer-avatar {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background-color: #eee;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 8px;
             font-weight: bold;
             color: var(--dark);
+            font-size: 0.8rem;
         }
 
         .customer-name {
             font-weight: 500;
-        }
-
-        .customer-phone {
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-
-        .order-details {
-            margin-bottom: 15px;
-        }
-
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
             font-size: 0.9rem;
         }
 
-        .order-address {
-            font-size: 0.85rem;
+        .customer-phone {
+            font-size: 0.75rem;
             color: var(--gray);
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
         }
 
-        .order-meta {
+        .order-items {
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            color: #555;
+            max-height: 60px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .order-item {
+            margin-bottom: 5px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 8px;
+            border-top: 1px solid #eee;
+            margin-top: 8px;
         }
 
         .order-total {
             font-weight: bold;
-            color: var(--dark);
+            font-size: 0.9rem;
         }
 
         .order-payment {
+            font-size: 0.75rem;
             color: var(--gray);
-        }
-
-        .order-footer {
-            padding: 15px;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .order-time {
-            font-size: 0.8rem;
-            color: var(--gray);
+            background-color: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 10px;
         }
 
         .order-actions {
             display: flex;
-            gap: 10px;
+            gap: 5px;
         }
 
         .action-btn {
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             border: none;
-            background-color: var(--light-gray);
+            background-color: #f0f0f0;
             color: var(--dark);
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 0.7rem;
         }
 
         .action-btn:hover {
@@ -339,29 +304,91 @@
             color: white;
         }
 
+        /* Cores das colunas */
+        .column-new {
+            border-top: 3px solid var(--info);
+        }
+        .column-preparing {
+            border-top: 3px solid var(--warning);
+        }
+        .column-ready {
+            border-top: 3px solid var(--success);
+        }
+        .column-delivery {
+            border-top: 3px solid var(--primary);
+        }
+        .column-delivered {
+            border-top: 3px solid var(--gray);
+        }
+
+        /* Drag and drop styles */
+        .kanban-column.dropzone {
+            background-color: rgba(72, 219, 251, 0.1);
+            border: 2px dashed var(--secondary);
+        }
+
+        .order-card.dragging {
+            opacity: 0.5;
+            transform: scale(0.98);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
         @media (max-width: 768px) {
-            .sidebar {
-                width: 70px;
+            :root {
+                --column-width: 280px;
             }
-            .nav-tab span {
+            
+            .header {
+                padding: 10px 15px;
+            }
+            
+            .logo span {
                 display: none;
             }
-            .nav-tab i {
+            
+            .logo i {
                 margin-right: 0;
                 font-size: 1.2rem;
             }
-            .orders-container {
-                grid-template-columns: 1fr;
+            
+            .search-bar {
+                margin: 0 10px;
+            }
+            
+            .user-info span {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="logo">RESTAURANTE</div>
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            <span>RESTAURANTE</span>
+        </div>
         <div class="search-bar">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="Informe o telefone ou nome do cliente...">
+            <input type="text" placeholder="Buscar pedido...">
         </div>
         <div class="user-info">
             <span>Operador</span>
@@ -370,63 +397,58 @@
     </div>
 
     <div class="main-container">
-        <div class="sidebar">
-            <div class="nav-tabs">
-                <div class="nav-tab active">
-                    <i class="fas fa-utensils"></i>
-                    <span>Pedidos</span>
-                </div>
-                <div class="nav-tab">
-                    <i class="fas fa-cog"></i>
-                    <span>Configurações</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="content">
-            <div class="status-cards">
-                <div class="status-card active">
-                    <div class="status-count">15</div>
-                    <div class="status-label">Todos</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-count">8</div>
-                    <div class="status-label">Cozinha</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-count">3</div>
-                    <div class="status-label">Aguardando</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-count">2</div>
-                    <div class="status-label">Entrega</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-count">2</div>
-                    <div class="status-label">Concluídos</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-count">1</div>
-                    <div class="status-label">Cancelados</div>
-                </div>
-            </div>
-
-            <div class="orders-container">
-                <!-- Pedido 1 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <div class="order-id">#223</div>
-                        <div class="order-status status-preparing">Em Preparo</div>
+        <div class="kanban-board" id="kanbanBoard">
+            <!-- Coluna Novos Pedidos -->
+            <div class="kanban-column column-new" data-status="new">
+                <div class="column-header">
+                    <div class="column-title">
+                        <i class="fas fa-inbox"></i>
+                        <span>Novos Pedidos</span>
                     </div>
-                    <div class="order-body">
+                    <div class="column-count">3</div>
+                </div>
+                <div class="column-content" data-column="new">
+                    <div class="order-card" draggable="true" data-order-id="45">
+                        <div class="order-header">
+                            <div class="order-id">#45</div>
+                            <div class="order-time">há 5 min</div>
+                        </div>
                         <div class="customer-info">
-                            <div class="customer-avatar">LN</div>
+                            <div class="customer-avatar">AM</div>
                             <div>
-                                <div class="customer-name">Lucas Níquelé</div>
-                                <div class="customer-phone">(11) 98765-4321</div>
+                                <div class="customer-name">Ana Mendes</div>
+                                <div class="customer-phone">(11) 98765-1234</div>
                             </div>
                         </div>
-                        <div class="order-details">
+                        <div class="order-items">
+                            <div class="order-item">
+                                <span>1x Pizza Margherita</span>
+                                <span>R$ 42,90</span>
+                            </div>
+                            <div class="order-item">
+                                <span>2x Guaraná 600ml</span>
+                                <span>R$ 15,80</span>
+                            </div>
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">R$ 58,70</div>
+                            <div class="order-payment">Cartão</div>
+                        </div>
+                    </div>
+
+                    <div class="order-card" draggable="true" data-order-id="46">
+                        <div class="order-header">
+                            <div class="order-id">#46</div>
+                            <div class="order-time">há 12 min</div>
+                        </div>
+                        <div class="customer-info">
+                            <div class="customer-avatar">CR</div>
+                            <div>
+                                <div class="customer-name">Carlos Rocha</div>
+                                <div class="customer-phone">(11) 91234-5678</div>
+                            </div>
+                        </div>
+                        <div class="order-items">
                             <div class="order-item">
                                 <span>1x Hambúrguer Artesanal</span>
                                 <span>R$ 28,90</span>
@@ -435,133 +457,198 @@
                                 <span>1x Batata Frita Grande</span>
                                 <span>R$ 19,90</span>
                             </div>
-                            <div class="order-item">
-                                <span>2x Refri 600ml</span>
-                                <span>R$ 17,80</span>
-                            </div>
                         </div>
-                        <div class="order-address">
-                            Vila Buarque - Rua Vitória Bueno, 79 - R$ 3,00
-                        </div>
-                        <div class="order-meta">
-                            <div class="order-total">Total: R$ 69,90</div>
+                        <div class="order-footer">
+                            <div class="order-total">R$ 48,80</div>
                             <div class="order-payment">Dinheiro</div>
                         </div>
                     </div>
-                    <div class="order-footer">
-                        <div class="order-time">
-                            <i class="far fa-clock"></i> 05 min - 06:31 (10:42 - 20:35m)
-                        </div>
-                        <div class="order-actions">
-                            <button class="action-btn" title="Preparar">
-                                <i class="fas fa-fire"></i>
-                            </button>
-                            <button class="action-btn" title="Imprimir">
-                                <i class="fas fa-print"></i>
-                            </button>
-                            <button class="action-btn" title="Detalhes">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Pedido 2 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <div class="order-id">#51</div>
-                        <div class="order-status status-delivery">Saiu para Entrega</div>
+            <!-- Coluna Em Preparo -->
+            <div class="kanban-column column-preparing" data-status="preparing">
+                <div class="column-header">
+                    <div class="column-title">
+                        <i class="fas fa-fire"></i>
+                        <span>Em Preparo</span>
                     </div>
-                    <div class="order-body">
+                    <div class="column-count">4</div>
+                </div>
+                <div class="column-content" data-column="preparing">
+                    <div class="order-card" draggable="true" data-order-id="42">
+                        <div class="order-header">
+                            <div class="order-id">#42</div>
+                            <div class="order-time">há 25 min</div>
+                        </div>
                         <div class="customer-info">
-                            <div class="customer-avatar">RF</div>
+                            <div class="customer-avatar">LN</div>
                             <div>
-                                <div class="customer-name">Ramon Forasca</div>
-                                <div class="customer-phone">(11) 91234-5678</div>
+                                <div class="customer-name">Lucas Níquelé</div>
+                                <div class="customer-phone">(11) 92345-6789</div>
                             </div>
                         </div>
-                        <div class="order-details">
+                        <div class="order-items">
                             <div class="order-item">
-                                <span>1x Pizza Calabresa</span>
-                                <span>R$ 49,90</span>
+                                <span>2x Pizza Calabresa</span>
+                                <span>R$ 99,80</span>
                             </div>
                             <div class="order-item">
                                 <span>1x Coca-Cola 2L</span>
                                 <span>R$ 12,90</span>
                             </div>
                         </div>
-                        <div class="order-address">
-                            Centro - Rua Maria Amália, 382 - R$ 1,00
-                        </div>
-                        <div class="order-meta">
-                            <div class="order-total">Total: R$ 65,80</div>
-                            <div class="order-payment">Dinheiro</div>
+                        <div class="order-footer">
+                            <div class="order-total">R$ 112,70</div>
+                            <div class="order-payment">Cartão</div>
                         </div>
                     </div>
-                    <div class="order-footer">
-                        <div class="order-time">
-                            <i class="far fa-clock"></i> 27 min - 15:08 (16:04 - 22:58m)
-                        </div>
-                        <div class="order-actions">
-                            <button class="action-btn" title="Entregue">
-                                <i class="fas fa-check"></i>
-                            </button>
-                            <button class="action-btn" title="Rastrear">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </button>
-                            <button class="action-btn" title="Detalhes">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Pedido 3 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <div class="order-id">#02</div>
-                        <div class="order-status status-waiting">Aguardando Entrega</div>
-                    </div>
-                    <div class="order-body">
+                    <div class="order-card" draggable="true" data-order-id="43">
+                        <div class="order-header">
+                            <div class="order-id">#43</div>
+                            <div class="order-time">há 18 min</div>
+                        </div>
                         <div class="customer-info">
                             <div class="customer-avatar">PT</div>
                             <div>
-                                <div class="customer-name">Pedido de Teste</div>
+                                <div class="customer-name">Pedido Teste</div>
                                 <div class="customer-phone">(11) 90000-0000</div>
                             </div>
                         </div>
-                        <div class="order-details">
+                        <div class="order-items">
                             <div class="order-item">
-                                <span>1x Esfiha Carne</span>
-                                <span>R$ 5,90</span>
+                                <span>3x Esfiha Carne</span>
+                                <span>R$ 17,70</span>
                             </div>
                             <div class="order-item">
                                 <span>1x Suco Natural</span>
                                 <span>R$ 8,90</span>
                             </div>
                         </div>
-                        <div class="order-address">
-                            Centro - Avenida Cruz, 50 - R$ 1,00
+                        <div class="order-footer">
+                            <div class="order-total">R$ 26,60</div>
+                            <div class="order-payment">Dinheiro</div>
                         </div>
-                        <div class="order-meta">
-                            <div class="order-total">Total: R$ 15,80</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna Prontos -->
+            <div class="kanban-column column-ready" data-status="ready">
+                <div class="column-header">
+                    <div class="column-title">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Prontos</span>
+                    </div>
+                    <div class="column-count">2</div>
+                </div>
+                <div class="column-content" data-column="ready">
+                    <div class="order-card" draggable="true" data-order-id="38">
+                        <div class="order-header">
+                            <div class="order-id">#38</div>
+                            <div class="order-time">há 32 min</div>
+                        </div>
+                        <div class="customer-info">
+                            <div class="customer-avatar">RF</div>
+                            <div>
+                                <div class="customer-name">Ramon Forasca</div>
+                                <div class="customer-phone">(11) 93456-7890</div>
+                            </div>
+                        </div>
+                        <div class="order-items">
+                            <div class="order-item">
+                                <span>1x Lasanha</span>
+                                <span>R$ 35,90</span>
+                            </div>
+                            <div class="order-item">
+                                <span>1x Água Mineral</span>
+                                <span>R$ 5,00</span>
+                            </div>
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">R$ 40,90</div>
                             <div class="order-payment">Cartão</div>
                         </div>
                     </div>
-                    <div class="order-footer">
-                        <div class="order-time">
-                            <i class="far fa-clock"></i> 30 min - 15:13 (15:04 - 22:53m)
+                </div>
+            </div>
+
+            <!-- Coluna Saiu para Entrega -->
+            <div class="kanban-column column-delivery" data-status="delivery">
+                <div class="column-header">
+                    <div class="column-title">
+                        <i class="fas fa-motorcycle"></i>
+                        <span>Em Entrega</span>
+                    </div>
+                    <div class="column-count">1</div>
+                </div>
+                <div class="column-content" data-column="delivery">
+                    <div class="order-card" draggable="true" data-order-id="35">
+                        <div class="order-header">
+                            <div class="order-id">#35</div>
+                            <div class="order-time">há 45 min</div>
                         </div>
-                        <div class="order-actions">
-                            <button class="action-btn" title="Entregar">
-                                <i class="fas fa-motorcycle"></i>
-                            </button>
-                            <button class="action-btn" title="Imprimir">
-                                <i class="fas fa-print"></i>
-                            </button>
-                            <button class="action-btn" title="Detalhes">
-                                <i class="fas fa-eye"></i>
-                            </button>
+                        <div class="customer-info">
+                            <div class="customer-avatar">MS</div>
+                            <div>
+                                <div class="customer-name">Mariana Silva</div>
+                                <div class="customer-phone">(11) 94567-8901</div>
+                            </div>
+                        </div>
+                        <div class="order-items">
+                            <div class="order-item">
+                                <span>1x Frango Grelhado</span>
+                                <span>R$ 29,90</span>
+                            </div>
+                            <div class="order-item">
+                                <span>1x Arroz e Feijão</span>
+                                <span>R$ 12,90</span>
+                            </div>
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">R$ 42,80</div>
+                            <div class="order-payment">Dinheiro</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna Entregues -->
+            <div class="kanban-column column-delivered" data-status="delivered">
+                <div class="column-header">
+                    <div class="column-title">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>Entregues</span>
+                    </div>
+                    <div class="column-count">3</div>
+                </div>
+                <div class="column-content" data-column="delivered">
+                    <div class="order-card" draggable="true" data-order-id="30">
+                        <div class="order-header">
+                            <div class="order-id">#30</div>
+                            <div class="order-time">1h 20min</div>
+                        </div>
+                        <div class="customer-info">
+                            <div class="customer-avatar">JV</div>
+                            <div>
+                                <div class="customer-name">João Victor</div>
+                                <div class="customer-phone">(11) 95678-9012</div>
+                            </div>
+                        </div>
+                        <div class="order-items">
+                            <div class="order-item">
+                                <span>2x X-Tudo</span>
+                                <span>R$ 59,80</span>
+                            </div>
+                            <div class="order-item">
+                                <span>2x Refri Lata</span>
+                                <span>R$ 15,80</span>
+                            </div>
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">R$ 75,60</div>
+                            <div class="order-payment">Cartão</div>
                         </div>
                     </div>
                 </div>
@@ -570,26 +657,119 @@
     </div>
 
     <script>
-        // Simples interação com os cards de status
-        document.querySelectorAll('.status-card').forEach(card => {
-            card.addEventListener('click', function() {
-                document.querySelector('.status-card.active').classList.remove('active');
-                this.classList.add('active');
-                
-                // Aqui você implementaria a filtragem dos pedidos
-                console.log('Filtrar por:', this.querySelector('.status-label').textContent);
-            });
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const kanbanBoard = document.getElementById('kanbanBoard');
+            const columns = document.querySelectorAll('.kanban-column');
+            const orderCards = document.querySelectorAll('.order-card');
+            let draggedItem = null;
 
-        // Simples interação com os botões de ação
-        document.querySelectorAll('.action-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const action = this.title;
-                const orderId = this.closest('.order-card').querySelector('.order-id').textContent;
-                console.log(`${action} pedido ${orderId}`);
+            // Funções para Drag and Drop
+            function handleDragStart(e) {
+                draggedItem = this;
+                setTimeout(() => {
+                    this.classList.add('dragging');
+                }, 0);
+            }
+
+            function handleDragEnd() {
+                this.classList.remove('dragging');
+                draggedItem = null;
+            }
+
+            function handleDragOver(e) {
+                e.preventDefault();
+            }
+
+            function handleDragEnter(e) {
+                e.preventDefault();
+                this.classList.add('dropzone');
+            }
+
+            function handleDragLeave() {
+                this.classList.remove('dropzone');
+            }
+
+            function handleDrop(e) {
+                e.preventDefault();
+                this.classList.remove('dropzone');
                 
-                // Aqui você implementaria as ações reais
+                if (draggedItem) {
+                    this.querySelector('.column-content').appendChild(draggedItem);
+                    updateOrderStatus(draggedItem, this.dataset.status);
+                }
+            }
+
+            // Atualiza o status do pedido quando movido
+            function updateOrderStatus(orderCard, newStatus) {
+                const orderId = orderCard.dataset.orderId;
+                console.log(`Pedido ${orderId} movido para: ${newStatus}`);
+                
+                // Aqui você implementaria a chamada API para atualizar o status no backend
+                // fetch(`/api/orders/${orderId}`, {
+                //     method: 'PUT',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({ status: newStatus }),
+                // });
+                
+                updateColumnCounts();
+            }
+
+            // Atualiza as contagens das colunas
+            function updateColumnCounts() {
+                columns.forEach(column => {
+                    const status = column.dataset.status;
+                    const count = column.querySelector('.column-content').children.length;
+                    column.querySelector('.column-count').textContent = count;
+                });
+            }
+
+            // Adiciona eventos aos cards
+            orderCards.forEach(card => {
+                card.addEventListener('dragstart', handleDragStart);
+                card.addEventListener('dragend', handleDragEnd);
             });
+
+            // Adiciona eventos às colunas
+            columns.forEach(column => {
+                column.addEventListener('dragover', handleDragOver);
+                column.addEventListener('dragenter', handleDragEnter);
+                column.addEventListener('dragleave', handleDragLeave);
+                column.addEventListener('drop', handleDrop);
+            });
+
+            // Botões de ação nos cards (exemplo)
+            document.querySelectorAll('.order-card').forEach(card => {
+                const footer = card.querySelector('.order-footer');
+                const actions = document.createElement('div');
+                actions.className = 'order-actions';
+                
+                // Botão de detalhes
+                const detailsBtn = document.createElement('button');
+                detailsBtn.className = 'action-btn';
+                detailsBtn.title = 'Detalhes';
+                detailsBtn.innerHTML = '<i class="fas fa-eye"></i>';
+                detailsBtn.addEventListener('click', () => {
+                    console.log('Ver detalhes do pedido:', card.dataset.orderId);
+                });
+                
+                // Botão de impressão
+                const printBtn = document.createElement('button');
+                printBtn.className = 'action-btn';
+                printBtn.title = 'Imprimir';
+                printBtn.innerHTML = '<i class="fas fa-print"></i>';
+                printBtn.addEventListener('click', () => {
+                    console.log('Imprimir pedido:', card.dataset.orderId);
+                });
+                
+                actions.appendChild(detailsBtn);
+                actions.appendChild(printBtn);
+                footer.appendChild(actions);
+            });
+
+            // Atualiza contagens iniciais
+            updateColumnCounts();
         });
     </script>
 </body>

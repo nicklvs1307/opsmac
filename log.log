@@ -217,3 +217,37 @@ _c @ react-dom.production.min.js:280
 lc @ react-dom.production.min.js:272
 Vo @ react-dom.production.min.js:127
 (anônimo) @ react-dom.production.min.js:266
+
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+labels.js: typeof express: function
+labels.js: typeof express.Router: function
+labels.js: typeof router after express.Router(): function router instanceof express.Router: false
+labels.js: typeof router before export: function router instanceof express.Router: false
+server.js: labelRoutes type: function labelRoutes instanceof Router: false
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api

@@ -1,75 +1,84 @@
-dashboard:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-The script has an unsupported MIME type ('text/html').
-serviceWorkerRegistration.js:90 Error during service worker registration: SecurityError: Failed to register a ServiceWorker for scope ('https://feedelizapro.towersfy.com/') with script ('https://feedelizapro.towersfy.com/service-worker.js'): The script has an unsupported MIME type ('text/html').
-(anônimo) @ serviceWorkerRegistration.js:90
-Promise.catch
-(anônimo) @ serviceWorkerRegistration.js:89
-(anônimo) @ serviceWorkerRegistration.js:46
-
-
 URL da solicitação
 https://feedelizaapi.towersfy.com/labels/users
 Método da solicitação
 GET
 Código de status
-404 Not Found
+500 Internal Server Error
 Endereço remoto
 95.217.16.187:443
-Mensagem de erro
-{"error":"Rota não encontrada"}
-
-URL da solicitação
-https://feedelizaapi.towersfy.com/labels/items
-Método da solicitação
-GET
-Código de status
-404 Not Found
-Endereço remoto
-95.217.16.187:443
-Mensagem de erro
-{"error":"Rota não encontrada"} 
 
 URL da solicitação
 https://feedelizaapi.towersfy.com/labels/loss-history
 Método da solicitação
 GET
 Código de status
-404 Not Found
+500 Internal Server Error
 Endereço remoto
 95.217.16.187:443
-Mensagem de erro
-{"error":"Rota não encontrada"} 
 
 URL da solicitação
 https://feedelizaapi.towersfy.com/labels/history
 Método da solicitação
 GET
 Código de status
-404 Not Found
+500 Internal Server Error
 Endereço remoto
-95.217.16.187:443 
-Mensagem de erro
-{"error":"Rota não encontrada"} 
+95.217.16.187:443
 
 URL da solicitação
 https://feedelizaapi.towersfy.com/labels/stock-counts
 Método da solicitação
-GET
+POST
 Código de status
-404 Not Found
+500 Internal Server Error
 Endereço remoto
 95.217.16.187:443
-Mensagem de erro
-{"error":"Rota não encontrada"} 
+
 
 URL da solicitação
 https://feedelizaapi.towersfy.com/labels/productions
 Método da solicitação
-GET
+POST
 Código de status
-404 Not Found
+500 Internal Server Error
 Endereço remoto
-95.217.16.187:443 
-Mensagem de erro
-{"error":"Rota não encontrada"}
+95.217.16.187:443
 
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+server.js: labelRoutes type: function labelRoutes instanceof Router: false
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
+column User.restaurant_id does not exist
+table name "user->restaurants->npsCriteria->questions->Survey->responses->c" specified more than once
+table name "user->restaurants->npsCriteria->questions->Survey->responses->c" specified more than once
+notNull Violation: StockCount.user_id cannot be null
+column User.restaurant_id does not exist
+table name "user->restaurants->npsCriteria->questions->Survey->responses->c" specified more than once
+table name "user->restaurants->npsCriteria->questions->Survey->responses->c" specified more than once
+notNull Violation: StockCount.user_id cannot be null
+notNull Violation: ProductionRecord.user_id cannot be null

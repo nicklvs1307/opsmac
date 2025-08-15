@@ -55,15 +55,25 @@ router.get('/items', auth, getRestaurantId, async (req, res) => {
 router.get('/users', auth, getRestaurantId, async (req, res) => {
   try {
     const { restaurantId } = req;
-    // This assumes you want to list all users associated with the restaurant.
-    // You might need a more complex query depending on your User-Restaurant association.
-    const users = await User.findAll({
-      // You need to implement the logic to filter users by restaurant_id
-      // This depends on how Users are associated with Restaurants in your system.
-      // For now, fetching all users as a placeholder.
-      where: { restaurant_id: restaurantId }
+    const restaurant = await Restaurant.findByPk(restaurantId, {
+      include: [{
+        model: User,
+        as: 'owner'
+      }]
     });
+
+    if (!restaurant) {
+      return res.status(404).json({ msg: 'Restaurant not found.' });
+    }
+
+    // If the goal is to get the owner of the restaurant
+    const users = restaurant.owner ? [restaurant.owner] : [];
     res.json(users);
+
+    // If there's a possibility of other users associated with the restaurant
+    // (e.g., employees), that association needs to be defined in the models.
+    // For now, we assume 'users' refers to the owner.
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

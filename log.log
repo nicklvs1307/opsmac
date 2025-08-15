@@ -1,14 +1,17 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
-/app/backend/server.js:101
-app.use('/api/labels', labelRoutes);
-                       ^
-ReferenceError: labelRoutes is not defined
-    at Object.<anonymous> (/app/backend/server.js:101:24)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+/app/backend/routes/labels.js:427
+    }
+    ^
+SyntaxError: Unexpected token '}'
+    at wrapSafe (node:internal/modules/cjs/loader:1472:18)
+    at Module._compile (node:internal/modules/cjs/loader:1501:20)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
     at Module.load (node:internal/modules/cjs/loader:1275:32)
     at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
-    at node:internal/main/run_main_module:28:49
+    at Module.require (node:internal/modules/cjs/loader:1298:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/backend/server.js:41:21)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
 Node.js v20.19.4

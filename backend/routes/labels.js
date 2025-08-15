@@ -424,9 +424,6 @@ router.post('/stock-counts/:id/complete', async (req, res) => {
 
 // #endregion
 
-    }
-});
-
 // #region Production Routes
 /**
  * @route   POST /api/labels/productions

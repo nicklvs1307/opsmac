@@ -423,69 +423,9 @@ const Pdv = () => {
 
   return (
     <div className="app-container">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <div className="logo">
-          <img src="https://via.placeholder.com/150x50?text=LOGO" alt="Restaurante Logo" />
-        </div>
-        <ul className="nav-menu">
-          <li className="nav-item">
-            <a href="#" className={currentTab === 'pdv' ? 'nav-link active' : 'nav-link'} onClick={() => setCurrentTab('pdv')}>
-              <PointOfSaleIcon />
-              <span>PDV</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#" className={currentTab === 'orders' ? 'nav-link active' : 'nav-link'} onClick={() => setCurrentTab('orders')}>
-              <RestaurantIcon />
-              <span>Pedidos</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#" className={currentTab === 'kanban' ? 'nav-link active' : 'nav-link'} onClick={() => setCurrentTab('kanban')}>
-              <AssignmentIcon />
-              <span>Kanban</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#" className="nav-link">
-              <BookIcon />
-              <span>Cardápio</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#" className="nav-link">
-              <PeopleIcon />
-              <span>Clientes</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#" className="nav-link">
-              <PieChartIcon />
-              <span>Relatórios</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#" className="nav-link">
-              <SettingsIcon />
-              <span>Configurações</span>
-            </a>
-          </li>
-        </ul>
-        <div className="sidebar-footer">
-          v1.0.0 © 2023 Restaurante
-        </div>
-      </aside>
 
       {/* Main Content */}
       <main className="main-content">
-        <div className="header">
-          <h1 className="page-title" id="currentTabTitle">{currentTab === 'pdv' ? 'PDV' : currentTab === 'orders' ? 'Pedidos' : 'Kanban'}</h1>
-          <div className="user-info">
-            <span>Operador</span>
-            <div className="user-avatar">OP</div>
-          </div>
-        </div>
 
         {/* Tabs Container */}
         <div className="tabs-container">
@@ -545,6 +485,7 @@ const Pdv = () => {
                     ) : (
                       cartItems.map(item => (
                         <div className="order-item" key={item.id}>
+                          <div className="item-image">{item.image && item.image.startsWith('http') ? <img src={item.image} alt={item.name} /> : item.image}</div>
                           <div className="item-info">
                             <div className="item-name">{item.name}</div>
                             <div className="item-price">R$ {Number(item.price).toFixed(2).replace('.', ',')}</div>

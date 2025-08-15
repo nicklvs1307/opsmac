@@ -1,16 +1,16 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      174.1s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      182.4s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.682
-0.682 > feedeliza-plus@1.0.0 build
-0.682 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.682
-3.520 Creating an optimized production build...
-173.1 Failed to compile.
-173.1
-173.1 Attempted import error: 'Fire' is not exported from '@mui/icons-material' (imported as 'FireIcon').
-173.1
-173.1
+0.638
+0.638 > feedeliza-plus@1.0.0 build
+0.638 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.638
+3.804 Creating an optimized production build...
+181.5 Failed to compile.
+181.5
+181.5 Attempted import error: 'Motorcycle' is not exported from '@mui/icons-material' (imported as 'MotorcycleIcon').
+181.5
+181.5
 ------
 Dockerfile.frontend:23
 --------------------

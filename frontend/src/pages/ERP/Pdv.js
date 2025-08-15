@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { Refresh as RefreshIcon, Store as StoreIcon, PointOfSale as PointOfSaleIcon, AddShoppingCart as AddShoppingCartIcon, RemoveShoppingCart as RemoveShoppingCartIcon, Delete as DeleteIcon, Menu as MenuIcon, Dashboard as DashboardIcon, ShoppingBasket as ShoppingBasketIcon, Inventory as InventoryIcon, Add as AddIcon, Remove as RemoveIcon, Search as SearchIcon, FilterList as FilterListIcon, Close as CloseIcon, CashRegister as CashRegisterIcon, Utensils as UtensilsIcon, Tasks as TasksIcon, Book as BookIcon, Users as UsersIcon, ChartPie as ChartPieIcon, Cog as CogIcon, TrashAlt as TrashAltIcon, Eye as EyeIcon, Edit as EditIcon, Print as PrintIcon, Filter as FilterIcon, Plus as PlusIcon, ShoppingCart as ShoppingCartIcon, ThumbsUp as ThumbsUpIcon, ThumbsUpDown as ThumbsUpDownIcon, ThumbDown as ThumbDownIcon, QuestionAnswer as QuestionAnswerIcon, PersonAdd as PersonAddIcon, CheckCircle as CheckCircleIcon, Motorcycle as MotorcycleIcon, ClipboardCheck as ClipboardCheckIcon, Inbox as InboxIcon, LocalFireDepartment as FireIcon } from '@mui/icons-material'; // Added many icons
+import { Refresh as RefreshIcon, Store as StoreIcon, PointOfSale as PointOfSaleIcon, AddShoppingCart as AddShoppingCartIcon, RemoveShoppingCart as RemoveShoppingCartIcon, Delete as DeleteIcon, Menu as MenuIcon, Dashboard as DashboardIcon, ShoppingBasket as ShoppingBasketIcon, Inventory as InventoryIcon, Add as AddIcon, Remove as RemoveIcon, Search as SearchIcon, FilterList as FilterListIcon, Close as CloseIcon, Restaurant as RestaurantIcon, Assignment as AssignmentIcon, Book as BookIcon, People as PeopleIcon, PieChart as PieChartIcon, Settings as SettingsIcon, Eye as EyeIcon, Edit as EditIcon, Print as PrintIcon, Filter as FilterIcon, Plus as PlusIcon, ShoppingCart as ShoppingCartIcon, ThumbsUp as ThumbsUpIcon, ThumbsUpDown as ThumbsUpDownIcon, ThumbDown as ThumbDownIcon, QuestionAnswer as QuestionAnswerIcon, PersonAdd as PersonAddIcon, CheckCircle as CheckCircleIcon, DeliveryDining as MotorcycleIcon, ClipboardCheck as ClipboardCheckIcon, Inbox as InboxIcon, LocalFireDepartment as FireIcon, Payments as PaymentsIcon, Person as PersonIcon, Info as InfoIcon, List as ListIcon } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 
@@ -431,19 +431,19 @@ const Pdv = () => {
         <ul className="nav-menu">
           <li className="nav-item">
             <a href="#" className={currentTab === 'pdv' ? 'nav-link active' : 'nav-link'} onClick={() => setCurrentTab('pdv')}>
-              <CashRegisterIcon />
+              <PointOfSaleIcon />
               <span>PDV</span>
             </a>
           </li>
           <li className="nav-item">
             <a href="#" className={currentTab === 'orders' ? 'nav-link active' : 'nav-link'} onClick={() => setCurrentTab('orders')}>
-              <UtensilsIcon />
+              <RestaurantIcon />
               <span>Pedidos</span>
             </a>
           </li>
           <li className="nav-item">
             <a href="#" className={currentTab === 'kanban' ? 'nav-link active' : 'nav-link'} onClick={() => setCurrentTab('kanban')}>
-              <TasksIcon />
+              <AssignmentIcon />
               <span>Kanban</span>
             </a>
           </li>
@@ -455,19 +455,19 @@ const Pdv = () => {
           </li>
           <li className="nav-item">
             <a href="#" className="nav-link">
-              <UsersIcon />
+              <PeopleIcon />
               <span>Clientes</span>
             </a>
           </li>
           <li className="nav-item">
             <a href="#" className="nav-link">
-              <ChartPieIcon />
+              <PieChartIcon />
               <span>Relatórios</span>
             </a>
           </li>
           <li className="nav-item">
             <a href="#" className="nav-link">
-              <CogIcon />
+              <SettingsIcon />
               <span>Configurações</span>
             </a>
           </li>
@@ -491,13 +491,13 @@ const Pdv = () => {
         <div className="tabs-container">
           <div className="tabs-header">
             <button className={currentTab === 'pdv' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('pdv')}>
-              <CashRegisterIcon /> PDV
+              <PointOfSaleIcon /> PDV
             </button>
             <button className={currentTab === 'orders' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('orders')}>
-              <UtensilsIcon /> Pedidos
+              <RestaurantIcon /> Pedidos
             </button>
             <button className={currentTab === 'kanban' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('kanban')}>
-              <TasksIcon /> Kanban
+              <AssignmentIcon /> Kanban
             </button>
           </div>
 
@@ -536,7 +536,7 @@ const Pdv = () => {
                   <div className="order-header">
                     <h3 className="order-title">Comanda Atual</h3>
                     <button className="order-clear" onClick={clearOrder}>
-                      <TrashAltIcon /> Limpar
+                      <DeleteIcon /> Limpar
                     </button>
                   </div>
                   <div className="order-items" id="orderItems">
@@ -577,10 +577,10 @@ const Pdv = () => {
                   </div>
                   <div className="order-actions">
                     <button className="btn btn-outline" onClick={openPaymentModal}>
-                      <i className="fas fa-money-bill-wave"></i> Pagamento
+                      <PaymentsIcon /> Pagamento
                     </button>
                     <button className="btn btn-success" onClick={handlePlaceOrder} disabled={createOrderMutation.isLoading || cartItems.length === 0 || !paymentMethod}>
-                      <i className="fas fa-check"></i> Finalizar
+                      <CheckCircleIcon /> Finalizar
                     </button>
                   </div>
                 </div>
@@ -597,7 +597,7 @@ const Pdv = () => {
                       <FilterIcon /> Filtrar
                     </button>
                     <button className="btn btn-primary">
-                      <PlusIcon /> Novo Pedido
+                      <AddIcon /> Novo Pedido
                     </button>
                   </div>
                 </div>
@@ -778,7 +778,7 @@ const Pdv = () => {
             <div className="modal-body">
               <div className="order-details-grid">
                 <div className="order-info-card">
-                  <h4 className="info-card-title"><i className="fas fa-user"></i> Informações do Cliente</h4>
+                  <h4 className="info-card-title"><PersonIcon /> Informações do Cliente</h4>
                   <div className="info-item">
                     <span className="info-label">Nome:</span>
                     <span className="info-value">{selectedOrder.customer_details.name}</span>
@@ -791,7 +791,7 @@ const Pdv = () => {
                 </div>
 
                 <div className="order-info-card">
-                  <h4 className="info-card-title"><i className="fas fa-info-circle"></i> Informações do Pedido</h4>
+                  <h4 className="info-card-title"><InfoIcon /> Informações do Pedido</h4>
                   <div className="info-item">
                     <span className="info-label">Data/Hora:</span>
                     <span className="info-value">{new Date(selectedOrder.order_date).toLocaleString()}</span>
@@ -811,7 +811,7 @@ const Pdv = () => {
                 </div>
               </div>
 
-              <h4 style={{ margin: '20px 0 15px', color: 'var(--dark)' }}><i className="fas fa-list"></i> Itens do Pedido</h4>
+              <h4 style={{ margin: '20px 0 15px', color: 'var(--dark)'}}><ListIcon /> Itens do Pedido</h4>
               <table className="items-list">
                 <thead>
                   <tr>
@@ -840,13 +840,13 @@ const Pdv = () => {
             </div>
             <div className="modal-footer">
               <button className="btn btn-outline" onClick={closeOrderDetailsModal}>
-                <i className="fas fa-times"></i> Fechar
+                <CloseIcon /> Fechar
               </button>
               <button className="btn btn-primary">
-                <i className="fas fa-print"></i> Imprimir
+                <PrintIcon /> Imprimir
               </button>
               <button className="btn btn-primary">
-                <i className="fas fa-check"></i> Marcar como Entregue
+                <CheckCircleIcon /> Marcar como Entregue
               </button>
             </div>
           </div>

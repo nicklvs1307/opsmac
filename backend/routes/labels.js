@@ -20,7 +20,7 @@ const getRestaurantId = (req, res, next) => {
 };
 
 // Use auth and getRestaurantId for all routes in this file
-router.use('/', auth, getRestaurantId);
+// router.use('/', auth, getRestaurantId);
 
 /**
  * @route   GET /api/labels/items

@@ -1,3 +1,12 @@
+dashboard:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+The script has an unsupported MIME type ('text/html').
+serviceWorkerRegistration.js:90 Error during service worker registration: SecurityError: Failed to register a ServiceWorker for scope ('https://feedelizapro.towersfy.com/') with script ('https://feedelizapro.towersfy.com/service-worker.js'): The script has an unsupported MIME type ('text/html').
+(anônimo) @ serviceWorkerRegistration.js:90
+Promise.catch
+(anônimo) @ serviceWorkerRegistration.js:89
+(anônimo) @ serviceWorkerRegistration.js:46
+
+
 URL da solicitação
 https://feedelizaapi.towersfy.com/labels/users
 Método da solicitação
@@ -6,10 +15,41 @@ Código de status
 404 Not Found
 Endereço remoto
 95.217.16.187:443
-
+Mensagem de erro
 {"error":"Rota não encontrada"}
 
-Exclusão de etiquetas nao funcionando, produção de etiquetas nao funcionando,  contagem de produtos nao funcionando, e hitorico também não eu clico no botão desses itens e nao acontece nada
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/items
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+Mensagem de erro
+{"error":"Rota não encontrada"} 
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/loss-history
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+Mensagem de erro
+{"error":"Rota não encontrada"} 
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/history
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443 
+Mensagem de erro
+{"error":"Rota não encontrada"} 
 
 URL da solicitação
 https://feedelizaapi.towersfy.com/labels/stock-counts
@@ -19,8 +59,8 @@ Código de status
 404 Not Found
 Endereço remoto
 95.217.16.187:443
-
-{"error":"Rota não encontrada"}
+Mensagem de erro
+{"error":"Rota não encontrada"} 
 
 URL da solicitação
 https://feedelizaapi.towersfy.com/labels/productions
@@ -29,6 +69,7 @@ GET
 Código de status
 404 Not Found
 Endereço remoto
-95.217.16.187:443
+95.217.16.187:443 
+Mensagem de erro
+{"error":"Rota não encontrada"}
 
-{"error":"Rota não encontrada"} 

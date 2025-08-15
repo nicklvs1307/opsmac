@@ -39,6 +39,7 @@ const ingredientsRoutes = require('./routes/ingredients');
 const technicalSpecificationsRoutes = require('./routes/technicalSpecifications');
 const categoriesRoutes = require('./routes/categories');
 const labelRoutes = require('./routes/labels');
+console.log('server.js: labelRoutes type:', typeof labelRoutes, 'labelRoutes instanceof Router:', labelRoutes instanceof express.Router);
 
 const app = express();
 app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)

@@ -7,30 +7,33 @@ const { Product, Ingredient, User, PrintedLabel, LossRecord, Stock, StockMovemen
 const { auth } = require('../middleware/auth');
 const adminAuth = require('../middleware/adminAuth');
 
-// Middleware to get restaurant_id from the authenticated user
+// Middleware to get restaurant_id from the authenticated user (similar to products.js)
 const getRestaurantId = (req, res, next) => {
-  // This is a placeholder. In a real app, you'd get this from the user's session or token.
-  // For now, let's assume the user is associated with a restaurant.
-  // You might need to adjust this based on your actual auth implementation.
-  req.restaurant_id = req.user.restaurant_id; 
-  if (!req.restaurant_id) {
-    return res.status(403).json({ msg: 'User is not associated with a restaurant.' });
+  let restaurantId = req.user?.restaurants?.[0]?.id; // Default for owner/manager
+
+  // If user is admin or super_admin, allow them to specify restaurant_id
+  if (req.user.role === 'admin' || req.user.role === 'super_admin') {
+    restaurantId = req.query.restaurant_id || req.body.restaurant_id || restaurantId;
   }
+
+  if (!restaurantId) {
+    return res.status(400).json({ msg: 'ID do restaurante é obrigatório ou usuário não associado a nenhum restaurante.' });
+  }
+  req.restaurantId = restaurantId; // Sets req.restaurantId
   next();
 };
 
-// Use auth and getRestaurantId for all routes in this file
-// router.use('/', auth, getRestaurantId);
 
 /**
  * @route   GET /api/labels/items
  * @desc    Get all stockable items (Products and Ingredients) for a restaurant
  * @access  Private
  */
-router.get('/items', async (req, res) => {
+router.get('/items', auth, getRestaurantId, async (req, res) => {
   try {
-    const products = await Product.findAll({ where: { restaurant_id: req.restaurant_id } });
-    const ingredients = await Ingredient.findAll({ where: { restaurant_id: req.restaurant_id } });
+    const { restaurantId } = req;
+    const products = await Product.findAll({ where: { restaurant_id: restaurantId } });
+    const ingredients = await Ingredient.findAll({ where: { restaurant_id: restaurantId } });
 
     const items = [
       ...products.map(p => ({ ...p.toJSON(), type: 'Product' })),
@@ -49,14 +52,16 @@ router.get('/items', async (req, res) => {
  * @desc    Get all users for the restaurant (for responsible person dropdown)
  * @access  Private
  */
-router.get('/users', async (req, res) => {
+router.get('/users', auth, getRestaurantId, async (req, res) => {
   try {
+    const { restaurantId } = req;
     // This assumes you want to list all users associated with the restaurant.
     // You might need a more complex query depending on your User-Restaurant association.
     const users = await User.findAll({
       // You need to implement the logic to filter users by restaurant_id
       // This depends on how Users are associated with Restaurants in your system.
       // For now, fetching all users as a placeholder.
+      where: { restaurant_id: restaurantId }
     });
     res.json(users);
   } catch (err) {
@@ -73,6 +78,8 @@ router.get('/users', async (req, res) => {
  */
 router.post(
   '/print',
+  auth,
+  getRestaurantId, // Add middleware
   [
     body('labelable_id', 'Item ID is required').not().isEmpty(),
     body('labelable_type', 'Item type is required').isIn(['Product', 'Ingredient']),
@@ -86,6 +93,7 @@ router.post(
     }
 
     const { labelable_id, labelable_type, expiration_date, quantity_printed, lot_number, sif, weight, unit_of_measure } = req.body;
+    const { restaurantId } = req; // Use req.restaurantId
 
     try {
       const newLabel = await PrintedLabel.create({
@@ -98,7 +106,7 @@ router.post(
         weight,
         unit_of_measure,
         user_id: req.user.id,
-        restaurant_id: req.restaurant_id,
+        restaurant_id: restaurantId, // Use restaurantId
       });
 
       res.status(201).json(newLabel);
@@ -116,6 +124,8 @@ router.post(
  */
 router.post(
   '/loss',
+  auth,
+  getRestaurantId, // Add middleware
   [
     body('stockable_id', 'Item ID is required').not().isEmpty(),
     body('stockable_type', 'Item type is required').isIn(['Product', 'Ingredient']),
@@ -129,6 +139,7 @@ router.post(
     }
 
     const { stockable_id, stockable_type, quantity, reason, notes } = req.body;
+    const { restaurantId } = req; // Use req.restaurantId
 
     const t = await sequelize.transaction();
 
@@ -141,7 +152,7 @@ router.post(
         reason,
         notes,
         user_id: req.user.id,
-        restaurant_id: req.restaurant_id,
+        restaurant_id: restaurantId, // Use restaurantId
         loss_date: new Date(),
       }, { transaction: t });
 
@@ -182,10 +193,11 @@ router.post(
  * @desc    Get history of printed labels
  * @access  Private
  */
-router.get('/history', async (req, res) => {
+router.get('/history', auth, getRestaurantId, async (req, res) => {
     try {
+        const { restaurantId } = req;
         const history = await PrintedLabel.findAll({
-            where: { restaurant_id: req.restaurant_id },
+            where: { restaurant_id: restaurantId },
             include: [{ all: true, nested: true }], // Includes user, product, ingredient etc.
             order: [['print_date', 'DESC']]
         });
@@ -201,10 +213,11 @@ router.get('/history', async (req, res) => {
  * @desc    Get history of loss records
  * @access  Private
  */
-router.get('/loss-history', async (req, res) => {
+router.get('/loss-history', auth, getRestaurantId, async (req, res) => {
     try {
+        const { restaurantId } = req;
         const history = await LossRecord.findAll({
-            where: { restaurant_id: req.restaurant_id },
+            where: { restaurant_id: restaurantId },
             include: [{ all: true, nested: true }],
             order: [['loss_date', 'DESC']]
         });
@@ -221,21 +234,22 @@ router.get('/loss-history', async (req, res) => {
  * @desc    Start a new stock count
  * @access  Private
  */
-router.post('/stock-counts', async (req, res) => {
+router.post('/stock-counts', auth, getRestaurantId, async (req, res) => {
     const t = await sequelize.transaction();
     try {
         const { notes } = req.body;
+        const { restaurantId } = req; // Use req.restaurantId
 
         // 1. Create the main stock count record
         const stockCount = await StockCount.create({
-            restaurant_id: req.restaurant_id,
+            restaurant_id: restaurantId, // Use restaurantId
             user_id: req.user.id,
             notes,
         }, { transaction: t });
 
         // 2. Get all stockable items for the restaurant
-        const products = await Product.findAll({ where: { restaurant_id: req.restaurant_id }, include: ['stock'] });
-        const ingredients = await Ingredient.findAll({ where: { restaurant_id: req.restaurant_id }, include: ['stock'] });
+        const products = await Product.findAll({ where: { restaurant_id: restaurantId }, include: ['stock'] });
+        const ingredients = await Ingredient.findAll({ where: { restaurant_id: restaurantId }, include: ['stock'] });
 
         const itemsToCount = [
             ...products.map(p => ({ ...p.toJSON(), type: 'Product' })),
@@ -270,10 +284,11 @@ router.post('/stock-counts', async (req, res) => {
  * @desc    Get all stock counts for the restaurant
  * @access  Private
  */
-router.get('/stock-counts', async (req, res) => {
+router.get('/stock-counts', auth, getRestaurantId, async (req, res) => {
     try {
+        const { restaurantId } = req;
         const counts = await StockCount.findAll({
-            where: { restaurant_id: req.restaurant_id },
+            where: { restaurant_id: restaurantId },
             include: ['user'],
             order: [['count_date', 'DESC']]
         });
@@ -289,10 +304,11 @@ router.get('/stock-counts', async (req, res) => {
  * @desc    Get details of a single stock count
  * @access  Private
  */
-router.get('/stock-counts/:id', async (req, res) => {
+router.get('/stock-counts/:id', auth, getRestaurantId, async (req, res) => {
     try {
+        const { restaurantId } = req;
         const count = await StockCount.findOne({
-            where: { id: req.params.id, restaurant_id: req.restaurant_id },
+            where: { id: req.params.id, restaurant_id: restaurantId },
             include: [
                 { model: StockCountItem, as: 'items', include: ['product', 'ingredient'] },
                 { model: User, as: 'user' }
@@ -315,7 +331,7 @@ router.get('/stock-counts/:id', async (req, res) => {
  * @desc    Update counted quantities for a stock count
  * @access  Private
  */
-router.put('/stock-counts/:id', [
+router.put('/stock-counts/:id', auth, getRestaurantId, [ // Add middleware
     body('items', 'Items array is required').isArray(),
     body('items.*.id', 'Item ID is required').isUUID(),
     body('items.*.counted_quantity', 'Counted quantity must be a non-negative integer').isInt({ min: 0 })
@@ -329,8 +345,9 @@ router.put('/stock-counts/:id', [
     try {
         const { id } = req.params;
         const { items } = req.body;
+        const { restaurantId } = req; // Use req.restaurantId
 
-        const stockCount = await StockCount.findOne({ where: { id, restaurant_id: req.restaurant_id, status: 'in_progress' }, transaction: t });
+        const stockCount = await StockCount.findOne({ where: { id, restaurant_id: restaurantId, status: 'in_progress' }, transaction: t });
 
         if (!stockCount) {
             await t.rollback();
@@ -361,12 +378,13 @@ router.put('/stock-counts/:id', [
  * @desc    Complete a stock count and adjust stock levels
  * @access  Private
  */
-router.post('/stock-counts/:id/complete', async (req, res) => {
+router.post('/stock-counts/:id/complete', auth, getRestaurantId, async (req, res) => {
     const t = await sequelize.transaction();
     try {
         const { id } = req.params;
+        const { restaurantId } = req; // Use req.restaurantId
         const stockCount = await StockCount.findOne({
-            where: { id, restaurant_id: req.restaurant_id, status: 'in_progress' },
+            where: { id, restaurant_id: restaurantId, status: 'in_progress' },
             include: ['items'],
             transaction: t
         });
@@ -432,6 +450,8 @@ router.post('/stock-counts/:id/complete', async (req, res) => {
  */
 router.post(
   '/productions',
+  auth,
+  getRestaurantId, // Add middleware
   [
     body('produced_item_id', 'Produced item ID is required').not().isEmpty(),
     body('produced_item_type', 'Produced item type is required').isIn(['Product', 'Ingredient']),
@@ -448,13 +468,14 @@ router.post(
     }
 
     const { produced_item_id, produced_item_type, produced_quantity, inputs, notes } = req.body;
+    const { restaurantId } = req; // Use req.restaurantId
 
     const t = await sequelize.transaction();
 
     try {
       // 1. Create the ProductionRecord
       const productionRecord = await ProductionRecord.create({
-        restaurant_id: req.restaurant_id,
+        restaurant_id: restaurantId, // Use restaurantId
         user_id: req.user.id,
         notes,
       }, { transaction: t });
@@ -517,10 +538,11 @@ router.post(
  * @desc    Get all production records for the restaurant
  * @access  Private
  */
-router.get('/productions', async (req, res) => {
+router.get('/productions', auth, getRestaurantId, async (req, res) => {
   try {
+    const { restaurantId } = req; // Use req.restaurantId
     const productions = await ProductionRecord.findAll({
-      where: { restaurant_id: req.restaurant_id },
+      where: { restaurant_id: restaurantId }, // Use restaurantId
       include: ['user'],
       order: [['production_date', 'DESC']],
     });
@@ -536,10 +558,11 @@ router.get('/productions', async (req, res) => {
  * @desc    Get details of a single production record
  * @access  Private
  */
-router.get('/productions/:id', async (req, res) => {
+router.get('/productions/:id', auth, getRestaurantId, async (req, res) => {
   try {
+    const { restaurantId } = req; // Use req.restaurantId
     const production = await ProductionRecord.findOne({
-      where: { id: req.params.id, restaurant_id: req.restaurant_id },
+      where: { id: req.params.id, restaurant_id: restaurantId }, // Use restaurantId
       include: [
         { model: ProductionRecordItem, as: 'items', include: ['product', 'ingredient'] },
         { model: User, as: 'user' },
@@ -564,7 +587,7 @@ router.get('/productions/:id', async (req, res) => {
  * @desc    Update a stockable item's label properties
  * @access  Private
  */
-router.patch('/items/:type/:id', [
+router.patch('/items/:type/:id', auth, getRestaurantId, [ // Add middleware
     body('default_expiration_days').optional().isInt({ min: 0 }).withMessage('Must be a positive integer.'),
     body('default_label_status').optional().isIn(['RESFRIADO', 'CONGELADO', 'AMBIENTE']).withMessage('Invalid status.')
 ], async (req, res) => {
@@ -575,6 +598,7 @@ router.patch('/items/:type/:id', [
 
     const { type, id } = req.params;
     const { default_expiration_days, default_label_status } = req.body;
+    const { restaurantId } = req; // Use req.restaurantId
 
     if (type !== 'Product' && type !== 'Ingredient') {
         return res.status(400).json({ msg: 'Invalid item type.' });
@@ -582,7 +606,7 @@ router.patch('/items/:type/:id', [
 
     try {
         const model = type === 'Product' ? Product : Ingredient;
-        const item = await model.findOne({ where: { id, restaurant_id: req.restaurant_id } });
+        const item = await model.findOne({ where: { id, restaurant_id: restaurantId } });
 
         if (!item) {
             return res.status(404).json({ msg: 'Item not found.' });
@@ -608,11 +632,6 @@ router.patch('/items/:type/:id', [
         console.error(err.message);
         res.status(500).send('Server Error');
     }
-});
-
-// Test route
-router.get('/test', (req, res) => {
-    res.send('Labels router test successful!');
 });
 
 module.exports = router;

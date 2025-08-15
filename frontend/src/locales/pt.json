@@ -898,7 +898,10 @@
       "platform": "Plataforma",
       "date": "Data",
       "items": "Itens",
-      "change_status": "Mudar Status"
+      "change_status": "Mudar Status",
+      "confirm_clear_order": "Tem certeza que deseja limpar a comanda?",
+      "cart_empty_for_payment": "Adicione itens à comanda antes de prosseguir para o pagamento.",
+      "payment_processed": "Pagamento de R$ {{total}} processado com sucesso!"
     },
     "ingredient_management": {
       "error_loading_ingredients": "Erro ao carregar ingredientes: {{message}}",

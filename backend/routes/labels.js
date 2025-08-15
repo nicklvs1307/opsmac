@@ -610,4 +610,9 @@ router.patch('/items/:type/:id', [
     }
 });
 
+// Test route
+router.get('/test', (req, res) => {
+    res.send('Labels router test successful!');
+});
+
 module.exports = router;

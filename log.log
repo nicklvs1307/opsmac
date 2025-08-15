@@ -1,20 +1,27 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      163.0s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      165.9s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.794
-0.794 > feedeliza-plus@1.0.0 build
-0.794 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.794
-4.202 Creating an optimized production build...
-162.0 Failed to compile.
-162.0
-162.0 [eslint]
-162.0 src/pages/Labels/LabelsDashboard.js
-162.0   Line 30:30:  'Link' is not defined  react/jsx-no-undef
-162.0
-162.0 Search for the keywords to learn more about each error.
-162.0
-162.0
+0.617
+0.617 > feedeliza-plus@1.0.0 build
+0.617 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.617
+3.033 Creating an optimized production build...
+165.4 Failed to compile.
+165.4
+165.4 [eslint]
+165.4 src/App.js
+165.4   Line 134:62:  'ProductionList' is not defined    react/jsx-no-undef
+165.4   Line 135:66:  'ProductionCreate' is not defined  react/jsx-no-undef
+165.4
+165.4 src/pages/Labels/LabelsAdmin.js
+165.4 Syntax error: Identifier 'LossHistory' has already been declared. (9:6) (9:6)
+165.4
+165.4 src/pages/Labels/LabelsDashboard.js
+165.4   Line 9:31:  'useState' is not defined  no-undef
+165.4
+165.4 Search for the keywords to learn more about each error.
+165.4
+165.4
 ------
 Dockerfile.frontend:23
 --------------------

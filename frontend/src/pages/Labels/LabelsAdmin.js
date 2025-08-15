@@ -4,11 +4,6 @@ import ManageLabelItems from '../../components/Labels/ManageLabelItems';
 import PrintHistory from '../../components/Labels/PrintHistory';
 import LossHistory from '../../components/Labels/LossHistory';
 
-// Placeholder components for each tab panel
-// const ManageLabelItems = () => <div>Gerenciar Produtos e Insumos (Conteúdo)</div>;
-const LossHistory = () => <div>Histórico de Perdas (Conteúdo)</div>;
-// const PrintHistory = () => <div>Histórico de Impressão (Conteúdo)</div>;
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 

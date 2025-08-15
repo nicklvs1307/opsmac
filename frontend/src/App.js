@@ -58,6 +58,8 @@ import PrintLabel from './pages/Labels/PrintLabel';
 import LabelsAdmin from './pages/Labels/LabelsAdmin';
 import StockCountList from './pages/Labels/StockCountList';
 import StockCountDetail from './pages/Labels/StockCountDetail';
+import ProductionList from './pages/Labels/ProductionList';
+import ProductionCreate from './pages/Labels/ProductionCreate';
 
 // Create query client
 const queryClient = new QueryClient({

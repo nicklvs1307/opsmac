@@ -3,8 +3,8 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const { Op } = require('sequelize');
-const { Product, Ingredient, User, PrintedLabel, LossRecord, Stock, StockMovement, sequelize } = require('../models');
-const auth = require('../middleware/auth');
+const { Product, Ingredient, User, PrintedLabel, LossRecord, Stock, StockMovement, sequelize, StockCount, StockCountItem, ProductionRecord, ProductionRecordItem } = require('../models');
+const { auth } = require('../middleware/auth');
 const adminAuth = require('../middleware/adminAuth');
 
 // Middleware to get restaurant_id from the authenticated user

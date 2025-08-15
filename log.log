@@ -1,12 +1,10 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
-/app/node_modules/path-to-regexp/index.js:69
-    throw new TypeError('path must be a string, array of strings, or regular expression');
-    ^
-TypeError: path must be a string, array of strings, or regular expression
-    at pathToRegexp (/app/node_modules/path-to-regexp/index.js:69:11)
-    at new Layer (/app/node_modules/express/lib/router/layer.js:45:17)
-    at Function.use (/app/node_modules/express/lib/router/index.js:475:17)
+/app/node_modules/express/lib/router/index.js:469
+      throw new TypeError('Router.use() requires a middleware function but got a ' + gettype(fn))
+      ^
+TypeError: Router.use() requires a middleware function but got a Object
+    at Function.use (/app/node_modules/express/lib/router/index.js:469:13)
     at Object.<anonymous> (/app/backend/routes/labels.js:23:8)
     at Module._compile (node:internal/modules/cjs/loader:1529:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
@@ -14,4 +12,6 @@ TypeError: path must be a string, array of strings, or regular expression
     at Module._load (node:internal/modules/cjs/loader:1096:12)
     at Module.require (node:internal/modules/cjs/loader:1298:19)
     at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/backend/server.js:41:21)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
 Node.js v20.19.4

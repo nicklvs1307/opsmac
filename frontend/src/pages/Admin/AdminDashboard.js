@@ -14,11 +14,18 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
 // Esquemas de Validação
-const userSchema = (t) => yup.object().shape({
+const userSchema = (t, editingUser) => yup.object().shape({
   name: yup.string().min(2, t('admin_dashboard.name_min_chars')).required(t('admin_dashboard.name_required')),
   email: yup.string().email(t('admin_dashboard.email_invalid')).required(t('admin_dashboard.email_required')),
   phone: yup.string().optional(),
   role: yup.string().oneOf(['owner', 'admin', 'employee'], t('admin_dashboard.role_invalid')).required(t('admin_dashboard.role_required')),
+  password: yup.string()
+    .min(6, t('admin_dashboard.password_min_chars'))
+    .when('editingUser', {
+      is: (val) => !val, // If not editing an existing user (i.e., creating a new one)
+      then: (schema) => schema.required(t('admin_dashboard.password_required')),
+      otherwise: (schema) => schema.optional(),
+    }),
 });
 
 const restaurantSchema = (t) => yup.object().shape({
@@ -48,8 +55,17 @@ const AdminDashboard = () => {
   ];
 
   // Formulários
-  const { control: userControl, handleSubmit: handleUserSubmit, reset: resetUserForm } = useForm({ resolver: yupResolver(userSchema(t)) });
+  const { control: userControl, handleSubmit: handleUserSubmit, reset: resetUserForm, setValue } = useForm({ resolver: yupResolver(userSchema(t, editingUser)) });
   const { control: restaurantControl, handleSubmit: handleRestaurantSubmit, reset: resetRestaurantForm } = useForm({ resolver: yupResolver(restaurantSchema(t)) });
+
+  const generateRandomPassword = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
+    let password = '';
+    for (let i = 0; i < 12; i++) { // Generate a 12-character password
+      password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return password;
+  };
 
   // Funções de busca
   const fetchUsers = async () => {
@@ -244,6 +260,30 @@ const AdminDashboard = () => {
           <Controller name="name" control={userControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.name_label')} fullWidth margin="normal" />} />
           <Controller name="email" control={userControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.email_label')} fullWidth margin="normal" /> } />
           <Controller name="phone" control={userControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.user_phone_label')} fullWidth margin="normal" /> } />
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Controller
+              name="password"
+              control={userControl}
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  {...field}
+                  label={t('admin_dashboard.password_label')}
+                  type="password"
+                  fullWidth
+                  margin="normal"
+                  error={!!error}
+                  helperText={error ? error.message : null}
+                />
+              )}
+            />
+            <Button
+              variant="outlined"
+              onClick={() => setValue('password', generateRandomPassword())}
+              sx={{ mt: 2 }}
+            >
+              {t('admin_dashboard.generate_password_button')}
+            </Button>
+          </Box>
           <Controller name="role" control={userControl} render={({ field }) => (
             <FormControl fullWidth margin="normal">
               <InputLabel>{t('admin_dashboard.role_label')}</InputLabel>

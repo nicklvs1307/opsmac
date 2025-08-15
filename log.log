@@ -1,102 +1,19 @@
-> node backend/server.js
-Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
-Generated Swagger Specs (first 500 chars): {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Check Test API",
-    "version": "1.0.0",
-    "description": "API documentation for the Check Test application."
-  },
-  "servers": [
-    {
-      "url": "http://localhost:5000/api",
-      "description": "Production server"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Public API",
-      "description": "Endpoints acessíveis via API Token para integração externa."
-    },
-    {
-      "name": "Admin",
-      "description": "Gerenciamento de usuários e res
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-📊 Dashboard: https://feedelizapro.towersfy.com
-🔗 API: https://feedelizaapi.towersfy.com/api
-Erro no login: Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
-    at async /app/backend/routes/auth.js:175:18 {
-  name: 'SequelizeDatabaseError',
-  parent: error: column User.created_at does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 175,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: 'Perhaps you meant to reference the column "User.createdAt".',
-    position: '332',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-
-: `SELECT "User"."id", "User"."name", "User"."email", "User"."password", "User"."phone", "User"."role", "User"."avatar", "User"."is_active", "User"."email_verified", "User"."email_verification_token", "User"."password_reset_token", "User"."password_reset_expires", "User"."last_login", "User"."login_attempts", "User"."locked_until", "User"."created_at" AS "createdAt", "User"."updated_at" AS "updatedAt", "restaurants"."id" AS "restaurants.id", "restaurants"."name" AS "restaurants.name", "restaurants"."slug" AS "restaurants.slug", "restaurants"."description" AS "restaurants.description", "restaurants"."cuisine_type" AS "restaurants.cuisine_type", "restaurants"."address" AS "restaurants.address", "restaurants"."city" AS "restaurants.city", "restaurants"."state" AS "restaurants.state", "restaurants"."zip_code" AS "restaurants.zip_code", "restaurants"."phone" AS "restaurants.phone", "restaurants"."email" AS "restaurants.email", "restaurants"."website" AS "restaurants.website", "restaurants"."whatsapp_api_url" AS "restaurants.whatsapp_api_url", "restaurants"."whatsapp_api_key" AS "restaurants.whatsapp_api_key", "restaurants"."whatsapp_instance_id" AS "restaurants.whatsapp_instance_id", "restaurants"."whatsapp_phone_number" AS "restaurants.whatsapp_phone_number", "restaurants"."logo" AS "restaurants.logo", "restaurants"."cover_image" AS "restaurants.cover_image", "restaurants"."opening_hours" AS "restaurants.opening_hours", "restaurants"."social_media" AS "restaurants.social_media", "restaurants"."settings" AS "restaurants.settings", "restaurants"."is_active" AS "restaurants.is_active", "restaurants"."is_open" AS "restaurants.is_open", "restaurants"."pos_status" AS "restaurants.pos_status", "restaurants"."subscription_plan" AS "restaurants.subscription_plan", "restaurants"."subscription_expires" AS "restaurants.subscription_expires", "restaurants"."total_tables" AS "restaurants.total_tables", "restaurants"."average_rating" AS "restaurants.average_rating", "restaurants"."total_feedbacks" AS "restaurants.total_feedbacks", "restaurants"."nps_score" AS "restaurants.nps_score", "restaurants"."total_promoters" AS "restaurants.total_promoters", "restaurants"."total_neutrals" AS "restaurants.total_neutrals", "restaurants"."total_detractors" AS "restaurants.total_detractors", "restaurants"."owner_id" AS "restaurants.owner_id", "restaurants"."api_token" AS "restaurants.api_token", "restaurants"."nps_criteria_scores" AS "restaurants.nps_criteria_scores", "restaurants"."created_at" AS "restaurants.createdAt", "restaurants"."updated_at" AS "restaurants.updatedAt" FROM "users" AS "User" LEFT OUTER JOIN "restaurants" AS "restaurants" ON "User"."id" = "restaurants"."owner_id" AND "restaurants"."is_active" = true WHERE "User"."email" = 'lucas@teste.com';`,
-    parameters: undefined
-  },
-  original: error: column User.created_at does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 175,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: 'Perhaps you meant to reference the column "User.createdAt".',
-    position: '332',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-
-: `SELECT "User"."id", "User"."name", "User"."email", "User"."password", "User"."phone", "User"."role", "User"."avatar", "User"."is_active", "User"."email_verified", "User"."email_verification_token", "User"."password_reset_token", "User"."password_reset_expires", "User"."last_login", "User"."login_attempts", "User"."locked_until", "User"."created_at" AS "createdAt", "User"."updated_at" AS "updatedAt", "restaurants"."id" AS "restaurants.id", "restaurants"."name" AS "restaurants.name", "restaurants"."slug" AS "restaurants.slug", "restaurants"."description" AS "restaurants.description", "restaurants"."cuisine_type" AS "restaurants.cuisine_type", "restaurants"."address" AS "restaurants.address", "restaurants"."city" AS "restaurants.city", "restaurants"."state" AS "restaurants.state", "restaurants"."zip_code" AS "restaurants.zip_code", "restaurants"."phone" AS "restaurants.phone", "restaurants"."email" AS "restaurants.email", "restaurants"."website" AS "restaurants.website", "restaurants"."whatsapp_api_url" AS "restaurants.whatsapp_api_url", "restaurants"."whatsapp_api_key" AS "restaurants.whatsapp_api_key", "restaurants"."whatsapp_instance_id" AS "restaurants.whatsapp_instance_id", "restaurants"."whatsapp_phone_number" AS "restaurants.whatsapp_phone_number", "restaurants"."logo" AS "restaurants.logo", "restaurants"."cover_image" AS "restaurants.cover_image", "restaurants"."opening_hours" AS "restaurants.opening_hours", "restaurants"."social_media" AS "restaurants.social_media", "restaurants"."settings" AS "restaurants.settings", "restaurants"."is_active" AS "restaurants.is_active", "restaurants"."is_open" AS "restaurants.is_open", "restaurants"."pos_status" AS "restaurants.pos_status", "restaurants"."subscription_plan" AS "restaurants.subscription_plan", "restaurants"."subscription_expires" AS "restaurants.subscription_expires", "restaurants"."total_tables" AS "restaurants.total_tables", "restaurants"."average_rating" AS "restaurants.average_rating", "restaurants"."total_feedbacks" AS "restaurants.total_feedbacks", "restaurants"."nps_score" AS "restaurants.nps_score", "restaurants"."total_promoters" AS "restaurants.total_promoters", "restaurants"."total_neutrals" AS "restaurants.total_neutrals", "restaurants"."total_detractors" AS "restaurants.total_detractors", "restaurants"."owner_id" AS "restaurants.owner_id", "restaurants"."api_token" AS "restaurants.api_token", "restaurants"."nps_criteria_scores" AS "restaurants.nps_criteria_scores", "restaurants"."created_at" AS "restaurants.createdAt", "restaurants"."updated_at" AS "restaurants.updatedAt" FROM "users" AS "User" LEFT OUTER JOIN "restaurants" AS "restaurants" ON "User"."id" = "restaurants"."owner_id" AND "restaurants"."is_active" = true WHERE "User"."email" = 'lucas@teste.com';`,
-    parameters: undefined
-  },
-
-`SELECT "User"."id", "User"."name", "User"."email", "User"."password", "User"."phone", "User"."role", "User"."avatar", "User"."is_active", "User"."email_verified", "User"."email_verification_token", "User"."password_reset_token", "User"."password_reset_expires", "User"."last_login", "User"."login_attempts", "User"."locked_until", "User"."created_at" AS "createdAt", "User"."updated_at" AS "updatedAt", "restaurants"."id" AS "restaurants.id", "restaurants"."name" AS "restaurants.name", "restaurants"."slug" AS "restaurants.slug", "restaurants"."description" AS "restaurants.description", "restaurants"."cuisine_type" AS "restaurants.cuisine_type", "restaurants"."address" AS "restaurants.address", "restaurants"."city" AS "restaurants.city", "restaurants"."state" AS "restaurants.state", "restaurants"."zip_code" AS "restaurants.zip_code", "restaurants"."phone" AS "restaurants.phone", "restaurants"."email" AS "restaurants.email", "restaurants"."website" AS "restaurants.website", "restaurants"."whatsapp_api_url" AS "restaurants.whatsapp_api_url", "restaurants"."whatsapp_api_key" AS "restaurants.whatsapp_api_key", "restaurants"."whatsapp_instance_id" AS "restaurants.whatsapp_instance_id", "restaurants"."whatsapp_phone_number" AS "restaurants.whatsapp_phone_number", "restaurants"."logo" AS "restaurants.logo", "restaurants"."cover_image" AS "restaurants.cover_image", "restaurants"."opening_hours" AS "restaurants.opening_hours", "restaurants"."social_media" AS "restaurants.social_media", "restaurants"."settings" AS "restaurants.settings", "restaurants"."is_active" AS "restaurants.is_active", "restaurants"."is_open" AS "restaurants.is_open", "restaurants"."pos_status" AS "restaurants.pos_status", "restaurants"."subscription_plan" AS "restaurants.subscription_plan", "restaurants"."subscription_expires" AS "restaurants.subscription_expires", "restaurants"."total_tables" AS "restaurants.total_tables", "restaurants"."average_rating" AS "restaurants.average_rating", "restaurants"."total_feedbacks" AS "restaurants.total_feedbacks", "restaurants"."nps_score" AS "restaurants.nps_score", "restaurants"."total_promoters" AS "restaurants.total_promoters", "restaurants"."total_neutrals" AS "restaurants.total_neutrals", "restaurants"."total_detractors" AS "restaurants.total_detractors", "restaurants"."owner_id" AS "restaurants.owner_id", "restaurants"."api_token" AS "restaurants.api_token", "restaurants"."nps_criteria_scores" AS "restaurants.nps_criteria_scores", "restaurants"."created_at" AS "restaurants.createdAt", "restaurants"."updated_at" AS "restaurants.updatedAt" FROM "users" AS "User" LEFT OUTER JOIN "restaurants" AS "restaurants" ON "User"."id" = "restaurants"."owner_id" AND "restaurants"."is_active" = true WHERE "User"."email" = 'lucas@teste.com';`,
-  parameters: {}
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/admin/users
+Método da solicitação
+POST
+Código de status
+400 Bad Request
+Endereço remoto
+95.217.16.187:443
+
+
+    "errors": [
+        {
+            "type": "field",
+            "msg": "Senha deve ter pelo menos 6 caracteres",
+            "path": "password",
+            "location": "body"
+        }
+    ]
 }

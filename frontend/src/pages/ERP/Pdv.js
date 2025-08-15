@@ -554,7 +554,7 @@ const Pdv = () => {
                             <div className="quantity-value">{item.quantity}</div>
                             <button className="quantity-btn" onClick={() => handleQuantityChange(item.id, 1)}>+</button>
                             <button className="remove-item" onClick={() => handleRemoveFromCart(item.id)}>
-                              <TrashAltIcon />
+                              <DeleteIcon />
                             </button>
                           </div>
                         </div>

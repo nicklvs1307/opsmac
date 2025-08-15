@@ -1,16 +1,20 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      180.0s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                      171.1s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.660
-0.660 > feedeliza-plus@1.0.0 build
-0.660 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.660
-3.065 Creating an optimized production build...
-178.3 Failed to compile.
-178.3
-178.3 Attempted import error: 'Eye' is not exported from '@mui/icons-material' (imported as 'EyeIcon').
-178.3
-178.3
+0.659
+0.659 > feedeliza-plus@1.0.0 build
+0.659 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.659
+2.881 Creating an optimized production build...
+170.4 Failed to compile.
+170.4
+170.4 [eslint]
+170.4 src/pages/ERP/Pdv.js
+170.4   Line 557:32:  'TrashAltIcon' is not defined  react/jsx-no-undef
+170.4
+170.4 Search for the keywords to learn more about each error.
+170.4
+170.4
 ------
 Dockerfile.frontend:23
 --------------------

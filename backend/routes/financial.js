@@ -222,7 +222,7 @@ router.get(
       // This assumes cash register sessions are linked to the restaurant
       const cashMovements = await models.CashRegisterMovement.findAll({
         where: {
-          '$session.restaurant_id$'
+          '$session.restaurant_id$': restaurantId
         },
         include: [{
           model: models.CashRegisterSession,

@@ -1,16 +1,16 @@
- => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                       12.3s
+ => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                       20.9s
 ------
  > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.777
-0.777 > feedeliza-plus@1.0.0 build
-0.777 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.777
-3.639 Creating an optimized production build...
-12.06 Failed to compile.
-12.06
-12.06 Module not found: Error: Can't resolve 'api/axiosInstance' in '/app/frontend/src/pages/Feedback'
-12.06
-12.06
+0.778
+0.778 > feedeliza-plus@1.0.0 build
+0.778 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.778
+3.525 Creating an optimized production build...
+20.67 Failed to compile.
+20.67
+20.68 Module not found: Error: Can't resolve '../api/axiosInstance' in '/app/frontend/src/components/UI'
+20.68
+20.68
 ------
 Dockerfile.frontend:24
 --------------------

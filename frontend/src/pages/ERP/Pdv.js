@@ -862,7 +862,7 @@ const Pdv = () => {
                               {order.items.map((item, idx) => (
                                 <div className="order-item" key={idx}>
                                   <span>{item.quantity}x {item.name}</span>
-                                  <span>R$ {Number(item.price).toFixed(2).replace('.', ',')}</span>
+                                  <span>Price: {item.price}</span>
                                 </div>
                               )))}
                             </div>

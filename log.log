@@ -1,18 +1,18 @@
- => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      181.8s
+ => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      171.0s
 ------
  > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.667
-0.667 > feedeliza-plus@1.0.0 build
-0.667 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.667
-3.082 Creating an optimized production build...
-181.5 Failed to compile.
-181.5
-181.5 [eslint]
-181.5 src/pages/ERP/Pdv.js
-181.5 Syntax error: Unexpected token, expected "}" (867:32) (867:32)
-181.5
-181.5
+0.611
+0.611 > feedeliza-plus@1.0.0 build
+0.611 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.611
+2.726 Creating an optimized production build...
+170.7 Failed to compile.
+170.7
+170.7 [eslint]
+170.7 src/pages/ERP/Pdv.js
+170.7 Syntax error: Unexpected token, expected "}" (867:32) (867:32)
+170.7
+170.7
 ------
 Dockerfile.frontend:24
 --------------------

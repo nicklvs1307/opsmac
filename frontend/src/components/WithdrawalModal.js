@@ -3,7 +3,7 @@ import { Modal, Box, Typography, TextField, Button, IconButton, FormControl, Inp
 import { Close as CloseIcon } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 
 const style = {

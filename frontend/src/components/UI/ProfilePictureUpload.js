@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import { useTranslation } from 'react-i18next';
 
 const ProfilePictureUpload = ({ currentAvatar, onUploadSuccess }) => {

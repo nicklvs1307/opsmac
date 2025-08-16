@@ -41,7 +41,7 @@ import {
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 import SpinTheWheel from '../../components/UI/SpinTheWheel';

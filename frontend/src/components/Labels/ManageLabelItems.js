@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import apiClient from '../api/axiosInstance';
+import apiClient from '../../api/axiosInstance';
 import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, CircularProgress, Alert
 } from '@mui/material';

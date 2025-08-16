@@ -816,7 +816,8 @@
       "search_results_for": "Results for",
       "clear_search": "Clear Search",
       "no_products_found_for_search": "No products found for \"{{searchTerm}}\"",
-      "try_other_terms_or_browse_categories": "Try searching with other terms or browse available categories"
+      "      "try_other_terms_or_browse_categories": "Try searching with other terms or browse available categories"
+    }"
     }
   }
 }

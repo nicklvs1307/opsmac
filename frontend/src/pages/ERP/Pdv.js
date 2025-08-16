@@ -731,7 +731,6 @@ const Pdv = () => {
                   </button>
                 </div>
               </div>
-              </div>
             </div>
 
             {/* Orders Tab */}

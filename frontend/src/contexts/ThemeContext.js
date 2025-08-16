@@ -68,6 +68,7 @@ export const ThemeProvider = ({ children }) => {
         divider: mode === 'light' ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.08)',
       },
       typography: {
+        fontSize: 12.8, // Adjusted for 80% scale
         fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
         h1: {
           fontWeight: 700,

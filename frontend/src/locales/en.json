@@ -187,7 +187,19 @@
       "labels_dashboard": "Dashboard",
       "labels_admin": "Admin",
       "labels_stock_count": "Stock Count",
-      "labels_production": "Production"
+      "labels_production": "Production",
+      "financial": "Financial",
+      "financial_transactions": "Financial Transactions",
+      "payment_methods": "Payment Methods",
+      "reports": "Reports",
+      "cash_flow_report": "Cash Flow Report",
+      "dre_report": "DRE Report",
+      "sales_by_payment_method_report": "Sales by Payment Method Report",
+      "list_of_accounts_report": "List of Accounts Report",
+      "current_stock_position_report": "Current Stock Position Report",
+      "stock_position_history_report": "Stock Position History Report",
+      "generated_coupons_report": "Generated Coupons Report",
+      "orders": "Orders"
     },
     "thank_you": {
       "share_title": "I rated {restaurant}",

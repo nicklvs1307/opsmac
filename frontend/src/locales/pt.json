@@ -219,7 +219,19 @@
       "labels_dashboard": "Painel",
       "labels_admin": "Administração",
       "labels_stock_count": "Contagem de Estoque",
-      "labels_production": "Produção"
+      "labels_production": "Produção",
+      "financial": "Financeiro",
+      "financial_transactions": "Transações Financeiras",
+      "payment_methods": "Métodos de Pagamento",
+      "reports": "Relatórios",
+      "cash_flow_report": "Relatório de Fluxo de Caixa",
+      "dre_report": "Relatório DRE",
+      "sales_by_payment_method_report": "Relatório de Vendas por Método de Pagamento",
+      "list_of_accounts_report": "Relatório de Contas",
+      "current_stock_position_report": "Relatório de Posição Atual de Estoque",
+      "stock_position_history_report": "Relatório Histórico de Posição de Estoque",
+      "generated_coupons_report": "Relatório de Cupons Gerados",
+      "orders": "Pedidos"
     },
     "thank_you": {
       "share_title": "Avaliei o {{restaurant}}",

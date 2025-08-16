@@ -30,6 +30,7 @@ import {
   Poll as PollIcon,
   ConnectWithoutContact as ConnectWithoutContactIcon,
   PointOfSale as PointOfSaleIcon,
+  Analytics as AnalyticsIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
@@ -186,12 +187,76 @@ const Sidebar = ({ onMobileClose }) => {
           path: '/erp/ingredients'
         },
         {
+          title: t('sidebar.orders'), // New
+          icon: <ListIcon />, // Consider a more specific icon
+          path: '/erp/orders'
+        },
+        {
           title: t('sidebar.technical_specifications'), // New
           icon: <ListIcon />,
           path: '/erp/technical-specifications'
+        },
+        {
+          title: t('sidebar.financial'),
+          icon: <PointOfSaleIcon />, // Using PointOfSaleIcon for financial, can be changed
+          path: '/financial',
+          submenu: [
+            {
+              title: t('sidebar.financial_transactions'),
+              icon: <ListIcon />,
+              path: '/erp/financial-transactions'
+            },
+            {
+              title: t('sidebar.payment_methods'),
+              icon: <ListIcon />,
+              path: '/erp/payment-methods'
+            },
+            {
+              title: t('sidebar.reports'),
+              icon: <AnalyticsIcon />,
+              path: '/reports',
+              submenu: [
+                {
+                  title: t('sidebar.cash_flow_report'),
+                  icon: <ListIcon />,
+                  path: '/reports/cash-flow'
+                },
+                {
+                  title: t('sidebar.dre_report'),
+                  icon: <ListIcon />,
+                  path: '/reports/dre'
+                },
+                {
+                  title: t('sidebar.sales_by_payment_method_report'),
+                  icon: <ListIcon />,
+                  path: '/reports/sales-by-payment-method'
+                },
+                {
+                  title: t('sidebar.list_of_accounts_report'),
+                  icon: <ListIcon />,
+                  path: '/reports/list-of-accounts'
+                },
+                {
+                  title: t('sidebar.current_stock_position_report'),
+                  icon: <ListIcon />,
+                  path: '/reports/current-stock-position'
+                },
+                {
+                  title: t('sidebar.stock_position_history_report'),
+                  icon: <ListIcon />,
+                  path: '/reports/stock-position-history'
+                },
+                {
+                  title: t('sidebar.generated_coupons_report'),
+                  icon: <ListIcon />,
+                  path: '/reports/generated-coupons'
+                }
+              ]
+            }
+          ]
         }
       ]
-    },
+    }
     {
       title: t('sidebar.labels'), // New
       icon: <QrCodeIcon />,

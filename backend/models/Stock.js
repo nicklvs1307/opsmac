@@ -28,7 +28,8 @@ module.exports = (sequelize) => {
         unique: true,
         fields: ['stockable_id', 'stockable_type']
       }
-    ]
+    ],
+    underscored: true,
   });
 
   Stock.associate = (models) => {

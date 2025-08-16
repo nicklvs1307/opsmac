@@ -28,26 +28,26 @@ router.get('/', auth, getRestaurantId, async (req, res) => {
     // Fetch stock for products
     const productStocks = await models.Stock.findAll({
       where: {
-        restaurant_id: restaurantId,
         stockable_type: 'Product', // Filter for products
       },
       include: [{
         model: models.Product,
         as: 'product',
         attributes: ['id', 'name', 'sku'],
+        where: { restaurant_id: restaurantId }
       }],
     });
 
     // Fetch stock for ingredients
     const ingredientStocks = await models.Stock.findAll({
       where: {
-        restaurant_id: restaurantId,
         stockable_type: 'Ingredient', // Filter for ingredients
       },
       include: [{
         model: models.Ingredient,
         as: 'ingredient',
         attributes: ['id', 'name', 'unit_of_measure'],
+        where: { restaurant_id: restaurantId }
       }],
     });
 

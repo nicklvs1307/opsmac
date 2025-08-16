@@ -1053,7 +1053,6 @@ const Pdv = () => {
         open={withdrawalModalOpen}
         handleClose={() => setWithdrawalModalOpen(false)}
         handleSave={handleSaveWithdrawal}
-        currentSessionId={currentCashRegisterSession?.id}
       />
 
       {/* Reinforcement Modal */}
@@ -1061,7 +1060,6 @@ const Pdv = () => {
         open={reinforcementModalOpen}
         handleClose={() => setReinforcementModalOpen(false)}
         handleSave={handleSaveReinforcement}
-        currentSessionId={currentCashRegisterSession?.id}
       />
 
       {/* Partial Summary Modal */}

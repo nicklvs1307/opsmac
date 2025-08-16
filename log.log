@@ -1,8 +1,8 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
 /app/backend/routes/financial.js:225
-          '$session.restaurant_id: restaurantId, // Access through associated session
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          '$session.restaurant_id
+          ^^^^^^^^^^^^^^^^^^^^^^^
 SyntaxError: Invalid or unexpected token
     at wrapSafe (node:internal/modules/cjs/loader:1472:18)
     at Module._compile (node:internal/modules/cjs/loader:1501:20)

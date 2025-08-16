@@ -72,6 +72,7 @@ module.exports = (sequelize) => {
   }, {
     freezeTableName: true,
     tableName: 'financial_transactions',
+    underscored: true, // Add this line
   });
 
   FinancialTransaction.associate = (models) => {

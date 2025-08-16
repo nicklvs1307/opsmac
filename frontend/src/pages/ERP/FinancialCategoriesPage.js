@@ -5,6 +5,7 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { useAuth } from '../../contexts/AuthContext';
 
 const fetchFinancialCategories = async ({ queryKey }) => {
   const [, restaurantId] = queryKey;

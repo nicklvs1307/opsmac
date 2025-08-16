@@ -928,10 +928,10 @@ const Pdv = () => {
           </div>
           <div className="modal-footer">
             <button className="btn btn-outline" onClick={closePaymentModal}>
-              <i className="fas fa-times"></i> Cancelar
+              <CloseIcon /> Cancelar
             </button>
             <button className="btn btn-primary" onClick={processPayment}>
-              <i className="fas fa-check"></i> Confirmar
+              <CheckCircleIcon /> Confirmar
             </button>
           </div>
         </div>

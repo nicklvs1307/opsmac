@@ -706,6 +706,7 @@ const Pdv = () => {
                     )}
                   </div>
                 </div>
+              </div>
 
                 <div className="order-summary">
                   <div className="summary-row">

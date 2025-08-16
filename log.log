@@ -1,23 +1,18 @@
- => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      171.7s
+ => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      172.4s
 ------
  > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.780
-0.780 > feedeliza-plus@1.0.0 build
-0.780 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.780
-3.514 Creating an optimized production build...
-170.6 Failed to compile.
-170.6
-170.6 [eslint]
-170.6 src/pages/ERP/FinancialCategoriesPage.js
-170.6   Line 33:20:  'useAuth' is not defined  no-undef
-170.6
-170.6 src/pages/ERP/Pdv.js
-170.6 Syntax error: Unexpected token, expected "}" (867:32) (867:32)
-170.6
-170.6 Search for the keywords to learn more about each error.
-170.6
-170.6
+0.693
+0.693 > feedeliza-plus@1.0.0 build
+0.693 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.693
+3.739 Creating an optimized production build...
+171.5 Failed to compile.
+171.5
+171.5 [eslint]
+171.5 src/pages/ERP/Pdv.js
+171.5 Syntax error: Unexpected token, expected "}" (867:32) (867:32)
+171.5
+171.5
 ------
 Dockerfile.frontend:24
 --------------------
@@ -28,4 +23,3 @@ Dockerfile.frontend:24
   26 |     # Estágio final para servir os arquivos com NGINX
 --------------------
 ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
-

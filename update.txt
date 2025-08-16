@@ -16,14 +16,18 @@
 ## Sistema ERP
 - [x] Funções de Cadastro de Produto (backend)
 - [x] Funções de Cadastro de Ficha Técnica
-- [ ] Caixa PDV
+- [x] Caixa PDV (Abertura, Reforço, Retirada, Resumo Parcial, Fechamento)
 - [x] Cardápio Digital (Backend e Frontend implementados)
 - [ ] Função para Cardápio Específico para Tablets, com manuseio simples para o cliente
+- [x] Módulo Financeiro (Integração de Menu)
+- [x] Módulo de Pedidos (Integração de Menu)
+- [x] Kanban de Pedidos (Visualização e Drag-and-Drop)
+- [x] Venda de Balcão (Fluxo simplificado sem cliente vinculado)
+- [x] Pesquisa de Cliente (no PDV, por nome/telefone, com endereço e seleção para pedido)
 
 ---
 **Observações:**
 As seções detalhadas sobre "CRITÉRIOS DE SEGMENTAÇÃO", "AGRUPAMENTOS PADRÕES", "AÇÕES AUTOMÁTICAS DISPONÍVEIS", "DADOS NECESSÁRIOS PARA FUNCIONAR", "FREQUÊNCIA DE ATUALIZAÇÃO", "SUGESTÃO DE SAÍDA DA FUNÇÃO" e "O QUE É NPS" foram consideradas como documentação conceitual/informativa e não como tarefas diretas de implementação. Elas servem como base para o desenvolvimento das funcionalidades listadas acima.
-
 
 dentro do modulo erp eu preciso
 um modulo financeiro onde tenha:
@@ -236,81 +240,3 @@ Relatórios ERP (alimentados pelos módulos anteriores).
 Cupons e Segmentação (para aumentar vendas).
 
 Automação e App Garçom (ganho de eficiência).
-
-
-quero que no menu "programa de fidelidade" seja alterado o nome para "fidelidade".
-no sub menu programa "programa de check-in" seja alterado para "check-in".
-notei que a rolagem para baixo e para cima não esta funcionando em todo o sistema.
-  isso quer dizer que quando tem uma iformação mais abaixo da pagina não consigo ver porque nao consigo rolar a pagina para baixo.
-
-Na pagina que o cliente vai fazer o check-in, esta com erro no seguinte:
-  URL da solicitação
-  https://feedelizaapi.towersfy.com/api/checkin/public/towersfy
-  Método da solicitação
-  POST
-  Código de status
-  400 Bad Request
-  Endereço remoto
-  95.217.16.187:443
-  {
-    "error": "Dados inválidos",
-    "details": [
-        {
-            "type": "field",
-            "value": null,
-            "msg": "ID do cupom inválido",
-            "path": "coupon_id",
-            "location": "body"
-        }
-    ]
-}
-
-Isso não é o esperado, pois o cliente não consegue fazer o check-in caso o cupom não esteja inserido.
-O usuario tem que ter nas configurações do checkin um toggle para ativar ou desativar a opção de inserir o cupom, caso esteja desativado o input da pagina publica nao deve aparecer, assim como é no toggle de pedir mesa.
-notei que na pagina publica do check in ainda tem algumas variaveis de tradução sem tradução, quero que verifique e coloque as traduçções
-
-outro ponto, no submenu satisfação, na aba pesquisas, tem a lista de pesquisas, e ali tem as opções
-uma deas é o qr code, eu quero que nessa opção do qrcode tenha a opção de aixar o qr code.
-outra questão pendente no sistema de pesquisas que quando tentamos acessar a pesquisa recebemos um erro na tela "Pesquisa não encontrada ou inativa"
-no devtools esta assim
-URL da solicitação
-https://feedelizaapi.towersfy.com/public/surveys/next/pesquisa-de-nps/
-Método da solicitação
-GET
-Código de status
-404 Not Found
-Endereço remoto
-95.217.16.187:443
-{"error":"Rota não encontrada"}
-uma coisa nessa pagina também é que ele temum botão "voltar para a pagina inicial" pore messa é uma pagina publica, e quando é clicado nesse botão é redirecionado para o sistema, eo cliente nao tem acesso, então pode remover esse botão
-
-no submenu gerenciar qrcodes, os botões gerar primeiro qr code e o botão +gerar qrcode, quando é clicado é redirecionado para o dashboar, essa função não esta funcional, quando clicado no botão ele tem que irpara criação do qrcode
-
-no subemnu cardapio a criação de produtos tem que ser melhorada, eu nao consigo criar um produto sem falar que é pizza e ter que escolher o valor fixo ou valor dinamico meio a meio
-o usuario tem que poder criar seus produtos de forma livre, porque nem tdos os usuarios tem pizzaria, serão restaurantes, hamburguerias , sorveterias e encontrada
-
-
-no submenu estoque, a movimentação de estoque nao esta funcionando, quando tento fazer uma movimentação de entrada ou saída da um erro abaixo
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/stock/move
-Método da solicitação
-POST
-Código de status
-500 Internal Server Error
-Endereço remoto
-95.217.16.187:443
-
-
-no submenu ficha tecnica, quando eu tento gerenciar a ficha tecnica do produto, me aparece esse erro
-Erro ao carregar ficha técnica. Verifique sua conexão ou tente novamente.
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/technical-specifications/f43fb188-b4e3-4cd1-9d8c-b304e70a3dce
-Método da solicitação
-GET
-Código de status
-404 Not Found
-Endereço remoto
-95.217.16.187:443
-{"msg":"Ficha técnica não encontrada para este produto."}
-
-

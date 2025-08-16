@@ -81,6 +81,8 @@ const Pdv = () => {
   const [notes, setNotes] = useState('');
   const [selectedProductCategory, setSelectedProductCategory] = useState('');
   const [productSearchTerm, setProductSearchTerm] = useState('');
+  const [customerSearchTerm, setCustomerSearchTerm] = useState(''); // New state for customer search
+  const [selectedCustomer, setSelectedCustomer] = useState(null); // New state for selected customer
   const [currentTab, setCurrentTab] = useState('pdv'); // State for active tab
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [orderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false);
@@ -91,6 +93,35 @@ const Pdv = () => {
   const [reinforcementModalOpen, setReinforcementModalOpen] = useState(false);
   const [partialSummaryModalOpen, setPartialSummaryModalOpen] = useState(false);
   const [closeCashRegisterModalOpen, setCloseCashRegisterModalOpen] = useState(false);
+
+  // Fetch Customers
+  const fetchCustomers = async ({ queryKey }) => {
+    const [, restaurantId, searchTerm] = queryKey;
+    if (!searchTerm) return [];
+    const { data } = await axiosInstance.get(`/api/customers?restaurant_id=${restaurantId}&search=${searchTerm}`);
+    return data;
+  };
+
+  const { data: searchResults, isLoading: isLoadingSearchResults } = useQuery(
+    ['customers', restaurantId, customerSearchTerm],
+    fetchCustomers,
+    {
+      enabled: !!restaurantId && customerSearchTerm.length > 2, // Only search if restaurantId exists and search term is at least 3 characters
+      onError: (error) => {
+        toast.error(t('pdv.error_loading_customers', { message: error.response?.data?.msg || error.message }));
+      },
+    }
+  );
+
+  // Function to handle customer selection from search results
+  const handleCustomerSelect = (customer) => {
+    setSelectedCustomer(customer);
+    setCustomerName(customer.name);
+    setCustomerPhone(customer.phone);
+    setCustomerSearchTerm(''); // Clear search term after selection
+    // Optionally, if customer has an address, you might want to store it too
+    // setCustomerAddress(customer.address);
+  };
 
   // Sample product data (from exemplo.html, will be replaced by API data)
   const sampleProducts = [
@@ -351,6 +382,7 @@ const Pdv = () => {
       setCustomerPhone('');
       setPaymentMethod('');
       setNotes('');
+      setSelectedCustomer(null); // Clear selected customer
     }
   };
 
@@ -360,6 +392,7 @@ const Pdv = () => {
     setCustomerPhone('');
     setPaymentMethod('');
     setNotes('');
+    setSelectedCustomer(null); // Clear selected customer
   };
 
   const formatTimeElapsed = (startTime) => {
@@ -411,8 +444,10 @@ const Pdv = () => {
       total_amount: calculateFinalTotal,
       items: cartItems.map(item => ({ product_id: item.id, quantity: item.quantity, price: item.price, name: item.name, sku: item.sku })),
       customer_details: {
-        name: customerName || t('pdv.anonymous_customer'),
-        phone: customerPhone || 'N/A',
+        name: selectedCustomer?.name || customerName || t('pdv.anonymous_customer'),
+        phone: selectedCustomer?.phone || customerPhone || 'N/A',
+        // Add customer_id if a customer is selected
+        ...(selectedCustomer && { customer_id: selectedCustomer.id }),
       },
       payment_method: paymentMethod,
       notes: notes,
@@ -638,9 +673,14 @@ const Pdv = () => {
                   <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
                   <div className="order-header">
                     <h3 className="order-title">Comanda Atual</h3>
-                    <button className="order-clear" onClick={clearOrder}>
-                      <DeleteIcon /> Limpar
-                    </button>
+                    <div>
+                      <button className="btn btn-outline" onClick={resetOrderForm}> {/* Using resetOrderForm to clear customer details */}
+                        <PointOfSaleIcon /> Venda de Balcão
+                      </button>
+                      <button className="order-clear" onClick={clearOrder}>
+                        <DeleteIcon /> Limpar
+                      </button>
+                    </div>
                   </div>
                   <div className="order-items" id="orderItems">
                     {cartItems.length === 0 ? (
@@ -824,7 +864,7 @@ const Pdv = () => {
                                   <span>{item.quantity}x {item.name}</span>
                                   <span>R$ {Number(item.price).toFixed(2).replace('.', ',')}</span>
                                 </div>
-                              ))}
+                              )))}
                             </div>
                             <div className="order-footer">
                               <div className="order-total">R$ {Number(order.total_amount).toFixed(2).replace('.', ',')}</div>

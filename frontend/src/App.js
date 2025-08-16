@@ -60,7 +60,7 @@ import StockCountList from './pages/Labels/StockCountList';
 import StockCountDetail from './pages/Labels/StockCountDetail';
 import ProductionList from './pages/Labels/ProductionList';
 import ProductionCreate from './pages/Labels/ProductionCreate';
-import FinancialTransactions from './pages/ERP/FinancialTransactions';
+import FinancialTransactionsPage from './pages/ERP/FinancialTransactionsPage'; // New Import
 import CashFlowReport from './pages/Reports/CashFlowReport';
 import DREReport from './pages/Reports/DREReport';
 import SalesByPaymentMethodReport from './pages/Reports/SalesByPaymentMethodReport';
@@ -69,6 +69,7 @@ import CurrentStockPositionReport from './pages/Reports/CurrentStockPositionRepo
 import StockPositionHistoryReport from './pages/Reports/StockPositionHistoryReport';
 import GeneratedCouponsReport from './pages/Reports/GeneratedCouponsReport';
 import PaymentMethods from './pages/ERP/PaymentMethods';
+import FinancialCategoriesPage from './pages/ERP/FinancialCategoriesPage'; // New Import
 
 // Create query client
 const queryClient = new QueryClient({
@@ -138,7 +139,8 @@ function App() {
                   <Route path="erp/pdv" element={<Pdv />} />
                   <Route path="erp/ingredients" element={<Ingredients />} />
                   <Route path="erp/payment-methods" element={<PaymentMethods />} />
-                  <Route path="erp/financial-transactions" element={<FinancialTransactions />} />
+                  <Route path="erp/financial-transactions" element={<FinancialTransactionsPage />} /> {/* Replaced with new component */}
+                  <Route path="erp/financial-categories" element={<FinancialCategoriesPage />} /> {/* New Route */}
                   <Route path="reports/cash-flow" element={<CashFlowReport />} />
                   <Route path="reports/dre" element={<DREReport />} />
                   <Route path="reports/sales-by-payment-method" element={<SalesByPaymentMethodReport />} />

@@ -1,25 +1,76 @@
- => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      168.5s
-------
- > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.652
-0.652 > feedeliza-plus@1.0.0 build
-0.652 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.652
-2.893 Creating an optimized production build...
-168.1 Failed to compile.
-168.1
-168.1 [eslint]
-168.1 src/components/Layout/Sidebar.js
-168.1 Syntax error: Unexpected token, expected "," (259:4) (259:4)
-168.1
-168.1
-------
-Dockerfile.frontend:24
---------------------
-  22 |     ARG REACT_APP_API_URL
-  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  24 | >>> RUN npm run build && ls -la /app/frontend/build
-  25 |
-  26 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+quero que no menu "programa de fidelidade" seja alterado o nome para "fidelidade".
+no sub menu programa "programa de check-in" seja alterado para "check-in".
+notei que a rolagem para baixo e para cima não esta funcionando em todo o sistema.
+  isso quer dizer que quando tem uma iformação mais abaixo da pagina não consigo ver porque nao consigo rolar a pagina para baixo.
+
+Na pagina que o cliente vai fazer o check-in, esta com erro no seguinte:
+  URL da solicitação
+  https://feedelizaapi.towersfy.com/api/checkin/public/towersfy
+  Método da solicitação
+  POST
+  Código de status
+  400 Bad Request
+  Endereço remoto
+  95.217.16.187:443
+  {
+    "error": "Dados inválidos",
+    "details": [
+        {
+            "type": "field",
+            "value": null,
+            "msg": "ID do cupom inválido",
+            "path": "coupon_id",
+            "location": "body"
+        }
+    ]
+}
+
+Isso não é o esperado, pois o cliente não consegue fazer o check-in caso o cupom não esteja inserido.
+O usuario tem que ter nas configurações do checkin um toggle para ativar ou desativar a opção de inserir o cupom, caso esteja desativado o input da pagina publica nao deve aparecer, assim como é no toggle de pedir mesa.
+notei que na pagina publica do check in ainda tem algumas variaveis de tradução sem tradução, quero que verifique e coloque as traduçções
+
+outro ponto, no submenu satisfação, na aba pesquisas, tem a lista de pesquisas, e ali tem as opções
+uma deas é o qr code, eu quero que nessa opção do qrcode tenha a opção de aixar o qr code.
+outra questão pendente no sistema de pesquisas que quando tentamos acessar a pesquisa recebemos um erro na tela "Pesquisa não encontrada ou inativa"
+no devtools esta assim
+URL da solicitação
+https://feedelizaapi.towersfy.com/public/surveys/next/pesquisa-de-nps/
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+{"error":"Rota não encontrada"}
+uma coisa nessa pagina também é que ele temum botão "voltar para a pagina inicial" pore messa é uma pagina publica, e quando é clicado nesse botão é redirecionado para o sistema, eo cliente nao tem acesso, então pode remover esse botão
+
+no submenu gerenciar qrcodes, os botões gerar primeiro qr code e o botão +gerar qrcode, quando é clicado é redirecionado para o dashboar, essa função não esta funcional, quando clicado no botão ele tem que irpara criação do qrcode
+
+no subemnu cardapio a criação de produtos tem que ser melhorada, eu nao consigo criar um produto sem falar que é pizza e ter que escolher o valor fixo ou valor dinamico meio a meio
+o usuario tem que poder criar seus produtos de forma livre, porque nem tdos os usuarios tem pizzaria, serão restaurantes, hamburguerias , sorveterias e encontrada
+
+
+no submenu estoque, a movimentação de estoque nao esta funcionando, quando tento fazer uma movimentação de entrada ou saída da um erro abaixo
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/stock/move
+Método da solicitação
+POST
+Código de status
+500 Internal Server Error
+Endereço remoto
+95.217.16.187:443
+
+
+no submenu ficha tecnica, quando eu tento gerenciar a ficha tecnica do produto, me aparece esse erro
+Erro ao carregar ficha técnica. Verifique sua conexão ou tente novamente.
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/technical-specifications/f43fb188-b4e3-4cd1-9d8c-b304e70a3dce
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+{"msg":"Ficha técnica não encontrada para este produto."}
+
+

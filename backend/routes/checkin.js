@@ -167,7 +167,7 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
   body('phone_number').optional().isString().withMessage('Número de telefone inválido'),
   body('cpf').optional().isString().withMessage('CPF inválido'),
   body('table_number').optional().isString().withMessage('Número da mesa inválido'),
-  body('coupon_id').optional().isUUID().withMessage('ID do cupom inválido'), // New validation
+  body('table_number').optional().isString().withMessage('Número da mesa inválido'),
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -180,7 +180,7 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
   // O restaurante já está disponível em req.restaurant devido ao middleware checkCheckinModuleEnabled
   const restaurant = req.restaurant;
   const { restaurantSlug } = req.params; // Extrair restaurantSlug dos parâmetros da URL
-  const { phone_number, cpf, customer_name, table_number, coupon_id } = req.body; // Extrair outros dados do corpo da requisição, incluindo coupon_id
+  let { phone_number, cpf, customer_name, table_number, coupon_id } = req.body; // Extrair outros dados do corpo da requisição, incluindo coupon_id
 
   try {
     let rewardEarned = null; // Variável para armazenar a recompensa ganha
@@ -189,8 +189,9 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
 
     const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
     const checkinDurationMinutes = checkinProgramSettings.checkin_duration_minutes || 1440; // Padrão: 24 horas
-
     const identificationMethod = checkinProgramSettings.identification_method || 'phone';
+    const requireCouponForCheckin = checkinProgramSettings.require_coupon_for_checkin || false; // New setting
+
     console.log('[Public Check-in] Método de Identificação:', identificationMethod);
 
     let customer;
@@ -252,6 +253,33 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
       return res.status(400).json({ message: 'Cliente já possui um check-in ativo neste restaurante.' });
     }
 
+    // Handle coupon_id conditionally
+    let validCouponId = null;
+    if (coupon_id) {
+      const coupon = await models.Coupon.findOne({
+        where: {
+          id: coupon_id,
+          restaurant_id: restaurant.id,
+          status: 'active',
+          expires_at: { [Op.or]: { [Op.gte]: new Date(), [Op.eq]: null } }
+        }
+      });
+
+      if (coupon) {
+        validCouponId = coupon_id;
+      } else {
+        if (requireCouponForCheckin) {
+          return res.status(400).json({ error: 'ID do cupom inválido ou cupom não ativo/expirado.' });
+        } else {
+          // If coupon is not required, and an invalid one is provided, just ignore it.
+          console.warn(`[Public Check-in] Cupom inválido (${coupon_id}) fornecido, mas não é obrigatório. Ignorando.`);
+          coupon_id = null; // Ensure it's not passed to checkin.create
+        }
+      }
+    } else if (requireCouponForCheckin) {
+      return res.status(400).json({ error: 'Cupom é obrigatório para este check-in.' });
+    }
+
     const checkinTime = new Date();
     const expiresAt = new Date(checkinTime.getTime() + checkinDurationMinutes * 60 * 1000);
 
@@ -259,7 +287,7 @@ router.post('/public/:restaurantSlug', checkCheckinModuleEnabled, [
       customer_id: customer.id,
       restaurant_id: restaurant.id,
       table_number,
-      coupon_id, // Include coupon_id here
+      coupon_id: validCouponId, // Use the validated coupon ID
       checkin_time: checkinTime,
       expires_at: expiresAt,
       status: 'active',

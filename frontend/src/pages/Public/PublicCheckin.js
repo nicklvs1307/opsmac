@@ -32,6 +32,7 @@ const PublicCheckin = () => {
   const [backgroundImageUrl, setBackgroundImageUrl] = useState(null);
   const [identificationMethod, setIdentificationMethod] = useState('phone'); // 'phone' or 'cpf'
   const [requiresTable, setRequiresTable] = useState(false);
+  const [requireCouponForCheckin, setRequireCouponForCheckin] = useState(false); // New state
 
   const {
     control,
@@ -60,6 +61,7 @@ const PublicCheckin = () => {
         setRestaurantLogo(`${process.env.REACT_APP_API_URL}${response.data.logo}`);
         setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
         setRequiresTable(response.data.settings?.checkin_program_settings?.checkin_requires_table || false);
+        setRequireCouponForCheckin(response.data.settings?.checkin_program_settings?.require_coupon_for_checkin || false); // Fetch new setting
         setPrimaryColor(response.data.settings?.checkin_program_settings?.primary_color || '#3f51b5');
         setSecondaryColor(response.data.settings?.checkin_program_settings?.secondary_color || '#f50057');
         setTextColor(response.data.settings?.checkin_program_settings?.text_color || '#333333');
@@ -421,49 +423,51 @@ const PublicCheckin = () => {
           )}
         />
 
-        <Controller
-          name="coupon_code"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={t('public_checkin.coupon_code')}
-              fullWidth
-              margin="normal"
-              error={!!errors.coupon_code}
-              helperText={errors.coupon_code?.message}
-              placeholder={t('public_checkin.coupon_code_optional')}
-              variant="outlined"
-              InputProps={{
-                sx: {
-                  borderRadius: 2,
-                  '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: 'rgba(0, 0, 0, 0.1)',
-                  },
-                  '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: alpha(primaryColor, 0.3),
-                  },
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: primaryColor,
-                  },
-                  transition: 'all 0.3s ease',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-                  '&:hover': {
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
-                  },
-                }
-              }}
-              InputLabelProps={{
-                sx: {
-                  color: textColor,
-                  '&.Mui-focused': {
-                    color: primaryColor,
-                  },
-                }
-              }}
-            />
-          )}
-        />
+        {requireCouponForCheckin && (
+          <Controller
+            name="coupon_code"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label={t('public_checkin.coupon_code')}
+                fullWidth
+                margin="normal"
+                error={!!errors.coupon_code}
+                helperText={errors.coupon_code?.message}
+                placeholder={t('public_checkin.coupon_code_optional')}
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    borderRadius: 2,
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: alpha(primaryColor, 0.3),
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: primaryColor,
+                    },
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                    '&:hover': {
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.07)',
+                    },
+                  }
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: textColor,
+                    '&.Mui-focused': {
+                      color: primaryColor,
+                    },
+                  }
+                }}
+              />
+            )}
+          />
+        )}
 
         {requiresTable && (
           <Controller

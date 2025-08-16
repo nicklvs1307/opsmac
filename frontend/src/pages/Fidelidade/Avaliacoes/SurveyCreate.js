@@ -240,8 +240,29 @@ const SurveyCreate = () => {
                 <DialogTitle>{t('survey_create.qr_code_dialog_title')}</DialogTitle>
                 <DialogContent sx={{ display: 'flex', justifyContent: 'center' }}>
                   {/* Integrar QR Code aqui */}
-                  <Paper elevation={3} sx={{ p: 2, width: 256, height: 256, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                     <Typography variant="caption">{t('common.qr_code')}</Typography>
+                  <Paper elevation={3} sx={{ p: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <QRCode value={`${window.location.origin}/public/surveys/${createdSurveySlug}`} size={256} level="H" renderAs="canvas" id="surveyQRCodeCanvas" />
+                    <Button
+                      variant="contained"
+                      sx={{ mt: 2 }}
+                      onClick={() => {
+                        const canvas = document.getElementById('surveyQRCodeCanvas');
+                        if (canvas) {
+                          const pngUrl = canvas.toDataURL('image/png');
+                          const downloadLink = document.createElement('a');
+                          downloadLink.href = pngUrl;
+                          downloadLink.download = `survey-${createdSurveySlug}-qrcode.png`;
+                          document.body.appendChild(downloadLink);
+                          downloadLink.click();
+                          document.body.removeChild(downloadLink);
+                          toast.success(t('survey_create.qr_code_download_success'));
+                        } else {
+                          toast.error(t('survey_create.qr_code_download_error'));
+                        }
+                      }}
+                    >
+                      {t('survey_create.download_qr_code_button')}
+                    </Button>
                   </Paper>
                 </DialogContent>
                 <DialogActions>

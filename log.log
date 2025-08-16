@@ -1,16 +1,17 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                        8.1s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       21.1s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.808
-0.808 > feedeliza-plus@1.0.0 build
-0.808 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.808
-4.034 Creating an optimized production build...
-7.899 Failed to compile.
-7.899
-7.901 Module not found: Error: Can't resolve './pages/ERP/PaymentMethods' in '/app/frontend/src'
-7.901
-7.901
+0.622
+0.622 > feedeliza-plus@1.0.0 build
+0.622 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.622
+3.735 Creating an optimized production build...
+20.91 Failed to compile.
+20.91
+20.91 Module not found: Error: You attempted to import ../../api/axiosInstance which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
+20.91 You can either move it inside src/, or add a symlink to it from project's node_modules/.
+20.91
+20.91
 ------
 Dockerfile.frontend:23
 --------------------
@@ -21,7 +22,6 @@ Dockerfile.frontend:23
   25 |     # Estágio final para servir os arquivos com NGINX
 --------------------
 ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
-----
 
 
 

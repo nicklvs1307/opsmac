@@ -336,6 +336,22 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                   }
                   label={t('checkin_program.require_table_number')}
                 />
+                <FormControlLabel
+                  control={
+                    <Controller
+                      name="require_coupon_for_checkin"
+                      control={control}
+                      render={({ field }) => (
+                        <Switch
+                          {...field}
+                          checked={!!field.value}
+                          onChange={(e) => field.onChange(e.target.checked)}
+                        />
+                      )}
+                    />
+                  }
+                  label={t('checkin_program.require_coupon_for_checkin')}
+                />
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <Controller

@@ -1,7 +1,3 @@
-html {
-  font-size: 62.5%; /* 1rem = 10px */
-}
-
 html, body {
   /* height: 100%; Removed to allow content to dictate height */
   margin: 0;
@@ -10,7 +6,7 @@ html, body {
 }
 
 body {
-  zoom: 0.8; /* Adjusted for further global zoom out */
+  /* zoom: 0.9; Removed to prevent global scaling of text */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

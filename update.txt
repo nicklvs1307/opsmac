@@ -60,4 +60,179 @@ tem que ter no mesmo botão o resumo parcial, isso ira mostrar os valores, em di
 e a ultima opção sera o fechar frente de caixa, os valores para o fechamento de caixa tem que bater, tanto em dinheiro, cartão e etc
  depois desse botão criado, vamos para o proximo passo um botão também com venda de balcão sem cliente
  depois uma barra de pesquisa para pesquisar o nome do cliente ou numero de telefone, nessa pesquisa tem que aparecer o endereço do cliente, quando o usuario clicar em cima do endereço ele vai para o pedido, para poder escolher os itens no pdv ja com o cliente selecionado ja com o endereço
-  
+
+robo de pedidosimpressão automatica
+gestor de pedidos
+relatorios de vendas
+app garçons
+
+1. Módulo Financeiro
+1.1. Acerto de Entregadores
+
+Registro de pedidos realizados por entregador.
+
+Cálculo automático de comissão/taxa por entrega.
+
+Ajustes manuais e histórico de acertos.
+
+Exportação para Excel/PDF.
+
+1.2. Acerto de Garçons
+
+Registro de vendas por garçom.
+
+Percentual ou valor fixo de comissão.
+
+Fechamento diário e histórico.
+
+1.3. Contas e Categorias
+
+Cadastro de categorias de contas (Ex.: Luz, Água, Marketing).
+
+Subcategorias.
+
+Relacionamento com lançamentos.
+
+1.4. Lançamentos Financeiros
+
+Entrada e saída.
+
+Anexo de comprovantes.
+
+Recorrência de lançamentos.
+
+1.5. Fornecedores
+
+Cadastro com dados fiscais.
+
+Histórico de compras.
+
+1.6. Frente de Caixa
+
+Formas de pagamento personalizáveis (Dinheiro, PIX, Cartão, VR etc.).
+
+Métodos de pagamento (à vista, parcelado, fiado).
+
+Controle de abertura, reforço, retirada, resumo parcial e fechamento.
+
+2. Módulo de Estoque
+2.1. Estrutura
+
+Grupos por ingrediente (Carnes, Queijos, Bebidas).
+
+Ingredientes e insumos com estoque mínimo.
+
+Ficha técnica integrada ao cardápio.
+
+2.2. Movimentações
+
+Entrada manual e automática (notas fiscais).
+
+Saída por venda ou baixa manual.
+
+Transferência entre estoques.
+
+2.3. Notas de Entrada
+
+Importação automática via XML NFe.
+
+Associação automática de produtos.
+
+2.4. Ordens de Compra
+
+Emissão para fornecedores.
+
+Aprovação e histórico.
+
+3. Relatórios ERP
+
+Cupons gerados.
+
+DRE Gerencial (customizável).
+
+Fluxo de caixa diário, semanal e mensal.
+
+Histórico de posição de estoque.
+
+Lista de contas.
+
+Posição de estoque atual.
+
+Venda por período e forma de pagamento.
+
+4. Cupons e Disparo de Mensagens
+
+Criar cupons no sistema (percentual, valor fixo, frete grátis).
+
+Associar cupom a segmentos de clientes.
+
+Disparo via WhatsApp integrado (com API oficial ou alternativa).
+
+Registro de quem recebeu e quem utilizou.
+
+5. PDV e Kanban de Pedidos
+5.1. Botão "Abrir Caixa"
+
+Popup com:
+
+Valor inicial em dinheiro.
+
+Observações.
+
+Botões Salvar e Cancelar.
+
+5.2. Botão com Caixa Aberto
+
+Mostrar:
+
+Tempo aberto.
+
+Valor inicial + vendas em dinheiro.
+
+Opções:
+
+Retirada (popup: tipo — pagamento ou sangria, valor, categoria).
+
+Reforço (valor adicionado).
+
+Resumo Parcial (totais por forma de pagamento).
+
+Fechar Caixa (valores conferidos por forma de pagamento).
+
+5.3. Venda de Balcão
+
+Sem cliente vinculado.
+
+Rápida seleção de itens e pagamento.
+
+5.4. Pesquisa de Cliente
+
+Por nome ou telefone.
+
+Mostrar endereço.
+
+Ao clicar, já abre pedido no PDV com cliente e endereço preenchidos.
+
+6. Automação e Extras
+
+Robô de pedidos: impressão automática no preparo.
+
+Gestor de pedidos: visualização em tempo real.
+
+Relatórios de vendas: comparativo por período, produto e canal.
+
+App para garçons: pedidos direto da mesa para o sistema.
+
+Fluxo de Implementação (Sugestão de Ordem)
+
+Frente de Caixa + Kanban de Pedidos (core das operações).
+
+Módulo Financeiro (para não perder controle de grana desde o início).
+
+Módulo de Estoque (para controlar desperdício e compras).
+
+Relatórios ERP (alimentados pelos módulos anteriores).
+
+Cupons e Segmentação (para aumentar vendas).
+
+Automação e App Garçom (ganho de eficiência).

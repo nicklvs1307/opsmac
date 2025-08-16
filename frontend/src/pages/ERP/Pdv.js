@@ -8,6 +8,12 @@ import toast from 'react-hot-toast';
 import { Refresh as RefreshIcon, Store as StoreIcon, PointOfSale as PointOfSaleIcon, AddShoppingCart as AddShoppingCartIcon, RemoveShoppingCart as RemoveShoppingCartIcon, Delete as DeleteIcon, Menu as MenuIcon, Dashboard as DashboardIcon, ShoppingBasket as ShoppingBasketIcon, Inventory as InventoryIcon, Add as AddIcon, Remove as RemoveIcon, Search as SearchIcon, FilterList as FilterListIcon, Close as CloseIcon, Restaurant as RestaurantIcon, Assignment as AssignmentIcon, Book as BookIcon, People as PeopleIcon, PieChart as PieChartIcon, Settings as SettingsIcon, Visibility as EyeIcon, Edit as EditIcon, Print as PrintIcon, Filter as FilterIcon, Plus as PlusIcon, ShoppingCart as ShoppingCartIcon, ThumbsUp as ThumbsUpIcon, ThumbsUpDown as ThumbsUpDownIcon, ThumbDown as ThumbDownIcon, QuestionAnswer as QuestionAnswerIcon, PersonAdd as PersonAddIcon, CheckCircle as CheckCircleIcon, DeliveryDining as MotorcycleIcon, DoneAll as ClipboardCheckIcon, Inbox as InboxIcon, LocalFireDepartment as FireIcon, Payments as PaymentsIcon, Person as PersonIcon, Info as InfoIcon, List as ListIcon } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import CashRegisterModal from '../../components/CashRegisterModal';
+import CashRegisterOptionsModal from '../../components/CashRegisterOptionsModal';
+import WithdrawalModal from '../../components/WithdrawalModal';
+import ReinforcementModal from '../../components/ReinforcementModal';
+import PartialSummaryModal from '../../components/PartialSummaryModal';
+import CloseCashRegisterModal from '../../components/CloseCashRegisterModal';
 
 const fetchOrders = async ({ queryKey }) => {
   const [, filterStatus] = queryKey;
@@ -79,6 +85,12 @@ const Pdv = () => {
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [orderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [cashRegisterModalOpen, setCashRegisterModalOpen] = useState(false);
+  const [cashRegisterOptionsModalOpen, setCashRegisterOptionsModalOpen] = useState(false);
+  const [withdrawalModalOpen, setWithdrawalModalOpen] = useState(false);
+  const [reinforcementModalOpen, setReinforcementModalOpen] = useState(false);
+  const [partialSummaryModalOpen, setPartialSummaryModalOpen] = useState(false);
+  const [closeCashRegisterModalOpen, setCloseCashRegisterModalOpen] = useState(false);
 
   // Sample product data (from exemplo.html, will be replaced by API data)
   const sampleProducts = [
@@ -143,6 +155,45 @@ const Pdv = () => {
     }
   );
 
+  const fetchCashRegisterSession = async ({ queryKey }) => {
+    const [, restaurantId, userId] = queryKey;
+    const { data } = await axiosInstance.get(`/api/cash-register/current-session?restaurant_id=${restaurantId}&user_id=${userId}`);
+    return data;
+  };
+
+  const { data: currentCashRegisterSession, isLoading: isLoadingCashRegisterSession, isError: isErrorCashRegisterSession } = useQuery(
+    ['cashRegisterSessions', restaurantId, user?.userId],
+    fetchCashRegisterSession,
+    {
+      enabled: !!restaurantId && !!user?.userId,
+      refetchInterval: 10000, // Refetch every 10 seconds to keep status updated
+      onError: (error) => {
+        // Only show toast if it's not a 404 (no open session)
+        if (error.response?.status !== 404) {
+          toast.error(t('pdv.error_loading_cash_register_session', { message: error.response?.data?.msg || error.message }));
+        }
+      },
+    }
+  );
+
+  const fetchCashOrders = async ({ queryKey }) => {
+    const [, sessionId] = queryKey;
+    const { data } = await axiosInstance.get(`/api/cash-register/cash-orders?session_id=${sessionId}`);
+    return data;
+  };
+
+  const { data: cashOrders, isLoading: isLoadingCashOrders, isError: isErrorCashOrders } = useQuery(
+    ['cashOrders', currentCashRegisterSession?.id],
+    fetchCashOrders,
+    {
+      enabled: !!currentCashRegisterSession?.id,
+      refetchInterval: 10000, // Refetch every 10 seconds to keep status updated
+      onError: (error) => {
+        toast.error(t('pdv.error_loading_cash_orders', { message: error.response?.data?.msg || error.message }));
+      },
+    }
+  );
+
   // Mutations
   const updateOrderStatusMutation = useMutation(updateOrderStatus, {
     onSuccess: () => {
@@ -184,6 +235,53 @@ const Pdv = () => {
       toast.error(t('pdv.error_creating_order', { message: error.response?.data?.msg || error.message }));
     }
   });
+
+  const createCashRegisterSession = async (sessionData) => {
+    const { data } = await axiosInstance.post('/api/cash-register/open', sessionData);
+    return data;
+  };
+
+  const createCashRegisterSessionMutation = useMutation(createCashRegisterSession, {
+    onSuccess: () => {
+      toast.success(t('pdv.cash_register_opened_success')); // Assuming translation key
+      queryClient.invalidateQueries('cashRegisterSessions'); // Invalidate to refetch if needed
+    },
+    onError: (error) => {
+      toast.error(t('pdv.error_opening_cash_register', { message: error.response?.data?.msg || error.message }));
+    },
+  });
+
+  const createWithdrawalMutation = useMutation(
+    async (data) => {
+      const { data: response } = await axiosInstance.post('/api/cash-register/withdrawal', data);
+      return response;
+    },
+    {
+      onSuccess: () => {
+        toast.success(t('pdv.withdrawal_recorded_success'));
+        queryClient.invalidateQueries('cashRegisterSessions'); // Invalidate to update balance
+      },
+      onError: (error) => {
+        toast.error(t('pdv.error_recording_withdrawal', { message: error.response?.data?.msg || error.message }));
+      },
+    }
+  );
+
+  const createReinforcementMutation = useMutation(
+    async (data) => {
+      const { data: response } = await axiosInstance.post('/api/cash-register/reinforcement', data);
+      return response;
+    },
+    {
+      onSuccess: () => {
+        toast.success(t('pdv.reinforcement_recorded_success'));
+        queryClient.invalidateQueries('cashRegisterSessions'); // Invalidate to update balance
+      },
+      onError: (error) => {
+        toast.error(t('pdv.error_recording_reinforcement', { message: error.response?.data?.msg || error.message }));
+      },
+    }
+  );
 
   // Helper Functions
   const calculateTotal = useMemo(() => {
@@ -262,6 +360,39 @@ const Pdv = () => {
     setCustomerPhone('');
     setPaymentMethod('');
     setNotes('');
+  };
+
+  const formatTimeElapsed = (startTime) => {
+    const now = new Date();
+    const start = new Date(startTime);
+    const diffMs = now - start;
+
+    const diffSeconds = Math.floor(diffMs / 1000);
+    const hours = Math.floor(diffSeconds / 3600);
+    const minutes = Math.floor((diffSeconds % 3600) / 60);
+    const seconds = diffSeconds % 60;
+
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const calculateCurrentCash = (session, movements, orders) => {
+    if (!session) return 0;
+
+    let totalCash = Number(session.opening_cash);
+
+    movements?.forEach(movement => {
+      if (movement.type === 'reinforcement') {
+        totalCash += Number(movement.amount);
+      } else if (movement.type === 'withdrawal') {
+        totalCash -= Number(movement.amount);
+      }
+    });
+
+    orders?.forEach(order => {
+      totalCash += Number(order.total_amount);
+    });
+
+    return totalCash;
   };
 
   const handlePlaceOrder = () => {
@@ -382,6 +513,36 @@ const Pdv = () => {
   const closeOrderDetailsModal = () => {
     setOrderDetailsModalOpen(false);
     setSelectedOrder(null);
+  };
+
+  const handleOpenCashRegisterModal = () => {
+    setCashRegisterModalOpen(true);
+  };
+
+  const handleOpenCashRegisterOptionsModal = () => {
+    setCashRegisterOptionsModalOpen(true);
+  };
+
+  const handleSaveCashRegister = (initialCash, observations) => {
+    createCashRegisterSessionMutation.mutate({
+      opening_cash: parseFloat(initialCash),
+      opening_observations: observations,
+    });
+    setCashRegisterModalOpen(false);
+  };
+
+  const handleSaveWithdrawal = (data) => {
+    createWithdrawalMutation.mutate(data);
+    setWithdrawalModalOpen(false);
+  };
+
+  const handleSaveReinforcement = (data) => {
+    createReinforcementMutation.mutate(data);
+    setReinforcementModalOpen(false);
+  };
+
+  const handleOpenPartialSummaryModal = () => {
+    setPartialSummaryModalOpen(true);
   };
 
   // Responsive behavior
@@ -594,6 +755,30 @@ const Pdv = () => {
             {/* Kanban Tab */}
             <div className={currentTab === 'kanban' ? 'tab-pane active' : 'tab-pane'} id="kanban-tab">
               <div className="main-container">
+                {/* New button for "Abrir Caixa" / "Caixa Aberto" */}
+                <div style={{ marginBottom: '20px', textAlign: 'right' }}>
+                  {isLoadingCashRegisterSession ? (
+                    <CircularProgress size={24} />
+                  ) : currentCashRegisterSession ? (
+                    <Button
+                      variant="contained"
+                      color="success" // Green for open
+                      startIcon={<PointOfSaleIcon />}
+                      onClick={handleOpenCashRegisterOptionsModal} // Will be implemented next
+                    >
+                      {t('pdv.cash_register_open')} ({formatTimeElapsed(currentCashRegisterSession.opening_time)}) - R$ {calculateCurrentCash(currentCashRegisterSession, null, cashOrders).toFixed(2).replace('.', ',')}
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      startIcon={<PointOfSaleIcon />}
+                      onClick={handleOpenCashRegisterModal}
+                    >
+                      {t('pdv.open_cash_register')} {/* Assuming translation key */}
+                    </Button>
+                  )}
+                </div>
                 <div className="kanban-board" id="kanbanBoard">
                   {orderStatuses.filter(s => ['pending', 'preparing', 'ready', 'on_the_way', 'delivered'].includes(s.id)).map(statusCol => (
                     <div
@@ -804,6 +989,48 @@ const Pdv = () => {
           <ShoppingCartIcon />
         </button>
       )}
+
+      {/* Cash Register Modal */}
+      <CashRegisterModal
+        open={cashRegisterModalOpen}
+        handleClose={() => setCashRegisterModalOpen(false)}
+        handleSave={handleSaveCashRegister}
+      />
+
+      {/* Cash Register Options Modal */}
+      <CashRegisterOptionsModal
+        open={cashRegisterOptionsModalOpen}
+        handleClose={() => setCashRegisterOptionsModalOpen(false)}
+        currentSession={currentCashRegisterSession}
+        setWithdrawalModalOpen={setWithdrawalModalOpen}
+        setReinforcementModalOpen={setReinforcementModalOpen}
+        setPartialSummaryModalOpen={setPartialSummaryModalOpen}
+        setCloseCashRegisterModalOpen={setCloseCashRegisterModalOpen}
+      />
+
+      {/* Withdrawal Modal */}
+      <WithdrawalModal
+        open={withdrawalModalOpen}
+        handleClose={() => setWithdrawalModalOpen(false)}
+        handleSave={handleSaveWithdrawal}
+        currentSessionId={currentCashRegisterSession?.id}
+      />
+
+      {/* Reinforcement Modal */}
+      <ReinforcementModal
+        open={reinforcementModalOpen}
+        handleClose={() => setReinforcementModalOpen(false)}
+        handleSave={handleSaveReinforcement}
+        currentSessionId={currentCashRegisterSession?.id}
+      />
+
+      {/* Partial Summary Modal */}
+      <PartialSummaryModal
+        open={partialSummaryModalOpen}
+        handleClose={() => setPartialSummaryModalOpen(false)}
+        currentSession={currentCashRegisterSession}
+        cashOrders={cashOrders}
+      />
     </div>
   );
 };

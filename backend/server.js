@@ -38,9 +38,8 @@ const ordersRoutes = require('./routes/orders');
 const ingredientsRoutes = require('./routes/ingredients');
 const technicalSpecificationsRoutes = require('./routes/technicalSpecifications');
 const categoriesRoutes = require('./routes/categories');
-const labelRoutes = require('./routes/labels_test');
-console.log('server.js: labelRoutes type:', typeof labelRoutes, 'labelRoutes instanceof Router:', labelRoutes instanceof express.Router);
-
+const cashRegisterRoutes = require('./routes/cashRegister');
+const financialRoutes = require('./routes/financial');
 const app = express();
 app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)
 const PORT = process.env.PORT || 5000;
@@ -100,7 +99,8 @@ app.use('/api/orders', ordersRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
 app.use('/api/technical-specifications', technicalSpecificationsRoutes);
 app.use('/api/categories', categoriesRoutes);
-app.use('/labels', labelRoutes);
+app.use('/api/cash-register', cashRegisterRoutes);
+app.use('/api/financial', financialRoutes);
 
 const restaurantRoutes = require('./routes/restaurant');
 const healthRoutes = require('./routes/health');

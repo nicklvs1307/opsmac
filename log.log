@@ -1,277 +1,76 @@
-satisfaction:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-main.8f0e94de.js:2 [Violation] 'message' handler took 321ms
-main.8f0e94de.js:2 [Violation] 'message' handler took 226ms
-The script has an unsupported MIME type ('text/html').
-serviceWorkerRegistration.js:90 Error during service worker registration: SecurityError: Failed to register a ServiceWorker for scope ('https://feedelizapro.towersfy.com/') with script ('https://feedelizapro.towersfy.com/service-worker.js'): The script has an unsupported MIME type ('text/html').
-(anônimo) @ serviceWorkerRegistration.js:90
-Promise.catch
-(anônimo) @ serviceWorkerRegistration.js:89
-(anônimo) @ serviceWorkerRegistration.js:46
-[Violation] 'click' handler levou <N> ms
-[Violation] 'click' handler levou <N> ms
-[Violation] 'click' handler levou <N> ms
-[Violation] 'click' handler levou <N> ms
-[Violation] 'click' handler levou <N> ms
-[Violation] 'click' handler levou <N> ms
-[Violation] 'click' handler levou <N> ms
-[Violation] 'click' handler levou <N> ms
-[Violation] 'click' handler levou <N> ms
-[Violation] 'click' handler levou <N> ms
-[Violation] Forced reflow while executing JavaScript took 55ms
-main.8f0e94de.js:2 [Violation] 'message' handler took 239ms
-[Violation] Forced reflow while executing JavaScript took 60ms
-Pdv.js:206 Product image: undefined
-Pdv.js:206 Product image: undefined
-Pdv.js:206 Product image: undefined
-Pdv.js:206 Product image: undefined
-Pdv.js:206 Product image: undefined
-ProductionList.js:16  GET https://feedelizaapi.towersfy.com/labels/productions 404 (Not Found)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-vo @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-wo.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ ProductionList.js:16
-(anônimo) @ ProductionList.js:26
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-ProductionList.js:20 Ur {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ ProductionList.js:20
-await in (anônimo)
-(anônimo) @ ProductionList.js:26
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-StockCountList.js:16  GET https://feedelizaapi.towersfy.com/labels/stock-counts 404 (Not Found)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-vo @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-wo.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-s @ StockCountList.js:16
-(anônimo) @ StockCountList.js:26
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-StockCountList.js:20 Ur {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-s @ StockCountList.js:20
-await in s
-(anônimo) @ StockCountList.js:26
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-[Violation] Forced reflow while executing JavaScript took 32ms
-ManageLabelItems.js:17  GET https://feedelizaapi.towersfy.com/labels/items 404 (Not Found)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-vo @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-wo.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ ManageLabelItems.js:17
-(anônimo) @ ManageLabelItems.js:27
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-ManageLabelItems.js:21 Ur {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ ManageLabelItems.js:21
-await in (anônimo)
-(anônimo) @ ManageLabelItems.js:27
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-PrintLabel.js:14  GET https://feedelizaapi.towersfy.com/labels/users 404 (Not Found)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-vo @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-wo.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ PrintLabel.js:14
-(anônimo) @ PrintLabel.js:22
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-PrintLabel.js:18 Ur {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ PrintLabel.js:18
-await in (anônimo)
-(anônimo) @ PrintLabel.js:22
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-ManageLabelItems.js:17  GET https://feedelizaapi.towersfy.com/labels/items 404 (Not Found)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-vo @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-wo.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ ManageLabelItems.js:17
-(anônimo) @ ManageLabelItems.js:27
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-ManageLabelItems.js:21 Ur {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ ManageLabelItems.js:21
-await in (anônimo)
-(anônimo) @ ManageLabelItems.js:27
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-LossHistory.js:15  GET https://feedelizaapi.towersfy.com/labels/loss-history 404 (Not Found)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-vo @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-wo.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ LossHistory.js:15
-(anônimo) @ LossHistory.js:24
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-LossHistory.js:19 Ur {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ LossHistory.js:19
-await in (anônimo)
-(anônimo) @ LossHistory.js:24
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-PrintHistory.js:15  GET https://feedelizaapi.towersfy.com/labels/history 404 (Not Found)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-vo @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-wo.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ PrintHistory.js:15
-(anônimo) @ PrintHistory.js:24
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
-PrintHistory.js:19 Ur {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ PrintHistory.js:19
-await in (anônimo)
-(anônimo) @ PrintHistory.js:24
-nl @ react-dom.production.min.js:243
-jc @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:282
-_c @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:266
+quero que no menu "programa de fidelidade" seja alterado o nome para "fidelidade".
+no sub menu programa "programa de check-in" seja alterado para "check-in".
+notei que a rolagem para baixo e para cima não esta funcionando em todo o sistema.
+  isso quer dizer que quando tem uma iformação mais abaixo da pagina não consigo ver porque nao consigo rolar a pagina para baixo.
 
+Na pagina que o cliente vai fazer o check-in, esta com erro no seguinte:
+  URL da solicitação
+  https://feedelizaapi.towersfy.com/api/checkin/public/towersfy
+  Método da solicitação
+  POST
+  Código de status
+  400 Bad Request
+  Endereço remoto
+  95.217.16.187:443
+  {
+    "error": "Dados inválidos",
+    "details": [
+        {
+            "type": "field",
+            "value": null,
+            "msg": "ID do cupom inválido",
+            "path": "coupon_id",
+            "location": "body"
+        }
+    ]
+}
 
+Isso não é o esperado, pois o cliente não consegue fazer o check-in caso o cupom não esteja inserido.
+O usuario tem que ter nas configurações do checkin um toggle para ativar ou desativar a opção de inserir o cupom, caso esteja desativado o input da pagina publica nao deve aparecer, assim como é no toggle de pedir mesa.
+notei que na pagina publica do check in ainda tem algumas variaveis de tradução sem tradução, quero que verifique e coloque as traduçções
+
+outro ponto, no submenu satisfação, na aba pesquisas, tem a lista de pesquisas, e ali tem as opções
+uma deas é o qr code, eu quero que nessa opção do qrcode tenha a opção de aixar o qr code.
+outra questão pendente no sistema de pesquisas que quando tentamos acessar a pesquisa recebemos um erro na tela "Pesquisa não encontrada ou inativa"
+no devtools esta assim
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/restaurant/219289ba-d468-4b6f-b4ce-dc386fa4bbda
+https://feedelizaapi.towersfy.com/public/surveys/next/pesquisa-de-nps/
 Método da solicitação
 GET
 Código de status
-429 Too Many Requests
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+{"error":"Rota não encontrada"}
+uma coisa nessa pagina também é que ele temum botão "voltar para a pagina inicial" pore messa é uma pagina publica, e quando é clicado nesse botão é redirecionado para o sistema, eo cliente nao tem acesso, então pode remover esse botão
+
+no submenu gerenciar qrcodes, os botões gerar primeiro qr code e o botão +gerar qrcode, quando é clicado é redirecionado para o dashboar, essa função não esta funcional, quando clicado no botão ele tem que irpara criação do qrcode
+
+no subemnu cardapio a criação de produtos tem que ser melhorada, eu nao consigo criar um produto sem falar que é pizza e ter que escolher o valor fixo ou valor dinamico meio a meio
+o usuario tem que poder criar seus produtos de forma livre, porque nem tdos os usuarios tem pizzaria, serão restaurantes, hamburguerias , sorveterias e encontrada
+
+
+no submenu estoque, a movimentação de estoque nao esta funcionando, quando tento fazer uma movimentação de entrada ou saída da um erro abaixo
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/stock/move
+Método da solicitação
+POST
+Código de status
+500 Internal Server Error
 Endereço remoto
 95.217.16.187:443
 
-{"error":"Muitas tentativas. Tente novamente em alguns minutos."}
 
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-labels.js: typeof express: function
-labels.js: typeof express.Router: function
-labels.js: typeof router after express.Router(): function router instanceof express.Router: false
-labels.js: typeof router before export: function router instanceof express.Router: false
-server.js: labelRoutes type: function labelRoutes instanceof Router: false
-Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
-Generated Swagger Specs (first 500 chars): {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Check Test API",
-    "version": "1.0.0",
-    "description": "API documentation for the Check Test application."
-  },
-  "servers": [
-    {
-      "url": "http://localhost:5000/api",
-      "description": "Production server"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Public API",
-      "description": "Endpoints acessíveis via API Token para integração externa."
-    },
-    {
-      "name": "Admin",
-      "description": "Gerenciamento de usuários e res
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-📊 Dashboard: https://feedelizapro.towersfy.com
-🔗 API: https://feedelizaapi.towersfy.com/api
+no submenu ficha tecnica, quando eu tento gerenciar a ficha tecnica do produto, me aparece esse erro
+Erro ao carregar ficha técnica. Verifique sua conexão ou tente novamente.
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/technical-specifications/f43fb188-b4e3-4cd1-9d8c-b304e70a3dce
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+{"msg":"Ficha técnica não encontrada para este produto."}
+
+

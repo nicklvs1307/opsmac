@@ -60,6 +60,15 @@ import StockCountList from './pages/Labels/StockCountList';
 import StockCountDetail from './pages/Labels/StockCountDetail';
 import ProductionList from './pages/Labels/ProductionList';
 import ProductionCreate from './pages/Labels/ProductionCreate';
+import FinancialTransactions from './pages/ERP/FinancialTransactions';
+import CashFlowReport from './pages/Reports/CashFlowReport';
+import DREReport from './pages/Reports/DREReport';
+import SalesByPaymentMethodReport from './pages/Reports/SalesByPaymentMethodReport';
+import ListOfAccountsReport from './pages/Reports/ListOfAccountsReport';
+import CurrentStockPositionReport from './pages/Reports/CurrentStockPositionReport';
+import StockPositionHistoryReport from './pages/Reports/StockPositionHistoryReport';
+import GeneratedCouponsReport from './pages/Reports/GeneratedCouponsReport';
+import PaymentMethods from './pages/ERP/PaymentMethods';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -128,6 +137,15 @@ function App() {
                   <Route path="erp/orders" element={<Orders />} />
                   <Route path="erp/pdv" element={<Pdv />} />
                   <Route path="erp/ingredients" element={<Ingredients />} />
+                  <Route path="erp/payment-methods" element={<PaymentMethods />} />
+                  <Route path="erp/financial-transactions" element={<FinancialTransactions />} />
+                  <Route path="reports/cash-flow" element={<CashFlowReport />} />
+                  <Route path="reports/dre" element={<DREReport />} />
+                  <Route path="reports/sales-by-payment-method" element={<SalesByPaymentMethodReport />} />
+                  <Route path="reports/list-of-accounts" element={<ListOfAccountsReport />} />
+                  <Route path="reports/current-stock-position" element={<CurrentStockPositionReport />} />
+                  <Route path="reports/stock-position-history" element={<StockPositionHistoryReport />} />
+                  <Route path="reports/generated-coupons" element={<GeneratedCouponsReport />} />
                   <Route path="labels/dashboard" element={<LabelsDashboard />} />
                   <Route path="labels/print" element={<PrintLabel />} />
                   <Route path="labels/admin" element={<LabelsAdmin />} />

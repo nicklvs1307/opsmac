@@ -25,28 +25,57 @@ router.get('/', auth, getRestaurantId, async (req, res) => {
   const { restaurantId } = req;
 
   try {
-    const products = await models.Product.findAll({
-      where: { restaurant_id: restaurantId },
+    // Fetch stock for products
+    const productStocks = await models.Stock.findAll({
+      where: {
+        restaurant_id: restaurantId,
+        stockable_type: 'Product', // Filter for products
+      },
       include: [{
-        model: models.Stock,
-        as: 'stock',
-        required: false // Use a LEFT JOIN to include products even without stock entries
+        model: models.Product,
+        as: 'product',
+        attributes: ['id', 'name', 'sku'],
       }],
-      order: [['name', 'ASC']] // Order products by name
     });
 
-    // Map the result to the desired format
-    const stockList = products.map(product => ({
-      id: product.id, // Keep product id for keys and actions
-      product_id: product.id,
-      name: product.name,
-      sku: product.sku,
-      quantity: product.stock ? product.stock.quantity : 0
-    }));
+    // Fetch stock for ingredients
+    const ingredientStocks = await models.Stock.findAll({
+      where: {
+        restaurant_id: restaurantId,
+        stockable_type: 'Ingredient', // Filter for ingredients
+      },
+      include: [{
+        model: models.Ingredient,
+        as: 'ingredient',
+        attributes: ['id', 'name', 'unit_of_measure'],
+      }],
+    });
+
+    // Combine and format the results
+    const stockList = [
+      ...productStocks.map(stock => ({
+        id: stock.id,
+        item_id: stock.stockable_id,
+        name: stock.product.name,
+        sku: stock.product.sku,
+        type: 'Product',
+        quantity: stock.quantity,
+        unit_of_measure: null, // Products don't have unit_of_measure in this context
+      })),
+      ...ingredientStocks.map(stock => ({
+        id: stock.id,
+        item_id: stock.stockable_id,
+        name: stock.ingredient.name,
+        sku: null, // Ingredients don't have SKU in this context
+        type: 'Ingredient',
+        quantity: stock.quantity,
+        unit_of_measure: stock.ingredient.unit_of_measure,
+      })),
+    ];
 
     res.json(stockList);
   } catch (error) {
-    // console.error('Error fetching stock list:', error);
+    console.error('Error fetching current stock position:', error);
     res.status(500).send('Server Error');
   }
 });
@@ -131,5 +160,66 @@ router.get('/history/:product_id', auth, getRestaurantId, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// Get stock movement history for all products and ingredients
+router.get(
+  '/history',
+  auth,
+  getRestaurantId,
+  async (req, res) => {
+    const { restaurantId } = req;
+    const { start_date, end_date, item_id, type } = req.query; // item_id can be product_id or ingredient_id
+
+    let whereClause = { restaurant_id: restaurantId };
+
+    if (start_date || end_date) {
+      whereClause.createdAt = {};
+      if (start_date) {
+        whereClause.createdAt[models.Sequelize.Op.gte] = new Date(start_date);
+      }
+      if (end_date) {
+        const endDate = new Date(end_date);
+        endDate.setHours(23, 59, 59, 999); // Set to end of day
+        whereClause.createdAt[models.Sequelize.Op.lte] = endDate;
+      }
+    }
+
+    if (item_id) {
+      whereClause.stockable_id = item_id;
+    }
+    if (type) {
+      whereClause.type = type; // 'in' or 'out'
+    }
+
+    try {
+      const history = await models.StockMovement.findAll({
+        where: whereClause,
+        include: [
+          {
+            model: models.Product,
+            as: 'product',
+            attributes: ['id', 'name', 'sku'],
+          },
+          {
+            model: models.Ingredient,
+            as: 'ingredient',
+            attributes: ['id', 'name', 'unit_of_measure'],
+          },
+          {
+            model: models.User,
+            as: 'user',
+            attributes: ['id', 'name'],
+          },
+        ],
+        order: [['createdAt', 'DESC']],
+      });
+
+      res.json(history);
+    } catch (error) {
+      console.error('Error fetching stock movement history:', error);
+      res.status(500).send('Server Error');
+    }
+  }
+);
 
 module.exports = router;

@@ -198,7 +198,7 @@ const Sidebar = ({ onMobileClose }) => {
         {
           title: t('sidebar.financial'),
           icon: <PointOfSaleIcon />, // Using PointOfSaleIcon for financial, can be changed
-          path: '/financial',
+          path: '/erp/financial-transactions', // Corrected path
           submenu: [
             {
               title: t('sidebar.financial_transactions'),

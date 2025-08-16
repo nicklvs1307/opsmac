@@ -40,6 +40,7 @@ const technicalSpecificationsRoutes = require('./routes/technicalSpecifications'
 const categoriesRoutes = require('./routes/categories');
 const cashRegisterRoutes = require('./routes/cashRegister');
 const financialRoutes = require('./routes/financial');
+const labelsRoutes = require('./routes/labels'); // New import for labels routes
 const app = express();
 app.set('trust proxy', 1); // Confia no proxy reverso (Traefik)
 const PORT = process.env.PORT || 5000;
@@ -101,6 +102,7 @@ app.use('/api/technical-specifications', technicalSpecificationsRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/cash-register', cashRegisterRoutes);
 app.use('/api/financial', financialRoutes);
+app.use('/labels', labelsRoutes); // New route for labels
 
 const restaurantRoutes = require('./routes/restaurant');
 const healthRoutes = require('./routes/health');

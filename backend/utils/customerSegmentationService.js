@@ -40,6 +40,7 @@ const determineNPSSegment = async (customer, models) => {
       as: 'answers',
       include: [{
         model: models.Question,
+        as: 'question',
         where: { question_type: 'nps' }, // Filter directly on Question model
         attributes: []
       }]

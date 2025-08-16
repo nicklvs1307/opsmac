@@ -19,7 +19,15 @@ module.exports = (sequelize) => {
     stockable_type: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    restaurant_id: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: 'restaurants',
+        key: 'id',
+      },
+    },
   }, {
     freezeTableName: true,
     tableName: 'stocks',
@@ -42,6 +50,10 @@ module.exports = (sequelize) => {
       foreignKey: 'stockable_id',
       constraints: false,
       as: 'ingredient'
+    });
+    Stock.belongsTo(models.Restaurant, {
+      foreignKey: 'restaurant_id',
+      as: 'restaurant',
     });
   };
 

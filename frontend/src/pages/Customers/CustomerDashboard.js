@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Paper, Grid, CircularProgress, Alert, List, ListItem, ListItemText } from '@mui/material';
 import { useQuery } from 'react-query';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '../api/axiosInstance';
 
 const fetchCustomerMetrics = async () => {
   const { data } = await axiosInstance.get('/api/customers/dashboard-metrics', {

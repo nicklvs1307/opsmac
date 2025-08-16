@@ -30,7 +30,7 @@ import {
 } from '@mui/icons-material';
 import { CheckCircleOutline as CheckinIcon, ExitToApp as ExitToAppIcon } from '@mui/icons-material';
 import { useAuth } from '../../../contexts/AuthContext';
-import axiosInstance from '../../../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import CheckinProgram from './CheckinProgram';
 import { useForm, useFieldArray } from 'react-hook-form';

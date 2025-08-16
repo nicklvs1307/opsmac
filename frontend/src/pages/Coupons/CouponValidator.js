@@ -4,7 +4,7 @@ import {
   Container,
   useTheme,
 } from '@mui/material';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '../api/axiosInstance';
 import CouponValidatorCard from '../../components/UI/CouponValidatorCard';
 import { useTranslation } from 'react-i18next';
 

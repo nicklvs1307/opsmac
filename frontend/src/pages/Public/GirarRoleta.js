@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Typography, Button, Paper, Container, CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '../api/axiosInstance';
 import toast from 'react-hot-toast';
 import SpinTheWheel from '../../components/UI/SpinTheWheel';
 

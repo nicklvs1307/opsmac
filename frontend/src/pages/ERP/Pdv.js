@@ -114,7 +114,7 @@ const Pdv = () => {
     () => fetchRestaurantStatus(restaurantId),
     {
       enabled: !!restaurantId,
-      refetchInterval: 15000,
+      refetchInterval: 300000,
       onError: (error) => {
         toast.error(t('pdv.error_loading_restaurant_status', { message: error.response?.data?.msg || error.message }));
       }
@@ -203,7 +203,7 @@ const Pdv = () => {
   }, [calculateSubtotal, calculateServiceTax]);
 
   const handleAddToCart = (product) => {
-    console.log('Product image:', product.image);
+    console.log('Product object:', product);
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id);
       if (existingItem) {
@@ -218,7 +218,7 @@ const Pdv = () => {
             name: product.name,
             price: parseFloat(product.price),
             quantity: 1,
-            image: product.image, // Assuming image is passed from sampleProducts
+            image: product.image || '❓', // Use a default emoji if image is undefined
           },
         ];
       }

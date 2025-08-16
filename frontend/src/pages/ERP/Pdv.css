@@ -38,20 +38,20 @@
         
 
         /* Main Content */
-        .main-content {
+                .main-content {
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            flex-grow: 1;
             overflow: hidden;
         }
 
         
 
         /* PDV Container */
-                                .pdv-container {
+                                        .pdv-container {
             display: flex;
             flex-direction: row;
-            height: 100vh;
+            flex-grow: 1;
             overflow: hidden;
         }
 
@@ -483,8 +483,10 @@
             display: none;
         }
 
-        .tab-pane.active {
-            display: block;
+                .tab-pane.active {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         /* Kanban Styles (exactly like you sent) */

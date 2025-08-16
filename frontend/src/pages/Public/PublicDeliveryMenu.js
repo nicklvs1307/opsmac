@@ -133,7 +133,7 @@ const PublicDeliveryMenu = () => {
 
   return (
     <ThemeProvider theme={deliveryTheme}>
-      <Box sx={{ maxWidth: '500px', margin: '0 auto', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+      <Box sx={{ maxWidth: '500px', margin: '0 auto', backgroundColor: '#f9f9f9' }}>
         {/* Header */}
         <AppBar position="sticky" className="header">
           <Toolbar className="header-container">

@@ -24,7 +24,7 @@ code {
 }
 
 .App {
-  min-height: 100vh;
+  /* min-height: 100vh; Removed to allow content to dictate height */
 }
 
 /* Custom scrollbar */

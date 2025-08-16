@@ -1,3 +1,30 @@
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                        8.1s
+------
+ > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
+0.808
+0.808 > feedeliza-plus@1.0.0 build
+0.808 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.808
+4.034 Creating an optimized production build...
+7.899 Failed to compile.
+7.899
+7.901 Module not found: Error: Can't resolve './pages/ERP/PaymentMethods' in '/app/frontend/src'
+7.901
+7.901
+------
+Dockerfile.frontend:23
+--------------------
+  21 |     ARG REACT_APP_API_URL
+  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  23 | >>> RUN npm run build && ls -la /app/frontend/build
+  24 |
+  25 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+----
+
+
+
 quero que no menu "programa de fidelidade" seja alterado o nome para "fidelidade".
 no sub menu programa "programa de check-in" seja alterado para "check-in".
 notei que a rolagem para baixo e para cima não esta funcionando em todo o sistema.

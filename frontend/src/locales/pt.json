@@ -54,7 +54,7 @@
       "send_auto_replies": "Enviar respostas automáticas para feedbacks",
       "feedback_moderation": "Moderação de Feedbacks",
       "review_feedback_before_publishing": "Revisar feedbacks antes de publicar",
-      "loyalty_program": "Programa de Fidelidade",
+      "loyalty_program": "Fidelidade",
       "activate_loyalty_program": "Ativar sistema de pontos e recompensas",
       "api_token": "API Token",
       "use_public_api": "Use este token para acessar a API pública do seu restaurante.",
@@ -184,7 +184,7 @@
     },
     "sidebar": {
       "dashboard": "Dashboard",
-      "fidelity_program": "Programa de Fidelidade",
+      "fidelity_program": "Fidelidade",
       "checkin_program": "Programa de Check-in",
       "satisfaction": "Satisfação",
       "satisfaction_analysis": "Análise de Satisfação",

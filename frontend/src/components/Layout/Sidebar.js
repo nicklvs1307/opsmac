@@ -255,7 +255,7 @@ const Sidebar = ({ onMobileClose }) => {
           ]
         }
       ]
-    }
+    },
     {
       title: t('sidebar.labels'), // New
       icon: <QrCodeIcon />,

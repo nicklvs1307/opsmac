@@ -1,18 +1,18 @@
- => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      177.0s
+ => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      168.5s
 ------
  > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.615
-0.615 > feedeliza-plus@1.0.0 build
-0.615 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.615
-3.897 Creating an optimized production build...
-175.9 Failed to compile.
-175.9
-175.9 [eslint]
-175.9 src/components/Layout/Sidebar.js
-175.9 Syntax error: Identifier 'AnalyticsIcon' has already been declared. (33:15) (33:15)
-175.9
-175.9
+0.652
+0.652 > feedeliza-plus@1.0.0 build
+0.652 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.652
+2.893 Creating an optimized production build...
+168.1 Failed to compile.
+168.1
+168.1 [eslint]
+168.1 src/components/Layout/Sidebar.js
+168.1 Syntax error: Unexpected token, expected "," (259:4) (259:4)
+168.1
+168.1
 ------
 Dockerfile.frontend:24
 --------------------

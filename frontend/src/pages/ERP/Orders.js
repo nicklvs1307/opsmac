@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, CircularProgress, Alert, Card, CardContent, Grid, Button, MenuItem, Select, FormControl, InputLabel, IconButton, Divider } from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '../utils/axiosInstance';
+import axiosInstance from '../../utils/axiosInstance';
 import toast from 'react-hot-toast';
 import { Refresh as RefreshIcon, CheckCircleOutline as CheckCircleOutlineIcon, CancelOutlined as CancelOutlinedIcon } from '@mui/icons-material';
 

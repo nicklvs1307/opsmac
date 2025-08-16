@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, CircularProgress, Alert, Button, TextField, MenuItem, Select, FormControl, InputLabel, IconButton, Divider, List, ListItem, ListItemText } from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '../utils/axiosInstance';
+import axiosInstance from '../../utils/axiosInstance';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';

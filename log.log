@@ -1,23 +1,23 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       20.3s
+ => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                       21.2s
 ------
- > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.643
-0.643 > feedeliza-plus@1.0.0 build
-0.643 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.643
-3.873 Creating an optimized production build...
-20.06 Failed to compile.
-20.06
-20.06 Module not found: Error: Can't resolve '../utils/axiosInstance' in '/app/frontend/src/pages/ERP'
-20.06
-20.06
+ > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
+0.657
+0.657 > feedeliza-plus@1.0.0 build
+0.657 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.657
+3.607 Creating an optimized production build...
+20.98 Failed to compile.
+20.98
+20.98 Module not found: Error: Can't resolve '../utils/axiosInstance' in '/app/frontend/src/pages/ERP'
+20.98
+20.98
 ------
-Dockerfile.frontend:23
+Dockerfile.frontend:24
 --------------------
-  21 |     ARG REACT_APP_API_URL
-  22 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  23 | >>> RUN npm run build && ls -la /app/frontend/build
-  24 |
-  25 |     # Estágio final para servir os arquivos com NGINX
+  22 |     ARG REACT_APP_API_URL
+  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  24 | >>> RUN npm run build && ls -la /app/frontend/build
+  25 |
+  26 |     # Estágio final para servir os arquivos com NGINX
 --------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1te
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

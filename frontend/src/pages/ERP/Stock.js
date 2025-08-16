@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress, Alert, Dialog, DialogTitle, DialogContent, DialogActions, TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
-import axiosInstance from '../utils/axiosInstance';
+import axiosInstance from '../../utils/axiosInstance';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
 

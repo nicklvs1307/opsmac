@@ -1,17 +1,16 @@
- => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       29.7s
+ => ERROR [builder 7/7] RUN npm run build && ls -la /app/frontend/build                       19.9s
 ------
  > [builder 7/7] RUN npm run build && ls -la /app/frontend/build:
-0.770
-0.770 > feedeliza-plus@1.0.0 build
-0.770 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.770
-4.056 Creating an optimized production build...
-29.38 Failed to compile.
-29.38
-29.38 Module not found: Error: You attempted to import ../../api/axiosInstance which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
-29.38 You can either move it inside src/, or add a symlink to it from project's node_modules/.
-29.38
-29.38
+0.714
+0.714 > feedeliza-plus@1.0.0 build
+0.714 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.714
+3.601 Creating an optimized production build...
+19.70 Failed to compile.
+19.70
+19.71 Module not found: Error: Can't resolve '../api/axiosInstance' in '/app/frontend/src/pages/ERP'
+19.71
+19.71
 ------
 Dockerfile.frontend:23
 --------------------

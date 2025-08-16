@@ -5,6 +5,7 @@ import axiosInstance from '../../api/axiosInstance';
 import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, useMediaQuery, Zoom, Fade, Chip, Slide, Fab, List, ListItem, ListItemText, ListItemAvatar, Avatar, BottomNavigation, BottomNavigationAction, ThemeProvider, createTheme, InputAdornment } from '@mui/material';
 import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, Search as SearchIcon, Add as AddIcon, Remove as RemoveIcon, Close as CloseIcon, Person as PersonIcon, Phone as PhoneIcon, Home as HomeIcon, Payment as PaymentIcon, Notes as NotesIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';
+import './PublicDeliveryMenu.css';
 
 const fetchDeliveryMenu = async (restaurantSlug) => {
     const { data } = await axiosInstance.get(`/api/public/products/delivery/${restaurantSlug}`);
@@ -132,29 +133,49 @@ const PublicDeliveryMenu = () => {
 
   return (
     <ThemeProvider theme={deliveryTheme}>
-      <Box sx={{ maxWidth: '500px', margin: '0 auto', backgroundColor: '#F8F8F8', minHeight: '100vh' }}>
-        <AppBar position="sticky" sx={{ backgroundColor: 'white', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-          <Toolbar>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                {restaurantData?.logo ? <img src={`${API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ height: '40px', width: '40px', objectFit: 'contain', borderRadius: '50%' }} /> : <RestaurantIcon sx={{ color: 'accent.main' }} />}
-                <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700 }}>{restaurantData?.name || 'Don Fonseca'}</Typography>
+      <Box sx={{ maxWidth: '500px', margin: '0 auto', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+        {/* Header */}
+        <AppBar position="sticky" className="header">
+          <Toolbar className="header-container">
+            <Box className="logo">
+                <RestaurantIcon sx={{ marginRight: '10px' }} />
+                <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>Meu Cardápio</Typography>
             </Box>
-            <Box sx={{ flexGrow: 1 }} />
-            <IconButton onClick={() => setCartOpen(true)}>
-              <ShoppingCartIcon />
-              {totalItemsInCart > 0 && <Chip label={totalItemsInCart} size="small" sx={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'primary.main', color: 'white' }} />}
-            </IconButton>
+            <Box className="user-actions">
+                <IconButton color="inherit" aria-label="search">
+                    <SearchIcon />
+                </IconButton>
+                <IconButton color="inherit" aria-label="user">
+                    <PersonIcon />
+                </IconButton>
+                <IconButton color="inherit" onClick={() => setCartOpen(true)}>
+                    <ShoppingCartIcon />
+                    {totalItemsInCart > 0 && <Chip label={totalItemsInCart} size="small" sx={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'var(--success)', color: 'white' }} />}
+                </IconButton>
+            </Box>
           </Toolbar>
         </AppBar>
 
-        <Box sx={{ p: 2, backgroundColor: 'primary.main', color: 'white', textAlign: 'center' }}>
-          <Typography variant="h6" sx={{ fontWeight: 700 }}>🚀 Delivery Turbo</Typography>
-          <Typography variant="body2">Entregamos em 35 minutos ou 20% de desconto!</Typography>
+        {/* Restaurant Info */}
+        <Box className="restaurant-info">
+            <Box className="restaurant-container">
+                <img src={restaurantData?.logo ? `${API_URL}${restaurantData.logo}` : "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"} alt="Restaurante" className="restaurant-image" />
+                <Box className="restaurant-details">
+                    <Typography variant="h6" component="h2" sx={{ fontSize: '22px', marginBottom: '5px' }}>{restaurantData?.name || 'Restaurante Sabor & Arte'}</Typography>
+                    <Box className="restaurant-meta">
+                        <Typography component="span"><i className="fas fa-star"></i> 4.8 (250+)</Typography>
+                        <Typography component="span"><i className="fas fa-clock"></i> 30-45 min</Typography>
+                        <Typography component="span"><i className="fas fa-tag"></i> $ - Média</Typography>
+                        <Typography component="span"><i className="fas fa-map-marker-alt"></i> 1.2 km</Typography>
+                    </Box>
+                    <Typography variant="body2">Culinária brasileira com toques contemporâneos</Typography>
+                </Box>
+            </Box>
         </Box>
 
-        <Box sx={{ p: 2, position: 'sticky', top: 64, zIndex: 900, backgroundColor: '#F8F8F8' }}>
-          <TextField 
-            fullWidth 
+        <Box sx={{ p: 2, backgroundColor: '#f9f9f9' }}>
+          <TextField
+            fullWidth
             placeholder="Buscar hambúrguer, porção, bebida..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -165,43 +186,58 @@ const PublicDeliveryMenu = () => {
           />
         </Box>
 
-        <Box sx={{ px: 2, pb: 2, position: 'sticky', top: 130, zIndex: 800, backgroundColor: '#F8F8F8' }}>
-          <Box sx={{ display: 'flex', overflowX: 'auto', gap: 1, pb: 1 }}>
-            <Chip label="Tudo" onClick={() => setSelectedCategory('all')} color={selectedCategory === 'all' ? 'primary' : 'default'} />
-            {menuData && Object.keys(menuData.categories).map(cat => (
-              <Chip key={cat} label={cat} onClick={() => setSelectedCategory(cat)} color={selectedCategory === cat ? 'primary' : 'default'} />
-            ))}
-          </Box>
+        {/* Categories */}
+        <Box className="categories">
+            <Box sx={{ display: 'flex', overflowX: 'auto', gap: 1, pb: 1 }}>
+                <Chip label="Todos" onClick={() => setSelectedCategory('all')} className={selectedCategory === 'all' ? 'category active' : 'category'} />
+                {menuData && Object.keys(menuData.categories).map(cat => (
+                    <Chip key={cat} label={cat} onClick={() => setSelectedCategory(cat)} className={selectedCategory === cat ? 'category active' : 'category'} />
+                ))}
+            </Box>
         </Box>
 
-        <Box sx={{ p: 2, pb: 12 }}>
-          <Grid container spacing={2}>
-            {filteredProducts?.map(item => (
-              <Grid item xs={12} sm={6} key={item.id}>
-                <Card sx={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                  <CardMedia component="img" height="140" image={item.image_url || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} />
-                  <CardContent>
-                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>{item.name}</Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ minHeight: 40 }}>{item.description}</Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 2 }}>
-                      <Typography variant="h6" sx={{ fontWeight: 800, color: 'primary.main' }}>R$ {Number(item.price).toFixed(2)}</Typography>
-                      <IconButton onClick={() => addToCart(item)} sx={{ backgroundColor: 'primary.main', color: 'white', '&:hover': { backgroundColor: 'primary.dark' } }}><AddIcon /></IconButton>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
+        <main className="menu-container">
+            {menuData && Object.keys(menuData.categories).map(categoryName => (
+                <section className="menu-section" key={categoryName}>
+                    <h3 className="section-title">{categoryName}</h3>
+                    <div className="menu-items">
+                        {menuData.categories[categoryName]
+                            .filter(item =>
+                                (item.name.toLowerCase().includes(searchTerm.toLowerCase()) || (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase())))
+                            )
+                            .map(item => {
+                                const currentItemInCart = cartItems.find(cartItem => cartItem.id === item.id);
+                                const quantityInCart = currentItemInCart ? currentItemInCart.quantity : 0;
+
+                                return (
+                                    <div className="menu-item" key={item.id}>
+                                        <div className="item-info">
+                                            <h4 className="item-title">{item.name}</h4>
+                                            <p className="item-description">{item.description}</p>
+                                            <p className="item-price">R$ {Number(item.price).toFixed(2)}</p>
+                                            <div className="item-actions">
+                                                <div className="quantity-control">
+                                                    <button className="quantity-btn minus" onClick={() => removeFromCart(item)}>-</button>
+                                                    <span className="quantity">{quantityInCart}</span>
+                                                    <button className="quantity-btn plus" onClick={() => addToCart(item)}>+</button>
+                                                </div>
+                                                <button className="add-btn" onClick={() => addToCart(item)}>Adicionar</button>
+                                            </div>
+                                        </div>
+                                        <img src={item.image_url || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} className="item-image" />
+                                    </div>
+                                );
+                            })}
+                    </div>
+                </section>
             ))}
-          </Grid>
-        </Box>
+        </main>
 
         {totalItemsInCart > 0 && !cartOpen && (
-          <Paper sx={{ position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)', width: 'calc(100% - 32px)', maxWidth: 500, borderRadius: '50px', p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'primary.main', color: 'white', boxShadow: '0 8px 24px rgba(0,0,0,0.2)' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Chip label={totalItemsInCart} sx={{ backgroundColor: 'white', color: 'primary.main', fontWeight: 700 }} />
-              <Typography variant="h6" sx={{ fontWeight: 700 }}>R$ {cartTotal.toFixed(2)}</Typography>
-            </Box>
-            <Button onClick={() => setCartOpen(true)} variant="contained" sx={{ backgroundColor: 'white', color: 'primary.main', borderRadius: '20px', fontWeight: 700, '&:hover': { backgroundColor: '#f0f0f0' } }}>Ver Carrinho</Button>
-          </Paper>
+            <div className="cart-btn" onClick={() => setCartOpen(true)}>
+                <ShoppingCartIcon />
+                <span className="cart-count">{totalItemsInCart}</span>
+            </div>
         )}
 
         <Dialog open={cartOpen} onClose={() => setCartOpen(false)} fullScreen={isMobile} PaperProps={{ sx: { borderRadius: { sm: '24px' } } }}>

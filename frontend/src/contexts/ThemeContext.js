@@ -128,6 +128,7 @@ export const ThemeProvider = ({ children }) => {
           lineHeight: 1.5,
         },
       },
+      spacing: 6, // Adjusted for overall element size reduction
       shape: {
         borderRadius: 10,
       },

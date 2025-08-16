@@ -1,16 +1,20 @@
- => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                       20.9s
+ => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      172.1s
 ------
  > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.778
-0.778 > feedeliza-plus@1.0.0 build
-0.778 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.778
-3.525 Creating an optimized production build...
-20.67 Failed to compile.
-20.67
-20.68 Module not found: Error: Can't resolve '../api/axiosInstance' in '/app/frontend/src/components/UI'
-20.68
-20.68
+0.799
+0.799 > feedeliza-plus@1.0.0 build
+0.799 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.799
+3.332 Creating an optimized production build...
+171.7 Failed to compile.
+171.7
+171.7 [eslint]
+171.7 src/pages/Fidelidade/Avaliacoes/SurveyCreate.js
+171.7   Line 244:22:  'QRCode' is not defined  react/jsx-no-undef
+171.7
+171.7 Search for the keywords to learn more about each error.
+171.7
+171.7
 ------
 Dockerfile.frontend:24
 --------------------

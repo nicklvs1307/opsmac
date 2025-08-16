@@ -31,3 +31,1292 @@ Código de status
 Endereço remoto
 95.217.16.187:443
 
+
+7 - menu erp > pdv :
+aba pedidos > botão novo pedido nao esta funcionando
+aba pdv > na comanda atual onde fica os itens adicionados quero que tenha responsividade, ja que se eu coloco 2 produtos aparece só um por falta de espaço, porem tem espaço, mas acho que foi definido um tamanho maximo de altura
+aba pdv > as fotos dos produtos nao aparecm
+aba pdv > botão finaizar nao funcionalidades
+aba pdv > botão de pagamento deve estar vinculado aos pagamentos cadastrados
+
+  - menu erp > sidebar ingrediets nao tem chave de TRADUÇÃO preciso que melhore essa questão de cadastro de ingredientes
+
+menu erp > fichas tecnicas > da errorURL da solicitação
+https://feedelizaapi.towersfy.com/api/technical-specifications/f43fb188-b4e3-4cd1-9d8c-b304e70a3dce
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+
+{"msg":"Ficha técnica não encontrada para este produto."}
+
+menu erp > financeiro > qaundo clicado redireciona para o dashboard, nao funciona
+
+menu etiquetas > painel > no botão fazer impressão da erro
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/users
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+{"error":"Rota não encontrada"}
+
+menu etiqueta > nao esta igual ao que eu pedi iguual o exemplo que mandei que esta na raiz do projeto @exemplo_modulo_etiquetas
+
+no menu contagem de estoque esta com erro também
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/stock-counts
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+
+no menu produção, tambem esta com erro
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/productions
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+
+aqui esta o log gerado pelo backend 
+
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}
+totalCheckins: 1
+mostFrequentCustomers: [
+  Checkin {
+    dataValues: {
+      customer_id: '1db7e117-c16d-4672-ad45-3eb7e5ee1e0b',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: '1db7e117-c16d-4672-ad45-3eb7e5ee1e0b',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+averageVisitDuration: { avg_duration_seconds: '372.0070000000000000' }
+checkinsByDay: [ { date: 2025-08-15T00:00:00.000Z, count: '1' } ]
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}
+totalCheckins: 1
+mostFrequentCustomers: [
+  Checkin {
+    dataValues: {
+      customer_id: '1db7e117-c16d-4672-ad45-3eb7e5ee1e0b',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: '1db7e117-c16d-4672-ad45-3eb7e5ee1e0b',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+averageVisitDuration: { avg_duration_seconds: '372.0070000000000000' }
+checkinsByDay: [ { date: 2025-08-15T00:00:00.000Z, count: '1' } ]
+[Public Route] Recebida requisição para /restaurant/towersfy
+[Public Route] Restaurante towersfy encontrado. Retornando dados.
+[Public Check-in] Restaurante encontrado: Towersfy Settings: {
+  enabled_modules: [
+    'customer_segmentation',
+    'ifood_integration',
+    'google_my_business_integration',
+    'saipos_integration',
+    'uai_rango_integration',
+    'delivery_much_integration',
+    'checkin_program',
+    'surveys_feedback',
+    'coupons_rewards',
+    'whatsapp_messaging'
+  ]
+}
+[Public Check-in] Método de Identificação: phone
+[Public Check-in] Critério de busca do cliente: {
+  phone: '5535998374007',
+  restaurant_id: '219289ba-d468-4b6f-b4ce-dc386fa4bbda'
+}
+[Public Check-in] Cliente não encontrado, criando novo.
+[Public Check-in] Novo cliente criado: 1e9211a1-14b9-4965-b0ea-f1464a175d40 çucas
+[Public Check-in] Check-in criado: 415fcab9-0581-4521-a526-4bbf5362dfd4
+[Public Check-in] total_visits do cliente incrementado para: 1
+[Public Check-in] Erro detalhado ao registrar check-in público: EagerLoadingError [SequelizeEagerLoadingError]: Answer is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SurveyResponse.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async determineNPSSegment (/app/backend/utils/customerSegmentationService.js:31:29)
+    at async segmentCustomer (/app/backend/utils/customerSegmentationService.js:63:22)
+Error fetching current stock position: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Stock.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/stock.js:29:27 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Stock.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 118,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '381',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+    parameters: undefined
+  },
+  original: error: column Stock.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 118,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '381',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+    parameters: undefined
+  },
+  sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+  parameters: {}
+}
+Error fetching current stock position: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Stock.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/stock.js:29:27 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Stock.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 118,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '381',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+    parameters: undefined
+  },
+  original: error: column Stock.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 118,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '381',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+    parameters: undefined
+  },
+  sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+  parameters: {}
+}
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}
+totalCheckins: 1
+mostFrequentCustomers: [
+  Checkin {
+    dataValues: {
+      customer_id: '1db7e117-c16d-4672-ad45-3eb7e5ee1e0b',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    _previousDataValues: {
+      customer_id: '1db7e117-c16d-4672-ad45-3eb7e5ee1e0b',
+      checkin_count: '1',
+      customer: [Customer]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      attributes: [Array],
+      raw: true
+    },
+    isNewRecord: false,
+    customer: Customer {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+averageVisitDuration: { avg_duration_seconds: '372.0070000000000000' }
+checkinsByDay: [ { date: 2025-08-15T00:00:00.000Z, count: '1' } ]
+[Public Route] Recebida requisição para /restaurant/towersfy
+[Public Route] Restaurante towersfy encontrado. Retornando dados.
+[Public Check-in] Restaurante encontrado: Towersfy Settings: {
+  enabled_modules: [
+    'customer_segmentation',
+    'ifood_integration',
+    'google_my_business_integration',
+    'saipos_integration',
+    'uai_rango_integration',
+    'delivery_much_integration',
+    'checkin_program',
+    'surveys_feedback',
+    'coupons_rewards',
+    'whatsapp_messaging'
+  ]
+}
+[Public Check-in] Método de Identificação: phone
+[Public Check-in] Critério de busca do cliente: {
+  phone: '5535998374007',
+  restaurant_id: '219289ba-d468-4b6f-b4ce-dc386fa4bbda'
+}
+[Public Check-in] Cliente encontrado: 1e9211a1-14b9-4965-b0ea-f1464a175d40 çucas
+[Public Check-in] Cliente já possui um check-in ativo: 1e9211a1-14b9-4965-b0ea-f1464a175d40
+[Public Check-in] Restaurante encontrado: Towersfy Settings: {
+  enabled_modules: [
+    'customer_segmentation',
+    'ifood_integration',
+    'google_my_business_integration',
+    'saipos_integration',
+    'uai_rango_integration',
+    'delivery_much_integration',
+    'checkin_program',
+    'surveys_feedback',
+    'coupons_rewards',
+    'whatsapp_messaging'
+  ]
+}
+[Public Check-in] Método de Identificação: phone
+[Public Check-in] Critério de busca do cliente: {
+  phone: '5535998374007',
+  restaurant_id: '219289ba-d468-4b6f-b4ce-dc386fa4bbda'
+}
+[Public Check-in] Cliente encontrado: 1e9211a1-14b9-4965-b0ea-f1464a175d40 çucas
+[Public Check-in] Check-in criado: 0a63a0f6-2e51-457b-8c45-c16469889e64
+[Public Check-in] total_visits do cliente incrementado para: 1
+[Public Check-in] Erro detalhado ao registrar check-in público: EagerLoadingError [SequelizeEagerLoadingError]: Answer is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SurveyResponse.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async determineNPSSegment (/app/backend/utils/customerSegmentationService.js:31:29)
+    at async segmentCustomer (/app/backend/utils/customerSegmentationService.js:63:22)
+Error fetching current stock position: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Stock.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/stock.js:29:27 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Stock.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 118,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '381',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+    parameters: undefined
+  },
+  original: error: column Stock.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 118,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '381',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+    parameters: undefined
+  },
+  sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+  parameters: {}
+}
+Error fetching current stock position: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Stock.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/stock.js:29:27 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Stock.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 118,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '381',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+    parameters: undefined
+  },
+  original: error: column Stock.restaurant_id does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 118,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '381',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+    parameters: undefined
+  },
+  sql: `SELECT "Stock"."id", "Stock"."quantity", "Stock"."stockable_id", "Stock"."stockable_type", "Stock"."created_at" AS "createdAt", "Stock"."updated_at" AS "updatedAt", "product"."id" AS "product.id", "product"."name" AS "product.name", "product"."sku" AS "product.sku" FROM "stocks" AS "Stock" LEFT OUTER JOIN "products" AS "product" ON "Stock"."stockable_id" = "product"."id" WHERE "Stock"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' AND "Stock"."stockable_type" = 'Product';`,
+  parameters: {}
+}
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}
+Error fetching cash register categories: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async CashRegisterCategory.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async /app/backend/routes/cashRegister.js:231:26 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  original: error: column "created_at" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 187,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: 'Perhaps you meant to reference the column "CashRegisterCategory.createdAt".',
+    position: '47',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "type", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "cash_register_categories" AS "CashRegisterCategory" WHERE ("CashRegisterCategory"."restaurant_id" = '219289ba-d468-4b6f-b4ce-dc386fa4bbda' OR "CashRegisterCategory"."restaurant_id" IS NULL) AND "CashRegisterCategory"."type" = 'withdrawal' ORDER BY "CashRegisterCategory"."name" ASC;`,
+  parameters: {}
+}

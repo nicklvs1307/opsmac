@@ -1,24 +1,24 @@
- => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      169.7s
+ => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      174.1s
 ------
  > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.690
-0.690 > feedeliza-plus@1.0.0 build
-0.690 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.690
-3.257 Creating an optimized production build...
-169.4 Failed to compile.
-169.4
-169.4 Module parse failed: Cannot parse JSON: Unexpected string in JSON at position 33575 while parsing '{
-169.4   "translation": {
-169.4     "settings": {
-169.4  '
-169.4 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
-169.4 Error: Cannot parse JSON: Unexpected string in JSON at position 33575 while parsing '{
-169.4   "translation": {
-169.4     "settings": {
-169.4  '
-169.4
-169.4
+0.685
+0.685 > feedeliza-plus@1.0.0 build
+0.685 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.685
+2.899 Creating an optimized production build...
+173.3 Failed to compile.
+173.3
+173.3 Module parse failed: Cannot parse JSON: Unexpected string in JSON at position 33575 while parsing '{
+173.3   "translation": {
+173.3     "settings": {
+173.3  '
+173.3 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+173.3 Error: Cannot parse JSON: Unexpected string in JSON at position 33575 while parsing '{
+173.3   "translation": {
+173.3     "settings": {
+173.3  '
+173.3
+173.3
 ------
 Dockerfile.frontend:24
 --------------------

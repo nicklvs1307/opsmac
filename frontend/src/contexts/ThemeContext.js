@@ -68,7 +68,7 @@ export const ThemeProvider = ({ children }) => {
         divider: mode === 'light' ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.08)',
       },
       typography: {
-        fontSize: 12.8, // Adjusted for 80% scale
+        fontSize: 14, // Reverted to Material UI default
         fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
         h1: {
           fontWeight: 700,
@@ -128,7 +128,7 @@ export const ThemeProvider = ({ children }) => {
           lineHeight: 1.5,
         },
       },
-      spacing: 6, // Adjusted for overall element size reduction
+      spacing: 8, // Reverted to Material UI default
       shape: {
         borderRadius: 10,
       },

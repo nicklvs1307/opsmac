@@ -14,7 +14,7 @@ import {
     Alert
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
-import axiosInstance from 'api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 

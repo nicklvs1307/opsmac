@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, TextField, List, ListItem, ListItemText, IconButton, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, Select, MenuItem, CircularProgress, Alert, Divider } from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, RemoveCircleOutline as RemoveIcon } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from 'api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 

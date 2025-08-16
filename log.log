@@ -1,16 +1,16 @@
  => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                       12.3s
 ------
  > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.857
-0.857 > feedeliza-plus@1.0.0 build
-0.857 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.857
-3.758 Creating an optimized production build...
+0.777
+0.777 > feedeliza-plus@1.0.0 build
+0.777 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.777
+3.639 Creating an optimized production build...
 12.06 Failed to compile.
 12.06
-12.07 Module not found: Error: Can't resolve 'api/axiosInstance' in '/app/frontend/src/contexts'
-12.07
-12.07
+12.06 Module not found: Error: Can't resolve 'api/axiosInstance' in '/app/frontend/src/pages/Feedback'
+12.06
+12.06
 ------
 Dockerfile.frontend:24
 --------------------

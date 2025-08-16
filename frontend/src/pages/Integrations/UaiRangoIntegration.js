@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, TextField, Button, CircularProgress } from '@mui/material';
-import axiosInstance from 'api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
 

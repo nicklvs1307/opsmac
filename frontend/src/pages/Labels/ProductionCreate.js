@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import apiClient from 'api/axiosInstance';
+import apiClient from '../../api/axiosInstance';
 import {
     Box, Button, CircularProgress, Alert, Typography, TextField, FormControl, InputLabel, Select, MenuItem, IconButton, Paper, Table, TableHead, TableRow, TableCell, TableBody
 } from '@mui/material';

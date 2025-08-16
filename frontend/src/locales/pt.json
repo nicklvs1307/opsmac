@@ -963,7 +963,7 @@
       "confirm_delete_transaction_title": "Confirmar Exclusão de Transação",
       "confirm_delete_transaction_message": "Tem certeza que deseja excluir a transação #{{transactionId}}?",
       "delete_transaction": "Excluir Transação",
-      "error_loading_transactions": "Erro ao carregar transações: {{message}",
+      "error_loading_transactions": "Erro ao carregar transações: {{message}}",
       "transaction_created_success": "Transação criada com sucesso!",
       "error_creating_transaction": "Erro ao criar transação: {{message}}",
       "transaction_updated_success": "Transação atualizada com sucesso!",

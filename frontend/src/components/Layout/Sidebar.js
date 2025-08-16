@@ -30,7 +30,6 @@ import {
   Poll as PollIcon,
   ConnectWithoutContact as ConnectWithoutContactIcon,
   PointOfSale as PointOfSaleIcon,
-  Analytics as AnalyticsIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';

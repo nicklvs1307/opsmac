@@ -1,0 +1,33 @@
+1 - verificar os promotores, neutros, detratores se estão sendo atualizados 
+
+2 - MENU FIDELIDADE > PROGRAMA CHECK-IN : TROCAR A TRADUÇÃO PROGRAMA DE CHECK-IN PARA "CHECK-IN"
+
+3 - GERAL : TODO O SISTEMA NÃO APRESENTA ROLAGEM, EX: NÃO CONSIGO ROLAR PARA BAIXO A PAGINA PARA VER AS INFORMAÇÕES, ISSO ESTA NO SISTEMA TODO! VEFIIQUE
+
+4 - PAGINA DE CHECKIN EX: https://feedelizapro.towersfy.com/checkin/public/towersfy
+    CLICANDO NO BOTÃO "FAZER CHECKIN AGORA DA ERRO
+    URL da solicitação
+https://feedelizaapi.towersfy.com/api/checkin/public/towersfy
+Método da solicitação
+POST
+Código de status
+500 Internal Server Error
+Endereço remoto
+95.217.16.187:443
+{
+    "error": "Erro interno do servidor",
+    "message": "Erro ao registrar check-in público"
+}
+
+5 - MENU FIDELIDADE > SATISFAÇÃO > ABA PESQUISA: QUANDO TENTO ACESSAR A PAGINA EX: https://feedelizapro.towersfy.com/public/surveys/pesquisa-de-nps REDIRECIONA PARA O DASHBOARD
+
+6 - MENU ERP > ESTOQUE : ERRO 
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/stock
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+Endereço remoto
+95.217.16.187:443
+

@@ -15,7 +15,8 @@ COPY frontend/package*.json ./
 RUN npm cache clean --force && npm install
 
 # Copia o restante do código-fonte do frontend
-COPY frontend/ ./
+COPY frontend/src ./src
+COPY frontend/public ./public
 
 # Gera o build de produção do React
 ARG REACT_APP_API_URL

@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { BarChart as BarChartIcon, Star as StarIcon, ThumbUp as ThumbUpIcon } from '@mui/icons-material';
 import { useAuth } from '../../../contexts/AuthContext';
-import axiosInstance from '../../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import { useQuery } from 'react-query';
 
 // A simple card for displaying a metric

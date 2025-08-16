@@ -9,7 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 

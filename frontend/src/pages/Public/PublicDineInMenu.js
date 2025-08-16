@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, useMediaQuery, Zoom, Fade, Chip, Slide, Fab, List, ListItem, ListItemText, ListItemAvatar, Avatar, BottomNavigation, BottomNavigationAction, ThemeProvider, createTheme } from '@mui/material';
 import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, Notifications as NotificationsIcon, Receipt as ReceiptIcon, Search as SearchIcon, Add as AddIcon, Remove as RemoveIcon, Close as CloseIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import toast from 'react-hot-toast';
 
 // Create context

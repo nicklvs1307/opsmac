@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import { Box, Typography, CircularProgress, Alert, Container, Card, CardContent, Grid } from '@mui/material';
 
 const fetchDineInMenu = async (tableId) => {

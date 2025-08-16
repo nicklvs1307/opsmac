@@ -48,7 +48,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthContext';
 import { useThemeMode } from '../../contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import toast from 'react-hot-toast';
 import ProfilePictureUpload from '../../components/UI/ProfilePictureUpload';
 

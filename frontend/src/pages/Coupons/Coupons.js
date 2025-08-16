@@ -31,7 +31,7 @@ import {
 } from '@mui/icons-material';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import { useAuth } from '../../contexts/AuthContext';
 import CouponAnalytics from './CouponAnalytics';
 import CouponValidator from './CouponValidator';

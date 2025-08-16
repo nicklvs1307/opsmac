@@ -30,7 +30,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'; // For thank you screen
 import { useParams, useNavigate } from 'react-router-dom';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { Restaurant as RestaurantIcon } from '@mui/icons-material';

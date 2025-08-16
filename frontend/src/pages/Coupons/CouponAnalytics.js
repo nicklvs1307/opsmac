@@ -12,7 +12,7 @@ import {
   PieChart as PieChartIcon,
 } from '@mui/icons-material';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Bar, ComposedChart } from 'recharts';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import { useAuth } from '../../contexts/AuthContext';
 
 const CouponAnalytics = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Paper, CircularProgress, Alert, List, ListItem, ListItemText } from '@mui/material';
 import { useQuery } from 'react-query';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 
 const fetchBirthdays = async () => {
   const { data } = await axiosInstance.get('/api/customers/birthdays', {

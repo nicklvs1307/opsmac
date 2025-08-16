@@ -10,7 +10,7 @@ import QrCodeIcon from '@mui/icons-material/QrCode';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '../../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import toast from 'react-hot-toast';
 import QRCode from 'qrcode.react';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';

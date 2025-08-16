@@ -38,7 +38,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from 'api/axiosInstance';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
 

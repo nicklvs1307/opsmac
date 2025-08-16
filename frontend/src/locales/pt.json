@@ -927,7 +927,7 @@
       "existing_categories": "Categorias Existentes",
       "no_categories_found": "Nenhuma categoria encontrada.",
       "confirm_delete_category_title": "Confirmar Exclusão de Categoria",
-      "confirm_delete_category_message": "Tem certeza que deseja excluir a categoria \"{{categoryName}}"",
+      "confirm_delete_category_message": "Tem certeza que deseja excluir a categoria \"{{categoryName}}",
       "delete_category": "Excluir Categoria",
       "error_loading_categories": "Erro ao carregar categorias: {{message}}",
       "category_created_success": "Categoria criada com sucesso!",
@@ -1026,4 +1026,4 @@
       "confirm_delete_message": "Tem certeza que deseja excluir esta ficha técnica? Esta ação não pode ser desfeita."
     }
   }
-}
+}}

@@ -1,53 +1,8 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
-Generated Swagger Specs (first 500 chars): {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Check Test API",
-    "version": "1.0.0",
-    "description": "API documentation for the Check Test application."
-  },
-  "servers": [
-    {
-      "url": "http://localhost:5000/api",
-      "description": "Production server"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Public API",
-      "description": "Endpoints acessíveis via API Token para integração externa."
-    },
-    {
-      "name": "Admin",
-      "description": "Gerenciamento de usuários e res
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-📊 Dashboard: https://feedelizapro.towersfy.com
-🔗 API: https://feedelizaapi.towersfy.com/api
-Erro ao buscar clientes: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
-    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
-    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
-    at /app/node_modules/sequelize/lib/model.js:421:37
-    at Array.map (<anonymous>)
-    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
-    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
-    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
-    at async /app/backend/routes/customers.js:293:18
-totalCheckins: 0
-mostFrequentCustomers: []
-averageVisitDuration: { avg_duration_seconds: null }
-checkinsByDay: []
-Question is associated to Answer using an alias. You must use the 'as' keyword to specify the alias within your include statement.
-Question is associated to Answer using an alias. You must use the 'as' keyword to specify the alias within your include statement.
-[Public Route] Recebida requisição para /restaurant/towersfy
-[Public Route] Restaurante towersfy encontrado. Retornando dados.
-[Public Route] Recebida requisição para /restaurant/towersfy
-[Public Route] Restaurante towersfy encontrado. Retornando dados.
-[Public Route] Recebida requisição para /restaurant/towersfy
-[Public Route] Restaurante towersfy encontrado. Retornando dados.
-[Public Route] Recebida requisição para /restaurant/towersfy
-[Public Route] Restaurante towersfy encontrado. Retornando dados.
+.order-items {
+    color: rgb(85, 85, 85);
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    max-height: 60px;
+    overflow-y: auto;
+    padding-right: 5px;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import api from '../../api/axiosInstance';
 import { 
     Container, Typography, Button, Box, List, ListItem, ListItemText, 

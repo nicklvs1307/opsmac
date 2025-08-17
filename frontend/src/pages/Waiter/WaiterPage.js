@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import api from '../../api/axiosInstance';
 import { Grid, Card, CardContent, Typography, Button, Box, Container } from '@mui/material';
 

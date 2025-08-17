@@ -246,7 +246,6 @@ const Layout = ({ children }) => {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.standard,
           }),
-          minHeight: 'calc(100vh - 64px)',
           backgroundColor: theme.palette.mode === 'light' 
             ? alpha(theme.palette.background.default, 0.5) 
             : alpha(theme.palette.background.default, 0.9),

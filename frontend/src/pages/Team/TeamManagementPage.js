@@ -8,7 +8,7 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import api from '../../api'; // Assuming you have a configured axios instance
+import api from '../../api/axiosInstance'; // Assuming you have a configured axios instance
 
 const TeamManagementPage = () => {
     const { user } = useContext(AuthContext);

@@ -429,12 +429,15 @@ const Pdv = () => {
   };
 
   const handlePlaceOrder = () => {
+    console.log('handlePlaceOrder called');
     if (cartItems.length === 0) {
       toast.error(t('pdv.cart_empty_error'));
+      console.log('Cart is empty, showing error');
       return;
     }
     if (!paymentMethod) {
       toast.error(t('pdv.payment_method_required'));
+      console.log('Payment method not selected, showing error');
       return;
     }
 
@@ -455,6 +458,7 @@ const Pdv = () => {
     };
 
     createOrderMutation.mutate(orderData);
+    console.log('Order data prepared and mutation called:', orderData);
   };
 
   // Handlers for existing order management

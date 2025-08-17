@@ -93,13 +93,28 @@ router.get('/next/:restaurantSlug/:customerId?', async (req, res) => {
     }
 });
 
-// @route   GET /public/surveys/:slug
-// @desc    Get a public survey by slug
+// @route   GET /public/surveys/:restaurantSlug/:surveySlug
+// @desc    Get a public survey by restaurant slug and survey slug
 // @access  Public
-router.get('/:slug', async (req, res) => {
+router.get('/:restaurantSlug/:surveySlug', async (req, res) => {
     try {
+        const { restaurantSlug, surveySlug } = req.params;
+
+        const restaurant = await models.Restaurant.findOne({
+            where: { slug: restaurantSlug },
+            attributes: ['id'], // Only need the ID for scoping
+        });
+
+        if (!restaurant) {
+            return res.status(404).json({ msg: 'Restaurante não encontrado.' });
+        }
+
         const survey = await models.Survey.findOne({
-            where: { slug: req.params.slug, status: 'active' }, // Only active surveys can be accessed publicly
+            where: {
+                slug: surveySlug,
+                restaurant_id: restaurant.id, // Scope by restaurant_id
+                status: 'active'
+            },
             include: [
                 {
                     model: models.Question,
@@ -109,14 +124,14 @@ router.get('/:slug', async (req, res) => {
                 {
                     model: models.Restaurant,
                     as: 'restaurant',
-                    attributes: ['name', 'logo', 'slug', 'settings'], // Incluir slug e settings do restaurante
+                    attributes: ['name', 'logo', 'slug', 'settings'],
                 }
             ],
             attributes: ['id', 'title', 'description', 'type', 'slug'],
         });
 
         if (!survey) {
-            return res.status(404).json({ msg: 'Pesquisa não encontrada ou inativa' });
+            return res.status(404).json({ msg: 'Pesquisa não encontrada ou inativa para este restaurante.' });
         }
 
         res.json({ survey, restaurant: survey.restaurant });

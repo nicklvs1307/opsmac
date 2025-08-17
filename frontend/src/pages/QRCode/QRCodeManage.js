@@ -224,7 +224,7 @@ const QRCodeManage = () => {
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => navigate('/qrcode/generate')}
+          onClick={() => navigate('/qrcodes/new')}
         >
           Gerar QR Code
         </Button>
@@ -356,7 +356,7 @@ const QRCodeManage = () => {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            onClick={() => navigate('/qrcode/generate')}
+            onClick={() => navigate('/qrcodes/new')}
           >
             Gerar Primeiro QR Code
           </Button>

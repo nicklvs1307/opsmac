@@ -672,9 +672,8 @@ const Pdv = () => {
                   </div>
                 </div>
 
-                <div className="order-column-wrapper">
-                  {/* Order Section */}
-                  <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
+                {/* Order Section */}
+                <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
                   <div className="order-header">
                     <h3 className="order-title">Comanda Atual</h3>
                     <div>
@@ -710,7 +709,6 @@ const Pdv = () => {
                     )}
                   </div>
                 </div>
-              </div>
 
                 <div className="order-summary">
                   <div className="summary-row">

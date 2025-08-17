@@ -24,7 +24,7 @@ const auth = async (req, res, next) => {
     const user = await models.User.findByPk(decoded.userId, {
       include: [{
         model: models.Restaurant,
-        as: 'restaurants',
+        as: 'owned_restaurants',
         attributes: ['id', 'name', 'slug'], // Otimiza a consulta para trazer apenas o necessário
       }]
     });
@@ -39,7 +39,7 @@ const auth = async (req, res, next) => {
       email: user.email,
       role: user.role,
       name: user.name,
-      restaurants: user.restaurants || [],
+      restaurants: user.owned_restaurants || [],
     };
 
     next();

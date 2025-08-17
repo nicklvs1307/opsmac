@@ -1,23 +1,59 @@
- => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                      176.4s
-------
- > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.639
-0.639 > feedeliza-plus@1.0.0 build
-0.639 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.639
-3.595 Creating an optimized production build...
-175.4 Failed to compile.
-175.4
-175.4 Attempted import error: 'AuthContext' is not exported from '../../contexts/AuthContext' (imported as 'AuthContext').
-175.4
-175.4
-------
-Dockerfile.frontend:24
---------------------
-  22 |     ARG REACT_APP_API_URL
-  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  24 | >>> RUN npm run build && ls -la /app/frontend/build
-  25 |
-  26 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
+Erro no middleware de autenticação: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async auth (/app/backend/middleware/auth.js:24:18)
+Erro no login: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async /app/backend/routes/auth.js:175:18
+Erro no login: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async /app/backend/routes/auth.js:175:18

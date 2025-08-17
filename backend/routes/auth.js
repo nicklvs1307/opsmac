@@ -177,7 +177,7 @@ router.post('/login', authLimiter, loginValidation, async (req, res) => {
       include: [
         {
           model: models.Restaurant,
-          as: 'restaurants',
+          as: 'owned_restaurants',
           where: { is_active: true },
           required: false
         }
@@ -228,7 +228,7 @@ router.post('/login', authLimiter, loginValidation, async (req, res) => {
         role: user.role,
         is_active: user.is_active,
         last_login: user.last_login,
-        restaurants: user.restaurants || []
+        restaurants: user.owned_restaurants || []
       }
     });
   } catch (error) {
@@ -302,7 +302,13 @@ router.get('/me', auth, async (req, res) => {
       include: [
         {
           model: models.Restaurant,
-          as: 'restaurants',
+          as: 'owned_restaurants',
+          where: { is_active: true },
+          required: false
+        },
+        {
+          model: models.Restaurant,
+          as: 'restaurant',
           where: { is_active: true },
           required: false
         }
@@ -313,6 +319,11 @@ router.get('/me', auth, async (req, res) => {
       return res.status(404).json({
         error: 'Usuário não encontrado'
       });
+    }
+
+    const allRestaurants = user.owned_restaurants || [];
+    if (user.restaurant && !allRestaurants.find(r => r.id === user.restaurant.id)) {
+      allRestaurants.push(user.restaurant);
     }
 
     res.json({
@@ -326,8 +337,8 @@ router.get('/me', auth, async (req, res) => {
         is_active: user.is_active,
         email_verified: user.email_verified,
         last_login: user.last_login,
-        restaurants: user.restaurants || [],
-        restaurant: user.restaurants && user.restaurants.length > 0 ? user.restaurants[0] : null
+        restaurants: allRestaurants,
+        restaurant: user.restaurant || (allRestaurants.length > 0 ? allRestaurants[0] : null)
       }
     });
   } catch (error) {

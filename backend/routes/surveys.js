@@ -270,6 +270,7 @@ router.get('/analytics/:restaurantId', auth, async (req, res) => {
         const allAnswers = await models.Answer.findAll({
             include: [{
                 model: models.Question,
+                as: 'question',
                 attributes: ['question_type'],
                 include: [{
                     model: models.Survey,

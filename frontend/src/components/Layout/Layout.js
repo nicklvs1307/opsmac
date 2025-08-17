@@ -135,7 +135,7 @@ const Layout = ({ children }) => {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', height: '100%' }}>
       {/* App Bar */}
       <AppBar
         position="fixed"

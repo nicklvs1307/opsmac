@@ -1,16 +1,16 @@
- => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                       22.8s
+ => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                       22.9s
 ------
  > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
-0.619
-0.619 > feedeliza-plus@1.0.0 build
-0.619 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.619
-3.645 Creating an optimized production build...
-22.56 Failed to compile.
-22.56
-22.57 Module not found: Error: Can't resolve '../../api' in '/app/frontend/src/pages/Team'
-22.57
-22.57
+0.621
+0.621 > feedeliza-plus@1.0.0 build
+0.621 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.621
+4.033 Creating an optimized production build...
+22.70 Failed to compile.
+22.70
+22.70 Module not found: Error: Can't resolve '../../api' in '/app/frontend/src/pages/Waiter'
+22.70
+22.70
 ------
 Dockerfile.frontend:24
 --------------------

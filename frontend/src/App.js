@@ -90,7 +90,7 @@ function App() {
       <ThemeProvider> {/* Usar o ThemeProvider do contexto */}
         <AuthProvider>
           <Router>
-            <div className="App" style={{ height: '100%' }}>
+            <div className="App">
               <Routes>
                 {/* Public Routes */}
                 <Route path="/login" element={<Login />} />

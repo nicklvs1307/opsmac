@@ -250,6 +250,7 @@ const Layout = ({ children }) => {
             ? alpha(theme.palette.background.default, 0.5) 
             : alpha(theme.palette.background.default, 0.9),
           borderRadius: { xs: 0, md: desktopOpen ? '24px 0 0 0' : 0 },
+          overflowY: 'scroll',
           backdropFilter: 'blur(8px)',
           boxShadow: desktopOpen ? `inset 8px 0 16px ${alpha(theme.palette.common.black, 0.05)}` : 'none'
         }}

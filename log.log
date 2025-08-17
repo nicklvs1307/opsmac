@@ -1,38 +1,54 @@
-checkin_program.checkin_cycle
-checkin_program.cycle_length
+[{
+	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "514",
+	"severity": 8,
+	"message": "Expected comma",
+	"source": "json",
+	"startLineNumber": 616,
+	"startColumn": 72,
+	"endLineNumber": 616,
+	"endColumn": 73,
+	"origin": "extHost1"
+}]
 
-checkin_program.cycle_length_helper
+[{
+	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "514",
+	"severity": 8,
+	"message": "Expected comma",
+	"source": "json",
+	"startLineNumber": 616,
+	"startColumn": 86,
+	"endLineNumber": 616,
+	"endColumn": 88,
+	"origin": "extHost1"
+}]
 
-checkin_program.cycle_name
+[{
+	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "515",
+	"severity": 8,
+	"message": "Colon expected",
+	"source": "json",
+	"startLineNumber": 616,
+	"startColumn": 88,
+	"endLineNumber": 616,
+	"endColumn": 89,
+	"origin": "extHost1"
+}]
 
-checkin_program.cycle_name_helper
-
-checkin_program.enable_ranking
-checkin_program.enable_level_progression
-checkin_program.rewards_per_visit
-checkin_program.rewards_per_visit_helper
-
-checkin_program.anti_fraud_control
-Exigir número da mesa no check-in
-checkin_program.require_coupon_for_checkin
-checkin_program.time_restriction
-
-checkin_program.time_restriction_helper
-
-checkin_program.checkin_duration_minutes
-
-checkin_program.checkin_duration_minutes_helper
-
-checkin_program.identification_method
-
-checkin_program.points_and_ranking
-checkin_program.points_per_checkin
-
-checkin_program.points_per_checkin_helper
-
-checkin_program.checkin_limit
-checkin_program.limit_per_cycle
-
-checkin_program.limit_per_cycle_helper
-
-checkin_program.allow_multiple_cycles
+[{
+	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"severity": 8,
+	"message": "End of file expected.",
+	"source": "json",
+	"startLineNumber": 619,
+	"startColumn": 6,
+	"endLineNumber": 619,
+	"endColumn": 7,
+	"origin": "extHost1"
+}]

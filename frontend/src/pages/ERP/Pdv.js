@@ -97,6 +97,7 @@ const Pdv = () => {
   // Fetch Customers
   const fetchCustomers = async ({ queryKey }) => {
     const [, restaurantId, searchTerm] = queryKey;
+    console.log('Fetching customers for restaurantId:', restaurantId, 'with searchTerm:', searchTerm); // ADD THIS LINE
     if (!searchTerm) return [];
     const { data } = await axiosInstance.get(`/api/customers?restaurant_id=${restaurantId}&search=${searchTerm}`);
     return data;
@@ -632,13 +633,13 @@ const Pdv = () => {
         <div className="tabs-container">
           <div className="tabs-header">
             <button className={currentTab === 'pdv' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('pdv')}>
-              <PointOfSaleIcon /> PDV
+              <PointOfSaleIcon /> {t('pdv.tab_pdv')}
             </button>
             <button className={currentTab === 'orders' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('orders')}>
-              <RestaurantIcon /> Pedidos
+              <RestaurantIcon /> {t('pdv.tab_orders')}
             </button>
             <button className={currentTab === 'kanban' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('kanban')}>
-              <AssignmentIcon /> Kanban
+              <AssignmentIcon /> {t('pdv.tab_kanban')}
             </button>
           </div>
 
@@ -649,7 +650,7 @@ const Pdv = () => {
                 {/* Products Section */}
                 <div className="products-section">
                   <div className="categories-tabs">
-                    <div className="category-tab active" onClick={() => setSelectedProductCategory('')}>Todos</div>
+                    <div className="category-tab active" onClick={() => setSelectedProductCategory('')}>{t('pdv.all_categories')}</div>
                     {categories?.map(category => (
                       <div
                         key={category.id}
@@ -675,19 +676,19 @@ const Pdv = () => {
                 {/* Order Section */}
                 <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
                   <div className="order-header">
-                    <h3 className="order-title">Comanda Atual</h3>
+                    <h3 className="order-title">{t('pdv.current_order_title')}</h3>
                     <div>
                       <button className="btn btn-outline" onClick={resetOrderForm}> {/* Using resetOrderForm to clear customer details */}
-                        <PointOfSaleIcon /> Venda de Balcão
+                        <PointOfSaleIcon /> {t('pdv.counter_sale')}
                       </button>
                       <button className="order-clear" onClick={clearOrder}>
-                        <DeleteIcon /> Limpar
+                        <DeleteIcon /> {t('pdv.clear_order')}
                       </button>
                     </div>
                   </div>
                   <div className="order-items" id="orderItems">
                     {cartItems.length === 0 ? (
-                      <div style={{ textAlign: 'center', padding: '20px', color: '#999' }}>Nenhum item adicionado</div>
+                      <div style={{ textAlign: 'center', padding: '20px', color: '#999' }}>{t('pdv.no_items_added')}</div>
                     ) : (
                       cartItems.map(item => (
                         <div className="order-item" key={item.id}>
@@ -712,24 +713,24 @@ const Pdv = () => {
 
                 <div className="order-summary">
                   <div className="summary-row">
-                    <span className="summary-label">Subtotal:</span>
+                    <span className="summary-label">{t('pdv.subtotal_label')}</span>
                     <span className="summary-value" id="subtotal">R$ {calculateSubtotal.toFixed(2).replace('.', ',')}</span>
                   </div>
                   <div className="summary-row">
-                    <span className="summary-label">Taxa de Serviço:</span>
+                    <span className="summary-label">{t('pdv.service_tax_label')}</span>
                     <span className="summary-value" id="serviceTax">R$ {calculateServiceTax.toFixed(2).replace('.', ',')}</span>
                   </div>
                   <div className="summary-row total-row">
-                    <span className="summary-label">Total:</span>
+                    <span className="summary-label">{t('pdv.total_label')}</span>
                     <span className="summary-value total-value" id="total">R$ {calculateFinalTotal.toFixed(2).replace('.', ',')}</span>
                   </div>
                 </div>
                 <div className="order-actions">
                   <button className="btn btn-outline" onClick={openPaymentModal}>
-                    <PaymentsIcon /> Pagamento
+                    <PaymentsIcon /> {t('pdv.payment_button')}
                   </button>
                   <button className="btn btn-success" onClick={handlePlaceOrder} disabled={createOrderMutation.isLoading || cartItems.length === 0 || !paymentMethod}>
-                    <CheckCircleIcon /> Finalizar
+                    <CheckCircleIcon /> {t('pdv.finalize_button')}
                   </button>
                 </div>
               </div>
@@ -739,13 +740,13 @@ const Pdv = () => {
             <div className={currentTab === 'orders' ? 'tab-pane active' : 'tab-pane'} id="orders-tab">
               <div className="orders-section">
                 <div className="section-header">
-                  <h2 className="section-title">Pedidos Recentes</h2>
+                  <h2 className="section-title">{t('pdv.recent_orders_title')}</h2>
                   <div>
                     <button className="btn btn-outline">
-                      <FilterIcon /> Filtrar
+                      <FilterIcon /> {t('pdv.filter_button')}
                     </button>
                     <button className="btn btn-primary">
-                      <AddIcon /> Novo Pedido
+                      <AddIcon /> {t('pdv.new_order_button')}
                     </button>
                   </div>
                 </div>
@@ -753,13 +754,13 @@ const Pdv = () => {
                 <table className="orders-table">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Cliente</th>
-                      <th>Data/Hora</th>
-                      <th>Itens</th>
-                      <th>Total</th>
-                      <th>Status</th>
-                      <th>Ações</th>
+                      <th>{t('pdv.table_header_id')}</th>
+                      <th>{t('pdv.table_header_customer')}</th>
+                      <th>{t('pdv.table_header_datetime')}</th>
+                      <th>{t('pdv.table_header_items')}</th>
+                      <th>{t('pdv.table_header_total')}</th>
+                      <th>{t('pdv.table_header_status')}</th>
+                      <th>{t('pdv.table_header_actions')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -777,13 +778,13 @@ const Pdv = () => {
                         <td>R$ {Number(order.total_amount).toFixed(2).replace('.', ',')}</td>
                         <td><span className={`status-badge ${order.status}`}>{orderStatuses.find(s => s.id === order.status)?.label || order.status}</span></td>
                         <td>
-                          <button className="action-btn" title="Visualizar" onClick={() => openOrderDetailsModal(order)}>
+                          <button className="action-btn" title={t('pdv.view_action')} onClick={() => openOrderDetailsModal(order)}>
                             <EyeIcon />
                           </button>
-                          <button className="action-btn" title="Editar">
+                          <button className="action-btn" title={t('pdv.edit_action')}>
                             <EditIcon />
                           </button>
-                          <button className="action-btn" title="Imprimir">
+                          <button className="action-btn" title={t('pdv.print_action')}>
                             <PrintIcon />
                           </button>
                         </td>
@@ -891,44 +892,44 @@ const Pdv = () => {
       <div className="modal" style={{ display: paymentModalOpen ? 'flex' : 'none' }}>
         <div className="modal-content">
           <div className="modal-header">
-            <h3 className="modal-title">Forma de Pagamento</h3>
+            <h3 className="modal-title">{t('pdv.payment_modal_title')}</h3>
             <button className="close-modal" onClick={closePaymentModal}>&times;</button>
           </div>
           <div className="modal-body">
             <div className="form-group">
-              <label className="form-label">Valor Total:</label>
+              <label className="form-label">{t('pdv.total_value_label')}</label>
               <input type="text" className="form-control" value={`R$ ${calculateFinalTotal.toFixed(2).replace('.', ',')}`} readOnly />
             </div>
             <div className="form-group">
-              <label className="form-label">Forma de Pagamento:</label>
+              <label className="form-label">{t('pdv.payment_method_label')}</label>
               <select className="form-control" value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
-                <option value="">Selecione</option>
-                <option value="cash">Dinheiro</option>
-                <option value="credit">Cartão de Crédito</option>
-                <option value="debit">Cartão de Débito</option>
-                <option value="pix">PIX</option>
-                <option value="meal">Vale Refeição</option>
+                <option value="">{t('pdv.select_option')}</option>
+                <option value="cash">{t('pdv.payment_cash')}</option>
+                <option value="credit">{t('pdv.payment_credit')}</option>
+                <option value="debit">{t('pdv.payment_debit')}</option>
+                <option value="pix">{t('pdv.payment_pix')}</option>
+                <option value="meal">{t('pdv.payment_meal_voucher')}</option>
               </select>
             </div>
             {paymentMethod === 'cash' && (
               <div className="form-group">
-                <label className="form-label">Valor Recebido:</label>
+                <label className="form-label">{t('pdv.amount_received_label')}</label>
                 <input type="text" className="form-control" placeholder="R$ 0,00" />
               </div>
             )}
             {paymentMethod === 'cash' && (
               <div className="form-group">
-                <label className="form-label">Troco:</label>
+                <label className="form-label">{t('pdv.change_label')}</label>
                 <input type="text" className="form-control" value="R$ 0,00" readOnly />
               </div>
             )}
           </div>
           <div className="modal-footer">
             <button className="btn btn-outline" onClick={closePaymentModal}>
-              <CloseIcon /> Cancelar
+              <CloseIcon /> {t('pdv.cancel_button')}
             </button>
             <button className="btn btn-primary" onClick={processPayment}>
-              <CheckCircleIcon /> Confirmar
+              <CheckCircleIcon /> {t('pdv.confirm_button')}
             </button>
           </div>
         </div>
@@ -939,53 +940,53 @@ const Pdv = () => {
         {selectedOrder && (
           <div className="modal-content">
             <div className="modal-header">
-              <h3 className="modal-title">Detalhes do Pedido #{selectedOrder.external_order_id || selectedOrder.id?.substring(0, 8)}</h3>
+              <h3 className="modal-title">{t('pdv.order_details_modal_title')} #{selectedOrder.external_order_id || selectedOrder.id?.substring(0, 8)}</h3>
               <button className="close-modal" onClick={closeOrderDetailsModal}>&times;</button>
             </div>
             <div className="modal-body">
               <div className="order-details-grid">
                 <div className="order-info-card">
-                  <h4 className="info-card-title"><PersonIcon /> Informações do Cliente</h4>
+                  <h4 className="info-card-title"><PersonIcon /> {t('pdv.customer_info_title')}</h4>
                   <div className="info-item">
-                    <span className="info-label">Nome:</span>
+                    <span className="info-label">{t('pdv.name_label')}</span>
                     <span className="info-value">{selectedOrder.customer_details.name}</span>
                   </div>
                   <div className="info-item">
-                    <span className="info-label">Telefone:</span>
+                    <span className="info-label">{t('pdv.phone_label')}</span>
                     <span className="info-value">{selectedOrder.customer_details.phone}</span>
                   </div>
                   {/* Add email and address if available in selectedOrder.customer_details */}
                 </div>
 
                 <div className="order-info-card">
-                  <h4 className="info-card-title"><InfoIcon /> Informações do Pedido</h4>
+                  <h4 className="info-card-title"><InfoIcon /> {t('pdv.order_info_title')}</h4>
                   <div className="info-item">
-                    <span className="info-label">Data/Hora:</span>
+                    <span className="info-label">{t('pdv.table_header_datetime')}</span>
                     <span className="info-value">{new Date(selectedOrder.order_date).toLocaleString()}</span>
                   </div>
                   <div className="info-item">
-                    <span className="info-label">Nº Pedido:</span>
+                    <span className="info-label">{t('pdv.order_number_label')}</span>
                     <span className="info-value">#{selectedOrder.external_order_id || selectedOrder.id?.substring(0, 8)}</span>
                   </div>
                   <div className="info-item">
-                    <span className="info-label">Método de Pagamento:</span>
+                    <span className="info-label">{t('pdv.payment_method_label_details')}</span>
                     <span className="info-value">{selectedOrder.payment_method}</span>
                   </div>
                   <div className="info-item">
-                    <span className="info-label">Status:</span>
+                    <span className="info-label">{t('pdv.table_header_status')}</span>
                     <span className="info-value"><span className={`status-badge ${selectedOrder.status}`}>{orderStatuses.find(s => s.id === selectedOrder.status)?.label || selectedOrder.status}</span></span>
                   </div>
                 </div>
               </div>
 
-              <h4 style={{ margin: '20px 0 15px', color: 'var(--dark)'}}><ListIcon /> Itens do Pedido</h4>
+              <h4 style={{ margin: '20px 0 15px', color: 'var(--dark)'}}><ListIcon /> {t('pdv.order_items_title')}</h4>
               <table className="items-list">
                 <thead>
                   <tr>
-                    <th>Item</th>
-                    <th className="item-quantity">Qtd</th>
-                    <th className="item-price">Preço Unit.</th>
-                    <th className="item-price">Subtotal</th>
+                    <th>{t('pdv.item_table_header_item')}</th>
+                    <th className="item-quantity">{t('pdv.item_table_header_qty')}</th>
+                    <th className="item-price">{t('pdv.item_table_header_unit_price')}</th>
+                    <th className="item-price">{t('pdv.item_table_header_subtotal')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1001,19 +1002,19 @@ const Pdv = () => {
               </table>
 
               <div className="order-total">
-                <span className="total-label">Total:</span>
+                <span className="total-label">{t('pdv.total_label')}</span>
                 <span className="total-value">R$ {Number(selectedOrder.total_amount).toFixed(2).replace('.', ',')}</span>
               </div>
             </div>
             <div className="modal-footer">
               <button className="btn btn-outline" onClick={closeOrderDetailsModal}>
-                <CloseIcon /> Fechar
+                <CloseIcon /> {t('pdv.close_button')}
               </button>
               <button className="btn btn-primary">
-                <PrintIcon /> Imprimir
+                <PrintIcon /> {t('pdv.print_action')}
               </button>
               <button className="btn btn-primary">
-                <CheckCircleIcon /> Marcar como Entregue
+                <CheckCircleIcon /> {t('pdv.mark_as_delivered_button')}
               </button>
             </div>
           </div>

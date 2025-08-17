@@ -1,54 +1,74 @@
-[{
-	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "514",
-	"severity": 8,
-	"message": "Expected comma",
-	"source": "json",
-	"startLineNumber": 616,
-	"startColumn": 72,
-	"endLineNumber": 616,
-	"endColumn": 73,
-	"origin": "extHost1"
-}]
+main.0c34da8c.js:sourcemap:2  GET https://feedelizaapi.towersfy.com/public/surveys/next/feedback-do-cardapio/ 404 (Not Found)
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+xhr @ main.0c34da8c.js:sourcemap:2
+vo @ main.0c34da8c.js:sourcemap:2
+Promise.then
+_request @ main.0c34da8c.js:sourcemap:2
+request @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+rl @ main.0c34da8c.js:sourcemap:2
+jc @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+j @ main.0c34da8c.js:sourcemap:2
+P @ main.0c34da8c.js:sourcemap:2
+main.0c34da8c.js:sourcemap:2 Error fetching survey: Un {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+await in (anônimo)
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+rl @ main.0c34da8c.js:sourcemap:2
+jc @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+j @ main.0c34da8c.js:sourcemap:2
+P @ main.0c34da8c.js:sourcemap:2
+main.0c34da8c.js:sourcemap:2 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/public/surveys/next/feedback-do-cardapio/".
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+xhr @ main.0c34da8c.js:sourcemap:2
+vo @ main.0c34da8c.js:sourcemap:2
+Promise.then
+_request @ main.0c34da8c.js:sourcemap:2
+request @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+rl @ main.0c34da8c.js:sourcemap:2
+jc @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+j @ main.0c34da8c.js:sourcemap:2
+P @ main.0c34da8c.js:sourcemap:2
+main.0c34da8c.js:sourcemap:2 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+xhr @ main.0c34da8c.js:sourcemap:2
+vo @ main.0c34da8c.js:sourcemap:2
+Promise.then
+_request @ main.0c34da8c.js:sourcemap:2
+request @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+rl @ main.0c34da8c.js:sourcemap:2
+jc @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+j @ main.0c34da8c.js:sourcemap:2
+P @ main.0c34da8c.js:sourcemap:2
+feedback-do-cardapio:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+The script has an unsupported MIME type ('text/html').
+main.0c34da8c.js:sourcemap:2 Error during service worker registration: SecurityError: Failed to register a ServiceWorker for scope ('https://feedelizapro.towersfy.com/') with script ('https://feedelizapro.towersfy.com/service-worker.js'): The script has an unsupported MIME type ('text/html').
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+Promise.catch
+(anônimo) @ main.0c34da8c.js:sourcemap:2
+(anônimo) @ main.0c34da8c.js:sourcemap:2
 
-[{
-	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "514",
-	"severity": 8,
-	"message": "Expected comma",
-	"source": "json",
-	"startLineNumber": 616,
-	"startColumn": 86,
-	"endLineNumber": 616,
-	"endColumn": 88,
-	"origin": "extHost1"
-}]
-
-[{
-	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "515",
-	"severity": 8,
-	"message": "Colon expected",
-	"source": "json",
-	"startLineNumber": 616,
-	"startColumn": 88,
-	"endLineNumber": 616,
-	"endColumn": 89,
-	"origin": "extHost1"
-}]
-
-[{
-	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"severity": 8,
-	"message": "End of file expected.",
-	"source": "json",
-	"startLineNumber": 619,
-	"startColumn": 6,
-	"endLineNumber": 619,
-	"endColumn": 7,
-	"origin": "extHost1"
-}]
+URL da solicitação
+https://feedelizaapi.towersfy.com/public/surveys/next/feedback-do-cardapio/
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+{"error":"Rota não encontrada"} 

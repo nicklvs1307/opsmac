@@ -208,27 +208,27 @@ const FeedbackList = () => {
       {/* Header */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Typography variant="h4" component="h1">
-          Feedbacks
+          {t('feedback_list.main_title')}
         </Typography>
         <Button
           variant="contained"
           startIcon={<AddIcon />}
           onClick={() => navigate('/feedback/new')}
         >
-          Novo Feedback
+          {t('feedback_list.new_feedback_button')}
         </Button>
       </Box>
 
       {/* Filters */}
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" gutterBottom>
-          Filtros
+          {t('feedback_list.filters_title')}
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={3}>
             <TextField
               fullWidth
-              label="Buscar"
+              label={t('feedback_list.search_label')}
               value={filters.search}
               onChange={(e) => handleFilterChange('search', e.target.value)}
               InputProps={{
@@ -238,65 +238,65 @@ const FeedbackList = () => {
           </Grid>
           <Grid item xs={12} md={2}>
             <FormControl fullWidth>
-              <InputLabel>Avaliação</InputLabel>
+              <InputLabel>{t('feedback_list.rating_label')}</InputLabel>
               <Select
                 value={filters.rating}
-                label="Avaliação"
+                label={t('feedback_list.rating_label')}
                 onChange={(e) => handleFilterChange('rating', e.target.value)}
               >
-                <MenuItem value="">Todas</MenuItem>
-                <MenuItem value="5">5 estrelas</MenuItem>
-                <MenuItem value="4">4 estrelas</MenuItem>
-                <MenuItem value="3">3 estrelas</MenuItem>
-                <MenuItem value="2">2 estrelas</MenuItem>
-                <MenuItem value="1">1 estrela</MenuItem>
+                <MenuItem value="">{t('feedback_list.all_ratings')}</MenuItem>
+                <MenuItem value="5">{t('feedback_list.five_stars')}</MenuItem>
+                <MenuItem value="4">{t('feedback_list.four_stars')}</MenuItem>
+                <MenuItem value="3">{t('feedback_list.three_stars')}</MenuItem>
+                <MenuItem value="2">{t('feedback_list.two_stars')}</MenuItem>
+                <MenuItem value="1">{t('feedback_list.one_star')}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} md={2}>
             <FormControl fullWidth>
-              <InputLabel>Tipo</InputLabel>
+              <InputLabel>{t('feedback_list.type_label')}</InputLabel>
               <Select
                 value={filters.type}
-                label="Tipo"
+                label={t('feedback_list.type_label')}
                 onChange={(e) => handleFilterChange('type', e.target.value)}
               >
-                <MenuItem value="">Todos</MenuItem>
-                <MenuItem value="compliment">Elogio</MenuItem>
-                <MenuItem value="complaint">Reclamação</MenuItem>
-                <MenuItem value="suggestion">Sugestão</MenuItem>
-                <MenuItem value="criticism">Crítica</MenuItem>
+                <MenuItem value="">{t('feedback_list.all_types')}</MenuItem>
+                <MenuItem value="compliment">{t('feedback_list.type_compliment')}</MenuItem>
+                <MenuItem value="complaint">{t('feedback_list.type_complaint')}</MenuItem>
+                <MenuItem value="suggestion">{t('feedback_list.type_suggestion')}</MenuItem>
+                <MenuItem value="criticism">{t('feedback_list.type_criticism')}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} md={2}>
             <FormControl fullWidth>
-              <InputLabel>Status</InputLabel>
+              <InputLabel>{t('feedback_list.status_label')}</InputLabel>
               <Select
                 value={filters.status}
-                label="Status"
+                label={t('feedback_list.status_label')}
                 onChange={(e) => handleFilterChange('status', e.target.value)}
               >
-                <MenuItem value="">Todos</MenuItem>
-                <MenuItem value="pending">Pendente</MenuItem>
-                <MenuItem value="responded">Respondido</MenuItem>
-                <MenuItem value="resolved">Resolvido</MenuItem>
+                <MenuItem value="">{t('feedback_list.all_types')}</MenuItem>
+                <MenuItem value="pending">{t('feedback_list.status_pending')}</MenuItem>
+                <MenuItem value="responded">{t('feedback_list.status_responded')}</MenuItem>
+                <MenuItem value="resolved">{t('feedback_list.status_resolved')}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} md={2}>
             <FormControl fullWidth>
-              <InputLabel>Origem</InputLabel>
+              <InputLabel>{t('feedback_list.source_label')}</InputLabel>
               <Select
                 value={filters.source}
-                label="Origem"
+                label={t('feedback_list.source_label')}
                 onChange={(e) => handleFilterChange('source', e.target.value)}
               >
-                <MenuItem value="">Todas</MenuItem>
-                <MenuItem value="qrcode">QR Code</MenuItem>
-                <MenuItem value="whatsapp">WhatsApp</MenuItem>
-                <MenuItem value="manual">Manual</MenuItem>
-                <MenuItem value="website">Website</MenuItem>
+                <MenuItem value="">{t('feedback_list.all_types')}</MenuItem>
+                <MenuItem value="qrcode">{t('feedback_list.source_qrcode')}</MenuItem>
+                <MenuItem value="whatsapp">{t('feedback_list.source_whatsapp')}</MenuItem>
+                <MenuItem value="manual">{t('feedback_list.source_manual')}</MenuItem>
+                <MenuItem value="website">{t('feedback_list.source_website')}</MenuItem>
               </Select>
             </FormControl>
           </Grid>

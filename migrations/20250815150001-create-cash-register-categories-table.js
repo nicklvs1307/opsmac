@@ -27,12 +27,12 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL', // If restaurant is deleted, category can remain or be set to null
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,

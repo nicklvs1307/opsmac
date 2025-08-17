@@ -6,6 +6,7 @@ module.exports = (sequelize) => {
     static associate(models) {
       Restaurant.belongsTo(models.User, { foreignKey: 'owner_id', as: 'owner' });
       Restaurant.hasMany(models.NpsCriterion, { as: 'npsCriteria', foreignKey: 'restaurant_id' });
+      Restaurant.hasMany(models.User, { foreignKey: 'restaurant_id', as: 'users' });
       // Adicione outras associações aqui se necessário
     }
 

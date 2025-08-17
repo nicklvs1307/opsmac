@@ -70,6 +70,9 @@ import StockPositionHistoryReport from './pages/Reports/StockPositionHistoryRepo
 import GeneratedCouponsReport from './pages/Reports/GeneratedCouponsReport';
 import PaymentMethods from './pages/ERP/PaymentMethods';
 import FinancialCategoriesPage from './pages/ERP/FinancialCategoriesPage'; // New Import
+import TeamManagementPage from './pages/Team/TeamManagementPage';
+import WaiterPage from './pages/Waiter/WaiterPage';
+import OrderPage from './pages/Waiter/OrderPage';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -141,6 +144,7 @@ function App() {
                   <Route path="erp/payment-methods" element={<PaymentMethods />} />
                   <Route path="erp/financial-transactions" element={<FinancialTransactionsPage />} /> {/* Replaced with new component */}
                   <Route path="erp/financial-categories" element={<FinancialCategoriesPage />} /> {/* New Route */}
+                  <Route path="team" element={<TeamManagementPage />} />
                   <Route path="reports/cash-flow" element={<CashFlowReport />} />
                   <Route path="reports/dre" element={<DREReport />} />
                   <Route path="reports/sales-by-payment-method" element={<SalesByPaymentMethodReport />} />
@@ -157,6 +161,11 @@ function App() {
                   <Route path="labels/productions/new" element={<ProductionCreate />} />
                 </Route>
                 <Route path="/admin" element={<ProtectedRoute allowedRoles={['super_admin']}><Layout><AdminDashboard /></Layout></ProtectedRoute>} />
+
+                {/* Waiter Routes */}
+                <Route path="/waiter" element={<ProtectedRoute allowedRoles={['waiter']}><WaiterPage /></ProtectedRoute>} />
+                <Route path="/waiter/order/:tableId" element={<ProtectedRoute allowedRoles={['waiter']}><OrderPage /></ProtectedRoute>} />
+
                 {/* Catch all route */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Routes>

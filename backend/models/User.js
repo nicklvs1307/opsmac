@@ -60,9 +60,13 @@ module.exports = (sequelize) => {
       }
     },
     role: {
-      type: DataTypes.ENUM('admin', 'owner', 'manager', 'super_admin'),
+      type: DataTypes.ENUM('admin', 'owner', 'manager', 'super_admin', 'waiter'),
       defaultValue: 'owner',
       allowNull: false
+    },
+    restaurant_id: {
+        type: DataTypes.UUID,
+        allowNull: true
     },
     avatar: {
       type: DataTypes.STRING(500),
@@ -133,9 +137,14 @@ module.exports = (sequelize) => {
   User.associate = (models) => {
     User.hasMany(models.Restaurant, {
       foreignKey: 'owner_id',
-      as: 'restaurants',
+      as: 'owned_restaurants', // Renomeado para evitar conflito
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE'
+    });
+
+    User.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant'
     });
   };
 

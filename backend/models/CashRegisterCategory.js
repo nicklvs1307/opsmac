@@ -27,6 +27,8 @@ module.exports = (sequelize) => {
   }, {
     freezeTableName: true,
     tableName: 'cash_register_categories',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
   });
 
   CashRegisterCategory.associate = (models) => {

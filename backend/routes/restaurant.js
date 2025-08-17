@@ -130,6 +130,119 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
   }
 });
 
+const { isOwnerOrManager } = require('../middleware/ownerOrManagerAuth');
+
+// USER MANAGEMENT ROUTES
+
+// List users of a restaurant
+router.get('/:restaurantId/users', auth, isOwnerOrManager, async (req, res) => {
+    try {
+        const users = await models.User.findAll({
+            where: { restaurant_id: req.params.restaurantId },
+            attributes: ['id', 'name', 'email', 'role', 'is_active']
+        });
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao listar usuários.' });
+    }
+});
+
+// Create a new user for a restaurant
+router.post('/:restaurantId/users', auth, isOwnerOrManager, async (req, res) => {
+    const { name, email, password, role } = req.body;
+    if (!['manager', 'waiter'].includes(role)) {
+        return res.status(400).json({ error: 'Função inválida. Permitido apenas: manager, waiter.' });
+    }
+    try {
+        const newUser = await models.User.create({
+            name,
+            email,
+            password,
+            role,
+            restaurant_id: req.params.restaurantId,
+            is_active: true
+        });
+        res.status(201).json(newUser);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao criar usuário.' });
+    }
+});
+
+// Update a user in a restaurant
+router.put('/:restaurantId/users/:userId', auth, isOwnerOrManager, async (req, res) => {
+    const { name, email, role, is_active } = req.body;
+    if (role && !['manager', 'waiter'].includes(role)) {
+        return res.status(400).json({ error: 'Função inválida. Permitido apenas: manager, waiter.' });
+    }
+    try {
+        const user = await models.User.findOne({ where: { id: req.params.userId, restaurant_id: req.params.restaurantId } });
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado neste restaurante.' });
+        }
+        await user.update({ name, email, role, is_active });
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao atualizar usuário.' });
+    }
+});
+
+// Delete a user from a restaurant
+router.delete('/:restaurantId/users/:userId', auth, isOwnerOrManager, async (req, res) => {
+    try {
+        const user = await models.User.findOne({ where: { id: req.params.userId, restaurant_id: req.params.restaurantId } });
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado neste restaurante.' });
+        }
+        await user.destroy();
+        res.status(204).send();
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao deletar usuário.' });
+    }
+});
+
+const { isWaiter } = require('../middleware/waiterAuth');
+
+// WAITER ROUTES
+
+// Get tables for a restaurant
+router.get('/:restaurantId/tables', auth, isWaiter, async (req, res) => {
+    try {
+        const tables = await models.Table.findAll({ where: { restaurant_id: req.params.restaurantId } });
+        res.json(tables);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao listar mesas.' });
+    }
+});
+
+// Get products for a restaurant
+router.get('/:restaurantId/products', auth, isWaiter, async (req, res) => {
+    try {
+        const products = await models.Product.findAll({ where: { restaurant_id: req.params.restaurantId, is_active: true } });
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao listar produtos.' });
+    }
+});
+
+// Create a new order for a table
+router.post('/:restaurantId/orders', auth, isWaiter, async (req, res) => {
+    const { table_id, items } = req.body;
+    try {
+        const newOrder = await models.Order.create({
+            restaurant_id: req.params.restaurantId,
+            table_id,
+            items,
+            status: 'pending',
+            platform: 'waiter_app',
+            order_date: new Date()
+        });
+        res.status(201).json(newOrder);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao criar pedido.' });
+    }
+});
+
+
 module.exports = router;
 
 /**

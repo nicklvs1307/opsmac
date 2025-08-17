@@ -23,8 +23,12 @@ const Login = () => {
     const result = await login(data.email, data.password);
     
     if (result.success) {
-      const from = location.state?.from?.pathname || '/dashboard';
-      navigate(from, { replace: true });
+      if (result.user.role === 'waiter') {
+        navigate('/waiter', { replace: true });
+      } else {
+        const from = location.state?.from?.pathname || '/dashboard';
+        navigate(from, { replace: true });
+      }
     }
     
     return result;

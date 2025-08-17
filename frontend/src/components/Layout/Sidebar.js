@@ -196,6 +196,11 @@ const Sidebar = ({ onMobileClose }) => {
           path: '/erp/technical-specifications'
         },
         {
+          title: t('sidebar.team'),
+          icon: <PeopleIcon />,
+          path: '/team'
+        },
+        {
           title: t('sidebar.financial'),
           icon: <PointOfSaleIcon />, // Using PointOfSaleIcon for financial, can be changed
           path: '/erp/financial-transactions', // Corrected path

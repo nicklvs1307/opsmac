@@ -72,6 +72,8 @@ module.exports = (sequelize) => {
   }, {
     freezeTableName: true,
     tableName: 'financial_transactions',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
   });
 
   FinancialTransaction.associate = (models) => {

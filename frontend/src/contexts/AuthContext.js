@@ -146,7 +146,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       toast.success(`Bem-vindo, ${user.name}!`);
-      return { success: true };
+      return { success: true, user };
     } catch (error) {
       dispatch({ type: AUTH_ACTIONS.AUTH_ERROR });
       const message = error.response?.data?.message || 'Erro ao fazer login';

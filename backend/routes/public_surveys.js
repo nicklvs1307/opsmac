@@ -1,4 +1,3 @@
-
 const express = require('express');
 const { models } = require('../config/database');
 const { body, validationResult } = require('express-validator');
@@ -301,38 +300,127 @@ router.post(
                 await restaurant.update({ nps_criteria_scores: currentNpsScores });
             }
 
-            let generatedCoupon = null;
+            let rewardData = null;
             if (survey.reward_id && customer_id) {
                 const reward = await models.Reward.findByPk(survey.reward_id);
-                if (reward && await reward.canCustomerUse(customer_id)) {
-                    const { coupon } = await reward.generateCoupon(customer_id, {
-                        coupon_validity_days: survey.coupon_validity_days, // Passando a validade do cupom
-                        metadata: {
-                            source: 'survey_response',
-                            survey_id: survey.id,
-                            response_id: newSurveyResponse.id
-                        }
-                    });
-                    generatedCoupon = coupon;
+                if (reward && (!reward.canCustomerUse || await reward.canCustomerUse(customer_id))) {
+                    if (reward.type === 'coupon') {
+                        const { coupon } = await reward.generateCoupon(customer_id, {
+                            coupon_validity_days: survey.coupon_validity_days, // Passando a validade do cupom
+                            metadata: {
+                                source: 'survey_response',
+                                survey_id: survey.id,
+                                response_id: newSurveyResponse.id
+                            }
+                        });
+                        rewardData = { type: 'coupon', details: coupon };
+                    } else if (reward.type === 'wheel_spin') {
+                        rewardData = { type: 'wheel_spin', details: { message: 'Você ganhou um giro na roleta!' } };
+                    }
+                    // Future reward types can be handled here
                 }
             }
 
             res.status(201).json({
                 msg: 'Respostas enviadas com sucesso!',
                 responseId: newSurveyResponse.id,
-                coupon: generatedCoupon
+                reward: rewardData
             });
         } catch (err) {
             console.error('Erro detalhado ao enviar respostas da pesquisa:', err);
-            res.status(500).json({ 
+            res.status(500).json({
                 error: 'Erro ao enviar respostas.',
                 message: process.env.NODE_ENV === 'development' ? err.message : 'Ocorreu um erro inesperado.',
-                stack: process.env.NODE_ENV === 'development' ? err.stack : undefined 
+                stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
             });
         }
     }
 );
 
-module.exports = router;
+// @route   PATCH /public/surveys/responses/:responseId/link-customer
+// @desc    Link an anonymous survey response to a customer and grant rewards
+// @access  Public
+router.patch(
+    '/responses/:responseId/link-customer',
+    [
+        body('customer_id', 'ID do cliente é obrigatório').isUUID(),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
 
-            
+        const { responseId } = req.params;
+        const { customer_id } = req.body;
+
+        try {
+            const surveyResponse = await models.SurveyResponse.findByPk(responseId, {
+                include: [{
+                    model: models.Survey,
+                    as: 'survey',
+                    include: [{ model: models.Reward, as: 'reward' }]
+                }]
+            });
+
+            if (!surveyResponse) {
+                return res.status(404).json({ msg: 'Resposta da pesquisa não encontrada.' });
+            }
+
+            if (surveyResponse.customer_id) {
+                return res.status(400).json({ msg: 'Esta resposta já está vinculada a um cliente.' });
+            }
+
+            // Link the customer
+            await surveyResponse.update({ customer_id });
+
+            // Now, grant the reward
+            const { survey } = surveyResponse;
+            let rewardData = null;
+
+            if (survey && survey.reward_id) {
+                const reward = survey.reward;
+                // Assuming canCustomerUse is a method on the Reward model instance
+                if (reward && (!reward.canCustomerUse || await reward.canCustomerUse(customer_id))) {
+                    if (reward.type === 'coupon') {
+                        const { coupon } = await reward.generateCoupon(customer_id, {
+                            coupon_validity_days: survey.coupon_validity_days,
+                            metadata: {
+                                source: 'survey_response_linked',
+                                survey_id: survey.id,
+                                response_id: surveyResponse.id
+                            }
+                        });
+                        rewardData = { type: 'coupon', details: coupon };
+                    } else if (reward.type === 'wheel_spin') {
+                        rewardData = { type: 'wheel_spin', details: { message: 'Você ganhou um giro na roleta!' } };
+                    }
+                    // Future reward types can be handled here
+                }
+            }
+
+            // Update customer stats after linking
+            const customer = await models.Customer.findByPk(customer_id);
+            if (customer) {
+                await customer.updateStats();
+                await customer.update({
+                    last_survey_id: survey.id,
+                    last_survey_completed_at: new Date(),
+                });
+                console.log(`[Link Survey] Estatísticas e última pesquisa do cliente ${customer_id} atualizadas.`);
+            }
+
+
+            res.json({
+                msg: 'Pesquisa vinculada com sucesso!',
+                reward: rewardData
+            });
+
+        } catch (err) {
+            console.error('Erro ao vincular cliente à resposta da pesquisa:', err);
+            res.status(500).send('Server Error');
+        }
+    }
+);
+
+module.exports = router;

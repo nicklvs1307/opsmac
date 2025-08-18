@@ -23,11 +23,6 @@ ARG REACT_APP_API_URL
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
 RUN set -x && npm run build && ls -la /app/frontend/build
 
-# --- NEW DIAGNOSTIC STEP ---
-RUN cp /app/frontend/build/service-worker.js /tmp/service-worker.js || echo "service-worker.js not found in build directory"
-RUN ls -la /tmp/service-worker.js || echo "service-worker.js not copied to /tmp"
-# --- END NEW DIAGNOSTIC STEP ---
-
 # Estágio final para servir os arquivos com NGINX
 FROM nginx:alpine
 

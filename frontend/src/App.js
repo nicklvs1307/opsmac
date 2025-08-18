@@ -31,6 +31,7 @@ import PublicFeedback from './pages/Public/PublicFeedback';
 import ThankYou from './pages/Public/ThankYou';
 import PublicSurveyForm from './pages/Public/PublicSurveyForm';
 import CheckinDashboard from './pages/Fidelidade/Checkin/CheckinDashboard';
+import SurveyDashboard from './pages/Fidelidade/Pesquisas/SurveyDashboard';
 import SurveyList from './pages/Fidelidade/Avaliacoes/SurveyList';
 import SurveyCreate from './pages/Fidelidade/Avaliacoes/SurveyCreate';
 import SurveyResults from './pages/Fidelidade/Avaliacoes/SurveyResults';
@@ -126,6 +127,7 @@ function App() {
                   <Route path="customers/dashboard" element={<CustomerDashboard />} />
                   <Route path="settings" element={<Settings />} />
                   <Route path="fidelity/checkin" element={<CheckinDashboard />} />
+                  <Route path="fidelity/surveys/settings" element={<SurveyDashboard />} />
                   <Route path="fidelity/satisfaction" element={<SatisfactionDashboard />} />
                   <Route path="fidelity/surveys" element={<SurveyList />} />
                   <Route path="fidelity/surveys/new" element={<SurveyCreate />} />

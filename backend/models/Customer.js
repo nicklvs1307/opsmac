@@ -92,6 +92,11 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       defaultValue: 0
     },
+    survey_responses_count: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      comment: 'Total de pesquisas de satisfação respondidas pelo cliente'
+    },
     total_spent: {
       type: DataTypes.DECIMAL(10, 2),
       defaultValue: 0.00

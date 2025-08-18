@@ -119,6 +119,11 @@ router.get('/:restaurantSlug/:surveySlug', async (req, res) => {
                     model: models.Question,
                     as: 'questions',
                     attributes: ['id', 'question_text', 'question_type', 'options', 'order'],
+                    include: [{
+                        model: models.NpsCriterion,
+                        as: 'npsCriterion',
+                        attributes: ['id', 'name']
+                    }]
                 },
                 {
                     model: models.Restaurant,
@@ -270,6 +275,10 @@ router.post(
             if (customer_id) {
                 const customer = await models.Customer.findByPk(customer_id);
                 if (customer) {
+                    // Incrementar o novo contador de respostas de pesquisa
+                    await customer.increment('survey_responses_count');
+                    await customer.reload(); // Recarregar para obter o valor mais recente
+
                     await customer.updateStats();
                     console.log(`[Public Survey] Estatísticas do cliente ${customer_id} atualizadas após resposta de pesquisa.`);
 
@@ -301,12 +310,59 @@ router.post(
             }
 
             let rewardData = null;
-            if (survey.reward_id && customer_id) {
+            // Nova lógica de recompensa por marco de respostas
+            if (customer_id && restaurant) {
+                const surveyRewardSettings = restaurant.settings?.survey_reward_settings || {};
+                const rewardsPerResponse = surveyRewardSettings.rewards_per_response || [];
+                const currentResponseCount = customer.survey_responses_count;
+
+                console.log(`[Survey Reward] Verificando recompensas para ${currentResponseCount} respostas.`);
+
+                for (const rewardConfig of rewardsPerResponse) {
+                    const responseMilestone = parseInt(rewardConfig.response_count, 10);
+                    if (responseMilestone === currentResponseCount) {
+                        console.log(`[Survey Reward] Cliente atingiu o marco de ${currentResponseCount} respostas.`);
+                        const reward = await models.Reward.findByPk(rewardConfig.reward_id);
+                        if (reward) {
+                            // Evitar dar a mesma recompensa de marco duas vezes
+                            const existingCoupon = await models.Coupon.findOne({
+                                where: {
+                                    customer_id: customer.id,
+                                    reward_id: reward.id,
+                                    visit_milestone: responseMilestone, // Usaremos o mesmo campo para rastrear marcos
+                                },
+                            });
+
+                            if (existingCoupon) {
+                                console.log(`[Survey Reward] Cliente já recebeu a recompensa para ${currentResponseCount} respostas.`);
+                                continue;
+                            }
+
+                            console.log(`[Survey Reward] Gerando recompensa: ${reward.title}`);
+                            const { coupon } = await reward.generateCoupon(customer.id, {
+                                coupon_validity_days: reward.validity_days || survey.coupon_validity_days,
+                                metadata: {
+                                    source: 'survey_response_milestone',
+                                    survey_id: survey.id,
+                                    response_id: newSurveyResponse.id,
+                                    milestone: currentResponseCount
+                                }
+                            });
+                            rewardData = { type: 'coupon', details: coupon };
+                            break; // Conceder apenas a primeira recompensa correspondente
+                        }
+                    }
+                }
+            }
+
+            // Fallback para a lógica antiga de recompensa (se nenhuma recompensa de marco foi ganha)
+            if (!rewardData && survey.reward_id && customer_id) {
+                 console.log(`[Survey Reward] Nenhuma recompensa de marco encontrada. Verificando recompensa padrão da pesquisa.`);
                 const reward = await models.Reward.findByPk(survey.reward_id);
                 if (reward && (!reward.canCustomerUse || await reward.canCustomerUse(customer_id))) {
                     if (reward.type === 'coupon') {
                         const { coupon } = await reward.generateCoupon(customer_id, {
-                            coupon_validity_days: survey.coupon_validity_days, // Passando a validade do cupom
+                            coupon_validity_days: survey.coupon_validity_days,
                             metadata: {
                                 source: 'survey_response',
                                 survey_id: survey.id,
@@ -317,7 +373,6 @@ router.post(
                     } else if (reward.type === 'wheel_spin') {
                         rewardData = { type: 'wheel_spin', details: { message: 'Você ganhou um giro na roleta!' } };
                     }
-                    // Future reward types can be handled here
                 }
             }
 

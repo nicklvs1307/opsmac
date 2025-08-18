@@ -211,9 +211,9 @@ export const ThemeProvider = ({ children }) => {
               },
             },
             containedPrimary: {
-              background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
+              background: 'linear-gradient(135deg, #D32F2F 0%, #FF5252 100%)',
               '&:hover': {
-                background: 'linear-gradient(135deg, #1565c0 0%, #1976d2 100%)',
+                background: 'linear-gradient(135deg, #B71C1C 0%, #D32F2F 100%)',
               },
             },
             containedSecondary: {

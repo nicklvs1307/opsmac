@@ -76,8 +76,13 @@ const SurveyList = () => {
     }
   };
 
-  const handleCopyLink = (slug) => {
-    const publicLink = `${window.location.origin}/public/surveys/${slug}`;
+  const handleCopyLink = (surveySlug) => {
+    const restaurantSlug = user?.restaurants?.[0]?.slug;
+    if (!restaurantSlug) {
+      toast.error(t('survey_list.restaurant_slug_not_found'));
+      return;
+    }
+    const publicLink = `${window.location.origin}/public/surveys/${restaurantSlug}/${surveySlug}`;
     navigator.clipboard.writeText(publicLink)
       .then(() => {
         toast.success(t('survey_list.copy_link_success'));
@@ -88,8 +93,13 @@ const SurveyList = () => {
       });
   };
 
-  const handleGenerateQrCode = (surveyId) => {
-    const publicLink = `${window.location.origin}/public/surveys/${surveyId}`;
+  const handleGenerateQrCode = (surveySlug) => {
+    const restaurantSlug = user?.restaurants?.[0]?.slug;
+    if (!restaurantSlug) {
+      toast.error(t('survey_list.restaurant_slug_not_found'));
+      return;
+    }
+    const publicLink = `${window.location.origin}/public/surveys/${restaurantSlug}/${surveySlug}`;
     setQrCodeValue(publicLink);
     setQrModalOpen(true);
   };
@@ -196,7 +206,7 @@ const SurveyList = () => {
                           >
                             {survey.status === 'active' ? <ToggleOnIcon /> : <ToggleOffIcon />}
                           </IconButton>
-                          <IconButton color="secondary" aria-label={t('survey_list.generate_qr_code_aria_label')} onClick={() => handleGenerateQrCode(survey.id)}>
+                          <IconButton color="secondary" aria-label={t('survey_list.generate_qr_code_aria_label')} onClick={() => handleGenerateQrCode(survey.slug)}>
                             <QrCodeIcon />
                           </IconButton>
                           <IconButton color="default" aria-label={t('survey_list.copy_link_aria_label')} onClick={() => handleCopyLink(survey.slug)}>

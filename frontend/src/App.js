@@ -96,7 +96,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/feedback/:shortUrl" element={<PublicFeedback />} />
                 <Route path="/thank-you" element={<ThankYou />} />
-                <Route path="/public/surveys/:restaurantSlug/:customerId?" element={<PublicSurveyForm />} />
+                <Route path="/public/surveys/:restaurantSlug/:surveySlug/:customerId?" element={<PublicSurveyForm />} />
                 <Route path="/checkin/public/:restaurantSlug" element={<PublicCheckin />} />
                 <Route path="/girar-roleta" element={<GirarRoleta />} />
                 <Route path="/recompensa-ganha" element={<PublicReward />} />

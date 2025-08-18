@@ -37,7 +37,7 @@ import { Restaurant as RestaurantIcon } from '@mui/icons-material';
 
 const PublicSurveyForm = () => {
   const { t } = useTranslation();
-  const { restaurantSlug, customerId } = useParams(); // Assuming these are URL params
+  const { restaurantSlug, surveySlug, customerId } = useParams(); // Get all params
   const navigate = useNavigate();
   const theme = useTheme();
 
@@ -63,8 +63,8 @@ const PublicSurveyForm = () => {
     const fetchSurvey = async () => {
       try {
         setLoading(true);
-        // Use the new endpoint for dynamic survey selection
-        const { data } = await axiosInstance.get(`/public/surveys/next/${restaurantSlug}/${customerId || ''}`);
+        // Use the correct endpoint with both restaurant and survey slugs
+        const { data } = await axiosInstance.get(`/public/surveys/${restaurantSlug}/${surveySlug}`);
 
         // Verify if survey module is enabled for this restaurant
         const enabledModules = data.restaurant?.settings?.enabled_modules || [];
@@ -95,10 +95,10 @@ const PublicSurveyForm = () => {
       }
     };
 
-    if (restaurantSlug) { // Only fetch if restaurantSlug is available
+    if (restaurantSlug && surveySlug) { // Only fetch if both slugs are available
       fetchSurvey();
     }
-  }, [restaurantSlug, customerId]); // Depend on restaurantSlug and customerId
+  }, [restaurantSlug, surveySlug]); // Depend on both slugs
 
   const handleAnswerChange = (questionId, value) => {
     setAnswers(prev => ({

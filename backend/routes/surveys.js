@@ -251,6 +251,31 @@ router.delete(
     }
 );
 
+// @route   GET api/surveys/:id
+// @desc    Get a single survey by ID
+// @access  Private
+router.get('/:id', auth, async (req, res) => {
+    try {
+        const survey = await models.Survey.findByPk(req.params.id, {
+            include: ['questions']
+        });
+
+        if (!survey) {
+            return res.status(404).json({ msg: 'Pesquisa não encontrada' });
+        }
+
+        // Ensure the user owns the survey's restaurant
+        if (survey.restaurant_id !== req.user.restaurants[0].id) {
+            return res.status(403).json({ msg: 'Não autorizado a acessar esta pesquisa' });
+        }
+
+        res.json(survey);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 
 // @route   GET /api/surveys/analytics/:restaurantId
 // @desc    Get satisfaction analytics for a restaurant

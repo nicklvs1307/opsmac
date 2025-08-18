@@ -40,6 +40,9 @@ const SatisfactionSettings = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmittingSettings, setIsSubmittingSettings] = useState(false);
   const [rewards, setRewards] = useState([]); // State to store rewards
+  const getValidColor = (colorValue, defaultValue) => {
+    return colorValue && colorValue !== '' ? colorValue : defaultValue;
+  };
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
@@ -74,7 +77,13 @@ const SatisfactionSettings = () => {
         .then(response => {
           const settings = response.data.settings?.survey_program_settings;
           if (settings) {
-            reset(settings);
+            reset({
+              background_color: getValidColor(settings.background_color, '#ffffff'),
+              text_color: getValidColor(settings.text_color, '#000000'),
+              primary_color: getValidColor(settings.primary_color, '#3f51b5'),
+              background_image_url: settings.background_image_url || '',
+              rewards_per_response: settings.rewards_per_response || [],
+            });
           }
         })
         .catch(err => console.error('Failed to fetch settings:', err));

@@ -1,74 +1,37 @@
-main.0c34da8c.js:sourcemap:2  GET https://feedelizaapi.towersfy.com/public/surveys/next/feedback-do-cardapio/ 404 (Not Found)
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-xhr @ main.0c34da8c.js:sourcemap:2
-vo @ main.0c34da8c.js:sourcemap:2
-Promise.then
-_request @ main.0c34da8c.js:sourcemap:2
-request @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-rl @ main.0c34da8c.js:sourcemap:2
-jc @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-j @ main.0c34da8c.js:sourcemap:2
-P @ main.0c34da8c.js:sourcemap:2
-main.0c34da8c.js:sourcemap:2 Error fetching survey: Un {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-await in (anônimo)
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-rl @ main.0c34da8c.js:sourcemap:2
-jc @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-j @ main.0c34da8c.js:sourcemap:2
-P @ main.0c34da8c.js:sourcemap:2
-main.0c34da8c.js:sourcemap:2 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/public/surveys/next/feedback-do-cardapio/".
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-xhr @ main.0c34da8c.js:sourcemap:2
-vo @ main.0c34da8c.js:sourcemap:2
-Promise.then
-_request @ main.0c34da8c.js:sourcemap:2
-request @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-rl @ main.0c34da8c.js:sourcemap:2
-jc @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-j @ main.0c34da8c.js:sourcemap:2
-P @ main.0c34da8c.js:sourcemap:2
-main.0c34da8c.js:sourcemap:2 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-xhr @ main.0c34da8c.js:sourcemap:2
-vo @ main.0c34da8c.js:sourcemap:2
-Promise.then
-_request @ main.0c34da8c.js:sourcemap:2
-request @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-rl @ main.0c34da8c.js:sourcemap:2
-jc @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-j @ main.0c34da8c.js:sourcemap:2
-P @ main.0c34da8c.js:sourcemap:2
-feedback-do-cardapio:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-The script has an unsupported MIME type ('text/html').
-main.0c34da8c.js:sourcemap:2 Error during service worker registration: SecurityError: Failed to register a ServiceWorker for scope ('https://feedelizapro.towersfy.com/') with script ('https://feedelizapro.towersfy.com/service-worker.js'): The script has an unsupported MIME type ('text/html').
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-Promise.catch
-(anônimo) @ main.0c34da8c.js:sourcemap:2
-(anônimo) @ main.0c34da8c.js:sourcemap:2
+Intervalo: 0 ms – 1,4 min
+Processamento de scripts25.036 ms
+Renderização12.434 ms
+Sistema6.267 ms
+Exibição3.165 ms
+Total84.850 ms
 
-URL da solicitação
-https://feedelizaapi.towersfy.com/public/surveys/next/feedback-do-cardapio/
-Método da solicitação
-GET
-Código de status
-404 Not Found
-Endereço remoto
-95.217.16.187:443
-{"error":"Rota não encontrada"} 
+[builder 8/8] RUN npm run build && ls -la /app/frontend/build                                                                               9.6s
+ => => # > feedeliza-plus@1.0.0 build
+ => => # > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+ => => # Creating an optimized production build...
+
+  => ERROR [builder 8/8] RUN npm run build && ls -la /app/frontend/build                                                                       171.1s
+------
+ > [builder 8/8] RUN npm run build && ls -la /app/frontend/build:
+0.842
+0.842 > feedeliza-plus@1.0.0 build
+0.842 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.842
+4.091 Creating an optimized production build...
+170.0 Failed to compile.
+170.0
+170.0 Module parse failed: Cannot parse JSON: Unexpected end of JSON input while parsing empty string
+170.0 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+170.0 Error: Cannot parse JSON: Unexpected end of JSON input while parsing empty string
+170.0
+170.0
+------
+Dockerfile.frontend:24
+--------------------
+  22 |     ARG REACT_APP_API_URL
+  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  24 | >>> RUN npm run build && ls -la /app/frontend/build
+  25 |
+  26 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

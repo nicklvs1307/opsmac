@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Box,
   Paper,
@@ -47,6 +48,7 @@ import toast from 'react-hot-toast';
 const FeedbackList = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id; // Acessa o ID do primeiro restaurante do usuário
   const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);

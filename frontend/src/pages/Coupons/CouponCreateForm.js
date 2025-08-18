@@ -17,9 +17,11 @@ import { useForm, Controller } from 'react-hook-form';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const CouponCreateForm = ({ onCouponCreated }) => {
     const { user } = useAuth();
+    const { t } = useTranslation();
     const restaurantId = user?.restaurants?.[0]?.id;
     const [rewards, setRewards] = useState([]);
     const [customers, setCustomers] = useState([]);
@@ -41,7 +43,7 @@ const CouponCreateForm = ({ onCouponCreated }) => {
                 setCustomers(customersRes.data.customers);
             } catch (err) {
                 console.error('Error fetching data for coupon creation:', err);
-                setError('Erro ao carregar dados necessários para criar cupom.');
+                setError(t('coupon_create_form.error_fetching_data'));
             } finally {
                 setLoading(false);
             }
@@ -49,19 +51,19 @@ const CouponCreateForm = ({ onCouponCreated }) => {
         if (restaurantId) {
             fetchData();
         }
-    }, [restaurantId]);
+    }, [restaurantId, t]); // Added t to dependency array
 
     const onSubmit = async (data) => {
         try {
             await axiosInstance.post('/api/coupons', { ...data, restaurant_id: restaurantId });
-            toast.success('Cupom criado com sucesso!');
+            toast.success(t('coupon_create_form.coupon_created_success'));
             reset(); // Clear form after successful submission
             if (onCouponCreated) {
                 onCouponCreated();
             }
         } catch (err) {
             console.error('Error creating coupon:', err);
-            toast.error(err.response?.data?.message || 'Erro ao criar cupom.');
+            toast.error(err.response?.data?.message || t('coupon_create_form.error_creating_coupon'));
         }
     };
 
@@ -75,7 +77,7 @@ const CouponCreateForm = ({ onCouponCreated }) => {
 
     return (
         <Box>
-            <Typography variant="h4" component="h1" mb={3}>Criar Novo Cupom</Typography>
+            <Typography variant="h4" component="h1" mb={3}>{t('coupon_create_form.title')}</Typography>
             <Paper sx={{ p: 3 }}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid container spacing={2}>
@@ -83,11 +85,11 @@ const CouponCreateForm = ({ onCouponCreated }) => {
                             <Controller
                                 name="reward_id"
                                 control={control}
-                                rules={{ required: 'Recompensa é obrigatória' }}
+                                rules={{ required: t('coupon_create_form.reward_required') }}
                                 render={({ field }) => (
                                     <FormControl fullWidth error={!!errors.reward_id}>
-                                        <InputLabel>Recompensa</InputLabel>
-                                        <Select {...field} label="Recompensa">
+                                        <InputLabel>{t('coupon_create_form.reward_label')}</InputLabel>
+                                        <Select {...field} label={t('coupon_create_form.reward_label')}>
                                             {rewards.map(reward => (
                                                 <MenuItem key={reward.id} value={reward.id}>
                                                     {reward.title}
@@ -102,11 +104,11 @@ const CouponCreateForm = ({ onCouponCreated }) => {
                             <Controller
                                 name="customer_id"
                                 control={control}
-                                rules={{ required: 'Cliente é obrigatório' }}
+                                rules={{ required: t('coupon_create_form.customer_required') }}
                                 render={({ field }) => (
                                     <FormControl fullWidth error={!!errors.customer_id}>
-                                        <InputLabel>Cliente</InputLabel>
-                                        <Select {...field} label="Cliente">
+                                        <InputLabel>{t('coupon_create_form.customer_label')}</InputLabel>
+                                        <Select {...field} label={t('coupon_create_form.customer_label')}>
                                             {customers.map(customer => (
                                                 <MenuItem key={customer.id} value={customer.id}>
                                                     {customer.name} ({customer.email})
@@ -124,7 +126,7 @@ const CouponCreateForm = ({ onCouponCreated }) => {
                                 render={({ field }) => (
                                     <TextField
                                         {...field}
-                                        label="Data de Expiração"
+                                        label={t('coupon_create_form.expires_at_label')}
                                         type="datetime-local"
                                         fullWidth
                                         InputLabelProps={{ shrink: true }}
@@ -133,7 +135,7 @@ const CouponCreateForm = ({ onCouponCreated }) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Button type="submit" variant="contained">Criar Cupom</Button>
+                            <Button type="submit" variant="contained">{t('coupon_create_form.create_coupon_button')}</Button>
                         </Grid>
                     </Grid>
                 </form>

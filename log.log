@@ -1,133 +1,4 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/settings/842920c5-5ad2-40ca-be4e-33930f488ee2
-Método da solicitação
-PUT
-Código de status
-400 Bad Request
-Endereço remoto
-95.217.16.187:443
-
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
-Generated Swagger Specs (first 500 chars): {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Check Test API",
-    "version": "1.0.0",
-    "description": "API documentation for the Check Test application."
-  },
-  "servers": [
-    {
-      "url": "http://localhost:5000/api",
-      "description": "Production server"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Public API",
-      "description": "Endpoints acessíveis via API Token para integração externa."
-    },
-    {
-      "name": "Admin",
-      "description": "Gerenciamento de usuários e res
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-📊 Dashboard: https://feedelizapro.towersfy.com
-🔗 API: https://feedelizaapi.towersfy.com/api
-totalCheckins: 3
-mostFrequentCustomers: [
-  Checkin {
-    dataValues: {
-      customer_id: '1e53afb2-06cf-4879-993e-ee12a1426f5d',
-      checkin_count: '2',
-      customer: [Customer]
-    },
-    _previousDataValues: {
-      customer_id: '1e53afb2-06cf-4879-993e-ee12a1426f5d',
-      checkin_count: '2',
-      customer: [Customer]
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: [Array],
-      includeNames: [Array],
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  },
-  Checkin {
-    dataValues: {
-      customer_id: 'f212088b-a19a-4c11-9e6e-2ab6f4025160',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    _previousDataValues: {
-      customer_id: 'f212088b-a19a-4c11-9e6e-2ab6f4025160',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: [Array],
-      includeNames: [Array],
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  }
-]
-averageVisitDuration: { avg_duration_seconds: '14281.122666666667' }
-checkinsByDay: [
-  { date: 2025-08-17T00:00:00.000Z, count: '2' },
-  { date: 2025-08-18T00:00:00.000Z, count: '1' }
-]
-
-PublicSurveyForm.js:189 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/public/surveys/towersfy/feedback-do-cardapio".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-go @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ PublicSurveyForm.js:189
-(anônimo) @ PublicSurveyForm.js:221
-rl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
+print:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
 AuthContext.js:110 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
@@ -144,4 +15,67 @@ _c @ react-dom.production.min.js:285
 (anônimo) @ react-dom.production.min.js:281
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
-feedback-do-cardapio:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+react-dom.production.min.js:188 TypeError: n.map is not a function
+    at _Z (PrintLabel.js:32:24)
+    at vi (react-dom.production.min.js:160:137)
+    at As (react-dom.production.min.js:196:258)
+    at wl (react-dom.production.min.js:291:88)
+    at xc (react-dom.production.min.js:279:389)
+    at gc (react-dom.production.min.js:279:320)
+    at vc (react-dom.production.min.js:279:180)
+    at ac (react-dom.production.min.js:270:88)
+    at oc (react-dom.production.min.js:267:429)
+    at _ (scheduler.production.min.js:13:203)
+ds @ react-dom.production.min.js:188
+n.callback @ react-dom.production.min.js:188
+Ha @ react-dom.production.min.js:156
+bl @ react-dom.production.min.js:261
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+PrintLabel.js:32 Uncaught TypeError: n.map is not a function
+    at _Z (PrintLabel.js:32:24)
+    at vi (react-dom.production.min.js:160:137)
+    at As (react-dom.production.min.js:196:258)
+    at wl (react-dom.production.min.js:291:88)
+    at xc (react-dom.production.min.js:279:389)
+    at gc (react-dom.production.min.js:279:320)
+    at vc (react-dom.production.min.js:279:180)
+    at ac (react-dom.production.min.js:270:88)
+    at oc (react-dom.production.min.js:267:429)
+    at _ (scheduler.production.min.js:13:203)
+_Z @ PrintLabel.js:32
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:270
+oc @ react-dom.production.min.js:267
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+PrintLabel.js:14 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/labels/users".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ PrintLabel.js:14
+(anônimo) @ PrintLabel.js:22
+rl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14

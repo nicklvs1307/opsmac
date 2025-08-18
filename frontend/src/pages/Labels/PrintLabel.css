@@ -18,7 +18,7 @@
 }
 
 .wizard-steps span.active {
-    color: #4F46E5; /* var(--primary-color) */
+    color: #D32F2F; /* var(--primary-color) */
     border-bottom-color: #4F46E5;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .item-card:hover, .item-card.selected {
-    border-color: #4F46E5; /* var(--primary-color) */
+    border-color: #D32F2F; /* var(--primary-color) */
     box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
 }
 

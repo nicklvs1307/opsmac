@@ -24,9 +24,9 @@ export const ThemeProvider = ({ children }) => {
       palette: {
         mode,
         primary: {
-          main: '#1976d2',
-          light: '#42a5f5',
-          dark: '#1565c0',
+          main: '#D32F2F', // Red 700
+          light: '#FF5252', // Red A200
+          dark: '#B71C1C', // Red 900
           contrastText: '#ffffff',
         },
         secondary: {
@@ -253,7 +253,7 @@ export const ThemeProvider = ({ children }) => {
           styleOverrides: {
             root: {
               padding: '20px 24px',
-              background: mode === 'light' ? 'linear-gradient(to right, rgba(25, 118, 210, 0.05), transparent)' : 'linear-gradient(to right, rgba(25, 118, 210, 0.15), transparent)',
+              background: mode === 'light' ? 'linear-gradient(to right, rgba(211, 47, 47, 0.05), transparent)' : 'linear-gradient(to right, rgba(211, 47, 47, 0.15), transparent)',
               borderBottom: `1px solid ${mode === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'}`,
             },
             title: {
@@ -320,12 +320,12 @@ export const ThemeProvider = ({ children }) => {
                   transition: 'all 0.3s ease',
                 },
                 '&:hover fieldset': {
-                  borderColor: mode === 'light' ? 'rgba(25, 118, 210, 0.5)' : 'rgba(66, 165, 245, 0.5)',
-                  boxShadow: mode === 'light' ? '0 0 0 4px rgba(25, 118, 210, 0.08)' : '0 0 0 4px rgba(66, 165, 245, 0.08)',
+                  borderColor: mode === 'light' ? 'rgba(211, 47, 47, 0.5)' : 'rgba(255, 82, 82, 0.5)',
+                  boxShadow: mode === 'light' ? '0 0 0 4px rgba(211, 47, 47, 0.08)' : '0 0 0 4px rgba(255, 82, 82, 0.08)',
                 },
                 '&.Mui-focused fieldset': {
                   borderWidth: '2px',
-                  boxShadow: mode === 'light' ? '0 0 0 4px rgba(25, 118, 210, 0.15)' : '0 0 0 4px rgba(66, 165, 245, 0.15)',
+                  boxShadow: mode === 'light' ? '0 0 0 4px rgba(211, 47, 47, 0.15)' : '0 0 0 4px rgba(255, 82, 82, 0.15)',
                 },
               },
             },
@@ -336,8 +336,8 @@ export const ThemeProvider = ({ children }) => {
             outlined: {
               borderRadius: 10,
               '&:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: mode === 'light' ? 'rgba(25, 118, 210, 0.5)' : 'rgba(66, 165, 245, 0.5)',
-                boxShadow: mode === 'light' ? '0 0 0 4px rgba(25, 118, 210, 0.08)' : '0 0 0 4px rgba(66, 165, 245, 0.08)',
+                borderColor: mode === 'light' ? 'rgba(211, 47, 47, 0.5)' : 'rgba(255, 82, 82, 0.5)',
+                boxShadow: mode === 'light' ? '0 0 0 4px rgba(211, 47, 47, 0.08)' : '0 0 0 4px rgba(255, 82, 82, 0.08)',
               },
             },
           },
@@ -349,9 +349,9 @@ export const ThemeProvider = ({ children }) => {
               margin: '2px 4px',
               padding: '8px 12px',
               '&.Mui-selected': {
-                backgroundColor: mode === 'light' ? 'rgba(25, 118, 210, 0.08)' : 'rgba(66, 165, 245, 0.08)',
+                backgroundColor: mode === 'light' ? 'rgba(211, 47, 47, 0.08)' : 'rgba(255, 82, 82, 0.08)',
                 '&:hover': {
-                  backgroundColor: mode === 'light' ? 'rgba(25, 118, 210, 0.12)' : 'rgba(66, 165, 245, 0.12)',
+                  backgroundColor: mode === 'light' ? 'rgba(211, 47, 47, 0.12)' : 'rgba(255, 82, 82, 0.12)',
                 },
               },
               '&:hover': {
@@ -365,9 +365,9 @@ export const ThemeProvider = ({ children }) => {
             root: {
               borderRadius: 8,
               '&.Mui-selected': {
-                backgroundColor: mode === 'light' ? 'rgba(25, 118, 210, 0.08)' : 'rgba(66, 165, 245, 0.08)',
+                backgroundColor: mode === 'light' ? 'rgba(211, 47, 47, 0.08)' : 'rgba(255, 82, 82, 0.08)',
                 '&:hover': {
-                  backgroundColor: mode === 'light' ? 'rgba(25, 118, 210, 0.12)' : 'rgba(66, 165, 245, 0.12)',
+                  backgroundColor: mode === 'light' ? 'rgba(211, 47, 47, 0.12)' : 'rgba(255, 82, 82, 0.12)',
                 },
               },
             },
@@ -383,9 +383,9 @@ export const ThemeProvider = ({ children }) => {
                 transform: 'translateX(4px)',
               },
               '&.Mui-selected': {
-                backgroundColor: mode === 'light' ? 'rgba(25, 118, 210, 0.12)' : 'rgba(66, 165, 245, 0.12)',
+                backgroundColor: mode === 'light' ? 'rgba(211, 47, 47, 0.12)' : 'rgba(255, 82, 82, 0.12)',
                 '&:hover': {
-                  backgroundColor: mode === 'light' ? 'rgba(25, 118, 210, 0.16)' : 'rgba(66, 165, 245, 0.16)',
+                  backgroundColor: mode === 'light' ? 'rgba(211, 47, 47, 0.16)' : 'rgba(255, 82, 82, 0.16)',
                 },
               },
             },
@@ -441,10 +441,10 @@ export const ThemeProvider = ({ children }) => {
               },
             },
             colorPrimary: {
-              backgroundColor: mode === 'light' ? 'rgba(25, 118, 210, 0.12)' : 'rgba(66, 165, 245, 0.12)',
-              color: mode === 'light' ? '#1976d2' : '#42a5f5',
+              backgroundColor: mode === 'light' ? 'rgba(211, 47, 47, 0.12)' : 'rgba(255, 82, 82, 0.12)',
+              color: mode === 'light' ? '#D32F2F' : '#FF5252',
               '&:hover': {
-                backgroundColor: mode === 'light' ? 'rgba(25, 118, 210, 0.18)' : 'rgba(66, 165, 245, 0.18)',
+                backgroundColor: mode === 'light' ? 'rgba(211, 47, 47, 0.18)' : 'rgba(255, 82, 82, 0.18)',
               },
             },
             colorSecondary: {
@@ -507,7 +507,7 @@ export const ThemeProvider = ({ children }) => {
         MuiTableHead: {
           styleOverrides: {
             root: {
-              backgroundColor: mode === 'light' ? 'rgba(25, 118, 210, 0.05)' : 'rgba(66, 165, 245, 0.05)',
+              backgroundColor: mode === 'light' ? 'rgba(211, 47, 47, 0.05)' : 'rgba(255, 82, 82, 0.05)',
               '& .MuiTableCell-head': {
                 fontWeight: 600,
                 color: mode === 'light' ? '#2c3e50' : '#e0e0e0',
@@ -564,13 +564,13 @@ export const ThemeProvider = ({ children }) => {
                 transform: 'translateX(16px)',
                 color: '#fff',
                 '& + .MuiSwitch-track': {
-                  backgroundColor: mode === 'light' ? '#1976d2' : '#42a5f5',
+                  backgroundColor: mode === 'light' ? '#D32F2F' : '#FF5252',
                   opacity: 1,
                   border: 'none',
                 },
               },
               '&.Mui-focusVisible .MuiSwitch-thumb': {
-                color: '#1976d2',
+                color: '#D32F2F',
                 border: '6px solid #fff',
               },
             },

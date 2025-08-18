@@ -33,7 +33,7 @@
 
 .labels-dashboard .card-icon-large {
     font-size: 28px;
-    color: #4F46E5; /* var(--primary-color) */
+    color: #D32F2F; /* var(--primary-color) */
     margin-bottom: 15px;
     background-color: #EEF2FF;
     width: 60px;
@@ -104,12 +104,12 @@
 }
 
 .btn-primary {
-    background-color: #4F46E5; /* var(--primary-color) */
+    background-color: #D32F2F; /* var(--primary-color) */
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: #4338CA;
+    background-color: #A52A2A;
 }
 
 .btn-secondary {

@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Typography, Paper, TextField, Button, List, ListItem, ListItemText, IconButton, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, Grid, Alert } from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import SurveyRewardProgram from '../Pesquisas/SurveyRewardProgram'; // Import the new component
 
-// Funções da API
+// API Functions
 const fetchNpsCriteria = async () => {
   const { data } = await axiosInstance.get('/api/nps-criteria');
   return data;
@@ -38,6 +39,7 @@ const SatisfactionSettings = () => {
   const [editCriterion, setEditCriterion] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmittingSettings, setIsSubmittingSettings] = useState(false);
+  const [rewards, setRewards] = useState([]); // State to store rewards
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
@@ -45,11 +47,29 @@ const SatisfactionSettings = () => {
       text_color: '#000000',
       primary_color: '#3f51b5',
       background_image_url: '',
+      rewards_per_response: [], // Add this for survey rewards
     }
   });
 
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'rewards_per_response',
+  });
+
+  const fetchRewards = useCallback(async () => {
+    if (!restaurantId) return;
+    try {
+      const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`);
+      setRewards(response.data.rewards);
+    } catch (err) {
+      console.error(t('satisfaction_settings.error_fetching_rewards_console'), err);
+      toast.error(t('satisfaction_settings.error_fetching_rewards'));
+    }
+  }, [restaurantId, t]);
+
   useEffect(() => {
     if (restaurantId) {
+      fetchRewards(); // Fetch rewards when component mounts or restaurantId changes
       axiosInstance.get(`/api/settings/${restaurantId}`)
         .then(response => {
           const settings = response.data.settings?.survey_program_settings;
@@ -59,7 +79,7 @@ const SatisfactionSettings = () => {
         })
         .catch(err => console.error('Failed to fetch settings:', err));
     }
-  }, [restaurantId, reset]);
+  }, [restaurantId, reset, fetchRewards]);
 
   const { data: criteria, isLoading, isError } = useQuery('npsCriteria', fetchNpsCriteria);
 
@@ -193,6 +213,21 @@ const SatisfactionSettings = () => {
             {isSubmittingSettings ? <CircularProgress size={24} /> : t('satisfaction_settings.save_personalization_button')}
           </Button>
         </form>
+      </Paper>
+
+      {/* New Survey Reward Program Section */}
+      <Paper sx={{ p: 3, mb: 3 }}>
+        <SurveyRewardProgram
+          control={control}
+          errors={errors}
+          fields={fields}
+          append={append}
+          remove={remove}
+          rewards={rewards}
+          loading={isSubmittingSettings} // Use the same loading state for now
+          onSave={handleSubmit(onSettingsSubmit)}
+          t={t}
+        />
       </Paper>
 
       <Paper sx={{ p: 3 }}>

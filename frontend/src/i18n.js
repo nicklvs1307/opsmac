@@ -12,7 +12,7 @@ i18n
       en: enTranslation,
       pt: ptTranslation,
     },
-    lng: localStorage.getItem('language') || 'pt', // Idioma padrão
+    lng: 'pt', // Forçando o idioma para português para depuração
     fallbackLng: 'en',
 
     interpolation: {

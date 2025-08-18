@@ -35,6 +35,23 @@ router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, async (r
   }
 });
 
+// Rota para OBTER uma recompensa específica por ID
+router.get('/:id', auth, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const reward = await models.Reward.findByPk(id);
+
+        if (!reward) {
+            return res.status(404).json({ error: 'Recompensa não encontrada.' });
+        }
+
+        res.json(reward);
+    } catch (error) {
+        console.error('Erro ao obter recompensa:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
 // Rota para CRIAR uma nova recompensa
 router.post(
     '/',
@@ -54,8 +71,8 @@ router.post(
         }
 
         const rewardData = req.body;
-        const user = await models.User.findByPk(req.user.userId, { include: [{ model: models.Restaurant, as: 'restaurants' }] });
-        const restaurantId = user?.restaurants?.[0]?.id;
+        const user = await models.User.findByPk(req.user.userId, { include: [{ model: models.Restaurant, as: 'owned_restaurants' }] });
+        const restaurantId = user?.owned_restaurants?.[0]?.id;
 
         if (!restaurantId) {
             return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
@@ -174,10 +191,10 @@ router.post('/spin-wheel', [
 router.get('/analytics', auth, async (req, res) => {
     try {
         const user = await models.User.findByPk(req.user.userId, {
-            include: [{ model: models.Restaurant, as: 'restaurants' }]
+            include: [{ model: models.Restaurant, as: 'owned_restaurants' }]
         });
 
-        const restaurantId = user?.restaurants?.[0]?.id;
+        const restaurantId = user?.owned_restaurants?.[0]?.id;
         if (!restaurantId) {
             return res.status(400).json({ error: 'Restaurante não encontrado para o usuário autenticado.' });
         }

@@ -16,9 +16,10 @@ const createSurvey = async (surveyData) => {
   return data;
 };
 
-const fetchRewards = async () => {
-    const { data } = await axiosInstance.get('/api/rewards?is_active=true');
-    return data;
+const fetchRewards = async (restaurantId) => {
+    if (!restaurantId) return [];
+    const { data } = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}?is_active=true`);
+    return data.rewards;
 };
 
 const fetchNpsCriteria = async () => {
@@ -45,9 +46,14 @@ const SurveyCreate = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const restaurantId = user?.restaurants?.[0]?.id;
   const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
 
-  const { data: rewards, isLoading: isLoadingRewards } = useQuery('rewards', fetchRewards);
+  const { data: rewards, isLoading: isLoadingRewards } = useQuery(
+    ['rewards', restaurantId],
+    () => fetchRewards(restaurantId),
+    { enabled: !!restaurantId }
+  );
   const { data: npsCriteria, isLoading: isLoadingNpsCriteria } = useQuery('npsCriteria', fetchNpsCriteria);
 
   const mutation = useMutation(createSurvey, {

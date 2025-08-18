@@ -13,9 +13,10 @@ const fetchSurvey = async (id) => {
   return data;
 };
 
-const fetchRewards = async () => {
-    const { data } = await axiosInstance.get('/api/rewards?is_active=true');
-    return data;
+const fetchRewards = async (restaurantId) => {
+    if (!restaurantId) return [];
+    const { data } = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}?is_active=true`);
+    return data.rewards;
 };
 
 const updateSurvey = async ({ id, surveyData }) => {
@@ -29,6 +30,7 @@ const SurveyEdit = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const restaurantId = user?.restaurants?.[0]?.id;
   const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
 
   const [title, setTitle] = useState('');
@@ -52,7 +54,11 @@ const SurveyEdit = () => {
     }
   });
 
-  const { data: rewards, isLoading: isLoadingRewards } = useQuery('rewards', fetchRewards);
+  const { data: rewards, isLoading: isLoadingRewards } = useQuery(
+    ['rewards', restaurantId],
+    () => fetchRewards(restaurantId),
+    { enabled: !!restaurantId }
+  );
 
   const mutation = useMutation(updateSurvey, {
     onSuccess: () => {
@@ -147,7 +153,7 @@ const SurveyEdit = () => {
                     <MenuItem disabled>{t('survey_edit.loading_rewards')}</MenuItem>
                 ) : (
                     rewards?.map((reward) => (
-                        <MenuItem key={reward.id} value={reward.id}>{reward.title}</MenuItem>
+                        <MenuItem key={reward.id} value={reward.id}>{reward.name}</MenuItem>
                     ))
                 )}
             </Select>

@@ -1,147 +1,26 @@
-feedback-do-cardapio:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-PublicSurveyForm.js:322 Rendering PublicSurveyForm with survey: {id: '5908fc50-0970-4c2c-b9d5-33c71f19e8b3', title: 'Feedback do Cardápio', description: 'Ajude-nos a entender o que você pensa sobre nossas opções de pratos.', type: 'menu_feedback', slug: 'feedback-do-cardapio', …}
-PublicSurveyForm.js:323 Rendering PublicSurveyForm with restaurantData: {name: 'Towersfy', logo: '/uploads/logo-1755461951500-626838863.png', slug: 'towersfy', settings: {…}}
-PublicSurveyForm.js:189 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/public/surveys/towersfy/feedback-do-cardapio".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-go @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ PublicSurveyForm.js:189
-(anônimo) @ PublicSurveyForm.js:221
-rl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-AuthContext.js:110 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-go @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ AuthContext.js:110
-(anônimo) @ AuthContext.js:127
-rl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-
-
-URL da solicitação
-https://feedelizaapi.towersfy.com/public/surveys/towersfy/feedback-do-cardapio
-Método da solicitação
-GET
-Código de status
-304 Not Modified
-Endereço remoto
-95.217.16.187:443
-
-{
-    "survey": {
-        "id": "5908fc50-0970-4c2c-b9d5-33c71f19e8b3",
-        "title": "Feedback do Cardápio",
-        "description": "Ajude-nos a entender o que você pensa sobre nossas opções de pratos.",
-        "type": "menu_feedback",
-        "slug": "feedback-do-cardapio",
-        "questions": [
-            {
-                "id": "fa2bf415-7660-4dc7-a41f-218ab9094ecc",
-                "question_text": "Quais pratos você mais gostou?",
-                "question_type": "textarea",
-                "options": null,
-                "order": 1,
-                "npsCriterion": null
-            },
-            {
-                "id": "70088561-226a-477f-a20c-f4b2536ade1d",
-                "question_text": "Quais pratos você menos gostou?",
-                "question_type": "textarea",
-                "options": null,
-                "order": 2,
-                "npsCriterion": null
-            },
-            {
-                "id": "73fa813b-163f-4e46-9bf4-9f24afd54d4f",
-                "question_text": "Existe algo que você gostaria de ver em nosso cardápio?",
-                "question_type": "textarea",
-                "options": null,
-                "order": 3,
-                "npsCriterion": null
-            }
-        ],
-        "restaurant": {
-            "name": "Towersfy",
-            "logo": "/uploads/logo-1755461951500-626838863.png",
-            "slug": "towersfy",
-            "settings": {
-                "enabled_modules": [
-                    "customer_segmentation",
-                    "ifood_integration",
-                    "google_my_business_integration",
-                    "saipos_integration",
-                    "uai_rango_integration",
-                    "delivery_much_integration",
-                    "checkin_program",
-                    "coupons_rewards",
-                    "whatsapp_messaging",
-                    "surveys_feedback"
-                ],
-                "checkin_program_settings": {
-                    "enable_ranking": true,
-                    "restaurant_slug": "towersfy",
-                    "rewards_per_visit": [
-                        {
-                            "reward_id": "a3a303da-a022-49a9-ac3d-b14ed2355c9b",
-                            "visit_count": "1",
-                            "message_template": "aa"
-                        }
-                    ],
-                    "identification_method": "phone",
-                    "enable_level_progression": true,
-                    "require_coupon_for_checkin": false
-                }
-            }
-        }
-    },
-    "restaurant": {
-        "name": "Towersfy",
-        "logo": "/uploads/logo-1755461951500-626838863.png",
-        "slug": "towersfy",
-        "settings": {
-            "enabled_modules": [
-                "customer_segmentation",
-                "ifood_integration",
-                "google_my_business_integration",
-                "saipos_integration",
-                "uai_rango_integration",
-                "delivery_much_integration",
-                "checkin_program",
-                "coupons_rewards",
-                "whatsapp_messaging",
-                "surveys_feedback"
-            ],
-            "checkin_program_settings": {
-                "enable_ranking": true,
-                "restaurant_slug": "towersfy",
-                "rewards_per_visit": [
-                    {
-                        "reward_id": "a3a303da-a022-49a9-ac3d-b14ed2355c9b",
-                        "visit_count": "1",
-                        "message_template": "aa"
-                    }
-                ],
-                "identification_method": "phone",
-                "enable_level_progression": true,
-                "require_coupon_for_checkin": false
-            }
-        }
-    }
-} 
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             187.0s
+------
+ > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.389 + npm run build
+0.785
+0.785 > feedeliza-plus@1.0.0 build
+0.785 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.785
+3.906 Creating an optimized production build...
+185.8 Failed to compile.
+185.8
+185.8 [eslint]
+185.8 src/pages/Public/PublicSurveyForm.js
+185.8 Syntax error: Unexpected token (536:26) (536:26)
+185.8
+185.8
+------
+Dockerfile.frontend:24
+--------------------
+  22 |     ARG REACT_APP_API_URL
+  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  24 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  25 |
+  26 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

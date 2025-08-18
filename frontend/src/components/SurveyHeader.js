@@ -2,63 +2,74 @@ import React from 'react';
 import { Box, Typography, LinearProgress } from '@mui/material';
 import { Restaurant as RestaurantIcon } from '@mui/icons-material';
 
-const SurveyHeader = ({ title, description, logo, primaryColor, secondaryColor, textColor, progress }) => {
+const SurveyHeader = ({ title, description, logo, primaryColor, secondaryColor, accentColor, textColor, progress }) => {
   return (
     <Box
       sx={{
-        background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
-        color: textColor,
-        padding: '30px',
-        textAlign: 'center',
+        background: primaryColor, // Main background for the header container
+        paddingTop: '60px', // Space for the shape
         position: 'relative',
         overflow: 'hidden',
         borderTopLeftRadius: '16px',
         borderTopRightRadius: '16px',
       }}
     >
-      {/* Circular Header Effect (Top Half) */}
+      {/* Header Shape (Capsule/Cut Circle) */}
       <Box
         sx={{
           position: 'absolute',
           top: 0,
-          left: '50%',
-          transform: 'translateX(-50%) translateY(-50%)',
-          width: '150px', // Adjust size as needed
-          height: '150px', // Adjust size as needed
-          borderRadius: '50%',
-          backgroundColor: 'white', // Background for the circle
-          zIndex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-          border: `4px solid ${primaryColor}`,
+          left: 0,
+          width: '100%',
+          height: '120px', // Height of the shape
+          background: primaryColor,
+          borderBottomLeftRadius: '50% 80%', // Asymmetric curvature
+          borderBottomRightRadius: '50% 80%',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
         }}
-      >
-        {logo ? (
-          <img
-            src={logo}
-            alt="Restaurant Logo"
-            style={{
-              width: '80px',
-              height: '80px',
-              objectFit: 'contain',
-              borderRadius: '50%',
-            }}
-          />
-        ) : (
-          <RestaurantIcon sx={{ fontSize: 60, color: primaryColor }} />
-        )}
-      </Box>
+      />
 
-      {/* Content below the circle */}
-      <Box sx={{ position: 'relative', zIndex: 2, pt: '75px' }}> {/* pt to push content below the circle */}
-        <Typography variant="h4" component="h1" sx={{ fontSize: '28px', fontWeight: 700, mb: '10px' }}>
+      {/* Header Content */}
+      <Box sx={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '20px' }}>
+        {/* Logo */}
+        <Box
+          sx={{
+            width: '80px',
+            height: '80px',
+            background: 'white',
+            borderRadius: '50%',
+            margin: '-40px auto 15px', // Negative margin to pull it up over the shape
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: `4px solid ${accentColor}`,
+            boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+          }}
+        >
+          {logo ? (
+            <img
+              src={logo}
+              alt="Restaurant Logo"
+              style={{
+                width: '60px',
+                height: '60px',
+                objectFit: 'contain',
+                borderRadius: '50%',
+              }}
+            />
+          ) : (
+            <RestaurantIcon sx={{ fontSize: 40, color: primaryColor }} />
+          )}
+        </Box>
+
+        <Typography variant="h4" component="h1" sx={{ color: primaryColor, mb: '5px', fontSize: '28px' }}>
           {title}
         </Typography>
-        <Typography variant="body1" sx={{ fontWeight: 300, opacity: 0.9, maxWidth: '600px', mx: 'auto' }}>
+        <Typography variant="body1" sx={{ color: '#666', fontSize: '16px' }}>
           {description}
         </Typography>
+
+        {/* Progress Bar - placed here as per example.html's first structure, but can be moved if needed */}
         <LinearProgress
           variant="determinate"
           value={progress}

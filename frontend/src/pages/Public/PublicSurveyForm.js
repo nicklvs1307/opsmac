@@ -336,7 +336,11 @@ const PublicSurveyForm = () => {
         />
 
         <Container maxWidth="md">
-            <Paper elevation={3} sx={{ p: 4, mt: 5 }}>
+            <Paper elevation={0} sx={{
+              borderRadius: '16px',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)', // var(--shadow)
+              overflow: 'hidden',
+            }}>
                 <Box sx={{ textAlign: 'center', mb: 4 }}>
                     {restaurantData?.logo ? (
                         <img src={`${process.env.REACT_APP_API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ maxWidth: '150px', marginBottom: '10px' }} />
@@ -365,7 +369,26 @@ const PublicSurveyForm = () => {
                                 label={t('public_survey.your_answer')}
                                 value={answers[survey.questions[currentQuestionIndex].id] || ''}
                                 onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
-                                sx={{ mb: 2 }}
+                                sx={{
+                                    mb: 2,
+                                    '& .MuiOutlinedInput-root': {
+                                        borderRadius: '10px',
+                                        '& fieldset': {
+                                            borderColor: 'var(--border)',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: primaryColor,
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: primaryColor,
+                                            boxShadow: `0 0 0 3px ${primaryColor}33`, // 33 is for 20% opacity
+                                        },
+                                    },
+                                    '& .MuiInputBase-input': {
+                                        padding: '15px',
+                                        fontSize: '16px',
+                                    },
+                                }}
                             />
                         )}
                         {survey.questions[currentQuestionIndex].question_type === 'textarea' && (
@@ -376,11 +399,30 @@ const PublicSurveyForm = () => {
                                 rows={4}
                                 value={answers[survey.questions[currentQuestionIndex].id] || ''}
                                 onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
-                                sx={{ mb: 2 }}
+                                sx={{
+                                    mb: 2,
+                                    '& .MuiOutlinedInput-root': {
+                                        borderRadius: '10px',
+                                        '& fieldset': {
+                                            borderColor: 'var(--border)',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: primaryColor,
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: primaryColor,
+                                            boxShadow: `0 0 0 3px ${primaryColor}33`,
+                                        },
+                                    },
+                                    '& .MuiInputBase-input': {
+                                        padding: '15px',
+                                        fontSize: '16px',
+                                    },
+                                }}
                             />
                         )}
                         {survey.questions[currentQuestionIndex].question_type === 'radio' && (
-                            <FormControl component="fieldset" sx={{ mb: 2 }}>
+                            <FormControl component="fieldset" sx={{ mb: 2, width: '100%' }}>
                                 <RadioGroup
                                     value={answers[survey.questions[currentQuestionIndex].id] || ''}
                                     onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
@@ -389,15 +431,33 @@ const PublicSurveyForm = () => {
                                         <FormControlLabel
                                             key={optIndex}
                                             value={option}
-                                            control={<Radio />}
+                                            control={<Radio sx={{ color: primaryColor, '&.Mui-checked': { color: primaryColor } }} />}
                                             label={option}
+                                            sx={{
+                                                width: '100%',
+                                                margin: '0 0 15px 0',
+                                                padding: '15px',
+                                                background: '#f8f9fa', // var(--light)
+                                                borderRadius: '10px',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s ease',
+                                                border: '1px solid #dee2e6', // var(--border)
+                                                '&:hover': {
+                                                    background: `${primaryColor}1A`, // primary-light with 10% opacity
+                                                    borderColor: primaryColor,
+                                                },
+                                                '&.Mui-selected': {
+                                                    background: `${primaryColor}1A`,
+                                                    borderColor: primaryColor,
+                                                },
+                                            }}
                                         />
                                     ))}
                                 </RadioGroup>
                             </FormControl>
                         )}
                         {survey.questions[currentQuestionIndex].question_type === 'checkboxes' && (
-                            <FormGroup sx={{ mb: 2 }}>
+                            <FormGroup sx={{ mb: 2, width: '100%' }}>
                                 {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
                                     <FormControlLabel
                                         key={optIndex}
@@ -405,9 +465,28 @@ const PublicSurveyForm = () => {
                                             <Checkbox
                                                 checked={(answers[survey.questions[currentQuestionIndex].id] || []).includes(option)}
                                                 onChange={() => handleCheckboxChange(survey.questions[currentQuestionIndex].id, option)}
+                                                sx={{ color: primaryColor, '&.Mui-checked': { color: primaryColor } }}
                                             />
                                         }
                                         label={option}
+                                        sx={{
+                                            width: '100%',
+                                            margin: '0 0 15px 0',
+                                            padding: '15px',
+                                            background: '#f8f9fa', // var(--light)
+                                            borderRadius: '10px',
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s ease',
+                                            border: '1px solid #dee2e6', // var(--border)
+                                            '&:hover': {
+                                                background: `${primaryColor}1A`,
+                                                borderColor: primaryColor,
+                                            },
+                                            '&.Mui-selected': {
+                                                background: `${primaryColor}1A`,
+                                                borderColor: primaryColor,
+                                            },
+                                        }}
                                     />
                                 ))}
                             </FormGroup>
@@ -428,109 +507,4 @@ const PublicSurveyForm = () => {
                                 </Select>
                             </FormControl>
                         )}
-                        {(survey.questions[currentQuestionIndex].question_type === 'nps' || survey.questions[currentQuestionIndex].question_type === 'csat') && (
-                            <Box sx={{ mb: 2 }}>
-                                <Typography gutterBottom>{t('public_survey.score_from_0_to_10')}</Typography>
-                                <Slider
-                                    value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
-                                    onChange={(e, newValue) => handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString())}
-                                    aria-labelledby="input-slider"
-                                    valueLabelDisplay="auto"
-                                    step={1}
-                                    marks
-                                    min={0}
-                                    max={10}
-                                />
-                                {survey.questions[currentQuestionIndex].question_type === 'nps' && survey.questions[currentQuestionIndex].npsCriterion && (
-                                    <Typography variant="caption" color="text.secondary">
-                                        {t('public_survey.nps_criterion')}: {survey.questions[currentQuestionIndex].npsCriterion.name}
-                                    </Typography>
-                                )}
-                            </Box>
-                        )}
-                        {survey.questions[currentQuestionIndex].question_type === 'ratings' && (
-                            <Box sx={{ mb: 2 }}>
-                                <Rating
-                                    name="simple-controlled"
-                                    value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
-                                    onChange={(event, newValue) => {
-                                        handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString());
-                                    }}
-                                    size="large"
-                                />
-                            </Box>
-                        )}
-                        {survey.questions[currentQuestionIndex].question_type === 'like_dislike' && (
-                            <Box sx={{ mb: 2 }}>
-                                <ToggleButtonGroup
-                                    value={answers[survey.questions[currentQuestionIndex].id] || ''}
-                                    exclusive
-                                    onChange={(event, newValue) => {
-                                        if (newValue !== null) {
-                                            handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue);
-                                        }
-                                    }}
-                                    aria-label="text alignment"
-                                >
-                                    <ToggleButton value="like" aria-label="like">
-                                        <ThumbUpIcon />
-                                    </ToggleButton>
-                                    <ToggleButton value="dislike" aria-label="dislike">
-                                        <ThumbDownIcon />
-                                    </ToggleButton>
-                                </ToggleButtonGroup>
-                            </Box>
-                        )}
-                        {(survey.questions[currentQuestionIndex].question_type === 'nps' || survey.questions[currentQuestionIndex].question_type === 'csat') && (
-                            <Box sx={{ mb: 2 }}>
-                                <Typography gutterBottom>{t('public_survey.score_from_0_to_10')}</Typography>
-                                <Slider
-                                    value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
-                                    onChange={(e, newValue) => handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString())}
-                                    aria-labelledby="input-slider"
-                                    valueLabelDisplay="auto"
-                                    step={1}
-                                    marks
-                                    min={0}
-                                    max={10}
-                                />
-                                {survey.questions[currentQuestionIndex].question_type === 'nps' && survey.questions[currentQuestionIndex].npsCriterion && (
-                                    <Typography variant="caption" color="text.secondary">
-                                        {t('public_survey.nps_criterion')}: {survey.questions[currentQuestionIndex].npsCriterion.name}
-                                    </Typography>
-                                )}
-                            </Box>
-                        )}
-                        {survey.questions[currentQuestionIndex].question_type === 'ratings' && (
-                            <Box sx={{ mb: 2 }}>
-                                <Rating
-                                    name="simple-controlled"
-                                    value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
-                                    onChange={(event, newValue) => {
-                                        handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString());
-                                    }}
-                                    size="large"
-                                />
-                            </Box>
-                        )}
-                        {survey.questions[currentQuestionIndex].question_type === 'like_dislike' && (
-                            <Box sx={{ mb: 2 }}>
-                                <ToggleButtonGroup
-                                    value={answers[survey.questions[currentQuestionIndex].id] || ''}
-                                    exclusive
-                                    onChange={(event, newValue) => {
-                                        if (newValue !== null) {
-                                            handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue);
-                                        }
-                                    }}
-                                    aria-label="text alignment"
-                                >
-                                    <ToggleButton value="like" aria-label="like">
-                                        <ThumbUpIcon />
-                                    </ToggleButton>
-                                    <ToggleButton value="dislike" aria-label="dislike">
-                                        <ThumbDownIcon />
-                                    </ToggleButton>
-                                </ToggleButtonGroup>
-                            </Box>
-                        )}
+

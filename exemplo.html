@@ -630,3 +630,128 @@
     </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roma Pizzaria - Pesquisa</title>
+    <style>
+        :root {
+            --vermelho-pizzaria: #E63946;
+            --branco: #FFFFFF;
+            --destaque: #FFD166;
+        }
+
+        .header-container {
+            background: var(--branco);
+            padding-top: 60px; /* Espaço para o shape */
+            position: relative;
+        }
+
+        .header-shape {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px; /* Altura do shape */
+            background: var(--vermelho-pizzaria);
+            border-bottom-left-radius: 50% 80%; /* Curvatura assimétrica */
+            border-bottom-right-radius: 50% 80%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: var(--branco);
+            border-radius: 50%;
+            margin: -40px auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--destaque);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+        }
+
+        h1 {
+            color: var(--vermelho-pizzaria);
+            margin: 10px 0 5px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <!-- Shape arredondado (cápsula) -->
+        <div class="header-shape"></div>
+        
+        <!-- Conteúdo do header -->
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/1404/1404945.png" alt="Logo Roma Pizzaria">
+            </div>
+            <h1>Roma Pizzaria & Choperia</h1>
+            <p class="subtitle">Pesquisa de Satisfação</p>
+        </div>
+    </div>
+</body>
+</html>
+
+Principais características técnicas:
+Shape Arredondado Superior:
+
+Uso de border-bottom-left-radius: 50% 80% e border-bottom-right-radius: 50% 80% para criar o efeito de cápsula
+
+O primeiro valor (50%) controla a curvatura horizontal
+
+O segundo valor (80%) controla a curvatura vertical, dando aquele aspecto de "pílula"
+
+Efeito Visual:
+
+Logo centralizada sobreposta ao shape
+
+Sombra sutil para profundidade
+
+Borda amarela destacando a logo
+
+Técnicas CSS Avançadas:
+
+Posicionamento absoluto para o shape
+
+Z-index para controle de camadas
+
+Margem negativa para sobrepor elementos
+
+Responsivo:
+
+Adapta-se automaticamente a diferentes larguras de tela
+
+Proporções mantidas em todos os dispositivos
+
+Como personalizar:
+Cores: Altere as variáveis CSS no :root
+
+Curvatura: Ajuste os valores do border-radius (ex: 60% 90% para um shape mais achatado)
+
+Logo: Substitua a imagem pela sua logo real
+
+Altura: Modifique a height do .header-shape para mais ou menos destaque

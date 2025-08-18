@@ -1,56 +1,38 @@
+survey_list.title
+survey_list.filters_title
+survey_list.search_placeholder
+survey_list.search_label
+survey_list.table_header_title	
+survey_list.table_header_type	
+survey_list.table_header_status	
+survey_list.table_header_actions
+checkin_dashboard.main_title
+checkin_dashboard.main_description
+satisfaction_settings.personalization_title
 
-# Resumo Detalhado das Atividades de Correção e Implementação
+satisfaction_settings.background_color_label
 
-Este documento detalha o processo de depuração e implementação de funcionalidades relacionadas ao sistema de pesquisas e recompensas.
+satisfaction_settings.text_color_label
 
----
+satisfaction_settings.primary_color_label
+satisfaction_settings.background_image_url_label
+survey_reward_program.title
+survey_reward_program.description
 
-### 1. Problema Inicial: Erro 404 ao Visualizar Pesquisa Pública
+survey_reward_program.rewards_per_response
+survey_reward_program.rewards_per_response_helper
 
-*   **Sintoma:** Ao tentar visualizar uma pesquisa pública, o sistema retornava um erro 404 (Não Encontrado).
-*   **Investigação:**
-    *   A análise do log de rede (`log.log`) mostrou que o frontend estava fazendo uma chamada para a rota `GET /public/surveys/next/:slug`.
-    *   O problema era que o `:slug` enviado era o da *pesquisa*, mas o backend esperava o slug do *restaurante*.
-*   **Solução Aplicada (Correção Completa):**
-    1.  **Backend:** Ajustamos a ordem das rotas no arquivo principal do servidor (`server.js`) para que a rota mais específica `/public/surveys` fosse processada antes da rota mais genérica `/public`.
-    2.  **Frontend:** Modificamos a tela de listagem de pesquisas (`SurveyList.js`) para gerar a URL pública correta, no formato `/public/surveys/:restaurantSlug/:surveySlug`.
-    3.  **Frontend:** Alteramos a definição da rota no `App.js` para aceitar os dois parâmetros (`:restaurantSlug` e `:surveySlug`).
-    4.  **Frontend:** Atualizamos o componente do formulário público (`PublicSurveyForm.js`) para extrair os dois parâmetros da URL e buscar os dados da pesquisa corretamente.
+satisfaction_settings.nps_criteria_title
+satisfaction_settings.nps_criteria_description
 
----
+satisfaction_settings.new_nps_criterion_label
+pdv.subtotal_label
 
-### 2. Nova Funcionalidade: Fluxo de Recompensa Pós-Pesquisa
+pdv.service_tax_label
 
-*   **Requisito:** Implementar um fluxo onde, ao final de uma pesquisa com recompensa, um usuário anônimo é convidado a se cadastrar ou fazer login para receber o prêmio (ex: girar a roleta). A recompensa deveria ser customizável (roleta, cupom, etc.).
-*   **Análise e Planejamento:**
-    *   Confirmamos que os modelos de dados do backend (`Reward`, `Survey`) já suportavam a associação entre pesquisa e recompensa, incluindo o tipo `wheel_spin` (roleta).
-*   **Implementação (Backend):**
-    1.  **Nova Rota:** Criamos a rota `PATCH /public/surveys/responses/:responseId/link-customer` para permitir que uma resposta de pesquisa, inicialmente anônima, fosse vinculada a um cliente após ele se identificar.
-    2.  **Lógica de Recompensa:** Ajustamos a rota de submissão de pesquisas (`POST /.../responses`) e a nova rota `PATCH` para retornarem um objeto `reward` genérico, informando ao frontend o tipo de recompensa ganha (`coupon`, `wheel_spin`, etc.).
-*   **Implementação (Frontend):**
-    1.  **Novo Componente:** Criamos o `IdentifyCustomerModal` dentro do `PublicSurveyForm.js`, contendo formulários de login e registro.
-    2.  **Novo Fluxo:** Modificamos a lógica de submissão da pesquisa. Se um usuário anônimo finaliza uma pesquisa com prêmio, o modal é exibido.
-    3.  **Vinculação:** Após o login/cadastro via modal, a nova rota `PATCH` do backend é chamada para vincular o cliente à resposta.
-    4.  **Redirecionamento Inteligente:** Criamos a função `handleReward` que, com base no tipo de recompensa retornado pela API, redireciona o usuário para a página da roleta (`/girar-roleta`) ou exibe o cupom ganho na tela de agradecimento.
-
----
-
-### 3. Problemas Secundários e Correções Adicionais
-
-Durante a implementação, vários problemas foram identificados e corrigidos:
-
-*   **Crash no Servidor (`EagerLoadingError`):**
-    *   **Causa:** O backend travava ao tentar carregar um usuário e seus restaurantes devido a uma ambiguidade nas associações dos modelos `User` and `Restaurant`.
-    *   **Solução:** Corrigimos a consulta no arquivo `rewards.js`, especificando o "alias" (`owned_restaurants`) correto da associação, resolvendo a ambiguidade.
-
-*   **Rota de API Inexistente:**
-    *   **Causa:** O frontend tentava buscar detalhes de uma recompensa em `GET /api/rewards/:id`, uma rota que não existia.
-    *   **Solução:** Adicionamos a rota `GET /api/rewards/:id` ao `rewards.js` no backend.
-
-*   **Dropdown de Recompensas Quebrado:**
-    *   **Causa:** Nas telas de criação e edição de pesquisas, a lista de recompensas não era carregada porque a chamada de API estava incorreta.
-    *   **Solução:** Corrigimos as funções `fetchRewards` nos arquivos `SurveyCreate.js` e `SurveyEdit.js` para que chamassem a rota correta (`/api/rewards/restaurant/:restaurantId`), resolvendo o problema.
-
-*   **Página da Pesquisa em Branco:**
-    *   **Causa:** A página pública da pesquisa ficava em branco porque o código não tratava corretamente os casos em que os dados da pesquisa ou do restaurante não eram carregados.
-    *   **Solução:** Adicionamos validações mais rigorosas no `PublicSurveyForm.js` para garantir que ambos os conjuntos de dados fossem recebidos, exibindo um erro claro em caso de falha.
+pdv.total_label
+pdv.current_order_title
+pdv.counter_salepdv.clear_order
+pdv.no_items_added
+sidebar.pdv
+sidebar.team

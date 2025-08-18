@@ -88,6 +88,9 @@ router.put('/:restaurantId', auth, checkRestaurantOwnership, [
   body('settings.survey_program_settings.text_color').optional().isString(),
   body('settings.survey_program_settings.primary_color').optional().isString(),
   body('settings.survey_program_settings.background_image_url').optional().isURL().withMessage('URL da imagem de fundo da pesquisa inválida'),
+  body('settings.survey_program_settings.rewards_per_response').optional().isArray().withMessage('Recompensas por resposta devem ser um array'),
+  body('settings.survey_program_settings.rewards_per_response.*.response_count').isInt({ min: 1 }).withMessage('Contagem de resposta deve ser um número inteiro positivo'),
+  body('settings.survey_program_settings.rewards_per_response.*.reward_id').isUUID().withMessage('ID da recompensa inválido'),
 
 ], async (req, res) => {
   const errors = validationResult(req);

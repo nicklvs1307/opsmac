@@ -1,99 +1,21 @@
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/customers/f212088b-a19a-4c11-9e6e-2ab6f4025160/details
+https://feedelizaapi.towersfy.com/api/customers/f212088b-a19a-4c11-9e6e-2ab6f4025160/clear-checkins
 Método da solicitação
-GET
+POST
 Código de status
 500 Internal Server Error
-
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
-Generated Swagger Specs (first 500 chars): {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Check Test API",
-    "version": "1.0.0",
-    "description": "API documentation for the Check Test application."
+      _options: [Object],
+      isNewRecord: false
+    }
   },
-  "servers": [
-    {
-      "url": "http://localhost:5000/api",
-      "description": "Production server"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Public API",
-      "description": "Endpoints acessíveis via API Token para integração externa."
-    },
-    {
-      "name": "Admin",
-      "description": "Gerenciamento de usuários e res
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-📊 Dashboard: https://feedelizapro.towersfy.com
-🔗 API: https://feedelizaapi.towersfy.com/api
-[Public Check-in] Restaurante encontrado: Towersfy Settings: {
-  enabled_modules: [
-    'customer_segmentation',
-    'ifood_integration',
-    'google_my_business_integration',
-    'saipos_integration',
-    'uai_rango_integration',
-    'delivery_much_integration',
-    'checkin_program',
-    'coupons_rewards',
-    'whatsapp_messaging',
-    'surveys_feedback'
-  ],
-  checkin_program_settings: {
-    restaurant_slug: 'towersfy',
-    rewards_per_visit: [ [Object] ],
-    require_coupon_for_checkin: false
-  }
-}
-[Public Check-in] Método de Identificação: phone
-[Public Check-in] Critério de busca do cliente: {
-  phone: '5535998989898',
-  restaurant_id: '842920c5-5ad2-40ca-be4e-33930f488ee2'
-}
-[Public Check-in] Cliente não encontrado, criando novo.
-[Public Check-in] Novo cliente criado: 8e025d06-86e5-4a99-9f6a-407cd0b6f551 lucas
-[Public Check-in] Check-in criado: 65a64293-5296-429a-b46f-46adc9ed1c49
-[Public Check-in] total_visits do cliente incrementado para: 1
-[Public Check-in] Estatísticas e segmentação do cliente atualizadas.
-[Public Check-in] Configurações do Programa de Check-in: {
-  "restaurant_slug": "towersfy",
-  "rewards_per_visit": [
-    {
-      "reward_id": "a3a303da-a022-49a9-ac3d-b14ed2355c9b",
-      "visit_count": "1",
-      "message_template": "aa"
-    }
-  ],
-  "require_coupon_for_checkin": false
-}
-[Public Check-in] Cliente lucas ganhou 1 pontos por check-in.
-[Public Check-in] Recompensas por Visita configuradas: [
-  {
-    reward_id: 'a3a303da-a022-49a9-ac3d-b14ed2355c9b',
-    visit_count: '1',
-    message_template: 'aa'
-  }
-]
-[Public Check-in] Visitas atuais do cliente: 0
-[Public Check-in] Processando rewardConfig: {"reward_id":"a3a303da-a022-49a9-ac3d-b14ed2355c9b","visit_count":"1","message_template":"aa"}
-[Public Check-in] Verificando recompensa para visit_count: 1 (parsed) vs currentVisits: 0
-totalCheckins: 3
-mostFrequentCustomers: [
   Checkin {
     dataValues: {
-      customer_id: '1e53afb2-06cf-4879-993e-ee12a1426f5d',
+      customer_id: '8e025d06-86e5-4a99-9f6a-407cd0b6f551',
       checkin_count: '2',
       customer: [Customer]
     },
     _previousDataValues: {
-      customer_id: '1e53afb2-06cf-4879-993e-ee12a1426f5d',
+      customer_id: '8e025d06-86e5-4a99-9f6a-407cd0b6f551',
       checkin_count: '2',
       customer: [Customer]
     },
@@ -155,118 +77,12 @@ mostFrequentCustomers: [
     }
   }
 ]
-averageVisitDuration: { avg_duration_seconds: '14281.122666666667' }
+averageVisitDuration: { avg_duration_seconds: '8578.1878000000000000' }
 checkinsByDay: [
   { date: 2025-08-17T00:00:00.000Z, count: '2' },
-  { date: 2025-08-18T00:00:00.000Z, count: '1' }
+  { date: 2025-08-18T00:00:00.000Z, count: '3' }
 ]
-[Public Route] Recebida requisição para /restaurant/towersfy
-[Public Route] Restaurante towersfy encontrado. Retornando dados.
-[Public Check-in] Restaurante encontrado: Towersfy Settings: {
-  enabled_modules: [
-    'customer_segmentation',
-    'ifood_integration',
-    'google_my_business_integration',
-    'saipos_integration',
-    'uai_rango_integration',
-    'delivery_much_integration',
-    'checkin_program',
-    'coupons_rewards',
-    'whatsapp_messaging',
-    'surveys_feedback'
-  ],
-  checkin_program_settings: {
-    restaurant_slug: 'towersfy',
-    rewards_per_visit: [ [Object] ],
-    require_coupon_for_checkin: false
-  }
-}
-[Public Check-in] Método de Identificação: phone
-[Public Check-in] Critério de busca do cliente: {
-  phone: '5535998989898',
-  restaurant_id: '842920c5-5ad2-40ca-be4e-33930f488ee2'
-}
-[Public Check-in] Cliente encontrado: 8e025d06-86e5-4a99-9f6a-407cd0b6f551 lucas
-[Public Check-in] Check-in criado: b3742e27-3610-4e0c-b132-1007bf9b5e9e
-[Public Check-in] total_visits do cliente incrementado para: 1
-[Public Check-in] Estatísticas e segmentação do cliente atualizadas.
-[Public Check-in] Configurações do Programa de Check-in: {
-  "restaurant_slug": "towersfy",
-  "rewards_per_visit": [
-    {
-      "reward_id": "a3a303da-a022-49a9-ac3d-b14ed2355c9b",
-      "visit_count": "1",
-      "message_template": "aa"
-    }
-  ],
-  "require_coupon_for_checkin": false
-}
-[Public Check-in] Cliente lucas ganhou 1 pontos por check-in.
-[Public Check-in] Recompensas por Visita configuradas: [
-  {
-    reward_id: 'a3a303da-a022-49a9-ac3d-b14ed2355c9b',
-    visit_count: '1',
-    message_template: 'aa'
-  }
-]
-[Public Check-in] Visitas atuais do cliente: 0
-[Public Check-in] Processando rewardConfig: {"reward_id":"a3a303da-a022-49a9-ac3d-b14ed2355c9b","visit_count":"1","message_template":"aa"}
-[Public Check-in] Verificando recompensa para visit_count: 1 (parsed) vs currentVisits: 0
-[Public Route] Recebida requisição para /restaurant/towersfy
-[Public Route] Restaurante towersfy encontrado. Retornando dados.
-[Public Check-in] Restaurante encontrado: Towersfy Settings: {
-  enabled_modules: [
-    'customer_segmentation',
-    'ifood_integration',
-    'google_my_business_integration',
-    'saipos_integration',
-    'uai_rango_integration',
-    'delivery_much_integration',
-    'checkin_program',
-    'coupons_rewards',
-    'whatsapp_messaging',
-    'surveys_feedback'
-  ],
-  checkin_program_settings: {
-    restaurant_slug: 'towersfy',
-    rewards_per_visit: [ [Object] ],
-    require_coupon_for_checkin: false
-  }
-}
-[Public Check-in] Método de Identificação: phone
-[Public Check-in] Critério de busca do cliente: {
-  phone: '5535998989898',
-  restaurant_id: '842920c5-5ad2-40ca-be4e-33930f488ee2'
-}
-[Public Check-in] Cliente encontrado: 8e025d06-86e5-4a99-9f6a-407cd0b6f551 lucas
-[Public Check-in] Check-in criado: 0661992b-00f5-4513-b960-3e3e29860cbe
-[Public Check-in] total_visits do cliente incrementado para: 1
-[Public Check-in] Estatísticas e segmentação do cliente atualizadas.
-[Public Check-in] Configurações do Programa de Check-in: {
-  "restaurant_slug": "towersfy",
-  "rewards_per_visit": [
-    {
-      "reward_id": "a3a303da-a022-49a9-ac3d-b14ed2355c9b",
-      "visit_count": "1",
-      "message_template": "aa"
-    }
-  ],
-  "require_coupon_for_checkin": false
-}
-[Public Check-in] Cliente lucas ganhou 1 pontos por check-in.
-[Public Check-in] Recompensas por Visita configuradas: [
-  {
-    reward_id: 'a3a303da-a022-49a9-ac3d-b14ed2355c9b',
-    visit_count: '1',
-    message_template: 'aa'
-  }
-]
-[Public Check-in] Visitas atuais do cliente: 0
-[Public Check-in] Processando rewardConfig: {"reward_id":"a3a303da-a022-49a9-ac3d-b14ed2355c9b","visit_count":"1","message_template":"aa"}
-[Public Check-in] Verificando recompensa para visit_count: 1 (parsed) vs currentVisits: 0
-[Public Route] Recebida requisição para /restaurant/towersfy
-[Public Route] Restaurante towersfy encontrado. Retornando dados.
-Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+Erro ao limpar check-ins do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
     at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
     at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
     at /app/node_modules/sequelize/lib/model.js:421:37
@@ -276,8 +92,8 @@ Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingErro
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
     at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
-    at async /app/backend/routes/customers.js:688:18
-Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at async /app/backend/routes/customers.js:781:18
+Erro ao limpar check-ins do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
     at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
     at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
     at /app/node_modules/sequelize/lib/model.js:421:37
@@ -287,4 +103,4 @@ Erro ao buscar detalhes do cliente: EagerLoadingError [SequelizeEagerLoadingErro
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
     at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
-    at async /app/backend/routes/customers.js:688:18
+    at async /app/backend/routes/customers.js:781:18

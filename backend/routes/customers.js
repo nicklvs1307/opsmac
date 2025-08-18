@@ -779,9 +779,9 @@ router.post('/:id/reset-visits', auth, async (req, res) => {
 router.post('/:id/clear-checkins', auth, async (req, res) => {
   try {
     const user = await models.User.findByPk(req.user.userId, {
-      include: [{ model: models.Restaurant, as: 'restaurants' }]
+      include: [{ model: models.Restaurant, as: 'owned_restaurants' }]
     });
-    const restaurantId = user?.restaurants?.[0]?.id;
+    const restaurantId = user?.owned_restaurants?.[0]?.id;
     if (!restaurantId) {
       return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
     }

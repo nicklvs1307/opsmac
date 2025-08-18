@@ -1,81 +1,31 @@
-print:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:110 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-go @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ AuthContext.js:110
-(anônimo) @ AuthContext.js:127
-rl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-react-dom.production.min.js:188 TypeError: n.map is not a function
-    at _Z (PrintLabel.js:32:24)
-    at vi (react-dom.production.min.js:160:137)
-    at As (react-dom.production.min.js:196:258)
-    at wl (react-dom.production.min.js:291:88)
-    at xc (react-dom.production.min.js:279:389)
-    at gc (react-dom.production.min.js:279:320)
-    at vc (react-dom.production.min.js:279:180)
-    at ac (react-dom.production.min.js:270:88)
-    at oc (react-dom.production.min.js:267:429)
-    at _ (scheduler.production.min.js:13:203)
-ds @ react-dom.production.min.js:188
-n.callback @ react-dom.production.min.js:188
-Ha @ react-dom.production.min.js:156
-bl @ react-dom.production.min.js:261
-xl @ react-dom.production.min.js:259
-yl @ react-dom.production.min.js:258
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-oc @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-PrintLabel.js:32 Uncaught TypeError: n.map is not a function
-    at _Z (PrintLabel.js:32:24)
-    at vi (react-dom.production.min.js:160:137)
-    at As (react-dom.production.min.js:196:258)
-    at wl (react-dom.production.min.js:291:88)
-    at xc (react-dom.production.min.js:279:389)
-    at gc (react-dom.production.min.js:279:320)
-    at vc (react-dom.production.min.js:279:180)
-    at ac (react-dom.production.min.js:270:88)
-    at oc (react-dom.production.min.js:267:429)
-    at _ (scheduler.production.min.js:13:203)
-_Z @ PrintLabel.js:32
-vi @ react-dom.production.min.js:160
-As @ react-dom.production.min.js:196
-wl @ react-dom.production.min.js:291
-xc @ react-dom.production.min.js:279
-gc @ react-dom.production.min.js:279
-vc @ react-dom.production.min.js:279
-ac @ react-dom.production.min.js:270
-oc @ react-dom.production.min.js:267
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-PrintLabel.js:14 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/labels/users".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-go @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ PrintLabel.js:14
-(anônimo) @ PrintLabel.js:22
-rl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-Vo @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-oc @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
+integrations:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+feedelizaapi.towersfy.com/api/customers?page=1&limit=10&search=&segment=&sort=created_at:1  Failed to load resource: the server responded with a status of 500 ()
+Customers.js:120 Error fetching customers: Un
+P @ Customers.js:120
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/customers?page=1&limit=10&search=&segment=&sort=created_at
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+Endereço remoto
+95.217.16.187:443
+
+{"error":"Erro interno do servidor"}

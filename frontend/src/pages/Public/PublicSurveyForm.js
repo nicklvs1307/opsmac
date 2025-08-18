@@ -314,13 +314,7 @@ const PublicSurveyForm = () => {
 
   if (loading) return <Container maxWidth="md"><Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh"><CircularProgress size={60} /></Box></Container>;
   if (error) return <Container maxWidth="md"><Box textAlign="center" py={8}><Alert severity="error">{error}</Alert><Button variant="contained" onClick={() => navigate('/')}>{t('common.back_to_home')}</Button></Box></Container>;
-  if (!survey || !restaurantData) {
-    console.log('Survey or restaurantData is null/undefined:', { survey, restaurantData });
-    return null;
-  }
-
-  console.log('Rendering PublicSurveyForm with survey:', survey);
-  console.log('Rendering PublicSurveyForm with restaurantData:', restaurantData);
+  if (!survey || !restaurantData) return null;
 
   if (showThankYouScreen) {
     // Thank You Screen JSX
@@ -339,7 +333,62 @@ const PublicSurveyForm = () => {
             responseId={anonymousResponseId}
             restaurantId={restaurantData?.id}
         />
-        {/* Rest of the survey form JSX */}
+
+        <Container maxWidth="md">
+            <Paper elevation={3} sx={{ p: 4, mt: 5 }}>
+                <Box sx={{ textAlign: 'center', mb: 4 }}>
+                    {restaurantData?.logo ? (
+                        <img src={`${process.env.REACT_APP_API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ maxWidth: '150px', marginBottom: '10px' }} />
+                    ) : (
+                        <RestaurantIcon sx={{ fontSize: 80, color: 'primary.main', mb: 2 }} />
+                    )}
+                    <Typography variant="h4" component="h1" gutterBottom>
+                        {survey.title}
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                        {survey.description}
+                    </Typography>
+                </Box>
+
+                {survey.questions && survey.questions.length > 0 && (
+                    <Box>
+                        <LinearProgress variant="determinate" value={((currentQuestionIndex + 1) / survey.questions.length) * 100} sx={{ mb: 3 }} />
+                        <Typography variant="h6" gutterBottom>
+                            {survey.questions[currentQuestionIndex].question_text}
+                        </Typography>
+
+                        {/* Placeholder for different question types */}
+                        {survey.questions[currentQuestionIndex].question_type === 'text' && (
+                            <TextField
+                                fullWidth
+                                label={t('public_survey.your_answer')}
+                                value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
+                                sx={{ mb: 2 }}
+                            />
+                        )}
+                        {/* Add more question types here as needed */}
+
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+                            <Button
+                                variant="outlined"
+                                onClick={handlePrevious}
+                                disabled={currentQuestionIndex === 0}
+                            >
+                                {t('common.previous')}
+                            </Button>
+                            <Button
+                                variant="contained"
+                                onClick={handleNext}
+                                disabled={submitting}
+                            >
+                                {submitting ? <CircularProgress size={24} /> : (currentQuestionIndex === survey.questions.length - 1 ? t('common.submit') : t('common.next'))}
+                            </Button>
+                        </Box>
+                    </Box>
+                )}
+            </Paper>
+        </Container>
     </Box>
   );
 };

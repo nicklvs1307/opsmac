@@ -79,16 +79,12 @@ const QRCodeGenerate = () => {
     if (watchedValues.name && restaurantId) {
       const baseUrl = window.location.origin;
       if (watchedValues.qr_type === 'checkin') {
-        const fetchRestaurantSlug = async () => {
-          try {
-            const response = await axiosInstance.get(`/api/restaurant/settings`);
-            const restaurantSlug = response.data.slug;
-            setPreviewUrl(`${baseUrl}/checkin/public/${restaurantSlug}`);
-          } catch (error) {
-            console.error('Erro ao buscar slug do restaurante:', error);
-          }
-        };
-        fetchRestaurantSlug();
+        const restaurantSlug = user?.restaurants?.[0]?.slug;
+        if (restaurantSlug) {
+          setPreviewUrl(`${baseUrl}/checkin/public/${restaurantSlug}`);
+        } else {
+          console.error('Restaurant slug not found for checkin QR code preview.');
+        }
       } else if (watchedValues.qr_type === 'menu') {
         const tableNumber = watchedValues.table_number || 'X';
         setPreviewUrl(`${baseUrl}/menu/table/preview-for-table-${tableNumber}`);
@@ -97,7 +93,7 @@ const QRCodeGenerate = () => {
         setPreviewUrl(`${baseUrl}/feedback/new?qrCodeId=${qrCodeId}`);
       }
     }
-  }, [watchedValues.name, watchedValues.qr_type, watchedValues.table_number, restaurantId]);
+  }, [watchedValues.name, watchedValues.qr_type, watchedValues.table_number, restaurantId, user]);
 
   const handleNext = async () => {
     const fieldsToValidate = getFieldsForStep(activeStep);

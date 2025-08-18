@@ -140,7 +140,7 @@ router.get('/:restaurantSlug/:surveySlug', async (req, res) => {
 
         res.json({ survey, restaurant: survey.restaurant });
     } catch (err) {
-        console.error(err.message);
+        console.error('Erro ao buscar pesquisa pública:', err);
         res.status(500).send('Server Error');
     }
 });

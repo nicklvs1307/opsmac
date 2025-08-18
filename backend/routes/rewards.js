@@ -232,4 +232,21 @@ router.get('/analytics', auth, async (req, res) => {
     }
 });
 
+// Rota para OBTER uma recompensa específica por ID
+router.get('/:id', auth, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const reward = await models.Reward.findByPk(id);
+
+        if (!reward) {
+            return res.status(404).json({ error: 'Recompensa não encontrada.' });
+        }
+
+        res.json(reward);
+    } catch (error) {
+        console.error('Erro ao obter recompensa:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
 module.exports = router;

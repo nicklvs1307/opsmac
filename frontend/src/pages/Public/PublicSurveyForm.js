@@ -188,7 +188,7 @@ const PublicSurveyForm = () => {
         setLoading(true);
         const { data } = await axiosInstance.get(`/public/surveys/${restaurantSlug}/${surveySlug}`);
         
-        if (!data.survey) {
+        if (!data.survey || !data.restaurant) {
             throw new Error(t('public_survey.survey_not_found_or_inactive'));
         }
 

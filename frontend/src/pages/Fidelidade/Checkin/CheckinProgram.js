@@ -79,15 +79,25 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       name="primary_color"
                       control={control}
                       render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('checkin_program.primary_color_label')}
-                          fullWidth
-                          margin="normal"
-                          type="color"
-                          helperText={t('checkin_program.color_helper')}
-                          InputLabelProps={{ shrink: true }}
-                        />
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                          <TextField
+                            {...field}
+                            label={t('checkin_program.primary_color_label')}
+                            fullWidth
+                            margin="normal"
+                            type="color"
+                            helperText={t('checkin_program.color_helper')}
+                            InputLabelProps={{ shrink: true }}
+                            sx={{ flexGrow: 1 }}
+                          />
+                          <Box sx={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: '4px',
+                            backgroundColor: field.value || 'transparent',
+                            border: '1px solid #ccc',
+                          }} />
+                        </Box>
                       )}
                     />
                   </Grid>
@@ -96,15 +106,25 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       name="secondary_color"
                       control={control}
                       render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('checkin_program.secondary_color_label')}
-                          fullWidth
-                          margin="normal"
-                          type="color"
-                          helperText={t('checkin_program.color_helper_secondary')}
-                          InputLabelProps={{ shrink: true }}
-                        />
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                          <TextField
+                            {...field}
+                            label={t('checkin_program.secondary_color_label')}
+                            fullWidth
+                            margin="normal"
+                            type="color"
+                            helperText={t('checkin_program.color_helper_secondary')}
+                            InputLabelProps={{ shrink: true }}
+                            sx={{ flexGrow: 1 }}
+                          />
+                          <Box sx={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: '4px',
+                            backgroundColor: field.value || 'transparent',
+                            border: '1px solid #ccc',
+                          }} />
+                        </Box>
                       )}
                     />
                   </Grid>
@@ -113,15 +133,25 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       name="text_color"
                       control={control}
                       render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('checkin_program.text_color_label')}
-                          fullWidth
-                          margin="normal"
-                          type="color"
-                          helperText={t('checkin_program.color_helper_text')}
-                          InputLabelProps={{ shrink: true }}
-                        />
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                          <TextField
+                            {...field}
+                            label={t('checkin_program.text_color_label')}
+                            fullWidth
+                            margin="normal"
+                            type="color"
+                            helperText={t('checkin_program.color_helper_text')}
+                            InputLabelProps={{ shrink: true }}
+                            sx={{ flexGrow: 1 }}
+                          />
+                          <Box sx={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: '4px',
+                            backgroundColor: field.value || 'transparent',
+                            border: '1px solid #ccc',
+                          }} />
+                        </Box>
                       )}
                     />
                   </Grid>
@@ -130,15 +160,25 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                       name="background_color"
                       control={control}
                       render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('checkin_program.background_color_label')}
-                          fullWidth
-                          margin="normal"
-                          type="color"
-                          helperText={t('checkin_program.color_helper_background')}
-                          InputLabelProps={{ shrink: true }}
-                        />
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                          <TextField
+                            {...field}
+                            label={t('checkin_program.background_color_label')}
+                            fullWidth
+                            margin="normal"
+                            type="color"
+                            helperText={t('checkin_program.color_helper_background')}
+                            InputLabelProps={{ shrink: true }}
+                            sx={{ flexGrow: 1 }}
+                          />
+                          <Box sx={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: '4px',
+                            backgroundColor: field.value || 'transparent',
+                            border: '1px solid #ccc',
+                          }} />
+                        </Box>
                       )}
                     />
                   </Grid>

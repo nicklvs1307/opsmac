@@ -1,88 +1,24 @@
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/customers/f212088b-a19a-4c11-9e6e-2ab6f4025160/clear-checkins
+https://feedelizaapi.towersfy.com/api/coupons
 Método da solicitação
 POST
 Código de status
 500 Internal Server Error
-      _options: [Object],
-      isNewRecord: false
-    }
-  },
-  Checkin {
-    dataValues: {
-      customer_id: '8e025d06-86e5-4a99-9f6a-407cd0b6f551',
-      checkin_count: '2',
-      customer: [Customer]
+Endereço remoto
+95.217.16.187:443
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
     },
-    _previousDataValues: {
-      customer_id: '8e025d06-86e5-4a99-9f6a-407cd0b6f551',
-      checkin_count: '2',
-      customer: [Customer]
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: [Array],
-      includeNames: [Array],
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  },
-  Checkin {
-    dataValues: {
-      customer_id: 'f212088b-a19a-4c11-9e6e-2ab6f4025160',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    _previousDataValues: {
-      customer_id: 'f212088b-a19a-4c11-9e6e-2ab6f4025160',
-      checkin_count: '1',
-      customer: [Customer]
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      include: [Array],
-      includeNames: [Array],
-      includeMap: [Object],
-      includeValidated: true,
-      attributes: [Array],
-      raw: true
-    },
-    isNewRecord: false,
-    customer: Customer {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  }
-]
-averageVisitDuration: { avg_duration_seconds: '8578.1878000000000000' }
-checkinsByDay: [
-  { date: 2025-08-17T00:00:00.000Z, count: '2' },
-  { date: 2025-08-18T00:00:00.000Z, count: '3' }
-]
-Erro ao limpar check-ins do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
+Erro ao expirar cupons: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
     at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
     at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
     at /app/node_modules/sequelize/lib/model.js:421:37
@@ -92,8 +28,8 @@ Erro ao limpar check-ins do cliente: EagerLoadingError [SequelizeEagerLoadingErr
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
     at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
-    at async /app/backend/routes/customers.js:781:18
-Erro ao limpar check-ins do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at async /app/backend/routes/coupons.js:160:22
+Erro ao resetar visitas do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
     at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
     at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
     at /app/node_modules/sequelize/lib/model.js:421:37
@@ -103,4 +39,70 @@ Erro ao limpar check-ins do cliente: EagerLoadingError [SequelizeEagerLoadingErr
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
     at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
-    at async /app/backend/routes/customers.js:781:18
+    at async /app/backend/routes/customers.js:723:18
+Erro ao resetar visitas do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/customers.js:723:18
+Erro ao resetar visitas do cliente: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/customers.js:723:18
+Erro ao expirar cupons: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/coupons.js:160:22
+Erro ao criar cupom: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/coupons.js:242:22
+Erro ao criar cupom: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/coupons.js:242:22
+Erro ao criar cupom: EagerLoadingError [SequelizeEagerLoadingError]: Restaurant is associated to User multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:580:13)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async /app/backend/routes/coupons.js:242:22

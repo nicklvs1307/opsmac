@@ -184,21 +184,75 @@ const SatisfactionSettings = () => {
               <Controller
                 name="background_color"
                 control={control}
-                render={({ field }) => <TextField {...field} label={t('satisfaction_settings.background_color_label')} fullWidth type="color" InputLabelProps={{ shrink: true }} />}
+                render={({ field }) => (
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <TextField
+                      {...field}
+                      label={t('satisfaction_settings.background_color_label')}
+                      fullWidth
+                      type="color"
+                      InputLabelProps={{ shrink: true }}
+                      sx={{ flexGrow: 1 }}
+                    />
+                    <Box sx={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: '4px',
+                      backgroundColor: field.value || 'transparent',
+                      border: '1px solid #ccc',
+                    }} />
+                  </Box>
+                )}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Controller
                 name="text_color"
                 control={control}
-                render={({ field }) => <TextField {...field} label={t('satisfaction_settings.text_color_label')} fullWidth type="color" InputLabelProps={{ shrink: true }} />}
+                render={({ field }) => (
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <TextField
+                      {...field}
+                      label={t('satisfaction_settings.text_color_label')}
+                      fullWidth
+                      type="color"
+                      InputLabelProps={{ shrink: true }}
+                      sx={{ flexGrow: 1 }}
+                    />
+                    <Box sx={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: '4px',
+                      backgroundColor: field.value || 'transparent',
+                      border: '1px solid #ccc',
+                    }} />
+                  </Box>
+                )}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Controller
                 name="primary_color"
                 control={control}
-                render={({ field }) => <TextField {...field} label={t('satisfaction_settings.primary_color_label')} fullWidth type="color" InputLabelProps={{ shrink: true }} />}
+                render={({ field }) => (
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <TextField
+                      {...field}
+                      label={t('satisfaction_settings.primary_color_label')}
+                      fullWidth
+                      type="color"
+                      InputLabelProps={{ shrink: true }}
+                      sx={{ flexGrow: 1 }}
+                    />
+                    <Box sx={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: '4px',
+                      backgroundColor: field.value || 'transparent',
+                      border: '1px solid #ccc',
+                    }} />
+                  </Box>
+                )}
               />
             </Grid>
             <Grid item xs={12}>

@@ -30,6 +30,9 @@ const PublicCheckin = () => {
   const [textColor, setTextColor] = useState('#333333');
   const [backgroundColor, setBackgroundColor] = useState('#ffffff');
   const [backgroundImageUrl, setBackgroundImageUrl] = useState(null);
+  const getValidColor = (colorValue, defaultValue) => {
+    return colorValue && colorValue !== '' ? colorValue : defaultValue;
+  };
   const [identificationMethod, setIdentificationMethod] = useState('phone'); // 'phone' or 'cpf'
   const [requiresTable, setRequiresTable] = useState(false);
   const [requireCouponForCheckin, setRequireCouponForCheckin] = useState(false); // New state
@@ -62,10 +65,10 @@ const PublicCheckin = () => {
         setIdentificationMethod(response.data.settings?.checkin_program_settings?.identification_method || 'phone');
         setRequiresTable(response.data.settings?.checkin_program_settings?.checkin_requires_table || false);
         setRequireCouponForCheckin(response.data.settings?.checkin_program_settings?.require_coupon_for_checkin || false); // Fetch new setting
-        setPrimaryColor(response.data.settings?.checkin_program_settings?.primary_color || '#3f51b5');
-        setSecondaryColor(response.data.settings?.checkin_program_settings?.secondary_color || '#f50057');
-        setTextColor(response.data.settings?.checkin_program_settings?.text_color || '#333333');
-        setBackgroundColor(response.data.settings?.checkin_program_settings?.background_color || '#ffffff');
+        setPrimaryColor(getValidColor(response.data.settings?.checkin_program_settings?.primary_color, '#3f51b5'));
+        setSecondaryColor(getValidColor(response.data.settings?.checkin_program_settings?.secondary_color, '#f50057'));
+        setTextColor(getValidColor(response.data.settings?.checkin_program_settings?.text_color, '#333333'));
+        setBackgroundColor(getValidColor(response.data.settings?.checkin_program_settings?.background_color, '#ffffff'));
         setBackgroundImageUrl(response.data.settings?.checkin_program_settings?.background_image_url || null);
       } catch (err) {
         console.error('Error fetching restaurant data:', err);

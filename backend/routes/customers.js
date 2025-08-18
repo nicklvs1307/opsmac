@@ -686,9 +686,9 @@ router.delete('/:id', auth, async (req, res) => {
 router.get('/:id/details', auth, async (req, res) => {
   try {
     const user = await models.User.findByPk(req.user.userId, {
-      include: [{ model: models.Restaurant, as: 'restaurants' }]
+      include: [{ model: models.Restaurant, as: 'owned_restaurants' }]
     });
-    const restaurantId = user?.restaurants?.[0]?.id;
+    const restaurantId = user?.owned_restaurants?.[0]?.id;
     if (!restaurantId) {
       return res.status(400).json({ error: 'Restaurante não encontrado para o usuário.' });
     }
@@ -712,7 +712,7 @@ router.get('/:id/details', auth, async (req, res) => {
 
     res.json(customer);
   } catch (error) {
-    console.error('Erro ao buscar detalhes do cliente:', error);
+    console.error('Erro ao buscar detalhes do cliente:', error); console.error(error.stack);
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });

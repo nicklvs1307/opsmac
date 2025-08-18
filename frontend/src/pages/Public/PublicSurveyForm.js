@@ -187,7 +187,13 @@ const PublicSurveyForm = () => {
       try {
         setLoading(true);
         const { data } = await axiosInstance.get(`/public/surveys/${restaurantSlug}/${surveySlug}`);
+        
+        if (!data.survey) {
+            throw new Error(t('public_survey.survey_not_found_or_inactive'));
+        }
+
         const surveyData = data.survey;
+        
         // Fetch reward details if reward_id exists
         if (surveyData.reward_id) {
             const rewardRes = await axiosInstance.get(`/api/rewards/${surveyData.reward_id}`);
@@ -204,7 +210,8 @@ const PublicSurveyForm = () => {
         setAnswers(initialAnswers);
       } catch (err) {
         console.error('Error fetching survey:', err);
-        setError(err.response?.data?.msg || t('public_survey.survey_not_found_or_inactive'));
+        const errorMessage = err.response?.data?.msg || err.message || t('public_survey.survey_not_found_or_inactive');
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }

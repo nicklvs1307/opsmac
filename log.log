@@ -1,31 +1,101 @@
-integrations:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-feedelizaapi.towersfy.com/api/customers?page=1&limit=10&search=&segment=&sort=created_at:1  Failed to load resource: the server responded with a status of 500 ()
-Customers.js:120 Error fetching customers: Un
-P @ Customers.js:120
-
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/customers?page=1&limit=10&search=&segment=&sort=created_at
-Método da solicitação
-GET
-Código de status
-500 Internal Server Error
-Endereço remoto
-95.217.16.187:443
-
-{"error":"Erro interno do servidor"}
+> Feedeliza+@1.0.0 start
+> node backend/server.js
+Swagger JSDoc options.apis: [ '/app/backend/routes/*.js' ]
+Generated Swagger Specs (first 500 chars): {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Test API",
+    "version": "1.0.0",
+    "description": "API documentation for the Check Test application."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public API",
+      "description": "Endpoints acessíveis via API Token para integração externa."
+    },
+    {
+      "name": "Admin",
+      "description": "Gerenciamento de usuários e res
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+📊 Dashboard: https://feedelizapro.towersfy.com
+🔗 API: https://feedelizaapi.towersfy.com/api
+Erro ao buscar clientes: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Customer.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Customer.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async /app/backend/routes/customers.js:320:29 {
+  name: 'SequelizeDatabaseError',
+  parent: error: column "survey_responses_count" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 123,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '142',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "email", "phone", "cpf", "whatsapp", "birth_date", "gender", "avatar", "preferences", "loyalty_points", "total_visits", "survey_responses_count", "total_spent", "average_rating_given", "last_visit", "first_visit", "customer_segment", "status", "source", "referral_code", "referred_by", "notes", "tags", "marketing_consent", "email_verified", "phone_verified", "gdpr_consent", "gdpr_consent_date", "last_birthday_message_year", "metadata", "rfv_score", "nps_segment", "last_purchase_date", "total_orders", "average_ticket", "last_ticket_value", "most_bought_products", "most_bought_categories", "purchase_behavior_tags", "location_details", "preferred_communication_channel", "campaign_interaction_history", "last_survey_completed_at", "last_survey_id", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "customers" AS "Customer" WHERE "Customer"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2' ORDER BY "createdAt" ASC LIMIT 10 OFFSET 0;`,
+    parameters: undefined
+  },
+  original: error: column "survey_responses_count" does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 123,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '142',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT "id", "name", "email", "phone", "cpf", "whatsapp", "birth_date", "gender", "avatar", "preferences", "loyalty_points", "total_visits", "survey_responses_count", "total_spent", "average_rating_given", "last_visit", "first_visit", "customer_segment", "status", "source", "referral_code", "referred_by", "notes", "tags", "marketing_consent", "email_verified", "phone_verified", "gdpr_consent", "gdpr_consent_date", "last_birthday_message_year", "metadata", "rfv_score", "nps_segment", "last_purchase_date", "total_orders", "average_ticket", "last_ticket_value", "most_bought_products", "most_bought_categories", "purchase_behavior_tags", "location_details", "preferred_communication_channel", "campaign_interaction_history", "last_survey_completed_at", "last_survey_id", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "customers" AS "Customer" WHERE "Customer"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2' ORDER BY "createdAt" ASC LIMIT 10 OFFSET 0;`,
+    parameters: undefined
+  },
+  sql: `SELECT "id", "name", "email", "phone", "cpf", "whatsapp", "birth_date", "gender", "avatar", "preferences", "loyalty_points", "total_visits", "survey_responses_count", "total_spent", "average_rating_given", "last_visit", "first_visit", "customer_segment", "status", "source", "referral_code", "referred_by", "notes", "tags", "marketing_consent", "email_verified", "phone_verified", "gdpr_consent", "gdpr_consent_date", "last_birthday_message_year", "metadata", "rfv_score", "nps_segment", "last_purchase_date", "total_orders", "average_ticket", "last_ticket_value", "most_bought_products", "most_bought_categories", "purchase_behavior_tags", "location_details", "preferred_communication_channel", "campaign_interaction_history", "last_survey_completed_at", "last_survey_id", "restaurant_id", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "customers" AS "Customer" WHERE "Customer"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2' ORDER BY "createdAt" ASC LIMIT 10 OFFSET 0;`,
+  parameters: {}
+}

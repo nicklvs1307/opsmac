@@ -184,7 +184,7 @@ const SurveyCreate = () => {
                             <MenuItem disabled>{t('survey_create.loading_rewards')}</MenuItem>
                         ) : (
                             rewards?.map((reward) => (
-                                <MenuItem key={reward.id} value={reward.id}>{reward.title}</MenuItem>
+                                <MenuItem key={reward.id} value={reward.id}>{reward.name}</MenuItem>
                             ))
                         )}
                     </Select>

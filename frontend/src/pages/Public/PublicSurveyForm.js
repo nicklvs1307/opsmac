@@ -314,7 +314,13 @@ const PublicSurveyForm = () => {
 
   if (loading) return <Container maxWidth="md"><Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh"><CircularProgress size={60} /></Box></Container>;
   if (error) return <Container maxWidth="md"><Box textAlign="center" py={8}><Alert severity="error">{error}</Alert><Button variant="contained" onClick={() => navigate('/')}>{t('common.back_to_home')}</Button></Box></Container>;
-  if (!survey || !restaurantData) return null;
+  if (!survey || !restaurantData) {
+    console.log('Survey or restaurantData is null/undefined:', { survey, restaurantData });
+    return null;
+  }
+
+  console.log('Rendering PublicSurveyForm with survey:', survey);
+  console.log('Rendering PublicSurveyForm with restaurantData:', restaurantData);
 
   if (showThankYouScreen) {
     // Thank You Screen JSX

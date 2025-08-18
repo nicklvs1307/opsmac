@@ -35,6 +35,7 @@ import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { Restaurant as RestaurantIcon } from '@mui/icons-material';
+import SurveyHeader from '../../components/SurveyHeader'; // Import the new header component
 
 // Modal Component for Customer Identification
 const IdentifyCustomerModal = ({ open, onClose, onIdentified, responseId, restaurantId }) => {
@@ -357,7 +358,7 @@ const PublicSurveyForm = () => {
                             {survey.questions[currentQuestionIndex].question_text}
                         </Typography>
 
-                        {/* Placeholder for different question types */}
+                        {/* Question types rendering */}
                         {survey.questions[currentQuestionIndex].question_type === 'text' && (
                             <TextField
                                 fullWidth
@@ -367,30 +368,169 @@ const PublicSurveyForm = () => {
                                 sx={{ mb: 2 }}
                             />
                         )}
-                        {/* Add more question types here as needed */}
-
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-                            <Button
-                                variant="outlined"
-                                onClick={handlePrevious}
-                                disabled={currentQuestionIndex === 0}
-                            >
-                                {t('common.previous')}
-                            </Button>
-                            <Button
-                                variant="contained"
-                                onClick={handleNext}
-                                disabled={submitting}
-                            >
-                                {submitting ? <CircularProgress size={24} /> : (currentQuestionIndex === survey.questions.length - 1 ? t('common.submit') : t('common.next'))}
-                            </Button>
-                        </Box>
-                    </Box>
-                )}
-            </Paper>
-        </Container>
-    </Box>
-  );
-};
-
-export default PublicSurveyForm;
+                        {survey.questions[currentQuestionIndex].question_type === 'textarea' && (
+                            <TextField
+                                fullWidth
+                                label={t('public_survey.your_answer')}
+                                multiline
+                                rows={4}
+                                value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
+                                sx={{ mb: 2 }}
+                            />
+                        )}
+                        {survey.questions[currentQuestionIndex].question_type === 'radio' && (
+                            <FormControl component="fieldset" sx={{ mb: 2 }}>
+                                <RadioGroup
+                                    value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                    onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
+                                >
+                                    {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
+                                        <FormControlLabel
+                                            key={optIndex}
+                                            value={option}
+                                            control={<Radio />}
+                                            label={option}
+                                        />
+                                    ))}
+                                </RadioGroup>
+                            </FormControl>
+                        )}
+                        {survey.questions[currentQuestionIndex].question_type === 'checkboxes' && (
+                            <FormGroup sx={{ mb: 2 }}>
+                                {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
+                                    <FormControlLabel
+                                        key={optIndex}
+                                        control={
+                                            <Checkbox
+                                                checked={(answers[survey.questions[currentQuestionIndex].id] || []).includes(option)}
+                                                onChange={() => handleCheckboxChange(survey.questions[currentQuestionIndex].id, option)}
+                                            />
+                                        }
+                                        label={option}
+                                    />
+                                ))}
+                            </FormGroup>
+                        )}
+                        {survey.questions[currentQuestionIndex].question_type === 'dropdown' && (
+                            <FormControl fullWidth sx={{ mb: 2 }}>
+                                <InputLabel>{t('public_survey.select_option')}</InputLabel>
+                                <Select
+                                    value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                    label={t('public_survey.select_option')}
+                                    onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
+                                >
+                                    {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
+                                        <MenuItem key={optIndex} value={option}>
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        )}
+                        {(survey.questions[currentQuestionIndex].question_type === 'nps' || survey.questions[currentQuestionIndex].question_type === 'csat') && (
+                            <Box sx={{ mb: 2 }}>
+                                <Typography gutterBottom>{t('public_survey.score_from_0_to_10')}</Typography>
+                                <Slider
+                                    value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
+                                    onChange={(e, newValue) => handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString())}
+                                    aria-labelledby="input-slider"
+                                    valueLabelDisplay="auto"
+                                    step={1}
+                                    marks
+                                    min={0}
+                                    max={10}
+                                />
+                                {survey.questions[currentQuestionIndex].question_type === 'nps' && survey.questions[currentQuestionIndex].npsCriterion && (
+                                    <Typography variant="caption" color="text.secondary">
+                                        {t('public_survey.nps_criterion')}: {survey.questions[currentQuestionIndex].npsCriterion.name}
+                                    </Typography>
+                                )}
+                            </Box>
+                        )}
+                        {survey.questions[currentQuestionIndex].question_type === 'ratings' && (
+                            <Box sx={{ mb: 2 }}>
+                                <Rating
+                                    name="simple-controlled"
+                                    value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
+                                    onChange={(event, newValue) => {
+                                        handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString());
+                                    }}
+                                    size="large"
+                                />
+                            </Box>
+                        )}
+                        {survey.questions[currentQuestionIndex].question_type === 'like_dislike' && (
+                            <Box sx={{ mb: 2 }}>
+                                <ToggleButtonGroup
+                                    value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                    exclusive
+                                    onChange={(event, newValue) => {
+                                        if (newValue !== null) {
+                                            handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue);
+                                        }
+                                    }}
+                                    aria-label="text alignment"
+                                >
+                                    <ToggleButton value="like" aria-label="like">
+                                        <ThumbUpIcon />
+                                    </ToggleButton>
+                                    <ToggleButton value="dislike" aria-label="dislike">
+                                        <ThumbDownIcon />
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                            </Box>
+                        )}
+                        {(survey.questions[currentQuestionIndex].question_type === 'nps' || survey.questions[currentQuestionIndex].question_type === 'csat') && (
+                            <Box sx={{ mb: 2 }}>
+                                <Typography gutterBottom>{t('public_survey.score_from_0_to_10')}</Typography>
+                                <Slider
+                                    value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
+                                    onChange={(e, newValue) => handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString())}
+                                    aria-labelledby="input-slider"
+                                    valueLabelDisplay="auto"
+                                    step={1}
+                                    marks
+                                    min={0}
+                                    max={10}
+                                />
+                                {survey.questions[currentQuestionIndex].question_type === 'nps' && survey.questions[currentQuestionIndex].npsCriterion && (
+                                    <Typography variant="caption" color="text.secondary">
+                                        {t('public_survey.nps_criterion')}: {survey.questions[currentQuestionIndex].npsCriterion.name}
+                                    </Typography>
+                                )}
+                            </Box>
+                        )}
+                        {survey.questions[currentQuestionIndex].question_type === 'ratings' && (
+                            <Box sx={{ mb: 2 }}>
+                                <Rating
+                                    name="simple-controlled"
+                                    value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
+                                    onChange={(event, newValue) => {
+                                        handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString());
+                                    }}
+                                    size="large"
+                                />
+                            </Box>
+                        )}
+                        {survey.questions[currentQuestionIndex].question_type === 'like_dislike' && (
+                            <Box sx={{ mb: 2 }}>
+                                <ToggleButtonGroup
+                                    value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                    exclusive
+                                    onChange={(event, newValue) => {
+                                        if (newValue !== null) {
+                                            handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue);
+                                        }
+                                    }}
+                                    aria-label="text alignment"
+                                >
+                                    <ToggleButton value="like" aria-label="like">
+                                        <ThumbUpIcon />
+                                    </ToggleButton>
+                                    <ToggleButton value="dislike" aria-label="dislike">
+                                        <ThumbDownIcon />
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                            </Box>
+                        )}

@@ -900,7 +900,7 @@ const Pdv = () => {
                   <button className="btn btn-outline" onClick={openPaymentModal}>
                     <PaymentsIcon /> {t('pdv.payment_button')}
                   </button>
-                  <button className="btn btn-success" onClick={handlePlaceOrder} disabled={createOrderMutation.isLoading || cartItems.length === 0 || !paymentMethod}>
+                  <button className="btn btn-success" onClick={handlePlaceOrder} disabled={(createTableOrderMutation.isLoading || createPublicOrderMutation.isLoading) || cartItems.length === 0 || !paymentMethod}>
                     <CheckCircleIcon /> {t('pdv.finalize_button')}
                   </button>
                 </div>
@@ -1136,7 +1136,7 @@ const Pdv = () => {
                   <button className="btn btn-outline" onClick={openPaymentModal}>
                     <PaymentsIcon /> {t('pdv.payment_button')}
                   </button>
-                  <button className="btn btn-success" onClick={handlePlaceOrder} disabled={createOrderMutation.isLoading || cartItems.length === 0 || !paymentMethod}>
+                  <button className="btn btn-success" onClick={handlePlaceOrder} disabled={(createTableOrderMutation.isLoading || createPublicOrderMutation.isLoading) || cartItems.length === 0 || !paymentMethod}>
                     <CheckCircleIcon /> {t('pdv.finalize_button')}
                   </button>
                 </div>

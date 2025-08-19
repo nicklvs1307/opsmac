@@ -80,6 +80,16 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('RESFRIADO', 'CONGELADO', 'AMBIENTE'),
       allowNull: true,
     },
+    addons: {
+      type: DataTypes.ARRAY(DataTypes.UUID),
+      allowNull: true,
+      defaultValue: [],
+    },
+    variations: {
+      type: DataTypes.JSONB,
+      allowNull: true,
+      defaultValue: [],
+    },
   }, {
     freezeTableName: true, // Model tableName will be the same as the model name
     tableName: 'products' // Explicitly define the table name

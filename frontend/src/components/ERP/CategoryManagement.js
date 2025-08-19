@@ -103,15 +103,16 @@ const CategoryManagement = () => {
   return (
     <Box sx={{ mt: 3 }}>
       <Typography variant="h5" gutterBottom>{t('category_management.title')}</Typography>
-      <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
+      <Paper elevation={2} className="form-container" sx={{ mb: 3 }}>
         <Typography variant="h6" gutterBottom>{editingCategory ? t('category_management.edit_category') : t('category_management.add_new_category')}</Typography>
-        <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+        <Box className="form-group" sx={{ display: 'flex', gap: 2, mb: 2 }}>
           <TextField
             label={t('category_management.category_name')}
             variant="outlined"
             fullWidth
             value={newCategoryName}
             onChange={(e) => setNewCategoryName(e.target.value)}
+            className="form-control"
           />
           {editingCategory ? (
             <Button
@@ -120,6 +121,7 @@ const CategoryManagement = () => {
               startIcon={<EditIcon />}
               onClick={handleUpdateCategory}
               disabled={updateCategoryMutation.isLoading}
+              className="btn btn-primary"
             >
               {t('category_management.update_button')}
             </Button>
@@ -130,6 +132,7 @@ const CategoryManagement = () => {
               startIcon={<AddIcon />}
               onClick={handleAddCategory}
               disabled={addCategoryMutation.isLoading}
+              className="btn btn-primary"
             >
               {t('category_management.add_button')}
             </Button>
@@ -142,6 +145,7 @@ const CategoryManagement = () => {
                 setEditingCategory(null);
                 setNewCategoryName('');
               }}
+              className="btn btn-secondary"
             >
               {t('common.cancel')}
             </Button>
@@ -150,31 +154,39 @@ const CategoryManagement = () => {
       </Paper>
 
       <Typography variant="h6" gutterBottom>{t('category_management.existing_categories')}</Typography>
-      <Paper elevation={2} sx={{ p: 3 }}>
-        {categories.length === 0 ? (
-          <Typography>{t('category_management.no_categories')}</Typography>
-        ) : (
-          <List>
-            {categories.map((category) => (
-              <ListItem
-                key={category.id}
-                secondaryAction={
-                  <Box>
-                    <IconButton edge="end" aria-label="edit" onClick={() => handleEditClick(category)}>
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteClick(category)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Box>
-                }
-              >
-                <ListItemText primary={category.name} />
-              </ListItem>
-            ))}
-          </List>
-        )}
-      </Paper>
+      <Box className="table-container">
+        <Box className="card-header" style={{ padding: '15px 20px', borderBottom: '1px solid #e0e0e0' }}>
+          <span className="card-title">{t('category_management.existing_categories')}</span>
+          <button className="btn btn-primary" style={{ padding: '8px 15px' }} onClick={() => { setEditingCategory(null); setNewCategoryName(''); }}>
+            <i className="fas fa-plus"></i> {t('category_management.add_new_category')}
+          </button>
+        </Box>
+        <table>
+          <thead>
+            <tr>
+              <th>{t('category_management.category_name')}</th>
+              <th>{t('common.actions')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.length === 0 ? (
+              <tr>
+                <td colSpan="2"><Typography>{t('category_management.no_categories')}</Typography></td>
+              </tr>
+            ) : (
+              categories.map((category) => (
+                <tr key={category.id}>
+                  <td>{category.name}</td>
+                  <td>
+                    <button className="action-btn edit-btn" onClick={() => handleEditClick(category)}><i className="fas fa-edit"></i></button>
+                    <button className="action-btn delete-btn" onClick={() => handleDeleteClick(category)}><i className="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </Box>
 
       <Dialog
         open={openDeleteDialog}

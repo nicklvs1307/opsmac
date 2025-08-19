@@ -1,14 +1,47 @@
 {
-  "pdv.open_cash_register_title": "",
-  "pdv.initial_cash": "",
-  "pdv.observations": "",
-  "pdv.cancel": "",
-  "pdv.save": "",
-  "pdv.cash_register_options_title": "",
-  "pdv.withdrawal": "",
-  "pdv.reinforcement": "",
-  "pdv.partial_summary": "",
-  "pdv.close_cash_register": "",
-  "pdv.closing_cash_required": "",
-  "pdv.close_cash_register_title": ""
+  "translation": {
+    "menu": {
+      "tabs": {
+        "addons": "Addons"
+      }
+    },
+    "addon_management": {
+      "add_success": "Addon added successfully!",
+      "add_error": "Error adding addon.",
+      "update_success": "Addon updated successfully!",
+      "update_error": "Error updating addon.",
+      "delete_success": "Addon deleted successfully!",
+      "delete_error": "Error deleting addon.",
+      "title": "Addon Management",
+      "edit_addon": "Edit Addon",
+      "add_new_addon": "Add New Addon",
+      "addon_name": "Addon Name",
+      "addon_price": "Addon Price",
+      "update_button": "Update",
+      "add_button": "Add",
+      "existing_addons": "Existing Addons",
+      "no_addons": "No addons found.",
+      "confirm_delete_title": "Confirm Deletion",
+      "confirm_delete_message": "Are you sure you want to delete the addon \"{{addonName}}\""
+    },
+    "product_management": {
+      "variations": "Variations",
+      "variation_name": "Variation Name",
+      "variation_value": "Variation Value",
+      "additional_price": "Additional Price",
+      "add_variation": "Add Variation"
+    },
+    "pdv.open_cash_register_title": "",
+    "pdv.initial_cash": "",
+    "pdv.observations": "",
+    "pdv.cancel": "",
+    "pdv.save": "",
+    "pdv.cash_register_options_title": "",
+    "pdv.withdrawal": "",
+    "pdv.reinforcement": "",
+    "pdv.partial_summary": "",
+    "pdv.close_cash_register": "",
+    "pdv.closing_cash_required": "",
+    "pdv.close_cash_register_title": ""
+  }
 }

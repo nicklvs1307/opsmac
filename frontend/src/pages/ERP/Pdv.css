@@ -498,9 +498,11 @@
         }
 
         .tabs-content {
-            flex-grow: 1;
+            flex-grow: 1 !important;
             overflow: hidden;
             position: relative;
+            display: flex !important;
+            flex-direction: column !important;
         }
 
         .tab-pane {

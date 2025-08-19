@@ -18,6 +18,30 @@
       "confirm_delete_title": "Confirmar Exclusão",
       "confirm_delete_message": "Tem certeza que deseja excluir a categoria \"{{categoryName}}\""
     },
+    "menu": {
+      "tabs": {
+        "addons": "Adicionais"
+      }
+    },
+    "addon_management": {
+      "add_success": "Adicional adicionado com sucesso!",
+      "add_error": "Erro ao adicionar adicional.",
+      "update_success": "Adicional atualizado com sucesso!",
+      "update_error": "Erro ao atualizar adicional.",
+      "delete_success": "Adicional excluído com sucesso!",
+      "delete_error": "Erro ao excluir adicional.",
+      "title": "Gerenciamento de Adicionais",
+      "edit_addon": "Editar Adicional",
+      "add_new_addon": "Adicionar Novo Adicional",
+      "addon_name": "Nome do Adicional",
+      "addon_price": "Preço do Adicional",
+      "update_button": "Atualizar",
+      "add_button": "Adicionar",
+      "existing_addons": "Adicionais Existentes",
+      "no_addons": "Nenhum adicional encontrado.",
+      "confirm_delete_title": "Confirmar Exclusão",
+      "confirm_delete_message": "Tem certeza que deseja excluir o adicional \"{{addonName}}\""
+    },
     "checkin_dashboard": {
       "no_restaurant_found": "Nenhum restaurante encontrado. Por favor, verifique suas configurações.",
       "error_fetching_checkin_data_console": "Erro ao carregar dados de check-in (console):",
@@ -389,7 +413,7 @@
         "title": "Integração Uai Rango",
         "description": "A Uai Rango possui uma API para desenvolvedores que permite a automação de tarefas para estabelecimentos. Isso inclui gerenciamento de cardápios, pedidos e controle de horários de funcionamento. Eles também oferecem webhooks para receber informações de pedidos em tempo real.",
         "key_points_title": "Pontos Chave para Integração:",
-        "step1_primary": "1. Gerenciamento de Cardápios:",
+        "step1_primary": "1. Gerenciamento de Cardápio:",
         "step1_secondary": "Possibilidade de automatizar a atualização de itens e preços do seu cardápio.",
         "step2_primary": "2. Gestão de Pedidos:",
         "step2_secondary": "Receber e gerenciar pedidos diretamente em seu sistema, com webhooks para notificações em tempo real.",
@@ -483,7 +507,12 @@
       "existing_products": "Produtos Existentes",
       "no_products": "Nenhum produto encontrado.",
       "confirm_delete_title": "Confirmar Exclusão",
-      "confirm_delete_message": "Tem certeza que deseja excluir o produto \"{{productName}}\""
+      "confirm_delete_message": "Tem certeza que deseja excluir o produto \"{{productName}}\"",
+      "variations": "Variações",
+      "variation_name": "Nome da Variação",
+      "variation_value": "Valor da Variação",
+      "additional_price": "Preço Adicional",
+      "add_variation": "Adicionar Variação"
     },
     "public_checkin": {
       "error_no_restaurant_id": "ID do restaurante não encontrado na URL. Por favor, use um QR Code válido.",
@@ -662,7 +691,6 @@
       "tab_surveys": "Pesquisas",
       "tab_feedbacks": "Feedbacks"
     },
-  
     "survey_form": {
       "create_title": "Criar Nova Pesquisa",
       "edit_title": "Editar Pesquisa",
@@ -1135,7 +1163,7 @@
       "title": "Configurações da Integração com o Uai Rango",
       "description": "A Uai Rango possui uma API para desenvolvedores que permite a automação de tarefas para estabelecimentos. Isso inclui gerenciamento de cardápios, pedidos e controle de horários de funcionamento. Eles também oferecem webhooks para receber informações de pedidos em tempo real.",
       "key_points_title": "Pontos Chave para Integração:",
-      "step1_primary": "1. Gerenciamento de Cardápios:",
+      "step1_primary": "1. Gerenciamento de Cardápio:",
       "step1_secondary": "Possibilidade de automatizar a atualização de itens e preços do seu cardápio.",
       "step2_primary": "2. Gestão de Pedidos:",
       "step2_secondary": "Receber e gerenciar pedidos diretamente em seu sistema, com webhooks para notificações em tempo real.",
@@ -1145,7 +1173,6 @@
       "step4_secondary": "Para detalhes específicos sobre autenticação (chaves de API, OAuth, etc.) e acesso à documentação completa, é provável que seja necessário entrar em contato direto com a equipe de desenvolvimento da Uai Rango ou acessar um portal de desenvolvedores específico, caso exista.",
       "documentation_guidance": "Para iniciar a integração, é recomendável buscar a documentação oficial da API da Uai Rango ou entrar em contato com o suporte para desenvolvedores para obter as credenciais e o guia de integração.",
       "api_key_label": "Uai Rango API Key",
-      "api_key_required": "Uai Rango API Key é obrigatória.",
       "restaurant_id_label": "ID do Restaurante Uai Rango",
       "restaurant_id_required": "ID do Restaurante Uai Rango é obrigatório.",
       "save_button": "Salvar Configurações"

@@ -1,28 +1,28 @@
-[{
-	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "520",
-	"severity": 4,
-	"message": "Duplicate object key",
-	"source": "json",
-	"startLineNumber": 665,
-	"startColumn": 5,
-	"endLineNumber": 665,
-	"endColumn": 18,
-	"origin": "extHost1"
-}]
-
-
-[{
-	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "520",
-	"severity": 4,
-	"message": "Duplicate object key",
-	"source": "json",
-	"startLineNumber": 1099,
-	"startColumn": 5,
-	"endLineNumber": 1099,
-	"endColumn": 18,
-	"origin": "extHost1"
-}]
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             184.7s
+------
+ > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.347 + npm run build
+0.770
+0.770 > feedeliza-plus@1.0.0 build
+0.770 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.770
+3.658 Creating an optimized production build...
+183.5 Failed to compile.
+183.5
+183.5 [eslint]
+183.5 src/pages/Feedback/FeedbackDetail.js
+183.5   Line 396:24:  'LocationIcon' is not defined  react/jsx-no-undef
+183.5
+183.5 Search for the keywords to learn more about each error.
+183.5
+183.5
+------
+Dockerfile.frontend:24
+--------------------
+  22 |     ARG REACT_APP_API_URL
+  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  24 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  25 |
+  26 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

@@ -393,7 +393,7 @@ const FeedbackDetail = () => {
                   </Typography>
                   {feedback.qr_code.location && (
                     <Typography variant="body2" display="flex" alignItems="center" gap={1}>
-                      <LocationIcon fontSize="small" />
+                      <LocationOnIcon fontSize="small" />
                       {feedback.qr_code.location}
                     </Typography>
                   )}

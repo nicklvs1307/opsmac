@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, useMediaQuery, Zoom, Fade, Chip, Slide, Fab, List, ListItem, ListItemText, ListItemAvatar, Avatar, BottomNavigation, BottomNavigationAction, ThemeProvider, createTheme, InputAdornment } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, Search as SearchIcon, Add as AddIcon, Remove as RemoveIcon, Close as CloseIcon, Person as PersonIcon, Phone as PhoneIcon, Home as HomeIcon, Payment as PaymentIcon, Notes as NotesIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 import './PublicDeliveryMenu.css';
@@ -42,6 +43,7 @@ const deliveryTheme = createTheme({
 });
 
 const PublicDeliveryMenu = () => {
+  const { t } = useTranslation();
   const { restaurantSlug } = useParams();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -71,18 +73,18 @@ const PublicDeliveryMenu = () => {
 
   const orderMutation = useMutation(createDeliveryOrder, {
       onSuccess: () => {
-          toast.success('Pedido realizado com sucesso!');
+          toast.success(t('public_delivery_menu.order_success_toast'));
           setCartItems([]);
           setCartOpen(false);
       },
       onError: () => {
-          toast.error('Erro ao realizar o pedido.');
+          toast.error(t('public_delivery_menu.order_error_toast'));
       }
   });
 
   const handleCheckout = () => {
     if (!customerName || !customerPhone || !deliveryAddress) {
-        toast.error('Por favor, preencha seu nome, telefone e endereço.');
+        toast.error(t('public_delivery_menu.fill_required_fields_toast'));
         return;
     }
     const orderData = {
@@ -127,7 +129,7 @@ const PublicDeliveryMenu = () => {
   const totalItemsInCart = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   if (isLoading) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><CircularProgress /></Box>;
-  if (isError) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><Alert severity="error">Erro ao carregar cardápio.</Alert></Box>;
+  if (isError) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><Alert severity="error">{t('public_delivery_menu.error_loading_menu')}</Alert></Box>;
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
@@ -139,7 +141,7 @@ const PublicDeliveryMenu = () => {
           <Toolbar className="header-container">
             <Box className="logo">
                 <RestaurantIcon sx={{ marginRight: '10px' }} />
-                <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>Meu Cardápio</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>{t('public_delivery_menu.my_menu_title')}</Typography>
             </Box>
             <Box className="user-actions">
                 <IconButton color="inherit" aria-label="search">
@@ -161,14 +163,14 @@ const PublicDeliveryMenu = () => {
             <Box className="restaurant-container">
                 <img src={restaurantData?.logo ? `${API_URL}${restaurantData.logo}` : "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"} alt="Restaurante" className="restaurant-image" />
                 <Box className="restaurant-details">
-                    <Typography variant="h6" component="h2" sx={{ fontSize: '22px', marginBottom: '5px' }}>{restaurantData?.name || 'Restaurante Sabor & Arte'}</Typography>
+                    <Typography variant="h6" component="h2" sx={{ fontSize: '22px', marginBottom: '5px' }}>{restaurantData?.name || t('public_delivery_menu.restaurant_placeholder_name')}</Typography>
                     <Box className="restaurant-meta">
                         <Typography component="span"><i className="fas fa-star"></i> 4.8 (250+)</Typography>
                         <Typography component="span"><i className="fas fa-clock"></i> 30-45 min</Typography>
                         <Typography component="span"><i className="fas fa-tag"></i> $ - Média</Typography>
                         <Typography component="span"><i className="fas fa-map-marker-alt"></i> 1.2 km</Typography>
                     </Box>
-                    <Typography variant="body2">Culinária brasileira com toques contemporâneos</Typography>
+                    <Typography variant="body2">{t('public_delivery_menu.cuisine_description_placeholder')}</Typography>
                 </Box>
             </Box>
         </Box>
@@ -176,7 +178,7 @@ const PublicDeliveryMenu = () => {
         <Box sx={{ p: 2, backgroundColor: '#f9f9f9' }}>
           <TextField
             fullWidth
-            placeholder="Buscar hambúrguer, porção, bebida..."
+            placeholder={t('public_delivery_menu.search_placeholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             InputProps={{
@@ -189,7 +191,7 @@ const PublicDeliveryMenu = () => {
         {/* Categories */}
         <Box className="categories">
             <Box sx={{ display: 'flex', overflowX: 'auto', gap: 1, pb: 1 }}>
-                <Chip label="Todos" onClick={() => setSelectedCategory('all')} className={selectedCategory === 'all' ? 'category active' : 'category'} />
+                <Chip label={t('public_delivery_menu.all_categories_chip')} onClick={() => setSelectedCategory('all')} className={selectedCategory === 'all' ? 'category active' : 'category'} />
                 {menuData && Object.keys(menuData.categories).map(cat => (
                     <Chip key={cat} label={cat} onClick={() => setSelectedCategory(cat)} className={selectedCategory === cat ? 'category active' : 'category'} />
                 ))}
@@ -221,7 +223,7 @@ const PublicDeliveryMenu = () => {
                                                     <span className="quantity">{quantityInCart}</span>
                                                     <button className="quantity-btn plus" onClick={() => addToCart(item)}>+</button>
                                                 </div>
-                                                <button className="add-btn" onClick={() => addToCart(item)}>Adicionar</button>
+                                                <button className="add-btn" onClick={() => addToCart(item)}>{t('public_delivery_menu.add_button')}</button>
                                             </div>
                                         </div>
                                         <img src={item.image_url || `https://source.unsplash.com/random/300x200?food&sig=${item.id}`} alt={item.name} className="item-image" />
@@ -242,7 +244,7 @@ const PublicDeliveryMenu = () => {
 
         <Dialog open={cartOpen} onClose={() => setCartOpen(false)} fullScreen={isMobile} PaperProps={{ sx: { borderRadius: { sm: '24px' } } }}>
           <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            Seu Pedido
+            {t('public_delivery_menu.your_order_title')}
             <IconButton onClick={() => setCartOpen(false)}><CloseIcon /></IconButton>
           </DialogTitle>
           <DialogContent dividers>
@@ -261,24 +263,24 @@ const PublicDeliveryMenu = () => {
               </Box>
             ))}
             <Divider sx={{ my: 2 }} />
-            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>Informações para Entrega</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>{t('public_delivery_menu.delivery_info_title')}</Typography>
             <Grid container spacing={2}>
-                <Grid item xs={12}><TextField fullWidth label="Nome Completo" value={customerName} onChange={e => setCustomerName(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><PersonIcon /></InputAdornment> }} /></Grid>
-                <Grid item xs={12}><TextField fullWidth label="Telefone (WhatsApp)" value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><PhoneIcon /></InputAdornment> }} /></Grid>
-                <Grid item xs={12}><TextField fullWidth label="Endereço Completo" value={deliveryAddress} onChange={e => setDeliveryAddress(e.target.value)} multiline rows={3} InputProps={{ startAdornment: <InputAdornment position="start"><HomeIcon /></InputAdornment> }} /></Grid>
-                <Grid item xs={12}><TextField fullWidth label="Forma de Pagamento" value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><PaymentIcon /></InputAdornment> }} /></Grid>
-                <Grid item xs={12}><TextField fullWidth label="Observações (opcional)" value={notes} onChange={e => setNotes(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><NotesIcon /></InputAdornment> }} /></Grid>
+                <Grid item xs={12}><TextField fullWidth label={t('public_delivery_menu.full_name_label')} value={customerName} onChange={e => setCustomerName(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><PersonIcon /></InputAdornment> }} /></Grid>
+                <Grid item xs={12}><TextField fullWidth label={t('public_delivery_menu.phone_whatsapp_label')} value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><PhoneIcon /></InputAdornment> }} /></Grid>
+                <Grid item xs={12}><TextField fullWidth label={t('public_delivery_menu.full_address_label')} value={deliveryAddress} onChange={e => setDeliveryAddress(e.target.value)} multiline rows={3} InputProps={{ startAdornment: <InputAdornment position="start"><HomeIcon /></InputAdornment> }} /></Grid>
+                <Grid item xs={12}><TextField fullWidth label={t('public_delivery_menu.payment_method_label')} value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><PaymentIcon /></InputAdornment> }} /></Grid>
+                <Grid item xs={12}><TextField fullWidth label={t('public_delivery_menu.notes_optional_label')} value={notes} onChange={e => setNotes(e.target.value)} InputProps={{ startAdornment: <InputAdornment position="start"><NotesIcon /></InputAdornment> }} /></Grid>
             </Grid>
           </DialogContent>
           <DialogActions sx={{ flexDirection: 'column', p: 2 }}>
             <Box sx={{ width: '100%' }}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}><Typography>Subtotal</Typography><Typography>R$ {cartTotal.toFixed(2)}</Typography></Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}><Typography>Taxa de Entrega</Typography><Typography>R$ 5.00</Typography></Box>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}><Typography>{t('public_delivery_menu.subtotal_label')}</Typography><Typography>R$ {cartTotal.toFixed(2)}</Typography></Box>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}><Typography>{t('public_delivery_menu.delivery_fee_label')}</Typography><Typography>R$ 5.00</Typography></Box>
               <Divider sx={{ my: 1 }} />
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}><Typography variant="h6" sx={{ fontWeight: 700 }}>Total</Typography><Typography variant="h6" sx={{ fontWeight: 700 }}>R$ {(cartTotal + 5).toFixed(2)}</Typography></Box>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}><Typography variant="h6" sx={{ fontWeight: 700 }}>{t('public_delivery_menu.total_label')}</Typography><Typography variant="h6" sx={{ fontWeight: 700 }}>R$ {(cartTotal + 5).toFixed(2)}</Typography></Box>
             </Box>
             <Button onClick={handleCheckout} fullWidth variant="contained" sx={{ mt: 2, py: 1.5, borderRadius: '12px', fontWeight: 700 }} disabled={orderMutation.isLoading}>
-                {orderMutation.isLoading ? <CircularProgress size={24} color="inherit" /> : 'Finalizar Pedido'}
+                {orderMutation.isLoading ? <CircularProgress size={24} color="inherit" /> : t('public_delivery_menu.finish_order_button')}
             </Button>
           </DialogActions>
         </Dialog>

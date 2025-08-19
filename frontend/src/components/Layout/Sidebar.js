@@ -161,7 +161,7 @@ const Sidebar = ({ onMobileClose }) => {
       roles: ['admin', 'owner', 'manager'],
       submenu: [
         {
-          title: t('sidebar.menu'),
+          title: t('sidebar.erp_menu'),
           icon: <ListIcon />,
           path: '/erp/menu'
         },

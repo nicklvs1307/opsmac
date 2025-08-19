@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import { Box, Typography, CircularProgress, Alert, Card, CardContent, CardMedia, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Tabs, Tab, AppBar, Toolbar, IconButton, Divider, Paper, Container, useTheme, useMediaQuery, Zoom, Fade, Chip, Slide, Fab, List, ListItem, ListItemText, ListItemAvatar, Avatar, BottomNavigation, BottomNavigationAction, ThemeProvider, createTheme } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Restaurant as RestaurantIcon, ShoppingCart as ShoppingCartIcon, Notifications as NotificationsIcon, Receipt as ReceiptIcon, Search as SearchIcon, Add as AddIcon, Remove as RemoveIcon, Close as CloseIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
@@ -51,6 +53,7 @@ const premiumTheme = createTheme({
 });
 
 const PublicDineInMenu = () => {
+    const { t } = useTranslation();
     const { restaurantSlug, tableNumber } = useParams();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -91,23 +94,23 @@ const PublicDineInMenu = () => {
 
     const callWaiterMutation = useMutation(callWaiter, {
         onSuccess: () => {
-            toast.success('Garçom chamado com sucesso!');
+            toast.success(t('public_dine_in_menu.waiter_called_success_toast'));
             setOpenWaiterDialog(false);
             setWaiterCallDescription('');
         },
         onError: () => {
-            toast.error('Erro ao chamar o garçom.');
+            toast.error(t('public_dine_in_menu.waiter_call_error_toast'));
         }
     });
 
     const orderMutation = useMutation(createOrder, {
         onSuccess: () => {
-            toast.success('Pedido enviado para a cozinha!');
+            toast.success(t('public_dine_in_menu.order_sent_success_toast'));
             setCartItems([]);
             setCartOpen(false);
         },
         onError: () => {
-            toast.error('Erro ao enviar o pedido.');
+            toast.error(t('public_dine_in_menu.order_send_error_toast'));
         }
     });
 
@@ -157,7 +160,7 @@ const PublicDineInMenu = () => {
     const categories = menuData ? Object.keys(menuData.categories) : [];
 
     if (isLoading) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><CircularProgress /></Box>;
-    if (isError) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><Alert severity="error">Erro ao carregar o cardápio.</Alert></Box>;
+    if (isError) return <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"><Alert severity="error">{t('public_dine_in_menu.error_loading_menu')}</Alert></Box>;
 
     const table = menuData?.table;
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
@@ -170,7 +173,7 @@ const PublicDineInMenu = () => {
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                             {restaurantData?.logo ? <img src={`${API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ height: '40px', width: '40px', objectFit: 'contain', borderRadius: '50%' }} /> : <RestaurantIcon sx={{ color: 'primary.main', fontSize: '2rem' }} />}
                             <Typography variant={isMobile ? 'h6' : 'h4'} sx={{ color: 'accent.main', fontWeight: 700 }}>
-                                {restaurantData?.name || 'DON FONSECA'}
+                                {restaurantData?.name || t('public_dine_in_menu.restaurant_placeholder_name')}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
@@ -178,7 +181,7 @@ const PublicDineInMenu = () => {
                                 <NotificationsIcon />
                             </IconButton>
                             <Typography sx={{ backgroundColor: 'primary.main', color: 'white', padding: '8px 18px', borderRadius: '30px', fontWeight: 600 }}>
-                                MESA {table?.table_number || tableNumber}
+                                {t('public_dine_in_menu.table_number_prefix')} {table?.table_number || tableNumber}
                             </Typography>
                         </Box>
                     </Toolbar>
@@ -217,7 +220,7 @@ const PublicDineInMenu = () => {
                                                     <Typography variant="body2" color="text.secondary" sx={{ mb: 2, minHeight: '60px' }}>{item.description}</Typography>
                                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                         <Typography variant="h6" sx={{ fontWeight: 800, color: 'primary.main' }}>R$ {Number(item.price).toFixed(2)}</Typography>
-                                                        <Button onClick={() => addToCart(item)} variant="contained" startIcon={<AddIcon />} sx={{ background: 'linear-gradient(135deg, #E31837, #FF4757)', borderRadius: '8px', fontWeight: 600, boxShadow: '0 3px 10px rgba(227, 24, 55, 0.3)', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 5px 15px rgba(227, 24, 55, 0.4)' } }}>Adicionar</Button>
+                                                        <Button onClick={() => addToCart(item)} variant="contained" startIcon={<AddIcon />} sx={{ background: 'linear-gradient(135deg, #E31837, #FF4757)', borderRadius: '8px', fontWeight: 600, boxShadow: '0 3px 10px rgba(227, 24, 55, 0.3)', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 5px 15px rgba(227, 24, 55, 0.4)' } }}>{t('public_dine_in_menu.add_button')}</Button>
                                                     </Box>
                                                 </CardContent>
                                             </Card>
@@ -231,22 +234,22 @@ const PublicDineInMenu = () => {
 
                 <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, display: { xs: 'block', md: 'none' }, zIndex: 10, borderTop: '1px solid #eee' }} elevation={3}>
                     <BottomNavigation showLabels>
-                        <BottomNavigationAction label="Cardápio" icon={<RestaurantIcon />} />
-                        <BottomNavigationAction label="Buscar" icon={<SearchIcon />} />
-                        <BottomNavigationAction label="Chamar Garçom" icon={<NotificationsIcon />} onClick={() => setOpenWaiterDialog(true)} />
-                        <BottomNavigationAction label="Carrinho" icon={<ShoppingCartIcon />} onClick={() => setCartOpen(true)} />
-                        <BottomNavigationAction label="Conta" icon={<ReceiptIcon />} />
+                        <BottomNavigationAction label={t('public_dine_in_menu.menu_tab')} icon={<RestaurantIcon />} />
+                        <BottomNavigationAction label={t('public_dine_in_menu.search_tab')} icon={<SearchIcon />} />
+                        <BottomNavigationAction label={t('public_dine_in_menu.call_waiter_tab')} icon={<NotificationsIcon />} onClick={() => setOpenWaiterDialog(true)} />
+                        <BottomNavigationAction label={t('public_dine_in_menu.cart_tab')} icon={<ShoppingCartIcon />} onClick={() => setCartOpen(true)} />
+                        <BottomNavigationAction label={t('public_dine_in_menu.account_tab')} icon={<ReceiptIcon />} />
                     </BottomNavigation>
                 </Paper>
 
                 <Dialog open={cartOpen} onClose={() => setCartOpen(false)} fullWidth maxWidth="sm" PaperProps={{ sx: { borderRadius: '15px', maxHeight: '80vh', display: 'flex', flexDirection: 'column' } }}>
                     <DialogTitle sx={{ background: 'linear-gradient(135deg, #1A1A1A, #000)', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        Meu Pedido
+                        {t('public_dine_in_menu.my_order_title')}
                         <IconButton onClick={() => setCartOpen(false)} sx={{ color: 'white' }}><CloseIcon /></IconButton>
                     </DialogTitle>
                     <DialogContent dividers sx={{ flex: 1, overflowY: 'auto' }}>
                         {cartItems.length === 0 ? (
-                            <Typography>Seu carrinho está vazio.</Typography>
+                            <Typography>{t('public_dine_in_menu.empty_cart_message')}</Typography>
                         ) : (
                             <List>
                                 {cartItems.map(item => (
@@ -265,22 +268,22 @@ const PublicDineInMenu = () => {
                     </DialogContent>
                     <DialogActions sx={{ padding: '20px', backgroundColor: '#f9f9f9', borderTop: '1px solid #eee' }}>
                         <Box sx={{ width: '100%' }}>
-                            <Typography variant="h6">Total: R$ {cartTotal.toFixed(2)}</Typography>
+                            <Typography variant="h6">{t('public_dine_in_menu.total_label')}: R$ {cartTotal.toFixed(2)}</Typography>
                             <Button onClick={handleCheckout} fullWidth variant="contained" sx={{ mt: 2, background: 'linear-gradient(135deg, #E31837, #FF4757)', padding: '15px', fontWeight: 600 }} disabled={cartItems.length === 0}>
-                                Realizar Pedido
+                                {t('public_dine_in_menu.place_order_button')}
                             </Button>
                         </Box>
                     </DialogActions>
                 </Dialog>
 
                 <Dialog open={openWaiterDialog} onClose={() => setOpenWaiterDialog(false)} PaperProps={{ sx: { borderRadius: '15px' } }}>
-                    <DialogTitle sx={{ background: 'linear-gradient(135deg, #1A1A1A, #000)', color: 'white' }}>Chamar Garçom</DialogTitle>
+                    <DialogTitle sx={{ background: 'linear-gradient(135deg, #1A1A1A, #000)', color: 'white' }}>{t('public_dine_in_menu.call_waiter_title')}</DialogTitle>
                     <DialogContent sx={{ mt: 2 }}>
-                        <TextField label="Mensagem (opcional)" fullWidth variant="outlined" value={waiterCallDescription} onChange={(e) => setWaiterCallDescription(e.target.value)} />
+                        <TextField label={t('public_dine_in_menu.message_optional_label')} fullWidth variant="outlined" value={waiterCallDescription} onChange={(e) => setWaiterCallDescription(e.target.value)} />
                     </DialogContent>
                     <DialogActions sx={{ padding: '20px' }}>
-                        <Button onClick={() => setOpenWaiterDialog(false)}>Cancelar</Button>
-                        <Button onClick={handleCallWaiter} variant="contained" sx={{ background: 'linear-gradient(135deg, #E31837, #FF4757)' }}>Enviar Chamada</Button>
+                        <Button onClick={() => setOpenWaiterDialog(false)}>{t('common.cancel')}</Button>
+                        <Button onClick={handleCallWaiter} variant="contained" sx={{ background: 'linear-gradient(135deg, #E31837, #FF4757)' }}>{t('public_dine_in_menu.send_call_button')}</Button>
                     </DialogActions>
                 </Dialog>
             </Box>

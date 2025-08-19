@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import { Box, Typography, CircularProgress, Alert, Container, Card, CardContent, Grid } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const fetchDineInMenu = async (tableId) => {
   // Note: The backend route is /api/public/dine-in-menu/:tableId which gets products by table
@@ -11,6 +12,7 @@ const fetchDineInMenu = async (tableId) => {
 };
 
 const DineInMenu = () => {
+  const { t } = useTranslation();
   const { tableId } = useParams();
 
   const { data: products, isLoading, isError, error } = useQuery(
@@ -22,7 +24,7 @@ const DineInMenu = () => {
   );
 
   const groupedProducts = products ? products.reduce((acc, product) => {
-    const category = product.category || 'Outros';
+    const category = product.category || t('common.others');
     if (!acc[category]) {
       acc[category] = [];
     }
@@ -42,7 +44,7 @@ const DineInMenu = () => {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Alert severity="error">
-          Erro ao carregar o cardápio: {error.response?.data?.msg || error.message}
+          {t('public_menu.error_loading_menu')}{error.response?.data?.msg || error.message}
         </Alert>
       </Box>
     );
@@ -51,7 +53,7 @@ const DineInMenu = () => {
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
       <Typography variant="h3" component="h1" align="center" gutterBottom>
-        Nosso Cardápio
+        {t('public_menu.our_menu_title')}
       </Typography>
       
       {Object.keys(groupedProducts).length > 0 ? (
@@ -82,7 +84,7 @@ const DineInMenu = () => {
           </Box>
         ))
       ) : (
-        <Typography align="center">Nenhum produto encontrado no cardápio.</Typography>
+        <Typography align="center">{t('public_menu.no_products_found')}</Typography>
       )}
     </Container>
   );

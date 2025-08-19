@@ -335,103 +335,222 @@ const PublicSurveyForm = () => {
             restaurantId={restaurantData?.id}
         />
 
-        <Container maxWidth="md">
+        {/* Header Estilizado */}
+        <Box sx={{
+            background: '#FFFFFF', // var(--light)
+            paddingTop: '60px',
+            position: 'relative',
+        }}>
+            {/* Shape arredondado (cápsula) */}
+            <Box sx={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '120px',
+                background: primaryColor, // var(--primary)
+                borderBottomLeftRadius: '50% 80%',
+                borderBottomRightRadius: '50% 80%',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)', // var(--shadow)
+            }}></Box>
+            
+            {/* Conteúdo do header */}
+            <Box sx={{
+                position: 'relative',
+                zIndex: 2,
+                textAlign: 'center',
+                padding: '20px 30px 30px',
+                color: textColor, // var(--dark)
+            }}>
+                <Box sx={{
+                    width: '80px',
+                    height: '80px',
+                    background: '#FFFFFF', // var(--light)
+                    borderRadius: '50%',
+                    margin: '-40px auto 15px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: `4px solid ${accentColor}`, // var(--accent)
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)', // var(--shadow)
+                }}>
+                    {restaurantData?.logo ? (
+                        <img src={`${process.env.REACT_APP_API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ width: '60px', height: '60px' }} />
+                    ) : (
+                        <RestaurantIcon sx={{ fontSize: 60, color: primaryColor }} />
+                    )}
+                </Box>
+                <Typography variant="h4" component="h1" sx={{
+                    color: primaryColor, // var(--primary)
+                    fontSize: '28px',
+                    fontWeight: 700,
+                    marginBottom: '10px',
+                }}>
+                    {restaurantData?.name || survey.title}
+                </Typography>
+                <Typography variant="body1" sx={{
+                    fontWeight: 300,
+                    opacity: 0.9,
+                    maxWidth: '600px',
+                    margin: '0 auto',
+                    color: textColor, // var(--dark)
+                }}>
+                    {survey.description}
+                </Typography>
+                <Box sx={{
+                    height: '6px',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    marginTop: '25px',
+                    borderRadius: '3px',
+                    overflow: 'hidden',
+                }}>
+                    <LinearProgress variant="determinate" value={((currentQuestionIndex + 1) / survey.questions.length) * 100} sx={{
+                        height: '100%',
+                        background: primaryColor, // var(--primary)
+                        transition: 'width 0.3s ease',
+                        '& .MuiLinearProgress-bar': {
+                            backgroundColor: primaryColor,
+                        }
+                    }} />
+                </Box>
+            </Box>
+        </Box>
+
+        {/* Corpo da Pesquisa */}
+        <Container maxWidth="md" sx={{
+            marginTop: '-40px', // Adjust to overlap with the header
+            marginBottom: '40px',
+        }}>
             <Paper elevation={0} sx={{
-              borderRadius: '16px',
+              borderRadius: '0 0 16px 16px',
               boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)', // var(--shadow)
               overflow: 'hidden',
             }}>
-                <Box sx={{ textAlign: 'center', mb: 4 }}>
-                    {restaurantData?.logo ? (
-                        <img src={`${process.env.REACT_APP_API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ maxWidth: '150px', marginBottom: '10px' }} />
-                    ) : (
-                        <RestaurantIcon sx={{ fontSize: 80, color: 'primary.main', mb: 2 }} />
-                    )}
-                    <Typography variant="h4" component="h1" gutterBottom>
-                        {survey.title}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                        {survey.description}
-                    </Typography>
-                </Box>
+                <Box sx={{ padding: '30px' }}>
+                    {survey.questions && survey.questions.length > 0 && (
+                        <Box>
+                            <Typography variant="body2" sx={{
+                                fontSize: '14px',
+                                color: '#adb5bd', // var(--gray)
+                                marginBottom: '5px',
+                                fontWeight: 500,
+                            }}>
+                                Pergunta {currentQuestionIndex + 1} de {survey.questions.length}
+                            </Typography>
+                            <Typography variant="h6" sx={{
+                                fontSize: '18px',
+                                fontWeight: 600,
+                                marginBottom: '20px',
+                            }}>
+                                {survey.questions[currentQuestionIndex].question_text}
+                            </Typography>
 
-                {survey.questions && survey.questions.length > 0 && (
-                    <Box>
-                        <LinearProgress variant="determinate" value={((currentQuestionIndex + 1) / survey.questions.length) * 100} sx={{ mb: 3 }} />
-                        <Typography variant="h6" gutterBottom>
-                            {survey.questions[currentQuestionIndex].question_text}
-                        </Typography>
-
-                        {/* Question types rendering */}
-                        {survey.questions[currentQuestionIndex].question_type === 'text' && (
-                            <TextField
-                                fullWidth
-                                label={t('public_survey.your_answer')}
-                                value={answers[survey.questions[currentQuestionIndex].id] || ''}
-                                onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
-                                sx={{
-                                    mb: 2,
-                                    '& .MuiOutlinedInput-root': {
-                                        borderRadius: '10px',
-                                        '& fieldset': {
-                                            borderColor: 'var(--border)',
-                                        },
-                                        '&:hover fieldset': {
-                                            borderColor: primaryColor,
-                                        },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: primaryColor,
-                                            boxShadow: `0 0 0 3px ${primaryColor}33`, // 33 is for 20% opacity
-                                        },
-                                    },
-                                    '& .MuiInputBase-input': {
-                                        padding: '15px',
-                                        fontSize: '16px',
-                                    },
-                                }}
-                            />
-                        )}
-                        {survey.questions[currentQuestionIndex].question_type === 'textarea' && (
-                            <TextField
-                                fullWidth
-                                label={t('public_survey.your_answer')}
-                                multiline
-                                rows={4}
-                                value={answers[survey.questions[currentQuestionIndex].id] || ''}
-                                onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
-                                sx={{
-                                    mb: 2,
-                                    '& .MuiOutlinedInput-root': {
-                                        borderRadius: '10px',
-                                        '& fieldset': {
-                                            borderColor: 'var(--border)',
-                                        },
-                                        '&:hover fieldset': {
-                                            borderColor: primaryColor,
-                                        },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: primaryColor,
-                                            boxShadow: `0 0 0 3px ${primaryColor}33`,
-                                        },
-                                    },
-                                    '& .MuiInputBase-input': {
-                                        padding: '15px',
-                                        fontSize: '16px',
-                                    },
-                                }}
-                            />
-                        )}
-                        {survey.questions[currentQuestionIndex].question_type === 'radio' && (
-                            <FormControl component="fieldset" sx={{ mb: 2, width: '100%' }}>
-                                <RadioGroup
+                            {/* Question types rendering */}
+                            {survey.questions[currentQuestionIndex].question_type === 'text' && (
+                                <TextField
+                                    fullWidth
+                                    label={t('public_survey.your_answer')}
                                     value={answers[survey.questions[currentQuestionIndex].id] || ''}
                                     onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
-                                >
+                                    sx={{
+                                        mb: 2,
+                                        '& .MuiOutlinedInput-root': {
+                                            borderRadius: '10px',
+                                            '& fieldset': {
+                                                borderColor: '#dee2e6', // var(--border)
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: primaryColor,
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: primaryColor,
+                                                boxShadow: `0 0 0 3px ${alpha(primaryColor, 0.2)}`,
+                                            },
+                                        },
+                                        '& .MuiInputBase-input': {
+                                            padding: '15px',
+                                            fontSize: '16px',
+                                        },
+                                    }}
+                                />
+                            )}
+                            {survey.questions[currentQuestionIndex].question_type === 'textarea' && (
+                                <TextField
+                                    fullWidth
+                                    label={t('public_survey.your_answer')}
+                                    multiline
+                                    rows={4}
+                                    value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                    onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
+                                    sx={{
+                                        mb: 2,
+                                        '& .MuiOutlinedInput-root': {
+                                            borderRadius: '10px',
+                                            '& fieldset': {
+                                                borderColor: '#dee2e6', // var(--border)
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: primaryColor,
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: primaryColor,
+                                                boxShadow: `0 0 0 3px ${alpha(primaryColor, 0.2)}`,
+                                            },
+                                        },
+                                        '& .MuiInputBase-input': {
+                                            padding: '15px',
+                                            fontSize: '16px',
+                                        },
+                                    }}
+                                />
+                            )}
+                            {survey.questions[currentQuestionIndex].question_type === 'radio' && (
+                                <FormControl component="fieldset" sx={{ mb: 2, width: '100%' }}>
+                                    <RadioGroup
+                                        value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                        onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
+                                    >
+                                        {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
+                                            <FormControlLabel
+                                                key={optIndex}
+                                                value={option}
+                                                control={<Radio sx={{ color: primaryColor, '&.Mui-checked': { color: primaryColor } }} />}
+                                                label={option}
+                                                sx={{
+                                                    width: '100%',
+                                                    margin: '0 0 15px 0',
+                                                    padding: '15px',
+                                                    background: '#f8f9fa', // var(--light)
+                                                    borderRadius: '10px',
+                                                    cursor: 'pointer',
+                                                    transition: 'all 0.2s ease',
+                                                    border: '1px solid #dee2e6', // var(--border)
+                                                    '&:hover': {
+                                                        background: `${alpha(primaryColor, 0.1)}`, // primary-light with 10% opacity
+                                                        borderColor: primaryColor,
+                                                    },
+                                                    '&.Mui-selected': {
+                                                        background: `${alpha(primaryColor, 0.1)}`,
+                                                        borderColor: primaryColor,
+                                                    },
+                                                }}
+                                            />
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
+                            )}
+                            {survey.questions[currentQuestionIndex].question_type === 'checkboxes' && (
+                                <FormGroup sx={{ mb: 2, width: '100%' }}>
                                     {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
                                         <FormControlLabel
                                             key={optIndex}
-                                            value={option}
-                                            control={<Radio sx={{ color: primaryColor, '&.Mui-checked': { color: primaryColor } }} />}
+                                            control={
+                                                <Checkbox
+                                                    checked={(answers[survey.questions[currentQuestionIndex].id] || []).includes(option)}
+                                                    onChange={() => handleCheckboxChange(survey.questions[currentQuestionIndex].id, option)}
+                                                    sx={{ color: primaryColor, '&.Mui-checked': { color: primaryColor } }}
+                                                />
+                                            }
                                             label={option}
                                             sx={{
                                                 width: '100%',
@@ -443,68 +562,342 @@ const PublicSurveyForm = () => {
                                                 transition: 'all 0.2s ease',
                                                 border: '1px solid #dee2e6', // var(--border)
                                                 '&:hover': {
-                                                    background: `${primaryColor}1A`, // primary-light with 10% opacity
+                                                    background: `${alpha(primaryColor, 0.1)}`,
                                                     borderColor: primaryColor,
                                                 },
                                                 '&.Mui-selected': {
-                                                    background: `${primaryColor}1A`,
+                                                    background: `${alpha(primaryColor, 0.1)}`,
                                                     borderColor: primaryColor,
                                                 },
                                             }}
                                         />
                                     ))}
-                                </RadioGroup>
-                            </FormControl>
-                        )}
-                        {survey.questions[currentQuestionIndex].question_type === 'checkboxes' && (
-                            <FormGroup sx={{ mb: 2, width: '100%' }}>
-                                {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
-                                    <FormControlLabel
-                                        key={optIndex}
-                                        control={
-                                            <Checkbox
-                                                checked={(answers[survey.questions[currentQuestionIndex].id] || []).includes(option)}
-                                                onChange={() => handleCheckboxChange(survey.questions[currentQuestionIndex].id, option)}
-                                                sx={{ color: primaryColor, '&.Mui-checked': { color: primaryColor } }}
-                                            />
-                                        }
-                                        label={option}
+                                </FormGroup>
+                            )}
+                            {survey.questions[currentQuestionIndex].question_type === 'dropdown' && (
+                                <FormControl fullWidth sx={{ mb: 2 }}>
+                                    <InputLabel>{t('public_survey.select_option')}</InputLabel>
+                                    <Select
+                                        value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                        label={t('public_survey.select_option')}
+                                        onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
+                                    >
+                                        {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
+                                            <MenuItem key={optIndex} value={option}>
+                                                {option}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            )}
+                            {survey.questions[currentQuestionIndex].question_type === 'ratings' && (
+                                <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center', width: '100%' }}>
+                                    <Rating
+                                        name="simple-controlled"
+                                        value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
+                                        onChange={(event, newValue) => {
+                                            handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString());
+                                        }}
+                                        size="large"
                                         sx={{
-                                            width: '100%',
-                                            margin: '0 0 15px 0',
-                                            padding: '15px',
-                                            background: '#f8f9fa', // var(--light)
-                                            borderRadius: '10px',
-                                            cursor: 'pointer',
-                                            transition: 'all 0.2s ease',
-                                            border: '1px solid #dee2e6', // var(--border)
-                                            '&:hover': {
-                                                background: `${primaryColor}1A`,
-                                                borderColor: primaryColor,
+                                            '& .MuiRating-iconFilled': {
+                                                color: primaryColor,
                                             },
-                                            '&.Mui-selected': {
-                                                background: `${primaryColor}1A`,
-                                                borderColor: primaryColor,
+                                            '& .MuiRating-iconHover': {
+                                                color: primaryColor,
                                             },
                                         }}
                                     />
-                                ))}
-                            </FormGroup>
-                        )}
-                        {survey.questions[currentQuestionIndex].question_type === 'dropdown' && (
-                            <FormControl fullWidth sx={{ mb: 2 }}>
-                                <InputLabel>{t('public_survey.select_option')}</InputLabel>
-                                <Select
-                                    value={answers[survey.questions[currentQuestionIndex].id] || ''}
-                                    label={t('public_survey.select_option')}
-                                    onChange={(e) => handleAnswerChange(survey.questions[currentQuestionIndex].id, e.target.value)}
-                                >
-                                    {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
-                                        <MenuItem key={optIndex} value={option}>
-                                            {option}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        )}
+                                </Box>
+                            )}
+                            {survey.questions[currentQuestionIndex].question_type === 'like_dislike' && (
+                                <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center', width: '100%' }}>
+                                    <ToggleButtonGroup
+                                        value={answers[survey.questions[currentQuestionIndex].id] || ''}
+                                        exclusive
+                                        onChange={(event, newValue) => {
+                                            if (newValue !== null) {
+                                                handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue);
+                                            }
+                                        }}
+                                        aria-label="text alignment"
+                                        sx={{
+                                            '& .MuiToggleButton-root': {
+                                                border: '1px solid #dee2e6', // var(--border)
+                                                borderRadius: '10px',
+                                                padding: '15px',
+                                                '&:hover': {
+                                                    background: `${alpha(primaryColor, 0.1)}`,
+                                                    borderColor: primaryColor,
+                                                },
+                                                '&.Mui-selected': {
+                                                    background: `${alpha(primaryColor, 0.1)}`,
+                                                    borderColor: primaryColor,
+                                                    color: primaryColor,
+                                                },
+                                            },
+                                        }}
+                                    >
+                                        <ToggleButton value="like" aria-label="like">
+                                            <ThumbUpIcon sx={{ fontSize: 36, color: primaryColor }} />
+                                        </ToggleButton>
+                                        <ToggleButton value="dislike" aria-label="dislike">
+                                            <ThumbDownIcon sx={{ fontSize: 36, color: primaryColor }} />
+                                        </ToggleButton>
+                                    </ToggleButtonGroup>
+                                </Box>
+                            )}
 
+                        {survey.questions[currentQuestionIndex].question_type === 'numerical_rating_scale' && (
+                                <Box sx={{
+                                    display: 'flex',
+                                'justifyContent': 'space-between',
+                                    marginTop: '15px',
+                                    flexWrap: 'wrap',
+                                    gap: '10px',
+                                }}>
+                                    {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
+                                        <Box
+                                            key={optIndex}
+                                            onClick={() => handleAnswerChange(survey.questions[currentQuestionIndex].id, option.value)}
+                                            sx={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
+                                                cursor: 'pointer',
+                                                padding: '10px',
+                                                borderRadius: '8px',
+                                                transition: 'all 0.2s ease',
+                                                width: { xs: 'calc(20% - 8px)', sm: 'auto' }, // Responsive width
+                                                background: answers[survey.questions[currentQuestionIndex].id] === option.value ? `${alpha(primaryColor, 0.1)}` : 'transparent',
+                                                '&:hover': {
+                                                    background: `${alpha(primaryColor, 0.1)}`,
+                                                },
+                                            }}
+                                        >
+                                            <Box sx={{
+                                                width: '40px',
+                                                height: '40px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                background: '#F1FAEE', // var(--secondary)
+                                                borderRadius: '50%',
+                                                fontWeight: 600,
+                                                marginBottom: '5px',
+                                                ...(answers[survey.questions[currentQuestionIndex].id] === option.value && {
+                                                    background: primaryColor,
+                                                    color: 'white',
+                                                }),
+                                                transition: 'all 0.2s ease',
+                                                '&:hover': {
+                                                    background: primaryColor,
+                                                    color: 'white',
+                                                },
+                                            }}>
+                                                {option.value}
+                                            </Box>
+                                            <Typography variant="caption" sx={{ fontSize: '12px', color: '#adb5bd', textAlign: 'center' }}>
+                                                {option.label}
+                                            </Typography>
+                                        </Box>
+                                    ))}
+                                </Box>
+                            )}
+                        {survey.questions[currentQuestionIndex].question_type === 'numerical_rating_scale' && (
+                                <Box sx={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    marginTop: '15px',
+                                    flexWrap: 'wrap',
+                                    gap: '10px',
+                                }}>
+                                    {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
+                                        <Box
+                                            key={optIndex}
+                                            onClick={() => handleAnswerChange(survey.questions[currentQuestionIndex].id, option.value)}
+                                            sx={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
+                                                cursor: 'pointer',
+                                                padding: '10px',
+                                                borderRadius: '8px',
+                                                transition: 'all 0.2s ease',
+                                                width: { xs: 'calc(20% - 8px)', sm: 'auto' }, // Responsive width
+                                                background: answers[survey.questions[currentQuestionIndex].id] === option.value ? `${alpha(primaryColor, 0.1)}` : 'transparent',
+                                                '&:hover': {
+                                                    background: `${alpha(primaryColor, 0.1)}`,
+                                                },
+                                            }}
+                                        >
+                                            <Box sx={{
+                                                width: '40px',
+                                                height: '40px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                background: '#F1FAEE', // var(--secondary)
+                                                borderRadius: '50%',
+                                                fontWeight: 600,
+                                                marginBottom: '5px',
+                                                ...(answers[survey.questions[currentQuestionIndex].id] === option.value && {
+                                                    background: primaryColor,
+                                                    color: 'white',
+                                                }),
+                                                transition: 'all 0.2s ease',
+                                                '&:hover': {
+                                                    background: primaryColor,
+                                                    color: 'white',
+                                                },
+                                            }}>
+                                                {option.value}
+                                            </Box>
+                                            <Typography variant="caption" sx={{ fontSize: '12px', color: '#adb5bd', textAlign: 'center' }}>
+                                                {option.label}
+                                            </Typography>
+                                        </Box>
+                                    ))}
+                                </Box>
+                            )}
+                        {survey.questions[currentQuestionIndex].question_type === 'emoji_rating' && (
+                            <Box sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                marginTop: '20px',
+                                flexWrap: 'wrap',
+                                gap: '10px',
+                            }}>
+                                {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
+                                    <Box
+                                        key={optIndex}
+                                        onClick={() => handleAnswerChange(survey.questions[currentQuestionIndex].id, option.value)}
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            cursor: 'pointer',
+                                            padding: '10px',
+                                            borderRadius: '8px',
+                                            transition: 'all 0.2s ease',
+                                            width: { xs: 'calc(20% - 8px)', sm: 'auto' }, // Responsive width
+                                            background: answers[survey.questions[currentQuestionIndex].id] === option.value ? `${alpha(primaryColor, 0.1)}` : 'transparent',
+                                            '&:hover': {
+                                                background: `${alpha(primaryColor, 0.1)}`,
+                                            },
+                                        }}
+                                    >
+                                        <Typography variant="h4" sx={{ fontSize: '36px', marginBottom: '5px' }}>
+                                            {option.emoji}
+                                        </Typography>
+                                        <Typography variant="caption" sx={{ fontSize: '12px', color: '#adb5bd' }}>
+                                            {option.label}
+                                        </Typography>
+                                    </Box>
+                                ))}
+                            </Box>
+                        )}
+                    </Box> // Closing Box for questions
+                    )} // Closing conditional render for questions
+
+                </Box>
+
+                {/* Survey Footer */}
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '20px 30px',
+                    borderTop: '1px solid #dee2e6', // var(--border)
+                }}>
+                    <Button
+                        variant="outlined"
+                        onClick={handlePrevious}
+                        disabled={currentQuestionIndex === 0}
+                        sx={{
+                            padding: '12px 24px',
+                            borderRadius: '8px',
+                            fontWeight: 500,
+                            cursor: 'pointer',
+                            transition: 'all 0.2s ease',
+                            border: `1px solid ${primaryColor}`,
+                            color: primaryColor,
+                            fontSize: '16px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            '&:hover': {
+                                background: `${alpha(primaryColor, 0.1)}`,
+                                borderColor: primaryColor,
+                            },
+                            '&:disabled': {
+                                opacity: 0.5,
+                                cursor: 'not-allowed',
+                                transform: 'none !important',
+                            },
+                        }}
+                    >
+                        <i className="fas fa-arrow-left"></i> Anterior
+                    </Button>
+                    {currentQuestionIndex < survey.questions.length - 1 ? (
+                        <Button
+                            variant="contained"
+                            onClick={handleNext}
+                            sx={{
+                                padding: '12px 24px',
+                                borderRadius: '8px',
+                                fontWeight: 500,
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                background: primaryColor,
+                                color: 'white',
+                                fontSize: '16px',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                '&:hover': {
+                                    background: alpha(primaryColor, 0.9),
+                                    transform: 'translateY(-2px)',
+                                },
+                            }}
+                        >
+                            Próximo <i className="fas fa-arrow-right"></i>
+                        </Button>
+                    ) : (
+                        <Button
+                            variant="contained"
+                            onClick={handleSubmit}
+                            disabled={submitting}
+                            sx={{
+                                padding: '12px 24px',
+                                borderRadius: '8px',
+                                fontWeight: 500,
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                background: primaryColor,
+                                color: 'white',
+                                fontSize: '16px',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                '&:hover': {
+                                    background: alpha(primaryColor, 0.9),
+                                    transform: 'translateY(-2px)',
+                                },
+                                '&:disabled': {
+                                    opacity: 0.5,
+                                    cursor: 'not-allowed',
+                                    transform: 'none !important',
+                                },
+                            }}
+                        >
+                            {submitting ? <CircularProgress size={24} color="inherit" /> : <><i className="fas fa-paper-plane"></i> Enviar Pesquisa</>}
+                        </Button>
+                    )}
+                </Box>
+            </Paper>
+        </Container>
+    </Box>
+  );
+};
+
+export default PublicSurveyForm;

@@ -1,19 +1,19 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             187.0s
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             171.5s
 ------
  > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.389 + npm run build
-0.785
-0.785 > feedeliza-plus@1.0.0 build
-0.785 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.785
-3.906 Creating an optimized production build...
-185.8 Failed to compile.
-185.8
-185.8 [eslint]
-185.8 src/pages/Public/PublicSurveyForm.js
-185.8 Syntax error: Unexpected token (536:26) (536:26)
-185.8
-185.8
+0.309 + npm run build
+0.598
+0.598 > feedeliza-plus@1.0.0 build
+0.598 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.598
+3.459 Creating an optimized production build...
+170.5 Failed to compile.
+170.5
+170.5 [eslint]
+170.5 src/pages/Public/PublicSurveyForm.js
+170.5 Syntax error: Unterminated JSX contents. (509:26) (509:26)
+170.5
+170.5
 ------
 Dockerfile.frontend:24
 --------------------

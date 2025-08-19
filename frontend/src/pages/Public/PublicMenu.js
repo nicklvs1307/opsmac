@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'; // Using a direct axios import for public routes
+import { useTranslation } from 'react-i18next';
 
 const PublicMenu = () => {
+  const { t } = useTranslation();
   const { restaurantSlug } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ const PublicMenu = () => {
         const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/public/products/${restaurantSlug}`);
         setProducts(response.data);
       } catch (err) {
-        setError('Failed to load menu. Please try again later.');
+        setError(t('public_menu_general.failed_to_load_menu'));
         console.error(err);
       } finally {
         setLoading(false);
@@ -27,7 +29,7 @@ const PublicMenu = () => {
   }, [restaurantSlug]);
 
   if (loading) {
-    return <div style={{ textAlign: 'center', padding: '20px' }}>Loading menu...</div>;
+    return <div style={{ textAlign: 'center', padding: '20px' }}>{t('public_menu_general.loading_menu')}</div>;
   }
 
   if (error) {
@@ -35,12 +37,12 @@ const PublicMenu = () => {
   }
 
   if (products.length === 0) {
-    return <div style={{ textAlign: 'center', padding: '20px' }}>No products found for this restaurant.</div>;
+    return <div style={{ textAlign: 'center', padding: '20px' }}>{t('public_menu_general.no_products_found')}</div>;
   }
 
   // Group products by category
   const productsByCategory = products.reduce((acc, product) => {
-    const category = product.category || 'Uncategorized';
+    const category = product.category || t('public_menu_general.uncategorized');
     if (!acc[category]) {
       acc[category] = [];
     }
@@ -50,7 +52,7 @@ const PublicMenu = () => {
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '800px', margin: '20px auto', padding: '20px', border: '1px solid #eee', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-      <h1 style={{ textAlign: 'center', color: '#333' }}>Digital Menu</h1>
+      <h1 style={{ textAlign: 'center', color: '#333' }}>{t('public_menu_general.digital_menu_title')}</h1>
       {
         Object.entries(productsByCategory).map(([category, prods]) => (
           <div key={category} style={{ marginBottom: '30px' }}>

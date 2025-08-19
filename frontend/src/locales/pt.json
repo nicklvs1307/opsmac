@@ -1259,7 +1259,13 @@
       "item_table_header_unit_price": "Preço Unit.",
       "item_table_header_subtotal": "Subtotal",
       "close_button": "Fechar",
-      "mark_as_delivered_button": "Marcar como Entregue"
+      "mark_as_delivered_button": "Marcar como Entregue",
+      "pdv.command_table": "Comanda Mesa",
+      "pdv.table_options_title": "Opções para Mesa {{tableNumber}}",
+      "pdv.table_options_description": "O que você deseja fazer com esta mesa?",
+      "pdv.add_items_button": "Adicionar Itens",
+      "pdv.close_account_button": "Fechar Conta",
+      "pdv.close_account_toast": "Funcionalidade \"Fechar Conta\" para Mesa {{tableNumber}} (a ser implementada)"
     }
   }
 }

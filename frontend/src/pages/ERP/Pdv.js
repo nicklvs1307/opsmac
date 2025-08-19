@@ -134,6 +134,8 @@ const Pdv = () => {
   const [reinforcementModalOpen, setReinforcementModalOpen] = useState(false);
   const [partialSummaryModalOpen, setPartialSummaryModalOpen] = useState(false);
   const [closeCashRegisterModalOpen, setCloseCashRegisterModalOpen] = useState(false);
+  const [showTableOptionsModal, setShowTableOptionsModal] = useState(false); // New state for table options modal
+  const [tableToActOn, setTableToActOn] = useState(null); // New state to store table for actions
 
   // Fetch Customers
   const fetchCustomers = async ({ queryKey }) => {
@@ -168,7 +170,14 @@ const Pdv = () => {
   const handleSelectTableCard = (table) => {
     setSelectedTable(table);
     setTableId(table.id); // Also update tableId for the existing PDV logic
-    setCurrentTab('pdv'); // Switch to PDV tab after selecting a table
+
+    if (table.status === 'occupied' && table.active_orders_count > 0) {
+      setTableToActOn(table);
+      setShowTableOptionsModal(true); // Open modal for options
+    } else {
+      setOrderType('dine_in'); // Set order type to dine_in for new orders on available/reserved tables
+      setCurrentTab('pdv'); // Switch to PDV tab directly
+    }
   };
 
   // Sample product data (from exemplo.html, will be replaced by API data)
@@ -786,7 +795,9 @@ const Pdv = () => {
                 {/* Order Section */}
                 <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
                   <div className="order-header">
-                    <h3 className="order-title">{t('pdv.current_order_title')}</h3>
+                    <h3 className="order-title">
+                      {selectedTable ? `${t('pdv.command_table')} ${selectedTable.table_number}` : t('pdv.current_order_title')}
+                    </h3>
                     <ToggleButtonGroup
                       value={orderType}
                       exclusive
@@ -937,57 +948,58 @@ const Pdv = () => {
 
             {/* Tables Tab */}
             <div className={currentTab === 'tables' ? 'tab-pane active' : 'tab-pane'} id="tables-tab">
-              <div className="tables-section">
-                <div className="tables-grid" id="tablesGrid">
-                  {isLoadingTables ? (
-                    <CircularProgress />
-                  ) : isErrorTables ? (
-                    <Alert severity="error">{t('pdv.error_loading_tables')}</Alert>
-                  ) : tables?.length === 0 ? (
-                    <Typography variant="h6" color="textSecondary" sx={{ textAlign: 'center', mt: 4 }}>
-                      {t('pdv.no_tables_found')}
-                    </Typography>
-                  ) : (
-                    tables?.map(table => {
-                      let statusClass = '';
-                      let statusText = '';
-
-                      switch(table.status) {
-                          case 'available':
-                              statusClass = 'status-available';
-                              statusText = t('pdv.table_status_available');
-                              break;
-                          case 'occupied':
-                              statusClass = 'status-occupied';
-                              statusText = t('pdv.table_status_occupied');
-                              break;
-                          case 'reserved':
-                              statusClass = 'status-reserved';
-                              statusText = t('pdv.table_status_reserved');
-                              break;
-                          default:
-                              statusClass = '';
-                              statusText = table.status;
-                      }
-
-                      return (
-                        <div
-                          key={table.id}
-                          className={`table-card ${selectedTable?.id === table.id ? 'active' : ''}`}
-                          onClick={() => handleSelectTableCard(table)}
-                        >
-                          <div className="table-number">{table.table_number}</div>
-                          <div className={`table-status ${statusClass}`}>{statusText}</div>
-                          <div className="table-capacity">{t('pdv.table_capacity', { capacity: table.capacity })}</div>
-                          {table.active_orders_count > 0 && (
-                            <div className="table-badge">{table.active_orders_count}</div>
-                          )}
-                        </div>
-                      );
-                    })
-                  )}
+                <div className="tables-section">
+                    <div className="tables-grid" id="tablesGrid">
+                        {/* Tables will be dynamically generated */}
+                        {isLoadingTables ? (
+                            <CircularProgress />
+                        ) : isErrorTables ? (
+                            <Alert severity="error">{t('pdv.error_loading_tables')}</Alert>
+                        ) : tables?.length === 0 ? (
+                            <Typography variant="h6" color="textSecondary" sx={{ textAlign: 'center', mt: 4 }}>
+                                {t('pdv.no_tables_found')}
+                            </Typography>
+                        ) : (
+                            tables?.map(table => {
+                                let statusClass = '';
+                                let statusText = '';
+                                
+                                switch(table.status) {
+                                    case 'available':
+                                        statusClass = 'status-available';
+                                        statusText = t('pdv.table_status_available');
+                                        break;
+                                    case 'occupied':
+                                        statusClass = 'status-occupied';
+                                        statusText = t('pdv.table_status_occupied');
+                                        break;
+                                    case 'reserved':
+                                        statusClass = 'status-reserved';
+                                        statusText = t('pdv.table_status_reserved');
+                                        break;
+                                    default:
+                                        statusClass = '';
+                                        statusText = table.status;
+                                }
+                                
+                                return (
+                                    <div
+                                        key={table.id}
+                                        className={`table-card ${selectedTable?.id === table.id ? 'active' : ''}`}
+                                        onClick={() => handleSelectTableCard(table)}
+                                    >
+                                        <div className="table-number">{table.table_number}</div>
+                                        <div className={`table-status ${statusClass}`}>{statusText}</div>
+                                        <div className="table-capacity">{t('pdv.table_capacity', { capacity: table.capacity })}</div>
+                                        {table.active_orders_count > 0 ? (
+                                            <div className="table-badge">{table.active_orders_count}</div>
+                                        ) : ''}
+                                    </div>
+                                );
+                            })
+                        )}
+                    </div>
                 </div>
-              </div>
             </div>
 
             {/* Orders Tab */}
@@ -1525,6 +1537,28 @@ const Pdv = () => {
           <ShoppingCartIcon />
         </button>
       )}
+
+      {/* Table Options Modal */}
+      <Dialog open={showTableOptionsModal} onClose={() => setShowTableOptionsModal(false)}>
+        <DialogTitle>{t('pdv.table_options_title', { tableNumber: tableToActOn?.table_number })}</DialogTitle>
+        <DialogContent>
+          <Typography>{t('pdv.table_options_description')}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => {
+            setShowTableOptionsModal(false);
+            setCurrentTab('pdv'); // Switch to PDV to add items
+          }}>{t('pdv.add_items_button')}</Button>
+          <Button onClick={() => {
+            setShowTableOptionsModal(false);
+            // Logic to close account for tableToActOn
+            // This would involve fetching the active order for tableToActOn
+            // and then opening the payment modal with that order's details.
+            // For now, let's just log it or open the payment modal with a dummy order.
+            toast.info(t('pdv.close_account_toast', { tableNumber: tableToActOn?.table_number }));
+          }} color="primary">{t('pdv.close_account_button')}</Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Cash Register Modal */}
       <CashRegisterModal

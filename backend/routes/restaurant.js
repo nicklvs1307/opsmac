@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { auth, checkRestaurantOwnership, authorize } = require('../middleware/auth');
 const { models } = require('../config/database');
+const { body, validationResult } = require('express-validator');
 
 /**
  * @swagger
@@ -224,23 +225,46 @@ router.get('/:restaurantId/products', auth, isWaiter, async (req, res) => {
     }
 });
 
-// Create a new order for a table
-router.post('/:restaurantId/orders', auth, isWaiter, async (req, res) => {
-    const { table_id, items } = req.body;
-    try {
-        const newOrder = await models.Order.create({
-            restaurant_id: req.params.restaurantId,
-            table_id,
-            items,
-            status: 'pending',
-            platform: 'waiter_app',
-            order_date: new Date()
-        });
-        res.status(201).json(newOrder);
-    } catch (error) {
-        res.status(500).json({ error: 'Erro ao criar pedido.' });
+router.post(
+    '/:restaurantId/orders',
+    auth,
+    isWaiter,
+    [
+        body('table_id').isUUID().withMessage('ID da mesa inválido.'),
+        body('items').isArray({ min: 1 }).withMessage('O pedido deve conter pelo menos um item.'),
+        body('items.*.id').isUUID().withMessage('ID do produto inválido.'),
+        body('items.*.name').notEmpty().withMessage('Nome do item é obrigatório.'),
+        body('items.*.quantity').isInt({ min: 1 }).withMessage('Quantidade do item inválida.'),
+        body('items.*.price').isDecimal().withMessage('Preço do item inválido.'),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const { table_id, items } = req.body;
+        try {
+            const total_amount = items.reduce((total, item) => total + item.price * item.quantity, 0);
+            const external_order_id = `POS-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
+
+            const newOrder = await models.Order.create({
+                restaurant_id: req.params.restaurantId,
+                table_id,
+                items,
+                status: 'pending',
+                platform: 'other', // Changed from 'waiter_app' to 'other'
+                order_date: new Date(),
+                total_amount,
+                external_order_id,
+            });
+            res.status(201).json(newOrder);
+        } catch (error) {
+            console.error('Erro ao criar pedido:', error); // Added console.error for better logging
+            res.status(500).json({ error: 'Erro ao criar pedido.' });
+        }
     }
-});
+);
 
 
 module.exports = router;

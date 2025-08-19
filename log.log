@@ -1,26 +1,78 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             166.4s
-------
- > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.371 + npm run build
-0.641
-0.641 > feedeliza-plus@1.0.0 build
-0.641 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.641
-3.593 Creating an optimized production build...
-165.3 Failed to compile.
-165.3
-165.3 [eslint]
-165.3 src/pages/Public/PublicDineInMenu.js
-165.3 Syntax error: Identifier 'useTranslation' has already been declared. (7:9) (7:9)
-165.3
-165.3
-------
-Dockerfile.frontend:24
---------------------
-  22 |     ARG REACT_APP_API_URL
-  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  24 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  25 |
-  26 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+Largest Contentful Paint (LCP)
+12,56 s
+Seu valor local de 12,56 s para LCP está ruim.
+Elemento da LCP
+p.MuiTypography-root.MuiT
+
+Interaction to Next Paint (INP)
+
+856 ms
+Seu valor local de 856 ms para INP está ruim.
+Interação INP
+pointer
+
+pointer
+span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-1j45gii
+72 ms
+Fase
+Duração local (ms)
+Latência na entrada
+6
+Duração do processamento
+11
+Atraso na apresentação
+55
+pointer
+span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-1j45gii
+368 ms
+Fase
+Duração local (ms)
+Latência na entrada
+5
+Duração do processamento
+272
+Atraso na apresentação
+91
+pointer
+span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-wzcz2x
+48 ms
+Fase
+Duração local (ms)
+Latência na entrada
+5
+Duração do processamento
+3
+Atraso na apresentação
+41
+pointer INP
+span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-wzcz2x
+856 ms
+Fase
+Duração local (ms)
+Latência na entrada
+6
+Duração do processamento
+670
+Atraso na apresentação
+180
+pointer
+div.MuiButtonBase-root.MuiListItemButton-root.MuiListItemButton-gutters.Mui-selected.css-97j628
+32 ms
+Fase
+Duração local (ms)
+Latência na entrada
+3
+Duração do processamento
+3
+Atraso na apresentação
+26
+pointer
+div.MuiButtonBase-root.MuiListItemButton-root.MuiListItemButton-gutters.Mui-selected.css-97j628
+456 ms
+Fase
+Duração local (ms)
+Latência na entrada
+2
+Duração do processamento
+279
+Atraso na apresentação

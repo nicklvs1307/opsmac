@@ -53,7 +53,7 @@ router.post(
         delivery_address: delivery_address || {},
         payment_method,
         notes,
-        platform: 'web_menu', // Set platform to 'web_menu'
+        platform: 'other', // Set platform to 'other' for web menu orders
         status: 'pending', // Initial status
         external_order_id: `WEB-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`, // Generate a unique ID for internal orders
       });

@@ -92,25 +92,25 @@ const UaiRangoIntegration = () => {
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="3. Controle de Horários:"
-              secondary="Automatizar a abertura e fechamento do seu estabelecimento na plataforma."
+              primary={t('integrations.uairango.step3_primary')}
+              secondary={t('integrations.uairango.step3_secondary')}
             />
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="4. Autenticação e Documentação:"
-              secondary="Para detalhes específicos sobre autenticação (chaves de API, OAuth, etc.) e acesso à documentação completa, é provável que seja necessário entrar em contato direto com a equipe de desenvolvimento da Uai Rango ou acessar um portal de desenvolvedores específico, caso exista."
+              primary={t('integrations.uairango.step4_primary')}
+              secondary={t('integrations.uairango.step4_secondary')}
             />
           </ListItem>
         </List>
         <Divider sx={{ my: 2 }} />
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-          Para iniciar a integração, é recomendável buscar a documentação oficial da API da Uai Rango ou entrar em contato com o suporte para desenvolvedores para obter as credenciais e o guia de integração.
+          {t('integrations.uairango.documentation_guidance')}
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <TextField
-            label="Uai Rango API Key"
+            label={t('integrations.uairango.api_key_label')}
             variant="outlined"
             fullWidth
             value={apiKey}
@@ -118,7 +118,7 @@ const UaiRangoIntegration = () => {
             required
           />
           <TextField
-            label="ID do Restaurante Uai Rango"
+            label={t('integrations.uairango.restaurant_id_label')}
             variant="outlined"
             fullWidth
             value={restaurantUaiRangoId}
@@ -126,7 +126,7 @@ const UaiRangoIntegration = () => {
             required
           />
           <Button type="submit" variant="contained" disabled={saving}>
-            {saving ? <CircularProgress size={24} color="inherit" /> : 'Salvar Configurações'}
+            {saving ? <CircularProgress size={24} color="inherit" /> : t('integrations.uairango.save_button')}
           </Button>
         </Box>
       </Paper>

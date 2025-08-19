@@ -1,24 +1,24 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             190.4s
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             189.4s
 ------
  > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.410 + npm run build
-0.695
-0.695 > feedeliza-plus@1.0.0 build
-0.695 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.695
-4.200 Creating an optimized production build...
-186.3 Failed to compile.
-186.3
-186.4 [eslint]
-186.4 src/pages/ERP/Pdv.js
-186.4   Line 1542:8:   'Dialog' is not defined         react/jsx-no-undef
-186.4   Line 1543:10:  'DialogTitle' is not defined    react/jsx-no-undef
-186.4   Line 1544:10:  'DialogContent' is not defined  react/jsx-no-undef
-186.4   Line 1547:10:  'DialogActions' is not defined  react/jsx-no-undef
-186.4
-186.4 Search for the keywords to learn more about each error.
-186.4
-186.4
+0.377 + npm run build
+0.790
+0.790 > feedeliza-plus@1.0.0 build
+0.790 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.790
+3.603 Creating an optimized production build...
+188.2 Failed to compile.
+188.2
+188.2 [eslint]
+188.2 src/pages/ERP/Pdv.js
+188.2   Line 1363:8:   'Dialog' is not defined         react/jsx-no-undef
+188.2   Line 1364:10:  'DialogTitle' is not defined    react/jsx-no-undef
+188.2   Line 1365:10:  'DialogContent' is not defined  react/jsx-no-undef
+188.2   Line 1368:10:  'DialogActions' is not defined  react/jsx-no-undef
+188.2
+188.2 Search for the keywords to learn more about each error.
+188.2
+188.2
 ------
 Dockerfile.frontend:24
 --------------------

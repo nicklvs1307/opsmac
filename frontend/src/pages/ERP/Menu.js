@@ -43,7 +43,7 @@ const Menu = () => {
   };
 
   return (
-    <Box className="main-content">
+    <Box>
       <Box className="header">
         <Typography variant="h4" component="h1" gutterBottom>
           {t('menu.title')}
@@ -68,17 +68,8 @@ const Menu = () => {
           </Box>
         </Box>
 
-        <Box className="card success">
-          <Box className="card-header">
-            <span className="card-title">Produtos Ativos</span>
-            <i className="fas fa-check-circle" style={{ color: 'var(--success)' }}></i>
-          </Box>
-          <Box className="card-value">87</Box>
-          <Box className="card-footer">
-            <i className="fas fa-arrow-up" style={{ color: 'var(--success)' }}></i>
-            <span>+12 este mês</span>
-          </Box>
-        </Box>
+            <Box>
+      <Box className="tabs">
 
         <Box className="card warning">
           <Box className="card-header">

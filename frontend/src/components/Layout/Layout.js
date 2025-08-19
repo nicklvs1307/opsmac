@@ -19,8 +19,9 @@ import {
 
 import Sidebar from './Sidebar';
 import Header from './Header';
+import DashboardContentHeader from './DashboardContentHeader';
 
-const drawerWidth = 280;
+const drawerWidth = 250;
 
 const Layout = ({ children }) => {
   const theme = useTheme();
@@ -28,6 +29,13 @@ const Layout = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopOpen, setDesktopOpen] = useState(true);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    document.body.style.backgroundColor = '#f5f7fa';
+    document.body.style.color = 'var(--dark)';
+    document.body.style.display = 'flex';
+    document.body.style.minHeight = '100vh';
+  }, []);
 
   const handleDrawerToggle = () => {
     if (isMobile) {
@@ -255,6 +263,7 @@ const Layout = ({ children }) => {
           boxShadow: desktopOpen ? `inset 8px 0 16px ${alpha(theme.palette.common.black, 0.05)}` : 'none'
         }}
       >
+        <DashboardContentHeader />
         <Toolbar /> {/* Spacer for fixed AppBar */}
         <Box sx={{ 
           mt: 2,

@@ -97,6 +97,15 @@ const options = {
             updated_at: { type: 'string', format: 'date-time', description: 'Data da última atualização do restaurante' },
           },
         },
+        Table: {
+          type: 'object',
+          properties: {
+            id: { type: 'string', format: 'uuid' },
+            restaurant_id: { type: 'string', format: 'uuid' },
+            table_number: { type: 'integer' },
+            qr_code_url: { type: 'string' },
+          },
+        },
       },
     },
   },

@@ -27,7 +27,7 @@ import {
   Person as PersonIcon,
   QrCode as QrCodeIcon,
   Schedule as ScheduleIcon,
-  LocationOn as LocationIcon,
+  LocationOn as LocationOnIcon,
   Phone as PhoneIcon,
   Email as EmailIcon,
 } from '@mui/icons-material';
@@ -36,10 +36,12 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const FeedbackDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { t } = useTranslation();
   const [feedback, setFeedback] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -61,7 +63,7 @@ const FeedbackDetail = () => {
       setFeedback(response.data);
     } catch (err) {
       console.error('Error fetching feedback:', err);
-      setError('Erro ao carregar feedback');
+      setError(t('feedback_detail.error_loading'));
     } finally {
       setLoading(false);
     }
@@ -75,12 +77,12 @@ const FeedbackDetail = () => {
         response: replyText,
       });
       
-      toast.success('Resposta enviada com sucesso!');
+      toast.success(t('feedback_detail.reply_success'));
       setReplyDialog(false);
       setReplyText('');
       fetchFeedback();
     } catch (err) {
-      toast.error('Erro ao enviar resposta');
+      toast.error(t('feedback_detail.reply_error'));
     } finally {
       setReplyLoading(false);
     }
@@ -90,10 +92,10 @@ const FeedbackDetail = () => {
     try {
       await axiosInstance.delete(`/api/feedback/${id}`);
       
-      toast.success('Feedback excluído com sucesso!');
+      toast.success(t('feedback_detail.delete_success'));
       navigate('/feedback');
     } catch (err) {
-      toast.error('Erro ao excluir feedback');
+      toast.error(t('feedback_detail.delete_error'));
     }
   };
 
@@ -118,29 +120,29 @@ const FeedbackDetail = () => {
 
   const getTypeLabel = (type) => {
     switch (type) {
-      case 'compliment': return 'Elogio';
-      case 'complaint': return 'Reclamação';
-      case 'suggestion': return 'Sugestão';
-      case 'criticism': return 'Crítica';
+      case 'compliment': return t('feedback_list.type_compliment');
+      case 'complaint': return t('feedback_list.type_complaint');
+      case 'suggestion': return t('feedback_list.type_suggestion');
+      case 'criticism': return t('feedback_list.type_criticism');
       default: return type;
     }
   };
 
   const getSourceLabel = (source) => {
     switch (source) {
-      case 'qr_code': return 'QR Code';
-      case 'whatsapp': return 'WhatsApp';
-      case 'manual': return 'Manual';
-      case 'website': return 'Website';
+      case 'qr_code': return t('feedback_list.source_qrcode');
+      case 'whatsapp': return t('feedback_list.source_whatsapp');
+      case 'manual': return t('feedback_list.source_manual');
+      case 'website': return t('feedback_list.source_website');
       default: return source;
     }
   };
 
   const getStatusLabel = (status) => {
     switch (status) {
-      case 'pending': return 'Pendente';
-      case 'responded': return 'Respondido';
-      case 'resolved': return 'Resolvido';
+      case 'pending': return t('feedback_list.status_pending');
+      case 'responded': return t('feedback_list.status_responded');
+      case 'resolved': return t('feedback_list.status_resolved');
       default: return status;
     }
   };
@@ -170,10 +172,10 @@ const FeedbackDetail = () => {
           onClick={() => navigate('/satisfaction/feedback')}
           sx={{ mb: 2 }}
         >
-          Voltar
+          {t('feedback_detail.back_button')}
         </Button>
         <Alert severity="error">
-          {error || 'Feedback não encontrado'}
+          {error || t('feedback_detail.not_found')}
         </Alert>
       </Box>
     );
@@ -188,10 +190,10 @@ const FeedbackDetail = () => {
             startIcon={<ArrowBackIcon />}
             onClick={() => navigate('/satisfaction/feedback')}
           >
-            Voltar
+            {t('feedback_detail.back_button')}
           </Button>
           <Typography variant="h4" component="h1">
-            Detalhes do Feedback
+            {t('feedback_detail.title')}
           </Typography>
         </Box>
         
@@ -202,7 +204,7 @@ const FeedbackDetail = () => {
               startIcon={<ReplyIcon />}
               onClick={() => setReplyDialog(true)}
             >
-              Responder
+              {t('feedback_detail.reply_button')}
             </Button>
           )}
           <Button
@@ -210,7 +212,7 @@ const FeedbackDetail = () => {
             startIcon={<EditIcon />}
             onClick={() => navigate(`/satisfaction/feedback/${id}/edit`)}
           >
-            Editar
+            {t('feedback_detail.edit_button')}
           </Button>
           <Button
             variant="outlined"
@@ -218,7 +220,7 @@ const FeedbackDetail = () => {
             startIcon={<DeleteIcon />}
             onClick={() => setDeleteDialog(true)}
           >
-            Excluir
+            {t('feedback_detail.delete_button')}
           </Button>
         </Box>
       </Box>
@@ -234,10 +236,10 @@ const FeedbackDetail = () => {
               </Avatar>
               <Box>
                 <Typography variant="h5">
-                  {feedback.customer?.name || 'Cliente Anônimo'}
+                  {feedback.customer?.name || t('feedback_detail.anonymous_customer')}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {feedback.customer?.email || feedback.customer?.phone || 'Sem contato'}
+                  {feedback.customer?.email || feedback.customer?.phone || t('feedback_detail.no_contact')}
                 </Typography>
               </Box>
             </Box>
@@ -270,7 +272,7 @@ const FeedbackDetail = () => {
                 />
                 {feedback.table_number && (
                   <Chip
-                    label={`Mesa ${feedback.table_number}`}
+                    label={t('feedback_detail.table_prefix') + ` ${feedback.table_number}`}
                     variant="outlined"
                   />
                 )}
@@ -282,7 +284,7 @@ const FeedbackDetail = () => {
             {/* Comment */}
             <Box mb={3}>
               <Typography variant="h6" gutterBottom>
-                Comentário
+                {t('feedback_detail.comment_title')}
               </Typography>
               <Typography variant="body1" paragraph>
                 {feedback.comment}
@@ -294,7 +296,7 @@ const FeedbackDetail = () => {
               <Box>
                 <Divider sx={{ my: 3 }} />
                 <Typography variant="h6" gutterBottom>
-                  Resposta
+                  {t('feedback_detail.response_title')}
                 </Typography>
                 <Box sx={{ bgcolor: 'grey.50', p: 2, borderRadius: 1 }}>
                   <Typography variant="body1">
@@ -302,7 +304,7 @@ const FeedbackDetail = () => {
                   </Typography>
                   {feedback.response_date && (
                     <Typography variant="caption" color="text.secondary" display="block" mt={1}>
-                      Respondido em {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                      {t('feedback_detail.responded_on')} {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
                     </Typography>
                   )}
                 </Box>
@@ -318,25 +320,25 @@ const FeedbackDetail = () => {
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 <ScheduleIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-                Timeline
+                {t('feedback_detail.timeline_title')}
               </Typography>
               <Box>
                 <Typography variant="body2" color="text.secondary">
-                  <strong>Criado:</strong> {format(new Date(feedback.created_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                  <strong>{t('feedback_detail.created_at')}:</strong> {format(new Date(feedback.created_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
                 </Typography>
                 {feedback.updated_at && feedback.updated_at !== feedback.created_at && (
                   <Typography variant="body2" color="text.secondary">
-                    <strong>Atualizado:</strong> {format(new Date(feedback.updated_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                    <strong>{t('feedback_detail.updated_at')}:</strong> {format(new Date(feedback.updated_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
                   </Typography>
                 )}
                 {feedback.response_date && (
                   <Typography variant="body2" color="text.secondary">
-                    <strong>Respondido:</strong> {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                    <strong>{t('feedback_detail.responded_at')}:</strong> {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
                   </Typography>
                 )}
                 {feedback.visit_date && (
                   <Typography variant="body2" color="text.secondary">
-                    <strong>Data da Visita:</strong> {format(new Date(feedback.visit_date), 'dd/MM/yyyy', { locale: ptBR })}
+                    <strong>{t('feedback_detail.visit_date')}:</strong> {format(new Date(feedback.visit_date), 'dd/MM/yyyy', { locale: ptBR })}
                   </Typography>
                 )}
               </Box>
@@ -349,11 +351,11 @@ const FeedbackDetail = () => {
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   <PersonIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-                  Detalhes do Cliente
+                  {t('feedback_detail.customer_details_title')}
                 </Typography>
                 <Box>
                   <Typography variant="body2">
-                    <strong>Nome:</strong> {feedback.customer.name}
+                    <strong>{t('feedback_detail.name_label')}:</strong> {feedback.customer.name}
                   </Typography>
                   {feedback.customer.email && (
                     <Typography variant="body2" display="flex" alignItems="center" gap={1}>
@@ -369,7 +371,7 @@ const FeedbackDetail = () => {
                   )}
                   {feedback.customer.total_visits && (
                     <Typography variant="body2">
-                      <strong>Total de Visitas:</strong> {feedback.customer.total_visits}
+                      <strong>{t('feedback_detail.total_visits_label')}:</strong> {feedback.customer.total_visits}
                     </Typography>
                   )}
                 </Box>
@@ -383,11 +385,11 @@ const FeedbackDetail = () => {
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   <QrCodeIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-                  QR Code
+                  {t('feedback_detail.qrcode_details_title')}
                 </Typography>
                 <Box>
                   <Typography variant="body2">
-                    <strong>Nome:</strong> {feedback.qr_code.name}
+                    <strong>{t('feedback_detail.name_label')}:</strong> {feedback.qr_code.name}
                   </Typography>
                   {feedback.qr_code.location && (
                     <Typography variant="body2" display="flex" alignItems="center" gap={1}>
@@ -397,7 +399,7 @@ const FeedbackDetail = () => {
                   )}
                   {feedback.qr_code.table_number && (
                     <Typography variant="body2">
-                      <strong>Mesa:</strong> {feedback.qr_code.table_number}
+                      <strong>{t('feedback_detail.table_label')}:</strong> {feedback.qr_code.table_number}
                     </Typography>
                   )}
                 </Box>
@@ -409,21 +411,21 @@ const FeedbackDetail = () => {
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
-                Estatísticas
+                {t('feedback_detail.stats_title')}
               </Typography>
               <Box>
                 <Typography variant="body2">
-                  <strong>ID:</strong> #{feedback.id}
+                  <strong>{t('feedback_detail.id_label')}:</strong> #{feedback.id}
                 </Typography>
                 <Typography variant="body2">
-                  <strong>Origem:</strong> {getSourceLabel(feedback.source)}
+                  <strong>{t('feedback_detail.source_label')}:</strong> {getSourceLabel(feedback.source)}
                 </Typography>
                 <Typography variant="body2">
-                  <strong>Status:</strong> {getStatusLabel(feedback.status)}
+                  <strong>{t('feedback_detail.status_label')}:</strong> {getStatusLabel(feedback.status)}
                 </Typography>
                 {feedback.nps_score !== undefined && (
                   <Typography variant="body2">
-                    <strong>NPS:</strong> {feedback.nps_score}
+                    <strong>{t('feedback_detail.nps_label')}:</strong> {feedback.nps_score}
                   </Typography>
                 )}
               </Box>
@@ -434,46 +436,46 @@ const FeedbackDetail = () => {
 
       {/* Reply Dialog */}
       <Dialog open={replyDialog} onClose={() => setReplyDialog(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>Responder Feedback</DialogTitle>
+        <DialogTitle>{t('feedback_detail.reply_dialog_title')}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            label="Sua resposta"
+            label={t('feedback_detail.reply_dialog_label')}
             fullWidth
             multiline
             rows={4}
             variant="outlined"
             value={replyText}
             onChange={(e) => setReplyText(e.target.value)}
-            placeholder="Digite sua resposta ao cliente..."
+            placeholder={t('feedback_detail.reply_dialog_placeholder')}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setReplyDialog(false)}>Cancelar</Button>
+          <Button onClick={() => setReplyDialog(false)}>{t('feedback_detail.cancel_button')}</Button>
           <Button
             onClick={handleReply}
             variant="contained"
             disabled={!replyText.trim() || replyLoading}
             startIcon={replyLoading ? <CircularProgress size={20} /> : null}
           >
-            {replyLoading ? 'Enviando...' : 'Enviar Resposta'}
+            {replyLoading ? t('feedback_detail.sending_button') : t('feedback_detail.send_reply_button')}
           </Button>
         </DialogActions>
       </Dialog>
 
       {/* Delete Dialog */}
       <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>
-        <DialogTitle>Confirmar Exclusão</DialogTitle>
+        <DialogTitle>{t('feedback_detail.delete_dialog_title')}</DialogTitle>
         <DialogContent>
           <Typography>
-            Tem certeza que deseja excluir este feedback? Esta ação não pode ser desfeita.
+            {t('feedback_detail.delete_dialog_content')}
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setDeleteDialog(false)}>Cancelar</Button>
+          <Button onClick={() => setDeleteDialog(false)}>{t('feedback_detail.cancel_button')}</Button>
           <Button onClick={handleDelete} color="error" variant="contained">
-            Excluir
+            {t('feedback_detail.delete_button')}
           </Button>
         </DialogActions>
       </Dialog>

@@ -115,7 +115,5 @@ const options = {
 };
 
 const specs = swaggerJsdoc(options);
-console.log('Swagger JSDoc options.apis:', options.apis);
-console.log('Generated Swagger Specs (first 500 chars):', JSON.stringify(specs, null, 2).substring(0, 500));
 
 module.exports = specs;

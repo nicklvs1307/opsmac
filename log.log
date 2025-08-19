@@ -1,17 +1,28 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-/app/node_modules/express/lib/router/index.js:469
-      throw new TypeError('Router.use() requires a middleware function but got a ' + gettype(fn))
-      ^
-TypeError: Router.use() requires a middleware function but got a Object
-    at Function.use (/app/node_modules/express/lib/router/index.js:469:13)
-    at Function.<anonymous> (/app/node_modules/express/lib/application.js:227:21)
-    at Array.forEach (<anonymous>)
-    at Function.use (/app/node_modules/express/lib/application.js:224:7)
-    at Object.<anonymous> (/app/backend/server.js:110:5)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
-Node.js v20.19.4
+[{
+	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "520",
+	"severity": 4,
+	"message": "Duplicate object key",
+	"source": "json",
+	"startLineNumber": 665,
+	"startColumn": 5,
+	"endLineNumber": 665,
+	"endColumn": 18,
+	"origin": "extHost1"
+}]
+
+
+[{
+	"resource": "/c:/Users/Niquele/Desktop/projeto_check/check_test/frontend/src/locales/pt.json",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "520",
+	"severity": 4,
+	"message": "Duplicate object key",
+	"source": "json",
+	"startLineNumber": 1099,
+	"startColumn": 5,
+	"endLineNumber": 1099,
+	"endColumn": 18,
+	"origin": "extHost1"
+}]

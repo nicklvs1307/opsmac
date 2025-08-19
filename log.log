@@ -1,31 +1,494 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             189.4s
-------
- > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.377 + npm run build
-0.790
-0.790 > feedeliza-plus@1.0.0 build
-0.790 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.790
-3.603 Creating an optimized production build...
-188.2 Failed to compile.
-188.2
-188.2 [eslint]
-188.2 src/pages/ERP/Pdv.js
-188.2   Line 1363:8:   'Dialog' is not defined         react/jsx-no-undef
-188.2   Line 1364:10:  'DialogTitle' is not defined    react/jsx-no-undef
-188.2   Line 1365:10:  'DialogContent' is not defined  react/jsx-no-undef
-188.2   Line 1368:10:  'DialogActions' is not defined  react/jsx-no-undef
-188.2
-188.2 Search for the keywords to learn more about each error.
-188.2
-188.2
-------
-Dockerfile.frontend:24
---------------------
-  22 |     ARG REACT_APP_API_URL
-  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  24 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  25 |
-  26 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+positionabsolute
+align-contentnormal
+align-itemsnormal
+align-selfauto
+block-size30px
+bottom-30px
+box-sizingborder-box
+clearnone
+clipauto
+displayflex
+flex-basisauto
+flex-directioncolumn
+flex-grow1
+flex-shrink1
+flex-wrapnowrap
+floatnone
+height30px
+inline-size1264.01px
+justify-contentnormal
+left0px
+margin-bottom0px
+margin-left0px
+margin-right0px
+margin-top0px
+max-block-sizenone
+max-heightnone
+max-inline-sizenone
+max-widthnone
+min-block-size0px
+min-height0px
+min-inline-size0px
+min-width0px
+overflow-xauto
+overflow-yauto
+padding-bottom15px
+padding-left15px
+padding-right15px
+padding-top15px
+resizenone
+right0px
+top0px
+visibilityvisible
+width1264.01px
+z-indexauto
+text-size-adjust100%
+directionltr
+font-familyPoppins, sans-serif
+font-feature-settingsnormal
+font-kerningauto
+font-optical-sizingauto
+font-size16px
+font-size-adjustnone
+font-stretch100%
+font-stylenormal
+font-variant-alternatesnormal
+font-variant-capsnormal
+font-variant-east-asiannormal
+font-variant-emojinormal
+font-variant-ligaturesnormal
+font-variant-numericnormal
+font-variant-positionnormal
+font-variation-settingsnormal
+font-weight400
+letter-spacing0.15008px
+line-height24px
+tab-size8
+text-alignstart
+text-align-lastauto
+text-decoration-colorrgb(44, 62, 80)
+text-decoration-linenone
+text-decoration-stylesolid
+text-decoration-thicknessauto
+text-indent0px
+text-overflowclip
+text-shadownone
+text-transformnone
+text-wrap-modewrap
+vertical-alignbaseline
+white-space-collapsecollapse
+word-breaknormal
+word-spacing0px
+colorrgb(44, 62, 80)
+background-attachmentscroll
+background-clipborder-box
+background-colorrgb(248, 249, 250)
+background-imagenone
+background-originpadding-box
+background-position-x0%
+background-position-y0%
+background-repeatrepeat
+background-sizeauto
+border-bottom-colorrgb(44, 62, 80)
+border-bottom-stylenone
+border-bottom-width0px
+border-image-outset0
+border-image-repeatstretch
+border-image-slice100%
+border-image-sourcenone
+border-image-width1
+border-left-colorrgb(44, 62, 80)
+border-left-stylenone
+border-left-width0px
+border-right-colorrgb(44, 62, 80)
+border-right-stylenone
+border-right-width0px
+border-top-colorrgb(44, 62, 80)
+border-top-stylenone
+border-top-width0px
+box-shadownone
+cursorauto
+outline-colorrgb(44, 62, 80)
+outline-offset0px
+outline-stylenone
+outline-width0px
+-webkit-border-imagenone
+animation-delay0s
+animation-directionnormal
+animation-duration0s
+animation-fill-modenone
+animation-iteration-count1
+animation-namenone
+animation-play-staterunning
+animation-range-endnormal
+animation-range-startnormal
+animation-timelineauto
+animation-timing-functionease
+transition-behaviornormal
+transition-delay0s
+transition-duration0s
+transition-propertyall
+transition-timing-functionease
+--light#f5f6fa
+--primary#ff6b6b
+--danger#ff4757
+--success#1dd1a1
+--column-width320px
+--gray#95a5a6
+--warning#ff9f43
+--primary-dark#ee5253
+--secondary#48dbfb
+--info#2e86de
+--dark#2c3a47
+--light-gray#ecf0f1
+--transitionall 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)
+--shadow0 4px 12px #00000014
+grid-auto-columnsauto
+grid-auto-flowrow
+grid-auto-rowsauto
+grid-column-endauto
+grid-column-startauto
+grid-row-endauto
+grid-row-startauto
+grid-template-areasnone
+grid-template-columnsnone
+grid-template-rowsnone
+justify-itemsnormal
+justify-selfauto
+order0
+border-collapseseparate
+caption-sidetop
+empty-cellsshow
+table-layoutauto
+-webkit-border-horizontal-spacing0px
+-webkit-border-vertical-spacing0px
+contentnormal
+counter-incrementnone
+counter-resetnone
+quotesauto
+color-schemenormal
+forced-color-adjustauto
+mask-imagenone
+math-depth0
+position-anchorauto
+appearancenone
+font-palettenormal
+font-synthesis-small-capsauto
+font-synthesis-styleauto
+font-synthesis-weightauto
+position-areanone
+text-orientationmixed
+text-renderingauto
+text-spacing-trimnormal
+-webkit-font-smoothingantialiased
+-webkit-locale"pt-BR"
+-webkit-text-orientationvertical-right
+writing-modehorizontal-tb
+zoom1
+accent-colorauto
+alignment-baselineauto
+all
+anchor-namenone
+anchor-scopenone
+animation-compositionreplace
+app-regionnone
+aspect-ratioauto
+backdrop-filternone
+backface-visibilityvisible
+background-blend-modenormal
+baseline-shift0px
+baseline-sourceauto
+border-block-end-colorrgb(44, 62, 80)
+border-block-end-stylenone
+border-block-end-width0px
+border-block-start-colorrgb(44, 62, 80)
+border-block-start-stylenone
+border-block-start-width0px
+border-bottom-left-radius0px
+border-bottom-right-radius0px
+border-end-end-radius0px
+border-end-start-radius0px
+border-inline-end-colorrgb(44, 62, 80)
+border-inline-end-stylenone
+border-inline-end-width0px
+border-inline-start-colorrgb(44, 62, 80)
+border-inline-start-stylenone
+border-inline-start-width0px
+border-start-end-radius0px
+border-start-start-radius0px
+border-top-left-radius0px
+border-top-right-radius0px
+box-decoration-breakslice
+break-afterauto
+break-beforeauto
+break-insideauto
+buffered-renderingauto
+caret-colorrgb(44, 62, 80)
+clip-pathnone
+clip-rulenonzero
+color-interpolationsrgb
+color-interpolation-filterslinearrgb
+color-renderingauto
+column-countauto
+column-fillbalance
+column-gapnormal
+column-rule-colorrgb(44, 62, 80)
+column-rule-stylenone
+column-rule-width0px
+column-spannone
+column-widthauto
+containnone
+contain-intrinsic-block-sizenone
+contain-intrinsic-heightnone
+contain-intrinsic-inline-sizenone
+contain-intrinsic-widthnone
+container-namenone
+container-typenormal
+content-visibilityvisible
+corner-bottom-left-shaperound
+corner-bottom-right-shaperound
+corner-end-end-shaperound
+corner-end-start-shaperound
+corner-start-end-shaperound
+corner-start-start-shaperound
+corner-top-left-shaperound
+corner-top-right-shaperound
+counter-setnone
+cx0px
+cy0px
+dnone
+dominant-baselineauto
+dynamic-range-limitno-limit
+field-sizingfixed
+fillrgb(0, 0, 0)
+fill-opacity1
+fill-rulenonzero
+filternone
+flood-colorrgb(0, 0, 0)
+flood-opacity1
+hyphenate-characterauto
+hyphenate-limit-charsauto
+hyphensmanual
+image-orientationfrom-image
+image-renderingauto
+initial-letternormal
+inset-block-end-30px
+inset-block-start0px
+inset-inline-end0px
+inset-inline-start0px
+interactivityauto
+interpolate-sizenumeric-only
+isolationauto
+lighting-colorrgb(255, 255, 255)
+line-breakauto
+list-style-imagenone
+list-style-positionoutside
+list-style-typedisc
+margin-block-end0px
+margin-block-start0px
+margin-inline-end0px
+margin-inline-start0px
+marker-endnone
+marker-midnone
+marker-startnone
+mask-clipborder-box
+mask-compositeadd
+mask-modematch-source
+mask-originborder-box
+mask-repeatrepeat
+mask-sizeauto
+mask-typeluminance
+math-shiftnormal
+math-stylenormal
+mix-blend-modenormal
+object-fitfill
+object-position50% 50%
+object-view-boxnone
+offset-anchorauto
+offset-distance0px
+offset-pathnone
+offset-positionnormal
+offset-rotateauto 0deg
+opacity1
+orphans2
+overflow-anchorauto
+overflow-blockauto
+overflow-clip-margin0px
+overflow-inlineauto
+overflow-wrapnormal
+overlaynone
+overscroll-behavior-blockauto
+overscroll-behavior-inlineauto
+overscroll-behavior-xauto
+overscroll-behavior-yauto
+padding-block-end15px
+padding-block-start15px
+padding-inline-end15px
+padding-inline-start15px
+pageauto
+page-orientation
+paint-ordernormal
+perspectivenone
+perspective-origin632.004px 15px
+pointer-eventsauto
+position-try-fallbacksnone
+position-try-ordernormal
+position-visibilityalways
+print-color-adjusteconomy
+r0px
+reading-flownormal
+reading-order0
+rotatenone
+row-gapnormal
+ruby-alignspace-around
+ruby-positionover
+rxauto
+ryauto
+scalenone
+scroll-behaviorauto
+scroll-initial-targetnone
+scroll-margin-block-end0px
+scroll-margin-block-start0px
+scroll-margin-bottom0px
+scroll-margin-inline-end0px
+scroll-margin-inline-start0px
+scroll-margin-left0px
+scroll-margin-right0px
+scroll-margin-top0px
+scroll-marker-groupnone
+scroll-padding-block-endauto
+scroll-padding-block-startauto
+scroll-padding-bottomauto
+scroll-padding-inline-endauto
+scroll-padding-inline-startauto
+scroll-padding-leftauto
+scroll-padding-rightauto
+scroll-padding-topauto
+scroll-snap-alignnone
+scroll-snap-stopnormal
+scroll-snap-typenone
+scroll-timeline-axisblock
+scroll-timeline-namenone
+scrollbar-colorrgb(189, 195, 199) rgb(245, 245, 245)
+scrollbar-gutterauto
+scrollbar-widthauto
+shape-image-threshold0
+shape-margin0px
+shape-outsidenone
+shape-renderingauto
+size
+speaknormal
+stop-colorrgb(0, 0, 0)
+stop-opacity1
+strokenone
+stroke-dasharraynone
+stroke-dashoffset0px
+stroke-linecapbutt
+stroke-linejoinmiter
+stroke-miterlimit4
+stroke-opacity1
+stroke-width1px
+text-anchorstart
+text-box-edgeauto
+text-box-trimnone
+text-combine-uprightnone
+text-decoration-skip-inkauto
+text-emphasis-colorrgb(44, 62, 80)
+text-emphasis-positionover
+text-emphasis-stylenone
+text-underline-offsetauto
+text-underline-positionauto
+text-wrap-styleauto
+timeline-scopenone
+touch-actionauto
+transformnone
+transform-boxview-box
+transform-origin632.004px 15px
+transform-styleflat
+translatenone
+unicode-bidiisolate
+user-selectauto
+vector-effectnone
+view-timeline-axisblock
+view-timeline-insetauto
+view-timeline-namenone
+view-transition-classnone
+view-transition-namenone
+-webkit-box-alignstretch
+-webkit-box-directionnormal
+-webkit-box-flex0
+-webkit-box-ordinal-group1
+-webkit-box-orienthorizontal
+-webkit-box-packstart
+-webkit-box-reflectnone
+-webkit-line-clampnone
+-webkit-mask-box-image-outset0
+-webkit-mask-box-image-repeatstretch
+-webkit-mask-box-image-slice0 fill
+-webkit-mask-box-image-sourcenone
+-webkit-mask-box-image-widthauto
+-webkit-mask-position-x0%
+-webkit-mask-position-y0%
+-webkit-perspective-origin-x
+-webkit-perspective-origin-y
+-webkit-rtl-orderinglogical
+-webkit-ruby-positionbefore
+-webkit-tap-highlight-colorrgba(0, 0, 0, 0.18)
+-webkit-text-combinenone
+-webkit-text-decorations-in-effectnone
+-webkit-text-fill-colorrgb(44, 62, 80)
+-webkit-text-securitynone
+-webkit-text-stroke-colorrgb(44, 62, 80)
+-webkit-text-stroke-width0px
+-webkit-transform-origin-x
+-webkit-transform-origin-y
+-webkit-transform-origin-z
+-webkit-user-dragauto
+-webkit-user-modifyread-only
+widows2
+will-changeauto
+x0px
+y0px
+
+
+<div class="tab-pane active" id="tables-tab"><div class="tables-section"><div class="tables-grid" id="tablesGrid"><div class="table-card active"><div class="table-number">1</div><div class="table-status "></div><div class="table-capacity"> lugares</div></div><div class="table-card "><div class="table-number">2</div><div class="table-status "></div><div class="table-capacity"> lugares</div></div><div class="table-card "><div class="table-number">15</div><div class="table-status "></div><div class="table-capacity"> lugares</div></div></div></div></div>
+    text-size-adjust: 100%;
+    --primary: #ff6b6b;
+    --primary-dark: #ee5253;
+    --secondary: #48dbfb;
+    --dark: #2c3a47;
+    --light: #f5f6fa;
+    --success: #1dd1a1;
+    --warning: #ff9f43;
+    --danger: #ff4757;
+    --info: #2e86de;
+    --gray: #95a5a6;
+    --light-gray: #ecf0f1;
+    --shadow: 0 4px 12px #00000014;
+    --column-width: 320px;
+    --transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
+    -webkit-font-smoothing: antialiased;
+    color: rgb(44, 62, 80);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    letter-spacing: 0.00938em;
+    scrollbar-color: rgb(189, 195, 199) rgb(245, 245, 245);
+    font-family: Poppins,sans-serif;
+    margin: 0;
+    box-sizing: inherit;
+    background: #f8f9fa;
+    height: 100%;
+    left: 0;
+    overflow-y: auto;
+    padding: 15px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+#tables-tab
+
+/html/body/div[1]/div/div[1]/main/div[2]/div/main/div/div[2]/div[2]

@@ -501,8 +501,8 @@
             flex-grow: 1 !important;
             overflow: hidden;
             position: relative;
-            display: flex !important;
-            flex-direction: column !important;
+            display: flex;
+            flex-direction: column;
         }
 
         .tab-pane {

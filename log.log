@@ -1,78 +1,9 @@
-Largest Contentful Paint (LCP)
-12,56 s
-Seu valor local de 12,56 s para LCP está ruim.
-Elemento da LCP
-p.MuiTypography-root.MuiT
-
-Interaction to Next Paint (INP)
-
-856 ms
-Seu valor local de 856 ms para INP está ruim.
-Interação INP
-pointer
-
-pointer
-span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-1j45gii
-72 ms
-Fase
-Duração local (ms)
-Latência na entrada
-6
-Duração do processamento
-11
-Atraso na apresentação
-55
-pointer
-span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-1j45gii
-368 ms
-Fase
-Duração local (ms)
-Latência na entrada
-5
-Duração do processamento
-272
-Atraso na apresentação
-91
-pointer
-span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-wzcz2x
-48 ms
-Fase
-Duração local (ms)
-Latência na entrada
-5
-Duração do processamento
-3
-Atraso na apresentação
-41
-pointer INP
-span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-wzcz2x
-856 ms
-Fase
-Duração local (ms)
-Latência na entrada
-6
-Duração do processamento
-670
-Atraso na apresentação
-180
-pointer
-div.MuiButtonBase-root.MuiListItemButton-root.MuiListItemButton-gutters.Mui-selected.css-97j628
-32 ms
-Fase
-Duração local (ms)
-Latência na entrada
-3
-Duração do processamento
-3
-Atraso na apresentação
-26
-pointer
-div.MuiButtonBase-root.MuiListItemButton-root.MuiListItemButton-gutters.Mui-selected.css-97j628
-456 ms
-Fase
-Duração local (ms)
-Latência na entrada
-2
-Duração do processamento
-279
-Atraso na apresentação
+pdv:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+Pdv.js:336 Product object: {id: '96fe9ea8-72fc-44c9-ac19-80e9f2b1161a', name: 'Pizza de Grango com Catupiry', description: '', price: '79.90', sku: '', …}
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+Pdv.js:336 Product object: {id: '4bcf1c71-ecc2-4101-bc4b-a4196e16dfc9', name: 'X Bacon', description: 'Otimo lanche com pão brioche, bacon crocante, maionese especial da casa hamburguer de 300g', price: '25.50', sku: '123', …}

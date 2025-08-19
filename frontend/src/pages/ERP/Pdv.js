@@ -59,8 +59,13 @@ const updateRestaurantPosStatus = async ({ restaurantId, pos_status }) => {
   return data;
 };
 
-const createOrder = async (orderData) => {
+const createPublicOrder = async (orderData) => {
   const { data } = await axiosInstance.post('/api/public/orders', orderData);
+  return data;
+};
+
+const createTableOrder = async ({ restaurantId, orderData }) => {
+  const { data } = await axiosInstance.post(`/api/restaurant/${restaurantId}/orders`, orderData);
   return data;
 };
 
@@ -75,6 +80,31 @@ const Pdv = () => {
 
   // POS State
   const [cartItems, setCartItems] = useState([]);
+  const [orderType, setOrderType] = useState('dine_in'); // 'dine_in' for table orders, 'delivery' for delivery orders
+  const [tableId, setTableId] = useState('');
+
+  // Fetch Tables for dine_in orders
+  const fetchTables = async (restaurantId) => {
+    const { data } = await axiosInstance.get(`/api/restaurant/${restaurantId}/tables`);
+    return data;
+  };
+
+  const { data: tables, isLoading: isLoadingTables, isError: isErrorTables } = useQuery(
+    ['tables', restaurantId],
+    () => fetchTables(restaurantId),
+    {
+      enabled: !!restaurantId && orderType === 'dine_in',
+      onError: (error) => {
+        toast.error(t('pdv.error_loading_tables', { message: error.response?.data?.msg || error.message }));
+      },
+    }
+  );
+
+  useEffect(() => {
+    if (orderType === 'dine_in' && tables?.length > 0) {
+      setTableId(tables[0].id); // Set first table as default
+    }
+  }, [orderType, tables]);
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -257,10 +287,21 @@ const Pdv = () => {
     }
   });
 
-  const createOrderMutation = useMutation(createOrder, {
+  const createPublicOrderMutation = useMutation(createPublicOrder, {
     onSuccess: () => {
       toast.success(t('pdv.order_created_success'));
-      resetOrderForm();
+      resetOrderForm(); // Moved here
+      queryClient.invalidateQueries('orders'); // Refresh order list
+    },
+    onError: (error) => {
+      toast.error(t('pdv.error_creating_order', { message: error.response?.data?.msg || error.message }));
+    }
+  });
+
+  const createTableOrderMutation = useMutation(({ restaurantId, orderData }) => createTableOrder({ restaurantId, orderData }), {
+    onSuccess: () => {
+      toast.success(t('pdv.order_created_success'));
+      resetOrderForm(); // Moved here
       queryClient.invalidateQueries('orders'); // Refresh order list
     },
     onError: (error) => {
@@ -442,23 +483,43 @@ const Pdv = () => {
       return;
     }
 
-    const orderData = {
+    let orderData = {
       restaurant_id: restaurantId,
-      delivery_type: 'dine_in', // Assuming dine_in for POS orders, can be changed
       total_amount: calculateFinalTotal,
       items: cartItems.map(item => ({ product_id: item.id, quantity: item.quantity, price: item.price, name: item.name, sku: item.sku })),
-      customer_details: {
-        name: selectedCustomer?.name || customerName || t('pdv.anonymous_customer'),
-        phone: selectedCustomer?.phone || customerPhone || 'N/A',
-        // Add customer_id if a customer is selected
-        ...(selectedCustomer && { customer_id: selectedCustomer.id }),
-      },
       payment_method: paymentMethod,
       notes: notes,
-      platform: 'pos', // Indicate order came from POS
+      platform: 'other', // Consistent platform for PDV orders
     };
 
-    createOrderMutation.mutate(orderData);
+    if (orderType === 'dine_in') {
+      if (!tableId) {
+        toast.error(t('pdv.table_required'));
+        return;
+      }
+      orderData = {
+        ...orderData,
+        delivery_type: 'dine_in',
+        table_id: tableId,
+      };
+      createTableOrderMutation.mutate({ restaurantId, orderData });
+    } else { // orderType === 'delivery'
+      if (!customerName || !customerPhone) {
+        toast.error(t('pdv.customer_details_required'));
+        return;
+      }
+      orderData = {
+        ...orderData,
+        delivery_type: 'delivery',
+        customer_details: {
+          name: selectedCustomer?.name || customerName,
+          phone: selectedCustomer?.phone || customerPhone,
+          ...(selectedCustomer && { customer_id: selectedCustomer.id }),
+        },
+        // delivery_address: {}, // Add if delivery address is captured
+      };
+      createPublicOrderMutation.mutate(orderData);
+    }
     console.log('Order data prepared and mutation called:', orderData);
   };
 
@@ -542,7 +603,7 @@ const Pdv = () => {
     // This would typically involve sending payment details to backend
     toast.success(t('pdv.payment_processed', { total: calculateFinalTotal.toFixed(2) }));
     closePaymentModal();
-    clearOrder();
+    // clearOrder(); // Removed: clearOrder() is now called on mutation success
   };
 
   const openOrderDetailsModal = (order) => {
@@ -677,6 +738,31 @@ const Pdv = () => {
                 <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
                   <div className="order-header">
                     <h3 className="order-title">{t('pdv.current_order_title')}</h3>
+                    <ToggleButtonGroup
+                      value={orderType}
+                      exclusive
+                      onChange={(event, newType) => {
+                        if (newType !== null) {
+                          setOrderType(newType);
+                          // Clear customer details if switching to dine_in
+                          if (newType === 'dine_in') {
+                            setCustomerName('');
+                            setCustomerPhone('');
+                            setSelectedCustomer(null);
+                            setCustomerSearchTerm('');
+                          }
+                        }
+                      }}
+                      aria-label="order type"
+                      sx={{ mb: 2 }}
+                    >
+                      <ToggleButton value="dine_in" aria-label="dine in">
+                        <RestaurantIcon /> {t('pdv.order_type_dine_in')}
+                      </ToggleButton>
+                      <ToggleButton value="delivery" aria-label="delivery">
+                        <MotorcycleIcon /> {t('pdv.order_type_delivery')}
+                      </ToggleButton>
+                    </ToggleButtonGroup>
                     <div>
                       <button className="btn btn-outline" onClick={resetOrderForm}> {/* Using resetOrderForm to clear customer details */}
                         <PointOfSaleIcon /> {t('pdv.counter_sale')}
@@ -686,6 +772,77 @@ const Pdv = () => {
                       </button>
                     </div>
                   </div>
+
+                  {orderType === 'dine_in' && (
+                    <FormControl fullWidth sx={{ mb: 2 }}>
+                      <InputLabel id="table-select-label">{t('pdv.select_table')}</InputLabel>
+                      <Select
+                        labelId="table-select-label"
+                        value={tableId}
+                        label={t('pdv.select_table')}
+                        onChange={(e) => setTableId(e.target.value)}
+                        disabled={isLoadingTables}
+                      >
+                        {isLoadingTables && <MenuItem value="">{t('pdv.loading_tables')}</MenuItem>}
+                        {isErrorTables && <MenuItem value="">{t('pdv.error_loading_tables')}</MenuItem>}
+                        {tables?.map((table) => (
+                          <MenuItem key={table.id} value={table.id}>
+                            {table.table_number}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  )}
+
+                  {orderType === 'delivery' && (
+                    <Box sx={{ mb: 2 }}>
+                      <TextField
+                        fullWidth
+                        label={t('pdv.customer_search')}
+                        value={customerSearchTerm}
+                        onChange={(e) => setCustomerSearchTerm(e.target.value)}
+                        sx={{ mb: 1 }}
+                      />
+                      {isLoadingSearchResults && <CircularProgress size={20} />}
+                      {customerSearchTerm.length > 2 && searchResults?.length > 0 && (
+                        <Paper sx={{ maxHeight: 200, overflow: 'auto', position: 'absolute', zIndex: 100, width: 'calc(100% - 40px)' }}>
+                          <List>
+                            {searchResults.map((customer) => (
+                              <ListItem button key={customer.id} onClick={() => handleCustomerSelect(customer)}>
+                                <ListItemText primary={customer.name} secondary={customer.phone} />
+                              </ListItem>
+                            ))}
+                          </List>
+                        </Paper>
+                      )}
+                      {selectedCustomer && (
+                        <Chip
+                          label={`${selectedCustomer.name} (${selectedCustomer.phone})`}
+                          onDelete={() => setSelectedCustomer(null)}
+                          sx={{ mt: 1 }}
+                        />
+                      )}
+                      {!selectedCustomer && (
+                        <>
+                          <TextField
+                            fullWidth
+                            label={t('pdv.customer_name')}
+                            value={customerName}
+                            onChange={(e) => setCustomerName(e.target.value)}
+                            sx={{ mb: 1 }}
+                          />
+                          <TextField
+                            fullWidth
+                            label={t('pdv.customer_phone')}
+                            value={customerPhone}
+                            onChange={(e) => setCustomerPhone(e.target.value)}
+                            sx={{ mb: 1 }}
+                          />
+                        </>
+                      )}
+                    </Box>
+                  )}
+
                   <div className="order-items" id="orderItems">
                     {cartItems.length === 0 ? (
                       <div style={{ textAlign: 'center', padding: '20px', color: '#999' }}>{t('pdv.no_items_added')}</div>

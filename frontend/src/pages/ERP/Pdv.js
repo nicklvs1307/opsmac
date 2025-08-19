@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './Pdv.css'; // Import the new CSS
-import { Box, Typography, CircularProgress, Alert, Card, CardContent, Grid, Button, MenuItem, Select, FormControl, InputLabel, IconButton, Divider, Switch, FormControlLabel, Paper, TextField, List, ListItem, ListItemText, Drawer, Tabs, Tab, Badge, useMediaQuery, Chip, Avatar, Tooltip, Fade } from '@mui/material';
+import { Box, Typography, CircularProgress, Alert, Card, CardContent, Grid, Button, MenuItem, Select, FormControl, InputLabel, IconButton, Divider, Switch, FormControlLabel, Paper, TextField, List, ListItem, ListItemText, Drawer, Tabs, Tab, Badge, useMediaQuery, Chip, Avatar, Tooltip, Fade, ToggleButtonGroup, ToggleButton } from '@mui/material';
+import { TableRestaurant as TableRestaurantIcon } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
@@ -82,6 +83,7 @@ const Pdv = () => {
   const [cartItems, setCartItems] = useState([]);
   const [orderType, setOrderType] = useState('dine_in'); // 'dine_in' for table orders, 'delivery' for delivery orders
   const [tableId, setTableId] = useState('');
+  const [selectedTable, setSelectedTable] = useState(null);
 
   // Fetch Tables for dine_in orders
   const fetchTables = async (restaurantId) => {
@@ -103,8 +105,17 @@ const Pdv = () => {
   useEffect(() => {
     if (orderType === 'dine_in' && tables?.length > 0) {
       setTableId(tables[0].id); // Set first table as default
+      setSelectedTable(tables[0]);
     }
   }, [orderType, tables]);
+
+  const handleTableSelect = (table) => {
+    setTableId(table.id);
+    setSelectedTable(table);
+    setOrderType('dine_in');
+    setCurrentTab('pdv');
+  };
+
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -152,6 +163,12 @@ const Pdv = () => {
     setCustomerSearchTerm(''); // Clear search term after selection
     // Optionally, if customer has an address, you might want to store it too
     // setCustomerAddress(customer.address);
+  };
+
+  const handleSelectTableCard = (table) => {
+    setSelectedTable(table);
+    setTableId(table.id); // Also update tableId for the existing PDV logic
+    setCurrentTab('pdv'); // Switch to PDV tab after selecting a table
   };
 
   // Sample product data (from exemplo.html, will be replaced by API data)
@@ -493,14 +510,15 @@ const Pdv = () => {
     };
 
     if (orderType === 'dine_in') {
-      if (!tableId) {
-        toast.error(t('pdv.table_required'));
+      if (!selectedTable) {
+        toast.error(t('pdv.please_select_table_first')); // New translation key
+        setCurrentTab('tables'); // Switch to tables tab
         return;
       }
       orderData = {
         ...orderData,
         delivery_type: 'dine_in',
-        table_id: tableId,
+        table_id: selectedTable.id,
       };
       createTableOrderMutation.mutate({ restaurantId, orderData });
     } else { // orderType === 'delivery'
@@ -696,8 +714,11 @@ const Pdv = () => {
             <button className={currentTab === 'pdv' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('pdv')}>
               <PointOfSaleIcon /> {t('pdv.tab_pdv')}
             </button>
+            <button className={currentTab === 'tables' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('tables')}>
+              <RestaurantIcon /> {t('pdv.tab_tables')}
+            </button>
             <button className={currentTab === 'orders' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('orders')}>
-              <RestaurantIcon /> {t('pdv.tab_orders')}
+              <AssignmentIcon /> {t('pdv.tab_orders')}
             </button>
             <button className={currentTab === 'kanban' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('kanban')}>
               <AssignmentIcon /> {t('pdv.tab_kanban')}
@@ -774,24 +795,253 @@ const Pdv = () => {
                   </div>
 
                   {orderType === 'dine_in' && (
-                    <FormControl fullWidth sx={{ mb: 2 }}>
-                      <InputLabel id="table-select-label">{t('pdv.select_table')}</InputLabel>
-                      <Select
-                        labelId="table-select-label"
-                        value={tableId}
-                        label={t('pdv.select_table')}
-                        onChange={(e) => setTableId(e.target.value)}
-                        disabled={isLoadingTables}
+                    <Box sx={{ mb: 2, p: 2, border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
+                      {selectedTable ? (
+                        <Typography variant="h6" color="primary">
+                          {t('pdv.selected_table')}: {selectedTable.table_number}
+                        </Typography>
+                      ) : (
+                        <Typography variant="body1" color="error">
+                          {t('pdv.please_select_table')}
+                        </Typography>
+                      )}
+                    </Box>
+                  )}
+
+                  {orderType === 'delivery' && (
+                    <Box sx={{ mb: 2 }}>
+                      <TextField
+                        fullWidth
+                        label={t('pdv.customer_search')}
+                        value={customerSearchTerm}
+                        onChange={(e) => setCustomerSearchTerm(e.target.value)}
+                        sx={{ mb: 1 }}
+                      />
+                      {isLoadingSearchResults && <CircularProgress size={20} />}
+                      {customerSearchTerm.length > 2 && searchResults?.length > 0 && (
+                        <Paper sx={{ maxHeight: 200, overflow: 'auto', position: 'absolute', zIndex: 100, width: 'calc(100% - 40px)' }}>
+                          <List>
+                            {searchResults.map((customer) => (
+                              <ListItem button key={customer.id} onClick={() => handleCustomerSelect(customer)}>
+                                <ListItemText primary={customer.name} secondary={customer.phone} />
+                              </ListItem>
+                            ))}
+                          </List>
+                        </Paper>
+                      )}
+                      {selectedCustomer && (
+                        <Chip
+                          label={`${selectedCustomer.name} (${selectedCustomer.phone})`}
+                          onDelete={() => setSelectedCustomer(null)}
+                          sx={{ mt: 1 }}
+                        />
+                      )}
+                      {!selectedCustomer && (
+                        <>
+                          <TextField
+                            fullWidth
+                            label={t('pdv.customer_name')}
+                            value={customerName}
+                            onChange={(e) => setCustomerName(e.target.value)}
+                            sx={{ mb: 1 }}
+                          />
+                          <TextField
+                            fullWidth
+                            label={t('pdv.customer_phone')}
+                            value={customerPhone}
+                            onChange={(e) => setCustomerPhone(e.target.value)}
+                            sx={{ mb: 1 }}
+                          />
+                        </>
+                      )}
+                    </Box>
+                  )}
+
+                  <div className="order-items" id="orderItems">
+                    {cartItems.length === 0 ? (
+                      <div style={{ textAlign: 'center', padding: '20px', color: '#999' }}>{t('pdv.no_items_added')}</div>
+                    ) : (
+                      cartItems.map(item => (
+                        <div className="order-item" key={item.id}>
+                          <div className="item-image">{item.image && item.image.startsWith('http') ? <img src={item.image} alt={item.name} /> : item.image}</div>
+                          <div className="item-info">
+                            <div className="item-name">{item.name}</div>
+                            <div className="item-price">R$ {Number(item.price).toFixed(2).replace('.', ',')}</div>
+                          </div>
+                          <div className="item-actions">
+                            <button className="quantity-btn" onClick={() => handleQuantityChange(item.id, -1)}>-</button>
+                            <div className="quantity-value">{item.quantity}</div>
+                            <button className="quantity-btn" onClick={() => handleQuantityChange(item.id, 1)}>+</button>
+                            <button className="remove-item" onClick={() => handleRemoveFromCart(item.id)}>
+                              <DeleteIcon />
+                            </button>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                <div className="order-summary">
+                  <div className="summary-row">
+                    <span className="summary-label">{t('pdv.subtotal_label')}</span>
+                    <span className="summary-value" id="subtotal">R$ {calculateSubtotal.toFixed(2).replace('.', ',')}</span>
+                  </div>
+                  <div className="summary-row">
+                    <span className="summary-label">{t('pdv.service_tax_label')}</span>
+                    <span className="summary-value" id="serviceTax">R$ {calculateServiceTax.toFixed(2).replace('.', ',')}</span>
+                  </div>
+                  <div className="summary-row total-row">
+                    <span className="summary-label">{t('pdv.total_label')}</span>
+                    <span className="summary-value total-value" id="total">R$ {calculateFinalTotal.toFixed(2).replace('.', ',')}</span>
+                  </div>
+                </div>
+                <div className="order-actions">
+                  <button className="btn btn-outline" onClick={openPaymentModal}>
+                    <PaymentsIcon /> {t('pdv.payment_button')}
+                  </button>
+                  <button className="btn btn-success" onClick={handlePlaceOrder} disabled={createOrderMutation.isLoading || cartItems.length === 0 || !paymentMethod}>
+                    <CheckCircleIcon /> {t('pdv.finalize_button')}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Tables Tab */}
+            <div className={currentTab === 'tables' ? 'tab-pane active' : 'tab-pane'} id="tables-tab">
+              <div className="tables-section">
+                <div className="tables-grid" id="tablesGrid">
+                  {isLoadingTables ? (
+                    <CircularProgress />
+                  ) : isErrorTables ? (
+                    <Alert severity="error">{t('pdv.error_loading_tables')}</Alert>
+                  ) : tables?.length === 0 ? (
+                    <Typography variant="h6" color="textSecondary" sx={{ textAlign: 'center', mt: 4 }}>
+                      {t('pdv.no_tables_found')}
+                    </Typography>
+                  ) : (
+                    tables?.map(table => {
+                      let statusClass = '';
+                      let statusText = '';
+
+                      switch(table.status) {
+                          case 'available':
+                              statusClass = 'status-available';
+                              statusText = t('pdv.table_status_available');
+                              break;
+                          case 'occupied':
+                              statusClass = 'status-occupied';
+                              statusText = t('pdv.table_status_occupied');
+                              break;
+                          case 'reserved':
+                              statusClass = 'status-reserved';
+                              statusText = t('pdv.table_status_reserved');
+                              break;
+                          default:
+                              statusClass = '';
+                              statusText = table.status;
+                      }
+
+                      return (
+                        <div
+                          key={table.id}
+                          className={`table-card ${selectedTable?.id === table.id ? 'active' : ''}`}
+                          onClick={() => handleSelectTableCard(table)}
+                        >
+                          <div className="table-number">{table.table_number}</div>
+                          <div className={`table-status ${statusClass}`}>{statusText}</div>
+                          <div className="table-capacity">{t('pdv.table_capacity', { capacity: table.capacity })}</div>
+                          {table.active_orders_count > 0 && (
+                            <div className="table-badge">{table.active_orders_count}</div>
+                          )}
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Orders Tab */}
+            <div className={currentTab === 'orders' ? 'tab-pane active' : 'tab-pane'} id="orders-tab">
+              <div className="pdv-container">
+                {/* Products Section */}
+                <div className="products-section">
+                  <div className="categories-tabs">
+                    <div className="category-tab active" onClick={() => setSelectedProductCategory('')}>{t('pdv.all_categories')}</div>
+                    {categories?.map(category => (
+                      <div
+                        key={category.id}
+                        className={selectedProductCategory === category.id ? 'category-tab active' : 'category-tab'}
+                        onClick={() => setSelectedProductCategory(category.id)}
                       >
-                        {isLoadingTables && <MenuItem value="">{t('pdv.loading_tables')}</MenuItem>}
-                        {isErrorTables && <MenuItem value="">{t('pdv.error_loading_tables')}</MenuItem>}
-                        {tables?.map((table) => (
-                          <MenuItem key={table.id} value={table.id}>
-                            {table.table_number}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
+                        {category.name}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="products-grid">
+                    {products?.map(product => (
+                      <div className="product-card" key={product.id} onClick={() => handleAddToCart(product)}>
+                        <div className="product-image">{product.image || '🍔'}</div> {/* Placeholder emoji */}
+                        <div className="product-name">{product.name}</div>
+                        <div className="product-price">R$ {Number(product.price).toFixed(2).replace('.', ',')}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Order Section */}
+                <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
+                  <div className="order-header">
+                    <h3 className="order-title">{t('pdv.current_order_title')}</h3>
+                    <ToggleButtonGroup
+                      value={orderType}
+                      exclusive
+                      onChange={(event, newType) => {
+                        if (newType !== null) {
+                          setOrderType(newType);
+                          // Clear customer details if switching to dine_in
+                          if (newType === 'dine_in') {
+                            setCustomerName('');
+                            setCustomerPhone('');
+                            setSelectedCustomer(null);
+                            setCustomerSearchTerm('');
+                          }
+                        }
+                      }}
+                      aria-label="order type"
+                      sx={{ mb: 2 }}
+                    >
+                      <ToggleButton value="dine_in" aria-label="dine in">
+                        <RestaurantIcon /> {t('pdv.order_type_dine_in')}
+                      </ToggleButton>
+                      <ToggleButton value="delivery" aria-label="delivery">
+                        <MotorcycleIcon /> {t('pdv.order_type_delivery')}
+                      </ToggleButton>
+                    </ToggleButtonGroup>
+                    <div>
+                      <button className="btn btn-outline" onClick={resetOrderForm}> {/* Using resetOrderForm to clear customer details */}
+                        <PointOfSaleIcon /> {t('pdv.counter_sale')}
+                      </button>
+                      <button className="order-clear" onClick={clearOrder}>
+                        <DeleteIcon /> {t('pdv.clear_order')}
+                      </button>
+                    </div>
+                  </div>
+
+                  {orderType === 'dine_in' && (
+                    <Box sx={{ mb: 2, p: 2, border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
+                      {selectedTable ? (
+                        <Typography variant="h6" color="primary">
+                          {t('pdv.selected_table')}: {selectedTable.table_number}
+                        </Typography>
+                      ) : (
+                        <Typography variant="body1" color="error">
+                          {t('pdv.please_select_table')}
+                        </Typography>
+                      )}
+                    </Box>
                   )}
 
                   {orderType === 'delivery' && (
@@ -957,6 +1207,30 @@ const Pdv = () => {
               <div className="main-container">
                 {/* New button for "Abrir Caixa" / "Caixa Aberto" */}
                 <div style={{ marginBottom: '20px', textAlign: 'right' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 2, mb: 2 }}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={restaurantStatus?.is_open || false}
+                          onChange={handleRestaurantOpenToggle}
+                          name="storeOpenStatus"
+                          color="primary"
+                        />
+                      }
+                      label={t('pdv.store_open_status')}
+                    />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={restaurantStatus?.pos_status === 'open' || false}
+                          onChange={handlePosStatusToggle}
+                          name="posOpenStatus"
+                          color="primary"
+                        />
+                      }
+                      label={t('pdv.pos_open_status')}
+                    />
+                  </Box>
                   {isLoadingCashRegisterSession ? (
                     <CircularProgress size={24} />
                   ) : currentCashRegisterSession ? (

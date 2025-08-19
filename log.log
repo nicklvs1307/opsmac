@@ -7,3 +7,49 @@ O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
 Pdv.js:336 Product object: {id: '4bcf1c71-ecc2-4101-bc4b-a4196e16dfc9', name: 'X Bacon', description: 'Otimo lanche com pão brioche, bacon crocante, maionese especial da casa hamburguer de 300g', price: '25.50', sku: '123', …}
+
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/public/orders
+Método da solicitação
+POST
+Código de status
+403 Forbidden
+Endereço remoto
+95.217.16.187:443
+
+{
+    "msg": "O sistema de pedidos está temporariamente indisponível. Tente novamente mais tarde."
+}
+
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             177.2s
+------
+ > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.351 + npm run build
+0.808
+0.808 > feedeliza-plus@1.0.0 build
+0.808 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.808
+3.957 Creating an optimized production build...
+176.2 Failed to compile.
+176.2
+176.3 [eslint]
+176.3 src/pages/ERP/Pdv.js
+176.3   Line 741:22:  'ToggleButtonGroup' is not defined    react/jsx-no-undef
+176.3   Line 759:24:  'ToggleButton' is not defined         react/jsx-no-undef
+176.3   Line 762:24:  'ToggleButton' is not defined         react/jsx-no-undef
+176.3   Line 889:92:  'createOrderMutation' is not defined  no-undef
+176.3
+176.3 Search for the keywords to learn more about each error.
+176.3
+176.3
+------
+Dockerfile.frontend:24
+--------------------
+  22 |     ARG REACT_APP_API_URL
+  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  24 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  25 |
+  26 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

@@ -843,6 +843,11 @@
       "restaurant_id_label": "ID do Restaurante Uai Rango",
       "restaurant_id_required": "ID do Restaurante Uai Rango Ã© obrigatÃ³rio.",
       "save_button": "Salvar ConfiguraÃ§Ãµes"
+    },
+    "pdv": {
+      "selected_table": "Mesa Selecionada",
+      "please_select_table": "Por favor, selecione uma mesa.",
+      "please_select_table_first": "Por favor, selecione uma mesa primeiro!"
     }
   }
 }

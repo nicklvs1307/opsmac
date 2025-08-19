@@ -1,93 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import apiClient from '../../api/axiosInstance';
 import './PrintLabel.css';
 
-// Placeholder components for each step
-const SelectResponsible = ({ onSelect }) => {
+const PrintLabel = () => {
+    const [step, setStep] = useState(1);
+    const [responsible, setResponsible] = useState(null);
+    const [group, setGroup] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
     const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const res = await apiClient.get('/labels/users');
-                setUsers(res.data);
-            } catch (err) {
-                setError('Failed to load users.');
-                console.error(err);
-            }
-            setLoading(false);
-        };
-        fetchUsers();
-    }, []);
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
-
-    return (
-        <div>
-            <h2>Selecionar responsável</h2>
-            <div className="item-grid">
-                {users.map(user => (
-                    <div key={user.id} className="item-card" onClick={() => onSelect(user)}>
-                        <span className="name">{user.name}</span>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-const SelectItem = ({ onSelect }) => {
     const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [formData, setFormData] = useState({ quantity: 1, lot: '' });
 
     useEffect(() => {
-        const fetchItems = async () => {
-            try {
-                const res = await apiClient.get('/labels/items');
-                setItems(res.data);
-            } catch (err) {
-                setError('Failed to load items.');
-                console.error(err);
-            }
-            setLoading(false);
-        };
-        fetchItems();
+        apiClient.get('/labels/users').then(res => setUsers(res.data)).catch(console.error);
+        apiClient.get('/labels/items').then(res => setItems(res.data)).catch(console.error);
     }, []);
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
-
-    return (
-        <div>
-            <h2>Selecionar produto</h2>
-            <div className="item-grid product-grid">
-                {items.map(item => (
-                    <div key={`${item.type}-${item.id}`} className="item-card" onClick={() => onSelect(item)}>
-                        <span className="name">{item.name}</span>
-                        <span className="category">{item.type}</span>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-const LabelPreview = ({ item, responsible, onPrint, onBack }) => {
-    const [formData, setFormData] = useState({ quantity: 1, lot: '' });
 
     const handlePrint = async () => {
         const expirationDate = new Date();
-        if (item.default_expiration_days) {
-            expirationDate.setDate(expirationDate.getDate() + item.default_expiration_days);
+        if (selectedItem.default_expiration_days) {
+            expirationDate.setDate(expirationDate.getDate() + selectedItem.default_expiration_days);
         }
 
         const payload = {
-            labelable_id: item.id,
-            labelable_type: item.type,
+            labelable_id: selectedItem.id,
+            labelable_type: selectedItem.type,
             expiration_date: expirationDate.toISOString(),
             quantity_printed: formData.quantity,
             lot_number: formData.lot,
@@ -95,86 +33,140 @@ const LabelPreview = ({ item, responsible, onPrint, onBack }) => {
         
         try {
             await apiClient.post('/labels/print', payload);
-            alert('Label printed successfully!'); // Replace with a proper notification
-            onPrint(payload);
+            alert('Label printed successfully!');
+            setStep(1);
+            setResponsible(null);
+            setGroup(null);
+            setSelectedItem(null);
         } catch (err) {
-            alert('Failed to print label.'); // Replace with a proper notification
+            alert('Failed to print label.');
             console.error(err);
         }
     };
 
-    return (
-        <div>
-            <h2>Pré-visualização da Etiqueta</h2>
-            <p>Responsável: {responsible?.name}</p>
-            <p>Item: {item?.name}</p>
-            <div>
-                <label>Quantidade:</label>
-                <input type="number" value={formData.quantity} onChange={e => setFormData({...formData, quantity: parseInt(e.target.value, 10) || 1})} />
-            </div>
-            <div>
-                <label>Lote:</label>
-                <input type="text" value={formData.lot} onChange={e => setFormData({...formData, lot: e.target.value})} />
-            </div>
-            <button onClick={onBack} className="btn btn-secondary">Voltar</button>
-            <button onClick={handlePrint} className="btn btn-primary">Imprimir</button>
-        </div>
-    );
-};
-
-
-const PrintLabel = () => {
-    const [step, setStep] = useState(1);
-    const [responsible, setResponsible] = useState(null);
-    const [selectedItem, setSelectedItem] = useState(null);
-
-    const handleSelectResponsible = (user) => {
-        setResponsible(user);
-        setStep(2);
-    };
-
-    const handleSelectItem = (item) => {
-        setSelectedItem(item);
-        setStep(3);
-    };
-
-    const handlePrint = () => {
-        // Reset the flow after printing
-        setStep(1);
-        setResponsible(null);
-        setSelectedItem(null);
-    };
-
-    const goBack = () => {
-        if (step > 1) {
-            setStep(step - 1);
-        }
-    };
-
-    const renderStep = () => {
+    const renderStepContent = () => {
         switch (step) {
             case 1:
-                return <SelectResponsible onSelect={handleSelectResponsible} />;
+                return (
+                    <section id="selecionar-responsavel-section" className="content-section">
+                        <div className="section-header">
+                            <h2>Selecionar responsável</h2>
+                            <p>Selecione o nome do responsável por essa impressão.</p>
+                        </div>
+                        <div className="item-grid">
+                            {users.map(user => (
+                                <div key={user.id} className="item-card" onClick={() => { setResponsible(user); setStep(2); }}>
+                                    <span className="item-name">{user.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                );
             case 2:
-                return <SelectItem onSelect={handleSelectItem} />;
+                const groups = [{ id: 1, name: 'Preparo' }, { id: 2, name: 'Sobremesas' }];
+                return (
+                    <section id="selecionar-grupo-section" className="content-section">
+                        <div className="section-header">
+                            <h2>Selecionar grupo</h2>
+                            <p>Selecione o grupo do produto que deseja imprimir.</p>
+                        </div>
+                        <div className="item-grid">
+                            {groups.map(g => (
+                                <div key={g.id} className="item-card" onClick={() => { setGroup(g); setStep(3); }}>
+                                    <span className="item-name">{g.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="pagination-controls">
+                            <button onClick={() => setStep(1)} className="btn btn-secondary">Voltar</button>
+                        </div>
+                    </section>
+                );
             case 3:
-                return <LabelPreview item={selectedItem} responsible={responsible} onPrint={handlePrint} onBack={() => setStep(2)} />;
+                return (
+                    <section id="selecionar-produto-section" className="content-section">
+                        <div className="section-header">
+                            <h2>Selecionar produto</h2>
+                            <p>Selecione o produto que deseja imprimir.</p>
+                        </div>
+                        <div className="item-grid product-grid">
+                            {items.map(item => (
+                                <div key={`${item.type}-${item.id}`} className="item-card" onClick={() => { setSelectedItem(item); setStep(4); }}>
+                                    <span className="item-name">{item.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="pagination-controls">
+                            <button onClick={() => setStep(2)} className="btn btn-secondary">Voltar</button>
+                        </div>
+                    </section>
+                );
+            case 4:
+                return (
+                    <section id="imprimir-etiqueta-section" className="content-section">
+                        <div className="imprimir-header">
+                            <button onClick={() => setStep(3)} className="btn btn-secondary">Voltar</button>
+                        </div>
+                        <p>Sua etiqueta está pronta para ser impressa, mas se preferir você pode inserir informações adicionais.</p>
+                        <div className="imprimir-container card">
+                            <div className="etiqueta-preview-container">
+                                <h4>Pré-visualização</h4>
+                                <div className="etiqueta-preview">
+                                    <p className="preview-product-name"><strong>{selectedItem?.name}</strong></p>
+                                    <p>RESP.: {responsible?.name}</p>
+                                </div>
+                            </div>
+                            <div className="etiqueta-form-container">
+                                <h4>Informações adicionais</h4>
+                                <div className="form-grid">
+                                    <div className="form-group">
+                                        <label htmlFor="lote">Lote</label>
+                                        <input type="text" id="lote" value={formData.lot} onChange={e => setFormData({...formData, lot: e.target.value})} className="form-control" />
+                                    </div>
+                                </div>
+                                <div className="form-actions">
+                                    <div className="quantity-control">
+                                        <label>Quantidade:</label>
+                                        <input type="number" value={formData.quantity} onChange={e => setFormData({...formData, quantity: parseInt(e.target.value, 10) || 1})} className="form-control quantity-input" />
+                                    </div>
+                                    <button onClick={handlePrint} className="btn btn-danger">Imprimir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                );
             default:
                 return <div>Unknown Step</div>;
         }
     };
 
     return (
-        <div className="print-label-container">
-            <div className="wizard-steps">
-                <span className={step >= 1 ? 'active' : ''}>1. Responsável</span>
-                <span className={step >= 2 ? 'active' : ''}>2. Produto</span>
-                <span className={step >= 3 ? 'active' : ''}>3. Imprimir</span>
-            </div>
-            <div className="wizard-content">
-                {step > 1 && <button onClick={goBack} className="btn btn-secondary mb-3">Voltar</button>}
-                {renderStep()}
-            </div>
+        <div className="container">
+            <aside className="sidebar">
+                <div className="logo">
+                    <h2>Etiquetafy</h2>
+                </div>
+                <nav className="menu">
+                    <ul>
+                        <li><Link to="/labels/dashboard"><i className="fas fa-home"></i> Início</Link></li>
+                        <li className="active"><a href="#"><i className="fas fa-tag"></i> Etiquetas</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <main className="main-content">
+                <header className="main-header">
+                    <div></div>
+                    <div className="user-info">
+                        <span className="user-avatar">D</span>
+                        <span>Don Fonseca</span>
+                    </div>
+                </header>
+                {renderStepContent()}
+                <footer className="main-footer">
+                    <p>Copyright © Etiquetafy 2025. Todos os direitos reservados.</p>
+                    <p>Made with ❤️ by Etiquetafy</p>
+                </footer>
+            </main>
         </div>
     );
 };

@@ -573,6 +573,34 @@ const Pdv = () => {
     return grouped;
   }, [orders, orderStatuses]);
 
+  const ordersToday = useMemo(() => {
+    if (!orders) return [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set to start of today
+
+    return orders.filter(order => {
+      const orderDate = new Date(order.order_date);
+      orderDate.setHours(0, 0, 0, 0); // Set to start of order date
+      return orderDate.getTime() === today.getTime();
+    });
+  }, [orders]);
+
+  const ordersTodayCount = ordersToday.length;
+
+  const completedOrdersCount = useMemo(() => {
+    return ordersToday.filter(order => ['delivered', 'concluded'].includes(order.status)).length;
+  }, [ordersToday]);
+
+  const inPreparationOrdersCount = useMemo(() => {
+    return ordersToday.filter(order => ['pending', 'preparing'].includes(order.status)).length;
+  }, [ordersToday]);
+
+  const revenueToday = useMemo(() => {
+    return ordersToday
+      .filter(order => ['delivered', 'concluded'].includes(order.status))
+      .reduce((sum, order) => sum + Number(order.total_amount), 0);
+  }, [ordersToday]);
+
   // Kanban Drag and Drop Logic
   const handleDragStart = (e, orderId) => {
     e.dataTransfer.setData('orderId', orderId);
@@ -1145,12 +1173,51 @@ const Pdv = () => {
 
             {/* Orders Tab */}
             <div className={currentTab === 'orders' ? 'tab-pane active' : 'tab-pane'} id="orders-tab">
+              {/* Stats Cards */}
+              <div className="stats-cards">
+                  <div className="stat-card">
+                      <div className="stat-icon primary">
+                          <ShoppingBasketIcon />
+                      </div>
+                      <div>
+                          <div className="stat-value">{ordersTodayCount}</div>
+                          <div className="stat-label">{t('pdv.orders_today')}</div>
+                      </div>
+                  </div>
+                  <div className="stat-card">
+                      <div className="stat-icon success">
+                          <CheckCircleIcon />
+                      </div>
+                      <div>
+                          <div className="stat-value">{completedOrdersCount}</div>
+                          <div className="stat-label">{t('pdv.completed_orders')}</div>
+                      </div>
+                  </div>
+                  <div className="stat-card">
+                      <div className="stat-icon warning">
+                          <FireIcon />
+                      </div>
+                      <div>
+                          <div className="stat-value">{inPreparationOrdersCount}</div>
+                          <div className="stat-label">{t('pdv.in_preparation')}</div>
+                      </div>
+                  </div>
+                  <div className="stat-card">
+                      <div className="stat-icon info">
+                          <PaymentsIcon />
+                      </div>
+                      <div>
+                          <div className="stat-value">R$ {revenueToday.toFixed(2).replace('.', ',')}</div>
+                          <div className="stat-label">{t('pdv.revenue_today')}</div>
+                      </div>
+                  </div>
+              </div>
               <div className="orders-section">
                 <div className="section-header">
                   <h2 className="section-title">{t('pdv.recent_orders_title')}</h2>
                   <div>
                     <button className="btn btn-outline">
-                      <FilterIcon /> {t('pdv.filter_button')}
+                      <FilterListIcon /> {t('pdv.filter_button')}
                     </button>
                     <button className="btn btn-primary">
                       <AddIcon /> {t('pdv.new_order_button')}

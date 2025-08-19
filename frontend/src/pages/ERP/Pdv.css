@@ -517,9 +517,10 @@
         }
 
                 .tab-pane.active {
-            display: flex;
+            display: flex !important;
             flex-direction: column;
-            flex-grow: 1;
+            flex-grow: 1 !important;
+            height: 100% !important;
         }
 
         /* Kanban Styles (exactly like you sent) */

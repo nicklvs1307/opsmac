@@ -1,29 +1,132 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             172.8s
-------
- > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.377 + npm run build
-0.768
-0.768 > feedeliza-plus@1.0.0 build
-0.768 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.768
-3.970 Creating an optimized production build...
-171.9 Failed to compile.
-171.9
-171.9 [eslint]
-171.9 src/pages/ERP/Pdv.js
-171.9   Line 903:92:   'createOrderMutation' is not defined  no-undef
-171.9   Line 1139:92:  'createOrderMutation' is not defined  no-undef
-171.9
-171.9 Search for the keywords to learn more about each error.
-171.9
-171.9
-------
-Dockerfile.frontend:24
---------------------
-  22 |     ARG REACT_APP_API_URL
-  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  24 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  25 |
-  26 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+URL da solicitação
+https://feedelizaapi.towersfy.com/labels/items
+Método da solicitação
+GET
+Código de status
+404 Not Found
+Endereço remoto
+95.217.16.187:443
+{"error":"Rota não encontrada"}
+
+
+via.placeholder.com/40:1  GET https://via.placeholder.com/40 net::ERR_NAME_NOT_RESOLVED
+Image
+bl @ react-dom.production.min.js:261
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+j @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboard:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+via.placeholder.com/40:1  GET https://via.placeholder.com/40 net::ERR_NAME_NOT_RESOLVED
+Image
+bl @ react-dom.production.min.js:261
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+react-dom.production.min.js:188 TypeError: c.map is not a function
+    at PrintLabel.js:57:36
+    at i0 (PrintLabel.js:164:18)
+    at vi (react-dom.production.min.js:160:137)
+    at As (react-dom.production.min.js:196:258)
+    at wl (react-dom.production.min.js:291:88)
+    at xc (react-dom.production.min.js:279:389)
+    at gc (react-dom.production.min.js:279:320)
+    at vc (react-dom.production.min.js:279:180)
+    at ac (react-dom.production.min.js:270:88)
+    at oc (react-dom.production.min.js:267:429)
+ds @ react-dom.production.min.js:188
+n.callback @ react-dom.production.min.js:188
+Ha @ react-dom.production.min.js:156
+bl @ react-dom.production.min.js:261
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+oc @ react-dom.production.min.js:269
+j @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+PrintLabel.js:57 Uncaught TypeError: c.map is not a function
+    at PrintLabel.js:57:36
+    at i0 (PrintLabel.js:164:18)
+    at vi (react-dom.production.min.js:160:137)
+    at As (react-dom.production.min.js:196:258)
+    at wl (react-dom.production.min.js:291:88)
+    at xc (react-dom.production.min.js:279:389)
+    at gc (react-dom.production.min.js:279:320)
+    at vc (react-dom.production.min.js:279:180)
+    at ac (react-dom.production.min.js:270:88)
+    at oc (react-dom.production.min.js:267:429)
+(anônimo) @ PrintLabel.js:57
+i0 @ PrintLabel.js:164
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:270
+oc @ react-dom.production.min.js:267
+j @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+PrintLabel.js:17  GET https://feedelizaapi.towersfy.com/labels/items 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ PrintLabel.js:17
+rl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Un {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+Promise.catch
+(anônimo) @ PrintLabel.js:17
+rl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+PrintLabel.js:17 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/labels/items".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+go @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ PrintLabel.js:17
+rl @ react-dom.production.min.js:243
+jc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+Vo @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266

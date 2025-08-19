@@ -141,32 +141,8 @@ const PrintLabel = () => {
     };
 
     return (
-        <div className="container">
-            <aside className="sidebar">
-                <div className="logo">
-                    <h2>Etiquetafy</h2>
-                </div>
-                <nav className="menu">
-                    <ul>
-                        <li><Link to="/labels/dashboard"><i className="fas fa-home"></i> Início</Link></li>
-                        <li className="active"><a href="#"><i className="fas fa-tag"></i> Etiquetas</a></li>
-                    </ul>
-                </nav>
-            </aside>
-            <main className="main-content">
-                <header className="main-header">
-                    <div></div>
-                    <div className="user-info">
-                        <span className="user-avatar">D</span>
-                        <span>Don Fonseca</span>
-                    </div>
-                </header>
-                {renderStepContent()}
-                <footer className="main-footer">
-                    <p>Copyright © Etiquetafy 2025. Todos os direitos reservados.</p>
-                    <p>Made with ❤️ by Etiquetafy</p>
-                </footer>
-            </main>
+        <div className="print-label-content">
+            {renderStepContent()}
         </div>
     );
 };

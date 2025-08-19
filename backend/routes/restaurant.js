@@ -201,22 +201,14 @@ router.delete('/:restaurantId/users/:userId', auth, isOwnerOrManager, async (req
     }
 });
 
-const { isWaiter } = require('../middleware/waiterAuth');
+const { isPdvUser } = require('../middleware/pdvUserAuth');
 
 // WAITER ROUTES
 
-// Get tables for a restaurant
-router.get('/:restaurantId/tables', auth, isWaiter, async (req, res) => {
-    try {
-        const tables = await models.Table.findAll({ where: { restaurant_id: req.params.restaurantId } });
-        res.json(tables);
-    } catch (error) {
-        res.status(500).json({ error: 'Erro ao listar mesas.' });
-    }
-});
+
 
 // Get products for a restaurant
-router.get('/:restaurantId/products', auth, isWaiter, async (req, res) => {
+router.get('/:restaurantId/products', auth, isPdvUser, async (req, res) => {
     try {
         const products = await models.Product.findAll({ where: { restaurant_id: req.params.restaurantId, is_active: true } });
         res.json(products);
@@ -228,7 +220,7 @@ router.get('/:restaurantId/products', auth, isWaiter, async (req, res) => {
 router.post(
     '/:restaurantId/orders',
     auth,
-    isWaiter,
+    isPdvUser,
     [
         body('table_id').isUUID().withMessage('ID da mesa inválido.'),
         body('items').isArray({ min: 1 }).withMessage('O pedido deve conter pelo menos um item.'),

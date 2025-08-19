@@ -58,6 +58,48 @@ router.get('/:restaurantId', auth, checkRestaurantOwnership, async (req, res) =>
 
 /**
  * @swagger
+ * /api/restaurant/{restaurantId}/tables:
+ *   get:
+ *     summary: Obtém as mesas de um restaurante específico
+ *     tags: [Restaurant]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: restaurantId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do restaurante
+ *     responses:
+ *       200:
+ *         description: Lista de mesas do restaurante
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Table'
+ *       404:
+ *         description: Restaurante não encontrado
+ *       500:
+ *         description: Erro interno do servidor
+ */
+router.get('/:restaurantId/tables', auth, async (req, res) => {
+    const { restaurantId } = req.params;
+    try {
+      const tables = await models.Table.findAll({
+        where: { restaurant_id: restaurantId },
+        order: [['table_number', 'ASC']]
+      });
+      res.json(tables);
+    } catch (error) {
+      res.status(500).send('Server Error');
+    }
+  });
+
+/**
+ * @swagger
  * /api/restaurant/{restaurantId}:
  *   put:
  *     summary: Atualiza dados de um restaurante específico
@@ -259,7 +301,7 @@ router.post(
 );
 
 
-module.exports = router;
+
 
 /**
  * @swagger

@@ -3,8 +3,10 @@ import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, TextFiel
 import axiosInstance from '../../api/axiosInstance';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const UaiRangoIntegration = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const restaurantId = user?.restaurants?.[0]?.id;
 
@@ -24,7 +26,7 @@ const UaiRangoIntegration = () => {
         setRestaurantUaiRangoId(uaiRangoSettings.restaurantUaiRangoId || '');
       } catch (error) {
         console.error('Erro ao carregar configurações do Uai Rango:', error);
-        toast.error('Erro ao carregar configurações do Uai Rango.');
+        toast.error(t('integrations.uairango.error_loading_settings'));
       } finally {
         setLoading(false);
       }
@@ -46,10 +48,10 @@ const UaiRangoIntegration = () => {
           },
         },
       });
-      toast.success('Configurações do Uai Rango salvas com sucesso!');
+      toast.success(t('integrations.uairango.settings_saved_successfully'));
     } catch (error) {
       console.error('Erro ao salvar configurações do Uai Rango:', error);
-      toast.error('Erro ao salvar configurações do Uai Rango.');
+      toast.error(t('integrations.uairango.error_saving_settings'));
     } finally {
       setSaving(false);
     }
@@ -66,26 +68,26 @@ const UaiRangoIntegration = () => {
   return (
     <Box>
       <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Configurações da Integração com o Uai Rango
+        {t('integrations.uairango.title')}
       </Typography>
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="body1" sx={{ mb: 2 }}>
-          A Uai Rango possui uma API para desenvolvedores que permite a automação de tarefas para estabelecimentos. Isso inclui gerenciamento de cardápios, pedidos e controle de horários de funcionamento. Eles também oferecem webhooks para receber informações de pedidos em tempo real.
+          {t('integrations.uairango.description')}
         </Typography>
         <Typography variant="h6" component="h3" sx={{ mb: 1 }}>
-          Pontos Chave para Integração:
+          {t('integrations.uairango.key_points_title')}
         </Typography>
         <List dense>
           <ListItem>
             <ListItemText
-              primary="1. Gerenciamento de Cardápios:"
-              secondary="Possibilidade de automatizar a atualização de itens e preços do seu cardápio."
+              primary={t('integrations.uairango.step1_primary')}
+              secondary={t('integrations.uairango.step1_secondary')}
             />
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="2. Gestão de Pedidos:"
-              secondary="Receber e gerenciar pedidos diretamente em seu sistema, com webhooks para notificações em tempo real."
+              primary={t('integrations.uairango.step2_primary')}
+              secondary={t('integrations.uairango.step2_secondary')}
             />
           </ListItem>
           <ListItem>

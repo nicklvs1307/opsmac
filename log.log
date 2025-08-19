@@ -1,19 +1,19 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             171.5s
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             166.4s
 ------
  > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.309 + npm run build
-0.598
-0.598 > feedeliza-plus@1.0.0 build
-0.598 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.598
-3.459 Creating an optimized production build...
-170.5 Failed to compile.
-170.5
-170.5 [eslint]
-170.5 src/pages/Public/PublicSurveyForm.js
-170.5 Syntax error: Unterminated JSX contents. (509:26) (509:26)
-170.5
-170.5
+0.371 + npm run build
+0.641
+0.641 > feedeliza-plus@1.0.0 build
+0.641 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.641
+3.593 Creating an optimized production build...
+165.3 Failed to compile.
+165.3
+165.3 [eslint]
+165.3 src/pages/Public/PublicDineInMenu.js
+165.3 Syntax error: Identifier 'useTranslation' has already been declared. (7:9) (7:9)
+165.3
+165.3
 ------
 Dockerfile.frontend:24
 --------------------

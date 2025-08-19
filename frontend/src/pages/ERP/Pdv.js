@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './Pdv.css'; // Import the new CSS
-import { Box, Typography, CircularProgress, Alert, Card, CardContent, Grid, Button, MenuItem, Select, FormControl, InputLabel, IconButton, Divider, Switch, FormControlLabel, Paper, TextField, List, ListItem, ListItemText, Drawer, Tabs, Tab, Badge, useMediaQuery, Chip, Avatar, Tooltip, Fade, ToggleButtonGroup, ToggleButton } from '@mui/material';
+import { Box, Typography, CircularProgress, Alert, Card, CardContent, Grid, Button, MenuItem, Select, FormControl, InputLabel, IconButton, Divider, Switch, FormControlLabel, Paper, TextField, List, ListItem, ListItemText, Drawer, Tabs, Tab, Badge, useMediaQuery, Chip, Avatar, Tooltip, Fade, ToggleButtonGroup, ToggleButton, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { TableRestaurant as TableRestaurantIcon } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import { useQuery, useMutation, useQueryClient } from 'react-query';

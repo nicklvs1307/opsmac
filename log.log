@@ -1,21 +1,24 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             184.7s
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             190.4s
 ------
  > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.347 + npm run build
-0.770
-0.770 > feedeliza-plus@1.0.0 build
-0.770 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.770
-3.658 Creating an optimized production build...
-183.5 Failed to compile.
-183.5
-183.5 [eslint]
-183.5 src/pages/Feedback/FeedbackDetail.js
-183.5   Line 396:24:  'LocationIcon' is not defined  react/jsx-no-undef
-183.5
-183.5 Search for the keywords to learn more about each error.
-183.5
-183.5
+0.410 + npm run build
+0.695
+0.695 > feedeliza-plus@1.0.0 build
+0.695 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.695
+4.200 Creating an optimized production build...
+186.3 Failed to compile.
+186.3
+186.4 [eslint]
+186.4 src/pages/ERP/Pdv.js
+186.4   Line 1542:8:   'Dialog' is not defined         react/jsx-no-undef
+186.4   Line 1543:10:  'DialogTitle' is not defined    react/jsx-no-undef
+186.4   Line 1544:10:  'DialogContent' is not defined  react/jsx-no-undef
+186.4   Line 1547:10:  'DialogActions' is not defined  react/jsx-no-undef
+186.4
+186.4 Search for the keywords to learn more about each error.
+186.4
+186.4
 ------
 Dockerfile.frontend:24
 --------------------

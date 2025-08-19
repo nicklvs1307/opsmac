@@ -111,9 +111,9 @@ app.use('/api/restaurant', restaurantRoutes);
 app.use('/api/health', healthRoutes);
 
 // Swagger UI
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./config/swagger');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// const swaggerUi = require('swagger-ui-express');
+// const swaggerDocument = require('./config/swagger');
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {

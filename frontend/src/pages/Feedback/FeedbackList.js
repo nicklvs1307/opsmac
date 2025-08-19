@@ -43,13 +43,11 @@ import axiosInstance from '../../api/axiosInstance';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
 
-
-
 const FeedbackList = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useTranslation();
-  const restaurantId = user?.restaurants?.[0]?.id; // Acessa o ID do primeiro restaurante do usuário
+  const restaurantId = user?.restaurants?.[0]?.id;
   const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -82,7 +80,6 @@ const FeedbackList = () => {
         limit: 10,
       };
 
-      // Adicionar filtros apenas se tiverem valor
       for (const key in filters) {
         if (filters[key] !== '' && filters[key] !== null && filters[key] !== undefined) {
           params[key] = filters[key];
@@ -95,7 +92,7 @@ const FeedbackList = () => {
       setTotalPages(response.data.totalPages);
     } catch (err) {
       console.error('Error fetching feedbacks:', err);
-      setError('Erro ao carregar feedbacks');
+      setError(t('feedback_list.error_loading'));
     } finally {
       setLoading(false);
     }
@@ -137,12 +134,12 @@ const FeedbackList = () => {
         response: replyText,
       });
       
-      toast.success('Resposta enviada com sucesso!');
+      toast.success(t('feedback_list.reply_success'));
       setReplyDialog(false);
       setReplyText('');
       fetchFeedbacks();
     } catch (err) {
-      toast.error('Erro ao enviar resposta');
+      toast.error(t('feedback_list.reply_error'));
     }
   };
 
@@ -150,11 +147,11 @@ const FeedbackList = () => {
     try {
       await axiosInstance.delete(`/api/feedback/${selectedFeedback.id}`);
       
-      toast.success('Feedback excluído com sucesso!');
+      toast.success(t('feedback_list.delete_success'));
       setDeleteDialog(false);
       fetchFeedbacks();
     } catch (err) {
-      toast.error('Erro ao excluir feedback');
+      toast.error(t('feedback_list.delete_error'));
     }
   };
 
@@ -179,20 +176,20 @@ const FeedbackList = () => {
 
   const getTypeLabel = (type) => {
     switch (type) {
-      case 'compliment': return 'Elogio';
-      case 'complaint': return 'Reclamação';
-      case 'suggestion': return 'Sugestão';
-      case 'criticism': return 'Crítica';
+      case 'compliment': return t('feedback_list.type_compliment');
+      case 'complaint': return t('feedback_list.type_complaint');
+      case 'suggestion': return t('feedback_list.type_suggestion');
+      case 'criticism': return t('feedback_list.type_criticism');
       default: return type;
     }
   };
 
   const getSourceLabel = (source) => {
     switch (source) {
-      case 'qr_code': return 'QR Code';
-      case 'whatsapp': return 'WhatsApp';
-      case 'manual': return 'Manual';
-      case 'website': return 'Website';
+      case 'qr_code': return t('feedback_list.source_qrcode');
+      case 'whatsapp': return t('feedback_list.source_whatsapp');
+      case 'manual': return t('feedback_list.source_manual');
+      case 'website': return t('feedback_list.source_website');
       default: return source;
     }
   };
@@ -325,7 +322,7 @@ const FeedbackList = () => {
                     <Box flex={1}>
                       <Box display="flex" alignItems="center" gap={1} mb={1}>
                         <Typography variant="h6">
-                          {feedback.customer?.name || 'Cliente Anônimo'}
+                          {feedback.customer?.name || t('feedback_list.anonymous_customer')}
                         </Typography>
                         <Rating value={feedback.rating} readOnly size="small" />
                         <Typography variant="body2" color="text.secondary">
@@ -351,7 +348,7 @@ const FeedbackList = () => {
                         />
                         {feedback.table_number && (
                           <Chip
-                            label={`Mesa ${feedback.table_number}`}
+                            label={`${t('public_feedback.table_prefix')} ${feedback.table_number}`}
                             variant="outlined"
                             size="small"
                           />
@@ -365,7 +362,7 @@ const FeedbackList = () => {
                       {feedback.response && (
                         <Box sx={{ bgcolor: 'grey.50', p: 2, borderRadius: 1, mt: 2 }}>
                           <Typography variant="body2" color="text.secondary" gutterBottom>
-                            <strong>Resposta:</strong>
+                            <strong>{t('feedback_list.response_label')}:</strong>
                           </Typography>
                           <Typography variant="body2">
                             {feedback.response}
@@ -394,7 +391,7 @@ const FeedbackList = () => {
       {feedbacks.length === 0 && !loading && (
         <Box textAlign="center" py={4}>
           <Typography variant="h6" color="text.secondary">
-            Nenhum feedback encontrado
+            {t('feedback_list.no_feedback_found')}
           </Typography>
         </Box>
       )}
@@ -419,28 +416,28 @@ const FeedbackList = () => {
       >
         <MenuItemComponent onClick={handleView}>
           <ViewIcon sx={{ mr: 1 }} />
-          Ver Detalhes
+          {t('feedback_list.view_details_action')}
         </MenuItemComponent>
         {!selectedFeedback?.response && (
           <MenuItemComponent onClick={handleReply}>
             <ReplyIcon sx={{ mr: 1 }} />
-            Responder
+            {t('feedback_list.reply_action')}
           </MenuItemComponent>
         )}
         <MenuItemComponent onClick={handleDelete} sx={{ color: 'error.main' }}>
           <DeleteIcon sx={{ mr: 1 }} />
-          Excluir
+          {t('common.delete')}
         </MenuItemComponent>
       </Menu>
 
       {/* Reply Dialog */}
       <Dialog open={replyDialog} onClose={() => setReplyDialog(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>Responder Feedback</DialogTitle>
+        <DialogTitle>{t('feedback_list.reply_dialog_title')}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            label="Sua resposta"
+            label={t('feedback_list.reply_dialog_label')}
             fullWidth
             multiline
             rows={4}
@@ -450,25 +447,25 @@ const FeedbackList = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setReplyDialog(false)}>Cancelar</Button>
+          <Button onClick={() => setReplyDialog(false)}>{t('common.cancel')}</Button>
           <Button onClick={submitReply} variant="contained" disabled={!replyText.trim()}>
-            Enviar Resposta
+            {t('feedback_list.send_reply_button')}
           </Button>
         </DialogActions>
       </Dialog>
 
       {/* Delete Dialog */}
       <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>
-        <DialogTitle>Confirmar Exclusão</DialogTitle>
+        <DialogTitle>{t('category_management.confirm_delete_title')}</DialogTitle>
         <DialogContent>
           <Typography>
-            Tem certeza que deseja excluir este feedback? Esta ação não pode ser desfeita.
+            {t('feedback_list.delete_dialog_content')}
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setDeleteDialog(false)}>Cancelar</Button>
+          <Button onClick={() => setDeleteDialog(false)}>{t('common.cancel')}</Button>
           <Button onClick={confirmDelete} color="error" variant="contained">
-            Excluir
+            {t('common.delete')}
           </Button>
         </DialogActions>
       </Dialog>

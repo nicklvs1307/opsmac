@@ -172,7 +172,7 @@ const FeedbackDetail = () => {
           onClick={() => navigate('/satisfaction/feedback')}
           sx={{ mb: 2 }}
         >
-          {t('feedback_detail.back_button')}
+          {t('public_feedback.back_button')}
         </Button>
         <Alert severity="error">
           {error || t('feedback_detail.not_found')}
@@ -190,7 +190,7 @@ const FeedbackDetail = () => {
             startIcon={<ArrowBackIcon />}
             onClick={() => navigate('/satisfaction/feedback')}
           >
-            {t('feedback_detail.back_button')}
+            {t('public_feedback.back_button')}
           </Button>
           <Typography variant="h4" component="h1">
             {t('feedback_detail.title')}
@@ -204,7 +204,7 @@ const FeedbackDetail = () => {
               startIcon={<ReplyIcon />}
               onClick={() => setReplyDialog(true)}
             >
-              {t('feedback_detail.reply_button')}
+              {t('feedback_list.reply_action')}
             </Button>
           )}
           <Button
@@ -212,7 +212,7 @@ const FeedbackDetail = () => {
             startIcon={<EditIcon />}
             onClick={() => navigate(`/satisfaction/feedback/${id}/edit`)}
           >
-            {t('feedback_detail.edit_button')}
+            {t('pdv.edit_action')}
           </Button>
           <Button
             variant="outlined"
@@ -220,7 +220,7 @@ const FeedbackDetail = () => {
             startIcon={<DeleteIcon />}
             onClick={() => setDeleteDialog(true)}
           >
-            {t('feedback_detail.delete_button')}
+            {t('common.delete')}
           </Button>
         </Box>
       </Box>
@@ -236,7 +236,7 @@ const FeedbackDetail = () => {
               </Avatar>
               <Box>
                 <Typography variant="h5">
-                  {feedback.customer?.name || t('feedback_detail.anonymous_customer')}
+                  {feedback.customer?.name || t('feedback_list.anonymous_customer')}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {feedback.customer?.email || feedback.customer?.phone || t('feedback_detail.no_contact')}
@@ -272,7 +272,7 @@ const FeedbackDetail = () => {
                 />
                 {feedback.table_number && (
                   <Chip
-                    label={t('feedback_detail.table_prefix') + ` ${feedback.table_number}`}
+                    label={`${t('public_feedback.table_prefix')} ${feedback.table_number}`}
                     variant="outlined"
                   />
                 )}
@@ -284,7 +284,7 @@ const FeedbackDetail = () => {
             {/* Comment */}
             <Box mb={3}>
               <Typography variant="h6" gutterBottom>
-                {t('feedback_detail.comment_title')}
+                {t('public_feedback.step_comment_label')}
               </Typography>
               <Typography variant="body1" paragraph>
                 {feedback.comment}
@@ -296,7 +296,7 @@ const FeedbackDetail = () => {
               <Box>
                 <Divider sx={{ my: 3 }} />
                 <Typography variant="h6" gutterBottom>
-                  {t('feedback_detail.response_title')}
+                  {t('feedback_list.response_label')}
                 </Typography>
                 <Box sx={{ bgcolor: 'grey.50', p: 2, borderRadius: 1 }}>
                   <Typography variant="body1">
@@ -324,7 +324,7 @@ const FeedbackDetail = () => {
               </Typography>
               <Box>
                 <Typography variant="body2" color="text.secondary">
-                  <strong>{t('feedback_detail.created_at')}:</strong> {format(new Date(feedback.created_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                  <strong>{t('coupons.table_header_created')}:</strong> {format(new Date(feedback.created_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
                 </Typography>
                 {feedback.updated_at && feedback.updated_at !== feedback.created_at && (
                   <Typography variant="body2" color="text.secondary">
@@ -333,12 +333,12 @@ const FeedbackDetail = () => {
                 )}
                 {feedback.response_date && (
                   <Typography variant="body2" color="text.secondary">
-                    <strong>{t('feedback_detail.responded_at')}:</strong> {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                    <strong>{t('feedback_list.status_responded')}:</strong> {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
                   </Typography>
                 )}
                 {feedback.visit_date && (
                   <Typography variant="body2" color="text.secondary">
-                    <strong>{t('feedback_detail.visit_date')}:</strong> {format(new Date(feedback.visit_date), 'dd/MM/yyyy', { locale: ptBR })}
+                    <strong>{t('new_feedback.visit_date_label')}:</strong> {format(new Date(feedback.visit_date), 'dd/MM/yyyy', { locale: ptBR })}
                   </Typography>
                 )}
               </Box>
@@ -355,7 +355,7 @@ const FeedbackDetail = () => {
                 </Typography>
                 <Box>
                   <Typography variant="body2">
-                    <strong>{t('feedback_detail.name_label')}:</strong> {feedback.customer.name}
+                    <strong>{t('settings.name_label')}:</strong> {feedback.customer.name}
                   </Typography>
                   {feedback.customer.email && (
                     <Typography variant="body2" display="flex" alignItems="center" gap={1}>
@@ -385,11 +385,11 @@ const FeedbackDetail = () => {
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   <QrCodeIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-                  {t('feedback_detail.qrcode_details_title')}
+                  {t('sidebar.qr_codes')}
                 </Typography>
                 <Box>
                   <Typography variant="body2">
-                    <strong>{t('feedback_detail.name_label')}:</strong> {feedback.qr_code.name}
+                    <strong>{t('settings.name_label')}:</strong> {feedback.qr_code.name}
                   </Typography>
                   {feedback.qr_code.location && (
                     <Typography variant="body2" display="flex" alignItems="center" gap={1}>
@@ -399,7 +399,7 @@ const FeedbackDetail = () => {
                   )}
                   {feedback.qr_code.table_number && (
                     <Typography variant="body2">
-                      <strong>{t('feedback_detail.table_label')}:</strong> {feedback.qr_code.table_number}
+                      <strong>{t('public_feedback.table_prefix')}:</strong> {feedback.qr_code.table_number}
                     </Typography>
                   )}
                 </Box>
@@ -415,17 +415,17 @@ const FeedbackDetail = () => {
               </Typography>
               <Box>
                 <Typography variant="body2">
-                  <strong>{t('feedback_detail.id_label')}:</strong> #{feedback.id}
+                  <strong>{t('pdv.table_header_id')}:</strong> #{feedback.id}
                 </Typography>
                 <Typography variant="body2">
-                  <strong>{t('feedback_detail.source_label')}:</strong> {getSourceLabel(feedback.source)}
+                  <strong>{t('new_feedback.source_label')}:</strong> {getSourceLabel(feedback.source)}
                 </Typography>
                 <Typography variant="body2">
-                  <strong>{t('feedback_detail.status_label')}:</strong> {getStatusLabel(feedback.status)}
+                  <strong>{t('coupons.table_header_status')}:</strong> {getStatusLabel(feedback.status)}
                 </Typography>
                 {feedback.nps_score !== undefined && (
                   <Typography variant="body2">
-                    <strong>{t('feedback_detail.nps_label')}:</strong> {feedback.nps_score}
+                    <strong>{t('dashboard.nps_title')}:</strong> {feedback.nps_score}
                   </Typography>
                 )}
               </Box>
@@ -436,12 +436,12 @@ const FeedbackDetail = () => {
 
       {/* Reply Dialog */}
       <Dialog open={replyDialog} onClose={() => setReplyDialog(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>{t('feedback_detail.reply_dialog_title')}</DialogTitle>
+        <DialogTitle>{t('feedback_list.reply_dialog_title')}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            label={t('feedback_detail.reply_dialog_label')}
+            label={t('feedback_list.reply_dialog_label')}
             fullWidth
             multiline
             rows={4}
@@ -452,30 +452,30 @@ const FeedbackDetail = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setReplyDialog(false)}>{t('feedback_detail.cancel_button')}</Button>
+          <Button onClick={() => setReplyDialog(false)}>{t('common.cancel')}</Button>
           <Button
             onClick={handleReply}
             variant="contained"
             disabled={!replyText.trim() || replyLoading}
             startIcon={replyLoading ? <CircularProgress size={20} /> : null}
           >
-            {replyLoading ? t('feedback_detail.sending_button') : t('feedback_detail.send_reply_button')}
+            {replyLoading ? t('feedback_detail.sending_button') : t('feedback_list.send_reply_button')}
           </Button>
         </DialogActions>
       </Dialog>
 
       {/* Delete Dialog */}
       <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>
-        <DialogTitle>{t('feedback_detail.delete_dialog_title')}</DialogTitle>
+        <DialogTitle>{t('category_management.confirm_delete_title')}</DialogTitle>
         <DialogContent>
           <Typography>
-            {t('feedback_detail.delete_dialog_content')}
+            {t('feedback_list.delete_dialog_content')}
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setDeleteDialog(false)}>{t('feedback_detail.cancel_button')}</Button>
+          <Button onClick={() => setDeleteDialog(false)}>{t('common.cancel')}</Button>
           <Button onClick={handleDelete} color="error" variant="contained">
-            {t('feedback_detail.delete_button')}
+            {t('common.delete')}
           </Button>
         </DialogActions>
       </Dialog>

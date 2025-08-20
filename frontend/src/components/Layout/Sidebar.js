@@ -356,7 +356,7 @@ const Sidebar = ({ onMobileClose }) => {
       <List sx={{ pt: 1 }}>
         {filteredMenuItems.map((item) => (
           <React.Fragment key={item.title}>
-            <ListItem disablePadding sx={{ mb: 0.5 }}>
+            <ListItem disablePadding sx={{ mb: 0.5, position: 'relative' }}>
               <Tooltip title={item.title} placement="right" arrow enterDelay={500}>
                 <ListItemButton
                   onClick={() => {
@@ -456,7 +456,6 @@ const Sidebar = ({ onMobileClose }) => {
                       minWidth: 200,
                       borderRadius: 2,
                       p: 1,
-                      ml: 1,
                       display: 'block', // Ensure it's visible when open
                     }}
                   >

@@ -240,5 +240,6 @@ module.exports = {
   optionalAuth,
   userRateLimit,
   logUserAction,
-  checkSubscription
+  checkSubscription,
+  ownerOrManagerAuth: [auth, authorize('owner', 'manager', 'admin', 'super_admin')]
 };

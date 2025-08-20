@@ -22,12 +22,7 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        body {
-            background-color: #f0f2f5; /* Reverted background-color */
-            color: var(--dark);
-            height: 100vh; /* Added height */
-            overflow: hidden; /* Added overflow */
-        }
+        
 
         .app-container {
             display: flex;

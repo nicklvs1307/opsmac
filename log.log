@@ -12,7 +12,7 @@ Error fetching stock dashboard data: Error
     at async Product.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
     at async exports.getDashboardData (/app/backend/controllers/stockController.js:20:23) {
   name: 'SequelizeDatabaseError',
-  parent: error: column Product.min_stock_level does not exist
+  parent: error: column "product_id" does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -22,12 +22,12 @@ Error fetching stock dashboard data: Error
       at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
       at Readable.push (node:internal/streams/readable:392:5)
       at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 121,
+    length: 111,
     severity: 'ERROR',
     code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '42',
+    position: '120',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,
@@ -42,7 +42,7 @@ Error fetching stock dashboard data: Error
     sql: `SELECT "Product"."id", "Product"."name", "Product"."min_stock_level", (SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id) AS "current_stock", "category"."id" AS "category.id", "category"."name" AS "category.name" FROM "products" AS "Product" LEFT OUTER JOIN "Categories" AS "category" ON "Product"."category_id" = "category"."id" WHERE "Product"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2';`,
     parameters: undefined
   },
-  original: error: column Product.min_stock_level does not exist
+  original: error: column "product_id" does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -52,12 +52,12 @@ Error fetching stock dashboard data: Error
       at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
       at Readable.push (node:internal/streams/readable:392:5)
       at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 121,
+    length: 111,
     severity: 'ERROR',
     code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '42',
+    position: '120',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,
@@ -83,7 +83,7 @@ Error fetching stock dashboard data: Error
     at async Product.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
     at async exports.getDashboardData (/app/backend/controllers/stockController.js:20:23) {
   name: 'SequelizeDatabaseError',
-  parent: error: column Product.min_stock_level does not exist
+  parent: error: column "product_id" does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -93,12 +93,12 @@ Error fetching stock dashboard data: Error
       at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
       at Readable.push (node:internal/streams/readable:392:5)
       at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 121,
+    length: 111,
     severity: 'ERROR',
     code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '42',
+    position: '120',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,
@@ -113,7 +113,7 @@ Error fetching stock dashboard data: Error
     sql: `SELECT "Product"."id", "Product"."name", "Product"."min_stock_level", (SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id) AS "current_stock", "category"."id" AS "category.id", "category"."name" AS "category.name" FROM "products" AS "Product" LEFT OUTER JOIN "Categories" AS "category" ON "Product"."category_id" = "category"."id" WHERE "Product"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2';`,
     parameters: undefined
   },
-  original: error: column Product.min_stock_level does not exist
+  original: error: column "product_id" does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -123,12 +123,12 @@ Error fetching stock dashboard data: Error
       at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
       at Readable.push (node:internal/streams/readable:392:5)
       at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 121,
+    length: 111,
     severity: 'ERROR',
     code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '42',
+    position: '120',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,

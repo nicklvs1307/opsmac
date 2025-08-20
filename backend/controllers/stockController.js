@@ -12,6 +12,7 @@ const getStockStatus = (currentStock, minStock) => {
 exports.getDashboardData = async (req, res) => {
   try {
     const { restaurant_id } = req.query;
+    console.log('getDashboardData: received restaurant_id', restaurant_id);
 
     // Total Products
     const totalProducts = await Product.count({ where: { restaurant_id } });
@@ -23,7 +24,7 @@ exports.getDashboardData = async (req, res) => {
         'id',
         'name',
         'min_stock_level',
-        [sequelize.literal('(SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id)'), 'current_stock']
+        [sequelize.literal('(SELECT SUM(quantity) FROM stock_movements WHERE stockable_id = "Product"."id" AND stockable_type = \'Product\')'), 'current_stock']
       ],
       include: [{
         model: Category,
@@ -109,13 +110,14 @@ exports.getStockHistory = async (req, res) => {
 exports.getAllStocks = async (req, res) => {
   try {
     const { restaurant_id } = req.query;
+    console.log('getAllStocks: received restaurant_id', restaurant_id);
     const stocks = await Product.findAll({
       where: { restaurant_id },
       attributes: [
         'id',
         'name',
         'sku',
-        [sequelize.literal('(SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id)'), 'quantity']
+        [sequelize.literal('(SELECT SUM(quantity) FROM stock_movements WHERE stockable_id = "Product"."id" AND stockable_type = \'Product\')'), 'quantity']
       ],
       order: [['name', 'ASC']],
     });

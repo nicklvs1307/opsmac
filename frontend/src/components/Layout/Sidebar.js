@@ -513,7 +513,6 @@ const Sidebar = ({ onMobileClose }) => {
                     <ClickAwayListener onClickAway={handlePopperClose}>
                       <Paper sx={{ minWidth: 200, borderRadius: 2, boxShadow: theme.shadows[3] }}>
                         <List component="div" disablePadding>
-                    <List component="div" disablePadding>
                           {item.submenu.map((subItem) => (
                             <ListItem key={subItem.title} disablePadding sx={{ mb: 0.5 }}>
                               <Tooltip title={subItem.title} placement="right" arrow enterDelay={500}>

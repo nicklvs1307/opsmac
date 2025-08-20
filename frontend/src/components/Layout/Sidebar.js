@@ -12,7 +12,10 @@ import {
   Divider,
   Typography,
   alpha,
-  useMediaQuery, // Import useMediaQuery
+  useMediaQuery,
+  Popper,
+  Paper,
+  ClickAwayListener,
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
@@ -31,6 +34,7 @@ import {
   Poll as PollIcon,
   ConnectWithoutContact as ConnectWithoutContactIcon,
   PointOfSale as PointOfSaleIcon,
+  ChevronRight,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
@@ -43,9 +47,10 @@ const Sidebar = ({ onMobileClose }) => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const [openMenus, setOpenMenus] = useState({});
+  const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
   const mode = theme.palette.mode;
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md')); // Detect desktop size
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const handleClick = (path) => {
     navigate(path);
@@ -54,11 +59,24 @@ const Sidebar = ({ onMobileClose }) => {
     }
   };
 
-  const handleMenuToggle = (menu) => {
-    setOpenMenus(prev => ({
-      ...prev,
-      [menu]: !prev[menu]
-    }));
+  const handleMenuToggle = (event, menu) => {
+    if (isDesktop) {
+      setAnchorEl(anchorEl === event.currentTarget ? null : event.currentTarget);
+      setOpenMenus(prev => ({
+        ...prev,
+        [menu]: !prev[menu]
+      }));
+    } else {
+      setOpenMenus(prev => ({
+        ...prev,
+        [menu]: !prev[menu]
+      }));
+    }
+  };
+
+  const handlePopperClose = () => {
+    setAnchorEl(null);
+    setOpenMenus({}); // Close all open menus when popper is closed
   };
 
   const isActive = (path) => {
@@ -359,9 +377,9 @@ const Sidebar = ({ onMobileClose }) => {
             <ListItem disablePadding sx={{ mb: 0.5, position: 'relative' }}>
               <Tooltip title={item.title} placement="right" arrow enterDelay={500}>
                 <ListItemButton
-                  onClick={() => {
+                  onClick={(event) => {
                     if (item.submenu) {
-                      handleMenuToggle(item.title);
+                      handleMenuToggle(event, item.title);
                     } else {
                       handleClick(item.path);
                     }
@@ -426,17 +444,31 @@ const Sidebar = ({ onMobileClose }) => {
                   }}
                 />
                 {item.submenu && (
-                  openMenus[item.title] ? 
-                    <ExpandLess sx={{ 
-                      color: isActive(item.path) ? 'white' : 'text.secondary',
-                      transition: 'transform 0.3s ease',
-                      transform: 'rotate(0deg)',
-                    }} /> : 
-                    <ExpandMore sx={{ 
-                      color: isActive(item.path) ? 'white' : 'text.secondary',
-                      transition: 'transform 0.3s ease',
-                      transform: 'rotate(0deg)',
-                    }} />
+                  isDesktop ? (
+                    openMenus[item.title] ? 
+                      <ExpandLess sx={{ 
+                        color: isActive(item.path) ? 'white' : 'text.secondary',
+                        transition: 'transform 0.3s ease',
+                        transform: 'rotate(0deg)',
+                      }} /> : 
+                      <ChevronRight sx={{ 
+                        color: isActive(item.path) ? 'white' : 'text.secondary',
+                        transition: 'transform 0.3s ease',
+                        transform: 'rotate(0deg)',
+                      }} />
+                  ) : (
+                    openMenus[item.title] ? 
+                      <ExpandLess sx={{ 
+                        color: isActive(item.path) ? 'white' : 'text.secondary',
+                        transition: 'transform 0.3s ease',
+                        transform: 'rotate(0deg)',
+                      }} /> : 
+                      <ExpandMore sx={{ 
+                        color: isActive(item.path) ? 'white' : 'text.secondary',
+                        transition: 'transform 0.3s ease',
+                        transform: 'rotate(0deg)',
+                      }} />
+                  )
                 )}
               </ListItemButton>
               </Tooltip>
@@ -444,8 +476,43 @@ const Sidebar = ({ onMobileClose }) => {
             
             {item.submenu && (
               isDesktop ? (
-                openMenus[item.title] && (
-                  <Box
+                <Popper
+                  open={openMenus[item.title] && Boolean(anchorEl)}
+                  anchorEl={anchorEl}
+                  placement="right-start"
+                  disablePortal
+                  modifiers={[
+                    {
+                      name: 'offset',
+                      options: {
+                        offset: [0, 8], // Adjust offset from anchor
+                      },
+                    },
+                    {
+                      name: 'flip',
+                      enabled: true,
+                      options: {
+                        altBoundary: true,
+                        rootBoundary: 'viewport',
+                        padding: 8,
+                      },
+                    },
+                    {
+                      name: 'preventOverflow',
+                      enabled: true,
+                      options: {
+                        altAxis: true,
+                        altBoundary: true,
+                        rootBoundary: 'viewport',
+                        padding: 8,
+                      },
+                    },
+                  ]}
+                >
+                  {({ TransitionProps }) => (
+                    <ClickAwayListener onClickAway={handlePopperClose}>
+                      <Paper sx={{ minWidth: 200, borderRadius: 2, boxShadow: theme.shadows[3] }}>
+                        <List component="div" disablePadding>
                     sx={{
                       position: 'absolute',
                       top: 0,
@@ -530,8 +597,10 @@ const Sidebar = ({ onMobileClose }) => {
                         </ListItem>
                       ))}
                     </List>
-                  </Box>
-                )
+                      </Paper>
+                    </ClickAwayListener>
+                  )}
+                </Popper>
               ) : (
                 <Collapse in={openMenus[item.title]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding sx={{ ml: 2, mt: 0.5 }}>

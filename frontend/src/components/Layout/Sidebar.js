@@ -480,7 +480,7 @@ const Sidebar = ({ onMobileClose }) => {
                   open={openMenus[item.title] && Boolean(anchorEl)}
                   anchorEl={anchorEl}
                   placement="right-start"
-                  disablePortal
+                  disablePortal={false}
                   modifiers={[
                     {
                       name: 'offset',

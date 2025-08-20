@@ -296,11 +296,15 @@ router.get('/analytics/:restaurantId', auth, async (req, res) => {
             include: [{
                 model: models.Question,
                 as: 'question',
-                attributes: ['question_type'],
+                attributes: ['question_type', 'nps_criterion_id'], // Include nps_criterion_id
                 include: [{
                     model: models.Survey,
                     where: { restaurant_id: restaurantId },
                     attributes: []
+                }, {
+                    model: models.NpsCriterion,
+                    as: 'npsCriterion',
+                    attributes: ['id', 'name'], // Include NpsCriterion details
                 }]
             }]
         });
@@ -309,6 +313,7 @@ router.get('/analytics/:restaurantId', auth, async (req, res) => {
         let npsCount = 0;
         let csatSum = 0;
         let csatCount = 0;
+        const npsByCriterion = {}; // Object to store NPS metrics per criterion
 
         allAnswers.forEach(answer => {
             if (answer.Question) {
@@ -317,12 +322,44 @@ router.get('/analytics/:restaurantId', auth, async (req, res) => {
                     if (answer.Question.question_type === 'nps') {
                         npsSum += value;
                         npsCount++;
+
+                        const criterionId = answer.Question.nps_criterion_id;
+                        const criterionName = answer.Question.npsCriterion?.name || 'Unknown Criterion';
+
+                        if (criterionId) {
+                            if (!npsByCriterion[criterionId]) {
+                                npsByCriterion[criterionId] = {
+                                    id: criterionId,
+                                    name: criterionName,
+                                    promoters: 0,
+                                    neutrals: 0,
+                                    detractors: 0,
+                                    totalResponses: 0,
+                                };
+                            }
+
+                            if (value >= 9) {
+                                npsByCriterion[criterionId].promoters++;
+                            } else if (value >= 7) {
+                                npsByCriterion[criterionId].neutrals++;
+                            } else {
+                                npsByCriterion[criterionId].detractors++;
+                            }
+                            npsByCriterion[criterionId].totalResponses++;
+                        }
                     } else if (answer.Question.question_type === 'csat') {
                         csatSum += value;
                         csatCount++;
                     }
                 }
             }
+        });
+
+        // Calculate NPS score for each criterion
+        const npsMetricsPerCriterion = Object.values(npsByCriterion).map(criterion => {
+            const { promoters, neutrals, detractors, totalResponses } = criterion;
+            const npsScore = totalResponses > 0 ? ((promoters - detractors) / totalResponses) * 100 : null;
+            return { ...criterion, npsScore };
         });
 
         const averageNps = npsCount > 0 ? npsSum / npsCount : null;
@@ -334,7 +371,8 @@ router.get('/analytics/:restaurantId', auth, async (req, res) => {
             totalResponses,
             averageNps,
             averageCsat,
-            npsCriteriaScores: restaurant?.nps_criteria_scores || {}
+            npsMetricsPerCriterion, // New: NPS metrics broken down by criterion
+            npsCriteriaScores: restaurant?.nps_criteria_scores || {} // Keep existing
         });
 
     } catch (err) {

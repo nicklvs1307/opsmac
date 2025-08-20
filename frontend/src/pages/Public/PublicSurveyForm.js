@@ -651,6 +651,45 @@ const PublicSurveyForm = () => {
                                 </Box>
                             )}
 
+                        {survey.questions[currentQuestionIndex].question_type === 'nps' && (
+                                <Box sx={{ mb: 2, width: '100%' }}>
+                                    <Typography gutterBottom>{t('public_survey.nps_question_label')}</Typography>
+                                    <Slider
+                                        aria-label="NPS Score"
+                                        value={parseInt(answers[survey.questions[currentQuestionIndex].id]) || 0}
+                                        onChange={(event, newValue) => {
+                                            handleAnswerChange(survey.questions[currentQuestionIndex].id, newValue.toString());
+                                        }}
+                                        defaultValue={0}
+                                        step={1}
+                                        marks
+                                        min={0}
+                                        max={10}
+                                        valueLabelDisplay="auto"
+                                        sx={
+                                            {
+                                                color: primaryColor,
+                                                '& .MuiSlider-markLabel': {
+                                                    color: textColor,
+                                                },
+                                                '& .MuiSlider-thumb': {
+                                                    '&:hover, &.Mui-focusVisible': {
+                                                        boxShadow: `0px 0px 0px 8px ${alpha(primaryColor, 0.16)}`,
+                                                    },
+                                                    '&.Mui-active': {
+                                                        boxShadow: `0px 0px 0px 14px ${alpha(primaryColor, 0.16)}`,
+                                                    },
+                                                },
+                                            }
+                                        }
+                                    />
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
+                                        <Typography variant="caption" sx={{ color: textColor }}>{t('public_survey.nps_0_label')}</Typography>
+                                        <Typography variant="caption" sx={{ color: textColor }}>{t('public_survey.nps_10_label')}</Typography>
+                                    </Box>
+                                </Box>
+                            )}
+
                         {survey.questions[currentQuestionIndex].question_type === 'numerical_rating_scale' && (
                                 <Box sx={{
                                     display: 'flex',

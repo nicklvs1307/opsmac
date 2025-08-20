@@ -120,16 +120,17 @@ const SatisfactionAnalytics = () => {
         <Typography variant="h6" gutterBottom>
           NPS por Critério
         </Typography>
-        {data?.npsCriteriaScores && Object.keys(data.npsCriteriaScores).length > 0 ? (
+        {data?.npsMetricsPerCriterion && data.npsMetricsPerCriterion.length > 0 ? (
           <Grid container spacing={2}>
-            {Object.entries(data.npsCriteriaScores).map(([criterionId, scores]) => (
-              <Grid item xs={12} md={6} key={criterionId}>
+            {data.npsMetricsPerCriterion.map((criterion) => (
+              <Grid item xs={12} md={6} key={criterion.id}>
                 <Paper sx={{ p: 2, border: '1px solid #eee' }}>
-                  <Typography variant="subtitle1">{getCriterionName(criterionId)}</Typography>
-                  <Typography>Promotores: {scores.promoters}</Typography>
-                  <Typography>Passivos: {scores.passives}</Typography>
-                  <Typography>Detratores: {scores.detractors}</Typography>
-                  <Typography>Total: {scores.total}</Typography>
+                  <Typography variant="subtitle1">{criterion.name}</Typography>
+                  <Typography>Promotores: {criterion.promoters}</Typography>
+                  <Typography>Neutros: {criterion.neutrals}</Typography>
+                  <Typography>Detratores: {criterion.detractors}</Typography>
+                  <Typography>Total de Respostas: {criterion.totalResponses}</Typography>
+                  <Typography variant="h6" sx={{ mt: 1 }}>NPS Score: {criterion.npsScore?.toFixed(2) || 'N/A'}</Typography>
                 </Paper>
               </Grid>
             ))}

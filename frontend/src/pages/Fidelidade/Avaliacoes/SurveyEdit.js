@@ -206,6 +206,25 @@ const SurveyEdit = () => {
               </Select>
             </FormControl>
 
+            {question.question_type === 'nps' && (
+              <FormControl fullWidth sx={{ mb: 2 }}>
+                <InputLabel>{t('survey_edit.nps_criterion_label')}</InputLabel>
+                <Select
+                  value={question.nps_criterion_id || ''}
+                  label={t('survey_edit.nps_criterion_label')}
+                  onChange={(e) => handleQuestionChange(qIndex, 'nps_criterion_id', e.target.value)}
+                >
+                  {isLoadingNpsCriteria ? (
+                    <MenuItem disabled>{t('survey_edit.loading_criteria')}</MenuItem>
+                  ) : (
+                    npsCriteria?.map((criterion) => (
+                      <MenuItem key={criterion.id} value={criterion.id}>{criterion.name}</MenuItem>
+                    ))
+                  )}
+                </Select>
+              </FormControl>
+            )}
+
             {(question.question_type === 'radio' ||
               question.question_type === 'checkboxes' ||
               question.question_type === 'dropdown') && (

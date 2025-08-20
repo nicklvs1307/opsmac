@@ -1,38 +1,773 @@
-survey_list.title
-survey_list.filters_title
-survey_list.search_placeholder
-survey_list.search_label
-survey_list.table_header_title	
-survey_list.table_header_type	
-survey_list.table_header_status	
-survey_list.table_header_actions
-checkin_dashboard.main_title
-checkin_dashboard.main_description
-satisfaction_settings.personalization_title
+Em uma escala de 1 a 5, o quanto você ficou satisfeito com a nossa EMBALAGEM? *
+1 - MUITO RUIM 5 - MUITO BOM
 
-satisfaction_settings.background_color_label
 
-satisfaction_settings.text_color_label
+1
 
-satisfaction_settings.primary_color_label
-satisfaction_settings.background_image_url_label
-survey_reward_program.title
-survey_reward_program.description
 
-survey_reward_program.rewards_per_response
-survey_reward_program.rewards_per_response_helper
+2
 
-satisfaction_settings.nps_criteria_title
-satisfaction_settings.nps_criteria_description
 
-satisfaction_settings.new_nps_criterion_label
-pdv.subtotal_label
+3
 
-pdv.service_tax_label
 
-pdv.total_label
-pdv.current_order_title
-pdv.counter_salepdv.clear_order
-pdv.no_items_added
-sidebar.pdv
-sidebar.team
+4
+
+
+5
+
+2 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com a APRESENTAÇÃO DO SEU PEDIDO? *
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+3 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com o nosso ATENDIMENTO? *
+1 - MUITO RUIM 5 - MUITO BOM
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+4 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com a QUALIDADE DOS NOSSOS PRODUTOS? *
+1 - MUITO RUIM 5 - MUITO BOM
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+5 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com o nosso TEMPO DE ENTREGA? *
+1 - MUITO RUIM 5 - MUITO BOM
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+6 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com o nosso CUSTO BENEFÍCIO? *
+1 - MUITO RUIM 5 - MUITO BOM
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+7 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+8 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+
+
+ - Como você avalia as OPÇÕES DO CARDÁPIO? *
+
+
+
+
+
+2 - O que você gostaria de ver em nosso cardápio ?
+Digite sua resposta
+3 - O que você não tiraria do cardápio?
+Digite sua resposta
+4 - O que você tiraria do cardápio?
+Digite sua resposta
+5 - O que você acredita que FALTA na Roma Pizzaria & Choperia?
+Digite sua resposta
+6 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+7 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+
+
+1 - Por onde você nos conheceu? *
+
+
+
+
+
+
+2 - Por qual motivo você veio à casa hoje? *
+
+
+
+
+
+
+
+
+3 - Se você não tivesse vindo à nossa casa, aonde iria?
+Digite sua resposta
+4 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+5 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+
+
+ - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+2 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+
+
+
+1 - Coloque aqui o número da sua mesa: *
+essa informação é importante para que possamos identificar a mesa no caso de algum imprevisto
+
+Digite sua resposta
+2 - Como você avalia a postura profissional da equipe de atendimento? *
+O que avaliar: não ficam escorados no balcão; não ficam de costas para o cliente. A postura está ereta, se locomovem com elegância e sem correr no salão. Não ficam com a mão no bolso/braços cruzados.
+
+
+
+
+
+
+3 - Como você avalia a apresentação da equipe de atendimento? *
+O que avaliar: Uniforme está completo, limpo e passado. Unhas estão limpas e bem feitas; Ausência de maquiagem pesada; Cabelos longos estão presos; barba está bem feita e/ou desenhada.
+
+
+
+
+
+
+4 - Como você avalia nossa recepção ao cliente *
+O que avaliar: Clientes estão sendo recepcionados com uma alegre e calorosa saudação na entrada do restaurante.
+
+
+
+
+
+
+5 - Como você avalia o acolhimento na entrada? *
+O que avaliar: a fila de espera é eficiente e bem organizada; há informação constante e atualizada para quem está aguardando; são realizadas vendas na fila.
+
+
+
+
+
+
+6 - Os atendentes executaram a regra dos 5 segundos? *
+O que avaliar: todos estão parando por 5 segundos o que estão fazendo para cumprimentar os clientes que entram no estabelecimento.
+
+
+
+7 - Como você avalia a acomodação dos clientes na casa? *
+O que avaliar: acomodam os clientes em suas mesas: ajudaram mulheres e senhoras a se sentarem e a guardarem seus pertences.
+
+
+
+
+
+
+8 - Como você avalia a primeira abordagem do atendimento? *
+O que avaliar: abordaram os clientes depois de no máximo 2 minutos; ao mesmo tempo, garçons dão tempo para o cliente escolher.
+
+
+
+
+
+
+9 - Como você avalia a apresentação da casa realizada pelo atendente?
+
+
+
+
+
+10 - Como você avalia a QUALIDADE DOS NOSSOS PRODUTOS? *
+
+
+
+
+
+11 - Como você avalia o nosso AMBIENTE EXTERNO? *
+
+
+
+
+
+12 - Como você avalia o nosso AMBIENTE INTERNO? *
+
+
+
+
+
+13 - Como você avalia a LIMPEZA DA CASA E DO BANHEIRO*
+
+
+
+
+
+14 - como você avalia a personalização e a humanização do atendimento da casa? *
+Ex: o atendente busca entender as necessidades do cliente? ele direciona para as melhores opções? conversa com o cliente falando o seu nome?
+
+
+
+
+
+
+15 - Como você avalia o posicionamento e distribuição dos atendentes na casa? *
+O que avaliar: Estão distribuídos em praças de atendimento. Estão bem posicionados em suas praça, em lugares estratégicos de visualização. Os clientes tiveram que levantar a mão para serem atendidos.
+
+
+
+
+
+
+16 - Como você avalia a estratégia de vendas? *
+O que avaliar: sugerem uma bebida na entrada para que o cliente aumente seu tempo de consumo. Utilizam a técnica das 3 opções. Elogiam as escolhas dos clientes, independente da sua sugestão.
+
+
+
+
+
+
+17 - Como você avalia a reposição de produtos? *
+O que avaliar: não deixaram copos vazios por mais de 1 minuto, enchendo-os ou oferendo novas bebidas para o cliente.
+
+
+
+
+
+
+18 - Como você avalia a forma de servir dos garçons da casa? *
+Ex: utilizam as técnicas certas para servir determinados produtos? são solícitos para servir o cliente? desejam bom apetite e checam a experiência de consumo?
+
+
+
+
+
+
+19 - No processo de despedida e finalização, como você avalia a experiência de pagamento? *
+Ex: conta chegou rápida? conta chegou certa sem necessidade de alteração? foi entregue algo a mais nesse momento?
+
+
+
+
+
+
+20 - O tempo de espera do atendimento, das bebidas e dos pratos foi dentro do padrão? Como você avalia? *
+
+
+
+
+
+21 - No processo de despedida e finalização, o atendente solicita feedbacks sobre a operação? *
+Ex: solicita responder uma pesquisa? avaliar no Google ou Trip Advisor? pergunta se deu tudo certo com a experiência?
+
+
+
+22 - A despedida foi calorosa e com convite para o cliente retornar? *
+Ex: cliente foi convidado a voltar? foi criado uma relação com o cliente?
+
+
+
+23 - Você possuiu algum atrito durante a sua experiência? *
+
+
+24 - Se sim, qual atrito?
+Digite sua resposta
+25 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+26 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+
+
+ - Como você avalia o nosso ATENDIMENTO? *
+
+
+
+
+
+2 - Como você avalia a APRESENTAÇÃO DOS PRODUTOS ENTREGUES? *
+
+
+
+
+
+3 - Como você avalia a nossa EMBALAGEM? *
+
+
+
+
+
+4 - Como você avalia a TEMPERATURA QUE CHEGOU O SEU PEDIDO? *
+
+
+
+
+
+5 - Como você avalia a QUALIDADE DOS NOSSOS PRODUTOS? *
+
+
+
+
+
+6 - Como você avalia o nosso TEMPO DE ENTREGA? *
+
+
+
+
+
+7 - Como você avalia o nosso CUSTO-BENEFÍCIO? *
+
+
+
+
+
+8 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+9 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+
+- Como você avalia o nosso ATENDIMENTO? *
+
+
+2 - Como você avalia a QUALIDADE DOS NOSSOS PRODUTOS?
+
+
+3 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+4 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+
+
+1 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+2 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+
+
+1 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+2 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+Digite sua resposta
+
+
+1 - Como você avalia o nosso ATENDIMENTO? *
+
+
+
+
+
+2 - Você foi recepcionado pela nossa equipe? *
+
+
+3 - O atendente se apresentou pelo nome para você? *
+
+
+4 - O atendente te apresentou as opções do nosso cardápio? *
+
+
+5 - O atendente fez sugestões de produtos da casa? *
+
+
+6 - Alguém do nosso time retornou a mesa para confirmar se tudo aconteceu de acordo com as suas expectativas? *
+
+
+7 - O(A) atendente te convidou para responder a nossa pesquisa? *
+
+
+8 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+9 - Coloque aqui sua crítica, sugestão ou elogio:
+
+
+1 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+
+0
+
+
+1
+
+
+2
+
+
+3
+
+
+4
+
+
+5
+
+
+6
+
+
+7
+
+
+8
+
+
+9
+
+
+10
+
+2 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
+Digite sua resposta

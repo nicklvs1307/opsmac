@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const { auth } = require('../middleware/auth');
+const { auth, authorize } = require('../middleware/auth');
 const upload = require('../middleware/upload'); // Import the upload middleware
 const { models } = require('../config/database');
 
@@ -44,6 +44,7 @@ router.post('/upload-image', auth, upload.single('productImage'), async (req, re
 router.post(
   '/',
   auth,
+  authorize('admin', 'owner', 'manager'),
   getRestaurantId,
   [
     body('name').notEmpty().withMessage('Nome é obrigatório').isLength({ min: 2, max: 100 }).withMessage('Nome deve ter entre 2 e 100 caracteres'),
@@ -174,6 +175,7 @@ router.get(
 router.put(
   '/:id',
   auth,
+  authorize('admin', 'owner', 'manager'),
   getRestaurantId,
   [
     body('name').optional().notEmpty().withMessage('Nome é obrigatório').isLength({ min: 2, max: 100 }).withMessage('Nome deve ter entre 2 e 100 caracteres'),
@@ -240,7 +242,7 @@ router.put(
 );
 
 // Deletar um produto
-router.delete('/:id', auth, getRestaurantId, async (req, res) => {
+router.delete('/:id', auth, authorize('admin', 'owner', 'manager'), getRestaurantId, async (req, res) => {
   const { id } = req.params;
   const { restaurantId } = req;
 
@@ -257,5 +259,33 @@ router.delete('/:id', auth, getRestaurantId, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// Ativa ou inativa um produto
+router.patch(
+  '/:id/toggle-status',
+  auth,
+  authorize('admin', 'owner', 'manager'),
+  getRestaurantId,
+  async (req, res) => {
+    const { id } = req.params;
+    const { restaurantId } = req;
+    try {
+      const product = await models.Product.findOne({
+        where: { id, restaurant_id: restaurantId },
+      });
+
+      if (!product) {
+        return res.status(404).json({ msg: 'Produto não encontrado.' });
+      }
+
+      product.is_active = !product.is_active;
+      await product.save();
+
+      res.json(product);
+    } catch (error) {
+      res.status(500).json({ msg: 'Erro interno do servidor.', error: error.message });
+    }
+  }
+);
 
 module.exports = router;

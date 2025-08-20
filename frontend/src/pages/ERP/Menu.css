@@ -50,7 +50,7 @@
     display: block;
 }
 
-/* Table */
+/* Table Container (Card Style) */
 .table-container {
     background-color: white;
     border-radius: 8px;
@@ -77,7 +77,7 @@ table {
 }
 
 thead {
-    background-color: var(--light);
+    background-color: #f5f7fa; /* Lighter head */
 }
 
 th, td {
@@ -89,12 +89,14 @@ th, td {
 th {
     font-weight: 600;
     color: var(--dark);
+    font-size: 14px;
 }
 
 tr:hover {
     background-color: #f9f9f9;
 }
 
+/* Status Badge */
 .status {
     display: inline-block;
     padding: 5px 10px;
@@ -105,27 +107,33 @@ tr:hover {
 
 .status.active {
     background-color: #d4edda;
-    color: var(--success);
+    color: #155724;
 }
 
 .status.inactive {
     background-color: #f8d7da;
-    color: var(--danger);
+    color: #721c24;
 }
 
+/* Action Buttons */
 .action-btn {
-    padding: 5px 10px;
+    padding: 5px 8px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin-right: 5px;
-    font-size: 12px;
-    transition: all 0.3s;
+    font-size: 14px;
+    transition: all 0.2s;
     background: none;
 }
 
+.action-btn i {
+    font-size: 14px;
+}
+
 .edit-btn {
-    color: var(--secondary);
+    background-color: var(--light);
+    color: var(--dark);
 }
 
 .edit-btn:hover {
@@ -133,6 +141,7 @@ tr:hover {
 }
 
 .delete-btn {
+    background-color: #f8d7da;
     color: var(--danger);
 }
 
@@ -140,16 +149,19 @@ tr:hover {
     background-color: #f1b0b7;
 }
 
-/* Form */
-.form-container {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    max-width: 800px;
-    margin: auto;
+.toggle-status-btn {
+    color: white;
 }
 
+.toggle-status-btn.active {
+    background-color: var(--success);
+}
+
+.toggle-status-btn.inactive {
+    background-color: var(--warning);
+}
+
+/* Form & Modal Styles */
 .form-group {
     margin-bottom: 20px;
 }
@@ -174,15 +186,6 @@ tr:hover {
     border-color: var(--secondary);
     outline: none;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-}
-
-.form-row {
-    display: flex;
-    gap: 20px;
-}
-
-.form-row .form-group {
-    flex: 1;
 }
 
 .btn {
@@ -219,45 +222,11 @@ tr:hover {
     background-color: #7f8c8d;
 }
 
-/* Image Upload */
-.image-upload {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px dashed #ddd;
-    padding: 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.image-upload:hover {
-    border-color: var(--secondary);
-}
-
-.image-upload i {
-    font-size: 40px;
-    color: var(--gray);
-    margin-bottom: 10px;
-}
-
-.image-upload span {
-    color: var(--gray);
-    text-align: center;
-}
-
-.image-preview {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-/* Variants & Addons */
+/* Variants & Addons in Modal */
 .variants-container {
     margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
 }
 
 .variant-item {
@@ -273,4 +242,5 @@ tr:hover {
 
 .variant-item .btn {
     padding: 5px 10px;
+    background-color: var(--accent);
 }

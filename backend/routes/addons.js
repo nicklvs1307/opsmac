@@ -66,4 +66,23 @@ router.delete('/:id', ownerOrManagerAuth, async (req, res) => {
     }
 });
 
+// Ativa ou inativa um adicional
+router.patch('/:id/toggle-status', ownerOrManagerAuth, async (req, res) => {
+    try {
+        const addon = await Addon.findByPk(req.params.id);
+        if (!addon) {
+            return res.status(404).json({ msg: 'Addon not found' });
+        }
+
+        // Assumes the Addon model has an 'is_active' field.
+        addon.is_active = !addon.is_active;
+        await addon.save();
+
+        res.json(addon);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;

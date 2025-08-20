@@ -313,4 +313,58 @@ router.delete(
   }
 );
 
+/**
+ * @swagger
+ * /api/categories/{id}/toggle-status:
+ *   patch:
+ *     summary: Ativa ou inativa uma categoria
+ *     tags: [Categories]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID da categoria
+ *     responses:
+ *       200:
+ *         description: Status da categoria atualizado com sucesso
+ *       404:
+ *         description: Categoria não encontrada
+ *       401:
+ *         description: Não autorizado
+ *       403:
+ *         description: Acesso negado
+ *       500:
+ *         description: Erro interno do servidor
+ */
+router.patch(
+  '/:id/toggle-status',
+  auth,
+  authorize('admin', 'owner', 'manager'),
+  getRestaurantId,
+  async (req, res) => {
+    const { id } = req.params;
+    const { restaurantId } = req;
+    try {
+      const category = await models.Category.findOne({
+        where: { id, restaurant_id: restaurantId },
+      });
+
+      if (!category) {
+        return res.status(404).json({ msg: 'Categoria não encontrada.' });
+      }
+
+      category.is_active = !category.is_active;
+      await category.save();
+
+      res.json(category);
+    } catch (error) {
+      res.status(500).json({ msg: 'Erro interno do servidor.', error: error.message });
+    }
+  }
+);
+
 module.exports = router;

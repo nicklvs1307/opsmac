@@ -13,6 +13,7 @@ const api = {
     create: (key, data) => axiosInstance.post(`/${key}`, data).then(res => res.data),
     update: (key, { id, ...data }) => axiosInstance.put(`/${key}/${id}`, data).then(res => res.data),
     delete: (key, id) => axiosInstance.delete(`/${key}/${id}`).then(res => res.data),
+    toggleStatus: (key, id) => axiosInstance.patch(`/${key}/${id}/toggle-status`).then(res => res.data),
 };
 
 const Menu = () => {
@@ -55,7 +56,7 @@ const CategoriesTab = () => {
     const mutationOptions = (action, resource) => ({
         onSuccess: () => {
             toast.success(`${resource} ${action} com sucesso!`);
-            queryClient.invalidateQueries(resource.toLowerCase() + 's');
+            queryClient.invalidateQueries('categories');
             closeModal();
         },
         onError: () => toast.error(`Erro ao ${action.toLowerCase()} ${resource.toLowerCase()}.`),
@@ -64,6 +65,19 @@ const CategoriesTab = () => {
     const createMutation = useMutation((data) => api.create('api/categories', data), mutationOptions('criada', 'Categoria'));
     const updateMutation = useMutation((data) => api.update('api/categories', data), mutationOptions('atualizada', 'Categoria'));
     const deleteMutation = useMutation((id) => api.delete('api/categories', id), mutationOptions('excluída', 'Categoria'));
+
+    const toggleStatusMutation = useMutation(
+        (id) => api.toggleStatus('api/categories', id),
+        {
+            onSuccess: () => {
+                toast.success('Status da categoria alterado com sucesso!');
+                queryClient.invalidateQueries('categories');
+            },
+            onError: () => {
+                toast.error('Erro ao alterar status da categoria.');
+            },
+        }
+    );
 
     const handleSave = (formData) => {
         const dataToSave = { ...formData, restaurant_id: user?.restaurants[0]?.id };
@@ -106,6 +120,9 @@ const CategoriesTab = () => {
                                 <td>{category.description}</td>
                                 <td><span className={`status ${category.is_active ? 'active' : 'inactive'}`}>{category.is_active ? 'Ativo' : 'Inativo'}</span></td>
                                 <td>
+                                    <button className={`action-btn toggle-status-btn ${category.is_active ? 'inactive' : 'active'}`} onClick={() => toggleStatusMutation.mutate(category.id)} title={category.is_active ? 'Inativar' : 'Ativar'}>
+                                        <Icon name={category.is_active ? 'toggle-off' : 'toggle-on'} />
+                                    </button>
                                     <button className="action-btn edit-btn" onClick={() => openModal(category)}><Icon name="edit" /></button>
                                     <button className="action-btn delete-btn" onClick={() => handleDelete(category.id)}><Icon name="trash" /></button>
                                 </td>
@@ -193,6 +210,19 @@ const ProductsTab = () => {
     const updateMutation = useMutation((data) => api.update('api/products', data), mutationOptions('atualizado'));
     const deleteMutation = useMutation((id) => api.delete('api/products', id), mutationOptions('excluído'));
 
+    const toggleStatusMutation = useMutation(
+        (id) => api.toggleStatus('api/products', id),
+        {
+            onSuccess: () => {
+                toast.success('Status do produto alterado com sucesso!');
+                queryClient.invalidateQueries('products');
+            },
+            onError: () => {
+                toast.error('Erro ao alterar status do produto.');
+            },
+        }
+    );
+
     const handleSave = (formData) => {
         const dataToSave = { ...formData, price: parseFloat(formData.price), restaurant_id: restaurantId };
         if (editingProduct) {
@@ -235,6 +265,9 @@ const ProductsTab = () => {
                                 <td>R$ {Number(product.price).toFixed(2)}</td>
                                 <td><span className={`status ${product.is_active ? 'active' : 'inactive'}`}>{product.is_active ? 'Ativo' : 'Inativo'}</span></td>
                                 <td>
+                                    <button className={`action-btn toggle-status-btn ${product.is_active ? 'inactive' : 'active'}`} onClick={() => toggleStatusMutation.mutate(product.id)} title={product.is_active ? 'Inativar' : 'Ativar'}>
+                                        <Icon name={product.is_active ? 'toggle-off' : 'toggle-on'} />
+                                    </button>
                                     <button className="action-btn edit-btn" onClick={() => openModal(product)}><Icon name="edit" /></button>
                                     <button className="action-btn delete-btn" onClick={() => handleDelete(product.id)}><Icon name="trash" /></button>
                                 </td>
@@ -369,6 +402,22 @@ const AddonsTab = () => {
     const updateMutation = useMutation((data) => api.update('api/addons', data), mutationOptions('atualizado'));
     const deleteMutation = useMutation((id) => api.delete('api/addons', id), mutationOptions('excluído'));
 
+    const toggleStatusMutation = useMutation(
+        (id) => api.toggleStatus('api/addons', id),
+        {
+            onSuccess: () => {
+                toast.success('Status do adicional alterado com sucesso!');
+                queryClient.invalidateQueries('addons');
+            },
+            onError: (err) => {
+                // Note: The Addon model might not have an 'is_active' field.
+                // If this fails, we need to add it via a database migration.
+                console.error("Toggle status error:", err);
+                toast.error('Erro ao alterar status do adicional.');
+            },
+        }
+    );
+
     const handleSave = (formData) => {
         const dataToSave = { ...formData, price: parseFloat(formData.price), restaurant_id: restaurantId };
         if (editingAddon) {
@@ -400,15 +449,19 @@ const AddonsTab = () => {
                     <button className="btn btn-primary" onClick={() => openModal()}><Icon name="plus" /> Novo Adicional</button>
                 </div>
                 <table>
-                    <thead><tr><th>Nome</th><th>Preço</th><th>Ações</th></tr></thead>
+                    <thead><tr><th>Nome</th><th>Preço</th><th>Status</th><th>Ações</th></tr></thead>
                     <tbody>
-                        {isLoading && <tr><td colSpan="3">Carregando...</td></tr>}
-                        {isError && <tr><td colSpan="3">Erro ao carregar dados.</td></tr>}
+                        {isLoading && <tr><td colSpan="4">Carregando...</td></tr>}
+                        {isError && <tr><td colSpan="4">Erro ao carregar dados.</td></tr>}
                         {addons?.map(addon => (
                             <tr key={addon.id}>
                                 <td>{addon.name}</td>
                                 <td>R$ {Number(addon.price).toFixed(2)}</td>
+                                <td><span className={`status ${addon.is_active ? 'active' : 'inactive'}`}>{addon.is_active ? 'Ativo' : 'Inativo'}</span></td>
                                 <td>
+                                    <button className={`action-btn toggle-status-btn ${addon.is_active ? 'inactive' : 'active'}`} onClick={() => toggleStatusMutation.mutate(addon.id)} title={addon.is_active ? 'Inativar' : 'Ativar'}>
+                                        <Icon name={addon.is_active ? 'toggle-off' : 'toggle-on'} />
+                                    </button>
                                     <button className="action-btn edit-btn" onClick={() => openModal(addon)}><Icon name="edit" /></button>
                                     <button className="action-btn delete-btn" onClick={() => handleDelete(addon.id)}><Icon name="trash" /></button>
                                 </td>
@@ -423,15 +476,15 @@ const AddonsTab = () => {
 };
 
 const AddonModal = ({ closeModal, onSave, addon }) => {
-    const [formData, setFormData] = useState({ name: '', price: '' });
+    const [formData, setFormData] = useState({ name: '', price: '', is_active: true });
 
     useEffect(() => {
-        if (addon) setFormData({ name: addon.name, price: addon.price });
+        if (addon) setFormData({ name: addon.name, price: addon.price, is_active: addon.is_active });
     }, [addon]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
     };
 
     const handleSubmit = (e) => {
@@ -449,6 +502,9 @@ const AddonModal = ({ closeModal, onSave, addon }) => {
                 <div className="form-group">
                     <label>Preço* (R$)</label>
                     <input type="number" name="price" value={formData.price} onChange={handleChange} className="form-control" required step="0.01" />
+                </div>
+                 <div className="form-group">
+                    <label><input type="checkbox" name="is_active" checked={formData.is_active} onChange={handleChange} /> Adicional Ativo</label>
                 </div>
                 <div style={styles.modalFooter}>
                     <button type="button" className='btn btn-secondary' onClick={closeModal}>Cancelar</button>

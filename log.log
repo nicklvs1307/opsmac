@@ -1,34 +1,29 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-📊 Dashboard: https://feedelizapro.towersfy.com
-🔗 API: https://feedelizaapi.towersfy.com/api
-getRestaurantId: restaurantId set to 842920c5-5ad2-40ca-be4e-33930f488ee2
-getDashboardData: received restaurant_id 842920c5-5ad2-40ca-be4e-33930f488ee2
-getRestaurantId: restaurantId set to 842920c5-5ad2-40ca-be4e-33930f488ee2
-getAllStocks: received restaurant_id undefined
-Error fetching all stocks: Error: WHERE parameter "restaurant_id" has invalid "undefined" value
-    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
-    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
-    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
-    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
-    at Product.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.getAllStocks (/app/backend/controllers/stockController.js:114:20)
-getRestaurantId: restaurantId set to 842920c5-5ad2-40ca-be4e-33930f488ee2
-getAllStocks: received restaurant_id undefined
-Error fetching all stocks: Error: WHERE parameter "restaurant_id" has invalid "undefined" value
-    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
-    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
-    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
-    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
-    at Product.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.getAllStocks (/app/backend/controllers/stockController.js:114:20)
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             196.2s
+------
+ > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.367 + npm run build
+0.731
+0.731 > feedeliza-plus@1.0.0 build
+0.731 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.731
+4.278 Creating an optimized production build...
+194.9 Failed to compile.
+194.9
+194.9 [eslint]
+194.9 src/pages/Fidelidade/Avaliacoes/SurveyEdit.js
+194.9   Line 217:20:  'isLoadingNpsCriteria' is not defined  no-undef
+194.9   Line 220:21:  'npsCriteria' is not defined           no-undef
+194.9
+194.9 Search for the keywords to learn more about each error.
+194.9
+194.9
+------
+Dockerfile.frontend:24
+--------------------
+  22 |     ARG REACT_APP_API_URL
+  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  24 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  25 |
+  26 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

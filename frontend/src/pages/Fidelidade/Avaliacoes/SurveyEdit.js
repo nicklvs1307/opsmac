@@ -19,6 +19,11 @@ const fetchRewards = async (restaurantId) => {
     return data.rewards;
 };
 
+const fetchNpsCriteria = async () => {
+  const { data } = await axiosInstance.get('/api/nps-criteria');
+  return data;
+};
+
 const updateSurvey = async ({ id, surveyData }) => {
   const { data } = await axiosInstance.put(`/api/surveys/${id}`, surveyData);
   return data;
@@ -59,6 +64,8 @@ const SurveyEdit = () => {
     () => fetchRewards(restaurantId),
     { enabled: !!restaurantId }
   );
+
+  const { data: npsCriteria, isLoading: isLoadingNpsCriteria } = useQuery('npsCriteria', fetchNpsCriteria);
 
   const mutation = useMutation(updateSurvey, {
     onSuccess: () => {

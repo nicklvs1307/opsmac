@@ -1,773 +1,150 @@
-Em uma escala de 1 a 5, o quanto você ficou satisfeito com a nossa EMBALAGEM? *
-1 - MUITO RUIM 5 - MUITO BOM
+📜 Script Detalhado para Criar Pesquisa com NPS + Critérios
+1. Definir Objetivo da Pesquisa
 
+Antes de criar perguntas, você precisa saber o propósito:
 
-1
+Avaliar a lealdade do cliente → NPS raiz.
 
+Identificar pontos fortes e fracos da experiência → critérios.
 
-2
+Coletar insights práticos para melhoria → perguntas abertas.
 
+⚡️ Regra: no máximo 10 perguntas por pesquisa rápida (se passar disso, divida em blocos para diferentes momentos).
 
-3
+2. Criar as Perguntas
 
+Sempre use escalas consistentes:
 
-4
+Critérios específicos: Escala 1 a 5 (mais simples, intuitiva, rápida).
 
+NPS raiz: Escala 0 a 10 (métrica padrão internacional).
 
-5
+Estrutura:
 
-2 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com a APRESENTAÇÃO DO SEU PEDIDO? *
+Pergunta de critério (1–5)
 
-1
+"Em uma escala de 1 a 5, como você avalia nossa EMBALAGEM?"
 
+1 = Muito ruim
 
-2
+5 = Muito bom
 
+Critério vinculado: Logística/Entrega
 
-3
+Pergunta de critério (1–5)
 
+"Em uma escala de 1 a 5, como você avalia nosso ATENDIMENTO?"
 
-4
+Critério vinculado: Atendimento
 
+Pergunta de critério (1–5)
 
-5
+"Em uma escala de 1 a 5, como você avalia a QUALIDADE dos nossos produtos?"
 
-3 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com o nosso ATENDIMENTO? *
-1 - MUITO RUIM 5 - MUITO BOM
+Critério vinculado: Produto
 
+Pergunta de critério (1–5)
 
-1
+"Em uma escala de 1 a 5, como você avalia o TEMPO DE ENTREGA?"
 
+Critério vinculado: Operação
 
-2
+Pergunta de critério (1–5)
 
+"Em uma escala de 1 a 5, como você avalia o CUSTO-BENEFÍCIO?"
 
-3
+Critério vinculado: Preço/Valor
 
+Pergunta NPS raiz (0–10)
 
-4
+"De 0 a 10, o quanto você indicaria nossa pizzaria para um amigo ou familiar?"
 
+Critério vinculado: Lealdade
 
-5
+Pergunta aberta (texto livre)
 
-4 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com a QUALIDADE DOS NOSSOS PRODUTOS? *
-1 - MUITO RUIM 5 - MUITO BOM
+"O que poderíamos melhorar para tornar sua experiência ainda melhor?"
 
+Critério vinculado: Insights
 
-1
+⚠️ Observação: você pode embaralhar a ordem das perguntas de critério, mas o NPS raiz deve sempre ficar no final (porque ele resume a percepção geral).
 
+3. Vincular Perguntas aos Critérios
 
-2
+A lógica é criar um mapa de relacionamento entre pergunta → critério → métrica.
 
+Exemplo em tabela:
 
-3
+ID Pergunta	Texto da Pergunta	Escala	Critério Vinculado	Tipo de Métrica
+P1	Embalagem	1–5	Logística	Média/Distribuição
+P2	Atendimento	1–5	Atendimento	Média/Distribuição
+P3	Qualidade do produto	1–5	Produto	Média/Distribuição
+P4	Tempo de entrega	1–5	Operação	Média/Distribuição
+P5	Custo-benefício	1–5	Preço	Média/Distribuição
+P6	Indicaria?	0–10	Lealdade (NPS)	NPS
+P7	Sugestão/Elogio	Texto	Insights	Qualitativa
 
 
-4
 
+5. Como Analisar
 
-5
+Critérios (1–5):
 
-5 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com o nosso TEMPO DE ENTREGA? *
-1 - MUITO RUIM 5 - MUITO BOM
+Cálculo de média por critério.
 
+% de clientes satisfeitos (nota 4–5).
 
-1
+Ranking dos critérios → mostra pontos fortes e fracos.
 
+NPS (0–10):
 
-2
+% Promotores (9–10) – % Detratores (0–6).
 
+Mostrar evolução no tempo.
 
-3
+Cruzamento:
 
+Cliente deu NPS baixo → ver qual critério teve nota mais baixa.
 
-4
+Cliente deu NPS alto → ver quais critérios estão puxando o índice pra cima.
 
+Texto (aberto):
 
-5
+Classificação manual ou via IA em categorias:
 
-6 - Em uma escala de 1 a 5, o quanto você ficou satisfeito com o nosso CUSTO BENEFÍCIO? *
-1 - MUITO RUIM 5 - MUITO BOM
+Produto, Atendimento, Preço, Entrega, Ambiente.
 
+6. Modelo de Roteiro (Fluxo Completo da Pesquisa)
 
-1
+👋 "Olá, queremos ouvir você para melhorar sempre sua experiência com a Roma Pizzaria & Choperia. Responda rapidinho:"
 
+Embalagem
 
-2
+Apresentação do pedido
 
+Atendimento
 
-3
+Qualidade do produto
 
+Tempo de entrega
 
-4
+Custo-benefício
 
+Indicaria a pizzaria? (NPS)
 
-5
+Sugestão/Elogio
 
-7 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
+➡️ Esse fluxo dá uma sensação de progressão natural:
+detalhes da experiência → percepção de valor → recomendação final → espaço livre pra comentário.
 
-0
+7. Boas Práticas
 
+Consistência: mantenha a mesma escala em todos os critérios (1–5) pra não confundir.
 
-1
+NPS separado: sempre em 0–10.
 
+Brevidade: quanto menor o tempo de resposta, maior a taxa de participação.
 
-2
+Automação: disparar a pesquisa logo após o consumo (delivery, check-in, pós-jantar).
 
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-8 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-
-
- - Como você avalia as OPÇÕES DO CARDÁPIO? *
-
-
-
-
-
-2 - O que você gostaria de ver em nosso cardápio ?
-Digite sua resposta
-3 - O que você não tiraria do cardápio?
-Digite sua resposta
-4 - O que você tiraria do cardápio?
-Digite sua resposta
-5 - O que você acredita que FALTA na Roma Pizzaria & Choperia?
-Digite sua resposta
-6 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-7 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-
-
-1 - Por onde você nos conheceu? *
-
-
-
-
-
-
-2 - Por qual motivo você veio à casa hoje? *
-
-
-
-
-
-
-
-
-3 - Se você não tivesse vindo à nossa casa, aonde iria?
-Digite sua resposta
-4 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-5 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-
-
- - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-2 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-
-
-
-1 - Coloque aqui o número da sua mesa: *
-essa informação é importante para que possamos identificar a mesa no caso de algum imprevisto
-
-Digite sua resposta
-2 - Como você avalia a postura profissional da equipe de atendimento? *
-O que avaliar: não ficam escorados no balcão; não ficam de costas para o cliente. A postura está ereta, se locomovem com elegância e sem correr no salão. Não ficam com a mão no bolso/braços cruzados.
-
-
-
-
-
-
-3 - Como você avalia a apresentação da equipe de atendimento? *
-O que avaliar: Uniforme está completo, limpo e passado. Unhas estão limpas e bem feitas; Ausência de maquiagem pesada; Cabelos longos estão presos; barba está bem feita e/ou desenhada.
-
-
-
-
-
-
-4 - Como você avalia nossa recepção ao cliente *
-O que avaliar: Clientes estão sendo recepcionados com uma alegre e calorosa saudação na entrada do restaurante.
-
-
-
-
-
-
-5 - Como você avalia o acolhimento na entrada? *
-O que avaliar: a fila de espera é eficiente e bem organizada; há informação constante e atualizada para quem está aguardando; são realizadas vendas na fila.
-
-
-
-
-
-
-6 - Os atendentes executaram a regra dos 5 segundos? *
-O que avaliar: todos estão parando por 5 segundos o que estão fazendo para cumprimentar os clientes que entram no estabelecimento.
-
-
-
-7 - Como você avalia a acomodação dos clientes na casa? *
-O que avaliar: acomodam os clientes em suas mesas: ajudaram mulheres e senhoras a se sentarem e a guardarem seus pertences.
-
-
-
-
-
-
-8 - Como você avalia a primeira abordagem do atendimento? *
-O que avaliar: abordaram os clientes depois de no máximo 2 minutos; ao mesmo tempo, garçons dão tempo para o cliente escolher.
-
-
-
-
-
-
-9 - Como você avalia a apresentação da casa realizada pelo atendente?
-
-
-
-
-
-10 - Como você avalia a QUALIDADE DOS NOSSOS PRODUTOS? *
-
-
-
-
-
-11 - Como você avalia o nosso AMBIENTE EXTERNO? *
-
-
-
-
-
-12 - Como você avalia o nosso AMBIENTE INTERNO? *
-
-
-
-
-
-13 - Como você avalia a LIMPEZA DA CASA E DO BANHEIRO*
-
-
-
-
-
-14 - como você avalia a personalização e a humanização do atendimento da casa? *
-Ex: o atendente busca entender as necessidades do cliente? ele direciona para as melhores opções? conversa com o cliente falando o seu nome?
-
-
-
-
-
-
-15 - Como você avalia o posicionamento e distribuição dos atendentes na casa? *
-O que avaliar: Estão distribuídos em praças de atendimento. Estão bem posicionados em suas praça, em lugares estratégicos de visualização. Os clientes tiveram que levantar a mão para serem atendidos.
-
-
-
-
-
-
-16 - Como você avalia a estratégia de vendas? *
-O que avaliar: sugerem uma bebida na entrada para que o cliente aumente seu tempo de consumo. Utilizam a técnica das 3 opções. Elogiam as escolhas dos clientes, independente da sua sugestão.
-
-
-
-
-
-
-17 - Como você avalia a reposição de produtos? *
-O que avaliar: não deixaram copos vazios por mais de 1 minuto, enchendo-os ou oferendo novas bebidas para o cliente.
-
-
-
-
-
-
-18 - Como você avalia a forma de servir dos garçons da casa? *
-Ex: utilizam as técnicas certas para servir determinados produtos? são solícitos para servir o cliente? desejam bom apetite e checam a experiência de consumo?
-
-
-
-
-
-
-19 - No processo de despedida e finalização, como você avalia a experiência de pagamento? *
-Ex: conta chegou rápida? conta chegou certa sem necessidade de alteração? foi entregue algo a mais nesse momento?
-
-
-
-
-
-
-20 - O tempo de espera do atendimento, das bebidas e dos pratos foi dentro do padrão? Como você avalia? *
-
-
-
-
-
-21 - No processo de despedida e finalização, o atendente solicita feedbacks sobre a operação? *
-Ex: solicita responder uma pesquisa? avaliar no Google ou Trip Advisor? pergunta se deu tudo certo com a experiência?
-
-
-
-22 - A despedida foi calorosa e com convite para o cliente retornar? *
-Ex: cliente foi convidado a voltar? foi criado uma relação com o cliente?
-
-
-
-23 - Você possuiu algum atrito durante a sua experiência? *
-
-
-24 - Se sim, qual atrito?
-Digite sua resposta
-25 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-26 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-
-
- - Como você avalia o nosso ATENDIMENTO? *
-
-
-
-
-
-2 - Como você avalia a APRESENTAÇÃO DOS PRODUTOS ENTREGUES? *
-
-
-
-
-
-3 - Como você avalia a nossa EMBALAGEM? *
-
-
-
-
-
-4 - Como você avalia a TEMPERATURA QUE CHEGOU O SEU PEDIDO? *
-
-
-
-
-
-5 - Como você avalia a QUALIDADE DOS NOSSOS PRODUTOS? *
-
-
-
-
-
-6 - Como você avalia o nosso TEMPO DE ENTREGA? *
-
-
-
-
-
-7 - Como você avalia o nosso CUSTO-BENEFÍCIO? *
-
-
-
-
-
-8 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-9 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-
-- Como você avalia o nosso ATENDIMENTO? *
-
-
-2 - Como você avalia a QUALIDADE DOS NOSSOS PRODUTOS?
-
-
-3 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-4 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-
-
-1 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-2 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-
-
-1 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-2 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-Digite sua resposta
-
-
-1 - Como você avalia o nosso ATENDIMENTO? *
-
-
-
-
-
-2 - Você foi recepcionado pela nossa equipe? *
-
-
-3 - O atendente se apresentou pelo nome para você? *
-
-
-4 - O atendente te apresentou as opções do nosso cardápio? *
-
-
-5 - O atendente fez sugestões de produtos da casa? *
-
-
-6 - Alguém do nosso time retornou a mesa para confirmar se tudo aconteceu de acordo com as suas expectativas? *
-
-
-7 - O(A) atendente te convidou para responder a nossa pesquisa? *
-
-
-8 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-9 - Coloque aqui sua crítica, sugestão ou elogio:
-
-
-1 - Em uma escala de 0 a 10, o quanto você indicaria a Roma Pizzaria & Choperia para um amigo ou familiar? *
-
-0
-
-
-1
-
-
-2
-
-
-3
-
-
-4
-
-
-5
-
-
-6
-
-
-7
-
-
-8
-
-
-9
-
-
-10
-
-2 - Coloque aqui sua sugestão ou elogio para a Roma Pizzaria & Choperia:
-Digite sua resposta
+Gamificação: dar pontos no clube de fidelidade pra quem responder.

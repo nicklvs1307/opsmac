@@ -1,22 +1,19 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             196.2s
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             191.3s
 ------
  > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.367 + npm run build
-0.731
-0.731 > feedeliza-plus@1.0.0 build
-0.731 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.731
-4.278 Creating an optimized production build...
-194.9 Failed to compile.
-194.9
-194.9 [eslint]
-194.9 src/pages/Fidelidade/Avaliacoes/SurveyEdit.js
-194.9   Line 217:20:  'isLoadingNpsCriteria' is not defined  no-undef
-194.9   Line 220:21:  'npsCriteria' is not defined           no-undef
-194.9
-194.9 Search for the keywords to learn more about each error.
-194.9
-194.9
+0.338 + npm run build
+0.708
+0.708 > feedeliza-plus@1.0.0 build
+0.708 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.708
+3.914 Creating an optimized production build...
+190.1 Failed to compile.
+190.1
+190.1 [eslint]
+190.1 src/components/Layout/Sidebar.js
+190.1 Syntax error: Expected corresponding JSX closing tag for <List>. (600:22) (600:22)
+190.1
+190.1
 ------
 Dockerfile.frontend:24
 --------------------

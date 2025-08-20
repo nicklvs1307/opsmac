@@ -513,90 +513,85 @@ const Sidebar = ({ onMobileClose }) => {
                     <ClickAwayListener onClickAway={handlePopperClose}>
                       <Paper sx={{ minWidth: 200, borderRadius: 2, boxShadow: theme.shadows[3] }}>
                         <List component="div" disablePadding>
-                    sx={{
-                      position: 'absolute',
-                      top: 0,
-                      left: '100%',
-                      zIndex: theme.zIndex.drawer + 1,
-                      backgroundColor: theme.palette.background.paper,
-                      boxShadow: theme.shadows[3],
-                      minWidth: 200,
-                      borderRadius: 2,
-                      p: 1,
-                      display: 'block', // Ensure it's visible when open
-                    }}
-                  >
                     <List component="div" disablePadding>
-                      {item.submenu.map((subItem) => (
-                        <ListItem key={subItem.title} disablePadding sx={{ mb: 0.5 }}>
-                          <Tooltip title={subItem.title} placement="right" arrow enterDelay={500}>
-                            <ListItemButton
-                              onClick={() => handleClick(subItem.path)}
-                              selected={isActive(subItem.path)}
-                              sx={{
-                                pl: 3,
-                                minHeight: 40,
-                                borderRadius: 2,
-                                mx: 1,
-                                transition: 'all 0.2s ease',
-                                '&.Mui-selected': {
-                                  background: `linear-gradient(90deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
-                                  color: 'white',
-                                  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-                                  transform: 'translateY(-1px)',
-                                  '&:hover': {
-                                    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                                  },
-                                  '& .MuiListItemIcon-root': {
-                                    color: 'white',
-                                  },
-                                },
-                                '&:hover': {
-                                  backgroundColor: mode === 'light' ? alpha(theme.palette.primary.main, 0.05) : alpha(theme.palette.primary.main, 0.1),
-                                  borderRadius: 2,
-                                  transform: 'translateX(4px)',
-                                },
-                                '&::before': isActive(subItem.path) ? {
-                                  content: '""',
-                                  position: 'absolute',
-                                  left: '-4px',
-                                  top: '50%',
-                                  transform: 'translateY(-50%)',
-                                  height: '40%',
-                                  width: '3px',
-                                  backgroundColor: theme.palette.primary.light,
-                                  borderRadius: '0 4px 4px 0',
-                                } : {},
-                              }}
-                            >
-                              <ListItemIcon
-                                sx={{
-                                  minWidth: 0,
-                                  mr: 2,
-                                  justifyContent: 'center',
-                                  color: isActive(subItem.path) ? 'white' : 'text.secondary',
-                                  transition: 'all 0.3s ease',
-                                  transform: isActive(subItem.path) ? 'scale(1.1)' : 'scale(1)',
-                                  fontSize: '0.9rem',
-                                }}
-                              >
-                                {subItem.icon}
-                              </ListItemIcon>
-                              <ListItemText 
-                                primary={subItem.title}
-                                primaryTypographyProps={{
-                                  fontSize: '0.8125rem',
-                                  fontWeight: isActive(subItem.path) ? 600 : 500,
-                                  color: isActive(subItem.path) ? 'white' : 'text.primary',
-                                  letterSpacing: isActive(subItem.path) ? '0.2px' : 'normal',
-                                  transition: 'all 0.2s ease',
-                                }}
-                              />
-                            </ListItemButton>
-                          </Tooltip>
-                        </ListItem>
-                      ))}
-                    </List>
+                          {item.submenu.map((subItem) => (
+                            <ListItem key={subItem.title} disablePadding sx={{ mb: 0.5 }}>
+                              <Tooltip title={subItem.title} placement="right" arrow enterDelay={500}>
+                                <ListItemButton
+                                  onClick={() => {
+                                    handleClick(subItem.path);
+                                    handlePopperClose(); // Close popper on subitem click
+                                  }}
+                                  selected={isActive(subItem.path)}
+                                  sx={{
+                                    pl: 3,
+                                    minHeight: 40,
+                                    borderRadius: 2,
+                                    mx: 1,
+                                    transition: 'all 0.2s ease',
+                                    '&.Mui-selected': {
+                                      background: `linear-gradient(90deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
+                                      color: 'white',
+                                      boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+                                      transform: 'translateY(-1px)',
+                                      '&:hover': {
+                                        background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                                      },
+                                      '& .MuiListItemIcon-root': {
+                                        color: 'white',
+                                      },
+                                    },
+                                    '&:hover': {
+                                      backgroundColor: mode === 'light' ? alpha(theme.palette.primary.main, 0.05) : alpha(theme.palette.primary.main, 0.1),
+                                      borderRadius: 2,
+                                      transform: 'translateX(4px)',
+                                    },
+                                    '&::before': isActive(subItem.path) ? {
+                                      content: '""',
+                                      position: 'absolute',
+                                      left: '-4px',
+                                      top: '50%',
+                                      transform: 'translateY(-50%)',
+                                      height: '40%',
+                                      width: '3px',
+                                      backgroundColor: theme.palette.primary.light,
+                                      borderRadius: '0 4px 4px 0',
+                                    } : {},
+                                  }}
+                                >
+                                  <ListItemIcon
+                                    sx={{
+                                      minWidth: 0,
+                                      mr: 2,
+                                      justifyContent: 'center',
+                                      color: isActive(subItem.path) ? 'white' : 'text.secondary',
+                                      transition: 'all 0.3s ease',
+                                      transform: isActive(subItem.path) ? 'scale(1.1)' : 'scale(1)',
+                                      fontSize: '0.9rem',
+                                    }}
+                                  >
+                                    {subItem.icon}
+                                  </ListItemIcon>
+                                  <ListItemText 
+                                    primary={subItem.title}
+                                    primaryTypographyProps={{
+                                      fontSize: '0.8125rem',
+                                      fontWeight: isActive(subItem.path) ? 600 : 500,
+                                      color: isActive(subItem.path) ? 'white' : 'text.primary',
+                                      letterSpacing: '0.2px',
+                                      transition: 'all 0.2s ease',
+                                    }}
+                                  />
+                                </ListItemButton>
+                              </Tooltip>
+                            </ListItem>
+                          ))}
+                        </List>
+                      </Paper>
+                    </ClickAwayListener>
+                  )}
+                </Popper>
+              ) : (
                       </Paper>
                     </ClickAwayListener>
                   )}

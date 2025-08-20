@@ -592,11 +592,6 @@ const Sidebar = ({ onMobileClose }) => {
                   )}
                 </Popper>
               ) : (
-                      </Paper>
-                    </ClickAwayListener>
-                  )}
-                </Popper>
-              ) : (
                 <Collapse in={openMenus[item.title]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding sx={{ ml: 2, mt: 0.5 }}>
                     {item.submenu.map((subItem) => (

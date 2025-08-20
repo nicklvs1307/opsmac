@@ -1,19 +1,19 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             191.3s
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             184.9s
 ------
  > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.338 + npm run build
-0.708
-0.708 > feedeliza-plus@1.0.0 build
-0.708 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.708
-3.914 Creating an optimized production build...
-190.1 Failed to compile.
-190.1
-190.1 [eslint]
-190.1 src/components/Layout/Sidebar.js
-190.1 Syntax error: Expected corresponding JSX closing tag for <List>. (600:22) (600:22)
-190.1
-190.1
+0.306 + npm run build
+0.588
+0.588 > feedeliza-plus@1.0.0 build
+0.588 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.588
+3.328 Creating an optimized production build...
+183.7 Failed to compile.
+183.7
+183.7 [eslint]
+183.7 src/components/Layout/Sidebar.js
+183.7 Syntax error: Expected corresponding JSX closing tag for <List>. (590:22) (590:22)
+183.7
+183.7
 ------
 Dockerfile.frontend:24
 --------------------

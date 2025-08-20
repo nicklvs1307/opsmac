@@ -375,7 +375,7 @@ const PublicSurveyForm = () => {
                     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)', // var(--shadow)
                 }}>
                     {restaurantData?.logo ? (
-                        <img src={`${process.env.REACT_APP_API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ width: '60px', height: '60px' }} />
+                        <img src={`${process.env.REACT_APP_API_URL}${restaurantData.logo}`} alt={restaurantData.name} style={{ width: '60px', height: '60px', borderRadius: '50%' }} />
                     ) : (
                         <RestaurantIcon sx={{ fontSize: 60, color: primaryColor }} />
                     )}
@@ -420,9 +420,10 @@ const PublicSurveyForm = () => {
         <Container maxWidth="md" sx={{
             marginTop: '-40px', // Adjust to overlap with the header
             marginBottom: '40px',
+            margin: { xs: '0 20px 20px', sm: '0 auto 40px' }, // Responsive margin
         }}>
             <Paper elevation={0} sx={{
-              borderRadius: '0 0 16px 16px',
+              borderRadius: { xs: '0 0 12px 12px', sm: '0 0 16px 16px' }, // Responsive border radius
               boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)', // var(--shadow)
               overflow: 'hidden',
             }}>
@@ -529,7 +530,8 @@ const PublicSurveyForm = () => {
                                                         background: `${alpha(primaryColor, 0.1)}`, // primary-light with 10% opacity
                                                         borderColor: primaryColor,
                                                     },
-                                                    '&.Mui-selected': {
+                                                    // This class is applied by MUI when the radio is checked
+                                                    '& .Mui-checked': {
                                                         background: `${alpha(primaryColor, 0.1)}`,
                                                         borderColor: primaryColor,
                                                     },
@@ -565,7 +567,8 @@ const PublicSurveyForm = () => {
                                                     background: `${alpha(primaryColor, 0.1)}`,
                                                     borderColor: primaryColor,
                                                 },
-                                                '&.Mui-selected': {
+                                                // This class is applied by MUI when the checkbox is checked
+                                                '& .Mui-checked': {
                                                     background: `${alpha(primaryColor, 0.1)}`,
                                                     borderColor: primaryColor,
                                                 },
@@ -648,62 +651,6 @@ const PublicSurveyForm = () => {
                                 </Box>
                             )}
 
-                        {survey.questions[currentQuestionIndex].question_type === 'numerical_rating_scale' && (
-                                <Box sx={{
-                                    display: 'flex',
-                                'justifyContent': 'space-between',
-                                    marginTop: '15px',
-                                    flexWrap: 'wrap',
-                                    gap: '10px',
-                                }}>
-                                    {survey.questions[currentQuestionIndex].options?.map((option, optIndex) => (
-                                        <Box
-                                            key={optIndex}
-                                            onClick={() => handleAnswerChange(survey.questions[currentQuestionIndex].id, option.value)}
-                                            sx={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'center',
-                                                cursor: 'pointer',
-                                                padding: '10px',
-                                                borderRadius: '8px',
-                                                transition: 'all 0.2s ease',
-                                                width: { xs: 'calc(20% - 8px)', sm: 'auto' }, // Responsive width
-                                                background: answers[survey.questions[currentQuestionIndex].id] === option.value ? `${alpha(primaryColor, 0.1)}` : 'transparent',
-                                                '&:hover': {
-                                                    background: `${alpha(primaryColor, 0.1)}`,
-                                                },
-                                            }}
-                                        >
-                                            <Box sx={{
-                                                width: '40px',
-                                                height: '40px',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                background: '#F1FAEE', // var(--secondary)
-                                                borderRadius: '50%',
-                                                fontWeight: 600,
-                                                marginBottom: '5px',
-                                                ...(answers[survey.questions[currentQuestionIndex].id] === option.value && {
-                                                    background: primaryColor,
-                                                    color: 'white',
-                                                }),
-                                                transition: 'all 0.2s ease',
-                                                '&:hover': {
-                                                    background: primaryColor,
-                                                    color: 'white',
-                                                },
-                                            }}>
-                                                {option.value}
-                                            </Box>
-                                            <Typography variant="caption" sx={{ fontSize: '12px', color: '#adb5bd', textAlign: 'center' }}>
-                                                {option.label}
-                                            </Typography>
-                                        </Box>
-                                    ))}
-                                </Box>
-                            )}
                         {survey.questions[currentQuestionIndex].question_type === 'numerical_rating_scale' && (
                                 <Box sx={{
                                     display: 'flex',

@@ -784,7 +784,13 @@ const Pdv = () => {
                   <div className="products-grid">
                     {products?.map(product => (
                       <div className="product-card" key={product.id} onClick={() => handleAddToCart(product)}>
-                        <div className="product-image">{product.image || '🍔'}</div> {/* Placeholder emoji */}
+                        <div className="product-image">
+                          {product.image && product.image.startsWith('http') ? (
+                            <img src={product.image} alt={product.name} />
+                          ) : (
+                            '🍔' // Placeholder emoji
+                          )}
+                        </div>
                         <div className="product-name">{product.name}</div>
                         <div className="product-price">R$ {Number(product.price).toFixed(2).replace('.', ',')}</div>
                       </div>
@@ -848,7 +854,7 @@ const Pdv = () => {
                   )}
 
                   {orderType === 'delivery' && (
-                    <Box sx={{ mb: 2 }}>
+                    <Box sx={{ mb: 2, position: 'relative' }}> {/* Added position: 'relative' here */}
                       <TextField
                         fullWidth
                         label={t('pdv.customer_search')}
@@ -858,7 +864,7 @@ const Pdv = () => {
                       />
                       {isLoadingSearchResults && <CircularProgress size={20} />}
                       {customerSearchTerm.length > 2 && searchResults?.length > 0 && (
-                        <Paper sx={{ maxHeight: 200, overflow: 'auto', position: 'absolute', zIndex: 100, width: 'calc(100% - 40px)' }}>
+                        <Paper sx={{ maxHeight: 200, overflow: 'auto', position: 'absolute', zIndex: 100, width: '100%', left: 0, right: 0 }}> {/* Adjusted width and positioning */}
                           <List>
                             {searchResults.map((customer) => (
                               <ListItem button key={customer.id} onClick={() => handleCustomerSelect(customer)}>

@@ -171,17 +171,36 @@ function App() {
               </Routes>
               
               <Toaster
-                position="top-right"
+                position="top-center"
+                gutter={12}
+                containerStyle={{ margin: '8px' }}
                 toastOptions={{
-                  duration: 4000,
+                  // Define default options
+                  className: '',
+                  duration: 5000,
                   style: {
-                    background: '#363636',
-                    color: '#fff',
+                    background: '#ffffff',
+                    color: '#363636',
+                    border: '1px solid #f0f0f0',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                    padding: '16px',
+                    fontSize: '16px',
                   },
+
+                  // Define options for specific types
                   success: {
+                    icon: '✅',
                     duration: 3000,
-                    theme: {
-                      primary: '#4aed88',
+                    style: {
+                      borderLeft: '5px solid #27ae60',
+                    },
+                  },
+                  error: {
+                    icon: '❌',
+                    duration: 5000,
+                    style: {
+                      borderLeft: '5px solid #e74c3c',
                     },
                   },
                 }}

@@ -476,7 +476,7 @@
         }
 
         .tab-btn {
-            padding: 12px 20px;
+            padding: 10px 15px; /* Slightly reduced padding */
             cursor: pointer;
             border-bottom: 2px solid transparent;
             transition: var(--transition);
@@ -485,6 +485,12 @@
             background: none;
             border: none;
             outline: none;
+            flex-grow: 1; /* Distribute space evenly */
+            min-width: 80px; /* Ensure a minimum width */
+            display: flex; /* Enable flex for icon and text alignment */
+            align-items: center;
+            justify-content: center;
+            gap: 5px; /* Space between icon and text */
         }
 
         .tab-btn.active, .tab-btn:hover {

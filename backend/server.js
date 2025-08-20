@@ -38,6 +38,7 @@ const ordersRoutes = require('./routes/orders');
 const ingredientsRoutes = require('./routes/ingredients');
 const technicalSpecificationsRoutes = require('./routes/technicalSpecifications');
 const categoriesRoutes = require('./routes/categories');
+const addonRoutes = require('./routes/addons'); // New import for addons
 const cashRegisterRoutes = require('./routes/cashRegister');
 const financialRoutes = require('./routes/financial');
 const labelsRoutes = require('./routes/labels'); // New import for labels routes
@@ -100,6 +101,7 @@ app.use('/api/orders', ordersRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
 app.use('/api/technical-specifications', technicalSpecificationsRoutes);
 app.use('/api/categories', categoriesRoutes);
+app.use('/api/addons', addonRoutes); // New route for addons
 app.use('/api/cash-register', cashRegisterRoutes);
 app.use('/api/financial', financialRoutes);
 app.use('/labels', labelsRoutes); // New route for labels

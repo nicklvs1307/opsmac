@@ -1,54 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Box, Typography, Paper, Tabs, Tab, TextField, Button, CircularProgress, 
-  Select, MenuItem, FormControl, InputLabel, Grid, FormHelperText, 
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
-  Dialog, DialogTitle, DialogContent, DialogActions, FormGroup, FormControlLabel, Checkbox, IconButton 
+import {
+  Box, Typography, Paper, Tabs, Tab, Button,
 } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import axiosInstance from '../../api/axiosInstance';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
-
-// Esquemas de Validação
-const userSchema = (t, editingUser) => yup.object().shape({
-  name: yup.string().min(2, t('admin_dashboard.name_min_chars')).required(t('admin_dashboard.name_required')),
-  email: yup.string().email(t('admin_dashboard.email_invalid')).required(t('admin_dashboard.email_required')),
-  phone: yup.string().optional(),
-  role: yup.string().oneOf(['owner', 'admin', 'employee'], t('admin_dashboard.role_invalid')).required(t('admin_dashboard.role_required')),
-  password: yup.string()
-    .min(6, t('admin_dashboard.password_min_chars'))
-    .when('editingUser', {
-      is: (val) => !val, // If not editing an existing user (i.e., creating a new one)
-      then: (schema) => schema.required(t('admin_dashboard.password_required')),
-      otherwise: (schema) => schema.optional(),
-    }),
-});
-
-const restaurantSchema = (t) => yup.object().shape({
-  name: yup.string().required(t('admin_dashboard.restaurant_name_required')),
-  address: yup.string().required(t('admin_dashboard.address_required')),
-  city: yup.string().required(t('admin_dashboard.city_required')),
-  state: yup.string().required(t('admin_dashboard.state_required')),
-  owner_id: yup.string().uuid(t('admin_dashboard.owner_id_invalid')).required(t('admin_dashboard.owner_id_required')),
-});
+import UserModal from '../../components/Admin/UserModal';
+import RestaurantModal from '../../components/Admin/RestaurantModal';
+import ModuleSettingsModal from '../../components/Admin/ModuleSettingsModal';
+import UserTable from '../../components/Admin/UserTable';
+import RestaurantTable from '../../components/Admin/RestaurantTable';
+import { saveUser, saveRestaurant, saveRestaurantModules } from '../../api/adminService';
+import useAdminData from '../../hooks/useAdminData';
+import useModal from '../../hooks/useModal';
 
 const AdminDashboard = () => {
   const { t } = useTranslation();
   const [tabValue, setTabValue] = useState(0);
-  
-  // Estados
-  const [users, setUsers] = useState([]);
-  const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [isUserModalOpen, setUserModalOpen] = useState(false);
-  const [isRestaurantModalOpen, setRestaurantModalOpen] = useState(false);
-  const [isModuleModalOpen, setModuleModalOpen] = useState(false);
-  const [editingUser, setEditingUser] = useState(null);
-  const [editingRestaurant, setEditingRestaurant] = useState(null);
+
+  const { users, restaurants, loading, fetchUsers, fetchRestaurants } = useAdminData();
+
+  // Estados dos Modais
+  const { isOpen: isUserModalOpen, editingItem: editingUser, handleOpen: handleOpenUserModal, handleClose: handleCloseUserModal } = useModal();
+  const { isOpen: isRestaurantModalOpen, editingItem: editingRestaurant, handleOpen: handleOpenRestaurantModal, handleClose: handleCloseRestaurantModal } = useModal();
+  const { isOpen: isModuleModalOpen, editingItem: editingModuleRestaurant, handleOpen: handleOpenModuleModal, handleClose: handleCloseModuleModal } = useModal();
+
   const [selectedModules, setSelectedModules] = useState([]);
 
   const availableModules = [
@@ -57,92 +33,19 @@ const AdminDashboard = () => {
     'checkin_program', 'surveys_feedback', 'coupons_rewards', 'whatsapp_messaging'
   ];
 
-  // Formulários
-  const { control: userControl, handleSubmit: handleUserSubmit, reset: resetUserForm, setValue } = useForm({ resolver: yupResolver(userSchema(t, editingUser)) });
-  const { control: restaurantControl, handleSubmit: handleRestaurantSubmit, reset: resetRestaurantForm } = useForm({ resolver: yupResolver(restaurantSchema(t)) });
-
-  const generateRandomPassword = () => {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
-    let password = '';
-    for (let i = 0; i < 12; i++) { // Generate a 12-character password
-      password += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return password;
-  };
-
-  // Funções de busca
-  const fetchUsers = async () => {
-    setLoading(true);
-    try {
-      const response = await axiosInstance.get('/api/admin/users');
-      setUsers(response.data);
-    } catch (error) {
-      toast.error(t('admin_dashboard.error_loading_users_description'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchRestaurants = async () => {
-    setLoading(true);
-    try {
-      const response = await axiosInstance.get('/api/admin/restaurants');
-      setRestaurants(response.data);
-    } catch (error) {
-      toast.error(t('admin_dashboard.error_loading_restaurants_description'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     if (tabValue === 0) fetchUsers();
     if (tabValue === 1) fetchRestaurants();
-  }, [tabValue]);
+  }, [tabValue, fetchUsers, fetchRestaurants]);
 
   // Funções de Ação (CRUD)
   const handleTabChange = (event, newValue) => setTabValue(newValue);
 
-  const handleOpenUserModal = (user = null) => {
-    setEditingUser(user);
-    resetUserForm(user || {});
-    setUserModalOpen(true);
-  };
-
-  const handleCloseUserModal = () => {
-    setUserModalOpen(false);
-    setEditingUser(null);
-  };
-
-  const handleOpenRestaurantModal = (restaurant = null) => {
-    setEditingRestaurant(restaurant);
-    resetRestaurantForm(restaurant || {});
-    setRestaurantModalOpen(true);
-  };
-
-  const handleCloseRestaurantModal = () => {
-    setRestaurantModalOpen(false);
-    setEditingRestaurant(null);
-  };
-
-  const handleOpenModuleModal = (restaurant) => {
-    setEditingRestaurant(restaurant);
-    setSelectedModules(restaurant.settings?.enabled_modules || []);
-    setModuleModalOpen(true);
-  };
-
-  const handleCloseModuleModal = () => setModuleModalOpen(false);
-
   const onUserSubmit = async (data) => {
     setLoading(true);
     try {
-      if (editingUser) {
-        await axiosInstance.put(`/api/admin/users/${editingUser.id}`, data);
-        toast.success(t('admin_dashboard.user_updated_success'));
-      } else {
-        await axiosInstance.post('/api/admin/users', data);
-        toast.success(t('admin_dashboard.user_created_title'));
-      }
+      await saveUser(data, editingUser?.id);
+      toast.success(t(editingUser ? 'admin_dashboard.user_updated_success' : 'admin_dashboard.user_created_title'));
       fetchUsers();
       handleCloseUserModal();
     } catch (error) {
@@ -155,13 +58,8 @@ const AdminDashboard = () => {
   const onRestaurantSubmit = async (data) => {
     setLoading(true);
     try {
-      if (editingRestaurant) {
-        await axiosInstance.put(`/api/restaurant/${editingRestaurant.id}`, data);
-        toast.success(t('admin_dashboard.restaurant_updated_success'));
-      } else {
-        await axiosInstance.post('/api/admin/restaurants', data);
-        toast.success(t('admin_dashboard.restaurant_created_title'));
-      }
+      await saveRestaurant(data, editingRestaurant?.id);
+      toast.success(t(editingRestaurant ? 'admin_dashboard.restaurant_updated_success' : 'admin_dashboard.restaurant_created_title'));
       fetchRestaurants();
       handleCloseRestaurantModal();
     } catch (error) {
@@ -174,7 +72,7 @@ const AdminDashboard = () => {
   const handleSaveModules = async () => {
     setLoading(true);
     try {
-      await axiosInstance.put(`/api/admin/restaurants/${editingRestaurant.id}/modules`, { enabled_modules: selectedModules });
+      await saveRestaurantModules(editingModuleRestaurant.id, selectedModules);
       toast.success(t('admin_dashboard.modules_updated_success'));
       fetchRestaurants();
       handleCloseModuleModal();
@@ -196,154 +94,45 @@ const AdminDashboard = () => {
       </Paper>
 
       {tabValue === 0 && (
-        <TableContainer component={Paper} sx={{ mt: 3 }}>
-          <Button onClick={() => handleOpenUserModal()}> {t('admin_dashboard.create_user_tab')} </Button>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>{t('admin_dashboard.list_header_name')}</TableCell>
-                <TableCell>{t('admin_dashboard.list_header_email')}</TableCell>
-                <TableCell>{t('admin_dashboard.list_header_role')}</TableCell>
-                <TableCell align="right">{t('admin_dashboard.list_header_actions')}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {loading ? <TableRow><TableCell colSpan={4} align="center"><CircularProgress /></TableCell></TableRow> : 
-                users.map(user => (
-                  <TableRow key={user.id} hover>
-                    <TableCell>{user.name}</TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>{user.role}</TableCell>
-                    <TableCell align="right">
-                      <IconButton onClick={() => handleOpenUserModal(user)}><EditIcon /></IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))
-              }
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <UserTable
+          users={users}
+          loading={loading}
+          handleOpenUserModal={handleOpenUserModal}
+        />
       )}
 
       {tabValue === 1 && (
-        <TableContainer component={Paper} sx={{ mt: 3 }}>
-           <Button onClick={() => handleOpenRestaurantModal()}> {t('admin_dashboard.create_restaurant_tab')} </Button>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>{t('admin_dashboard.list_header_restaurant')}</TableCell>
-                <TableCell>{t('admin_dashboard.list_header_owner')}</TableCell>
-                <TableCell>{t('admin_dashboard.list_header_modules')}</TableCell>
-                <TableCell align="right">{t('admin_dashboard.list_header_actions')}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {loading ? <TableRow><TableCell colSpan={4} align="center"><CircularProgress /></TableCell></TableRow> : 
-                restaurants.map(restaurant => (
-                  <TableRow key={restaurant.id} hover>
-                    <TableCell>{restaurant.name}</TableCell>
-                    <TableCell>{restaurant.owner?.name || 'N/A'}</TableCell>
-                    <TableCell>{(restaurant.settings?.enabled_modules || []).join(', ')}</TableCell>
-                    <TableCell align="right">
-                      <IconButton onClick={() => handleOpenRestaurantModal(restaurant)}><EditIcon /></IconButton>
-                      <Button variant="outlined" onClick={() => handleOpenModuleModal(restaurant)}>{t('admin_dashboard.manage_modules_button')}</Button>
-                    </TableCell>
-                  </TableRow>
-                ))
-              }
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <RestaurantTable
+          restaurants={restaurants}
+          loading={loading}
+          handleOpenRestaurantModal={handleOpenRestaurantModal}
+          handleOpenModuleModal={handleOpenModuleModal}
+        />
       )}
 
       {/* Modais */}
-      <Dialog open={isUserModalOpen} onClose={handleCloseUserModal}>
-        <DialogTitle>{editingUser ? t('admin_dashboard.edit_user_title') : t('admin_dashboard.create_user_tab')}</DialogTitle>
-        <DialogContent>
-          <Controller name="name" control={userControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.name_label')} fullWidth margin="normal" />} />
-          <Controller name="email" control={userControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.email_label')} fullWidth margin="normal" /> } />
-          <Controller name="phone" control={userControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.user_phone_label')} fullWidth margin="normal" /> } />
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Controller
-              name="password"
-              control={userControl}
-              render={({ field, fieldState: { error } }) => (
-                <TextField
-                  {...field}
-                  label={t('admin_dashboard.password_label')}
-                  type="password"
-                  fullWidth
-                  margin="normal"
-                  error={!!error}
-                  helperText={error ? error.message : null}
-                />
-              )}
-            />
-            <Button
-              variant="outlined"
-              onClick={() => setValue('password', generateRandomPassword())}
-              sx={{ mt: 2 }}
-            >
-              {t('admin_dashboard.generate_password_button')}
-            </Button>
-          </Box>
-          <Controller name="role" control={userControl} render={({ field }) => (
-            <FormControl fullWidth margin="normal">
-              <InputLabel>{t('admin_dashboard.role_label')}</InputLabel>
-              <Select {...field} label={t('admin_dashboard.role_label')}>
-                <MenuItem value="owner">{t('admin_dashboard.role_owner')}</MenuItem>
-                <MenuItem value="admin">{t('admin_dashboard.role_admin')}</MenuItem>
-                <MenuItem value="employee">{t('admin_dashboard.role_employee')}</MenuItem>
-              </Select>
-            </FormControl>
-          )} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseUserModal}>{t('common.cancel')}</Button>
-          <Button onClick={handleUserSubmit(onUserSubmit)} variant="contained">{t('common.save')}</Button>
-        </DialogActions>
-      </Dialog>
-
-      <Dialog open={isRestaurantModalOpen} onClose={handleCloseRestaurantModal}>
-        <DialogTitle>{editingRestaurant ? t('admin_dashboard.edit_restaurant_title') : t('admin_dashboard.create_restaurant_tab')}</DialogTitle>
-        <DialogContent>
-          <Controller name="name" control={restaurantControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.restaurant_name_label')} fullWidth margin="normal" />} />
-          <Controller name="address" control={restaurantControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.address_label')} fullWidth margin="normal" />} />
-          <Controller name="city" control={restaurantControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.city_label')} fullWidth margin="normal" />} />
-          <Controller name="state" control={restaurantControl} render={({ field }) => <TextField {...field} label={t('admin_dashboard.state_label')} fullWidth margin="normal" />} />
-          <Controller name="owner_id" control={restaurantControl} render={({ field }) => (
-            <FormControl fullWidth margin="normal">
-              <InputLabel>{t('admin_dashboard.owner_label')}</InputLabel>
-              <Select {...field} label={t('admin_dashboard.owner_label')}>
-                {users.map(user => <MenuItem key={user.id} value={user.id}>{user.name}</MenuItem>)}
-              </Select>
-            </FormControl>
-          )} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseRestaurantModal}>{t('common.cancel')}</Button>
-          <Button onClick={handleRestaurantSubmit(onRestaurantSubmit)} variant="contained">{t('common.save')}</Button>
-        </DialogActions>
-      </Dialog>
-
-      <Dialog open={isModuleModalOpen} onClose={handleCloseModuleModal}>
-        <DialogTitle>{t('admin_dashboard.manage_modules_for', { name: editingRestaurant?.name })}</DialogTitle>
-        <DialogContent>
-          <FormGroup>
-            {availableModules.map(moduleName => (
-              <FormControlLabel 
-                key={moduleName} 
-                control={<Checkbox checked={selectedModules.includes(moduleName)} onChange={(e) => setSelectedModules(e.target.checked ? [...selectedModules, moduleName] : selectedModules.filter(m => m !== moduleName))} name={moduleName} />} 
-                label={t(`modules.${moduleName}`)} 
-              />
-            ))}
-          </FormGroup>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseModuleModal}>{t('common.cancel')}</Button>
-          <Button onClick={handleSaveModules} variant="contained">{t('common.save')}</Button>
-        </DialogActions>
-      </Dialog>
+      <UserModal
+        isOpen={isUserModalOpen}
+        onClose={handleCloseUserModal}
+        editingUser={editingUser}
+        onSave={onUserSubmit}
+      />
+      <RestaurantModal
+        isOpen={isRestaurantModalOpen}
+        onClose={handleCloseRestaurantModal}
+        editingRestaurant={editingRestaurant}
+        onSave={onRestaurantSubmit}
+        users={users} // Pass users for owner selection
+      />
+      <ModuleSettingsModal
+        isOpen={isModuleModalOpen}
+        onClose={handleCloseModuleModal}
+        editingRestaurant={editingModuleRestaurant}
+        availableModules={availableModules}
+        selectedModules={selectedModules}
+        onSaveModules={handleSaveModules}
+        setSelectedModules={setSelectedModules}
+      />
 
     </Box>
   );

@@ -1,29 +1,42 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-node:internal/modules/cjs/loader:1215
-
-  throw err;
-  ^
-Error: Cannot find module '../../config/database'
-Require stack:
-- /app/backend/controllers/addonController.js
-- /app/backend/routes/addons.js
-- /app/backend/server.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1212:15)
-    at Module._load (node:internal/modules/cjs/loader:1043:27)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/controllers/addonController.js:1:20)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    '/app/backend/controllers/addonController.js',
-    '/app/backend/routes/addons.js',
-    '/app/backend/server.js'
-  ]
-}
-Node.js v20.19.4
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             190.8s
+------
+ > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.366 + npm run build
+0.766
+0.766 > feedeliza-plus@1.0.0 build
+0.766 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.766
+4.106 Creating an optimized production build...
+189.8 Failed to compile.
+189.8
+189.8 [eslint]
+189.8 src/components/Admin/UserModal.js
+189.8   Line 115:24:  'FormHelperText' is not defined  react/jsx-no-undef
+189.8
+189.8 src/components/Layout/Layout.js
+189.8   Line 33:3:  'useEffect' is not defined  no-undef
+189.8
+189.8 src/pages/Admin/AdminDashboard.js
+189.8   Line 45:5:  'setLoading' is not defined  no-undef
+189.8   Line 54:7:  'setLoading' is not defined  no-undef
+189.8   Line 59:5:  'setLoading' is not defined  no-undef
+189.8   Line 68:7:  'setLoading' is not defined  no-undef
+189.8   Line 73:5:  'setLoading' is not defined  no-undef
+189.8   Line 82:7:  'setLoading' is not defined  no-undef
+189.8
+189.8 src/pages/ERP/Menu.js
+189.8 Syntax error: Unterminated JSX contents. (119:10) (119:10)
+189.8
+189.8 Search for the keywords to learn more about each error.
+189.8
+189.8
+------
+Dockerfile.frontend:24
+--------------------
+  22 |     ARG REACT_APP_API_URL
+  23 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  24 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  25 |
+  26 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

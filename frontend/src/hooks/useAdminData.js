@@ -33,7 +33,7 @@ const useAdminData = () => {
     }
   };
 
-  return { users, restaurants, loading, fetchUsers, fetchRestaurants };
+  return { users, restaurants, loading, setLoading, fetchUsers, fetchRestaurants };
 };
 
 export default useAdminData;

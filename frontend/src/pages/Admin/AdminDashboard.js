@@ -18,7 +18,7 @@ const AdminDashboard = () => {
   const { t } = useTranslation();
   const [tabValue, setTabValue] = useState(0);
 
-  const { users, restaurants, loading, fetchUsers, fetchRestaurants } = useAdminData();
+  const { users, restaurants, loading, setLoading, fetchUsers, fetchRestaurants } = useAdminData();
 
   // Estados dos Modais
   const { isOpen: isUserModalOpen, editingItem: editingUser, handleOpen: handleOpenUserModal, handleClose: handleCloseUserModal } = useModal();

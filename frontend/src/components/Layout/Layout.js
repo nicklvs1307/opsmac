@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -19,9 +19,8 @@ import {
 
 import Sidebar from './Sidebar';
 import Header from './Header';
-import DashboardContentHeader from './DashboardContentHeader';
 
-const drawerWidth = 250;
+const drawerWidth = 280;
 
 const Layout = ({ children }) => {
   const theme = useTheme();
@@ -29,13 +28,6 @@ const Layout = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopOpen, setDesktopOpen] = useState(true);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    document.body.style.backgroundColor = '#f5f7fa';
-    document.body.style.color = 'var(--dark)';
-    document.body.style.display = 'flex';
-    document.body.style.minHeight = '100vh';
-  }, []);
 
   const handleDrawerToggle = () => {
     if (isMobile) {
@@ -54,34 +46,89 @@ const Layout = ({ children }) => {
       height: '100%', 
       display: 'flex', 
       flexDirection: 'column',
-      bgcolor: theme.palette.primary.main,
+      bgcolor: theme.palette.mode === 'light' 
+        ? alpha(theme.palette.background.paper, 0.9) 
+        : alpha(theme.palette.background.paper, 0.2),
+      backgroundImage: theme.palette.mode === 'light'
+        ? 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))'
+        : 'linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))'
     }}>
       <Toolbar
         sx={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           px: 3,
           py: 2,
-          borderBottom: `1px solid rgba(255,255,255,0.1)`,
-          marginBottom: '20px',
+          bgcolor: theme.palette.mode === 'light' 
+            ? alpha(theme.palette.background.paper, 0.8) 
+            : alpha(theme.palette.background.paper, 0.2),
+          borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
+          backdropFilter: 'blur(8px)'
         }}
-        className="logo"
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Typography 
-            variant="h6" 
-            sx={{ 
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: '1.1rem',
-              textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+          <Box 
+            sx={{
+              width: 36,
+              height: 36,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
+              borderRadius: 1.5,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: `0 4px 12px ${alpha(theme.palette.primary.main, 0.3)}`,
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-2px)',
+                boxShadow: `0 6px 16px ${alpha(theme.palette.primary.main, 0.4)}`,
+              }
             }}
           >
-            <i className="fas fa-utensils" style={{ marginRight: '10px', color: 'var(--secondary)' }}></i>
-            <span>{t('layout.app_name')}</span>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: '1.1rem',
+                textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+              }}
+            >
+              {t('layout.app_initial')}
+            </Typography>
+          </Box>
+          <Typography 
+            variant="h6" 
+            noWrap 
+            component="div" 
+            sx={{
+              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontWeight: 'bold',
+              fontSize: '1.2rem',
+              letterSpacing: '0.5px'
+            }}
+          >
+            {t('layout.app_name')}
           </Typography>
         </Box>
+        {!isMobile && (
+          <IconButton 
+            onClick={handleDrawerToggle}
+            sx={{ 
+              color: 'text.secondary',
+              transition: 'all 0.2s ease',
+              '&:hover': {
+                color: theme.palette.primary.main,
+                transform: 'scale(1.1)',
+                backgroundColor: alpha(theme.palette.primary.main, 0.1)
+              }
+            }}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+        )}
       </Toolbar>
       <Sidebar onMobileClose={handleMobileDrawerClose} />
     </Box>
@@ -104,6 +151,8 @@ const Layout = ({ children }) => {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.standard,
           }),
+          backdropFilter: 'blur(10px)',
+          backgroundColor: alpha(theme.palette.background.default, 0.8),
           borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
         }}
       >
@@ -152,6 +201,7 @@ const Layout = ({ children }) => {
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
+              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
               backgroundImage: theme.palette.mode === 'light'
                 ? 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))'
                 : 'linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))'
@@ -174,6 +224,7 @@ const Layout = ({ children }) => {
                 easing: theme.transitions.easing.easeInOut,
                 duration: theme.transitions.duration.standard,
               }),
+              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
               borderRight: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
             },
           }}
@@ -195,11 +246,30 @@ const Layout = ({ children }) => {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.standard,
           }),
+          backgroundColor: theme.palette.mode === 'light' 
+            ? alpha(theme.palette.background.default, 0.5) 
+            : alpha(theme.palette.background.default, 0.9),
+          borderRadius: { xs: 0, md: desktopOpen ? '24px 0 0 0' : 0 },
+          overflowY: 'scroll',
+          backdropFilter: 'blur(8px)',
+          boxShadow: desktopOpen ? `inset 8px 0 16px ${alpha(theme.palette.common.black, 0.05)}` : 'none'
         }}
       >
-        <DashboardContentHeader />
         <Toolbar /> {/* Spacer for fixed AppBar */}
-        <Box>
+        <Box sx={{ 
+          mt: 2,
+          animation: 'fadeIn 0.5s ease-in-out',
+          '@keyframes fadeIn': {
+            '0%': {
+              opacity: 0,
+              transform: 'translateY(10px)'
+            },
+            '100%': {
+              opacity: 1,
+              transform: 'translateY(0)'
+            },
+          }
+        }}>
           {children || <Outlet />}
         </Box>
       </Box>

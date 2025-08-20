@@ -18,30 +18,6 @@
       "confirm_delete_title": "Confirmar Exclusão",
       "confirm_delete_message": "Tem certeza que deseja excluir a categoria \"{{categoryName}}\""
     },
-    "menu": {
-      "tabs": {
-        "addons": "Adicionais"
-      }
-    },
-    "addon_management": {
-      "add_success": "Adicional adicionado com sucesso!",
-      "add_error": "Erro ao adicionar adicional.",
-      "update_success": "Adicional atualizado com sucesso!",
-      "update_error": "Erro ao atualizar adicional.",
-      "delete_success": "Adicional excluído com sucesso!",
-      "delete_error": "Erro ao excluir adicional.",
-      "title": "Gerenciamento de Adicionais",
-      "edit_addon": "Editar Adicional",
-      "add_new_addon": "Adicionar Novo Adicional",
-      "addon_name": "Nome do Adicional",
-      "addon_price": "Preço do Adicional",
-      "update_button": "Atualizar",
-      "add_button": "Adicionar",
-      "existing_addons": "Adicionais Existentes",
-      "no_addons": "Nenhum adicional encontrado.",
-      "confirm_delete_title": "Confirmar Exclusão",
-      "confirm_delete_message": "Tem certeza que deseja excluir o adicional \"{{addonName}}\""
-    },
     "checkin_dashboard": {
       "no_restaurant_found": "Nenhum restaurante encontrado. Por favor, verifique suas configurações.",
       "error_fetching_checkin_data_console": "Erro ao carregar dados de check-in (console):",
@@ -507,12 +483,7 @@
       "existing_products": "Produtos Existentes",
       "no_products": "Nenhum produto encontrado.",
       "confirm_delete_title": "Confirmar Exclusão",
-      "confirm_delete_message": "Tem certeza que deseja excluir o produto \"{{productName}}\"",
-      "variations": "Variações",
-      "variation_name": "Nome da Variação",
-      "variation_value": "Valor da Variação",
-      "additional_price": "Preço Adicional",
-      "add_variation": "Adicionar Variação"
+      "confirm_delete_message": "Tem certeza que deseja excluir o produto \"{{productName}}\""
     },
     "public_checkin": {
       "error_no_restaurant_id": "ID do restaurante não encontrado na URL. Por favor, use um QR Code válido.",
@@ -767,24 +738,19 @@
       "source_whatsapp": "WhatsApp",
       "source_manual": "Manual",
       "source_website": "Website",
-      "no_feedback_found": "Nenhum feedback encontrado",
-      "anonymous_customer": "Cliente Anônimo",
-      "response_label": "Resposta",
-      "view_details_action": "Ver Detalhes",
-      "reply_action": "Responder",
-      "delete_action": "Excluir",
-      "reply_dialog_title": "Responder Feedback",
-      "reply_dialog_label": "Sua resposta",
+      "source_email": "Email",
+      "source_manual": "Manual",
+      "table_number_label": "Número da Mesa",
+      "table_number_placeholder": "Ex: 5",
+      "visit_date_label": "Data da Visita",
+      "preview_title": "Preview do Feedback",
+      "preview_comment_placeholder": "Comentário aparecerá aqui...",
       "cancel_button": "Cancelar",
-      "send_reply_button": "Enviar Resposta",
-      "delete_dialog_title": "Confirmar Exclusão",
-      "delete_dialog_content": "Tem certeza que deseja excluir este feedback? Esta ação não pode ser desfeita.",
-      "delete_button": "Excluir",
-      "error_loading": "Erro ao carregar feedbacks",
-      "reply_success": "Resposta enviada com sucesso!",
-      "reply_error": "Erro ao enviar resposta",
-      "delete_success": "Feedback excluído com sucesso!",
-      "delete_error": "Erro ao excluir feedback"
+      "saving_button": "Salvando...",
+      "save_button": "Salvar Feedback",
+      "error_loading_initial_data": "Erro ao carregar dados iniciais",
+      "create_success": "Feedback criado com sucesso!",
+      "create_error": "Erro ao criar feedback"
     },
     "feedback_detail": {
       "title": "Detalhes do Feedback",

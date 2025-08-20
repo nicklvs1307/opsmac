@@ -56,12 +56,6 @@ router.post(
     body('available_for_online_order').isBoolean().withMessage('available_for_online_order deve ser um booleano').optional({ nullable: true }),
     body('available_for_digital_menu').isBoolean().withMessage('available_for_digital_menu deve ser um booleano').optional({ nullable: true }),
     body('image_url').isString().withMessage('URL da imagem inválida').optional({ nullable: true }),
-    body('addons').isArray().withMessage('Addons must be an array').optional({ nullable: true }),
-    body('addons.*').isUUID().withMessage('Each addon must be a valid UUID'),
-    body('variations').isArray().withMessage('Variations must be an array').optional({ nullable: true }),
-    body('variations.*.name').notEmpty().withMessage('Variation name is required'),
-    body('variations.*.value').notEmpty().withMessage('Variation value is required'),
-    body('variations.*.additionalPrice').isFloat({ min: 0 }).withMessage('Additional price must be a positive number'),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -82,8 +76,6 @@ router.post(
       available_for_online_order,
       available_for_digital_menu,
       image_url,
-      addons,
-      variations,
     } = req.body;
     const { restaurantId } = req;
 
@@ -102,8 +94,6 @@ router.post(
         available_for_online_order,
         available_for_digital_menu,
         image_url,
-        addons,
-        variations,
       });
 
       res.status(201).json(product);
@@ -196,12 +186,6 @@ router.put(
     body('available_for_online_order').isBoolean().withMessage('available_for_online_order deve ser um booleano').optional({ nullable: true }),
     body('available_for_digital_menu').isBoolean().withMessage('available_for_digital_menu deve ser um booleano').optional({ nullable: true }),
     body('image_url').isString().withMessage('URL da imagem inválida').optional({ nullable: true }),
-    body('addons').isArray().withMessage('Addons must be an array').optional({ nullable: true }),
-    body('addons.*').isUUID().withMessage('Each addon must be a valid UUID'),
-    body('variations').isArray().withMessage('Variations must be an array').optional({ nullable: true }),
-    body('variations.*.name').notEmpty().withMessage('Variation name is required'),
-    body('variations.*.value').notEmpty().withMessage('Variation value is required'),
-    body('variations.*.additionalPrice').isFloat({ min: 0 }).withMessage('Additional price must be a positive number'),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -224,8 +208,6 @@ router.put(
       available_for_online_order,
       available_for_digital_menu,
       image_url,
-      addons,
-      variations,
     } = req.body;
 
     try {
@@ -247,8 +229,6 @@ router.put(
         available_for_online_order,
         available_for_digital_menu,
         image_url,
-        addons,
-        variations,
       });
 
       res.json(product);

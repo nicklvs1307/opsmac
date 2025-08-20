@@ -108,7 +108,7 @@ const AddonManagement = () => {
   return (
     <Box sx={{ mt: 3 }}>
       <Typography variant="h5" gutterBottom>{t('addon_management.title')}</Typography>
-      <Paper elevation={2} className="form-container" sx={{ mb: 3 }}>
+      <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" gutterBottom>{editingAddon ? t('addon_management.edit_addon') : t('addon_management.add_new_addon')}</Typography>
         <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
           <TextField
@@ -117,7 +117,6 @@ const AddonManagement = () => {
             fullWidth
             value={newAddonName}
             onChange={(e) => setNewAddonName(e.target.value)}
-            className="form-control"
           />
           <TextField
             label={t('addon_management.addon_price')}
@@ -126,7 +125,6 @@ const AddonManagement = () => {
             type="number"
             value={newAddonPrice}
             onChange={(e) => setNewAddonPrice(e.target.value)}
-            className="form-control"
           />
           {editingAddon ? (
             <Button
@@ -135,7 +133,6 @@ const AddonManagement = () => {
               startIcon={<EditIcon />}
               onClick={handleUpdateAddon}
               disabled={updateAddonMutation.isLoading}
-              className="btn btn-primary"
             >
               {t('addon_management.update_button')}
             </Button>
@@ -146,7 +143,6 @@ const AddonManagement = () => {
               startIcon={<AddIcon />}
               onClick={handleAddAddon}
               disabled={addAddonMutation.isLoading}
-              className="btn btn-primary"
             >
               {t('addon_management.add_button')}
             </Button>
@@ -160,7 +156,6 @@ const AddonManagement = () => {
                 setNewAddonName('');
                 setNewAddonPrice('');
               }}
-              className="btn btn-secondary"
             >
               {t('common.cancel')}
             </Button>
@@ -169,41 +164,31 @@ const AddonManagement = () => {
       </Paper>
 
       <Typography variant="h6" gutterBottom>{t('addon_management.existing_addons')}</Typography>
-      <Box className="table-container">
-        <Box className="card-header" style={{ padding: '15px 20px', borderBottom: '1px solid #e0e0e0' }}>
-          <span className="card-title">{t('addon_management.existing_addons')}</span>
-          <button className="btn btn-primary" style={{ padding: '8px 15px' }} onClick={() => { setEditingAddon(null); setNewAddonName(''); setNewAddonPrice(''); }}>
-            <i className="fas fa-plus"></i> {t('addon_management.add_new_addon')}
-          </button>
-        </Box>
-        <table>
-          <thead>
-            <tr>
-              <th>{t('addon_management.addon_name')}</th>
-              <th>{t('addon_management.addon_price')}</th>
-              <th>{t('common.actions')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {addons.length === 0 ? (
-              <tr>
-                <td colSpan="3"><Typography>{t('addon_management.no_addons')}</Typography></td>
-              </tr>
-            ) : (
-              addons.map((addon) => (
-                <tr key={addon.id}>
-                  <td>{addon.name}</td>
-                  <td>R$ {addon.price}</td>
-                  <td>
-                    <button className="action-btn edit-btn" onClick={() => handleEditClick(addon)}><i className="fas fa-edit"></i></button>
-                    <button className="action-btn delete-btn" onClick={() => handleDeleteClick(addon)}><i className="fas fa-trash"></i></button>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </Box>
+      <Paper elevation={2} sx={{ p: 3 }}>
+        {addons.length === 0 ? (
+          <Typography>{t('addon_management.no_addons')}</Typography>
+        ) : (
+          <List>
+            {addons.map((addon) => (
+              <ListItem
+                key={addon.id}
+                secondaryAction={
+                  <Box>
+                    <IconButton edge="end" aria-label="edit" onClick={() => handleEditClick(addon)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteClick(addon)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
+                }
+              >
+                <ListItemText primary={`${addon.name} (R$ ${addon.price})`} />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
 
       <Dialog
         open={openDeleteDialog}

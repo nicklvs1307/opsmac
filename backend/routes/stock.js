@@ -13,11 +13,9 @@ const getRestaurantId = (req, res, next) => {
   }
 
   if (!restaurantId) {
-    console.log('getRestaurantId: restaurantId is undefined. User:', req.user);
     return res.status(400).json({ msg: 'ID do restaurante é obrigatório ou usuário não associado a nenhum restaurante.' });
   }
   req.restaurantId = restaurantId;
-  console.log('getRestaurantId: restaurantId set to', req.restaurantId);
 
   next();
 };

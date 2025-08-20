@@ -4,148 +4,10 @@
 🚀 Servidor rodando na porta 5000
 📊 Dashboard: https://feedelizapro.towersfy.com
 🔗 API: https://feedelizaapi.towersfy.com/api
-Error fetching stock dashboard data: Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Product.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async exports.getDashboardData (/app/backend/controllers/stockController.js:20:23) {
-  name: 'SequelizeDatabaseError',
-  parent: error: column "product_id" does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 111,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: undefined,
-    position: '120',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT "Product"."id", "Product"."name", "Product"."min_stock_level", (SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id) AS "current_stock", "category"."id" AS "category.id", "category"."name" AS "category.name" FROM "products" AS "Product" LEFT OUTER JOIN "Categories" AS "category" ON "Product"."category_id" = "category"."id" WHERE "Product"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2';`,
-    parameters: undefined
-  },
-  original: error: column "product_id" does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 111,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: undefined,
-    position: '120',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT "Product"."id", "Product"."name", "Product"."min_stock_level", (SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id) AS "current_stock", "category"."id" AS "category.id", "category"."name" AS "category.name" FROM "products" AS "Product" LEFT OUTER JOIN "Categories" AS "category" ON "Product"."category_id" = "category"."id" WHERE "Product"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2';`,
-    parameters: undefined
-  },
-  sql: `SELECT "Product"."id", "Product"."name", "Product"."min_stock_level", (SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id) AS "current_stock", "category"."id" AS "category.id", "category"."name" AS "category.name" FROM "products" AS "Product" LEFT OUTER JOIN "Categories" AS "category" ON "Product"."category_id" = "category"."id" WHERE "Product"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2';`,
-  parameters: {}
-}
-Error fetching stock dashboard data: Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Product.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async exports.getDashboardData (/app/backend/controllers/stockController.js:20:23) {
-  name: 'SequelizeDatabaseError',
-  parent: error: column "product_id" does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 111,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: undefined,
-    position: '120',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT "Product"."id", "Product"."name", "Product"."min_stock_level", (SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id) AS "current_stock", "category"."id" AS "category.id", "category"."name" AS "category.name" FROM "products" AS "Product" LEFT OUTER JOIN "Categories" AS "category" ON "Product"."category_id" = "category"."id" WHERE "Product"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2';`,
-    parameters: undefined
-  },
-  original: error: column "product_id" does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 111,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: undefined,
-    position: '120',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT "Product"."id", "Product"."name", "Product"."min_stock_level", (SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id) AS "current_stock", "category"."id" AS "category.id", "category"."name" AS "category.name" FROM "products" AS "Product" LEFT OUTER JOIN "Categories" AS "category" ON "Product"."category_id" = "category"."id" WHERE "Product"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2';`,
-    parameters: undefined
-  },
-  sql: `SELECT "Product"."id", "Product"."name", "Product"."min_stock_level", (SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id) AS "current_stock", "category"."id" AS "category.id", "category"."name" AS "category.name" FROM "products" AS "Product" LEFT OUTER JOIN "Categories" AS "category" ON "Product"."category_id" = "category"."id" WHERE "Product"."restaurant_id" = '842920c5-5ad2-40ca-be4e-33930f488ee2';`,
-  parameters: {}
-}
+getRestaurantId: restaurantId set to 842920c5-5ad2-40ca-be4e-33930f488ee2
+getDashboardData: received restaurant_id 842920c5-5ad2-40ca-be4e-33930f488ee2
+getRestaurantId: restaurantId set to 842920c5-5ad2-40ca-be4e-33930f488ee2
+getAllStocks: received restaurant_id undefined
 Error fetching all stocks: Error: WHERE parameter "restaurant_id" has invalid "undefined" value
     at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
     at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
@@ -156,7 +18,9 @@ Error fetching all stocks: Error: WHERE parameter "restaurant_id" has invalid "u
     at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
     at Product.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.getAllStocks (/app/backend/controllers/stockController.js:112:20)
+    at async exports.getAllStocks (/app/backend/controllers/stockController.js:114:20)
+getRestaurantId: restaurantId set to 842920c5-5ad2-40ca-be4e-33930f488ee2
+getAllStocks: received restaurant_id undefined
 Error fetching all stocks: Error: WHERE parameter "restaurant_id" has invalid "undefined" value
     at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
     at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
@@ -167,4 +31,4 @@ Error fetching all stocks: Error: WHERE parameter "restaurant_id" has invalid "u
     at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
     at Product.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.getAllStocks (/app/backend/controllers/stockController.js:112:20)
+    at async exports.getAllStocks (/app/backend/controllers/stockController.js:114:20)

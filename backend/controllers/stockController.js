@@ -11,8 +11,7 @@ const getStockStatus = (currentStock, minStock) => {
 // Get Stock Dashboard Data
 exports.getDashboardData = async (req, res) => {
   try {
-    const { restaurant_id } = req.query;
-    console.log('getDashboardData: received restaurant_id', restaurant_id);
+    const restaurant_id = req.restaurantId; // Use req.restaurantId from middleware
 
     // Total Products
     const totalProducts = await Product.count({ where: { restaurant_id } });
@@ -83,6 +82,7 @@ exports.getDashboardData = async (req, res) => {
 exports.createStockMovement = async (req, res) => {
   try {
     const { product_id, type, quantity, description } = req.body;
+    const restaurant_id = req.restaurantId; // Use req.restaurantId from middleware
     const movement = await StockMovement.create({ product_id, type, quantity, description, movement_date: new Date() });
     res.status(201).json(movement);
   } catch (error) {
@@ -95,6 +95,7 @@ exports.createStockMovement = async (req, res) => {
 exports.getStockHistory = async (req, res) => {
   try {
     const { productId } = req.params;
+    const restaurant_id = req.restaurantId; // Use req.restaurantId from middleware
     const history = await StockMovement.findAll({
       where: { product_id: productId },
       order: [['movement_date', 'DESC']],
@@ -109,8 +110,7 @@ exports.getStockHistory = async (req, res) => {
 // Get all stocks (current stock levels for all products)
 exports.getAllStocks = async (req, res) => {
   try {
-    const { restaurant_id } = req.query;
-    console.log('getAllStocks: received restaurant_id', restaurant_id);
+    const restaurant_id = req.restaurantId; // Use req.restaurantId from middleware
     const stocks = await Product.findAll({
       where: { restaurant_id },
       attributes: [

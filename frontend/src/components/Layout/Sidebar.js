@@ -73,7 +73,6 @@ const Submenu = ({ items, parentEl, onClose, level = 0 }) => {
         anchorEl={parentEl}
         placement="right-start"
         transition
-        disablePortal
         modifiers={[
           {
             name: 'offset',

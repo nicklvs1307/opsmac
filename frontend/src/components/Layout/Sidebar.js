@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
   List,
@@ -569,8 +569,6 @@ const Sidebar = ({ onMobileClose }) => {
   );
 };
 
-export default Sidebar;
-
 const SubmenuPopper = ({ item, openMenus, anchorEl, handlePopperClose, handleClick, isActive, theme, mode }) => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
@@ -678,3 +676,5 @@ const SubmenuPopper = ({ item, openMenus, anchorEl, handlePopperClose, handleCli
     </ClickAwayListener>
   );
 };
+
+export default Sidebar;

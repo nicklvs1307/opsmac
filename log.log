@@ -1,21 +1,19 @@
- => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             192.6s
+ => ERROR [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build                                                             184.8s
 ------
  > [builder 8/8] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.353 + npm run build
-0.669
-0.669 > feedeliza-plus@1.0.0 build
-0.669 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
-0.669
-4.021 Creating an optimized production build...
-191.5 Failed to compile.
-191.5
-191.5 [eslint]
-191.5 src/components/Layout/Sidebar.js
-191.5   Line 577:3:  'useEffect' is not defined  no-undef
-191.5
-191.5 Search for the keywords to learn more about each error.
-191.5
-191.5
+0.311 + npm run build
+0.657
+0.657 > feedeliza-plus@1.0.0 build
+0.657 > REACT_APP_API_URL=https://feedelizaapi.towersfy.com react-scripts build
+0.657
+3.672 Creating an optimized production build...
+183.7 Failed to compile.
+183.7
+183.7 [eslint]
+183.7 src/components/Layout/Sidebar.js
+183.7 Syntax error: Identifier 'useState' has already been declared. (40:9) (40:9)
+183.7
+183.7
 ------
 Dockerfile.frontend:24
 --------------------

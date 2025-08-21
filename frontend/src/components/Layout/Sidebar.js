@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
   List,
@@ -15,6 +16,7 @@ import {
   useMediaQuery,
   Popper,
   Paper,
+  Grow,
   ClickAwayListener,
 } from '@mui/material';
 import {
@@ -40,16 +42,113 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 
+// Componente recursivo para os submenus flutuantes
+const Submenu = ({ items, parentEl, onClose, level = 0 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const theme = useTheme();
+  const [openSubmenu, setOpenSubmenu] = useState({ anchor: null, items: [] });
+
+  const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/');
+
+  const handleSubmenuEnter = (event, submenuItems) => {
+    if (submenuItems && submenuItems.length > 0) {
+      setOpenSubmenu({ anchor: event.currentTarget, items: submenuItems });
+    }
+  };
+
+  const handleSubmenuLeave = () => {
+    setOpenSubmenu({ anchor: null, items: [] });
+  };
+
+  const handleItemClick = (path) => {
+    navigate(path);
+    onClose(); // Fecha toda a cadeia de submenus
+  };
+
+  return (
+    <>
+      <Popper
+        open={Boolean(parentEl)}
+        anchorEl={parentEl}
+        placement="right-start"
+        transition
+        disablePortal
+        modifiers={[
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 2],
+            },
+          },
+        ]}
+        style={{ zIndex: 2000 }}
+        onMouseLeave={handleSubmenuLeave}
+      >
+        {({ TransitionProps }) => (
+          <Grow {...TransitionProps} timeout={350}>
+            <Paper 
+              elevation={8}
+              sx={{ 
+                minWidth: 220, 
+                borderRadius: 2,
+                boxShadow: '0 5px 15px rgba(0,0,0,0.2)',
+                background: theme.palette.background.paper,
+              }}
+            >
+              <List component="div" disablePadding>
+                {items.map((item) => (
+                  <ListItem 
+                    key={item.title} 
+                    disablePadding 
+                    onMouseEnter={(e) => handleSubmenuEnter(e, item.submenu)}
+                  >
+                    <ListItemButton
+                      onClick={() => handleItemClick(item.path)}
+                      selected={isActive(item.path)}
+                      sx={{ 
+                        pl: 2.5, 
+                        pr: 1.5,
+                        minHeight: 40,
+                        m: 0.5,
+                        borderRadius: 1.5,
+                      }}
+                    >
+                      <ListItemIcon sx={{ minWidth: 32 }}>{item.icon}</ListItemIcon>
+                      <ListItemText primary={item.title} primaryTypographyProps={{ fontSize: '0.875rem' }} />
+                      {item.submenu && <ChevronRight sx={{ fontSize: '1.2rem', color: 'text.secondary' }} />}
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
+      {openSubmenu.anchor && (
+        <Submenu
+          items={openSubmenu.items}
+          parentEl={openSubmenu.anchor}
+          onClose={onClose}
+          level={level + 1}
+        />
+      )}
+    </>
+  );
+};
+
+
 const Sidebar = ({ onMobileClose }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
   const { t } = useTranslation();
-  const [openMenus, setOpenMenus] = useState({});
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [openMobileMenus, setOpenMobileMenus] = useState({});
+  const [openPopper, setOpenPopper] = useState({ anchor: null, items: [] });
   const theme = useTheme();
   const mode = theme.palette.mode;
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const sidebarRef = useRef(null);
 
   const handleClick = (path) => {
     navigate(path);
@@ -58,27 +157,30 @@ const Sidebar = ({ onMobileClose }) => {
     }
   };
 
-  const handleMenuToggle = (event, menu) => {
+  const handleMenuToggle = (event, item) => {
     if (isDesktop) {
-      setAnchorEl(anchorEl === event.currentTarget ? null : event.currentTarget);
-      setOpenMenus(prev => ({
-        ...prev,
-        [menu]: !prev[menu]
-      }));
+      if (item.submenu) {
+        setOpenPopper({ anchor: event.currentTarget, items: item.submenu });
+      } else {
+        handleClick(item.path);
+        handlePopperClose();
+      }
     } else {
-      setOpenMenus(prev => ({
-        ...prev,
-        [menu]: !prev[menu]
-      }));
+      // Lógica para mobile (Collapse)
+      if (item.submenu) {
+        setOpenMobileMenus(prev => ({ ...prev, [item.title]: !prev[item.title] }));
+      } else {
+        handleClick(item.path);
+      }
     }
   };
 
   const handlePopperClose = () => {
-    setAnchorEl(null);
-    setOpenMenus({}); // Close all open menus when popper is closed
+    setOpenPopper({ anchor: null, items: [] });
   };
 
   const isActive = (path) => {
+    if (!path) return false;
     return location.pathname === path || location.pathname.startsWith(path + '/');
   };
 
@@ -91,7 +193,7 @@ const Sidebar = ({ onMobileClose }) => {
     },
     {
       title: t('sidebar.fidelity_program'),
-      icon: <CheckinIcon />, // Usando CheckinIcon por enquanto, pode ser alterado
+      icon: <CheckinIcon />,
       path: '/fidelity',
       roles: ['admin', 'owner', 'manager'],
       submenu: [
@@ -327,166 +429,112 @@ const Sidebar = ({ onMobileClose }) => {
   );
 
   return (
-    <Box sx={{ 
-      overflow: 'auto', 
-      flexGrow: 1, 
-      px: 1,
-      '&::-webkit-scrollbar': {
-        width: '6px',
-      },
-      '&::-webkit-scrollbar-track': {
-        background: 'transparent',
-      },
-      '&::-webkit-scrollbar-thumb': {
-        background: mode === 'light' ? alpha(theme.palette.primary.main, 0.2) : alpha(theme.palette.primary.main, 0.3),
-        borderRadius: '10px',
-      },
-      '&::-webkit-scrollbar-thumb:hover': {
-        background: mode === 'light' ? alpha(theme.palette.primary.main, 0.3) : alpha(theme.palette.primary.main, 0.4),
-      },
-    }}>
-      <Box sx={{ 
-        p: 2, 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        mb: 1,
-      }}>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            fontWeight: 700, 
-            background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            letterSpacing: '0.5px',
-            textAlign: 'center',
-          }}
-        >
-          {t('sidebar.app_name')}
-        </Typography>
-      </Box>
-      <Divider sx={{ 
-        mb: 1,
-        borderColor: mode === 'light' ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.08)',
-      }} />
-      <List sx={{ pt: 1 }}>
-        {filteredMenuItems.map((item) => (
-          <React.Fragment key={item.title}>
-            <ListItem disablePadding sx={{ mb: 0.5, position: 'relative' }}>
-              <Tooltip title={item.title} placement="right" arrow enterDelay={500}>
-                <ListItemButton
-                  onClick={(event) => {
-                    if (item.submenu) {
-                      handleMenuToggle(event, item.title);
-                    } else {
-                      handleClick(item.path);
-                    }
-                  }}
-                  selected={!item.submenu && isActive(item.path)}
-                  sx={{
-                    minHeight: 48,
-                    borderRadius: 2,
-                    mx: 1,
-                    position: 'relative',
-                    transition: 'all 0.2s ease',
-                    '&.Mui-selected': {
-                      background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-                      color: mode === 'light' ? '#333' : 'white', // Ajuste de contraste
-                      boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
-                      transform: 'translateY(-1px)',
-                      '&:hover': {
-                        background: `linear-gradient(90deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
-                      },
-                      '& .MuiListItemIcon-root': {
-                        color: 'white',
-                      },
-                    },
-                    '&:hover': {
-                      backgroundColor: mode === 'light' ? alpha(theme.palette.primary.main, 0.08) : alpha(theme.palette.primary.main, 0.15),
+    <ClickAwayListener onClickAway={handlePopperClose}>
+      <Box 
+        ref={sidebarRef}
+        sx={{ 
+          overflow: 'auto', 
+          flexGrow: 1, 
+          px: 1,
+          '&::-webkit-scrollbar': { width: '6px' },
+          '&::-webkit-scrollbar-track': { background: 'transparent' },
+          '&::-webkit-scrollbar-thumb': {
+            background: mode === 'light' ? alpha(theme.palette.primary.main, 0.2) : alpha(theme.palette.primary.main, 0.3),
+            borderRadius: '10px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            background: mode === 'light' ? alpha(theme.palette.primary.main, 0.3) : alpha(theme.palette.primary.main, 0.4),
+          },
+        }}
+      >
+        <Box sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
+          <Typography 
+            variant="h6" 
+            sx={{ 
+              fontWeight: 700, 
+              background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              letterSpacing: '0.5px',
+              textAlign: 'center',
+            }}
+          >
+            {t('sidebar.app_name')}
+          </Typography>
+        </Box>
+        <Divider sx={{ mb: 1, borderColor: mode === 'light' ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.08)' }} />
+        
+        <List sx={{ pt: 1 }} onMouseLeave={isDesktop ? handlePopperClose : undefined}>
+          {filteredMenuItems.map((item) => (
+            <React.Fragment key={item.title}>
+              <ListItem disablePadding sx={{ mb: 0.5 }}>
+                <Tooltip title={item.title} placement="right" arrow enterDelay={500}>
+                  <ListItemButton
+                    onClick={(event) => handleMenuToggle(event, item)}
+                    onMouseEnter={(event) => isDesktop && item.submenu && handleMenuToggle(event, item)}
+                    selected={!item.submenu && isActive(item.path)}
+                    sx={{
+                      minHeight: 48,
                       borderRadius: 2,
-                      transform: 'translateX(4px)',
-                    },
-                    '&::before': isActive(item.path) && !item.submenu ? {
-                      content: '""',
-                      position: 'absolute',
-                      left: '-8px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      height: '60%',
-                      width: '4px',
-                      backgroundColor: theme.palette.primary.main,
-                      borderRadius: '0 4px 4px 0',
-                    } : {},
-                  }}
-                >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: 2,
-                    justifyContent: 'center',
-                    color: isActive(item.path) ? 'white' : 'text.secondary',
-                    transition: 'all 0.3s ease',
-                    transform: isActive(item.path) ? 'scale(1.1)' : 'scale(1)',
-                  }}
-                >
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText 
-                  primary={item.title}
-                  primaryTypographyProps={{
-                    fontSize: '0.875rem',
-                    fontWeight: isActive(item.path) ? 600 : 500,
-                    color: isActive(item.path) ? 'white' : 'text.primary',
-                    letterSpacing: isActive(item.path) ? '0.3px' : 'normal',
-                    transition: 'all 0.2s ease',
-                  }}
-                />
-                {item.submenu && (
-                  isDesktop ? (
-                    openMenus[item.title] ? 
-                      <ExpandLess sx={{ 
-                        color: isActive(item.path) ? 'white' : 'text.secondary',
-                        transition: 'transform 0.3s ease',
-                        transform: 'rotate(0deg)',
-                      }} /> : 
-                      <ChevronRight sx={{ 
-                        color: isActive(item.path) ? 'white' : 'text.secondary',
-                        transition: 'transform 0.3s ease',
-                        transform: 'rotate(0deg)',
-                      }} />
-                  ) : (
-                    openMenus[item.title] ? 
-                      <ExpandLess sx={{ 
-                        color: isActive(item.path) ? 'white' : 'text.secondary',
-                        transition: 'transform 0.3s ease',
-                        transform: 'rotate(0deg)',
-                      }} /> : 
-                      <ExpandMore sx={{ 
-                        color: isActive(item.path) ? 'white' : 'text.secondary',
-                        transition: 'transform 0.3s ease',
-                        transform: 'rotate(0deg)',
-                      }} />
-                  )
-                )}
-              </ListItemButton>
-              </Tooltip>
-            </ListItem>
-            
-            {item.submenu && (
-              isDesktop ? (
-                <SubmenuPopper
-                  item={item}
-                  openMenus={openMenus}
-                  anchorEl={anchorEl}
-                  handlePopperClose={handlePopperClose}
-                  handleClick={handleClick}
-                  isActive={isActive}
-                  theme={theme}
-                  mode={mode}
-                />
-              ) : (
-                <Collapse in={openMenus[item.title]} timeout="auto" unmountOnExit>
+                      mx: 1,
+                      transition: 'all 0.2s ease',
+                      '&.Mui-selected': {
+                        background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
+                        color: 'white',
+                        boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
+                        transform: 'translateY(-1px)',
+                        '&:hover': {
+                          background: `linear-gradient(90deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
+                        },
+                        '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+                          color: 'white',
+                        },
+                      },
+                      '&:hover': {
+                        backgroundColor: mode === 'light' ? alpha(theme.palette.primary.main, 0.08) : alpha(theme.palette.primary.main, 0.15),
+                        transform: 'translateX(4px)',
+                      },
+                      '&::before': isActive(item.path) && !item.submenu ? {
+                        content: '""',
+                        position: 'absolute',
+                        left: '-8px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        height: '60%',
+                        width: '4px',
+                        backgroundColor: theme.palette.primary.main,
+                        borderRadius: '0 4px 4px 0',
+                      } : {},
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: 2,
+                        justifyContent: 'center',
+                        color: isActive(item.path) && !item.submenu ? 'white' : 'text.secondary',
+                      }}
+                    >
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText 
+                      primary={item.title}
+                      primaryTypographyProps={{
+                        fontSize: '0.875rem',
+                        fontWeight: isActive(item.path) && !item.submenu ? 600 : 500,
+                      }}
+                    />
+                    {item.submenu && (
+                      isDesktop ? 
+                        <ChevronRight sx={{ color: 'text.secondary', transition: 'transform 0.3s ease' }} /> :
+                        (openMobileMenus[item.title] ? <ExpandLess /> : <ExpandMore />)
+                    )}
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+              
+              {!isDesktop && item.submenu && (
+                <Collapse in={openMobileMenus[item.title]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding sx={{ ml: 2, mt: 0.5 }}>
                     {item.submenu.map((subItem) => (
                       <ListItem key={subItem.title} disablePadding sx={{ mb: 0.5 }}>
@@ -494,64 +542,14 @@ const Sidebar = ({ onMobileClose }) => {
                           <ListItemButton
                             onClick={() => handleClick(subItem.path)}
                             selected={isActive(subItem.path)}
-                            sx={{
-                              pl: 3,
-                              minHeight: 40,
-                              borderRadius: 2,
-                              mx: 1,
-                              transition: 'all 0.2s ease',
-                              '&.Mui-selected': {
-                                background: `linear-gradient(90deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
-                                color: 'white',
-                                boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-                                transform: 'translateY(-1px)',
-                                '&:hover': {
-                                  background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                                },
-                                '& .MuiListItemIcon-root': {
-                                  color: 'white',
-                                },
-                              },
-                              '&:hover': {
-                                backgroundColor: mode === 'light' ? alpha(theme.palette.primary.main, 0.05) : alpha(theme.palette.primary.main, 0.1),
-                                borderRadius: 2,
-                                transform: 'translateX(4px)',
-                              },
-                              '&::before': isActive(subItem.path) ? {
-                                content: '""',
-                                position: 'absolute',
-                                left: '-4px',
-                                top: '50%',
-                                transform: 'translateY(-50%)',
-                                height: '40%',
-                                width: '3px',
-                                backgroundColor: theme.palette.primary.light,
-                                borderRadius: '0 4px 4px 0',
-                              } : {},
-                            }}
+                            sx={{ pl: 3, minHeight: 40, borderRadius: 2, mx: 1 }}
                           >
-                            <ListItemIcon
-                              sx={{
-                                minWidth: 0,
-                                mr: 2,
-                                justifyContent: 'center',
-                                color: isActive(subItem.path) ? 'white' : 'text.secondary',
-                                transition: 'all 0.3s ease',
-                                transform: isActive(subItem.path) ? 'scale(1.1)' : 'scale(1)',
-                                fontSize: '0.9rem',
-                              }}
-                            >
+                            <ListItemIcon sx={{ minWidth: 0, mr: 2, justifyContent: 'center' }}>
                               {subItem.icon}
                             </ListItemIcon>
                             <ListItemText 
                               primary={subItem.title}
-                              primaryTypographyProps={{
-                                fontSize: '0.8125rem',
-                                fontWeight: isActive(subItem.path) ? 600 : 500,
-                                color: isActive(subItem.path) ? 'white' : 'text.primary',
-                                letterSpacing: isActive(subItem.path) ? '0.2px' : 'normal',
-                                transition: 'all 0.2s ease',
-                              }}
+                              primaryTypographyProps={{ fontSize: '0.8125rem' }}
                             />
                           </ListItemButton>
                         </Tooltip>
@@ -559,119 +557,19 @@ const Sidebar = ({ onMobileClose }) => {
                     ))}
                   </List>
                 </Collapse>
-              )
-            )}
-          </React.Fragment>
-        ))}
-      </List>
-    </Box>
-  );
-};
-
-const SubmenuPopper = ({ item, openMenus, anchorEl, handlePopperClose, handleClick, isActive, theme, mode }) => {
-  const [position, setPosition] = useState({ top: 0, left: 0 });
-
-  useEffect(() => {
-    if (openMenus[item.title] && anchorEl) {
-      const rect = anchorEl.getBoundingClientRect();
-      setPosition({
-        top: rect.top,
-        left: rect.right, // Position to the right of the anchor
-      });
-    }
-  }, [openMenus, item.title, anchorEl]);
-
-  return (
-    <ClickAwayListener onClickAway={handlePopperClose}>
-      <Paper
-        sx={{
-          position: 'fixed',
-          top: position.top,
-          left: position.left,
-          minWidth: 200,
-          borderRadius: 2,
-          boxShadow: theme.shadows[3],
-          zIndex: 2000, // Ensure it's on top
-          opacity: openMenus[item.title] ? 1 : 0,
-          visibility: openMenus[item.title] ? 'visible' : 'hidden',
-          transition: 'opacity 0.3s ease, visibility 0.3s ease',
-        }}
-      >
-        <List component="div" disablePadding>
-          {item.submenu.map((subItem) => (
-            <ListItem key={subItem.title} disablePadding sx={{ mb: 0.5 }}>
-              <Tooltip title={subItem.title} placement="right" arrow enterDelay={500}>
-                <ListItemButton
-                  onClick={() => {
-                    handleClick(subItem.path);
-                    handlePopperClose(); // Close popper on subitem click
-                  }}
-                  selected={isActive(subItem.path)}
-                  sx={{
-                    pl: 3,
-                    minHeight: 40,
-                    borderRadius: 2,
-                    mx: 1,
-                    transition: 'all 0.2s ease',
-                    '&.Mui-selected': {
-                      background: `linear-gradient(90deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
-                      color: 'white',
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-                      transform: 'translateY(-1px)',
-                      '&:hover': {
-                        background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                      },
-                      '& .MuiListItemIcon-root': {
-                        color: 'white',
-                      },
-                    },
-                    '&:hover': {
-                      backgroundColor: mode === 'light' ? alpha(theme.palette.primary.main, 0.05) : alpha(theme.palette.primary.main, 0.1),
-                      borderRadius: 2,
-                      transform: 'translateX(4px)',
-                    },
-                    '&::before': isActive(subItem.path) ? {
-                      content: '""',
-                      position: 'absolute',
-                      left: '-4px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      height: '40%',
-                      width: '3px',
-                      backgroundColor: theme.palette.primary.light,
-                      borderRadius: '0 4px 4px 0',
-                    } : {},
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: 2,
-                      justifyContent: 'center',
-                      color: isActive(subItem.path) ? 'white' : 'text.secondary',
-                      transition: 'all 0.3s ease',
-                      transform: isActive(subItem.path) ? 'scale(1.1)' : 'scale(1)',
-                      fontSize: '0.9rem',
-                    }}
-                  >
-                    {subItem.icon}
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary={subItem.title}
-                    primaryTypographyProps={{
-                      fontSize: '0.8125rem',
-                      fontWeight: isActive(subItem.path) ? 600 : 500,
-                      color: isActive(subItem.path) ? 'white' : 'text.primary',
-                      letterSpacing: '0.2px',
-                      transition: 'all 0.2s ease',
-                    }}
-                  />
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
+              )}
+            </React.Fragment>
           ))}
         </List>
-      </Paper>
+        
+        {isDesktop && openPopper.anchor && (
+          <Submenu 
+            items={openPopper.items}
+            parentEl={openPopper.anchor}
+            onClose={handlePopperClose}
+          />
+        )}
+      </Box>
     </ClickAwayListener>
   );
 };

@@ -1,18 +1,242 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
-/app/node_modules/express/lib/router/route.js:216
-        throw new Error(msg);
+node:internal/modules/cjs/loader:1215
 
-^
-Error: Route.get() requires a callback function but got a [object Object]
-    at Route.<computed> [as get] (/app/node_modules/express/lib/router/route.js:216:15)
-    at proto.<computed> [as get] (/app/node_modules/express/lib/router/index.js:521:19)
-    at Object.<anonymous> (/app/backend/src/domains/auth/auth.routes.js:20:8)
+  throw err;
+  ^
+Error: Cannot find module '../middleware/authMiddleware'
+Require stack:
+- /app/backend/src/domains/feedback/feedback.routes.js
+- /app/backend/routes/index.js
+- /app/backend/server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1212:15)
+    at Module._load (node:internal/modules/cjs/loader:1043:27)
+    at Module.require (node:internal/modules/cjs/loader:1298:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/backend/src/domains/feedback/feedback.routes.js:2:44)
     at Module._compile (node:internal/modules/cjs/loader:1529:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
     at Module.load (node:internal/modules/cjs/loader:1275:32)
     at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/routes/index.js:1:20)
+    at Module.require (node:internal/modules/cjs/loader:1298:19) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/app/backend/src/domains/feedback/feedback.routes.js',
+    '/app/backend/routes/index.js',
+    '/app/backend/server.js'
+  ]
+}
 Node.js v20.19.4
+Dito pelo ChatGPT:
+
+Mestre, esse erro é clássico de path quebrado ou arquivo inexistente no Node.js.
+
+O log mostra:
+
+Error: Cannot find module '../middleware/authMiddleware'
+
+
+Ou seja, dentro do arquivo:
+
+/app/backend/src/domains/feedback/feedback.routes.js
+
+
+na linha 2, você provavelmente tem algo assim:
+
+const { protect } = require('../middleware/authMiddleware');
+
+Onde pode estar o problema:
+
+Arquivo não existe
+Verifique se você realmente tem um arquivo authMiddleware.js em:
+
+backend/src/middleware/authMiddleware.js
+
+
+Path incorreto
+Como feedback.routes.js está em:
+
+backend/src/domains/feedback/
+
+
+para sair para middleware, o caminho correto deve ser:
+
+const { protect } = require('../../middleware/authMiddleware');
+
+
+(dois pontos ../../, não um ../).
+
+Case sensitivity
+No Windows o path não diferencia maiúsculas/minúsculas, mas no Linux (e Docker) diferencia.
+Se seu arquivo chama AuthMiddleware.js, e você tenta importar authMiddleware.js, vai quebrar.
+➝ Ajuste para o mesmo case.
+
+Como corrigir rápido:
+
+Entre no container ou na pasta local e rode:
+
+ls backend/src/middleware/
+
+
+e veja se o arquivo está lá.
+
+Se estiver, ajuste o require em feedback.routes.js de:
+
+require('../middleware/authMiddleware')
+
+
+para:
+
+require('../../middleware/authMiddleware')
+
+
+Se não estiver, crie o arquivo authMiddleware.js com algo básico só para validar:
+
+const protect = (req, res, next) => {
+  console.log("Middleware protect chamado");
+  next();
+};
+
+module.exports = { protect };
+
+
+👉 Quer que eu te ajude a revisar a estrutura de pastas do backend e te dar o caminho exato que o require deveria ter?
+
+Dito por si:
+o problema que nao tem como eu entrar no container do backend porque toda vez ele da erro e cai e cria outro 
+Dito pelo ChatGPT:
+
+Boa, entendi mestre 👊 — isso é normal quando o container cai em loop porque o Node quebra na inicialização.
+Se você não consegue nem abrir um exec porque ele reinicia, temos alguns caminhos práticos:
+
+🔎 1. Corrigir antes de subir (mais fácil)
+
+Como o problema é no código, não no container em si, o ideal é ajustar o caminho no seu código local (no host), e depois dar build de novo no container.
+
+Exemplo:
+
+Vá no arquivo:
+
+backend/src/domains/feedback/feedback.routes.js
+
+
+Troque a linha:
+
+const { protect } = require('../middleware/authMiddleware');
+
+
+por:
+
+const { protect } = require('../../middleware/authMiddleware');
+
+
+Salve.
+
+Derrube os containers e suba de novo:
+
+docker compose down
+docker compose up --build
+
+🔎 2. Debug pelo docker run
+
+Se mesmo assim precisar inspecionar, dá pra rodar o container sem iniciar o Node:
+
+docker run -it --entrypoint /bin/sh nome-da-imagem-backend
+
+
+Aí você entra no shell sem o node backend/server.js rodar, e consegue:
+
+ls /app/backend/src/middleware
+
+
+Isso ajuda a confirmar se o arquivo realmente existe no build final.
+
+🔎 3. Logs mais limpos
+
+Se o container estiver em loop, rode:
+
+docker compose logs -f backend
+
+
+ou
+
+docker logs -f nome-do-container
+
+
+pra acompanhar os erros direto.
+
+💡 Mas pelo erro, tenho quase certeza: o ../ está errado, tem que ser ../../.
+Como você está dentro de src/domains/feedback/, precisa subir duas pastas pra chegar em src/middleware/.
+
+Quer que eu te monte um mapa da estrutura de pastas correta (com routes, domains, middleware, etc.) pra você só copiar e colar e nunca mais ter esse tipo de erro de path?
+
+Dito por si:
+const express = require('express');
+const { auth, checkRestaurantOwnership } = require('../middleware/authMiddleware');
+const { logUserAction } = require('../middleware/logUserActionMiddleware');
+const feedbackController = require('./feedback.controller');
+const {
+    createFeedbackValidation,
+    updateFeedbackValidation,
+    listFeedbacksValidation,
+    respondToFeedbackValidation
+} = require('./feedback.validation');
+
+const router = express.Router();
+
+router.use(auth);
+
+router.post('/', createFeedbackValidation, feedbackController.createFeedback);
+router.get('/restaurant/:restaurantId', checkRestaurantOwnership, listFeedbacksValidation, feedbackController.listFeedbacks);
+router.get('/:id', feedbackController.getFeedbackById);
+router.put('/:id', updateFeedbackValidation, logUserAction('update_feedback'), feedbackController.updateFeedback);
+router.delete('/:id', logUserAction('delete_feedback'), feedbackController.deleteFeedback);
+router.post('/:id/respond', respondToFeedbackValidation, logUserAction('respond_feedback'), feedbackController.respondToFeedback);
+
+module.exports = router;
+Dito pelo ChatGPT:
+
+Aí está o problema bem claro, mestre 🚨
+
+Esse feedback.routes.js está dentro de:
+
+backend/src/domains/feedback/
+
+
+E você está tentando importar assim:
+
+const { auth, checkRestaurantOwnership } = require('../middleware/authMiddleware');
+const { logUserAction } = require('../middleware/logUserActionMiddleware');
+
+
+Só que ../ sobe uma pasta só, então ele vai procurar em:
+
+backend/src/domains/middleware/
+
+
+👉 Mas seu middleware/ está em backend/src/middleware/.
+
+✅ Correção
+
+Tem que subir duas pastas (../../) pra sair de domains/feedback e chegar em src/:
+
+const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware');
+const { logUserAction } = require('../../middleware/logUserActionMiddleware');
+
+🛠 Dica extra (pra evitar isso sempre)
+
+Configure path alias no package.json ou no jsconfig.json/tsconfig.json:
+
+{
+  "compilerOptions": {
+    "baseUrl": "src"
+  }
+}
+
+
+Depois você importa assim:
+
+const { auth } = require('middleware/authMiddleware');
+
+
+Muito mais limpo e não quebra no Docker.

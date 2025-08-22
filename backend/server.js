@@ -1,3 +1,16 @@
+require('module-alias/register');
+const moduleAlias = require('module-alias');
+const path = require('path');
+
+moduleAlias.addAliases({
+  '~': path.resolve(__dirname, 'src'),
+  'middleware': path.resolve(__dirname, 'src/middleware'),
+  'config': path.resolve(__dirname, 'src/config'),
+  'domains': path.resolve(__dirname, 'src/domains'),
+  'services': path.resolve(__dirname, 'src/services'),
+  'utils': path.resolve(__dirname, 'src/utils')
+});
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');

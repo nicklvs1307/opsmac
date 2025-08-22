@@ -94,6 +94,7 @@ module.exports = (sequelize) => {
       allowNull: true,
       defaultValue: {},}
   }, {
+    sequelize,
     tableName: 'whatsapp_messages',
     timestamps: true,
     underscored: true,

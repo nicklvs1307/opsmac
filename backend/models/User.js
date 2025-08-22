@@ -195,6 +195,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
   }, {
+    sequelize,
     tableName: 'users',
     indexes: [
       {

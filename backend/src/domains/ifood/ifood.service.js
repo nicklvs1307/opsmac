@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('../../config/database');
 const { BadRequestError, ForbiddenError } = require('../../utils/errors');
 const { Op } = require('sequelize');
 

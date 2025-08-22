@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('../../config/database');
 const { BadRequestError, NotFoundError } = require('../../utils/errors');
 const restaurantService = require('../restaurant/restaurant.service'); // Existing restaurant service
 const settingsService = require('../settings/settings.service'); // Existing settings service

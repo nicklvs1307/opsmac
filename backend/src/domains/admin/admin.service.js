@@ -1,4 +1,4 @@
-const { models, sequelize } = require('../config/database');
+const { models, sequelize } = require('../../config/database');
 const { BadRequestError, NotFoundError } = require('../../utils/errors');
 const { generateUniqueSlug } = require('../../utils/slugGenerator');
 

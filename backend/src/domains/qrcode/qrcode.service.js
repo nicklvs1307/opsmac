@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('../../config/database');
 const QRCodeLib = require('qrcode'); // Renamed to avoid conflict with model name
 const { Op, fn, col } = require('sequelize');
 const { NotFoundError, BadRequestError } = require('../../utils/errors'); // Assuming these are needed

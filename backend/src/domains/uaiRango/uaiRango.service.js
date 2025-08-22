@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('../../config/database');
 const { BadRequestError, ForbiddenError, NotFoundError } = require('../../utils/errors');
 
 // Moved from backend/services/uaiRangoService.js

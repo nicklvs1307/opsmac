@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('../../config/database');
 const { NotFoundError } = require('../../utils/errors');
 
 exports.getDineInMenu = async (restaurantSlug, tableNumber) => {

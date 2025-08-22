@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('../../config/database');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('../../utils/errors');
 const { sendWhatsAppMessage } = require('../../services/integrations/whatsappApiClient');
 const { Op, fn, col, literal } = require('sequelize');

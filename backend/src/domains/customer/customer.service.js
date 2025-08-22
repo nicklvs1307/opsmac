@@ -1,4 +1,4 @@
-const { models, sequelize } = require('../config/database');
+const { models, sequelize } = require('../../config/database');
 const { Op, fn, col, literal } = require('sequelize');
 
 exports.getCustomerDashboardMetrics = async (restaurantId) => {

@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('../../config/database');
 const lodash = require('lodash');
 const crypto = require('crypto');
 const { NotFoundError } = require('../../utils/errors');

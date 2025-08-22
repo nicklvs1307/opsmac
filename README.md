@@ -65,3 +65,20 @@ Sistema completo de coleta e gestão de feedback de clientes para restaurantes.
 ## Licença
 
 MIT License
+
+
+4. Implantação em Produção (Docker Swarm/Portainer):
+
+   * Crucial: Antes de implantar, você DEVE criar os Docker Secrets em seu Docker Swarm.
+
+   1     echo "sua_senha_do_banco_de_producao" | docker secret create db_password -
+   2     echo "sua_chave_jwt_secreta_de_producao" | docker secret create jwt_secret -
+      Substitua sua_senha_do_banco_de_producao e sua_chave_jwt_secreta_de_producao pelos seus segredos
+  de produção reais.
+   * Certifique-se de que seu arquivo docker-compose.yml na VPS seja o atualizado.
+   * Se você tiver outras variáveis de ambiente não secretas para produção (por exemplo,
+     NODE_ENV=production, FRONTEND_URL=https://your-production-frontend.com), você pode:
+       * Defini-las diretamente no Portainer ao implantar a stack.
+       * Ou, criar um arquivo .env em sua VPS ao lado do `docker-compose.yml` com essas variáveis não
+         secretas específicas de produção.
+   * Implante sua stack usando Portainer ou docker stack deploy -c docker-compose.yml your_stack_name.

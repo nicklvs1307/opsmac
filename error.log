@@ -1,11 +1,11 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
-/app/backend/server.js:18
-const path = require('path');
-      ^
-SyntaxError: Identifier 'path' has already been declared
-    at wrapSafe (node:internal/modules/cjs/loader:1472:18)
-    at Module._compile (node:internal/modules/cjs/loader:1501:20)
+/app/backend/server.js:5
+  '~': path.resolve(__dirname, 'src'),
+       ^
+ReferenceError: Cannot access 'path' before initialization
+    at Object.<anonymous> (/app/backend/server.js:5:8)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
     at Module.load (node:internal/modules/cjs/loader:1275:32)
     at Module._load (node:internal/modules/cjs/loader:1096:12)

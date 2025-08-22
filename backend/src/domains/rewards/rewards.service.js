@@ -1,6 +1,6 @@
 const { models, Op, fn, col } = require('../../config/database');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('../../utils/errors');
-const { spinWheel } = require('../services/wheelService.js');
+const { spinWheel } = require('../../services/wheelService.js');
 
 // Helper function to get restaurant ID from authenticated user
 const getRestaurantIdFromUser = async (userId) => {

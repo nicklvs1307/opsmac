@@ -4,7 +4,7 @@ node:internal/modules/cjs/loader:1215
 
   throw err;
   ^
-Error: Cannot find module '../../src/services/wheelService.js'
+Error: Cannot find module '../services/wheelService.js'
 Require stack:
 - /app/backend/src/domains/rewards/rewards.service.js
 - /app/backend/models/Reward.js

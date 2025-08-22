@@ -4,11 +4,8 @@ node:internal/modules/cjs/loader:1215
 
   throw err;
   ^
-Error: Cannot find module '/app/backend/src/utils/whatsappService'
+Error: Cannot find module './core/dashboard'
 Require stack:
-- /app/backend/src/domains/feedback/feedback.service.js
-- /app/backend/src/domains/feedback/feedback.controller.js
-- /app/backend/src/domains/feedback/feedback.routes.js
 - /app/backend/routes/index.js
 - /app/backend/server.js
     at Module._resolveFilename (node:internal/modules/cjs/loader:1212:15)
@@ -16,18 +13,12 @@ Require stack:
     at Module._load (node:internal/modules/cjs/loader:1043:27)
     at Module.require (node:internal/modules/cjs/loader:1298:19)
     at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/src/domains/feedback/feedback.service.js:4:33)
+    at Object.<anonymous> (/app/backend/routes/index.js:3:25)
     at Module._compile (node:internal/modules/cjs/loader:1529:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
     at Module.load (node:internal/modules/cjs/loader:1275:32)
     at Module._load (node:internal/modules/cjs/loader:1096:12) {
   code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    '/app/backend/src/domains/feedback/feedback.service.js',
-    '/app/backend/src/domains/feedback/feedback.controller.js',
-    '/app/backend/src/domains/feedback/feedback.routes.js',
-    '/app/backend/routes/index.js',
-    '/app/backend/server.js'
-  ]
+  requireStack: [ '/app/backend/routes/index.js', '/app/backend/server.js' ]
 }
 Node.js v20.19.4

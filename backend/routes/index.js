@@ -1,6 +1,6 @@
 const authRoutes = require('~/domains/auth/auth.routes');
 const feedbackRoutes = require('~/domains/feedback/feedback.routes');
-const dashboardRoutes = require('./core/dashboard');
+const dashboardRoutes = require('~/domains/dashboard/dashboard.routes');
 const rewardsRoutes = require('~/domains/rewards/rewards.routes');
 const qrcodeRoutes = require('~/domains/qrcode/qrcode.routes');
 const whatsappRoutes = require('~/domains/whatsapp/whatsapp.routes');

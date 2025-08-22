@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth, authorize } = require('../../middleware/authMiddleware');
+const { auth, authorize } = require('../middleware/authMiddleware');
 const ingredientsController = require('./ingredients.controller');
 const {
     createIngredientValidation,

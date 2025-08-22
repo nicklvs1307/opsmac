@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth, checkRestaurantOwnership } = require('../../src/middleware/authMiddleware');
+const { auth, checkRestaurantOwnership } = require('../middleware/authMiddleware');
 const { logUserAction } = require('../middleware/logUserActionMiddleware');
 const whatsappController = require('./whatsapp.controller');
 const {

@@ -2,7 +2,7 @@ const express = require('express');
 const express = require('express');
 const { auth, authorize } = require('../../middleware/auth');
 const getRestaurantId = require('../../src/middleware/getRestaurantMiddleware');
-const { isOwnerOrManager } = require('../../src/middleware/ownerOrManagerAuthMiddleware');
+const { isOwnerOrManager } = require('../middleware/ownerOrManagerAuthMiddleware');
 const { isPdvUser } = require('../middleware/pdvUserAuthMiddleware');
 const restaurantController = require('./restaurant.controller');
 const {

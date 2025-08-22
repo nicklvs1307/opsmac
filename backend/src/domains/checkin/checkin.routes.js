@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware');
+const { auth, checkRestaurantOwnership } = require('../middleware/authMiddleware');
 const checkinController = require('./checkin.controller');
 const {
     recordCheckinValidation,

@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth, authorize } = require('../../middleware/authMiddleware');
+const { auth, authorize } = require('../middleware/authMiddleware');
 const ordersController = require('./orders.controller');
 const {
     updateOrderStatusValidation

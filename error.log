@@ -1,29 +1,18 @@
 > Feedeliza+@1.0.0 start
 > node backend/server.js
-node:internal/modules/cjs/loader:1215
+/app/node_modules/express/lib/router/route.js:216
+        throw new Error(msg);
 
-  throw err;
-  ^
-Error: Cannot find module '../middleware/authMiddleware'
-Require stack:
-- /app/backend/src/domains/feedback/feedback.routes.js
-- /app/backend/routes/index.js
-- /app/backend/server.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1212:15)
-    at Module._load (node:internal/modules/cjs/loader:1043:27)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/src/domains/feedback/feedback.routes.js:2:44)
+^
+Error: Route.get() requires a callback function but got a [object Object]
+    at Route.<computed> [as get] (/app/node_modules/express/lib/router/route.js:216:15)
+    at proto.<computed> [as get] (/app/node_modules/express/lib/router/index.js:521:19)
+    at Object.<anonymous> (/app/backend/src/domains/auth/auth.routes.js:20:8)
     at Module._compile (node:internal/modules/cjs/loader:1529:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
     at Module.load (node:internal/modules/cjs/loader:1275:32)
     at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    '/app/backend/src/domains/feedback/feedback.routes.js',
-    '/app/backend/routes/index.js',
-    '/app/backend/server.js'
-  ]
-}
+    at Module.require (node:internal/modules/cjs/loader:1298:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/backend/routes/index.js:1:20)
 Node.js v20.19.4

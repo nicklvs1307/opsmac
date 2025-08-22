@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth } = require('../../middleware/auth');
+const { auth } = require('../../middleware/authMiddleware');
 const cashRegisterController = require('./cashRegister.controller');
 const {
     openSessionValidation,

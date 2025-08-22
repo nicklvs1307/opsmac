@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth, ownerOrManagerAuth } = require('../../middleware/auth');
+const { auth, ownerOrManagerAuth } = require('../../middleware/authMiddleware');
 const addonsController = require('./addons.controller');
 const {
     addonValidation,

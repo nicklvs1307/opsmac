@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth, checkRestaurantOwnership } = require('../../middleware/auth');
+const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware');
 const upload = require('../middleware/uploadMiddleware');
 const settingsController = require('./settings.controller');
 const {

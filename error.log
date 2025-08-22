@@ -4,7 +4,7 @@ node:internal/modules/cjs/loader:1215
 
   throw err;
   ^
-Error: Cannot find module '../../middleware/auth'
+Error: Cannot find module '../middleware/authMiddleware'
 Require stack:
 - /app/backend/src/domains/auth/auth.routes.js
 - /app/backend/routes/index.js

@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 const { models } = require('../../config/database');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 const OAuth2 = google.auth.OAuth2;
 

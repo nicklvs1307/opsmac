@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('config/database');
 
 const checkRestaurantOwnership = async (req, res, next) => {
   try {

@@ -1,6 +1,6 @@
 const { models, sequelize } = require('../../config/database');
 const { Op } = require('sequelize');
-const { NotFoundError, BadRequestError } = require('../../utils/errors');
+const { NotFoundError, BadRequestError } = require('utils/errors');
 
 exports.listCoupons = async (restaurantId, page, limit, status, search) => {
   const offset = (page - 1) * limit;

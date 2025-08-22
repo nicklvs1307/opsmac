@@ -3,7 +3,7 @@ const publicSurveyController = require('./publicSurvey.controller');
 const {
     submitResponsesValidation,
     linkCustomerValidation
-} = require('./publicSurvey.validation');
+} = require('domains/publicSurvey/publicSurvey.validation');
 
 const router = express.Router();
 

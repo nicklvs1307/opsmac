@@ -1,4 +1,4 @@
-const { models } = require('../../config/database');
+const { models } = require('config/database');
 
 exports.getLabelUsers = async (restaurantId) => {
   const users = await models.User.findAll({

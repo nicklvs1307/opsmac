@@ -1,6 +1,6 @@
 const { models } = require('../../config/database');
 const { Op, fn, col, literal } = require('sequelize');
-const { BadRequestError, NotFoundError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError } = require('utils/errors');
 
 // from transactionService.js
 exports.createTransaction = async (restaurantId, userId, transactionData) => {

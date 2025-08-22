@@ -2,7 +2,7 @@ const { models } = require('../../config/database');
 const { Op } = require('sequelize');
 const { surveyTemplates } = require('../../utils/surveyTemplates');
 const { generateUniqueSlug } = require('../../utils/slugGenerator');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 exports.listSurveys = async (restaurant_id, search) => {
     const where = {

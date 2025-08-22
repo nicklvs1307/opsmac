@@ -3,7 +3,7 @@ const { auth, authorize } = require('../middleware/authMiddleware');
 const categoriesController = require('./categories.controller');
 const {
     categoryValidation
-} = require('./categories.validation');
+} = require('domains/categories/categories.validation');
 
 const router = express.Router();
 

@@ -7,7 +7,7 @@ const {
     updateUserValidation,
     createRestaurantValidation,
     updateRestaurantModulesValidation
-} = require('./admin.validation');
+} = require('domains/admin/admin.validation');
 
 const router = express.Router();
 

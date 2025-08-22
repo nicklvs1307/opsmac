@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { NotFoundError, BadRequestError } = require('../../utils/errors');
+const { NotFoundError, BadRequestError } = require('utils/errors');
 
 exports.submitFeedback = async (restaurant_id, customer_id, rating, comment, nps_score) => {
   if (customer_id) {

@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('config/database');
 
 const apiAuth = async (req, res, next) => {
   const apiToken = req.header('x-api-key');

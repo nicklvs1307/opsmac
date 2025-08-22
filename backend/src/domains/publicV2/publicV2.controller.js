@@ -1,6 +1,6 @@
 const publicV2Service = require('./publicV2.service');
 const { validationResult } = require('express-validator');
-const { BadRequestError } = require('../../utils/errors');
+const { BadRequestError } = require('utils/errors');
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);

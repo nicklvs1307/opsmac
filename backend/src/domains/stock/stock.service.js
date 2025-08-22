@@ -1,6 +1,6 @@
 const { models } = require('../../config/database');
 const { Op, fn, col } = require('sequelize');
-const { NotFoundError, BadRequestError } = require('../../utils/errors');
+const { NotFoundError, BadRequestError } = require('utils/errors');
 
 exports.getDashboardData = async (restaurantId) => {
   // Exemplo de dados do dashboard de estoque

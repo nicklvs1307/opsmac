@@ -1,7 +1,7 @@
 const { models } = require('../../config/database');
 const { Op } = require('sequelize');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../../utils/errors');
-const { sendWhatsAppMessage } = require('~/utils/whatsappService');
+const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
+const { sendWhatsAppMessage } = require('~/services/integrations/whatsappApiClient');
 
 const findOrCreateCustomer = async (feedbackData, restaurantId) => {
     const { customer_id, is_anonymous, customer_data, source } = feedbackData;

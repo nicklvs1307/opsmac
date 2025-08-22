@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { models } = require('../config/database');
+const { models } = require('config/database');
 
 const optionalAuth = async (req, res, next) => {
   try {

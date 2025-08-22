@@ -4,7 +4,7 @@ const ingredientsController = require('./ingredients.controller');
 const {
     createIngredientValidation,
     updateIngredientValidation
-} = require('./ingredients.validation');
+} = require('domains/ingredients/ingredients.validation');
 
 const router = express.Router();
 

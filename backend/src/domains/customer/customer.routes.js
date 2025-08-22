@@ -6,7 +6,7 @@ const {
   createCustomerValidation,
   publicRegisterCustomerValidation,
   byPhoneValidation
-} = require('./customer.validation');
+} = require('domains/customer/customer.validation');
 
 const router = express.Router();
 

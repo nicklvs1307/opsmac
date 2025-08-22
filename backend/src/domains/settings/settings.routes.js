@@ -8,7 +8,7 @@ const {
     testWhatsappMessageValidation,
     updateRestaurantProfileValidation,
     updateNpsCriteriaValidation
-} = require('./settings.validation');
+} = require('domains/settings/settings.validation');
 
 const router = express.Router();
 

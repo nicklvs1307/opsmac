@@ -3,7 +3,7 @@ const { auth, authorize } = require('../middleware/authMiddleware');
 const technicalSpecificationsController = require('./technicalSpecifications.controller');
 const {
     createUpdateTechnicalSpecificationValidation
-} = require('./technicalSpecifications.validation');
+} = require('domains/technicalSpecifications/technicalSpecifications.validation');
 
 const router = express.Router();
 

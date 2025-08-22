@@ -1,6 +1,6 @@
 const publicProductsService = require('./publicProducts.service');
 const { validationResult } = require('express-validator');
-const { NotFoundError } = require('../../utils/errors');
+const { NotFoundError } = require('utils/errors');
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);

@@ -3,7 +3,7 @@ const { auth } = require('../middleware/authMiddleware');
 const googleMyBusinessController = require('./googleMyBusiness.controller');
 const {
     replyToReviewValidation
-} = require('./googleMyBusiness.validation');
+} = require('domains/googleMyBusiness/googleMyBusiness.validation');
 
 const router = express.Router();
 

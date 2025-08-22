@@ -1,5 +1,5 @@
 const express = require('express');
-const uaiRangoController = require('./uaiRango.controller');
+const uaiRangoController = require('domains/uaiRango/uaiRango.controller');
 
 const router = express.Router();
 

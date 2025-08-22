@@ -5,7 +5,7 @@ const {
     openSessionValidation,
     recordMovementValidation,
     closeSessionValidation
-} = require('./cashRegister.validation');
+} = require('domains/cashRegister/cashRegister.validation');
 
 const router = express.Router();
 

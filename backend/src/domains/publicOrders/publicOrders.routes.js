@@ -2,7 +2,7 @@ const express = require('express');
 const publicOrdersController = require('./publicOrders.controller');
 const {
     createPublicOrderValidation
-} = require('./publicOrders.validation');
+} = require('domains/publicOrders/publicOrders.validation');
 
 const router = express.Router();
 

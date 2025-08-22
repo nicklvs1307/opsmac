@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { BadRequestError, ForbiddenError, NotFoundError } = require('../../utils/errors');
+const { BadRequestError, ForbiddenError, NotFoundError } = require('utils/errors');
 
 // Moved from backend/services/saiposService.js
 async function handleOrderCreated(orderData) {

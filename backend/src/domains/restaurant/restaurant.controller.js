@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 const restaurantService = require('./restaurant.service');
-const { BadRequestError } = require('../../utils/errors');
+const { BadRequestError } = require('utils/errors');
 
 // Helper para tratar erros de validação
 const handleValidationErrors = (req) => {

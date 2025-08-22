@@ -1,6 +1,6 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
-const rewardsService = require('../src/domains/rewards/rewards.service'); // Import the new service
+const rewardsService = require('~/domains/rewards/rewards.service'); // Import the new service
 
 module.exports = (sequelize) => {
   class Reward extends Model {

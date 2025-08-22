@@ -1,5 +1,5 @@
 const ifoodService = require('./ifood.service');
-const { BadRequestError } = require('../../utils/errors');
+const { BadRequestError } = require('utils/errors');
 
 exports.checkIfoodModuleEnabled = async (req, res, next) => {
   try {

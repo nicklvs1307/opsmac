@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { NotFoundError, BadRequestError } = require('../../utils/errors');
+const { NotFoundError, BadRequestError } = require('utils/errors');
 
 // --- Funções de Gerenciamento de Restaurante ---
 exports.getRestaurantById = async (restaurantId) => {

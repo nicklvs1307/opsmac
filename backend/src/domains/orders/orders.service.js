@@ -1,6 +1,6 @@
 const { models } = require('../../config/database');
 const { Op } = require('sequelize');
-const { NotFoundError, BadRequestError } = require('../../utils/errors');
+const { NotFoundError, BadRequestError } = require('utils/errors');
 
 exports.getAllOrders = async (restaurantId, status, platform, delivery_type, search) => {
   const whereClause = {

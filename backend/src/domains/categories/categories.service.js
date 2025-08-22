@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { BadRequestError, NotFoundError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError } = require('utils/errors');
 
 exports.createCategory = async (name, restaurantId) => {
   const category = await models.Category.create({ name, restaurant_id: restaurantId });

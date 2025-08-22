@@ -4,7 +4,7 @@ const addonsController = require('./addons.controller');
 const {
     addonValidation,
     updateAddonValidation
-} = require('./addons.validation');
+} = require('domains/addons/addons.validation');
 
 const router = express.Router();
 

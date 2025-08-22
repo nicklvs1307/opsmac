@@ -7,7 +7,7 @@ const {
     sendBulkFeedbackValidation,
     sendManualMessageValidation,
     listMessagesValidation
-} = require('./whatsapp.validation');
+} = require('domains/whatsapp/whatsapp.validation');
 
 const router = express.Router();
 

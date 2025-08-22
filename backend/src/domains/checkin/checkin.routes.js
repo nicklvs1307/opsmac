@@ -5,7 +5,7 @@ const {
     recordCheckinValidation,
     recordPublicCheckinValidation,
     analyticsValidation
-} = require('./checkin.validation');
+} = require('domains/checkin/checkin.validation');
 
 const router = express.Router();
 

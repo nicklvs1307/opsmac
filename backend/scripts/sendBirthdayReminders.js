@@ -1,5 +1,5 @@
 const { models, sequelize } = require('../config/database');
-const { sendWhatsAppMessage } = require('../src/services/integrations/whatsappApiClient');
+const { sendWhatsAppMessage } = require('~/services/integrations/whatsappApiClient');
 const { Op } = require('sequelize');
 
 async function sendBirthdayReminders() {

@@ -23,7 +23,7 @@ const {
   updateWaiterOrderValidation,
   createWaiterCallValidation,
   updateWaiterCallValidation,
-} = require('./restaurant.validation');
+} = require('domains/restaurant/restaurant.validation');
 
 
 // Rotas de Gerenciamento de Restaurante

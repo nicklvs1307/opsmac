@@ -1,5 +1,5 @@
 const saiposService = require('./saipos.service');
-const { BadRequestError } = require('../../utils/errors');
+const { BadRequestError } = require('utils/errors');
 
 exports.checkSaiposModuleEnabled = async (req, res, next) => {
   try {

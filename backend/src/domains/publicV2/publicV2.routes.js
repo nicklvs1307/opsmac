@@ -4,7 +4,7 @@ const publicV2Controller = require('./publicV2.controller');
 const {
     feedbackValidation,
     checkinValidation
-} = require('./publicV2.validation');
+} = require('domains/publicV2/publicV2.validation');
 
 const router = express.Router();
 

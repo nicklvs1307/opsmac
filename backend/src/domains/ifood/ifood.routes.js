@@ -1,5 +1,5 @@
 const express = require('express');
-const ifoodController = require('./ifood.controller');
+const ifoodController = require('domains/ifood/ifood.controller');
 
 const router = express.Router();
 

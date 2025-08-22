@@ -10,7 +10,7 @@ const {
     analyticsValidation,
     cloneQRCodeValidation,
     listQRCodesValidation
-} = require('./qrcode.validation');
+} = require('domains/qrcode/qrcode.validation');
 
 const router = express.Router();
 

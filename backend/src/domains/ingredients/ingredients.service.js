@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { BadRequestError, NotFoundError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError } = require('utils/errors');
 
 exports.createIngredient = async (name, unit_of_measure, cost_per_unit, restaurantId) => {
   const ingredient = await models.Ingredient.create({

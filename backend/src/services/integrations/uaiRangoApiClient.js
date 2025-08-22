@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { models } = require('../../config/database');
+const { models } = require('config/database');
 
 const UAI_RANGO_API_BASE_URL = 'https://api.uairango.com'; // Verifique a URL base correta da API do Uai Rango
 

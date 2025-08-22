@@ -7,7 +7,7 @@ const {
     updateFeedbackValidation,
     listFeedbacksValidation,
     respondToFeedbackValidation
-} = require('./feedback.validation');
+} = require('domains/feedback/feedback.validation');
 
 const router = express.Router();
 

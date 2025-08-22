@@ -1,5 +1,5 @@
 const deliveryMuchService = require('./deliveryMuch.service');
-const { BadRequestError, ForbiddenError } = require('../../utils/errors');
+const { BadRequestError, ForbiddenError } = require('utils/errors');
 
 exports.checkDeliveryMuchModuleEnabled = async (req, res, next) => {
   try {

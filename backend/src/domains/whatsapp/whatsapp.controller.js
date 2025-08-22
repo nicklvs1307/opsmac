@@ -1,7 +1,7 @@
 const whatsappService = require('./whatsapp.service');
 const { validationResult } = require('express-validator');
 const { BadRequestError, ForbiddenError } = require('../../utils/errors');
-const { getRestaurantIdFromUser } = require('../../services/restaurantAuthService');
+const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);

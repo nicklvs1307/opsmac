@@ -1,4 +1,4 @@
-const { BadRequestError } = require('../utils/errors');
+const { BadRequestError } = require('utils/errors');
 
 /**
  * Middleware para obter o ID do restaurante a partir do usuário autenticado.

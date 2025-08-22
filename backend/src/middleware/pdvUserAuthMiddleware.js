@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('config/database');
 
 const isPdvUser = async (req, res, next) => {
     try {

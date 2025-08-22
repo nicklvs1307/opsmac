@@ -1,6 +1,6 @@
 const { models } = require('../../config/database');
 const { Op } = require('sequelize');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 exports.getNextSurvey = async (restaurantSlug, customerId) => {
   const restaurant = await models.Restaurant.findOne({

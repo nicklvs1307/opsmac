@@ -1,4 +1,4 @@
-const { BaseError } = require('../utils/errors');
+const { BaseError } = require('utils/errors');
 
 /**
  * Middleware de tratamento de erros centralizado.

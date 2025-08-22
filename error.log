@@ -4,7 +4,7 @@ node:internal/modules/cjs/loader:1215
 
   throw err;
   ^
-Error: Cannot find module '../../utils/whatsappService'
+Error: Cannot find module '/app/backend/src/utils/whatsappService'
 Require stack:
 - /app/backend/src/domains/feedback/feedback.service.js
 - /app/backend/src/domains/feedback/feedback.controller.js

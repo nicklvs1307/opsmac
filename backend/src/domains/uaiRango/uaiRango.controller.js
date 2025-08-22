@@ -1,5 +1,5 @@
 const uaiRangoService = require('./uaiRango.service');
-const { BadRequestError } = require('../../utils/errors');
+const { BadRequestError } = require('utils/errors');
 
 exports.checkUaiRangoModuleEnabled = async (req, res, next) => {
   try {

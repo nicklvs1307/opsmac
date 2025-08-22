@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 exports.createTechnicalSpecification = async (product_id, recipe_ingredients, restaurantId) => {
   const product = await models.Product.findOne({

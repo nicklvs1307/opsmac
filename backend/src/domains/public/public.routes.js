@@ -4,7 +4,7 @@ const publicController = require('./public.controller');
 const {
     submitPublicFeedbackValidation,
     registerPublicCheckinValidation
-} = require('./public.validation');
+} = require('domains/public/public.validation');
 
 const router = express.Router();
 

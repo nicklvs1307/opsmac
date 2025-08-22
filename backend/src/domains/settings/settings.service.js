@@ -2,7 +2,7 @@ const { models } = require('../../config/database');
 const lodash = require('lodash');
 const crypto = require('crypto');
 const { NotFoundError } = require('../../utils/errors');
-const { sendWhatsAppMessage } = require('../services/integrations/whatsappApiClient'); // Assuming this is the correct path
+const { sendWhatsAppMessage } = require('services/integrations/whatsappApiClient'); // Assuming this is the correct path
 
 // Helper function to get restaurant ID from authenticated user
 const getRestaurantIdFromUser = async (userId) => {

@@ -8,7 +8,8 @@ moduleAlias.addAliases({
   'config': path.resolve(__dirname, 'src/config'),
   'domains': path.resolve(__dirname, 'src/domains'),
   'services': path.resolve(__dirname, 'src/services'),
-  'utils': path.resolve(__dirname, 'src/utils')
+  'utils': path.resolve(__dirname, 'src/utils'),
+  'models': path.resolve(__dirname, 'models')
 });
 
 const express = require('express');
@@ -53,7 +54,7 @@ allRoutes.forEach(route => {
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('../config/swagger');
+const swaggerDocument = require('~/config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Rota 404 - Deve vir antes do tratador de erros

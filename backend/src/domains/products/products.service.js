@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { NotFoundError } = require('../../utils/errors');
+const { NotFoundError } = require('utils/errors');
 
 // Consolidating all product-related services into one file.
 

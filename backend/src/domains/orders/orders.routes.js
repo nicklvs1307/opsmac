@@ -3,7 +3,7 @@ const { auth, authorize } = require('../middleware/authMiddleware');
 const ordersController = require('./orders.controller');
 const {
     updateOrderStatusValidation
-} = require('./orders.validation');
+} = require('domains/orders/orders.validation');
 
 const router = express.Router();
 

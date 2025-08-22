@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { BadRequestError, NotFoundError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError } = require('utils/errors');
 
 exports.openSession = async (restaurantId, userId, opening_cash, opening_observations) => {
   const existingOpenSession = await models.CashRegisterSession.findOne({

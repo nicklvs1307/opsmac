@@ -1,4 +1,4 @@
-const healthService = require('./health.service');
+const healthService = require('domains/health/health.service');
 
 exports.getHealthStatus = (req, res, next) => {
   try {

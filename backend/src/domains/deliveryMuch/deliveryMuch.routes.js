@@ -1,5 +1,5 @@
 const express = require('express');
-const deliveryMuchController = require('./deliveryMuch.controller');
+const deliveryMuchController = require('domains/deliveryMuch/deliveryMuch.controller');
 
 const router = express.Router();
 

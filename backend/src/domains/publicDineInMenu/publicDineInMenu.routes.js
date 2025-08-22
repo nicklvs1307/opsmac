@@ -1,5 +1,5 @@
 const express = require('express');
-const publicDineInMenuController = require('./publicDineInMenu.controller');
+const publicDineInMenuController = require('domains/publicDineInMenu/publicDineInMenu.controller');
 
 const router = express.Router();
 

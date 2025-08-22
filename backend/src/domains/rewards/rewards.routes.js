@@ -5,7 +5,7 @@ const {
     createRewardValidation,
     updateRewardValidation,
     spinWheelValidation
-} = require('./rewards.validation');
+} = require('domains/rewards/rewards.validation');
 
 const router = express.Router();
 

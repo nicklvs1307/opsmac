@@ -1,6 +1,6 @@
 const { models, sequelize } = require('../../config/database');
 const { BadRequestError, NotFoundError } = require('../../utils/errors');
-const { generateUniqueSlug } = require('../../utils/slugGenerator');
+const { generateUniqueSlug } = require('utils/slugGenerator');
 
 // User Management
 exports.createUser = async (userData) => {

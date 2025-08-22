@@ -1,6 +1,6 @@
 const express = require('express');
 const { authorize } = require('../../middleware/auth');
-const supplierController = require('./supplier.controller');
+const supplierController = require('domains/supplier/supplier.controller');
 
 const router = express.Router();
 

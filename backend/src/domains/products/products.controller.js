@@ -1,7 +1,7 @@
 const productsService = require('./products.service');
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('../../utils/errors');
-const { getRestaurantIdFromUser } = require('../../services/restaurantAuthService');
+const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);

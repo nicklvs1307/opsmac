@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { NotFoundError, BadRequestError } = require('../../utils/errors');
+const { NotFoundError, BadRequestError } = require('utils/errors');
 
 const generateQrCodeUrl = (restaurantSlug, tableNumber) => {
   const frontendBaseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';

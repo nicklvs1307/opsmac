@@ -6,7 +6,7 @@ const {
     reportValidation,
     createPaymentMethodValidation,
     updatePaymentMethodValidation
-} = require('./financial.validation');
+} = require('domains/financial/financial.validation');
 
 const router = express.Router();
 

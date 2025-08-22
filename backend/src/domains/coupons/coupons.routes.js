@@ -7,7 +7,7 @@ const {
     createCouponValidation,
     validateCouponValidation,
     publicValidateCouponValidation
-} = require('./coupons.validation');
+} = require('domains/coupons/coupons.validation');
 
 const router = express.Router();
 

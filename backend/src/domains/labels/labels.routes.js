@@ -3,7 +3,7 @@ const { auth } = require('../middleware/authMiddleware');
 const labelsController = require('./labels.controller');
 const {
     printLabelValidation
-} = require('./labels.validation');
+} = require('domains/labels/labels.validation');
 
 const router = express.Router();
 

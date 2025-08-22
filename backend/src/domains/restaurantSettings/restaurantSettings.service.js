@@ -1,7 +1,7 @@
 const { models } = require('../../config/database');
 const { BadRequestError, NotFoundError } = require('../../utils/errors');
 const restaurantService = require('../restaurant/restaurant.service'); // Existing restaurant service
-const settingsService = require('../settings/settings.service'); // Existing settings service
+const settingsService = require('domains/settings/settings.service'); // Existing settings service
 
 // Proxies to existing services
 exports.getRestaurantById = restaurantService.getRestaurantById;

@@ -1,5 +1,5 @@
 const express = require('express');
-const saiposController = require('./saipos.controller');
+const saiposController = require('domains/saipos/saipos.controller');
 
 const router = express.Router();
 

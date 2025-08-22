@@ -1,5 +1,5 @@
 const { models, Op, fn, col, literal } = require('../../config/database');
-const { BadRequestError, NotFoundError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError } = require('utils/errors');
 
 // Helper function to get restaurant ID from authenticated user
 const getRestaurantIdFromUser = async (userId) => {

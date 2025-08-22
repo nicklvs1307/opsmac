@@ -3,7 +3,7 @@ const { auth } = require('../middleware/authMiddleware');
 const npsCriteriaController = require('./npsCriteria.controller');
 const {
     npsCriterionValidation
-} = require('./npsCriteria.validation');
+} = require('domains/npsCriteria/npsCriteria.validation');
 
 const router = express.Router();
 

@@ -54,7 +54,7 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-const { checkRestaurantOwnership } = require('./checkRestaurantOwnershipMiddleware');
+const { checkRestaurantOwnership } = require('middleware/checkRestaurantOwnershipMiddleware');
 
 module.exports = {
   auth: authMiddleware,

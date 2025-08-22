@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 exports.listNpsCriteria = async (restaurantId) => {
   const criteria = await models.NpsCriterion.findAll({

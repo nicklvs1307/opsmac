@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { BadRequestError, NotFoundError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError } = require('utils/errors');
 
 exports.listAddons = async (restaurantId) => {
   const addons = await models.Addon.findAll({ where: { restaurant_id: restaurantId } });

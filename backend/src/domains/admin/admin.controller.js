@@ -1,6 +1,6 @@
 const adminService = require('./admin.service');
 const { validationResult } = require('express-validator');
-const { BadRequestError } = require('../../utils/errors');
+const { BadRequestError } = require('utils/errors');
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);

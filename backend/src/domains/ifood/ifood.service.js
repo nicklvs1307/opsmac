@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { BadRequestError, ForbiddenError } = require('../../utils/errors');
+const { BadRequestError, ForbiddenError } = require('utils/errors');
 const { Op } = require('sequelize');
 
 // Moved from backend/services/ifoodService.js

@@ -1,7 +1,7 @@
 const { models } = require('../../config/database');
 const QRCodeLib = require('qrcode'); // Renamed to avoid conflict with model name
 const { Op, fn, col } = require('sequelize');
-const { NotFoundError, BadRequestError } = require('../../utils/errors'); // Assuming these are needed
+const { NotFoundError, BadRequestError } = require('utils/errors'); // Assuming these are needed
 
 exports.generateQRCodeImage = async (qrCode, size, format) => {
   const qrCodeUrl = qrCode.feedback_url; // Ou a URL que o QR Code deve apontar

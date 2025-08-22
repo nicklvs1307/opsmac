@@ -1,5 +1,5 @@
 const express = require('express');
-const publicProductsController = require('./publicProducts.controller');
+const publicProductsController = require('domains/publicProducts/publicProducts.controller');
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
-const qrcodeService = require('../src/domains/qrcode/qrcode.service'); // Import the new service
+const qrcodeService = require('~/domains/qrcode/qrcode.service'); // Import the new service
 
 module.exports = (sequelize) => {
   class QRCode extends Model {

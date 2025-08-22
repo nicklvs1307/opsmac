@@ -4,7 +4,7 @@ const {
     getDashboardOverviewValidation,
     getDashboardAnalyticsValidation,
     generateReportValidation
-} = require('./dashboard.validation');
+} = require('domains/dashboard/dashboard.validation');
 
 const router = express.Router();
 

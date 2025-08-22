@@ -1,5 +1,5 @@
 const { models } = require('../../config/database');
-const { NotFoundError } = require('../../utils/errors');
+const { NotFoundError } = require('utils/errors');
 
 exports.getDineInMenu = async (restaurantSlug, tableNumber) => {
   const restaurant = await models.Restaurant.findOne({

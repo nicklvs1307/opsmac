@@ -1,4 +1,4 @@
-const { sequelize, models } = require('../src/config/database');
+const { sequelize, models } = require('~/config/database');
 
 const updateAllCustomerSegments = async () => {
   try {

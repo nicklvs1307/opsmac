@@ -19,7 +19,7 @@ const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const { sequelize } = require('./src/config/database');
-const { BaseError } = require('./src/utils/errors');
+const { BaseError } = require('utils/errors');
 
 // Importação de Rotas
 const allRoutes = require('./routes'); // Import the consolidated routes

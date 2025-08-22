@@ -1,3 +1,5 @@
+
+
 📜 Script Detalhado para Criar Pesquisa com NPS + Critérios
 1. Definir Objetivo da Pesquisa
 

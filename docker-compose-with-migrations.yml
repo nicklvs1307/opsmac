@@ -1,38 +1,45 @@
 version: '3.8'
 
+# Este arquivo foi modificado para usar Docker Secrets e para corrigir o comando de migração.
+# Lembre-se que você precisa criar os secrets no seu Docker Swarm manualmente.
+# Exemplo de comandos para criar os secrets:
+# echo "sua_senha_do_banco" | docker secret create db_password -
+# echo "sua_chave_jwt_super_secreta" | docker secret create jwt_secret -
+
 services:
-  # NOVO SERVIÇO PARA MIGRAÇÕES
   migrations:
     build:
       context: /root/opsmac
       dockerfile: Dockerfile.backend
-    image: feedeliza-backend:latest # Usará a mesma imagem do backend
+    image: feedeliza-backend:latest
     depends_on:
-      # Garante que o banco de dados esteja pronto antes de rodar as migrações
-      # Assumindo que seu serviço de DB se chama 'postgres' na rede do Swarm
-      - postgres 
+      - postgres
     environment:
-      # Variáveis de ambiente para a conexão com o banco de dados
       - DB_HOST=postgres
       - DB_PORT=5432
       - DB_NAME=feedeliza
       - DB_USER=postgres
-      - DB_PASSWORD=b74996144735db08d6e091f460df4184
-      # Certifique-se de que todas as variáveis de ambiente necessárias para a conexão com o DB estejam aqui
-    command: ["/bin/sh", "-c", "npx sequelize-cli db:migrate"] # O comando para rodar as migrações
+      # A senha agora é lida do secret e injetada como um arquivo em /run/secrets/
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+    command: >
+      /bin/sh -c "
+        echo 'Waiting for database to be ready...'
+        sleep 15
+        echo 'Running migrations...'
+        npx sequelize-cli db:migrate --config config/config.js --migrations-path migrations --models-path backend/models &&
+        echo 'Running seeders...'
+        npx sequelize-cli db:seed:all --config config/config.js --seeders-path seeders
+      "
     networks:
       - towersfy_network
     volumes:
-      - /root/opsmac:/app # Mapeie o volume para que o config/config.js e as migrações sejam acessíveis
+      - /root/opsmac:/app
+    secrets:
+      - db_password
     deploy:
-      # Configurações de deploy para o Swarm
       replicas: 1
       restart_policy:
-        condition: on-failure # Tenta reiniciar se a migração falhar
-      labels:
-        # Adicione labels se precisar de roteamento Traefik para este serviço (geralmente não é necessário para migrações)
-        # - "traefik.enable=false" # Exemplo para desabilitar Traefik para este serviço
-        - "com.docker.swarm.service.name=feedeliza_migrations" # Nome do serviço no Swarm
+        condition: on-failure
 
   backend:
     build:
@@ -42,20 +49,16 @@ services:
     environment:
       - NODE_ENV=production
       - FRONTEND_URL=https://feedelizapro.towersfy.com
-
-      # Conexão com banco de dados (ORMs modernos preferem essas separadas)
-      - DB_HOST=postgres # Continua usando o nome do serviço do DB
+      - DB_HOST=postgres
       - DB_PORT=5432
       - DB_NAME=feedeliza
       - DB_USER=postgres
-      - DB_PASSWORD=b74996144735db08d6e091f460df4184
-
-      # URL padrão para fallback (alguns ORMs preferem a URL direta)
-      - DATABASE_URL=postgresql://postgres:b74996144735db08d6e091f460df4184@postgres:5432/feedeliza
-
-      # Segurança
-      - JWT_SECRET=bJ0c8J5UXhGVsI3zbqMnOAQsCGk8BNBG
-
+      # A senha e o JWT secret agora são lidos de secrets
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+      - JWT_SECRET_FILE=/run/secrets/jwt_secret
+    secrets:
+      - db_password
+      - jwt_secret
     deploy:
       replicas: 1
       restart_policy:
@@ -70,14 +73,13 @@ services:
         - "traefik.http.routers.backend-uploads.entrypoints=websecure"
         - "traefik.http.routers.backend-uploads.tls.certresolver=letsencryptresolver"
         - "traefik.http.routers.backend-uploads.priority=100"
-
     networks:
       - towersfy_network
     volumes:
-      - /root/opsmac:/app # Mapeie o volume para que o código da aplicação seja acessível
+      - /root/opsmac:/app
       - uploads_data:/app/backend/public/uploads
     depends_on:
-      - migrations # Adicionado: Garante que as migrações rodem antes do backend
+      - migrations
 
   frontend:
     build:
@@ -101,7 +103,14 @@ services:
 
 networks:
   towersfy_network:
-    external: true # Usando a rede existente do Traefik
+    external: true
 
 volumes:
   uploads_data:
+
+# Declaração dos secrets que serão usados. O Docker espera que eles já existam no Swarm.
+secrets:
+  db_password:
+    external: true
+  jwt_secret:
+    external: true

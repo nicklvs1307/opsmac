@@ -6,18 +6,18 @@ module.exports = (sequelize) => {
     static associate(models) {
       ProductionRecordItem.belongsTo(models.ProductionRecord, {
         foreignKey: 'production_record_id',
-        as: 'productionRecord'
+        as: 'productionRecord',
       });
       // Polymorphic association to Product or Ingredient
       ProductionRecordItem.belongsTo(models.Product, {
         foreignKey: 'stockable_id',
         constraints: false,
-        as: 'product'
+        as: 'product',
       });
       ProductionRecordItem.belongsTo(models.Ingredient, {
         foreignKey: 'stockable_id',
         constraints: false,
-        as: 'ingredient'
+        as: 'ingredient',
       });
     }
 
@@ -33,42 +33,43 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     production_record_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'production_records',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     stockable_id: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
     },
     stockable_type: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     quantity: {
-      type: DataTypes.DECIMAL(10, 3), // Using decimal for precision
-      allowNull: false
+      type: DataTypes.DECIMAL(10, 3),
+      allowNull: false,
     },
     type: {
       type: DataTypes.ENUM('input', 'output'),
-      allowNull: false
-    }
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'ProductionRecordItem',
     tableName: 'production_record_items',
     timestamps: true,
+    underscored: true,
     indexes: [
-        {
-          fields: ['production_record_id', 'stockable_id', 'stockable_type']
-        }
-    ]
+      {
+        fields: ['production_record_id', 'stockable_id', 'stockable_type'],
+      },
+    ],
   });
 
   return ProductionRecordItem;

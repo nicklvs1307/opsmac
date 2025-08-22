@@ -6,11 +6,11 @@ module.exports = (sequelize) => {
     static associate(models) {
       RecipeIngredient.belongsTo(models.TechnicalSpecification, {
         foreignKey: 'technical_specification_id',
-        as: 'technicalSpecification'
+        as: 'technicalSpecification',
       });
       RecipeIngredient.belongsTo(models.Ingredient, {
         foreignKey: 'ingredient_id',
-        as: 'ingredient'
+        as: 'ingredient',
       });
     }
   }
@@ -18,41 +18,42 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     technical_specification_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'technical_specifications',
-        key: 'id'
+        key: 'id',
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
     },
     ingredient_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'ingredients',
-        key: 'id'
+        key: 'id',
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
     },
     quantity: {
       type: DataTypes.DECIMAL(10, 4),
       allowNull: false,
       validate: {
         isDecimal: { msg: 'Quantidade deve ser um número decimal' },
-        min: { args: [0], msg: 'Quantidade não pode ser negativa' }
-      }
-    }
+        min: { args: [0], msg: 'Quantidade não pode ser negativa' },
+      },
+    },
   }, {
     sequelize,
     modelName: 'RecipeIngredient',
     tableName: 'recipe_ingredients',
-    timestamps: true
+    timestamps: true,
+    underscored: true,
   });
   return RecipeIngredient;
 };

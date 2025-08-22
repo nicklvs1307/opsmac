@@ -1,44 +1,92 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Box, Typography, Paper, Tabs, Tab, Button,
+  Box, Typography, Paper, Tabs, Tab
 } from '@mui/material';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
+
+// API Services
+import { 
+  fetchUsers as apiFetchUsers, 
+  fetchRestaurants as apiFetchRestaurants, 
+  saveUser, 
+  saveRestaurant, 
+  getAllModules, 
+  getRestaurantModules, 
+  saveRestaurantModules 
+} from '../../api/adminService';
+
+// Components
 import UserModal from '../../components/Admin/UserModal';
 import RestaurantModal from '../../components/Admin/RestaurantModal';
 import ModuleSettingsModal from '../../components/Admin/ModuleSettingsModal';
 import UserTable from '../../components/Admin/UserTable';
 import RestaurantTable from '../../components/Admin/RestaurantTable';
-import { saveUser, saveRestaurant, saveRestaurantModules } from '../../api/adminService';
-import useAdminData from '../../hooks/useAdminData';
+
+// Hooks
 import useModal from '../../hooks/useModal';
 
 const AdminDashboard = () => {
   const { t } = useTranslation();
   const [tabValue, setTabValue] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-  const { users, restaurants, loading, setLoading, fetchUsers, fetchRestaurants } = useAdminData();
+  // Data State
+  const [users, setUsers] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
+  const [allModules, setAllModules] = useState([]);
 
-  // Estados dos Modais
+  // Modal State
   const { isOpen: isUserModalOpen, editingItem: editingUser, handleOpen: handleOpenUserModal, handleClose: handleCloseUserModal } = useModal();
   const { isOpen: isRestaurantModalOpen, editingItem: editingRestaurant, handleOpen: handleOpenRestaurantModal, handleClose: handleCloseRestaurantModal } = useModal();
   const { isOpen: isModuleModalOpen, editingItem: editingModuleRestaurant, handleOpen: handleOpenModuleModal, handleClose: handleCloseModuleModal } = useModal();
+  
+  const [selectedModuleIds, setSelectedModuleIds] = useState([]);
 
-  const [selectedModules, setSelectedModules] = useState([]);
+  // --- Data Fetching ---
+  const fetchUsers = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await apiFetchUsers();
+      setUsers(data);
+    } catch (error) {
+      toast.error(t('admin_dashboard.fetch_users_error'));
+    } finally {
+      setLoading(false);
+    }
+  }, [t]);
 
-  const availableModules = [
-    'customer_segmentation', 'ifood_integration', 'google_my_business_integration',
-    'saipos_integration', 'uai_rango_integration', 'delivery_much_integration',
-    'checkin_program', 'surveys_feedback', 'coupons_rewards', 'whatsapp_messaging'
-  ];
+  const fetchRestaurants = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await apiFetchRestaurants();
+      setRestaurants(data);
+    } catch (error) {
+      toast.error(t('admin_dashboard.fetch_restaurants_error'));
+    } finally {
+      setLoading(false);
+    }
+  }, [t]);
 
   useEffect(() => {
     if (tabValue === 0) fetchUsers();
     if (tabValue === 1) fetchRestaurants();
   }, [tabValue, fetchUsers, fetchRestaurants]);
 
-  // Funções de Ação (CRUD)
+  useEffect(() => {
+    const fetchAllModules = async () => {
+      try {
+        const response = await getAllModules();
+        setAllModules(response.data);
+      } catch (error) {
+        toast.error(t('admin_dashboard.fetch_modules_error'));
+      }
+    };
+    fetchAllModules();
+  }, [t]);
+
+  // --- Modal and Form Handlers ---
+
   const handleTabChange = (event, newValue) => setTabValue(newValue);
 
   const onUserSubmit = async (data) => {
@@ -69,12 +117,27 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleOpenModuleEditor = async (restaurant) => {
+    handleOpenModuleModal(restaurant); // Abre o modal e define o restaurante em edição
+    try {
+      setLoading(true);
+      const response = await getRestaurantModules(restaurant.id);
+      const currentModuleIds = response.data.map(module => module.id);
+      setSelectedModuleIds(currentModuleIds);
+    } catch (error) {
+      toast.error(t('admin_dashboard.fetch_restaurant_modules_error'));
+      handleCloseModuleModal(); // Fecha o modal se houver erro
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSaveModules = async () => {
+    if (!editingModuleRestaurant) return;
     setLoading(true);
     try {
-      await saveRestaurantModules(editingModuleRestaurant.id, selectedModules);
+      await saveRestaurantModules(editingModuleRestaurant.id, selectedModuleIds);
       toast.success(t('admin_dashboard.modules_updated_success'));
-      fetchRestaurants();
       handleCloseModuleModal();
     } catch (error) {
       toast.error(t('admin_dashboard.modules_updated_error'));
@@ -106,7 +169,7 @@ const AdminDashboard = () => {
           restaurants={restaurants}
           loading={loading}
           handleOpenRestaurantModal={handleOpenRestaurantModal}
-          handleOpenModuleModal={handleOpenModuleModal}
+          handleOpenModuleModal={handleOpenModuleEditor} // Passa a nova função
         />
       )}
 
@@ -122,18 +185,20 @@ const AdminDashboard = () => {
         onClose={handleCloseRestaurantModal}
         editingRestaurant={editingRestaurant}
         onSave={onRestaurantSubmit}
-        users={users} // Pass users for owner selection
+        users={users}
       />
-      <ModuleSettingsModal
-        isOpen={isModuleModalOpen}
-        onClose={handleCloseModuleModal}
-        editingRestaurant={editingModuleRestaurant}
-        availableModules={availableModules}
-        selectedModules={selectedModules}
-        onSaveModules={handleSaveModules}
-        setSelectedModules={setSelectedModules}
-      />
-
+      {isModuleModalOpen && (
+        <ModuleSettingsModal
+          isOpen={isModuleModalOpen}
+          onClose={handleCloseModuleModal}
+          editingRestaurant={editingModuleRestaurant}
+          allModules={allModules} // Passa todos os módulos possíveis
+          selectedModuleIds={selectedModuleIds} // Passa os IDs dos módulos selecionados
+          setSelectedModuleIds={setSelectedModuleIds} // Passa a função para atualizar os IDs
+          onSaveModules={handleSaveModules}
+          loading={loading}
+        />
+      )}
     </Box>
   );
 };

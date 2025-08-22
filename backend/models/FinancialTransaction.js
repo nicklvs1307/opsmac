@@ -1,7 +1,30 @@
-const { DataTypes } = require('sequelize');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const FinancialTransaction = sequelize.define('FinancialTransaction', {
+  class FinancialTransaction extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      FinancialTransaction.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
+      });
+      FinancialTransaction.belongsTo(models.FinancialCategory, {
+        foreignKey: 'category_id',
+        as: 'category',
+      });
+      FinancialTransaction.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        as: 'user',
+      });
+    }
+  }
+
+  FinancialTransaction.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -70,24 +93,12 @@ module.exports = (sequelize) => {
       },
     },
   }, {
-    freezeTableName: true,
+    sequelize,
+    modelName: 'FinancialTransaction',
     tableName: 'financial_transactions',
+    underscored: true,
+    timestamps: true,
   });
-
-  FinancialTransaction.associate = (models) => {
-    FinancialTransaction.belongsTo(models.Restaurant, {
-      foreignKey: 'restaurant_id',
-      as: 'restaurant',
-    });
-    FinancialTransaction.belongsTo(models.FinancialCategory, {
-      foreignKey: 'category_id',
-      as: 'category',
-    });
-    FinancialTransaction.belongsTo(models.User, {
-      foreignKey: 'user_id',
-      as: 'user',
-    });
-  };
 
   return FinancialTransaction;
 };

@@ -7,6 +7,7 @@ module.exports = (sequelize) => {
       Restaurant.belongsTo(models.User, { foreignKey: 'owner_id', as: 'owner' });
       Restaurant.hasMany(models.NpsCriterion, { as: 'npsCriteria', foreignKey: 'restaurant_id' });
       Restaurant.hasMany(models.User, { foreignKey: 'restaurant_id', as: 'users' });
+      Restaurant.belongsToMany(models.Module, { through: 'RestaurantModules', foreignKey: 'restaurantId', otherKey: 'moduleId', as: 'modules' });
       // Adicione outras associações aqui se necessário
     }
 
@@ -44,14 +45,14 @@ module.exports = (sequelize) => {
     address: { type: DataTypes.TEXT, allowNull: false, validate: { notEmpty: { msg: 'Endereço é obrigatório' } } },
     city: { type: DataTypes.STRING(100), allowNull: false, validate: { notEmpty: { msg: 'Cidade é obrigatória' } } },
     state: { type: DataTypes.STRING(50), allowNull: false, validate: { notEmpty: { msg: 'Estado é obrigatório' } } },
-    zip_code: { type: DataTypes.STRING(20), allowNull: true, validate: { is: { args: /^[\d]{5}-?[\d]{3}$/, msg: 'CEP deve ter formato válido (00000-000)' } } },
-    phone: { type: DataTypes.STRING(20), allowNull: true, validate: { is: { args: /^[\+]?[1-9][\d]{0,15}$/, msg: 'Telefone deve ter um formato válido' } } },
+    zip_code: { type: DataTypes.STRING(20), allowNull: true, validate: { is: { args: /^[\\d]{5}-?[\\d]{3}$/, msg: 'CEP deve ter formato válido (00000-000)' } } },
+    phone: { type: DataTypes.STRING(20), allowNull: true, validate: { is: { args: /^[\\+]?[1-9][\\d]{0,15}$/, msg: 'Telefone deve ter um formato válido' } } },
     email: { type: DataTypes.STRING(150), allowNull: true, validate: { isEmail: { msg: 'Email deve ter um formato válido' } } },
     website: { type: DataTypes.STRING(255), allowNull: true, validate: { isUrl: { msg: 'Website deve ter um formato válido' } } },
     whatsapp_api_url: { type: DataTypes.STRING(255), allowNull: true, validate: { isUrl: { msg: 'URL da API do WhatsApp deve ser um formato válido' } } },
     whatsapp_api_key: { type: DataTypes.STRING(255), allowNull: true },
     whatsapp_instance_id: { type: DataTypes.STRING(255), allowNull: true, unique: true },
-    whatsapp_phone_number: { type: DataTypes.STRING(20), allowNull: true, validate: { is: { args: /^[\+]?[1-9][\d]{0,15}$/, msg: 'Número de telefone do WhatsApp deve ter um formato válido' } } },
+    whatsapp_phone_number: { type: DataTypes.STRING(20), allowNull: true, validate: { is: { args: /^[\\+]?[1-9][\\d]{0,15}$/, msg: 'Número de telefone do WhatsApp deve ter um formato válido' } } },
     logo: { type: DataTypes.STRING(500), allowNull: true },
     cover_image: { type: DataTypes.STRING(500), allowNull: true },
     opening_hours: { type: DataTypes.JSONB, allowNull: true, defaultValue: { monday: { open: '09:00', close: '22:00', closed: false }, tuesday: { open: '09:00', close: '22:00', closed: false }, wednesday: { open: '09:00', close: '22:00', closed: false }, thursday: { open: '09:00', close: '22:00', closed: false }, friday: { open: '09:00', close: '22:00', closed: false }, saturday: { open: '09:00', close: '22:00', closed: false }, sunday: { open: '09:00', close: '22:00', closed: false } } },
@@ -87,6 +88,7 @@ module.exports = (sequelize) => {
     modelName: 'Restaurant',
     tableName: 'restaurants',
     timestamps: true, // Habilitado para consistência
+    underscored: true,
     indexes: [
       { fields: ['owner_id'] },
       { fields: ['city', 'state'] },

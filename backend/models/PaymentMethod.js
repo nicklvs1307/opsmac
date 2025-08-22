@@ -1,7 +1,22 @@
-const { DataTypes } = require('sequelize');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const PaymentMethod = sequelize.define('PaymentMethod', {
+  class PaymentMethod extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      PaymentMethod.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
+      });
+    }
+  }
+
+  PaymentMethod.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -30,16 +45,12 @@ module.exports = (sequelize) => {
       },
     },
   }, {
-    freezeTableName: true,
+    sequelize,
+    modelName: 'PaymentMethod',
     tableName: 'payment_methods',
+    underscored: true,
+    timestamps: true,
   });
-
-  PaymentMethod.associate = (models) => {
-    PaymentMethod.belongsTo(models.Restaurant, {
-      foreignKey: 'restaurant_id',
-      as: 'restaurant',
-    });
-  };
 
   return PaymentMethod;
 };

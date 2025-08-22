@@ -22,7 +22,8 @@ export const saveUser = async (userData, userId = null) => {
 
 export const saveRestaurant = async (restaurantData, restaurantId = null) => {
   if (restaurantId) {
-    const response = await axiosInstance.put(`/api/restaurant/${restaurantId}`, restaurantData);
+    // Note: This route might need checking, the admin route is likely /api/admin/restaurants/:id
+    const response = await axiosInstance.put(`/api/admin/restaurants/${restaurantId}`, restaurantData);
     return response.data;
   } else {
     const response = await axiosInstance.post('/api/admin/restaurants', restaurantData);
@@ -30,7 +31,28 @@ export const saveRestaurant = async (restaurantData, restaurantId = null) => {
   }
 };
 
-export const saveRestaurantModules = async (restaurantId, enabledModules) => {
-  const response = await axiosInstance.put(`/api/admin/restaurants/${restaurantId}/modules`, { enabled_modules: enabledModules });
-  return response.data;
+// --- New Module Management API Functions ---
+
+/**
+ * Fetches all available modules from the API.
+ */
+export const getAllModules = async () => {
+  return await axiosInstance.get('/api/admin/modules');
+};
+
+/**
+ * Fetches the assigned modules for a specific restaurant.
+ * @param {string} restaurantId The ID of the restaurant.
+ */
+export const getRestaurantModules = async (restaurantId) => {
+  return await axiosInstance.get(`/api/admin/restaurants/${restaurantId}/modules`);
+};
+
+/**
+ * Saves the assigned modules for a restaurant.
+ * @param {string} restaurantId The ID of the restaurant.
+ * @param {number[]} moduleIds An array of module IDs to be assigned.
+ */
+export const saveRestaurantModules = async (restaurantId, moduleIds) => {
+  return await axiosInstance.post(`/api/admin/restaurants/${restaurantId}/modules`, { moduleIds });
 };

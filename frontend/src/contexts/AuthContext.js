@@ -2,18 +2,16 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import toast from 'react-hot-toast';
 
-// Create context
 const AuthContext = createContext();
 
-// Initial state
 const initialState = {
   user: null,
   token: localStorage.getItem('token'),
   isAuthenticated: false,
   loading: true,
+  allowedModules: [], // Módulos permitidos para o usuário
 };
 
-// Action types
 const AUTH_ACTIONS = {
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGOUT: 'LOGOUT',
@@ -23,17 +21,29 @@ const AUTH_ACTIONS = {
   UPDATE_USER: 'UPDATE_USER',
 };
 
-// Reducer
+const getModulesFromUser = (user) => {
+  if (user?.restaurant?.modules) {
+    return user.restaurant.modules.map(m => m.name);
+  }
+  if (user?.restaurants?.[0]?.modules) {
+    return user.restaurants[0].modules.map(m => m.name);
+  }
+  return [];
+};
+
 const authReducer = (state, action) => {
   switch (action.type) {
     case AUTH_ACTIONS.LOGIN_SUCCESS:
     case AUTH_ACTIONS.LOAD_USER:
+      const user = action.payload.user;
+      const allowedModules = getModulesFromUser(user);
       return {
         ...state,
-        user: action.payload.user,
+        user,
         token: action.payload.token,
         isAuthenticated: true,
         loading: false,
+        allowedModules,
       };
     case AUTH_ACTIONS.LOGOUT:
     case AUTH_ACTIONS.AUTH_ERROR:
@@ -44,6 +54,7 @@ const authReducer = (state, action) => {
         token: null,
         isAuthenticated: false,
         loading: false,
+        allowedModules: [],
       };
     case AUTH_ACTIONS.SET_LOADING:
       return {
@@ -60,7 +71,6 @@ const authReducer = (state, action) => {
   }
 };
 
-// Set auth token in axios headers
 const setAuthToken = (token) => {
   if (token) {
     axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -71,22 +81,16 @@ const setAuthToken = (token) => {
   }
 };
 
-// Axios interceptor to handle 401 errors
-    axiosInstance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const { config, response: { status } } = error;
     const originalRequest = config;
 
-    // Check if the error is a 401 and not a retry request
     if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      
-      // No refresh token logic implemented, so we log out the user.
-      setAuthToken(null); // Clear token from headers and localStorage
+      setAuthToken(null);
       toast.error('Sua sessão expirou. Por favor, faça login novamente.');
-
-      // Redirect to login page, preventing further failed requests.
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
@@ -96,11 +100,9 @@ const setAuthToken = (token) => {
   }
 );
 
-// Auth Provider
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Load user on app start
   useEffect(() => {
     const loadUser = async () => {
       const token = localStorage.getItem('token');
@@ -110,10 +112,7 @@ export const AuthProvider = ({ children }) => {
           const res = await axiosInstance.get('/api/auth/me');
           dispatch({
             type: AUTH_ACTIONS.LOAD_USER,
-            payload: {
-              user: res.data.user,
-              token,
-            },
+            payload: { user: res.data.user, token },
           });
         } catch (error) {
           console.error('Error loading user:', error);
@@ -127,24 +126,16 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, []);
 
-  // Login function
   const login = async (email, password) => {
     try {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: true });
-      
-      const response = await axiosInstance.post('/api/auth/login', {
-        email,
-        password,
-      });
-
+      const response = await axiosInstance.post('/api/auth/login', { email, password });
       const { token, user } = response.data;
-      
       setAuthToken(token);
       dispatch({
         type: AUTH_ACTIONS.LOGIN_SUCCESS,
         payload: { user, token },
       });
-
       toast.success(`Bem-vindo, ${user.name}!`);
       return { success: true, user };
     } catch (error) {
@@ -155,38 +146,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Register function
-  const register = async (userData) => {
-    try {
-      dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: true });
-      
-      const response = await axiosInstance.post('/api/auth/register', userData);
-      const { token, user } = response.data;
-      
-      setAuthToken(token);
-      dispatch({
-        type: AUTH_ACTIONS.LOGIN_SUCCESS,
-        payload: { user, token },
-      });
-
-      toast.success('Conta criada com sucesso!');
-      return { success: true };
-    } catch (error) {
-      dispatch({ type: AUTH_ACTIONS.AUTH_ERROR });
-      const message = error.response?.data?.message || 'Erro ao criar conta';
-      toast.error(message);
-      return { success: false, message };
-    }
-  };
-
-  // Logout function
   const logout = () => {
     setAuthToken(null);
     dispatch({ type: AUTH_ACTIONS.LOGOUT });
     toast.success('Logout realizado com sucesso');
   };
 
-  // Update user function
   const updateUser = async (userData) => {
     try {
       const response = await axiosInstance.put('/api/auth/profile', userData);
@@ -203,58 +168,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Change password function
-  const changePassword = async (currentPassword, newPassword) => {
-    try {
-      await axiosInstance.put('/api/auth/change-password', {
-        currentPassword,
-        newPassword,
-      });
-      toast.success('Senha alterada com sucesso!');
-      return { success: true };
-    } catch (error) {
-      const message = error.response?.data?.message || 'Erro ao alterar senha';
-      toast.error(message);
-      return { success: false, message };
-    }
-  };
-
-  // Forgot password function
-  const forgotPassword = async (email) => {
-    try {
-      await axiosInstance.post('/api/auth/forgot-password', { email });
-      toast.success('Email de recuperação enviado!');
-      return { success: true };
-    } catch (error) {
-      const message = error.response?.data?.message || 'Erro ao enviar email';
-      toast.error(message);
-      return { success: false, message };
-    }
-  };
-
-  // Reset password function
-  const resetPassword = async (token, password) => {
-    try {
-      await axiosInstance.post('/api/auth/reset-password', { token, password });
-      toast.success('Senha redefinida com sucesso!');
-      return { success: true };
-    } catch (error) {
-      const message = error.response?.data?.message || 'Erro ao redefinir senha';
-      toast.error(message);
-      return { success: false, message };
-    }
-  };
-
   const value = {
     ...state,
     login,
-    register,
     logout,
     updateUser,
-    changePassword,
-    forgotPassword,
-    resetPassword,
-    dispatch, // Expose dispatch
   };
 
   return (
@@ -264,7 +182,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use auth context
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

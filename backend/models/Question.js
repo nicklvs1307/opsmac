@@ -1,13 +1,25 @@
 
-const { DataTypes, Model } = require('sequelize');
-const { v4: uuidv4 } = require('uuid');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  class Question extends Model {}
+  class Question extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      Question.belongsTo(models.Survey, { foreignKey: 'survey_id' });
+      Question.hasMany(models.Answer, { foreignKey: 'question_id', as: 'answers', onDelete: 'CASCADE' });
+      Question.belongsTo(models.NpsCriterion, { foreignKey: 'nps_criterion_id', as: 'npsCriterion' });
+    }
+  }
+
   Question.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: () => uuidv4(),
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     survey_id: {
@@ -15,8 +27,8 @@ module.exports = (sequelize) => {
       allowNull: false,
       references: {
         model: 'surveys',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     question_text: {
       type: DataTypes.STRING,
@@ -31,29 +43,24 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     order: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     nps_criterion_id: {
       type: DataTypes.UUID,
       allowNull: true,
       references: {
-        model: 'NpsCriterions', // Nome da tabela, não do modelo
-        key: 'id'
-      }
-    }
+        model: 'nps_criterions', // Changed from 'NpsCriterions' to 'nps_criterions' for consistency
+        key: 'id',
+      },
+    },
   }, {
     sequelize,
     modelName: 'Question',
     tableName: 'questions',
-    timestamps: false,
+    timestamps: true, // Changed from false to true for consistency
+    underscored: true,
   });
-
-  Question.associate = (models) => {
-    Question.belongsTo(models.Survey, { foreignKey: 'survey_id' });
-    Question.hasMany(models.Answer, { foreignKey: 'question_id', as: 'answers', onDelete: 'CASCADE' });
-    Question.belongsTo(models.NpsCriterion, { foreignKey: 'nps_criterion_id', as: 'npsCriterion' });
-  };
 
   return Question;
 };

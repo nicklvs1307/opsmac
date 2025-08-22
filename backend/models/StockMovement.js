@@ -1,11 +1,39 @@
-const { DataTypes } = require('sequelize');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const StockMovement = sequelize.define('StockMovement', {
+  class StockMovement extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      StockMovement.belongsTo(models.Product, {
+        foreignKey: 'stockable_id',
+        constraints: false,
+        as: 'product',
+      });
+      StockMovement.belongsTo(models.Ingredient, {
+        foreignKey: 'stockable_id',
+        constraints: false,
+        as: 'ingredient',
+      });
+    }
+
+    // Helper method to get the associated stockable item (Product or Ingredient)
+    getStockable(options) {
+      if (!this.stockable_type) return Promise.resolve(null);
+      const mixinMethodName = `get${this.stockable_type}`;
+      return this[mixinMethodName](options);
+    }
+  }
+
+  StockMovement.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     stockable_id: {
       type: DataTypes.UUID,
@@ -13,55 +41,38 @@ module.exports = (sequelize) => {
     },
     stockable_type: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     type: { // 'in' for incoming, 'out' for outgoing
       type: DataTypes.ENUM('in', 'out'),
-      allowNull: false
+      allowNull: false,
     },
     quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     movement_date: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW
+      defaultValue: DataTypes.NOW,
     },
     description: { // e.g., 'Initial stock', 'Sale', 'Return', 'Adjustment'
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     // You might add user_id who performed the movement, order_id, etc.
   }, {
-    freezeTableName: true,
+    sequelize,
+    modelName: 'StockMovement',
     tableName: 'stock_movements',
     indexes: [
       {
-        fields: ['stockable_id', 'stockable_type']
-      }
-    ]
+        fields: ['stockable_id', 'stockable_type'],
+      },
+    ],
+    underscored: true,
+    timestamps: true,
   });
-
-  StockMovement.associate = (models) => {
-    StockMovement.belongsTo(models.Product, {
-      foreignKey: 'stockable_id',
-      constraints: false,
-      as: 'product'
-    });
-    StockMovement.belongsTo(models.Ingredient, {
-      foreignKey: 'stockable_id',
-      constraints: false,
-      as: 'ingredient'
-    });
-  };
-
-  // Helper method to get the associated stockable item (Product or Ingredient)
-  StockMovement.prototype.getStockable = function(options) {
-    if (!this.stockable_type) return Promise.resolve(null);
-    const mixinMethodName = `get${this.stockable_type}`;
-    return this[mixinMethodName](options);
-  };
 
   return StockMovement;
 };

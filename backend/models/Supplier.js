@@ -1,58 +1,64 @@
+'use strict';
 const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  class Supplier extends Model {}
+  class Supplier extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      Supplier.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
+      });
+    }
+  }
 
   Supplier.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     contact_person: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: true,
-      unique: true
+      unique: true,
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     restaurant_id: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        references: {
-            model: 'restaurants',
-            key: 'id'
-        }
-    }
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'restaurants',
+        key: 'id',
+      },
+    },
   }, {
     sequelize,
     modelName: 'Supplier',
     tableName: 'suppliers',
     underscored: true,
-    timestamps: true
+    timestamps: true,
   });
-
-  Supplier.associate = (models) => {
-    Supplier.belongsTo(models.Restaurant, {
-      foreignKey: 'restaurant_id',
-      as: 'restaurant'
-    });
-  };
 
   return Supplier;
 };

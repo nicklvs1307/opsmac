@@ -1,7 +1,30 @@
-const { DataTypes } = require('sequelize');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const CashRegisterMovement = sequelize.define('CashRegisterMovement', {
+  class CashRegisterMovement extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      CashRegisterMovement.belongsTo(models.CashRegisterSession, {
+        foreignKey: 'session_id',
+        as: 'session',
+      });
+      CashRegisterMovement.belongsTo(models.CashRegisterCategory, {
+        foreignKey: 'category_id',
+        as: 'category',
+      });
+      CashRegisterMovement.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        as: 'user',
+      });
+    }
+  }
+
+  CashRegisterMovement.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -44,24 +67,12 @@ module.exports = (sequelize) => {
       },
     },
   }, {
-    freezeTableName: true,
+    sequelize,
+    modelName: 'CashRegisterMovement',
     tableName: 'cash_register_movements',
+    underscored: true,
+    timestamps: true,
   });
-
-  CashRegisterMovement.associate = (models) => {
-    CashRegisterMovement.belongsTo(models.CashRegisterSession, {
-      foreignKey: 'session_id',
-      as: 'session',
-    });
-    CashRegisterMovement.belongsTo(models.CashRegisterCategory, {
-      foreignKey: 'category_id',
-      as: 'category',
-    });
-    CashRegisterMovement.belongsTo(models.User, {
-      foreignKey: 'user_id',
-      as: 'user',
-    });
-  };
 
   return CashRegisterMovement;
 };

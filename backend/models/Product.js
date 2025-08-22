@@ -1,41 +1,103 @@
-const { DataTypes } = require('sequelize');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const Product = sequelize.define('Product', {
+  class Product extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      Product.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
+      });
+      Product.belongsTo(models.Category, {
+        foreignKey: 'category_id',
+        as: 'category',
+      });
+      // Associação com a ficha técnica
+      Product.hasOne(models.TechnicalSpecification, {
+        foreignKey: 'product_id',
+        as: 'technicalSpecification',
+      });
+
+      // Associação polimórfica com Stock
+      Product.hasOne(models.Stock, {
+        foreignKey: 'stockable_id',
+        constraints: false,
+        scope: {
+          stockable_type: 'Product',
+        },
+        as: 'stock',
+      });
+
+      // Associação polimórfica com StockMovement
+      Product.hasMany(models.StockMovement, {
+        foreignKey: 'stockable_id',
+        constraints: false,
+        scope: {
+          stockable_type: 'Product',
+        },
+        as: 'stockMovements',
+      });
+    }
+  }
+
+  Product.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Nome do produto é obrigatório',
+        },
+        len: {
+          args: [2, 255],
+          msg: 'Nome do produto deve ter entre 2 e 255 caracteres',
+        },
+      },
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: true,
     },
     price: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isDecimal: {
+          msg: 'Preço deve ser um número decimal válido',
+        },
+        min: {
+          args: [0],
+          msg: 'Preço não pode ser negativo',
+        },
+      },
     },
     sku: { // Stock Keeping Unit (Código de Referência do Estoque)
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
     },
     restaurant_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'restaurants',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     category_id: {
       type: DataTypes.UUID,
       allowNull: true,
       references: {
-        model: 'Categories',
+        model: 'categories', // Changed from 'Categories' to 'categories' for consistency
         key: 'id',
       },
     },
@@ -81,45 +143,12 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
   }, {
-    freezeTableName: true, // Model tableName will be the same as the model name
-    tableName: 'products' // Explicitly define the table name
+    sequelize,
+    modelName: 'Product',
+    tableName: 'products',
+    underscored: true,
+    timestamps: true,
   });
-
-  Product.associate = (models) => {
-    Product.belongsTo(models.Restaurant, {
-      foreignKey: 'restaurant_id',
-      as: 'restaurant'
-    });
-    Product.belongsTo(models.Category, {
-      foreignKey: 'category_id',
-      as: 'category'
-    });
-    // Associação com a ficha técnica
-    Product.hasOne(models.TechnicalSpecification, {
-      foreignKey: 'product_id',
-      as: 'technicalSpecification'
-    });
-    
-    // Associação polimórfica com Stock
-    Product.hasOne(models.Stock, {
-      foreignKey: 'stockable_id',
-      constraints: false,
-      scope: {
-        stockable_type: 'Product'
-      },
-      as: 'stock'
-    });
-
-    // Associação polimórfica com StockMovement
-    Product.hasMany(models.StockMovement, {
-      foreignKey: 'stockable_id',
-      constraints: false,
-      scope: {
-        stockable_type: 'Product'
-      },
-      as: 'stockMovements'
-    });
-  };
 
   return Product;
 };

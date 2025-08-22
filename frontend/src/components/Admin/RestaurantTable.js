@@ -27,7 +27,7 @@ const RestaurantTable = ({ restaurants, loading, handleOpenRestaurantModal, hand
               <TableRow key={restaurant.id} hover>
                 <TableCell>{restaurant.name}</TableCell>
                 <TableCell>{restaurant.owner?.name || 'N/A'}</TableCell>
-                <TableCell>{(restaurant.settings?.enabled_modules || []).join(', ')}</TableCell>
+                <TableCell>{(restaurant.modules || []).map(m => m.displayName).join(', ')}</TableCell>
                 <TableCell align="right">
                   <IconButton onClick={() => handleOpenRestaurantModal(restaurant)}><EditIcon /></IconButton>
                   <Button variant="outlined" onClick={() => handleOpenModuleModal(restaurant)}>{t('admin_dashboard.manage_modules_button')}</Button>

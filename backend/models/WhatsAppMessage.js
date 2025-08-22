@@ -1,7 +1,22 @@
-const { DataTypes } = require('sequelize');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const WhatsAppMessage = sequelize.define('WhatsAppMessage', {
+  class WhatsAppMessage extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      WhatsAppMessage.belongsTo(models.Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
+      WhatsAppMessage.belongsTo(models.Customer, { foreignKey: 'customer_id', as: 'customer' });
+      WhatsAppMessage.belongsTo(models.Coupon, { foreignKey: 'coupon_id', as: 'coupon' });
+      WhatsAppMessage.belongsTo(models.User, { foreignKey: 'sent_by', as: 'sender' });
+    }
+  }
+
+  WhatsAppMessage.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -77,20 +92,12 @@ module.exports = (sequelize) => {
     metadata: {
       type: DataTypes.JSONB,
       allowNull: true,
-      defaultValue: {},
-    },
+      defaultValue: {},}
   }, {
     tableName: 'whatsapp_messages',
     timestamps: true,
     underscored: true,
   });
-
-  WhatsAppMessage.associate = (models) => {
-    WhatsAppMessage.belongsTo(models.Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
-    WhatsAppMessage.belongsTo(models.Customer, { foreignKey: 'customer_id', as: 'customer' });
-    WhatsAppMessage.belongsTo(models.Coupon, { foreignKey: 'coupon_id', as: 'coupon' });
-    WhatsAppMessage.belongsTo(models.User, { foreignKey: 'sent_by', as: 'sender' });
-  };
 
   return WhatsAppMessage;
 };

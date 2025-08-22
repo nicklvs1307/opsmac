@@ -1,7 +1,22 @@
-const { DataTypes } = require('sequelize');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const CashRegisterCategory = sequelize.define('CashRegisterCategory', {
+  class CashRegisterCategory extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      CashRegisterCategory.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
+      });
+    }
+  }
+
+  CashRegisterCategory.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -25,16 +40,12 @@ module.exports = (sequelize) => {
       },
     },
   }, {
-    freezeTableName: true,
+    sequelize,
+    modelName: 'CashRegisterCategory',
     tableName: 'cash_register_categories',
+    underscored: true,
+    timestamps: true,
   });
-
-  CashRegisterCategory.associate = (models) => {
-    CashRegisterCategory.belongsTo(models.Restaurant, {
-      foreignKey: 'restaurant_id',
-      as: 'restaurant',
-    });
-  };
 
   return CashRegisterCategory;
 };

@@ -6,22 +6,22 @@ module.exports = (sequelize) => {
     static associate(models) {
       LossRecord.belongsTo(models.User, {
         foreignKey: 'user_id',
-        as: 'user'
+        as: 'user',
       });
       LossRecord.belongsTo(models.Restaurant, {
         foreignKey: 'restaurant_id',
-        as: 'restaurant'
+        as: 'restaurant',
       });
       // Polymorphic association to Product or Ingredient
       LossRecord.belongsTo(models.Product, {
         foreignKey: 'stockable_id',
         constraints: false,
-        as: 'product'
+        as: 'product',
       });
       LossRecord.belongsTo(models.Ingredient, {
         foreignKey: 'stockable_id',
         constraints: false,
-        as: 'ingredient'
+        as: 'ingredient',
       });
     }
 
@@ -37,62 +37,63 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     stockable_id: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
     },
     stockable_type: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     user_id: { // User who registered the loss
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'users',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     restaurant_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'restaurants',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        min: 1
-      }
+        min: 1,
+      },
     },
     reason: {
       type: DataTypes.ENUM('vencimento', 'avaria', 'qualidade', 'outro'),
-      allowNull: false
+      allowNull: false,
     },
     notes: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: true,
     },
     loss_date: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'LossRecord',
     tableName: 'loss_records',
     timestamps: true,
+    underscored: true,
     indexes: [
       {
-        fields: ['stockable_id', 'stockable_type']
-      }
-    ]
+        fields: ['stockable_id', 'stockable_type'],
+      },
+    ],
   });
 
   return LossRecord;

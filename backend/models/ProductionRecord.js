@@ -6,15 +6,15 @@ module.exports = (sequelize) => {
     static associate(models) {
       ProductionRecord.belongsTo(models.User, {
         foreignKey: 'user_id',
-        as: 'user'
+        as: 'user',
       });
       ProductionRecord.belongsTo(models.Restaurant, {
         foreignKey: 'restaurant_id',
-        as: 'restaurant'
+        as: 'restaurant',
       });
       ProductionRecord.hasMany(models.ProductionRecordItem, {
         foreignKey: 'production_record_id',
-        as: 'items'
+        as: 'items',
       });
     }
   }
@@ -23,38 +23,39 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     restaurant_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'restaurants',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     user_id: { // User who performed the production
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'users',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     production_date: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
-      allowNull: false
+      allowNull: false,
     },
     notes: {
       type: DataTypes.TEXT,
-      allowNull: true
-    }
+      allowNull: true,
+    },
   }, {
     sequelize,
     modelName: 'ProductionRecord',
     tableName: 'production_records',
-    timestamps: true
+    timestamps: true,
+    underscored: true,
   });
 
   return ProductionRecord;

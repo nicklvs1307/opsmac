@@ -6,11 +6,11 @@ module.exports = (sequelize) => {
     static associate(models) {
       Ingredient.belongsTo(models.Restaurant, {
         foreignKey: 'restaurant_id',
-        as: 'restaurant'
+        as: 'restaurant',
       });
       Ingredient.hasMany(models.RecipeIngredient, {
         foreignKey: 'ingredient_id',
-        as: 'recipeIngredients'
+        as: 'recipeIngredients',
       });
 
       // Associação polimórfica com Stock
@@ -18,9 +18,9 @@ module.exports = (sequelize) => {
         foreignKey: 'stockable_id',
         constraints: false,
         scope: {
-          stockable_type: 'Ingredient'
+          stockable_type: 'Ingredient',
         },
-        as: 'stock'
+        as: 'stock',
       });
 
       // Associação polimórfica com StockMovement
@@ -28,9 +28,9 @@ module.exports = (sequelize) => {
         foreignKey: 'stockable_id',
         constraints: false,
         scope: {
-          stockable_type: 'Ingredient'
+          stockable_type: 'Ingredient',
         },
-        as: 'stockMovements'
+        as: 'stockMovements',
       });
     }
   }
@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING(100),
@@ -46,15 +46,15 @@ module.exports = (sequelize) => {
       unique: true,
       validate: {
         notEmpty: { msg: 'Nome do ingrediente é obrigatório' },
-        len: { args: [2, 100], msg: 'Nome deve ter entre 2 e 100 caracteres' }
-      }
+        len: { args: [2, 100], msg: 'Nome deve ter entre 2 e 100 caracteres' },
+      },
     },
     unit_of_measure: {
       type: DataTypes.ENUM('g', 'kg', 'ml', 'L', 'unidade', 'colher de chá', 'colher de sopa', 'xícara', 'pitada', 'a gosto'),
       allowNull: false,
       validate: {
-        notEmpty: { msg: 'Unidade de medida é obrigatória' }
-      }
+        notEmpty: { msg: 'Unidade de medida é obrigatória' },
+      },
     },
     cost_per_unit: {
       type: DataTypes.DECIMAL(10, 4),
@@ -62,16 +62,16 @@ module.exports = (sequelize) => {
       defaultValue: 0.0000,
       validate: {
         isDecimal: { msg: 'Custo por unidade deve ser um número decimal' },
-        min: { args: [0], msg: 'Custo por unidade não pode ser negativo' }
-      }
+        min: { args: [0], msg: 'Custo por unidade não pode ser negativo' },
+      },
     },
     restaurant_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'restaurants',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     default_expiration_days: {
       type: DataTypes.INTEGER,
@@ -85,7 +85,8 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Ingredient',
     tableName: 'ingredients',
-    timestamps: true
+    timestamps: true,
+    underscored: true,
   });
   return Ingredient;
 };

@@ -1,13 +1,25 @@
 
-const { DataTypes, Model } = require('sequelize');
-const { v4: uuidv4 } = require('uuid');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  class SurveyResponse extends Model {}
+  class SurveyResponse extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      SurveyResponse.belongsTo(models.Survey, { foreignKey: 'survey_id' });
+      SurveyResponse.belongsTo(models.Customer, { foreignKey: 'customer_id', as: 'customer' });
+      SurveyResponse.hasMany(models.Answer, { foreignKey: 'response_id', as: 'answers', onDelete: 'CASCADE' });
+    }
+  }
+
   SurveyResponse.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: () => uuidv4(),
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     survey_id: {
@@ -15,31 +27,24 @@ module.exports = (sequelize) => {
       allowNull: false,
       references: {
         model: 'surveys',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     customer_id: {
       type: DataTypes.UUID,
       allowNull: true, // Allow anonymous responses
       references: {
         model: 'customers',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
   }, {
     sequelize,
     modelName: 'SurveyResponse',
     tableName: 'survey_responses',
     timestamps: true,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
+    underscored: true,
   });
-
-  SurveyResponse.associate = (models) => {
-    SurveyResponse.belongsTo(models.Survey, { foreignKey: 'survey_id' });
-    SurveyResponse.belongsTo(models.Customer, { foreignKey: 'customer_id', as: 'customer' });
-    SurveyResponse.hasMany(models.Answer, { foreignKey: 'response_id', as: 'answers', onDelete: 'CASCADE' });
-  };
 
   return SurveyResponse;
 };

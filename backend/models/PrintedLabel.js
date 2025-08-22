@@ -6,22 +6,22 @@ module.exports = (sequelize) => {
     static associate(models) {
       PrintedLabel.belongsTo(models.User, {
         foreignKey: 'user_id',
-        as: 'user'
+        as: 'user',
       });
       PrintedLabel.belongsTo(models.Restaurant, {
         foreignKey: 'restaurant_id',
-        as: 'restaurant'
+        as: 'restaurant',
       });
       // Polymorphic association to Product or Ingredient
       PrintedLabel.belongsTo(models.Product, {
         foreignKey: 'labelable_id',
         constraints: false,
-        as: 'product'
+        as: 'product',
       });
       PrintedLabel.belongsTo(models.Ingredient, {
         foreignKey: 'labelable_id',
         constraints: false,
-        as: 'ingredient'
+        as: 'ingredient',
       });
     }
 
@@ -37,75 +37,76 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     labelable_id: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
     },
     labelable_type: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     user_id: { // User who printed the label
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'users',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     restaurant_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'restaurants',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     print_date: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
-      allowNull: false
+      allowNull: false,
     },
     expiration_date: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
     },
     quantity_printed: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 1
+      defaultValue: 1,
     },
     lot_number: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     sif: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     weight: {
       type: DataTypes.DECIMAL(10, 3),
-      allowNull: true
+      allowNull: true,
     },
     unit_of_measure: {
       type: DataTypes.STRING,
-      allowNull: true
-    }
+      allowNull: true,
+    },
   }, {
     sequelize,
     modelName: 'PrintedLabel',
     tableName: 'printed_labels',
     timestamps: true,
+    underscored: true,
     indexes: [
       {
-        fields: ['labelable_id', 'labelable_type']
+        fields: ['labelable_id', 'labelable_type'],
       },
       {
-        fields: ['expiration_date']
-      }
-    ]
+        fields: ['expiration_date'],
+      },
+    ],
   });
 
   return PrintedLabel;

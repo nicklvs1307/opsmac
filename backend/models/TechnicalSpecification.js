@@ -1,8 +1,27 @@
 'use strict';
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize'); // Import Sequelize
 
-module.exports = (sequelize, DataTypes, Sequelize) => {
-  const TechnicalSpecification = sequelize.define('TechnicalSpecification', {
+module.exports = (sequelize) => {
+  class TechnicalSpecification extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      TechnicalSpecification.belongsTo(models.Product, {
+        foreignKey: 'product_id',
+        as: 'product',
+      });
+      // Add new association
+      TechnicalSpecification.hasMany(models.RecipeIngredient, {
+        foreignKey: 'technical_specification_id',
+        as: 'recipeIngredients',
+      });
+    }
+  }
+
+  TechnicalSpecification.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -18,33 +37,13 @@ module.exports = (sequelize, DataTypes, Sequelize) => {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
-    },
   }, {
-    freezeTableName: true,
+    sequelize,
+    modelName: 'TechnicalSpecification',
     tableName: 'technical_specifications',
-    timestamps: false, // Using created_at and updated_at manually
+    underscored: true,
+    timestamps: true, // Let Sequelize handle timestamps
   });
-
-  TechnicalSpecification.associate = (models) => {
-    TechnicalSpecification.belongsTo(models.Product, {
-      foreignKey: 'product_id',
-      as: 'product',
-    });
-    // Add new association
-    TechnicalSpecification.hasMany(models.RecipeIngredient, {
-      foreignKey: 'technical_specification_id',
-      as: 'recipeIngredients'
-    });
-  };
 
   return TechnicalSpecification;
 };

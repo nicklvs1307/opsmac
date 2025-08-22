@@ -6,18 +6,18 @@ module.exports = (sequelize) => {
     static associate(models) {
       StockCountItem.belongsTo(models.StockCount, {
         foreignKey: 'stock_count_id',
-        as: 'stockCount'
+        as: 'stockCount',
       });
       // Polymorphic association to Product or Ingredient
       StockCountItem.belongsTo(models.Product, {
         foreignKey: 'stockable_id',
         constraints: false,
-        as: 'product'
+        as: 'product',
       });
       StockCountItem.belongsTo(models.Ingredient, {
         foreignKey: 'stockable_id',
         constraints: false,
-        as: 'ingredient'
+        as: 'ingredient',
       });
     }
 
@@ -33,47 +33,48 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     stock_count_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'stock_counts',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     stockable_id: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
     },
     stockable_type: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     system_quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     counted_quantity: {
       type: DataTypes.INTEGER,
-      allowNull: true // Starts as null until user inputs it
+      allowNull: true, // Starts as null until user inputs it
     },
     discrepancy: {
-        type: DataTypes.INTEGER,
-        allowNull: true // Can be calculated when counted_quantity is set
-    }
+      type: DataTypes.INTEGER,
+      allowNull: true, // Can be calculated when counted_quantity is set
+    },
   }, {
     sequelize,
     modelName: 'StockCountItem',
     tableName: 'stock_count_items',
     timestamps: true,
+    underscored: true,
     indexes: [
-        {
-          unique: true,
-          fields: ['stock_count_id', 'stockable_id', 'stockable_type']
-        }
-    ]
+      {
+        unique: true,
+        fields: ['stock_count_id', 'stockable_id', 'stockable_type'],
+      },
+    ],
   });
 
   return StockCountItem;

@@ -1,7 +1,30 @@
-const { DataTypes } = require('sequelize');
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const Checkin = sequelize.define('Checkin', {
+  class Checkin extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      Checkin.belongsTo(models.Customer, {
+        foreignKey: 'customer_id',
+        as: 'customer',
+      });
+      Checkin.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
+      });
+      Checkin.belongsTo(models.Coupon, {
+        foreignKey: 'coupon_id',
+        as: 'coupon',
+      });
+    }
+  }
+
+  Checkin.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -57,25 +80,12 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
   }, {
+    sequelize,
+    modelName: 'Checkin',
     tableName: 'checkins',
     timestamps: true,
     underscored: true,
   });
-
-  Checkin.associate = (models) => {
-    Checkin.belongsTo(models.Customer, {
-      foreignKey: 'customer_id',
-      as: 'customer'
-    });
-    Checkin.belongsTo(models.Restaurant, {
-      foreignKey: 'restaurant_id',
-      as: 'restaurant'
-    });
-    Checkin.belongsTo(models.Coupon, {
-      foreignKey: 'coupon_id',
-      as: 'coupon'
-    });
-  };
 
   return Checkin;
 };

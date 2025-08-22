@@ -1,4 +1,4 @@
-const { models } = require('../../../config/database');
+const { models } = require('../../config/database');
 const { generateToken } = require('../../services/jwtService');
 const { UnauthorizedError, ForbiddenError, NotFoundError } = require('../../utils/errors');
 

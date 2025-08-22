@@ -6,7 +6,7 @@ const path = require('path');
 require('dotenv').config();
 
 const { sequelize } = require('./src/config/database');
-const { BaseError } = require('./utils/errors');
+const { BaseError } = require('./src/utils/errors');
 
 // Importação de Rotas
 const allRoutes = require('./routes'); // Import the consolidated routes
@@ -41,7 +41,7 @@ allRoutes.forEach(route => {
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./config/swagger');
+const swaggerDocument = require('../config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Rota 404 - Deve vir antes do tratador de erros

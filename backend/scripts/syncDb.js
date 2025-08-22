@@ -1,4 +1,4 @@
-const { syncDatabase } = require('../config/database');
+const { syncDatabase } = require('../src/config/database');
 require('dotenv').config();
 
 const runSync = async () => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const { auth, checkRestaurantOwnership } = require('../../src/middleware/authMiddleware');
-const { logUserAction } = require('../../src/middleware/logUserActionMiddleware');
+const { logUserAction } = require('../middleware/logUserActionMiddleware');
 const feedbackController = require('./feedback.controller');
 const {
     createFeedbackValidation,

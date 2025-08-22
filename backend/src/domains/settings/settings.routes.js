@@ -1,6 +1,6 @@
 const express = require('express');
 const { auth, checkRestaurantOwnership } = require('../../middleware/auth');
-const upload = require('../../src/middleware/uploadMiddleware');
+const upload = require('../middleware/uploadMiddleware');
 const settingsController = require('./settings.controller');
 const {
     updateRestaurantSettingsValidation,

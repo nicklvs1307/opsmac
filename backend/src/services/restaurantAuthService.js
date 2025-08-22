@@ -1,4 +1,4 @@
-const { models } = require('../config/database');
+const { models } = require('../../config/database');
 
 const getRestaurantIdFromUser = async (userId) => {
   const user = await models.User.findByPk(userId, {

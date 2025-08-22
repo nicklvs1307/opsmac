@@ -1,7 +1,7 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
-const { LOGIN_ATTEMPTS_LIMIT, LOGIN_LOCK_DURATION_HOURS } = require('../config/security');
+const { LOGIN_ATTEMPTS_LIMIT, LOGIN_LOCK_DURATION_HOURS } = require('../../config/security');
 
 module.exports = (sequelize) => {
   class User extends Model {

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { models } = require('../config/database');
+const { models } = require('../../config/database');
 
 const IFOOD_AUTH_URL = 'https://merchant-api.ifood.com.br/authentication/v1.0/oauth/token';
 const IFOOD_API_BASE_URL = 'https://merchant-api.ifood.com.br';

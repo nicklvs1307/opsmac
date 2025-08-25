@@ -1,13 +1,92 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './Pdv.css'; // Import the new CSS
-import { Box, Typography, CircularProgress, Alert, Card, CardContent, Grid, Button, MenuItem, Select, FormControl, InputLabel, IconButton, Divider, Switch, FormControlLabel, Paper, TextField, List, ListItem, ListItemText, Drawer, Tabs, Tab, Badge, useMediaQuery, Chip, Avatar, Tooltip, Fade, ToggleButtonGroup, ToggleButton, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Card,
+  CardContent,
+  Grid,
+  Button,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  IconButton,
+  Divider,
+  Switch,
+  FormControlLabel,
+  Paper,
+  TextField,
+  List,
+  ListItem,
+  ListItemText,
+  Drawer,
+  Tabs,
+  Tab,
+  Badge,
+  useMediaQuery,
+  Chip,
+  Avatar,
+  Tooltip,
+  Fade,
+  ToggleButtonGroup,
+  ToggleButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from '@mui/material';
 import { TableRestaurant as TableRestaurantIcon } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { Refresh as RefreshIcon, Store as StoreIcon, PointOfSale as PointOfSaleIcon, AddShoppingCart as AddShoppingCartIcon, RemoveShoppingCart as RemoveShoppingCartIcon, Delete as DeleteIcon, Menu as MenuIcon, Dashboard as DashboardIcon, ShoppingBasket as ShoppingBasketIcon, Inventory as InventoryIcon, Add as AddIcon, Remove as RemoveIcon, Search as SearchIcon, FilterList as FilterListIcon, Close as CloseIcon, Restaurant as RestaurantIcon, Assignment as AssignmentIcon, Book as BookIcon, People as PeopleIcon, PieChart as PieChartIcon, Settings as SettingsIcon, Visibility as EyeIcon, Edit as EditIcon, Print as PrintIcon, Filter as FilterIcon, Plus as PlusIcon, ShoppingCart as ShoppingCartIcon, ThumbsUp as ThumbsUpIcon, ThumbsUpDown as ThumbsUpDownIcon, ThumbDown as ThumbDownIcon, QuestionAnswer as QuestionAnswerIcon, PersonAdd as PersonAddIcon, CheckCircle as CheckCircleIcon, DeliveryDining as MotorcycleIcon, DoneAll as ClipboardCheckIcon, Inbox as InboxIcon, LocalFireDepartment as FireIcon, Payments as PaymentsIcon, Person as PersonIcon, Info as InfoIcon, List as ListIcon } from '@mui/icons-material';
-import { useAuth } from '../../contexts/AuthContext';
+import {
+  Refresh as RefreshIcon,
+  Store as StoreIcon,
+  PointOfSale as PointOfSaleIcon,
+  AddShoppingCart as AddShoppingCartIcon,
+  RemoveShoppingCart as RemoveShoppingCartIcon,
+  Delete as DeleteIcon,
+  Menu as MenuIcon,
+  Dashboard as DashboardIcon,
+  ShoppingBasket as ShoppingBasketIcon,
+  Inventory as InventoryIcon,
+  Add as AddIcon,
+  Remove as RemoveIcon,
+  Search as SearchIcon,
+  FilterList as FilterListIcon,
+  Close as CloseIcon,
+  Restaurant as RestaurantIcon,
+  Assignment as AssignmentIcon,
+  Book as BookIcon,
+  People as PeopleIcon,
+  PieChart as PieChartIcon,
+  Settings as SettingsIcon,
+  Visibility as EyeIcon,
+  Edit as EditIcon,
+  Print as PrintIcon,
+  Filter as FilterIcon,
+  Plus as PlusIcon,
+  ShoppingCart as ShoppingCartIcon,
+  ThumbsUp as ThumbsUpIcon,
+  ThumbsUpDown as ThumbsUpDownIcon,
+  ThumbDown as ThumbDownIcon,
+  QuestionAnswer as QuestionAnswerIcon,
+  PersonAdd as PersonAddIcon,
+  CheckCircle as CheckCircleIcon,
+  DeliveryDining as MotorcycleIcon,
+  DoneAll as ClipboardCheckIcon,
+  Inbox as InboxIcon,
+  LocalFireDepartment as FireIcon,
+  Payments as PaymentsIcon,
+  Person as PersonIcon,
+  Info as InfoIcon,
+  List as ListIcon,
+} from '@mui/icons-material';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import CashRegisterModal from '../../components/CashRegisterModal';
 import CashRegisterOptionsModal from '../../components/CashRegisterOptionsModal';
@@ -18,7 +97,9 @@ import CloseCashRegisterModal from '../../components/CloseCashRegisterModal';
 
 const fetchOrders = async ({ queryKey }) => {
   const [, filterStatus] = queryKey;
-  const { data } = await axiosInstance.get(`/api/orders${filterStatus ? `?status=${filterStatus}` : ''}`);
+  const { data } = await axiosInstance.get(
+    `/api/orders${filterStatus ? `?status=${filterStatus}` : ''}`
+  );
   return data;
 };
 
@@ -51,12 +132,16 @@ const updateOrderStatus = async ({ orderId, status }) => {
 };
 
 const updateRestaurantOpenStatus = async ({ restaurantId, is_open }) => {
-  const { data } = await axiosInstance.put(`/api/restaurant/${restaurantId}/status/open`, { is_open });
+  const { data } = await axiosInstance.put(`/api/restaurant/${restaurantId}/status/open`, {
+    is_open,
+  });
   return data;
 };
 
 const updateRestaurantPosStatus = async ({ restaurantId, pos_status }) => {
-  const { data } = await axiosInstance.put(`/api/restaurant/${restaurantId}/pos-status`, { pos_status });
+  const { data } = await axiosInstance.put(`/api/restaurant/${restaurantId}/pos-status`, {
+    pos_status,
+  });
   return data;
 };
 
@@ -91,16 +176,18 @@ const Pdv = () => {
     return data;
   };
 
-  const { data: tables, isLoading: isLoadingTables, isError: isErrorTables } = useQuery(
-    ['tables', restaurantId],
-    () => fetchTables(restaurantId),
-    {
-      enabled: !!restaurantId && orderType === 'dine_in',
-      onError: (error) => {
-        toast.error(t('pdv.error_loading_tables', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: tables,
+    isLoading: isLoadingTables,
+    isError: isErrorTables,
+  } = useQuery(['tables', restaurantId], () => fetchTables(restaurantId), {
+    enabled: !!restaurantId && orderType === 'dine_in',
+    onError: (error) => {
+      toast.error(
+        t('pdv.error_loading_tables', { message: error.response?.data?.msg || error.message })
+      );
+    },
+  });
 
   useEffect(() => {
     if (orderType === 'dine_in' && tables?.length > 0) {
@@ -140,9 +227,16 @@ const Pdv = () => {
   // Fetch Customers
   const fetchCustomers = async ({ queryKey }) => {
     const [, restaurantId, searchTerm] = queryKey;
-    console.log('Fetching customers for restaurantId:', restaurantId, 'with searchTerm:', searchTerm); // ADD THIS LINE
+    console.log(
+      'Fetching customers for restaurantId:',
+      restaurantId,
+      'with searchTerm:',
+      searchTerm
+    ); // ADD THIS LINE
     if (!searchTerm) return [];
-    const { data } = await axiosInstance.get(`/api/customers?restaurant_id=${restaurantId}&search=${searchTerm}`);
+    const { data } = await axiosInstance.get(
+      `/api/customers?restaurant_id=${restaurantId}&search=${searchTerm}`
+    );
     return data;
   };
 
@@ -152,7 +246,9 @@ const Pdv = () => {
     {
       enabled: !!restaurantId && customerSearchTerm.length > 2, // Only search if restaurantId exists and search term is at least 3 characters
       onError: (error) => {
-        toast.error(t('pdv.error_loading_customers', { message: error.response?.data?.msg || error.message }));
+        toast.error(
+          t('pdv.error_loading_customers', { message: error.response?.data?.msg || error.message })
+        );
       },
     }
   );
@@ -182,105 +278,135 @@ const Pdv = () => {
 
   // Sample product data (from exemplo.html, will be replaced by API data)
   const sampleProducts = [
-    { id: 1, name: "Pizza Margherita", price: 42.90, category: "Pratos Principais", image: "🍕" },
-    { id: 2, name: "Hambúrguer Artesanal", price: 28.90, category: "Pratos Principais", image: "🍔" },
-    { id: 3, name: "Batata Frita Grande", price: 19.90, category: "Entradas", image: "🍟" },
-    { id: 4, name: "Lasanha", price: 35.90, category: "Pratos Principais", image: "🍝" },
-    { id: 5, name: "Frango Grelhado", price: 29.90, category: "Pratos Principais", image: "🍗" },
-    { id: 6, name: "Coca-Cola 600ml", price: 7.90, category: "Bebidas", image: "🥤" },
-    { id: 7, name: "Guaraná 600ml", price: 7.90, category: "Bebidas", image: "🥤" },
-    { id: 8, name: "Água Mineral", price: 5.00, category: "Bebidas", image: "💧" },
-    { id: 9, name: "Sorvete", price: 12.90, category: "Sobremesas", image: "🍨" },
-    { id: 10, name: "Bolo de Chocolate", price: 15.90, category: "Sobremesas", image: "🍰" },
-    { id: 11, name: "Salada Caesar", price: 22.90, category: "Entradas", image: "🥗" },
-    { id: 12, name: "Cerveja Artesanal", price: 14.90, category: "Bebidas", image: "🍺" }
+    { id: 1, name: 'Pizza Margherita', price: 42.9, category: 'Pratos Principais', image: '🍕' },
+    {
+      id: 2,
+      name: 'Hambúrguer Artesanal',
+      price: 28.9,
+      category: 'Pratos Principais',
+      image: '🍔',
+    },
+    { id: 3, name: 'Batata Frita Grande', price: 19.9, category: 'Entradas', image: '🍟' },
+    { id: 4, name: 'Lasanha', price: 35.9, category: 'Pratos Principais', image: '🍝' },
+    { id: 5, name: 'Frango Grelhado', price: 29.9, category: 'Pratos Principais', image: '🍗' },
+    { id: 6, name: 'Coca-Cola 600ml', price: 7.9, category: 'Bebidas', image: '🥤' },
+    { id: 7, name: 'Guaraná 600ml', price: 7.9, category: 'Bebidas', image: '🥤' },
+    { id: 8, name: 'Água Mineral', price: 5.0, category: 'Bebidas', image: '💧' },
+    { id: 9, name: 'Sorvete', price: 12.9, category: 'Sobremesas', image: '🍨' },
+    { id: 10, name: 'Bolo de Chocolate', price: 15.9, category: 'Sobremesas', image: '🍰' },
+    { id: 11, name: 'Salada Caesar', price: 22.9, category: 'Entradas', image: '🥗' },
+    { id: 12, name: 'Cerveja Artesanal', price: 14.9, category: 'Bebidas', image: '🍺' },
   ];
 
   // Fetch Data
-  const { data: orders, isLoading: isLoadingOrders, isError: isErrorOrders } = useQuery(
-    ['orders', filterStatus],
-    fetchOrders,
-    {
-      enabled: !!restaurantId,
-      refetchInterval: 5000,
-      onError: (error) => {
-        toast.error(t('pdv.error_loading_orders', { message: error.response?.data?.msg || error.message }));
-      }
-    }
-  );
+  const {
+    data: orders,
+    isLoading: isLoadingOrders,
+    isError: isErrorOrders,
+  } = useQuery(['orders', filterStatus], fetchOrders, {
+    enabled: !!restaurantId,
+    refetchInterval: 5000,
+    onError: (error) => {
+      toast.error(
+        t('pdv.error_loading_orders', { message: error.response?.data?.msg || error.message })
+      );
+    },
+  });
 
-  const { data: restaurantStatus, isLoading: isLoadingRestaurantStatus, isError: isErrorRestaurantStatus } = useQuery(
-    ['restaurantStatus', restaurantId],
-    () => fetchRestaurantStatus(restaurantId),
-    {
-      enabled: !!restaurantId,
-      refetchInterval: 300000,
-      onError: (error) => {
-        toast.error(t('pdv.error_loading_restaurant_status', { message: error.response?.data?.msg || error.message }));
-      }
-    }
-  );
+  const {
+    data: restaurantStatus,
+    isLoading: isLoadingRestaurantStatus,
+    isError: isErrorRestaurantStatus,
+  } = useQuery(['restaurantStatus', restaurantId], () => fetchRestaurantStatus(restaurantId), {
+    enabled: !!restaurantId,
+    refetchInterval: 300000,
+    onError: (error) => {
+      toast.error(
+        t('pdv.error_loading_restaurant_status', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
+  });
 
-  const { data: products, isLoading: isLoadingProducts, isError: isErrorProducts } = useQuery(
+  const {
+    data: products,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
+  } = useQuery(
     ['products', restaurantId, selectedProductCategory, productSearchTerm],
     fetchProducts,
     {
       enabled: !!restaurantId,
       onError: (error) => {
-        toast.error(t('pdv.error_loading_products', { message: error.response?.data?.msg || error.message }));
-      }
+        toast.error(
+          t('pdv.error_loading_products', { message: error.response?.data?.msg || error.message })
+        );
+      },
     }
   );
 
-  const { data: categories, isLoading: isLoadingCategories, isError: isErrorCategories } = useQuery(
-    ['categories', restaurantId],
-    () => fetchCategories(restaurantId),
-    {
-      enabled: !!restaurantId,
-      onError: (error) => {
-        toast.error(t('pdv.error_loading_categories', { message: error.response?.data?.msg || error.message }));
-      }
-    }
-  );
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    isError: isErrorCategories,
+  } = useQuery(['categories', restaurantId], () => fetchCategories(restaurantId), {
+    enabled: !!restaurantId,
+    onError: (error) => {
+      toast.error(
+        t('pdv.error_loading_categories', { message: error.response?.data?.msg || error.message })
+      );
+    },
+  });
 
   const fetchCashRegisterSession = async ({ queryKey }) => {
     const [, restaurantId, userId] = queryKey;
-    const { data } = await axiosInstance.get(`/api/cash-register/current-session?restaurant_id=${restaurantId}&user_id=${userId}`);
+    const { data } = await axiosInstance.get(
+      `/api/cash-register/current-session?restaurant_id=${restaurantId}&user_id=${userId}`
+    );
     return data;
   };
 
-  const { data: currentCashRegisterSession, isLoading: isLoadingCashRegisterSession, isError: isErrorCashRegisterSession } = useQuery(
-    ['cashRegisterSessions', restaurantId, user?.userId],
-    fetchCashRegisterSession,
-    {
-      enabled: !!restaurantId && !!user?.userId,
-      refetchInterval: 10000, // Refetch every 10 seconds to keep status updated
-      onError: (error) => {
-        // Only show toast if it's not a 404 (no open session)
-        if (error.response?.status !== 404) {
-          toast.error(t('pdv.error_loading_cash_register_session', { message: error.response?.data?.msg || error.message }));
-        }
-      },
-    }
-  );
+  const {
+    data: currentCashRegisterSession,
+    isLoading: isLoadingCashRegisterSession,
+    isError: isErrorCashRegisterSession,
+  } = useQuery(['cashRegisterSessions', restaurantId, user?.userId], fetchCashRegisterSession, {
+    enabled: !!restaurantId && !!user?.userId,
+    refetchInterval: 10000, // Refetch every 10 seconds to keep status updated
+    onError: (error) => {
+      // Only show toast if it's not a 404 (no open session)
+      if (error.response?.status !== 404) {
+        toast.error(
+          t('pdv.error_loading_cash_register_session', {
+            message: error.response?.data?.msg || error.message,
+          })
+        );
+      }
+    },
+  });
 
   const fetchCashOrders = async ({ queryKey }) => {
     const [, sessionId] = queryKey;
-    const { data } = await axiosInstance.get(`/api/cash-register/cash-orders?session_id=${sessionId}`);
+    const { data } = await axiosInstance.get(
+      `/api/cash-register/cash-orders?session_id=${sessionId}`
+    );
     return data;
   };
 
-  const { data: cashOrders, isLoading: isLoadingCashOrders, isError: isErrorCashOrders } = useQuery(
-    ['cashOrders', currentCashRegisterSession?.id],
-    fetchCashOrders,
-    {
-      enabled: !!currentCashRegisterSession?.id,
-      refetchInterval: 10000, // Refetch every 10 seconds to keep status updated
-      onError: (error) => {
-        toast.error(t('pdv.error_loading_cash_orders', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: cashOrders,
+    isLoading: isLoadingCashOrders,
+    isError: isErrorCashOrders,
+  } = useQuery(['cashOrders', currentCashRegisterSession?.id], fetchCashOrders, {
+    enabled: !!currentCashRegisterSession?.id,
+    refetchInterval: 10000, // Refetch every 10 seconds to keep status updated
+    onError: (error) => {
+      toast.error(
+        t('pdv.error_loading_cash_orders', { message: error.response?.data?.msg || error.message })
+      );
+    },
+  });
 
   // Mutations
   const updateOrderStatusMutation = useMutation(updateOrderStatus, {
@@ -289,8 +415,12 @@ const Pdv = () => {
       queryClient.invalidateQueries('orders');
     },
     onError: (error) => {
-      toast.error(t('pdv.error_updating_order_status', { message: error.response?.data?.msg || error.message }));
-    }
+      toast.error(
+        t('pdv.error_updating_order_status', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
   });
 
   const updateRestaurantOpenStatusMutation = useMutation(updateRestaurantOpenStatus, {
@@ -299,8 +429,12 @@ const Pdv = () => {
       queryClient.invalidateQueries(['restaurantStatus', restaurantId]);
     },
     onError: (error) => {
-      toast.error(t('pdv.error_updating_store_status', { message: error.response?.data?.msg || error.message }));
-    }
+      toast.error(
+        t('pdv.error_updating_store_status', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
   });
 
   const updateRestaurantPosStatusMutation = useMutation(updateRestaurantPosStatus, {
@@ -309,8 +443,10 @@ const Pdv = () => {
       queryClient.invalidateQueries(['restaurantStatus', restaurantId]);
     },
     onError: (error) => {
-      toast.error(t('pdv.error_updating_pos_status', { message: error.response?.data?.msg || error.message }));
-    }
+      toast.error(
+        t('pdv.error_updating_pos_status', { message: error.response?.data?.msg || error.message })
+      );
+    },
   });
 
   const createPublicOrderMutation = useMutation(createPublicOrder, {
@@ -320,20 +456,27 @@ const Pdv = () => {
       queryClient.invalidateQueries('orders'); // Refresh order list
     },
     onError: (error) => {
-      toast.error(t('pdv.error_creating_order', { message: error.response?.data?.msg || error.message }));
-    }
+      toast.error(
+        t('pdv.error_creating_order', { message: error.response?.data?.msg || error.message })
+      );
+    },
   });
 
-  const createTableOrderMutation = useMutation(({ restaurantId, orderData }) => createTableOrder({ restaurantId, orderData }), {
-    onSuccess: () => {
-      toast.success(t('pdv.order_created_success'));
-      resetOrderForm(); // Moved here
-      queryClient.invalidateQueries('orders'); // Refresh order list
-    },
-    onError: (error) => {
-      toast.error(t('pdv.error_creating_order', { message: error.response?.data?.msg || error.message }));
+  const createTableOrderMutation = useMutation(
+    ({ restaurantId, orderData }) => createTableOrder({ restaurantId, orderData }),
+    {
+      onSuccess: () => {
+        toast.success(t('pdv.order_created_success'));
+        resetOrderForm(); // Moved here
+        queryClient.invalidateQueries('orders'); // Refresh order list
+      },
+      onError: (error) => {
+        toast.error(
+          t('pdv.error_creating_order', { message: error.response?.data?.msg || error.message })
+        );
+      },
     }
-  });
+  );
 
   const createCashRegisterSession = async (sessionData) => {
     const { data } = await axiosInstance.post('/api/cash-register/open', sessionData);
@@ -346,7 +489,11 @@ const Pdv = () => {
       queryClient.invalidateQueries('cashRegisterSessions'); // Invalidate to refetch if needed
     },
     onError: (error) => {
-      toast.error(t('pdv.error_opening_cash_register', { message: error.response?.data?.msg || error.message }));
+      toast.error(
+        t('pdv.error_opening_cash_register', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
     },
   });
 
@@ -361,7 +508,11 @@ const Pdv = () => {
         queryClient.invalidateQueries('cashRegisterSessions'); // Invalidate to update balance
       },
       onError: (error) => {
-        toast.error(t('pdv.error_recording_withdrawal', { message: error.response?.data?.msg || error.message }));
+        toast.error(
+          t('pdv.error_recording_withdrawal', {
+            message: error.response?.data?.msg || error.message,
+          })
+        );
       },
     }
   );
@@ -377,18 +528,22 @@ const Pdv = () => {
         queryClient.invalidateQueries('cashRegisterSessions'); // Invalidate to update balance
       },
       onError: (error) => {
-        toast.error(t('pdv.error_recording_reinforcement', { message: error.response?.data?.msg || error.message }));
+        toast.error(
+          t('pdv.error_recording_reinforcement', {
+            message: error.response?.data?.msg || error.message,
+          })
+        );
       },
     }
   );
 
   // Helper Functions
   const calculateTotal = useMemo(() => {
-    return cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cartItems]);
 
   const calculateSubtotal = useMemo(() => {
-    return cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cartItems]);
 
   const calculateServiceTax = useMemo(() => {
@@ -401,10 +556,10 @@ const Pdv = () => {
 
   const handleAddToCart = (product) => {
     console.log('Product object:', product);
-    setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id);
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === product.id);
       if (existingItem) {
-        return prevItems.map(item =>
+        return prevItems.map((item) =>
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
@@ -423,20 +578,18 @@ const Pdv = () => {
   };
 
   const handleRemoveFromCart = (productId) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
   };
 
   const handleQuantityChange = (productId, change) => {
-    setCartItems(prevItems => {
-      const item = prevItems.find(item => item.id === productId);
+    setCartItems((prevItems) => {
+      const item = prevItems.find((item) => item.id === productId);
       if (item) {
         const newQuantity = item.quantity + change;
         if (newQuantity <= 0) {
-          return prevItems.filter(i => i.id !== productId);
+          return prevItems.filter((i) => i.id !== productId);
         } else {
-          return prevItems.map(i =>
-            i.id === productId ? { ...i, quantity: newQuantity } : i
-          );
+          return prevItems.map((i) => (i.id === productId ? { ...i, quantity: newQuantity } : i));
         }
       }
       return prevItems;
@@ -481,7 +634,7 @@ const Pdv = () => {
 
     let totalCash = Number(session.opening_cash);
 
-    movements?.forEach(movement => {
+    movements?.forEach((movement) => {
       if (movement.type === 'reinforcement') {
         totalCash += Number(movement.amount);
       } else if (movement.type === 'withdrawal') {
@@ -489,7 +642,7 @@ const Pdv = () => {
       }
     });
 
-    orders?.forEach(order => {
+    orders?.forEach((order) => {
       totalCash += Number(order.total_amount);
     });
 
@@ -512,7 +665,13 @@ const Pdv = () => {
     let orderData = {
       restaurant_id: restaurantId,
       total_amount: calculateFinalTotal,
-      items: cartItems.map(item => ({ product_id: item.id, quantity: item.quantity, price: item.price, name: item.name, sku: item.sku })),
+      items: cartItems.map((item) => ({
+        product_id: item.id,
+        quantity: item.quantity,
+        price: item.price,
+        name: item.name,
+        sku: item.sku,
+      })),
       payment_method: paymentMethod,
       notes: notes,
       platform: 'other', // Consistent platform for PDV orders
@@ -530,7 +689,8 @@ const Pdv = () => {
         table_id: selectedTable.id,
       };
       createTableOrderMutation.mutate({ restaurantId, orderData });
-    } else { // orderType === 'delivery'
+    } else {
+      // orderType === 'delivery'
       if (!customerName || !customerPhone) {
         toast.error(t('pdv.customer_details_required'));
         return;
@@ -560,24 +720,65 @@ const Pdv = () => {
   };
 
   const handlePosStatusToggle = (event) => {
-    updateRestaurantPosStatusMutation.mutate({ restaurantId, pos_status: event.target.checked ? 'open' : 'closed' });
+    updateRestaurantPosStatusMutation.mutate({
+      restaurantId,
+      pos_status: event.target.checked ? 'open' : 'closed',
+    });
   };
 
-  const orderStatuses = useMemo(() => [
-    { id: 'pending', label: t('pdv.status_pending'), color: 'var(--info)', icon: <InboxIcon /> },
-    { id: 'preparing', label: t('pdv.status_preparing'), color: 'var(--warning)', icon: <FireIcon /> },
-    { id: 'ready', label: t('pdv.status_ready'), color: 'var(--success)', icon: <CheckCircleIcon /> },
-    { id: 'on_the_way', label: t('pdv.status_on_the_way'), color: 'var(--primary)', icon: <MotorcycleIcon /> },
-    { id: 'delivered', label: t('pdv.status_delivered'), color: 'var(--gray)', icon: <ClipboardCheckIcon /> },
-    { id: 'concluded', label: t('pdv.status_concluded'), color: 'var(--success)', icon: <CheckCircleIcon /> }, // Assuming concluded is similar to delivered
-    { id: 'cancelled', label: t('pdv.status_cancelled'), color: 'var(--danger)', icon: <CloseIcon /> },
-    { id: 'rejected', label: t('pdv.status_rejected'), color: 'var(--danger)', icon: <CloseIcon /> },
-  ], [t]);
+  const orderStatuses = useMemo(
+    () => [
+      { id: 'pending', label: t('pdv.status_pending'), color: 'var(--info)', icon: <InboxIcon /> },
+      {
+        id: 'preparing',
+        label: t('pdv.status_preparing'),
+        color: 'var(--warning)',
+        icon: <FireIcon />,
+      },
+      {
+        id: 'ready',
+        label: t('pdv.status_ready'),
+        color: 'var(--success)',
+        icon: <CheckCircleIcon />,
+      },
+      {
+        id: 'on_the_way',
+        label: t('pdv.status_on_the_way'),
+        color: 'var(--primary)',
+        icon: <MotorcycleIcon />,
+      },
+      {
+        id: 'delivered',
+        label: t('pdv.status_delivered'),
+        color: 'var(--gray)',
+        icon: <ClipboardCheckIcon />,
+      },
+      {
+        id: 'concluded',
+        label: t('pdv.status_concluded'),
+        color: 'var(--success)',
+        icon: <CheckCircleIcon />,
+      }, // Assuming concluded is similar to delivered
+      {
+        id: 'cancelled',
+        label: t('pdv.status_cancelled'),
+        color: 'var(--danger)',
+        icon: <CloseIcon />,
+      },
+      {
+        id: 'rejected',
+        label: t('pdv.status_rejected'),
+        color: 'var(--danger)',
+        icon: <CloseIcon />,
+      },
+    ],
+    [t]
+  );
 
   const ordersByStatus = useMemo(() => {
     const grouped = {};
-    orderStatuses.forEach(status => {
-      grouped[status.id] = orders?.filter(order => order.status === status.id) || [];
+    orderStatuses.forEach((status) => {
+      grouped[status.id] = orders?.filter((order) => order.status === status.id) || [];
     });
     return grouped;
   }, [orders, orderStatuses]);
@@ -587,7 +788,7 @@ const Pdv = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Set to start of today
 
-    return orders.filter(order => {
+    return orders.filter((order) => {
       const orderDate = new Date(order.order_date);
       orderDate.setHours(0, 0, 0, 0); // Set to start of order date
       return orderDate.getTime() === today.getTime();
@@ -597,16 +798,16 @@ const Pdv = () => {
   const ordersTodayCount = ordersToday.length;
 
   const completedOrdersCount = useMemo(() => {
-    return ordersToday.filter(order => ['delivered', 'concluded'].includes(order.status)).length;
+    return ordersToday.filter((order) => ['delivered', 'concluded'].includes(order.status)).length;
   }, [ordersToday]);
 
   const inPreparationOrdersCount = useMemo(() => {
-    return ordersToday.filter(order => ['pending', 'preparing'].includes(order.status)).length;
+    return ordersToday.filter((order) => ['pending', 'preparing'].includes(order.status)).length;
   }, [ordersToday]);
 
   const revenueToday = useMemo(() => {
     return ordersToday
-      .filter(order => ['delivered', 'concluded'].includes(order.status))
+      .filter((order) => ['delivered', 'concluded'].includes(order.status))
       .reduce((sum, order) => sum + Number(order.total_amount), 0);
   }, [ordersToday]);
 
@@ -712,7 +913,7 @@ const Pdv = () => {
   }, [isMobile]);
 
   const toggleOrderSectionMobile = () => {
-    setShowOrderSectionMobile(prev => !prev);
+    setShowOrderSectionMobile((prev) => !prev);
   };
 
   if (isLoadingOrders || isLoadingRestaurantStatus || isLoadingProducts || isLoadingCategories) {
@@ -741,23 +942,33 @@ const Pdv = () => {
 
   return (
     <div className="app-container">
-
       {/* Main Content */}
       <main className="main-content">
-
         {/* Tabs Container */}
         <div className="tabs-container">
           <div className="tabs-header">
-            <button className={currentTab === 'pdv' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('pdv')}>
+            <button
+              className={currentTab === 'pdv' ? 'tab-btn active' : 'tab-btn'}
+              onClick={() => setCurrentTab('pdv')}
+            >
               <PointOfSaleIcon /> {t('pdv.tab_pdv')}
             </button>
-            <button className={currentTab === 'tables' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('tables')}>
+            <button
+              className={currentTab === 'tables' ? 'tab-btn active' : 'tab-btn'}
+              onClick={() => setCurrentTab('tables')}
+            >
               <RestaurantIcon /> {t('pdv.tab_tables')}
             </button>
-            <button className={currentTab === 'orders' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('orders')}>
+            <button
+              className={currentTab === 'orders' ? 'tab-btn active' : 'tab-btn'}
+              onClick={() => setCurrentTab('orders')}
+            >
               <AssignmentIcon /> {t('pdv.tab_orders')}
             </button>
-            <button className={currentTab === 'kanban' ? 'tab-btn active' : 'tab-btn'} onClick={() => setCurrentTab('kanban')}>
+            <button
+              className={currentTab === 'kanban' ? 'tab-btn active' : 'tab-btn'}
+              onClick={() => setCurrentTab('kanban')}
+            >
               <AssignmentIcon /> {t('pdv.tab_kanban')}
             </button>
           </div>
@@ -769,11 +980,20 @@ const Pdv = () => {
                 {/* Products Section */}
                 <div className="products-section">
                   <div className="categories-tabs">
-                    <div className="category-tab active" onClick={() => setSelectedProductCategory('')}>{t('pdv.all_categories')}</div>
-                    {categories?.map(category => (
+                    <div
+                      className="category-tab active"
+                      onClick={() => setSelectedProductCategory('')}
+                    >
+                      {t('pdv.all_categories')}
+                    </div>
+                    {categories?.map((category) => (
                       <div
                         key={category.id}
-                        className={selectedProductCategory === category.id ? 'category-tab active' : 'category-tab'}
+                        className={
+                          selectedProductCategory === category.id
+                            ? 'category-tab active'
+                            : 'category-tab'
+                        }
                         onClick={() => setSelectedProductCategory(category.id)}
                       >
                         {category.name}
@@ -782,8 +1002,12 @@ const Pdv = () => {
                   </div>
 
                   <div className="products-grid">
-                    {products?.map(product => (
-                      <div className="product-card" key={product.id} onClick={() => handleAddToCart(product)}>
+                    {products?.map((product) => (
+                      <div
+                        className="product-card"
+                        key={product.id}
+                        onClick={() => handleAddToCart(product)}
+                      >
                         <div className="product-image">
                           {product.image && product.image.startsWith('http') ? (
                             <img src={product.image} alt={product.name} />
@@ -792,17 +1016,26 @@ const Pdv = () => {
                           )}
                         </div>
                         <div className="product-name">{product.name}</div>
-                        <div className="product-price">R$ {Number(product.price).toFixed(2).replace('.', ',')}</div>
+                        <div className="product-price">
+                          R$ {Number(product.price).toFixed(2).replace('.', ',')}
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Order Section */}
-                <div className={isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'} id="orderSection">
+                <div
+                  className={
+                    isMobile && !showOrderSectionMobile ? 'order-section' : 'order-section visible'
+                  }
+                  id="orderSection"
+                >
                   <div className="order-header">
                     <h3 className="order-title">
-                      {selectedTable ? `${t('pdv.command_table')} ${selectedTable.table_number}` : t('pdv.current_order_title')}
+                      {selectedTable
+                        ? `${t('pdv.command_table')} ${selectedTable.table_number}`
+                        : t('pdv.current_order_title')}
                     </h3>
                     <ToggleButtonGroup
                       value={orderType}
@@ -830,7 +1063,9 @@ const Pdv = () => {
                       </ToggleButton>
                     </ToggleButtonGroup>
                     <div>
-                      <button className="btn btn-outline" onClick={resetOrderForm}> {/* Using resetOrderForm to clear customer details */}
+                      <button className="btn btn-outline" onClick={resetOrderForm}>
+                        {' '}
+                        {/* Using resetOrderForm to clear customer details */}
                         <PointOfSaleIcon /> {t('pdv.counter_sale')}
                       </button>
                       <button className="order-clear" onClick={clearOrder}>
@@ -840,7 +1075,15 @@ const Pdv = () => {
                   </div>
 
                   {orderType === 'dine_in' && (
-                    <Box sx={{ mb: 2, p: 2, border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
+                    <Box
+                      sx={{
+                        mb: 2,
+                        p: 2,
+                        border: '1px solid #ddd',
+                        borderRadius: '8px',
+                        backgroundColor: '#f9f9f9',
+                      }}
+                    >
                       {selectedTable ? (
                         <Typography variant="h6" color="primary">
                           {t('pdv.selected_table')}: {selectedTable.table_number}
@@ -854,7 +1097,9 @@ const Pdv = () => {
                   )}
 
                   {orderType === 'delivery' && (
-                    <Box sx={{ mb: 2, position: 'relative' }}> {/* Added position: 'relative' here */}
+                    <Box sx={{ mb: 2, position: 'relative' }}>
+                      {' '}
+                      {/* Added position: 'relative' here */}
                       <TextField
                         fullWidth
                         label={t('pdv.customer_search')}
@@ -864,10 +1109,26 @@ const Pdv = () => {
                       />
                       {isLoadingSearchResults && <CircularProgress size={20} />}
                       {customerSearchTerm.length > 2 && searchResults?.length > 0 && (
-                        <Paper sx={{ maxHeight: 200, overflow: 'auto', position: 'absolute', zIndex: 100, width: '100%', left: 0, right: 0 }}> {/* Adjusted width and positioning */}
+                        <Paper
+                          sx={{
+                            maxHeight: 200,
+                            overflow: 'auto',
+                            position: 'absolute',
+                            zIndex: 100,
+                            width: '100%',
+                            left: 0,
+                            right: 0,
+                          }}
+                        >
+                          {' '}
+                          {/* Adjusted width and positioning */}
                           <List>
                             {searchResults.map((customer) => (
-                              <ListItem button key={customer.id} onClick={() => handleCustomerSelect(customer)}>
+                              <ListItem
+                                button
+                                key={customer.id}
+                                onClick={() => handleCustomerSelect(customer)}
+                              >
                                 <ListItemText primary={customer.name} secondary={customer.phone} />
                               </ListItem>
                             ))}
@@ -904,20 +1165,43 @@ const Pdv = () => {
 
                   <div className="order-items" id="orderItems">
                     {cartItems.length === 0 ? (
-                      <div style={{ textAlign: 'center', padding: '20px', color: '#999' }}>{t('pdv.no_items_added')}</div>
+                      <div style={{ textAlign: 'center', padding: '20px', color: '#999' }}>
+                        {t('pdv.no_items_added')}
+                      </div>
                     ) : (
-                      cartItems.map(item => (
+                      cartItems.map((item) => (
                         <div className="order-item" key={item.id}>
-                          <div className="item-image">{item.image && item.image.startsWith('http') ? <img src={item.image} alt={item.name} /> : item.image}</div>
+                          <div className="item-image">
+                            {item.image && item.image.startsWith('http') ? (
+                              <img src={item.image} alt={item.name} />
+                            ) : (
+                              item.image
+                            )}
+                          </div>
                           <div className="item-info">
                             <div className="item-name">{item.name}</div>
-                            <div className="item-price">R$ {Number(item.price).toFixed(2).replace('.', ',')}</div>
+                            <div className="item-price">
+                              R$ {Number(item.price).toFixed(2).replace('.', ',')}
+                            </div>
                           </div>
                           <div className="item-actions">
-                            <button className="quantity-btn" onClick={() => handleQuantityChange(item.id, -1)}>-</button>
+                            <button
+                              className="quantity-btn"
+                              onClick={() => handleQuantityChange(item.id, -1)}
+                            >
+                              -
+                            </button>
                             <div className="quantity-value">{item.quantity}</div>
-                            <button className="quantity-btn" onClick={() => handleQuantityChange(item.id, 1)}>+</button>
-                            <button className="remove-item" onClick={() => handleRemoveFromCart(item.id)}>
+                            <button
+                              className="quantity-btn"
+                              onClick={() => handleQuantityChange(item.id, 1)}
+                            >
+                              +
+                            </button>
+                            <button
+                              className="remove-item"
+                              onClick={() => handleRemoveFromCart(item.id)}
+                            >
                               <DeleteIcon />
                             </button>
                           </div>
@@ -930,22 +1214,37 @@ const Pdv = () => {
                 <div className="order-summary">
                   <div className="summary-row">
                     <span className="summary-label">{t('pdv.subtotal_label')}</span>
-                    <span className="summary-value" id="subtotal">R$ {calculateSubtotal.toFixed(2).replace('.', ',')}</span>
+                    <span className="summary-value" id="subtotal">
+                      R$ {calculateSubtotal.toFixed(2).replace('.', ',')}
+                    </span>
                   </div>
                   <div className="summary-row">
                     <span className="summary-label">{t('pdv.service_tax_label')}</span>
-                    <span className="summary-value" id="serviceTax">R$ {calculateServiceTax.toFixed(2).replace('.', ',')}</span>
+                    <span className="summary-value" id="serviceTax">
+                      R$ {calculateServiceTax.toFixed(2).replace('.', ',')}
+                    </span>
                   </div>
                   <div className="summary-row total-row">
                     <span className="summary-label">{t('pdv.total_label')}</span>
-                    <span className="summary-value total-value" id="total">R$ {calculateFinalTotal.toFixed(2).replace('.', ',')}</span>
+                    <span className="summary-value total-value" id="total">
+                      R$ {calculateFinalTotal.toFixed(2).replace('.', ',')}
+                    </span>
                   </div>
                 </div>
                 <div className="order-actions">
                   <button className="btn btn-outline" onClick={openPaymentModal}>
                     <PaymentsIcon /> {t('pdv.payment_button')}
                   </button>
-                  <button className="btn btn-success" onClick={handlePlaceOrder} disabled={(createTableOrderMutation.isLoading || createPublicOrderMutation.isLoading) || cartItems.length === 0 || !paymentMethod}>
+                  <button
+                    className="btn btn-success"
+                    onClick={handlePlaceOrder}
+                    disabled={
+                      createTableOrderMutation.isLoading ||
+                      createPublicOrderMutation.isLoading ||
+                      cartItems.length === 0 ||
+                      !paymentMethod
+                    }
+                  >
                     <CheckCircleIcon /> {t('pdv.finalize_button')}
                   </button>
                 </div>
@@ -953,103 +1252,115 @@ const Pdv = () => {
             </div>
 
             {/* Tables Tab */}
-            <div className={currentTab === 'tables' ? 'tab-pane active' : 'tab-pane'} id="tables-tab">
-                <div className="tables-section">
-                    <div className="tables-grid" id="tablesGrid">
-                        {/* Tables will be dynamically generated */}
-                        {isLoadingTables ? (
-                            <CircularProgress />
-                        ) : isErrorTables ? (
-                            <Alert severity="error">{t('pdv.error_loading_tables')}</Alert>
-                        ) : tables?.length === 0 ? (
-                            <Typography variant="h6" color="textSecondary" sx={{ textAlign: 'center', mt: 4 }}>
-                                {t('pdv.no_tables_found')}
-                            </Typography>
-                        ) : (
-                            tables?.map(table => {
-                                let statusClass = '';
-                                let statusText = '';
-                                
-                                switch(table.status) {
-                                    case 'available':
-                                        statusClass = 'status-available';
-                                        statusText = t('pdv.table_status_available');
-                                        break;
-                                    case 'occupied':
-                                        statusClass = 'status-occupied';
-                                        statusText = t('pdv.table_status_occupied');
-                                        break;
-                                    case 'reserved':
-                                        statusClass = 'status-reserved';
-                                        statusText = t('pdv.table_status_reserved');
-                                        break;
-                                    default:
-                                        statusClass = '';
-                                        statusText = table.status;
-                                }
-                                
-                                return (
-                                    <div
-                                        key={table.id}
-                                        className={`table-card ${selectedTable?.id === table.id ? 'active' : ''}`}
-                                        onClick={() => handleSelectTableCard(table)}
-                                    >
-                                        <div className="table-number">{table.table_number}</div>
-                                        <div className={`table-status ${statusClass}`}>{statusText}</div>
-                                        <div className="table-capacity">{t('pdv.table_capacity', { capacity: table.capacity })}</div>
-                                        {table.active_orders_count > 0 ? (
-                                            <div className="table-badge">{table.active_orders_count}</div>
-                                        ) : ''}
-                                    </div>
-                                );
-                            })
-                        )}
-                    </div>
+            <div
+              className={currentTab === 'tables' ? 'tab-pane active' : 'tab-pane'}
+              id="tables-tab"
+            >
+              <div className="tables-section">
+                <div className="tables-grid" id="tablesGrid">
+                  {/* Tables will be dynamically generated */}
+                  {isLoadingTables ? (
+                    <CircularProgress />
+                  ) : isErrorTables ? (
+                    <Alert severity="error">{t('pdv.error_loading_tables')}</Alert>
+                  ) : tables?.length === 0 ? (
+                    <Typography
+                      variant="h6"
+                      color="textSecondary"
+                      sx={{ textAlign: 'center', mt: 4 }}
+                    >
+                      {t('pdv.no_tables_found')}
+                    </Typography>
+                  ) : (
+                    tables?.map((table) => {
+                      let statusClass = '';
+                      let statusText = '';
+
+                      switch (table.status) {
+                        case 'available':
+                          statusClass = 'status-available';
+                          statusText = t('pdv.table_status_available');
+                          break;
+                        case 'occupied':
+                          statusClass = 'status-occupied';
+                          statusText = t('pdv.table_status_occupied');
+                          break;
+                        case 'reserved':
+                          statusClass = 'status-reserved';
+                          statusText = t('pdv.table_status_reserved');
+                          break;
+                        default:
+                          statusClass = '';
+                          statusText = table.status;
+                      }
+
+                      return (
+                        <div
+                          key={table.id}
+                          className={`table-card ${selectedTable?.id === table.id ? 'active' : ''}`}
+                          onClick={() => handleSelectTableCard(table)}
+                        >
+                          <div className="table-number">{table.table_number}</div>
+                          <div className={`table-status ${statusClass}`}>{statusText}</div>
+                          <div className="table-capacity">
+                            {t('pdv.table_capacity', { capacity: table.capacity })}
+                          </div>
+                          {table.active_orders_count > 0 ? (
+                            <div className="table-badge">{table.active_orders_count}</div>
+                          ) : (
+                            ''
+                          )}
+                        </div>
+                      );
+                    })
+                  )}
                 </div>
+              </div>
             </div>
 
-            
-
             {/* Orders Tab */}
-            <div className={currentTab === 'orders' ? 'tab-pane active' : 'tab-pane'} id="orders-tab">
+            <div
+              className={currentTab === 'orders' ? 'tab-pane active' : 'tab-pane'}
+              id="orders-tab"
+            >
               {/* Stats Cards */}
               <div className="stats-cards">
-                  <div className="stat-card">
-                      <div className="stat-icon primary">
-                          <ShoppingBasketIcon />
-                      </div>
-                      <div>
-                          <div className="stat-value">{ordersTodayCount}</div>
-                          <div className="stat-label">{t('pdv.orders_today')}</div>
-                      </div>
+                <div className="stat-card">
+                  <div className="stat-icon primary">
+                    <ShoppingBasketIcon />
                   </div>
-                  <div className="stat-card">
-                      <div className="stat-icon success">
-                          <CheckCircleIcon />
-                      </div>
-                      <div>
-                          <div className="stat-value">{completedOrdersCount}</div>
-                          <div className="stat-label">{t('pdv.completed_orders')}</div>
-                      </div>
+                  <div>
+                    <div className="stat-value">{ordersTodayCount}</div>
+                    <div className="stat-label">{t('pdv.orders_today')}</div>
                   </div>
-                  <div className="stat-card">
-                      <div className="stat-icon warning">
-                          <FireIcon />
-                      </div>
-                      <div>
-                          <div className="stat-value">{inPreparationOrdersCount}</div>
-                          <div className="stat-label">{t('pdv.in_preparation')}</div>
-                      </div>
+                </div>
+                <div className="stat-card">
+                  <div className="stat-icon success">
+                    <CheckCircleIcon />
                   </div>
-                  <div className="stat-card">
-                      <div className="stat-icon info">
-                          <PaymentsIcon />
-                      </div>
-                      <div>
-                          <div className="stat-value">R$ {revenueToday.toFixed(2).replace('.', ',')}</div>
-                          <div className="stat-label">{t('pdv.revenue_today')}</div>
-                      </div>
+                  <div>
+                    <div className="stat-value">{completedOrdersCount}</div>
+                    <div className="stat-label">{t('pdv.completed_orders')}</div>
                   </div>
+                </div>
+                <div className="stat-card">
+                  <div className="stat-icon warning">
+                    <FireIcon />
+                  </div>
+                  <div>
+                    <div className="stat-value">{inPreparationOrdersCount}</div>
+                    <div className="stat-label">{t('pdv.in_preparation')}</div>
+                  </div>
+                </div>
+                <div className="stat-card">
+                  <div className="stat-icon info">
+                    <PaymentsIcon />
+                  </div>
+                  <div>
+                    <div className="stat-value">R$ {revenueToday.toFixed(2).replace('.', ',')}</div>
+                    <div className="stat-label">{t('pdv.revenue_today')}</div>
+                  </div>
+                </div>
               </div>
               <div className="orders-section">
                 <div className="section-header">
@@ -1077,21 +1388,36 @@ const Pdv = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orders?.map(order => (
+                    {orders?.map((order) => (
                       <tr key={order.id}>
-                        <td className="order-id">#{order.external_order_id || order.id.substring(0, 8)}</td>
+                        <td className="order-id">
+                          #{order.external_order_id || order.id.substring(0, 8)}
+                        </td>
                         <td>
                           <div className="customer-info">
-                            <div className="customer-avatar">{order.customer_details.name ? order.customer_details.name.substring(0, 2).toUpperCase() : '--'}</div>
+                            <div className="customer-avatar">
+                              {order.customer_details.name
+                                ? order.customer_details.name.substring(0, 2).toUpperCase()
+                                : '--'}
+                            </div>
                             <span>{order.customer_details.name}</span>
                           </div>
                         </td>
                         <td>{new Date(order.order_date).toLocaleString()}</td>
                         <td>{order.items.length}</td>
                         <td>R$ {Number(order.total_amount).toFixed(2).replace('.', ',')}</td>
-                        <td><span className={`status-badge ${order.status}`}>{orderStatuses.find(s => s.id === order.status)?.label || order.status}</span></td>
                         <td>
-                          <button className="action-btn" title={t('pdv.view_action')} onClick={() => openOrderDetailsModal(order)}>
+                          <span className={`status-badge ${order.status}`}>
+                            {orderStatuses.find((s) => s.id === order.status)?.label ||
+                              order.status}
+                          </span>
+                        </td>
+                        <td>
+                          <button
+                            className="action-btn"
+                            title={t('pdv.view_action')}
+                            onClick={() => openOrderDetailsModal(order)}
+                          >
                             <EyeIcon />
                           </button>
                           <button className="action-btn" title={t('pdv.edit_action')}>
@@ -1109,11 +1435,22 @@ const Pdv = () => {
             </div>
 
             {/* Kanban Tab */}
-            <div className={currentTab === 'kanban' ? 'tab-pane active' : 'tab-pane'} id="kanban-tab">
+            <div
+              className={currentTab === 'kanban' ? 'tab-pane active' : 'tab-pane'}
+              id="kanban-tab"
+            >
               <div className="main-container">
                 {/* New button for "Abrir Caixa" / "Caixa Aberto" */}
                 <div style={{ marginBottom: '20px', textAlign: 'right' }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 2, mb: 2 }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      alignItems: 'center',
+                      gap: 2,
+                      mb: 2,
+                    }}
+                  >
                     <FormControlLabel
                       control={
                         <Switch
@@ -1146,7 +1483,11 @@ const Pdv = () => {
                       startIcon={<PointOfSaleIcon />}
                       onClick={handleOpenCashRegisterOptionsModal} // Will be implemented next
                     >
-                      {t('pdv.cash_register_open')} ({formatTimeElapsed(currentCashRegisterSession.opening_time)}) - R$ {calculateCurrentCash(currentCashRegisterSession, null, cashOrders).toFixed(2).replace('.', ',')}
+                      {t('pdv.cash_register_open')} (
+                      {formatTimeElapsed(currentCashRegisterSession.opening_time)}) - R${' '}
+                      {calculateCurrentCash(currentCashRegisterSession, null, cashOrders)
+                        .toFixed(2)
+                        .replace('.', ',')}
                     </Button>
                   ) : (
                     <Button
@@ -1160,64 +1501,84 @@ const Pdv = () => {
                   )}
                 </div>
                 <div className="kanban-board" id="kanbanBoard">
-                  {orderStatuses.filter(s => ['pending', 'preparing', 'ready', 'on_the_way', 'delivered'].includes(s.id)).map(statusCol => (
-                    <div
-                      className={`kanban-column column-${statusCol.id}`}
-                      data-status={statusCol.id}
-                      key={statusCol.id}
-                      onDragOver={handleDragOver}
-                      onDragEnter={handleDragEnter}
-                      onDragLeave={handleDragLeave}
-                      onDrop={(e) => handleDrop(e, statusCol.id)}
-                    >
-                      <div className="column-header">
-                        <div className="column-title">
-                          {statusCol.icon}
-                          <span>{statusCol.label}</span>
-                        </div>
-                        <div className="column-count">{ordersByStatus[statusCol.id]?.length || 0}</div>
-                      </div>
-                      <div className="column-content" data-column={statusCol.id}>
-                        {ordersByStatus[statusCol.id]?.map(order => (
-                          <div
-                            className="order-card"
-                            draggable="true"
-                            onDragStart={(e) => handleDragStart(e, order.id)}
-                            onDragEnd={handleDragEnd}
-                            key={order.id}
-                            data-order-id={order.id}
-                          >
-                            <div className="order-header">
-                              <div className="order-id">#{order.external_order_id || order.id.substring(0, 8)}</div>
-                              <div className="order-time">{new Date(order.order_date).toLocaleTimeString()}</div>
-                            </div>
-                            <div className="customer-info">
-                              <div className="customer-avatar">{order.customer_details.name ? order.customer_details.name.substring(0, 2).toUpperCase() : '--'}</div>
-                              <div>
-                                <div className="customer-name">{order.customer_details.name}</div>
-                                <div className="customer-phone">{order.customer_details.phone}</div>
-                              </div>
-                            </div>
-                            <div className="order-items">
-                              {/* Items will be listed here */}
-                            </div>
-                            <div className="order-footer">
-                              <div className="order-total">R$ {Number(order.total_amount).toFixed(2).replace('.', ',')}</div>
-                              <div className="order-payment">{order.payment_method}</div>
-                              <div className="order-actions">
-                                <button className="action-btn" title="Detalhes" onClick={() => openOrderDetailsModal(order)}>
-                                  <EyeIcon />
-                                </button>
-                                <button className="action-btn" title="Imprimir">
-                                  <PrintIcon />
-                                </button>
-                              </div>
-                            </div>
+                  {orderStatuses
+                    .filter((s) =>
+                      ['pending', 'preparing', 'ready', 'on_the_way', 'delivered'].includes(s.id)
+                    )
+                    .map((statusCol) => (
+                      <div
+                        className={`kanban-column column-${statusCol.id}`}
+                        data-status={statusCol.id}
+                        key={statusCol.id}
+                        onDragOver={handleDragOver}
+                        onDragEnter={handleDragEnter}
+                        onDragLeave={handleDragLeave}
+                        onDrop={(e) => handleDrop(e, statusCol.id)}
+                      >
+                        <div className="column-header">
+                          <div className="column-title">
+                            {statusCol.icon}
+                            <span>{statusCol.label}</span>
                           </div>
-                        ))}
+                          <div className="column-count">
+                            {ordersByStatus[statusCol.id]?.length || 0}
+                          </div>
+                        </div>
+                        <div className="column-content" data-column={statusCol.id}>
+                          {ordersByStatus[statusCol.id]?.map((order) => (
+                            <div
+                              className="order-card"
+                              draggable="true"
+                              onDragStart={(e) => handleDragStart(e, order.id)}
+                              onDragEnd={handleDragEnd}
+                              key={order.id}
+                              data-order-id={order.id}
+                            >
+                              <div className="order-header">
+                                <div className="order-id">
+                                  #{order.external_order_id || order.id.substring(0, 8)}
+                                </div>
+                                <div className="order-time">
+                                  {new Date(order.order_date).toLocaleTimeString()}
+                                </div>
+                              </div>
+                              <div className="customer-info">
+                                <div className="customer-avatar">
+                                  {order.customer_details.name
+                                    ? order.customer_details.name.substring(0, 2).toUpperCase()
+                                    : '--'}
+                                </div>
+                                <div>
+                                  <div className="customer-name">{order.customer_details.name}</div>
+                                  <div className="customer-phone">
+                                    {order.customer_details.phone}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="order-items">{/* Items will be listed here */}</div>
+                              <div className="order-footer">
+                                <div className="order-total">
+                                  R$ {Number(order.total_amount).toFixed(2).replace('.', ',')}
+                                </div>
+                                <div className="order-payment">{order.payment_method}</div>
+                                <div className="order-actions">
+                                  <button
+                                    className="action-btn"
+                                    title="Detalhes"
+                                    onClick={() => openOrderDetailsModal(order)}
+                                  >
+                                    <EyeIcon />
+                                  </button>
+                                  <button className="action-btn" title="Imprimir">
+                                    <PrintIcon />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             </div>
@@ -1230,16 +1591,27 @@ const Pdv = () => {
         <div className="modal-content">
           <div className="modal-header">
             <h3 className="modal-title">{t('pdv.payment_modal_title')}</h3>
-            <button className="close-modal" onClick={closePaymentModal}>&times;</button>
+            <button className="close-modal" onClick={closePaymentModal}>
+              &times;
+            </button>
           </div>
           <div className="modal-body">
             <div className="form-group">
               <label className="form-label">{t('pdv.total_value_label')}</label>
-              <input type="text" className="form-control" value={`R$ ${calculateFinalTotal.toFixed(2).replace('.', ',')}`} readOnly />
+              <input
+                type="text"
+                className="form-control"
+                value={`R$ ${calculateFinalTotal.toFixed(2).replace('.', ',')}`}
+                readOnly
+              />
             </div>
             <div className="form-group">
               <label className="form-label">{t('pdv.payment_method_label')}</label>
-              <select className="form-control" value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+              <select
+                className="form-control"
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              >
                 <option value="">{t('pdv.select_option')}</option>
                 <option value="cash">{t('pdv.payment_cash')}</option>
                 <option value="credit">{t('pdv.payment_credit')}</option>
@@ -1277,13 +1649,20 @@ const Pdv = () => {
         {selectedOrder && (
           <div className="modal-content">
             <div className="modal-header">
-              <h3 className="modal-title">{t('pdv.order_details_modal_title')} #{selectedOrder.external_order_id || selectedOrder.id?.substring(0, 8)}</h3>
-              <button className="close-modal" onClick={closeOrderDetailsModal}>&times;</button>
+              <h3 className="modal-title">
+                {t('pdv.order_details_modal_title')} #
+                {selectedOrder.external_order_id || selectedOrder.id?.substring(0, 8)}
+              </h3>
+              <button className="close-modal" onClick={closeOrderDetailsModal}>
+                &times;
+              </button>
             </div>
             <div className="modal-body">
               <div className="order-details-grid">
                 <div className="order-info-card">
-                  <h4 className="info-card-title"><PersonIcon /> {t('pdv.customer_info_title')}</h4>
+                  <h4 className="info-card-title">
+                    <PersonIcon /> {t('pdv.customer_info_title')}
+                  </h4>
                   <div className="info-item">
                     <span className="info-label">{t('pdv.name_label')}</span>
                     <span className="info-value">{selectedOrder.customer_details.name}</span>
@@ -1296,14 +1675,20 @@ const Pdv = () => {
                 </div>
 
                 <div className="order-info-card">
-                  <h4 className="info-card-title"><InfoIcon /> {t('pdv.order_info_title')}</h4>
+                  <h4 className="info-card-title">
+                    <InfoIcon /> {t('pdv.order_info_title')}
+                  </h4>
                   <div className="info-item">
                     <span className="info-label">{t('pdv.table_header_datetime')}</span>
-                    <span className="info-value">{new Date(selectedOrder.order_date).toLocaleString()}</span>
+                    <span className="info-value">
+                      {new Date(selectedOrder.order_date).toLocaleString()}
+                    </span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">{t('pdv.order_number_label')}</span>
-                    <span className="info-value">#{selectedOrder.external_order_id || selectedOrder.id?.substring(0, 8)}</span>
+                    <span className="info-value">
+                      #{selectedOrder.external_order_id || selectedOrder.id?.substring(0, 8)}
+                    </span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">{t('pdv.payment_method_label_details')}</span>
@@ -1311,12 +1696,19 @@ const Pdv = () => {
                   </div>
                   <div className="info-item">
                     <span className="info-label">{t('pdv.table_header_status')}</span>
-                    <span className="info-value"><span className={`status-badge ${selectedOrder.status}`}>{orderStatuses.find(s => s.id === selectedOrder.status)?.label || selectedOrder.status}</span></span>
+                    <span className="info-value">
+                      <span className={`status-badge ${selectedOrder.status}`}>
+                        {orderStatuses.find((s) => s.id === selectedOrder.status)?.label ||
+                          selectedOrder.status}
+                      </span>
+                    </span>
                   </div>
                 </div>
               </div>
 
-              <h4 style={{ margin: '20px 0 15px', color: 'var(--dark)'}}><ListIcon /> {t('pdv.order_items_title')}</h4>
+              <h4 style={{ margin: '20px 0 15px', color: 'var(--dark)' }}>
+                <ListIcon /> {t('pdv.order_items_title')}
+              </h4>
               <table className="items-list">
                 <thead>
                   <tr>
@@ -1331,8 +1723,12 @@ const Pdv = () => {
                     <tr key={idx}>
                       <td>{item.name}</td>
                       <td className="item-quantity">{item.quantity}</td>
-                      <td className="item-price">R$ {Number(item.price).toFixed(2).replace('.', ',')}</td>
-                      <td className="item-price">R$ {(Number(item.price) * item.quantity).toFixed(2).replace('.', ',')}</td>
+                      <td className="item-price">
+                        R$ {Number(item.price).toFixed(2).replace('.', ',')}
+                      </td>
+                      <td className="item-price">
+                        R$ {(Number(item.price) * item.quantity).toFixed(2).replace('.', ',')}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -1340,7 +1736,9 @@ const Pdv = () => {
 
               <div className="order-total">
                 <span className="total-label">{t('pdv.total_label')}</span>
-                <span className="total-value">R$ {Number(selectedOrder.total_amount).toFixed(2).replace('.', ',')}</span>
+                <span className="total-value">
+                  R$ {Number(selectedOrder.total_amount).toFixed(2).replace('.', ',')}
+                </span>
               </div>
             </div>
             <div className="modal-footer">
@@ -1360,30 +1758,46 @@ const Pdv = () => {
 
       {/* Mobile Toggle Order Button */}
       {isMobile && (
-        <button className="toggle-order" id="toggleOrder" onClick={toggleOrderSectionMobile} style={{ display: isMobile ? 'flex' : 'none' }}>
+        <button
+          className="toggle-order"
+          id="toggleOrder"
+          onClick={toggleOrderSectionMobile}
+          style={{ display: isMobile ? 'flex' : 'none' }}
+        >
           <ShoppingCartIcon />
         </button>
       )}
 
       {/* Table Options Modal */}
       <Dialog open={showTableOptionsModal} onClose={() => setShowTableOptionsModal(false)}>
-        <DialogTitle>{t('pdv.table_options_title', { tableNumber: tableToActOn?.table_number })}</DialogTitle>
+        <DialogTitle>
+          {t('pdv.table_options_title', { tableNumber: tableToActOn?.table_number })}
+        </DialogTitle>
         <DialogContent>
           <Typography>{t('pdv.table_options_description')}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => {
-            setShowTableOptionsModal(false);
-            setCurrentTab('pdv'); // Switch to PDV to add items
-          }}>{t('pdv.add_items_button')}</Button>
-          <Button onClick={() => {
-            setShowTableOptionsModal(false);
-            // Logic to close account for tableToActOn
-            // This would involve fetching the active order for tableToActOn
-            // and then opening the payment modal with that order's details.
-            // For now, let's just log it or open the payment modal with a dummy order.
-            toast.info(t('pdv.close_account_toast', { tableNumber: tableToActOn?.table_number }));
-          }} color="primary">{t('pdv.close_account_button')}</Button>
+          <Button
+            onClick={() => {
+              setShowTableOptionsModal(false);
+              setCurrentTab('pdv'); // Switch to PDV to add items
+            }}
+          >
+            {t('pdv.add_items_button')}
+          </Button>
+          <Button
+            onClick={() => {
+              setShowTableOptionsModal(false);
+              // Logic to close account for tableToActOn
+              // This would involve fetching the active order for tableToActOn
+              // and then opening the payment modal with that order's details.
+              // For now, let's just log it or open the payment modal with a dummy order.
+              toast.info(t('pdv.close_account_toast', { tableNumber: tableToActOn?.table_number }));
+            }}
+            color="primary"
+          >
+            {t('pdv.close_account_button')}
+          </Button>
         </DialogActions>
       </Dialog>
 

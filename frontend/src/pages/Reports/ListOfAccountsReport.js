@@ -1,9 +1,28 @@
 import React, { useState } from 'react';
-import { Box, Typography, CircularProgress, Alert, Button, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Button,
+  TextField,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 
@@ -25,16 +44,21 @@ const ListOfAccountsReport = () => {
     type: '',
   });
 
-  const { data: categories, isLoading, isError, refetch } = useQuery(
-    ['financialCategoriesReport', restaurantId, filters],
-    fetchFinancialCategories,
-    {
-      enabled: !!restaurantId,
-      onError: (error) => {
-        toast.error(t('reports.error_loading_categories', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: categories,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery(['financialCategoriesReport', restaurantId, filters], fetchFinancialCategories, {
+    enabled: !!restaurantId,
+    onError: (error) => {
+      toast.error(
+        t('reports.error_loading_categories', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
+  });
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -66,7 +90,9 @@ const ListOfAccountsReport = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('reports.list_of_accounts_title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('reports.list_of_accounts_title')}
+      </Typography>
 
       <Paper elevation={2} sx={{ p: 2, mb: 3 }}>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-end' }}>
@@ -84,7 +110,12 @@ const ListOfAccountsReport = () => {
               <MenuItem value="general">{t('reports.general')}</MenuItem>
             </Select>
           </FormControl>
-          <Button variant="contained" startIcon={<RefreshIcon />} onClick={refetch} disabled={isLoading}>
+          <Button
+            variant="contained"
+            startIcon={<RefreshIcon />}
+            onClick={refetch}
+            disabled={isLoading}
+          >
             {t('reports.refresh')}
           </Button>
         </Box>

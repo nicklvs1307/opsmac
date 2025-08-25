@@ -1,10 +1,13 @@
 const express = require('express');
-const deliveryMuchController = require('domains/deliveryMuch/deliveryMuch.controller');
+const { auth } = require('../../middleware/authMiddleware');
+const checkPermission = require('../../middleware/permission');
+const deliveryMuchController = require('./deliveryMuch.controller');
 
 const router = express.Router();
 
 // Rotas do Delivery Much
-router.post('/webhook', deliveryMuchController.checkDeliveryMuchModuleEnabled, deliveryMuchController.handleWebhook);
-router.get('/orders', deliveryMuchController.getOrders);
+// O webhook é público e a verificação do módulo deve ser feita no controller.
+router.post('/webhook', deliveryMuchController.handleWebhook);
+router.get('/orders', auth, checkPermission('deliveryMuch:view'), deliveryMuchController.getOrders);
 
 module.exports = router;

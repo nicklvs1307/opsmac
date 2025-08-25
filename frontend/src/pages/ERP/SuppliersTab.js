@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
-import { Box, Typography, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress, Alert, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  CircularProgress,
+  Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+} from '@mui/material';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import toast from 'react-hot-toast';
 
 const fetchSuppliers = async (restaurantId) => {
@@ -31,11 +49,13 @@ const SuppliersTab = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [editingSupplier, setEditingSupplier] = useState(null);
 
-  const { data: suppliers, isLoading, isError } = useQuery(
-    ['suppliers', restaurantId],
-    () => fetchSuppliers(restaurantId),
-    { enabled: !!restaurantId }
-  );
+  const {
+    data: suppliers,
+    isLoading,
+    isError,
+  } = useQuery(['suppliers', restaurantId], () => fetchSuppliers(restaurantId), {
+    enabled: !!restaurantId,
+  });
 
   const { control, handleSubmit, reset, setValue } = useForm();
 
@@ -96,7 +116,10 @@ const SuppliersTab = () => {
 
   const onSubmit = (data) => {
     if (editingSupplier) {
-      updateMutation.mutate({ id: editingSupplier.id, updatedSupplier: { ...data, restaurant_id: restaurantId } });
+      updateMutation.mutate({
+        id: editingSupplier.id,
+        updatedSupplier: { ...data, restaurant_id: restaurantId },
+      });
     } else {
       createMutation.mutate({ ...data, restaurant_id: restaurantId });
     }
@@ -104,7 +127,9 @@ const SuppliersTab = () => {
 
   return (
     <Box p={3}>
-      <Typography variant="h4" gutterBottom>Gerenciamento de Fornecedores</Typography>
+      <Typography variant="h4" gutterBottom>
+        Gerenciamento de Fornecedores
+      </Typography>
 
       <Button variant="contained" color="primary" onClick={() => handleOpenDialog()} sx={{ mb: 3 }}>
         Adicionar Fornecedor
@@ -148,7 +173,12 @@ const SuppliersTab = () => {
                       <Button size="small" onClick={() => handleOpenDialog(supplier)}>
                         Editar
                       </Button>
-                      <Button size="small" color="error" onClick={() => deleteMutation.mutate(supplier.id)} sx={{ ml: 1 }}>
+                      <Button
+                        size="small"
+                        color="error"
+                        onClick={() => deleteMutation.mutate(supplier.id)}
+                        sx={{ ml: 1 }}
+                      >
                         Excluir
                       </Button>
                     </TableCell>
@@ -167,7 +197,9 @@ const SuppliersTab = () => {
       </Paper>
 
       <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>{editingSupplier ? 'Editar Fornecedor' : 'Adicionar Novo Fornecedor'}</DialogTitle>
+        <DialogTitle>
+          {editingSupplier ? 'Editar Fornecedor' : 'Adicionar Novo Fornecedor'}
+        </DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
@@ -215,7 +247,14 @@ const SuppliersTab = () => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <TextField {...field} label="Endereço" fullWidth margin="normal" multiline rows={2} />
+                <TextField
+                  {...field}
+                  label="Endereço"
+                  fullWidth
+                  margin="normal"
+                  multiline
+                  rows={2}
+                />
               )}
             />
           </form>

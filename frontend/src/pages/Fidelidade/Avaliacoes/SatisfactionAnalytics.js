@@ -1,15 +1,11 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
+import { Box, Grid, Paper, Typography, CircularProgress, Alert } from '@mui/material';
 import {
-  Box,
-  Grid,
-  Paper,
-  Typography,
-  CircularProgress,
-  Alert
-} from '@mui/material';
-import { BarChart as BarChartIcon, Star as StarIcon, ThumbUp as ThumbUpIcon } from '@mui/icons-material';
-import { useAuth } from '../../../contexts/AuthContext';
+  BarChart as BarChartIcon,
+  Star as StarIcon,
+  ThumbUp as ThumbUpIcon,
+} from '@mui/icons-material';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import axiosInstance from '../../../api/axiosInstance';
 import { useQuery } from 'react-query';
 
@@ -66,7 +62,7 @@ const SatisfactionAnalytics = () => {
 
   const getCriterionName = (criterionId) => {
     if (!npsCriteria) return criterionId;
-    const criterion = npsCriteria.find(c => c.id === criterionId);
+    const criterion = npsCriteria.find((c) => c.id === criterionId);
     return criterion ? criterion.name : criterionId;
   };
 
@@ -81,7 +77,8 @@ const SatisfactionAnalytics = () => {
   if (error) {
     return (
       <Alert severity="error" sx={{ m: 3 }}>
-        Erro ao carregar as análises de satisfação. A funcionalidade no backend pode não existir ainda. ({error.message})
+        Erro ao carregar as análises de satisfação. A funcionalidade no backend pode não existir
+        ainda. ({error.message})
       </Alert>
     );
   }
@@ -130,7 +127,9 @@ const SatisfactionAnalytics = () => {
                   <Typography>Neutros: {criterion.neutrals}</Typography>
                   <Typography>Detratores: {criterion.detractors}</Typography>
                   <Typography>Total de Respostas: {criterion.totalResponses}</Typography>
-                  <Typography variant="h6" sx={{ mt: 1 }}>NPS Score: {criterion.npsScore?.toFixed(2) || 'N/A'}</Typography>
+                  <Typography variant="h6" sx={{ mt: 1 }}>
+                    NPS Score: {criterion.npsScore?.toFixed(2) || 'N/A'}
+                  </Typography>
                 </Paper>
               </Grid>
             ))}

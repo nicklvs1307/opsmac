@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
-import { Box, Typography, CircularProgress, Alert, Button, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Button,
+  TextField,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 
@@ -13,7 +27,9 @@ const fetchSalesByPaymentMethodReport = async ({ queryKey }) => {
   if (!start_date || !end_date) {
     return null; // Don't fetch if dates are not set
   }
-  const { data } = await axiosInstance.get(`/api/financial/reports/sales-by-payment-method?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`);
+  const { data } = await axiosInstance.get(
+    `/api/financial/reports/sales-by-payment-method?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`
+  );
   return data;
 };
 
@@ -27,13 +43,22 @@ const SalesByPaymentMethodReport = () => {
     end_date: '',
   });
 
-  const { data: reportData, isLoading, isError, refetch } = useQuery(
+  const {
+    data: reportData,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery(
     ['salesByPaymentMethodReport', restaurantId, filters],
     fetchSalesByPaymentMethodReport,
     {
       enabled: !!restaurantId && !!filters.start_date && !!filters.end_date,
       onError: (error) => {
-        toast.error(t('reports.error_loading_sales_by_payment_method', { message: error.response?.data?.msg || error.message }));
+        toast.error(
+          t('reports.error_loading_sales_by_payment_method', {
+            message: error.response?.data?.msg || error.message,
+          })
+        );
       },
     }
   );
@@ -60,7 +85,9 @@ const SalesByPaymentMethodReport = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('reports.sales_by_payment_method_title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('reports.sales_by_payment_method_title')}
+      </Typography>
 
       <Paper elevation={2} sx={{ p: 2, mb: 3 }}>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-end' }}>
@@ -86,7 +113,12 @@ const SalesByPaymentMethodReport = () => {
             }}
             fullWidth
           />
-          <Button variant="contained" startIcon={<RefreshIcon />} onClick={handleGenerateReport} disabled={isLoading}>
+          <Button
+            variant="contained"
+            startIcon={<RefreshIcon />}
+            onClick={handleGenerateReport}
+            disabled={isLoading}
+          >
             {t('reports.generate_report')}
           </Button>
         </Box>
@@ -112,15 +144,22 @@ const SalesByPaymentMethodReport = () => {
               <TableBody>
                 {reportData.map((row) => (
                   <TableRow key={row.payment_method}>
-                    <TableCell>{t(`payment_methods.type_${row.payment_method}`) || row.payment_method}</TableCell>
-                    <TableCell align="right">R$ {Number(row.total_sales).toFixed(2).replace('.', ',')}</TableCell>
+                    <TableCell>
+                      {t(`payment_methods.type_${row.payment_method}`) || row.payment_method}
+                    </TableCell>
+                    <TableCell align="right">
+                      R$ {Number(row.total_sales).toFixed(2).replace('.', ',')}
+                    </TableCell>
                     <TableCell align="right">{row.total_orders}</TableCell>
                   </TableRow>
                 ))}
                 <TableRow>
                   <TableCell sx={{ fontWeight: 'bold' }}>{t('reports.grand_total')}</TableCell>
                   <TableCell align="right" sx={{ fontWeight: 'bold' }}>
-                    R$ {Number(reportData.reduce((sum, row) => sum + Number(row.total_sales), 0)).toFixed(2).replace('.', ',')}
+                    R${' '}
+                    {Number(reportData.reduce((sum, row) => sum + Number(row.total_sales), 0))
+                      .toFixed(2)
+                      .replace('.', ',')}
                   </TableCell>
                   <TableCell align="right" sx={{ fontWeight: 'bold' }}>
                     {reportData.reduce((sum, row) => sum + Number(row.total_orders), 0)}

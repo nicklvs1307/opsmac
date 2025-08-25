@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   class Module extends Model {
     static associate(models) {
       Module.belongsToMany(models.Restaurant, {
-        through: 'RestaurantModules',
+        through: 'restaurant_modules',
         foreignKey: 'moduleId',
         otherKey: 'restaurantId',
         as: 'restaurants',
@@ -27,7 +27,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Module',
     tableName: 'modules',
-    underscored: true,
     timestamps: true,
   });
 

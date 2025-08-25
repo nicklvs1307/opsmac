@@ -1,6 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, List, ListItem, ListItemText, IconButton, Typography, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox } from '@mui/material';
-import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, Image as ImageIcon } from '@mui/icons-material';
+import {
+  Box,
+  Button,
+  TextField,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Typography,
+  Paper,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControlLabel,
+  Checkbox,
+} from '@mui/material';
+import {
+  Add as AddIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  Image as ImageIcon,
+} from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
@@ -38,9 +64,21 @@ const fetchAddons = async () => {
 const ProductManagement = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { data: products, isLoading: isLoadingProducts, isError: isErrorProducts } = useQuery('products', fetchProducts);
-  const { data: categories, isLoading: isLoadingCategories, isError: isErrorCategories } = useQuery('categories', fetchCategories);
-  const { data: addons, isLoading: isLoadingAddons, isError: isErrorAddons } = useQuery('addons', fetchAddons);
+  const {
+    data: products,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
+  } = useQuery('products', fetchProducts);
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    isError: isErrorCategories,
+  } = useQuery('categories', fetchCategories);
+  const {
+    data: addons,
+    isLoading: isLoadingAddons,
+    isError: isErrorAddons,
+  } = useQuery('addons', fetchAddons);
 
   const [productForm, setProductForm] = useState({
     addons: [],
@@ -127,8 +165,6 @@ const ProductManagement = () => {
     },
   });
 
-  
-
   const handleRemoveVariation = (index) => {
     const newVariations = [...productForm.variations];
     newVariations.splice(index, 1);
@@ -142,7 +178,10 @@ const ProductManagement = () => {
   };
 
   const handleAddVariation = () => {
-    setProductForm({ ...productForm, variations: [...productForm.variations, { name: '', value: '', additionalPrice: '' }] });
+    setProductForm({
+      ...productForm,
+      variations: [...productForm.variations, { name: '', value: '', additionalPrice: '' }],
+    });
   };
 
   const handleInputChange = (e) => {
@@ -176,7 +215,7 @@ const ProductManagement = () => {
       sku: product.sku || '',
       category_id: product.category_id || '',
       is_pizza: product.is_pizza || false,
-      pizza_type: product.is_pizza ? (product.pizza_type || 'variable_price') : '',
+      pizza_type: product.is_pizza ? product.pizza_type || 'variable_price' : '',
       available_for_delivery: product.available_for_delivery || false,
       available_for_dine_in: product.available_for_dine_in || false,
       available_for_online_order: product.available_for_online_order || false,
@@ -221,21 +260,32 @@ const ProductManagement = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      setProductForm({ ...productForm, image_url: `${process.env.REACT_APP_API_URL}${data.imageUrl}` });
+      setProductForm({
+        ...productForm,
+        image_url: `${process.env.REACT_APP_API_URL}${data.imageUrl}`,
+      });
       toast.success(t('product_management.upload_success'));
     } catch (error) {
       toast.error(error.response?.data?.msg || t('product_management.upload_error'));
     }
   };
 
-  if (isLoadingProducts || isLoadingCategories || isLoadingAddons) return <Typography>{t('common.loading')}</Typography>;
-  if (isErrorProducts || isErrorCategories || isErrorAddons) return <Typography>{t('common.error_loading_data')}</Typography>;
+  if (isLoadingProducts || isLoadingCategories || isLoadingAddons)
+    return <Typography>{t('common.loading')}</Typography>;
+  if (isErrorProducts || isErrorCategories || isErrorAddons)
+    return <Typography>{t('common.error_loading_data')}</Typography>;
 
   return (
     <Box sx={{ mt: 3 }}>
-      <Typography variant="h5" gutterBottom>{t('product_management.title')}</Typography>
+      <Typography variant="h5" gutterBottom>
+        {t('product_management.title')}
+      </Typography>
       <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
-        <Typography variant="h6" gutterBottom>{editingProduct ? t('product_management.edit_product') : t('product_management.add_new_product')}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {editingProduct
+            ? t('product_management.edit_product')
+            : t('product_management.add_new_product')}
+        </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <TextField
             label={t('product_management.product_name')}
@@ -310,45 +360,64 @@ const ProductManagement = () => {
                 label={t('product_management.pizza_type')}
               >
                 <MenuItem value="">{t('product_management.select_pizza_type')}</MenuItem>
-                <MenuItem value="variable_price">{t('product_management.variable_price_pizza')}</MenuItem>
+                <MenuItem value="variable_price">
+                  {t('product_management.variable_price_pizza')}
+                </MenuItem>
                 <MenuItem value="fixed_price">{t('product_management.fixed_price_pizza')}</MenuItem>
               </Select>
             </FormControl>
           )}
 
-          <Typography variant="subtitle1" sx={{ mt: 2 }}>{t('product_management.availability')}</Typography>
+          <Typography variant="subtitle1" sx={{ mt: 2 }}>
+            {t('product_management.availability')}
+          </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, flexWrap: 'wrap' }}>
             <FormControlLabel
-              control={<Checkbox checked={productForm.available_for_delivery} onChange={handleInputChange} name="available_for_delivery" />}
+              control={
+                <Checkbox
+                  checked={productForm.available_for_delivery}
+                  onChange={handleInputChange}
+                  name="available_for_delivery"
+                />
+              }
               label={t('product_management.available_for_delivery')}
             />
             <FormControlLabel
-              control={<Checkbox checked={productForm.available_for_dine_in} onChange={handleInputChange} name="available_for_dine_in" />}
+              control={
+                <Checkbox
+                  checked={productForm.available_for_dine_in}
+                  onChange={handleInputChange}
+                  name="available_for_dine_in"
+                />
+              }
               label={t('product_management.available_for_dine_in')}
             />
             <FormControlLabel
-              control={<Checkbox checked={productForm.available_for_online_order} onChange={handleInputChange} name="available_for_online_order" />}
+              control={
+                <Checkbox
+                  checked={productForm.available_for_online_order}
+                  onChange={handleInputChange}
+                  name="available_for_online_order"
+                />
+              }
               label={t('product_management.available_for_online_order')}
             />
             <FormControlLabel
-              control={<Checkbox checked={productForm.available_for_digital_menu} onChange={handleInputChange} name="available_for_digital_menu" />}
+              control={
+                <Checkbox
+                  checked={productForm.available_for_digital_menu}
+                  onChange={handleInputChange}
+                  name="available_for_digital_menu"
+                />
+              }
               label={t('product_management.available_for_digital_menu')}
             />
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Button
-              variant="outlined"
-              component="label"
-              startIcon={<ImageIcon />}
-            >
+            <Button variant="outlined" component="label" startIcon={<ImageIcon />}>
               {t('product_management.upload_image')}
-              <input
-                type="file"
-                hidden
-                accept="image/*"
-                onChange={handleImageUpload}
-              />
+              <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
             </Button>
             {productForm.image_url && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -356,7 +425,10 @@ const ProductManagement = () => {
                 <IconButton onClick={() => window.open(productForm.image_url, '_blank')}>
                   <ImageIcon />
                 </IconButton>
-                <IconButton onClick={() => setProductForm({ ...productForm, image_url: '' })} color="error">
+                <IconButton
+                  onClick={() => setProductForm({ ...productForm, image_url: '' })}
+                  color="error"
+                >
                   <DeleteIcon />
                 </IconButton>
               </Box>
@@ -371,7 +443,9 @@ const ProductManagement = () => {
               value={productForm.addons}
               onChange={handleInputChange}
               label={t('product_management.addons')}
-              renderValue={(selected) => selected.map(id => addons.find(addon => addon.id === id)?.name).join(', ')}
+              renderValue={(selected) =>
+                selected.map((id) => addons.find((addon) => addon.id === id)?.name).join(', ')
+              }
             >
               {addons.map((addon) => (
                 <MenuItem key={addon.id} value={addon.id}>
@@ -381,7 +455,9 @@ const ProductManagement = () => {
             </Select>
           </FormControl>
 
-          <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>{t('product_management.variations')}</Typography>
+          <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
+            {t('product_management.variations')}
+          </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {productForm.variations.map((variation, index) => (
               <Box key={index} sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
@@ -412,11 +488,7 @@ const ProductManagement = () => {
                 </IconButton>
               </Box>
             ))}
-            <Button
-              variant="outlined"
-              startIcon={<AddIcon />}
-              onClick={handleAddVariation}
-            >
+            <Button variant="outlined" startIcon={<AddIcon />} onClick={handleAddVariation}>
               {t('product_management.add_variation')}
             </Button>
           </Box>
@@ -472,7 +544,9 @@ const ProductManagement = () => {
         </Box>
       </Paper>
 
-      <Typography variant="h6" gutterBottom>{t('product_management.existing_products')}</Typography>
+      <Typography variant="h6" gutterBottom>
+        {t('product_management.existing_products')}
+      </Typography>
       <Paper elevation={2} sx={{ p: 3 }}>
         {products.length === 0 ? (
           <Typography>{t('product_management.no_products')}</Typography>
@@ -483,25 +557,42 @@ const ProductManagement = () => {
                 key={product.id}
                 secondaryAction={
                   <Box>
-                    <IconButton edge="end" aria-label="edit" onClick={() => handleEditClick(product)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="edit"
+                      onClick={() => handleEditClick(product)}
+                    >
                       <EditIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteClick(product)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleDeleteClick(product)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Box>
                 }
               >
-                <ListItemText 
+                <ListItemText
                   primary={product.name}
                   secondary={
                     <>
                       <Typography component="span" variant="body2" color="text.primary">
-                        {t('product_management.price')}: {product.price} | {t('product_management.category')}: {product.category ? product.category.name : t('common.none')}
+                        {t('product_management.price')}: {product.price} |{' '}
+                        {t('product_management.category')}:{' '}
+                        {product.category ? product.category.name : t('common.none')}
                       </Typography>
                       {product.is_pizza && (
-                        <Typography component="span" variant="body2" color="text.secondary" sx={{ display: 'block' }}>
-                          {t('product_management.is_pizza')}: {t('common.yes')} | {t('product_management.pizza_type')}: {t(`product_management.${product.pizza_type}`)}
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{ display: 'block' }}
+                        >
+                          {t('product_management.is_pizza')}: {t('common.yes')} |{' '}
+                          {t('product_management.pizza_type')}:{' '}
+                          {t(`product_management.${product.pizza_type}`)}
                         </Typography>
                       )}
                     </>
@@ -519,7 +610,9 @@ const ProductManagement = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{t('product_management.confirm_delete_title')}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {t('product_management.confirm_delete_title')}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {t('product_management.confirm_delete_message', { productName: productToDelete?.name })}

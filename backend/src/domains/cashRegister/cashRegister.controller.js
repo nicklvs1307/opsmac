@@ -1,6 +1,6 @@
 const cashRegisterService = require('./cashRegister.service');
 const { validationResult } = require('express-validator');
-const { BadRequestError } = require('../../utils/errors');
+const { BadRequestError } = require('utils/errors');
 const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
 const handleValidationErrors = (req) => {
@@ -65,7 +65,7 @@ exports.getCashRegisterCategories = async (req, res, next) => {
   }
 };
 
-exports.get movements = async (req, res, next) => {
+exports.getMovements = async (req, res, next) => {
   try {
     const restaurantId = await getRestaurantIdFromUser(req.user.userId);
     const { session_id } = req.query;

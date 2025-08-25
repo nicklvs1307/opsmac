@@ -1,14 +1,15 @@
 const express = require('express');
-const { authorize } = require('../../middleware/auth');
-const supplierController = require('domains/supplier/supplier.controller');
+const { auth } = require('../../middleware/authMiddleware');
+const checkPermission = require('../../middleware/permission');
+const supplierController = require('./supplier.controller');
 
 const router = express.Router();
 
 // Rotas de Fornecedores
-router.post('/', authorize(['admin', 'owner', 'manager']), supplierController.createSupplier);
-router.get('/', authorize(['admin', 'owner', 'manager']), supplierController.getAllSuppliers);
-router.get('/:id', authorize(['admin', 'owner', 'manager']), supplierController.getSupplierById);
-router.put('/:id', authorize(['admin', 'owner', 'manager']), supplierController.updateSupplier);
-router.delete('/:id', authorize(['admin', 'owner', 'manager']), supplierController.deleteSupplier);
+router.post('/', auth, checkPermission('suppliers:create'), supplierController.createSupplier);
+router.get('/', auth, checkPermission('suppliers:view'), supplierController.getAllSuppliers);
+router.get('/:id', auth, checkPermission('suppliers:view'), supplierController.getSupplierById);
+router.put('/:id', auth, checkPermission('suppliers:edit'), supplierController.updateSupplier);
+router.delete('/:id', auth, checkPermission('suppliers:delete'), supplierController.deleteSupplier);
 
 module.exports = router;

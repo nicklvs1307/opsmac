@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: 'restaurants', // Changed from 'Restaurants'
+        model: 'Restaurant',
         key: 'id',
       },
     },
@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'modules', // Changed from 'Modules'
+        model: 'Module',
         key: 'id',
       },
     },
@@ -29,7 +29,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'RestaurantModule',
     tableName: 'restaurant_modules',
-    underscored: true,
     timestamps: true,
   });
 

@@ -43,7 +43,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'FinancialCategory',
     tableName: 'financial_categories',
-    underscored: true,
     timestamps: true,
   });
 

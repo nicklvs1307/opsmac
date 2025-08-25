@@ -1,4 +1,4 @@
-const { models } = require('../../config/database');
+const { models } = require('config/config');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 exports.createTechnicalSpecification = async (product_id, recipe_ingredients, restaurantId) => {

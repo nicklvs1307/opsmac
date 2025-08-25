@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
   List,
@@ -11,20 +11,15 @@ import {
   Tooltip,
   Divider,
   Typography,
-  alpha,
   useMediaQuery,
   Popper,
   Paper,
   Grow,
   ClickAwayListener,
 } from '@mui/material';
-import {
-  ExpandLess,
-  ExpandMore,
-  ChevronRight,
-} from '@mui/icons-material';
+import { ExpandLess, ExpandMore, ChevronRight } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { menuStructure } from './menuStructure'; // Importa a estrutura completa do menu
 
@@ -35,10 +30,12 @@ const Submenu = ({ items, parentEl, onClose, level = 0 }) => {
   const theme = useTheme();
   const [openSubmenu, setOpenSubmenu] = useState({ anchor: null, items: [] });
 
-  const isActive = (path) => location.pathname === path || (path && location.pathname.startsWith(path));
+  const isActive = (path) =>
+    location.pathname === path || (path && location.pathname.startsWith(path));
 
   const handleSubmenuToggle = (event, submenuItems) => {
     event.stopPropagation();
+
     if (submenuItems && submenuItems.length > 0) {
       if (openSubmenu.anchor === event.currentTarget) {
         setOpenSubmenu({ anchor: null, items: [] });
@@ -62,15 +59,15 @@ const Submenu = ({ items, parentEl, onClose, level = 0 }) => {
         anchorEl={parentEl}
         placement="right-start"
         transition
-        modifiers={[{ name: 'offset', options: { offset: [0, 2] } }] }
+        modifiers={[{ name: 'offset', options: { offset: [0, 2] } }]}
         style={{ zIndex: 2000 + level }}
       >
         {({ TransitionProps }) => (
           <Grow {...TransitionProps} timeout={250}>
-            <Paper 
+            <Paper
               elevation={8}
-              sx={{ 
-                minWidth: 220, 
+              sx={{
+                minWidth: 220,
                 borderRadius: 2,
                 boxShadow: '0 5px 15px rgba(0,0,0,0.2)',
                 background: theme.palette.background.paper,
@@ -81,13 +78,22 @@ const Submenu = ({ items, parentEl, onClose, level = 0 }) => {
                 {items.map((item) => (
                   <ListItem key={item.title} disablePadding>
                     <ListItemButton
-                      onClick={(e) => item.submenu ? handleSubmenuToggle(e, item.submenu) : handleItemClick(item.path)}
+                      onClick={(e) =>
+                        item.submenu
+                          ? handleSubmenuToggle(e, item.submenu)
+                          : handleItemClick(item.path)
+                      }
                       selected={isActive(item.path)}
                       sx={{ pl: 2.5, pr: 1.5, minHeight: 40, m: 0.5, borderRadius: 1.5 }}
                     >
                       {item.icon && <ListItemIcon sx={{ minWidth: 32 }}>{item.icon}</ListItemIcon>}
-                      <ListItemText primary={item.title} primaryTypographyProps={{ fontSize: '0.875rem' }} />
-                      {item.submenu && <ChevronRight sx={{ fontSize: '1.2rem', color: 'text.secondary' }} />}
+                      <ListItemText
+                        primary={item.title}
+                        primaryTypographyProps={{ fontSize: '0.875rem' }}
+                      />
+                      {item.submenu && (
+                        <ChevronRight sx={{ fontSize: '1.2rem', color: 'text.secondary' }} />
+                      )}
                     </ListItemButton>
                   </ListItem>
                 ))}
@@ -116,13 +122,29 @@ const Sidebar = ({ onMobileClose }) => {
   const [openMobileMenus, setOpenMobileMenus] = useState({});
   const [openPopper, setOpenPopper] = useState({ anchor: null, items: [] });
   const theme = useTheme();
-  const mode = theme.palette.mode;
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
-  // Filtra o menu com base nos módulos permitidos
-  const filteredMenuItems = menuStructure.filter(item => 
-    !item.module || (allowedModules && allowedModules.includes(item.module))
-  );
+  const filterMenu = (menu, allowedModules, userRole) => {
+    return menu.reduce((acc, item) => {
+      const moduleMatch = !item.module || (allowedModules && allowedModules.includes(item.module));
+      const isSuperAdmin = userRole?.name === 'super_admin';
+      const roleMatch = isSuperAdmin || (item.roles && item.roles.includes(user?.role?.name));
+
+      if (moduleMatch && roleMatch) {
+        if (item.submenu) {
+          const filteredSubmenu = filterMenu(item.submenu, allowedModules, userRole);
+          if (filteredSubmenu.length > 0) {
+            acc.push({ ...item, submenu: filteredSubmenu });
+          }
+        } else {
+          acc.push(item);
+        }
+      }
+      return acc;
+    }, []);
+  };
+
+  const filteredMenuItems = filterMenu(menuStructure, allowedModules, user?.role);
 
   const handleClick = (path) => {
     if (path) {
@@ -147,7 +169,7 @@ const Sidebar = ({ onMobileClose }) => {
       }
     } else {
       if (item.submenu) {
-        setOpenMobileMenus(prev => ({ ...prev, [item.title]: !prev[item.title] }));
+        setOpenMobileMenus((prev) => ({ ...prev, [item.title]: !prev[item.title] }));
       } else {
         handleClick(item.path);
       }
@@ -185,8 +207,18 @@ const Sidebar = ({ onMobileClose }) => {
                     <ListItemIcon sx={{ minWidth: 0, mr: 2, justifyContent: 'center' }}>
                       {item.icon}
                     </ListItemIcon>
-                    <ListItemText primary={item.title} primaryTypographyProps={{ fontSize: '0.875rem' }} />
-                    {item.submenu && (isDesktop ? <ChevronRight /> : (openMobileMenus[item.title] ? <ExpandLess /> : <ExpandMore />))}
+                    <ListItemText
+                      primary={item.title}
+                      primaryTypographyProps={{ fontSize: '0.875rem' }}
+                    />
+                    {item.submenu &&
+                      (isDesktop ? (
+                        <ChevronRight />
+                      ) : openMobileMenus[item.title] ? (
+                        <ExpandLess />
+                      ) : (
+                        <ExpandMore />
+                      ))}
                   </ListItemButton>
                 </Tooltip>
               </ListItem>
@@ -194,7 +226,11 @@ const Sidebar = ({ onMobileClose }) => {
                 <Collapse in={openMobileMenus[item.title]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding sx={{ ml: 2 }}>
                     {item.submenu.map((subItem) => (
-                      <ListItemButton key={subItem.title} onClick={() => handleClick(subItem.path)} sx={{ pl: 4 }}>
+                      <ListItemButton
+                        key={subItem.title}
+                        onClick={() => handleClick(subItem.path)}
+                        sx={{ pl: 4 }}
+                      >
                         <ListItemIcon>{subItem.icon}</ListItemIcon>
                         <ListItemText primary={subItem.title} />
                       </ListItemButton>
@@ -206,7 +242,7 @@ const Sidebar = ({ onMobileClose }) => {
           ))}
         </List>
         {isDesktop && openPopper.anchor && (
-          <Submenu 
+          <Submenu
             items={openPopper.items}
             parentEl={openPopper.anchor}
             onClose={handlePopperClose}

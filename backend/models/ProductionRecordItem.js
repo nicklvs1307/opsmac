@@ -5,17 +5,17 @@ module.exports = (sequelize) => {
   class ProductionRecordItem extends Model {
     static associate(models) {
       ProductionRecordItem.belongsTo(models.ProductionRecord, {
-        foreignKey: 'production_record_id',
+        foreignKey: 'productionRecordId',
         as: 'productionRecord',
       });
       // Polymorphic association to Product or Ingredient
       ProductionRecordItem.belongsTo(models.Product, {
-        foreignKey: 'stockable_id',
+        foreignKey: 'stockableId',
         constraints: false,
         as: 'product',
       });
       ProductionRecordItem.belongsTo(models.Ingredient, {
-        foreignKey: 'stockable_id',
+        foreignKey: 'stockableId',
         constraints: false,
         as: 'ingredient',
       });
@@ -23,8 +23,8 @@ module.exports = (sequelize) => {
 
     // Helper method to get the associated stockable item
     getStockable(options) {
-      if (!this.stockable_type) return Promise.resolve(null);
-      const mixinMethodName = `get${this.stockable_type}`;
+      if (!this.stockableType) return Promise.resolve(null);
+      const mixinMethodName = `get${this.stockableType}`;
       return this[mixinMethodName](options);
     }
   }
@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    production_record_id: {
+    productionRecordId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -43,11 +43,11 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    stockable_id: {
+    stockableId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    stockable_type: {
+    stockableType: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -64,10 +64,9 @@ module.exports = (sequelize) => {
     modelName: 'ProductionRecordItem',
     tableName: 'production_record_items',
     timestamps: true,
-    underscored: true,
     indexes: [
       {
-        fields: ['production_record_id', 'stockable_id', 'stockable_type'],
+        fields: ['productionRecordId', 'stockableId', 'stockableType'],
       },
     ],
   });

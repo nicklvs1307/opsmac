@@ -5,21 +5,21 @@ module.exports = (sequelize) => {
   class LossRecord extends Model {
     static associate(models) {
       LossRecord.belongsTo(models.User, {
-        foreignKey: 'user_id',
+        foreignKey: 'userId',
         as: 'user',
       });
       LossRecord.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurant_id',
+        foreignKey: 'restaurantId',
         as: 'restaurant',
       });
       // Polymorphic association to Product or Ingredient
       LossRecord.belongsTo(models.Product, {
-        foreignKey: 'stockable_id',
+        foreignKey: 'stockableId',
         constraints: false,
         as: 'product',
       });
       LossRecord.belongsTo(models.Ingredient, {
-        foreignKey: 'stockable_id',
+        foreignKey: 'stockableId',
         constraints: false,
         as: 'ingredient',
       });
@@ -27,8 +27,8 @@ module.exports = (sequelize) => {
 
     // Helper method to get the associated stockable item
     getStockable(options) {
-      if (!this.stockable_type) return Promise.resolve(null);
-      const mixinMethodName = `get${this.stockable_type}`;
+      if (!this.stockableType) return Promise.resolve(null);
+      const mixinMethodName = `get${this.stockableType}`;
       return this[mixinMethodName](options);
     }
   }
@@ -39,15 +39,15 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    stockable_id: {
+    stockableId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    stockable_type: {
+    stockableType: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    user_id: { // User who registered the loss
+    userId: { // User who registered the loss
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -55,7 +55,7 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -78,7 +78,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    loss_date: {
+    lossDate: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
       allowNull: false,
@@ -88,10 +88,9 @@ module.exports = (sequelize) => {
     modelName: 'LossRecord',
     tableName: 'loss_records',
     timestamps: true,
-    underscored: true,
     indexes: [
       {
-        fields: ['stockable_id', 'stockable_type'],
+        fields: ['stockableId', 'stockableType'],
       },
     ],
   });

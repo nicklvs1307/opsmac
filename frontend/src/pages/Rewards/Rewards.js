@@ -43,7 +43,7 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import SpinTheWheel from '../../components/UI/SpinTheWheel';
 
 const Rewards = () => {
@@ -63,10 +63,10 @@ const Rewards = () => {
     status: '',
     type: '',
   });
-  
+
   const [createDialog, setCreateDialog] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
-  
+
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [detailsModalTab, setDetailsModalTab] = useState(0); // 0 for config, 1 for analytics
 
@@ -114,15 +114,17 @@ const Rewards = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const params = {
         page,
         limit: 12,
         ...filters,
       };
-      
-      const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`, { params });
-      
+
+      const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`, {
+        params,
+      });
+
       setRewards(response.data.rewards);
       setTotalPages(response.data.pagination.total_pages);
     } catch (err) {
@@ -137,7 +139,7 @@ const Rewards = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const response = await axiosInstance.get('/api/rewards/analytics');
       setAnalytics(response.data);
     } catch (err) {
@@ -163,11 +165,9 @@ const Rewards = () => {
   };
 
   const handleFilterChange = (field, value) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
+    setFilters((prev) => ({ ...prev, [field]: value }));
     setPage(1);
   };
-
-  
 
   const handleCreate = () => {
     reset();
@@ -181,13 +181,9 @@ const Rewards = () => {
     setDetailsModalOpen(true);
   };
 
-  
-
   const handleDelete = () => {
     setDeleteDialog(true);
   };
-
-  
 
   const onSubmit = async (data) => {
     try {
@@ -195,9 +191,12 @@ const Rewards = () => {
 
       // Handle numerical fields, convert empty strings to null
       cleanData.value = cleanData.value !== '' ? parseFloat(cleanData.value) : null;
-      cleanData.points_required = cleanData.points_required !== '' ? parseInt(cleanData.points_required) : null;
-      cleanData.max_uses_per_customer = cleanData.max_uses !== '' ? parseInt(cleanData.max_uses) : null;
-      cleanData.coupon_validity_days = cleanData.coupon_validity_days !== '' ? parseInt(cleanData.coupon_validity_days) : null;
+      cleanData.points_required =
+        cleanData.points_required !== '' ? parseInt(cleanData.points_required) : null;
+      cleanData.max_uses_per_customer =
+        cleanData.max_uses !== '' ? parseInt(cleanData.max_uses) : null;
+      cleanData.coupon_validity_days =
+        cleanData.coupon_validity_days !== '' ? parseInt(cleanData.coupon_validity_days) : null;
       cleanData.valid_until = cleanData.expires_at ? new Date(cleanData.expires_at) : null;
 
       delete cleanData.max_uses;
@@ -209,9 +208,9 @@ const Rewards = () => {
       } else {
         // Ensure wheel_config.items are properly formatted (e.g., probability as number)
         if (cleanData.wheel_config && cleanData.wheel_config.items) {
-          cleanData.wheel_config.items = cleanData.wheel_config.items.map(item => ({
+          cleanData.wheel_config.items = cleanData.wheel_config.items.map((item) => ({
             ...item,
-            probability: parseFloat(item.probability) // Ensure probability is a number
+            probability: parseFloat(item.probability), // Ensure probability is a number
           }));
         }
       }
@@ -223,7 +222,7 @@ const Rewards = () => {
         await axiosInstance.post('/api/rewards', { ...cleanData, restaurant_id: restaurantId });
         toast.success('Recompensa criada com sucesso!');
       }
-      
+
       setCreateDialog(false);
       setDetailsModalOpen(false);
       fetchRewards();
@@ -232,14 +231,10 @@ const Rewards = () => {
     }
   };
 
-  
-
-  
-
   const confirmDelete = async () => {
     try {
       await axiosInstance.delete(`/api/rewards/${selectedItem.id}`);
-      
+
       toast.success('Recompensa excluída com sucesso!');
       setDeleteDialog(false);
       fetchRewards();
@@ -250,45 +245,69 @@ const Rewards = () => {
 
   const getTypeColor = (type) => {
     switch (type) {
-      case 'discount_percentage': return 'primary';
-      case 'discount_fixed': return 'primary';
-      case 'free_item': return 'success';
-      case 'points_multiplier': return 'warning';
-      case 'cashback': return 'info';
-      case 'spin_the_wheel': return 'secondary'; // New color for wheel
-      default: return 'default';
+      case 'discount_percentage':
+        return 'primary';
+      case 'discount_fixed':
+        return 'primary';
+      case 'free_item':
+        return 'success';
+      case 'points_multiplier':
+        return 'warning';
+      case 'cashback':
+        return 'info';
+      case 'spin_the_wheel':
+        return 'secondary'; // New color for wheel
+      default:
+        return 'default';
     }
   };
 
   const getTypeLabel = (type) => {
     switch (type) {
-      case 'discount_percentage': return 'Desconto (%)';
-      case 'discount_fixed': return 'Desconto Fixo';
-      case 'free_item': return 'Item Grátis';
-      case 'points_multiplier': return 'Multiplicador de Pontos';
-      case 'cashback': return 'Cashback';
-      case 'spin_the_wheel': return 'Roleta de Prêmios'; // New label for wheel
-      default: return type;
+      case 'discount_percentage':
+        return 'Desconto (%)';
+      case 'discount_fixed':
+        return 'Desconto Fixo';
+      case 'free_item':
+        return 'Item Grátis';
+      case 'points_multiplier':
+        return 'Multiplicador de Pontos';
+      case 'cashback':
+        return 'Cashback';
+      case 'spin_the_wheel':
+        return 'Roleta de Prêmios'; // New label for wheel
+      default:
+        return type;
     }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'active': return 'success';
-      case 'inactive': return 'error';
-      case 'expired': return 'warning';
-      default: return 'default';
+      case 'active':
+        return 'success';
+      case 'inactive':
+        return 'error';
+      case 'expired':
+        return 'warning';
+      default:
+        return 'default';
     }
   };
 
   const getStatusLabel = (status) => {
     switch (status) {
-      case 'active': return 'Ativo';
-      case 'inactive': return 'Inativo';
-      case 'expired': return 'Expirado';
-      case 'used': return 'Usado';
-      case 'pending': return 'Pendente';
-      default: return status;
+      case 'active':
+        return 'Ativo';
+      case 'inactive':
+        return 'Inativo';
+      case 'expired':
+        return 'Expirado';
+      case 'used':
+        return 'Usado';
+      case 'pending':
+        return 'Pendente';
+      default:
+        return status;
     }
   };
 
@@ -349,28 +368,34 @@ const Rewards = () => {
       <Grid container spacing={3}>
         {rewards.map((reward) => (
           <Grid item xs={12} sm={6} md={4} key={reward.id}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer' }} onClick={() => handleCardClick(reward)}>
+            <Card
+              sx={{ height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
+              onClick={() => handleCardClick(reward)}
+            >
               <CardContent sx={{ flexGrow: 1 }}>
                 <Box display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
                   <Avatar sx={{ bgcolor: 'primary.main' }}>
                     <RewardIcon />
                   </Avatar>
                 </Box>
-                
+
                 <Typography variant="h6" gutterBottom noWrap>
                   {reward.title}
                 </Typography>
-                
+
                 <Typography variant="body2" color="text.secondary" paragraph>
                   {reward.description}
                 </Typography>
-                
-                {reward.reward_type === 'spin_the_wheel' && reward.wheel_config?.items?.length > 0 && (
-                  <Box sx={{ my: 2 }}>
-                    <Typography variant="subtitle2" gutterBottom>Itens da Roleta:</Typography>
-                    <SpinTheWheel items={reward.wheel_config.items} />
-                  </Box>
-                )}
+
+                {reward.reward_type === 'spin_the_wheel' &&
+                  reward.wheel_config?.items?.length > 0 && (
+                    <Box sx={{ my: 2 }}>
+                      <Typography variant="subtitle2" gutterBottom>
+                        Itens da Roleta:
+                      </Typography>
+                      <SpinTheWheel items={reward.wheel_config.items} />
+                    </Box>
+                  )}
 
                 <Box display="flex" gap={1} mb={2}>
                   <Chip
@@ -384,7 +409,7 @@ const Rewards = () => {
                     size="small"
                   />
                 </Box>
-                
+
                 <Typography variant="body2">
                   <strong>Valor:</strong> {reward.value}%
                 </Typography>
@@ -396,13 +421,14 @@ const Rewards = () => {
                     <strong>Usos máximos:</strong> {reward.max_uses}
                   </Typography>
                 )}
-                
+
                 <Typography variant="caption" color="text.secondary" display="block" mt={1}>
-                  Criado: {reward.created_at && !isNaN(new Date(reward.created_at)) ? format(new Date(reward.created_at), 'dd/MM/yyyy', { locale: ptBR }) : 'Data inválida'}
+                  Criado:{' '}
+                  {reward.created_at && !isNaN(new Date(reward.created_at))
+                    ? format(new Date(reward.created_at), 'dd/MM/yyyy', { locale: ptBR })
+                    : 'Data inválida'}
                 </Typography>
               </CardContent>
-              
-              
             </Card>
           </Grid>
         ))}
@@ -414,11 +440,7 @@ const Rewards = () => {
           <Typography variant="h6" color="text.secondary" gutterBottom>
             Nenhuma recompensa encontrada
           </Typography>
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            onClick={handleCreate}
-          >
+          <Button variant="contained" startIcon={<AddIcon />} onClick={handleCreate}>
             Criar Primeira Recompensa
           </Button>
         </Box>
@@ -435,9 +457,7 @@ const Rewards = () => {
               <Typography variant="h4" color="primary">
                 {analytics.total_rewards}
               </Typography>
-              <Typography variant="body2">
-                Total de Recompensas
-              </Typography>
+              <Typography variant="body2">Total de Recompensas</Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={3}>
@@ -445,9 +465,7 @@ const Rewards = () => {
               <Typography variant="h4" color="primary">
                 {analytics.active_rewards}
               </Typography>
-              <Typography variant="body2">
-                Recompensas Ativas
-              </Typography>
+              <Typography variant="body2">Recompensas Ativas</Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={3}>
@@ -455,9 +473,7 @@ const Rewards = () => {
               <Typography variant="h4" color="primary">
                 {analytics.total_coupons}
               </Typography>
-              <Typography variant="body2">
-                Cupons Gerados
-              </Typography>
+              <Typography variant="body2">Cupons Gerados</Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={3}>
@@ -465,9 +481,7 @@ const Rewards = () => {
               <Typography variant="h4" color="primary">
                 {analytics.redeemed_coupons}
               </Typography>
-              <Typography variant="body2">
-                Cupons Resgatados
-              </Typography>
+              <Typography variant="body2">Cupons Resgatados</Typography>
             </Paper>
           </Grid>
         </>
@@ -491,11 +505,7 @@ const Rewards = () => {
           Sistema de Recompensas
         </Typography>
         {tabValue === 0 && (
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            onClick={handleCreate}
-          >
+          <Button variant="contained" startIcon={<AddIcon />} onClick={handleCreate}>
             Nova Recompensa
           </Button>
         )}
@@ -536,8 +546,6 @@ const Rewards = () => {
         </Box>
       )}
 
-      
-
       {/* Create/Edit/Details Dialog */}
       <Dialog
         open={createDialog || detailsModalOpen}
@@ -550,332 +558,322 @@ const Rewards = () => {
         maxWidth="md"
         fullWidth
       >
-        <DialogTitle>
-          {createDialog ? 'Nova Recompensa' : 'Detalhes da Recompensa'}
-        </DialogTitle>
+        <DialogTitle>{createDialog ? 'Nova Recompensa' : 'Detalhes da Recompensa'}</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit(onSubmit)}>
-          {!createDialog && (
-            <Tabs
-              value={detailsModalTab}
-              onChange={(e, newValue) => setDetailsModalTab(newValue)}
-              indicatorColor="primary"
-              textColor="primary"
-              sx={{ mb: 2 }}
-            >
-              <Tab label="Configurações" />
-              <Tab label="Análises" />
-            </Tabs>
-          )}
+            {!createDialog && (
+              <Tabs
+                value={detailsModalTab}
+                onChange={(e, newValue) => setDetailsModalTab(newValue)}
+                indicatorColor="primary"
+                textColor="primary"
+                sx={{ mb: 2 }}
+              >
+                <Tab label="Configurações" />
+                <Tab label="Análises" />
+              </Tabs>
+            )}
 
-          {/* Configurações Tab Content */}
-          {(createDialog || detailsModalTab === 0) && (
-            <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid item xs={12} md={6}>
-                <Controller
-                  name="title"
-                  control={control}
-                  rules={{ required: 'Nome é obrigatório' }}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label="Nome"
-                      fullWidth
-                      error={!!errors.name}
-                      helperText={errors.name?.message}
-                    />
-                  )}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Controller
-                  name="reward_type"
-                  control={control}
-                  rules={{ required: 'Tipo é obrigatório' }}
-                  render={({ field }) => (
-                    <FormControl fullWidth error={!!errors.type}>
-                      <InputLabel>Tipo</InputLabel>
-                      <Select {...field} label="Tipo">
-                        <SelectMenuItem value="discount_percentage">Desconto (%)</SelectMenuItem>
-                        <SelectMenuItem value="discount_fixed">Desconto Fixo</SelectMenuItem>
-                        <SelectMenuItem value="free_item">Item Grátis</SelectMenuItem>
-                        <SelectMenuItem value="points_multiplier">Multiplicador de Pontos</SelectMenuItem>
-                        <SelectMenuItem value="cashback">Cashback</SelectMenuItem>
-                        <SelectMenuItem value="spin_the_wheel">Roleta de Prêmios</SelectMenuItem>
-                      </Select>
-                    </FormControl>
-                  )}
-                />
-              </Grid>
-              {watch('reward_type') === 'spin_the_wheel' && (
-                <Grid item xs={12}>
-                  <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                    Configuração da Roleta
-                  </Typography>
-                  <SpinTheWheel items={watch('wheel_config.items')} />
-                  {fields.map((item, index) => (
-                    <Paper key={item.id} sx={{ p: 2, mb: 2, border: '1px solid #eee' }}>
-                      <Grid container spacing={2} alignItems="center">
-                        <Grid item xs={12} sm={6}>
-                          <Controller
-                            name={`wheel_config.items.${index}.title`}
-                            control={control}
-                            rules={{ required: 'Título do item é obrigatório' }}
-                            render={({ field }) => (
-                              <TextField
-                                {...field}
-                                label="Título do Item"
-                                fullWidth
-                              />
-                            )}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                          <Controller
-                            name={`wheel_config.items.${index}.probability`}
-                            control={control}
-                            rules={{ required: 'Probabilidade é obrigatória', min: 0 }}
-                            render={({ field }) => (
-                              <TextField
-                                {...field}
-                                label="Probabilidade"
-                                type="number"
-                                fullWidth
-                              />
-                            )}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                          <Controller
-                            name={`wheel_config.items.${index}.color`}
-                            control={control}
-                            render={({ field }) => (
-                              <TextField
-                                {...field}
-                                label="Cor do Segmento (Hex)"
-                                fullWidth
-                                placeholder="Ex: #FFD700"
-                              />
-                            )}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                          <Controller
-                            name={`wheel_config.items.${index}.textColor`}
-                            control={control}
-                            render={({ field }) => (
-                              <TextField
-                                {...field}
-                                label="Cor do Texto (Hex)"
-                                fullWidth
-                                placeholder="Ex: #FFFFFF"
-                              />
-                            )}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={2}>
-                          <Button
-                            variant="outlined"
-                            color="error"
-                            onClick={() => remove(index)}
-                            startIcon={<DeleteIcon />}
-                          >
-                            Remover
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  ))}
-                  <Button
-                    variant="outlined"
-                    startIcon={<AddIcon />}
-                    onClick={() => append({ title: '', probability: 0 })}
-                  >
-                    Adicionar Item à Roleta
-                  </Button>
-                </Grid>
-              )}
-              <Grid item xs={12}>
-                <Controller
-                  name="description"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label="Descrição"
-                      multiline
-                      rows={3}
-                      fullWidth
-                    />
-                  )}
-                />
-              </Grid>
-              {watch('reward_type') !== 'spin_the_wheel' && (
-                <Grid item xs={12} md={4}>
-                  <Controller
-                    name="value"
-                    control={control}
-                    rules={{ required: 'Valor é obrigatório' }}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label="Valor (%)"
-                        type="number"
-                        fullWidth
-                        error={!!errors.value}
-                        helperText={errors.value?.message}
-                      />
-                    )}
-                  />
-                </Grid>
-              )}
-              {watch('reward_type') !== 'spin_the_wheel' && (
-                <Grid item xs={12} md={4}>
-                  <Controller
-                    name="points_required"
-                    control={control}
-                    rules={{ required: 'Pontos são obrigatórios' }}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label="Pontos Necessários"
-                        type="number"
-                        fullWidth
-                        error={!!errors.points_required}
-                        helperText={errors.points_required?.message}
-                      />
-                    )}
-                  />
-                </Grid>
-              )}
-              {watch('reward_type') !== 'spin_the_wheel' && (
-                <Grid item xs={12} md={4}>
-                  <Controller
-                    name="max_uses"
-                    control={control}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label="Usos Máximos"
-                        type="number"
-                        fullWidth
-                        helperText="Deixe em branco para ilimitado"
-                      />
-                    )}
-                  />
-                </Grid>
-              )}
-              {watch('reward_type') !== 'spin_the_wheel' && (
+            {/* Configurações Tab Content */}
+            {(createDialog || detailsModalTab === 0) && (
+              <Grid container spacing={2} sx={{ mt: 1 }}>
                 <Grid item xs={12} md={6}>
                   <Controller
-                    name="expires_at"
+                    name="title"
                     control={control}
+                    rules={{ required: 'Nome é obrigatório' }}
                     render={({ field }) => (
                       <TextField
                         {...field}
-                        label="Data de Expiração da Recompensa"
-                        type="datetime-local"
+                        label="Nome"
                         fullWidth
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        helperText="Quando a recompensa não poderá mais ser ganha."
+                        error={!!errors.name}
+                        helperText={errors.name?.message}
                       />
                     )}
                   />
                 </Grid>
-              )}
-              <Grid item xs={12} md={6}>
-                <Controller
-                  name="coupon_validity_days"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label="Dias de Validade do Cupom"
-                      type="number"
-                      fullWidth
-                      helperText="Por quantos dias o cupom será válido após ser gerado."
-                      InputProps={{
-                          inputProps: { min: 1 }
-                      }}
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name="reward_type"
+                    control={control}
+                    rules={{ required: 'Tipo é obrigatório' }}
+                    render={({ field }) => (
+                      <FormControl fullWidth error={!!errors.type}>
+                        <InputLabel>Tipo</InputLabel>
+                        <Select {...field} label="Tipo">
+                          <SelectMenuItem value="discount_percentage">Desconto (%)</SelectMenuItem>
+                          <SelectMenuItem value="discount_fixed">Desconto Fixo</SelectMenuItem>
+                          <SelectMenuItem value="free_item">Item Grátis</SelectMenuItem>
+                          <SelectMenuItem value="points_multiplier">
+                            Multiplicador de Pontos
+                          </SelectMenuItem>
+                          <SelectMenuItem value="cashback">Cashback</SelectMenuItem>
+                          <SelectMenuItem value="spin_the_wheel">Roleta de Prêmios</SelectMenuItem>
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                </Grid>
+                {watch('reward_type') === 'spin_the_wheel' && (
+                  <Grid item xs={12}>
+                    <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+                      Configuração da Roleta
+                    </Typography>
+                    <SpinTheWheel items={watch('wheel_config.items')} />
+                    {fields.map((item, index) => (
+                      <Paper key={item.id} sx={{ p: 2, mb: 2, border: '1px solid #eee' }}>
+                        <Grid container spacing={2} alignItems="center">
+                          <Grid item xs={12} sm={6}>
+                            <Controller
+                              name={`wheel_config.items.${index}.title`}
+                              control={control}
+                              rules={{ required: 'Título do item é obrigatório' }}
+                              render={({ field }) => (
+                                <TextField {...field} label="Título do Item" fullWidth />
+                              )}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={4}>
+                            <Controller
+                              name={`wheel_config.items.${index}.probability`}
+                              control={control}
+                              rules={{ required: 'Probabilidade é obrigatória', min: 0 }}
+                              render={({ field }) => (
+                                <TextField
+                                  {...field}
+                                  label="Probabilidade"
+                                  type="number"
+                                  fullWidth
+                                />
+                              )}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6}>
+                            <Controller
+                              name={`wheel_config.items.${index}.color`}
+                              control={control}
+                              render={({ field }) => (
+                                <TextField
+                                  {...field}
+                                  label="Cor do Segmento (Hex)"
+                                  fullWidth
+                                  placeholder="Ex: #FFD700"
+                                />
+                              )}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6}>
+                            <Controller
+                              name={`wheel_config.items.${index}.textColor`}
+                              control={control}
+                              render={({ field }) => (
+                                <TextField
+                                  {...field}
+                                  label="Cor do Texto (Hex)"
+                                  fullWidth
+                                  placeholder="Ex: #FFFFFF"
+                                />
+                              )}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={2}>
+                            <Button
+                              variant="outlined"
+                              color="error"
+                              onClick={() => remove(index)}
+                              startIcon={<DeleteIcon />}
+                            >
+                              Remover
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    ))}
+                    <Button
+                      variant="outlined"
+                      startIcon={<AddIcon />}
+                      onClick={() => append({ title: '', probability: 0 })}
+                    >
+                      Adicionar Item à Roleta
+                    </Button>
+                  </Grid>
+                )}
+                <Grid item xs={12}>
+                  <Controller
+                    name="description"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField {...field} label="Descrição" multiline rows={3} fullWidth />
+                    )}
+                  />
+                </Grid>
+                {watch('reward_type') !== 'spin_the_wheel' && (
+                  <Grid item xs={12} md={4}>
+                    <Controller
+                      name="value"
+                      control={control}
+                      rules={{ required: 'Valor é obrigatório' }}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Valor (%)"
+                          type="number"
+                          fullWidth
+                          error={!!errors.value}
+                          helperText={errors.value?.message}
+                        />
+                      )}
                     />
-                  )}
-                />
+                  </Grid>
+                )}
+                {watch('reward_type') !== 'spin_the_wheel' && (
+                  <Grid item xs={12} md={4}>
+                    <Controller
+                      name="points_required"
+                      control={control}
+                      rules={{ required: 'Pontos são obrigatórios' }}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Pontos Necessários"
+                          type="number"
+                          fullWidth
+                          error={!!errors.points_required}
+                          helperText={errors.points_required?.message}
+                        />
+                      )}
+                    />
+                  </Grid>
+                )}
+                {watch('reward_type') !== 'spin_the_wheel' && (
+                  <Grid item xs={12} md={4}>
+                    <Controller
+                      name="max_uses"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Usos Máximos"
+                          type="number"
+                          fullWidth
+                          helperText="Deixe em branco para ilimitado"
+                        />
+                      )}
+                    />
+                  </Grid>
+                )}
+                {watch('reward_type') !== 'spin_the_wheel' && (
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name="expires_at"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Data de Expiração da Recompensa"
+                          type="datetime-local"
+                          fullWidth
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          helperText="Quando a recompensa não poderá mais ser ganha."
+                        />
+                      )}
+                    />
+                  </Grid>
+                )}
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name="coupon_validity_days"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label="Dias de Validade do Cupom"
+                        type="number"
+                        fullWidth
+                        helperText="Por quantos dias o cupom será válido após ser gerado."
+                        InputProps={{
+                          inputProps: { min: 1 },
+                        }}
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name="status"
+                    control={control}
+                    render={({ field }) => (
+                      <FormControl fullWidth>
+                        <InputLabel>Status</InputLabel>
+                        <Select {...field} label="Status">
+                          <SelectMenuItem value="active">Ativo</SelectMenuItem>
+                          <SelectMenuItem value="inactive">Inativo</SelectMenuItem>
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12} md={6}>
-                <Controller
-                  name="status"
-                  control={control}
-                  render={({ field }) => (
-                    <FormControl fullWidth>
-                      <InputLabel>Status</InputLabel>
-                      <Select {...field} label="Status">
-                        <SelectMenuItem value="active">Ativo</SelectMenuItem>
-                        <SelectMenuItem value="inactive">Inativo</SelectMenuItem>
-                      </Select>
-                    </FormControl>
-                  )}
-                />
-              </Grid>
-            </Grid>
-          )}
+            )}
 
-          {/* Análises Tab Content */}
-          {detailsModalTab === 1 && !createDialog && selectedItem && selectedRewardAnalytics && (
-            <Box sx={{ mt: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                Análises de Cupons
-              </Typography>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <Paper sx={{ p: 2, textAlign: 'center' }}>
-                    <Typography variant="h5" color="primary">
-                      {selectedRewardAnalytics.total_generated || 0}
-                    </Typography>
-                    <Typography variant="body2">Cupons Gerados</Typography>
-                  </Paper>
+            {/* Análises Tab Content */}
+            {detailsModalTab === 1 && !createDialog && selectedItem && selectedRewardAnalytics && (
+              <Box sx={{ mt: 2 }}>
+                <Typography variant="h6" gutterBottom>
+                  Análises de Cupons
+                </Typography>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <Paper sx={{ p: 2, textAlign: 'center' }}>
+                      <Typography variant="h5" color="primary">
+                        {selectedRewardAnalytics.total_generated || 0}
+                      </Typography>
+                      <Typography variant="body2">Cupons Gerados</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Paper sx={{ p: 2, textAlign: 'center' }}>
+                      <Typography variant="h5" color="success">
+                        {selectedRewardAnalytics.total_redeemed || 0}
+                      </Typography>
+                      <Typography variant="body2">Cupons Resgatados</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Paper sx={{ p: 2, textAlign: 'center' }}>
+                      <Typography variant="h5" color="info">
+                        {(selectedRewardAnalytics.redemption_rate || 0).toFixed(2)}%
+                      </Typography>
+                      <Typography variant="body2">Taxa de Resgate</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Paper sx={{ p: 2, textAlign: 'center' }}>
+                      <Typography variant="h5" color="warning">
+                        R$ {(selectedRewardAnalytics.average_order_value || 0).toFixed(2)}
+                      </Typography>
+                      <Typography variant="body2">Valor Médio do Pedido</Typography>
+                    </Paper>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Paper sx={{ p: 2, textAlign: 'center' }}>
-                    <Typography variant="h5" color="success">
-                      {selectedRewardAnalytics.total_redeemed || 0}
-                    </Typography>
-                    <Typography variant="body2">Cupons Resgatados</Typography>
-                  </Paper>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Paper sx={{ p: 2, textAlign: 'center' }}>
-                    <Typography variant="h5" color="info">
-                      {(selectedRewardAnalytics.redemption_rate || 0).toFixed(2)}%
-                    </Typography>
-                    <Typography variant="body2">Taxa de Resgate</Typography>
-                  </Paper>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Paper sx={{ p: 2, textAlign: 'center' }}>
-                    <Typography variant="h5" color="warning">
-                      R$ {(selectedRewardAnalytics.average_order_value || 0).toFixed(2)}
-                    </Typography>
-                    <Typography variant="body2">Valor Médio do Pedido</Typography>
-                  </Paper>
-                </Grid>
-              </Grid>
-              <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  startIcon={<DeleteIcon />}
-                  onClick={() => {
-                    setDetailsModalOpen(false); // Close details modal first
-                    setDeleteDialog(true); // Open delete confirmation
-                  }}
-                >
-                  Excluir Recompensa
-                </Button>
+                <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={() => {
+                      setDetailsModalOpen(false); // Close details modal first
+                      setDeleteDialog(true); // Open delete confirmation
+                    }}
+                  >
+                    Excluir Recompensa
+                  </Button>
+                </Box>
               </Box>
-            </Box>
-          )}
+            )}
           </form>
         </DialogContent>
         <DialogActions>
@@ -898,11 +896,17 @@ const Rewards = () => {
       </Dialog>
 
       {/* Delete Dialog */}
-      <Dialog open={deleteDialog} onClose={() => { setDeleteDialog(false); }}>
+      <Dialog
+        open={deleteDialog}
+        onClose={() => {
+          setDeleteDialog(false);
+        }}
+      >
         <DialogTitle>Confirmar Exclusão</DialogTitle>
         <DialogContent>
           <Typography>
-            Tem certeza que deseja excluir a recompensa "{selectedItem?.title}"? Esta ação não pode ser desfeita.
+            Tem certeza que deseja excluir a recompensa "{selectedItem?.title}"? Esta ação não pode
+            ser desfeita.
           </Typography>
         </DialogContent>
         <DialogActions>

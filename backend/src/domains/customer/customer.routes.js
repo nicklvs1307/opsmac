@@ -1,12 +1,13 @@
 const express = require('express');
-const { auth } = require('../middleware/authMiddleware');
+const { auth } = require('../../middleware/authMiddleware');
+const checkPermission = require('../../middleware/permission');
 const customerController = require('./customer.controller');
 const {
   customerQueryValidation,
   createCustomerValidation,
   publicRegisterCustomerValidation,
   byPhoneValidation
-} = require('domains/customer/customer.validation');
+} = require('./customer.validation');
 
 const router = express.Router();
 
@@ -16,16 +17,16 @@ router.post('/public/register', publicRegisterCustomerValidation, customerContro
 // Todas as outras rotas são protegidas e requerem autenticação
 router.use(auth);
 
-router.get('/dashboard-metrics', customerController.getCustomerDashboardMetrics);
-router.get('/birthdays', customerController.getBirthdayCustomers);
-router.get('/', customerQueryValidation, customerController.listCustomers);
-router.post('/', createCustomerValidation, customerController.createCustomer);
-router.get('/by-phone', byPhoneValidation, customerController.getCustomerByPhone);
-router.get('/:id', customerController.getCustomerById);
-router.put('/:id', customerController.updateCustomer);
-router.delete('/:id', customerController.deleteCustomer);
-router.get('/:id/details', customerController.getCustomerDetails);
-router.post('/:id/reset-visits', customerController.resetCustomerVisits);
-router.post('/:id/clear-checkins', customerController.clearCustomerCheckins);
+router.get('/dashboard-metrics', checkPermission('customers:view'), customerController.getCustomerDashboardMetrics);
+router.get('/birthdays', checkPermission('customers:view'), customerController.getBirthdayCustomers);
+router.get('/', checkPermission('customers:view'), customerQueryValidation, customerController.listCustomers);
+router.post('/', checkPermission('customers:create'), createCustomerValidation, customerController.createCustomer);
+router.get('/by-phone', checkPermission('customers:view'), byPhoneValidation, customerController.getCustomerByPhone);
+router.get('/:id', checkPermission('customers:view'), customerController.getCustomerById);
+router.put('/:id', checkPermission('customers:edit'), customerController.updateCustomer);
+router.delete('/:id', checkPermission('customers:delete'), customerController.deleteCustomer);
+router.get('/:id/details', checkPermission('customers:view'), customerController.getCustomerDetails);
+router.post('/:id/reset-visits', checkPermission('customers:edit'), customerController.resetCustomerVisits);
+router.post('/:id/clear-checkins', checkPermission('customers:edit'), customerController.clearCustomerCheckins);
 
 module.exports = router;

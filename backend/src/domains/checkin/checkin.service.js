@@ -1,6 +1,6 @@
 const { models } = require('../../config/database');
 const { Op, fn, col, literal } = require('sequelize');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../../utils/errors');
+const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 const { sendWhatsAppMessage } = require('services/integrations/whatsappApiClient');
 
 async function recordCheckin(customer_id, restaurantId) {

@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Button, Paper, CircularProgress, TextField, FormControl, InputLabel, Select, MenuItem, IconButton, Alert } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  Paper,
+  CircularProgress,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  IconButton,
+  Alert,
+} from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../../contexts/AuthContext'; // Importar useAuth
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const fetchSurvey = async (id) => {
   const { data } = await axiosInstance.get(`/api/surveys/${id}`);
@@ -14,9 +27,11 @@ const fetchSurvey = async (id) => {
 };
 
 const fetchRewards = async (restaurantId) => {
-    if (!restaurantId) return [];
-    const { data } = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}?is_active=true`);
-    return data.rewards;
+  if (!restaurantId) return [];
+  const { data } = await axiosInstance.get(
+    `/api/rewards/restaurant/${restaurantId}?is_active=true`
+  );
+  return data.rewards;
 };
 
 const fetchNpsCriteria = async () => {
@@ -45,7 +60,12 @@ const SurveyEdit = () => {
   const [couponValidityDays, setCouponValidityDays] = useState('');
   const [questions, setQuestions] = useState([]);
 
-  const { data: survey, isLoading, isError, error } = useQuery(['survey', id], () => fetchSurvey(id), {
+  const {
+    data: survey,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(['survey', id], () => fetchSurvey(id), {
     onSuccess: (data) => {
       setTitle(data.title);
       setSlug(data.slug);
@@ -56,7 +76,7 @@ const SurveyEdit = () => {
     },
     onError: (err) => {
       toast.error(t('survey_edit.load_error', { message: err.response.data.msg || err.message }));
-    }
+    },
   });
 
   const { data: rewards, isLoading: isLoadingRewards } = useQuery(
@@ -65,7 +85,10 @@ const SurveyEdit = () => {
     { enabled: !!restaurantId }
   );
 
-  const { data: npsCriteria, isLoading: isLoadingNpsCriteria } = useQuery('npsCriteria', fetchNpsCriteria);
+  const { data: npsCriteria, isLoading: isLoadingNpsCriteria } = useQuery(
+    'npsCriteria',
+    fetchNpsCriteria
+  );
 
   const mutation = useMutation(updateSurvey, {
     onSuccess: () => {
@@ -76,7 +99,7 @@ const SurveyEdit = () => {
     },
     onError: (err) => {
       toast.error(t('survey_edit.update_error', { message: err.response.data.msg || err.message }));
-    }
+    },
   });
 
   // Verifica se o módulo de pesquisas/feedback está habilitado
@@ -91,13 +114,16 @@ const SurveyEdit = () => {
   }
 
   const handleAddQuestion = () => {
-    setQuestions([...questions, {
-      id: Math.random().toString(36).substring(7), // Temporary ID
-      question_text: '',
-      question_type: 'text',
-      options: [],
-      order: questions.length + 1,
-    }]);
+    setQuestions([
+      ...questions,
+      {
+        id: Math.random().toString(36).substring(7), // Temporary ID
+        question_text: '',
+        question_type: 'text',
+        options: [],
+        order: questions.length + 1,
+      },
+    ]);
   };
 
   const handleQuestionChange = (index, field, value) => {
@@ -142,47 +168,89 @@ const SurveyEdit = () => {
   };
 
   if (isLoading) return <CircularProgress />;
-  if (isError) return <Typography color="error">{t('common.error')}: {error.message}</Typography>;
+  if (isError)
+    return (
+      <Typography color="error">
+        {t('common.error')}: {error.message}
+      </Typography>
+    );
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('survey_edit.title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('survey_edit.title')}
+      </Typography>
       <Paper elevation={3} sx={{ p: 4 }}>
-        <TextField fullWidth label={t('survey_edit.title_label')} value={title} onChange={(e) => setTitle(e.target.value)} sx={{ mb: 2 }} />
-        <TextField fullWidth label={t('survey_edit.slug_label')} value={slug} onChange={(e) => setSlug(e.target.value)} sx={{ mb: 2 }} helperText={t('survey_edit.slug_helper')} />
-        <TextField fullWidth label={t('survey_edit.description_label')} value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={3} sx={{ mb: 2 }} />
+        <TextField
+          fullWidth
+          label={t('survey_edit.title_label')}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          sx={{ mb: 2 }}
+        />
+        <TextField
+          fullWidth
+          label={t('survey_edit.slug_label')}
+          value={slug}
+          onChange={(e) => setSlug(e.target.value)}
+          sx={{ mb: 2 }}
+          helperText={t('survey_edit.slug_helper')}
+        />
+        <TextField
+          fullWidth
+          label={t('survey_edit.description_label')}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          multiline
+          rows={3}
+          sx={{ mb: 2 }}
+        />
 
         <FormControl fullWidth sx={{ mb: 2 }}>
-            <InputLabel>{t('survey_edit.reward_label')}</InputLabel>
-            <Select value={rewardId} label={t('survey_edit.reward_label')} onChange={(e) => setRewardId(e.target.value)}>
-                <MenuItem value=""><em>{t('common.none')}</em></MenuItem>
-                {isLoadingRewards ? (
-                    <MenuItem disabled>{t('survey_edit.loading_rewards')}</MenuItem>
-                ) : (
-                    rewards?.map((reward) => (
-                        <MenuItem key={reward.id} value={reward.id}>{reward.name}</MenuItem>
-                    ))
-                )}
-            </Select>
+          <InputLabel>{t('survey_edit.reward_label')}</InputLabel>
+          <Select
+            value={rewardId}
+            label={t('survey_edit.reward_label')}
+            onChange={(e) => setRewardId(e.target.value)}
+          >
+            <MenuItem value="">
+              <em>{t('common.none')}</em>
+            </MenuItem>
+            {isLoadingRewards ? (
+              <MenuItem disabled>{t('survey_edit.loading_rewards')}</MenuItem>
+            ) : (
+              rewards?.map((reward) => (
+                <MenuItem key={reward.id} value={reward.id}>
+                  {reward.name}
+                </MenuItem>
+              ))
+            )}
+          </Select>
         </FormControl>
 
         <TextField
-            fullWidth
-            label={t('survey_edit.coupon_validity_days_label')}
-            type="number"
-            value={couponValidityDays}
-            onChange={(e) => setCouponValidityDays(e.target.value)}
-            sx={{ mb: 2 }}
-            InputProps={{
-                inputProps: { min: 1 }
-            }}
+          fullWidth
+          label={t('survey_edit.coupon_validity_days_label')}
+          type="number"
+          value={couponValidityDays}
+          onChange={(e) => setCouponValidityDays(e.target.value)}
+          sx={{ mb: 2 }}
+          InputProps={{
+            inputProps: { min: 1 },
+          }}
         />
 
-        <Typography variant="h5" sx={{ mt: 3, mb: 2 }}>{t('survey_edit.questions_title')}</Typography>
+        <Typography variant="h5" sx={{ mt: 3, mb: 2 }}>
+          {t('survey_edit.questions_title')}
+        </Typography>
         {questions.map((question, qIndex) => (
           <Paper key={question.id} elevation={1} sx={{ p: 3, mb: 3 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-              <Typography variant="h6">{t('survey_edit.question_number', { number: qIndex + 1 })}</Typography>
+            <Box
+              sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}
+            >
+              <Typography variant="h6">
+                {t('survey_edit.question_number', { number: qIndex + 1 })}
+              </Typography>
               <IconButton color="error" onClick={() => handleRemoveQuestion(qIndex)}>
                 <DeleteIcon />
               </IconButton>
@@ -209,7 +277,9 @@ const SurveyEdit = () => {
                 <MenuItem value="nps">{t('survey_edit.question_type_nps')}</MenuItem>
                 <MenuItem value="csat">{t('survey_edit.question_type_csat')}</MenuItem>
                 <MenuItem value="ratings">{t('survey_edit.question_type_ratings')}</MenuItem>
-                <MenuItem value="like_dislike">{t('survey_edit.question_type_like_dislike')}</MenuItem>
+                <MenuItem value="like_dislike">
+                  {t('survey_edit.question_type_like_dislike')}
+                </MenuItem>
               </Select>
             </FormControl>
 
@@ -225,7 +295,9 @@ const SurveyEdit = () => {
                     <MenuItem disabled>{t('survey_edit.loading_criteria')}</MenuItem>
                   ) : (
                     npsCriteria?.map((criterion) => (
-                      <MenuItem key={criterion.id} value={criterion.id}>{criterion.name}</MenuItem>
+                      <MenuItem key={criterion.id} value={criterion.id}>
+                        {criterion.name}
+                      </MenuItem>
                     ))
                   )}
                 </Select>
@@ -236,7 +308,9 @@ const SurveyEdit = () => {
               question.question_type === 'checkboxes' ||
               question.question_type === 'dropdown') && (
               <Box sx={{ mt: 2 }}>
-                <Typography variant="subtitle1" gutterBottom>{t('survey_edit.options_title')}</Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  {t('survey_edit.options_title')}
+                </Typography>
                 {question.options.map((option, optIndex) => (
                   <Box key={optIndex} sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                     <TextField
@@ -245,23 +319,41 @@ const SurveyEdit = () => {
                       value={option}
                       onChange={(e) => handleOptionChange(qIndex, optIndex, e.target.value)}
                     />
-                    <IconButton color="error" onClick={() => handleRemoveOption(qIndex, optIndex)} sx={{ ml: 1 }}>
+                    <IconButton
+                      color="error"
+                      onClick={() => handleRemoveOption(qIndex, optIndex)}
+                      sx={{ ml: 1 }}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Box>
                 ))}
-                <Button variant="outlined" onClick={() => handleAddOption(qIndex)} sx={{ mt: 1 }}>{t('survey_edit.add_option_button')}</Button>
+                <Button variant="outlined" onClick={() => handleAddOption(qIndex)} sx={{ mt: 1 }}>
+                  {t('survey_edit.add_option_button')}
+                </Button>
               </Box>
             )}
           </Paper>
         ))}
-        <Button variant="contained" onClick={handleAddQuestion} sx={{ mb: 2 }}>{t('survey_edit.add_question_button')}</Button>
+        <Button variant="contained" onClick={handleAddQuestion} sx={{ mb: 2 }}>
+          {t('survey_edit.add_question_button')}
+        </Button>
 
         <Box sx={{ mt: 3 }}>
           <Button variant="contained" onClick={handleSubmit} disabled={mutation.isLoading}>
-            {mutation.isLoading ? <CircularProgress size={24} /> : t('survey_edit.save_changes_button')}
+            {mutation.isLoading ? (
+              <CircularProgress size={24} />
+            ) : (
+              t('survey_edit.save_changes_button')
+            )}
           </Button>
-          <Button variant="outlined" onClick={() => navigate('/satisfaction/surveys')} sx={{ ml: 2 }}>{t('common.cancel')}</Button>
+          <Button
+            variant="outlined"
+            onClick={() => navigate('/satisfaction/surveys')}
+            sx={{ ml: 2 }}
+          >
+            {t('common.cancel')}
+          </Button>
         </Box>
       </Paper>
     </Box>

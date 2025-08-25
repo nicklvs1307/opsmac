@@ -42,7 +42,7 @@ import {
   Pie,
   Cell,
 } from 'recharts';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
 
@@ -59,20 +59,20 @@ const Dashboard = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       // Obter o ID do restaurante a partir do objeto restaurant no usuário
       const restaurantId = user?.restaurants?.[0]?.id;
-      
+
       if (!restaurantId) {
         setError('Nenhum restaurante encontrado. Por favor, verifique suas configurações.');
         setLoading(false);
         return;
       }
-      
+
       const response = await axiosInstance.get(`/api/dashboard/overview/${restaurantId}`, {
-        params: { period }
+        params: { period },
       });
-      
+
       setDashboardData(response.data);
       // Removendo console.log de depuração
       // console.log('Dados do Dashboard recebidos:', response.data);
@@ -89,8 +89,6 @@ const Dashboard = () => {
     fetchDashboardData();
   }, [fetchDashboardData]);
 
-  
-
   const RATING_COLORS = {
     5: '#4FC3F7',
     4: '#5C6BC0',
@@ -100,11 +98,12 @@ const Dashboard = () => {
   };
 
   // Mover a definição de 'data' para dentro da função de renderização
-  const formattedRatingDistribution = dashboardData?.ratings_distribution?.map(item => ({
-    name: `${item.rating} estrelas`,
-    value: Number(item.count),
-    color: RATING_COLORS[item.rating] || '#CCCCCC', // Fallback color
-  })) || [];
+  const formattedRatingDistribution =
+    dashboardData?.ratings_distribution?.map((item) => ({
+      name: `${item.rating} estrelas`,
+      value: Number(item.count),
+      color: RATING_COLORS[item.rating] || '#CCCCCC', // Fallback color
+    })) || [];
 
   const data = {
     overview: dashboardData?.overview || {},
@@ -132,32 +131,30 @@ const Dashboard = () => {
     );
   }
 
-
-
   return (
     <Box>
       {/* Header */}
       <Box mb={4}>
-        <Typography 
-            variant="h4" 
-            component="h1" 
-            sx={{ 
-              fontWeight: 'bold',
-              color: '#2c3e50',
-              mb: 1
-            }}
-          >
-            {t('dashboard.overview_title')}
-          </Typography>
-          <Typography 
-            variant="body1" 
-            sx={{ 
-              color: '#7f8c8d',
-              mb: 3
-            }}
-          >
-            {t('dashboard.welcome_message')}
-          </Typography>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 'bold',
+            color: '#2c3e50',
+            mb: 1,
+          }}
+        >
+          {t('dashboard.overview_title')}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color: '#7f8c8d',
+            mb: 3,
+          }}
+        >
+          {t('dashboard.welcome_message')}
+        </Typography>
       </Box>
 
       {/* Metrics Cards */}
@@ -236,7 +233,7 @@ const Dashboard = () => {
               borderRadius: 3,
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
               background: 'linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%)',
-              border: '1px solid rgba(0, 0, 0, 0.05)'
+              border: '1px solid rgba(0, 0, 0, 0.05)',
             }}
           >
             <Box display="flex" alignItems="center" mb={2}>
@@ -246,7 +243,7 @@ const Dashboard = () => {
                   width: 32,
                   height: 32,
                   mr: 1.5,
-                  fontSize: '1rem'
+                  fontSize: '1rem',
                 }}
               >
                 👥
@@ -256,7 +253,7 @@ const Dashboard = () => {
                 sx={{
                   fontWeight: 600,
                   color: '#2c3e50',
-                  fontSize: '1.25rem'
+                  fontSize: '1.25rem',
                 }}
               >
                 Top Clientes
@@ -266,21 +263,18 @@ const Dashboard = () => {
               <Grid container spacing={2}>
                 {data.top_customers.slice(0, 3).map((customer, index) => (
                   <Grid item xs={12} sm={6} md={4} key={customer.id}>
-                    <CustomerCard 
-                      customer={customer}
-                      index={index}
-                    />
+                    <CustomerCard customer={customer} index={index} />
                   </Grid>
                 ))}
               </Grid>
             ) : (
-              <Box 
+              <Box
                 sx={{
                   textAlign: 'center',
                   py: 4,
                   bgcolor: 'rgba(0, 0, 0, 0.02)',
                   borderRadius: 2,
-                  border: '2px dashed rgba(0, 0, 0, 0.1)'
+                  border: '2px dashed rgba(0, 0, 0, 0.1)',
                 }}
               >
                 <Avatar
@@ -289,25 +283,22 @@ const Dashboard = () => {
                     width: 48,
                     height: 48,
                     mx: 'auto',
-                    mb: 1.5
+                    mb: 1.5,
                   }}
                 >
                   👥
                 </Avatar>
-                <Typography 
-                  variant="subtitle1" 
-                  sx={{ 
+                <Typography
+                  variant="subtitle1"
+                  sx={{
                     color: '#6c757d',
                     mb: 0.5,
-                    fontWeight: 500
+                    fontWeight: 500,
                   }}
                 >
                   Nenhum cliente encontrado
                 </Typography>
-                <Typography 
-                  variant="body2" 
-                  sx={{ color: '#9ca3af' }}
-                >
+                <Typography variant="body2" sx={{ color: '#9ca3af' }}>
                   Os clientes aparecerão aqui conforme os feedbacks forem recebidos.
                 </Typography>
               </Box>
@@ -327,7 +318,7 @@ const Dashboard = () => {
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
               background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
               border: '1px solid rgba(0, 0, 0, 0.05)',
-              height: '100%'
+              height: '100%',
             }}
           >
             <Box display="flex" alignItems="center" mb={3}>
@@ -336,7 +327,7 @@ const Dashboard = () => {
                   bgcolor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   width: 32,
                   height: 32,
-                  mr: 1.5
+                  mr: 1.5,
                 }}
               >
                 📈
@@ -346,18 +337,18 @@ const Dashboard = () => {
                 sx={{
                   fontWeight: 600,
                   color: '#2c3e50',
-                  fontSize: '1.25rem'
+                  fontSize: '1.25rem',
                 }}
               >
                 Desempenho do NPS
               </Typography>
             </Box>
             {data.trends && data.trends.length > 0 ? (
-              <Box 
+              <Box
                 sx={{
                   bgcolor: 'rgba(102, 126, 234, 0.05)',
                   borderRadius: 2,
-                  p: 2
+                  p: 2,
                 }}
               >
                 <ResponsiveContainer width="100%" height={280}>
@@ -371,42 +362,42 @@ const Dashboard = () => {
                     }}
                   >
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(102, 126, 234, 0.1)" />
-                    <XAxis 
-                      dataKey="date" 
+                    <XAxis
+                      dataKey="date"
                       tick={{ fontSize: 12, fill: '#6c757d' }}
                       axisLine={{ stroke: 'rgba(102, 126, 234, 0.2)' }}
                     />
-                    <YAxis 
+                    <YAxis
                       tick={{ fontSize: 12, fill: '#6c757d' }}
                       axisLine={{ stroke: 'rgba(102, 126, 234, 0.2)' }}
                     />
-                    <Tooltip 
+                    <Tooltip
                       contentStyle={{
                         backgroundColor: 'white',
                         border: '1px solid rgba(102, 126, 234, 0.2)',
                         borderRadius: '8px',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                       }}
                     />
-                    <Line 
-                      type="monotone" 
-                      dataKey="nps" 
-                      stroke="#667eea" 
+                    <Line
+                      type="monotone"
+                      dataKey="nps"
+                      stroke="#667eea"
                       strokeWidth={3}
                       dot={{ fill: '#667eea', strokeWidth: 2, r: 4 }}
-                      activeDot={{ r: 6, stroke: '#667eea', strokeWidth: 2, fill: 'white' }} 
+                      activeDot={{ r: 6, stroke: '#667eea', strokeWidth: 2, fill: 'white' }}
                     />
                   </LineChart>
                 </ResponsiveContainer>
               </Box>
             ) : (
-              <Box 
+              <Box
                 sx={{
                   textAlign: 'center',
                   py: 4,
                   bgcolor: 'rgba(0, 0, 0, 0.02)',
                   borderRadius: 2,
-                  border: '2px dashed rgba(0, 0, 0, 0.1)'
+                  border: '2px dashed rgba(0, 0, 0, 0.1)',
                 }}
               >
                 <Typography variant="body2" color="text.secondary">
@@ -426,7 +417,7 @@ const Dashboard = () => {
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
               background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
               border: '1px solid rgba(0, 0, 0, 0.05)',
-              height: '100%'
+              height: '100%',
             }}
           >
             <Box display="flex" alignItems="center" mb={3}>
@@ -435,7 +426,7 @@ const Dashboard = () => {
                   bgcolor: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
                   width: 32,
                   height: 32,
-                  mr: 1.5
+                  mr: 1.5,
                 }}
               >
                 🎯
@@ -445,21 +436,21 @@ const Dashboard = () => {
                 sx={{
                   fontWeight: 600,
                   color: '#2c3e50',
-                  fontSize: '1.25rem'
+                  fontSize: '1.25rem',
                 }}
               >
                 Distribuição de Avaliações
               </Typography>
             </Box>
             {data.ratingDistribution && data.ratingDistribution.length > 0 ? (
-              <Box 
+              <Box
                 sx={{
                   bgcolor: 'rgba(240, 147, 251, 0.05)',
                   borderRadius: 2,
                   p: 2,
                   display: 'flex',
                   flexDirection: 'column',
-                  alignItems: 'center'
+                  alignItems: 'center',
                 }}
               >
                 <ResponsiveContainer width="100%" height={240}>
@@ -478,12 +469,12 @@ const Dashboard = () => {
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip 
+                    <Tooltip
                       contentStyle={{
                         backgroundColor: 'white',
                         border: '1px solid rgba(240, 147, 251, 0.2)',
                         borderRadius: '8px',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                       }}
                     />
                   </PieChart>
@@ -499,10 +490,13 @@ const Dashboard = () => {
                               height: 12,
                               bgcolor: entry.color,
                               borderRadius: '50%',
-                              mr: 0.5
+                              mr: 0.5,
                             }}
                           />
-                          <Typography variant="body2" sx={{ fontSize: '0.75rem', color: '#6c757d' }}>
+                          <Typography
+                            variant="body2"
+                            sx={{ fontSize: '0.75rem', color: '#6c757d' }}
+                          >
                             {entry.name}
                           </Typography>
                         </Box>
@@ -512,13 +506,13 @@ const Dashboard = () => {
                 </Box>
               </Box>
             ) : (
-              <Box 
+              <Box
                 sx={{
                   textAlign: 'center',
                   py: 4,
                   bgcolor: 'rgba(0, 0, 0, 0.02)',
                   borderRadius: 2,
-                  border: '2px dashed rgba(0, 0, 0, 0.1)'
+                  border: '2px dashed rgba(0, 0, 0, 0.1)',
                 }}
               >
                 <Typography variant="body2" color="text.secondary">

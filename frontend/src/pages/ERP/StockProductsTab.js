@@ -1,8 +1,20 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Box, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress, Alert } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  CircularProgress,
+  Alert,
+} from '@mui/material';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const fetchAllStocks = async (restaurantId) => {
   const { data } = await axiosInstance.get(`/api/stock?restaurant_id=${restaurantId}`);
@@ -13,18 +25,22 @@ const StockProductsTab = () => {
   const { user } = useAuth();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const { data: stocks, isLoading, isError } = useQuery(
-    ['allStocks', restaurantId],
-    () => fetchAllStocks(restaurantId),
-    { enabled: !!restaurantId }
-  );
+  const {
+    data: stocks,
+    isLoading,
+    isError,
+  } = useQuery(['allStocks', restaurantId], () => fetchAllStocks(restaurantId), {
+    enabled: !!restaurantId,
+  });
 
   if (isLoading) return <CircularProgress />;
   if (isError) return <Alert severity="error">Erro ao carregar produtos em estoque.</Alert>;
 
   return (
     <Box p={3}>
-      <Typography variant="h4" gutterBottom>Todos os Produtos em Estoque</Typography>
+      <Typography variant="h4" gutterBottom>
+        Todos os Produtos em Estoque
+      </Typography>
 
       <Paper sx={{ mb: 3 }}>
         <TableContainer>

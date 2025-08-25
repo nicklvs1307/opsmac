@@ -1,4 +1,4 @@
-const { models } = require('config/database');
+const { models } = require('config/config');
 
 const isOwnerOrManager = async (req, res, next) => {
     try {

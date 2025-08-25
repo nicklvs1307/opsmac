@@ -32,7 +32,7 @@ import {
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import CouponAnalytics from './CouponAnalytics';
 import CouponValidator from './CouponValidator';
 import { useTranslation } from 'react-i18next';
@@ -92,7 +92,7 @@ const Coupons = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const params = {
         page,
         limit: itemsPerPage,
@@ -101,9 +101,11 @@ const Coupons = () => {
       if (filters.search) params.search = filters.search;
       if (filters.status) params.status = filters.status;
       if (filters.type) params.type = filters.type;
-      
-      const response = await axiosInstance.get(`/api/coupons/restaurant/${restaurantId}`, { params });
-      
+
+      const response = await axiosInstance.get(`/api/coupons/restaurant/${restaurantId}`, {
+        params,
+      });
+
       setCoupons(response.data.coupons);
       setTotalPages(response.data.pagination.total_pages);
     } catch (err) {
@@ -126,23 +128,35 @@ const Coupons = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'active': return 'success';
-      case 'inactive': return 'error';
-      case 'expired': return 'warning';
-      case 'used': return 'info';
-      case 'pending': return 'default';
-      default: return 'default';
+      case 'active':
+        return 'success';
+      case 'inactive':
+        return 'error';
+      case 'expired':
+        return 'warning';
+      case 'used':
+        return 'info';
+      case 'pending':
+        return 'default';
+      default:
+        return 'default';
     }
   };
 
   const getStatusLabel = (status) => {
     switch (status) {
-      case 'active': return t('coupons.status_active');
-      case 'inactive': return t('coupons.status_inactive');
-      case 'expired': return t('coupons.status_expired');
-      case 'used': return t('coupons.status_used');
-      case 'pending': return t('coupons.status_pending');
-      default: return status;
+      case 'active':
+        return t('coupons.status_active');
+      case 'inactive':
+        return t('coupons.status_inactive');
+      case 'expired':
+        return t('coupons.status_expired');
+      case 'used':
+        return t('coupons.status_used');
+      case 'pending':
+        return t('coupons.status_pending');
+      default:
+        return status;
     }
   };
 
@@ -183,14 +197,10 @@ const Coupons = () => {
               <TableCell>
                 {coupon.expires_at
                   ? format(new Date(coupon.expires_at), 'dd/MM/yyyy', { locale: ptBR })
-                  : t('coupons.no_expiration')
-                }
+                  : t('coupons.no_expiration')}
               </TableCell>
               <TableCell>
-                <IconButton
-                  size="small"
-                  onClick={(e) => handleMenuOpen(e, coupon)}
-                >
+                <IconButton size="small" onClick={(e) => handleMenuOpen(e, coupon)}>
                   <MoreVertIcon />
                 </IconButton>
               </TableCell>
@@ -265,12 +275,10 @@ const Coupons = () => {
         </Box>
       )}
 
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={() => handleRedeem(selectedItem.id)}>{t('coupons.redeem_coupon_button')}</MenuItem>
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+        <MenuItem onClick={() => handleRedeem(selectedItem.id)}>
+          {t('coupons.redeem_coupon_button')}
+        </MenuItem>
         <MenuItem onClick={handleMenuClose}>{t('coupons.invalidate_coupon_button')}</MenuItem>
       </Menu>
     </Box>

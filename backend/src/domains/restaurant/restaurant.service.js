@@ -1,4 +1,4 @@
-const { models } = require('../../config/database');
+const { models } = require('config/config');
 const { NotFoundError, BadRequestError } = require('utils/errors');
 
 // --- Funções de Gerenciamento de Restaurante ---

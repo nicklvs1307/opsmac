@@ -1,6 +1,7 @@
 const authService = require('./auth.service');
-const { BadRequestError } = require('../../utils/errors');
+const { BadRequestError } = require('utils/errors');
 const { loginValidation, updateProfileValidation, changePasswordValidation } = require('domains/auth/auth.validation');
+const { validationResult } = require('express-validator');
 
 const handleValidationErrors = (req) => {
     const errors = validationResult(req);

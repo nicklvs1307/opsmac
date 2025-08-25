@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  Box, Typography, Paper, Tabs, Tab
-} from '@mui/material';
+import { Box, Typography, Paper, Tabs, Tab } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
 // API Services
-import { 
-  fetchUsers as apiFetchUsers, 
-  fetchRestaurants as apiFetchRestaurants, 
-  saveUser, 
-  saveRestaurant, 
-  getAllModules, 
-  getRestaurantModules, 
-  saveRestaurantModules 
+import {
+  fetchUsers as apiFetchUsers,
+  fetchRestaurants as apiFetchRestaurants,
+  saveUser,
+  saveRestaurant,
+  getAllModules,
+  getRestaurantModules,
+  saveRestaurantModules,
 } from '../../api/adminService';
 
 // Components
@@ -37,10 +35,25 @@ const AdminDashboard = () => {
   const [allModules, setAllModules] = useState([]);
 
   // Modal State
-  const { isOpen: isUserModalOpen, editingItem: editingUser, handleOpen: handleOpenUserModal, handleClose: handleCloseUserModal } = useModal();
-  const { isOpen: isRestaurantModalOpen, editingItem: editingRestaurant, handleOpen: handleOpenRestaurantModal, handleClose: handleCloseRestaurantModal } = useModal();
-  const { isOpen: isModuleModalOpen, editingItem: editingModuleRestaurant, handleOpen: handleOpenModuleModal, handleClose: handleCloseModuleModal } = useModal();
-  
+  const {
+    isOpen: isUserModalOpen,
+    editingItem: editingUser,
+    handleOpen: handleOpenUserModal,
+    handleClose: handleCloseUserModal,
+  } = useModal();
+  const {
+    isOpen: isRestaurantModalOpen,
+    editingItem: editingRestaurant,
+    handleOpen: handleOpenRestaurantModal,
+    handleClose: handleCloseRestaurantModal,
+  } = useModal();
+  const {
+    isOpen: isModuleModalOpen,
+    editingItem: editingModuleRestaurant,
+    handleOpen: handleOpenModuleModal,
+    handleClose: handleCloseModuleModal,
+  } = useModal();
+
   const [selectedModuleIds, setSelectedModuleIds] = useState([]);
 
   // --- Data Fetching ---
@@ -93,7 +106,13 @@ const AdminDashboard = () => {
     setLoading(true);
     try {
       await saveUser(data, editingUser?.id);
-      toast.success(t(editingUser ? 'admin_dashboard.user_updated_success' : 'admin_dashboard.user_created_title'));
+      toast.success(
+        t(
+          editingUser
+            ? 'admin_dashboard.user_updated_success'
+            : 'admin_dashboard.user_created_title'
+        )
+      );
       fetchUsers();
       handleCloseUserModal();
     } catch (error) {
@@ -107,7 +126,13 @@ const AdminDashboard = () => {
     setLoading(true);
     try {
       await saveRestaurant(data, editingRestaurant?.id);
-      toast.success(t(editingRestaurant ? 'admin_dashboard.restaurant_updated_success' : 'admin_dashboard.restaurant_created_title'));
+      toast.success(
+        t(
+          editingRestaurant
+            ? 'admin_dashboard.restaurant_updated_success'
+            : 'admin_dashboard.restaurant_created_title'
+        )
+      );
       fetchRestaurants();
       handleCloseRestaurantModal();
     } catch (error) {
@@ -122,7 +147,7 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       const response = await getRestaurantModules(restaurant.id);
-      const currentModuleIds = response.data.map(module => module.id);
+      const currentModuleIds = response.data.map((module) => module.id);
       setSelectedModuleIds(currentModuleIds);
     } catch (error) {
       toast.error(t('admin_dashboard.fetch_restaurant_modules_error'));
@@ -148,7 +173,9 @@ const AdminDashboard = () => {
 
   return (
     <Box sx={{ p: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>{t('admin_dashboard.title')}</Typography>
+      <Typography variant="h4" component="h1" gutterBottom>
+        {t('admin_dashboard.title')}
+      </Typography>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <Tabs value={tabValue} onChange={handleTabChange} variant="scrollable" scrollButtons="auto">
           <Tab label={t('admin_dashboard.list_users_tab')} />
@@ -157,11 +184,7 @@ const AdminDashboard = () => {
       </Paper>
 
       {tabValue === 0 && (
-        <UserTable
-          users={users}
-          loading={loading}
-          handleOpenUserModal={handleOpenUserModal}
-        />
+        <UserTable users={users} loading={loading} handleOpenUserModal={handleOpenUserModal} />
       )}
 
       {tabValue === 1 && (

@@ -1,6 +1,5 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
-const qrcodeService = require('~/domains/qrcode/qrcode.service'); // Import the new service
 
 module.exports = (sequelize) => {
   class QRCode extends Model {
@@ -22,7 +21,7 @@ module.exports = (sequelize) => {
 
     static findByShortUrl(shortUrl) {
       return this.findOne({
-        where: { short_url: shortUrl, is_active: true },
+        where: { short_url: shortUrl, isActive: true },
         include: [
           { model: sequelize.models.Restaurant, as: 'restaurant' },
         ],
@@ -107,7 +106,7 @@ module.exports = (sequelize) => {
       allowNull: true,
       unique: true,
     },
-    is_active: {
+    isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
@@ -225,7 +224,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'QRCode',
     tableName: 'qr_codes',
-    underscored: true,
     timestamps: true,
     indexes: [
       {
@@ -245,7 +243,7 @@ module.exports = (sequelize) => {
         fields: ['restaurant_id'],
       },
       {
-        fields: ['is_active'],
+        fields: ['isActive'],
       },
       {
         fields: ['status'],
@@ -262,12 +260,14 @@ module.exports = (sequelize) => {
     ],
     hooks: {
       beforeValidate: async (qrcode) => {
+        const qrcodeService = require('~/domains/qrcode/qrcode.service');
         await qrcodeService.handleQRCodeBeforeCreate(qrcode);
       },
       beforeCreate: async (qrcode) => {
         // Logic moved to handleQRCodeBeforeCreate
       },
       afterCreate: async (qrcode) => {
+        const qrcodeService = require('~/domains/qrcode/qrcode.service');
         await qrcodeService.handleQRCodeAfterCreate(qrcode);
       },
     },

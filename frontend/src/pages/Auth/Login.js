@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Container, Box, Typography } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import LoginForm from '../../components/UI/LoginForm';
 import { useTranslation } from 'react-i18next';
 
@@ -21,7 +21,7 @@ const Login = () => {
 
   const handleSubmit = async (data) => {
     const result = await login(data.email, data.password);
-    
+
     if (result.success) {
       if (result.user.role === 'waiter') {
         navigate('/waiter', { replace: true });
@@ -30,18 +30,13 @@ const Login = () => {
         navigate(from, { replace: true });
       }
     }
-    
+
     return result;
   };
 
   if (loading) {
     return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Typography>{t('login.loading')}</Typography>
       </Box>
     );
@@ -58,7 +53,7 @@ const Login = () => {
           py: 4,
         }}
       >
-        <LoginForm 
+        <LoginForm
           onSubmit={handleSubmit}
           loading={loading}
           error={loading ? '' : location.state?.error || ''}

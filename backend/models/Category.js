@@ -10,11 +10,11 @@ module.exports = (sequelize) => {
      */
     static associate(models) {
       Category.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurant_id',
+        foreignKey: 'restaurantId',
         as: 'restaurant',
       });
       Category.hasMany(models.Product, {
-        foreignKey: 'category_id',
+        foreignKey: 'categoryId',
         as: 'products',
       });
     }
@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: 'unique_category_name_per_restaurant', // This refers to the unique constraint defined in the migration
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
@@ -40,7 +40,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Category',
     tableName: 'categories',
-    underscored: true,
     timestamps: true,
   });
 

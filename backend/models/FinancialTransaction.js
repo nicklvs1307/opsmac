@@ -96,7 +96,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'FinancialTransaction',
     tableName: 'financial_transactions',
-    underscored: true,
     timestamps: true,
   });
 

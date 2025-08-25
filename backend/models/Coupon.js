@@ -1,6 +1,5 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
-const couponsService = require('~/domains/coupons/coupons.service'); // Import the new service
 
 module.exports = (sequelize) => {
   class Coupon extends Model {
@@ -374,7 +373,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Coupon',
     tableName: 'coupons',
-    underscored: true,
     timestamps: true,
     indexes: [
       {
@@ -405,15 +403,19 @@ module.exports = (sequelize) => {
     ],
     hooks: {
       beforeCreate: async (coupon) => {
+        const couponsService = require('~/domains/coupons/coupons.service');
         await couponsService.handleBeforeCreateCoupon(coupon);
       },
       afterCreate: async (coupon) => {
+        const couponsService = require('~/domains/coupons/coupons.service');
         await couponsService.handleAfterCreateCoupon(coupon);
       },
       beforeUpdate: async (coupon) => {
+        const couponsService = require('~/domains/coupons/coupons.service');
         await couponsService.handleBeforeUpdateCoupon(coupon);
       },
       afterUpdate: async (coupon) => {
+        const couponsService = require('~/domains/coupons/coupons.service');
         await couponsService.handleAfterUpdateCoupon(coupon);
       },
     },

@@ -1,5 +1,6 @@
-const { models, sequelize } = require('../../config/database');
-const { BadRequestError, NotFoundError } = require('../../utils/errors');
+const models = require('models');
+const { sequelize } = models;
+const { BadRequestError, NotFoundError } = require('utils/errors');
 const { generateUniqueSlug } = require('utils/slugGenerator');
 
 // User Management
@@ -34,15 +35,26 @@ exports.updateUser = async (userId, updateData) => {
 
 // Restaurant Management
 exports.createRestaurant = async (restaurantData) => {
-  const { name, owner_id } = restaurantData;
+  const { name } = restaurantData;
+  let { ownerId } = restaurantData;
 
-  const owner = await models.User.findByPk(owner_id);
+  if (!ownerId) {
+    const superAdminUser = await models.User.findOne({ where: { role: 'super_admin' } });
+    if (superAdminUser) {
+      ownerId = superAdminUser.id;
+    } else {
+      throw new BadRequestError('Proprietário não encontrado e nenhum super_admin disponível para atribuição.');
+    }
+  }
+
+  const owner = await models.User.findByPk(ownerId);
   if (!owner) {
     throw new BadRequestError('Proprietário não encontrado');
   }
 
   const restaurant = await models.Restaurant.create({
     ...restaurantData,
+    ownerId,
     slug: await generateUniqueSlug(models.Restaurant, name),
   });
   return restaurant;
@@ -53,6 +65,23 @@ exports.listRestaurants = async () => {
     order: [['name', 'ASC']]
   });
   return restaurants;
+};
+
+exports.updateRestaurant = async (restaurantId, updateData) => {
+  const restaurant = await models.Restaurant.findByPk(restaurantId);
+  if (!restaurant) {
+    throw new NotFoundError('Restaurante não encontrado');
+  }
+
+  if (updateData.ownerId) {
+    const newOwner = await models.User.findByPk(updateData.ownerId);
+    if (!newOwner) {
+      throw new BadRequestError('Novo proprietário não encontrado');
+    }
+  }
+
+  await restaurant.update(updateData);
+  return restaurant;
 };
 
 // Module Management

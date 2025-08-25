@@ -15,42 +15,38 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
 
 const LabelsAdmin = () => {
-    const [currentTab, setCurrentTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState(0);
 
-    const handleTabChange = (event, newValue) => {
-        setCurrentTab(newValue);
-    };
+  const handleTabChange = (event, newValue) => {
+    setCurrentTab(newValue);
+  };
 
-    return (
-        <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={currentTab} onChange={handleTabChange} aria-label="Labels admin tabs">
-                    <Tab label="Itens para Etiqueta" />
-                    <Tab label="Histórico de Perdas" />
-                    <Tab label="Histórico de Impressão" />
-                </Tabs>
-            </Box>
-            <TabPanel value={currentTab} index={0}>
-                <ManageLabelItems />
-            </TabPanel>
-            <TabPanel value={currentTab} index={1}>
-                <LossHistory />
-            </TabPanel>
-            <TabPanel value={currentTab} index={2}>
-                <PrintHistory />
-            </TabPanel>
-        </Box>
-    );
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={currentTab} onChange={handleTabChange} aria-label="Labels admin tabs">
+          <Tab label="Itens para Etiqueta" />
+          <Tab label="Histórico de Perdas" />
+          <Tab label="Histórico de Impressão" />
+        </Tabs>
+      </Box>
+      <TabPanel value={currentTab} index={0}>
+        <ManageLabelItems />
+      </TabPanel>
+      <TabPanel value={currentTab} index={1}>
+        <LossHistory />
+      </TabPanel>
+      <TabPanel value={currentTab} index={2}>
+        <PrintHistory />
+      </TabPanel>
+    </Box>
+  );
 };
 
 export default LabelsAdmin;

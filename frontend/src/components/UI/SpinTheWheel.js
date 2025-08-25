@@ -35,114 +35,119 @@ const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete })
     return luminance > 0.5 ? '#000000' : '#FFFFFF';
   }, []);
 
-  const coloredItems = useMemo(() => 
-    items.map(item => {
-      const randomColor = getRandomHexColor();
-      return {
-        ...item,
-        color: randomColor,
-        textColor: getContrastingTextColor(randomColor)
-      };
-    }), 
-  [items, getRandomHexColor, getContrastingTextColor]);
+  const coloredItems = useMemo(
+    () =>
+      items.map((item) => {
+        const randomColor = getRandomHexColor();
+        return {
+          ...item,
+          color: randomColor,
+          textColor: getContrastingTextColor(randomColor),
+        };
+      }),
+    [items, getRandomHexColor, getContrastingTextColor]
+  );
 
-  const drawWheel = useCallback((currentRotation = 0) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+  const drawWheel = useCallback(
+    (currentRotation = 0) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
 
-    ctx.clearRect(0, 0, wheelSize, wheelSize);
+      ctx.clearRect(0, 0, wheelSize, wheelSize);
 
-    if (!coloredItems || coloredItems.length === 0) {
-      return;
-    }
+      if (!coloredItems || coloredItems.length === 0) {
+        return;
+      }
 
-    ctx.save(); // Save the unrotated state
-    ctx.translate(center, center); // Move origin to center
-    ctx.rotate(currentRotation); // Apply the overall wheel rotation
-    ctx.translate(-center, -center); // Move origin back
+      ctx.save(); // Save the unrotated state
+      ctx.translate(center, center); // Move origin to center
+      ctx.rotate(currentRotation); // Apply the overall wheel rotation
+      ctx.translate(-center, -center); // Move origin back
 
-    const numItems = coloredItems.length;
-    const segmentAngle = (2 * Math.PI) / numItems;
-    let startAngle = 0; // Segments start from 0 relative to the rotated canvas
+      const numItems = coloredItems.length;
+      const segmentAngle = (2 * Math.PI) / numItems;
+      let startAngle = 0; // Segments start from 0 relative to the rotated canvas
 
-    coloredItems.forEach((item, index) => {
-      const endAngle = startAngle + segmentAngle;
+      coloredItems.forEach((item, index) => {
+        const endAngle = startAngle + segmentAngle;
 
-      const segmentColor = item.color;
-      const textColor = item.textColor;
+        const segmentColor = item.color;
+        const textColor = item.textColor;
 
-      ctx.fillStyle = segmentColor;
+        ctx.fillStyle = segmentColor;
+        ctx.beginPath();
+        ctx.moveTo(center, center);
+        ctx.arc(center, center, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(center, center);
+        ctx.lineTo(center + radius * Math.cos(startAngle), center + radius * Math.sin(startAngle));
+        ctx.stroke();
+
+        ctx.save();
+        ctx.fillStyle = textColor;
+        ctx.translate(center, center);
+
+        const angMeio = startAngle + segmentAngle / 2;
+        ctx.rotate(angMeio);
+
+        const textRadius = radius * 0.5; // Adjusted radius for text to give more margin
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        const text = item.name || item.title;
+        let fontSize = 14; // Start with a reasonable font size
+        ctx.font = `bold ${fontSize}px Poppins`;
+
+        // Adjust font size to fit within the segment, or truncate if too long
+        const maxTextWidth = radius * Math.sin(segmentAngle / 2) * 2 * 0.8; // 80% of segment width
+        while (ctx.measureText(text).width > maxTextWidth && fontSize > 8) {
+          fontSize -= 1;
+          ctx.font = `bold ${fontSize}px Poppins`;
+        }
+
+        // If text still doesn't fit, truncate it
+        let displaytext = text;
+        if (ctx.measureText(text).width > maxTextWidth) {
+          let len = text.length;
+          while (ctx.measureText(displaytext + '...').width > maxTextWidth && len > 0) {
+            len--;
+            displaytext = text.substring(0, len);
+          }
+          displaytext += '...';
+        }
+
+        ctx.fillText(displaytext, textRadius, 0);
+
+        ctx.restore();
+
+        startAngle = endAngle;
+      });
+
+      // Draw center circle
+      ctx.fillStyle = '#FFD700';
       ctx.beginPath();
-      ctx.moveTo(center, center);
-      ctx.arc(center, center, radius, startAngle, endAngle);
-      ctx.closePath();
+      ctx.arc(center, center, 15, 0, 2 * Math.PI);
       ctx.fill();
 
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(center, center);
-      ctx.lineTo(center + radius * Math.cos(startAngle), center + radius * Math.sin(startAngle));
+      ctx.strokeStyle = '#FFF';
+      ctx.lineWidth = 3;
       ctx.stroke();
 
-      ctx.save();
-      ctx.fillStyle = textColor;
-      ctx.translate(center, center);
-      
-      const angMeio = startAngle + segmentAngle / 2;
-      ctx.rotate(angMeio);
-      
-      const textRadius = radius * 0.5; // Adjusted radius for text to give more margin
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      
-      const text = item.name || item.title;
-      let fontSize = 14; // Start with a reasonable font size
-      ctx.font = `bold ${fontSize}px Poppins`;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.beginPath();
+      ctx.arc(center, center, 8, 0, 2 * Math.PI);
+      ctx.fill();
 
-      // Adjust font size to fit within the segment, or truncate if too long
-      const maxTextWidth = radius * Math.sin(segmentAngle / 2) * 2 * 0.8; // 80% of segment width
-      while (ctx.measureText(text).width > maxTextWidth && fontSize > 8) {
-        fontSize -= 1;
-        ctx.font = `bold ${fontSize}px Poppins`;
-      }
-
-      // If text still doesn't fit, truncate it
-      let displaytext = text;
-      if (ctx.measureText(text).width > maxTextWidth) {
-        let len = text.length;
-        while (ctx.measureText(displaytext + '...').width > maxTextWidth && len > 0) {
-          len--;
-          displaytext = text.substring(0, len);
-        }
-        displaytext += '...';
-      }
-
-      ctx.fillText(displaytext, textRadius, 0);
-      
-      ctx.restore();
-
-      startAngle = endAngle;
-    });
-
-    // Draw center circle
-    ctx.fillStyle = '#FFD700';
-    ctx.beginPath();
-    ctx.arc(center, center, 15, 0, 2 * Math.PI);
-    ctx.fill();
-    
-    ctx.strokeStyle = '#FFF';
-    ctx.lineWidth = 3;
-    ctx.stroke();
-    
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-    ctx.beginPath();
-    ctx.arc(center, center, 8, 0, 2 * Math.PI);
-    ctx.fill();
-
-    ctx.restore(); // Restore the canvas to its original unrotated state
-  }, [coloredItems, center, radius, wheelSize]);
+      ctx.restore(); // Restore the canvas to its original unrotated state
+    },
+    [coloredItems, center, radius, wheelSize]
+  );
 
   useEffect(() => {
     drawWheel(rotationRef.current);
@@ -150,58 +155,63 @@ const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete })
 
   const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
 
-  const animateSpin = useCallback((targetRotationRadians, duration = 5000) => {
-    const start = performance.now();
-    const initialRotationRadians = rotationRef.current;
+  const animateSpin = useCallback(
+    (targetRotationRadians, duration = 5000) => {
+      const start = performance.now();
+      const initialRotationRadians = rotationRef.current;
 
-    const animate = (currentTime) => {
-      const elapsed = currentTime - start;
-      let progress = elapsed / duration;
-      if (progress > 1) progress = 1;
+      const animate = (currentTime) => {
+        const elapsed = currentTime - start;
+        let progress = elapsed / duration;
+        if (progress > 1) progress = 1;
 
-      const easedProgress = easeOutQuart(progress);
-      const newRotation = initialRotationRadians + (targetRotationRadians - initialRotationRadians) * easedProgress;
-      
-      rotationRef.current = newRotation;
-      drawWheel(newRotation);
+        const easedProgress = easeOutQuart(progress);
+        const newRotation =
+          initialRotationRadians + (targetRotationRadians - initialRotationRadians) * easedProgress;
 
-      if (progress < 1) {
-        animationFrameId.current = requestAnimationFrame(animate);
-      } else {
-        rotationRef.current = targetRotationRadians;
-        drawWheel(targetRotationRadians);
-        if (onAnimationComplete) {
-          setTimeout(() => {
-            onAnimationComplete();
-          }, 100);
+        rotationRef.current = newRotation;
+        drawWheel(newRotation);
+
+        if (progress < 1) {
+          animationFrameId.current = requestAnimationFrame(animate);
+        } else {
+          rotationRef.current = targetRotationRadians;
+          drawWheel(targetRotationRadians);
+          if (onAnimationComplete) {
+            setTimeout(() => {
+              onAnimationComplete();
+            }, 100);
+          }
         }
+      };
+
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
       }
-    };
-    
-    if (animationFrameId.current) {
-      cancelAnimationFrame(animationFrameId.current);
-    }
-    animationFrameId.current = requestAnimationFrame(animate);
-  }, [drawWheel, onAnimationComplete]);
+      animationFrameId.current = requestAnimationFrame(animate);
+    },
+    [drawWheel, onAnimationComplete]
+  );
 
   useEffect(() => {
     if (winningIndex !== -1 && items && items.length > 0) {
       const numItems = items.length;
       const segmentAngleRadians = (2 * Math.PI) / numItems;
-      
+
       const randomSpins = 5 + Math.floor(Math.random() * 3); // 5 to 7 full spins as in example.html
-      
+
       // Calcular o ângulo do centro do segmento vencedor
-      const winningSegmentCenterAngle = (winningIndex * segmentAngleRadians) + (segmentAngleRadians / 2);
+      const winningSegmentCenterAngle =
+        winningIndex * segmentAngleRadians + segmentAngleRadians / 2;
 
       // Calcular o deslocamento necessário para alinhar o centro do segmento vencedor com o ponteiro (12 horas)
       // O ponteiro está em 3 * Math.PI / 2 (270 graus ou -90 graus) no sentido horário a partir de 0 (3 horas).
-      let targetOffset = (3 * Math.PI / 2) - winningSegmentCenterAngle;
+      let targetOffset = (3 * Math.PI) / 2 - winningSegmentCenterAngle;
 
       // Garantir que o targetOffset seja positivo e dentro de 0 a 2*PI
-      targetOffset = (targetOffset % (2 * Math.PI) + (2 * Math.PI)) % (2 * Math.PI);
+      targetOffset = ((targetOffset % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
-      const targetRotationRadians = (2 * Math.PI * randomSpins) + targetOffset;
+      const targetRotationRadians = 2 * Math.PI * randomSpins + targetOffset;
 
       animateSpin(targetRotationRadians);
     }
@@ -249,7 +259,8 @@ const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete })
           borderTop: '30px solid #FFD700', // var(--gold)
           zIndex: 10,
           filter: 'drop-shadow(0 0 5px #FFD700)', // var(--gold)
-          '&::after': { // Pseudo-element for the dot on the arrow
+          '&::after': {
+            // Pseudo-element for the dot on the arrow
             content: '""',
             position: 'absolute',
             top: -33,
@@ -260,7 +271,7 @@ const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete })
             borderRadius: '50%',
             zIndex: -1,
             boxShadow: '0 0 10px #FFD700', // var(--gold)
-          }
+          },
         }}
       />
     </Box>

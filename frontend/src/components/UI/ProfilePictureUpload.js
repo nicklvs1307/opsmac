@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '@/services/axiosInstance';
 import { useTranslation } from 'react-i18next';
 
 const ProfilePictureUpload = ({ currentAvatar, onUploadSuccess }) => {
@@ -56,11 +56,17 @@ const ProfilePictureUpload = ({ currentAvatar, onUploadSuccess }) => {
       <h3>{t('profile_picture_upload.title')}</h3>
       {preview && (
         <div className="avatar-preview">
-          <img src={preview} alt={t('profile_picture_upload.preview_alt')} style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} />
+          <img
+            src={preview}
+            alt={t('profile_picture_upload.preview_alt')}
+            style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
+          />
         </div>
       )}
       <input type="file" accept="image/*" onChange={handleFileChange} />
-      <button onClick={handleUpload} disabled={!selectedFile}>{t('profile_picture_upload.upload_button')}</button>
+      <button onClick={handleUpload} disabled={!selectedFile}>
+        {t('profile_picture_upload.upload_button')}
+      </button>
       {message && <p style={{ color: 'green' }}>{message}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>

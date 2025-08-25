@@ -1,6 +1,5 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
-const customerService = require('~/domains/customer/customer.service'); // Import the new service
 
 module.exports = (sequelize) => {
   class Customer extends Model {
@@ -319,18 +318,18 @@ module.exports = (sequelize) => {
       allowNull: true,
       comment: 'Data da última pesquisa respondida',
     },
-    last_survey_id: {
+    lastSurveyId: {
       type: DataTypes.UUID,
       allowNull: true,
       references: {
-        model: 'Surveys', // Referencia a tabela Surveys
+        model: 'surveys', // Referencia a tabela Surveys
         key: 'id',
       },
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',
       comment: 'ID da última pesquisa respondida',
     },
-    restaurant_id: { // Add this field
+    restaurantId: { // Add this field
       type: DataTypes.UUID,
       allowNull: true,
       references: {
@@ -344,7 +343,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Customer',
     tableName: 'customers',
-    underscored: true,
     timestamps: true,
     indexes: [
       {
@@ -367,44 +365,46 @@ module.exports = (sequelize) => {
       },
       {
         unique: true,
-        fields: ['referral_code'],
+        fields: ['referralCode'],
         where: {
-          referral_code: {
+          referralCode: {
             [sequelize.Sequelize.Op.ne]: null,
           },
         },
       },
       {
-        fields: ['customer_segment'],
+        fields: ['customerSegment'],
       },
       {
         fields: ['status'],
       },
       {
-        fields: ['loyalty_points'],
+        fields: ['loyaltyPoints'],
       },
       {
-        fields: ['last_visit'],
+        fields: ['lastVisit'],
       },
       // Novos índices para os campos de segmentação
       {
-        fields: ['nps_segment'],
+        fields: ['npsSegment'],
       },
       {
-        fields: ['last_purchase_date'],
+        fields: ['lastPurchaseDate'],
       },
       {
-        fields: ['total_orders'],
+        fields: ['totalOrders'],
       },
       {
-        fields: ['average_ticket'],
+        fields: ['averageTicket'],
       },
     ],
     hooks: {
       beforeCreate: (customer) => {
+        const customerService = require('~/domains/customer/customer.service');
         customerService.handleCustomerBeforeCreate(customer);
       },
       afterCreate: async (customer) => {
+        const customerService = require('~/domains/customer/customer.service');
         await customerService.handleCustomerAfterCreate(customer);
       },
     },

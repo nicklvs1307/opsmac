@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
-import { Box, Typography, CircularProgress, Alert, Button, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Button,
+  TextField,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 
@@ -37,27 +55,36 @@ const StockPositionHistoryReport = () => {
     type: '',
   });
 
-  const { data: historyData, isLoading, isError, refetch } = useQuery(
-    ['stockPositionHistory', restaurantId, filters],
-    fetchStockPositionHistory,
-    {
-      enabled: !!restaurantId,
-      onError: (error) => {
-        toast.error(t('reports.error_loading_stock_history', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: historyData,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery(['stockPositionHistory', restaurantId, filters], fetchStockPositionHistory, {
+    enabled: !!restaurantId,
+    onError: (error) => {
+      toast.error(
+        t('reports.error_loading_stock_history', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
+  });
 
-  const { data: stockItems, isLoading: isLoadingStockItems, isError: isErrorStockItems } = useQuery(
-    ['stockItems', restaurantId],
-    fetchStockItems,
-    {
-      enabled: !!restaurantId,
-      onError: (error) => {
-        toast.error(t('reports.error_loading_stock_items', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: stockItems,
+    isLoading: isLoadingStockItems,
+    isError: isErrorStockItems,
+  } = useQuery(['stockItems', restaurantId], fetchStockItems, {
+    enabled: !!restaurantId,
+    onError: (error) => {
+      toast.error(
+        t('reports.error_loading_stock_items', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
+  });
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -93,7 +120,9 @@ const StockPositionHistoryReport = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('reports.stock_position_history_title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('reports.stock_position_history_title')}
+      </Typography>
 
       <Paper elevation={2} sx={{ p: 2, mb: 3 }}>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-end' }}>
@@ -128,8 +157,10 @@ const StockPositionHistoryReport = () => {
               onChange={handleFilterChange}
             >
               <MenuItem value="">{t('reports.all')}</MenuItem>
-              {stockItems?.map(item => (
-                <MenuItem key={item.item_id} value={item.item_id}>{item.name} ({item.type})</MenuItem>
+              {stockItems?.map((item) => (
+                <MenuItem key={item.item_id} value={item.item_id}>
+                  {item.name} ({item.type})
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -146,7 +177,12 @@ const StockPositionHistoryReport = () => {
               <MenuItem value="out">{t('reports.out')}</MenuItem>
             </Select>
           </FormControl>
-          <Button variant="contained" startIcon={<RefreshIcon />} onClick={handleGenerateReport} disabled={isLoading}>
+          <Button
+            variant="contained"
+            startIcon={<RefreshIcon />}
+            onClick={handleGenerateReport}
+            disabled={isLoading}
+          >
             {t('reports.generate_report')}
           </Button>
         </Box>

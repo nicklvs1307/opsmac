@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const fetchDashboardData = async (restaurantId) => {
   // This endpoint needs to be created in the backend
@@ -13,11 +13,13 @@ const StockDashboardTab = () => {
   const { user } = useAuth();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const { data: dashboardData, isLoading, isError } = useQuery(
-    ['stockDashboard', restaurantId],
-    () => fetchDashboardData(restaurantId),
-    { enabled: !!restaurantId }
-  );
+  const {
+    data: dashboardData,
+    isLoading,
+    isError,
+  } = useQuery(['stockDashboard', restaurantId], () => fetchDashboardData(restaurantId), {
+    enabled: !!restaurantId,
+  });
 
   if (isLoading) return <div>Carregando Dashboard...</div>;
   if (isError) return <div>Erro ao carregar Dashboard.</div>;
@@ -35,7 +37,8 @@ const StockDashboardTab = () => {
         <div className="alert alert-error">
           <i className="fas fa-exclamation-circle"></i>
           <div>
-            <strong>Atenção!</strong> {lowStock} produtos estão com estoque baixo e {outOfStock} produtos estão em falta.
+            <strong>Atenção!</strong> {lowStock} produtos estão com estoque baixo e {outOfStock}{' '}
+            produtos estão em falta.
           </div>
         </div>
       )}
@@ -102,13 +105,24 @@ const StockDashboardTab = () => {
               lowStockProducts.map((product) => (
                 <tr key={product.id}>
                   <td>{product.name}</td>
-                  <td>{product.category_name || 'N/A'}</td> {/* Assuming category_name is available */}
+                  <td>{product.category_name || 'N/A'}</td>{' '}
+                  {/* Assuming category_name is available */}
                   <td>{product.current_stock}</td>
                   <td>{product.min_stock}</td>
-                  <td><span className={`status ${product.current_stock <= 0 ? 'status-out' : 'status-low'}`}>{product.current_stock <= 0 ? 'Em Falta' : 'Estoque Baixo'}</span></td>
                   <td>
-                    <button className="action-btn btn-edit"><i className="fas fa-edit"></i></button>
-                    <button className="action-btn btn-delete"><i className="fas fa-trash"></i></button>
+                    <span
+                      className={`status ${product.current_stock <= 0 ? 'status-out' : 'status-low'}`}
+                    >
+                      {product.current_stock <= 0 ? 'Em Falta' : 'Estoque Baixo'}
+                    </span>
+                  </td>
+                  <td>
+                    <button className="action-btn btn-edit">
+                      <i className="fas fa-edit"></i>
+                    </button>
+                    <button className="action-btn btn-delete">
+                      <i className="fas fa-trash"></i>
+                    </button>
                   </td>
                 </tr>
               ))

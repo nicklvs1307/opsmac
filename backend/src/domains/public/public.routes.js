@@ -1,5 +1,5 @@
 const express = require('express');
-const apiAuth = require('../middleware/apiAuthMiddleware');
+const apiAuth = require('middleware/apiAuthMiddleware');
 const publicController = require('./public.controller');
 const {
     submitPublicFeedbackValidation,

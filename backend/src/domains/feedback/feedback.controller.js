@@ -1,5 +1,5 @@
 const feedbackService = require('./feedback.service');
-const { getRestaurantIdFromUser } = require('../../services/restaurantAuthService');
+const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
 

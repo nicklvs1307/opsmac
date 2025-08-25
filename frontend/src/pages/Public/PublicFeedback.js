@@ -102,27 +102,30 @@ const PublicFeedback = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const response = await axiosInstance.get(`/api/qr-codes/public/${qrId}`);
-      
+
       if (!response.data.qrCode.is_active) {
         setError('Este QR Code não está mais ativo');
         return;
       }
-      
-      if (response.data.qrCode.expires_at && new Date(response.data.qrCode.expires_at) < new Date()) {
+
+      if (
+        response.data.qrCode.expires_at &&
+        new Date(response.data.qrCode.expires_at) < new Date()
+      ) {
         setError('Este QR Code expirou');
         return;
       }
-      
+
       setQrCode(response.data.qrCode);
       setRestaurant(response.data.restaurant);
-      
+
       // Set table number if available
       if (response.data.qrCode.table_number) {
         setValue('table_number', response.data.qrCode.table_number);
       }
-      
+
       // Track QR code scan
       await axiosInstance.post(`/api/qr-codes/${qrId}/scan`);
     } catch (err) {
@@ -136,25 +139,25 @@ const PublicFeedback = () => {
   const onSubmit = async (data) => {
     try {
       setSubmitting(true);
-      
+
       const feedbackData = {
         ...data,
         qr_code_id: qrCode.id,
         restaurant_id: restaurant.id,
         source: 'qr_code',
       };
-      
+
       await axiosInstance.post('/api/feedback/public', feedbackData);
-      
+
       setSubmitted(true);
-      
+
       // Redirect to thank you page after 3 seconds
       setTimeout(() => {
-        navigate('/obrigado', { 
-          state: { 
+        navigate('/obrigado', {
+          state: {
             restaurant: restaurant.name,
-            rating: data.rating 
-          } 
+            rating: data.rating,
+          },
         });
       }, 3000);
     } catch (err) {
@@ -175,12 +178,18 @@ const PublicFeedback = () => {
 
   const getRatingLabel = (value) => {
     switch (value) {
-      case 1: return 'Muito Ruim';
-      case 2: return 'Ruim';
-      case 3: return 'Regular';
-      case 4: return 'Bom';
-      case 5: return 'Excelente';
-      default: return '';
+      case 1:
+        return 'Muito Ruim';
+      case 2:
+        return 'Ruim';
+      case 3:
+        return 'Regular';
+      case 4:
+        return 'Bom';
+      case 5:
+        return 'Excelente';
+      default:
+        return '';
     }
   };
 
@@ -208,35 +217,35 @@ const PublicFeedback = () => {
   if (loading) {
     return (
       <Container maxWidth="md">
-        <Box 
-          display="flex" 
+        <Box
+          display="flex"
           flexDirection="column"
-          justifyContent="center" 
-          alignItems="center" 
+          justifyContent="center"
+          alignItems="center"
           minHeight="70vh"
           gap={3}
         >
-          <CircularProgress 
-            size={70} 
+          <CircularProgress
+            size={70}
             thickness={4}
-            sx={{ 
+            sx={{
               color: 'primary.main',
               boxShadow: '0 0 20px rgba(25, 118, 210, 0.2)',
               borderRadius: '50%',
-              p: 1
-            }} 
+              p: 1,
+            }}
           />
-          <Typography 
-            variant="h6" 
+          <Typography
+            variant="h6"
             color="text.secondary"
-            sx={{ 
+            sx={{
               fontWeight: 500,
               animation: 'pulse 1.5s infinite',
               '@keyframes pulse': {
                 '0%': { opacity: 0.6 },
                 '50%': { opacity: 1 },
-                '100%': { opacity: 0.6 }
-              }
+                '100%': { opacity: 0.6 },
+              },
             }}
           >
             Carregando...
@@ -249,7 +258,7 @@ const PublicFeedback = () => {
   if (error) {
     return (
       <Container maxWidth="md">
-        <Box 
+        <Box
           display="flex"
           flexDirection="column"
           justifyContent="center"
@@ -259,7 +268,7 @@ const PublicFeedback = () => {
         >
           <Paper
             elevation={3}
-            sx={{ 
+            sx={{
               p: { xs: 3, md: 4 },
               borderRadius: 3,
               width: '100%',
@@ -275,56 +284,52 @@ const PublicFeedback = () => {
                 right: 0,
                 height: '4px',
                 background: 'linear-gradient(90deg, #f44336, #ff9800)',
-              }
+              },
             }}
           >
-            <Box 
-              sx={{ 
+            <Box
+              sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                mb: 3
+                mb: 3,
               }}
             >
-              <Avatar 
-                sx={{ 
-                  bgcolor: 'error.light', 
-                  width: 70, 
+              <Avatar
+                sx={{
+                  bgcolor: 'error.light',
+                  width: 70,
                   height: 70,
                   mb: 2,
-                  boxShadow: '0 4px 14px rgba(244, 67, 54, 0.3)'
+                  boxShadow: '0 4px 14px rgba(244, 67, 54, 0.3)',
                 }}
               >
                 <ErrorOutlineIcon sx={{ fontSize: 40, color: 'white' }} />
               </Avatar>
-              <Typography 
-                variant="h5" 
-                gutterBottom
-                sx={{ fontWeight: 600, color: 'error.main' }}
-              >
+              <Typography variant="h5" gutterBottom sx={{ fontWeight: 600, color: 'error.main' }}>
                 Oops! Ocorreu um erro
               </Typography>
             </Box>
-            
-            <Alert 
-              severity="error" 
+
+            <Alert
+              severity="error"
               variant="outlined"
-              sx={{ 
+              sx={{
                 mb: 3,
                 borderRadius: 2,
                 '& .MuiAlert-icon': {
-                  fontSize: '1.5rem'
-                }
+                  fontSize: '1.5rem',
+                },
               }}
             >
               {error}
             </Alert>
-            
-            <Button 
-              variant="contained" 
+
+            <Button
+              variant="contained"
               onClick={() => window.history.back()}
               startIcon={<ArrowBackIcon />}
-              sx={{ 
+              sx={{
                 borderRadius: 2,
                 px: 3,
                 py: 1,
@@ -334,8 +339,8 @@ const PublicFeedback = () => {
                 '&:hover': {
                   bgcolor: 'error.dark',
                   boxShadow: '0 6px 15px rgba(244, 67, 54, 0.4)',
-                  transform: 'translateY(-2px)'
-                }
+                  transform: 'translateY(-2px)',
+                },
               }}
             >
               Voltar
@@ -349,7 +354,7 @@ const PublicFeedback = () => {
   if (submitted) {
     return (
       <Container maxWidth="md">
-        <Box 
+        <Box
           display="flex"
           flexDirection="column"
           justifyContent="center"
@@ -360,7 +365,7 @@ const PublicFeedback = () => {
           <Fade in={submitted} timeout={800}>
             <Paper
               elevation={3}
-              sx={{ 
+              sx={{
                 p: { xs: 4, md: 5 },
                 borderRadius: 3,
                 width: '100%',
@@ -376,22 +381,22 @@ const PublicFeedback = () => {
                   right: 0,
                   height: '4px',
                   background: 'linear-gradient(90deg, #4caf50, #8bc34a)',
-                }
+                },
               }}
             >
-              <Box 
-                sx={{ 
+              <Box
+                sx={{
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  mb: 3
+                  mb: 3,
                 }}
               >
                 <Zoom in={submitted} timeout={1000} style={{ transitionDelay: '300ms' }}>
-                  <Avatar 
-                    sx={{ 
-                      bgcolor: 'success.light', 
-                      width: 90, 
+                  <Avatar
+                    sx={{
+                      bgcolor: 'success.light',
+                      width: 90,
                       height: 90,
                       mb: 3,
                       boxShadow: '0 6px 20px rgba(76, 175, 80, 0.3)',
@@ -399,45 +404,45 @@ const PublicFeedback = () => {
                       '@keyframes pulse': {
                         '0%': { boxShadow: '0 0 0 0 rgba(76, 175, 80, 0.4)' },
                         '70%': { boxShadow: '0 0 0 15px rgba(76, 175, 80, 0)' },
-                        '100%': { boxShadow: '0 0 0 0 rgba(76, 175, 80, 0)' }
-                      }
+                        '100%': { boxShadow: '0 0 0 0 rgba(76, 175, 80, 0)' },
+                      },
                     }}
                   >
                     <CheckCircleIcon sx={{ fontSize: 50, color: 'white' }} />
                   </Avatar>
                 </Zoom>
-                
+
                 <Fade in={submitted} timeout={1000} style={{ transitionDelay: '500ms' }}>
-                  <Typography 
-                    variant="h4" 
-                    gutterBottom 
-                    sx={{ 
-                      fontWeight: 600, 
+                  <Typography
+                    variant="h4"
+                    gutterBottom
+                    sx={{
+                      fontWeight: 600,
                       color: 'success.main',
                       mb: 2,
-                      textShadow: '0 2px 4px rgba(76, 175, 80, 0.2)'
+                      textShadow: '0 2px 4px rgba(76, 175, 80, 0.2)',
                     }}
                   >
                     Obrigado pelo seu feedback!
                   </Typography>
                 </Fade>
-                
+
                 <Fade in={submitted} timeout={1000} style={{ transitionDelay: '700ms' }}>
-                  <Typography 
-                    variant="body1" 
-                    color="text.secondary" 
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
                     gutterBottom
-                    sx={{ 
+                    sx={{
                       fontSize: '1.1rem',
                       mb: 3,
                       maxWidth: '80%',
-                      mx: 'auto'
+                      mx: 'auto',
                     }}
                   >
                     Sua opinião é muito importante para nós.
                   </Typography>
                 </Fade>
-                
+
                 <Fade in={submitted} timeout={1000} style={{ transitionDelay: '900ms' }}>
                   <Box
                     sx={{
@@ -448,19 +453,11 @@ const PublicFeedback = () => {
                       bgcolor: 'rgba(76, 175, 80, 0.08)',
                       borderRadius: 2,
                       p: 1.5,
-                      width: 'fit-content'
+                      width: 'fit-content',
                     }}
                   >
-                    <CircularProgress 
-                      size={20} 
-                      thickness={5}
-                      sx={{ color: 'success.main' }} 
-                    />
-                    <Typography 
-                      variant="body2" 
-                      color="text.secondary"
-                      sx={{ fontWeight: 500 }}
-                    >
+                    <CircularProgress size={20} thickness={5} sx={{ color: 'success.main' }} />
+                    <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
                       Redirecionando...
                     </Typography>
                   </Box>
@@ -477,11 +474,11 @@ const PublicFeedback = () => {
     <Container maxWidth="md">
       <Box py={4}>
         {/* Restaurant Header */}
-        <Card 
+        <Card
           elevation={0}
-          sx={{ 
-            mb: 4, 
-            background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)', 
+          sx={{
+            mb: 4,
+            background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
             color: 'white',
             borderRadius: 3,
             overflow: 'hidden',
@@ -495,78 +492,78 @@ const PublicFeedback = () => {
               height: '100%',
               background: 'rgba(255,255,255,0.1)',
               clipPath: 'polygon(100% 0, 0 0, 100% 100%)',
-            }
+            },
           }}
         >
           <CardContent sx={{ p: { xs: 3, md: 4 } }}>
             <Box display="flex" alignItems="center" gap={3} flexWrap={{ xs: 'wrap', sm: 'nowrap' }}>
-              <Avatar 
-                sx={{ 
-                  bgcolor: 'rgba(255,255,255,0.2)', 
-                  width: { xs: 60, md: 80 }, 
+              <Avatar
+                sx={{
+                  bgcolor: 'rgba(255,255,255,0.2)',
+                  width: { xs: 60, md: 80 },
                   height: { xs: 60, md: 80 },
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
                 }}
               >
                 <RestaurantIcon sx={{ fontSize: { xs: 30, md: 40 } }} />
               </Avatar>
               <Box>
-                <Typography 
-                  variant="h4" 
-                  gutterBottom 
-                  sx={{ 
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  sx={{
                     fontSize: { xs: '1.5rem', md: '2rem' },
                     fontWeight: 600,
-                    textShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                    textShadow: '0 2px 4px rgba(0,0,0,0.2)',
                   }}
                 >
                   {restaurant?.name}
                 </Typography>
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
+                <Typography
+                  variant="body1"
+                  sx={{
                     opacity: 0.9,
                     fontSize: { xs: '0.95rem', md: '1.1rem' },
                     display: 'flex',
                     alignItems: 'center',
                     gap: 1,
-                    mb: 0.5
+                    mb: 0.5,
                   }}
                 >
-                  <Chip 
-                    label={restaurant?.cuisine_type} 
-                    size="small" 
-                    sx={{ 
+                  <Chip
+                    label={restaurant?.cuisine_type}
+                    size="small"
+                    sx={{
                       bgcolor: 'rgba(255,255,255,0.2)',
                       color: 'white',
-                      fontWeight: 500
-                    }} 
+                      fontWeight: 500,
+                    }}
                   />
                 </Typography>
                 {qrCode?.location && (
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
+                  <Typography
+                    variant="body2"
+                    sx={{
                       opacity: 0.8,
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 0.5
+                      gap: 0.5,
                     }}
                   >
                     <Box component="span" sx={{ display: 'flex', alignItems: 'center' }}>
                       {qrCode.location}
                     </Box>
                     {qrCode.table_number && (
-                      <Chip 
-                                                                label={t('public_feedback.table_prefix') + ` ${qrCode.table_number}`} 
-                        size="small" 
-                        sx={{ 
+                      <Chip
+                        label={t('public_feedback.table_prefix') + ` ${qrCode.table_number}`}
+                        size="small"
+                        sx={{
                           bgcolor: 'rgba(255,255,255,0.15)',
                           color: 'white',
                           fontWeight: 500,
                           height: 24,
-                          '& .MuiChip-label': { px: 1 }
-                        }} 
+                          '& .MuiChip-label': { px: 1 },
+                        }}
                       />
                     )}
                   </Typography>
@@ -577,9 +574,9 @@ const PublicFeedback = () => {
         </Card>
 
         {/* Feedback Form */}
-        <Paper 
+        <Paper
           elevation={2}
-          sx={{ 
+          sx={{
             p: { xs: 3, md: 4 },
             borderRadius: 3,
             boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
@@ -593,12 +590,12 @@ const PublicFeedback = () => {
               right: 0,
               height: '4px',
               background: 'linear-gradient(90deg, #1976d2, #42a5f5)',
-            }
+            },
           }}
         >
-          <Typography 
-            variant="h5" 
-            gutterBottom 
+          <Typography
+            variant="h5"
+            gutterBottom
             textAlign="center"
             sx={{
               fontWeight: 600,
@@ -615,18 +612,19 @@ const PublicFeedback = () => {
                 left: '10%',
                 width: '80%',
                 height: '3px',
-                background: 'linear-gradient(90deg, transparent, rgba(25, 118, 210, 0.5), transparent)',
+                background:
+                  'linear-gradient(90deg, transparent, rgba(25, 118, 210, 0.5), transparent)',
                 borderRadius: '50%',
-              }
+              },
             }}
           >
             Conte-nos sobre sua experiência
           </Typography>
-          
-          <Stepper 
-            activeStep={activeStep} 
-            orientation="vertical" 
-            sx={{ 
+
+          <Stepper
+            activeStep={activeStep}
+            orientation="vertical"
+            sx={{
               mb: 4,
               '& .MuiStepLabel-root': {
                 padding: { xs: '12px 0', md: '16px 0' },
@@ -640,21 +638,21 @@ const PublicFeedback = () => {
                 },
                 '&.Mui-completed': {
                   color: '#4caf50',
-                }
+                },
               },
               '& .MuiStepLabel-label': {
                 fontSize: { xs: '1rem', md: '1.1rem' },
                 fontWeight: 500,
                 '&.Mui-active': {
                   fontWeight: 600,
-                }
+                },
               },
               '& .MuiStepContent-root': {
                 borderLeft: '2px solid rgba(25, 118, 210, 0.3)',
                 marginLeft: '16px',
                 paddingLeft: { xs: '16px', md: '24px' },
                 transition: 'all 0.3s ease',
-              }
+              },
             }}
           >
             {steps.map((step, index) => (
@@ -677,16 +675,9 @@ const PublicFeedback = () => {
                         rules={{ required: 'Por favor, selecione uma avaliação' }}
                         render={({ field }) => (
                           <Box>
-                            <Rating
-                              {...field}
-                              size="large"
-                              sx={{ fontSize: '3rem', mb: 2 }}
-                            />
+                            <Rating {...field} size="large" sx={{ fontSize: '3rem', mb: 2 }} />
                             {rating > 0 && (
-                              <Typography
-                                variant="h6"
-                                sx={{ color: getRatingColor(rating) }}
-                              >
+                              <Typography variant="h6" sx={{ color: getRatingColor(rating) }}>
                                 {getRatingLabel(rating)}
                               </Typography>
                             )}
@@ -699,47 +690,43 @@ const PublicFeedback = () => {
                         )}
                       />
                       <Box mt={3}>
-                        <Button
-                          variant="contained"
-                          onClick={handleNext}
-                          disabled={!rating}
-                        >
+                        <Button variant="contained" onClick={handleNext} disabled={!rating}>
                           Continuar
                         </Button>
                       </Box>
                     </Box>
                   )}
-                  
+
                   {index === 1 && (
-                    <Box 
+                    <Box
                       py={3}
                       sx={{
                         '& .MuiTextField-root': {
                           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                           '&:hover': {
                             transform: 'translateY(-2px)',
-                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
-                          }
-                        }
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+                          },
+                        },
                       }}
                     >
                       <Fade in={true} timeout={500}>
                         <Box>
-                          <Typography 
-                            variant="body1" 
-                            sx={{ 
-                              mb: 2, 
-                              display: 'flex', 
-                              alignItems: 'center', 
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              mb: 2,
+                              display: 'flex',
+                              alignItems: 'center',
                               gap: 1,
                               color: 'text.secondary',
-                              fontWeight: 500
+                              fontWeight: 500,
                             }}
                           >
                             <CommentIcon color="primary" fontSize="small" />
                             Compartilhe detalhes sobre sua experiência
                           </Typography>
-                          
+
                           <Controller
                             name="comment"
                             control={control}
@@ -751,7 +738,7 @@ const PublicFeedback = () => {
                                 rows={4}
                                 fullWidth
                                 placeholder="Conte-nos mais sobre sua experiência..."
-                                sx={{ 
+                                sx={{
                                   mb: 3,
                                   '& .MuiOutlinedInput-root': {
                                     borderRadius: 2,
@@ -763,35 +750,35 @@ const PublicFeedback = () => {
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                                       borderColor: 'primary.main',
                                       borderWidth: '2px',
-                                      boxShadow: '0 0 0 3px rgba(25, 118, 210, 0.1)'
-                                    }
-                                  }
+                                      boxShadow: '0 0 0 3px rgba(25, 118, 210, 0.1)',
+                                    },
+                                  },
                                 }}
                                 InputProps={{
                                   sx: {
                                     '&::placeholder': {
                                       fontStyle: 'italic',
-                                      opacity: 0.7
-                                    }
-                                  }
+                                      opacity: 0.7,
+                                    },
+                                  },
                                 }}
                               />
                             )}
                           />
-                          
-                          <Box 
-                            display="flex" 
+
+                          <Box
+                            display="flex"
                             gap={2}
-                            sx={{ 
+                            sx={{
                               justifyContent: { xs: 'center', sm: 'flex-start' },
-                              flexWrap: 'wrap'
+                              flexWrap: 'wrap',
                             }}
                           >
-                            <Button 
+                            <Button
                               onClick={handleBack}
                               startIcon={<ArrowBackIcon />}
                               variant="outlined"
-                              sx={{ 
+                              sx={{
                                 borderRadius: 2,
                                 px: 3,
                                 py: 1,
@@ -799,17 +786,17 @@ const PublicFeedback = () => {
                                 color: 'primary.main',
                                 '&:hover': {
                                   borderColor: 'primary.dark',
-                                  backgroundColor: 'rgba(25, 118, 210, 0.04)'
-                                }
+                                  backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                },
                               }}
                             >
                               Voltar
                             </Button>
-                            <Button 
-                              variant="contained" 
+                            <Button
+                              variant="contained"
                               onClick={handleNext}
                               endIcon={<NavigateNextIcon />}
-                              sx={{ 
+                              sx={{
                                 borderRadius: 2,
                                 px: 3,
                                 py: 1,
@@ -817,8 +804,8 @@ const PublicFeedback = () => {
                                 transition: 'all 0.3s ease',
                                 '&:hover': {
                                   boxShadow: '0 6px 15px rgba(25, 118, 210, 0.4)',
-                                  transform: 'translateY(-2px)'
-                                }
+                                  transform: 'translateY(-2px)',
+                                },
                               }}
                             >
                               Continuar
@@ -828,41 +815,41 @@ const PublicFeedback = () => {
                       </Fade>
                     </Box>
                   )}
-                  
+
                   {index === 2 && (
-                    <Box 
+                    <Box
                       py={3}
                       sx={{
                         '& .MuiTextField-root': {
                           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                           '&:hover': {
                             transform: 'translateY(-2px)',
-                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
-                          }
-                        }
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+                          },
+                        },
                       }}
                     >
                       <Fade in={true} timeout={500}>
                         <Box>
-                          <Typography 
-                            variant="body1" 
-                            sx={{ 
-                              mb: 3, 
-                              display: 'flex', 
-                              alignItems: 'center', 
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              mb: 3,
+                              display: 'flex',
+                              alignItems: 'center',
                               gap: 1,
                               color: 'text.secondary',
                               fontWeight: 500,
                               bgcolor: 'rgba(25, 118, 210, 0.04)',
                               p: 2,
                               borderRadius: 2,
-                              border: '1px dashed rgba(25, 118, 210, 0.3)'
+                              border: '1px dashed rgba(25, 118, 210, 0.3)',
                             }}
                           >
                             <InfoIcon color="primary" fontSize="small" />
                             Para que possamos responder ao seu feedback (opcional)
                           </Typography>
-                          
+
                           <Grid container spacing={3} sx={{ mb: 3 }}>
                             <Grid item xs={12} md={6}>
                               <Zoom in={true} style={{ transitionDelay: '100ms' }}>
@@ -876,7 +863,7 @@ const PublicFeedback = () => {
                                         label="Seu Nome"
                                         fullWidth
                                         variant="outlined"
-                                        sx={{ 
+                                        sx={{
                                           '& .MuiOutlinedInput-root': {
                                             borderRadius: 2,
                                             transition: 'all 0.3s ease',
@@ -887,15 +874,15 @@ const PublicFeedback = () => {
                                             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                                               borderColor: 'primary.main',
                                               borderWidth: '2px',
-                                              boxShadow: '0 0 0 3px rgba(25, 118, 210, 0.1)'
-                                            }
-                                          }
+                                              boxShadow: '0 0 0 3px rgba(25, 118, 210, 0.1)',
+                                            },
+                                          },
                                         }}
                                         InputProps={{
                                           startAdornment: (
-                                            <Box 
-                                              sx={{ 
-                                                mr: 1, 
+                                            <Box
+                                              sx={{
+                                                mr: 1,
                                                 color: 'primary.main',
                                                 display: 'flex',
                                                 alignItems: 'center',
@@ -903,7 +890,7 @@ const PublicFeedback = () => {
                                                 bgcolor: 'rgba(25, 118, 210, 0.08)',
                                                 borderRadius: '50%',
                                                 width: 32,
-                                                height: 32
+                                                height: 32,
                                               }}
                                             >
                                               <PersonIcon fontSize="small" />
@@ -936,7 +923,7 @@ const PublicFeedback = () => {
                                         fullWidth
                                         error={!!errors.customer_email}
                                         helperText={errors.customer_email?.message}
-                                        sx={{ 
+                                        sx={{
                                           '& .MuiOutlinedInput-root': {
                                             borderRadius: 2,
                                             transition: 'all 0.3s ease',
@@ -947,26 +934,26 @@ const PublicFeedback = () => {
                                             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                                               borderColor: 'primary.main',
                                               borderWidth: '2px',
-                                              boxShadow: '0 0 0 3px rgba(25, 118, 210, 0.1)'
+                                              boxShadow: '0 0 0 3px rgba(25, 118, 210, 0.1)',
                                             },
                                             '&.Mui-error .MuiOutlinedInput-notchedOutline': {
                                               borderColor: 'error.main',
-                                              boxShadow: '0 0 0 3px rgba(211, 47, 47, 0.1)'
-                                            }
+                                              boxShadow: '0 0 0 3px rgba(211, 47, 47, 0.1)',
+                                            },
                                           },
                                           '& .MuiFormHelperText-root.Mui-error': {
                                             display: 'flex',
                                             alignItems: 'center',
                                             gap: 0.5,
                                             mt: 0.5,
-                                            mx: 0
-                                          }
+                                            mx: 0,
+                                          },
                                         }}
                                         InputProps={{
                                           startAdornment: (
-                                            <Box 
-                                              sx={{ 
-                                                mr: 1, 
+                                            <Box
+                                              sx={{
+                                                mr: 1,
                                                 color: 'primary.main',
                                                 display: 'flex',
                                                 alignItems: 'center',
@@ -974,7 +961,7 @@ const PublicFeedback = () => {
                                                 bgcolor: 'rgba(25, 118, 210, 0.08)',
                                                 borderRadius: '50%',
                                                 width: 32,
-                                                height: 32
+                                                height: 32,
                                               }}
                                             >
                                               <EmailIcon fontSize="small" />
@@ -987,7 +974,7 @@ const PublicFeedback = () => {
                                               <ErrorOutlineIcon fontSize="small" />
                                               {errors.customer_email?.message}
                                             </>
-                                          )
+                                          ),
                                         }}
                                       />
                                     )}
@@ -1007,7 +994,7 @@ const PublicFeedback = () => {
                                         label="Telefone"
                                         fullWidth
                                         placeholder="(11) 99999-9999"
-                                        sx={{ 
+                                        sx={{
                                           '& .MuiOutlinedInput-root': {
                                             borderRadius: 2,
                                             transition: 'all 0.3s ease',
@@ -1018,15 +1005,15 @@ const PublicFeedback = () => {
                                             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                                               borderColor: 'primary.main',
                                               borderWidth: '2px',
-                                              boxShadow: '0 0 0 3px rgba(25, 118, 210, 0.1)'
-                                            }
-                                          }
+                                              boxShadow: '0 0 0 3px rgba(25, 118, 210, 0.1)',
+                                            },
+                                          },
                                         }}
                                         InputProps={{
                                           startAdornment: (
-                                            <Box 
-                                              sx={{ 
-                                                mr: 1, 
+                                            <Box
+                                              sx={{
+                                                mr: 1,
                                                 color: 'primary.main',
                                                 display: 'flex',
                                                 alignItems: 'center',
@@ -1034,7 +1021,7 @@ const PublicFeedback = () => {
                                                 bgcolor: 'rgba(25, 118, 210, 0.08)',
                                                 borderRadius: '50%',
                                                 width: 32,
-                                                height: 32
+                                                height: 32,
                                               }}
                                             >
                                               <PhoneIcon fontSize="small" />
@@ -1048,21 +1035,21 @@ const PublicFeedback = () => {
                               </Zoom>
                             </Grid>
                           </Grid>
-                          
-                          <Box 
-                            display="flex" 
+
+                          <Box
+                            display="flex"
                             gap={2}
-                            sx={{ 
+                            sx={{
                               justifyContent: { xs: 'center', sm: 'flex-start' },
                               flexWrap: 'wrap',
-                              mt: 2
+                              mt: 2,
                             }}
                           >
-                            <Button 
+                            <Button
                               onClick={handleBack}
                               startIcon={<ArrowBackIcon />}
                               variant="outlined"
-                              sx={{ 
+                              sx={{
                                 borderRadius: 2,
                                 px: 3,
                                 py: 1,
@@ -1070,8 +1057,8 @@ const PublicFeedback = () => {
                                 color: 'primary.main',
                                 '&:hover': {
                                   borderColor: 'primary.dark',
-                                  backgroundColor: 'rgba(25, 118, 210, 0.04)'
-                                }
+                                  backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                },
                               }}
                             >
                               Voltar
@@ -1082,7 +1069,7 @@ const PublicFeedback = () => {
                               onClick={handleSubmit(onSubmit)}
                               disabled={submitting}
                               size="large"
-                              sx={{ 
+                              sx={{
                                 borderRadius: 2,
                                 px: 3,
                                 py: 1,
@@ -1092,8 +1079,8 @@ const PublicFeedback = () => {
                                 '&:hover': {
                                   boxShadow: '0 6px 15px rgba(25, 118, 210, 0.4)',
                                   transform: 'translateY(-2px)',
-                                  bgcolor: 'primary.dark'
-                                }
+                                  bgcolor: 'primary.dark',
+                                },
                               }}
                             >
                               {submitting ? (
@@ -1112,7 +1099,7 @@ const PublicFeedback = () => {
             ))}
           </Stepper>
         </Paper>
-        
+
         {/* Footer */}
         <Box textAlign="center" mt={4}>
           <Typography variant="body2" color="text.secondary">

@@ -9,7 +9,7 @@ const ThankYou = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { restaurant, rating, customerName, reward } = location.state || {};
-  
+
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
@@ -24,31 +24,33 @@ const ThankYou = () => {
       window.open(url, '_blank');
     }
   };
-  
+
   return (
-    <Box sx={{ 
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      background: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)', // Gradiente suave para melhor aparência
-      py: { xs: 4, sm: 6, md: 8 },
-      px: 2, // Padding horizontal para mobile
-    }}>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        background: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)', // Gradiente suave para melhor aparência
+        py: { xs: 4, sm: 6, md: 8 },
+        px: 2, // Padding horizontal para mobile
+      }}
+    >
       {/* Logo ou ícone do restaurante */}
       <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
-        <img 
-          src="/logo192.png" 
-          alt="Logo" 
-          style={{ 
-            height: '70px', 
+        <img
+          src="/logo192.png"
+          alt="Logo"
+          style={{
+            height: '70px',
             width: 'auto',
-            filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))'
-          }} 
+            filter: 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15))',
+          }}
         />
       </Box>
-      
+
       <Container maxWidth="md">
         <Box py={4}>
           <ThankYouCard
@@ -59,11 +61,26 @@ const ThankYou = () => {
             onShare={handleShare}
           />
         </Box>
-        
-        <Box textAlign="center" mt={4} sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}>
-          <Typography variant="caption" color="text.disabled" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-            <span>Powered by</span> 
-            <span style={{ fontWeight: 'bold', background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+
+        <Box
+          textAlign="center"
+          mt={4}
+          sx={{ opacity: 0.8, transition: 'opacity 0.3s ease', '&:hover': { opacity: 1 } }}
+        >
+          <Typography
+            variant="caption"
+            color="text.disabled"
+            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}
+          >
+            <span>Powered by</span>
+            <span
+              style={{
+                fontWeight: 'bold',
+                background: 'linear-gradient(45deg, #3f51b5 30%, #2196f3 90%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               Sistema de Feedback
             </span>
           </Typography>

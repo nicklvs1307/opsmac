@@ -12,10 +12,7 @@ import {
   useMediaQuery,
   alpha,
 } from '@mui/material';
-import {
-  Menu as MenuIcon,
-  ChevronLeft as ChevronLeftIcon,
-} from '@mui/icons-material';
+import { Menu as MenuIcon, ChevronLeft as ChevronLeftIcon } from '@mui/icons-material';
 
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -42,17 +39,21 @@ const Layout = ({ children }) => {
   };
 
   const drawer = (
-    <Box sx={{ 
-      height: '100%', 
-      display: 'flex', 
-      flexDirection: 'column',
-      bgcolor: theme.palette.mode === 'light' 
-        ? alpha(theme.palette.background.paper, 0.9) 
-        : alpha(theme.palette.background.paper, 0.2),
-      backgroundImage: theme.palette.mode === 'light'
-        ? 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))'
-        : 'linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))'
-    }}>
+    <Box
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        bgcolor:
+          theme.palette.mode === 'light'
+            ? alpha(theme.palette.background.paper, 0.9)
+            : alpha(theme.palette.background.paper, 0.2),
+        backgroundImage:
+          theme.palette.mode === 'light'
+            ? 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))'
+            : 'linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))',
+      }}
+    >
       <Toolbar
         sx={{
           display: 'flex',
@@ -60,15 +61,16 @@ const Layout = ({ children }) => {
           justifyContent: 'space-between',
           px: 3,
           py: 2,
-          bgcolor: theme.palette.mode === 'light' 
-            ? alpha(theme.palette.background.paper, 0.8) 
-            : alpha(theme.palette.background.paper, 0.2),
+          bgcolor:
+            theme.palette.mode === 'light'
+              ? alpha(theme.palette.background.paper, 0.8)
+              : alpha(theme.palette.background.paper, 0.2),
           borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
-          backdropFilter: 'blur(8px)'
+          backdropFilter: 'blur(8px)',
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Box 
+          <Box
             sx={{
               width: 36,
               height: 36,
@@ -82,48 +84,48 @@ const Layout = ({ children }) => {
               '&:hover': {
                 transform: 'translateY(-2px)',
                 boxShadow: `0 6px 16px ${alpha(theme.palette.primary.main, 0.4)}`,
-              }
+              },
             }}
           >
-            <Typography 
-              variant="h6" 
-              sx={{ 
+            <Typography
+              variant="h6"
+              sx={{
                 color: 'white',
                 fontWeight: 'bold',
                 fontSize: '1.1rem',
-                textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+                textShadow: '0 1px 2px rgba(0,0,0,0.2)',
               }}
             >
               {t('layout.app_initial')}
             </Typography>
           </Box>
-          <Typography 
-            variant="h6" 
-            noWrap 
-            component="div" 
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
             sx={{
               background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               fontWeight: 'bold',
               fontSize: '1.2rem',
-              letterSpacing: '0.5px'
+              letterSpacing: '0.5px',
             }}
           >
             {t('layout.app_name')}
           </Typography>
         </Box>
         {!isMobile && (
-          <IconButton 
+          <IconButton
             onClick={handleDrawerToggle}
-            sx={{ 
+            sx={{
               color: 'text.secondary',
               transition: 'all 0.2s ease',
               '&:hover': {
                 color: theme.palette.primary.main,
                 transform: 'scale(1.1)',
-                backgroundColor: alpha(theme.palette.primary.main, 0.1)
-              }
+                backgroundColor: alpha(theme.palette.primary.main, 0.1),
+              },
             }}
           >
             <ChevronLeftIcon />
@@ -170,8 +172,8 @@ const Layout = ({ children }) => {
               transition: 'all 0.2s ease',
               '&:hover': {
                 transform: 'scale(1.1)',
-                backgroundColor: alpha(theme.palette.primary.main, 0.1)
-              }
+                backgroundColor: alpha(theme.palette.primary.main, 0.1),
+              },
             }}
           >
             <MenuIcon />
@@ -202,9 +204,10 @@ const Layout = ({ children }) => {
               boxSizing: 'border-box',
               width: drawerWidth,
               boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-              backgroundImage: theme.palette.mode === 'light'
-                ? 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))'
-                : 'linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))'
+              backgroundImage:
+                theme.palette.mode === 'light'
+                  ? 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))'
+                  : 'linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))',
             },
           }}
         >
@@ -246,30 +249,35 @@ const Layout = ({ children }) => {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.standard,
           }),
-          backgroundColor: theme.palette.mode === 'light' 
-            ? alpha(theme.palette.background.default, 0.5) 
-            : alpha(theme.palette.background.default, 0.9),
+          backgroundColor:
+            theme.palette.mode === 'light'
+              ? alpha(theme.palette.background.default, 0.5)
+              : alpha(theme.palette.background.default, 0.9),
           borderRadius: { xs: 0, md: desktopOpen ? '24px 0 0 0' : 0 },
           overflowY: 'scroll',
           backdropFilter: 'blur(8px)',
-          boxShadow: desktopOpen ? `inset 8px 0 16px ${alpha(theme.palette.common.black, 0.05)}` : 'none'
+          boxShadow: desktopOpen
+            ? `inset 8px 0 16px ${alpha(theme.palette.common.black, 0.05)}`
+            : 'none',
         }}
       >
         <Toolbar /> {/* Spacer for fixed AppBar */}
-        <Box sx={{ 
-          mt: 2,
-          animation: 'fadeIn 0.5s ease-in-out',
-          '@keyframes fadeIn': {
-            '0%': {
-              opacity: 0,
-              transform: 'translateY(10px)'
+        <Box
+          sx={{
+            mt: 2,
+            animation: 'fadeIn 0.5s ease-in-out',
+            '@keyframes fadeIn': {
+              '0%': {
+                opacity: 0,
+                transform: 'translateY(10px)',
+              },
+              '100%': {
+                opacity: 1,
+                transform: 'translateY(0)',
+              },
             },
-            '100%': {
-              opacity: 1,
-              transform: 'translateY(0)'
-            },
-          }
-        }}>
+          }}
+        >
           {children || <Outlet />}
         </Box>
       </Box>

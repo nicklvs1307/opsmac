@@ -1,5 +1,20 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, List, ListItem, ListItemText, IconButton, Typography, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import {
+  Box,
+  Button,
+  TextField,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Typography,
+  Paper,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
@@ -102,9 +117,15 @@ const CategoryManagement = () => {
 
   return (
     <Box sx={{ mt: 3 }}>
-      <Typography variant="h5" gutterBottom>{t('category_management.title')}</Typography>
+      <Typography variant="h5" gutterBottom>
+        {t('category_management.title')}
+      </Typography>
       <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
-        <Typography variant="h6" gutterBottom>{editingCategory ? t('category_management.edit_category') : t('category_management.add_new_category')}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {editingCategory
+            ? t('category_management.edit_category')
+            : t('category_management.add_new_category')}
+        </Typography>
         <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
           <TextField
             label={t('category_management.category_name')}
@@ -149,7 +170,9 @@ const CategoryManagement = () => {
         </Box>
       </Paper>
 
-      <Typography variant="h6" gutterBottom>{t('category_management.existing_categories')}</Typography>
+      <Typography variant="h6" gutterBottom>
+        {t('category_management.existing_categories')}
+      </Typography>
       <Paper elevation={2} sx={{ p: 3 }}>
         {categories.length === 0 ? (
           <Typography>{t('category_management.no_categories')}</Typography>
@@ -160,10 +183,18 @@ const CategoryManagement = () => {
                 key={category.id}
                 secondaryAction={
                   <Box>
-                    <IconButton edge="end" aria-label="edit" onClick={() => handleEditClick(category)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="edit"
+                      onClick={() => handleEditClick(category)}
+                    >
                       <EditIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteClick(category)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleDeleteClick(category)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Box>
@@ -182,10 +213,14 @@ const CategoryManagement = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{t('category_management.confirm_delete_title')}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {t('category_management.confirm_delete_title')}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {t('category_management.confirm_delete_message', { categoryName: categoryToDelete?.name })}
+            {t('category_management.confirm_delete_message', {
+              categoryName: categoryToDelete?.name,
+            })}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

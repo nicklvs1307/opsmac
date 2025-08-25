@@ -22,10 +22,20 @@ import {
 import { Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { Controller } from 'react-hook-form';
 import QRCode from 'qrcode.react';
-import { useAuth } from '../../../contexts/AuthContext'; // Adicionado useAuth
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next'; // Adicionado useTranslation
 
-const CheckinProgram = ({ control, errors, fields, append, remove, rewards, loading, onSave, checkinQRCode }) => {
+const CheckinProgram = ({
+  control,
+  errors,
+  fields,
+  append,
+  remove,
+  rewards,
+  loading,
+  onSave,
+  checkinQRCode,
+}) => {
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
   const { t } = useTranslation(); // Obter função de tradução
   const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
@@ -54,7 +64,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Slug do Restaurante */}
               <Box sx={{ mb: 4 }}>
-                                <Typography variant="h6" gutterBottom>{t('checkin_program.slug_title')}</Typography>
+                <Typography variant="h6" gutterBottom>
+                  {t('checkin_program.slug_title')}
+                </Typography>
                 <Controller
                   name="restaurant_slug"
                   control={control}
@@ -72,7 +84,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Personalização Visual */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('checkin_program.visual_customization_title')}</Typography>
+                <Typography variant="h6" gutterBottom>
+                  {t('checkin_program.visual_customization_title')}
+                </Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <Controller
@@ -90,13 +104,15 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                             InputLabelProps={{ shrink: true }}
                             sx={{ flexGrow: 1 }}
                           />
-                          <Box sx={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: '4px',
-                            backgroundColor: field.value || 'transparent',
-                            border: '1px solid #ccc',
-                          }} />
+                          <Box
+                            sx={{
+                              width: 40,
+                              height: 40,
+                              borderRadius: '4px',
+                              backgroundColor: field.value || 'transparent',
+                              border: '1px solid #ccc',
+                            }}
+                          />
                         </Box>
                       )}
                     />
@@ -117,13 +133,15 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                             InputLabelProps={{ shrink: true }}
                             sx={{ flexGrow: 1 }}
                           />
-                          <Box sx={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: '4px',
-                            backgroundColor: field.value || 'transparent',
-                            border: '1px solid #ccc',
-                          }} />
+                          <Box
+                            sx={{
+                              width: 40,
+                              height: 40,
+                              borderRadius: '4px',
+                              backgroundColor: field.value || 'transparent',
+                              border: '1px solid #ccc',
+                            }}
+                          />
                         </Box>
                       )}
                     />
@@ -144,13 +162,15 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                             InputLabelProps={{ shrink: true }}
                             sx={{ flexGrow: 1 }}
                           />
-                          <Box sx={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: '4px',
-                            backgroundColor: field.value || 'transparent',
-                            border: '1px solid #ccc',
-                          }} />
+                          <Box
+                            sx={{
+                              width: 40,
+                              height: 40,
+                              borderRadius: '4px',
+                              backgroundColor: field.value || 'transparent',
+                              border: '1px solid #ccc',
+                            }}
+                          />
                         </Box>
                       )}
                     />
@@ -171,13 +191,15 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                             InputLabelProps={{ shrink: true }}
                             sx={{ flexGrow: 1 }}
                           />
-                          <Box sx={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: '4px',
-                            backgroundColor: field.value || 'transparent',
-                            border: '1px solid #ccc',
-                          }} />
+                          <Box
+                            sx={{
+                              width: 40,
+                              height: 40,
+                              borderRadius: '4px',
+                              backgroundColor: field.value || 'transparent',
+                              border: '1px solid #ccc',
+                            }}
+                          />
                         </Box>
                       )}
                     />
@@ -202,7 +224,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Ciclo de Check-in */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('checkin_program.checkin_cycle')}</Typography>
+                <Typography variant="h6" gutterBottom>
+                  {t('checkin_program.checkin_cycle')}
+                </Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <Controller
@@ -272,7 +296,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Recompensas por Visita */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('checkin_program.rewards_per_visit')}</Typography>
+                <Typography variant="h6" gutterBottom>
+                  {t('checkin_program.rewards_per_visit')}
+                </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                   {t('checkin_program.rewards_per_visit_helper')}
                 </Typography>
@@ -285,7 +311,7 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           control={control}
                           rules={{
                             required: t('checkin_program.visit_count_required'),
-                            setValueAs: (value) => value === '' ? undefined : Number(value),
+                            setValueAs: (value) => (value === '' ? undefined : Number(value)),
                           }}
                           render={({ field }) => (
                             <TextField
@@ -305,7 +331,10 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           control={control}
                           rules={{ required: t('checkin_program.reward_required') }}
                           render={({ field }) => (
-                            <FormControl fullWidth error={!!errors.rewards_per_visit?.[index]?.reward_id}>
+                            <FormControl
+                              fullWidth
+                              error={!!errors.rewards_per_visit?.[index]?.reward_id}
+                            >
                               <InputLabel>{t('checkin_program.select_reward')}</InputLabel>
                               <Select {...field} label={t('checkin_program.select_reward')}>
                                 {rewards.map((reward) => (
@@ -314,7 +343,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                                   </MenuItem>
                                 ))}
                               </Select>
-                              <FormHelperText>{errors.rewards_per_visit?.[index]?.reward_id?.message}</FormHelperText>
+                              <FormHelperText>
+                                {errors.rewards_per_visit?.[index]?.reward_id?.message}
+                              </FormHelperText>
                             </FormControl>
                           )}
                         />
@@ -359,7 +390,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Controle Anti-Fraude */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('checkin_program.anti_fraud_control')}</Typography>
+                <Typography variant="h6" gutterBottom>
+                  {t('checkin_program.anti_fraud_control')}
+                </Typography>
                 <FormControlLabel
                   control={
                     <Controller
@@ -434,7 +467,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                           <Select {...field} label={t('checkin_program.identification_method')}>
                             <MenuItem value="phone">{t('checkin_program.method_phone')}</MenuItem>
                             <MenuItem value="cpf">{t('checkin_program.method_cpf')}</MenuItem>
-                            <MenuItem value="unique_link">{t('checkin_program.method_unique_link')}</MenuItem>
+                            <MenuItem value="unique_link">
+                              {t('checkin_program.method_unique_link')}
+                            </MenuItem>
                           </Select>
                         </FormControl>
                       )}
@@ -445,7 +480,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Sistema de Pontuação e Ranking */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('checkin_program.points_and_ranking')}</Typography>
+                <Typography variant="h6" gutterBottom>
+                  {t('checkin_program.points_and_ranking')}
+                </Typography>
                 <Controller
                   name="points_per_checkin"
                   control={control}
@@ -464,7 +501,9 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
 
               {/* Limite de Check-ins por Ciclo */}
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>{t('checkin_program.checkin_limit')}</Typography>
+                <Typography variant="h6" gutterBottom>
+                  {t('checkin_program.checkin_limit')}
+                </Typography>
                 <Controller
                   name="checkin_limit_per_cycle"
                   control={control}
@@ -504,7 +543,11 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                 disabled={loading}
                 sx={{ mt: 2 }}
               >
-                {loading ? <CircularProgress size={20} /> : t('checkin_program.save_checkin_program_button')}
+                {loading ? (
+                  <CircularProgress size={20} />
+                ) : (
+                  t('checkin_program.save_checkin_program_button')
+                )}
               </Button>
             </CardContent>
           </Card>
@@ -520,19 +563,27 @@ const CheckinProgram = ({ control, errors, fields, append, remove, rewards, load
                     {checkinQRCode.url}
                   </Typography>
                   <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center', gap: 1 }}>
-                    <Button variant="outlined" onClick={() => navigator.clipboard.writeText(checkinQRCode.url)}>
+                    <Button
+                      variant="outlined"
+                      onClick={() => navigator.clipboard.writeText(checkinQRCode.url)}
+                    >
                       {t('checkin_program.copy_link_button')}
                     </Button>
-                    <Button variant="contained" onClick={() => {
-                      const canvas = document.querySelector('canvas');
-                      const pngUrl = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-                      let downloadLink = document.createElement('a');
-                      downloadLink.href = pngUrl;
-                      downloadLink.download = 'checkin-qrcode.png';
-                      document.body.appendChild(downloadLink);
-                      downloadLink.click();
-                      document.body.removeChild(downloadLink);
-                    }}>
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        const canvas = document.querySelector('canvas');
+                        const pngUrl = canvas
+                          .toDataURL('image/png')
+                          .replace('image/png', 'image/octet-stream');
+                        let downloadLink = document.createElement('a');
+                        downloadLink.href = pngUrl;
+                        downloadLink.download = 'checkin-qrcode.png';
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+                        document.body.removeChild(downloadLink);
+                      }}
+                    >
                       {t('checkin_program.download_qr_code_button')}
                     </Button>
                   </Box>

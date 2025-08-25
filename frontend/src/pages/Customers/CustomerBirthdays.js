@@ -1,5 +1,14 @@
 import React from 'react';
-import { Box, Typography, Paper, CircularProgress, Alert, List, ListItem, ListItemText } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Paper,
+  CircularProgress,
+  Alert,
+  List,
+  ListItem,
+  ListItemText,
+} from '@mui/material';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 
@@ -24,9 +33,7 @@ const CustomerBirthdays = () => {
   }
 
   if (error) {
-    return (
-      <Alert severity="error">Erro ao carregar aniversariantes: {error.message}</Alert>
-    );
+    return <Alert severity="error">Erro ao carregar aniversariantes: {error.message}</Alert>;
   }
 
   return (
@@ -39,7 +46,7 @@ const CustomerBirthdays = () => {
           <List>
             {data.map((customer) => (
               <ListItem key={customer.id}>
-                <ListItemText 
+                <ListItemText
                   primary={customer.name}
                   secondary={`Email: ${customer.email || 'N/A'} | Telefone: ${customer.phone || 'N/A'}`}
                 />
@@ -47,9 +54,7 @@ const CustomerBirthdays = () => {
             ))}
           </List>
         ) : (
-          <Typography variant="body1">
-            Nenhum cliente faz aniversário este mês.
-          </Typography>
+          <Typography variant="body1">Nenhum cliente faz aniversário este mês.</Typography>
         )}
       </Paper>
     </Box>

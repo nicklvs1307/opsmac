@@ -10,12 +10,12 @@ module.exports = (sequelize) => {
      */
     static associate(models) {
       StockMovement.belongsTo(models.Product, {
-        foreignKey: 'stockable_id',
+        foreignKey: 'stockableId',
         constraints: false,
         as: 'product',
       });
       StockMovement.belongsTo(models.Ingredient, {
-        foreignKey: 'stockable_id',
+        foreignKey: 'stockableId',
         constraints: false,
         as: 'ingredient',
       });
@@ -23,8 +23,8 @@ module.exports = (sequelize) => {
 
     // Helper method to get the associated stockable item (Product or Ingredient)
     getStockable(options) {
-      if (!this.stockable_type) return Promise.resolve(null);
-      const mixinMethodName = `get${this.stockable_type}`;
+      if (!this.stockableType) return Promise.resolve(null);
+      const mixinMethodName = `get${this.stockableType}`;
       return this[mixinMethodName](options);
     }
   }
@@ -35,11 +35,11 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    stockable_id: {
+    stockableId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    stockable_type: {
+    stockableType: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -51,7 +51,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    movement_date: {
+    movementDate: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
@@ -67,10 +67,9 @@ module.exports = (sequelize) => {
     tableName: 'stock_movements',
     indexes: [
       {
-        fields: ['stockable_id', 'stockable_type'],
+        fields: ['stockableId', 'stockableType'],
       },
     ],
-    underscored: true,
     timestamps: true,
   });
 

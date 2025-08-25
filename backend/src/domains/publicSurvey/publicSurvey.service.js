@@ -1,4 +1,4 @@
-const { models } = require('../../config/database');
+const { models } = require('models');
 const { Op } = require('sequelize');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
@@ -238,7 +238,7 @@ exports.submitSurveyResponses = async (surveySlug, answers, customer_id) => {
 
   const restaurant = await models.Restaurant.findByPk(survey.restaurant_id);
   if (restaurant) {
-    const currentNpsScores = restaurant.nps_criteria_scores || {};
+    const currentNpsScores = restaurant.npsCriteriaScores || {};
     for (const criterionId in npsScoresByCriterion) {
       if (npsScoresByCriterion.hasOwnProperty(criterionId)) {
         const newScores = npsScoresByCriterion[criterionId];
@@ -250,7 +250,7 @@ exports.submitSurveyResponses = async (surveySlug, answers, customer_id) => {
         };
       }
     }
-    await restaurant.update({ nps_criteria_scores: currentNpsScores });
+    await restaurant.update({ npsCriteriaScores: currentNpsScores });
   }
 
   let rewardData = null;

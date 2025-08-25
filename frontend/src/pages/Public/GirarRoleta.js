@@ -22,7 +22,9 @@ const GirarRoleta = () => {
   if (!reward_earned || !reward_earned.wheel_config) {
     return (
       <Container component={Paper} sx={{ p: 4, mt: 5, textAlign: 'center' }}>
-        <Typography variant="h6" color="error">{t('girar_roleta.error_no_reward')}</Typography>
+        <Typography variant="h6" color="error">
+          {t('girar_roleta.error_no_reward')}
+        </Typography>
       </Container>
     );
   }
@@ -38,10 +40,9 @@ const GirarRoleta = () => {
       setWinningItem(response.data.wonItem);
       setApiResponseRewardEarned(response.data.reward_earned);
       setLoading(false); // Stop loading here, as animation will start
-      
+
       // Usar o winningIndex diretamente do backend
       setWinningIndex(response.data.winningIndex);
-
     } catch (err) {
       console.error('Error spinning wheel:', err);
       toast.error(err.response?.data?.message || t('girar_roleta.error_spinning'));
@@ -60,8 +61,12 @@ const GirarRoleta = () => {
   return (
     <Container component={Paper} elevation={3} sx={{ p: 4, mt: 5 }}>
       <Box sx={{ textAlign: 'center', mb: 3 }}>
-        <Typography variant="h4" component="h1" gutterBottom>{reward_earned.reward_title || t('girar_roleta.title')}</Typography>
-        <Typography variant="body1" color="text.secondary">{reward_earned.description || t('girar_roleta.description')}</Typography>
+        <Typography variant="h4" component="h1" gutterBottom>
+          {reward_earned.reward_title || t('girar_roleta.title')}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          {reward_earned.description || t('girar_roleta.description')}
+        </Typography>
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>

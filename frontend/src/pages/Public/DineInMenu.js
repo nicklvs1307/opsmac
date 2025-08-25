@@ -2,7 +2,16 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
-import { Box, Typography, CircularProgress, Alert, Container, Card, CardContent, Grid } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Container,
+  Card,
+  CardContent,
+  Grid,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const fetchDineInMenu = async (tableId) => {
@@ -15,22 +24,25 @@ const DineInMenu = () => {
   const { t } = useTranslation();
   const { tableId } = useParams();
 
-  const { data: products, isLoading, isError, error } = useQuery(
-    ['dineInMenu', tableId],
-    () => fetchDineInMenu(tableId),
-    {
-      enabled: !!tableId,
-    }
-  );
+  const {
+    data: products,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(['dineInMenu', tableId], () => fetchDineInMenu(tableId), {
+    enabled: !!tableId,
+  });
 
-  const groupedProducts = products ? products.reduce((acc, product) => {
-    const category = product.category || t('common.others');
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push(product);
-    return acc;
-  }, {}) : {};
+  const groupedProducts = products
+    ? products.reduce((acc, product) => {
+        const category = product.category || t('common.others');
+        if (!acc[category]) {
+          acc[category] = [];
+        }
+        acc[category].push(product);
+        return acc;
+      }, {})
+    : {};
 
   if (isLoading) {
     return (
@@ -44,7 +56,8 @@ const DineInMenu = () => {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Alert severity="error">
-          {t('public_menu.error_loading_menu')}{error.response?.data?.msg || error.message}
+          {t('public_menu.error_loading_menu')}
+          {error.response?.data?.msg || error.message}
         </Alert>
       </Box>
     );
@@ -55,11 +68,16 @@ const DineInMenu = () => {
       <Typography variant="h3" component="h1" align="center" gutterBottom>
         {t('public_menu.our_menu_title')}
       </Typography>
-      
+
       {Object.keys(groupedProducts).length > 0 ? (
         Object.entries(groupedProducts).map(([category, items]) => (
           <Box key={category} mb={4}>
-            <Typography variant="h4" component="h2" gutterBottom sx={{ borderBottom: '2px solid', borderColor: 'primary.main', pb: 1 }}>
+            <Typography
+              variant="h4"
+              component="h2"
+              gutterBottom
+              sx={{ borderBottom: '2px solid', borderColor: 'primary.main', pb: 1 }}
+            >
               {category}
             </Typography>
             <Grid container spacing={3}>
@@ -74,7 +92,10 @@ const DineInMenu = () => {
                         {product.description}
                       </Typography>
                       <Typography variant="h6" color="primary">
-                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price)}
+                        {new Intl.NumberFormat('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        }).format(product.price)}
                       </Typography>
                     </CardContent>
                   </Card>

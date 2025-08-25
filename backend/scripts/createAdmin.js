@@ -1,4 +1,7 @@
+
+require('../aliases');
 const { sequelize, models } = require('~/config/database');
+const { Role } = require('../models'); // Import the Role model
 require('dotenv').config();
 
 const createAdminUser = async () => {
@@ -13,8 +16,12 @@ const createAdminUser = async () => {
 
     // Sincroniza o modelo User com o banco de dados (garante que a tabela exista)
     console.log('Sincronizando modelo User com o banco de dados...');
-    await models.User.sync({ alter: true }); 
-    console.log('Modelo User sincronizado.');
+    
+    // Find the super_admin role ID
+    const superAdminRole = await Role.findOne({ where: { name: 'super_admin' } });
+    if (!superAdminRole) {
+      throw new Error('Função super_admin não encontrada. Certifique-se de que os seeds foram executados.');
+    }
 
     const existingAdmin = await models.User.findOne({ where: { email: adminEmail } });
 
@@ -30,12 +37,12 @@ const createAdminUser = async () => {
         name: adminName,
         email: adminEmail,
         password: adminPassword,
-        role: 'super_admin',
-        is_active: true,
-        email_verified: true
+        roleId: superAdminRole.id, // Assign the roleId
+        isActive: true,
+        emailVerified: true
       });
       console.log(`Usuário admin ${newAdmin.name} criado com sucesso!`);
-      console.log(`Detalhes: ID: ${newAdmin.id}, Email: ${newAdmin.email}, Role: ${newAdmin.role}`);
+      console.log(`Detalhes: ID: ${newAdmin.id}, Email: ${newAdmin.email}, RoleId: ${newAdmin.roleId}`);
       console.log('Lembre-se de alterar a senha padrão se você não a definiu via variáveis de ambiente.');
     }
   } catch (error) {

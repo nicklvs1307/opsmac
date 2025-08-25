@@ -1,17 +1,18 @@
 const express = require('express');
-const { auth } = require('../middleware/authMiddleware');
-const upload = require('../middleware/uploadMiddleware');
-const productsController = require('domains/products/products.controller');
+const { auth } = require('../../middleware/authMiddleware');
+const checkPermission = require('../../middleware/permission');
+const upload = require('../../middleware/uploadMiddleware');
+const productsController = require('./products.controller');
 
 const router = express.Router();
 
 // Rotas de Produtos
-router.post('/image', auth, upload.single('product_image'), productsController.uploadProductImage);
-router.post('/', auth, productsController.createProduct);
-router.get('/', auth, productsController.listProducts);
-router.get('/:id', auth, productsController.getProductById);
-router.put('/:id', auth, productsController.updateProduct);
-router.delete('/:id', auth, productsController.deleteProduct);
-router.patch('/:id/toggle-status', auth, productsController.toggleProductStatus);
+router.post('/image', auth, checkPermission('products:edit'), upload.single('product_image'), productsController.uploadProductImage);
+router.post('/', auth, checkPermission('products:create'), productsController.createProduct);
+router.get('/', auth, checkPermission('products:view'), productsController.listProducts);
+router.get('/:id', auth, checkPermission('products:view'), productsController.getProductById);
+router.put('/:id', auth, checkPermission('products:edit'), productsController.updateProduct);
+router.delete('/:id', auth, checkPermission('products:delete'), productsController.deleteProduct);
+router.patch('/:id/toggle-status', auth, checkPermission('products:edit'), productsController.toggleProductStatus);
 
 module.exports = router;

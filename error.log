@@ -1,29 +1,47 @@
-> Feedeliza+@1.0.0 start
-> node backend/server.js
-node:internal/modules/cjs/loader:1215
-
-  throw err;
-  ^
-Error: Cannot find module '../middleware/authMiddleware'
-Require stack:
-- /app/backend/src/domains/qrcode/qrcode.routes.js
-- /app/backend/routes/index.js
-- /app/backend/server.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1212:15)
-    at Module._resolveFilename (/app/node_modules/module-alias/index.js:49:29)
-    at Module._load (node:internal/modules/cjs/loader:1043:27)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/src/domains/qrcode/qrcode.routes.js:2:44)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    '/app/backend/src/domains/qrcode/qrcode.routes.js',
-    '/app/backend/routes/index.js',
-    '/app/backend/server.js'
-  ]
-}
-Node.js v20.19.4
+react refresh:37 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+deprecations.ts:9 ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+warnOnce @ deprecations.ts:9
+logDeprecation @ deprecations.ts:13
+logV6DeprecationWarnings @ deprecations.ts:26
+(anônimo) @ index.tsx:720
+commitHookEffectListMount @ react-dom.development.js:23189
+commitPassiveMountOnFiber @ react-dom.development.js:24965
+commitPassiveMountEffects_complete @ react-dom.development.js:24930
+commitPassiveMountEffects_begin @ react-dom.development.js:24917
+commitPassiveMountEffects @ react-dom.development.js:24905
+flushPassiveEffectsImpl @ react-dom.development.js:27078
+flushPassiveEffects @ react-dom.development.js:27023
+(anônimo) @ react-dom.development.js:26808
+workLoop @ scheduler.development.js:266
+flushWork @ scheduler.development.js:239
+performWorkUntilDeadline @ scheduler.development.js:533
+authQueries.js:11 O XHR terminou de carregar: GET "http://localhost:5000/api/auth/me".
+dispatchXhrRequest @ xhr.js:195
+xhr @ xhr.js:15
+dispatchRequest @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Axios.<computed> @ Axios.js:213
+wrap @ bind.js:5
+fetchMe @ authQueries.js:11
+fetchFn @ query.js:300
+run @ retryer.js:95
+Retryer @ retryer.js:156
+fetch @ query.js:332
+executeFetch @ queryObserver.js:199
+onSubscribe @ queryObserver.js:40
+subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+commitHookEffectListMount @ react-dom.development.js:23189
+commitPassiveMountOnFiber @ react-dom.development.js:24965
+commitPassiveMountEffects_complete @ react-dom.development.js:24930
+commitPassiveMountEffects_begin @ react-dom.development.js:24917
+commitPassiveMountEffects @ react-dom.development.js:24905
+flushPassiveEffectsImpl @ react-dom.development.js:27078
+flushPassiveEffects @ react-dom.development.js:27023
+(anônimo) @ react-dom.development.js:26808
+workLoop @ scheduler.development.js:266
+flushWork @ scheduler.development.js:239
+performWorkUntilDeadline @ scheduler.development.js:533
+settings:1 Error while trying to use the following icon from the Manifest: http://localhost:3000/logo192.png (Download error or resource isn't a valid image)

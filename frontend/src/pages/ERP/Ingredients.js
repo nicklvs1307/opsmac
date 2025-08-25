@@ -1,10 +1,34 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, TextField, MenuItem, Select, FormControl, InputLabel, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress, Alert } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  TextField,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  CircularProgress,
+  Alert,
+} from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 
 const fetchIngredients = async () => {
@@ -32,11 +56,19 @@ const Ingredients = () => {
   const { user } = useAuth();
   const restaurantId = user?.restaurants?.[0]?.id; // Assuming user is associated with one restaurant
 
-  const { data: ingredients, isLoading, isError } = useQuery('ingredients', fetchIngredients, {
+  const {
+    data: ingredients,
+    isLoading,
+    isError,
+  } = useQuery('ingredients', fetchIngredients, {
     enabled: !!restaurantId, // Only fetch if restaurantId is available
     onError: (error) => {
-      toast.error(t('ingredient_management.error_loading_ingredients', { message: error.response?.data?.msg || error.message }));
-    }
+      toast.error(
+        t('ingredient_management.error_loading_ingredients', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
   });
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -48,7 +80,16 @@ const Ingredients = () => {
   });
 
   const unitOfMeasureOptions = [
-    'g', 'kg', 'ml', 'L', 'unidade', 'colher de chá', 'colher de sopa', 'xícara', 'pitada', 'a gosto'
+    'g',
+    'kg',
+    'ml',
+    'L',
+    'unidade',
+    'colher de chá',
+    'colher de sopa',
+    'xícara',
+    'pitada',
+    'a gosto',
   ];
 
   const createMutation = useMutation(createIngredient, {
@@ -58,8 +99,12 @@ const Ingredients = () => {
       handleCloseDialog();
     },
     onError: (error) => {
-      toast.error(t('ingredient_management.add_error', { message: error.response?.data?.msg || error.message }));
-    }
+      toast.error(
+        t('ingredient_management.add_error', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
   });
 
   const updateMutation = useMutation(updateIngredient, {
@@ -69,8 +114,12 @@ const Ingredients = () => {
       handleCloseDialog();
     },
     onError: (error) => {
-      toast.error(t('ingredient_management.update_error', { message: error.response?.data?.msg || error.message }));
-    }
+      toast.error(
+        t('ingredient_management.update_error', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
   });
 
   const deleteMutation = useMutation(deleteIngredient, {
@@ -79,8 +128,12 @@ const Ingredients = () => {
       queryClient.invalidateQueries('ingredients');
     },
     onError: (error) => {
-      toast.error(t('ingredient_management.delete_error', { message: error.response?.data?.msg || error.message }));
-    }
+      toast.error(
+        t('ingredient_management.delete_error', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
   });
 
   const handleOpenDialog = (ingredient = null) => {
@@ -142,7 +195,9 @@ const Ingredients = () => {
   if (isError) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-        <Alert severity="error">{t('ingredient_management.error_loading_ingredients_generic')}</Alert>
+        <Alert severity="error">
+          {t('ingredient_management.error_loading_ingredients_generic')}
+        </Alert>
       </Box>
     );
   }
@@ -157,7 +212,9 @@ const Ingredients = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('ingredient_management.title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('ingredient_management.title')}
+      </Typography>
       <Button variant="contained" startIcon={<AddIcon />} onClick={() => handleOpenDialog()}>
         {t('ingredient_management.add_ingredient_button')}
       </Button>
@@ -193,11 +250,13 @@ const Ingredients = () => {
       </TableContainer>
 
       <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>{currentIngredient ? t('ingredient_management.edit_ingredient_title') : t('ingredient_management.add_ingredient_title')}</DialogTitle>
+        <DialogTitle>
+          {currentIngredient
+            ? t('ingredient_management.edit_ingredient_title')
+            : t('ingredient_management.add_ingredient_title')}
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            {t('ingredient_management.dialog_description')}
-          </DialogContentText>
+          <DialogContentText>{t('ingredient_management.dialog_description')}</DialogContentText>
           <form onSubmit={handleSubmit}>
             <TextField
               autoFocus
@@ -235,13 +294,15 @@ const Ingredients = () => {
               variant="outlined"
               value={formValues.cost_per_unit}
               onChange={handleChange}
-              inputProps={{ step: "0.0001" }}
+              inputProps={{ step: '0.0001' }}
               required
             />
             <DialogActions>
               <Button onClick={handleCloseDialog}>{t('common.cancel')}</Button>
               <Button type="submit" variant="contained" color="primary">
-                {currentIngredient ? t('ingredient_management.save_changes_button') : t('ingredient_management.add_button')}
+                {currentIngredient
+                  ? t('ingredient_management.save_changes_button')
+                  : t('ingredient_management.add_button')}
               </Button>
             </DialogActions>
           </form>

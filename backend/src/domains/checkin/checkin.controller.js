@@ -1,6 +1,6 @@
 const checkinService = require('./checkin.service');
 const { validationResult } = require('express-validator');
-const { BadRequestError, ForbiddenError } = require('../../utils/errors');
+const { BadRequestError, ForbiddenError } = require('utils/errors');
 const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
 const handleValidationErrors = (req) => {

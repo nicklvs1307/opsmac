@@ -1,7 +1,7 @@
-const { models } = require('../../config/database');
+const models = require('models');
 const lodash = require('lodash');
 const crypto = require('crypto');
-const { NotFoundError } = require('../../utils/errors');
+const { NotFoundError } = require('utils/errors');
 const { sendWhatsAppMessage } = require('services/integrations/whatsappApiClient'); // Assuming this is the correct path
 
 // Helper function to get restaurant ID from authenticated user
@@ -13,6 +13,14 @@ const getRestaurantIdFromUser = async (userId) => {
 };
 
 // Restaurant Settings
+exports.getRestaurantSettings = async (restaurantId) => {
+  const restaurant = await models.Restaurant.findByPk(restaurantId);
+  if (!restaurant) {
+    throw new NotFoundError('Restaurante não encontrado');
+  }
+  return restaurant.settings || {};
+};
+
 exports.updateRestaurantSettings = async (restaurantId, settings) => {
   const restaurant = await models.Restaurant.findByPk(restaurantId);
   if (!restaurant) {
@@ -106,12 +114,12 @@ exports.updateRestaurantProfile = async (restaurantId, profileData) => {
 // NPS Criteria
 exports.getNpsCriteria = async (restaurantId) => {
   const restaurant = await models.Restaurant.findByPk(restaurantId, {
-    attributes: ['nps_criteria_scores']
+    attributes: ['npsCriteriaScores']
   });
   if (!restaurant) {
     throw new NotFoundError('Restaurante não encontrado');
   }
-  return restaurant.nps_criteria_scores || [];
+  return restaurant.npsCriteriaScores || [];
 };
 
 exports.updateNpsCriteria = async (restaurantId, nps_criteria) => {
@@ -119,6 +127,6 @@ exports.updateNpsCriteria = async (restaurantId, nps_criteria) => {
   if (!restaurant) {
     throw new NotFoundError('Restaurante não encontrado');
   }
-  await restaurant.update({ nps_criteria_scores: nps_criteria });
+  await restaurant.update({ npsCriteriaScores: nps_criteria });
   return nps_criteria;
 };

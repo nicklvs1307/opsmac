@@ -31,7 +31,6 @@ module.exports = (sequelize) => {
     modelName: 'NpsCriterion',
     tableName: 'nps_criterions',
     timestamps: true,
-    underscored: true,
   });
 
   return NpsCriterion;

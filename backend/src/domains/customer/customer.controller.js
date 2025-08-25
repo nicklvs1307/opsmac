@@ -1,5 +1,5 @@
 const customerService = require('./customer.service');
-const { getRestaurantIdFromUser } = require('../../services/restaurantAuthService');
+const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 const { BadRequestError } = require('utils/errors');
 
 // Helper para obter o restaurantId e passá-lo para o serviço

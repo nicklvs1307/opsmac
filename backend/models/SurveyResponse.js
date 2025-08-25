@@ -43,7 +43,6 @@ module.exports = (sequelize) => {
     modelName: 'SurveyResponse',
     tableName: 'survey_responses',
     timestamps: true,
-    underscored: true,
   });
 
   return SurveyResponse;

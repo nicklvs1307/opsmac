@@ -1,12 +1,29 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Box, Typography, Paper, TextField, Button, List, ListItem, ListItemText, IconButton, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, Grid, Alert } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Paper,
+  TextField,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Grid,
+  Alert,
+} from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import axiosInstance from '../../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import SurveyRewardProgram from '../Pesquisas/SurveyRewardProgram'; // Import the new component
 
@@ -44,14 +61,19 @@ const SatisfactionSettings = () => {
     return colorValue && colorValue !== '' ? colorValue : defaultValue;
   };
 
-  const { control, handleSubmit, reset, formState: { errors } } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       background_color: '#ffffff',
       text_color: '#000000',
       primary_color: '#3f51b5',
       background_image_url: '',
       rewards_per_response: [], // Add this for survey rewards
-    }
+    },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -73,8 +95,9 @@ const SatisfactionSettings = () => {
   useEffect(() => {
     if (restaurantId) {
       fetchRewards(); // Fetch rewards when component mounts or restaurantId changes
-      axiosInstance.get(`/api/settings/${restaurantId}`)
-        .then(response => {
+      axiosInstance
+        .get(`/api/settings/${restaurantId}`)
+        .then((response) => {
           const settings = response.data.settings?.survey_program_settings;
           if (settings) {
             reset({
@@ -86,7 +109,7 @@ const SatisfactionSettings = () => {
             });
           }
         })
-        .catch(err => console.error('Failed to fetch settings:', err));
+        .catch((err) => console.error('Failed to fetch settings:', err));
     }
   }, [restaurantId, reset, fetchRewards]);
 
@@ -97,8 +120,8 @@ const SatisfactionSettings = () => {
       setIsSubmittingSettings(true);
       await axiosInstance.put(`/api/settings/${restaurantId}`, {
         settings: {
-          survey_program_settings: data
-        }
+          survey_program_settings: data,
+        },
       });
       toast.success(t('satisfaction_settings.personalization_success'));
     } catch (error) {
@@ -157,8 +180,8 @@ const SatisfactionSettings = () => {
 
   const handleUpdate = () => {
     if (!editCriterion || !editCriterion.name.trim()) {
-        toast.error(t('satisfaction_settings.criterion_name_empty_error'));
-        return;
+      toast.error(t('satisfaction_settings.criterion_name_empty_error'));
+      return;
     }
     setIsSubmitting(true);
     updateMutation.mutate({ id: editCriterion.id, name: editCriterion.name });
@@ -203,13 +226,15 @@ const SatisfactionSettings = () => {
                       InputLabelProps={{ shrink: true }}
                       sx={{ flexGrow: 1 }}
                     />
-                    <Box sx={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: '4px',
-                      backgroundColor: field.value || 'transparent',
-                      border: '1px solid #ccc',
-                    }} />
+                    <Box
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: '4px',
+                        backgroundColor: field.value || 'transparent',
+                        border: '1px solid #ccc',
+                      }}
+                    />
                   </Box>
                 )}
               />
@@ -228,13 +253,15 @@ const SatisfactionSettings = () => {
                       InputLabelProps={{ shrink: true }}
                       sx={{ flexGrow: 1 }}
                     />
-                    <Box sx={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: '4px',
-                      backgroundColor: field.value || 'transparent',
-                      border: '1px solid #ccc',
-                    }} />
+                    <Box
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: '4px',
+                        backgroundColor: field.value || 'transparent',
+                        border: '1px solid #ccc',
+                      }}
+                    />
                   </Box>
                 )}
               />
@@ -253,13 +280,15 @@ const SatisfactionSettings = () => {
                       InputLabelProps={{ shrink: true }}
                       sx={{ flexGrow: 1 }}
                     />
-                    <Box sx={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: '4px',
-                      backgroundColor: field.value || 'transparent',
-                      border: '1px solid #ccc',
-                    }} />
+                    <Box
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: '4px',
+                        backgroundColor: field.value || 'transparent',
+                        border: '1px solid #ccc',
+                      }}
+                    />
                   </Box>
                 )}
               />
@@ -268,12 +297,28 @@ const SatisfactionSettings = () => {
               <Controller
                 name="background_image_url"
                 control={control}
-                render={({ field }) => <TextField {...field} label={t('satisfaction_settings.background_image_url_label')} fullWidth />}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label={t('satisfaction_settings.background_image_url_label')}
+                    fullWidth
+                  />
+                )}
               />
             </Grid>
           </Grid>
-          <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }} disabled={isSubmittingSettings}>
-            {isSubmittingSettings ? <CircularProgress size={24} /> : t('satisfaction_settings.save_personalization_button')}
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            disabled={isSubmittingSettings}
+          >
+            {isSubmittingSettings ? (
+              <CircularProgress size={24} />
+            ) : (
+              t('satisfaction_settings.save_personalization_button')
+            )}
           </Button>
         </form>
       </Paper>
@@ -301,7 +346,11 @@ const SatisfactionSettings = () => {
           {t('satisfaction_settings.nps_criteria_description')}
         </Typography>
 
-        <Box component="form" onSubmit={handleCriterionSubmit} sx={{ display: 'flex', gap: 2, mb: 4 }}>
+        <Box
+          component="form"
+          onSubmit={handleCriterionSubmit}
+          sx={{ display: 'flex', gap: 2, mb: 4 }}
+        >
           <TextField
             fullWidth
             label={t('satisfaction_settings.new_nps_criterion_label')}
@@ -322,16 +371,28 @@ const SatisfactionSettings = () => {
         ) : (
           <List>
             {criteria?.map((criterion) => (
-              <ListItem key={criterion.id} secondaryAction={
-                <Box>
-                  <IconButton edge="end" aria-label="edit" onClick={() => setEditCriterion(criterion)}>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(criterion.id)} sx={{ ml: 1 }}>
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
-              }>
+              <ListItem
+                key={criterion.id}
+                secondaryAction={
+                  <Box>
+                    <IconButton
+                      edge="end"
+                      aria-label="edit"
+                      onClick={() => setEditCriterion(criterion)}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleDelete(criterion.id)}
+                      sx={{ ml: 1 }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
+                }
+              >
                 <ListItemText primary={criterion.name} />
               </ListItem>
             ))}
@@ -354,7 +415,9 @@ const SatisfactionSettings = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setEditCriterion(null)}>{t('satisfaction_settings.cancel_button')}</Button>
+          <Button onClick={() => setEditCriterion(null)}>
+            {t('satisfaction_settings.cancel_button')}
+          </Button>
           <Button onClick={handleUpdate} disabled={isSubmitting}>
             {isSubmitting ? <CircularProgress size={24} /> : t('satisfaction_settings.save_button')}
           </Button>

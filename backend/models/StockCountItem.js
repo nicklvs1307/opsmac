@@ -68,7 +68,6 @@ module.exports = (sequelize) => {
     modelName: 'StockCountItem',
     tableName: 'stock_count_items',
     timestamps: true,
-    underscored: true,
     indexes: [
       {
         unique: true,

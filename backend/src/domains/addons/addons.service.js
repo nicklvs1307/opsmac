@@ -1,4 +1,4 @@
-const { models } = require('../../config/database');
+const { models } = require('config/config');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 exports.listAddons = async (restaurantId) => {

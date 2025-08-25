@@ -10,15 +10,15 @@ module.exports = (sequelize) => {
      */
     static associate(models) {
       Checkin.belongsTo(models.Customer, {
-        foreignKey: 'customer_id',
+        foreignKey: 'customerId',
         as: 'customer',
       });
       Checkin.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurant_id',
+        foreignKey: 'restaurantId',
         as: 'restaurant',
       });
       Checkin.belongsTo(models.Coupon, {
-        foreignKey: 'coupon_id',
+        foreignKey: 'couponId',
         as: 'coupon',
       });
     }
@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    customer_id: {
+    customerId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -46,17 +46,17 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    checkin_time: {
+    checkinTime: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    table_number: {
+    tableNumber: {
       type: DataTypes.STRING,
       allowNull: true,
       comment: 'The table number provided by the customer during check-in.',
     },
-    coupon_id: {
+    couponId: {
       type: DataTypes.UUID,
       allowNull: true,
       references: {
@@ -66,7 +66,7 @@ module.exports = (sequelize) => {
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',
     },
-    checkout_time: {
+    checkoutTime: {
       type: DataTypes.DATE,
       allowNull: true,
     },
@@ -75,7 +75,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: 'active',
     },
-    expires_at: {
+    expiresAt: {
       type: DataTypes.DATE,
       allowNull: true,
     },
@@ -84,7 +84,6 @@ module.exports = (sequelize) => {
     modelName: 'Checkin',
     tableName: 'checkins',
     timestamps: true,
-    underscored: true,
   });
 
   return Checkin;

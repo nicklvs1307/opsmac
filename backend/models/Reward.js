@@ -1,6 +1,5 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
-const rewardsService = require('~/domains/rewards/rewards.service'); // Import the new service
 
 module.exports = (sequelize) => {
   class Reward extends Model {
@@ -202,7 +201,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Reward',
     tableName: 'rewards',
-    underscored: true,
     timestamps: true,
     indexes: [
       {
@@ -229,12 +227,15 @@ module.exports = (sequelize) => {
     ],
     hooks: {
       beforeSave: (reward) => {
+        const rewardsService = require('~/domains/rewards/rewards.service');
         rewardsService.handleRewardBeforeSave(reward);
       },
       beforeCreate: (reward) => {
+        const rewardsService = require('~/domains/rewards/rewards.service');
         rewardsService.handleRewardBeforeCreate(reward);
       },
       beforeUpdate: (reward) => {
+        const rewardsService = require('~/domains/rewards/rewards.service');
         rewardsService.handleRewardBeforeUpdate(reward);
       },
     },

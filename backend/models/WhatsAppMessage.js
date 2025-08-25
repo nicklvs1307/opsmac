@@ -97,7 +97,6 @@ module.exports = (sequelize) => {
     sequelize,
     tableName: 'whatsapp_messages',
     timestamps: true,
-    underscored: true,
   });
 
   return WhatsAppMessage;

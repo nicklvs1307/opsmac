@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Box, Paper, Typography, Grid, CircularProgress, Alert } from '@mui/material';
+import { BarChart as BarChartIcon, PieChart as PieChartIcon } from '@mui/icons-material';
 import {
-  Box,
-  Paper,
-  Typography,
-  Grid,
-  CircularProgress,
-  Alert,
-} from '@mui/material';
-import {
-  BarChart as BarChartIcon,
-  PieChart as PieChartIcon,
-} from '@mui/icons-material';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Bar, ComposedChart } from 'recharts';
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Bar,
+  ComposedChart,
+} from 'recharts';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 
 const CouponAnalytics = () => {
@@ -32,7 +32,7 @@ const CouponAnalytics = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const response = await axiosInstance.get(`/api/coupons/analytics/restaurant/${restaurantId}`);
       setAnalytics(response.data);
     } catch (err) {
@@ -71,9 +71,7 @@ const CouponAnalytics = () => {
             <Typography variant="h4" color="primary">
               {analytics?.total_coupons || 0}
             </Typography>
-            <Typography variant="body2">
-              {t('coupon_analytics.total_coupons')}
-            </Typography>
+            <Typography variant="body2">{t('coupon_analytics.total_coupons')}</Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} md={3}>
@@ -81,9 +79,7 @@ const CouponAnalytics = () => {
             <Typography variant="h4" color="primary">
               {analytics?.redeemed_coupons || 0}
             </Typography>
-            <Typography variant="body2">
-              {t('coupon_analytics.redeemed_coupons')}
-            </Typography>
+            <Typography variant="body2">{t('coupon_analytics.redeemed_coupons')}</Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} md={3}>
@@ -91,9 +87,7 @@ const CouponAnalytics = () => {
             <Typography variant="h4" color="primary">
               {analytics?.expired_coupons || 0}
             </Typography>
-            <Typography variant="body2">
-              {t('coupon_analytics.expired_coupons')}
-            </Typography>
+            <Typography variant="body2">{t('coupon_analytics.expired_coupons')}</Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} md={3}>
@@ -101,9 +95,7 @@ const CouponAnalytics = () => {
             <Typography variant="h4" color="primary">
               {analytics?.expiring_soon_coupons || 0}
             </Typography>
-            <Typography variant="body2">
-              {t('coupon_analytics.expiring_soon_coupons')}
-            </Typography>
+            <Typography variant="body2">{t('coupon_analytics.expiring_soon_coupons')}</Typography>
           </Paper>
         </Grid>
 

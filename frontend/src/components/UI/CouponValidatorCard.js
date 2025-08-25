@@ -16,14 +16,14 @@ import {
   Zoom,
   Paper,
   IconButton,
-  Tooltip
+  Tooltip,
 } from '@mui/material';
 import {
   CheckCircle as CheckCircleIcon,
   Cancel as CancelIcon,
   ContentCopy as ContentCopyIcon,
   Refresh as RefreshIcon,
-  LocalOffer as LocalOfferIcon
+  LocalOffer as LocalOfferIcon,
 } from '@mui/icons-material';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -47,7 +47,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
     try {
       setLoading(true);
       setError('');
-      
+
       // Se a função onValidate foi fornecida como prop, use-a
       if (onValidate) {
         const result = await onValidate(couponCode);
@@ -61,7 +61,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
             reward: { title: t('customer_card.simulated_discount') },
             customer: { name: t('customer_card.test_customer') },
             status: ['active', 'redeemed', 'expired'][Math.floor(Math.random() * 3)],
-            expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+            expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
           });
           setLoading(false);
         }, 1000);
@@ -89,28 +89,40 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'active': return theme.palette.success.main;
-      case 'redeemed': return theme.palette.info.main;
-      case 'expired': return theme.palette.warning.main;
-      default: return theme.palette.grey[500];
+      case 'active':
+        return theme.palette.success.main;
+      case 'redeemed':
+        return theme.palette.info.main;
+      case 'expired':
+        return theme.palette.warning.main;
+      default:
+        return theme.palette.grey[500];
     }
   };
 
   const getStatusLabel = (status) => {
     switch (status) {
-      case 'active': return t('coupon_validator_card.status_active');
-      case 'redeemed': return t('coupon_validator_card.status_redeemed');
-      case 'expired': return t('coupon_validator_card.status_expired');
-      default: return status;
+      case 'active':
+        return t('coupon_validator_card.status_active');
+      case 'redeemed':
+        return t('coupon_validator_card.status_redeemed');
+      case 'expired':
+        return t('coupon_validator_card.status_expired');
+      default:
+        return status;
     }
   };
 
   const getStatusBgColor = (status) => {
     switch (status) {
-      case 'active': return alpha(theme.palette.success.main, 0.1);
-      case 'redeemed': return alpha(theme.palette.info.main, 0.1);
-      case 'expired': return alpha(theme.palette.warning.main, 0.1);
-      default: return alpha(theme.palette.grey[500], 0.1);
+      case 'active':
+        return alpha(theme.palette.success.main, 0.1);
+      case 'redeemed':
+        return alpha(theme.palette.info.main, 0.1);
+      case 'expired':
+        return alpha(theme.palette.warning.main, 0.1);
+      default:
+        return alpha(theme.palette.grey[500], 0.1);
     }
   };
 
@@ -131,20 +143,20 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
           right: 0,
           height: '4px',
           background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-        }
+        },
       }}
     >
       <CardContent sx={{ p: 3 }}>
         <Box display="flex" alignItems="center" mb={2}>
-          <LocalOfferIcon 
-            sx={{ 
-              mr: 1.5, 
+          <LocalOfferIcon
+            sx={{
+              mr: 1.5,
               color: theme.palette.primary.main,
-              fontSize: 28
-            }} 
+              fontSize: 28,
+            }}
           />
-          <Typography 
-            variant="h5" 
+          <Typography
+            variant="h5"
             component="h2"
             sx={{
               fontWeight: 600,
@@ -159,7 +171,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
 
         <Divider sx={{ mb: 3, opacity: 0.6 }} />
 
-        <Box 
+        <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -171,16 +183,16 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
               '&:hover': {
                 '& fieldset': {
                   borderColor: theme.palette.primary.main,
-                }
+                },
               },
               '&.Mui-focused': {
                 '& fieldset': {
                   borderWidth: '1px',
                   borderColor: theme.palette.primary.main,
                   boxShadow: `0 0 0 3px ${alpha(theme.palette.primary.main, 0.2)}`,
-                }
-              }
-            }
+                },
+              },
+            },
           }}
         >
           <TextField
@@ -192,12 +204,18 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
             placeholder={t('coupon_validator_card.coupon_code_placeholder')}
             InputProps={{
               endAdornment: couponCode && (
-                <Tooltip title={copied ? t('coupon_validator_card.copied_tooltip') : t('coupon_validator_card.copy_code_tooltip')}>
+                <Tooltip
+                  title={
+                    copied
+                      ? t('coupon_validator_card.copied_tooltip')
+                      : t('coupon_validator_card.copy_code_tooltip')
+                  }
+                >
                   <IconButton onClick={handleCopyCode} size="small">
-                    <ContentCopyIcon fontSize="small" color={copied ? "primary" : "action"} />
+                    <ContentCopyIcon fontSize="small" color={copied ? 'primary' : 'action'} />
                   </IconButton>
                 </Tooltip>
-              )
+              ),
             }}
           />
           <Box sx={{ display: 'flex', ml: 1.5 }}>
@@ -205,7 +223,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
               variant="contained"
               onClick={handleValidate}
               disabled={loading}
-              sx={{ 
+              sx={{
                 borderRadius: 2,
                 px: 3,
                 py: 1.2,
@@ -216,18 +234,18 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   boxShadow: `0 6px 20px ${alpha(theme.palette.primary.main, 0.6)}`,
-                }
+                },
               }}
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : t('coupon_validator_card.validate_button')}
+              {loading ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                t('coupon_validator_card.validate_button')
+              )}
             </Button>
             {coupon && (
               <Tooltip title={t('coupon_validator_card.clear_and_validate_another')}>
-                <IconButton 
-                  onClick={handleReset} 
-                  sx={{ ml: 1 }}
-                  color="default"
-                >
+                <IconButton onClick={handleReset} sx={{ ml: 1 }} color="default">
                   <RefreshIcon />
                 </IconButton>
               </Tooltip>
@@ -237,14 +255,14 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
 
         {error && (
           <Fade in={!!error}>
-            <Alert 
-              severity="error" 
-              sx={{ 
+            <Alert
+              severity="error"
+              sx={{
                 mb: 3,
                 borderRadius: 2,
                 '& .MuiAlert-icon': {
-                  alignItems: 'center'
-                }
+                  alignItems: 'center',
+                },
               }}
               onClose={() => setError('')}
             >
@@ -255,13 +273,13 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
 
         {coupon && (
           <Zoom in={!!coupon} style={{ transitionDelay: '100ms' }}>
-            <Paper 
+            <Paper
               elevation={2}
               sx={{
                 p: 3,
                 borderRadius: 2,
-                background: coupon.is_valid 
-                  ? `linear-gradient(135deg, ${alpha(theme.palette.success.light, 0.2)} 0%, ${alpha(theme.palette.success.main, 0.05)} 100%)` 
+                background: coupon.is_valid
+                  ? `linear-gradient(135deg, ${alpha(theme.palette.success.light, 0.2)} 0%, ${alpha(theme.palette.success.main, 0.05)} 100%)`
                   : `linear-gradient(135deg, ${alpha(theme.palette.error.light, 0.2)} 0%, ${alpha(theme.palette.error.main, 0.05)} 100%)`,
                 border: `1px solid ${alpha(coupon.is_valid ? theme.palette.success.main : theme.palette.error.main, 0.2)}`,
                 position: 'relative',
@@ -275,70 +293,72 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                   left: 0,
                   background: `radial-gradient(circle at top right, ${alpha(coupon.is_valid ? theme.palette.success.main : theme.palette.error.main, 0.1)} 0%, transparent 70%)`,
                   zIndex: 0,
-                }
+                },
               }}
             >
-              <Box 
-                display="flex" 
-                alignItems="center" 
+              <Box
+                display="flex"
+                alignItems="center"
                 mb={2}
                 sx={{ position: 'relative', zIndex: 1 }}
               >
                 {coupon.is_valid ? (
-                  <CheckCircleIcon 
-                    sx={{ 
-                      mr: 1.5, 
+                  <CheckCircleIcon
+                    sx={{
+                      mr: 1.5,
                       color: theme.palette.success.main,
-                      fontSize: 28
-                    }} 
+                      fontSize: 28,
+                    }}
                   />
                 ) : (
-                  <CancelIcon 
-                    sx={{ 
-                      mr: 1.5, 
+                  <CancelIcon
+                    sx={{
+                      mr: 1.5,
                       color: theme.palette.error.main,
-                      fontSize: 28
-                    }} 
+                      fontSize: 28,
+                    }}
                   />
                 )}
-                <Typography 
+                <Typography
                   variant="h6"
                   sx={{
                     fontWeight: 600,
-                    color: coupon.is_valid ? theme.palette.success.main : theme.palette.error.main
+                    color: coupon.is_valid ? theme.palette.success.main : theme.palette.error.main,
                   }}
                 >
-                  {coupon.is_valid ? t('coupon_validator_card.coupon_valid') : t('coupon_validator_card.coupon_invalid')}
+                  {coupon.is_valid
+                    ? t('coupon_validator_card.coupon_valid')
+                    : t('coupon_validator_card.coupon_invalid')}
                 </Typography>
               </Box>
 
-              <Box 
-                sx={{ 
-                  display: 'grid', 
+              <Box
+                sx={{
+                  display: 'grid',
                   gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' },
                   gap: 2,
                   position: 'relative',
-                  zIndex: 1
+                  zIndex: 1,
                 }}
               >
                 <Box>
-                  <Typography 
-                    variant="body2" 
+                  <Typography
+                    variant="body2"
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
                     {t('coupon_validator_card.code_label')}
                   </Typography>
-                  <Typography 
+                  <Typography
                     variant="body1"
-                    sx={{ 
+                    sx={{
                       fontWeight: 600,
                       fontFamily: 'monospace',
                       letterSpacing: '0.5px',
                       bgcolor: alpha(theme.palette.background.paper, 0.7),
                       p: 1,
                       borderRadius: 1,
-                      border: `1px solid ${alpha(theme.palette.divider, 0.1)}`
+                      border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
                     }}
                   >
                     {coupon.code}
@@ -346,8 +366,8 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                 </Box>
 
                 <Box>
-                  <Typography 
-                    variant="body2" 
+                  <Typography
+                    variant="body2"
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
@@ -359,8 +379,8 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                 </Box>
 
                 <Box>
-                  <Typography 
-                    variant="body2" 
+                  <Typography
+                    variant="body2"
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
@@ -372,8 +392,8 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                 </Box>
 
                 <Box>
-                  <Typography 
-                    variant="body2" 
+                  <Typography
+                    variant="body2"
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
@@ -381,7 +401,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                   </Typography>
                   <Chip
                     label={getStatusLabel(coupon.status)}
-                    sx={{ 
+                    sx={{
                       fontWeight: 600,
                       color: getStatusColor(coupon.status),
                       bgcolor: getStatusBgColor(coupon.status),
@@ -392,16 +412,16 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                 </Box>
 
                 <Box sx={{ gridColumn: { xs: '1', sm: '1 / span 2' } }}>
-                  <Typography 
-                    variant="body2" 
+                  <Typography
+                    variant="body2"
                     color="text.secondary"
                     sx={{ mb: 0.5, fontWeight: 500 }}
                   >
                     {t('coupon_validator_card.expires_in_label')}
                   </Typography>
                   <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                    {coupon.expires_at 
-                      ? format(new Date(coupon.expires_at), 'dd/MM/yyyy HH:mm', { locale: ptBR }) 
+                    {coupon.expires_at
+                      ? format(new Date(coupon.expires_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })
                       : t('coupon_validator_card.does_not_expire')}
                   </Typography>
                 </Box>
@@ -411,7 +431,7 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                       variant="contained"
                       onClick={() => onRedeem(coupon.id)}
                       disabled={loading}
-                      sx={{ 
+                      sx={{
                         borderRadius: 2,
                         px: 3,
                         py: 1.2,
@@ -422,10 +442,14 @@ const CouponValidatorCard = ({ onValidate, onReset, onRedeem }) => {
                         '&:hover': {
                           transform: 'translateY(-2px)',
                           boxShadow: `0 6px 20px ${alpha(theme.palette.primary.main, 0.6)}`,
-                        }
+                        },
                       }}
                     >
-                      {loading ? <CircularProgress size={24} color="inherit" /> : t('coupon_validator_card.use_coupon_button')}
+                      {loading ? (
+                        <CircularProgress size={24} color="inherit" />
+                      ) : (
+                        t('coupon_validator_card.use_coupon_button')
+                      )}
                     </Button>
                   </Box>
                 )}

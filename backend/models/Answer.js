@@ -10,8 +10,8 @@ module.exports = (sequelize) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Answer.belongsTo(models.SurveyResponse, { foreignKey: 'response_id' });
-      Answer.belongsTo(models.Question, { foreignKey: 'question_id', as: 'question' });
+      Answer.belongsTo(models.SurveyResponse, { foreignKey: 'responseId' });
+      Answer.belongsTo(models.Question, { foreignKey: 'questionId', as: 'question' });
     }
   }
 
@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    response_id: {
+    responseId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    question_id: {
+    questionId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    answer_value: {
+    answerValue: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -46,7 +46,6 @@ module.exports = (sequelize) => {
     modelName: 'Answer',
     tableName: 'answers',
     timestamps: false,
-    underscored: true,
   });
 
   return Answer;

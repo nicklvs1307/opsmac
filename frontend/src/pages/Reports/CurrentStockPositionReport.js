@@ -1,9 +1,21 @@
 import React from 'react';
-import { Box, Typography, CircularProgress, Alert, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 
 const fetchCurrentStockPosition = async ({ queryKey }) => {
@@ -17,16 +29,20 @@ const CurrentStockPositionReport = () => {
   const { user } = useAuth();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const { data: stockPositions, isLoading, isError } = useQuery(
-    ['currentStockPosition', restaurantId],
-    fetchCurrentStockPosition,
-    {
-      enabled: !!restaurantId,
-      onError: (error) => {
-        toast.error(t('reports.error_loading_stock_position', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: stockPositions,
+    isLoading,
+    isError,
+  } = useQuery(['currentStockPosition', restaurantId], fetchCurrentStockPosition, {
+    enabled: !!restaurantId,
+    onError: (error) => {
+      toast.error(
+        t('reports.error_loading_stock_position', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
+  });
 
   if (isLoading) {
     return (
@@ -54,7 +70,9 @@ const CurrentStockPositionReport = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('reports.current_stock_position_title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('reports.current_stock_position_title')}
+      </Typography>
 
       {stockPositions && stockPositions.length > 0 ? (
         <TableContainer component={Paper} elevation={2}>

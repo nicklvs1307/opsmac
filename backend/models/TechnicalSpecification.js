@@ -41,7 +41,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'TechnicalSpecification',
     tableName: 'technical_specifications',
-    underscored: true,
     timestamps: true, // Let Sequelize handle timestamps
   });
 

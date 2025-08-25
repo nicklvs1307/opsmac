@@ -1,6 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Button, TextField, List, ListItem, ListItemText, IconButton, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, Select, MenuItem, CircularProgress, Alert, Divider } from '@mui/material';
-import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, RemoveCircleOutline as RemoveIcon } from '@mui/icons-material';
+import {
+  Box,
+  Typography,
+  Button,
+  TextField,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Paper,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  CircularProgress,
+  Alert,
+  Divider,
+} from '@mui/material';
+import {
+  Add as AddIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  RemoveCircleOutline as RemoveIcon,
+} from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
@@ -29,7 +56,9 @@ const createTechnicalSpecification = async (data) => {
 };
 
 const updateTechnicalSpecification = async ({ productId, recipe_ingredients }) => {
-  const { data } = await axiosInstance.put(`/api/technical-specifications/${productId}`, { recipe_ingredients });
+  const { data } = await axiosInstance.put(`/api/technical-specifications/${productId}`, {
+    recipe_ingredients,
+  });
   return data;
 };
 
@@ -49,9 +78,22 @@ const TechnicalSpecificationManagement = () => {
   const [tsToDeleteProductId, setTsToDeleteProductId] = useState(null);
 
   // Fetch data
-  const { data: products, isLoading: isLoadingProducts, isError: isErrorProducts } = useQuery('products', fetchProducts);
-  const { data: ingredients, isLoading: isLoadingIngredients, isError: isErrorIngredients } = useQuery('ingredients', fetchIngredients);
-  const { data: technicalSpecification, isLoading: isLoadingTS, isError: isErrorTS, refetch: refetchTS } = useQuery(
+  const {
+    data: products,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
+  } = useQuery('products', fetchProducts);
+  const {
+    data: ingredients,
+    isLoading: isLoadingIngredients,
+    isError: isErrorIngredients,
+  } = useQuery('ingredients', fetchIngredients);
+  const {
+    data: technicalSpecification,
+    isLoading: isLoadingTS,
+    isError: isErrorTS,
+    refetch: refetchTS,
+  } = useQuery(
     ['technicalSpecification', selectedProductId],
     () => fetchTechnicalSpecification(selectedProductId),
     { enabled: !!selectedProductId }
@@ -105,15 +147,15 @@ const TechnicalSpecificationManagement = () => {
   // Handlers
   const handleAddIngredient = () => {
     if (selectedIngredientId && ingredientQuantity > 0) {
-      const ingredientToAdd = ingredients.find(ing => ing.id === selectedIngredientId);
+      const ingredientToAdd = ingredients.find((ing) => ing.id === selectedIngredientId);
       if (ingredientToAdd) {
-        setCurrentRecipeIngredients(prev => [
+        setCurrentRecipeIngredients((prev) => [
           ...prev,
           {
             ingredient_id: selectedIngredientId,
             quantity: parseFloat(ingredientQuantity),
-            ingredient: { ...ingredientToAdd } // Include ingredient details for display
-          }
+            ingredient: { ...ingredientToAdd }, // Include ingredient details for display
+          },
         ]);
         setSelectedIngredientId('');
         setIngredientQuantity('');
@@ -124,11 +166,13 @@ const TechnicalSpecificationManagement = () => {
   };
 
   const handleRemoveIngredient = (ingredientId) => {
-    setCurrentRecipeIngredients(prev => prev.filter(item => item.ingredient_id !== ingredientId));
+    setCurrentRecipeIngredients((prev) =>
+      prev.filter((item) => item.ingredient_id !== ingredientId)
+    );
   };
 
   const handleSaveTechnicalSpecification = () => {
-    const recipe_ingredients = currentRecipeIngredients.map(ri => ({
+    const recipe_ingredients = currentRecipeIngredients.map((ri) => ({
       ingredient_id: ri.ingredient_id,
       quantity: ri.quantity,
     }));
@@ -169,10 +213,14 @@ const TechnicalSpecificationManagement = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('ts_management.title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('ts_management.title')}
+      </Typography>
 
       <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
-        <Typography variant="h6" gutterBottom>{t('ts_management.select_product')}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {t('ts_management.select_product')}
+        </Typography>
         <FormControl fullWidth variant="outlined">
           <InputLabel>{t('ts_management.product')}</InputLabel>
           <Select
@@ -181,7 +229,7 @@ const TechnicalSpecificationManagement = () => {
             label={t('ts_management.product')}
           >
             <MenuItem value="">{t('ts_management.select_product_placeholder')}</MenuItem>
-            {products?.map(product => (
+            {products?.map((product) => (
               <MenuItem key={product.id} value={product.id}>
                 {product.name}
               </MenuItem>
@@ -192,8 +240,12 @@ const TechnicalSpecificationManagement = () => {
 
       {selectedProductId && (
         <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
-          <Typography variant="h6" gutterBottom>{t('ts_management.manage_ts', { productName: products?.find(p => p.id === selectedProductId)?.name || '' })}</Typography>
-          
+          <Typography variant="h6" gutterBottom>
+            {t('ts_management.manage_ts', {
+              productName: products?.find((p) => p.id === selectedProductId)?.name || '',
+            })}
+          </Typography>
+
           {isLoadingTS ? (
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100px">
               <CircularProgress />
@@ -202,17 +254,28 @@ const TechnicalSpecificationManagement = () => {
             <Alert severity="error">{t('ts_management.error_loading_ts')}</Alert>
           ) : (
             <>
-              <Typography variant="subtitle1" gutterBottom>{t('ts_management.current_ingredients')}</Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                {t('ts_management.current_ingredients')}
+              </Typography>
               {currentRecipeIngredients.length === 0 ? (
-                <Typography color="text.secondary">{t('ts_management.no_ingredients_added')}</Typography>
+                <Typography color="text.secondary">
+                  {t('ts_management.no_ingredients_added')}
+                </Typography>
               ) : (
                 <List>
                   {currentRecipeIngredients.map((item, index) => (
-                    <ListItem key={item.ingredient_id || index} secondaryAction={
-                      <IconButton edge="end" aria-label="delete" onClick={() => handleRemoveIngredient(item.ingredient_id)}>
-                        <RemoveIcon />
-                      </IconButton>
-                    }>
+                    <ListItem
+                      key={item.ingredient_id || index}
+                      secondaryAction={
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => handleRemoveIngredient(item.ingredient_id)}
+                        >
+                          <RemoveIcon />
+                        </IconButton>
+                      }
+                    >
                       <ListItemText
                         primary={`${item.ingredient?.name || 'N/A'} - ${item.quantity} ${item.ingredient?.unit_of_measure || ''}`}
                         secondary={`Custo: R$ ${((item.ingredient?.cost_per_unit || 0) * item.quantity).toFixed(4)}`}
@@ -224,7 +287,9 @@ const TechnicalSpecificationManagement = () => {
 
               <Divider sx={{ my: 2 }} />
 
-              <Typography variant="subtitle1" gutterBottom>{t('ts_management.add_ingredient')}</Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                {t('ts_management.add_ingredient')}
+              </Typography>
               <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
                 <FormControl fullWidth variant="outlined">
                   <InputLabel>{t('ts_management.ingredient')}</InputLabel>
@@ -234,7 +299,7 @@ const TechnicalSpecificationManagement = () => {
                     label={t('ts_management.ingredient')}
                   >
                     <MenuItem value="">{t('ts_management.select_ingredient_placeholder')}</MenuItem>
-                    {ingredients?.map(ingredient => (
+                    {ingredients?.map((ingredient) => (
                       <MenuItem key={ingredient.id} value={ingredient.id}>
                         {ingredient.name} ({ingredient.unit_of_measure})
                       </MenuItem>
@@ -248,7 +313,7 @@ const TechnicalSpecificationManagement = () => {
                   onChange={(e) => setIngredientQuantity(e.target.value)}
                   variant="outlined"
                   sx={{ width: 150 }}
-                  inputProps={{ step: "0.01" }}
+                  inputProps={{ step: '0.01' }}
                 />
                 <Button variant="contained" startIcon={<AddIcon />} onClick={handleAddIngredient}>
                   {t('ts_management.add_button')}
@@ -259,10 +324,16 @@ const TechnicalSpecificationManagement = () => {
                 variant="contained"
                 color="primary"
                 onClick={handleSaveTechnicalSpecification}
-                disabled={currentRecipeIngredients.length === 0 || createTSMutation.isLoading || updateTSMutation.isLoading}
+                disabled={
+                  currentRecipeIngredients.length === 0 ||
+                  createTSMutation.isLoading ||
+                  updateTSMutation.isLoading
+                }
                 sx={{ mr: 2 }}
               >
-                {technicalSpecification ? t('ts_management.update_ts_button') : t('ts_management.create_ts_button')}
+                {technicalSpecification
+                  ? t('ts_management.update_ts_button')
+                  : t('ts_management.create_ts_button')}
               </Button>
               {technicalSpecification && (
                 <Button

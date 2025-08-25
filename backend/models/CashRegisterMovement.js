@@ -10,15 +10,15 @@ module.exports = (sequelize) => {
      */
     static associate(models) {
       CashRegisterMovement.belongsTo(models.CashRegisterSession, {
-        foreignKey: 'session_id',
+        foreignKey: 'sessionId',
         as: 'session',
       });
       CashRegisterMovement.belongsTo(models.CashRegisterCategory, {
-        foreignKey: 'category_id',
+        foreignKey: 'categoryId',
         as: 'category',
       });
       CashRegisterMovement.belongsTo(models.User, {
-        foreignKey: 'user_id',
+        foreignKey: 'userId',
         as: 'user',
       });
     }
@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    session_id: { // Link to the cash register session
+    sessionId: { // Link to the cash register session
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -46,7 +46,7 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    category_id: { // For withdrawals, optional for reinforcement
+    categoryId: { // For withdrawals, optional for reinforcement
       type: DataTypes.UUID,
       allowNull: true,
       references: {
@@ -58,7 +58,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    user_id: { // User who performed the movement
+    userId: { // User who performed the movement
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -70,7 +70,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'CashRegisterMovement',
     tableName: 'cash_register_movements',
-    underscored: true,
     timestamps: true,
   });
 

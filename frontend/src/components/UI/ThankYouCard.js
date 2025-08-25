@@ -46,7 +46,7 @@ const ThankYouCard = ({
     // Animate content appearance
     const timer1 = setTimeout(() => setShowContent(true), 300);
     const timer2 = setTimeout(() => setShowReward(true), 1500);
-    
+
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
@@ -104,14 +104,15 @@ const ThankYouCard = ({
   const ratingInfo = rating ? getRatingMessage(rating) : null;
 
   return (
-    <Paper 
+    <Paper
       elevation={0}
       sx={{
         borderRadius: 4,
         overflow: 'hidden',
-        background: theme.palette.mode === 'dark' 
-          ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.8)} 0%, ${alpha(theme.palette.background.paper, 0.9)} 100%)` 
-          : `linear-gradient(135deg, ${alpha('#f8f9fa', 0.8)} 0%, ${alpha('#ffffff', 0.9)} 100%)`,
+        background:
+          theme.palette.mode === 'dark'
+            ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.8)} 0%, ${alpha(theme.palette.background.paper, 0.9)} 100%)`
+            : `linear-gradient(135deg, ${alpha('#f8f9fa', 0.8)} 0%, ${alpha('#ffffff', 0.9)} 100%)`,
         backdropFilter: 'blur(10px)',
         border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
         boxShadow: `0 10px 40px ${alpha(theme.palette.common.black, 0.1)}`,
@@ -125,16 +126,16 @@ const ThankYouCard = ({
           height: '4px',
           background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
           zIndex: 1,
-        }
+        },
       }}
     >
       <Box py={6} px={4} textAlign="center">
         {/* Success Icon */}
         <Zoom in={showContent}>
-          <CheckCircleIcon 
-            sx={{ 
-              fontSize: 120, 
-              color: ratingInfo?.color || theme.palette.success.main, 
+          <CheckCircleIcon
+            sx={{
+              fontSize: 120,
+              color: ratingInfo?.color || theme.palette.success.main,
               mb: 3,
               filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))',
               animation: 'pulse 2s infinite',
@@ -152,17 +153,17 @@ const ThankYouCard = ({
                   opacity: 1,
                 },
               },
-            }} 
+            }}
           />
         </Zoom>
 
         {/* Main Message */}
         <Fade in={showContent} timeout={800}>
           <Box mb={4}>
-            <Typography 
-              variant="h3" 
-              gutterBottom 
-              sx={{ 
+            <Typography
+              variant="h3"
+              gutterBottom
+              sx={{
                 fontWeight: 'bold',
                 background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
                 backgroundClip: 'text',
@@ -173,11 +174,11 @@ const ThankYouCard = ({
             >
               {ratingInfo?.title || 'Obrigado!'}
             </Typography>
-            
+
             {customerName && (
-              <Typography 
-                variant="h5" 
-                gutterBottom 
+              <Typography
+                variant="h5"
+                gutterBottom
                 sx={{
                   color: theme.palette.text.secondary,
                   fontWeight: 500,
@@ -187,11 +188,11 @@ const ThankYouCard = ({
                 {customerName}
               </Typography>
             )}
-            
-            <Typography 
-              variant="h6" 
-              sx={{ 
-                maxWidth: 600, 
+
+            <Typography
+              variant="h6"
+              sx={{
+                maxWidth: 600,
                 mx: 'auto',
                 color: theme.palette.text.secondary,
                 lineHeight: 1.5,
@@ -205,16 +206,17 @@ const ThankYouCard = ({
         {/* Restaurant Info */}
         {restaurant && (
           <Fade in={showContent} timeout={1000}>
-            <Card 
-              sx={{ 
-                mb: 4, 
-                maxWidth: 500, 
+            <Card
+              sx={{
+                mb: 4,
+                maxWidth: 500,
                 mx: 'auto',
                 borderRadius: 3,
                 boxShadow: `0 8px 32px ${alpha(theme.palette.common.black, 0.08)}`,
-                background: theme.palette.mode === 'dark'
-                  ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.6)} 0%, ${alpha(theme.palette.background.paper, 0.8)} 100%)`
-                  : `linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)`,
+                background:
+                  theme.palette.mode === 'dark'
+                    ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.6)} 0%, ${alpha(theme.palette.background.paper, 0.8)} 100%)`
+                    : `linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)`,
                 border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
                 transition: 'transform 0.3s ease',
                 '&:hover': {
@@ -224,8 +226,8 @@ const ThankYouCard = ({
             >
               <CardContent sx={{ p: 3 }}>
                 <Box display="flex" alignItems="center" justifyContent="center" gap={2} mb={2}>
-                  <Avatar 
-                    sx={{ 
+                  <Avatar
+                    sx={{
                       bgcolor: theme.palette.primary.main,
                       width: 48,
                       height: 48,
@@ -234,7 +236,7 @@ const ThankYouCard = ({
                   >
                     <RestaurantIcon />
                   </Avatar>
-                  <Typography 
+                  <Typography
                     variant="h6"
                     sx={{
                       fontWeight: 600,
@@ -243,12 +245,12 @@ const ThankYouCard = ({
                     {restaurant}
                   </Typography>
                 </Box>
-                
+
                 {rating && (
-                  <Box 
-                    display="flex" 
-                    alignItems="center" 
-                    justifyContent="center" 
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
                     gap={1}
                     sx={{
                       p: 1.5,
@@ -256,13 +258,18 @@ const ThankYouCard = ({
                       bgcolor: alpha(theme.palette.background.default, 0.5),
                     }}
                   >
-                    <Typography variant="body1" sx={{ fontWeight: 500 }}>Sua avaliação:</Typography>
+                    <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                      Sua avaliação:
+                    </Typography>
                     <Box display="flex" alignItems="center" gap={0.5}>
                       {[...Array(5)].map((_, index) => (
                         <StarIcon
                           key={index}
                           sx={{
-                            color: index < rating ? ratingInfo?.color : alpha(theme.palette.text.disabled, 0.3),
+                            color:
+                              index < rating
+                                ? ratingInfo?.color
+                                : alpha(theme.palette.text.disabled, 0.3),
                             fontSize: 24,
                             transition: 'all 0.3s ease',
                             animation: index < rating ? 'star-pulse 1.5s infinite' : 'none',
@@ -282,28 +289,29 @@ const ThankYouCard = ({
                         />
                       ))}
                     </Box>
-                    <Chip 
-                      label={`${rating}/5`} 
-                      size="small" 
-                      sx={{ 
+                    <Chip
+                      label={`${rating}/5`}
+                      size="small"
+                      sx={{
                         bgcolor: ratingInfo?.color,
                         color: 'white',
                         fontWeight: 'bold',
                         ml: 1,
-                      }} 
+                      }}
                     />
                   </Box>
                 )}
-                
-                <Typography 
-                  variant="body2" 
-                  color="text.secondary" 
-                  sx={{ 
+
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
                     mt: 2,
                     fontStyle: 'italic',
                   }}
                 >
-                  Enviado em {format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm", { locale: ptBR })}
+                  Enviado em{' '}
+                  {format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm", { locale: ptBR })}
                 </Typography>
               </CardContent>
             </Card>
@@ -313,10 +321,10 @@ const ThankYouCard = ({
         {/* Reward Section */}
         {showReward && reward && (
           <Zoom in={showReward}>
-            <Card 
-              sx={{ 
-                mb: 4, 
-                maxWidth: 500, 
+            <Card
+              sx={{
+                mb: 4,
+                maxWidth: 500,
                 mx: 'auto',
                 borderRadius: 3,
                 background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
@@ -342,8 +350,8 @@ const ThankYouCard = ({
             >
               <CardContent sx={{ p: 3, position: 'relative', zIndex: 1 }}>
                 <Box display="flex" alignItems="center" justifyContent="center" gap={2} mb={2}>
-                  <GiftIcon 
-                    sx={{ 
+                  <GiftIcon
+                    sx={{
                       fontSize: 40,
                       animation: 'gift-bounce 2s infinite',
                       '@keyframes gift-bounce': {
@@ -354,27 +362,29 @@ const ThankYouCard = ({
                           transform: 'translateY(-10px)',
                         },
                       },
-                    }} 
+                    }}
                   />
-                  <Typography variant="h5" sx={{ fontWeight: 600 }}>Parabéns!</Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                    Parabéns!
+                  </Typography>
                 </Box>
-                
+
                 <Typography variant="h6" gutterBottom sx={{ fontWeight: 500 }}>
                   Você ganhou uma recompensa!
                 </Typography>
-                
+
                 <Typography variant="body1" sx={{ opacity: 0.9, mb: 2 }}>
                   {reward.description}
                 </Typography>
-                
+
                 {reward.code && (
                   <Box mt={2}>
                     <Typography variant="body2" sx={{ opacity: 0.8 }}>
                       Código do cupom:
                     </Typography>
-                    <Typography 
-                      variant="h6" 
-                      sx={{ 
+                    <Typography
+                      variant="h6"
+                      sx={{
                         fontFamily: 'monospace',
                         bgcolor: 'rgba(255,255,255,0.2)',
                         p: 1.5,
@@ -398,10 +408,10 @@ const ThankYouCard = ({
         {showNextSteps && (
           <Fade in={showContent} timeout={1200}>
             <Box>
-              <Typography 
-                variant="h6" 
-                gutterBottom 
-                sx={{ 
+              <Typography
+                variant="h6"
+                gutterBottom
+                sx={{
                   color: theme.palette.text.secondary,
                   mb: 2,
                   fontWeight: 600,
@@ -409,13 +419,13 @@ const ThankYouCard = ({
               >
                 O que acontece agora?
               </Typography>
-              
+
               <Grid container spacing={2} sx={{ maxWidth: 600, mx: 'auto', mb: 4 }}>
                 <Grid item xs={12} md={4}>
-                  <Card 
-                    variant="outlined" 
-                    sx={{ 
-                      p: 2, 
+                  <Card
+                    variant="outlined"
+                    sx={{
+                      p: 2,
                       height: '100%',
                       borderRadius: 2,
                       transition: 'all 0.3s ease',
@@ -426,10 +436,10 @@ const ThankYouCard = ({
                       },
                     }}
                   >
-                    <Typography 
-                      variant="h6" 
-                      gutterBottom 
-                      sx={{ 
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{
                         color: theme.palette.primary.main,
                         fontWeight: 600,
                       }}
@@ -441,12 +451,12 @@ const ThankYouCard = ({
                     </Typography>
                   </Card>
                 </Grid>
-                
+
                 <Grid item xs={12} md={4}>
-                  <Card 
-                    variant="outlined" 
-                    sx={{ 
-                      p: 2, 
+                  <Card
+                    variant="outlined"
+                    sx={{
+                      p: 2,
                       height: '100%',
                       borderRadius: 2,
                       transition: 'all 0.3s ease',
@@ -457,10 +467,10 @@ const ThankYouCard = ({
                       },
                     }}
                   >
-                    <Typography 
-                      variant="h6" 
-                      gutterBottom 
-                      sx={{ 
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{
                         color: theme.palette.primary.main,
                         fontWeight: 600,
                       }}
@@ -472,12 +482,12 @@ const ThankYouCard = ({
                     </Typography>
                   </Card>
                 </Grid>
-                
+
                 <Grid item xs={12} md={4}>
-                  <Card 
-                    variant="outlined" 
-                    sx={{ 
-                      p: 2, 
+                  <Card
+                    variant="outlined"
+                    sx={{
+                      p: 2,
                       height: '100%',
                       borderRadius: 2,
                       transition: 'all 0.3s ease',
@@ -488,10 +498,10 @@ const ThankYouCard = ({
                       },
                     }}
                   >
-                    <Typography 
-                      variant="h6" 
-                      gutterBottom 
-                      sx={{ 
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{
                         color: theme.palette.primary.main,
                         fontWeight: 600,
                       }}
@@ -510,13 +520,7 @@ const ThankYouCard = ({
 
         {/* Action Buttons */}
         <Fade in={showContent} timeout={1400}>
-          <Box 
-            display="flex" 
-            gap={2} 
-            justifyContent="center" 
-            flexWrap="wrap"
-            sx={{ mb: 2 }}
-          >
+          <Box display="flex" gap={2} justifyContent="center" flexWrap="wrap" sx={{ mb: 2 }}>
             <Button
               variant="outlined"
               startIcon={<ShareIcon />}
@@ -544,17 +548,13 @@ const ThankYouCard = ({
         {showFooter && (
           <Box mt={4}>
             <Divider sx={{ mb: 2, opacity: 0.6 }} />
-            <Typography 
-              variant="body2" 
-              color="text.secondary"
-              sx={{ mb: 0.5 }}
-            >
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
               Obrigado por escolher nosso restaurante!
             </Typography>
-            <Typography 
-              variant="caption" 
+            <Typography
+              variant="caption"
               color="text.secondary"
-              sx={{ 
+              sx={{
                 opacity: 0.7,
                 fontStyle: 'italic',
               }}

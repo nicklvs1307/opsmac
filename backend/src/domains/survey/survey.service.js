@@ -1,7 +1,7 @@
-const { models } = require('../../config/database');
+const { models } = require('models');
 const { Op } = require('sequelize');
 const { surveyTemplates } = require('../../utils/surveyTemplates');
-const { generateUniqueSlug } = require('../../utils/slugGenerator');
+const { generateUniqueSlug } = require('utils/slugGenerator');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 exports.listSurveys = async (restaurant_id, search) => {
@@ -242,6 +242,6 @@ exports.getSurveyAnalytics = async (restaurantId) => {
         averageNps,
         averageCsat,
         npsMetricsPerCriterion,
-        npsCriteriaScores: restaurant?.nps_criteria_scores || {}
+        npsCriteriaScores: restaurant?.npsCriteriaScores || {}
     };
 };

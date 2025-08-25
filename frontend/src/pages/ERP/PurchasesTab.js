@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
-import { Box, Typography, Button, Paper, TextField, MenuItem, Select, FormControl, InputLabel, CircularProgress, Alert } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  Paper,
+  TextField,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  CircularProgress,
+  Alert,
+} from '@mui/material';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import toast from 'react-hot-toast';
 
 // Fetch products for selection
@@ -28,17 +40,21 @@ const PurchasesTab = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
   const queryClient = useQueryClient();
 
-  const { data: products, isLoading: isLoadingProducts, isError: isErrorProducts } = useQuery(
-    ['products', restaurantId],
-    () => fetchProducts(restaurantId),
-    { enabled: !!restaurantId }
-  );
+  const {
+    data: products,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
+  } = useQuery(['products', restaurantId], () => fetchProducts(restaurantId), {
+    enabled: !!restaurantId,
+  });
 
-  const { data: suppliers, isLoading: isLoadingSuppliers, isError: isErrorSuppliers } = useQuery(
-    ['suppliers', restaurantId],
-    () => fetchSuppliers(restaurantId),
-    { enabled: !!restaurantId }
-  );
+  const {
+    data: suppliers,
+    isLoading: isLoadingSuppliers,
+    isError: isErrorSuppliers,
+  } = useQuery(['suppliers', restaurantId], () => fetchSuppliers(restaurantId), {
+    enabled: !!restaurantId,
+  });
 
   const { control, handleSubmit, reset } = useForm();
 
@@ -66,11 +82,14 @@ const PurchasesTab = () => {
   };
 
   if (isLoadingProducts || isLoadingSuppliers) return <CircularProgress />;
-  if (isErrorProducts || isErrorSuppliers) return <Alert severity="error">Erro ao carregar dados para o formulário de compras.</Alert>;
+  if (isErrorProducts || isErrorSuppliers)
+    return <Alert severity="error">Erro ao carregar dados para o formulário de compras.</Alert>;
 
   return (
     <Box p={3}>
-      <Typography variant="h4" gutterBottom>Registrar Nova Compra</Typography>
+      <Typography variant="h4" gutterBottom>
+        Registrar Nova Compra
+      </Typography>
 
       <Paper sx={{ p: 3 }}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -102,15 +121,12 @@ const PurchasesTab = () => {
             name="quantity"
             control={control}
             defaultValue=""
-            rules={{ required: 'Quantidade é obrigatória', min: { value: 1, message: 'Quantidade deve ser maior que 0' } }}
+            rules={{
+              required: 'Quantidade é obrigatória',
+              min: { value: 1, message: 'Quantidade deve ser maior que 0' },
+            }}
             render={({ field }) => (
-              <TextField
-                {...field}
-                label="Quantidade"
-                type="number"
-                fullWidth
-                margin="normal"
-              />
+              <TextField {...field} label="Quantidade" type="number" fullWidth margin="normal" />
             )}
           />
 

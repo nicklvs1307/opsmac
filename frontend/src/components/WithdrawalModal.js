@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { Modal, Box, Typography, TextField, Button, IconButton, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  Modal,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
@@ -29,15 +40,17 @@ const WithdrawalModal = ({ open, handleClose, handleSave, currentSessionId }) =>
   const [categoryId, setCategoryId] = useState('');
   const [observations, setObservations] = useState('');
 
-  const { data: categories, isLoading: isLoadingCategories, isError: isErrorCategories } = useQuery(
-    'withdrawalCategories',
-    fetchWithdrawalCategories,
-    {
-      onError: (error) => {
-        toast.error(t('pdv.error_loading_categories', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    isError: isErrorCategories,
+  } = useQuery('withdrawalCategories', fetchWithdrawalCategories, {
+    onError: (error) => {
+      toast.error(
+        t('pdv.error_loading_categories', { message: error.response?.data?.msg || error.message })
+      );
+    },
+  });
 
   const onSave = () => {
     if (!amount || parseFloat(amount) <= 0) {

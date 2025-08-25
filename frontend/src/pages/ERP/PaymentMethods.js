@@ -1,15 +1,38 @@
 import React, { useState } from 'react';
-import { Box, Typography, CircularProgress, Alert, Button, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, FormControl, InputLabel, Select, MenuItem, Switch, FormControlLabel } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Button,
+  TextField,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Switch,
+  FormControlLabel,
+} from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
 const fetchPaymentMethods = async ({ queryKey }) => {
   const [, restaurantId] = queryKey;
-  const { data } = await axiosInstance.get(`/api/financial/payment-methods?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(
+    `/api/financial/payment-methods?restaurant_id=${restaurantId}`
+  );
   return data;
 };
 
@@ -39,16 +62,20 @@ const PaymentMethods = () => {
   const [newMethodIsActive, setNewMethodIsActive] = useState(true);
   const [editingMethod, setEditingMethod] = useState(null);
 
-  const { data: paymentMethods, isLoading, isError } = useQuery(
-    ['paymentMethods', restaurantId],
-    fetchPaymentMethods,
-    {
-      enabled: !!restaurantId,
-      onError: (error) => {
-        toast.error(t('payment_methods.error_loading_methods', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: paymentMethods,
+    isLoading,
+    isError,
+  } = useQuery(['paymentMethods', restaurantId], fetchPaymentMethods, {
+    enabled: !!restaurantId,
+    onError: (error) => {
+      toast.error(
+        t('payment_methods.error_loading_methods', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
+  });
 
   const createMutation = useMutation(createPaymentMethod, {
     onSuccess: () => {
@@ -59,7 +86,11 @@ const PaymentMethods = () => {
       setNewMethodIsActive(true);
     },
     onError: (error) => {
-      toast.error(t('payment_methods.error_adding_method', { message: error.response?.data?.msg || error.message }));
+      toast.error(
+        t('payment_methods.error_adding_method', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
     },
   });
 
@@ -70,7 +101,11 @@ const PaymentMethods = () => {
       setEditingMethod(null);
     },
     onError: (error) => {
-      toast.error(t('payment_methods.error_updating_method', { message: error.response?.data?.msg || error.message }));
+      toast.error(
+        t('payment_methods.error_updating_method', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
     },
   });
 
@@ -80,7 +115,11 @@ const PaymentMethods = () => {
       queryClient.invalidateQueries(['paymentMethods', restaurantId]);
     },
     onError: (error) => {
-      toast.error(t('payment_methods.error_deleting_method', { message: error.response?.data?.msg || error.message }));
+      toast.error(
+        t('payment_methods.error_deleting_method', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
     },
   });
 
@@ -89,7 +128,12 @@ const PaymentMethods = () => {
       toast.error(t('payment_methods.name_type_required'));
       return;
     }
-    createMutation.mutate({ name: newMethodName, type: newMethodType, is_active: newMethodIsActive, restaurant_id: restaurantId });
+    createMutation.mutate({
+      name: newMethodName,
+      type: newMethodType,
+      is_active: newMethodIsActive,
+      restaurant_id: restaurantId,
+    });
   };
 
   const handleEditClick = (method) => {
@@ -136,10 +180,14 @@ const PaymentMethods = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('payment_methods.title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('payment_methods.title')}
+      </Typography>
 
       <Paper elevation={2} sx={{ p: 2, mb: 3 }}>
-        <Typography variant="h6" gutterBottom>{t('payment_methods.add_new_method')}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {t('payment_methods.add_new_method')}
+        </Typography>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-end' }}>
           <TextField
             label={t('payment_methods.method_name')}
@@ -162,10 +210,20 @@ const PaymentMethods = () => {
             </Select>
           </FormControl>
           <FormControlLabel
-            control={<Switch checked={newMethodIsActive} onChange={(e) => setNewMethodIsActive(e.target.checked)} />} 
+            control={
+              <Switch
+                checked={newMethodIsActive}
+                onChange={(e) => setNewMethodIsActive(e.target.checked)}
+              />
+            }
             label={t('payment_methods.is_active')}
           />
-          <Button variant="contained" startIcon={<AddIcon />} onClick={handleCreateMethod} disabled={createMutation.isLoading}>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={handleCreateMethod}
+            disabled={createMutation.isLoading}
+          >
             {t('payment_methods.add')}
           </Button>
         </Box>
@@ -200,12 +258,16 @@ const PaymentMethods = () => {
                     <FormControl fullWidth size="small">
                       <Select
                         value={editingMethod.type}
-                        onChange={(e) => setEditingMethod({ ...editingMethod, type: e.target.value })}
+                        onChange={(e) =>
+                          setEditingMethod({ ...editingMethod, type: e.target.value })
+                        }
                       >
                         <MenuItem value="cash">{t('payment_methods.type_cash')}</MenuItem>
                         <MenuItem value="card">{t('payment_methods.type_card')}</MenuItem>
                         <MenuItem value="pix">{t('payment_methods.type_pix')}</MenuItem>
-                        <MenuItem value="meal_voucher">{t('payment_methods.type_meal_voucher')}</MenuItem>
+                        <MenuItem value="meal_voucher">
+                          {t('payment_methods.type_meal_voucher')}
+                        </MenuItem>
                         <MenuItem value="other">{t('payment_methods.type_other')}</MenuItem>
                       </Select>
                     </FormControl>
@@ -217,10 +279,14 @@ const PaymentMethods = () => {
                   {editingMethod?.id === method.id ? (
                     <Switch
                       checked={editingMethod.is_active}
-                      onChange={(e) => setEditingMethod({ ...editingMethod, is_active: e.target.checked })}
+                      onChange={(e) =>
+                        setEditingMethod({ ...editingMethod, is_active: e.target.checked })
+                      }
                     />
+                  ) : method.is_active ? (
+                    t('payment_methods.yes')
                   ) : (
-                    method.is_active ? t('payment_methods.yes') : t('payment_methods.no')
+                    t('payment_methods.no')
                   )}
                 </TableCell>
                 <TableCell align="right">
@@ -233,7 +299,10 @@ const PaymentMethods = () => {
                       <EditIcon />
                     </IconButton>
                   )}
-                  <IconButton onClick={() => handleDeleteClick(method.id)} disabled={deleteMutation.isLoading}>
+                  <IconButton
+                    onClick={() => handleDeleteClick(method.id)}
+                    disabled={deleteMutation.isLoading}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>

@@ -16,7 +16,7 @@ import {
   CardContent,
   FormControlLabel,
 } from '@mui/material';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
@@ -136,7 +136,9 @@ const RelationshipDashboard = () => {
       toast.success(t('relationship.automatic_campaigns_saved_successfully'));
     } catch (err) {
       console.error('Erro ao salvar campanhas automáticas:', err);
-      toast.error(err.response?.data?.message || t('relationship.error_saving_automatic_campaigns'));
+      toast.error(
+        err.response?.data?.message || t('relationship.error_saving_automatic_campaigns')
+      );
     } finally {
       setLoading(false);
     }
@@ -149,13 +151,17 @@ const RelationshipDashboard = () => {
         <CardContent>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom>{t('relationship.select_customer')}</Typography>
+              <Typography variant="h6" gutterBottom>
+                {t('relationship.select_customer')}
+              </Typography>
               {loading ? (
                 <CircularProgress />
               ) : (
                 <List component={Paper} sx={{ maxHeight: 400, overflow: 'auto' }}>
                   {customers.length === 0 ? (
-                    <ListItem><ListItemText primary={t('relationship.no_customers_found')} /></ListItem>
+                    <ListItem>
+                      <ListItemText primary={t('relationship.no_customers_found')} />
+                    </ListItem>
                   ) : (
                     customers.map((customer) => (
                       <ListItem
@@ -175,7 +181,9 @@ const RelationshipDashboard = () => {
               )}
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom>{t('relationship.send_message')}</Typography>
+              <Typography variant="h6" gutterBottom>
+                {t('relationship.send_message')}
+              </Typography>
               <Controller
                 name="recipient_phone_number"
                 control={manualMessageControl}

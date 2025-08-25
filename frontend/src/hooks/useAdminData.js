@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-import { fetchUsers as fetchUsersService, fetchRestaurants as fetchRestaurantsService } from '../api/adminService';
+import {
+  fetchUsers as fetchUsersService,
+  fetchRestaurants as fetchRestaurantsService,
+} from '../api/adminService';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 

@@ -1,5 +1,15 @@
 import React from 'react';
-import { Modal, Box, Typography, Button, IconButton, Divider, List, ListItem, ListItemText } from '@mui/material';
+import {
+  Modal,
+  Box,
+  Typography,
+  Button,
+  IconButton,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+} from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
@@ -27,23 +37,25 @@ const fetchCashRegisterMovements = async ({ queryKey }) => {
 const PartialSummaryModal = ({ open, handleClose, currentSession, cashOrders }) => {
   const { t } = useTranslation();
 
-  const { data: movements, isLoading: isLoadingMovements, isError: isErrorMovements } = useQuery(
-    ['cashRegisterMovements', currentSession?.id],
-    fetchCashRegisterMovements,
-    {
-      enabled: !!currentSession?.id,
-      onError: (error) => {
-        toast.error(t('pdv.error_loading_movements', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: movements,
+    isLoading: isLoadingMovements,
+    isError: isErrorMovements,
+  } = useQuery(['cashRegisterMovements', currentSession?.id], fetchCashRegisterMovements, {
+    enabled: !!currentSession?.id,
+    onError: (error) => {
+      toast.error(
+        t('pdv.error_loading_movements', { message: error.response?.data?.msg || error.message })
+      );
+    },
+  });
 
   const calculateCurrentCash = () => {
     if (!currentSession) return 0;
 
     let totalCash = Number(currentSession.opening_cash);
 
-    movements?.forEach(movement => {
+    movements?.forEach((movement) => {
       if (movement.type === 'reinforcement') {
         totalCash += Number(movement.amount);
       } else if (movement.type === 'withdrawal') {
@@ -51,7 +63,8 @@ const PartialSummaryModal = ({ open, handleClose, currentSession, cashOrders }) 
       }
     });
 
-    cashOrders?.forEach(order => { // Add cash orders
+    cashOrders?.forEach((order) => {
+      // Add cash orders
       totalCash += Number(order.total_amount);
     });
 
@@ -94,10 +107,13 @@ const PartialSummaryModal = ({ open, handleClose, currentSession, cashOrders }) 
               {t('pdv.opening_time')}: {new Date(currentSession.opening_time).toLocaleString()}
             </Typography>
             <Typography variant="body1">
-              {t('pdv.opening_cash')}: R$ {Number(currentSession.opening_cash).toFixed(2).replace('.', ',')}
+              {t('pdv.opening_cash')}: R${' '}
+              {Number(currentSession.opening_cash).toFixed(2).replace('.', ',')}
             </Typography>
             <Divider sx={{ my: 2 }} />
-            <Typography variant="h6" gutterBottom>{t('pdv.movements')}</Typography>
+            <Typography variant="h6" gutterBottom>
+              {t('pdv.movements')}
+            </Typography>
             {isLoadingMovements ? (
               <Typography>{t('pdv.loading_movements')}</Typography>
             ) : isErrorMovements ? (
@@ -112,14 +128,17 @@ const PartialSummaryModal = ({ open, handleClose, currentSession, cashOrders }) 
                       primary={`${movement.type === 'reinforcement' ? '+' : '-'} R$ ${Number(movement.amount).toFixed(2).replace('.', ',')} - ${movement.category?.name || movement.type}`}
                       secondary={movement.observations ? `(${movement.observations})` : ''}
                     />
-                    <Typography variant="caption">{new Date(movement.createdAt).toLocaleTimeString()}</Typography>
+                    <Typography variant="caption">
+                      {new Date(movement.createdAt).toLocaleTimeString()}
+                    </Typography>
                   </ListItem>
                 ))}
               </List>
             )}
             <Divider sx={{ my: 2 }} />
             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-              {t('pdv.current_cash_balance')}: R$ {calculateCurrentCash().toFixed(2).replace('.', ',')}
+              {t('pdv.current_cash_balance')}: R${' '}
+              {calculateCurrentCash().toFixed(2).replace('.', ',')}
             </Typography>
           </Box>
         )}

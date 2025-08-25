@@ -1,5 +1,15 @@
 import React from 'react';
-import { Box, Typography, Paper, Grid, CircularProgress, Alert, List, ListItem, ListItemText } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Paper,
+  Grid,
+  CircularProgress,
+  Alert,
+  List,
+  ListItem,
+  ListItemText,
+} from '@mui/material';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 
@@ -24,9 +34,7 @@ const CustomerDashboard = () => {
   }
 
   if (error) {
-    return (
-      <Alert severity="error">Erro ao carregar métricas do cliente: {error.message}</Alert>
-    );
+    return <Alert severity="error">Erro ao carregar métricas do cliente: {error.message}</Alert>;
   }
 
   return (
@@ -37,31 +45,41 @@ const CustomerDashboard = () => {
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Paper elevation={1} sx={{ p: 2 }}>
-            <Typography variant="subtitle1" color="text.secondary">Total de Clientes</Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              Total de Clientes
+            </Typography>
             <Typography variant="h4">{data.totalCustomers}</Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper elevation={1} sx={{ p: 2 }}>
-            <Typography variant="subtitle1" color="text.secondary">Taxa de Engajamento</Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              Taxa de Engajamento
+            </Typography>
             <Typography variant="h4">{(data.engagementRate * 100).toFixed(0)}%</Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper elevation={1} sx={{ p: 2 }}>
-            <Typography variant="subtitle1" color="text.secondary">Taxa de Fidelidade</Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              Taxa de Fidelidade
+            </Typography>
             <Typography variant="h4">{(data.loyaltyRate * 100).toFixed(0)}%</Typography>
           </Paper>
         </Grid>
 
         <Grid item xs={12} md={6}>
           <Paper elevation={1} sx={{ p: 2 }}>
-            <Typography variant="h6" gutterBottom>Clientes com Mais Check-ins</Typography>
+            <Typography variant="h6" gutterBottom>
+              Clientes com Mais Check-ins
+            </Typography>
             {data.mostCheckins.length > 0 ? (
               <List>
                 {data.mostCheckins.map((customer, index) => (
                   <ListItem key={index}>
-                    <ListItemText primary={`${customer.customer_name || 'Desconhecido'} (${customer.checkin_count} check-ins)`} />
+                    <ListItemText
+                      primary={`${customer.customer_name || 'Desconhecido'} (${customer.checkin_count} check-ins)`}
+                    />
                   </ListItem>
                 ))}
               </List>
@@ -73,12 +91,16 @@ const CustomerDashboard = () => {
 
         <Grid item xs={12} md={6}>
           <Paper elevation={1} sx={{ p: 2 }}>
-            <Typography variant="h6" gutterBottom>Clientes com Mais Feedbacks</Typography>
+            <Typography variant="h6" gutterBottom>
+              Clientes com Mais Feedbacks
+            </Typography>
             {data.mostFeedbacks.length > 0 ? (
               <List>
                 {data.mostFeedbacks.map((customer, index) => (
                   <ListItem key={index}>
-                    <ListItemText primary={`${customer.customer_name || 'Desconhecido'} (${customer.feedback_count} feedbacks)`} />
+                    <ListItemText
+                      primary={`${customer.customer_name || 'Desconhecido'} (${customer.feedback_count} feedbacks)`}
+                    />
                   </ListItem>
                 ))}
               </List>

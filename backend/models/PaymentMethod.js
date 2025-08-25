@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('cash', 'card', 'pix', 'meal_voucher', 'other'),
       allowNull: false,
     },
-    is_active: {
+    isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
       allowNull: false,
@@ -48,7 +48,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'PaymentMethod',
     tableName: 'payment_methods',
-    underscored: true,
     timestamps: true,
   });
 

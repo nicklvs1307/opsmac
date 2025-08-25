@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
      */
     static associate(models) {
       CashRegisterCategory.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurant_id',
+        foreignKey: 'restaurantId',
         as: 'restaurant',
       });
     }
@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('withdrawal', 'reinforcement', 'general'),
       allowNull: false,
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: true,
       references: {
@@ -43,7 +43,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'CashRegisterCategory',
     tableName: 'cash_register_categories',
-    underscored: true,
     timestamps: true,
   });
 

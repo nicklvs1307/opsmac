@@ -39,9 +39,9 @@ services:
         echo 'Waiting for database to be ready...'
         sleep 15
         echo 'Running migrations...'
-        npx sequelize-cli db:migrate --config config/config.js --migrations-path migrations --models-path backend/models &&
+        npx sequelize-cli db:migrate &&
         echo 'Running seeders...'
-        npx sequelize-cli db:seed:all --config config/config.js --seeders-path seeders
+        npx sequelize-cli db:seed:all
       "
     networks:
       - towersfy_network

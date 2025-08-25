@@ -40,7 +40,7 @@ import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import toast from 'react-hot-toast';
 
 const FeedbackList = () => {
@@ -74,7 +74,7 @@ const FeedbackList = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const params = {
         page,
         limit: 10,
@@ -85,9 +85,11 @@ const FeedbackList = () => {
           params[key] = filters[key];
         }
       }
-      
-      const response = await axiosInstance.get(`/api/feedback/restaurant/${restaurantId}`, { params });
-      
+
+      const response = await axiosInstance.get(`/api/feedback/restaurant/${restaurantId}`, {
+        params,
+      });
+
       setFeedbacks(response.data.feedbacks);
       setTotalPages(response.data.totalPages);
     } catch (err) {
@@ -99,7 +101,7 @@ const FeedbackList = () => {
   };
 
   const handleFilterChange = (field, value) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
+    setFilters((prev) => ({ ...prev, [field]: value }));
     setPage(1);
   };
 
@@ -133,7 +135,7 @@ const FeedbackList = () => {
       await axiosInstance.post(`/api/feedback/${selectedFeedback.id}/reply`, {
         response: replyText,
       });
-      
+
       toast.success(t('feedback_list.reply_success'));
       setReplyDialog(false);
       setReplyText('');
@@ -146,7 +148,7 @@ const FeedbackList = () => {
   const confirmDelete = async () => {
     try {
       await axiosInstance.delete(`/api/feedback/${selectedFeedback.id}`);
-      
+
       toast.success(t('feedback_list.delete_success'));
       setDeleteDialog(false);
       fetchFeedbacks();
@@ -157,40 +159,59 @@ const FeedbackList = () => {
 
   const getSentimentColor = (sentiment) => {
     switch (sentiment) {
-      case 'positive': return 'success';
-      case 'negative': return 'error';
-      case 'neutral': return 'warning';
-      default: return 'default';
+      case 'positive':
+        return 'success';
+      case 'negative':
+        return 'error';
+      case 'neutral':
+        return 'warning';
+      default:
+        return 'default';
     }
   };
 
   const getTypeColor = (type) => {
     switch (type) {
-      case 'compliment': return 'success';
-      case 'complaint': return 'error';
-      case 'suggestion': return 'info';
-      case 'criticism': return 'warning';
-      default: return 'default';
+      case 'compliment':
+        return 'success';
+      case 'complaint':
+        return 'error';
+      case 'suggestion':
+        return 'info';
+      case 'criticism':
+        return 'warning';
+      default:
+        return 'default';
     }
   };
 
   const getTypeLabel = (type) => {
     switch (type) {
-      case 'compliment': return t('feedback_list.type_compliment');
-      case 'complaint': return t('feedback_list.type_complaint');
-      case 'suggestion': return t('feedback_list.type_suggestion');
-      case 'criticism': return t('feedback_list.type_criticism');
-      default: return type;
+      case 'compliment':
+        return t('feedback_list.type_compliment');
+      case 'complaint':
+        return t('feedback_list.type_complaint');
+      case 'suggestion':
+        return t('feedback_list.type_suggestion');
+      case 'criticism':
+        return t('feedback_list.type_criticism');
+      default:
+        return type;
     }
   };
 
   const getSourceLabel = (source) => {
     switch (source) {
-      case 'qr_code': return t('feedback_list.source_qrcode');
-      case 'whatsapp': return t('feedback_list.source_whatsapp');
-      case 'manual': return t('feedback_list.source_manual');
-      case 'website': return t('feedback_list.source_website');
-      default: return source;
+      case 'qr_code':
+        return t('feedback_list.source_qrcode');
+      case 'whatsapp':
+        return t('feedback_list.source_whatsapp');
+      case 'manual':
+        return t('feedback_list.source_manual');
+      case 'website':
+        return t('feedback_list.source_website');
+      default:
+        return source;
     }
   };
 
@@ -329,7 +350,7 @@ const FeedbackList = () => {
                           ({feedback.rating}/5)
                         </Typography>
                       </Box>
-                      
+
                       <Box display="flex" gap={1} mb={2}>
                         <Chip
                           label={getTypeLabel(feedback.feedback_type)}
@@ -354,31 +375,31 @@ const FeedbackList = () => {
                           />
                         )}
                       </Box>
-                      
+
                       <Typography variant="body1" paragraph>
                         {feedback.comment}
                       </Typography>
-                      
+
                       {feedback.response && (
                         <Box sx={{ bgcolor: 'grey.50', p: 2, borderRadius: 1, mt: 2 }}>
                           <Typography variant="body2" color="text.secondary" gutterBottom>
                             <strong>{t('feedback_list.response_label')}:</strong>
                           </Typography>
-                          <Typography variant="body2">
-                            {feedback.response}
-                          </Typography>
+                          <Typography variant="body2">{feedback.response}</Typography>
                         </Box>
                       )}
-                      
+
                       <Typography variant="caption" color="text.secondary">
-                        {feedback.created_at ? format(new Date(feedback.created_at), 'dd/MM/yyyy HH:mm', { locale: ptBR }) : ''}
+                        {feedback.created_at
+                          ? format(new Date(feedback.created_at), 'dd/MM/yyyy HH:mm', {
+                              locale: ptBR,
+                            })
+                          : ''}
                       </Typography>
                     </Box>
                   </Box>
-                  
-                  <IconButton
-                    onClick={(e) => handleMenuOpen(e, feedback)}
-                  >
+
+                  <IconButton onClick={(e) => handleMenuOpen(e, feedback)}>
                     <MoreVertIcon />
                   </IconButton>
                 </Box>
@@ -409,11 +430,7 @@ const FeedbackList = () => {
       )}
 
       {/* Action Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-      >
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
         <MenuItemComponent onClick={handleView}>
           <ViewIcon sx={{ mr: 1 }} />
           {t('feedback_list.view_details_action')}
@@ -458,9 +475,7 @@ const FeedbackList = () => {
       <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>
         <DialogTitle>{t('category_management.confirm_delete_title')}</DialogTitle>
         <DialogContent>
-          <Typography>
-            {t('feedback_list.delete_dialog_content')}
-          </Typography>
+          <Typography>{t('feedback_list.delete_dialog_content')}</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDeleteDialog(false)}>{t('common.cancel')}</Button>

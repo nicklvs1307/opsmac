@@ -3,7 +3,7 @@ import { Box, Typography, CircularProgress, Alert, Button, TextField, Paper } fr
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 
@@ -13,7 +13,9 @@ const fetchCashFlowReport = async ({ queryKey }) => {
   if (!start_date || !end_date) {
     return null; // Don't fetch if dates are not set
   }
-  const { data } = await axiosInstance.get(`/api/financial/reports/cash-flow?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`);
+  const { data } = await axiosInstance.get(
+    `/api/financial/reports/cash-flow?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`
+  );
   return data;
 };
 
@@ -27,16 +29,21 @@ const CashFlowReport = () => {
     end_date: '',
   });
 
-  const { data: reportData, isLoading, isError, refetch } = useQuery(
-    ['cashFlowReport', restaurantId, filters],
-    fetchCashFlowReport,
-    {
-      enabled: !!restaurantId && !!filters.start_date && !!filters.end_date,
-      onError: (error) => {
-        toast.error(t('reports.error_loading_cash_flow', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: reportData,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery(['cashFlowReport', restaurantId, filters], fetchCashFlowReport, {
+    enabled: !!restaurantId && !!filters.start_date && !!filters.end_date,
+    onError: (error) => {
+      toast.error(
+        t('reports.error_loading_cash_flow', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
+  });
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -60,7 +67,9 @@ const CashFlowReport = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('reports.cash_flow_title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('reports.cash_flow_title')}
+      </Typography>
 
       <Paper elevation={2} sx={{ p: 2, mb: 3 }}>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-end' }}>
@@ -86,7 +95,12 @@ const CashFlowReport = () => {
             }}
             fullWidth
           />
-          <Button variant="contained" startIcon={<RefreshIcon />} onClick={handleGenerateReport} disabled={isLoading}>
+          <Button
+            variant="contained"
+            startIcon={<RefreshIcon />}
+            onClick={handleGenerateReport}
+            disabled={isLoading}
+          >
             {t('reports.generate_report')}
           </Button>
         </Box>
@@ -100,12 +114,29 @@ const CashFlowReport = () => {
         <Alert severity="error">{t('reports.error_loading_report')}</Alert>
       ) : reportData ? (
         <Paper elevation={2} sx={{ p: 3 }}>
-          <Typography variant="h5" gutterBottom>{t('reports.summary')}</Typography>
-          <Typography variant="body1">{t('reports.total_income')}: R$ {Number(reportData.totalIncome).toFixed(2).replace('.', ',')}</Typography>
-          <Typography variant="body1">{t('reports.total_reinforcement')}: R$ {Number(reportData.totalReinforcement).toFixed(2).replace('.', ',')}</Typography>
-          <Typography variant="body1">{t('reports.total_expense')}: R$ {Number(reportData.totalExpense).toFixed(2).replace('.', ',')}</Typography>
-          <Typography variant="body1">{t('reports.total_withdrawal')}: R$ {Number(reportData.totalWithdrawal).toFixed(2).replace('.', ',')}</Typography>
-          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold' }}>{t('reports.net_cash_flow')}: R$ {Number(reportData.netCashFlow).toFixed(2).replace('.', ',')}</Typography>
+          <Typography variant="h5" gutterBottom>
+            {t('reports.summary')}
+          </Typography>
+          <Typography variant="body1">
+            {t('reports.total_income')}: R${' '}
+            {Number(reportData.totalIncome).toFixed(2).replace('.', ',')}
+          </Typography>
+          <Typography variant="body1">
+            {t('reports.total_reinforcement')}: R${' '}
+            {Number(reportData.totalReinforcement).toFixed(2).replace('.', ',')}
+          </Typography>
+          <Typography variant="body1">
+            {t('reports.total_expense')}: R${' '}
+            {Number(reportData.totalExpense).toFixed(2).replace('.', ',')}
+          </Typography>
+          <Typography variant="body1">
+            {t('reports.total_withdrawal')}: R${' '}
+            {Number(reportData.totalWithdrawal).toFixed(2).replace('.', ',')}
+          </Typography>
+          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold' }}>
+            {t('reports.net_cash_flow')}: R${' '}
+            {Number(reportData.netCashFlow).toFixed(2).replace('.', ',')}
+          </Typography>
         </Paper>
       ) : (
         <Alert severity="info">{t('reports.no_data_for_period')}</Alert>

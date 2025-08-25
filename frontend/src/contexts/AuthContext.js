@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
@@ -23,10 +23,10 @@ const AUTH_ACTIONS = {
 
 const getModulesFromUser = (user) => {
   if (user?.restaurant?.modules) {
-    return user.restaurant.modules.map(m => m.name);
+    return user.restaurant.modules.map((m) => m.name);
   }
   if (user?.restaurants?.[0]?.modules) {
-    return user.restaurants[0].modules.map(m => m.name);
+    return user.restaurants[0].modules.map((m) => m.name);
   }
   return [];
 };
@@ -84,7 +84,10 @@ const setAuthToken = (token) => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    const { config, response: { status } } = error;
+    const {
+      config,
+      response: { status },
+    } = error;
     const originalRequest = config;
 
     if (status === 401 && !originalRequest._retry) {
@@ -95,7 +98,7 @@ axiosInstance.interceptors.response.use(
         window.location.href = '/login';
       }
     }
-    
+
     return Promise.reject(error);
   }
 );
@@ -175,11 +178,7 @@ export const AuthProvider = ({ children }) => {
     updateUser,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {

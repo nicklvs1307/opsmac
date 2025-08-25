@@ -1,11 +1,32 @@
 import React, { useState } from 'react';
-import { Box, Typography, CircularProgress, Alert, Button, TextField, MenuItem, Select, FormControl, InputLabel, IconButton, Divider, List, ListItem, ListItemText } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Button,
+  TextField,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  IconButton,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+} from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { Add as AddIcon, FilterList as FilterListIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import {
+  Add as AddIcon,
+  FilterList as FilterListIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+} from '@mui/icons-material';
 import FinancialTransactionFormModal from '../../components/FinancialTransactionFormModal';
 
 const fetchFinancialTransactions = async ({ queryKey }) => {
@@ -43,27 +64,35 @@ const FinancialTransactions = () => {
   const [formModalOpen, setFormModalOpen] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState(null);
 
-  const { data: transactions, isLoading: isLoadingTransactions, isError: isErrorTransactions } = useQuery(
-    ['financialTransactions', restaurantId, filters],
-    fetchFinancialTransactions,
-    {
-      enabled: !!restaurantId,
-      onError: (error) => {
-        toast.error(t('financial.error_loading_transactions', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: transactions,
+    isLoading: isLoadingTransactions,
+    isError: isErrorTransactions,
+  } = useQuery(['financialTransactions', restaurantId, filters], fetchFinancialTransactions, {
+    enabled: !!restaurantId,
+    onError: (error) => {
+      toast.error(
+        t('financial.error_loading_transactions', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
+  });
 
-  const { data: categories, isLoading: isLoadingCategories, isError: isErrorCategories } = useQuery(
-    ['financialCategories', restaurantId, filters.type],
-    fetchFinancialCategories,
-    {
-      enabled: !!restaurantId,
-      onError: (error) => {
-        toast.error(t('financial.error_loading_categories', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    isError: isErrorCategories,
+  } = useQuery(['financialCategories', restaurantId, filters.type], fetchFinancialCategories, {
+    enabled: !!restaurantId,
+    onError: (error) => {
+      toast.error(
+        t('financial.error_loading_categories', {
+          message: error.response?.data?.msg || error.message,
+        })
+      );
+    },
+  });
 
   const createTransactionMutation = useMutation(
     async (newTransaction) => {
@@ -77,7 +106,11 @@ const FinancialTransactions = () => {
         setFormModalOpen(false);
       },
       onError: (error) => {
-        toast.error(t('financial.error_adding_transaction', { message: error.response?.data?.msg || error.message }));
+        toast.error(
+          t('financial.error_adding_transaction', {
+            message: error.response?.data?.msg || error.message,
+          })
+        );
       },
     }
   );
@@ -121,7 +154,9 @@ const FinancialTransactions = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('financial.transactions_title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('financial.transactions_title')}
+      </Typography>
 
       <Box sx={{ display: 'flex', gap: 2, mb: 3, alignItems: 'flex-end' }}>
         <FormControl sx={{ minWidth: 120 }}>
@@ -147,8 +182,10 @@ const FinancialTransactions = () => {
             onChange={handleFilterChange}
           >
             <MenuItem value="">{t('financial.all')}</MenuItem>
-            {categories?.map(category => (
-              <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
+            {categories?.map((category) => (
+              <MenuItem key={category.id} value={category.id}>
+                {category.name}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -185,17 +222,20 @@ const FinancialTransactions = () => {
         <Typography>{t('financial.no_transactions_found')}</Typography>
       ) : (
         <List>
-          {transactions?.map(transaction => (
-            <ListItem key={transaction.id} secondaryAction={
-              <Box>
-                <IconButton edge="end" aria-label="edit">
-                  <EditIcon />
-                </IconButton>
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              </Box>
-            }>
+          {transactions?.map((transaction) => (
+            <ListItem
+              key={transaction.id}
+              secondaryAction={
+                <Box>
+                  <IconButton edge="end" aria-label="edit">
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                </Box>
+              }
+            >
               <ListItemText
                 primary={`R$ ${Number(transaction.amount).toFixed(2).replace('.', ',')} - ${transaction.description || t('financial.no_description')}`}
                 secondary={
@@ -206,7 +246,9 @@ const FinancialTransactions = () => {
                       variant="body2"
                       color="text.primary"
                     >
-                      {t('financial.type')}: {t(`financial.${transaction.type}`)} - {t('financial.category')}: {transaction.category?.name || t('financial.uncategorized')}
+                      {t('financial.type')}: {t(`financial.${transaction.type}`)} -{' '}
+                      {t('financial.category')}:{' '}
+                      {transaction.category?.name || t('financial.uncategorized')}
                     </Typography>
                     {` — ${new Date(transaction.transaction_date).toLocaleDateString()}`}
                   </React.Fragment>

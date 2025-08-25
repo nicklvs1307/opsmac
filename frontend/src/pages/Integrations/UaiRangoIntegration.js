@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, TextField, Button, CircularProgress } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  TextField,
+  Button,
+  CircularProgress,
+} from '@mui/material';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
@@ -108,7 +119,11 @@ const UaiRangoIntegration = () => {
           {t('integrations.uairango.documentation_guidance')}
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+        >
           <TextField
             label={t('integrations.uairango.api_key_label')}
             variant="outlined"
@@ -126,7 +141,11 @@ const UaiRangoIntegration = () => {
             required
           />
           <Button type="submit" variant="contained" disabled={saving}>
-            {saving ? <CircularProgress size={24} color="inherit" /> : t('integrations.uairango.save_button')}
+            {saving ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              t('integrations.uairango.save_button')
+            )}
           </Button>
         </Box>
       </Paper>

@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 /**
  * CustomerCard - Um componente reutilizável para exibir informações de clientes com visual moderno
- * 
+ *
  * @param {Object} props - Propriedades do componente
  * @param {Object} props.customer - Dados do cliente
  * @param {string} props.customer.name - Nome do cliente
@@ -29,7 +29,7 @@ import { useTranslation } from 'react-i18next';
 const CustomerCard = ({ customer, index, showRanking = true }) => {
   const theme = useTheme();
   const { t } = useTranslation();
-  
+
   // Gradientes para os cards baseados no índice
   const gradients = [
     `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
@@ -43,8 +43,8 @@ const CustomerCard = ({ customer, index, showRanking = true }) => {
   const cardBackground = gradients[index % gradients.length] || gradients[0];
 
   return (
-    <Card 
-      sx={{ 
+    <Card
+      sx={{
         borderRadius: 2,
         boxShadow: `0 8px 24px ${alpha(theme.palette.common.black, 0.12)}`,
         border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
@@ -54,7 +54,7 @@ const CustomerCard = ({ customer, index, showRanking = true }) => {
         height: '100%',
         '&:hover': {
           transform: 'translateY(-5px)',
-          boxShadow: `0 12px 28px ${alpha(theme.palette.common.black, 0.18)}`
+          boxShadow: `0 12px 28px ${alpha(theme.palette.common.black, 0.18)}`,
         },
         background: cardBackground,
         color: theme.palette.common.white,
@@ -67,7 +67,7 @@ const CustomerCard = ({ customer, index, showRanking = true }) => {
           height: '100%',
           background: `radial-gradient(circle at top right, ${alpha(theme.palette.common.white, 0.1)}, transparent 70%)`,
           zIndex: 1,
-        }
+        },
       }}
     >
       {showRanking && (
@@ -110,42 +110,42 @@ const CustomerCard = ({ customer, index, showRanking = true }) => {
               '@keyframes pulse': {
                 '0%': { boxShadow: `0 0 0 0 ${alpha(theme.palette.common.white, 0.4)}` },
                 '70%': { boxShadow: `0 0 0 6px ${alpha(theme.palette.common.white, 0)}` },
-                '100%': { boxShadow: `0 0 0 0 ${alpha(theme.palette.common.white, 0)}` }
-              }
+                '100%': { boxShadow: `0 0 0 0 ${alpha(theme.palette.common.white, 0)}` },
+              },
             }}
           >
             {customer.name.charAt(0).toUpperCase()}
           </Avatar>
           <Box flex={1}>
-            <Typography 
-              variant="subtitle1" 
+            <Typography
+              variant="subtitle1"
               component="div"
               sx={{
                 fontWeight: 600,
                 fontSize: '1rem',
                 mb: 0.25,
                 lineHeight: 1.2,
-                textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+                textShadow: '0 1px 2px rgba(0,0,0,0.2)',
               }}
             >
               {customer.name}
             </Typography>
-            <Typography 
+            <Typography
               variant="body2"
               sx={{
                 color: alpha(theme.palette.common.white, 0.8),
                 fontSize: '0.8rem',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
               }}
             >
               {customer.email}
             </Typography>
           </Box>
         </Box>
-        
-        <Box 
+
+        <Box
           sx={{
             bgcolor: alpha(theme.palette.common.black, 0.1),
             borderRadius: 1.5,
@@ -155,34 +155,34 @@ const CustomerCard = ({ customer, index, showRanking = true }) => {
             '@keyframes fadeIn': {
               '0%': {
                 opacity: 0,
-                transform: 'translateY(10px)'
+                transform: 'translateY(10px)',
               },
               '100%': {
                 opacity: 1,
-                transform: 'translateY(0)'
+                transform: 'translateY(0)',
               },
-            }
+            },
           }}
         >
           <Grid container spacing={1}>
             <Grid item xs={6}>
               <Box textAlign="center">
-                <Typography 
-                  variant="h6" 
-                  sx={{ 
+                <Typography
+                  variant="h6"
+                  sx={{
                     fontWeight: 'bold',
                     mb: 0.25,
                     fontSize: '1.1rem',
-                    textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+                    textShadow: '0 1px 2px rgba(0,0,0,0.2)',
                   }}
                 >
                   {customer.feedback_count}
                 </Typography>
-                <Typography 
+                <Typography
                   variant="body2"
                   sx={{
                     color: alpha(theme.palette.common.white, 0.8),
-                    fontSize: '0.7rem'
+                    fontSize: '0.7rem',
                   }}
                 >
                   {t('customer_card.feedbacks')}
@@ -191,22 +191,22 @@ const CustomerCard = ({ customer, index, showRanking = true }) => {
             </Grid>
             <Grid item xs={6}>
               <Box textAlign="center">
-                <Typography 
-                  variant="h6" 
-                  sx={{ 
+                <Typography
+                  variant="h6"
+                  sx={{
                     fontWeight: 'bold',
                     mb: 0.25,
                     fontSize: '1.1rem',
-                    textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+                    textShadow: '0 1px 2px rgba(0,0,0,0.2)',
                   }}
                 >
                   {customer.coupons_redeemed || 0}
                 </Typography>
-                <Typography 
+                <Typography
                   variant="body2"
                   sx={{
                     color: alpha(theme.palette.common.white, 0.8),
-                    fontSize: '0.7rem'
+                    fontSize: '0.7rem',
                   }}
                 >
                   {t('customer_card.coupons')}
@@ -216,18 +216,25 @@ const CustomerCard = ({ customer, index, showRanking = true }) => {
           </Grid>
 
           {customer.average_rating && (
-            <Box 
-              sx={{ 
-                mt: 1.5, 
-                display: 'flex', 
+            <Box
+              sx={{
+                mt: 1.5,
+                display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 pt: 1,
-                borderTop: `1px solid ${alpha(theme.palette.common.white, 0.1)}`
+                borderTop: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
               }}
             >
               <Chip
-                icon={<StarIcon sx={{ color: `${theme.palette.warning.light} !important`, fontSize: '0.875rem' }} />}
+                icon={
+                  <StarIcon
+                    sx={{
+                      color: `${theme.palette.warning.light} !important`,
+                      fontSize: '0.875rem',
+                    }}
+                  />
+                }
                 label={t('customer_card.stars', { rating: customer.average_rating.toFixed(1) })}
                 size="small"
                 sx={{

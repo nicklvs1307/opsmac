@@ -16,15 +16,12 @@ import {
   Alert,
   CircularProgress,
 } from '@mui/material';
-import {
-  Save as SaveIcon,
-  ArrowBack as ArrowBackIcon,
-} from '@mui/icons-material';
+import { Save as SaveIcon, ArrowBack as ArrowBackIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 
 const NewFeedback = () => {
@@ -75,12 +72,14 @@ const NewFeedback = () => {
   const fetchInitialData = async () => {
     try {
       setLoadingData(true);
-      
+
       const [customersResponse, qrCodesResponse] = await Promise.all([
         axiosInstance.get('/api/customers'),
-        restaurantId ? axiosInstance.get(`/api/qrcode/restaurant/${restaurantId}`) : Promise.resolve({ data: { qrcodes: [] } }),
+        restaurantId
+          ? axiosInstance.get(`/api/qrcode/restaurant/${restaurantId}`)
+          : Promise.resolve({ data: { qrcodes: [] } }),
       ]);
-      
+
       setCustomers(customersResponse.data.customers || []);
       setQrCodes(qrCodesResponse.data.qrcodes || []);
     } catch (err) {
@@ -94,7 +93,7 @@ const NewFeedback = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      
+
       const cleanData = Object.fromEntries(
         Object.entries(data).filter(([key, value]) => {
           if ((key === 'customer_id' || key === 'qr_code_id') && value === null) {
@@ -103,12 +102,17 @@ const NewFeedback = () => {
           return value !== null && value !== '';
         })
       );
-      
+
       cleanData.restaurant_id = restaurantId;
 
       if (cleanData.customer_id) {
         delete cleanData.customer_data;
-      } else if (cleanData.customer_data && !cleanData.customer_data.name && !cleanData.customer_data.email && !cleanData.customer_data.phone) {
+      } else if (
+        cleanData.customer_data &&
+        !cleanData.customer_data.name &&
+        !cleanData.customer_data.email &&
+        !cleanData.customer_data.phone
+      ) {
         delete cleanData.customer_data;
       }
 
@@ -119,9 +123,9 @@ const NewFeedback = () => {
       }
 
       console.log('Dados enviados para o feedback:', cleanData);
-      
+
       await axiosInstance.post('/api/feedback', cleanData);
-      
+
       toast.success(t('new_feedback.create_success'));
       navigate('/feedback');
     } catch (err) {
@@ -134,22 +138,33 @@ const NewFeedback = () => {
 
   const getRatingLabel = (rating) => {
     switch (rating) {
-      case 1: return t('new_feedback.rating_very_dissatisfied');
-      case 2: return t('new_feedback.rating_dissatisfied');
-      case 3: return t('new_feedback.rating_neutral');
-      case 4: return t('new_feedback.rating_satisfied');
-      case 5: return t('new_feedback.rating_very_satisfied');
-      default: return '';
+      case 1:
+        return t('new_feedback.rating_very_dissatisfied');
+      case 2:
+        return t('new_feedback.rating_dissatisfied');
+      case 3:
+        return t('new_feedback.rating_neutral');
+      case 4:
+        return t('new_feedback.rating_satisfied');
+      case 5:
+        return t('new_feedback.rating_very_satisfied');
+      default:
+        return '';
     }
   };
 
   const getTypeLabel = (type) => {
     switch (type) {
-      case 'compliment': return t('feedback_list.type_compliment');
-      case 'complaint': return t('feedback_list.type_complaint');
-      case 'suggestion': return t('feedback_list.type_suggestion');
-      case 'criticism': return t('feedback_list.type_criticism');
-      default: return type;
+      case 'compliment':
+        return t('feedback_list.type_compliment');
+      case 'complaint':
+        return t('feedback_list.type_complaint');
+      case 'suggestion':
+        return t('feedback_list.type_suggestion');
+      case 'criticism':
+        return t('feedback_list.type_criticism');
+      default:
+        return type;
     }
   };
 
@@ -165,10 +180,7 @@ const NewFeedback = () => {
     <Box>
       {/* Header */}
       <Box display="flex" alignItems="center" gap={2} mb={3}>
-        <Button
-          startIcon={<ArrowBackIcon />}
-          onClick={() => navigate('/feedback')}
-        >
+        <Button startIcon={<ArrowBackIcon />} onClick={() => navigate('/feedback')}>
           {t('public_feedback.back_button')}
         </Button>
         <Typography variant="h4" component="h1">
@@ -188,7 +200,7 @@ const NewFeedback = () => {
                   <Autocomplete
                     options={customers}
                     getOptionLabel={(option) => `${option.name || option.email || option.phone}`}
-                    value={customers.find(c => c.id === value) || null}
+                    value={customers.find((c) => c.id === value) || null}
                     onChange={(_, newValue) => onChange(newValue?.id || null)}
                     renderInput={(params) => (
                       <TextField
@@ -202,7 +214,9 @@ const NewFeedback = () => {
                     renderOption={(props, option) => (
                       <li {...props}>
                         <Box>
-                          <Typography variant="body1">{option.name || option.email || option.phone}</Typography>
+                          <Typography variant="body1">
+                            {option.name || option.email || option.phone}
+                          </Typography>
                           <Typography variant="body2" color="text.secondary">
                             {option.email || option.phone}
                           </Typography>
@@ -222,8 +236,10 @@ const NewFeedback = () => {
                 render={({ field: { onChange, value } }) => (
                   <Autocomplete
                     options={qrCodes}
-                    getOptionLabel={(option) => `${option.table_name || `Mesa ${option.table_number}`} - ${option.location_description || 'N/A'}`}
-                    value={qrCodes.find(q => q.id === value) || null}
+                    getOptionLabel={(option) =>
+                      `${option.table_name || `Mesa ${option.table_number}`} - ${option.location_description || 'N/A'}`
+                    }
+                    value={qrCodes.find((q) => q.id === value) || null}
                     onChange={(_, newValue) => {
                       onChange(newValue?.id || null);
                       if (newValue?.table_number) {
@@ -240,7 +256,9 @@ const NewFeedback = () => {
                     renderOption={(props, option) => (
                       <li {...props}>
                         <Box>
-                          <Typography variant="body1">{option.table_name || `Mesa ${option.table_number}`}</Typography>
+                          <Typography variant="body1">
+                            {option.table_name || `Mesa ${option.table_number}`}
+                          </Typography>
                           <Typography variant="body2" color="text.secondary">
                             {option.location_description || 'N/A'}
                           </Typography>
@@ -397,16 +415,8 @@ const NewFeedback = () => {
                   {t('new_feedback.preview_title')}
                 </Typography>
                 <Box display="flex" gap={1} mb={1}>
-                  <Chip
-                    label={getTypeLabel(watch('feedback_type'))}
-                    color="primary"
-                    size="small"
-                  />
-                  <Chip
-                    label={watch('source')}
-                    variant="outlined"
-                    size="small"
-                  />
+                  <Chip label={getTypeLabel(watch('feedback_type'))} color="primary" size="small" />
+                  <Chip label={watch('source')} variant="outlined" size="small" />
                   {watch('table_number') && (
                     <Chip
                       label={`${t('public_feedback.table_prefix')} ${watch('table_number')}`}
@@ -417,9 +427,7 @@ const NewFeedback = () => {
                 </Box>
                 <Box display="flex" alignItems="center" gap={1} mb={1}>
                   <Rating value={watchRating} readOnly size="small" />
-                  <Typography variant="body2">
-                    {getRatingLabel(watchRating)}
-                  </Typography>
+                  <Typography variant="body2">{getRatingLabel(watchRating)}</Typography>
                 </Box>
                 <Typography variant="body2">
                   {watch('comment') || t('new_feedback.preview_comment_placeholder')}
@@ -430,11 +438,7 @@ const NewFeedback = () => {
             {/* Actions */}
             <Grid item xs={12}>
               <Box display="flex" gap={2} justifyContent="flex-end">
-                <Button
-                  variant="outlined"
-                  onClick={() => navigate('/feedback')}
-                  disabled={loading}
-                >
+                <Button variant="outlined" onClick={() => navigate('/feedback')} disabled={loading}>
                   {t('common.cancel')}
                 </Button>
                 <Button

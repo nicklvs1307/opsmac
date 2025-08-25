@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { models } = require('config/database');
+const { models } = require('config/config');
 
 const DELIVERY_MUCH_API_BASE_URL = 'https://api.deliverymuch.com.br'; // Verifique a URL base correta da API do Delivery Much
 

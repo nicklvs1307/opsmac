@@ -45,7 +45,7 @@ import { ptBR } from 'date-fns/locale';
 import QRCode from 'qrcode.react';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const QRCodeManage = () => {
   const navigate = useNavigate();
@@ -75,15 +75,17 @@ const QRCodeManage = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const params = {
         page,
         limit: 12,
         ...filters,
       };
-      
-      const response = await axiosInstance.get(`/api/qrcode/restaurant/${restaurantId}`, { params });
-      
+
+      const response = await axiosInstance.get(`/api/qrcode/restaurant/${restaurantId}`, {
+        params,
+      });
+
       setQrCodes(response.data.qrcodes);
       setTotalPages(response.data.pagination.total_pages);
     } catch (err) {
@@ -105,7 +107,7 @@ const QRCodeManage = () => {
   };
 
   const handleFilterChange = (field, value) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
+    setFilters((prev) => ({ ...prev, [field]: value }));
     setPage(1);
   };
 
@@ -139,7 +141,7 @@ const QRCodeManage = () => {
       const response = await axiosInstance.get(`/api/qrcode/${selectedQRCode.id}/image`, {
         responseType: 'blob',
       });
-      
+
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -147,7 +149,7 @@ const QRCodeManage = () => {
       document.body.appendChild(link);
       link.click();
       link.remove();
-      
+
       toast.success('QR Code baixado com sucesso!');
     } catch (err) {
       toast.error('Erro ao baixar QR Code');
@@ -179,7 +181,7 @@ const QRCodeManage = () => {
   const confirmDelete = async () => {
     try {
       await axiosInstance.delete(`/api/qrcode/${selectedQRCode.id}`);
-      
+
       toast.success('QR Code excluído com sucesso!');
       setDeleteDialog(false);
       fetchQRCodes();
@@ -190,19 +192,27 @@ const QRCodeManage = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'active': return 'success';
-      case 'inactive': return 'error';
-      case 'expired': return 'warning';
-      default: return 'default';
+      case 'active':
+        return 'success';
+      case 'inactive':
+        return 'error';
+      case 'expired':
+        return 'warning';
+      default:
+        return 'default';
     }
   };
 
   const getStatusLabel = (status) => {
     switch (status) {
-      case 'active': return 'Ativo';
-      case 'inactive': return 'Inativo';
-      case 'expired': return 'Expirado';
-      default: return status;
+      case 'active':
+        return 'Ativo';
+      case 'inactive':
+        return 'Inativo';
+      case 'expired':
+        return 'Expirado';
+      default:
+        return status;
     }
   };
 
@@ -284,28 +294,25 @@ const QRCodeManage = () => {
                   <Avatar sx={{ bgcolor: 'primary.main' }}>
                     <QrCodeIcon />
                   </Avatar>
-                  <IconButton
-                    size="small"
-                    onClick={(e) => handleMenuOpen(e, qrCode)}
-                  >
+                  <IconButton size="small" onClick={(e) => handleMenuOpen(e, qrCode)}>
                     <MoreVertIcon />
                   </IconButton>
                 </Box>
-                
+
                 <Typography variant="h6" gutterBottom noWrap>
                   {qrCode.name}
                 </Typography>
-                
+
                 <Typography variant="body2" color="text.secondary" gutterBottom>
                   {qrCode.location}
                 </Typography>
-                
+
                 {qrCode.table_number && (
                   <Typography variant="body2" gutterBottom>
                     Mesa: {qrCode.table_number}
                   </Typography>
                 )}
-                
+
                 <Box display="flex" gap={1} mb={2}>
                   <Chip
                     label={getStatusLabel(qrCode.status)}
@@ -313,18 +320,21 @@ const QRCodeManage = () => {
                     size="small"
                   />
                 </Box>
-                
+
                 <Typography variant="caption" color="text.secondary">
-                  Criado: {qrCode.created_at ? format(new Date(qrCode.created_at), 'dd/MM/yyyy', { locale: ptBR }) : ''}
+                  Criado:{' '}
+                  {qrCode.created_at
+                    ? format(new Date(qrCode.created_at), 'dd/MM/yyyy', { locale: ptBR })
+                    : ''}
                 </Typography>
-                
+
                 {qrCode.scan_count !== undefined && (
                   <Typography variant="caption" display="block" color="text.secondary">
                     Escaneamentos: {qrCode.scan_count}
                   </Typography>
                 )}
               </CardContent>
-              
+
               <CardActions>
                 <Button
                   size="small"
@@ -335,10 +345,7 @@ const QRCodeManage = () => {
                 >
                   Ver QR
                 </Button>
-                <Button
-                  size="small"
-                  onClick={() => navigate(`/qrcode/edit/${qrCode.id}`)}
-                >
+                <Button size="small" onClick={() => navigate(`/qrcode/edit/${qrCode.id}`)}>
                   Editar
                 </Button>
               </CardActions>
@@ -376,11 +383,7 @@ const QRCodeManage = () => {
       )}
 
       {/* Action Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-      >
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
         <MenuItem onClick={handleView}>
           <ViewIcon sx={{ mr: 1 }} />
           Ver QR Code
@@ -417,12 +420,7 @@ const QRCodeManage = () => {
         <DialogContent>
           {selectedQRCode && (
             <Box textAlign="center">
-              <QRCode
-                value={selectedQRCode.url}
-                size={256}
-                level="M"
-                includeMargin
-              />
+              <QRCode value={selectedQRCode.url} size={256} level="M" includeMargin />
               <Typography variant="body2" color="text.secondary" mt={2}>
                 {selectedQRCode.url}
               </Typography>
@@ -438,7 +436,12 @@ const QRCodeManage = () => {
       </Dialog>
 
       {/* Analytics Dialog */}
-      <Dialog open={analyticsDialog} onClose={() => setAnalyticsDialog(false)} maxWidth="md" fullWidth>
+      <Dialog
+        open={analyticsDialog}
+        onClose={() => setAnalyticsDialog(false)}
+        maxWidth="md"
+        fullWidth
+      >
         <DialogTitle>Analytics - {selectedQRCode?.name}</DialogTitle>
         <DialogContent>
           {analytics && (
@@ -448,9 +451,7 @@ const QRCodeManage = () => {
                   <Typography variant="h4" color="primary">
                     {analytics.total_scans}
                   </Typography>
-                  <Typography variant="body2">
-                    Total de Escaneamentos
-                  </Typography>
+                  <Typography variant="body2">Total de Escaneamentos</Typography>
                 </Paper>
               </Grid>
               <Grid item xs={6} md={3}>
@@ -458,9 +459,7 @@ const QRCodeManage = () => {
                   <Typography variant="h4" color="primary">
                     {analytics.unique_scans}
                   </Typography>
-                  <Typography variant="body2">
-                    Escaneamentos Únicos
-                  </Typography>
+                  <Typography variant="body2">Escaneamentos Únicos</Typography>
                 </Paper>
               </Grid>
               <Grid item xs={6} md={3}>
@@ -468,9 +467,7 @@ const QRCodeManage = () => {
                   <Typography variant="h4" color="primary">
                     {analytics.feedbacks_generated}
                   </Typography>
-                  <Typography variant="body2">
-                    Feedbacks Gerados
-                  </Typography>
+                  <Typography variant="body2">Feedbacks Gerados</Typography>
                 </Paper>
               </Grid>
               <Grid item xs={6} md={3}>
@@ -478,9 +475,7 @@ const QRCodeManage = () => {
                   <Typography variant="h4" color="primary">
                     {analytics.conversion_rate}%
                   </Typography>
-                  <Typography variant="body2">
-                    Taxa de Conversão
-                  </Typography>
+                  <Typography variant="body2">Taxa de Conversão</Typography>
                 </Paper>
               </Grid>
             </Grid>
@@ -496,7 +491,8 @@ const QRCodeManage = () => {
         <DialogTitle>Confirmar Exclusão</DialogTitle>
         <DialogContent>
           <Typography>
-            Tem certeza que deseja excluir o QR Code "{selectedQRCode?.name}"? Esta ação não pode ser desfeita.
+            Tem certeza que deseja excluir o QR Code "{selectedQRCode?.name}"? Esta ação não pode
+            ser desfeita.
           </Typography>
         </DialogContent>
         <DialogActions>

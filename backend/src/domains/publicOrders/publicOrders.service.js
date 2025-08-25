@@ -1,4 +1,4 @@
-const { models } = require('../../config/database');
+const { models } = require('config/config');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 exports.createPublicOrder = async (restaurant_id, delivery_type, total_amount, items, customer_details, delivery_address, payment_method, notes) => {

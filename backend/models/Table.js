@@ -58,7 +58,6 @@ module.exports = (sequelize) => {
         fields: ['restaurant_id', 'table_number'],
       },
     ],
-    underscored: true,
     timestamps: true,
   });
 

@@ -19,6 +19,11 @@ exports.createRestaurantValidation = [
   body('owner_id').isUUID().withMessage('ID do proprietário inválido'),
 ];
 
+exports.updateRestaurantValidation = [
+  body('name').optional().trim().notEmpty().withMessage('Nome do restaurante é obrigatório'),
+  body('owner_id').optional().isUUID().withMessage('ID do proprietário inválido'),
+];
+
 exports.updateRestaurantModulesValidation = [
   body('moduleIds').isArray().withMessage('moduleIds deve ser um array'),
   body('moduleIds.*').isInt().withMessage('Cada item em moduleIds deve ser um inteiro.')

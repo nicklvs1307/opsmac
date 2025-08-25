@@ -1,13 +1,17 @@
-
 import React, { useState } from 'react';
 import { Box, Typography, Paper, Tabs, Tab, Alert } from '@mui/material';
-import { BarChart as BarChartIcon, Settings as SettingsIcon, List as ListIcon, Feedback as FeedbackIcon } from '@mui/icons-material';
+import {
+  BarChart as BarChartIcon,
+  Settings as SettingsIcon,
+  List as ListIcon,
+  Feedback as FeedbackIcon,
+} from '@mui/icons-material';
 import SurveyList from './SurveyList';
 import FeedbackList from '../../Feedback/FeedbackList';
 import SatisfactionAnalytics from './SatisfactionAnalytics';
 import SatisfactionSettings from './SatisfactionSettings';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../../contexts/AuthContext'; // Importar useAuth
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const SatisfactionDashboard = () => {
   const [tabValue, setTabValue] = useState(0);

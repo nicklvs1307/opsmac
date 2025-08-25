@@ -1,15 +1,34 @@
 import React, { useState } from 'react';
-import { Box, Typography, CircularProgress, Alert, Button, TextField, Paper, List, ListItem, ListItemText, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Button,
+  TextField,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const fetchFinancialCategories = async ({ queryKey }) => {
   const [, restaurantId] = queryKey;
-  const { data } = await axiosInstance.get(`/api/financial/categories?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(
+    `/api/financial/categories?restaurant_id=${restaurantId}`
+  );
   return data;
 };
 
@@ -39,16 +58,19 @@ const FinancialCategoriesPage = () => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
 
-  const { data: categories, isLoading, isError, error } = useQuery(
-    ['financialCategories', restaurantId],
-    fetchFinancialCategories,
-    {
-      enabled: !!restaurantId,
-      onError: (err) => {
-        toast.error(t('financial.error_loading_categories', { message: err.response?.data?.msg || err.message }));
-      },
-    }
-  );
+  const {
+    data: categories,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(['financialCategories', restaurantId], fetchFinancialCategories, {
+    enabled: !!restaurantId,
+    onError: (err) => {
+      toast.error(
+        t('financial.error_loading_categories', { message: err.response?.data?.msg || err.message })
+      );
+    },
+  });
 
   const createMutation = useMutation(createFinancialCategory, {
     onSuccess: () => {
@@ -57,7 +79,9 @@ const FinancialCategoriesPage = () => {
       queryClient.invalidateQueries('financialCategories');
     },
     onError: (err) => {
-      toast.error(t('financial.error_creating_category', { message: err.response?.data?.msg || err.message }));
+      toast.error(
+        t('financial.error_creating_category', { message: err.response?.data?.msg || err.message })
+      );
     },
   });
 
@@ -68,7 +92,9 @@ const FinancialCategoriesPage = () => {
       queryClient.invalidateQueries('financialCategories');
     },
     onError: (err) => {
-      toast.error(t('financial.error_updating_category', { message: err.response?.data?.msg || err.message }));
+      toast.error(
+        t('financial.error_updating_category', { message: err.response?.data?.msg || err.message })
+      );
     },
   });
 
@@ -80,7 +106,9 @@ const FinancialCategoriesPage = () => {
       queryClient.invalidateQueries('financialCategories');
     },
     onError: (err) => {
-      toast.error(t('financial.error_deleting_category', { message: err.response?.data?.msg || err.message }));
+      toast.error(
+        t('financial.error_deleting_category', { message: err.response?.data?.msg || err.message })
+      );
     },
   });
 
@@ -127,17 +155,23 @@ const FinancialCategoriesPage = () => {
   if (isError) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
-        <Alert severity="error">{t('financial.error_loading_categories', { message: error.message })}</Alert>
+        <Alert severity="error">
+          {t('financial.error_loading_categories', { message: error.message })}
+        </Alert>
       </Box>
     );
   }
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('financial.manage_categories')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('financial.manage_categories')}
+      </Typography>
 
       <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
-        <Typography variant="h6" gutterBottom>{editingCategory ? t('financial.edit_category') : t('financial.add_new_category')}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {editingCategory ? t('financial.edit_category') : t('financial.add_new_category')}
+        </Typography>
         <Box display="flex" alignItems="center" gap={2}>
           <TextField
             label={t('financial.category_name')}
@@ -185,9 +219,13 @@ const FinancialCategoriesPage = () => {
       </Paper>
 
       <Paper elevation={2} sx={{ p: 3 }}>
-        <Typography variant="h6" gutterBottom>{t('financial.existing_categories')}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {t('financial.existing_categories')}
+        </Typography>
         {categories.length === 0 ? (
-          <Typography variant="body1" color="text.secondary">{t('financial.no_categories_found')}</Typography>
+          <Typography variant="body1" color="text.secondary">
+            {t('financial.no_categories_found')}
+          </Typography>
         ) : (
           <List>
             {categories.map((category) => (
@@ -195,10 +233,18 @@ const FinancialCategoriesPage = () => {
                 key={category.id}
                 secondaryAction={
                   <>
-                    <IconButton edge="end" aria-label="edit" onClick={() => handleEditClick(category)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="edit"
+                      onClick={() => handleEditClick(category)}
+                    >
                       <EditIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteClick(category)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleDeleteClick(category)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </>
@@ -217,15 +263,24 @@ const FinancialCategoriesPage = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{t('financial.confirm_delete_category_title')}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {t('financial.confirm_delete_category_title')}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {t('financial.confirm_delete_category_message', { categoryName: categoryToDelete?.name })}
+            {t('financial.confirm_delete_category_message', {
+              categoryName: categoryToDelete?.name,
+            })}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDeleteDialog(false)}>{t('financial.cancel')}</Button>
-          <Button onClick={handleConfirmDelete} color="error" autoFocus disabled={deleteMutation.isLoading}>
+          <Button
+            onClick={handleConfirmDelete}
+            color="error"
+            autoFocus
+            disabled={deleteMutation.isLoading}
+          >
             {t('financial.delete_category')}
           </Button>
         </DialogActions>

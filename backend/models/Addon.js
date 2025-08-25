@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
      */
     static associate(models) {
       Addon.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurant_id',
+        foreignKey: 'restaurantId',
         as: 'restaurant',
       });
     }
@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    is_active: {
+    isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
       allowNull: false,
@@ -48,7 +48,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Addon',
     tableName: 'addons',
-    underscored: true,
     timestamps: true,
   });
 

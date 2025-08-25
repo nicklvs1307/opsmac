@@ -59,6 +59,16 @@ exports.listRestaurants = async (req, res, next) => {
   }
 };
 
+exports.updateRestaurant = async (req, res, next) => {
+  try {
+    handleValidationErrors(req);
+    const restaurant = await adminService.updateRestaurant(req.params.id, req.body);
+    res.status(200).json({ message: 'Restaurante atualizado com sucesso', restaurant });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Module Management
 exports.listModules = async (req, res, next) => {
   try {

@@ -1,9 +1,31 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress, Alert, Dialog, DialogTitle, DialogContent, DialogActions, TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  CircularProgress,
+  Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+} from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import toast from 'react-hot-toast';
 
 const fetchStocks = async (restaurantId) => {
@@ -29,17 +51,21 @@ const StockMovementsTab = () => {
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [openHistoryDialog, setOpenHistoryDialog] = useState(false);
 
-  const { data: stocks, isLoading: isLoadingStocks, isError: isErrorStocks } = useQuery('stocks', () => fetchStocks(restaurantId), {
+  const {
+    data: stocks,
+    isLoading: isLoadingStocks,
+    isError: isErrorStocks,
+  } = useQuery('stocks', () => fetchStocks(restaurantId), {
     enabled: !!restaurantId,
   });
 
-  const { data: stockHistory, isLoading: isLoadingHistory, isError: isErrorHistory } = useQuery(
-    ['stockHistory', selectedProductId],
-    () => fetchStockHistory(selectedProductId),
-    {
-      enabled: !!selectedProductId && openHistoryDialog,
-    }
-  );
+  const {
+    data: stockHistory,
+    isLoading: isLoadingHistory,
+    isError: isErrorHistory,
+  } = useQuery(['stockHistory', selectedProductId], () => fetchStockHistory(selectedProductId), {
+    enabled: !!selectedProductId && openHistoryDialog,
+  });
 
   const { control, handleSubmit, reset } = useForm();
 
@@ -51,7 +77,8 @@ const StockMovementsTab = () => {
       reset();
       toast.success('Movimentação de estoque realizada com sucesso!'); // Added toast
     },
-    onError: (error) => { // Added error handling
+    onError: (error) => {
+      // Added error handling
       console.error('Erro ao realizar movimentação de estoque:', error);
       toast.error(`Erro ao realizar movimentação: ${error.response?.data?.msg || error.message}`);
     },
@@ -122,7 +149,11 @@ const StockMovementsTab = () => {
                       <Button size="small" onClick={() => handleOpenMovementDialog(product.id)}>
                         Movimentar
                       </Button>
-                      <Button size="small" onClick={() => handleOpenHistoryDialog(product.id)} sx={{ ml: 1 }}>
+                      <Button
+                        size="small"
+                        onClick={() => handleOpenHistoryDialog(product.id)}
+                        sx={{ ml: 1 }}
+                      >
                         Histórico
                       </Button>
                     </TableCell>
@@ -130,9 +161,12 @@ const StockMovementsTab = () => {
                 ))
               ) : (
                 <TableRow>
-                    <TableCell colSpan={4} align="center">
-                        <Typography>Nenhum produto encontrado. Adicione produtos na aba 'Produtos' para controlar o estoque.</Typography>
-                    </TableCell>
+                  <TableCell colSpan={4} align="center">
+                    <Typography>
+                      Nenhum produto encontrado. Adicione produtos na aba 'Produtos' para controlar
+                      o estoque.
+                    </Typography>
+                  </TableCell>
                 </TableRow>
               )}
             </TableBody>
@@ -163,15 +197,26 @@ const StockMovementsTab = () => {
               name="quantity"
               control={control}
               defaultValue=""
-              render={({ field }) => <TextField {...field} label="Quantidade" fullWidth margin="normal" type="number" />} 
+              render={({ field }) => (
+                <TextField {...field} label="Quantidade" fullWidth margin="normal" type="number" />
+              )}
             />
             <Controller
               name="description"
               control={control}
               defaultValue=""
-              render={({ field }) => <TextField {...field} label="Descrição" fullWidth margin="normal" multiline rows={2} />} 
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Descrição"
+                  fullWidth
+                  margin="normal"
+                  multiline
+                  rows={2}
+                />
+              )}
             />
-            <input type="hidden" {...control.register("product_id")} value={selectedProductId} />
+            <input type="hidden" {...control.register('product_id')} value={selectedProductId} />
           </form>
         </DialogContent>
         <DialogActions>

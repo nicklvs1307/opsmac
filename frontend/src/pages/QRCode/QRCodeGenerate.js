@@ -32,13 +32,9 @@ import { useForm, Controller } from 'react-hook-form';
 import QRCode from 'qrcode.react';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
-const steps = [
-  'Informações Básicas',
-  'Configurações',
-  'Preview e Geração',
-];
+const steps = ['Informações Básicas', 'Configurações', 'Preview e Geração'];
 
 const QRCodeGenerate = () => {
   const { user } = useAuth();
@@ -88,7 +84,8 @@ const QRCodeGenerate = () => {
       } else if (watchedValues.qr_type === 'menu') {
         const tableNumber = watchedValues.table_number || 'X';
         setPreviewUrl(`${baseUrl}/menu/table/preview-for-table-${tableNumber}`);
-      } else { // Default to feedback
+      } else {
+        // Default to feedback
         const qrCodeId = 'preview-id';
         setPreviewUrl(`${baseUrl}/feedback/new?qrCodeId=${qrCodeId}`);
       }
@@ -98,7 +95,7 @@ const QRCodeGenerate = () => {
   const handleNext = async () => {
     const fieldsToValidate = getFieldsForStep(activeStep);
     const isValid = await trigger(fieldsToValidate);
-    
+
     if (isValid) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
@@ -122,14 +119,18 @@ const QRCodeGenerate = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      
+
       // Remove empty values
       const cleanData = Object.fromEntries(
         Object.entries(data).filter(([_, value]) => value !== '' && value !== null)
       );
-      
-      const response = await axiosInstance.post('/api/qrcode', { ...cleanData, restaurant_id: restaurantId, qr_type: data.qr_type });
-      
+
+      const response = await axiosInstance.post('/api/qrcode', {
+        ...cleanData,
+        restaurant_id: restaurantId,
+        qr_type: data.qr_type,
+      });
+
       setGeneratedQRCode(response.data);
       toast.success('QR Code gerado com sucesso!');
       navigate('/qrcode');
@@ -143,12 +144,12 @@ const QRCodeGenerate = () => {
 
   const handleDownload = async () => {
     if (!generatedQRCode) return;
-    
+
     try {
       const response = await axiosInstance.get(`/api/qrcode/${generatedQRCode.id}/image`, {
         responseType: 'blob',
       });
-      
+
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -156,7 +157,7 @@ const QRCodeGenerate = () => {
       document.body.appendChild(link);
       link.click();
       link.remove();
-      
+
       toast.success('QR Code baixado com sucesso!');
     } catch (err) {
       toast.error('Erro ao baixar QR Code');
@@ -165,7 +166,7 @@ const QRCodeGenerate = () => {
 
   const handlePrint = async () => {
     if (!generatedQRCode) return;
-    
+
     try {
       await axiosInstance.post(`/api/qrcode/${generatedQRCode.id}/print`);
       toast.success('QR Code enviado para impressão!');
@@ -235,11 +236,14 @@ const QRCodeGenerate = () => {
                 name="table_number"
                 control={control}
                 rules={{
-                  required: watchedValues.qr_type === 'menu' ? 'Número da mesa é obrigatório para QR Code de cardápio.' : false,
+                  required:
+                    watchedValues.qr_type === 'menu'
+                      ? 'Número da mesa é obrigatório para QR Code de cardápio.'
+                      : false,
                   min: {
                     value: 1,
-                    message: 'Número da mesa deve ser positivo.'
-                  }
+                    message: 'Número da mesa deve ser positivo.',
+                  },
                 }}
                 render={({ field }) => (
                   <TextField
@@ -272,7 +276,7 @@ const QRCodeGenerate = () => {
             </Grid>
           </Grid>
         );
-      
+
       case 1:
         return (
           <Grid container spacing={3}>
@@ -343,7 +347,7 @@ const QRCodeGenerate = () => {
             </Grid>
           </Grid>
         );
-      
+
       case 2:
         return (
           <Grid container spacing={3}>
@@ -354,12 +358,7 @@ const QRCodeGenerate = () => {
                     Preview do QR Code
                   </Typography>
                   <Box textAlign="center" mb={2}>
-                    <QRCode
-                      value={previewUrl}
-                      size={200}
-                      level="M"
-                      includeMargin
-                    />
+                    <QRCode value={previewUrl} size={200} level="M" includeMargin />
                   </Box>
                   <Typography variant="body2" color="text.secondary" textAlign="center">
                     {previewUrl}
@@ -386,11 +385,13 @@ const QRCodeGenerate = () => {
                       </Typography>
                     )}
                     <Typography variant="body2">
-                      <strong>Status:</strong> {watchedValues.status === 'active' ? 'Ativo' : 'Inativo'}
+                      <strong>Status:</strong>{' '}
+                      {watchedValues.status === 'active' ? 'Ativo' : 'Inativo'}
                     </Typography>
                     {watchedValues.expires_at && (
                       <Typography variant="body2">
-                        <strong>Expira em:</strong> {new Date(watchedValues.expires_at).toLocaleString('pt-BR')}
+                        <strong>Expira em:</strong>{' '}
+                        {new Date(watchedValues.expires_at).toLocaleString('pt-BR')}
                       </Typography>
                     )}
                   </Box>
@@ -399,7 +400,7 @@ const QRCodeGenerate = () => {
             </Grid>
           </Grid>
         );
-      
+
       default:
         return null;
     }
@@ -410,10 +411,7 @@ const QRCodeGenerate = () => {
       <Box>
         {/* Header */}
         <Box display="flex" alignItems="center" gap={2} mb={3}>
-          <Button
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate('/qrcode')}
-          >
+          <Button startIcon={<ArrowBackIcon />} onClick={() => navigate('/qrcode')}>
             Voltar
           </Button>
           <Typography variant="h4" component="h1">
@@ -427,12 +425,7 @@ const QRCodeGenerate = () => {
               <Typography variant="h6" gutterBottom>
                 {generatedQRCode.name}
               </Typography>
-              <QRCode
-                value={generatedQRCode.url}
-                size={256}
-                level="M"
-                includeMargin
-              />
+              <QRCode value={generatedQRCode.url} size={256} level="M" includeMargin />
               <Typography variant="body2" color="text.secondary" mt={2}>
                 {generatedQRCode.url}
               </Typography>
@@ -447,7 +440,11 @@ const QRCodeGenerate = () => {
                 <Button
                   variant="outlined"
                   startIcon={<ContentCopyIcon />}
-                  onClick={() => navigator.clipboard.writeText(generatedQRCode.url).then(() => toast.success('Link copiado!'))}
+                  onClick={() =>
+                    navigator.clipboard
+                      .writeText(generatedQRCode.url)
+                      .then(() => toast.success('Link copiado!'))
+                  }
                   fullWidth
                 >
                   Copiar Link
@@ -468,11 +465,7 @@ const QRCodeGenerate = () => {
                 >
                   Imprimir QR Code
                 </Button>
-                <Button
-                  variant="outlined"
-                  onClick={() => navigate('/qrcode')}
-                  fullWidth
-                >
+                <Button variant="outlined" onClick={() => navigate('/qrcode')} fullWidth>
                   Gerenciar QR Codes
                 </Button>
                 <Button
@@ -497,10 +490,7 @@ const QRCodeGenerate = () => {
     <Box>
       {/* Header */}
       <Box display="flex" alignItems="center" gap={2} mb={3}>
-        <Button
-          startIcon={<ArrowBackIcon />}
-          onClick={() => navigate('/qrcode')}
-        >
+        <Button startIcon={<ArrowBackIcon />} onClick={() => navigate('/qrcode')}>
           Voltar
         </Button>
         <Typography variant="h4" component="h1">
@@ -514,9 +504,7 @@ const QRCodeGenerate = () => {
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
               <StepContent>
-                <Box sx={{ mb: 2 }}>
-                  {renderStepContent(index)}
-                </Box>
+                <Box sx={{ mb: 2 }}>{renderStepContent(index)}</Box>
                 <Box sx={{ mb: 2 }}>
                   <div>
                     {index === steps.length - 1 ? (
@@ -530,19 +518,11 @@ const QRCodeGenerate = () => {
                         {loading ? 'Gerando...' : 'Gerar QR Code'}
                       </Button>
                     ) : (
-                      <Button
-                        variant="contained"
-                        onClick={handleNext}
-                        sx={{ mt: 1, mr: 1 }}
-                      >
+                      <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
                         Continuar
                       </Button>
                     )}
-                    <Button
-                      disabled={index === 0}
-                      onClick={handleBack}
-                      sx={{ mt: 1, mr: 1 }}
-                    >
+                    <Button disabled={index === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
                       Voltar
                     </Button>
                   </div>

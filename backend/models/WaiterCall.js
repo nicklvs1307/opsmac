@@ -54,7 +54,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'WaiterCall',
     tableName: 'waiter_calls',
-    underscored: true,
     timestamps: true,
   });
 

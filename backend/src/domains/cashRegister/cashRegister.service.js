@@ -1,4 +1,4 @@
-const { models } = require('../../config/database');
+const { models } = require('config/config');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 exports.openSession = async (restaurantId, userId, opening_cash, opening_observations) => {
@@ -79,7 +79,7 @@ exports.getCashRegisterCategories = async (restaurantId, type) => {
   return categories;
 };
 
-exports.get movements = async (restaurantId, session_id) => {
+exports.getMovements = async (restaurantId, session_id) => {
   const session = await models.CashRegisterSession.findOne({
     where: { id: session_id, restaurant_id: restaurantId },
   });

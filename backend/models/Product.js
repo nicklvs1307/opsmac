@@ -146,7 +146,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Product',
     tableName: 'products',
-    underscored: true,
     timestamps: true,
   });
 

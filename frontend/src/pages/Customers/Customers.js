@@ -105,15 +105,15 @@ const Customers = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const params = {
         page,
         limit: 10,
         ...filters,
       };
-      
+
       const response = await axiosInstance.get('/api/customers', { params });
-      
+
       setCustomers(response.data.customers);
       setTotalPages(response.data.totalPages);
     } catch (err) {
@@ -124,10 +124,8 @@ const Customers = () => {
     }
   };
 
-  
-
   const handleFilterChange = (field, value) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
+    setFilters((prev) => ({ ...prev, [field]: value }));
     setPage(1);
   };
 
@@ -157,15 +155,13 @@ const Customers = () => {
     handleMenuClose();
   };
 
-  
-
   const onSubmit = async (data) => {
     console.log('onSubmit chamado. editDialog:', editDialog, 'data:', data);
     try {
       const cleanData = Object.fromEntries(
         Object.entries(data).filter(([_, value]) => value !== '' && value !== null)
       );
-      
+
       if (editDialog) {
         console.log('Tentando PUT para /api/customers/' + selectedCustomer.id, cleanData);
         await axiosInstance.put(`/customers/${selectedCustomer.id}`, cleanData);
@@ -174,7 +170,7 @@ const Customers = () => {
         await axiosInstance.post('/api/customers', cleanData);
         toast.success('Cliente criado com sucesso!');
       }
-      
+
       setCreateDialog(false);
       setEditDialog(false);
       fetchCustomers();
@@ -186,7 +182,7 @@ const Customers = () => {
   const confirmDelete = async () => {
     try {
       await axiosInstance.delete(`/api/customers/${selectedCustomer.id}`);
-      
+
       toast.success('Cliente excluído com sucesso!');
       setDeleteDialog(false);
       fetchCustomers();
@@ -197,21 +193,31 @@ const Customers = () => {
 
   const getSegmentColor = (segment) => {
     switch (segment) {
-      case 'vip': return 'error';
-      case 'regular': return 'primary';
-      case 'new': return 'success';
-      case 'inactive': return 'default';
-      default: return 'default';
+      case 'vip':
+        return 'error';
+      case 'regular':
+        return 'primary';
+      case 'new':
+        return 'success';
+      case 'inactive':
+        return 'default';
+      default:
+        return 'default';
     }
   };
 
   const getSegmentLabel = (segment) => {
     switch (segment) {
-      case 'vip': return 'VIP';
-      case 'regular': return 'Regular';
-      case 'new': return 'Novo';
-      case 'inactive': return 'Inativo';
-      default: return segment;
+      case 'vip':
+        return 'VIP';
+      case 'regular':
+        return 'Regular';
+      case 'new':
+        return 'Novo';
+      case 'inactive':
+        return 'Inativo';
+      default:
+        return segment;
     }
   };
 
@@ -235,11 +241,7 @@ const Customers = () => {
         <Typography variant="h4" component="h1">
           Clientes
         </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={handleCreate}
-        >
+        <Button variant="contained" startIcon={<AddIcon />} onClick={handleCreate}>
           Novo Cliente
         </Button>
       </Box>
@@ -320,7 +322,12 @@ const Customers = () => {
           </TableHead>
           <TableBody>
             {customers.map((customer) => (
-              <TableRow key={customer.id} hover onClick={() => handleRowClick(customer.id)} sx={{ cursor: 'pointer' }}>
+              <TableRow
+                key={customer.id}
+                hover
+                onClick={() => handleRowClick(customer.id)}
+                sx={{ cursor: 'pointer' }}
+              >
                 <TableCell>
                   <Box display="flex" alignItems="center" gap={2}>
                     <Avatar sx={{ bgcolor: 'primary.main' }}>
@@ -362,9 +369,7 @@ const Customers = () => {
                 <TableCell>
                   <Box display="flex" alignItems="center" gap={1}>
                     <TrendingUpIcon fontSize="small" color="action" />
-                    <Typography variant="body2">
-                      {customer.total_visits || 0}
-                    </Typography>
+                    <Typography variant="body2">{customer.total_visits || 0}</Typography>
                   </Box>
                 </TableCell>
                 <TableCell>
@@ -410,10 +415,7 @@ const Customers = () => {
                   )}
                 </TableCell>
                 <TableCell>
-                  <IconButton
-                    size="small"
-                    onClick={(e) => handleMenuOpen(e, customer)}
-                  >
+                  <IconButton size="small" onClick={(e) => handleMenuOpen(e, customer)}>
                     <MoreVertIcon />
                   </IconButton>
                 </TableCell>
@@ -429,11 +431,7 @@ const Customers = () => {
           <Typography variant="h6" color="text.secondary" gutterBottom>
             Nenhum cliente encontrado
           </Typography>
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            onClick={handleCreate}
-          >
+          <Button variant="contained" startIcon={<AddIcon />} onClick={handleCreate}>
             Cadastrar Primeiro Cliente
           </Button>
         </Box>
@@ -452,13 +450,7 @@ const Customers = () => {
       )}
 
       {/* Action Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-      >
-        
-        
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
         <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
           <DeleteIcon sx={{ mr: 1 }} />
           Excluir
@@ -479,27 +471,27 @@ const Customers = () => {
           sx: {
             borderRadius: 2,
             boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
-            overflow: 'hidden'
-          }
+            overflow: 'hidden',
+          },
         }}
         TransitionProps={{
-          timeout: 400
+          timeout: 400,
         }}
       >
-        <DialogTitle sx={{
-          background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
-          color: 'white',
-          py: 2.5,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 1.5
-        }}>
+        <DialogTitle
+          sx={{
+            background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
+            color: 'white',
+            py: 2.5,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1.5,
+          }}
+        >
           <Avatar sx={{ bgcolor: 'rgba(255,255,255,0.2)' }}>
             {editDialog ? <EditIcon /> : <PersonIcon />}
           </Avatar>
-          <Typography variant="h6">
-            {editDialog ? 'Editar Cliente' : 'Novo Cliente'}
-          </Typography>
+          <Typography variant="h6">{editDialog ? 'Editar Cliente' : 'Novo Cliente'}</Typography>
         </DialogTitle>
         <DialogContent sx={{ p: { xs: 2, md: 3 }, mt: 1 }}>
           <Grid container spacing={{ xs: 2, md: 3 }} sx={{ mt: 0 }}>
@@ -524,12 +516,12 @@ const Customers = () => {
                         borderRadius: 2,
                         transition: 'all 0.3s',
                         '&:hover': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)'
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)',
                         },
                         '&.Mui-focused': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)'
-                        }
-                      }
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)',
+                        },
+                      },
                     }}
                   />
                 )}
@@ -562,12 +554,12 @@ const Customers = () => {
                         borderRadius: 2,
                         transition: 'all 0.3s',
                         '&:hover': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)'
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)',
                         },
                         '&.Mui-focused': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)'
-                        }
-                      }
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)',
+                        },
+                      },
                     }}
                   />
                 )}
@@ -592,12 +584,12 @@ const Customers = () => {
                         borderRadius: 2,
                         transition: 'all 0.3s',
                         '&:hover': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)'
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)',
                         },
                         '&.Mui-focused': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)'
-                        }
-                      }
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)',
+                        },
+                      },
                     }}
                   />
                 )}
@@ -622,12 +614,12 @@ const Customers = () => {
                         borderRadius: 2,
                         transition: 'all 0.3s',
                         '&:hover': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)'
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)',
                         },
                         '&.Mui-focused': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)'
-                        }
-                      }
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)',
+                        },
+                      },
                     }}
                   />
                 )}
@@ -651,12 +643,12 @@ const Customers = () => {
                         borderRadius: 2,
                         transition: 'all 0.3s',
                         '&:hover': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)'
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.1)',
                         },
                         '&.Mui-focused': {
-                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)'
-                        }
-                      }
+                          boxShadow: '0 0 0 2px rgba(25, 118, 210, 0.2)',
+                        },
+                      },
                     }}
                   />
                 )}
@@ -664,7 +656,15 @@ const Customers = () => {
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions sx={{ px: 3, py: 2.5, borderTop: '1px solid', borderColor: 'divider', justifyContent: 'space-between' }}>
+        <DialogActions
+          sx={{
+            px: 3,
+            py: 2.5,
+            borderTop: '1px solid',
+            borderColor: 'divider',
+            justifyContent: 'space-between',
+          }}
+        >
           <Button
             onClick={() => {
               setCreateDialog(false);
@@ -675,16 +675,16 @@ const Customers = () => {
           >
             Cancelar
           </Button>
-          <Button 
-            onClick={handleSubmit(onSubmit)} 
+          <Button
+            onClick={handleSubmit(onSubmit)}
             variant="contained"
-            sx={{ 
-              borderRadius: 2, 
+            sx={{
+              borderRadius: 2,
               px: 3,
               boxShadow: '0 4px 10px rgba(25, 118, 210, 0.3)',
               '&:hover': {
-                boxShadow: '0 6px 15px rgba(25, 118, 210, 0.4)'
-              }
+                boxShadow: '0 6px 15px rgba(25, 118, 210, 0.4)',
+              },
             }}
           >
             {editDialog ? 'Atualizar' : 'Criar'}
@@ -692,14 +692,13 @@ const Customers = () => {
         </DialogActions>
       </Dialog>
 
-      
-
       {/* Delete Dialog */}
       <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>
         <DialogTitle>Confirmar Exclusão</DialogTitle>
         <DialogContent>
           <Typography>
-            Tem certeza que deseja excluir o cliente "{selectedCustomer?.name}"? Esta ação não pode ser desfeita e todos os dados relacionados serão perdidos.
+            Tem certeza que deseja excluir o cliente "{selectedCustomer?.name}"? Esta ação não pode
+            ser desfeita e todos os dados relacionados serão perdidos.
           </Typography>
         </DialogContent>
         <DialogActions>

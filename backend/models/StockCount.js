@@ -60,7 +60,6 @@ module.exports = (sequelize) => {
     modelName: 'StockCount',
     tableName: 'stock_counts',
     timestamps: true,
-    underscored: true,
   });
 
   return StockCount;

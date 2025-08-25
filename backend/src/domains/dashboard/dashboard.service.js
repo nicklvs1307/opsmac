@@ -1,4 +1,4 @@
-const { models, Op, fn, col, literal } = require('../../config/database');
+const { models, Op, fn, col, literal } = require('config/config');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 // Helper function to get restaurant ID from authenticated user

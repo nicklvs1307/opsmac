@@ -55,7 +55,6 @@ module.exports = (sequelize) => {
     modelName: 'ProductionRecord',
     tableName: 'production_records',
     timestamps: true,
-    underscored: true,
   });
 
   return ProductionRecord;

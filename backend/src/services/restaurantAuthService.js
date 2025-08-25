@@ -1,10 +1,10 @@
-const { models } = require('config/database');
+const models = require('models');
 
 const getRestaurantIdFromUser = async (userId) => {
   const user = await models.User.findByPk(userId, {
-    include: [{ model: models.Restaurant, as: 'restaurants' }]
+    include: [{ model: models.Restaurant, as: 'ownedRestaurants' }]
   });
-  return user?.restaurants?.[0]?.id;
+  return user?.ownedRestaurants?.[0]?.id;
 };
 
 module.exports = {

@@ -75,7 +75,7 @@ const CustomerDetail = () => {
       toast.success('Visitas do cliente resetadas com sucesso!');
       setResetConfirmOpen(false);
       // Atualizar o estado do cliente para refletir a mudança
-      setCustomer(prev => ({ ...prev, total_visits: 0 }));
+      setCustomer((prev) => ({ ...prev, total_visits: 0 }));
     } catch (err) {
       console.error('Error resetting visits:', err);
       toast.error(err.response?.data?.message || 'Erro ao resetar visitas.');
@@ -91,7 +91,7 @@ const CustomerDetail = () => {
       toast.success('Check-ins do cliente limpos com sucesso!');
       setClearCheckinsConfirmOpen(false);
       // Atualizar o estado do cliente para refletir a mudança
-      setCustomer(prev => ({ ...prev, checkins: [] }));
+      setCustomer((prev) => ({ ...prev, checkins: [] }));
     } catch (err) {
       console.error('Error clearing checkins:', err);
       toast.error(err.response?.data?.message || 'Erro ao limpar check-ins.');
@@ -128,9 +128,9 @@ const CustomerDetail = () => {
 
   const handleEditFormChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setEditFormData(prev => ({
+    setEditFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -160,8 +160,12 @@ const CustomerDetail = () => {
   if (error) {
     return (
       <Paper sx={{ p: 4, mt: 5, textAlign: 'center' }}>
-        <Typography variant="h6" color="error">{error}</Typography>
-        <Button variant="contained" onClick={() => navigate(-1)} sx={{ mt: 2 }}>Voltar</Button>
+        <Typography variant="h6" color="error">
+          {error}
+        </Typography>
+        <Button variant="contained" onClick={() => navigate(-1)} sx={{ mt: 2 }}>
+          Voltar
+        </Button>
       </Paper>
     );
   }
@@ -170,7 +174,9 @@ const CustomerDetail = () => {
     return (
       <Paper sx={{ p: 4, mt: 5, textAlign: 'center' }}>
         <Typography variant="h6">Cliente não encontrado.</Typography>
-        <Button variant="contained" onClick={() => navigate(-1)} sx={{ mt: 2 }}>Voltar</Button>
+        <Button variant="contained" onClick={() => navigate(-1)} sx={{ mt: 2 }}>
+          Voltar
+        </Button>
       </Paper>
     );
   }
@@ -201,7 +207,8 @@ const CustomerDetail = () => {
                 <Box>
                   <Typography variant="h5">{customer.name}</Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Cliente desde {format(new Date(customer.createdAt), 'dd/MM/yyyy', { locale: ptBR })}
+                    Cliente desde{' '}
+                    {format(new Date(customer.createdAt), 'dd/MM/yyyy', { locale: ptBR })}
                   </Typography>
                 </Box>
               </Box>
@@ -216,11 +223,17 @@ const CustomerDetail = () => {
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <CakeIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 1 }} />
-                Nascimento: {customer.birth_date ? format(new Date(customer.birth_date), 'dd/MM/yyyy', { locale: ptBR }) : 'N/A'}
+                Nascimento:{' '}
+                {customer.birth_date
+                  ? format(new Date(customer.birth_date), 'dd/MM/yyyy', { locale: ptBR })
+                  : 'N/A'}
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <AccessTimeIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 1 }} />
-                Última Visita: {customer.last_visit ? format(new Date(customer.last_visit), 'dd/MM/yyyy HH:mm', { locale: ptBR }) : 'Nunca'}
+                Última Visita:{' '}
+                {customer.last_visit
+                  ? format(new Date(customer.last_visit), 'dd/MM/yyyy HH:mm', { locale: ptBR })
+                  : 'Nunca'}
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <strong>Pontos de Fidelidade:</strong> {customer.loyalty_points || 0}
@@ -230,7 +243,10 @@ const CustomerDetail = () => {
               </Typography>
               {customer.preferences && (
                 <Typography variant="body1" gutterBottom>
-                  <strong>Preferências:</strong> {typeof customer.preferences === 'object' ? JSON.stringify(customer.preferences) : customer.preferences}
+                  <strong>Preferências:</strong>{' '}
+                  {typeof customer.preferences === 'object'
+                    ? JSON.stringify(customer.preferences)
+                    : customer.preferences}
                 </Typography>
               )}
               <Button
@@ -276,7 +292,9 @@ const CustomerDetail = () => {
                   ))}
                 </List>
               ) : (
-                <Typography variant="body2" color="text.secondary">Nenhum check-in registrado.</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Nenhum check-in registrado.
+                </Typography>
               )}
             </CardContent>
           </Card>
@@ -303,7 +321,9 @@ const CustomerDetail = () => {
                   ))}
                 </List>
               ) : (
-                <Typography variant="body2" color="text.secondary">Nenhum feedback registrado.</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Nenhum feedback registrado.
+                </Typography>
               )}
             </CardContent>
           </Card>
@@ -330,7 +350,9 @@ const CustomerDetail = () => {
                   ))}
                 </List>
               ) : (
-                <Typography variant="body2" color="text.secondary">Nenhum cupom resgatado.</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Nenhum cupom resgatado.
+                </Typography>
               )}
             </CardContent>
           </Card>
@@ -357,7 +379,9 @@ const CustomerDetail = () => {
                   ))}
                 </List>
               ) : (
-                <Typography variant="body2" color="text.secondary">Nenhuma resposta de pesquisa.</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Nenhuma resposta de pesquisa.
+                </Typography>
               )}
             </CardContent>
           </Card>
@@ -365,13 +389,12 @@ const CustomerDetail = () => {
       </Grid>
 
       {/* Dialog de Confirmação de Reset */}
-      <Dialog
-        open={resetConfirmOpen}
-        onClose={() => setResetConfirmOpen(false)}
-      >
+      <Dialog open={resetConfirmOpen} onClose={() => setResetConfirmOpen(false)}>
         <DialogTitle>Confirmar Reset de Visitas</DialogTitle>
         <DialogContent>
-          <Typography>Tem certeza que deseja resetar o total de visitas para este cliente para 0?</Typography>
+          <Typography>
+            Tem certeza que deseja resetar o total de visitas para este cliente para 0?
+          </Typography>
           <Typography color="error">Esta ação não pode ser desfeita.</Typography>
         </DialogContent>
         <DialogActions>
@@ -383,13 +406,12 @@ const CustomerDetail = () => {
       </Dialog>
 
       {/* Dialog de Confirmação de Limpeza de Check-ins */}
-      <Dialog
-        open={clearCheckinsConfirmOpen}
-        onClose={() => setClearCheckinsConfirmOpen(false)}
-      >
+      <Dialog open={clearCheckinsConfirmOpen} onClose={() => setClearCheckinsConfirmOpen(false)}>
         <DialogTitle>Confirmar Limpeza de Check-ins</DialogTitle>
         <DialogContent>
-          <Typography>Tem certeza que deseja limpar TODOS os check-ins para este cliente?</Typography>
+          <Typography>
+            Tem certeza que deseja limpar TODOS os check-ins para este cliente?
+          </Typography>
           <Typography color="error">Esta ação não pode ser desfeita.</Typography>
         </DialogContent>
         <DialogActions>

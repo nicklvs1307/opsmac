@@ -1,5 +1,20 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, List, ListItem, ListItemText, IconButton, Typography, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import {
+  Box,
+  Button,
+  TextField,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Typography,
+  Paper,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
@@ -87,7 +102,11 @@ const AddonManagement = () => {
 
   const handleUpdateAddon = () => {
     if (editingAddon && newAddonName.trim() && newAddonPrice.trim()) {
-      updateAddonMutation.mutate({ id: editingAddon.id, name: newAddonName, price: parseFloat(newAddonPrice) });
+      updateAddonMutation.mutate({
+        id: editingAddon.id,
+        name: newAddonName,
+        price: parseFloat(newAddonPrice),
+      });
     }
   };
 
@@ -107,9 +126,13 @@ const AddonManagement = () => {
 
   return (
     <Box sx={{ mt: 3 }}>
-      <Typography variant="h5" gutterBottom>{t('addon_management.title')}</Typography>
+      <Typography variant="h5" gutterBottom>
+        {t('addon_management.title')}
+      </Typography>
       <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
-        <Typography variant="h6" gutterBottom>{editingAddon ? t('addon_management.edit_addon') : t('addon_management.add_new_addon')}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {editingAddon ? t('addon_management.edit_addon') : t('addon_management.add_new_addon')}
+        </Typography>
         <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
           <TextField
             label={t('addon_management.addon_name')}
@@ -163,7 +186,9 @@ const AddonManagement = () => {
         </Box>
       </Paper>
 
-      <Typography variant="h6" gutterBottom>{t('addon_management.existing_addons')}</Typography>
+      <Typography variant="h6" gutterBottom>
+        {t('addon_management.existing_addons')}
+      </Typography>
       <Paper elevation={2} sx={{ p: 3 }}>
         {addons.length === 0 ? (
           <Typography>{t('addon_management.no_addons')}</Typography>
@@ -177,7 +202,11 @@ const AddonManagement = () => {
                     <IconButton edge="end" aria-label="edit" onClick={() => handleEditClick(addon)}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteClick(addon)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleDeleteClick(addon)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Box>
@@ -196,7 +225,9 @@ const AddonManagement = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{t('addon_management.confirm_delete_title')}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {t('addon_management.confirm_delete_title')}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {t('addon_management.confirm_delete_message', { addonName: addonToDelete?.name })}

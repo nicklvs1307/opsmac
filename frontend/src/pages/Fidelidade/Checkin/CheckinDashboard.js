@@ -29,9 +29,17 @@ import {
   Stars as StarsIcon,
 } from '@mui/icons-material';
 import { CheckCircleOutline as CheckinIcon, ExitToApp as ExitToAppIcon } from '@mui/icons-material';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import axiosInstance from '../../../api/axiosInstance';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 import CheckinProgram from './CheckinProgram';
 import { useForm, useFieldArray } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -179,7 +187,6 @@ const CheckinDashboard = () => {
       } else {
         setCheckinQRCode(null);
       }
-
     } catch (err) {
       console.error(t('checkin_dashboard.error_fetching_restaurant_data_console'), err);
       toast.error(t('checkin_dashboard.error_loading_restaurant_data'));
@@ -187,8 +194,6 @@ const CheckinDashboard = () => {
       setLoading(false);
     }
   }, [restaurantId, reset, t]);
-
-  
 
   const fetchActiveCheckins = useCallback(async () => {
     if (!restaurantId) return;
@@ -241,7 +246,7 @@ const CheckinDashboard = () => {
     }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     if (tabValue === 0) {
       fetchCheckinData();
     } else if (tabValue === 1) {
@@ -313,7 +318,7 @@ const CheckinDashboard = () => {
               sx={{
                 fontWeight: 600,
                 color: '#2c3e50',
-                mb: 3
+                mb: 3,
               }}
             >
               {t('checkin_dashboard.checkins_by_day_title')}
@@ -358,12 +363,13 @@ const CheckinDashboard = () => {
               sx={{
                 fontWeight: 600,
                 color: '#2c3e50',
-                mb: 3
+                mb: 3,
               }}
             >
               {t('checkin_dashboard.most_frequent_customers_title')}
             </Typography>
-            {checkinData?.most_frequent_customers && checkinData.most_frequent_customers.length > 0 ? (
+            {checkinData?.most_frequent_customers &&
+            checkinData.most_frequent_customers.length > 0 ? (
               <List>
                 {checkinData.most_frequent_customers.map((customer) => (
                   <ListItem key={customer.customer_id}>
@@ -372,7 +378,9 @@ const CheckinDashboard = () => {
                     </ListItemIcon>
                     <ListItemText
                       primary={customer.customer.name}
-                      secondary={t('checkin_dashboard.checkins_count', { count: customer.checkin_count })}
+                      secondary={t('checkin_dashboard.checkins_count', {
+                        count: customer.checkin_count,
+                      })}
                     />
                   </ListItem>
                 ))}
@@ -402,7 +410,7 @@ const CheckinDashboard = () => {
         sx={{
           fontWeight: 600,
           color: '#2c3e50',
-          mb: 3
+          mb: 3,
         }}
       >
         {t('checkin_dashboard.active_checkins_title')}
@@ -465,8 +473,6 @@ const CheckinDashboard = () => {
       </Alert>
     );
   }
-
-  
 
   return (
     <Box>

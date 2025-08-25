@@ -18,7 +18,7 @@ import {
   Logout as LogoutIcon,
   Person as PersonIcon,
 } from '@mui/icons-material';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 
 const Header = ({ onMobileNavOpen }) => {
@@ -29,7 +29,7 @@ const Header = ({ onMobileNavOpen }) => {
   const [notificationsAnchorEl, setNotificationsAnchorEl] = useState(null);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const theme = useTheme();
-  
+
   useEffect(() => {
     setNotificationsOpen(Boolean(notificationsAnchorEl));
   }, [notificationsAnchorEl]);
@@ -82,46 +82,44 @@ const Header = ({ onMobileNavOpen }) => {
         {/* User Info */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
           <Box sx={{ textAlign: 'right', display: { xs: 'none', sm: 'block' } }}>
-            <Typography 
-              variant="body2" 
-              sx={{ 
+            <Typography
+              variant="body2"
+              sx={{
                 color: theme.palette.text.primary,
                 fontWeight: 600,
-                lineHeight: 1.2
+                lineHeight: 1.2,
               }}
             >
               {user?.name || 'João Silva'}
             </Typography>
-            <Typography 
-              variant="caption" 
-              sx={{ 
+            <Typography
+              variant="caption"
+              sx={{
                 color: theme.palette.text.secondary,
-                fontSize: '0.75rem'
+                fontSize: '0.75rem',
               }}
             >
               {user?.role === 'admin' ? t('header.admin_role') : t('header.user_role')}
             </Typography>
           </Box>
-          
+
           {/* User Avatar */}
           <Tooltip title={t('header.profile_tooltip')}>
-            <IconButton
-              onClick={handleProfileMenuOpen}
-              sx={{ p: 0 }}
-            >
+            <IconButton onClick={handleProfileMenuOpen} sx={{ p: 0 }}>
               <Avatar
                 alt={user?.name || t('header.user_placeholder')}
                 src={user?.restaurant?.logo || user?.avatar}
-                sx={{ 
-                  width: 40, 
+                sx={{
+                  width: 40,
                   height: 40,
                   bgcolor: 'primary.light',
                   color: 'white',
                   fontWeight: 600,
-                  fontSize: '1rem'
+                  fontSize: '1rem',
                 }}
               >
-                {!user?.restaurant?.logo && (user?.name || t('header.user_placeholder')).charAt(0).toUpperCase()}
+                {!user?.restaurant?.logo &&
+                  (user?.name || t('header.user_placeholder')).charAt(0).toUpperCase()}
               </Avatar>
             </IconButton>
           </Tooltip>
@@ -165,35 +163,35 @@ const Header = ({ onMobileNavOpen }) => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Box sx={{ px: 2, py: 1.5 }}>
-          <Typography 
-            variant="subtitle1" 
-            noWrap 
-            sx={{ 
+          <Typography
+            variant="subtitle1"
+            noWrap
+            sx={{
               fontWeight: 600,
               color: theme.palette.text.primary,
             }}
           >
             {user?.name || t('header.user_placeholder')}
           </Typography>
-          <Typography 
-            variant="body2" 
-            sx={{ 
+          <Typography
+            variant="body2"
+            sx={{
               color: theme.palette.text.secondary,
               display: 'flex',
               alignItems: 'center',
               gap: 0.5,
-            }} 
+            }}
             noWrap
           >
-            <Box 
-              component="span" 
-              sx={{ 
-                width: 8, 
-                height: 8, 
-                borderRadius: '50%', 
+            <Box
+              component="span"
+              sx={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
                 backgroundColor: theme.palette.success.main,
                 display: 'inline-block',
-              }} 
+              }}
             />
             {user?.email || t('header.email_placeholder')}
           </Typography>
@@ -268,15 +266,25 @@ const Header = ({ onMobileNavOpen }) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Box sx={{ px: 2, py: 1.5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>{t('header.notifications_title')}</Typography>
-          <Typography 
-            variant="caption" 
-            sx={{ 
-              color: 'white', 
-              bgcolor: theme.palette.primary.main, 
-              px: 1, 
-              py: 0.5, 
+        <Box
+          sx={{
+            px: 2,
+            py: 1.5,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+            {t('header.notifications_title')}
+          </Typography>
+          <Typography
+            variant="caption"
+            sx={{
+              color: 'white',
+              bgcolor: theme.palette.primary.main,
+              px: 1,
+              py: 0.5,
               borderRadius: 10,
               fontWeight: 500,
             }}
@@ -287,8 +295,18 @@ const Header = ({ onMobileNavOpen }) => {
         <Divider sx={{ my: 0.5 }} />
         <MenuItem sx={{ py: 1.5 }}>
           <Box sx={{ width: '100%' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: theme.palette.primary.main }}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                mb: 0.5,
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{ fontWeight: 600, color: theme.palette.primary.main }}
+              >
                 {t('header.new_feedback_title')}
               </Typography>
               <Typography variant="caption" sx={{ color: 'text.secondary' }}>
@@ -302,8 +320,18 @@ const Header = ({ onMobileNavOpen }) => {
         </MenuItem>
         <MenuItem sx={{ py: 1.5 }}>
           <Box sx={{ width: '100%' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: theme.palette.success.main }}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                mb: 0.5,
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{ fontWeight: 600, color: theme.palette.success.main }}
+              >
                 {t('header.new_coupon_title')}
               </Typography>
               <Typography variant="caption" sx={{ color: 'text.secondary' }}>
@@ -317,8 +345,18 @@ const Header = ({ onMobileNavOpen }) => {
         </MenuItem>
         <MenuItem sx={{ py: 1.5 }}>
           <Box sx={{ width: '100%' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: theme.palette.warning.main }}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                mb: 0.5,
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{ fontWeight: 600, color: theme.palette.warning.main }}
+              >
                 {t('header.nps_alert_title')}
               </Typography>
               <Typography variant="caption" sx={{ color: 'text.secondary' }}>
@@ -332,10 +370,10 @@ const Header = ({ onMobileNavOpen }) => {
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <Box sx={{ textAlign: 'center', p: 1.5 }}>
-          <Typography 
-            variant="body2" 
-            sx={{ 
-              color: 'primary.main', 
+          <Typography
+            variant="body2"
+            sx={{
+              color: 'primary.main',
               cursor: 'pointer',
               fontWeight: 500,
               '&:hover': {

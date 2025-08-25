@@ -1,6 +1,6 @@
 const { verifyToken } = require('../services/jwtService');
 const { models } = require('../config/database'); // Path ajustado para a config original
-const { UnauthorizedError, ForbiddenError } = require('../utils/errors');
+const { UnauthorizedError, ForbiddenError } = require('utils/errors');
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -20,31 +20,40 @@ const authMiddleware = async (req, res, next) => {
       return next(new UnauthorizedError('Token inválido ou expirado.'));
     }
 
-    const user = await models.User.findByPk(decoded.userId, {
-        // Buscar restaurantes associados é uma necessidade comum para os próximos middlewares/controllers.
+    const findOptions = {
         include: [{
-            model: models.Restaurant,
-            as: 'owned_restaurants',
-            attributes: ['id', 'name', 'slug'],
-            required: false
+            model: models.Role,
+            as: 'role',
+            attributes: ['name']
         }]
-    });
+    };
+    console.log('findByPk options in authMiddleware:', JSON.stringify(findOptions, null, 2));
+
+    let user = await models.User.findByPk(decoded.userId, findOptions);
+
+    console.log('User object after findByPk in authMiddleware:', JSON.stringify(user, null, 2));
 
     if (!user) {
       return next(new UnauthorizedError('Usuário do token não encontrado.'));
     }
 
-    if (!user.is_active) {
+    if (!user.isActive) {
         return next(new ForbiddenError('Acesso negado. A conta do usuário está desativada.'));
+    }
+
+    // Ensure user.role and user.role.name exist before assigning
+    if (!user.role || !user.role.name) {
+        console.error('User has no associated role or role name is missing:', user);
+        return next(new ForbiddenError('Usuário não possui uma função válida.'));
     }
 
     // Anexa um objeto de usuário limpo e seguro à requisição.
     req.user = {
       userId: user.id,
       email: user.email,
-      role: user.role,
+      role: user.role.name, // Use the name from the associated Role
       name: user.name,
-      restaurants: user.owned_restaurants || [],
+      restaurantId: user.restaurantId,
     };
 
     next();

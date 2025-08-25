@@ -1,6 +1,21 @@
-
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Button, Paper, CircularProgress, Alert, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, TextField, Grid } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  Paper,
+  CircularProgress,
+  Alert,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton,
+  TextField,
+  Grid,
+} from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
@@ -16,7 +31,7 @@ import QRCode from 'qrcode.react';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../../contexts/AuthContext'; // Importar useAuth
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const fetchSurveys = async (filters) => {
   const { data } = await axiosInstance.get('/api/surveys', { params: filters });
@@ -43,7 +58,12 @@ const SurveyList = () => {
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
   const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
 
-  const { data: surveys, isLoading, error, refetch } = useQuery(['surveys', filters], () => fetchSurveys(filters));
+  const {
+    data: surveys,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery(['surveys', filters], () => fetchSurveys(filters));
 
   const deleteMutation = useMutation(deleteSurvey, {
     onSuccess: () => {
@@ -61,7 +81,9 @@ const SurveyList = () => {
       toast.success(t('survey_list.status_update_success'));
     },
     onError: (err) => {
-      toast.error(t('survey_list.status_update_error', { message: err.response.data.msg || err.message }));
+      toast.error(
+        t('survey_list.status_update_error', { message: err.response.data.msg || err.message })
+      );
     },
   });
 
@@ -83,7 +105,8 @@ const SurveyList = () => {
       return;
     }
     const publicLink = `${window.location.origin}/public/surveys/${restaurantSlug}/${surveySlug}`;
-    navigator.clipboard.writeText(publicLink)
+    navigator.clipboard
+      .writeText(publicLink)
       .then(() => {
         toast.success(t('survey_list.copy_link_success'));
       })
@@ -105,7 +128,7 @@ const SurveyList = () => {
   };
 
   const handleFilterChange = (field, value) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
+    setFilters((prev) => ({ ...prev, [field]: value }));
   };
 
   useEffect(() => {
@@ -122,8 +145,6 @@ const SurveyList = () => {
       </Box>
     );
   }
-
-  
 
   return (
     <Box sx={{ p: 3 }}>
@@ -142,8 +163,8 @@ const SurveyList = () => {
       {/* Filters */}
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" gutterBottom>
-            {t('survey_list.filters_title')}
-          </Typography>
+          {t('survey_list.filters_title')}
+        </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <TextField
@@ -166,7 +187,9 @@ const SurveyList = () => {
             <CircularProgress />
           </Box>
         ) : error ? (
-          <Alert severity="error">{t('common.error_loading_surveys')}: {error.message}</Alert>
+          <Alert severity="error">
+            {t('common.error_loading_surveys')}: {error.message}
+          </Alert>
         ) : (
           <TableContainer sx={{ overflowX: 'auto' }}>
             <Table>
@@ -193,26 +216,48 @@ const SurveyList = () => {
                       <TableCell>{survey.status}</TableCell>
                       <TableCell align="right">
                         <Box sx={{ display: 'flex', gap: 0.5, justifyContent: 'flex-end' }}>
-                          <IconButton component={RouterLink} to={`/fidelity/surveys/${survey.id}/results`} color="primary" aria-label={t('survey_list.view_results_aria_label')}>
+                          <IconButton
+                            component={RouterLink}
+                            to={`/fidelity/surveys/${survey.id}/results`}
+                            color="primary"
+                            aria-label={t('survey_list.view_results_aria_label')}
+                          >
                             <BarChartIcon />
                           </IconButton>
-                          <IconButton component={RouterLink} to={`/fidelity/surveys/edit/${survey.id}`} color="info" aria-label={t('survey_list.edit_survey_aria_label')}>
+                          <IconButton
+                            component={RouterLink}
+                            to={`/fidelity/surveys/edit/${survey.id}`}
+                            color="info"
+                            aria-label={t('survey_list.edit_survey_aria_label')}
+                          >
                             <EditIcon />
                           </IconButton>
-                          <IconButton 
+                          <IconButton
                             color={survey.status === 'active' ? 'success' : 'default'}
                             aria-label={t('survey_list.toggle_status_aria_label')}
                             onClick={() => handleToggleStatus(survey.id, survey.status)}
                           >
                             {survey.status === 'active' ? <ToggleOnIcon /> : <ToggleOffIcon />}
                           </IconButton>
-                          <IconButton color="secondary" aria-label={t('survey_list.generate_qr_code_aria_label')} onClick={() => handleGenerateQrCode(survey.slug)}>
+                          <IconButton
+                            color="secondary"
+                            aria-label={t('survey_list.generate_qr_code_aria_label')}
+                            onClick={() => handleGenerateQrCode(survey.slug)}
+                          >
                             <QrCodeIcon />
                           </IconButton>
-                          <IconButton color="default" aria-label={t('survey_list.copy_link_aria_label')} onClick={() => handleCopyLink(survey.slug)}>
+                          <IconButton
+                            color="default"
+                            aria-label={t('survey_list.copy_link_aria_label')}
+                            onClick={() => handleCopyLink(survey.slug)}
+                          >
                             <ContentCopyIcon />
                           </IconButton>
-                          <IconButton color="error" aria-label={t('survey_list.delete_survey_aria_label')} onClick={() => handleDelete(survey.id)}>
+                          <IconButton
+                            color="error"
+                            aria-label={t('survey_list.delete_survey_aria_label')}
+                            onClick={() => handleDelete(survey.id)}
+                          >
                             <DeleteIcon />
                           </IconButton>
                         </Box>
@@ -242,10 +287,14 @@ const SurveyList = () => {
           }}
           onClick={() => setQrModalOpen(false)}
         >
-          <Paper sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+          <Paper
+            sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
+          >
             <Typography variant="h6">{t('survey_list.qr_code_modal_title')}</Typography>
             <QRCode value={qrCodeValue} size={256} />
-            <Button variant="contained" onClick={() => setQrModalOpen(false)}>{t('common.close')}</Button>
+            <Button variant="contained" onClick={() => setQrModalOpen(false)}>
+              {t('common.close')}
+            </Button>
           </Paper>
         </Box>
       )}

@@ -1,9 +1,28 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress, Alert, Dialog, DialogTitle, DialogContent, DialogActions, TextField, IconButton } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  CircularProgress,
+  Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  IconButton,
+} from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
 import axiosInstance from '../../api/axiosInstance';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import QRCode from 'qrcode.react'; // For displaying QR code on frontend
 
 const fetchTables = async (restaurantId) => {
@@ -37,7 +56,11 @@ const Tables = () => {
   const [openQrDialog, setOpenQrDialog] = useState(false);
   const [currentQrCodeUrl, setCurrentQrCodeUrl] = useState('');
 
-  const { data: tables, isLoading, isError } = useQuery('tables', () => fetchTables(restaurantId), {
+  const {
+    data: tables,
+    isLoading,
+    isError,
+  } = useQuery('tables', () => fetchTables(restaurantId), {
     enabled: !!restaurantId,
   });
 
@@ -151,7 +174,13 @@ const Tables = () => {
                     <TableCell>{table.table_number}</TableCell>
                     <TableCell>
                       {table.qr_code_url ? (
-                        <Button size="small" onClick={() => { setCurrentQrCodeUrl(table.qr_code_url); setOpenQrDialog(true); }}>
+                        <Button
+                          size="small"
+                          onClick={() => {
+                            setCurrentQrCodeUrl(table.qr_code_url);
+                            setOpenQrDialog(true);
+                          }}
+                        >
                           Ver QR Code
                         </Button>
                       ) : (
@@ -162,10 +191,19 @@ const Tables = () => {
                       <Button size="small" onClick={() => handleOpenFormDialog(table)}>
                         Editar
                       </Button>
-                      <Button size="small" onClick={() => handleDelete(table.id)} color="error" sx={{ ml: 1 }}>
+                      <Button
+                        size="small"
+                        onClick={() => handleDelete(table.id)}
+                        color="error"
+                        sx={{ ml: 1 }}
+                      >
                         Deletar
                       </Button>
-                      <Button size="small" onClick={() => handleGenerateQr(table.id)} sx={{ ml: 1 }}>
+                      <Button
+                        size="small"
+                        onClick={() => handleGenerateQr(table.id)}
+                        sx={{ ml: 1 }}
+                      >
                         Gerar QR
                       </Button>
                     </TableCell>
@@ -212,7 +250,9 @@ const Tables = () => {
       {/* QR Code Display Dialog */}
       <Dialog open={openQrDialog} onClose={handleCloseQrDialog}>
         <DialogTitle>QR Code da Mesa</DialogTitle>
-        <DialogContent sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
+        <DialogContent
+          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}
+        >
           {currentQrCodeUrl ? (
             <QRCode value={currentQrCodeUrl} size={256} level="H" includeMargin={true} />
           ) : (

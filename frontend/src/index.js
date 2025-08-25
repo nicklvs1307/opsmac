@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './shared/styles/globals.css';
+import '@/shared/styles/global.css';
 import App from './App';
-import i18n from './i18n'; // Importar a configuração do i18n
+import i18n from '@/shared/lib/i18n'; // Importar a configuração do i18n
 import { I18nextProvider } from 'react-i18next';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 

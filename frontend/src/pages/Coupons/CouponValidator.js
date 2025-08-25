@@ -1,9 +1,4 @@
-import {
-  Box,
-  Typography,
-  Container,
-  useTheme,
-} from '@mui/material';
+import { Box, Typography, Container, useTheme } from '@mui/material';
 import axiosInstance from '../../api/axiosInstance';
 import CouponValidatorCard from '../../components/UI/CouponValidatorCard';
 import { useTranslation } from 'react-i18next';
@@ -32,16 +27,16 @@ const CouponValidator = () => {
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
-      <Box 
+      <Box
         sx={{
           mb: 4,
           textAlign: 'center',
         }}
       >
-        <Typography 
-          variant="h4" 
-          component="h1" 
-          sx={{ 
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
             mb: 1,
             fontWeight: 700,
             background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
@@ -51,10 +46,10 @@ const CouponValidator = () => {
         >
           {t('coupon_validator.title')}
         </Typography>
-        <Typography 
-          variant="body1" 
+        <Typography
+          variant="body1"
           color="text.secondary"
-          sx={{ 
+          sx={{
             maxWidth: '600px',
             mx: 'auto',
             mb: 3,

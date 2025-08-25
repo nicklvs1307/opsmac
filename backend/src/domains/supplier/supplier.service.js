@@ -1,4 +1,4 @@
-const { models } = require('../../config/database');
+const { models } = require('config/config');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 exports.createSupplier = async (name, contact_person, phone, email, address, restaurant_id) => {

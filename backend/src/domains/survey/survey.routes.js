@@ -1,5 +1,6 @@
 const express = require('express');
-const { auth } = require('middleware/authMiddleware');
+const { auth } = require('../../middleware/authMiddleware');
+const checkPermission = require('../../middleware/permission');
 const surveyController = require('./survey.controller');
 const {
     createSurveyValidation,
@@ -10,12 +11,12 @@ const {
 const router = express.Router();
 
 // Rotas de Pesquisas
-router.get('/', auth, surveyController.listSurveys);
-router.post('/', auth, createSurveyValidation, surveyController.createSurvey);
-router.put('/:id', auth, updateSurveyValidation, surveyController.updateSurvey);
-router.patch('/:id/status', auth, updateSurveyStatusValidation, surveyController.updateSurveyStatus);
-router.delete('/:id', auth, surveyController.deleteSurvey);
-router.get('/:id', auth, surveyController.getSurveyById);
-router.get('/analytics/:restaurantId', auth, surveyController.getSurveyAnalytics);
+router.get('/', auth, checkPermission('surveys:view'), surveyController.listSurveys);
+router.post('/', auth, checkPermission('surveys:create'), createSurveyValidation, surveyController.createSurvey);
+router.put('/:id', auth, checkPermission('surveys:edit'), updateSurveyValidation, surveyController.updateSurvey);
+router.patch('/:id/status', auth, checkPermission('surveys:edit'), updateSurveyStatusValidation, surveyController.updateSurveyStatus);
+router.delete('/:id', auth, checkPermission('surveys:delete'), surveyController.deleteSurvey);
+router.get('/:id', auth, checkPermission('surveys:view'), surveyController.getSurveyById);
+router.get('/analytics/:restaurantId', auth, checkPermission('surveys:view'), surveyController.getSurveyAnalytics);
 
 module.exports = router;

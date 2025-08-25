@@ -1,4 +1,4 @@
-const { models } = require('config/database');
+const { models } = require('config/config');
 
 const checkSubscription = async (req, res, next) => {
   try {

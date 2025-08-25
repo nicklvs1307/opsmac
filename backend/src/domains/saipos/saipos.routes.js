@@ -1,10 +1,13 @@
 const express = require('express');
-const saiposController = require('domains/saipos/saipos.controller');
+const { auth } = require('../../middleware/authMiddleware');
+const checkPermission = require('../../middleware/permission');
+const saiposController = require('./saipos.controller');
 
 const router = express.Router();
 
 // Rotas da Saipos
-router.post('/webhook', saiposController.checkSaiposModuleEnabled, saiposController.handleWebhook);
-router.get('/orders', saiposController.getOrders);
+// A verificação do módulo deve ser feita dentro do controller para webhooks públicos
+router.post('/webhook', saiposController.handleWebhook);
+router.get('/orders', auth, checkPermission('saipos:view'), saiposController.getOrders);
 
 module.exports = router;

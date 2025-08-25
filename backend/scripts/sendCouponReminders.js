@@ -1,4 +1,4 @@
-const { models, sequelize } = require('../config/database');
+const { models, sequelize } = require('config/config');
 const { sendWhatsAppMessage } = require('~/services/integrations/whatsappApiClient');
 
 async function sendCouponReminders() {

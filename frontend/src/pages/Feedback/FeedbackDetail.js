@@ -58,7 +58,7 @@ const FeedbackDetail = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const response = await axiosInstance.get(`/api/feedback/${id}`);
       setFeedback(response.data);
     } catch (err) {
@@ -72,11 +72,11 @@ const FeedbackDetail = () => {
   const handleReply = async () => {
     try {
       setReplyLoading(true);
-      
+
       await axiosInstance.post(`/api/feedback/${id}/reply`, {
         response: replyText,
       });
-      
+
       toast.success(t('feedback_detail.reply_success'));
       setReplyDialog(false);
       setReplyText('');
@@ -91,7 +91,7 @@ const FeedbackDetail = () => {
   const handleDelete = async () => {
     try {
       await axiosInstance.delete(`/api/feedback/${id}`);
-      
+
       toast.success(t('feedback_detail.delete_success'));
       navigate('/feedback');
     } catch (err) {
@@ -101,58 +101,85 @@ const FeedbackDetail = () => {
 
   const getSentimentColor = (sentiment) => {
     switch (sentiment) {
-      case 'positive': return 'success';
-      case 'negative': return 'error';
-      case 'neutral': return 'warning';
-      default: return 'default';
+      case 'positive':
+        return 'success';
+      case 'negative':
+        return 'error';
+      case 'neutral':
+        return 'warning';
+      default:
+        return 'default';
     }
   };
 
   const getTypeColor = (type) => {
     switch (type) {
-      case 'compliment': return 'success';
-      case 'complaint': return 'error';
-      case 'suggestion': return 'info';
-      case 'criticism': return 'warning';
-      default: return 'default';
+      case 'compliment':
+        return 'success';
+      case 'complaint':
+        return 'error';
+      case 'suggestion':
+        return 'info';
+      case 'criticism':
+        return 'warning';
+      default:
+        return 'default';
     }
   };
 
   const getTypeLabel = (type) => {
     switch (type) {
-      case 'compliment': return t('feedback_list.type_compliment');
-      case 'complaint': return t('feedback_list.type_complaint');
-      case 'suggestion': return t('feedback_list.type_suggestion');
-      case 'criticism': return t('feedback_list.type_criticism');
-      default: return type;
+      case 'compliment':
+        return t('feedback_list.type_compliment');
+      case 'complaint':
+        return t('feedback_list.type_complaint');
+      case 'suggestion':
+        return t('feedback_list.type_suggestion');
+      case 'criticism':
+        return t('feedback_list.type_criticism');
+      default:
+        return type;
     }
   };
 
   const getSourceLabel = (source) => {
     switch (source) {
-      case 'qr_code': return t('feedback_list.source_qrcode');
-      case 'whatsapp': return t('feedback_list.source_whatsapp');
-      case 'manual': return t('feedback_list.source_manual');
-      case 'website': return t('feedback_list.source_website');
-      default: return source;
+      case 'qr_code':
+        return t('feedback_list.source_qrcode');
+      case 'whatsapp':
+        return t('feedback_list.source_whatsapp');
+      case 'manual':
+        return t('feedback_list.source_manual');
+      case 'website':
+        return t('feedback_list.source_website');
+      default:
+        return source;
     }
   };
 
   const getStatusLabel = (status) => {
     switch (status) {
-      case 'pending': return t('feedback_list.status_pending');
-      case 'responded': return t('feedback_list.status_responded');
-      case 'resolved': return t('feedback_list.status_resolved');
-      default: return status;
+      case 'pending':
+        return t('feedback_list.status_pending');
+      case 'responded':
+        return t('feedback_list.status_responded');
+      case 'resolved':
+        return t('feedback_list.status_resolved');
+      default:
+        return status;
     }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return 'warning';
-      case 'responded': return 'info';
-      case 'resolved': return 'success';
-      default: return 'default';
+      case 'pending':
+        return 'warning';
+      case 'responded':
+        return 'info';
+      case 'resolved':
+        return 'success';
+      default:
+        return 'default';
     }
   };
 
@@ -174,9 +201,7 @@ const FeedbackDetail = () => {
         >
           {t('public_feedback.back_button')}
         </Button>
-        <Alert severity="error">
-          {error || t('feedback_detail.not_found')}
-        </Alert>
+        <Alert severity="error">{error || t('feedback_detail.not_found')}</Alert>
       </Box>
     );
   }
@@ -186,17 +211,14 @@ const FeedbackDetail = () => {
       {/* Header */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Box display="flex" alignItems="center" gap={2}>
-          <Button
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate('/satisfaction/feedback')}
-          >
+          <Button startIcon={<ArrowBackIcon />} onClick={() => navigate('/satisfaction/feedback')}>
             {t('public_feedback.back_button')}
           </Button>
           <Typography variant="h4" component="h1">
             {t('feedback_detail.title')}
           </Typography>
         </Box>
-        
+
         <Box display="flex" gap={1}>
           {!feedback.response && (
             <Button
@@ -239,7 +261,9 @@ const FeedbackDetail = () => {
                   {feedback.customer?.name || t('feedback_list.anonymous_customer')}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {feedback.customer?.email || feedback.customer?.phone || t('feedback_detail.no_contact')}
+                  {feedback.customer?.email ||
+                    feedback.customer?.phone ||
+                    t('feedback_detail.no_contact')}
                 </Typography>
               </Box>
             </Box>
@@ -248,24 +272,16 @@ const FeedbackDetail = () => {
             <Box mb={3}>
               <Box display="flex" alignItems="center" gap={2} mb={2}>
                 <Rating value={feedback.rating} readOnly size="large" />
-                <Typography variant="h6">
-                  {feedback.rating}/5
-                </Typography>
+                <Typography variant="h6">{feedback.rating}/5</Typography>
               </Box>
-              
+
               <Box display="flex" gap={1} flexWrap="wrap">
                 <Chip
                   label={getTypeLabel(feedback.feedback_type)}
                   color={getTypeColor(feedback.feedback_type)}
                 />
-                <Chip
-                  label={feedback.sentiment}
-                  color={getSentimentColor(feedback.sentiment)}
-                />
-                <Chip
-                  label={getSourceLabel(feedback.source)}
-                  variant="outlined"
-                />
+                <Chip label={feedback.sentiment} color={getSentimentColor(feedback.sentiment)} />
+                <Chip label={getSourceLabel(feedback.source)} variant="outlined" />
                 <Chip
                   label={getStatusLabel(feedback.status)}
                   color={getStatusColor(feedback.status)}
@@ -299,12 +315,13 @@ const FeedbackDetail = () => {
                   {t('feedback_list.response_label')}
                 </Typography>
                 <Box sx={{ bgcolor: 'grey.50', p: 2, borderRadius: 1 }}>
-                  <Typography variant="body1">
-                    {feedback.response}
-                  </Typography>
+                  <Typography variant="body1">{feedback.response}</Typography>
                   {feedback.response_date && (
                     <Typography variant="caption" color="text.secondary" display="block" mt={1}>
-                      {t('feedback_detail.responded_on')} {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                      {t('feedback_detail.responded_on')}{' '}
+                      {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', {
+                        locale: ptBR,
+                      })}
                     </Typography>
                   )}
                 </Box>
@@ -324,21 +341,25 @@ const FeedbackDetail = () => {
               </Typography>
               <Box>
                 <Typography variant="body2" color="text.secondary">
-                  <strong>{t('coupons.table_header_created')}:</strong> {format(new Date(feedback.created_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                  <strong>{t('coupons.table_header_created')}:</strong>{' '}
+                  {format(new Date(feedback.created_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
                 </Typography>
                 {feedback.updated_at && feedback.updated_at !== feedback.created_at && (
                   <Typography variant="body2" color="text.secondary">
-                    <strong>{t('feedback_detail.updated_at')}:</strong> {format(new Date(feedback.updated_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                    <strong>{t('feedback_detail.updated_at')}:</strong>{' '}
+                    {format(new Date(feedback.updated_at), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
                   </Typography>
                 )}
                 {feedback.response_date && (
                   <Typography variant="body2" color="text.secondary">
-                    <strong>{t('feedback_list.status_responded')}:</strong> {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
+                    <strong>{t('feedback_list.status_responded')}:</strong>{' '}
+                    {format(new Date(feedback.response_date), 'dd/MM/yyyy HH:mm', { locale: ptBR })}
                   </Typography>
                 )}
                 {feedback.visit_date && (
                   <Typography variant="body2" color="text.secondary">
-                    <strong>{t('new_feedback.visit_date_label')}:</strong> {format(new Date(feedback.visit_date), 'dd/MM/yyyy', { locale: ptBR })}
+                    <strong>{t('new_feedback.visit_date_label')}:</strong>{' '}
+                    {format(new Date(feedback.visit_date), 'dd/MM/yyyy', { locale: ptBR })}
                   </Typography>
                 )}
               </Box>
@@ -371,7 +392,8 @@ const FeedbackDetail = () => {
                   )}
                   {feedback.customer.total_visits && (
                     <Typography variant="body2">
-                      <strong>{t('feedback_detail.total_visits_label')}:</strong> {feedback.customer.total_visits}
+                      <strong>{t('feedback_detail.total_visits_label')}:</strong>{' '}
+                      {feedback.customer.total_visits}
                     </Typography>
                   )}
                 </Box>
@@ -399,7 +421,8 @@ const FeedbackDetail = () => {
                   )}
                   {feedback.qr_code.table_number && (
                     <Typography variant="body2">
-                      <strong>{t('public_feedback.table_prefix')}:</strong> {feedback.qr_code.table_number}
+                      <strong>{t('public_feedback.table_prefix')}:</strong>{' '}
+                      {feedback.qr_code.table_number}
                     </Typography>
                   )}
                 </Box>
@@ -418,10 +441,12 @@ const FeedbackDetail = () => {
                   <strong>{t('pdv.table_header_id')}:</strong> #{feedback.id}
                 </Typography>
                 <Typography variant="body2">
-                  <strong>{t('new_feedback.source_label')}:</strong> {getSourceLabel(feedback.source)}
+                  <strong>{t('new_feedback.source_label')}:</strong>{' '}
+                  {getSourceLabel(feedback.source)}
                 </Typography>
                 <Typography variant="body2">
-                  <strong>{t('coupons.table_header_status')}:</strong> {getStatusLabel(feedback.status)}
+                  <strong>{t('coupons.table_header_status')}:</strong>{' '}
+                  {getStatusLabel(feedback.status)}
                 </Typography>
                 {feedback.nps_score !== undefined && (
                   <Typography variant="body2">
@@ -459,7 +484,9 @@ const FeedbackDetail = () => {
             disabled={!replyText.trim() || replyLoading}
             startIcon={replyLoading ? <CircularProgress size={20} /> : null}
           >
-            {replyLoading ? t('feedback_detail.sending_button') : t('feedback_list.send_reply_button')}
+            {replyLoading
+              ? t('feedback_detail.sending_button')
+              : t('feedback_list.send_reply_button')}
           </Button>
         </DialogActions>
       </Dialog>
@@ -468,9 +495,7 @@ const FeedbackDetail = () => {
       <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>
         <DialogTitle>{t('category_management.confirm_delete_title')}</DialogTitle>
         <DialogContent>
-          <Typography>
-            {t('feedback_list.delete_dialog_content')}
-          </Typography>
+          <Typography>{t('feedback_list.delete_dialog_content')}</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDeleteDialog(false)}>{t('common.cancel')}</Button>

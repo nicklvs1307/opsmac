@@ -1,16 +1,5 @@
 const path = require('path');
-require('module-alias/register');
-const moduleAlias = require('module-alias');
-
-moduleAlias.addAliases({
-  '~': path.resolve(__dirname, 'src'),
-  'middleware': path.resolve(__dirname, 'src/middleware'),
-  'config': path.resolve(__dirname, 'src/config'),
-  'domains': path.resolve(__dirname, 'src/domains'),
-  'services': path.resolve(__dirname, 'src/services'),
-  'utils': path.resolve(__dirname, 'src/utils'),
-  'models': path.resolve(__dirname, 'models')
-});
+require('./aliases');
 
 const express = require('express');
 const cors = require('cors');
@@ -18,7 +7,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
-const { sequelize } = require('./src/config/database');
+const { sequelize, models } = require('models');
 const { BaseError } = require('utils/errors');
 
 // Importação de Rotas
@@ -30,8 +19,22 @@ const PORT = process.env.PORT || 5000;
 
 // Middlewares Globais
 app.use(helmet({ crossOriginResourcePolicy: false }));
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:3000',
+  'https://feedelizapro.towersfy.com'
+].filter(Boolean); // Filtra valores undefined/null
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com',
+  origin: function (origin, callback) {
+    // Permite requisições sem 'origin' (como mobile apps ou curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'A política de CORS para este site não permite acesso da origem especificada.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));

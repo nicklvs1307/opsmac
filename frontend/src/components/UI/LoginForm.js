@@ -67,9 +67,10 @@ const LoginForm = ({
         borderRadius: 3,
         position: 'relative',
         overflow: 'hidden',
-        background: theme.palette.mode === 'dark' 
-          ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.8)} 0%, ${alpha(theme.palette.background.paper, 0.9)} 100%)` 
-          : `linear-gradient(135deg, ${alpha('#f8f9fa', 0.8)} 0%, ${alpha('#ffffff', 0.9)} 100%)`,
+        background:
+          theme.palette.mode === 'dark'
+            ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.8)} 0%, ${alpha(theme.palette.background.paper, 0.9)} 100%)`
+            : `linear-gradient(135deg, ${alpha('#f8f9fa', 0.8)} 0%, ${alpha('#ffffff', 0.9)} 100%)`,
         backdropFilter: 'blur(10px)',
         border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
         boxShadow: `0 10px 40px ${alpha(theme.palette.common.black, 0.1)}`,
@@ -96,9 +97,9 @@ const LoginForm = ({
       }}
     >
       {/* Logo/Title */}
-      <Box 
-        sx={{ 
-          mb: 3, 
+      <Box
+        sx={{
+          mb: 3,
           textAlign: 'center',
           position: 'relative',
           zIndex: 1,
@@ -134,8 +135,8 @@ const LoginForm = ({
             >
               {finalAppName}
             </Typography>
-            <Typography 
-              variant="body1" 
+            <Typography
+              variant="body1"
               color="text.secondary"
               sx={{
                 animation: 'fadeIn 0.8s ease-in-out 0.2s both',
@@ -157,21 +158,21 @@ const LoginForm = ({
         )}
       </Box>
 
-      <Divider 
-        sx={{ 
-          width: '100%', 
+      <Divider
+        sx={{
+          width: '100%',
           mb: 3,
           '&::before, &::after': {
             borderColor: alpha(theme.palette.divider, 0.2),
           },
-        }} 
+        }}
       />
 
       {/* Login Form */}
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        sx={{ 
+        sx={{
           width: '100%',
           position: 'relative',
           zIndex: 1,
@@ -182,7 +183,7 @@ const LoginForm = ({
           variant="h5"
           align="center"
           gutterBottom
-          sx={{ 
+          sx={{
             mb: 3,
             fontWeight: 600,
             color: theme.palette.text.primary,
@@ -203,9 +204,9 @@ const LoginForm = ({
         </Typography>
 
         {error && (
-          <Alert 
-            severity="error" 
-            sx={{ 
+          <Alert
+            severity="error"
+            sx={{
               mb: 2,
               borderRadius: 2,
               animation: 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
@@ -401,16 +402,12 @@ const LoginForm = ({
             },
           }}
         >
-          {loading ? (
-            <CircularProgress size={24} color="inherit" />
-          ) : (
-            t('login_form.login_button')
-          )}
+          {loading ? <CircularProgress size={24} color="inherit" /> : t('login_form.login_button')}
         </Button>
 
-        <Box 
-          sx={{ 
-            textAlign: 'center', 
+        <Box
+          sx={{
+            textAlign: 'center',
             mt: 2,
             animation: 'fadeIn 0.8s ease-in-out 1.2s both',
             '@keyframes fadeIn': {
@@ -427,8 +424,8 @@ const LoginForm = ({
             component={RouterLink}
             to="/forgot-password"
             variant="body2"
-            sx={{ 
-              mb: 2, 
+            sx={{
+              mb: 2,
               display: 'block',
               color: theme.palette.primary.main,
               textDecoration: 'none',
@@ -442,14 +439,14 @@ const LoginForm = ({
           >
             {t('login_form.forgot_password')}
           </Link>
-          
+
           <Typography variant="body2" color="text.secondary">
-            {t('login_form.no_account_question')} 
-            <Link 
-              component={RouterLink} 
-              to="/register" 
+            {t('login_form.no_account_question')}
+            <Link
+              component={RouterLink}
+              to="/register"
               variant="body2"
-              sx={{ 
+              sx={{
                 color: theme.palette.primary.main,
                 textDecoration: 'none',
                 fontWeight: 500,
@@ -468,12 +465,12 @@ const LoginForm = ({
 
       {/* Demo credentials */}
       {showDemoCredentials && (
-        <Box 
-          sx={{ 
-            mt: 3, 
-            p: 2, 
+        <Box
+          sx={{
+            mt: 3,
+            p: 2,
             bgcolor: alpha(theme.palette.background.default, 0.5),
-            borderRadius: 2, 
+            borderRadius: 2,
             width: '100%',
             border: `1px dashed ${alpha(theme.palette.divider, 0.3)}`,
             animation: 'fadeIn 0.8s ease-in-out 1.4s both',

@@ -45,7 +45,7 @@ import {
   Send as SendIcon,
 } from '@mui/icons-material';
 import { useForm, Controller } from 'react-hook-form';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useThemeMode } from '../../contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../api/axiosInstance';
@@ -64,7 +64,7 @@ const Settings = () => {
   const { mode, toggleTheme } = useThemeMode();
   const { t, i18n } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
-  
+
   const [loading, setLoading] = useState(true); // Keep true from current
   const [apiToken, setApiToken] = useState('');
   const [activeTab, setActiveTab] = useState('profile');
@@ -172,22 +172,31 @@ const Settings = () => {
     }
   };
 
-  const fetchApiToken = useCallback(async (id) => {
-    try {
-      const response = await axiosInstance.get(`/api/settings/${id}/api-token`);
-      setApiToken(response.data.api_token || '');
-    } catch (err) {
-      console.error('Error fetching API token:', err);
-      toast.error(t('settings.error_fetching_api_token'));
-    }
-  }, [t]);
+  const fetchApiToken = useCallback(
+    async (id) => {
+      try {
+        const response = await axiosInstance.get(`/api/settings/${id}/api-token`);
+        setApiToken(response.data.api_token || '');
+      } catch (err) {
+        console.error('Error fetching API token:', err);
+        toast.error(t('settings.error_fetching_api_token'));
+      }
+    },
+    [t]
+  );
 
   const fetchSettings = useCallback(async (id) => {
     try {
       const response = await axiosInstance.get(`/api/settings/${id}`);
-      setSettings(prevSettings => ({
-        notifications: { ...(prevSettings.notifications || {}), ...(response.data.settings?.notifications || {}) },
-        appearance: { ...(prevSettings.appearance || {}), ...(response.data.settings?.appearance || {}) },
+      setSettings((prevSettings) => ({
+        notifications: {
+          ...(prevSettings.notifications || {}),
+          ...(response.data.settings?.notifications || {}),
+        },
+        appearance: {
+          ...(prevSettings.appearance || {}),
+          ...(response.data.settings?.appearance || {}),
+        },
         business: { ...(prevSettings.business || {}), ...(response.data.settings?.business || {}) },
       }));
     } catch (err) {
@@ -197,22 +206,27 @@ const Settings = () => {
     }
   }, []);
 
-  const fetchNpsCriteria = useCallback(async (id) => {
-    try {
-      const response = await axiosInstance.get(`/api/settings/${id}/nps-criteria`);
-      setNpsCriteria(response.data.nps_criteria || []);
-    } catch (err) {
-      console.error('Error fetching NPS criteria:', err);
-      toast.error(t('settings.error_fetching_nps_criteria'));
-    }
-  }, [t]);
+  const fetchNpsCriteria = useCallback(
+    async (id) => {
+      try {
+        const response = await axiosInstance.get(`/api/settings/${id}/nps-criteria`);
+        setNpsCriteria(response.data.nps_criteria || []);
+      } catch (err) {
+        console.error('Error fetching NPS criteria:', err);
+        toast.error(t('settings.error_fetching_nps_criteria'));
+      }
+    },
+    [t]
+  );
 
   const handleAddCriterion = async () => {
     if (newCriterion.trim() && !npsCriteria.includes(newCriterion.trim())) {
       const updatedCriteria = [...npsCriteria, newCriterion.trim()];
       try {
         setLoading(true);
-        await axiosInstance.put(`/api/settings/${restaurantId}/nps-criteria`, { nps_criteria: updatedCriteria });
+        await axiosInstance.put(`/api/settings/${restaurantId}/nps-criteria`, {
+          nps_criteria: updatedCriteria,
+        });
         setNpsCriteria(updatedCriteria);
         setNewCriterion('');
         toast.success(t('settings.nps_criterion_added_successfully'));
@@ -226,10 +240,12 @@ const Settings = () => {
   };
 
   const handleRemoveCriterion = async (criterionToRemove) => {
-    const updatedCriteria = npsCriteria.filter(c => c !== criterionToRemove);
+    const updatedCriteria = npsCriteria.filter((c) => c !== criterionToRemove);
     try {
       setLoading(true);
-      await axiosInstance.put(`/api/settings/${restaurantId}/nps-criteria`, { nps_criteria: updatedCriteria });
+      await axiosInstance.put(`/api/settings/${restaurantId}/nps-criteria`, {
+        nps_criteria: updatedCriteria,
+      });
       setNpsCriteria(updatedCriteria);
       toast.success(t('settings.nps_criterion_removed_successfully'));
     } catch (err) {
@@ -357,25 +373,34 @@ const Settings = () => {
       };
       fetchWhatsappSettings();
     }
-  }, [user, restaurantId, fetchSettings, fetchApiToken, fetchNpsCriteria, resetProfile, resetWhatsapp, t]);
+  }, [
+    user,
+    restaurantId,
+    fetchSettings,
+    fetchApiToken,
+    fetchNpsCriteria,
+    resetProfile,
+    resetWhatsapp,
+    t,
+  ]);
 
   const onProfileSubmit = async (data) => {
     try {
       setLoading(true);
-      
+
       const profileData = {
         name: data.name,
         email: data.email,
         phone: data.phone,
       };
-      
+
       const restaurantData = {
         name: data.restaurant_name,
         cuisine_type: data.cuisine_type,
         address: data.address,
         description: data.description,
       };
-      
+
       // Update user profile
       await updateUser(profileData);
 
@@ -399,13 +424,13 @@ const Settings = () => {
   const onPasswordSubmit = async (data) => {
     try {
       setLoading(true);
-      
+
       await axiosInstance.put('/api/auth/change-password', {
         current_password: data.current_password,
         new_password: data.new_password,
       });
-      
-            toast.success(t('settings.password_changed_successfully')); // Use t()
+
+      toast.success(t('settings.password_changed_successfully')); // Use t()
       setChangePasswordDialog(false);
       resetPassword();
     } catch (err) {
@@ -424,20 +449,22 @@ const Settings = () => {
           [setting]: value,
         },
       };
-      
+
       setSettings(newSettings);
-      
-      await axiosInstance.put(`/api/settings/${restaurantId}`, { // Use restaurantId
+
+      await axiosInstance.put(`/api/settings/${restaurantId}`, {
+        // Use restaurantId
         category,
         setting,
         value,
       });
-      
+
       toast.success(t('settings.setting_updated')); // Use t()
     } catch (err) {
       toast.error(t('settings.error_updating_setting')); // Use t()
       // Revert on error
-      if (restaurantId) { // Only fetch if restaurantId exists
+      if (restaurantId) {
+        // Only fetch if restaurantId exists
         fetchSettings(restaurantId);
       }
     }
@@ -470,9 +497,24 @@ const Settings = () => {
   ];
 
   const cuisineTypes = [
-        t('settings.cuisine_type_brazilian'),     t('settings.cuisine_type_italian'),     t('settings.cuisine_type_japanese'),     t('settings.cuisine_type_chinese'),     t('settings.cuisine_type_mexican'),     t('settings.cuisine_type_french'),
-        t('settings.cuisine_type_indian'), t('settings.cuisine_type_arabic'),         t('settings.cuisine_type_vegetarian'),         t('settings.cuisine_type_vegan'), t('settings.cuisine_type_fast_food'),     t('settings.cuisine_type_pizza'),
-    t('settings.cuisine_type_steakhouse'),     t('settings.cuisine_type_seafood'),         t('settings.cuisine_type_contemporary'), t('settings.cuisine_type_fusion'), t('settings.cuisine_type_other'),,
+    t('settings.cuisine_type_brazilian'),
+    t('settings.cuisine_type_italian'),
+    t('settings.cuisine_type_japanese'),
+    t('settings.cuisine_type_chinese'),
+    t('settings.cuisine_type_mexican'),
+    t('settings.cuisine_type_french'),
+    t('settings.cuisine_type_indian'),
+    t('settings.cuisine_type_arabic'),
+    t('settings.cuisine_type_vegetarian'),
+    t('settings.cuisine_type_vegan'),
+    t('settings.cuisine_type_fast_food'),
+    t('settings.cuisine_type_pizza'),
+    t('settings.cuisine_type_steakhouse'),
+    t('settings.cuisine_type_seafood'),
+    t('settings.cuisine_type_contemporary'),
+    t('settings.cuisine_type_fusion'),
+    t('settings.cuisine_type_other'),
+    ,
   ];
 
   const renderTabContent = () => {
@@ -487,7 +529,13 @@ const Settings = () => {
             <CardContent>
               <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
                 <Avatar
-                  sx={{ width: 120, height: 120, mb: 2, border: '2px solid', borderColor: 'divider' }}
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    mb: 2,
+                    border: '2px solid',
+                    borderColor: 'divider',
+                  }}
                   src={avatarPreview}
                 >
                   {user?.name?.charAt(0)}
@@ -571,7 +619,7 @@ const Settings = () => {
                   />
                 </Grid>
               </Grid>
-              
+
               <Box mt={3}>
                 <Button
                   variant="contained"
@@ -589,202 +637,217 @@ const Settings = () => {
       case 'business':
         return (
           <>
-          <Card>
-            <CardHeader
-              title={t('settings.restaurant_info')}
-              subheader={t('settings.configure_restaurant_info')}
-            />
-            <CardContent>
-              <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
-                <Avatar
-                  sx={{ width: 120, height: 120, mb: 2, border: '2px solid', borderColor: 'divider' }}
-                  src={logoPreview}
-                >
-                  <BusinessIcon sx={{ fontSize: 60 }} />
-                </Avatar>
-                <input
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                  id="logo-upload-input"
-                  type="file"
-                  onChange={handleLogoChange}
-                />
-                <label htmlFor="logo-upload-input">
-                  <Button variant="outlined" component="span" startIcon={<PhotoCameraIcon />}>
-                    {t('settings.change_logo')}
-                  </Button>
-                </label>
-                {selectedLogo && (
+            <Card>
+              <CardHeader
+                title={t('settings.restaurant_info')}
+                subheader={t('settings.configure_restaurant_info')}
+              />
+              <CardContent>
+                <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
+                  <Avatar
+                    sx={{
+                      width: 120,
+                      height: 120,
+                      mb: 2,
+                      border: '2px solid',
+                      borderColor: 'divider',
+                    }}
+                    src={logoPreview}
+                  >
+                    <BusinessIcon sx={{ fontSize: 60 }} />
+                  </Avatar>
+                  <input
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    id="logo-upload-input"
+                    type="file"
+                    onChange={handleLogoChange}
+                  />
+                  <label htmlFor="logo-upload-input">
+                    <Button variant="outlined" component="span" startIcon={<PhotoCameraIcon />}>
+                      {t('settings.change_logo')}
+                    </Button>
+                  </label>
+                  {selectedLogo && (
+                    <Button
+                      variant="contained"
+                      onClick={handleLogoUpload}
+                      disabled={loading}
+                      sx={{ mt: 1 }}
+                    >
+                      {loading ? <CircularProgress size={20} /> : t('settings.upload_logo')}
+                    </Button>
+                  )}
+                </Box>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name="restaurant_name"
+                      control={profileControl}
+                      rules={{ required: t('settings.restaurant_name_required') }}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label={t('settings.restaurant_name')}
+                          fullWidth
+                          error={!!profileErrors.restaurant_name}
+                          helperText={profileErrors.restaurant_name?.message}
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name="cuisine_type"
+                      control={profileControl}
+                      render={({ field }) => (
+                        <FormControl fullWidth>
+                          <InputLabel>{t('settings.cuisine_type')}</InputLabel>
+                          <Select {...field} label={t('settings.cuisine_type')}>
+                            {cuisineTypes.map((type) => (
+                              <MenuItem key={type} value={type}>
+                                {type}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Controller
+                      name="address"
+                      control={profileControl}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label={t('settings.address')}
+                          fullWidth
+                          multiline
+                          rows={2}
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Controller
+                      name="description"
+                      control={profileControl}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          label={t('settings.description')}
+                          fullWidth
+                          multiline
+                          rows={3}
+                          placeholder={t('settings.description')}
+                        />
+                      )}
+                    />
+                  </Grid>
+                </Grid>
+
+                <Divider sx={{ my: 3 }} />
+
+                <Typography variant="h6" gutterBottom>
+                  {t('settings.business_settings')}
+                </Typography>
+
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary={t('settings.auto_reply')}
+                      secondary={t('settings.send_auto_replies')}
+                    />
+                    <ListItemSecondaryAction>
+                      <Switch
+                        checked={settings.business.auto_reply}
+                        onChange={(e) =>
+                          handleSettingChange('business', 'auto_reply', e.target.checked)
+                        }
+                      />
+                    </ListItemSecondaryAction>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemText
+                      primary={t('settings.feedback_moderation')}
+                      secondary={t('settings.review_feedback_before_publishing')}
+                    />
+                    <ListItemSecondaryAction>
+                      <Switch
+                        checked={settings.business.feedback_moderation}
+                        onChange={(e) =>
+                          handleSettingChange('business', 'feedback_moderation', e.target.checked)
+                        }
+                      />
+                    </ListItemSecondaryAction>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemText
+                      primary={t('settings.loyalty_program')}
+                      secondary={t('settings.activate_loyalty_program')}
+                    />
+                    <ListItemSecondaryAction>
+                      <Switch
+                        checked={settings.business.loyalty_program}
+                        onChange={(e) =>
+                          handleSettingChange('business', 'loyalty_program', e.target.checked)
+                        }
+                      />
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
+
+                <Box mt={3}>
                   <Button
                     variant="contained"
-                    onClick={handleLogoUpload}
+                    startIcon={<SaveIcon />}
+                    onClick={handleProfileSubmit(onProfileSubmit)}
                     disabled={loading}
-                    sx={{ mt: 1 }}
                   >
-                    {loading ? <CircularProgress size={20} /> : t('settings.upload_logo')}
+                    {loading ? <CircularProgress size={20} /> : t('settings.save_changes')}
                   </Button>
-                )}
-              </Box>
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                  <Controller
-                    name="restaurant_name"
-                    control={profileControl}
-                    rules={{ required: t('settings.restaurant_name_required') }}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={t('settings.restaurant_name')}
-                        fullWidth
-                        error={!!profileErrors.restaurant_name}
-                        helperText={profileErrors.restaurant_name?.message}
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Controller
-                    name="cuisine_type"
-                    control={profileControl}
-                    render={({ field }) => (
-                      <FormControl fullWidth>
-                        <InputLabel>{t('settings.cuisine_type')}</InputLabel>
-                        <Select {...field} label={t('settings.cuisine_type')}>
-                          {cuisineTypes.map((type) => (
-                            <MenuItem key={type} value={type}>
-                              {type}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    name="address"
-                    control={profileControl}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={t('settings.address')}
-                        fullWidth
-                        multiline
-                        rows={2}
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    name="description"
-                    control={profileControl}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={t('settings.description')}
-                        fullWidth
-                        multiline
-                        rows={3}
-                        placeholder={t('settings.description')}
-                      />
-                    )}
-                  />
-                </Grid>
-              </Grid>
-              
-              <Divider sx={{ my: 3 }} />
-              
-              <Typography variant="h6" gutterBottom>
-                {t('settings.business_settings')}
-              </Typography>
-              
-              <List>
-                <ListItem>
-                  <ListItemText
-                    primary={t('settings.auto_reply')}
-                    secondary={t('settings.send_auto_replies')}
-                  />
-                  <ListItemSecondaryAction>
-                    <Switch
-                      checked={settings.business.auto_reply}
-                      onChange={(e) => handleSettingChange('business', 'auto_reply', e.target.checked)}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-                
-                <ListItem>
-                  <ListItemText
-                    primary={t('settings.feedback_moderation')}
-                    secondary={t('settings.review_feedback_before_publishing')}
-                  />
-                  <ListItemSecondaryAction>
-                    <Switch
-                      checked={settings.business.feedback_moderation}
-                      onChange={(e) => handleSettingChange('business', 'feedback_moderation', e.target.checked)}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-                
-                <ListItem>
-                  <ListItemText
-                    primary={t('settings.loyalty_program')}
-                    secondary={t('settings.activate_loyalty_program')}
-                  />
-                  <ListItemSecondaryAction>
-                    <Switch
-                      checked={settings.business.loyalty_program}
-                      onChange={(e) => handleSettingChange('business', 'loyalty_program', e.target.checked)}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </List>
-              
-              <Box mt={3}>
-                <Button
-                  variant="contained"
-                  startIcon={<SaveIcon />}
-                  onClick={handleProfileSubmit(onProfileSubmit)}
-                  disabled={loading}
-                >
-                  {loading ? <CircularProgress size={20} /> : t('settings.save_changes')}
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-
-          <Card sx={{ mt: 3 }}>
-            <CardHeader
-              title="Link do Cardápio de Delivery"
-              subheader="Compartilhe este link com seus clientes para que eles possam ver seu cardápio online."
-            />
-            <CardContent>
-              {user?.restaurant?.slug ? (
-                <Box display="flex" alignItems="center">
-                  <TextField
-                    value={`${window.location.origin}/menu/delivery/${user.restaurant.slug}`}
-                    fullWidth
-                    InputProps={{
-                      readOnly: true,
-                    }}
-                    sx={{ mr: 2 }}
-                  />
-                  <IconButton 
-                    onClick={() => {
-                      navigator.clipboard.writeText(`${window.location.origin}/menu/delivery/${user.restaurant.slug}`);
-                      toast.success('Link copiado!');
-                    }}
-                  >
-                    <ContentCopyIcon />
-                  </IconButton>
                 </Box>
-              ) : (
-                <Typography variant="body2" color="text.secondary">
-                  O link do seu cardápio aparecerá aqui assim que as informações do seu restaurante estiverem salvas.
-                </Typography>
-              )}
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            <Card sx={{ mt: 3 }}>
+              <CardHeader
+                title="Link do Cardápio de Delivery"
+                subheader="Compartilhe este link com seus clientes para que eles possam ver seu cardápio online."
+              />
+              <CardContent>
+                {user?.restaurant?.slug ? (
+                  <Box display="flex" alignItems="center">
+                    <TextField
+                      value={`${window.location.origin}/menu/delivery/${user.restaurant.slug}`}
+                      fullWidth
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      sx={{ mr: 2 }}
+                    />
+                    <IconButton
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `${window.location.origin}/menu/delivery/${user.restaurant.slug}`
+                        );
+                        toast.success('Link copiado!');
+                      }}
+                    >
+                      <ContentCopyIcon />
+                    </IconButton>
+                  </Box>
+                ) : (
+                  <Typography variant="body2" color="text.secondary">
+                    O link do seu cardápio aparecerá aqui assim que as informações do seu
+                    restaurante estiverem salvas.
+                  </Typography>
+                )}
+              </CardContent>
+            </Card>
           </>
         );
 
@@ -805,11 +868,13 @@ const Settings = () => {
                   <ListItemSecondaryAction>
                     <Switch
                       checked={settings.notifications.email_feedback}
-                      onChange={(e) => handleSettingChange('notifications', 'email_feedback', e.target.checked)}
+                      onChange={(e) =>
+                        handleSettingChange('notifications', 'email_feedback', e.target.checked)
+                      }
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
-                
+
                 <ListItem>
                   <ListItemText
                     primary={t('settings.email_reports')}
@@ -818,11 +883,13 @@ const Settings = () => {
                   <ListItemSecondaryAction>
                     <Switch
                       checked={settings.notifications.email_reports}
-                      onChange={(e) => handleSettingChange('notifications', 'email_reports', e.target.checked)}
+                      onChange={(e) =>
+                        handleSettingChange('notifications', 'email_reports', e.target.checked)
+                      }
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
-                
+
                 <ListItem>
                   <ListItemText
                     primary={t('settings.sms_alerts')}
@@ -831,11 +898,13 @@ const Settings = () => {
                   <ListItemSecondaryAction>
                     <Switch
                       checked={settings.notifications.sms_alerts}
-                      onChange={(e) => handleSettingChange('notifications', 'sms_alerts', e.target.checked)}
+                      onChange={(e) =>
+                        handleSettingChange('notifications', 'sms_alerts', e.target.checked)
+                      }
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
-                
+
                 <ListItem>
                   <ListItemText
                     primary={t('settings.push_notifications')}
@@ -844,7 +913,9 @@ const Settings = () => {
                   <ListItemSecondaryAction>
                     <Switch
                       checked={settings.notifications.push_notifications}
-                      onChange={(e) => handleSettingChange('notifications', 'push_notifications', e.target.checked)}
+                      onChange={(e) =>
+                        handleSettingChange('notifications', 'push_notifications', e.target.checked)
+                      }
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -876,9 +947,9 @@ const Settings = () => {
                   {t('settings.change_password')}
                 </Button>
               </Box>
-              
+
               <Divider sx={{ my: 3 }} />
-              
+
               <Box>
                 <Typography variant="h6" gutterBottom>
                   {t('settings.active_sessions')}
@@ -886,7 +957,7 @@ const Settings = () => {
                 <Typography variant="body2" color="text.secondary" gutterBottom>
                   {t('settings.manage_logged_in_sessions')}
                 </Typography>
-                
+
                 <List>
                   <ListItem>
                     <ListItemText
@@ -970,7 +1041,7 @@ const Settings = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                
+
                 <Grid item xs={12} md={6}>
                   <FormControl fullWidth>
                     <InputLabel>{t('settings.language')}</InputLabel>
@@ -988,17 +1059,23 @@ const Settings = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                
+
                 <Grid item xs={12} md={6}>
                   <FormControl fullWidth>
                     <InputLabel>{t('settings.timezone')}</InputLabel>
                     <Select
                       value={settings.appearance.timezone}
                       label={t('settings.timezone')}
-                      onChange={(e) => handleSettingChange('appearance', 'timezone', e.target.value)}
+                      onChange={(e) =>
+                        handleSettingChange('appearance', 'timezone', e.target.value)
+                      }
                     >
-                      <MenuItem value="America/Sao_Paulo">{t('settings.timezone_sao_paulo')}</MenuItem>
-                      <MenuItem value="America/New_York">{t('settings.timezone_new_york')}</MenuItem>
+                      <MenuItem value="America/Sao_Paulo">
+                        {t('settings.timezone_sao_paulo')}
+                      </MenuItem>
+                      <MenuItem value="America/New_York">
+                        {t('settings.timezone_new_york')}
+                      </MenuItem>
                       <MenuItem value="Europe/London">{t('settings.timezone_london')}</MenuItem>
                     </Select>
                   </FormControl>
@@ -1031,10 +1108,16 @@ const Settings = () => {
                     )}
                   />
                 }
-                label={t('settings.enable_whatsapp_integration', 'Habilitar Integração com WhatsApp')}
+                label={t(
+                  'settings.enable_whatsapp_integration',
+                  'Habilitar Integração com WhatsApp'
+                )}
               />
               <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                {t('settings.enable_whatsapp_integration_helper', 'Ative para permitir o envio de mensagens automáticas via WhatsApp.')}
+                {t(
+                  'settings.enable_whatsapp_integration_helper',
+                  'Ative para permitir o envio de mensagens automáticas via WhatsApp.'
+                )}
               </Typography>
 
               <Grid container spacing={2}>
@@ -1157,7 +1240,11 @@ const Settings = () => {
                   <ListItem
                     key={index}
                     secondaryAction={
-                      <IconButton edge="end" aria-label="delete" onClick={() => handleRemoveCriterion(criterion)}>
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => handleRemoveCriterion(criterion)}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     }
@@ -1185,7 +1272,7 @@ const Settings = () => {
       <Typography variant="h4" component="h1" gutterBottom>
         {t('settings.title')}
       </Typography>
-      
+
       <Grid container spacing={3}>
         {/* Sidebar */}
         <Grid item xs={12} md={3}>
@@ -1219,11 +1306,18 @@ const Settings = () => {
             </List>
           </Paper>
         </Grid>
-        
+
         {/* Content */}
         <Grid item xs={12} md={9}>
           {loading ? (
-            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '50vh',
+              }}
+            >
               <CircularProgress />
             </Box>
           ) : (
@@ -1348,7 +1442,9 @@ const Settings = () => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setChangePasswordDialog(false)}>{t('settings.cancel_button')}</Button>
+          <Button onClick={() => setChangePasswordDialog(false)}>
+            {t('settings.cancel_button')}
+          </Button>
           <Button
             onClick={handlePasswordSubmit(onPasswordSubmit)}
             variant="contained"

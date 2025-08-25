@@ -1,7 +1,15 @@
 import React from 'react';
 import {
-  Button, Dialog, DialogTitle, DialogContent, DialogActions,
-  FormGroup, FormControlLabel, Checkbox, CircularProgress, Box
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  CircularProgress,
+  Box,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +21,7 @@ const ModuleSettingsModal = ({
   selectedModuleIds, // Recebe os IDs dos módulos selecionados (array de números)
   setSelectedModuleIds, // Função para atualizar os IDs selecionados
   onSaveModules,
-  loading
+  loading,
 }) => {
   const { t } = useTranslation();
 
@@ -28,7 +36,9 @@ const ModuleSettingsModal = ({
 
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>{t('admin_dashboard.manage_modules_for', { name: editingRestaurant?.name })}</DialogTitle>
+      <DialogTitle>
+        {t('admin_dashboard.manage_modules_for', { name: editingRestaurant?.name })}
+      </DialogTitle>
       <DialogContent dividers>
         {loading ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
@@ -53,7 +63,9 @@ const ModuleSettingsModal = ({
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} disabled={loading}>{t('common.cancel')}</Button>
+        <Button onClick={onClose} disabled={loading}>
+          {t('common.cancel')}
+        </Button>
         <Button onClick={onSaveModules} variant="contained" disabled={loading}>
           {loading ? <CircularProgress size={24} /> : t('common.save')}
         </Button>

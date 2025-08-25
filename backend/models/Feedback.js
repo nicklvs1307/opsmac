@@ -237,7 +237,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Feedback',
     tableName: 'feedbacks',
-    underscored: true,
     timestamps: true,
     indexes: [
       {

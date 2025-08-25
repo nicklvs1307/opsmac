@@ -115,7 +115,6 @@ module.exports = (sequelize) => {
     modelName: 'Order',
     tableName: 'orders',
     timestamps: true,
-    underscored: true,
     indexes: [
       {
         fields: ['restaurant_id'],

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { models } = require('config/database');
+const { models } = require('config/config');
 
 const SAIPOS_API_BASE_URL = 'https://api.saipos.com'; // Verifique a URL base correta da API da Saipos
 

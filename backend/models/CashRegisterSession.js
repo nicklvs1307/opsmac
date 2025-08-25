@@ -10,11 +10,11 @@ module.exports = (sequelize) => {
      */
     static associate(models) {
       CashRegisterSession.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurant_id',
+        foreignKey: 'restaurantId',
         as: 'restaurant',
       });
       CashRegisterSession.belongsTo(models.User, {
-        foreignKey: 'user_id',
+        foreignKey: 'userId',
         as: 'user',
       });
     }
@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    user_id: {
+    userId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -42,28 +42,28 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    opening_cash: {
+    openingCash: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    opening_observations: {
+    openingObservations: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    opening_time: {
+    openingTime: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    closing_cash: {
+    closingCash: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: true,
     },
-    closing_observations: {
+    closingObservations: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    closing_time: {
+    closingTime: {
       type: DataTypes.DATE,
       allowNull: true,
     },
@@ -76,7 +76,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'CashRegisterSession',
     tableName: 'cash_register_sessions',
-    underscored: true,
     timestamps: true,
   });
 

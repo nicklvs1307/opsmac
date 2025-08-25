@@ -58,7 +58,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'TableSession',
     tableName: 'table_sessions',
-    underscored: true,
     timestamps: true,
   });
 

@@ -1,8 +1,19 @@
 import React from 'react';
-import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, TextField, Button, CircularProgress } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  TextField,
+  Button,
+  CircularProgress,
+} from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
@@ -129,7 +140,11 @@ const GoogleMyBusinessIntegration = () => {
                 fullWidth
                 margin="normal"
                 error={!!errors.google_my_business_client_id}
-                helperText={errors.google_my_business_client_id ? errors.google_my_business_client_id.message : ''}
+                helperText={
+                  errors.google_my_business_client_id
+                    ? errors.google_my_business_client_id.message
+                    : ''
+                }
               />
             )}
           />
@@ -145,7 +160,11 @@ const GoogleMyBusinessIntegration = () => {
                 margin="normal"
                 type="password"
                 error={!!errors.google_my_business_client_secret}
-                helperText={errors.google_my_business_client_secret ? errors.google_my_business_client_secret.message : ''}
+                helperText={
+                  errors.google_my_business_client_secret
+                    ? errors.google_my_business_client_secret.message
+                    : ''
+                }
               />
             )}
           />
@@ -156,7 +175,11 @@ const GoogleMyBusinessIntegration = () => {
             sx={{ mt: 2 }}
             disabled={loading}
           >
-            {loading ? <CircularProgress size={24} /> : t('integrations.google_my_business.save_button')}
+            {loading ? (
+              <CircularProgress size={24} />
+            ) : (
+              t('integrations.google_my_business.save_button')
+            )}
           </Button>
         </form>
       </Paper>

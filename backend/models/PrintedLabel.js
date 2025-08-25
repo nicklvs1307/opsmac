@@ -5,21 +5,21 @@ module.exports = (sequelize) => {
   class PrintedLabel extends Model {
     static associate(models) {
       PrintedLabel.belongsTo(models.User, {
-        foreignKey: 'user_id',
+        foreignKey: 'userId',
         as: 'user',
       });
       PrintedLabel.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurant_id',
+        foreignKey: 'restaurantId',
         as: 'restaurant',
       });
       // Polymorphic association to Product or Ingredient
       PrintedLabel.belongsTo(models.Product, {
-        foreignKey: 'labelable_id',
+        foreignKey: 'labelableId',
         constraints: false,
         as: 'product',
       });
       PrintedLabel.belongsTo(models.Ingredient, {
-        foreignKey: 'labelable_id',
+        foreignKey: 'labelableId',
         constraints: false,
         as: 'ingredient',
       });
@@ -27,8 +27,8 @@ module.exports = (sequelize) => {
 
     // Helper method to get the associated labelable item
     getLabelable(options) {
-      if (!this.labelable_type) return Promise.resolve(null);
-      const mixinMethodName = `get${this.labelable_type}`;
+      if (!this.labelableType) return Promise.resolve(null);
+      const mixinMethodName = `get${this.labelableType}`;
       return this[mixinMethodName](options);
     }
   }
@@ -39,15 +39,15 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    labelable_id: {
+    labelableId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    labelable_type: {
+    labelableType: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    user_id: { // User who printed the label
+    userId: { // User who printed the label
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -55,7 +55,7 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -63,21 +63,21 @@ module.exports = (sequelize) => {
         key: 'id',
       },
     },
-    print_date: {
+    printDate: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
       allowNull: false,
     },
-    expiration_date: {
+    expirationDate: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    quantity_printed: {
+    quantityPrinted: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1,
     },
-    lot_number: {
+    lotNumber: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -89,7 +89,7 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL(10, 3),
       allowNull: true,
     },
-    unit_of_measure: {
+    unitOfMeasure: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -98,13 +98,12 @@ module.exports = (sequelize) => {
     modelName: 'PrintedLabel',
     tableName: 'printed_labels',
     timestamps: true,
-    underscored: true,
     indexes: [
       {
-        fields: ['labelable_id', 'labelable_type'],
+        fields: ['labelableId', 'labelableType'],
       },
       {
-        fields: ['expiration_date'],
+        fields: ['expirationDate'],
       },
     ],
   });

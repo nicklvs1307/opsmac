@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
-import { Box, Typography, CircularProgress, Alert, Button, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Button,
+  TextField,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 import { useQuery } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 
@@ -13,7 +27,9 @@ const fetchDREReport = async ({ queryKey }) => {
   if (!start_date || !end_date) {
     return null; // Don't fetch if dates are not set
   }
-  const { data } = await axiosInstance.get(`/api/financial/reports/dre?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`);
+  const { data } = await axiosInstance.get(
+    `/api/financial/reports/dre?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`
+  );
   return data;
 };
 
@@ -27,16 +43,19 @@ const DREReport = () => {
     end_date: '',
   });
 
-  const { data: reportData, isLoading, isError, refetch } = useQuery(
-    ['dreReport', restaurantId, filters],
-    fetchDREReport,
-    {
-      enabled: !!restaurantId && !!filters.start_date && !!filters.end_date,
-      onError: (error) => {
-        toast.error(t('reports.error_loading_dre', { message: error.response?.data?.msg || error.message }));
-      },
-    }
-  );
+  const {
+    data: reportData,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery(['dreReport', restaurantId, filters], fetchDREReport, {
+    enabled: !!restaurantId && !!filters.start_date && !!filters.end_date,
+    onError: (error) => {
+      toast.error(
+        t('reports.error_loading_dre', { message: error.response?.data?.msg || error.message })
+      );
+    },
+  });
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -60,7 +79,9 @@ const DREReport = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('reports.dre_title')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('reports.dre_title')}
+      </Typography>
 
       <Paper elevation={2} sx={{ p: 2, mb: 3 }}>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-end' }}>
@@ -86,7 +107,12 @@ const DREReport = () => {
             }}
             fullWidth
           />
-          <Button variant="contained" startIcon={<RefreshIcon />} onClick={handleGenerateReport} disabled={isLoading}>
+          <Button
+            variant="contained"
+            startIcon={<RefreshIcon />}
+            onClick={handleGenerateReport}
+            disabled={isLoading}
+          >
             {t('reports.generate_report')}
           </Button>
         </Box>
@@ -104,36 +130,56 @@ const DREReport = () => {
             <Table size="small">
               <TableBody>
                 <TableRow>
-                  <TableCell sx={{ fontWeight: 'bold' }}>{t('reports.operational_revenue')}</TableCell>
-                  <TableCell align="right" sx={{ fontWeight: 'bold' }}>R$ {Number(reportData.totalSales).toFixed(2).replace('.', ',')}</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>
+                    {t('reports.operational_revenue')}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontWeight: 'bold' }}>
+                    R$ {Number(reportData.totalSales).toFixed(2).replace('.', ',')}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>{t('reports.cmv')}</TableCell>
-                  <TableCell align="right">R$ {Number(reportData.cmv).toFixed(2).replace('.', ',')}</TableCell>
+                  <TableCell align="right">
+                    R$ {Number(reportData.cmv).toFixed(2).replace('.', ',')}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell sx={{ fontWeight: 'bold' }}>{t('reports.gross_profit')}</TableCell>
-                  <TableCell align="right" sx={{ fontWeight: 'bold' }}>R$ {Number(reportData.grossProfit).toFixed(2).replace('.', ',')}</TableCell>
+                  <TableCell align="right" sx={{ fontWeight: 'bold' }}>
+                    R$ {Number(reportData.grossProfit).toFixed(2).replace('.', ',')}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>{t('reports.operational_expenses')}</TableCell>
-                  <TableCell align="right">R$ {Number(reportData.totalOperationalExpenses).toFixed(2).replace('.', ',')}</TableCell>
+                  <TableCell align="right">
+                    R$ {Number(reportData.totalOperationalExpenses).toFixed(2).replace('.', ',')}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell sx={{ fontWeight: 'bold' }}>{t('reports.operating_profit')}</TableCell>
-                  <TableCell align="right" sx={{ fontWeight: 'bold' }}>R$ {Number(reportData.operatingProfit).toFixed(2).replace('.', ',')}</TableCell>
+                  <TableCell align="right" sx={{ fontWeight: 'bold' }}>
+                    R$ {Number(reportData.operatingProfit).toFixed(2).replace('.', ',')}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>{t('reports.other_income')}</TableCell>
-                  <TableCell align="right">R$ {Number(reportData.otherIncome).toFixed(2).replace('.', ',')}</TableCell>
+                  <TableCell align="right">
+                    R$ {Number(reportData.otherIncome).toFixed(2).replace('.', ',')}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>{t('reports.other_expenses')}</TableCell>
-                  <TableCell align="right">R$ {Number(reportData.otherExpenses).toFixed(2).replace('.', ',')}</TableCell>
+                  <TableCell align="right">
+                    R$ {Number(reportData.otherExpenses).toFixed(2).replace('.', ',')}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t('reports.net_profit')}</TableCell>
-                  <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>R$ {Number(reportData.netProfit).toFixed(2).replace('.', ',')}</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>
+                    {t('reports.net_profit')}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>
+                    R$ {Number(reportData.netProfit).toFixed(2).replace('.', ',')}
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>

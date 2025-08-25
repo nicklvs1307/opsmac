@@ -5,7 +5,7 @@ import api from '../../api/axiosInstance';
 import { Grid, Card, CardContent, Typography, Button, Box, Container } from '@mui/material';
 
 const WaiterPage = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useAuth();
   const [tables, setTables] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -14,17 +14,17 @@ const WaiterPage = () => {
 
   useEffect(() => {
     if (restaurantId) {
-        const fetchTables = async () => {
-          try {
-            // Waiters will need a specific endpoint to get tables, let's assume one exists or will be created.
-            // For now, let's reuse the admin endpoint, assuming permissions are handled on the backend.
-            const response = await api.get(`/restaurant/${restaurantId}/tables`); // This endpoint might need to be created
-            setTables(response.data);
-          } catch (err) {
-            setError('Erro ao buscar mesas.');
-          }
-        };
-        fetchTables();
+      const fetchTables = async () => {
+        try {
+          // Waiters will need a specific endpoint to get tables, let's assume one exists or will be created.
+          // For now, let's reuse the admin endpoint, assuming permissions are handled on the backend.
+          const response = await api.get(`/restaurant/${restaurantId}/tables`); // This endpoint might need to be created
+          setTables(response.data);
+        } catch (err) {
+          setError('Erro ao buscar mesas.');
+        }
+      };
+      fetchTables();
     }
   }, [restaurantId]);
 
@@ -41,7 +41,9 @@ const WaiterPage = () => {
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h4">Mesas</Typography>
-        <Button variant="outlined" onClick={handleLogout}>Sair</Button>
+        <Button variant="outlined" onClick={handleLogout}>
+          Sair
+        </Button>
       </Box>
       {error && <Typography color="error">{error}</Typography>}
       <Grid container spacing={3}>
@@ -53,12 +55,12 @@ const WaiterPage = () => {
                 <Typography color="text.secondary">
                   Status: {table.is_active ? 'Livre' : 'Ocupada'}
                 </Typography>
-                <Button 
-                    variant="contained" 
-                    color="primary" 
-                    sx={{ mt: 2 }} 
-                    onClick={() => handleSelectTable(table.id)}
-                    disabled={!table.is_active}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ mt: 2 }}
+                  onClick={() => handleSelectTable(table.id)}
+                  disabled={!table.is_active}
                 >
                   Criar Pedido
                 </Button>

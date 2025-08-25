@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, TextField, Button, CircularProgress } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  TextField,
+  Button,
+  CircularProgress,
+} from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
@@ -130,7 +141,9 @@ const DeliveryMuchIntegration = () => {
                 fullWidth
                 margin="normal"
                 error={!!errors.delivery_much_client_id}
-                helperText={errors.delivery_much_client_id ? errors.delivery_much_client_id.message : ''}
+                helperText={
+                  errors.delivery_much_client_id ? errors.delivery_much_client_id.message : ''
+                }
               />
             )}
           />
@@ -146,7 +159,11 @@ const DeliveryMuchIntegration = () => {
                 margin="normal"
                 type="password"
                 error={!!errors.delivery_much_client_secret}
-                helperText={errors.delivery_much_client_secret ? errors.delivery_much_client_secret.message : ''}
+                helperText={
+                  errors.delivery_much_client_secret
+                    ? errors.delivery_much_client_secret.message
+                    : ''
+                }
               />
             )}
           />
@@ -161,7 +178,9 @@ const DeliveryMuchIntegration = () => {
                 fullWidth
                 margin="normal"
                 error={!!errors.delivery_much_username}
-                helperText={errors.delivery_much_username ? errors.delivery_much_username.message : ''}
+                helperText={
+                  errors.delivery_much_username ? errors.delivery_much_username.message : ''
+                }
               />
             )}
           />
@@ -177,7 +196,9 @@ const DeliveryMuchIntegration = () => {
                 margin="normal"
                 type="password"
                 error={!!errors.delivery_much_password}
-                helperText={errors.delivery_much_password ? errors.delivery_much_password.message : ''}
+                helperText={
+                  errors.delivery_much_password ? errors.delivery_much_password.message : ''
+                }
               />
             )}
           />

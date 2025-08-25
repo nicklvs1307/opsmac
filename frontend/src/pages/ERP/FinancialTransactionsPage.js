@@ -1,21 +1,53 @@
 import React, { useState } from 'react';
-import { Box, Typography, CircularProgress, Alert, Button, TextField, Paper, List, ListItem, ListItemText, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Select, MenuItem, FormControl, InputLabel, Switch, FormControlLabel } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Button,
+  TextField,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Switch,
+  FormControlLabel,
+} from '@mui/material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '../../api/axiosInstance';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, Visibility as VisibilityIcon } from '@mui/icons-material';
-import { useAuth } from '../../contexts/AuthContext';
+import {
+  Add as AddIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  Visibility as VisibilityIcon,
+} from '@mui/icons-material';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const fetchFinancialTransactions = async ({ queryKey }) => {
   const [, restaurantId] = queryKey;
-  const { data } = await axiosInstance.get(`/api/financial/transactions?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(
+    `/api/financial/transactions?restaurant_id=${restaurantId}`
+  );
   return data;
 };
 
 const fetchFinancialCategories = async ({ queryKey }) => {
   const [, restaurantId] = queryKey;
-  const { data } = await axiosInstance.get(`/api/financial/categories?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(
+    `/api/financial/categories?restaurant_id=${restaurantId}`
+  );
   return data;
 };
 
@@ -56,27 +88,34 @@ const FinancialTransactionsPage = () => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [transactionToDelete, setTransactionToDelete] = useState(null);
 
-  const { data: transactions, isLoading, isError, error } = useQuery(
-    ['financialTransactions', restaurantId],
-    fetchFinancialTransactions,
-    {
-      enabled: !!restaurantId,
-      onError: (err) => {
-        toast.error(t('financial.error_loading_transactions', { message: err.response?.data?.msg || err.message }));
-      },
-    }
-  );
+  const {
+    data: transactions,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(['financialTransactions', restaurantId], fetchFinancialTransactions, {
+    enabled: !!restaurantId,
+    onError: (err) => {
+      toast.error(
+        t('financial.error_loading_transactions', {
+          message: err.response?.data?.msg || err.message,
+        })
+      );
+    },
+  });
 
-  const { data: categories, isLoading: isLoadingCategories, isError: isErrorCategories } = useQuery(
-    ['financialCategories', restaurantId],
-    fetchFinancialCategories,
-    {
-      enabled: !!restaurantId,
-      onError: (err) => {
-        toast.error(t('financial.error_loading_categories', { message: err.response?.data?.msg || err.message }));
-      },
-    }
-  );
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    isError: isErrorCategories,
+  } = useQuery(['financialCategories', restaurantId], fetchFinancialCategories, {
+    enabled: !!restaurantId,
+    onError: (err) => {
+      toast.error(
+        t('financial.error_loading_categories', { message: err.response?.data?.msg || err.message })
+      );
+    },
+  });
 
   const createMutation = useMutation(createFinancialTransaction, {
     onSuccess: () => {
@@ -86,7 +125,11 @@ const FinancialTransactionsPage = () => {
       queryClient.invalidateQueries('financialTransactions');
     },
     onError: (err) => {
-      toast.error(t('financial.error_creating_transaction', { message: err.response?.data?.msg || err.message }));
+      toast.error(
+        t('financial.error_creating_transaction', {
+          message: err.response?.data?.msg || err.message,
+        })
+      );
     },
   });
 
@@ -98,7 +141,11 @@ const FinancialTransactionsPage = () => {
       queryClient.invalidateQueries('financialTransactions');
     },
     onError: (err) => {
-      toast.error(t('financial.error_updating_transaction', { message: err.response?.data?.msg || err.message }));
+      toast.error(
+        t('financial.error_updating_transaction', {
+          message: err.response?.data?.msg || err.message,
+        })
+      );
     },
   });
 
@@ -110,7 +157,11 @@ const FinancialTransactionsPage = () => {
       queryClient.invalidateQueries('financialTransactions');
     },
     onError: (err) => {
-      toast.error(t('financial.error_deleting_transaction', { message: err.response?.data?.msg || err.message }));
+      toast.error(
+        t('financial.error_deleting_transaction', {
+          message: err.response?.data?.msg || err.message,
+        })
+      );
     },
   });
 
@@ -139,7 +190,9 @@ const FinancialTransactionsPage = () => {
       setPaymentMethod(transaction.payment_method || '');
       setIsRecurring(transaction.is_recurring);
       setRecurringInterval(transaction.recurring_interval || '');
-      setRecurringEndsAt(transaction.recurring_ends_at ? transaction.recurring_ends_at.split('T')[0] : '');
+      setRecurringEndsAt(
+        transaction.recurring_ends_at ? transaction.recurring_ends_at.split('T')[0] : ''
+      );
       setReceiptUrl(transaction.receipt_url || '');
     }
     setOpenFormDialog(true);
@@ -194,14 +247,20 @@ const FinancialTransactionsPage = () => {
   if (isError || isErrorCategories) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
-        <Alert severity="error">{t('financial.error_loading_transactions', { message: error?.message || 'Unknown error' })}</Alert>
+        <Alert severity="error">
+          {t('financial.error_loading_transactions', {
+            message: error?.message || 'Unknown error',
+          })}
+        </Alert>
       </Box>
     );
   }
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>{t('financial.manage_transactions')}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {t('financial.manage_transactions')}
+      </Typography>
 
       <Button
         variant="contained"
@@ -213,9 +272,13 @@ const FinancialTransactionsPage = () => {
       </Button>
 
       <Paper elevation={2} sx={{ p: 3 }}>
-        <Typography variant="h6" gutterBottom>{t('financial.existing_transactions')}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {t('financial.existing_transactions')}
+        </Typography>
         {transactions.length === 0 ? (
-          <Typography variant="body1" color="text.secondary">{t('financial.no_transactions_found')}</Typography>
+          <Typography variant="body1" color="text.secondary">
+            {t('financial.no_transactions_found')}
+          </Typography>
         ) : (
           <List>
             {transactions.map((transaction) => (
@@ -223,13 +286,25 @@ const FinancialTransactionsPage = () => {
                 key={transaction.id}
                 secondaryAction={
                   <>
-                    <IconButton edge="end" aria-label="view" onClick={() => handleOpenFormDialog(transaction)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="view"
+                      onClick={() => handleOpenFormDialog(transaction)}
+                    >
                       <VisibilityIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="edit" onClick={() => handleOpenFormDialog(transaction)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="edit"
+                      onClick={() => handleOpenFormDialog(transaction)}
+                    >
                       <EditIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteClick(transaction)}>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleDeleteClick(transaction)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </>
@@ -238,10 +313,20 @@ const FinancialTransactionsPage = () => {
                 <ListItemText
                   primary={
                     <>
-                      <Typography component="span" variant="subtitle1" color={transaction.type === 'income' ? 'success.main' : 'error.main'}>
-                        {transaction.type === 'income' ? '+' : '-'} R$ {parseFloat(transaction.amount).toFixed(2).replace('.', ',')}
+                      <Typography
+                        component="span"
+                        variant="subtitle1"
+                        color={transaction.type === 'income' ? 'success.main' : 'error.main'}
+                      >
+                        {transaction.type === 'income' ? '+' : '-'} R${' '}
+                        {parseFloat(transaction.amount).toFixed(2).replace('.', ',')}
                       </Typography>
-                      <Typography component="span" variant="body2" color="text.secondary" sx={{ ml: 1 }}>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ ml: 1 }}
+                      >
                         ({transaction.description || t('financial.no_description')})
                       </Typography>
                     </>
@@ -255,8 +340,10 @@ const FinancialTransactionsPage = () => {
                       </Typography>
                       {transaction.is_recurring && (
                         <Typography variant="body2" color="text.secondary">
-                          {t('financial.recurring')} ({t(`financial.recurring_interval_${transaction.recurring_interval}`)})
-                          {transaction.recurring_ends_at && ` ${t('financial.until')} ${new Date(transaction.recurring_ends_at).toLocaleDateString()}`}
+                          {t('financial.recurring')} (
+                          {t(`financial.recurring_interval_${transaction.recurring_interval}`)})
+                          {transaction.recurring_ends_at &&
+                            ` ${t('financial.until')} ${new Date(transaction.recurring_ends_at).toLocaleDateString()}`}
                         </Typography>
                       )}
                     </>
@@ -269,7 +356,11 @@ const FinancialTransactionsPage = () => {
       </Paper>
 
       <Dialog open={openFormDialog} onClose={handleCloseFormDialog} fullWidth maxWidth="sm">
-        <DialogTitle>{editingTransaction ? t('financial.edit_transaction') : t('financial.add_new_transaction')}</DialogTitle>
+        <DialogTitle>
+          {editingTransaction
+            ? t('financial.edit_transaction')
+            : t('financial.add_new_transaction')}
+        </DialogTitle>
         <DialogContent>
           <FormControl fullWidth sx={{ mb: 2 }}>
             <InputLabel>{t('financial.transaction_type')}</InputLabel>
@@ -338,7 +429,9 @@ const FinancialTransactionsPage = () => {
             sx={{ mb: 2 }}
           />
           <FormControlLabel
-            control={<Switch checked={isRecurring} onChange={(e) => setIsRecurring(e.target.checked)} />}
+            control={
+              <Switch checked={isRecurring} onChange={(e) => setIsRecurring(e.target.checked)} />
+            }
             label={t('financial.is_recurring')}
             sx={{ mb: 2 }}
           />
@@ -373,8 +466,14 @@ const FinancialTransactionsPage = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseFormDialog}>{t('financial.cancel')}</Button>
-          <Button onClick={handleSubmit} variant="contained" disabled={createMutation.isLoading || updateMutation.isLoading}>
-            {editingTransaction ? t('financial.update_transaction') : t('financial.add_transaction')}
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            disabled={createMutation.isLoading || updateMutation.isLoading}
+          >
+            {editingTransaction
+              ? t('financial.update_transaction')
+              : t('financial.add_transaction')}
           </Button>
         </DialogActions>
       </Dialog>
@@ -385,15 +484,24 @@ const FinancialTransactionsPage = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{t('financial.confirm_delete_transaction_title')}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {t('financial.confirm_delete_transaction_title')}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {t('financial.confirm_delete_transaction_message', { transactionId: transactionToDelete?.id })}
+            {t('financial.confirm_delete_transaction_message', {
+              transactionId: transactionToDelete?.id,
+            })}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDeleteDialog(false)}>{t('financial.cancel')}</Button>
-          <Button onClick={handleConfirmDelete} color="error" autoFocus disabled={deleteMutation.isLoading}>
+          <Button
+            onClick={handleConfirmDelete}
+            color="error"
+            autoFocus
+            disabled={deleteMutation.isLoading}
+          >
             {t('financial.delete_transaction')}
           </Button>
         </DialogActions>

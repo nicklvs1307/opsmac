@@ -2,17 +2,17 @@ const { models } = require('config/config');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 exports.createCategory = async (name, restaurantId) => {
-  const category = await models.Category.create({ name, restaurant_id: restaurantId });
+  const category = await models.Category.create({ name, restaurantId: restaurantId });
   return category;
 };
 
 exports.listCategories = async (restaurantId) => {
-  const categories = await models.Category.findAll({ where: { restaurant_id: restaurantId } });
+  const categories = await models.Category.findAll({ where: { restaurantId: restaurantId } });
   return categories;
 };
 
 exports.getCategoryById = async (id, restaurantId) => {
-  const category = await models.Category.findOne({ where: { id, restaurant_id: restaurantId } });
+  const category = await models.Category.findOne({ where: { id, restaurantId: restaurantId } });
   if (!category) {
     throw new NotFoundError('Categoria não encontrada.');
   }
@@ -20,7 +20,7 @@ exports.getCategoryById = async (id, restaurantId) => {
 };
 
 exports.updateCategory = async (id, name, restaurantId) => {
-  const category = await models.Category.findOne({ where: { id, restaurant_id: restaurantId } });
+  const category = await models.Category.findOne({ where: { id, restaurantId: restaurantId } });
   if (!category) {
     throw new NotFoundError('Categoria não encontrada.');
   }
@@ -29,7 +29,7 @@ exports.updateCategory = async (id, name, restaurantId) => {
 };
 
 exports.deleteCategory = async (id, restaurantId) => {
-  const category = await models.Category.findOne({ where: { id, restaurant_id: restaurantId } });
+  const category = await models.Category.findOne({ where: { id, restaurantId: restaurantId } });
   if (!category) {
     throw new NotFoundError('Categoria não encontrada.');
   }
@@ -37,10 +37,10 @@ exports.deleteCategory = async (id, restaurantId) => {
 };
 
 exports.toggleCategoryStatus = async (id, restaurantId) => {
-  const category = await models.Category.findOne({ where: { id, restaurant_id: restaurantId } });
+  const category = await models.Category.findOne({ where: { id, restaurantId: restaurantId } });
   if (!category) {
     throw new NotFoundError('Categoria não encontrada.');
   }
-  await category.update({ is_active: !category.is_active });
+  await category.update({ isActive: !category.isActive });
   return category;
 };

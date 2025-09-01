@@ -25,15 +25,15 @@ exports.getCustomerDashboardMetrics = async (req, res, next) => {
         const metrics = await customerService.getCustomerDashboardMetrics(restaurantId);
         
         const mostCheckinsFormatted = metrics.mostCheckins.map(c => ({
-            customer_id: c.customer_id,
-            checkin_count: c.dataValues.checkin_count,
-            customer_name: c.customer ? c.customer.name : 'Desconhecido'
+            customerId: c.customerId,
+            checkinCount: c.dataValues.checkinCount,
+            customerName: c.customer ? c.customer.name : 'Desconhecido'
         }));
 
         const mostFeedbacksFormatted = metrics.mostFeedbacks.map(f => ({
-            customer_id: f.customer_id,
-            feedback_count: f.dataValues.feedback_count,
-            customer_name: f.customer ? f.customer.name : 'Desconhecido'
+            customerId: f.customerId,
+            feedbackCount: f.dataValues.feedbackCount,
+            customerName: f.customer ? f.customer.name : 'Desconhecido'
         }));
 
         const engagementRate = metrics.totalCustomers > 0 ? metrics.engagedCustomersCount / metrics.totalCustomers : 0;

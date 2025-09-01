@@ -1,103 +1,63 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
-  class WhatsAppMessage extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+module.exports = (sequelize, DataTypes) => {
+  class WhatsappMessage extends Model {
     static associate(models) {
-      WhatsAppMessage.belongsTo(models.Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
-      WhatsAppMessage.belongsTo(models.Customer, { foreignKey: 'customer_id', as: 'customer' });
-      WhatsAppMessage.belongsTo(models.Coupon, { foreignKey: 'coupon_id', as: 'coupon' });
-      WhatsAppMessage.belongsTo(models.User, { foreignKey: 'sent_by', as: 'sender' });
+      WhatsappMessage.belongsTo(models.Customer, {
+        foreignKey: 'customer_id',
+        as: 'customer',
+      });
+      WhatsappMessage.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
+      });
     }
   }
 
-  WhatsAppMessage.init({
+  WhatsappMessage.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    phone_number: {
-      type: DataTypes.STRING(20),
+    customerId: {
+      type: DataTypes.UUID,
       allowNull: false,
+      field: 'customer_id',
     },
-    message_text: {
+    message: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    message_type: {
-      type: DataTypes.ENUM(
-        'feedback_request',
-        'bulk_feedback_request',
-        'manual',
-        'checkin_thank_you',
-        'coupon_reminder',
-        'birthday_greeting',
-        'received',
-        'response',
-        'notification'
-      ),
-      allowNull: false,
-    },
     status: {
-      type: DataTypes.ENUM('sent', 'delivered', 'read', 'failed', 'received'),
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'sent',
     },
-    whatsapp_message_id: {
-      type: DataTypes.STRING(255),
-      allowNull: true, // ID da mensagem retornado pela API do WhatsApp
+    sentAt: {
+      type: DataTypes.DATE,
+      field: 'sent_at',
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
-      allowNull: true, // Pode ser nulo para mensagens recebidas sem contexto de restaurante
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      allowNull: false,
+      field: 'restaurant_id',
     },
-    customer_id: {
-      type: DataTypes.UUID,
-      allowNull: true, // Pode ser nulo se o cliente não for identificado
-      references: {
-        model: 'customers',
-        key: 'id',
-      },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
     },
-    table_number: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
-    coupon_id: {
-      type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'coupons',
-        key: 'id',
-      },
-    },
-    sent_by: {
-      type: DataTypes.UUID,
-      allowNull: true, // ID do usuário que enviou a mensagem (para mensagens manuais/bulk)
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-    },
-    metadata: {
-      type: DataTypes.JSONB,
-      allowNull: true,
-      defaultValue: {},}
   }, {
     sequelize,
+    modelName: 'WhatsappMessage',
     tableName: 'whatsapp_messages',
     timestamps: true,
+    underscored: true,
   });
 
-  return WhatsAppMessage;
+  return WhatsappMessage;
 };

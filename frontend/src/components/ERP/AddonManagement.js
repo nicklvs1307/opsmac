@@ -18,7 +18,7 @@ import {
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 
 const fetchAddons = async () => {
@@ -27,17 +27,17 @@ const fetchAddons = async () => {
 };
 
 const createAddon = async (newAddon) => {
-  const { data } = await axiosInstance.post('/api/addons', newAddon);
+  const { data } = await axiosInstance.post('/addons', newAddon);
   return data;
 };
 
 const updateAddon = async ({ id, name, price }) => {
-  const { data } = await axiosInstance.put(`/api/addons/${id}`, { name, price });
+  const { data } = await axiosInstance.put(`/addons/${id}`, { name, price });
   return data;
 };
 
 const deleteAddon = async (id) => {
-  await axiosInstance.delete(`/api/addons/${id}`);
+  await axiosInstance.delete(`/addons/${id}`);
 };
 
 const AddonManagement = () => {

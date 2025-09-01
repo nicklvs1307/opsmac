@@ -1,76 +1,69 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class Stock extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      Stock.belongsTo(models.Product, {
-        foreignKey: 'stockableId',
-        constraints: false,
-        as: 'product',
-      });
-      Stock.belongsTo(models.Ingredient, {
-        foreignKey: 'stockableId',
-        constraints: false,
-        as: 'ingredient',
-      });
       Stock.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurantId',
+        foreignKey: 'restaurant_id',
         as: 'restaurant',
       });
-    }
-
-    // Helper method to get the associated stockable item (Product or Ingredient)
-    getStockable(options) {
-      if (!this.stockableType) return Promise.resolve(null);
-      const mixinMethodName = `get${this.stockableType}`;
-      return this[mixinMethodName](options);
+      Stock.hasMany(models.StockMovement, {
+        foreignKey: 'stock_id',
+        as: 'movements',
+      });
+      // Polymorphic association defined in Product and Ingredient models
     }
   }
 
   Stock.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     quantity: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(10, 3),
       allowNull: false,
       defaultValue: 0,
     },
     stockableId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'stockable_id',
     },
     stockableType: {
       type: DataTypes.STRING,
       allowNull: false,
+      field: 'stockable_type',
     },
     restaurantId: {
       type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      allowNull: false,
+      field: 'restaurant_id',
+    },
+    labelFormat: {
+      type: DataTypes.STRING,
+      field: 'label_format',
+    },
+    labelFields: {
+      type: DataTypes.JSONB,
+      field: 'label_fields',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'Stock',
     tableName: 'stocks',
-    indexes: [
-      {
-        unique: true,
-        fields: ['stockableId', 'stockableType'],
-      },
-    ],
     timestamps: true,
+    underscored: true,
   });
 
   return Stock;

@@ -1,21 +1,28 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class Table extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       Table.belongsTo(models.Restaurant, {
         foreignKey: 'restaurant_id',
         as: 'restaurant',
       });
+      Table.hasMany(models.QRCode, {
+        foreignKey: 'table_id',
+        as: 'qrcodes',
+      });
       Table.hasMany(models.TableSession, {
         foreignKey: 'table_id',
         as: 'sessions',
+      });
+      Table.hasMany(models.Order, {
+        foreignKey: 'table_id',
+        as: 'orders',
+      });
+      Table.hasMany(models.WaiterCall, {
+        foreignKey: 'table_id',
+        as: 'waiterCalls',
       });
     }
   }
@@ -23,42 +30,33 @@ module.exports = (sequelize) => {
   Table.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      field: 'restaurant_id',
     },
-    table_number: {
+    tableNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: 'compositeIndex', // Ensures table_number is unique per restaurant
+      field: 'table_number',
     },
-    qr_code_url: {
-      type: DataTypes.STRING,
-      allowNull: true, // Will be generated later
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
     },
-    // status: {
-    //   type: DataTypes.ENUM('available', 'occupied', 'needs_cleaning'),
-    //   defaultValue: 'available',
-    //   allowNull: false
-    // }
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
+    },
   }, {
     sequelize,
     modelName: 'Table',
     tableName: 'tables',
-    indexes: [
-      {
-        unique: true,
-        fields: ['restaurant_id', 'table_number'],
-      },
-    ],
     timestamps: true,
+    underscored: true,
   });
 
   return Table;

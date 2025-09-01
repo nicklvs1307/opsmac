@@ -1,7 +1,7 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class ProductionRecord extends Model {
     static associate(models) {
       ProductionRecord.belongsTo(models.User, {
@@ -22,39 +22,32 @@ module.exports = (sequelize) => {
   ProductionRecord.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    restaurant_id: {
+    userId: {
+      type: DataTypes.UUID,
+      field: 'user_id',
+    },
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      field: 'restaurant_id',
     },
-    user_id: { // User who performed the production
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-    },
-    production_date: {
+    createdAt: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-      allowNull: false,
+      field: 'created_at',
     },
-    notes: {
-      type: DataTypes.TEXT,
-      allowNull: true,
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'ProductionRecord',
     tableName: 'production_records',
     timestamps: true,
+    underscored: true,
   });
 
   return ProductionRecord;

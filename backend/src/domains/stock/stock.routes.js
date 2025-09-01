@@ -1,6 +1,6 @@
 const express = require('express');
 const { auth } = require('../../middleware/authMiddleware');
-const checkPermission = require('../../middleware/permission');
+const requirePermission = require('../../middleware/requirePermission');
 const stockController = require('./stock.controller');
 const {
     createStockMovementValidation
@@ -9,9 +9,9 @@ const {
 const router = express.Router();
 
 // Rotas de Estoque
-router.get('/dashboard', auth, checkPermission('stock:view'), stockController.getDashboardData);
-router.get('/', auth, checkPermission('stock:view'), stockController.getAllStocks);
-router.post('/move', auth, checkPermission('stock:manage'), createStockMovementValidation, stockController.createStockMovement);
-router.get('/history/:productId', auth, checkPermission('stock:view'), stockController.getStockHistory);
+router.get('/dashboard', auth, requirePermission('stock', 'read'), stockController.getDashboardData);
+router.get('/', auth, requirePermission('stock', 'read'), stockController.getAllStocks);
+router.post('/move', auth, requirePermission('stock', 'update'), createStockMovementValidation, stockController.createStockMovement);
+router.get('/history/:productId', auth, requirePermission('stock', 'read'), stockController.getStockHistory);
 
 module.exports = router;

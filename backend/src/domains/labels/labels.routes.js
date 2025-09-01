@@ -1,6 +1,6 @@
 const express = require('express');
 const { auth } = require('../../middleware/authMiddleware');
-const checkPermission = require('../../middleware/permission');
+const requirePermission = require('../../middleware/requirePermission');
 const labelsController = require('./labels.controller');
 const {
     printLabelValidation
@@ -9,10 +9,10 @@ const {
 const router = express.Router();
 
 // Rotas de Etiquetas
-router.get('/users', auth, checkPermission('labels:view'), labelsController.getLabelUsers);
-router.get('/items', auth, checkPermission('labels:view'), labelsController.getLabelItems);
-router.get('/stock-counts', auth, checkPermission('labels:view'), labelsController.getStockCounts);
-router.get('/productions', auth, checkPermission('labels:view'), labelsController.getProductions);
-router.post('/print', auth, checkPermission('labels:print'), printLabelValidation, labelsController.printLabel);
+router.get('/users', auth, requirePermission('labels', 'read'), labelsController.getLabelUsers);
+router.get('/items', auth, requirePermission('labels', 'read'), labelsController.getLabelItems);
+router.get('/stock-counts', auth, requirePermission('labels', 'read'), labelsController.getStockCounts);
+router.get('/productions', auth, requirePermission('labels', 'read'), labelsController.getProductions);
+router.post('/print', auth, requirePermission('labels', 'create'), printLabelValidation, labelsController.printLabel);
 
 module.exports = router;

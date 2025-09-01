@@ -13,9 +13,9 @@ const handleValidationErrors = (req) => {
 exports.openSession = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { opening_cash, opening_observations } = req.body;
+    const { openingCash, openingObservations } = req.body;
     const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const session = await cashRegisterService.openSession(restaurantId, req.user.userId, opening_cash, opening_observations);
+    const session = await cashRegisterService.openSession(restaurantId, req.user.userId, openingCash, openingObservations);
     res.status(201).json(session);
   } catch (error) {
     next(error);
@@ -35,8 +35,8 @@ exports.getCurrentSession = async (req, res, next) => {
 exports.recordWithdrawal = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { session_id, amount, category_id, observations } = req.body;
-    const movement = await cashRegisterService.recordMovement(session_id, 'withdrawal', amount, category_id, observations, req.user.userId);
+    const { sessionId, amount, categoryId, observations } = req.body;
+    const movement = await cashRegisterService.recordMovement(sessionId, 'withdrawal', amount, categoryId, observations, req.user.userId);
     res.status(201).json(movement);
   } catch (error) {
     next(error);
@@ -46,8 +46,8 @@ exports.recordWithdrawal = async (req, res, next) => {
 exports.recordReinforcement = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { session_id, amount, observations } = req.body;
-    const movement = await cashRegisterService.recordMovement(session_id, 'reinforcement', amount, null, observations, req.user.userId);
+    const { sessionId, amount, observations } = req.body;
+    const movement = await cashRegisterService.recordMovement(sessionId, 'reinforcement', amount, null, observations, req.user.userId);
     res.status(201).json(movement);
   } catch (error) {
     next(error);
@@ -68,8 +68,8 @@ exports.getCashRegisterCategories = async (req, res, next) => {
 exports.getMovements = async (req, res, next) => {
   try {
     const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const { session_id } = req.query;
-    const movements = await cashRegisterService.getMovements(restaurantId, session_id);
+    const { sessionId } = req.query;
+    const movements = await cashRegisterService.getMovements(restaurantId, sessionId);
     res.json(movements);
   } catch (error) {
     next(error);
@@ -79,9 +79,9 @@ exports.getMovements = async (req, res, next) => {
 exports.closeSession = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { session_id, closing_cash, closing_observations } = req.body;
+    const { sessionId, closingCash, closingObservations } = req.body;
     const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const session = await cashRegisterService.closeSession(session_id, restaurantId, req.user.userId, closing_cash, closing_observations);
+    const session = await cashRegisterService.closeSession(sessionId, restaurantId, req.user.userId, closingCash, closingObservations);
     res.json(session);
   } catch (error) {
     next(error);
@@ -91,8 +91,8 @@ exports.closeSession = async (req, res, next) => {
 exports.getCashOrders = async (req, res, next) => {
   try {
     const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const { session_id } = req.query;
-    const orders = await cashRegisterService.getCashOrders(restaurantId, session_id);
+    const { sessionId } = req.query;
+    const orders = await cashRegisterService.getCashOrders(restaurantId, sessionId);
     res.json(orders);
   } catch (error) {
     next(error);

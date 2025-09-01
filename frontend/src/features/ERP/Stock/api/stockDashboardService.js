@@ -1,0 +1,14 @@
+import { useQuery } from 'react-query';
+import axiosInstance from '@/services/axiosInstance';
+
+const fetchDashboardData = async (restaurantId) => {
+  // This endpoint needs to be created in the backend
+  const { data } = await axiosInstance.get(`/api/stock/dashboard?restaurant_id=${restaurantId}`);
+  return data;
+};
+
+export const useStockDashboardData = (restaurantId) => {
+  return useQuery(['stockDashboard', restaurantId], () => fetchDashboardData(restaurantId), {
+    enabled: !!restaurantId,
+  });
+};

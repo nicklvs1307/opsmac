@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import {
   Box,
-  Typography,
   TextField,
   Button,
   Select,
@@ -12,10 +11,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  IconButton,
   FormHelperText,
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
@@ -24,7 +19,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
 // Esquema de Validação para o Usuário
-const userSchema = (t, editingUser) =>
+const userSchema = (t, editingUser, isSuperAdmin) =>
   yup.object().shape({
     name: yup
       .string()
@@ -35,18 +30,21 @@ const userSchema = (t, editingUser) =>
       .email(t('admin_dashboard.email_invalid'))
       .required(t('admin_dashboard.email_required')),
     phone: yup.string().optional(),
-    role: yup
+    roleName: yup
       .string()
-      .oneOf(['owner', 'admin', 'employee'], t('admin_dashboard.role_invalid'))
+      .oneOf(['owner', 'admin', 'employee', 'super_admin'], t('admin_dashboard.role_invalid'))
       .required(t('admin_dashboard.role_required')),
     password: yup
       .string()
       .min(6, t('admin_dashboard.password_min_chars'))
-      .when('editingUser', {
-        is: (val) => !val, // If not editing an existing user (i.e., creating a new one)
+      .when('$editingUser', {
+        is: (val) => !val, // Only require for new users
         then: (schema) => schema.required(t('admin_dashboard.password_required')),
         otherwise: (schema) => schema.optional(),
       }),
+    restaurantId: isSuperAdmin
+      ? yup.string().required(t('admin_dashboard.restaurant_id_required'))
+      : yup.string().optional(), // Optional if not super admin, will be set automatically
   });
 
 const generateRandomPassword = () => {
@@ -54,23 +52,61 @@ const generateRandomPassword = () => {
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
   let password = '';
   for (let i = 0; i < 12; i++) {
-    // Generate a 12-character password
     password += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return password;
 };
 
-const UserModal = ({ isOpen, onClose, editingUser, onSave }) => {
+const UserModal = ({
+  isOpen,
+  onClose,
+  editingUser,
+  onSave,
+  restaurants = [],
+  isSuperAdmin,
+  loggedInUserRestaurantId,
+}) => {
   const { t } = useTranslation();
-  const { control, handleSubmit, reset, setValue } = useForm({
-    resolver: yupResolver(userSchema(t, editingUser)),
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(userSchema(t, editingUser, isSuperAdmin)),
+    context: { editingUser, isSuperAdmin },
   });
 
   useEffect(() => {
-    reset(editingUser || {});
-  }, [editingUser, reset]);
+    if (isOpen) {
+      const defaultRestaurantId = isSuperAdmin
+        ? editingUser?.restaurantId || ''
+        : loggedInUserRestaurantId || '';
+      reset(
+        editingUser
+          ? {
+              ...editingUser,
+              roleName: editingUser.role?.name || '',
+              restaurantId: defaultRestaurantId,
+            }
+          : {
+              name: '',
+              email: '',
+              phone: '',
+              roleName: '',
+              password: '',
+              restaurantId: defaultRestaurantId,
+            }
+      );
+    }
+  }, [editingUser, isOpen, reset, isSuperAdmin, loggedInUserRestaurantId]);
 
   const onSubmit = (data) => {
+    // If not super admin, ensure restaurantId is set to the logged-in user's restaurantId
+    if (!isSuperAdmin && !data.restaurantId) {
+      data.restaurantId = loggedInUserRestaurantId;
+    }
     onSave(data);
   };
 
@@ -83,42 +119,42 @@ const UserModal = ({ isOpen, onClose, editingUser, onSave }) => {
         <Controller
           name="name"
           control={control}
-          render={({ field, fieldState: { error } }) => (
+          render={({ field }) => (
             <TextField
               {...field}
               label={t('admin_dashboard.name_label')}
               fullWidth
               margin="normal"
-              error={!!error}
-              helperText={error ? error.message : null}
+              error={!!errors.name}
+              helperText={errors.name?.message}
             />
           )}
         />
         <Controller
           name="email"
           control={control}
-          render={({ field, fieldState: { error } }) => (
+          render={({ field }) => (
             <TextField
               {...field}
               label={t('admin_dashboard.email_label')}
               fullWidth
               margin="normal"
-              error={!!error}
-              helperText={error ? error.message : null}
+              error={!!errors.email}
+              helperText={errors.email?.message}
             />
           )}
         />
         <Controller
           name="phone"
           control={control}
-          render={({ field, fieldState: { error } }) => (
+          render={({ field }) => (
             <TextField
               {...field}
               label={t('admin_dashboard.user_phone_label')}
               fullWidth
               margin="normal"
-              error={!!error}
-              helperText={error ? error.message : null}
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
             />
           )}
         />
@@ -126,41 +162,63 @@ const UserModal = ({ isOpen, onClose, editingUser, onSave }) => {
           <Controller
             name="password"
             control={control}
-            render={({ field, fieldState: { error } }) => (
+            render={({ field }) => (
               <TextField
                 {...field}
                 label={t('admin_dashboard.password_label')}
                 type="password"
                 fullWidth
                 margin="normal"
-                error={!!error}
-                helperText={error ? error.message : null}
+                error={!!errors.password}
+                helperText={errors.password?.message}
               />
             )}
           />
           <Button
             variant="outlined"
             onClick={() => setValue('password', generateRandomPassword())}
-            sx={{ mt: 2 }}
+            sx={{ mt: 1 }}
           >
             {t('admin_dashboard.generate_password_button')}
           </Button>
         </Box>
         <Controller
-          name="role"
+          name="roleName"
           control={control}
-          render={({ field, fieldState: { error } }) => (
-            <FormControl fullWidth margin="normal" error={!!error}>
+          render={({ field }) => (
+            <FormControl fullWidth margin="normal" error={!!errors.roleName}>
               <InputLabel>{t('admin_dashboard.role_label')}</InputLabel>
               <Select {...field} label={t('admin_dashboard.role_label')}>
+                <MenuItem value="super_admin">{t('admin_dashboard.role_super_admin')}</MenuItem>
                 <MenuItem value="owner">{t('admin_dashboard.role_owner')}</MenuItem>
                 <MenuItem value="admin">{t('admin_dashboard.role_admin')}</MenuItem>
                 <MenuItem value="employee">{t('admin_dashboard.role_employee')}</MenuItem>
               </Select>
-              {error && <FormHelperText>{error.message}</FormHelperText>}
+              {errors.roleName && <FormHelperText>{errors.roleName.message}</FormHelperText>}
             </FormControl>
           )}
         />
+        {isSuperAdmin && (
+          <Controller
+            name="restaurantId"
+            control={control}
+            render={({ field }) => (
+              <FormControl fullWidth margin="normal" error={!!errors.restaurantId}>
+                <InputLabel>{t('admin_dashboard.restaurant_label')}</InputLabel>
+                <Select {...field} label={t('admin_dashboard.restaurant_label')}>
+                  {restaurants.map((restaurant) => (
+                    <MenuItem key={restaurant.id} value={restaurant.id}>
+                      {restaurant.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {errors.restaurantId && (
+                  <FormHelperText>{errors.restaurantId.message}</FormHelperText>
+                )}
+              </FormControl>
+            )}
+          />
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>{t('common.cancel')}</Button>

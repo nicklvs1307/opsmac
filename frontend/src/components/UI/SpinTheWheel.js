@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
-import { Box, Typography, Paper, List, ListItem, ListItemText } from '@mui/material';
+import { Box } from '@mui/material';
 
 const SpinTheWheel = ({ items, winningItem, winningIndex, onAnimationComplete }) => {
   const canvasRef = useRef(null);

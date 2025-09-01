@@ -3,7 +3,7 @@ const { BadRequestError, ForbiddenError, NotFoundError } = require('utils/errors
 
 // Moved from backend/services/deliveryMuchService.js
 async function handleOrderCreated(orderData) {
-  const restaurantId = orderData.restaurant_id;
+  const restaurantId = orderData.restaurantId;
   const localRestaurant = await models.Restaurant.findByPk(restaurantId);
 
   if (!localRestaurant) {
@@ -14,12 +14,12 @@ async function handleOrderCreated(orderData) {
   let customerInstance = null;
   if (orderData.customer && orderData.customer.phone) {
     customerInstance = await models.Customer.findOrCreate({
-      where: { phone: orderData.customer.phone, restaurant_id: localRestaurant.id },
+      where: { phone: orderData.customer.phone, restaurantId: localRestaurant.id },
       defaults: {
         name: orderData.customer.name || 'Cliente Delivery Much',
         email: orderData.customer.email || null,
         whatsapp: orderData.customer.phone,
-        restaurant_id: localRestaurant.id,
+        restaurantId: localRestaurant.id,
         source: 'delivery_much',
       },
     });
@@ -27,20 +27,20 @@ async function handleOrderCreated(orderData) {
   }
 
   await models.Order.create({
-    restaurant_id: localRestaurant.id,
-    customer_id: customerInstance ? customerInstance.id : null,
-    external_order_id: orderData.id,
+    restaurantId: localRestaurant.id,
+    customerId: customerInstance ? customerInstance.id : null,
+    externalOrderId: orderData.id,
     platform: 'delivery_much',
     status: orderData.status,
-    total_amount: orderData.total_amount,
-    delivery_fee: orderData.delivery_fee || 0,
+    totalAmount: orderData.total_amount,
+    deliveryFee: orderData.delivery_fee || 0,
     items: orderData.items,
-    customer_details: orderData.customer,
-    order_details: orderData,
-    order_date: orderData.created_at,
-    delivery_address: orderData.delivery_address,
-    payment_method: orderData.payment_method,
-    delivery_type: orderData.delivery_type,
+    customerDetails: orderData.customer,
+    orderDetails: orderData,
+    orderDate: orderData.created_at,
+    deliveryAddress: orderData.delivery_address,
+    paymentMethod: orderData.payment_method,
+    deliveryType: orderData.delivery_type,
     notes: orderData.notes,
   });
   console.log(`Novo pedido Delivery Much ${orderData.id} registrado para o restaurante ${localRestaurant.name}.`);
@@ -48,7 +48,7 @@ async function handleOrderCreated(orderData) {
 
 // Moved from backend/services/deliveryMuchService.js
 async function handleOrderUpdated(orderData) {
-  const order = await models.Order.findOne({ where: { external_order_id: orderData.id, platform: 'delivery_much' } });
+  const order = await models.Order.findOne({ where: { externalOrderId: orderData.id, platform: 'delivery_much' } });
   if (order) {
     await order.update({ status: orderData.status });
     console.log(`Status do pedido Delivery Much ${orderData.id} atualizado para ${orderData.status}.`);
@@ -68,7 +68,7 @@ async function processWebhookEvent(event) {
 
 // Moved from backend/services/deliveryMuchService.js and integrated
 async function getOrdersFromDb(restaurantId, status) {
-  const where = { restaurant_id: restaurantId, platform: 'delivery_much' };
+  const where = { restaurantId: restaurantId, platform: 'delivery_much' };
   if (status) where.status = status;
   const orders = await models.Order.findAll({ where });
   return orders;

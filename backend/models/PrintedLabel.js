@@ -1,111 +1,69 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class PrintedLabel extends Model {
     static associate(models) {
       PrintedLabel.belongsTo(models.User, {
-        foreignKey: 'userId',
+        foreignKey: 'user_id',
         as: 'user',
       });
       PrintedLabel.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurantId',
+        foreignKey: 'restaurant_id',
         as: 'restaurant',
       });
-      // Polymorphic association to Product or Ingredient
-      PrintedLabel.belongsTo(models.Product, {
-        foreignKey: 'labelableId',
-        constraints: false,
-        as: 'product',
-      });
-      PrintedLabel.belongsTo(models.Ingredient, {
-        foreignKey: 'labelableId',
-        constraints: false,
-        as: 'ingredient',
-      });
-    }
-
-    // Helper method to get the associated labelable item
-    getLabelable(options) {
-      if (!this.labelableType) return Promise.resolve(null);
-      const mixinMethodName = `get${this.labelableType}`;
-      return this[mixinMethodName](options);
+      // Polymorphic association to Stock (stockable_id, stockable_type) is handled in service layer
     }
   }
 
   PrintedLabel.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    labelableId: {
+    stockableId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'stockable_id',
     },
-    labelableType: {
+    stockableType: {
       type: DataTypes.STRING,
       allowNull: false,
+      field: 'stockable_type',
     },
-    userId: { // User who printed the label
-      type: DataTypes.UUID,
+    printDate: {
+      type: DataTypes.DATE,
       allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
+      field: 'print_date',
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.UUID,
+      field: 'user_id',
     },
     restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      field: 'restaurant_id',
     },
-    printDate: {
+    createdAt: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-      allowNull: false,
+      field: 'created_at',
     },
-    expirationDate: {
+    updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false,
-    },
-    quantityPrinted: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1,
-    },
-    lotNumber: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    sif: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    weight: {
-      type: DataTypes.DECIMAL(10, 3),
-      allowNull: true,
-    },
-    unitOfMeasure: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'PrintedLabel',
     tableName: 'printed_labels',
     timestamps: true,
-    indexes: [
-      {
-        fields: ['labelableId', 'labelableType'],
-      },
-      {
-        fields: ['expirationDate'],
-      },
-    ],
+    underscored: true,
   });
 
   return PrintedLabel;

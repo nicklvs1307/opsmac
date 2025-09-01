@@ -10,6 +10,7 @@ RUN apk add --no-cache python3 make g++ libc6-compat
 
 # Copia os arquivos de dependência
 COPY frontend/package*.json ./
+COPY frontend/config-overrides.js ./
 
 # Instala as dependências
 RUN npm cache clean --force && npm install

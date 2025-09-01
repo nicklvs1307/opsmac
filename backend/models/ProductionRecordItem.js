@@ -1,74 +1,55 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class ProductionRecordItem extends Model {
     static associate(models) {
       ProductionRecordItem.belongsTo(models.ProductionRecord, {
-        foreignKey: 'productionRecordId',
+        foreignKey: 'production_record_id',
         as: 'productionRecord',
       });
-      // Polymorphic association to Product or Ingredient
       ProductionRecordItem.belongsTo(models.Product, {
-        foreignKey: 'stockableId',
-        constraints: false,
+        foreignKey: 'product_id',
         as: 'product',
       });
-      ProductionRecordItem.belongsTo(models.Ingredient, {
-        foreignKey: 'stockableId',
-        constraints: false,
-        as: 'ingredient',
-      });
-    }
-
-    // Helper method to get the associated stockable item
-    getStockable(options) {
-      if (!this.stockableType) return Promise.resolve(null);
-      const mixinMethodName = `get${this.stockableType}`;
-      return this[mixinMethodName](options);
     }
   }
 
   ProductionRecordItem.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     productionRecordId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'production_records',
-        key: 'id',
-      },
+      field: 'production_record_id',
     },
-    stockableId: {
+    productId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'product_id',
     },
-    stockableType: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    quantity: {
+    quantityProduced: {
       type: DataTypes.DECIMAL(10, 3),
       allowNull: false,
+      field: 'quantity_produced',
     },
-    type: {
-      type: DataTypes.ENUM('input', 'output'),
-      allowNull: false,
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'ProductionRecordItem',
     tableName: 'production_record_items',
     timestamps: true,
-    indexes: [
-      {
-        fields: ['productionRecordId', 'stockableId', 'stockableType'],
-      },
-    ],
+    underscored: true,
   });
 
   return ProductionRecordItem;

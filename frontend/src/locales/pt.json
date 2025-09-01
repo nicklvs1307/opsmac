@@ -1,63 +1,19 @@
 {
   "translation": {
     "modules": {
-      "surveys_feedback": "Pesquisas e Feedback"
+      "satisfaction": "Pesquisas e Feedback",
+      "checkin": "Programa de Check-in"
     },
-    "survey_create": {
-      "success_message": "Pesquisa criada com sucesso!",
-      "error_message": "Erro ao criar pesquisa: {{message}}",
-      "question_text_required_error": "O texto da pergunta é obrigatório.",
-      "nps_criterion_required_error": "O critério NPS é obrigatório para perguntas do tipo NPS.",
-      "nps_question_text": "Qual a probabilidade de você recomendar {{name}} a um amigo ou colega?",
-      "select_type_error": "Por favor, selecione um tipo de pesquisa.",
-      "title_required_error": "O título é obrigatório.",
-      "no_nps_criteria_error": "Nenhum critério NPS encontrado. Por favor, adicione critérios NPS nas configurações.",
-      "survey_type_label": "Tipo de Pesquisa",
-      "type_nps_dynamic": "NPS Dinâmico (com base em critérios)",
-      "type_custom_soon": "Personalizada (em breve)",
-      "type_delivery_csat": "CSAT Delivery (em breve)",
-      "type_menu_feedback": "Feedback de Cardápio (em breve)",
-      "type_customer_profile": "Perfil do Cliente (em breve)",
-      "type_salon_ratings": "Avaliações de Salão (em breve)",
-      "type_salon_like_dislike": "Gostei/Não Gostei de Salão (em breve)",
-      "title_label": "Título",
-      "slug_label": "Slug (URL)",
-      "slug_helper": "Identificador único para a URL da pesquisa (ex: pesquisa-de-satisfacao).",
-      "description_label": "Descrição",
-      "reward_label": "Recompensa",
-      "loading_rewards": "Carregando recompensas...",
-      "coupon_validity_days_label": "Validade do Cupom (dias)",
-      "questions_title": "Perguntas da Pesquisa",
-      "question_type_label": "Tipo da Pergunta",
-      "add_question_button": "Adicionar Pergunta",
-      "review_details": "Revise os detalhes da pesquisa antes de criar.",
-      "created_success_title": "Pesquisa Criada com Sucesso!",
-      "public_link_label": "Link Público da Pesquisa:",
-      "generate_qr_code_button": "Gerar QR Code",
-      "edit_survey_button": "Editar Pesquisa",
-      "view_all_surveys_button": "Ver Todas as Pesquisas",
-      "qr_code_dialog_title": "QR Code da Pesquisa",
-      "qr_code_download_success": "QR Code baixado com sucesso!",
-      "qr_code_download_error": "Erro ao baixar QR Code.",
-      "download_qr_code_button": "Baixar QR Code",
-      "unknown_step": "Passo desconhecido",
-      "main_title": "Criar Nova Pesquisa",
-      "step_choose_type": "Escolha o Tipo",
-      "step_configure_details": "Configure os Detalhes",
-      "step_review_and_create": "Revisar e Criar",
-      "step_actions": "Ações Pós-Criação",
-      "create_survey_button": "Criar Pesquisa",
-      "add_question_dialog_title": "Adicionar Pergunta",
-      "question_text_label": "Texto da Pergunta",
-      "question_type_text": "Texto",
-      "question_type_textarea": "Área de Texto",
-      "question_type_ratings": "Avaliação (Estrelas)",
-      "question_type_nps": "NPS (0-10)",
-      "question_type_csat": "CSAT (Satisfação)",
-      "nps_criterion_label": "Critério NPS",
-      "loading_criteria": "Carregando critérios...",
-      "module_not_enabled": "O módulo de {{moduleName}} não está habilitado para o seu restaurante. Por favor, entre em contato com o suporte."
+    "monthly_summary": {
+      "total_checkins": "Total de Check-ins",
+      "new_customers": "Novos Clientes",
+      "total_survey_responses": "Total de Respostas de Pesquisas",
+      "redeemed_coupons": "Cupons Resgatados",
+      "avg_nps_score": "Média NPS",
+      "avg_rating": "Média de Avaliações",
+      "monthly_trend": "Tendência Mensal"
     },
+    
     "category_management": {
       "add_success": "Categoria adicionada com sucesso!",
       "add_error": "Erro ao adicionar categoria.",
@@ -1148,7 +1104,9 @@
       "role_label": "Função",
       "role_owner": "Proprietário",
       "role_admin": "Administrador",
-      "role_employee": "Funcionário"
+      "role_employee": "Funcionário",
+      "create_new_restaurant": "Criar Novo Restaurante",
+      "create_new_user": "Criar Novo Usuário"
     },
     "sidebar": {
       "admin": "Admin",
@@ -1231,6 +1189,72 @@
       "copy_link_aria_label": "Copiar link",
       "delete_survey_aria_label": "Excluir pesquisa",
       "qr_code_modal_title": "QR Code da Pesquisa"
+    },
+    "fidelity_general": {
+      "multiple_choice_analysis_title": "Análise de Múltipla Escolha"
+    },
+    "multiple_choice": {
+      "select_survey": "Selecionar Pesquisa",
+      "select_question": "Selecionar Pergunta",
+      "no_multiple_choice_questions": "Nenhuma pergunta de múltipla escolha encontrada nesta pesquisa.",
+      "error_loading_answers": "Erro ao carregar respostas da pergunta.",
+      "answer_distribution": "Distribuição de Respostas",
+      "no_answers_recorded": "Nenhuma resposta registrada para esta pergunta.",
+      "select_question_to_view_distribution": "Selecione uma pergunta para visualizar a distribuição."
+    },
+    "fidelity_general": {
+      "multiple_choice_analysis_title": "Análise de Múltipla Escolha",
+      "word_clouds_title": "Nuvens de Palavras"
+    },
+    "word_clouds": {
+      "error_loading_word_cloud": "Erro ao carregar nuvem de palavras.",
+      "no_data_to_display": "Nenhum dado para exibir na nuvem de palavras. Ajuste os filtros ou verifique se há feedbacks com comentários."
+    },
+    "common": {
+      "loading": "Carregando...",
+      "error_loading_data": "Erro ao carregar dados.",
+      "cancel": "Cancelar",
+      "delete": "Excluir",
+      "none": "Nenhum",
+      "yes": "Sim",
+      "others": "Outros",
+      "save": "Salvar",
+      "filters": "Filtros",
+      "clear_filters": "Limpar Filtros",
+      "all": "Todos",
+      "features_to_be_implemented": "Funcionalidades a serem implementadas:",
+      "stay_tuned_for_updates": "Fique atento para mais atualizações!"
+    },
+    "fidelity_coupons": {
+      "raffle_title": "Sorteio de Cupons",
+      "raffle_description": "Gerencie e realize sorteios de cupons para engajar seus clientes e recompensar a fidelidade.",
+      "raffle_feature_create": "Criação de novos sorteios com regras personalizáveis (ex: participantes elegíveis, cupons a serem sorteados).",
+      "raffle_feature_manage": "Visualização e gerenciamento de sorteios ativos e passados.",
+      "raffle_feature_draw": "Funcionalidade para realizar o sorteio de forma justa e transparente.",
+      "raffle_feature_winners": "Exibição dos vencedores e distribuição automática dos cupons premiados.",
+      "raffle_feature_integration": "Integração com o módulo de Cupons para seleção de prêmios."
+    },
+    "fidelity_responses": {
+      "replicas_title": "Gestão de Respostas",
+      "replicas_description": "Visualize e gerencie todas as respostas enviadas aos feedbacks dos clientes, garantindo um acompanhamento eficaz.",
+      "replicas_feature_list": "Listagem de todas as respostas enviadas, com detalhes do feedback original e do cliente.",
+      "replicas_feature_filter": "Opções de filtro e busca para localizar respostas específicas (por data, status, cliente).",
+      "replicas_feature_edit": "Funcionalidade para editar respostas existentes.",
+      "replicas_feature_status": "Acompanhamento do status das respostas (ex: pendente, respondido, resolvido).",
+      "goals_title": "Metas e Desempenho",
+      "goals_description": "Defina e acompanhe metas de desempenho para suas respostas de feedback e satisfação do cliente.",
+      "goals_feature_define": "Definição de metas personalizadas (ex: tempo de resposta, taxa de resolução, NPS alvo).",
+      "goals_feature_track": "Acompanhamento do progresso em tempo real em relação às metas estabelecidas.",
+      "goals_feature_visualize": "Visualização gráfica do desempenho e tendências.",
+      "goals_feature_alerts": "Alertas e notificações para marcos alcançados ou desvios das metas."
+    },
+    "fidelity_responses": {
+      "import_title": "Importação de Dados",
+      "import_description": "Importe dados de feedback de fontes externas para análise e gerenciamento centralizado.",
+      "import_feature_upload": "Upload de arquivos (CSV, Excel) com dados de feedback.",
+      "import_feature_mapping": "Mapeamento de colunas para campos existentes no sistema.",
+      "import_feature_validation": "Validação de dados antes da importação para garantir a integridade.",
+      "import_feature_history": "Histórico de importações realizadas."
     },
     "thank_you": {
       "share_title": "Avaliei o {{restaurant}}",

@@ -12,11 +12,11 @@ const handleValidationErrors = (req) => {
 
 exports.listAddons = async (req, res, next) => {
   try {
-    const { restaurant_id } = req.query;
-    if (!restaurant_id) {
+    const { restaurantId } = req.query;
+    if (!restaurantId) {
       throw new BadRequestError('Restaurant ID is required');
     }
-    const addons = await addonsService.listAddons(restaurant_id);
+    const addons = await addonsService.listAddons(restaurantId);
     res.json(addons);
   } catch (error) {
     next(error);
@@ -26,8 +26,8 @@ exports.listAddons = async (req, res, next) => {
 exports.createAddon = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { name, price, restaurant_id } = req.body;
-    const newAddon = await addonsService.createAddon(name, price, restaurant_id);
+    const { name, price, restaurantId } = req.body;
+    const newAddon = await addonsService.createAddon(name, price, restaurantId);
     res.json(newAddon);
   } catch (error) {
     next(error);

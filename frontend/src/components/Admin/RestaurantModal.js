@@ -24,7 +24,7 @@ const restaurantSchema = (t) =>
     address: yup.string().required(t('admin_dashboard.address_required')),
     city: yup.string().required(t('admin_dashboard.city_required')),
     state: yup.string().required(t('admin_dashboard.state_required')),
-    owner_id: yup
+    ownerId: yup
       .string()
       .uuid(t('admin_dashboard.owner_id_invalid'))
       .required(t('admin_dashboard.owner_id_required')),
@@ -109,7 +109,7 @@ const RestaurantModal = ({ isOpen, onClose, editingRestaurant, onSave, users }) 
           )}
         />
         <Controller
-          name="owner_id"
+          name="ownerId"
           control={control}
           render={({ field, fieldState: { error } }) => (
             <FormControl fullWidth margin="normal" error={!!error}>

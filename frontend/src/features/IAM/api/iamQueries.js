@@ -1,0 +1,155 @@
+import { useQuery, useMutation } from 'react-query';
+import axiosInstance from '@/services/axiosInstance';
+
+// --- IAM API Hooks ---
+
+// Fetch permission snapshot (tree)
+export const useGetPermissionTree = (restaurantId, options) => {
+  return useQuery(
+    ['permissionTree', restaurantId],
+    async () => {
+      const { data } = await axiosInstance.get(`/api/iam/tree?restaurantId=${restaurantId}`);
+      return data;
+    },
+    options
+  );
+};
+
+// Fetch all roles for a restaurant
+export const useGetRoles = (restaurantId, options) => {
+  return useQuery(
+    ['roles', restaurantId],
+    async () => {
+      const { data } = await axiosInstance.get(`/api/iam/roles?restaurantId=${restaurantId}`);
+      return data;
+    },
+    options
+  );
+};
+
+// Create a new role
+export const useCreateRole = () => {
+  return useMutation(async ({ restaurantId, key, name }) => {
+    const { data } = await axiosInstance.post('/api/iam/roles', { restaurantId, key, name });
+    return data;
+  });
+};
+
+// Update a role
+export const useUpdateRole = () => {
+  return useMutation(async ({ roleId, restaurantId, name }) => {
+    const { data } = await axiosInstance.patch(`/api/iam/roles/${roleId}`, { restaurantId, name });
+    return data;
+  });
+};
+
+// Delete a role
+export const useDeleteRole = () => {
+  return useMutation(async ({ roleId, restaurantId }) => {
+    await axiosInstance.delete(`/api/iam/roles/${roleId}`, { data: { restaurantId } }); // DELETE with body
+  });
+};
+
+// Set permissions for a role
+export const useSetRolePermissions = () => {
+  return useMutation(async ({ roleId, restaurantId, permissions }) => {
+    const { data } = await axiosInstance.post(`/api/iam/roles/${roleId}/permissions`, {
+      permissions,
+    });
+    return data;
+  });
+};
+
+// Fetch user roles for a specific user in a restaurant
+export const useGetUserRoles = (userId, restaurantId, options) => {
+  return useQuery(
+    ['userRoles', userId, restaurantId],
+    async () => {
+      const { data } = await axiosInstance.get(
+        `/api/iam/users/${userId}/roles?restaurantId=${restaurantId}`
+      );
+      return data;
+    },
+    options
+  );
+};
+
+// Assign a role to a user
+export const useAssignUserRole = () => {
+  return useMutation(async ({ userId, restaurantId, roleId }) => {
+    const { data } = await axiosInstance.post(`/api/iam/users/${userId}/roles`, {
+      restaurantId,
+      roleId,
+    });
+    return data;
+  });
+};
+
+// Remove a role from a user
+export const useRemoveUserRole = () => {
+  return useMutation(async ({ userId, restaurantId, roleId }) => {
+    await axiosInstance.delete(`/api/iam/users/${userId}/roles`, {
+      data: { restaurantId, roleId },
+    });
+  });
+};
+
+// Fetch user permission overrides
+export const useGetUserPermissionOverrides = (userId, restaurantId, options) => {
+  return useQuery(
+    ['userPermissionOverrides', userId, restaurantId],
+    async () => {
+      const { data } = await axiosInstance.get(
+        `/api/iam/users/${userId}/overrides?restaurantId=${restaurantId}`
+      );
+      return data;
+    },
+    options
+  );
+};
+
+// Set user permission overrides
+export const useSetUserPermissionOverrides = () => {
+  return useMutation(async ({ userId, restaurantId, overrides }) => {
+    const { data } = await axiosInstance.post(`/api/iam/users/${userId}/overrides`, { overrides });
+    return data;
+  });
+};
+
+// Set tenant entitlements (Superadmin only)
+export const useSetEntitlement = () => {
+  return useMutation(async ({ restaurantId, entityType, entityId, status, source, metadata }) => {
+    const { data } = await axiosInstance.post('/api/iam/entitlements', {
+      restaurantId,
+      entityType,
+      entityId,
+      status,
+      source,
+      metadata,
+    });
+    return data;
+  });
+};
+
+// Remove tenant entitlement (Superadmin only)
+export const useRemoveEntitlement = () => {
+  return useMutation(async ({ restaurantId, entityType, entityId }) => {
+    await axiosInstance.delete('/api/iam/entitlements', {
+      data: { restaurantId, entityType, entityId },
+    });
+  });
+};
+
+// Fetch permissions for a specific role
+export const useGetRolePermissions = (roleId, restaurantId, options) => {
+  return useQuery(
+    ['rolePermissions', roleId, restaurantId],
+    async () => {
+      const { data } = await axiosInstance.get(
+        `/api/iam/roles/${roleId}/permissions?restaurantId=${restaurantId}`
+      );
+      return data;
+    },
+    options
+  );
+};

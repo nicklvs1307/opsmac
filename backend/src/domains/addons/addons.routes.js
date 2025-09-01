@@ -1,6 +1,6 @@
 const express = require('express');
 const { auth } = require('../../middleware/authMiddleware');
-const checkPermission = require('../../middleware/permission');
+const requirePermission = require('../../middleware/requirePermission');
 const addonsController = require('./addons.controller');
 const {
     addonValidation,
@@ -10,10 +10,10 @@ const {
 const router = express.Router();
 
 // Rotas de Addons
-router.get('/', auth, checkPermission('addons:view'), addonsController.listAddons);
-router.post('/', auth, checkPermission('addons:create'), addonValidation, addonsController.createAddon);
-router.put('/:id', auth, checkPermission('addons:edit'), updateAddonValidation, addonsController.updateAddon);
-router.delete('/:id', auth, checkPermission('addons:delete'), addonsController.deleteAddon);
-router.patch('/:id/toggle-status', auth, checkPermission('addons:edit'), addonsController.toggleAddonStatus);
+router.get('/', auth, requirePermission('addons', 'read'), addonsController.listAddons);
+router.post('/', auth, requirePermission('addons', 'create'), addonValidation, addonsController.createAddon);
+router.put('/:id', auth, requirePermission('addons', 'update'), updateAddonValidation, addonsController.updateAddon);
+router.delete('/:id', auth, requirePermission('addons', 'delete'), addonsController.deleteAddon);
+router.patch('/:id/toggle-status', auth, requirePermission('addons', 'update'), addonsController.toggleAddonStatus);
 
 module.exports = router;

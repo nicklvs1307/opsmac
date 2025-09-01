@@ -3,7 +3,9 @@ const { NotFoundError, BadRequestError } = require('utils/errors');
 
 // --- Funções de Gerenciamento de Restaurante ---
 exports.getRestaurantById = async (restaurantId) => {
-  const restaurant = await models.Restaurant.findByPk(restaurantId);
+  const restaurant = await models.Restaurant.findByPk(restaurantId, {
+    include: [{ model: models.Feature, as: 'features', attributes: ['id', 'name', 'description', 'path'] }] // Include features
+  });
   if (!restaurant) {
     throw new NotFoundError('Restaurante não encontrado');
   }

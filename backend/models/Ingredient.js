@@ -1,91 +1,70 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class Ingredient extends Model {
     static associate(models) {
       Ingredient.belongsTo(models.Restaurant, {
         foreignKey: 'restaurant_id',
         as: 'restaurant',
       });
+      Ingredient.belongsTo(models.Supplier, {
+        foreignKey: 'supplier_id',
+        as: 'supplier',
+      });
       Ingredient.hasMany(models.RecipeIngredient, {
         foreignKey: 'ingredient_id',
         as: 'recipeIngredients',
       });
-
-      // Associação polimórfica com Stock
       Ingredient.hasOne(models.Stock, {
         foreignKey: 'stockable_id',
         constraints: false,
         scope: {
-          stockable_type: 'Ingredient',
+          stockable_type: 'ingredient'
         },
         as: 'stock',
       });
-
-      // Associação polimórfica com StockMovement
-      Ingredient.hasMany(models.StockMovement, {
-        foreignKey: 'stockable_id',
-        constraints: false,
-        scope: {
-          stockable_type: 'Ingredient',
-        },
-        as: 'stockMovements',
-      });
     }
   }
+
   Ingredient.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
-      validate: {
-        notEmpty: { msg: 'Nome do ingrediente é obrigatório' },
-        len: { args: [2, 100], msg: 'Nome deve ter entre 2 e 100 caracteres' },
-      },
     },
-    unit_of_measure: {
-      type: DataTypes.ENUM('g', 'kg', 'ml', 'L', 'unidade', 'colher de chá', 'colher de sopa', 'xícara', 'pitada', 'a gosto'),
+    unit: {
+      type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: { msg: 'Unidade de medida é obrigatória' },
-      },
     },
-    cost_per_unit: {
-      type: DataTypes.DECIMAL(10, 4),
-      allowNull: false,
-      defaultValue: 0.0000,
-      validate: {
-        isDecimal: { msg: 'Custo por unidade deve ser um número decimal' },
-        min: { args: [0], msg: 'Custo por unidade não pode ser negativo' },
-      },
-    },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      field: 'restaurant_id',
     },
-    default_expiration_days: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+    supplierId: {
+      type: DataTypes.UUID,
+      field: 'supplier_id',
     },
-    default_label_status: {
-      type: DataTypes.ENUM('RESFRIADO', 'CONGELADO', 'AMBIENTE'),
-      allowNull: true,
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'Ingredient',
     tableName: 'ingredients',
     timestamps: true,
+    underscored: true,
   });
+
   return Ingredient;
 };

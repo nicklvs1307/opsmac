@@ -3,19 +3,19 @@ const { Op, fn, col, literal } = require('sequelize');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 const { sendWhatsAppMessage } = require('services/integrations/whatsappApiClient');
 
-async function recordCheckin(customer_id, restaurantId) {
+async function recordCheckin(customerId, restaurantId) {
   const restaurant = await models.Restaurant.findByPk(restaurantId);
   if (!restaurant) {
     throw new NotFoundError('Restaurante não encontrado');
   }
 
-  const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
-  const checkinDurationMinutes = checkinProgramSettings.checkin_duration_minutes || 1440;
+  const checkinProgramSettings = restaurant.settings?.checkinProgramSettings || {};
+  const checkinDurationMinutes = checkinProgramSettings.checkinDurationMinutes || 1440;
 
   const customer = await models.Customer.findOne({
     where: {
-      id: customer_id,
-      restaurant_id: restaurantId
+      id: customerId,
+      restaurantId: restaurantId
     }
   });
 
@@ -25,10 +25,10 @@ async function recordCheckin(customer_id, restaurantId) {
 
   const existingCheckin = await models.Checkin.findOne({
     where: {
-      customer_id,
-      restaurant_id,
+      customerId,
+      restaurantId,
       status: 'active',
-      expires_at: { [Op.gt]: new Date() }
+      expiresAt: { [Op.gt]: new Date() }
     },
   });
 
@@ -40,21 +40,21 @@ async function recordCheckin(customer_id, restaurantId) {
   const expiresAt = new Date(checkinTime.getTime() + checkinDurationMinutes * 60 * 1000);
 
   const checkin = await models.Checkin.create({
-    customer_id,
-    restaurant_id,
-    checkin_time: checkinTime,
-    expires_at: expiresAt,
+    customerId,
+    restaurantId,
+    checkinTime: checkinTime,
+    expiresAt: expiresAt,
     status: 'active',
   });
 
   if (customer) {
-    await customer.increment('total_visits');
+    await customer.increment('totalVisits');
   }
 
   try {
-    if (restaurant && restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
-      const checkinMessageEnabled = restaurant.settings?.whatsapp_messages?.checkin_message_enabled;
-      const customCheckinMessage = restaurant.settings?.whatsapp_messages?.checkin_message_text;
+    if (restaurant && restaurant.whatsappApiUrl && restaurant.whatsappApiKey && restaurant.whatsappInstanceId && customer.phone) {
+      const checkinMessageEnabled = restaurant.settings?.whatsappMessages?.checkinMessageEnabled;
+      const customCheckinMessage = restaurant.settings?.whatsappMessages?.checkinMessageText;
 
       if (checkinMessageEnabled) {
         let messageText = customCheckinMessage || `Olá {{customer_name}}! 👋\n\nObrigado por fazer check-in no *{{restaurant_name}}*!\n\nComo agradecimento, você tem um benefício especial na sua próxima compra. Fique de olho nas nossas promoções! 😉`;
@@ -63,22 +63,22 @@ async function recordCheckin(customer_id, restaurantId) {
         messageText = messageText.replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
 
         const whatsappResponse = await sendWhatsAppMessage(
-          restaurant.whatsapp_api_url,
-          restaurant.whatsapp_api_key,
-          restaurant.whatsapp_instance_id,
+          restaurant.whatsappApiUrl,
+          restaurant.whatsappApiKey,
+          restaurant.whatsappInstanceId,
           customer.phone,
           messageText
         );
 
         if (whatsappResponse.success) {
           await models.WhatsAppMessage.create({
-            phone_number: customer.phone,
-            message_text: messageText,
-            message_type: 'checkin_thank_you',
+            phoneNumber: customer.phone,
+            messageText: messageText,
+            messageType: 'checkin_thank_you',
             status: 'sent',
-            whatsapp_message_id: whatsappResponse.data?.id || null,
-            restaurant_id: restaurant.id,
-            customer_id: customer.id,
+            whatsappMessageId: whatsappResponse.data?.id || null,
+            restaurantId: restaurant.id,
+            customerId: customer.id,
           });
         } else {
           console.error('Erro ao enviar mensagem de agradecimento de check-in para', customer.phone, ':', whatsappResponse.error);
@@ -92,28 +92,28 @@ async function recordCheckin(customer_id, restaurantId) {
   return checkin;
 }
 
-async function recordPublicCheckin(restaurant, phone_number, cpf, customer_name, table_number, coupon_id) {
-  const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
-  const checkinDurationMinutes = checkinProgramSettings.checkin_duration_minutes || 1440;
-  const identificationMethod = checkinProgramSettings.identification_method || 'phone';
-  const requireCouponForCheckin = checkinProgramSettings.require_coupon_for_checkin || false;
+async function recordPublicCheckin(restaurant, phoneNumber, cpf, customerName, tableNumber, couponId) {
+  const checkinProgramSettings = restaurant.settings?.checkinProgramSettings || {};
+  const checkinDurationMinutes = checkinProgramSettings.checkinDurationMinutes || 1440;
+  const identificationMethod = checkinProgramSettings.identificationMethod || 'phone';
+  const requireCouponForCheckin = checkinProgramSettings.requireCouponForCheckin || false;
 
   let customer;
   let customerSearchCriteria = {};
-  let customerCreationData = { restaurant_id: restaurant.id };
+  let customerCreationData = { restaurantId: restaurant.id };
 
   if (identificationMethod === 'phone') {
-    if (!phone_number) {
+    if (!phoneNumber) {
       throw new BadRequestError('Número de telefone é obrigatório para este método de identificação.');
     }
-    customerSearchCriteria = { phone: phone_number, restaurant_id: restaurant.id };
-    customerCreationData.phone = phone_number;
-    customerCreationData.whatsapp = phone_number;
+    customerSearchCriteria = { phone: phoneNumber, restaurantId: restaurant.id };
+    customerCreationData.phone = phoneNumber;
+    customerCreationData.whatsapp = phoneNumber;
   } else if (identificationMethod === 'cpf') {
     if (!cpf) {
       throw new BadRequestError('CPF é obrigatório para este método de identificação.');
     }
-    customerSearchCriteria = { cpf, restaurant_id: restaurant.id };
+    customerSearchCriteria = { cpf, restaurantId: restaurant.id };
     customerCreationData.cpf = cpf;
   } else {
     throw new BadRequestError('Método de identificação inválido configurado para o restaurante.');
@@ -122,21 +122,21 @@ async function recordPublicCheckin(restaurant, phone_number, cpf, customer_name,
   customer = await models.Customer.findOne({ where: customerSearchCriteria });
 
   if (!customer) {
-    customerCreationData.name = customer_name || 'Cliente Anônimo';
+    customerCreationData.name = customerName || 'Cliente Anônimo';
     customerCreationData.source = 'checkin_qrcode';
     customer = await models.Customer.create(customerCreationData);
   } else {
-    if (customer_name && customer.name === 'Cliente Anônimo') {
-      await customer.update({ name: customer_name });
+    if (customerName && customer.name === 'Cliente Anônimo') {
+      await customer.update({ name: customerName });
     }
   }
 
   const existingCheckin = await models.Checkin.findOne({
     where: {
-      customer_id: customer.id,
-      restaurant_id: restaurant.id,
+      customerId: customer.id,
+      restaurantId: restaurant.id,
       status: 'active',
-      expires_at: { [Op.gt]: new Date() }
+      expiresAt: { [Op.gt]: new Date() }
     },
   });
 
@@ -145,23 +145,23 @@ async function recordPublicCheckin(restaurant, phone_number, cpf, customer_name,
   }
 
   let validCouponId = null;
-  if (coupon_id) {
+  if (couponId) {
     const coupon = await models.Coupon.findOne({
       where: {
-        id: coupon_id,
-        restaurant_id: restaurant.id,
+        id: couponId,
+        restaurantId: restaurant.id,
         status: 'active',
-        expires_at: { [Op.or]: { [Op.gte]: new Date(), [Op.eq]: null } }
+        expiresAt: { [Op.or]: { [Op.gte]: new Date(), [Op.eq]: null } }
       }
     });
 
     if (coupon) {
-      validCouponId = coupon_id;
+      validCouponId = couponId;
     } else {
       if (requireCouponForCheckin) {
         throw new BadRequestError('ID do cupom inválido ou cupom não ativo/expirado.');
       } else {
-        coupon_id = null;
+        couponId = null;
       }
     }
   } else if (requireCouponForCheckin) {
@@ -172,43 +172,43 @@ async function recordPublicCheckin(restaurant, phone_number, cpf, customer_name,
   const expiresAt = new Date(checkinTime.getTime() + checkinDurationMinutes * 60 * 1000);
 
   const checkin = await models.Checkin.create({
-    customer_id: customer.id,
-    restaurant_id: restaurant.id,
-    table_number,
-    coupon_id: validCouponId,
-    checkin_time: checkinTime,
-    expires_at: expiresAt,
+    customerId: customer.id,
+    restaurantId: restaurant.id,
+    tableNumber,
+    couponId: validCouponId,
+    checkinTime: checkinTime,
+    expiresAt: expiresAt,
     status: 'active',
   });
 
-  await customer.increment('total_visits');
+  await customer.increment('totalVisits');
   await customer.reload();
   await customer.updateStats();
 
   const { 
-    checkin_time_restriction = 'unlimited',
-    points_per_checkin = 1,
+    checkinTimeRestriction = 'unlimited',
+    pointsPerCheckin = 1,
   } = checkinProgramSettings;
 
-  if (checkin_time_restriction !== 'unlimited') {
+  if (checkinTimeRestriction !== 'unlimited') {
     const lastCheckin = await models.Checkin.findOne({
       where: {
-        customer_id: customer.id,
-        restaurant_id: restaurant.id,
+        customerId: customer.id,
+        restaurantId: restaurant.id,
         status: 'active',
         id: { [Op.ne]: checkin.id }
       },
-      order: [['checkin_time', 'DESC']]
+      order: [['checkinTime', 'DESC']]
     });
 
     if (lastCheckin) {
       const now = new Date();
-      const lastCheckinTime = new Date(lastCheckin.checkin_time);
+      const lastCheckinTime = new Date(lastCheckin.checkinTime);
       const diffHours = Math.abs(now - lastCheckinTime) / 36e5;
 
       let restrictionHours = 0;
-      if (checkin_time_restriction === '1_per_day') restrictionHours = 24;
-      if (checkin_time_restriction === '1_per_6_hours') restrictionHours = 6;
+      if (checkinTimeRestriction === '1_per_day') restrictionHours = 24;
+      if (checkinTimeRestriction === '1_per_6_hours') restrictionHours = 6;
 
       if (restrictionHours > 0 && diffHours < restrictionHours) {
         console.warn(`Anti-fraude: Cliente ${customer.id} tentou check-in muito rápido. Último check-in: ${lastCheckinTime.toISOString()}`);
@@ -216,62 +216,62 @@ async function recordPublicCheckin(restaurant, phone_number, cpf, customer_name,
     }
   }
 
-  if (points_per_checkin > 0) {
+  if (pointsPerCheckin > 0) {
     if (typeof customer.addLoyaltyPoints === 'function') {
-      await customer.addLoyaltyPoints(parseInt(points_per_checkin, 10), 'checkin');
+      await customer.addLoyaltyPoints(parseInt(pointsPerCheckin, 10), 'checkin');
     } else {
       console.warn('[Public Check-in] Método addLoyaltyPoints não encontrado no modelo Customer. Pontos não adicionados.');
     }
   }
 
   let rewardEarned = null;
-  const visitRewards = restaurant.settings?.checkin_program_settings?.rewards_per_visit || [];
+  const visitRewards = restaurant.settings?.checkinProgramSettings?.rewardsPerVisit || [];
 
   for (const rewardConfig of visitRewards) {
-    const parsedVisitCount = parseInt(rewardConfig.visit_count, 10);
+    const parsedVisitCount = parseInt(rewardConfig.visitCount, 10);
     
-    if (parsedVisitCount === customer.total_visits) {
+    if (parsedVisitCount === customer.totalVisits) {
       const existingCoupon = await models.Coupon.findOne({
         where: {
-          customer_id: customer.id,
-          reward_id: rewardConfig.reward_id,
-          visit_milestone: parsedVisitCount,
+          customerId: customer.id,
+          rewardId: rewardConfig.rewardId,
+          visitMilestone: parsedVisitCount,
         },
       });
 
       if (existingCoupon) {
         continue;
       }
-      const reward = await models.Reward.findByPk(rewardConfig.reward_id);
+      const reward = await models.Reward.findByPk(rewardConfig.rewardId);
       
       if (reward) {
         try {
-          if (reward.reward_type === 'spin_the_wheel') {
+          if (reward.rewardType === 'spin_the_wheel') {
             rewardEarned = {
-              reward_id: reward.id,
-              reward_title: reward.title,
-              reward_type: reward.reward_type,
-              wheel_config: reward.wheel_config,
-              visit_count: customer.total_visits,
-              customer_id: customer.id,
+              rewardId: reward.id,
+              rewardTitle: reward.title,
+              rewardType: reward.rewardType,
+              wheelConfig: reward.wheelConfig,
+              visitCount: customer.totalVisits,
+              customerId: customer.id,
               description: reward.description,
             };
           } else {
-            const newCoupon = await reward.generateCoupon(customer.id, { visit_milestone: parsedVisitCount });
+            const newCoupon = await reward.generateCoupon(customer.id, { visitMilestone: parsedVisitCount });
 
             if (newCoupon) {
-              let rewardMessage = rewardConfig.message_template || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
+              let rewardMessage = rewardConfig.messageTemplate || `Parabéns, {{customer_name}}! Você ganhou um cupom de *{{reward_title}}* na sua {{visit_count}}ª visita ao *{{restaurant_name}}*! Use o código: {{coupon_code}}`;
               
               rewardMessage = rewardMessage.replace(/\{\{customer_name\}\}/g, customer.name || '').replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
               rewardMessage = rewardMessage.replace(/\{\{reward_title\}\}/g, reward.title || '').replace(/\{\{coupon_code\}\}/g, newCoupon.code || '');
-              rewardMessage = rewardMessage.replace(/\{\{visit_count\}\}/g, customer.total_visits);
+              rewardMessage = rewardMessage.replace(/\{\{visit_count\}\}/g, customer.totalVisits);
 
-              if (restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
+              if (restaurant.whatsappApiUrl && restaurant.whatsappApiKey && restaurant.whatsappInstanceId && customer.phone) {
                 try {
                   await sendWhatsAppMessage(
-                    restaurant.whatsapp_api_url,
-                    restaurant.whatsapp_api_key,
-                    restaurant.whatsapp_instance_id,
+                    restaurant.whatsappApiUrl,
+                    restaurant.whatsappApiKey,
+                    restaurant.whatsappInstanceId,
                     customer.phone,
                     rewardMessage
                   );
@@ -280,12 +280,12 @@ async function recordPublicCheckin(restaurant, phone_number, cpf, customer_name,
                 }
               }
               rewardEarned = {
-                reward_title: newCoupon.title || '',
-                coupon_code: newCoupon.code || '',
-                formatted_message: rewardMessage,
-                visit_count: customer.total_visits,
-                reward_type: reward.reward_type,
-                wheel_config: reward.wheel_config,
+                rewardTitle: newCoupon.title || '',
+                couponCode: newCoupon.code || '',
+                formattedMessage: rewardMessage,
+                visitCount: customer.totalVisits,
+                rewardType: reward.rewardType,
+                wheelConfig: reward.wheelConfig,
                 value: newCoupon.value || 0,
                 description: newCoupon.description || ''
               };
@@ -295,21 +295,21 @@ async function recordPublicCheckin(restaurant, phone_number, cpf, customer_name,
           console.error(`[Public Check-in] Erro ao gerar cupom de recompensa por visita para ${customer.name}:`, couponError.message, 'Stack:', couponError.stack);
         }
       } else {
-        console.warn(`[Public Check-in] Recompensa com ID ${rewardConfig.reward_id} não encontrada no banco de dados.`);
+        console.warn(`[Public Check-in] Recompensa com ID ${rewardConfig.rewardId} não encontrada no banco de dados.`);
       }
     }
   }
 
   if (!rewardEarned) {
     try {
-      if (restaurant.settings?.whatsapp_enabled && restaurant.whatsapp_api_url && restaurant.whatsapp_api_key && restaurant.whatsapp_instance_id && customer.phone) {
-        const checkinMessageEnabled = restaurant.settings?.whatsapp_messages?.checkin_message_enabled;
-        const customCheckinMessage = restaurant.settings?.whatsapp_messages?.checkin_message_text;
+      if (restaurant.settings?.whatsappEnabled && restaurant.whatsappApiUrl && restaurant.whatsappApiKey && restaurant.whatsappInstanceId && customer.phone) {
+        const checkinMessageEnabled = restaurant.settings?.whatsappMessages?.checkinMessageEnabled;
+        const customCheckinMessage = restaurant.settings?.whatsappMessages?.checkinMessageText;
 
         if (checkinMessageEnabled && customCheckinMessage) {
           let messageText = customCheckinMessage.replace(/\{\{customer_name\}\}/g, customer.name || '').replace(/\{\{restaurant_name\}\}/g, restaurant.name || '');
           
-          await sendWhatsAppMessage(restaurant.whatsapp_api_url, restaurant.whatsapp_api_key, restaurant.whatsapp_instance_id, customer.phone, messageText);
+          await sendWhatsAppMessage(restaurant.whatsappApiUrl, restaurant.whatsappApiKey, restaurant.whatsappInstanceId, customer.phone, messageText);
         }
       }
     } catch (whatsappError) {
@@ -317,7 +317,7 @@ async function recordPublicCheckin(restaurant, phone_number, cpf, customer_name,
     }
   }
 
-  return { checkin, customer_total_visits: customer.total_visits, reward_earned: rewardEarned };
+  return { checkin, customerTotalVisits: customer.totalVisits, rewardEarned: rewardEarned };
 }
 
 async function checkoutCheckin(checkinId, userId) {
@@ -356,7 +356,7 @@ async function checkoutCheckin(checkinId, userId) {
     throw new ForbiddenError('Módulo de Check-in não habilitado para este restaurante.');
   }
 
-  checkin.checkout_time = new Date();
+  checkin.checkoutTime = new Date();
   checkin.status = 'completed';
   await checkin.save();
 
@@ -368,7 +368,8 @@ async function checkoutCheckin(checkinId, userId) {
 
 async function getCheckinAnalytics(restaurantId, period) {
   let startDate = null;
-  if (period !== 'all') {
+  const validPeriods = ['7d', '30d', '90d', '1y', 'all'];
+  if (period && validPeriods.includes(period) && period !== 'all') {
     const days = {
       '7d': 7,
       '30d': 30,
@@ -377,17 +378,20 @@ async function getCheckinAnalytics(restaurantId, period) {
     };
     startDate = new Date();
     startDate.setDate(startDate.getDate() - days[period]);
+  } else if (period && !validPeriods.includes(period)) {
+    // Log a warning or throw an error if an invalid period is provided
+    console.warn(`Invalid period provided for checkin analytics: ${period}. Defaulting to all time.`);
   }
 
   const dateFilter = startDate ? {
-    checkin_time: {
+    checkinTime: {
       [Op.gte]: startDate
     }
   } : {};
 
   const totalCheckins = await models.Checkin.count({
     where: {
-      restaurant_id: restaurantId,
+      restaurantId: restaurantId,
       status: 'completed',
       ...dateFilter
     },
@@ -395,66 +399,66 @@ async function getCheckinAnalytics(restaurantId, period) {
 
   const mostFrequentCustomers = await models.Checkin.findAll({
     where: {
-      restaurant_id: restaurantId,
+      restaurantId: restaurantId,
       status: 'completed',
       ...dateFilter
     },
     attributes: [
-      'customer_id',
-      [fn('COUNT', col('Checkin.id')), 'checkin_count'],
+      'customerId',
+      [fn('COUNT', col('Checkin.id')), 'checkinCount'],
     ],
     include: [{
       model: models.Customer,
       as: 'customer',
       attributes: ['name', 'email'],
     }],
-    group: ['customer_id', 'customer.id', 'customer.name', 'customer.email'],
-    order: [[literal('checkin_count'), 'DESC']],
+    group: ['customerId', 'customer.id', 'customer.name', 'customer.email'],
+    order: [[literal('checkinCount'), 'DESC']],
     limit: 10,
   });
 
   const averageVisitDuration = await models.Checkin.findOne({
     where: {
-      restaurant_id: restaurantId,
+      restaurantId: restaurantId,
       status: 'completed',
-      checkout_time: { [Op.not]: null },
+      checkoutTime: { [Op.not]: null },
       ...dateFilter
     },
     attributes: [
-      [fn('AVG', literal('EXTRACT(EPOCH FROM (checkout_time - checkin_time))')), 'avg_duration_seconds'],
+      [fn('AVG', literal('EXTRACT(EPOCH FROM (checkoutTime - checkinTime))')), 'avgDurationSeconds'],
     ],
     raw: true,
   });
 
   const checkinsByDay = await models.Checkin.findAll({
     where: {
-      restaurant_id: restaurantId,
+      restaurantId: restaurantId,
       status: 'completed',
-      checkin_time: {
+      checkinTime: {
         [Op.gte]: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
       }
     },
     attributes: [
-      [fn('DATE_TRUNC', 'day', col('checkin_time')), 'date'],
+      [fn('DATE_TRUNC', 'day', col('checkinTime')), 'date'],
       [fn('COUNT', col('id')), 'count'],
     ],
-    group: [fn('DATE_TRUNC', 'day', col('checkin_time'))],
-    order: [[fn('DATE_TRUNC', 'day', col('checkin_time')), 'ASC']],
+    group: [fn('DATE_TRUNC', 'day', col('checkinTime'))],
+    order: [[fn('DATE_TRUNC', 'day', col('checkinTime')), 'ASC']],
     raw: true,
   });
 
   return {
-    total_checkins: totalCheckins,
-    most_frequent_customers: mostFrequentCustomers,
-    average_visit_duration_seconds: parseFloat(averageVisitDuration?.avg_duration_seconds || 0),
-    checkins_by_day: checkinsByDay,
+    totalCheckins: totalCheckins,
+    mostFrequentCustomers: mostFrequentCustomers,
+    averageVisitDurationSeconds: parseFloat(averageVisitDuration?.avgDurationSeconds || 0),
+    checkinsByDay: checkinsByDay,
   };
 }
 
 async function getActiveCheckins(restaurantId) {
   const activeCheckins = await models.Checkin.findAll({
     where: {
-      restaurant_id: restaurantId,
+      restaurantId: restaurantId,
       status: 'active',
     },
     include: [{
@@ -462,7 +466,7 @@ async function getActiveCheckins(restaurantId) {
       as: 'customer',
       attributes: ['id', 'name', 'phone', 'email'],
     }],
-    order: [['checkin_time', 'ASC']],
+    order: [['checkinTime', 'ASC']],
   });
   return activeCheckins;
 }

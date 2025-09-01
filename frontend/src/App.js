@@ -1,5 +1,4 @@
 import React from 'react';
-import { RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Toaster } from 'react-hot-toast';
 
@@ -7,6 +6,7 @@ import AppProvider from '@/app/providers';
 
 // Routes
 import { router } from '@/app/router';
+import { RouterProvider } from 'react-router-dom'; // Add this import
 
 // Create query client
 const queryClient = new QueryClient({
@@ -19,11 +19,14 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  // The useNavigate hook and useEffect are removed as RouterProvider is removed.
+  // The setNavigator function might need to be called elsewhere if still needed.
+
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
         <div className="App">
-          <RouterProvider router={router} />
+          <RouterProvider router={router} /> {/* Add this line */}
           <Toaster
             position="top-center"
             gutter={12}

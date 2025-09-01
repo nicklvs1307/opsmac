@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -29,11 +29,11 @@ import {
 } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 
 const fetchProducts = async () => {
-  const { data } = await axiosInstance.get('/api/products');
+  const { data } = await axiosInstance.get('/addons');
   return data;
 };
 
@@ -57,7 +57,7 @@ const deleteProduct = async (id) => {
 };
 
 const fetchAddons = async () => {
-  const { data } = await axiosInstance.get('/api/addons');
+  const { data } = await axiosInstance.get('/addons');
   return data;
 };
 
@@ -255,7 +255,7 @@ const ProductManagement = () => {
     formData.append('productImage', file);
 
     try {
-      const { data } = await axiosInstance.post('/api/products/upload-image', formData, {
+      const { data } = await axiosInstance.post('/products/upload-image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

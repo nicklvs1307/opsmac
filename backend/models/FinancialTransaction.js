@@ -1,21 +1,20 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class FinancialTransaction extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      FinancialTransaction.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurant_id',
-        as: 'restaurant',
-      });
       FinancialTransaction.belongsTo(models.FinancialCategory, {
         foreignKey: 'category_id',
         as: 'category',
+      });
+      FinancialTransaction.belongsTo(models.PaymentMethod, {
+        foreignKey: 'payment_method_id',
+        as: 'paymentMethod',
+      });
+      FinancialTransaction.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
       });
       FinancialTransaction.belongsTo(models.User, {
         foreignKey: 'user_id',
@@ -27,76 +26,57 @@ module.exports = (sequelize) => {
   FinancialTransaction.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    restaurant_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
-    },
-    type: { // 'income' or 'expense'
-      type: DataTypes.ENUM('income', 'expense'),
+    description: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     amount: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true,
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    transaction_date: {
+    categoryId: {
+      type: DataTypes.UUID,
+      field: 'category_id',
+    },
+    paymentMethodId: {
+      type: DataTypes.UUID,
+      field: 'payment_method_id',
+    },
+    transactionDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
+      field: 'transaction_date',
     },
-    category_id: {
+    restaurantId: {
       type: DataTypes.UUID,
-      allowNull: true, // Can be null if no category is selected
-      references: {
-        model: 'financial_categories',
-        key: 'id',
-      },
-    },
-    payment_method: { // e.g., 'cash', 'credit_card', 'pix', 'bank_transfer'
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    receipt_url: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    is_recurring: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
       allowNull: false,
+      field: 'restaurant_id',
     },
-    recurring_interval: { // e.g., 'daily', 'weekly', 'monthly', 'yearly'
-      type: DataTypes.ENUM('daily', 'weekly', 'monthly', 'yearly'),
-      allowNull: true,
+    userId: {
+      type: DataTypes.UUID,
+      field: 'user_id',
     },
-    recurring_ends_at: {
+    createdAt: {
       type: DataTypes.DATE,
-      allowNull: true,
+      field: 'created_at',
     },
-    user_id: { // User who recorded the transaction
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'FinancialTransaction',
     tableName: 'financial_transactions',
     timestamps: true,
+    underscored: true,
   });
 
   return FinancialTransaction;

@@ -245,3 +245,60 @@ exports.getSurveyAnalytics = async (restaurantId) => {
         npsCriteriaScores: restaurant?.npsCriteriaScores || {}
     };
 };
+
+exports.getSurveysComparisonAnalytics = async (restaurantId, surveyIds) => {
+    const comparisonData = [];
+
+    for (const surveyId of surveyIds) {
+        const survey = await models.Survey.findByPk(surveyId, {
+            where: { restaurant_id: restaurantId },
+            include: ['questions']
+        });
+
+        if (survey) {
+            const analytics = await exports.getSurveyAnalytics(restaurantId); // Re-use existing analytics logic
+            comparisonData.push({
+                surveyId: survey.id,
+                title: survey.title,
+                totalResponses: analytics.totalResponses,
+                averageNps: analytics.averageNps,
+                averageCsat: analytics.averageCsat,
+                npsMetricsPerCriterion: analytics.npsMetricsPerCriterion,
+            });
+        }
+    }
+    return comparisonData;
+};
+
+exports.getQuestionAnswersDistribution = async (restaurantId, surveyId, questionId) => {
+    const question = await models.Question.findOne({
+        where: { id: questionId, survey_id: surveyId },
+        include: [{
+            model: models.Survey,
+            where: { restaurant_id: restaurantId },
+            attributes: []
+        }]
+    });
+
+    if (!question) {
+        throw new NotFoundError('Questão não encontrada ou não pertence a este restaurante/pesquisa.');
+    }
+
+    const answers = await models.Answer.findAll({
+        where: { question_id: questionId },
+        attributes: ['answer_value'],
+    });
+
+    const distribution = {};
+    answers.forEach(answer => {
+        const value = answer.answer_value;
+        distribution[value] = (distribution[value] || 0) + 1;
+    });
+
+    return {
+        questionId: question.id,
+        questionText: question.question_text,
+        questionType: question.question_type,
+        distribution,
+    };
+};

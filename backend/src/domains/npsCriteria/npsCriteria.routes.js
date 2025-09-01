@@ -1,6 +1,6 @@
 const express = require('express');
 const { auth } = require('../../middleware/authMiddleware');
-const checkPermission = require('../../middleware/permission');
+const requirePermission = require('../../middleware/requirePermission');
 const npsCriteriaController = require('./npsCriteria.controller');
 const {
     npsCriterionValidation
@@ -9,9 +9,9 @@ const {
 const router = express.Router();
 
 // Rotas de Critérios de NPS
-router.get('/', auth, checkPermission('npsCriteria:view'), npsCriteriaController.listNpsCriteria);
-router.post('/', auth, checkPermission('npsCriteria:create'), npsCriterionValidation, npsCriteriaController.createNpsCriterion);
-router.put('/:id', auth, checkPermission('npsCriteria:edit'), npsCriterionValidation, npsCriteriaController.updateNpsCriterion);
-router.delete('/:id', auth, checkPermission('npsCriteria:delete'), npsCriteriaController.deleteNpsCriterion);
+router.get('/', auth, requirePermission('npsCriteria', 'read'), npsCriteriaController.listNpsCriteria);
+router.post('/', auth, requirePermission('npsCriteria', 'create'), npsCriterionValidation, npsCriteriaController.createNpsCriterion);
+router.put('/:id', auth, requirePermission('npsCriteria', 'update'), npsCriterionValidation, npsCriteriaController.updateNpsCriterion);
+router.delete('/:id', auth, requirePermission('npsCriteria', 'delete'), npsCriteriaController.deleteNpsCriterion);
 
 module.exports = router;

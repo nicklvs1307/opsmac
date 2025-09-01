@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import apiClient from '../../api/axiosInstance';
+import apiClient from '@/shared/lib/axiosInstance';
 import {
   Table,
   TableBody,

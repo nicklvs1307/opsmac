@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '../../../shared/lib/axiosInstance';
+import axiosInstance from '@/services/axiosInstance'; // Using aliased path
 
 // Query Keys
 const AUTH_QUERY_KEYS = {
@@ -8,16 +8,13 @@ const AUTH_QUERY_KEYS = {
 
 // API Functions
 const fetchMe = async () => {
+  // The token is now automatically added by the axios interceptor in axiosInstance.js
   const response = await axiosInstance.get('/auth/me');
-  return response.data;
-};
-
-const loginUser = async ({ email, password }) => {
-  const response = await axiosInstance.post('/auth/login', { email, password });
-  return response.data;
+  return response.data.user; // The endpoint returns { user: ... }
 };
 
 const updateProfile = async (userData) => {
+  // The token is now automatically added by the axios interceptor in axiosInstance.js
   const response = await axiosInstance.put('/auth/profile', userData);
   return response.data;
 };
@@ -25,21 +22,10 @@ const updateProfile = async (userData) => {
 // React Query Hooks
 export const useFetchMe = () => {
   return useQuery(AUTH_QUERY_KEYS.me, fetchMe, {
-    staleTime: Infinity, // User data doesn't change often
+    staleTime: Infinity,
     cacheTime: Infinity,
-    retry: 1,
-    enabled: !!localStorage.getItem('token'), // Only fetch if token exists
-  });
-};
-
-export const useLogin = () => {
-  const queryClient = useQueryClient();
-  return useMutation(loginUser, {
-    onSuccess: (data) => {
-      // Invalidate 'me' query to refetch user data after successful login
-      queryClient.invalidateQueries(AUTH_QUERY_KEYS.me);
-      // Optionally, set token here if not handled by axiosInstance interceptor
-    },
+    retry: false, // Don't retry on auth errors, the context will handle logout
+    enabled: false, // This query should be called manually by the AuthContext
   });
 };
 
@@ -51,7 +37,7 @@ export const useUpdateProfile = () => {
       queryClient.invalidateQueries(AUTH_QUERY_KEYS.me);
       // Optionally, update local cache directly if data is returned
       queryClient.setQueryData(AUTH_QUERY_KEYS.me, (oldData) => {
-        return oldData ? { ...oldData, user: data.user } : oldData;
+        return oldData ? { ...oldData, ...data.user } : oldData;
       });
     },
   });

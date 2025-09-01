@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Copie os arquivos package.json e package-lock.json para instalar as dependências
 # Isso aproveita o cache do Docker se as dependências não mudarem
-COPY package*.json ./
+COPY backend/package*.json ./
 
 # Instale as dependências do projeto principal
 RUN npm install

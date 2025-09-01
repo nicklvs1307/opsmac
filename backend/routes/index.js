@@ -20,6 +20,7 @@ const saiposRoutes = require('../src/domains/saipos/saipos.routes');
 const uaiRangoRoutes = require('../src/domains/uaiRango/uaiRango.routes');
 const deliveryMuchRoutes = require('../src/domains/deliveryMuch/deliveryMuch.routes');
 const productRoutes = require('../src/domains/products/products.routes');
+const { auth } = require('middleware/authMiddleware'); // Added this line, using alias
 const { checkRestaurantOwnership } = require('../src/middleware/checkRestaurantOwnershipMiddleware');
 const publicProductsRoutes = require('../src/domains/publicProducts/publicProducts.routes');
 const stockRoutes = require('../src/domains/stock/stock.routes');
@@ -39,10 +40,13 @@ const labelsRoutes = require('../src/domains/labels/labels.routes');
 const restaurantRoutes = require('../src/domains/restaurant/restaurant.routes');
 const healthRoutes = require('../src/domains/health/health.routes');
 
+const requirePermission = require('../src/middleware/requirePermission');
+const iamRoutes = require('../src/api/routes/iam');
+
 module.exports = [
     { path: '/api/auth', router: authRoutes },
     { path: '/api/feedback', router: feedbackRoutes },
-    { path: '/api/dashboard/:restaurantId', router: dashboardRoutes, middleware: [checkRestaurantOwnership] },
+    { path: '/api/dashboard/:restaurantId', router: dashboardRoutes, middleware: [auth, checkRestaurantOwnership] }, // Modified this line
     { path: '/api/rewards', router: rewardsRoutes },
     { path: '/api/qrcode', router: qrcodeRoutes },
     { path: '/api/whatsapp', router: whatsappRoutes },
@@ -50,8 +54,8 @@ module.exports = [
     { path: '/api/settings', router: settingsRoutes },
     { path: '/api/coupons', router: couponsRoutes },
     { path: '/api/checkin', router: checkinRoutes },
-    { path: '/public/surveys', router: publicSurveyRoutes },
-    { path: '/public', router: publicRoutes },
+    { path: '/api/public/surveys', router: publicSurveyRoutes },
+    { path: '/api/public', router: publicRoutes },
     { path: '/api/public/v2', router: publicRoutesV2 },
     { path: '/api/surveys', router: surveyRoutes },
     { path: '/api/admin', router: adminRoutes },
@@ -67,7 +71,7 @@ module.exports = [
     { path: '/api/public/orders', router: publicOrdersRoutes },
     { path: '/api/stock', router: stockRoutes },
     { path: '/api/tables', router: tablesRoutes },
-    { path: '/public/menu/dine-in', router: publicDineInMenuRoutes },
+    { path: '/api/public/menu/dine-in', router: publicDineInMenuRoutes },
     { path: '/api/public/dine-in', router: publicDineInOrdersRoutes },
     { path: '/api/orders', router: ordersRoutes },
     { path: '/api/ingredients', router: ingredientsRoutes },
@@ -77,7 +81,9 @@ module.exports = [
     { path: '/api/suppliers', router: supplierRoutes },
     { path: '/api/cash-register', router: cashRegisterRoutes },
     { path: '/api/financial', router: financialRoutes },
-    { path: '/labels', router: labelsRoutes },
+    { path: '/api/labels', router: labelsRoutes },
     { path: '/api/restaurant/:restaurantId', router: restaurantRoutes },
     { path: '/api/health', router: healthRoutes },
+    
+    { path: '/api/iam', router: iamRoutes },
 ];

@@ -1,32 +1,32 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '@/shared/lib/axiosInstance';
+import axiosInstance from '@/services/axiosInstance';
 
 // Query Keys
 const ADMIN_QUERY_KEYS = {
   users: 'adminUsers',
   restaurants: 'adminRestaurants',
   modules: 'adminModules',
-  restaurantModules: 'adminRestaurantModules',
+  restaurantFeatures: 'adminRestaurantFeatures',
 };
 
 // API Functions (these are the original functions from adminService.js)
 const fetchUsers = async () => {
-  const response = await axiosInstance.get('/api/admin/users');
+  const response = await axiosInstance.get('/admin/users');
   return response.data;
 };
 
 const fetchRestaurants = async () => {
-  const response = await axiosInstance.get('/api/admin/restaurants');
+  const response = await axiosInstance.get('/admin/restaurants');
   return response.data;
 };
 
 const saveUser = async (userData) => {
   const { userId, ...data } = userData;
   if (userId) {
-    const response = await axiosInstance.put(`/api/admin/users/${userId}`, data);
+    const response = await axiosInstance.put(`/admin/users/${userId}`, data);
     return response.data;
   } else {
-    const response = await axiosInstance.post('/api/admin/users', data);
+    const response = await axiosInstance.post('/admin/users', data);
     return response.data;
   }
 };
@@ -34,28 +34,33 @@ const saveUser = async (userData) => {
 const saveRestaurant = async (restaurantData) => {
   const { restaurantId, ...data } = restaurantData;
   if (restaurantId) {
-    const response = await axiosInstance.put(`/api/admin/restaurants/${restaurantId}`, data);
+    const response = await axiosInstance.put(`/admin/restaurants/${restaurantId}`, data);
     return response.data;
   } else {
-    const response = await axiosInstance.post('/api/admin/restaurants', data);
+    const response = await axiosInstance.post('/admin/restaurants', data);
     return response.data;
   }
 };
 
+const createRestaurantWithOwner = async (data) => {
+  const response = await axiosInstance.post('/admin/restaurants/create-with-owner', data);
+  return response.data;
+};
+
 const getAllModules = async () => {
-  const response = await axiosInstance.get('/api/admin/modules');
+  const response = await axiosInstance.get('/admin/modules');
   return response.data;
 };
 
-const getRestaurantModules = async (restaurantId) => {
-  const response = await axiosInstance.get(`/api/admin/restaurants/${restaurantId}/modules`);
+const getRestaurantFeatures = async (restaurantId) => {
+  const response = await axiosInstance.get(`/admin/restaurants/${restaurantId}/features`);
   return response.data;
 };
 
-const saveRestaurantModules = async (data) => {
-  const { restaurantId, moduleIds } = data;
-  const response = await axiosInstance.post(`/api/admin/restaurants/${restaurantId}/modules`, {
-    moduleIds,
+const saveRestaurantFeatures = async (data) => {
+  const { restaurantId, enabledFeatureIds } = data;
+  const response = await axiosInstance.put(`/admin/restaurants/${restaurantId}/features`, {
+    enabledFeatureIds,
   });
   return response.data;
 };
@@ -87,25 +92,35 @@ export const useSaveAdminRestaurant = () => {
   });
 };
 
+export const useCreateRestaurantWithOwner = () => {
+  const queryClient = useQueryClient();
+  return useMutation(createRestaurantWithOwner, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(ADMIN_QUERY_KEYS.restaurants);
+      queryClient.invalidateQueries(ADMIN_QUERY_KEYS.users); // Invalidate users as well
+    },
+  });
+};
+
 export const useAllModules = () => {
   return useQuery(ADMIN_QUERY_KEYS.modules, getAllModules);
 };
 
-export const useRestaurantModules = (restaurantId) => {
+export const useRestaurantFeatures = (restaurantId) => {
   return useQuery(
-    [ADMIN_QUERY_KEYS.restaurantModules, restaurantId],
-    () => getRestaurantModules(restaurantId),
+    [ADMIN_QUERY_KEYS.restaurantFeatures, restaurantId],
+    () => getRestaurantFeatures(restaurantId),
     {
       enabled: !!restaurantId, // Only run query if restaurantId is provided
     }
   );
 };
 
-export const useSaveRestaurantModules = () => {
+export const useSaveRestaurantFeatures = () => {
   const queryClient = useQueryClient();
-  return useMutation(saveRestaurantModules, {
+  return useMutation(saveRestaurantFeatures, {
     onSuccess: (data, variables) => {
-      queryClient.invalidateQueries([ADMIN_QUERY_KEYS.restaurantModules, variables.restaurantId]);
+      queryClient.invalidateQueries([ADMIN_QUERY_KEYS.restaurantFeatures, variables.restaurantId]);
     },
   });
 };

@@ -1,43 +1,55 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class RolePermission extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // No direct associations needed here as it's a join table
+      RolePermission.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
+      RolePermission.belongsTo(models.Feature, { foreignKey: 'feature_id', as: 'feature' });
+      RolePermission.belongsTo(models.Action, { foreignKey: 'action_id', as: 'action' });
     }
   }
+
   RolePermission.init({
-    roleId: {
-      type: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.BIGINT,
       primaryKey: true,
-      references: {
-        model: 'Roles',
-        key: 'id'
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
+      autoIncrement: true,
     },
-    permissionId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      references: {
-        model: 'Permissions',
-        key: 'id'
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
+    roleId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      field: 'role_id',
+    },
+    featureId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      field: 'feature_id',
+    },
+    actionId: {
+      type: DataTypes.SMALLINT,
+      allowNull: false,
+      field: 'action_id',
+    },
+    allowed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'RolePermission',
-    tableName: 'RolePermissions', // Ensure this matches the migration table name
+    tableName: 'role_permissions',
+    timestamps: true,
+    underscored: true,
   });
+
   return RolePermission;
 };

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '@/shared/lib/axiosInstance';
+import axiosInstance from '@/services/axiosInstance';
 
 // Query Keys
 const ERP_QUERY_KEYS = {
@@ -45,8 +45,10 @@ const deleteFinancialCategory = async (categoryId) => {
 };
 
 // API Functions - Financial Transactions
-const fetchFinancialTransactions = async (url) => {
-  const response = await axiosInstance.get(url);
+const fetchFinancialTransactions = async (filters) => {
+  const response = await axiosInstance.get(
+    `/api/financial/transactions?restaurant_id=${filters.restaurantId}`
+  );
   return response.data;
 };
 const createFinancialTransaction = async (newTransaction) => {
@@ -318,7 +320,7 @@ const deleteTable = async (id) => {
   return response.data;
 };
 const generateQrCode = async (id) => {
-  const response = await axiosInstance.post(`/api/tables/${id}/generate-qr`);
+  const response = await axiosInstance.post(`/tables/${id}/generate-qr`);
   return response.data;
 };
 
@@ -358,12 +360,12 @@ export const useDeleteFinancialCategory = () => {
 };
 
 // React Query Hooks - Financial Transactions
-export const useFinancialTransactions = (url) => {
+export const useFinancialTransactions = (filters) => {
   return useQuery(
-    [ERP_QUERY_KEYS.financialTransactions, url],
-    () => fetchFinancialTransactions(url),
+    [ERP_QUERY_KEYS.financialTransactions, filters],
+    () => fetchFinancialTransactions(filters),
     {
-      enabled: !!url,
+      enabled: !!filters.restaurantId,
     }
   );
 };
@@ -823,7 +825,6 @@ export const useDeleteTable = () => {
   });
 };
 export const useGenerateQrCode = () => {
-  const queryClient = useQueryClient();
   return useMutation(generateQrCode, {
     onSuccess: () => {
       // Invalidate tables or QR codes query if applicable

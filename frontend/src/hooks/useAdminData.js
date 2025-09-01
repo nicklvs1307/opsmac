@@ -1,42 +1,44 @@
-import { useState, useEffect } from 'react';
-import {
-  fetchUsers as fetchUsersService,
-  fetchRestaurants as fetchRestaurantsService,
-} from '../api/adminService';
+import { useAdminUsers, useAdminRestaurants } from '@/features/Admin/api/adminQueries';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 const useAdminData = () => {
   const { t } = useTranslation();
-  const [users, setUsers] = useState([]);
-  const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(false);
 
-  const fetchUsers = async () => {
-    setLoading(true);
-    try {
-      const data = await fetchUsersService();
-      setUsers(data);
-    } catch (error) {
-      toast.error(t('admin_dashboard.error_loading_users_description'));
-    } finally {
-      setLoading(false);
-    }
+  const {
+    data: users,
+    isLoading: isLoadingUsers,
+    isError: isErrorUsers,
+    error: errorUsers,
+    refetch: refetchUsers,
+  } = useAdminUsers();
+  const {
+    data: restaurants,
+    isLoading: isLoadingRestaurants,
+    isError: isErrorRestaurants,
+    error: errorRestaurants,
+    refetch: refetchRestaurants,
+  } = useAdminRestaurants();
+
+  // Handle errors with toast
+  if (isErrorUsers) {
+    toast.error(t('admin_dashboard.error_loading_users_description'));
+    console.error('Error loading users:', errorUsers);
+  }
+  if (isErrorRestaurants) {
+    toast.error(t('admin_dashboard.error_loading_restaurants_description'));
+    console.error('Error loading restaurants:', errorRestaurants);
+  }
+
+  const loading = isLoadingUsers || isLoadingRestaurants;
+
+  return {
+    users: users || [], // Provide empty array if data is not yet available
+    restaurants: restaurants || [], // Provide empty array if data is not yet available
+    loading,
+    refetchUsers,
+    refetchRestaurants,
   };
-
-  const fetchRestaurants = async () => {
-    setLoading(true);
-    try {
-      const data = await fetchRestaurantsService();
-      setRestaurants(data);
-    } catch (error) {
-      toast.error(t('admin_dashboard.error_loading_restaurants_description'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return { users, restaurants, loading, setLoading, fetchUsers, fetchRestaurants };
 };
 
 export default useAdminData;

@@ -1,7 +1,7 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class StockCount extends Model {
     static associate(models) {
       StockCount.belongsTo(models.User, {
@@ -22,44 +22,42 @@ module.exports = (sequelize) => {
   StockCount.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    restaurant_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
-    },
-    user_id: { // User who performed the count
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-    },
-    count_date: {
+    referenceDate: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
       allowNull: false,
+      field: 'reference_date',
     },
     status: {
-      type: DataTypes.ENUM('in_progress', 'completed'),
-      defaultValue: 'in_progress',
+      type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: 'pending',
     },
-    notes: {
-      type: DataTypes.TEXT,
-      allowNull: true,
+    userId: {
+      type: DataTypes.UUID,
+      field: 'user_id',
+    },
+    restaurantId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      field: 'restaurant_id',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'StockCount',
     tableName: 'stock_counts',
     timestamps: true,
+    underscored: true,
   });
 
   return StockCount;

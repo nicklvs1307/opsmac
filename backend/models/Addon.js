@@ -1,16 +1,11 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class Addon extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       Addon.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurantId',
+        foreignKey: 'restaurant_id',
         as: 'restaurant',
       });
     }
@@ -19,9 +14,8 @@ module.exports = (sequelize) => {
   Addon.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
@@ -31,24 +25,30 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
+    restaurantId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      field: 'restaurant_id',
+    },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-      allowNull: false,
+      field: 'is_active',
     },
-    restaurant_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'Addon',
     tableName: 'addons',
     timestamps: true,
+    underscored: true,
   });
 
   return Addon;

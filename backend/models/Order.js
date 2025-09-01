@@ -1,137 +1,70 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      Order.belongsTo(models.Restaurant, { foreignKey: 'restaurant_id', as: 'restaurant' });
-      Order.belongsTo(models.Customer, { foreignKey: 'customer_id', as: 'customer' });
+      Order.belongsTo(models.Customer, {
+        foreignKey: 'customer_id',
+        as: 'customer',
+      });
+      Order.belongsTo(models.Table, {
+        foreignKey: 'table_id',
+        as: 'table',
+      });
+      Order.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
+      });
     }
   }
 
   Order.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    restaurant_id: {
+    customerId: {
       type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      field: 'customer_id',
     },
-    customer_id: {
+    tableId: {
       type: DataTypes.UUID,
-      allowNull: true, // Pode ser nulo se o cliente não for encontrado/criado no sistema
-      references: {
-        model: 'customers',
-        key: 'id',
-      },
+      field: 'table_id',
     },
-    external_order_id: {
-      type: DataTypes.STRING,
+    total: {
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
-      unique: true,
-      comment: 'ID do pedido na plataforma externa (iFood, Delivery Much, etc.)',
-    },
-    platform: {
-      type: DataTypes.ENUM('ifood', 'delivery_much', 'uai_rango', 'saipos', 'other'),
-      allowNull: false,
-      comment: 'Plataforma de origem do pedido',
     },
     status: {
-      type: DataTypes.ENUM('pending', 'accepted', 'preparing', 'on_the_way', 'delivered', 'cancelled', 'concluded', 'rejected'),
+      type: DataTypes.STRING,
+      allowNull: false,
       defaultValue: 'pending',
-      allowNull: false,
-      comment: 'Status atual do pedido',
-    },
-    total_amount: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-      defaultValue: 0.00,
-      comment: 'Valor total do pedido',
-    },
-    delivery_fee: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: true,
-      defaultValue: 0.00,
-      comment: 'Taxa de entrega',
     },
     items: {
       type: DataTypes.JSONB,
       allowNull: false,
-      defaultValue: [],
-      comment: 'Array de objetos com os itens do pedido (nome, quantidade, preço, etc.)',
     },
-    customer_details: {
-      type: DataTypes.JSONB,
+    restaurantId: {
+      type: DataTypes.UUID,
       allowNull: false,
-      defaultValue: {},
-      comment: 'Detalhes do cliente do pedido (nome, telefone, endereço, etc.)',
+      field: 'restaurant_id',
     },
-    order_details: {
-      type: DataTypes.JSONB,
-      allowNull: true,
-      defaultValue: {},
-      comment: 'Detalhes brutos do pedido da plataforma externa',
-    },
-    order_date: {
+    createdAt: {
       type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-      comment: 'Data e hora do pedido',
+      field: 'created_at',
     },
-    delivery_address: {
-      type: DataTypes.JSONB,
-      allowNull: true,
-      defaultValue: {},
-      comment: 'Endereço de entrega do pedido',
-    },
-    payment_method: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      comment: 'Método de pagamento',
-    },
-    delivery_type: {
-      type: DataTypes.ENUM('delivery', 'pickup', 'dine_in'),
-      allowNull: true,
-      comment: 'Tipo de entrega/serviço',
-    },
-    notes: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      comment: 'Observações do pedido',
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'Order',
     tableName: 'orders',
     timestamps: true,
-    indexes: [
-      {
-        fields: ['restaurant_id'],
-      },
-      {
-        fields: ['customer_id'],
-      },
-      {
-        fields: ['platform'],
-      },
-      {
-        fields: ['status'],
-      },
-      {
-        fields: ['order_date'],
-      },
-    ],
+    underscored: true,
   });
 
   return Order;

@@ -27,8 +27,9 @@ const login = async (req, res, next) => {
 
 const getMe = async (req, res, next) => {
   try {
-    const user = await authService.getMe(req.user.userId);
-    res.json({ user });
+    // O middleware de autenticação já anexa o usuário à requisição (req.user).
+    // Não há necessidade de chamar authService.getMe novamente aqui.
+    res.json({ user: req.user });
   } catch (error) {
     next(error);
   }
@@ -61,9 +62,16 @@ const changePassword = async (req, res, next) => {
     }
 };
 
+const logout = (req, res) => {
+  // For stateless JWT, logout is handled client-side by deleting the token.
+  // This endpoint can be kept for semantics, but it doesn't need to do anything on the server.
+  res.status(200).json({ message: 'Logout realizado com sucesso' });
+};
+
 module.exports = {
   login,
   getMe,
   updateProfile,
   changePassword,
+  logout,
 };

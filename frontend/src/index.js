@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@/shared/styles/global.css';
+
+import '@/styles/globals.css';
 import App from './App';
-import i18n from '@/shared/lib/i18n'; // Importar a configuração do i18n
+import i18n from '@/i18n'; // Importar a configuração do i18n
 import { I18nextProvider } from 'react-i18next';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
@@ -18,4 +19,4 @@ root.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.unregister();
+serviceWorkerRegistration.register();

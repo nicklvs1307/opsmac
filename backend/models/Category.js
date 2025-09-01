@@ -1,20 +1,15 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       Category.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurantId',
+        foreignKey: 'restaurant_id',
         as: 'restaurant',
       });
       Category.hasMany(models.Product, {
-        foreignKey: 'categoryId',
+        foreignKey: 'category_id',
         as: 'products',
       });
     }
@@ -23,24 +18,32 @@ module.exports = (sequelize) => {
   Category.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: 'unique_category_name_per_restaurant', // This refers to the unique constraint defined in the migration
     },
     restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'restaurant_id',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'Category',
     tableName: 'categories',
     timestamps: true,
+    underscored: true,
   });
 
   return Category;

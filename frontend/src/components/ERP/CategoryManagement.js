@@ -18,7 +18,7 @@ import {
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
-import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 
 const fetchCategories = async () => {
@@ -27,17 +27,17 @@ const fetchCategories = async () => {
 };
 
 const createCategory = async (newCategory) => {
-  const { data } = await axiosInstance.post('/api/categories', newCategory);
+  const { data } = await axiosInstance.post('/categories', newCategory);
   return data;
 };
 
 const updateCategory = async ({ id, name }) => {
-  const { data } = await axiosInstance.put(`/api/categories/${id}`, { name });
+  const { data } = await axiosInstance.put(`/categories/${id}`, { name });
   return data;
 };
 
 const deleteCategory = async (id) => {
-  await axiosInstance.delete(`/api/categories/${id}`);
+  await axiosInstance.delete(`/categories/${id}`);
 };
 
 const CategoryManagement = () => {

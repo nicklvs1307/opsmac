@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '@/shared/lib/axiosInstance';
+import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 
 //================================================================================================
@@ -114,18 +114,15 @@ export const useScanQRCode = () => {
 
 // Hook to create a new public feedback
 export const useCreatePublicFeedback = () => {
-  return useMutation(
-    (publicFeedback) => axiosInstance.post('/api/feedback/public', publicFeedback),
-    {
-      onSuccess: () => {
-        // No need to invalidate queries here as it's a public action
-        // Success is handled in the component with redirection
-      },
-      onError: (error) => {
-        toast.error(error.response?.data?.message || 'Erro ao enviar feedback.');
-      },
-    }
-  );
+  return useMutation((publicFeedback) => axiosInstance.post('/feedback/public', publicFeedback), {
+    onSuccess: () => {
+      // No need to invalidate queries here as it's a public action
+      // Success is handled in the component with redirection
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || 'Erro ao enviar feedback.');
+    },
+  });
 };
 
 //================================================================================================
@@ -137,7 +134,7 @@ export const useGetCustomersForFeedback = () => {
   return useQuery(
     'customersForFeedback',
     async () => {
-      const { data } = await axiosInstance.get('/api/customers');
+      const { data } = await axiosInstance.get('/customers');
       return data.customers || [];
     },
     {
@@ -151,7 +148,7 @@ export const useGetQRCodesForFeedback = (restaurantId) => {
   return useQuery(
     ['qrCodesForFeedback', restaurantId],
     async () => {
-      const { data } = await axiosInstance.get(`/api/qrcode/restaurant/${restaurantId}`);
+      const { data } = await axiosInstance.get(`/qrcode/restaurant/${restaurantId}`);
       return data.qrcodes || [];
     },
     {

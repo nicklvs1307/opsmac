@@ -20,7 +20,6 @@ import {
   Star as StarIcon,
   Restaurant as RestaurantIcon,
   Share as ShareIcon,
-  Home as HomeIcon,
   CardGiftcard as GiftIcon,
 } from '@mui/icons-material';
 import { format } from 'date-fns';
@@ -92,12 +91,6 @@ const ThankYouCard = ({
       const text = `Acabei de avaliar minha experiência no ${restaurant} com ${rating} estrelas!`;
       const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
       window.open(url, '_blank');
-    }
-  };
-
-  const handleHome = () => {
-    if (onHome) {
-      onHome();
     }
   };
 

@@ -1,21 +1,20 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class CashRegisterSession extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
+      CashRegisterSession.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        as: 'user',
+      });
       CashRegisterSession.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurantId',
+        foreignKey: 'restaurant_id',
         as: 'restaurant',
       });
-      CashRegisterSession.belongsTo(models.User, {
-        foreignKey: 'userId',
-        as: 'user',
+      CashRegisterSession.hasMany(models.CashRegisterMovement, {
+        foreignKey: 'session_id',
+        as: 'movements',
       });
     }
   }
@@ -23,60 +22,51 @@ module.exports = (sequelize) => {
   CashRegisterSession.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    restaurantId: {
-      type: DataTypes.UUID,
+    openingBalance: {
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      field: 'opening_balance',
+    },
+    closingBalance: {
+      type: DataTypes.DECIMAL(10, 2),
+      field: 'closing_balance',
+    },
+    openedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'opened_at',
+    },
+    closedAt: {
+      type: DataTypes.DATE,
+      field: 'closed_at',
     },
     userId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
+      field: 'user_id',
     },
-    openingCash: {
-      type: DataTypes.DECIMAL(10, 2),
+    restaurantId: {
+      type: DataTypes.UUID,
       allowNull: false,
+      field: 'restaurant_id',
     },
-    openingObservations: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
-    openingTime: {
+    createdAt: {
       type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
+      field: 'created_at',
     },
-    closingCash: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: true,
-    },
-    closingObservations: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
-    closingTime: {
+    updatedAt: {
       type: DataTypes.DATE,
-      allowNull: true,
-    },
-    status: {
-      type: DataTypes.ENUM('open', 'closed'),
-      allowNull: false,
-      defaultValue: 'open',
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'CashRegisterSession',
     tableName: 'cash_register_sessions',
     timestamps: true,
+    underscored: true,
   });
 
   return CashRegisterSession;

@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import axiosInstance from '@/shared/lib/axiosInstance';
+import axiosInstance from '@/services/axiosInstance';
 
 // Query Keys
 const DASHBOARD_QUERY_KEYS = {
@@ -11,7 +11,7 @@ const fetchDashboardOverview = async ({ restaurantId, period }) => {
   if (!restaurantId) {
     throw new Error('Restaurant ID is required to fetch dashboard data.');
   }
-  const response = await axiosInstance.get(`/api/dashboard/overview/${restaurantId}`, {
+  const response = await axiosInstance.get(`/dashboard/overview/${restaurantId}`, {
     params: { period },
   });
   return response.data;

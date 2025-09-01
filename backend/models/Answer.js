@@ -1,51 +1,54 @@
-
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class Answer extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      Answer.belongsTo(models.SurveyResponse, { foreignKey: 'responseId' });
-      Answer.belongsTo(models.Question, { foreignKey: 'questionId', as: 'question' });
+      Answer.belongsTo(models.SurveyResponse, {
+        foreignKey: 'survey_response_id',
+        as: 'surveyResponse',
+      });
+      Answer.belongsTo(models.Question, {
+        foreignKey: 'question_id',
+        as: 'question',
+      });
     }
   }
 
   Answer.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    responseId: {
+    surveyResponseId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'survey_responses',
-        key: 'id',
-      },
+      field: 'survey_response_id',
     },
     questionId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'questions',
-        key: 'id',
-      },
+      field: 'question_id',
     },
-    answerValue: {
+    value: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'Answer',
     tableName: 'answers',
-    timestamps: false,
+    timestamps: true,
+    underscored: true,
   });
 
   return Answer;

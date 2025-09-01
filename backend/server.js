@@ -23,20 +23,28 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
   'http://localhost:3000',
   'https://feedelizapro.towersfy.com'
-].filter(Boolean); // Filtra valores undefined/null
+].filter(Boolean);
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Permite requisições sem 'origin' (como mobile apps ou curl)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'A política de CORS para este site não permite acesso da origem especificada.';
-      return callback(new Error(msg), false);
+// Configuração de CORS centralizada e robusta
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Permite requisições sem 'origin' (como Postman, mobile apps) ou de origens na lista
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
     }
-    return callback(null, true);
   },
-  credentials: true
-}));
+  credentials: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  optionsSuccessStatus: 204 // Retorna 204 para requisições preflight
+};
+
+// Aplica o CORS para todas as requisições
+app.use(cors(corsOptions));
+// Garante que as requisições OPTIONS sejam tratadas pelo middleware CORS
+app.options('*', cors(corsOptions));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -57,7 +65,7 @@ allRoutes.forEach(route => {
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('~/config/swagger');
+const swaggerDocument = require('config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Rota 404 - Deve vir antes do tratador de erros

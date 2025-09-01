@@ -1,98 +1,68 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class LossRecord extends Model {
     static associate(models) {
       LossRecord.belongsTo(models.User, {
-        foreignKey: 'userId',
+        foreignKey: 'user_id',
         as: 'user',
       });
       LossRecord.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurantId',
+        foreignKey: 'restaurant_id',
         as: 'restaurant',
       });
-      // Polymorphic association to Product or Ingredient
-      LossRecord.belongsTo(models.Product, {
-        foreignKey: 'stockableId',
-        constraints: false,
-        as: 'product',
-      });
-      LossRecord.belongsTo(models.Ingredient, {
-        foreignKey: 'stockableId',
-        constraints: false,
-        as: 'ingredient',
-      });
-    }
-
-    // Helper method to get the associated stockable item
-    getStockable(options) {
-      if (!this.stockableType) return Promise.resolve(null);
-      const mixinMethodName = `get${this.stockableType}`;
-      return this[mixinMethodName](options);
+      // Polymorphic association to Stock (stockable_id, stockable_type) is handled in service layer
     }
   }
 
   LossRecord.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     stockableId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'stockable_id',
     },
     stockableType: {
       type: DataTypes.STRING,
       allowNull: false,
+      field: 'stockable_type',
     },
-    userId: { // User who registered the loss
-      type: DataTypes.UUID,
+    quantity: {
+      type: DataTypes.DECIMAL(10, 3),
       allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
+    },
+    reason: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.UUID,
+      field: 'user_id',
     },
     restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      field: 'restaurant_id',
     },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        min: 1,
-      },
-    },
-    reason: {
-      type: DataTypes.ENUM('vencimento', 'avaria', 'qualidade', 'outro'),
-      allowNull: false,
-    },
-    notes: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
-    lossDate: {
+    createdAt: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-      allowNull: false,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'LossRecord',
     tableName: 'loss_records',
     timestamps: true,
-    indexes: [
-      {
-        fields: ['stockableId', 'stockableType'],
-      },
-    ],
+    underscored: true,
   });
 
   return LossRecord;

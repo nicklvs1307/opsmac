@@ -1,11 +1,11 @@
 const { models } = require('config/config');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
-exports.openSession = async (restaurantId, userId, opening_cash, opening_observations) => {
+exports.openSession = async (restaurantId, userId, openingCash, openingObservations) => {
   const existingOpenSession = await models.CashRegisterSession.findOne({
     where: {
-      restaurant_id: restaurantId,
-      user_id: userId,
+      restaurantId: restaurantId,
+      userId: userId,
       status: 'open',
     },
   });
@@ -15,10 +15,10 @@ exports.openSession = async (restaurantId, userId, opening_cash, opening_observa
   }
 
   const session = await models.CashRegisterSession.create({
-    restaurant_id: restaurantId,
-    user_id: userId,
-    opening_cash,
-    opening_observations,
+    restaurantId: restaurantId,
+    userId: userId,
+    openingCash,
+    openingObservations,
     status: 'open',
   });
 
@@ -28,8 +28,8 @@ exports.openSession = async (restaurantId, userId, opening_cash, opening_observa
 exports.getCurrentSession = async (restaurantId, userId) => {
   const session = await models.CashRegisterSession.findOne({
     where: {
-      restaurant_id: restaurantId,
-      user_id: userId,
+      restaurantId: restaurantId,
+      userId: userId,
       status: 'open',
     },
   });
@@ -41,19 +41,19 @@ exports.getCurrentSession = async (restaurantId, userId) => {
   return session;
 };
 
-exports.recordMovement = async (session_id, type, amount, category_id, observations, userId) => {
-  const session = await models.CashRegisterSession.findByPk(session_id);
+exports.recordMovement = async (sessionId, type, amount, categoryId, observations, userId) => {
+  const session = await models.CashRegisterSession.findByPk(sessionId);
   if (!session || session.status !== 'open') {
     throw new NotFoundError('Open cash register session not found.');
   }
 
   const movement = await models.CashRegisterMovement.create({
-    session_id,
+    sessionId,
     type,
     amount,
-    category_id,
+    categoryId,
     observations,
-    user_id: userId,
+    userId: userId,
   });
 
   return movement;
@@ -62,8 +62,8 @@ exports.recordMovement = async (session_id, type, amount, category_id, observati
 exports.getCashRegisterCategories = async (restaurantId, type) => {
   let whereClause = {
     [models.Sequelize.Op.or]: [
-      { restaurant_id: restaurantId },
-      { restaurant_id: null } // Global categories
+      { restaurantId: restaurantId },
+      { restaurantId: null } // Global categories
     ]
   };
 
@@ -79,9 +79,9 @@ exports.getCashRegisterCategories = async (restaurantId, type) => {
   return categories;
 };
 
-exports.getMovements = async (restaurantId, session_id) => {
+exports.getMovements = async (restaurantId, sessionId) => {
   const session = await models.CashRegisterSession.findOne({
-    where: { id: session_id, restaurant_id: restaurantId },
+    where: { id: sessionId, restaurantId: restaurantId },
   });
 
   if (!session) {
@@ -89,7 +89,7 @@ exports.getMovements = async (restaurantId, session_id) => {
   }
 
   const movements = await models.CashRegisterMovement.findAll({
-    where: { session_id },
+    where: { sessionId },
     include: [
       { model: models.CashRegisterCategory, as: 'category' },
       { model: models.User, as: 'user', attributes: ['id', 'name'] },
@@ -100,12 +100,12 @@ exports.getMovements = async (restaurantId, session_id) => {
   return movements;
 };
 
-exports.closeSession = async (session_id, restaurantId, userId, closing_cash, closing_observations) => {
+exports.closeSession = async (sessionId, restaurantId, userId, closingCash, closingObservations) => {
   const session = await models.CashRegisterSession.findOne({
     where: {
-      id: session_id,
-      restaurant_id: restaurantId,
-      user_id: userId,
+      id: sessionId,
+      restaurantId: restaurantId,
+      userId: userId,
       status: 'open',
     },
   });
@@ -115,18 +115,18 @@ exports.closeSession = async (session_id, restaurantId, userId, closing_cash, cl
   }
 
   await session.update({
-    closing_cash,
-    closing_observations,
-    closing_time: new Date(),
+    closingCash,
+    closingObservations,
+    closingTime: new Date(),
     status: 'closed',
   });
 
   return session;
 };
 
-exports.getCashOrders = async (restaurantId, session_id) => {
+exports.getCashOrders = async (restaurantId, sessionId) => {
   const session = await models.CashRegisterSession.findOne({
-    where: { id: session_id, restaurant_id: restaurantId },
+    where: { id: sessionId, restaurantId: restaurantId },
   });
 
   if (!session) {
@@ -135,15 +135,15 @@ exports.getCashOrders = async (restaurantId, session_id) => {
 
   const orders = await models.Order.findAll({
     where: {
-      restaurant_id: restaurantId,
-      payment_method: 'cash',
-      order_date: {
-        [models.Sequelize.Op.gte]: session.opening_time,
-        [models.Sequelize.Op.lte]: session.closing_time || new Date(),
+      restaurantId: restaurantId,
+      paymentMethod: 'cash',
+      orderDate: {
+        [models.Sequelize.Op.gte]: session.openingTime,
+        [models.Sequelize.Op.lte]: session.closingTime || new Date(),
       },
     },
-    attributes: ['id', 'total_amount', 'order_date'],
-    order: [['order_date', 'ASC']],
+    attributes: ['id', 'totalAmount', 'orderDate'],
+    order: [['orderDate', 'ASC']],
   });
 
   return orders;

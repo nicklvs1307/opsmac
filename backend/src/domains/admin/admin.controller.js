@@ -13,7 +13,7 @@ const handleValidationErrors = (req) => {
 exports.createUser = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const user = await adminService.createUser(req.body);
+    const user = await adminService.createUser(req.body, req.user); // Pass req.user
     res.status(201).json({ message: 'Usuário criado com sucesso', user });
   } catch (error) {
     next(error);
@@ -45,6 +45,16 @@ exports.createRestaurant = async (req, res, next) => {
     handleValidationErrors(req);
     const restaurant = await adminService.createRestaurant(req.body);
     res.status(201).json({ message: 'Restaurante criado com sucesso', restaurant });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.createRestaurantWithOwner = async (req, res, next) => {
+  try {
+    handleValidationErrors(req);
+    const { restaurant, owner } = await adminService.createRestaurantWithOwner(req.body);
+    res.status(201).json({ message: 'Restaurante e proprietário criados com sucesso', restaurant, owner });
   } catch (error) {
     next(error);
   }
@@ -88,11 +98,32 @@ exports.getRestaurantModules = async (req, res, next) => {
   }
 };
 
-exports.updateRestaurantModules = async (req, res, next) => {
+exports.updateRestaurantFeatures = async (req, res, next) => {
+  try {
+    console.log('Received enabledFeatureIds:', req.body.enabledFeatureIds); // Updated log
+    handleValidationErrors(req);
+    const features = await adminService.updateRestaurantFeatures(req.params.id, req.body.enabledFeatureIds);
+    res.status(200).json({ message: 'Funcionalidades atualizadas com sucesso', features });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Feature Management
+exports.getRestaurantFeatures = async (req, res, next) => {
+  try {
+    const features = await adminService.getRestaurantFeatures(req.params.id);
+    res.status(200).json(features);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateRestaurantFeatures = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const modules = await adminService.updateRestaurantModules(req.params.id, req.body.moduleIds);
-    res.status(200).json({ message: 'Módulos atualizados com sucesso', modules });
+    const features = await adminService.updateRestaurantFeatures(req.params.id, req.body.enabledFeatureIds);
+    res.status(200).json({ message: 'Funcionalidades atualizadas com sucesso', features });
   } catch (error) {
     next(error);
   }

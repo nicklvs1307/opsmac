@@ -1,189 +1,120 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import axiosInstance from '../../../shared/lib/axiosInstance';
 import toast from 'react-hot-toast';
-import { useFetchMe, useLogin, useUpdateProfile } from '../../../features/Auth/api/authQueries';
-import { useQueryClient } from 'react-query'; // Import useQueryClient
+import { useQueryClient } from 'react-query';
+import axiosInstance, { setAuthToken } from '@/services/axiosInstance';
+import { useUpdateProfile } from '../../../features/Auth/api/authQueries';
 
 const AuthContext = createContext();
 
 const initialState = {
   user: null,
-  token: localStorage.getItem('token'),
   isAuthenticated: false,
   loading: true,
-  allowedModules: [], // Módulos permitidos para o usuário
-  allowedPermissions: [], // Permissões permitidas para o usuário
+  selectedRestaurantId: null, // New field
 };
 
 const AUTH_ACTIONS = {
-  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  SET_USER: 'SET_USER',
   LOGOUT: 'LOGOUT',
-  LOAD_USER: 'LOAD_USER',
-  AUTH_ERROR: 'AUTH_ERROR',
   SET_LOADING: 'SET_LOADING',
   UPDATE_USER: 'UPDATE_USER',
-};
-
-const getModulesFromUser = (user) => {
-  if (!user || !user.role || !user.role.name) {
-    return [];
-  }
-
-  // If the user object already contains a 'modules' array (as it does for super_admin from backend)
-  if (user.modules && Array.isArray(user.modules)) {
-    return user.modules;
-  }
-
-  // Fallback for roles where 'modules' might not be directly provided or for backward compatibility
-  const roleName = user.role.name;
-  const allModules = ['fidelity', 'stock', 'orders', 'management', 'cdv', 'financial']; // All possible modules
-
-  if (roleName === 'super_admin') {
-    // This case should ideally be covered by user.modules, but as a fallback
-    return allModules;
-  } else if (roleName === 'admin' || roleName === 'owner') {
-    return allModules.filter((mod) => mod !== 'admin');
-  } else if (roleName === 'manager') {
-    return ['fidelity', 'stock', 'orders', 'cdv', 'financial'];
-  } else if (roleName === 'waiter') {
-    return ['orders'];
-  }
-  return [];
+  INIT: 'INIT',
+  SET_SELECTED_RESTAURANT: 'SET_SELECTED_RESTAURANT', // New action
 };
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case AUTH_ACTIONS.LOGIN_SUCCESS:
-    case AUTH_ACTIONS.LOAD_USER:
-      const user = action.payload.user;
-      const allowedModules = getModulesFromUser(user);
-      const allowedPermissions = user.permissions || []; // Extract permissions
+    case AUTH_ACTIONS.INIT:
       return {
         ...state,
-        user,
-        token: action.payload.token,
+        loading: false,
+        isAuthenticated: !!action.payload.token,
+      };
+    case AUTH_ACTIONS.SET_USER:
+      const user = action.payload || {};
+      return {
+        ...state,
+        user: { ...user, token: localStorage.getItem('token') }, // Ensure token is part of user object
         isAuthenticated: true,
         loading: false,
-        allowedModules,
-        allowedPermissions, // Store permissions
+        selectedRestaurantId:
+          user.restaurants && user.restaurants.length > 0 ? user.restaurants[0].id : null, // Auto-select first restaurant
       };
     case AUTH_ACTIONS.LOGOUT:
-    case AUTH_ACTIONS.AUTH_ERROR:
-      localStorage.removeItem('token');
       return {
         ...state,
         user: null,
-        token: null,
         isAuthenticated: false,
         loading: false,
-        allowedModules: [],
+        selectedRestaurantId: null,
       };
     case AUTH_ACTIONS.SET_LOADING:
-      return {
-        ...state,
-        loading: action.payload,
-      };
+      return { ...state, loading: action.payload };
     case AUTH_ACTIONS.UPDATE_USER:
-      return {
-        ...state,
-        user: { ...state.user, ...action.payload },
-      };
+      return { ...state, user: { ...state.user, ...action.payload } };
+    case AUTH_ACTIONS.SET_SELECTED_RESTAURANT: // New action handler
+      return { ...state, selectedRestaurantId: action.payload };
     default:
       return state;
   }
 };
 
-const setAuthToken = (token) => {
-  if (token) {
-    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    localStorage.setItem('token', token);
-  } else {
-    delete axiosInstance.defaults.headers.common['Authorization'];
-    localStorage.removeItem('token');
-  }
-};
-
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const {
-      config,
-      response: { status },
-    } = error;
-    const originalRequest = config;
-
-    if (status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      setAuthToken(null);
-      toast.error('Sua sessão expirou. Por favor, faça login novamente.');
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login';
-      }
-    }
-
-    return Promise.reject(error);
-  }
-);
-
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
-  const queryClient = useQueryClient(); // Get query client instance
-
-  // Use useFetchMe to load user data
-  const { data: userData, isLoading: isUserLoading, isError: isUserError } = useFetchMe();
-  const loginMutation = useLogin();
+  const queryClient = useQueryClient();
   const updateProfileMutation = useUpdateProfile();
 
+  // On app start, check for token and fetch user
   useEffect(() => {
-    if (userData) {
-      dispatch({
-        type: AUTH_ACTIONS.LOAD_USER,
-        payload: { user: userData.user, token: localStorage.getItem('token') }, // Pass token from localStorage
-      });
-    } else if (!isUserLoading && isUserError) {
-      // If there's an error loading user and not just loading, it means token might be invalid
-      dispatch({ type: AUTH_ACTIONS.AUTH_ERROR });
+    const token = localStorage.getItem('token');
+    if (token) {
+      setAuthToken(token);
+      axiosInstance
+        .get('/auth/me')
+        .then((response) => {
+          dispatch({ type: AUTH_ACTIONS.SET_USER, payload: response.data.user });
+        })
+        .catch(() => {
+          // Token is invalid, logout
+          setAuthToken(null);
+          dispatch({ type: AUTH_ACTIONS.LOGOUT });
+        });
+    } else {
+      dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: false });
     }
-  }, [userData, isUserLoading, isUserError]);
-
-  useEffect(() => {
-    // Set loading state based on react-query's loading
-    dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: isUserLoading });
-  }, [isUserLoading]);
+  }, []);
 
   const login = async (email, password) => {
     try {
-      const response = await loginMutation.mutateAsync({ email, password });
-      const { token, user } = response; // response is already data from loginUser
-      setAuthToken(token);
-      dispatch({
-        type: AUTH_ACTIONS.LOGIN_SUCCESS,
-        payload: { user, token },
-      });
-      toast.success(`Bem-vindo, ${user.name}!`);
-      return { success: true, user };
+      const response = await axiosInstance.post('/auth/login', { email, password });
+      const { token, ...user } = response.data;
+
+      if (token) {
+        setAuthToken(token);
+        dispatch({ type: AUTH_ACTIONS.SET_USER, payload: user });
+        toast.success(`Bem-vindo, ${user.name}!`);
+        return { success: true, user };
+      } else {
+        throw new Error('Token não recebido do servidor');
+      }
     } catch (error) {
-      dispatch({ type: AUTH_ACTIONS.AUTH_ERROR });
       const message = error.response?.data?.message || 'Erro ao fazer login';
       toast.error(message);
       return { success: false, message };
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
     setAuthToken(null);
     dispatch({ type: AUTH_ACTIONS.LOGOUT });
-    queryClient.removeQueries(); // Clear all react-query cache on logout
+    queryClient.clear();
     toast.success('Logout realizado com sucesso');
   };
 
   const updateUser = async (userData) => {
     try {
-      const response = await updateProfileMutation.mutateAsync(userData);
-      dispatch({
-        type: AUTH_ACTIONS.UPDATE_USER,
-        payload: response.user, // response is already data from updateProfile
-      });
+      const updatedUser = await updateProfileMutation.mutateAsync(userData);
+      dispatch({ type: AUTH_ACTIONS.UPDATE_USER, payload: updatedUser });
       toast.success('Perfil atualizado com sucesso!');
       return { success: true };
     } catch (error) {
@@ -193,12 +124,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const value = {
-    ...state,
-    login,
-    logout,
-    updateUser,
+  const setSelectedRestaurant = (restaurantId) => {
+    // New setter function
+    dispatch({ type: AUTH_ACTIONS.SET_SELECTED_RESTAURANT, payload: restaurantId });
   };
+
+  const value = { ...state, login, logout, updateUser, setSelectedRestaurant };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

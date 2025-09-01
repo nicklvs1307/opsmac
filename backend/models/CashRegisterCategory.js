@@ -1,17 +1,16 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class CashRegisterCategory extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       CashRegisterCategory.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurantId',
+        foreignKey: 'restaurant_id',
         as: 'restaurant',
+      });
+      CashRegisterCategory.hasMany(models.CashRegisterMovement, {
+        foreignKey: 'category_id',
+        as: 'movements',
       });
     }
   }
@@ -19,31 +18,32 @@ module.exports = (sequelize) => {
   CashRegisterCategory.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
-    },
-    type: {
-      type: DataTypes.ENUM('withdrawal', 'reinforcement', 'general'),
-      allowNull: false,
     },
     restaurantId: {
       type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      allowNull: false,
+      field: 'restaurant_id',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'CashRegisterCategory',
     tableName: 'cash_register_categories',
     timestamps: true,
+    underscored: true,
   });
 
   return CashRegisterCategory;

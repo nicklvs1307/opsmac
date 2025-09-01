@@ -1,17 +1,16 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class WaiterCall extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      WaiterCall.belongsTo(models.TableSession, {
-        foreignKey: 'table_session_id',
-        as: 'session',
+      WaiterCall.belongsTo(models.Table, {
+        foreignKey: 'table_id',
+        as: 'table',
+      });
+      WaiterCall.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
       });
     }
   }
@@ -19,42 +18,37 @@ module.exports = (sequelize) => {
   WaiterCall.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    table_session_id: {
+    tableId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'table_sessions',
-        key: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-    },
-    call_time: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
+      field: 'table_id',
     },
     status: {
-      type: DataTypes.ENUM('pending', 'acknowledged', 'resolved'),
-      defaultValue: 'pending',
-      allowNull: false,
-    },
-    type: { // e.g., 'waiter', 'bill', 'other'
       type: DataTypes.STRING,
-      allowNull: true,
+      defaultValue: 'pending',
     },
-    description: { // Optional: for 'other' type or additional details
-      type: DataTypes.TEXT,
-      allowNull: true,
+    restaurantId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      field: 'restaurant_id',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'WaiterCall',
     tableName: 'waiter_calls',
     timestamps: true,
+    underscored: true,
   });
 
   return WaiterCall;

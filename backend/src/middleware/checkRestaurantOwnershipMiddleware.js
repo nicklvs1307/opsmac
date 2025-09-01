@@ -1,36 +1,37 @@
-const { models } = require('config/config');
+const { ForbiddenError, BadRequestError } = require('../utils/errors');
 
-const checkRestaurantOwnership = async (req, res, next) => {
+const checkRestaurantOwnership = (req, res, next) => {
   try {
-    const restaurantId = req.params.restaurantId || req.body.restaurant_id;
-    
-    if (!restaurantId) {
-      return res.status(400).json({
-        error: 'ID do restaurante é obrigatório'
-      });
+    const restaurantIdFromParams = req.params.restaurantId;
+
+    if (!restaurantIdFromParams) {
+      // This middleware should only be on routes with :restaurantId
+      return next(new BadRequestError('ID do restaurante não encontrado nos parâmetros da rota.'));
     }
 
-    // Admins podem acessar qualquer restaurante
-    if (req.user.role === 'admin' || req.user.role === 'super_admin') {
+    const { role, restaurantId: userRestaurantId, restaurant } = req.user;
+
+    // Super Admins can access anything
+    if (role.name === 'super_admin') {
       return next();
     }
 
-    // Verificar se o usuário está associado a este restaurante
-    const isAssociated = req.user.restaurants.some(r => r.id === restaurantId);
-
-    if (!isAssociated) {
-      return res.status(403).json({
-        error: 'Acesso negado. Você não tem permissão para acessar este restaurante'
-      });
+    // If the user is not a super_admin, they must have a restaurant ID.
+    if (!userRestaurantId) {
+      return next(new ForbiddenError('Acesso negado. Usuário não está associado a um restaurante.'));
     }
 
-    // If the user is an owner/manager and is associated, proceed
+    // Check if the user's restaurant ID matches the one in the URL params.
+    if (userRestaurantId !== restaurantIdFromParams) {
+      return next(new ForbiddenError('Acesso negado. Você não tem permissão para acessar este restaurante.'));
+    }
+
+    // Attach the restaurant object to the request for later use if needed
+    req.restaurant = restaurant;
+
     next();
   } catch (error) {
-    console.error('Erro ao verificar propriedade do restaurante:', error);
-    res.status(500).json({
-      error: 'Erro interno do servidor'
-    });
+    next(error); // Pass errors to the centralized error handler
   }
 };
 

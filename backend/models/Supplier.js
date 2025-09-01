@@ -1,17 +1,16 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class Supplier extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       Supplier.belongsTo(models.Restaurant, {
         foreignKey: 'restaurant_id',
         as: 'restaurant',
+      });
+      Supplier.hasMany(models.Ingredient, {
+        foreignKey: 'supplier_id',
+        as: 'ingredients',
       });
     }
   }
@@ -19,44 +18,45 @@ module.exports = (sequelize) => {
   Supplier.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    contact_person: {
+    contactPerson: {
       type: DataTypes.STRING,
-      allowNull: true,
+      field: 'contact_person',
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: true,
-      unique: true,
     },
     address: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.TEXT,
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      field: 'restaurant_id',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'Supplier',
     tableName: 'suppliers',
     timestamps: true,
+    underscored: true,
   });
 
   return Supplier;

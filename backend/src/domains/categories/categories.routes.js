@@ -1,6 +1,6 @@
 const express = require('express');
 const { auth } = require('../../middleware/authMiddleware');
-const checkPermission = require('../../middleware/permission');
+const requirePermission = require('../../middleware/requirePermission');
 const categoriesController = require('./categories.controller');
 const {
     categoryValidation
@@ -9,11 +9,11 @@ const {
 const router = express.Router();
 
 // Rotas de Categorias
-router.post('/', auth, checkPermission('categories:create'), categoryValidation, categoriesController.createCategory);
-router.get('/', auth, checkPermission('categories:view'), categoriesController.listCategories);
-router.get('/:id', auth, checkPermission('categories:view'), categoriesController.getCategoryById);
-router.put('/:id', auth, checkPermission('categories:edit'), categoryValidation, categoriesController.updateCategory);
-router.delete('/:id', auth, checkPermission('categories:delete'), categoriesController.deleteCategory);
-router.patch('/:id/toggle-status', auth, checkPermission('categories:edit'), categoriesController.toggleCategoryStatus);
+router.post('/', auth, requirePermission('categories', 'create'), categoryValidation, categoriesController.createCategory);
+router.get('/', auth, requirePermission('categories', 'read'), categoriesController.listCategories);
+router.get('/:id', auth, requirePermission('categories', 'read'), categoriesController.getCategoryById);
+router.put('/:id', auth, requirePermission('categories', 'update'), categoryValidation, categoriesController.updateCategory);
+router.delete('/:id', auth, requirePermission('categories', 'delete'), categoriesController.deleteCategory);
+router.patch('/:id/toggle-status', auth, requirePermission('categories', 'update'), categoriesController.toggleCategoryStatus);
 
 module.exports = router;

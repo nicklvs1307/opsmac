@@ -11,19 +11,19 @@ const getStockStatus = (currentStock, minStock) => {
 // Get Stock Dashboard Data
 exports.getDashboardData = async (req, res) => {
   try {
-    const { restaurant_id } = req.query;
+    const { restaurantId } = req.query;
 
     // Total Products
-    const totalProducts = await Product.count({ where: { restaurant_id } });
+    const totalProducts = await Product.count({ where: { restaurantId } });
 
     // Stock levels
     const stockData = await Product.findAll({
-      where: { restaurant_id },
+      where: { restaurantId },
       attributes: [
         'id',
         'name',
-        'min_stock_level',
-        [sequelize.literal('(SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id)'), 'current_stock']
+        'minStockLevel',
+        [sequelize.literal('(SELECT SUM(quantity) FROM stock_movements WHERE productId = Product.id)'), 'currentStock']
       ],
       include: [{
         model: Category,
@@ -38,9 +38,9 @@ exports.getDashboardData = async (req, res) => {
     const lowStockProducts = [];
 
     stockData.forEach(product => {
-      const current_stock = parseInt(product.dataValues.current_stock || 0);
-      const min_stock = product.min_stock_level || 0;
-      const status = getStockStatus(current_stock, min_stock);
+      const currentStock = parseInt(product.dataValues.currentStock || 0);
+      const minStock = product.minStockLevel || 0;
+      const status = getStockStatus(currentStock, minStock);
 
       if (status === 'in_stock') {
         inStock++;
@@ -49,18 +49,18 @@ exports.getDashboardData = async (req, res) => {
         lowStockProducts.push({
           id: product.id,
           name: product.name,
-          category_name: product.category ? product.category.name : 'N/A',
-          current_stock: current_stock,
-          min_stock: min_stock,
+          categoryName: product.category ? product.category.name : 'N/A',
+          currentStock: currentStock,
+          minStock: minStock,
         });
       } else if (status === 'out_of_stock') {
         outOfStock++;
         lowStockProducts.push({
           id: product.id,
           name: product.name,
-          category_name: product.category ? product.category.name : 'N/A',
-          current_stock: current_stock,
-          min_stock: min_stock,
+          categoryName: product.category ? product.category.name : 'N/A',
+          currentStock: currentStock,
+          minStock: minStock,
         });
       }
     });
@@ -81,8 +81,8 @@ exports.getDashboardData = async (req, res) => {
 // Create Stock Movement
 exports.createStockMovement = async (req, res) => {
   try {
-    const { product_id, type, quantity, description } = req.body;
-    const movement = await StockMovement.create({ product_id, type, quantity, description, movement_date: new Date() });
+    const { productId, type, quantity, description } = req.body;
+    const movement = await StockMovement.create({ productId, type, quantity, description, movementDate: new Date() });
     res.status(201).json(movement);
   } catch (error) {
     console.error('Error creating stock movement:', error);
@@ -95,8 +95,8 @@ exports.getStockHistory = async (req, res) => {
   try {
     const { productId } = req.params;
     const history = await StockMovement.findAll({
-      where: { product_id: productId },
-      order: [['movement_date', 'DESC']],
+      where: { productId: productId },
+      order: [['movementDate', 'DESC']],
     });
     res.status(200).json(history);
   } catch (error) {
@@ -108,14 +108,14 @@ exports.getStockHistory = async (req, res) => {
 // Get all stocks (current stock levels for all products)
 exports.getAllStocks = async (req, res) => {
   try {
-    const { restaurant_id } = req.query;
+    const { restaurantId } = req.query;
     const stocks = await Product.findAll({
-      where: { restaurant_id },
+      where: { restaurantId },
       attributes: [
         'id',
         'name',
         'sku',
-        [sequelize.literal('(SELECT SUM(quantity) FROM stock_movements WHERE product_id = Product.id)'), 'quantity']
+        [sequelize.literal('(SELECT SUM(quantity) FROM stock_movements WHERE productId = Product.id)'), 'quantity']
       ],
       order: [['name', 'ASC']],
     });

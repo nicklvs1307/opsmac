@@ -24,6 +24,8 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 const LoginForm = ({
   onSubmit,
@@ -41,6 +43,17 @@ const LoginForm = ({
   const finalAppName = appName || t('login.app_name');
   const finalAppDescription = appDescription || t('login.app_description');
 
+  const validationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .required(t('login_form.email_required'))
+      .email(t('login_form.invalid_email')),
+    password: yup
+      .string()
+      .required(t('login_form.password_required'))
+      .min(6, t('login_form.password_min_length')),
+  });
+
   const {
     control,
     handleSubmit,
@@ -50,6 +63,7 @@ const LoginForm = ({
       email: '',
       password: '',
     },
+    resolver: yupResolver(validationSchema),
   });
 
   const handleClickShowPassword = () => {
@@ -233,13 +247,6 @@ const LoginForm = ({
         <Controller
           name="email"
           control={control}
-          rules={{
-            required: t('login_form.email_required'),
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: t('login_form.invalid_email'),
-            },
-          }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -288,13 +295,6 @@ const LoginForm = ({
         <Controller
           name="password"
           control={control}
-          rules={{
-            required: t('login_form.password_required'),
-            minLength: {
-              value: 6,
-              message: t('login_form.password_min_length'),
-            },
-          }}
           render={({ field }) => (
             <TextField
               {...field}

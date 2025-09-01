@@ -82,3 +82,13 @@ exports.respondToFeedback = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.getFeedbackWordFrequency = async (req, res, next) => {
+    try {
+        const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+        const wordFrequency = await feedbackService.getFeedbackWordFrequency(restaurantId, req.query);
+        res.json(wordFrequency);
+    } catch (error) {
+        next(error);
+    }
+};

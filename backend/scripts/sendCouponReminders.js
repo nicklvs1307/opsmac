@@ -30,16 +30,16 @@ async function sendCouponReminders() {
           continue;
         }
 
-        if (!restaurant.whatsapp_api_url || !restaurant.whatsapp_api_key || !restaurant.whatsapp_instance_id || !restaurant.whatsapp_phone_number) {
+        if (!restaurant.whatsappApiUrl || !restaurant.whatsappApiKey || !restaurant.whatsappInstanceId || !restaurant.whatsappPhoneNumber) {
           console.warn(`Cupom ${coupon.id}: Credenciais da Evolution API incompletas para o restaurante ${restaurant.id}. Pulando.`);
           continue;
         }
 
-        const couponReminderEnabled = restaurant.settings?.whatsapp_messages?.coupon_reminder_enabled;
-        const customCouponReminderMessage = restaurant.settings?.whatsapp_messages?.coupon_reminder_text;
+        const couponReminderEnabled = restaurant.settings?.whatsappMessages?.couponReminderEnabled;
+        const customCouponReminderMessage = restaurant.settings?.whatsappMessages?.couponReminderText;
 
         if (couponReminderEnabled) {
-          const reward = await models.Reward.findByPk(coupon.reward_id);
+          const reward = await models.Reward.findByPk(coupon.rewardId);
           const rewardTitle = reward ? reward.title : 'seu benefício';
 
           let messageText = customCouponReminderMessage || `Olá {{customer_name}}! 👋\n\nLembrete: Você tem um cupom ativo de *{{reward_title}}* ({{coupon_code}}) no *{{restaurant_name}}* que expira em breve!\n\nNão perca essa chance! Resgate seu cupom antes de {{expires_at}}.\n\nEsperamos por você! 😉`;
@@ -49,12 +49,12 @@ async function sendCouponReminders() {
           messageText = messageText.replace(/\{\{reward_title\}\} /g, rewardTitle);
           messageText = messageText.replace(/\{\{coupon_code\}\} /g, coupon.code);
           messageText = messageText.replace(/\{\{restaurant_name\}\} /g, restaurant.name || '');
-          messageText = messageText.replace(/\{\{expires_at\}\} /g, coupon.expires_at ? coupon.expires_at.toLocaleDateString('pt-BR') : 'em breve');
+          messageText = messageText.replace(/\{\{expires_at\}\} /g, coupon.expiresAt ? coupon.expiresAt.toLocaleDateString('pt-BR') : 'em breve');
 
           const whatsappResponse = await sendWhatsAppMessage(
-            restaurant.whatsapp_api_url,
-            restaurant.whatsapp_api_key,
-            restaurant.whatsapp_instance_id,
+            restaurant.whatsappApiUrl,
+            restaurant.whatsappApiKey,
+            restaurant.whatsappInstanceId,
             customer.phone,
             messageText
           );
@@ -62,19 +62,19 @@ async function sendCouponReminders() {
           if (whatsappResponse.success) {
             console.log(`Lembrete de cupom ${coupon.code} enviado com sucesso para ${customer.phone}`);
             await coupon.update({
-              reminder_sent: true,
-              reminder_sent_at: new Date()
+              reminderSent: true,
+              reminderSentAt: new Date()
             });
             // Opcional: Registrar o envio da mensagem no banco de dados
             await models.WhatsAppMessage.create({
-              phone_number: customer.phone,
-              message_text: messageText,
-              message_type: 'coupon_reminder',
+              phoneNumber: customer.phone,
+              messageText: messageText,
+              messageType: 'coupon_reminder',
               status: 'sent',
-              whatsapp_message_id: whatsappResponse.data?.id || null,
-              restaurant_id: restaurant.id,
-              customer_id: customer.id,
-              coupon_id: coupon.id
+              whatsappMessageId: whatsappResponse.data?.id || null,
+              restaurantId: restaurant.id,
+              customerId: customer.id,
+              couponId: coupon.id
             });
           } else {
             console.error(`Erro ao enviar lembrete de cupom ${coupon.code} para ${customer.phone}:`, whatsappResponse.error);

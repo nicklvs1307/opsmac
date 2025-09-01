@@ -1,17 +1,16 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class PaymentMethod extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       PaymentMethod.belongsTo(models.Restaurant, {
         foreignKey: 'restaurant_id',
         as: 'restaurant',
+      });
+      PaymentMethod.hasMany(models.FinancialTransaction, {
+        foreignKey: 'payment_method_id',
+        as: 'financialTransactions',
       });
     }
   }
@@ -19,36 +18,37 @@ module.exports = (sequelize) => {
   PaymentMethod.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    type: { // e.g., 'cash', 'card', 'pix', 'meal_voucher', 'other'
-      type: DataTypes.ENUM('cash', 'card', 'pix', 'meal_voucher', 'other'),
       allowNull: false,
     },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-      allowNull: false,
+      field: 'is_active',
     },
-    restaurant_id: {
+    restaurantId: {
       type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'restaurants',
-        key: 'id',
-      },
+      allowNull: false,
+      field: 'restaurant_id',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'PaymentMethod',
     tableName: 'payment_methods',
     timestamps: true,
+    underscored: true,
   });
 
   return PaymentMethod;

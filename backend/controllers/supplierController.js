@@ -3,8 +3,8 @@ const { Supplier, Restaurant } = require('../models');
 // Create a new Supplier
 exports.createSupplier = async (req, res) => {
   try {
-    const { name, contact_person, phone, email, address, restaurant_id } = req.body;
-    const supplier = await Supplier.create({ name, contact_person, phone, email, address, restaurant_id });
+    const { name, contactPerson, phone, email, address, restaurantId } = req.body;
+    const supplier = await Supplier.create({ name, contactPerson, phone, email, address, restaurantId });
     res.status(201).json(supplier);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -14,8 +14,8 @@ exports.createSupplier = async (req, res) => {
 // Get all Suppliers
 exports.getAllSuppliers = async (req, res) => {
   try {
-    const { restaurant_id } = req.query;
-    const suppliers = await Supplier.findAll({ where: { restaurant_id } });
+    const { restaurantId } = req.query;
+    const suppliers = await Supplier.findAll({ where: { restaurantId } });
     res.status(200).json(suppliers);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -41,8 +41,8 @@ exports.getSupplierById = async (req, res) => {
 exports.updateSupplier = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, contact_person, phone, email, address } = req.body;
-    const [updated] = await Supplier.update({ name, contact_person, phone, email, address }, { where: { id } });
+    const { name, contactPerson, phone, email, address } = req.body;
+    const [updated] = await Supplier.update({ name, contactPerson, phone, email, address }, { where: { id } });
     if (updated) {
       const updatedSupplier = await Supplier.findByPk(id);
       res.status(200).json(updatedSupplier);

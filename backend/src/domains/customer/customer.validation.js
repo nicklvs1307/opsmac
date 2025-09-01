@@ -11,14 +11,14 @@ exports.customerQueryValidation = [
 exports.createCustomerValidation = [
   body('name').notEmpty().withMessage('Nome é obrigatório'),
   body('phone').notEmpty().withMessage('Telefone é obrigatório'),
-  body('birth_date').isISO8601().withMessage('Data de nascimento inválida'),
+  body('birthDate').isISO8601().withMessage('Data de nascimento inválida'),
 ];
 
 exports.publicRegisterCustomerValidation = [
   body('name').notEmpty().withMessage('Nome é obrigatório'),
   body('phone').notEmpty().withMessage('Telefone é obrigatório'),
-  body('birth_date').isISO8601().withMessage('Data de nascimento inválida'),
-  body('restaurant_id').isUUID().withMessage('ID do restaurante inválido')
+  body('birthDate').isISO8601().withMessage('Data de nascimento inválida'),
+  body('restaurantId').isUUID().withMessage('ID do restaurante inválido')
 ];
 
 exports.byPhoneValidation = [

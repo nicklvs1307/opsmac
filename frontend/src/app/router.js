@@ -1,124 +1,150 @@
 import React, { Suspense } from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 // Components
-import Layout from '@/shared/components/Layout/Layout'; // Assuming Layout is a shared component
-import ProtectedRoute from '@/shared/components/Auth/ProtectedRoute'; // Assuming ProtectedRoute is a shared component
+import Layout from '@/components/Layout/Layout'; // Assuming Layout is a shared component
+import ProtectedRoute from '@/components/Auth/ProtectedRoute'; // Assuming ProtectedRoute is a shared component
 
 import Login from '@/features/Auth/Auth/Login';
-import Dashboard from '@/features/Dashboard/Dashboard/Dashboard';
-import FeedbackList from '@/features/Feedback/Feedback/FeedbackList';
-import NewFeedback from '@/features/Feedback/Feedback/NewFeedback';
-import FeedbackDetail from '@/features/Feedback/Feedback/FeedbackDetail';
-import QRCodeManage from '@/features/QRCode/QRCode/QRCodeManage';
-import QRCodeGenerate from '@/features/QRCode/QRCode/QRCodeGenerate';
-import Rewards from '@/features/Rewards/Rewards/Rewards';
-import Customers from '@/features/Customers/Customers/Customers';
-import CouponListPage from '@/features/Coupons/Coupons/CouponListPage';
+import Dashboard from '@/features/Dashboard/Dashboard';
+import FeedbackList from '@/features/Feedback/FeedbackList';
+import NewFeedback from '@/features/Feedback/NewFeedback';
+import FeedbackDetail from '@/features/Feedback/FeedbackDetail';
+import QRCodeManage from '@/features/QRCode/QRCodeManage';
+import QRCodeGenerate from '@/features/QRCode/QRCodeGenerate';
+import Rewards from '@/features/Rewards/Rewards';
+import Customers from '@/features/Customers/Customers';
+import CouponListPage from '@/features/Coupons/CouponListPage';
 
-import CouponValidatorPage from '@/features/Coupons/Coupons/CouponValidatorPage';
-import CouponCreatePage from '@/features/Coupons/Coupons/CouponCreatePage';
-import CustomerDetail from '@/features/Customers/Customers/CustomerDetail';
-import CustomerBirthdays from '@/features/Customers/Customers/CustomerBirthdays';
-import CustomerDashboard from '@/features/Customers/Customers/CustomerDashboard';
-import Settings from '@/features/Settings/Settings/Settings';
-import PublicFeedback from '@/features/Public/Public/PublicFeedback';
-import ThankYou from '@/features/Public/Public/ThankYou';
-import PublicSurveyForm from '@/features/Public/Public/PublicSurveyForm';
-import SurveyList from '@/features/Fidelidade/Fidelidade/Avaliacoes/SurveyList';
-import CheckinAnalyticsPage from '@/features/Fidelidade/Fidelidade/Checkin/CheckinAnalyticsPage';
-import CheckinSettingsPage from '@/features/Fidelidade/Fidelidade/Checkin/CheckinSettingsPage';
-import ActiveCheckinsPage from '@/features/Fidelidade/Fidelidade/Checkin/ActiveCheckinsPage';
-import SurveyCreate from '@/features/Fidelidade/Fidelidade/Avaliacoes/SurveyCreate';
-import SurveyResults from '@/features/Fidelidade/Fidelidade/Avaliacoes/SurveyResults';
-import SurveyEdit from '@/features/Fidelidade/Fidelidade/Avaliacoes/SurveyEdit';
-import AdminDashboard from '@/features/Admin/Admin/AdminDashboard';
-import SatisfactionAnalyticsPage from '@/features/Fidelidade/Fidelidade/Avaliacoes/SatisfactionAnalyticsPage';
-import SatisfactionSettingsPage from '@/features/Fidelidade/Fidelidade/Avaliacoes/SatisfactionSettingsPage';
-import RelationshipDashboard from '@/features/Relationship/Relationship/RelationshipDashboard';
-import IntegrationsPage from '@/features/Integrations/Integrations/IntegrationsPage';
-import PublicCheckin from '@/features/Public/Public/PublicCheckin';
-import PublicReward from '@/features/Public/Public/PublicReward';
-import GirarRoleta from '@/features/Public/Public/GirarRoleta';
-import PublicMenu from '@/features/Public/Public/PublicMenu';
-import PublicDeliveryMenu from '@/features/Public/Public/PublicDeliveryMenu';
-import PublicDineInMenu from '@/features/Public/Public/PublicDineInMenu';
-import CustomerRegistration from '@/features/Public/Public/CustomerRegistration';
-import Tables from '@/features/ERP/ERP/Tables';
-import TechnicalSpecificationManagement from '@/shared/components/ERP/TechnicalSpecificationManagement'; // Assuming this is a shared component
-import StockDashboardPage from '@/features/ERP/ERP/StockDashboardPage';
-import StockMovementsPage from '@/features/ERP/ERP/StockMovementsPage';
-import SuppliersPage from '@/features/ERP/ERP/SuppliersPage';
-import PurchasesPage from '@/features/ERP/ERP/PurchasesPage';
-import StockProductsPage from '@/features/ERP/ERP/StockProductsPage';
-import Orders from '@/features/ERP/ERP/Orders';
-import Pdv from '@/features/ERP/ERP/Pdv';
-import Ingredients from '@/features/ERP/ERP/Ingredients';
-import Menu from '@/features/ERP/ERP/Menu';
-import LabelsDashboard from '@/features/CDV/CDV/Dashboard';
-import PrintLabel from '@/features/CDV/CDV/PrintLabel';
-import LabelsAdmin from '@/features/CDV/CDV/Admin/index.js';
-import StockCountList from '@/features/CDV/CDV/StockCountList';
-import StockCountDetail from '@/features/CDV/CDV/StockCountDetail';
-import ProductionList from '@/features/CDV/CDV/ProductionList';
-import ProductionCreate from '@/features/CDV/CDV/ProductionCreate';
-import DeleteLabels from '@/features/CDV/CDV/DeleteLabels';
-import Production from '@/features/CDV/CDV/Production';
-import CountProducts from '@/features/CDV/CDV/CountProducts';
-import CountHistory from '@/features/CDV/CDV/CountHistory';
-import FinancialTransactionsPage from '@/features/ERP/ERP/FinancialTransactionsPage';
-import CashFlowReport from '@/features/Reports/Reports/CashFlowReport';
-import DREReport from '@/features/Reports/Reports/DREReport';
-import SalesByPaymentMethodReport from '@/features/Reports/Reports/SalesByPaymentMethodReport';
-import ListOfAccountsReport from '@/features/Reports/Reports/ListOfAccountsReport';
-import CurrentStockPositionReport from '@/features/Reports/Reports/CurrentStockPositionReport';
-import StockPositionHistoryReport from '@/features/Reports/Reports/StockPositionHistoryReport';
-import GeneratedCouponsReport from '@/features/Reports/Reports/GeneratedCouponsReport';
-import PaymentMethods from '@/features/ERP/ERP/PaymentMethods';
-import FinancialCategoriesPage from '@/features/ERP/ERP/FinancialCategoriesPage';
-import TeamManagementPage from '@/features/Team/Team/TeamManagementPage';
-import WaiterPage from '@/features/Waiter/Waiter/WaiterPage';
-import OrderPage from '@/features/Waiter/Waiter/OrderPage';
-import ComingSoon from '@/features/Common/Common/ComingSoon';
-import RolePermissionManagementPage from '@/shared/components/PermissionManagement/RolePermissionManagementPage'; // Assuming shared
-import RestaurantModuleManagementPage from '@/shared/components/PermissionManagement/RestaurantModuleManagementPage'; // Assuming shared
-import RestaurantsListPage from '@/features/Admin/Admin/RestaurantsListPage';
-import RestaurantDetailPage from '@/features/Admin/Admin/RestaurantDetailPage';
-import RoleManagementPage from '@/features/Owner/Owner/RoleManagementPage';
-import MonthlySummary from '@/features/Fidelidade/Fidelidade/Geral/MonthlySummary';
-import SatisfactionOverview from '@/features/Fidelidade/Fidelidade/Geral/SatisfactionOverview';
-import SurveysComparison from '@/features/Fidelidade/Fidelidade/Geral/SurveysComparison';
-import Evolution from '@/features/Fidelidade/Fidelidade/Geral/Evolution';
-import Benchmarking from '@/features/Fidelidade/Fidelidade/Geral/Benchmarking';
-import MultipleChoice from '@/features/Fidelidade/Fidelidade/Geral/MultipleChoice';
-import WordClouds from '@/features/Fidelidade/Fidelidade/Geral/WordClouds';
-import Raffle from '@/features/Fidelidade/Fidelidade/Cupons/Raffle';
-import Replicas from '@/features/Fidelidade/Fidelidade/Respostas/Replicas';
-import Goals from '@/features/Fidelidade/Fidelidade/Respostas/Goals';
-import Import from '@/features/Fidelidade/Fidelidade/Respostas/Import';
-import Ranking from '@/features/Fidelidade/Fidelidade/Relacionamento/Ranking';
-import Dispatches from '@/features/Fidelidade/Fidelidade/Relacionamento/Dispatches';
-import Campaigns from '@/features/Fidelidade/Fidelidade/Relacionamento/Campaigns';
-import Messages from '@/features/Fidelidade/Fidelidade/Relacionamento/Messages';
-import Segmentation from '@/features/Fidelidade/Fidelidade/Relacionamento/Segmentation';
-import FidelityReports from '@/features/Fidelidade/Fidelidade/Reports';
-import ProductsCreate from '@/features/ERP/ERP/Stock/ProductsCreate';
-import StockSettings from '@/features/ERP/ERP/Stock/Settings';
-import StockReports from '@/features/ERP/ERP/Stock/Reports';
-import Inventory from '@/features/ERP/ERP/Stock/Inventory';
-import TechnicalSheetCreate from '@/features/ERP/ERP/Stock/TechnicalSheetCreate';
-import CMV from '@/features/ERP/ERP/Stock/CMV';
-import Adjustments from '@/features/ERP/ERP/Stock/Adjustments';
-import Lots from '@/features/ERP/ERP/Stock/Lots';
-import Alerts from '@/features/ERP/ERP/Stock/Alerts';
-import Integrations from '@/features/ERP/ERP/Orders/Integrations';
-import Delivery from '@/features/ERP/ERP/Orders/Delivery';
-import SalesReport from '@/features/ERP/ERP/Orders/SalesReport';
-import ManagementDashboard from '@/features/Management/Management/Dashboard';
-import Schedule from '@/features/Management/Management/Schedule';
-import Commissions from '@/features/Management/Management/Commissions';
-import Costs from '@/features/Management/Management/Costs';
-import ManagementPermissions from '@/features/Management/Management/Permissions';
+import CouponValidatorPage from '@/features/Coupons/CouponValidatorPage';
+import CouponCreatePage from '@/features/Coupons/CouponCreatePage';
+import CouponEditPage from '@/features/Coupons/CouponEditPage'; // New Import
+import CouponDashboardPage from '@/features/Coupons/CouponDashboardPage'; // New Import
+import CustomerDetail from '@/features/Customers/CustomerDetail';
+import CustomerBirthdays from '@/features/Customers/CustomerBirthdays';
+import CustomerDashboard from '@/features/Customers/CustomerDashboard';
+// import Settings from '@/features/Settings/Settings'; // Original Settings component
+import PublicFeedback from '@/features/Public/PublicFeedback';
+import ThankYou from '@/features/Public/ThankYou';
+import PublicSurveyForm from '@/features/Public/PublicSurveyForm';
+
+import CheckinAnalyticsPage from '@/features/Fidelidade/Checkin/CheckinAnalyticsPage';
+import CheckinSettingsPage from '@/features/Fidelidade/Checkin/CheckinSettingsPage';
+import ActiveCheckinsPage from '@/features/Fidelidade/Checkin/ActiveCheckinsPage';
+import SurveyCreate from '@/features/Fidelidade/Avaliacoes/SurveyCreate';
+import SurveyResults from '@/features/Fidelidade/Avaliacoes/SurveyResults';
+import SurveyEdit from '@/features/Fidelidade/Avaliacoes/SurveyEdit';
+import SurveyList from '@/features/Fidelidade/Avaliacoes/SurveyList';
+
+import AdminUsersPage from '@/features/Admin/AdminUsersPage';
+import AdminRestaurantsPage from '@/features/Admin/AdminRestaurantsPage';
+import RestaurantEditPage from '@/features/Admin/RestaurantEditPage';
+import RestaurantCreatePage from '@/features/Admin/RestaurantCreatePage';
+import UserEditPage from '@/features/Admin/UserEditPage';
+import UserCreatePage from '@/features/Admin/UserCreatePage';
+import SatisfactionAnalyticsPage from '@/features/Fidelidade/Avaliacoes/SatisfactionAnalyticsPage';
+import SatisfactionSettingsPage from '@/features/Fidelidade/Avaliacoes/SatisfactionSettingsPage';
+import RelationshipDashboard from '@/features/Relationship/RelationshipDashboard';
+
+import IntegrationsPage from '@/features/Integrations/IntegrationsPage';
+import PublicCheckin from '@/features/Public/PublicCheckin';
+import PublicReward from '@/features/Public/PublicReward';
+import GirarRoleta from '@/features/Public/GirarRoleta';
+import PublicMenu from '@/features/Public/PublicMenu';
+import PublicDeliveryMenu from '@/features/Public/PublicDeliveryMenu';
+import PublicDineInMenu from '@/features/Public/DineInMenu';
+import CustomerRegistration from '@/features/Public/CustomerRegistration';
+import Tables from '@/features/ERP/Tables';
+import TechnicalSpecificationManagement from '@/components/ERP/TechnicalSpecificationManagement'; // Assuming this is a shared component
+import StockDashboardPage from '@/features/ERP/StockDashboardPage';
+import StockMovementsPage from '@/features/ERP/StockMovementsPage';
+import SuppliersPage from '@/features/ERP/SuppliersPage';
+import PurchasesPage from '@/features/ERP/PurchasesPage';
+import StockProductsPage from '@/features/ERP/StockProductsPage';
+import Orders from '@/features/ERP/Orders';
+import Pdv from '@/features/ERP/Pdv';
+import Ingredients from '@/features/ERP/Ingredients';
+import Menu from '@/features/ERP/Menu';
+import LabelsDashboard from '@/features/CDV/Dashboard';
+import PrintLabel from '@/features/CDV/PrintLabel';
+import LabelsAdmin from '@/features/CDV/Admin';
+import StockCountList from '@/features/CDV/StockCountList';
+import StockCountDetail from '@/features/CDV/StockCountDetail';
+import ProductionList from '@/features/CDV/ProductionList';
+import ProductionCreate from '@/features/CDV/ProductionCreate';
+import DeleteLabels from '@/features/CDV/DeleteLabels';
+import Production from '@/features/CDV/Production';
+import CountProducts from '@/features/CDV/CountProducts';
+import CountHistory from '@/features/CDV/CountHistory';
+
+import CashFlowReport from '@/features/Reports/CashFlowReport';
+import DREReport from '@/features/Reports/DREReport';
+import SalesByPaymentMethodReport from '@/features/Reports/SalesByPaymentMethodReport';
+import ListOfAccountsReport from '@/features/Reports/ListOfAccountsReport';
+import CurrentStockPositionReport from '@/features/Reports/CurrentStockPositionReport';
+import StockPositionHistoryReport from '@/features/Reports/StockPositionHistoryReport';
+import GeneratedCouponsReport from '@/features/Reports/GeneratedCouponsReport';
+import PaymentMethods from '@/features/ERP/PaymentMethods';
+import FinancialCategoriesPage from '@/features/ERP/FinancialCategoriesPage';
+import TeamManagementPage from '@/features/Team/TeamManagementPage';
+import WaiterPage from '@/features/Waiter/WaiterPage';
+import OrderPage from '@/features/Waiter/OrderPage';
+import ComingSoon from '@/features/Common/ComingSoon';
+import RolePermissionManagementPage from '@/components/Admin/RolePermissionManagementPage'; // Assuming shared
+
+import IAMDashboard from '@/features/IAM/IAMDashboard';
+import RoleManagement from '@/features/IAM/RoleManagement';
+import RolePermissions from '@/features/IAM/RolePermissions';
+import UserPermissionOverrides from '@/features/IAM/UserPermissionOverrides';
+import EntitlementManagement from '@/features/IAM/EntitlementManagement';
+import UserRoleManagement from '@/features/IAM/UserRoleManagement';
+
+import MonthlySummary from '@/features/Fidelidade/Geral/MonthlySummary';
+import SatisfactionOverview from '@/features/Fidelidade/Geral/SatisfactionOverview';
+import SurveysComparison from '@/features/Fidelidade/Geral/SurveysComparison';
+import Evolution from '@/features/Fidelidade/Geral/Evolution';
+import Benchmarking from '@/features/Fidelidade/Geral/Benchmarking';
+import MultipleChoice from '@/features/Fidelidade/Geral/MultipleChoice';
+import WordClouds from '@/features/Fidelidade/Geral/WordClouds';
+import Raffle from '@/features/Fidelidade/Cupons/Raffle';
+import Replicas from '@/features/Fidelidade/Respostas/Replicas';
+import Goals from '@/features/Fidelidade/Respostas/Goals';
+import Import from '@/features/Fidelidade/Respostas/Import';
+import Ranking from '@/features/Fidelidade/Relacionamento/Ranking';
+import Dispatches from '@/features/Fidelidade/Relacionamento/Dispatches';
+import Campaigns from '@/features/Fidelidade/Relacionamento/Campaigns';
+import Messages from '@/features/Fidelidade/Relacionamento/Messages';
+import Segmentation from '@/features/Fidelidade/Relacionamento/Segmentation';
+import FidelityReports from '@/features/Fidelidade/Reports';
+import ProductsCreate from '@/features/ERP/Stock/ProductsCreate';
+import StockSettings from '@/features/ERP/Stock/Settings';
+import StockReports from '@/features/ERP/Stock/Reports';
+import Inventory from '@/features/ERP/Stock/Inventory';
+import TechnicalSheetCreate from '@/features/ERP/Stock/TechnicalSheetCreate';
+import CMV from '@/features/ERP/Stock/CMV';
+import Adjustments from '@/features/ERP/Stock/Adjustments';
+import Lots from '@/features/ERP/Stock/Lots';
+import Alerts from '@/features/ERP/Stock/Alerts';
+import Integrations from '@/features/ERP/Orders/Integrations';
+import Delivery from '@/features/ERP/Orders/Delivery';
+import SalesReport from '@/features/ERP/Orders/SalesReport';
+import ManagementDashboard from '@/features/Management/Dashboard';
+import Schedule from '@/features/Management/Schedule';
+import Commissions from '@/features/Management/Commissions';
+import Costs from '@/features/Management/Costs';
+import ManagementPermissions from '@/features/Management/Permissions';
+
+// New Settings Page Imports
+import Settings from '@/features/Settings/Settings'; // Keep this for the redirect
+import ProfileSettingsPage from '@/features/Settings/pages/ProfileSettingsPage';
+import BusinessSettingsPage from '@/features/Settings/pages/BusinessSettingsPage';
+import NotificationsSettingsPage from '@/features/Settings/pages/NotificationsSettingsPage';
+import SecuritySettingsPage from '@/features/Settings/pages/SecuritySettingsPage';
+import AppearanceSettingsPage from '@/features/Settings/pages/AppearanceSettingsPage';
+import WhatsappSettingsPage from '@/features/Settings/pages/WhatsappSettingsPage';
+
+// New Digital Menus Page Import
+import DeliveryMenuPage from '@/features/Orders/DigitalMenus/DeliveryMenuPage';
 
 const NotFound = () => {
   return (
@@ -356,7 +382,23 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: 'fidelity/coupons/edit/:id', // New route for editing coupons
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <CouponEditPage />
+          </Suspense>
+        ),
+      },
+      {
         path: 'fidelity/coupons/dashboard',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <CouponDashboardPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'fidelity/coupons/list',
         element: (
           <Suspense fallback={<div>Carregando...</div>}>
             <CouponListPage />
@@ -431,26 +473,67 @@ export const router = createBrowserRouter([
         path: 'settings',
         element: (
           <Suspense fallback={<div>Carregando...</div>}>
+            {/* Settings component now acts as a redirect */}
             <Settings />
           </Suspense>
         ),
+        children: [
+          {
+            index: true, // Default child route for /settings
+            element: <Settings />,
+          },
+          {
+            path: 'profile',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <ProfileSettingsPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'business',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <BusinessSettingsPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'notifications',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <NotificationsSettingsPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'security',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <SecuritySettingsPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'appearance',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <AppearanceSettingsPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'whatsapp',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <WhatsappSettingsPage />
+              </Suspense>
+            ),
+          },
+          // NPS Criteria route is intentionally omitted
+        ],
       },
-      {
-        path: 'settings/roles',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <RoleManagementPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'settings/permissions',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <RolePermissionManagementPage />
-          </Suspense>
-        ),
-      },
+
       {
         path: 'fidelity/checkin/dashboard',
         element: (
@@ -756,10 +839,34 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'orders/tables',
+        path: 'integrations',
         element: (
           <Suspense fallback={<div>Carregando...</div>}>
-            <Tables />
+            <Integrations />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'delivery',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <Delivery />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'sales-report',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <SalesReport />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'digital-menus/delivery',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <DeliveryMenuPage />
           </Suspense>
         ),
       },
@@ -804,60 +911,74 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'orders/dashboard',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Orders />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'stock/sales',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Orders />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'orders/pdv',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Pdv />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'orders/list',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Orders />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'orders/integrations',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Integrations />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'orders/delivery',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Delivery />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'orders/sales-report',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <SalesReport />
-          </Suspense>
-        ),
+        path: 'orders',
+        children: [
+          {
+            index: true, // Default child route for /orders
+            element: <Navigate to="dashboard" replace />,
+          },
+          {
+            path: 'dashboard',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <Orders />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'pdv',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <Pdv />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'list',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <Orders />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'integrations',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <Integrations />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'delivery',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <Delivery />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'sales-report',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <SalesReport />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'digital-menus/delivery',
+            element: (
+              <Suspense fallback={<div>Carregando...</div>}>
+                <DeliveryMenuPage />
+              </Suspense>
+            ),
+          },
+          // Placeholder for dine-in menu
+          // {
+          //   path: 'digital-menus/dine-in',
+          //   element: <Suspense fallback={<div>Carregando...</div>}><DineInMenuPage /></Suspense>,
+          // },
+        ],
       },
       {
         path: 'stock/ingredients',
@@ -875,14 +996,7 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: 'erp/financial-transactions',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <FinancialTransactionsPage />
-          </Suspense>
-        ),
-      },
+
       {
         path: 'erp/financial-categories',
         element: (
@@ -1076,6 +1190,54 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: 'financial/receivables',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'financial/fiscal/invoices',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'financial/fiscal/taxes',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'financial/fiscal/sefaz',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'financial/fiscal/reports',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'financial/fiscal/settings',
+        element: (
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
+        ),
+      },
+      {
         path: 'cdv/stock-counts/:id',
         element: (
           <Suspense fallback={<div>Carregando...</div>}>
@@ -1108,31 +1270,35 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'admin/dashboard',
+        path: 'cdv/expirations',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <Suspense fallback={<div>Carregando...</div>}>
-              <AdminDashboard />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
         ),
       },
       {
-        path: 'admin/users',
+        path: 'cdv/expirations-alert',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <Suspense fallback={<div>Carregando...</div>}>
-              <ComingSoon />
-            </Suspense>
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'admin/dashboard',
+        element: (
+          <ProtectedRoute featureKey="admin_panel" actionKey="access">
+            <Navigate to="/admin/users" replace />
           </ProtectedRoute>
         ),
       },
       {
         path: 'admin/restaurant-settings',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="restaurant_management" actionKey="update">
             <Suspense fallback={<div>Carregando...</div>}>
-              <ComingSoon />
+              <Settings />
             </Suspense>
           </ProtectedRoute>
         ),
@@ -1140,9 +1306,9 @@ export const router = createBrowserRouter([
       {
         path: 'admin/modules',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="modules" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
-              <ComingSoon />
+              <RestaurantModuleManagementPage />
             </Suspense>
           </ProtectedRoute>
         ),
@@ -1150,9 +1316,10 @@ export const router = createBrowserRouter([
       {
         path: 'admin/reports',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="reports" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
-              <ComingSoon />
+              <ComingSoon />{' '}
+              {/* Keep ComingSoon for now if no specific report component is ready */}
             </Suspense>
           </ProtectedRoute>
         ),
@@ -1160,9 +1327,9 @@ export const router = createBrowserRouter([
       {
         path: 'admin/financial',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="financial" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
-              <ComingSoon />
+              <ComingSoon /> {/* Placeholder for FinancialTransactionsPage */}
             </Suspense>
           </ProtectedRoute>
         ),
@@ -1170,7 +1337,7 @@ export const router = createBrowserRouter([
       {
         path: 'admin/stock',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="stock" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <StockDashboardPage />
             </Suspense>
@@ -1180,9 +1347,9 @@ export const router = createBrowserRouter([
       {
         path: 'admin/products',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="products" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
-              <TechnicalSpecificationManagement />
+              <StockProductsPage /> {/* Assuming this is the main products page */}
             </Suspense>
           </ProtectedRoute>
         ),
@@ -1190,7 +1357,7 @@ export const router = createBrowserRouter([
       {
         path: 'admin/coupons',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="coupons" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <CouponListPage />
             </Suspense>
@@ -1200,7 +1367,7 @@ export const router = createBrowserRouter([
       {
         path: 'admin/surveys',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="surveys" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <SurveyList />
             </Suspense>
@@ -1210,77 +1377,63 @@ export const router = createBrowserRouter([
       {
         path: 'admin/checkins',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <Suspense fallback={<div>Carregando...</div>}>
-              <CheckinAnalyticsPage />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<div>Carregando...</div>}>
+            <CheckinAnalyticsPage />
+          </Suspense>
         ),
       },
       {
         path: 'admin/tables',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <Suspense fallback={<div>Carregando...</div>}>
-              <Tables />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<div>Carregando...</div>}>
+            <Tables />
+          </Suspense>
         ),
       },
       {
         path: 'admin/qrcodes',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <Suspense fallback={<div>Carregando...</div>}>
-              <QRCodeManage />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<div>Carregando...</div>}>
+            <QRCodeManage />
+          </Suspense>
         ),
       },
       {
         path: 'admin/waiter-calls',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <Suspense fallback={<div>Carregando...</div>}>
-              <ComingSoon />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
         ),
       },
       {
         path: 'admin/whatsapp-messages',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <Suspense fallback={<div>Carregando...</div>}>
-              <ComingSoon />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
         ),
       },
       {
         path: 'admin/losses',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <Suspense fallback={<div>Carregando...</div>}>
-              <ComingSoon />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ComingSoon />
+          </Suspense>
         ),
       },
       {
         path: 'admin/production',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <Suspense fallback={<div>Carregando...</div>}>
-              <ProductionList />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ProductionList />
+          </Suspense>
         ),
       },
       {
         path: 'admin/suppliers',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="suppliers" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <SuppliersPage />
             </Suspense>
@@ -1290,7 +1443,7 @@ export const router = createBrowserRouter([
       {
         path: 'admin/roles-permissions',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="role_management" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <RolePermissionManagementPage />
             </Suspense>
@@ -1300,7 +1453,7 @@ export const router = createBrowserRouter([
       {
         path: 'admin/restaurant-modules',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="modules" actionKey="manage">
             <Suspense fallback={<div>Carregando...</div>}>
               <RestaurantModuleManagementPage />
             </Suspense>
@@ -1308,21 +1461,69 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'admin/restaurants',
+        path: 'admin/dashboard',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="admin_panel" actionKey="access">
+            <Navigate to="/admin/users" replace />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/users',
+        element: (
+          <ProtectedRoute featureKey="users" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
-              <RestaurantsListPage />
+              <AdminUsersPage />
             </Suspense>
           </ProtectedRoute>
         ),
       },
       {
-        path: 'admin/restaurants/:id',
+        path: 'admin/users/:userId/edit',
         element: (
-          <ProtectedRoute allowedRoles={['super_admin']}>
+          <ProtectedRoute featureKey="users" actionKey="update">
             <Suspense fallback={<div>Carregando...</div>}>
-              <RestaurantDetailPage />
+              <UserEditPage />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/users/new',
+        element: (
+          <ProtectedRoute featureKey="users" actionKey="create">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <UserCreatePage />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/restaurants',
+        element: (
+          <ProtectedRoute featureKey="restaurants" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <AdminRestaurantsPage />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/restaurants/:restaurantId/edit',
+        element: (
+          <ProtectedRoute featureKey="restaurants" actionKey="update">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <RestaurantEditPage />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/restaurants/new',
+        element: (
+          <ProtectedRoute featureKey="restaurants" actionKey="create">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <RestaurantCreatePage />
             </Suspense>
           </ProtectedRoute>
         ),
@@ -1330,7 +1531,7 @@ export const router = createBrowserRouter([
       {
         path: '/waiter',
         element: (
-          <ProtectedRoute allowedRoles={['waiter']}>
+          <ProtectedRoute featureKey="waiter_app" actionKey="access">
             <Suspense fallback={<div>Carregando...</div>}>
               <WaiterPage />
             </Suspense>
@@ -1340,7 +1541,7 @@ export const router = createBrowserRouter([
       {
         path: '/waiter/order/:tableId',
         element: (
-          <ProtectedRoute allowedRoles={['waiter']}>
+          <ProtectedRoute featureKey="waiter_app" actionKey="access">
             <Suspense fallback={<div>Carregando...</div>}>
               <OrderPage />
             </Suspense>
@@ -1348,6 +1549,66 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: '/admin/iam/:restaurantId',
+    element: (
+      <ProtectedRoute featureKey="iam_admin" actionKey="access">
+        <Suspense fallback={<div>Carregando...</div>}>
+          <IAMDashboard />
+        </Suspense>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/admin/iam/:restaurantId/roles',
+    element: (
+      <ProtectedRoute featureKey="roles" actionKey="read">
+        <Suspense fallback={<div>Carregando...</div>}>
+          <RoleManagement />
+        </Suspense>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/admin/iam/:restaurantId/roles/:roleId/permissions',
+    element: (
+      <ProtectedRoute featureKey="role_permissions" actionKey="read">
+        <Suspense fallback={<div>Carregando...</div>}>
+          <RolePermissions />
+        </Suspense>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/admin/iam/:restaurantId/users/:userId/overrides',
+    element: (
+      <ProtectedRoute featureKey="user_overrides" actionKey="read">
+        <Suspense fallback={<div>Carregando...</div>}>
+          <UserPermissionOverrides />
+        </Suspense>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/admin/iam/:restaurantId/entitlements',
+    element: (
+      <ProtectedRoute featureKey="entitlements" actionKey="read">
+        <Suspense fallback={<div>Carregando...</div>}>
+          <EntitlementManagement />
+        </Suspense>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/admin/iam/:restaurantId/users',
+    element: (
+      <ProtectedRoute featureKey="user_roles" actionKey="read">
+        <Suspense fallback={<div>Carregando...</div>}>
+          <UserRoleManagement />
+        </Suspense>
+      </ProtectedRoute>
+    ),
   },
   { path: '*', element: <NotFound /> },
 ]);

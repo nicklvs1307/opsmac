@@ -1,22 +1,12 @@
 'use strict';
-const { Model, DataTypes, Sequelize } = require('sequelize'); // Import Sequelize
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class TechnicalSpecification extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       TechnicalSpecification.belongsTo(models.Product, {
         foreignKey: 'product_id',
         as: 'product',
-      });
-      // Add new association
-      TechnicalSpecification.hasMany(models.RecipeIngredient, {
-        foreignKey: 'technical_specification_id',
-        as: 'recipeIngredients',
       });
     }
   }
@@ -24,24 +14,32 @@ module.exports = (sequelize) => {
   TechnicalSpecification.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    product_id: {
+    productId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'products',
-        key: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
+      unique: true,
+      field: 'product_id',
+    },
+    content: {
+      type: DataTypes.TEXT,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'TechnicalSpecification',
     tableName: 'technical_specifications',
-    timestamps: true, // Let Sequelize handle timestamps
+    timestamps: true,
+    underscored: true,
   });
 
   return TechnicalSpecification;

@@ -91,3 +91,25 @@ exports.getSurveyAnalytics = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getSurveysComparisonAnalytics = async (req, res, next) => {
+  try {
+    const { surveyIds } = req.body; // Assuming surveyIds are sent in the request body
+    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const analytics = await surveyService.getSurveysComparisonAnalytics(restaurantId, surveyIds);
+    res.json(analytics);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getQuestionAnswersDistribution = async (req, res, next) => {
+  try {
+    const { surveyId, questionId } = req.params;
+    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const distribution = await surveyService.getQuestionAnswersDistribution(restaurantId, surveyId, questionId);
+    res.json(distribution);
+  } catch (error) {
+    next(error);
+  }
+};

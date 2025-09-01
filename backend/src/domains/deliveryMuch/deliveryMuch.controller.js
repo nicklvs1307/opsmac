@@ -3,7 +3,7 @@ const { BadRequestError, ForbiddenError } = require('utils/errors');
 
 exports.checkDeliveryMuchModuleEnabled = async (req, res, next) => {
   try {
-    const restaurantId = req.body.restaurant_id; // Ajuste conforme o payload real do Delivery Much
+    const restaurantId = req.body.restaurantId; // Ajuste conforme o payload real do Delivery Much
     const restaurant = await deliveryMuchService.checkDeliveryMuchModuleEnabled(restaurantId, req.user?.userId);
     req.restaurant = restaurant; // Anexa o objeto do restaurante à requisição
     next();

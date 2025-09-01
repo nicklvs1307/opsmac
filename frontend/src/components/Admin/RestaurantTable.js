@@ -12,22 +12,32 @@ import {
   IconButton,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const RestaurantTable = ({
   restaurants,
   loading,
-  handleOpenRestaurantModal,
   handleOpenModuleModal,
+  canAddRestaurant,
+  canEditRestaurant,
+  canManageRestaurantModules,
 }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleEditClick = (restaurantId) => {
+    navigate(`/admin/restaurants/${restaurantId}/edit`);
+  };
 
   return (
     <TableContainer component={Paper} sx={{ mt: 3 }}>
-      <Button onClick={() => handleOpenRestaurantModal()}>
-        {' '}
-        {t('admin_dashboard.create_restaurant_tab')}{' '}
-      </Button>
+      {canAddRestaurant && (
+        <Button onClick={() => navigate('/admin/restaurants/new')}>
+          {' '}
+          {t('admin_dashboard.create_restaurant_tab')}{' '}
+        </Button>
+      )}
       <Table>
         <TableHead>
           <TableRow>
@@ -53,12 +63,16 @@ const RestaurantTable = ({
                   {(restaurant.modules || []).map((m) => m.displayName).join(', ')}
                 </TableCell>
                 <TableCell align="right">
-                  <IconButton onClick={() => handleOpenRestaurantModal(restaurant)}>
-                    <EditIcon />
-                  </IconButton>
-                  <Button variant="outlined" onClick={() => handleOpenModuleModal(restaurant)}>
-                    {t('admin_dashboard.manage_modules_button')}
-                  </Button>
+                  {canEditRestaurant && (
+                    <IconButton onClick={() => handleEditClick(restaurant.id)}>
+                      <EditIcon />
+                    </IconButton>
+                  )}
+                  {canManageRestaurantModules && (
+                    <Button variant="outlined" onClick={() => handleOpenModuleModal(restaurant)}>
+                      {t('admin_dashboard.manage_modules_button')}
+                    </Button>
+                  )}
                 </TableCell>
               </TableRow>
             ))

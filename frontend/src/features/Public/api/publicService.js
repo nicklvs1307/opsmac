@@ -1,6 +1,5 @@
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '@/shared/lib/axiosInstance';
-import toast from 'react-hot-toast';
+import { useQuery, useMutation } from 'react-query';
+import axiosInstance from '@/services/axiosInstance';
 
 //================================================================================================
 // PUBLIC

@@ -1,14 +1,14 @@
 const { body, query } = require('express-validator');
 
 exports.recordCheckinValidation = [
-  body('customer_id').isUUID().withMessage('ID do cliente inválido'),
+  body('customerId').isUUID().withMessage('ID do cliente inválido'),
 ];
 
 exports.recordPublicCheckinValidation = [
-  body('customer_name').optional().isString().withMessage('Nome do cliente inválido'),
-  body('phone_number').optional().isString().withMessage('Número de telefone inválido'),
+  body('customerName').optional().isString().withMessage('Nome do cliente inválido'),
+  body('phoneNumber').optional().isString().withMessage('Número de telefone inválido'),
   body('cpf').optional().isString().withMessage('CPF inválido'),
-  body('table_number').optional().isString().withMessage('Número da mesa inválido'),
+  body('tableNumber').optional().isString().withMessage('Número da mesa inválido'),
 ];
 
 exports.analyticsValidation = [

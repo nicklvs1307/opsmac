@@ -14,21 +14,21 @@ async function sendBirthdayReminders() {
     // Buscar clientes que fazem aniversário hoje e que ainda não receberam mensagem este ano
     const customersCelebratingBirthday = await models.Customer.findAll({
       where: {
-        birth_date: {
+        birthDate: {
           [Op.ne]: null // Garante que a data de nascimento não é nula
         },
-        [Op.and]: sequelize.where(sequelize.fn('EXTRACT', sequelize.literal('MONTH FROM birth_date')), currentMonth),
-        [Op.and]: sequelize.where(sequelize.fn('EXTRACT', sequelize.literal('DAY FROM birth_date')), currentDay),
+        [Op.and]: sequelize.where(sequelize.fn('EXTRACT', sequelize.literal('MONTH FROM birthDate')), currentMonth),
+        [Op.and]: sequelize.where(sequelize.fn('EXTRACT', sequelize.literal('DAY FROM birthDate')), currentDay),
         [Op.or]: [
-          { last_birthday_message_year: { [Op.ne]: currentYear } },
-          { last_birthday_message_year: null }
+          { lastBirthdayMessageYear: { [Op.ne]: currentYear } },
+          { lastBirthdayMessageYear: null }
         ]
       },
       include: [
         {
           model: models.Restaurant,
           as: 'restaurant',
-          attributes: ['id', 'name', 'whatsapp_api_url', 'whatsapp_api_key', 'whatsapp_instance_id', 'whatsapp_phone_number']
+          attributes: ['id', 'name', 'whatsappApiUrl', 'whatsappApiKey', 'whatsappInstanceId', 'whatsappPhoneNumber']
         }
       ]
     });
@@ -49,13 +49,13 @@ async function sendBirthdayReminders() {
           continue;
         }
 
-        if (!restaurant || !restaurant.whatsapp_api_url || !restaurant.whatsapp_api_key || !restaurant.whatsapp_instance_id || !restaurant.whatsapp_phone_number) {
+        if (!restaurant || !restaurant.whatsappApiUrl || !restaurant.whatsappApiKey || !restaurant.whatsappInstanceId || !restaurant.whatsappPhoneNumber) {
           console.warn(`Cliente ${customer.id} (${customer.name}): Credenciais da Evolution API incompletas para o restaurante ${restaurant?.id}. Pulando.`);
           continue;
         }
 
-        const birthdayGreetingEnabled = restaurant.settings?.whatsapp_messages?.birthday_greeting_enabled;
-        const customBirthdayGreetingMessage = restaurant.settings?.whatsapp_messages?.birthday_greeting_text;
+        const birthdayGreetingEnabled = restaurant.settings?.whatsappMessages?.birthdayGreetingEnabled;
+        const customBirthdayGreetingMessage = restaurant.settings?.whatsappMessages?.birthdayGreetingText;
 
         if (birthdayGreetingEnabled) {
           // Gerar um cupom de cortesia de aniversário (exemplo: 10% de desconto)
@@ -65,16 +65,16 @@ async function sendBirthdayReminders() {
             // Supondo que você tenha uma recompensa padrão para aniversário ou crie uma dinamicamente
             // Para este exemplo, vamos criar um cupom genérico ou buscar um existente
             const birthdayReward = await models.Reward.findOne({
-              where: { restaurant_id: restaurant.id, title: 'Aniversário' } // Ou crie um se não existir
+              where: { restaurantId: restaurant.id, title: 'Aniversário' } // Ou crie um se não existir
             });
 
             if (birthdayReward) {
               const newCoupon = await models.Coupon.create({
-                reward_id: birthdayReward.id,
-                customer_id: customer.id,
-                restaurant_id: restaurant.id,
+                rewardId: birthdayReward.id,
+                customerId: customer.id,
+                restaurantId: restaurant.id,
                 code: `ANIVER${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
-                expires_at: new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()) // Válido por 1 ano
+                expiresAt: new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()) // Válido por 1 ano
               });
               birthdayCouponCode = newCoupon.code;
               couponMessagePart = `\n\nPara comemorar, use seu cupom de presente: *{{coupon_code}}*! 🎉`;
@@ -96,9 +96,9 @@ async function sendBirthdayReminders() {
           }
 
           const whatsappResponse = await sendWhatsAppMessage(
-            restaurant.whatsapp_api_url,
-            restaurant.whatsapp_api_key,
-            restaurant.whatsapp_instance_id,
+            restaurant.whatsappApiUrl,
+            restaurant.whatsappApiKey,
+            restaurant.whatsappInstanceId,
             customer.phone,
             messageText
           );
@@ -106,18 +106,18 @@ async function sendBirthdayReminders() {
           if (whatsappResponse.success) {
             console.log(`Mensagem de aniversário enviada com sucesso para ${customer.name} (${customer.phone})`);
             await customer.update({
-              last_birthday_message_year: currentYear
+              lastBirthdayMessageYear: currentYear
             });
             // Opcional: Registrar o envio da mensagem no banco de dados
             await models.WhatsAppMessage.create({
-              phone_number: customer.phone,
-              message_text: messageText,
-              message_type: 'birthday_greeting',
+              phoneNumber: customer.phone,
+              messageText: messageText,
+              messageType: 'birthday_greeting',
               status: 'sent',
-              whatsapp_message_id: whatsappResponse.data?.id || null,
-              restaurant_id: restaurant.id,
-              customer_id: customer.id,
-              coupon_id: birthdayCouponCode ? (await models.Coupon.findOne({ where: { code: birthdayCouponCode } }))?.id : null
+              whatsappMessageId: whatsappResponse.data?.id || null,
+              restaurantId: restaurant.id,
+              customerId: customer.id,
+              couponId: birthdayCouponCode ? (await models.Coupon.findOne({ where: { code: birthdayCouponCode } }))?.id : null
             });
           } else {
             console.error(`Erro ao enviar mensagem de aniversário para ${customer.name} (${customer.phone}):`, whatsappResponse.error);

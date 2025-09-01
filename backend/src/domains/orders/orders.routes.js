@@ -1,6 +1,6 @@
 const express = require('express');
 const { auth } = require('../../middleware/authMiddleware');
-const checkPermission = require('../../middleware/permission');
+const requirePermission = require('../../middleware/requirePermission');
 const ordersController = require('./orders.controller');
 const {
     updateOrderStatusValidation
@@ -9,7 +9,7 @@ const {
 const router = express.Router();
 
 // Rotas de Pedidos
-router.get('/', auth, checkPermission('orders:view'), ordersController.getAllOrders);
-router.put('/:id/status', auth, checkPermission('orders:edit'), updateOrderStatusValidation, ordersController.updateOrderStatus);
+router.get('/', auth, requirePermission('orders', 'read'), ordersController.getAllOrders);
+router.put('/:id/status', auth, requirePermission('orders', 'update'), updateOrderStatusValidation, ordersController.updateOrderStatus);
 
 module.exports = router;

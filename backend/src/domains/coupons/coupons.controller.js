@@ -45,9 +45,9 @@ exports.redeemCoupon = async (req, res, next) => {
 exports.createCoupon = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { reward_id, customer_id, expires_at } = req.body;
+    const { rewardId, customerId, expiresAt } = req.body;
     const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const coupon = await couponsService.createCoupon(reward_id, customer_id, restaurantId, expires_at);
+    const coupon = await couponsService.createCoupon(rewardId, customerId, restaurantId, expiresAt);
     res.status(201).json(coupon);
   } catch (error) {
     next(error);

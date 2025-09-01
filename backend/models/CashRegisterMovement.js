@@ -1,24 +1,19 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class CashRegisterMovement extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       CashRegisterMovement.belongsTo(models.CashRegisterSession, {
-        foreignKey: 'sessionId',
+        foreignKey: 'session_id',
         as: 'session',
       });
       CashRegisterMovement.belongsTo(models.CashRegisterCategory, {
-        foreignKey: 'categoryId',
+        foreignKey: 'category_id',
         as: 'category',
       });
       CashRegisterMovement.belongsTo(models.User, {
-        foreignKey: 'userId',
+        foreignKey: 'user_id',
         as: 'user',
       });
     }
@@ -27,50 +22,49 @@ module.exports = (sequelize) => {
   CashRegisterMovement.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    sessionId: { // Link to the cash register session
+    sessionId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'cash_register_sessions',
-        key: 'id',
-      },
+      field: 'session_id',
     },
-    type: { // 'withdrawal' or 'reinforcement'
-      type: DataTypes.ENUM('withdrawal', 'reinforcement'),
+    type: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     amount: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    categoryId: { // For withdrawals, optional for reinforcement
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    categoryId: {
       type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'cash_register_categories',
-        key: 'id',
-      },
+      field: 'category_id',
     },
-    observations: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
-    userId: { // User who performed the movement
+    userId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
+      field: 'user_id',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'CashRegisterMovement',
     tableName: 'cash_register_movements',
     timestamps: true,
+    underscored: true,
   });
 
   return CashRegisterMovement;

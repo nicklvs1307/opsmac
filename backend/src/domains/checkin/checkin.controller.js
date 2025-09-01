@@ -35,8 +35,8 @@ exports.recordCheckin = async (req, res, next) => {
   try {
     handleValidationErrors(req);
     const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const { customer_id } = req.body;
-    const checkin = await checkinService.recordCheckin(customer_id, restaurantId);
+    const { customerId } = req.body;
+    const checkin = await checkinService.recordCheckin(customerId, restaurantId);
     res.status(201).json({ message: 'Check-in registrado com sucesso', checkin });
   } catch (error) {
     next(error);
@@ -47,22 +47,22 @@ exports.recordPublicCheckin = async (req, res, next) => {
   try {
     handleValidationErrors(req);
     const restaurant = req.restaurant; // From checkCheckinModuleEnabled middleware
-    const { phone_number, cpf, customer_name, table_number, coupon_id } = req.body;
+    const { phoneNumber, cpf, customerName, tableNumber, couponId } = req.body;
 
     const result = await checkinService.recordPublicCheckin(
       restaurant,
-      phone_number,
+      phoneNumber,
       cpf,
-      customer_name,
-      table_number,
-      coupon_id
+      customerName,
+      tableNumber,
+      couponId
     );
 
     res.status(201).json({
       message: 'Check-in registrado com sucesso',
       checkin: result.checkin,
-      customer_total_visits: result.customer_total_visits,
-      reward_earned: result.reward_earned
+      customerTotalVisits: result.customerTotalVisits,
+      rewardEarned: result.rewardEarned
     });
   } catch (error) {
     next(error);

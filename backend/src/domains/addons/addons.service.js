@@ -2,12 +2,12 @@ const { models } = require('config/config');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 exports.listAddons = async (restaurantId) => {
-  const addons = await models.Addon.findAll({ where: { restaurant_id: restaurantId } });
+  const addons = await models.Addon.findAll({ where: { restaurantId: restaurantId } });
   return addons;
 };
 
 exports.createAddon = async (name, price, restaurantId) => {
-  const newAddon = await models.Addon.create({ name, price, restaurant_id: restaurantId });
+  const newAddon = await models.Addon.create({ name, price, restaurantId: restaurantId });
   return newAddon;
 };
 
@@ -32,6 +32,6 @@ exports.toggleAddonStatus = async (id) => {
   if (!addon) {
     throw new NotFoundError('Adicional não encontrado.');
   }
-  await addon.update({ is_active: !addon.is_active });
+  await addon.update({ isActive: !addon.isActive });
   return addon;
 };

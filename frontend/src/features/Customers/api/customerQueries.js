@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '@/shared/lib/axiosInstance'; // Adjust path as needed
+import axiosInstance from '@/services/axiosInstance';
 
 // Query Keys
 const CUSTOMER_QUERY_KEYS = {
@@ -41,17 +41,17 @@ const updateCustomer = async ({ id, data }) => {
 };
 
 const fetchCustomers = async (params) => {
-  const response = await axiosInstance.get('/api/customers', { params });
+  const response = await axiosInstance.get('/customers', { params });
   return response.data;
 };
 
 const createCustomer = async (data) => {
-  const response = await axiosInstance.post('/api/customers', data);
+  const response = await axiosInstance.post('/customers', data);
   return response.data;
 };
 
 const deleteCustomer = async (id) => {
-  const response = await axiosInstance.delete(`/api/customers/${id}`);
+  const response = await axiosInstance.delete(`/customers/${id}`);
   return response.data;
 };
 

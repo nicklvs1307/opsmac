@@ -1,61 +1,57 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      Role.belongsToMany(models.Permission, {
-        through: 'RolePermissions',
-        foreignKey: 'roleId',
-        otherKey: 'permissionId',
-        as: 'permissions'
-      });
-
-      Role.hasMany(models.User, {
-        foreignKey: 'roleId',
-        as: 'users'
-      });
-
       Role.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurantId',
-        as: 'restaurant'
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
       });
+      Role.hasMany(models.RolePermission, { foreignKey: 'role_id', as: 'permissions' });
+      Role.hasMany(models.UserRole, { foreignKey: 'role_id', as: 'userRoles' });
     }
   }
+
   Role.init({
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
+      type: DataTypes.UUID,
       primaryKey: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     restaurantId: {
       type: DataTypes.UUID,
-      allowNull: true, // Null for global roles
-      references: {
-        model: 'restaurants',
-        key: 'id'
-      }
-    }
+      field: 'restaurant_id',
+    },
+    key: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    isSystem: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+      field: 'is_system',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
+    },
   }, {
     sequelize,
     modelName: 'Role',
-    tableName: 'Roles', // Ensure this matches the migration table name
+    tableName: 'roles',
+    timestamps: true,
+    underscored: true,
   });
+
   return Role;
 };

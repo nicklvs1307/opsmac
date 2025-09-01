@@ -1,21 +1,20 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class TableSession extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       TableSession.belongsTo(models.Table, {
         foreignKey: 'table_id',
         as: 'table',
       });
-      TableSession.hasMany(models.WaiterCall, {
-        foreignKey: 'table_session_id',
-        as: 'waiterCalls',
+      TableSession.belongsTo(models.Customer, {
+        foreignKey: 'customer_id',
+        as: 'customer',
+      });
+      TableSession.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurant_id',
+        as: 'restaurant',
       });
     }
   }
@@ -23,42 +22,46 @@ module.exports = (sequelize) => {
   TableSession.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    table_id: {
+    tableId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'tables',
-        key: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
+      field: 'table_id',
     },
-    start_time: {
+    customerId: {
+      type: DataTypes.UUID,
+      field: 'customer_id',
+    },
+    startTime: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
+      field: 'start_time',
     },
-    end_time: {
+    endTime: {
       type: DataTypes.DATE,
-      allowNull: true,
+      field: 'end_time',
     },
-    status: {
-      type: DataTypes.ENUM('active', 'closed', 'bill_requested', 'waiter_called'),
-      defaultValue: 'active',
+    restaurantId: {
+      type: DataTypes.UUID,
       allowNull: false,
+      field: 'restaurant_id',
     },
-    customer_count: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'TableSession',
     tableName: 'table_sessions',
     timestamps: true,
+    underscored: true,
   });
 
   return TableSession;

@@ -1,12 +1,12 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class RecipeIngredient extends Model {
     static associate(models) {
-      RecipeIngredient.belongsTo(models.TechnicalSpecification, {
-        foreignKey: 'technical_specification_id',
-        as: 'technicalSpecification',
+      RecipeIngredient.belongsTo(models.Product, {
+        foreignKey: 'product_id',
+        as: 'product',
       });
       RecipeIngredient.belongsTo(models.Ingredient, {
         foreignKey: 'ingredient_id',
@@ -14,45 +14,42 @@ module.exports = (sequelize) => {
       });
     }
   }
+
   RecipeIngredient.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    technical_specification_id: {
+    productId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'technical_specifications',
-        key: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
+      field: 'product_id',
     },
-    ingredient_id: {
+    ingredientId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'ingredients',
-        key: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
+      field: 'ingredient_id',
     },
     quantity: {
-      type: DataTypes.DECIMAL(10, 4),
+      type: DataTypes.DECIMAL(10, 3),
       allowNull: false,
-      validate: {
-        isDecimal: { msg: 'Quantidade deve ser um número decimal' },
-        min: { args: [0], msg: 'Quantidade não pode ser negativa' },
-      },
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'RecipeIngredient',
     tableName: 'recipe_ingredients',
     timestamps: true,
+    underscored: true,
   });
+
   return RecipeIngredient;
 };

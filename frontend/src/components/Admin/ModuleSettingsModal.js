@@ -12,6 +12,7 @@ import {
   Box,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import usePermissions from '@/hooks/usePermissions';
 
 const ModuleSettingsModal = ({
   isOpen,
@@ -24,6 +25,7 @@ const ModuleSettingsModal = ({
   loading,
 }) => {
   const { t } = useTranslation();
+  const { can } = usePermissions(); // Destructure can from usePermissions
 
   const handleModuleChange = (event) => {
     const moduleId = parseInt(event.target.name, 10);
@@ -54,6 +56,7 @@ const ModuleSettingsModal = ({
                     checked={selectedModuleIds.includes(module.id)}
                     onChange={handleModuleChange}
                     name={String(module.id)} // O nome agora é o ID do módulo
+                    disabled={!can('modules', 'manage')}
                   />
                 }
                 label={module.displayName} // Usa o displayName para o texto
@@ -66,7 +69,11 @@ const ModuleSettingsModal = ({
         <Button onClick={onClose} disabled={loading}>
           {t('common.cancel')}
         </Button>
-        <Button onClick={onSaveModules} variant="contained" disabled={loading}>
+        <Button
+          onClick={onSaveModules}
+          variant="contained"
+          disabled={loading || !can('modules', 'manage')}
+        >
           {loading ? <CircularProgress size={24} /> : t('common.save')}
         </Button>
       </DialogActions>

@@ -1,48 +1,58 @@
-
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class SurveyResponse extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      SurveyResponse.belongsTo(models.Survey, { foreignKey: 'survey_id' });
-      SurveyResponse.belongsTo(models.Customer, { foreignKey: 'customer_id', as: 'customer' });
-      SurveyResponse.hasMany(models.Answer, { foreignKey: 'response_id', as: 'answers', onDelete: 'CASCADE' });
+      SurveyResponse.belongsTo(models.Survey, {
+        foreignKey: 'survey_id',
+        as: 'survey',
+      });
+      SurveyResponse.belongsTo(models.Customer, {
+        foreignKey: 'customer_id',
+        as: 'customer',
+      });
+      SurveyResponse.hasMany(models.Answer, {
+        foreignKey: 'survey_response_id',
+        as: 'answers',
+      });
     }
   }
 
   SurveyResponse.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
-    survey_id: {
+    surveyId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'surveys',
-        key: 'id',
-      },
+      field: 'survey_id',
     },
-    customer_id: {
+    customerId: {
       type: DataTypes.UUID,
-      allowNull: true, // Allow anonymous responses
-      references: {
-        model: 'customers',
-        key: 'id',
-      },
+      allowNull: false,
+      field: 'customer_id',
+    },
+    npsScore: {
+      type: DataTypes.INTEGER,
+      field: 'nps_score',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'SurveyResponse',
     tableName: 'survey_responses',
     timestamps: true,
+    underscored: true,
   });
 
   return SurveyResponse;

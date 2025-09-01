@@ -39,6 +39,7 @@ import SurveyList from '@/features/Fidelidade/Avaliacoes/SurveyList';
 import AdminUsersPage from '@/features/Admin/AdminUsersPage';
 import AdminRestaurantsPage from '@/features/Admin/AdminRestaurantsPage';
 import RestaurantEditPage from '@/features/Admin/RestaurantEditPage';
+import MenuManagement from '@/features/Admin/MenuManagement'; // Added import
 import RestaurantCreatePage from '@/features/Admin/RestaurantCreatePage';
 import UserEditPage from '@/features/Admin/UserEditPage';
 import UserCreatePage from '@/features/Admin/UserCreatePage';
@@ -1308,7 +1309,7 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute featureKey="modules" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
-              <RestaurantModuleManagementPage />
+              <MenuManagement />
             </Suspense>
           </ProtectedRoute>
         ),
@@ -1455,7 +1456,7 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute featureKey="modules" actionKey="manage">
             <Suspense fallback={<div>Carregando...</div>}>
-              <RestaurantModuleManagementPage />
+              <MenuManagement />
             </Suspense>
           </ProtectedRoute>
         ),

@@ -1,145 +1,49 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Error AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1122:18)
-    at afterConnectMultiple (node:net:1689:7) {
-  code: 'ECONNREFUSED',
-  [errors]: [
-    Error: connect ECONNREFUSED ::1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '::1',
-      port: 6379
-    },
-    Error: connect ECONNREFUSED 127.0.0.1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '127.0.0.1',
-      port: 6379
-    }
-  ]
-}
-Redis Client Error AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1122:18)
-    at afterConnectMultiple (node:net:1689:7) {
-  code: 'ECONNREFUSED',
-  [errors]: [
-    Error: connect ECONNREFUSED ::1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '::1',
-      port: 6379
-    },
-    Error: connect ECONNREFUSED 127.0.0.1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '127.0.0.1',
-      port: 6379
-    }
-  ]
-}
-Redis Client Error AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1122:18)
-    at afterConnectMultiple (node:net:1689:7) {
-  code: 'ECONNREFUSED',
-  [errors]: [
-    Error: connect ECONNREFUSED ::1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '::1',
-      port: 6379
-    },
-    Error: connect ECONNREFUSED 127.0.0.1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '127.0.0.1',
-      port: 6379
-    }
-  ]
-}
-❌ Erro ao iniciar servidor: ConnectionError [SequelizeConnectionError]: password authentication failed for user "postgres"
-    at Client._connectionCallback (/app/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:145:24)
-    at Client._handleErrorWhileConnecting (/app/node_modules/pg/lib/client.js:336:19)
-    at Client._handleErrorMessage (/app/node_modules/pg/lib/client.js:356:19)
-    at Connection.emit (node:events:524:28)
-    at /app/node_modules/pg/lib/connection.js:116:12
-    at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:36:17)
-    at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-    at Socket.emit (node:events:524:28)
-    at addChunk (node:internal/streams/readable:561:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3) {
-  parent: error: password authentication failed for user "postgres"
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 104,
-    severity: 'FATAL',
-    code: '28P01',
-    detail: undefined,
-    hint: undefined,
-    position: undefined,
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'auth.c',
-    line: '335',
-    routine: 'auth_failed'
-  },
-  original: error: password authentication failed for user "postgres"
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 104,
-    severity: 'FATAL',
-    code: '28P01',
-    detail: undefined,
-    hint: undefined,
-    position: undefined,
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'auth.c',
-    line: '335',
-    routine: 'auth_failed'
-  }
-}
+root@ServerAgents:~/opsmac# docker build -f Dockerfile.frontend -t feedeliza-frontend:latest . --no-cache
+[+] Building 392.0s (15/17)                                                              docker:default
+ => [internal] load build definition from Dockerfile.frontend                                      0.0s
+ => => transferring dockerfile: 988B                                                               0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                    0.9s
+ => [internal] load metadata for docker.io/library/node:18-alpine                                  0.8s
+ => [internal] load .dockerignore                                                                  0.0s
+ => => transferring context: 243B                                                                  0.0s
+ => [builder 1/9] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011  0.0s
+ => [internal] load build context                                                                  0.2s
+ => => transferring context: 68.63kB                                                               0.1s
+ => CACHED [stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:42a516af16b852e33b7682d5ef8ac  0.0s
+ => CACHED [builder 2/9] WORKDIR /app/frontend                                                     0.0s
+ => [builder 3/9] RUN apk add --no-cache python3 make g++ libc6-compat                             5.3s
+ => [builder 4/9] COPY frontend/package*.json ./                                                   0.1s
+ => [builder 5/9] COPY frontend/config-overrides.js ./                                             0.1s
+ => [builder 6/9] RUN npm cache clean --force && npm install                                     161.7s
+ => [builder 7/9] COPY frontend/src ./src                                                          0.2s
+ => [builder 8/9] COPY frontend/public ./public                                                    0.0s
+ => ERROR [builder 9/9] RUN set -x && npm run build && ls -la /app/frontend/build                223.4s
+------
+ > [builder 9/9] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.428 + npm run build
+0.868
+0.868 > feedeliza-plus@1.0.0 build
+0.868 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.868
+4.406 Creating an optimized production build...
+222.2 Failed to compile.
+222.2
+222.2 [eslint]
+222.2 src/app/router.js
+222.2   Line 1311:16:  'RestaurantModuleManagementPage' is not defined  react/jsx-no-undef
+222.2   Line 1458:16:  'RestaurantModuleManagementPage' is not defined  react/jsx-no-undef
+222.2
+222.2 Search for the keywords to learn more about each error.
+222.2
+222.2
+------
+Dockerfile.frontend:25
+--------------------
+  23 |     ARG REACT_APP_API_URL
+  24 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  25 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  26 |
+  27 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+root@ServerAgents:~/opsmac#

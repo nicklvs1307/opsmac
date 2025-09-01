@@ -92,7 +92,6 @@ import OrderPage from '@/features/Waiter/OrderPage';
 import ComingSoon from '@/features/Common/ComingSoon';
 import RolePermissionManagementPage from '@/components/Admin/RolePermissionManagementPage'; // Assuming shared
 
-import RestaurantModuleManagementPage from '@/features/Admin/RestaurantModuleManagementPage';
 import IAMDashboard from '@/features/IAM/IAMDashboard';
 import RoleManagement from '@/features/IAM/RoleManagement';
 import RolePermissions from '@/features/IAM/RolePermissions';

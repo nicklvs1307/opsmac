@@ -54,6 +54,7 @@ services:
       # For production, these will be read from secrets
       DB_PASSWORD_FILE: /run/secrets/db_password # For production secrets
       JWT_SECRET_FILE: /run/secrets/jwt_secret # For production secrets
+      REDIS_URL: redis://redis:6379 # Added for Redis connection
       PORT: 5000
       NODE_ENV: development
       DB_HOST: postgres

@@ -1,8 +1,7 @@
 const redis = require('redis');
-const config = require('config/config'); // Assuming config.js holds Redis connection details
 
 const redisClient = redis.createClient({
-  url: config.redisUrl, // e.g., 'redis://localhost:6379'
+  url: process.env.REDIS_URL || 'redis://localhost:6379', // Use environment variable for Redis URL
 });
 
 redisClient.on('connect', () => console.log('Redis Client Connected'));

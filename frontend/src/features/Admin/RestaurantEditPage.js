@@ -140,13 +140,13 @@ const RestaurantEditPage = () => {
             newSelected[itemId].submodules[submoduleId].checked = isChecked;
             Object.keys(newSelected[itemId].submodules[submoduleId].features).forEach(
               (featureId) => {
-                newSelected[itemId].submodules[submoduleId].features[feature.id] = isChecked;
+                newSelected[itemId].submodules[submoduleId].features[featureId] = isChecked;
               }
             );
           });
           Object.keys(newSelected[itemId].features).forEach((featureId) => {
             // Direct features under module
-            newSelected[itemId].features[feature.id] = isChecked;
+            newSelected[itemId].features[featureId] = isChecked;
           });
         }
 

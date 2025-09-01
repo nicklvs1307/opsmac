@@ -1,31 +1,10 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:13-alpine
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432" # Only expose for local development, remove for production if not needed
-    networks:
-      - towersfy_network
-    deploy:
-      # For production, you might not want to deploy postgres via compose,
-      # or you'd configure it differently (e.g., external managed DB)
-      # This section is primarily for local docker-compose setup.
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
   migrations:
-    #build:
-    #  context: .
-    #  dockerfile: Dockerfile.backend
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
     image: feedeliza-backend:latest
     depends_on:
       - postgres
@@ -65,9 +44,9 @@ services:
         condition: on-failure
 
   backend:
-    #build:
-    #  context: .
-    #  dockerfile: Dockerfile.backend
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
     image: feedeliza-backend:latest
     depends_on:
       - migrations # Ensure migrations run first
@@ -114,9 +93,9 @@ services:
         - "traefik.http.routers.backend-uploads.priority=100"
 
   frontend:
-    #build:
-    #  context: .
-    #  dockerfile: Dockerfile.frontend
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
     image: feedeliza-frontend:latest
     environment:
       PORT: 5000
@@ -158,7 +137,6 @@ networks:
 
 volumes:
   uploads_data:
-  postgres_data: # New volume for postgres data
   redis_data: # Add this line for Redis data persistence
 
 # Declaração dos secrets que serão usados. O Docker espera que eles já existam no Swarm.

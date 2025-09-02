@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -47,6 +48,16 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       field: 'is_superadmin',
     },
+    loginAttempts: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+      field: 'login_attempts',
+    },
+    lockUntil: {
+      type: DataTypes.DATE,
+      field: 'lock_until',
+    },
     createdAt: {
       type: DataTypes.DATE,
       field: 'created_at',
@@ -62,6 +73,38 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     underscored: true, // Even though global is false, setting here ensures mapping
   });
+
+  // Instance Methods
+  User.prototype.comparePassword = async function (candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.passwordHash);
+  };
+
+  User.prototype.isLocked = function () {
+    // Check if the account is locked due to too many failed login attempts
+    return this.lockUntil && this.lockUntil > new Date();
+  };
+
+  User.prototype.incrementLoginAttempts = async function () {
+    const LOCK_TIME = 15 * 60 * 1000; // 15 minutes
+    const MAX_LOGIN_ATTEMPTS = 5;
+
+    if (this.isLocked()) {
+      return; // Already locked, do nothing
+    }
+
+    this.loginAttempts = (this.loginAttempts || 0) + 1;
+
+    if (this.loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+      this.lockUntil = new Date(Date.now() + LOCK_TIME);
+    }
+    await this.save();
+  };
+
+  User.prototype.resetLoginAttempts = async function () {
+    this.loginAttempts = 0;
+    this.lockUntil = null;
+    await this.save();
+  };
 
   return User;
 };

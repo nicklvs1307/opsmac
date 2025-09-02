@@ -3,77 +3,23 @@
 Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
-Error caught by middleware: Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+Error caught by middleware: UnauthorizedError: Credenciais inválidas
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:28:11)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
-    at async Object.login (/app/backend/src/domains/auth/auth.service.js:12:14)
     at async login (/app/backend/src/domains/auth/auth.controller.js:17:20) {
-  name: 'SequelizeDatabaseError',
-  parent: error: column restaurants->restaurant.created_at does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 214,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: 'Perhaps you meant to reference the column "restaurants->restaurant.createdAt".',
-    position: '2459',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT "User"."id", "User"."email", "User"."name", "User"."password_hash" AS "passwordHash", "User"."is_superadmin" AS "isSuperadmin", "User"."created_at" AS "createdAt", "User"."updated_at" AS "updatedAt", "roles"."id" AS "roles.id", "roles"."restaurant_id" AS "roles.restaurantId", "roles"."key" AS "roles.key", "roles"."name" AS "roles.name", "roles"."is_system" AS "roles.isSystem", "roles"."created_at" AS "roles.createdAt", "roles"."updated_at" AS "roles.updatedAt", "roles"."restaurant_id" AS "roles.restaurant_id", "roles->UserRole"."user_id" AS "roles.UserRole.userId", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurantId", "roles->UserRole"."role_id" AS "roles.UserRole.roleId", "roles->UserRole"."created_at" AS "roles.UserRole.createdAt", "roles->UserRole"."updated_at" AS "roles.UserRole.updatedAt", "roles->UserRole"."role_id" AS "roles.UserRole.role_id", "roles->UserRole"."user_id" AS "roles.UserRole.user_id", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurant_id", "restaurants"."user_id" AS "restaurants.userId", "restaurants"."restaurant_id" AS "restaurants.restaurantId", "restaurants"."is_owner" AS "restaurants.isOwner", "restaurants"."created_at" AS "restaurants.createdAt", "restaurants"."updated_at" AS "restaurants.updatedAt", "restaurants"."restaurant_id" AS "restaurants.restaurant_id", "restaurants"."user_id" AS "restaurants.user_id", "restaurants->restaurant"."id" AS "restaurants.restaurant.id", "restaurants->restaurant"."name" AS "restaurants.restaurant.name", "restaurants->restaurant"."slug" AS "restaurants.restaurant.slug", "restaurants->restaurant"."description" AS "restaurants.restaurant.description", "restaurants->restaurant"."address" AS "restaurants.restaurant.address", "restaurants->restaurant"."city" AS "restaurants.restaurant.city", "restaurants->restaurant"."state" AS "restaurants.restaurant.state", "restaurants->restaurant"."zipCode" AS "restaurants.restaurant.zipCode", "restaurants->restaurant"."phone" AS "restaurants.restaurant.phone", "restaurants->restaurant"."email" AS "restaurants.restaurant.email", "restaurants->restaurant"."website" AS "restaurants.restaurant.website", "restaurants->restaurant"."logo" AS "restaurants.restaurant.logo", "restaurants->restaurant"."plan_key" AS "restaurants.restaurant.planKey", "restaurants->restaurant"."status" AS "restaurants.restaurant.status", "restaurants->restaurant"."perm_version" AS "restaurants.restaurant.permVersion", "restaurants->restaurant"."created_at" AS "restaurants.restaurant.createdAt", "restaurants->restaurant"."updated_at" AS "restaurants.restaurant.updatedAt" FROM "users" AS "User" LEFT OUTER JOIN ( "user_roles" AS "roles->UserRole" INNER JOIN "roles" AS "roles" ON "roles"."id" = "roles->UserRole"."role_id") ON "User"."id" = "roles->UserRole"."user_id" LEFT OUTER JOIN "user_restaurants" AS "restaurants" ON "User"."id" = "restaurants"."user_id" LEFT OUTER JOIN "restaurants" AS "restaurants->restaurant" ON "restaurants"."restaurant_id" = "restaurants->restaurant"."id" WHERE "User"."email" = 'admin@example.com';`,
-    parameters: undefined
-  },
-  original: error: column restaurants->restaurant.created_at does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 214,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: 'Perhaps you meant to reference the column "restaurants->restaurant.createdAt".',
-    position: '2459',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT "User"."id", "User"."email", "User"."name", "User"."password_hash" AS "passwordHash", "User"."is_superadmin" AS "isSuperadmin", "User"."created_at" AS "createdAt", "User"."updated_at" AS "updatedAt", "roles"."id" AS "roles.id", "roles"."restaurant_id" AS "roles.restaurantId", "roles"."key" AS "roles.key", "roles"."name" AS "roles.name", "roles"."is_system" AS "roles.isSystem", "roles"."created_at" AS "roles.createdAt", "roles"."updated_at" AS "roles.updatedAt", "roles"."restaurant_id" AS "roles.restaurant_id", "roles->UserRole"."user_id" AS "roles.UserRole.userId", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurantId", "roles->UserRole"."role_id" AS "roles.UserRole.roleId", "roles->UserRole"."created_at" AS "roles.UserRole.createdAt", "roles->UserRole"."updated_at" AS "roles.UserRole.updatedAt", "roles->UserRole"."role_id" AS "roles.UserRole.role_id", "roles->UserRole"."user_id" AS "roles.UserRole.user_id", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurant_id", "restaurants"."user_id" AS "restaurants.userId", "restaurants"."restaurant_id" AS "restaurants.restaurantId", "restaurants"."is_owner" AS "restaurants.isOwner", "restaurants"."created_at" AS "restaurants.createdAt", "restaurants"."updated_at" AS "restaurants.updatedAt", "restaurants"."restaurant_id" AS "restaurants.restaurant_id", "restaurants"."user_id" AS "restaurants.user_id", "restaurants->restaurant"."id" AS "restaurants.restaurant.id", "restaurants->restaurant"."name" AS "restaurants.restaurant.name", "restaurants->restaurant"."slug" AS "restaurants.restaurant.slug", "restaurants->restaurant"."description" AS "restaurants.restaurant.description", "restaurants->restaurant"."address" AS "restaurants.restaurant.address", "restaurants->restaurant"."city" AS "restaurants.restaurant.city", "restaurants->restaurant"."state" AS "restaurants.restaurant.state", "restaurants->restaurant"."zipCode" AS "restaurants.restaurant.zipCode", "restaurants->restaurant"."phone" AS "restaurants.restaurant.phone", "restaurants->restaurant"."email" AS "restaurants.restaurant.email", "restaurants->restaurant"."website" AS "restaurants.restaurant.website", "restaurants->restaurant"."logo" AS "restaurants.restaurant.logo", "restaurants->restaurant"."plan_key" AS "restaurants.restaurant.planKey", "restaurants->restaurant"."status" AS "restaurants.restaurant.status", "restaurants->restaurant"."perm_version" AS "restaurants.restaurant.permVersion", "restaurants->restaurant"."created_at" AS "restaurants.restaurant.createdAt", "restaurants->restaurant"."updated_at" AS "restaurants.restaurant.updatedAt" FROM "users" AS "User" LEFT OUTER JOIN ( "user_roles" AS "roles->UserRole" INNER JOIN "roles" AS "roles" ON "roles"."id" = "roles->UserRole"."role_id") ON "User"."id" = "roles->UserRole"."user_id" LEFT OUTER JOIN "user_restaurants" AS "restaurants" ON "User"."id" = "restaurants"."user_id" LEFT OUTER JOIN "restaurants" AS "restaurants->restaurant" ON "restaurants"."restaurant_id" = "restaurants->restaurant"."id" WHERE "User"."email" = 'admin@example.com';`,
-    parameters: undefined
-  },
-
-SELECT "User"."id", "User"."email", "User"."name", "User"."password_hash" AS "passwordHash", "User"."is_superadmin" AS "isSuperadmin", "User"."created_at" AS "createdAt", "User"."updated_at" AS "updatedAt", "roles"."id" AS "roles.id", "roles"."restaurant_id" AS "roles.restaurantId", "roles"."key" AS "roles.key", "roles"."name" AS "roles.name", "roles"."is_system" AS "roles.isSystem", "roles"."created_at" AS "roles.createdAt", "roles"."updated_at" AS "roles.updatedAt", "roles"."restaurant_id" AS "roles.restaurant_id", "roles->UserRole"."user_id" AS "roles.UserRole.userId", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurantId", "roles->UserRole"."role_id" AS "roles.UserRole.roleId", "roles->UserRole"."created_at" AS "roles.UserRole.createdAt", "roles->UserRole"."updated_at" AS "roles.UserRole.updatedAt", "roles->UserRole"."role_id" AS "roles.UserRole.role_id", "roles->UserRole"."user_id" AS "roles.UserRole.user_id", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurant_id", "restaurants"."user_id" AS "restaurants.userId", "restaurants"."restaurant_id" AS "restaurants.restaurantId", "restaurants"."is_owner" AS "restaurants.isOwner", "restaurants"."created_at" AS "restaurants.createdAt", "restaurants"."updated_at" AS "restaurants.updatedAt", "restaurants"."restaurant_id" AS "restaurants.restaurant_id", "restaurants"."user_id" AS "restaurants.user_id", "restaurants->restaurant"."id" AS "restaurants.restaurant.id", "restaurants->restaurant"."name" AS "restaurants.restaurant.name", "restaurants->restaurant"."slug" AS "restaurants.restaurant.slug", "restaurants->restaurant"."description" AS "restaurants.restaurant.description", "restaurants->restaurant"."address" AS "restaurants.restaurant.address", "restaurants->restaurant"."city" AS "restaurants.restaurant.city", "restaurants->restaurant"."state" AS "restaurants.restaurant.state", "restaurants->restaurant"."zipCode" AS "restaurants.restaurant.zipCode", "restaurants->restaurant"."phone" AS "restaurants.restaurant.phone", "restaurants->restaurant"."email" AS "restaurants.restaurant.email", "restaurants->restaurant"."website" AS "restaurants.restaurant.website", "restaurants->restaurant"."logo" AS "restaurants.restaurant.logo", "restaurants->restaurant"."plan_key" AS "restaurants.restaurant.planKey", "restaurants->restaurant"."status" AS "restaurants.restaurant.status", "restaurants->restaurant"."perm_version" AS "restaurants.restaurant.permVersion", "restaurants->restaurant"."created_at" AS "restaurants.restaurant.createdAt", "restaurants->restaurant"."updated_at" AS "restaurants.restaurant.updatedAt" FROM "users" AS "User" LEFT OUTER JOIN ( "user_roles" AS "roles->UserRole" INNER JOIN "roles" AS "roles" ON "roles"."id" = "roles->UserRole"."role_id") ON "User"."id" = "roles->UserRole"."user_id" LEFT OUTER JOIN "user_restaurants" AS "restaurants" ON "User"."id" = "restaurants"."user_id" LEFT OUTER JOIN "restaurants" AS "restaurants->restaurant" ON "restaurants"."restaurant_id" = "restaurants->restaurant"."id" WHERE "User"."email" = 'admin@example.com';`,
-  parameters: {}
+  statusCode: 401
 }
+Error caught by middleware: UnauthorizedError: Credenciais inválidas
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:28:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20) {
+  statusCode: 401
+}
+Error caught by middleware: TypeError: user.isLocked is not a function
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:31:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+Error caught by middleware: TypeError: user.isLocked is not a function
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:31:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)

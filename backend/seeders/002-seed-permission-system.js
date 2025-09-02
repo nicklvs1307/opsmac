@@ -50,6 +50,7 @@ module.exports = {
       { module_id: moduleMap['admin'], key: 'users', name: 'Usuários' },
       { module_id: moduleMap['admin'], key: 'restaurants', name: 'Restaurantes' },
       { module_id: moduleMap['admin'], key: 'permissions', name: 'Permissões' },
+      { module_id: moduleMap['admin'], key: 'general', name: 'Geral' },
     ].map(s => ({ ...s, id: Sequelize.literal('gen_random_uuid()'), created_at: new Date(), updated_at: new Date() }));
     await queryInterface.bulkInsert('submodules', submodulesData, {});
     const submodules = await queryInterface.sequelize.query('SELECT id, key, module_id FROM "submodules";', { type: Sequelize.QueryTypes.SELECT });

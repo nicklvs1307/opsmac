@@ -1,32 +1,16 @@
-
-      
 Database is up, running migrations...
-
 Connection to postgres (10.0.1.90) 5432 port [tcp/postgresql] succeeded!
-
 Postgres is up - executing command
-
 Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
-
 Loaded configuration file "backend/config/config.js".
-
 Using environment "production".
-
 No migrations were executed, database schema was already up to date.
-
 Running seeders...
-
 Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
-
 Loaded configuration file "backend/config/config.js".
-
 Using environment "production".
-
 == 001-seed-core-infrastructure: migrating =======
-
-== 001-seed-core-infrastructure: migrated (0.505s)
-
+== 001-seed-core-infrastructure: migrated (0.551s)
 == 002-seed-permission-system: migrating =======
-
-ERROR: relation "RolePermission" does not exist
-
+ERROR: null value in column "submodule_id" of relation "features" violates not-null constraint
+ERROR DETAIL: Failing row contains (0654a643-fcfa-489c-93fe-34b44356a3c9, null, dashboard_view, Visualizar Painel Geral, null, 0, {}, 2025-09-02 15:29:16.003+00, 2025-09-02 15:29:16.003+00).

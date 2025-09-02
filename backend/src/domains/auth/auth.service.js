@@ -91,7 +91,7 @@ const getMe = async (userId) => {
         include: [
             {
                 model: models.Role,
-                as: 'role',
+                as: 'roles',
             },
             {
                 model: models.UserRestaurant,

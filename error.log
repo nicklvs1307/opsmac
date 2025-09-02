@@ -3,17 +3,28 @@
 Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
-Error caught by middleware: Error: JWT_SECRET não está definido no .env
-    at verifyToken (/app/backend/src/services/jwtService.js:53:11)
-    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:19:21)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: Role is associated to User using an alias. You've included an alias (role), but it does not match the alias(es) defined in your association (roles).
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:574:15)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async Object.getMe (/app/backend/src/domains/auth/auth.service.js:90:18)
 NODE_ENV: production
 JWT_SECRET_FILE: /run/secrets/jwt_secret
 Secret read from file. Length: 32
+Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: Role is associated to User using an alias. You've included an alias (role), but it does not match the alias(es) defined in your association (roles).
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:574:15)
+    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async Object.getMe (/app/backend/src/domains/auth/auth.service.js:90:18)

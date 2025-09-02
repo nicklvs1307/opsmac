@@ -8,11 +8,17 @@ Redis Client Connected
 
 🚀 Servidor rodando na porta 5000
 
+NODE_ENV: production
+
+JWT_SECRET_FILE: /run/secrets/jwt_secret
+
+Secret read from file. Length: 32
+
 Error caught by middleware: Error: secretOrPrivateKey must have a value
 
     at module.exports [as sign] (/app/node_modules/jsonwebtoken/sign.js:111:20)
 
-    at generateToken (/app/backend/src/services/jwtService.js:32:14)
+    at generateToken (/app/backend/src/services/jwtService.js:38:14)
 
     at Object.login (/app/backend/src/domains/auth/auth.service.js:47:17)
 

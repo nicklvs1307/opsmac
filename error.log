@@ -1,14 +1,32 @@
-Connection to postgres (10.0.1.90) 5432 port [tcp/postgresql] succeeded!
-Postgres is up - executing command
+
+      
 Database is up, running migrations...
+
+Connection to postgres (10.0.1.90) 5432 port [tcp/postgresql] succeeded!
+
+Postgres is up - executing command
+
 Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
+
 Loaded configuration file "backend/config/config.js".
+
 Using environment "production".
+
 No migrations were executed, database schema was already up to date.
+
 Running seeders...
+
 Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
+
 Loaded configuration file "backend/config/config.js".
+
 Using environment "production".
-== 20250901000001-seed-initial-data: migrating =======
-ERROR: Validation error
-ERROR DETAIL: Key (id)=(1) already exists.
+
+== 001-seed-core-infrastructure: migrating =======
+
+== 001-seed-core-infrastructure: migrated (0.505s)
+
+== 002-seed-permission-system: migrating =======
+
+ERROR: relation "RolePermission" does not exist
+

@@ -1,145 +1,45 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Error AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1122:18)
-    at afterConnectMultiple (node:net:1689:7) {
-  code: 'ECONNREFUSED',
-  [errors]: [
-    Error: connect ECONNREFUSED ::1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '::1',
-      port: 6379
-    },
-    Error: connect ECONNREFUSED 127.0.0.1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '127.0.0.1',
-      port: 6379
-    }
-  ]
-}
-Redis Client Error AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1122:18)
-    at afterConnectMultiple (node:net:1689:7) {
-  code: 'ECONNREFUSED',
-  [errors]: [
-    Error: connect ECONNREFUSED ::1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '::1',
-      port: 6379
-    },
-    Error: connect ECONNREFUSED 127.0.0.1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '127.0.0.1',
-      port: 6379
-    }
-  ]
-}
-Redis Client Error AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1122:18)
-    at afterConnectMultiple (node:net:1689:7) {
-  code: 'ECONNREFUSED',
-  [errors]: [
-    Error: connect ECONNREFUSED ::1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '::1',
-      port: 6379
-    },
-    Error: connect ECONNREFUSED 127.0.0.1:6379
-        at createConnectionError (node:net:1652:14)
-        at afterConnectMultiple (node:net:1682:16) {
-      errno: -111,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '127.0.0.1',
-      port: 6379
-    }
-  ]
-}
-❌ Erro ao iniciar servidor: ConnectionError [SequelizeConnectionError]: password authentication failed for user "postgres"
-    at Client._connectionCallback (/app/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:145:24)
-    at Client._handleErrorWhileConnecting (/app/node_modules/pg/lib/client.js:336:19)
-    at Client._handleErrorMessage (/app/node_modules/pg/lib/client.js:356:19)
-    at Connection.emit (node:events:524:28)
-    at /app/node_modules/pg/lib/connection.js:116:12
-    at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:36:17)
-    at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-    at Socket.emit (node:events:524:28)
-    at addChunk (node:internal/streams/readable:561:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3) {
-  parent: error: password authentication failed for user "postgres"
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 104,
-    severity: 'FATAL',
-    code: '28P01',
-    detail: undefined,
-    hint: undefined,
-    position: undefined,
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'auth.c',
-    line: '335',
-    routine: 'auth_failed'
-  },
-  original: error: password authentication failed for user "postgres"
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 104,
-    severity: 'FATAL',
-    code: '28P01',
-    detail: undefined,
-    hint: undefined,
-    position: undefined,
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'auth.c',
-    line: '335',
-    routine: 'auth_failed'
-  }
-}
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  redis:
+    image: redis:latest  ## Versão do Redis
+    command: [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--port",
+        "6379"
+      ]
+
+    volumes:
+      - redis_data:/data
+
+    networks:
+      - towersfy_network ## Nome da rede interna
+
+    ## Descomente as linhas abaixo para uso externo
+    #ports:
+    #  - 6379:6379
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2048M
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  redis_data:
+    external: true
+    name: redis_data
+
+networks:
+  towersfy_network: ## Nome da rede interna
+    external: true
+    name: towersfy_network ## Nome da rede interna

@@ -12,17 +12,15 @@ services:
       # For production, these will be read from secrets
       DB_PASSWORD_FILE: /run/secrets/db_password # For production secrets
       PORT: 5000
-      NODE_ENV: development
+      NODE_ENV: production
       DB_HOST: postgres
       DB_PORT: 5432
       DB_NAME: feedback_restaurante
       DB_USER: postgres
-      DB_PASSWORD: 123456789
-      JWT_SECRET: YrvWABCrjcTJ73ScR3Z1IQUs6Y0EnnOC
       JWT_EXPIRES_IN: 7d
-      FRONTEND_URL: http://localhost:3000
-      BACKEND_URL: http://localhost:5000
-      REACT_APP_API_URL: http://localhost:5000/api
+      FRONTEND_URL: https://feedelizapro.towersfy.com
+      BACKEND_URL: https://feedelizaapi.towersfy.com
+      REACT_APP_API_URL: https://feedelizaapi.towersfy.com/api
     command: >
       /bin/sh -c "
         echo 'Waiting for database to be ready...'
@@ -56,17 +54,15 @@ services:
       JWT_SECRET_FILE: /run/secrets/jwt_secret # For production secrets
       REDIS_URL: redis://redis:6379 # Added for Redis connection
       PORT: 5000
-      NODE_ENV: development
+      NODE_ENV: production
       DB_HOST: postgres
       DB_PORT: 5432
       DB_NAME: feedback_restaurante
       DB_USER: postgres
-      DB_PASSWORD: 123456789
-      JWT_SECRET: YrvWABCrjcTJ73ScR3Z1IQUs6Y0EnnOC
       JWT_EXPIRES_IN: 7d
-      FRONTEND_URL: http://localhost:3000
-      BACKEND_URL: http://localhost:5000
-      REACT_APP_API_URL: http://localhost:5000/api
+      FRONTEND_URL: https://feedelizapro.towersfy.com
+      BACKEND_URL: https://feedelizaapi.towersfy.com
+      REACT_APP_API_URL: https://feedelizaapi.towersfy.com/api
     ports:
       - "5000:5000" # Only expose for local development, remove for production if behind Traefik
     networks:
@@ -100,10 +96,10 @@ services:
     image: feedeliza-frontend:latest
     environment:
       PORT: 5000
-      NODE_ENV: development
-      FRONTEND_URL: http://localhost:3000
-      BACKEND_URL: http://localhost:5000
-      REACT_APP_API_URL: http://localhost:5000/api
+      NODE_ENV: production
+      FRONTEND_URL: https://feedelizapro.towersfy.com
+      BACKEND_URL: https://feedelizaapi.towersfy.com
+      REACT_APP_API_URL: https://feedelizaapi.towersfy.com/api
     ports:
       - "3000:80" # Only expose for local development, remove for production if behind Traefik
     networks:
@@ -119,18 +115,7 @@ services:
         - "traefik.http.routers.frontend.tls.certresolver=letsencryptresolver"
         - "traefik.http.services.frontend.loadbalancer.server.port=80"
 
-  redis:
-    image: redis:6.2-alpine
-    ports:
-      - "6379:6379"
-    networks:
-      - towersfy_network
-    volumes:
-      - redis_data:/data
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
+  
 
 networks:
   towersfy_network:
@@ -138,7 +123,6 @@ networks:
 
 volumes:
   uploads_data:
-  redis_data: # Add this line for Redis data persistence
 
 # Declaração dos secrets que serão usados. O Docker espera que eles já existam no Swarm.
 secrets:

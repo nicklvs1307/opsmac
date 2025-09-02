@@ -8,7 +8,6 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
  * @param {string} userId - O ID do usuário a ser incluído no token.
  * @returns {string} O token JWT gerado.
  */
-const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const { UnauthorizedError } = require('utils/errors');
 

@@ -1,70 +1,14 @@
---- DEBUGGING START ---
---- 1. Environment Variables ---
-NODE_VERSION=20.19.4
-HOSTNAME=0e50675dc568
-
-DB_PORT=5432
-YARN_VERSION=1.22.22
-SHLVL=2
-
-0
-HOME=/root
-DB_NAME=feedeliza
-BACKEND_URL=https://feedelizaapi.towersfy.com
-JWT_EXPIRES_IN=7d
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-JWT_SECRET_FILE=/run/secrets/jwt_secret
-DB_PASSWORD_FILE=/run/secrets/db_password
-PWD=/app
-DB_HOST=postgres
-REDIS_URL=redis://redis:6379
-DB_USER=postgres
-NODE_ENV=production
-REACT_APP_API_URL=https://feedelizaapi.towersfy.com/api
-FRONTEND_URL=https://feedelizapro.towersfy.com
---- 2. Secret File Content ---
-b74996144735db08d6e091f460df4184
---- 3. Config File Content ---
-require('dotenv').config();
-const fs = require('fs');
-// Adicionado para ler a senha do banco de dados a partir de um arquivo (Docker Secret)
-let dbPassword = process.env.DB_PASSWORD;
-if (process.env.NODE_ENV === 'production' && process.env.DB_PASSWORD_FILE) {
-  try {
-    dbPassword = fs.readFileSync(process.env.DB_PASSWORD_FILE, 'utf8').trim();
-  } catch (e) {
-    console.error('Falha ao ler o secret da senha do banco de dados:', e);
-    process.exit(1);
-  }
-}
-module.exports = {
-  development: {
-    username: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD || '123456789',
-    database: process.env.DB_NAME || 'feedback_restaurante',
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    dialect: 'postgres',
-    logging: console.log,
-  },
-
-{
-    username: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD || '123456789',
-    database: process.env.DB_NAME || 'feedback_restaurante_test',
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    dialect: 'postgres',
-    logging: false,
-  },
-  production: {
-    username: process.env.DB_USER,
-    password: dbPassword, // Modificado para usar a senha do secret
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: 'postgres',
-    logging: false
-  }
-};--- DEBUGGING END ---
-Container will sleep for 5 minutes for inspection...
+--- FINAL DEBUG TEST ---
+Running sequelize-cli connection test inside backend service...
+Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
+Loaded configuration file "backend/config/config.js".
+Using environment "production".
+up 001-create-core-infrastructure.js
+up 002-create-permission-system.js
+up 003-create-stock-management-tables.js
+up 004-create-customer-relationship-tables.js
+up 005-create-order-operation-tables.js
+up 006-add-order-fields-to-products.js
+up 007-create-financial-tables.js
+--- TEST END --- 
+Container will sleep for 5 minutes...

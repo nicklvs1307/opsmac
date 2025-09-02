@@ -63,19 +63,6 @@ services:
     secrets:
       - db_password # For production secrets
       - jwt_secret # For production secrets
-    command: >
-      /bin/sh -c "
-        echo '--- DEBUGGING START ---';
-        echo '--- 1. Environment Variables ---';
-        printenv;
-        echo '--- 2. Secret File Content ---';
-        cat /run/secrets/db_password; echo;
-        echo '--- 3. Config File Content ---';
-        cat backend/config/config.js;
-        echo '--- DEBUGGING END ---';
-        echo 'Container will sleep for 5 minutes for inspection...';
-        sleep 300;
-      "
     deploy:
       replicas: 1
       restart_policy:

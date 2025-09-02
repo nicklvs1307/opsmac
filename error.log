@@ -1,29 +1,15 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Connected
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-Error caught by middleware: UnauthorizedError: Conta desativada. Entre em contato com o suporte
-    at Object.login (/app/backend/src/domains/auth/auth.service.js:36:11)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20) {
-  statusCode: 401
-}
-Error caught by middleware: UnauthorizedError: Credenciais inválidas
-    at Object.login (/app/backend/src/domains/auth/auth.service.js:28:11)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20) {
-  statusCode: 401
-}
-Error caught by middleware: UnauthorizedError: Credenciais inválidas
-    at Object.login (/app/backend/src/domains/auth/auth.service.js:28:11)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20) {
-  statusCode: 401
-}
-Error caught by middleware: UnauthorizedError: Conta desativada. Entre em contato com o suporte
-    at Object.login (/app/backend/src/domains/auth/auth.service.js:36:11)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20) {
-  statusCode: 401
-}
+Error caught by middleware: Error: JWT_SECRET não está definido no .env
+
+    at generateToken (/app/backend/src/services/jwtService.js:13:11)
+
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:47:17)
+
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+
+Error caught by middleware: Error: JWT_SECRET não está definido no .env
+
+    at generateToken (/app/backend/src/services/jwtService.js:13:11)
+
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:47:17)
+
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)

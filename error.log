@@ -1,14 +1,15 @@
-
-#####log migrations
 Connection to postgres (10.0.1.90) 5432 port [tcp/postgresql] succeeded!
 Postgres is up - executing command
 Database is up, running migrations...
 Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
 Loaded configuration file "backend/config/config.js".
 Using environment "production".
-ERROR: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string
+== 003-create-stock-management-tables: migrating =======
+ERROR: relation "categories" does not exist
 
-#### log backend
+
+
+backend
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
 Redis Client Connected

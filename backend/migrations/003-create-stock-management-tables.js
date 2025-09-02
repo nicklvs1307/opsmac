@@ -3,6 +3,15 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // Create categories table first as products depends on it
+    await queryInterface.createTable('categories', {
+      id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
+      name: { type: Sequelize.STRING, allowNull: false },
+      restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+    });
+
     // Main entities: Suppliers, Ingredients, Products
     await queryInterface.createTable('suppliers', {
       id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
@@ -156,6 +165,7 @@ module.exports = {
     await queryInterface.dropTable('stock_movements');
     await queryInterface.dropTable('stocks');
     await queryInterface.dropTable('products');
+    await queryInterface.dropTable('categories');
     await queryInterface.dropTable('ingredients');
     await queryInterface.dropTable('suppliers');
   }

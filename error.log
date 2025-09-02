@@ -1,7 +1,8 @@
-main.ba5d7de3.js:2 [Violation] 'message' handler took 233ms
-main.ba5d7de3.js:2 [Violation] 'message' handler took 364ms
+main.da1406fc.js:2 [Violation] 'message' handler took 460ms
+main.da1406fc.js:2 [Violation] 'message' handler took 706ms
 login:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:89  POST http://localhost:5000/auth/login net::ERR_BLOCKED_BY_PRIVATE_NETWORK_ACCESS_CHECKS
+main.da1406fc.js:2 [Violation] 'submit' handler took 286ms
+AuthContext.js:89  POST https://feedelizaapi.towersfy.com/api/auth/login 500 (Internal Server Error)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -17,15 +18,17 @@ await in (anônimo)
 Te @ react-dom.production.min.js:54
 We @ react-dom.production.min.js:54
 (anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
+zn @ react-dom.production.min.js:105
+Dn @ react-dom.production.min.js:106
 (anônimo) @ react-dom.production.min.js:117
 cc @ react-dom.production.min.js:273
 Me @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
-AuthContext.js:89 Falha ao carregar XHR: POST "http://localhost:5000/auth/login".
+main.da1406fc.js:2 [Violation] 'message' handler took 268ms
+[Violation] Forced reflow while executing JavaScript took 35ms
+AuthContext.js:89 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/auth/login".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -41,16 +44,16 @@ await in (anônimo)
 Te @ react-dom.production.min.js:54
 We @ react-dom.production.min.js:54
 (anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
+zn @ react-dom.production.min.js:105
+Dn @ react-dom.production.min.js:106
 (anônimo) @ react-dom.production.min.js:117
 cc @ react-dom.production.min.js:273
 Me @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
-main.ba5d7de3.js:2 [Violation] 'message' handler took 186ms
-AuthContext.js:89  POST http://localhost:5000/auth/login net::ERR_BLOCKED_BY_PRIVATE_NETWORK_ACCESS_CHECKS
+main.da1406fc.js:2 [Violation] 'submit' handler took 185ms
+AuthContext.js:89  POST https://feedelizaapi.towersfy.com/api/auth/login 500 (Internal Server Error)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -66,15 +69,16 @@ await in (anônimo)
 Te @ react-dom.production.min.js:54
 We @ react-dom.production.min.js:54
 (anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
+zn @ react-dom.production.min.js:105
+Dn @ react-dom.production.min.js:106
 (anônimo) @ react-dom.production.min.js:117
 cc @ react-dom.production.min.js:273
 Me @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
-AuthContext.js:89 Falha ao carregar XHR: POST "http://localhost:5000/auth/login".
+main.da1406fc.js:2 [Violation] 'message' handler took 216ms
+AuthContext.js:89 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/auth/login".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -90,8 +94,57 @@ await in (anônimo)
 Te @ react-dom.production.min.js:54
 We @ react-dom.production.min.js:54
 (anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
+zn @ react-dom.production.min.js:105
+Dn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+main.da1406fc.js:2 [Violation] 'submit' handler took 200ms
+AuthContext.js:89  POST https://feedelizaapi.towersfy.com/api/auth/login 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+login @ AuthContext.js:89
+onSubmit @ Login.js:25
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+Dn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+AuthContext.js:89 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/auth/login".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+login @ AuthContext.js:89
+onSubmit @ Login.js:25
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+zn @ react-dom.production.min.js:105
+Dn @ react-dom.production.min.js:106
 (anônimo) @ react-dom.production.min.js:117
 cc @ react-dom.production.min.js:273
 Me @ react-dom.production.min.js:52

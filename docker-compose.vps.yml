@@ -2,9 +2,6 @@ version: '3.8'
 
 services:
   migrations:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
     image: feedeliza-backend:latest
     depends_on:
       - postgres
@@ -23,17 +20,14 @@ services:
       REACT_APP_API_URL: https://feedelizaapi.towersfy.com/api
     command: >
       /bin/sh -c "
-        echo 'Waiting for database to be ready...'
-        sleep 15
-        echo 'Running migrations...'
-        npx sequelize-cli db:migrate &&
-        echo 'Running seeders...'
+        backend/scripts/wait-for-it.sh postgres 5432 -- \ 
+        echo 'Database is up, running migrations...' && \ 
+        npx sequelize-cli db:migrate && \ 
+        echo 'Running seeders...' && \ 
         npx sequelize-cli db:seed:all
       "
     networks:
       - towersfy_network
-    volumes:
-      - .:/app # Mount entire project for migrations
     secrets:
       - db_password # For production secrets
     deploy:
@@ -42,9 +36,6 @@ services:
         condition: on-failure
 
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
     image: feedeliza-backend:latest
     depends_on:
       - migrations # Ensure migrations run first
@@ -63,8 +54,6 @@ services:
       FRONTEND_URL: https://feedelizapro.towersfy.com
       BACKEND_URL: https://feedelizaapi.towersfy.com
       REACT_APP_API_URL: https://feedelizaapi.towersfy.com/api
-    ports:
-      - "5000:5000" # Only expose for local development, remove for production if behind Traefik
     networks:
       - towersfy_network
     volumes:
@@ -90,9 +79,6 @@ services:
         - "traefik.http.routers.backend-uploads.priority=100"
 
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
     image: feedeliza-frontend:latest
     environment:
       PORT: 5000
@@ -100,8 +86,6 @@ services:
       FRONTEND_URL: https://feedelizapro.towersfy.com
       BACKEND_URL: https://feedelizaapi.towersfy.com
       REACT_APP_API_URL: https://feedelizaapi.towersfy.com/api
-    ports:
-      - "3000:80" # Only expose for local development, remove for production if behind Traefik
     networks:
       - towersfy_network
     deploy:

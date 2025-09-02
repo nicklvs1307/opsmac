@@ -1,21 +1,71 @@
-root@ServerAgents:~/opsmac# echo "mypass" | docker secret create db_password -
-Error response from daemon: rpc error: code = AlreadyExists desc = secret db_password already exists
-root@ServerAgents:~/opsmac# echo "jwtsecret" | docker secret create jwt_secret -
-Error response from daemon: rpc error: code = AlreadyExists desc = secret jwt_secret already exists
-root@ServerAgents:~/opsmac# docker secret ls
-ID                          NAME          DRIVER    CREATED       UPDATED
-stz56z4lm39lr46evxxl0lll7   db_password             10 days ago   10 days ago
-cgbjv6ve48w1k1ddixn5d5ti9   jwt_secret              10 days ago   10 days ago
-root@ServerAgents:~/opsmac# docker secret rm db_password
-Error response from daemon: rpc error: code = InvalidArgument desc = secret 'db_password' is in use by the following services: feedeliza_backend, feedeliza_migrations
-root@ServerAgents:~/opsmac# docker secret rm jwt_secret
-Error response from daemon: rpc error: code = InvalidArgument desc = secret 'jwt_secret' is in use by the following service: feedeliza_backend
-root@ServerAgents:~/opsmac# docker secret rm db_password
-Error response from daemon: rpc error: code = InvalidArgument desc = secret 'db_password' is in use by the following services: feedeliza_backend, feedeliza_migrations
-root@ServerAgents:~/opsmac# docker secret rm jwt_secret
-Error response from daemon: rpc error: code = InvalidArgument desc = secret 'jwt_secret' is in use by the following service: feedeliza_backend
-root@ServerAgents:~/opsmac# docker secret rm db_password
-Error response from daemon: rpc error: code = InvalidArgument desc = secret 'db_password' is in use by the following services: feedeliza_backend, feedeliza_migrations
-root@ServerAgents:~/opsmac# echo "123456789" | docker secret create db_password -
-Error response from daemon: rpc error: code = AlreadyExists desc = secret db_password already exists
-root@ServerAgents:~/opsmac#
+> feedeliza-plus@1.0.0 start
+> node backend/server.js
+Redis Client Connected
+❌ Erro ao iniciar servidor: ConnectionError [SequelizeConnectionError]: password authentication failed for user "postgres"
+    at Client._connectionCallback (/app/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:145:24)
+    at Client._handleErrorWhileConnecting (/app/node_modules/pg/lib/client.js:336:19)
+    at Client._handleErrorMessage (/app/node_modules/pg/lib/client.js:356:19)
+    at Connection.emit (node:events:524:28)
+    at /app/node_modules/pg/lib/connection.js:116:12
+    at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3) {
+  parent: error: password authentication failed for user "postgres"
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 104,
+    severity: 'FATAL',
+    code: '28P01',
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'auth.c',
+    line: '343',
+    routine: 'auth_failed'
+  },
+  original: error: password authentication failed for user "postgres"
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 104,
+    severity: 'FATAL',
+    code: '28P01',
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'auth.c',
+    line: '343',
+    routine: 'auth_failed'
+  }
+}

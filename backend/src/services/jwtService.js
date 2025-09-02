@@ -14,10 +14,8 @@ const { UnauthorizedError } = require('utils/errors');
 const generateToken = (userId) => {
   const secret = 'thisisatestsecretthatislongenough12345'; // TEMPORARY HARDCODED SECRET
   console.log('Using hardcoded secret. Length:', secret.length);
-    throw new Error('JWT_SECRET não está definido.');
-  }
-  return jwt.sign({ userId }, JWT_SECRET, {
-    expiresIn: JWT_EXPIRES_IN,
+  return jwt.sign({ userId }, secret, {
+    expiresIn: process.env.JWT_EXPIRES_IN || '7d',
   });
 };
 

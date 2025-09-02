@@ -1,45 +1,21 @@
-version: "3.7"
-services:
-
-## --------------------------- ORION --------------------------- ##
-
-  redis:
-    image: redis:latest  ## Versão do Redis
-    command: [
-        "redis-server",
-        "--appendonly",
-        "yes",
-        "--port",
-        "6379"
-      ]
-
-    volumes:
-      - redis_data:/data
-
-    networks:
-      - towersfy_network ## Nome da rede interna
-
-    ## Descomente as linhas abaixo para uso externo
-    #ports:
-    #  - 6379:6379
-
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "1"
-          memory: 2048M
-
-## --------------------------- ORION --------------------------- ##
-
-volumes:
-  redis_data:
-    external: true
-    name: redis_data
-
-networks:
-  towersfy_network: ## Nome da rede interna
-    external: true
-    name: towersfy_network ## Nome da rede interna
+root@ServerAgents:~/opsmac# echo "mypass" | docker secret create db_password -
+Error response from daemon: rpc error: code = AlreadyExists desc = secret db_password already exists
+root@ServerAgents:~/opsmac# echo "jwtsecret" | docker secret create jwt_secret -
+Error response from daemon: rpc error: code = AlreadyExists desc = secret jwt_secret already exists
+root@ServerAgents:~/opsmac# docker secret ls
+ID                          NAME          DRIVER    CREATED       UPDATED
+stz56z4lm39lr46evxxl0lll7   db_password             10 days ago   10 days ago
+cgbjv6ve48w1k1ddixn5d5ti9   jwt_secret              10 days ago   10 days ago
+root@ServerAgents:~/opsmac# docker secret rm db_password
+Error response from daemon: rpc error: code = InvalidArgument desc = secret 'db_password' is in use by the following services: feedeliza_backend, feedeliza_migrations
+root@ServerAgents:~/opsmac# docker secret rm jwt_secret
+Error response from daemon: rpc error: code = InvalidArgument desc = secret 'jwt_secret' is in use by the following service: feedeliza_backend
+root@ServerAgents:~/opsmac# docker secret rm db_password
+Error response from daemon: rpc error: code = InvalidArgument desc = secret 'db_password' is in use by the following services: feedeliza_backend, feedeliza_migrations
+root@ServerAgents:~/opsmac# docker secret rm jwt_secret
+Error response from daemon: rpc error: code = InvalidArgument desc = secret 'jwt_secret' is in use by the following service: feedeliza_backend
+root@ServerAgents:~/opsmac# docker secret rm db_password
+Error response from daemon: rpc error: code = InvalidArgument desc = secret 'db_password' is in use by the following services: feedeliza_backend, feedeliza_migrations
+root@ServerAgents:~/opsmac# echo "123456789" | docker secret create db_password -
+Error response from daemon: rpc error: code = AlreadyExists desc = secret db_password already exists
+root@ServerAgents:~/opsmac#

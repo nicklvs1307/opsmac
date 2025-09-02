@@ -3,8 +3,8 @@
 Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
-Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: Role is not associated to User!
-    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:565:13)
+Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: UserRestaurant is associated to User using an alias. You've included an alias (userRestaurants), but it does not match the alias(es) defined in your association (restaurants).
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:574:15)
     at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
     at /app/node_modules/sequelize/lib/model.js:421:37
     at Array.map (<anonymous>)
@@ -14,8 +14,8 @@ Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: Role
     at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
     at async Object.login (/app/backend/src/domains/auth/auth.service.js:12:14)
     at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
-Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: Role is not associated to User!
-    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:565:13)
+Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: UserRestaurant is associated to User using an alias. You've included an alias (userRestaurants), but it does not match the alias(es) defined in your association (restaurants).
+    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:574:15)
     at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
     at /app/node_modules/sequelize/lib/model.js:421:37
     at Array.map (<anonymous>)

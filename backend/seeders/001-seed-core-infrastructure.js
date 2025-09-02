@@ -4,22 +4,16 @@ const bcrypt = require('bcryptjs');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    // Actions
-    const actions = [
-      { id: 1, key: 'create', created_at: new Date(), updated_at: new Date() },
-      { id: 2, key: 'read', created_at: new Date(), updated_at: new Date() },
-      { id: 3, key: 'update', created_at: new Date(), updated_at: new Date() },
-      { id: 4, key: 'delete', created_at: new Date(), updated_at: new Date() },
-      { id: 5, key: 'export', created_at: new Date(), updated_at: new Date() },
-      { id: 6, key: 'approve', created_at: new Date(), updated_at: new Date() },
-      { id: 7, key: 'manage_permissions', created_at: new Date(), updated_at: new Date() },
-    ];
-    await queryInterface.bulkInsert('actions', actions, {});
+    // Clean up existing data
+    await queryInterface.bulkDelete('user_restaurants', null, {});
+    await queryInterface.bulkDelete('restaurants', null, {});
+    await queryInterface.bulkDelete('users', null, {});
 
-    // Super Admin User
+    // --- Seed Super Admin User ---
     const superAdminId = uuidv4();
     const salt = await bcrypt.genSalt(12);
-    const hashedPassword = await bcrypt.hash('superadmin', salt);
+    // Using a more secure default password
+    const hashedPassword = await bcrypt.hash('superadmin@123', salt);
 
     await queryInterface.bulkInsert('users', [{
       id: superAdminId,
@@ -31,11 +25,12 @@ module.exports = {
       updated_at: new Date(),
     }], {});
 
-    // Default Restaurant (Tenant)
+    // --- Seed Default Restaurant (Tenant) ---
     const restaurantId = uuidv4();
     await queryInterface.bulkInsert('restaurants', [{
         id: restaurantId,
         name: 'Restaurante Padrão',
+        slug: 'restaurante-padrao',
         address: 'Rua Padrão, 123',
         city: 'Cidade Padrão',
         state: 'SP',
@@ -43,7 +38,7 @@ module.exports = {
         updatedAt: new Date(),
     }], {});
 
-    // Link Super Admin to Default Restaurant as Owner
+    // --- Link Super Admin to Default Restaurant as Owner ---
     await queryInterface.bulkInsert('user_restaurants', [{
         user_id: superAdminId,
         restaurant_id: restaurantId,
@@ -51,14 +46,11 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
     }], {});
-
-    // TODO: Add more seed data (modules, features, roles, etc.)
   },
 
   async down (queryInterface, Sequelize) {
     await queryInterface.bulkDelete('user_restaurants', null, {});
     await queryInterface.bulkDelete('restaurants', null, {});
     await queryInterface.bulkDelete('users', null, {});
-    await queryInterface.bulkDelete('actions', null, {});
   }
 };

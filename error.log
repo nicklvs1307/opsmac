@@ -1,14 +1,14 @@
---- FINAL DEBUG TEST ---
-Running sequelize-cli connection test inside backend service...
+Connection to postgres (10.0.1.90) 5432 port [tcp/postgresql] succeeded!
+Postgres is up - executing command
+Database is up, running migrations...
 Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
 Loaded configuration file "backend/config/config.js".
 Using environment "production".
-up 001-create-core-infrastructure.js
-up 002-create-permission-system.js
-up 003-create-stock-management-tables.js
-up 004-create-customer-relationship-tables.js
-up 005-create-order-operation-tables.js
-up 006-add-order-fields-to-products.js
-up 007-create-financial-tables.js
---- TEST END --- 
-Container will sleep for 5 minutes...
+No migrations were executed, database schema was already up to date.
+Running seeders...
+Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
+Loaded configuration file "backend/config/config.js".
+Using environment "production".
+== 20250901000001-seed-initial-data: migrating =======
+ERROR: Validation error
+ERROR DETAIL: Key (id)=(1) already exists.

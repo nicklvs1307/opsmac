@@ -77,18 +77,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     createdAt: {
       type: DataTypes.DATE,
-      field: 'created_at',
     },
     updatedAt: {
       type: DataTypes.DATE,
-      field: 'updated_at',
     },
   }, {
     sequelize,
     modelName: 'Restaurant',
     tableName: 'restaurants',
     timestamps: true,
-    underscored: true,
+    underscored: false,
   });
 
   return Restaurant;

@@ -58,6 +58,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       field: 'lock_until',
     },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+      field: 'is_active',
+    },
     createdAt: {
       type: DataTypes.DATE,
       field: 'created_at',

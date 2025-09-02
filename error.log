@@ -3,20 +3,20 @@
 Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
+Error caught by middleware: NotFoundError: Usuário não encontrado
+    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:105:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
+  statusCode: 404
+}
 NODE_ENV: production
 JWT_SECRET_FILE: /run/secrets/jwt_secret
 Secret read from file. Length: 32
-Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: UserRestaurant is associated to User using an alias. You've included an alias (userRestaurants), but it does not match the alias(es) defined in your association (restaurants).
-    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:574:15)
-    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
-    at /app/node_modules/sequelize/lib/model.js:421:37
-    at Array.map (<anonymous>)
-    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
-    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
-    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
-    at async Object.getMe (/app/backend/src/domains/auth/auth.service.js:90:18)
+Error caught by middleware: ForbiddenError: Acesso negado. A conta do usuário está desativada.
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:31:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
 NODE_ENV: production
 JWT_SECRET_FILE: /run/secrets/jwt_secret
 Secret read from file. Length: 32

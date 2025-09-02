@@ -21,6 +21,7 @@ module.exports = {
       name: 'Super Admin',
       password_hash: hashedPassword,
       is_superadmin: true,
+      is_active: true,
       created_at: new Date(),
       updated_at: new Date(),
     }], {});

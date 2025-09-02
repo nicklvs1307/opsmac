@@ -1,16 +1,100 @@
-Database is up, running migrations...
-Connection to postgres (10.0.1.90) 5432 port [tcp/postgresql] succeeded!
-Postgres is up - executing command
-Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
-Loaded configuration file "backend/config/config.js".
-Using environment "production".
-No migrations were executed, database schema was already up to date.
-Running seeders...
-Sequelize CLI [Node: 20.19.4, CLI: 6.6.3, ORM: 6.37.7]
-Loaded configuration file "backend/config/config.js".
-Using environment "production".
-== 001-seed-core-infrastructure: migrating =======
-== 001-seed-core-infrastructure: migrated (0.551s)
-== 002-seed-permission-system: migrating =======
-ERROR: null value in column "submodule_id" of relation "features" violates not-null constraint
-ERROR DETAIL: Failing row contains (0654a643-fcfa-489c-93fe-34b44356a3c9, null, dashboard_view, Visualizar Painel Geral, null, 0, {}, 2025-09-02 15:29:16.003+00, 2025-09-02 15:29:16.003+00).
+main.ba5d7de3.js:2 [Violation] 'message' handler took 233ms
+main.ba5d7de3.js:2 [Violation] 'message' handler took 364ms
+login:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+AuthContext.js:89  POST http://localhost:5000/auth/login net::ERR_BLOCKED_BY_PRIVATE_NETWORK_ACCESS_CHECKS
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+login @ AuthContext.js:89
+onSubmit @ Login.js:25
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+AuthContext.js:89 Falha ao carregar XHR: POST "http://localhost:5000/auth/login".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+login @ AuthContext.js:89
+onSubmit @ Login.js:25
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+main.ba5d7de3.js:2 [Violation] 'message' handler took 186ms
+AuthContext.js:89  POST http://localhost:5000/auth/login net::ERR_BLOCKED_BY_PRIVATE_NETWORK_ACCESS_CHECKS
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+login @ AuthContext.js:89
+onSubmit @ Login.js:25
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+AuthContext.js:89 Falha ao carregar XHR: POST "http://localhost:5000/auth/login".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+login @ AuthContext.js:89
+onSubmit @ Login.js:25
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73

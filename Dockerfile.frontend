@@ -21,6 +21,8 @@ COPY frontend/public ./public
 
 # Gera o build de produção do React
 ARG REACT_APP_API_URL
+# Fail build if REACT_APP_API_URL is not set
+RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
 RUN set -x && npm run build && ls -la /app/frontend/build
 

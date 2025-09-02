@@ -3,12 +3,6 @@
 Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
-Error caught by middleware: NotFoundError: Usuário não encontrado
-    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:105:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
-  statusCode: 404
-}
 NODE_ENV: production
 JWT_SECRET_FILE: /run/secrets/jwt_secret
 Secret read from file. Length: 32
@@ -17,6 +11,3 @@ Error caught by middleware: ForbiddenError: Acesso negado. A conta do usuário e
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
   statusCode: 403
 }
-NODE_ENV: production
-JWT_SECRET_FILE: /run/secrets/jwt_secret
-Secret read from file. Length: 32

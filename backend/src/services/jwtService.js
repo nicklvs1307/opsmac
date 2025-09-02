@@ -13,20 +13,26 @@ const { UnauthorizedError } = require('utils/errors');
 
 const generateToken = (userId) => {
   let secret;
+  console.log('NODE_ENV:', process.env.NODE_ENV);
+  console.log('JWT_SECRET_FILE:', process.env.JWT_SECRET_FILE);
+
   if (process.env.NODE_ENV === 'production' && process.env.JWT_SECRET_FILE) {
     try {
       secret = fs.readFileSync(process.env.JWT_SECRET_FILE, 'utf8').trim();
+      console.log('Secret read from file. Length:', secret.length);
     } catch (error) {
       console.error('Error reading JWT secret file:', error);
       throw new Error('Erro ao ler o segredo JWT do arquivo.');
     }
   } else if (process.env.JWT_SECRET) {
     secret = process.env.JWT_SECRET;
+    console.log('Secret read from env. Length:', secret.length);
   } else {
     throw new Error('JWT_SECRET não está definido no .env ou no arquivo de segredo.');
   }
 
   if (!secret) {
+    console.error('Final secret is empty or undefined!');
     throw new Error('JWT_SECRET não está definido.');
   }
   return jwt.sign({ userId }, JWT_SECRET, {

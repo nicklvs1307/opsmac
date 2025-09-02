@@ -1,17 +1,19 @@
 > feedeliza-plus@1.0.0 start
+
 > node backend/server.js
-/app/backend/src/services/jwtService.js:11
-const jwt = require('jsonwebtoken');
-      ^
-SyntaxError: Identifier 'jwt' has already been declared
-    at wrapSafe (node:internal/modules/cjs/loader:1472:18)
-    at Module._compile (node:internal/modules/cjs/loader:1501:20)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Module.require (node:internal/modules/cjs/loader:1298:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/src/middleware/authMiddleware.js:1:25)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-Node.js v20.19.4
+
+Redis Client Connected
+
+✅ Conexão com banco de dados estabelecida
+
+🚀 Servidor rodando na porta 5000
+
+Error caught by middleware: Error: secretOrPrivateKey must have a value
+
+    at module.exports [as sign] (/app/node_modules/jsonwebtoken/sign.js:111:20)
+
+    at generateToken (/app/backend/src/services/jwtService.js:32:14)
+
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:47:17)
+
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)

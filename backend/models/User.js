@@ -12,6 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.UserRole, { foreignKey: 'user_id', as: 'userRoles' });
       User.hasMany(models.UserPermissionOverride, { foreignKey: 'user_id', as: 'permissionOverrides' });
       User.hasMany(models.AuditLog, { foreignKey: 'actor_user_id', as: 'auditLogs' });
+
+      User.belongsToMany(models.Role, {
+        through: models.UserRole,
+        foreignKey: 'user_id',
+        otherKey: 'role_id',
+        as: 'roles',
+      });
     }
   }
 

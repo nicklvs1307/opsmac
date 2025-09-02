@@ -14,7 +14,7 @@ const login = async (email, password) => {
     include: [
       {
         model: models.Role,
-        as: 'role',
+        as: 'roles',
       },
       {
         model: models.UserRestaurant,

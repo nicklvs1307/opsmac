@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   migrations:
-    image: feedeliza-backend:latest
+    image: feedeliza-backend:v2
     depends_on:
       - postgres
     environment:
@@ -36,7 +36,7 @@ services:
         condition: on-failure
 
   backend:
-    image: feedeliza-backend:latest
+    image: feedeliza-backend:v2
     depends_on:
       - migrations # Ensure migrations run first
     environment:
@@ -63,6 +63,19 @@ services:
     secrets:
       - db_password # For production secrets
       - jwt_secret # For production secrets
+    command: >
+      /bin/sh -c "
+        echo '--- DEBUGGING START ---';
+        echo '--- 1. Environment Variables ---';
+        printenv;
+        echo '--- 2. Secret File Content ---';
+        cat /run/secrets/db_password; echo;
+        echo '--- 3. Config File Content ---';
+        cat backend/config/config.js;
+        echo '--- DEBUGGING END ---';
+        echo 'Container will sleep for 5 minutes for inspection...';
+        sleep 300;
+      "
     deploy:
       replicas: 1
       restart_policy:

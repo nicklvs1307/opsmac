@@ -162,7 +162,7 @@ const AdminRestaurantsPage = () => {
         {t('admin_dashboard.restaurants_title')}
       </Typography>
 
-      {can('admin_restaurants', 'create') && (
+      {can('restaurants', 'create') && (
         <Button
           variant="contained"
           color="primary"
@@ -181,8 +181,8 @@ const AdminRestaurantsPage = () => {
           createRestaurantWithOwnerMutation.isLoading ||
           isLoadingPermissionTree
         }
-        canAddRestaurant={can('admin_restaurants', 'create')}
-        canEditRestaurant={can('admin_restaurants', 'update')}
+        canAddRestaurant={can('restaurants', 'create')}
+        canEditRestaurant={can('restaurants', 'update')}
         canManageRestaurantModules={can('entitlements', 'update')}
         handleOpenModuleModal={handleOpenModuleModal}
       />

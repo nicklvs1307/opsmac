@@ -4,7 +4,7 @@ import usePermissions from '@/hooks/usePermissions';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const ProtectedRoute = ({ children, featureKey, actionKey }) => {
-  const { isAuthenticated, loading: authLoading } = useAuth();
+  const { isAuthenticated, loading: authLoading, user } = useAuth();
   const { can, loading: permissionsLoading, error: permissionsError } = usePermissions();
 
   // If authentication is still loading, show nothing or a loader

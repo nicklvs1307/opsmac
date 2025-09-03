@@ -1,15 +1,25 @@
 'use strict';
 const iamService = require('../services/iamService');
+const { models } = require('../models'); // Ensure models are imported
 
 const requirePermission = (featureKey, actionKey) => {
   return async (req, res, next) => {
     try {
-      // Assuming userId is on req.user and restaurantId is on req.restaurant or req.params
       const userId = req.user?.id;
-      const restaurantId = req.restaurant?.id || req.params.restaurantId;
+      if (!userId) {
+        return res.status(401).json({ error: 'Unauthorized: User not authenticated.' });
+      }
 
-      if (!userId || !restaurantId) {
-        return res.status(401).json({ error: 'Unauthorized: Missing user or restaurant context.' });
+      // Bypass for Super Admin
+      const user = await models.User.findByPk(userId);
+      if (user && user.isSuperadmin) {
+        return next();
+      }
+
+      // Restaurant context is required for non-superadmins
+      const restaurantId = req.restaurant?.id || req.params.restaurantId;
+      if (!restaurantId) {
+        return res.status(401).json({ error: 'Unauthorized: Missing restaurant context.' });
       }
 
       const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey);

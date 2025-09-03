@@ -202,7 +202,7 @@ class IamService {
   async checkPermission(restaurantId, userId, featureKey, actionKey) {
     // 1. Superadmin global?
     const user = await models.User.findByPk(userId);
-    if (user && user.is_superadmin) {
+    if (user && user.isSuperadmin) {
       return { allowed: true, locked: false, reason: 'superadmin' };
     }
 

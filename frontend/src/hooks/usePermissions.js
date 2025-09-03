@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@/app/providers/contexts/AuthContext'; // Assuming AuthContext provides user and selected restaurant
-import axios from 'axios'; // Assuming axios is available for API calls
+import { useAuth } from '@/app/providers/contexts/AuthContext';
+import axios from 'axios';
 
 const usePermissions = () => {
-  const { user, selectedRestaurantId } = useAuth(); // Assuming selectedRestaurantId is available from AuthContext
+  const { user, selectedRestaurantId } = useAuth();
   const [permissionSnapshot, setPermissionSnapshot] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ const usePermissions = () => {
     try {
       const response = await axios.get(`/api/iam/${selectedRestaurantId}/tree`, {
         headers: {
-          Authorization: `Bearer ${user.token}`, // Assuming user.token exists
+          Authorization: `Bearer ${user.token}`,
         },
       });
       setPermissionSnapshot(response.data);
@@ -32,24 +32,36 @@ const usePermissions = () => {
   }, [user, selectedRestaurantId]);
 
   useEffect(() => {
-    fetchPermissions();
-  }, [fetchPermissions]);
+    // Prioritize the snapshot from the auth context, especially for Super Admin
+    if (user?.permissionSnapshot) {
+      setPermissionSnapshot(user.permissionSnapshot);
+      setLoading(false);
+    } else if (selectedRestaurantId) {
+      // Only fetch if there's a restaurant and no snapshot from auth
+      fetchPermissions();
+    } else {
+      // No user, no restaurant, no permissions
+      setLoading(false);
+    }
+  }, [user, selectedRestaurantId, fetchPermissions]);
 
   const can = useCallback(
     (featureKey, actionKey) => {
+      // If auth is still loading, or there's an error, or no snapshot yet, deny.
       if (loading || error || !permissionSnapshot) {
-        return false; // Or handle as appropriate during loading/error
+        return false;
       }
 
-      // Superadmin bypass
+      // Superadmin bypass: if the flag is true, grant access immediately.
       if (permissionSnapshot.isSuperAdmin) {
         return true;
       }
 
-      // Owner bypass (if feature is not locked by entitlement)
-      // This logic is already handled in the backend buildSnapshot, so we just check the 'allowed' flag
-      // if (permissionSnapshot.isOwner && !featureLocked) { return true; } // This is implicitly handled by the snapshot
-
+      // If there's no module data (e.g., non-superadmin with no restaurant), deny.
+      if (!permissionSnapshot.modules) {
+          return false;
+      }
+      
       // Optimized search for feature and action
       let foundFeature = null;
       for (const mod of permissionSnapshot.modules) {
@@ -63,14 +75,14 @@ const usePermissions = () => {
         if (foundFeature) break;
       }
 
-      if (!foundFeature) return false; // Feature not found in snapshot
+      if (!foundFeature) return false;
 
       if (foundFeature.locked) {
-        return false; // Feature is locked by entitlement
+        return false;
       }
 
       const action = foundFeature.actions.find((a) => a.key === actionKey);
-      if (!action) return false; // Action not found for this feature
+      if (!action) return false;
 
       return action.allowed;
     },

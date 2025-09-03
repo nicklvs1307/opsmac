@@ -1,6 +1,6 @@
 'use strict';
 const iamService = require('../services/iamService');
-const { models } = require('../models'); // Ensure models are imported
+const { models } = require('models'); // Ensure models are imported
 
 const requirePermission = (featureKey, actionKey) => {
   return async (req, res, next) => {

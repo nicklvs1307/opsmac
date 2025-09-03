@@ -12,7 +12,13 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
     return <div>Loading...</div>; // Or a proper spinner component
   }
 
-  // If not authenticated, redirect to login
+  console.log('ProtectedRoute Debug: isAuthenticated', isAuthenticated);
+  console.log('ProtectedRoute Debug: user', user);
+  console.log('ProtectedRoute Debug: user.permissionSnapshot', user?.permissionSnapshot);
+  console.log('ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin', user?.permissionSnapshot?.isSuperAdmin);
+  console.log('ProtectedRoute Debug: featureKey', featureKey);
+  console.log('ProtectedRoute Debug: actionKey', actionKey);
+
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
@@ -20,6 +26,7 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
   // Allow access for super admin if authenticated and no specific permission is required
   // This handles the root path where featureKey/actionKey might be undefined
   if (user && user.permissionSnapshot && user.permissionSnapshot.isSuperAdmin && !featureKey && !actionKey) {
+    console.log('ProtectedRoute Debug: Super Admin bypass triggered.');
     return children;
   }
 

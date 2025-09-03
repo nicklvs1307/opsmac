@@ -1,31 +1,7 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          206.5s
-------
- > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.339 + npm run build
-0.967
-0.967 > feedeliza-plus@1.0.0 build
-0.967 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.967
-4.874 Creating an optimized production build...
-205.4 Failed to compile.
-205.4
-205.4 [eslint]
-205.4 src/components/Auth/ProtectedRoute.js
-205.4   Line 22:7:   'user' is not defined  no-undef
-205.4   Line 22:15:  'user' is not defined  no-undef
-205.4   Line 22:42:  'user' is not defined  no-undef
-205.4
-205.4 Search for the keywords to learn more about each error.
-205.4
-205.4
-------
-Dockerfile.frontend:27
---------------------
-  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
-  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  28 |
-  29 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
-root@ServerAgents:~/opsmac#
+feedelizapro.towersfy.com/:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user Object
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot null
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin undefined
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined

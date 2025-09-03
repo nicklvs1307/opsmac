@@ -47,14 +47,11 @@ const login = async (email, password) => {
 
   const token = generateToken(user.id);
 
-  // Check if the user is a Super Admin
-  const isSuperAdmin = user.roles.some(role => role.name === 'Super Admin');
-
   let permissionSnapshot = null;
   let primaryRestaurant = null;
   let primaryRestaurantId = null;
 
-  if (isSuperAdmin) {
+  if (user.isSuperadmin) {
     // For Super Admin, create a snapshot that grants all permissions
     permissionSnapshot = {
         isSuperAdmin: true,
@@ -118,19 +115,15 @@ const getMe = async (userId) => {
         throw new NotFoundError('Usuário não encontrado');
     }
 
-    // Check if the user is a Super Admin
-    const isSuperAdmin = user.roles.some(role => role.name === 'Super Admin');
-
     let permissionSnapshot = null;
     let primaryRestaurant = null;
     let primaryRestaurantId = null;
 
-    if (isSuperAdmin) {
+    if (user.isSuperadmin) {
         // For Super Admin, create a snapshot that grants all permissions
         permissionSnapshot = {
             isSuperAdmin: true,
             permissions: {}, // Empty means no specific feature checks, relies on isSuperAdmin
-            // Or you could build a full permission set here if needed
         };
     } else {
         // For regular users, determine the primary restaurant and build permissions

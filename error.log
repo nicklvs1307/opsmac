@@ -1,22 +1,6 @@
-(índice):1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot null
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin undefined
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
-AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-yt.forEach.Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ AuthContext.js:73
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
+main.8bad6da6.js:sourcemap:2 ProtectedRoute Debug: isAuthenticated true
+main.8bad6da6.js:sourcemap:2 ProtectedRoute Debug: user Objectemail: "superadmin@example.com"id: "091d685c-7f9e-4b3f-8044-c2f4787a2955"isActive: truename: "Super Admin"permissionSnapshot: nullrestaurant: nullrestaurantId: nullrestaurants: []token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwOTFkNjg1Yy03ZjllLTRiM2YtODA0NC1jMmY0Nzg3YTI5NTUiLCJpYXQiOjE3NTY4OTg1MTksImV4cCI6MTc1NzUwMzMxOX0.lFx3OwKzTdcSq74vY3E1HDgaUV-crjBHpvMOLuiflTY"[[Prototype]]: Object
+main.8bad6da6.js:sourcemap:2 ProtectedRoute Debug: user.permissionSnapshot null
+main.8bad6da6.js:sourcemap:2 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin undefined
+main.8bad6da6.js:sourcemap:2 ProtectedRoute Debug: featureKey undefined
+main.8bad6da6.js:sourcemap:2 ProtectedRoute Debug: actionKey undefined

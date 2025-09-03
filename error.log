@@ -1,18 +1,6 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Connected
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-DEBUG: User object before isActive check: {
-  id: '5d5980aa-f71b-4777-ad4c-7469df662769',
-  email: 'superadmin@example.com',
-  isActive: true
-}
-NODE_ENV: production
-JWT_SECRET_FILE: /run/secrets/jwt_secret
-Secret read from file. Length: 32
-Error caught by middleware: ForbiddenError: Acesso negado. A conta do usuário está desativada.
-    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:31:21)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
-  statusCode: 403
-}
+URL da solicitação
+https://feedelizapro.towersfy.com/unauthorized
+Método da solicitação
+GET
+Código de status
+200 OK

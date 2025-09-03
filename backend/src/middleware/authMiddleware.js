@@ -27,7 +27,7 @@ const authMiddleware = async (req, res, next) => {
       return next(new UnauthorizedError('Usuário do token não encontrado.'));
     }
 
-    if (!user.is_active) {
+    if (!user.isActive) {
         return next(new ForbiddenError('Acesso negado. A conta do usuário está desativada.'));
     }
 

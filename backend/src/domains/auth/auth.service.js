@@ -47,27 +47,39 @@ const login = async (email, password) => {
 
   const token = generateToken(user.id);
 
-  // Determine the primary restaurant for the user
+  // Check if the user is a Super Admin
+  const isSuperAdmin = user.roles.some(role => role.name === 'Super Admin');
+
+  let permissionSnapshot = null;
   let primaryRestaurant = null;
   let primaryRestaurantId = null;
 
-  if (user.userRestaurants && user.userRestaurants.length > 0) {
-    // Find the owned restaurant first, or the first associated one
-    const ownedRestaurant = user.userRestaurants.find(ur => ur.isOwner)?.restaurant;
-    if (ownedRestaurant) {
-      primaryRestaurant = ownedRestaurant;
-      primaryRestaurantId = ownedRestaurant.id;
-    } else {
-      primaryRestaurant = user.userRestaurants[0].restaurant;
-      primaryRestaurantId = user.userRestaurants[0].restaurant.id;
+  if (isSuperAdmin) {
+    // For Super Admin, create a snapshot that grants all permissions
+    permissionSnapshot = {
+        isSuperAdmin: true,
+        permissions: {}, // Empty means no specific feature checks, relies on isSuperAdmin
+    };
+  } else {
+    // For regular users, determine the primary restaurant and build permissions
+    if (user.userRestaurants && user.userRestaurants.length > 0) {
+      // Find the owned restaurant first, or the first associated one
+      const ownedRestaurant = user.userRestaurants.find(ur => ur.isOwner)?.restaurant;
+      if (ownedRestaurant) {
+        primaryRestaurant = ownedRestaurant;
+        primaryRestaurantId = ownedRestaurant.id;
+      } else {
+        primaryRestaurant = user.userRestaurants[0].restaurant;
+        primaryRestaurantId = user.userRestaurants[0].restaurant.id;
+      }
+    }
+
+    // Build the permission snapshot for the primary restaurant
+    if (primaryRestaurantId) {
+      permissionSnapshot = await iamService.buildSnapshot(primaryRestaurantId, user.id);
     }
   }
 
-  // Build the permission snapshot for the primary restaurant
-  let permissionSnapshot = null;
-  if (primaryRestaurantId) {
-    permissionSnapshot = await iamService.buildSnapshot(primaryRestaurantId, user.id);
-  }
 
   return {
     token,
@@ -106,25 +118,36 @@ const getMe = async (userId) => {
         throw new NotFoundError('Usuário não encontrado');
     }
 
-    // Determine the primary restaurant for the user
+    // Check if the user is a Super Admin
+    const isSuperAdmin = user.roles.some(role => role.name === 'Super Admin');
+
+    let permissionSnapshot = null;
     let primaryRestaurant = null;
     let primaryRestaurantId = null;
 
-    if (user.userRestaurants && user.userRestaurants.length > 0) {
-        const ownedRestaurant = user.userRestaurants.find(ur => ur.isOwner)?.restaurant;
-        if (ownedRestaurant) {
-            primaryRestaurant = ownedRestaurant;
-            primaryRestaurantId = ownedRestaurant.id;
-        } else {
-            primaryRestaurant = user.userRestaurants[0].restaurant;
-            primaryRestaurantId = user.userRestaurants[0].restaurant.id;
+    if (isSuperAdmin) {
+        // For Super Admin, create a snapshot that grants all permissions
+        permissionSnapshot = {
+            isSuperAdmin: true,
+            permissions: {}, // Empty means no specific feature checks, relies on isSuperAdmin
+            // Or you could build a full permission set here if needed
+        };
+    } else {
+        // For regular users, determine the primary restaurant and build permissions
+        if (user.userRestaurants && user.userRestaurants.length > 0) {
+            const ownedRestaurant = user.userRestaurants.find(ur => ur.isOwner)?.restaurant;
+            if (ownedRestaurant) {
+                primaryRestaurant = ownedRestaurant;
+                primaryRestaurantId = ownedRestaurant.id;
+            } else {
+                primaryRestaurant = user.userRestaurants[0].restaurant;
+                primaryRestaurantId = user.userRestaurants[0].restaurant.id;
+            }
         }
-    }
 
-    // Build the permission snapshot for the primary restaurant
-    let permissionSnapshot = null;
-    if (primaryRestaurantId) {
-        permissionSnapshot = await iamService.buildSnapshot(primaryRestaurantId, user.id);
+        if (primaryRestaurantId) {
+            permissionSnapshot = await iamService.buildSnapshot(primaryRestaurantId, user.id);
+        }
     }
 
     return {
@@ -132,7 +155,7 @@ const getMe = async (userId) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
-        role: user.role,
+        role: user.role, // This might need adjustment if a user can have multiple roles
         avatar: user.avatar,
         isActive: user.isActive,
         emailVerified: user.emailVerified,

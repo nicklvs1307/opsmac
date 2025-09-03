@@ -263,7 +263,7 @@ const Sidebar = ({ onMobileClose }) => {
           {filteredMenuItems.map((moduleItem) => (
             <React.Fragment key={moduleItem.name}>
               <ListItem disablePadding sx={{ mb: 0.5 }}>
-                <Tooltip title={moduleItem.displayName} placement="right" arrow enterDelay={500}>
+                <Tooltip title={moduleItem.displayName || moduleItem.title} placement="right" arrow enterDelay={500}>
                   <ListItemButton
                     onClick={(event) => handleMenuToggle(event, moduleItem)}
                     selected={isActive(moduleItem.path)}
@@ -275,7 +275,7 @@ const Sidebar = ({ onMobileClose }) => {
                       {moduleItem.icon}
                     </ListItemIcon>
                     <ListItemText
-                      primary={moduleItem.displayName}
+                      primary={moduleItem.displayName || moduleItem.title}
                       primaryTypographyProps={{ fontSize: '0.875rem' }}
                     />
                     {!moduleItem.hasAccess && (

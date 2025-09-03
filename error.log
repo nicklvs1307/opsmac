@@ -1,31 +1,509 @@
+users:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ AuthContext.js:73
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+main.ae510d81.js:2 [Violation] 'message' handler took 260ms
+[Violation] Forced reflow while executing JavaScript took 43ms
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey read
+adminQueries.js:14  GET https://feedelizaapi.towersfy.com/api/admin/users 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+G0 @ adminQueries.js:14
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminQueries.js:19  GET https://feedelizaapi.towersfy.com/api/admin/restaurants 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+X0 @ adminQueries.js:19
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminQueries.js:14 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/admin/users".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+G0 @ adminQueries.js:14
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminQueries.js:19 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+X0 @ adminQueries.js:19
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminQueries.js:14  GET https://feedelizaapi.towersfy.com/api/admin/users 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+G0 @ adminQueries.js:14
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+useAdminData.js:26 Error loading users: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+e1 @ useAdminData.js:26
+r1 @ AdminUsersPage.js:21
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminQueries.js:19  GET https://feedelizaapi.towersfy.com/api/admin/restaurants 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+X0 @ adminQueries.js:19
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+useAdminData.js:26 Error loading users: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+e1 @ useAdminData.js:26
+r1 @ AdminUsersPage.js:21
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+useAdminData.js:30 Error loading restaurants: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+e1 @ useAdminData.js:30
+r1 @ AdminUsersPage.js:21
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminQueries.js:14 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/admin/users".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+G0 @ adminQueries.js:14
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminQueries.js:19 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+X0 @ adminQueries.js:19
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+useAdminData.js:26 Error loading users: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+e1 @ useAdminData.js:26
+r1 @ AdminUsersPage.js:21
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+useAdminData.js:30 Error loading restaurants: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+e1 @ useAdminData.js:30
+r1 @ AdminUsersPage.js:21
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+
+
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
-node:internal/modules/cjs/loader:1210
-
-  throw err;
-  ^
-Error: Cannot find module '../models'
-Require stack:
-- /app/backend/src/middleware/requirePermission.js
-- /app/backend/src/domains/feedback/feedback.routes.js
-- /app/backend/routes/index.js
-- /app/backend/server.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
-    at Module._resolveFilename (/app/node_modules/module-alias/index.js:49:29)
-    at Module._load (node:internal/modules/cjs/loader:1038:27)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/src/middleware/requirePermission.js:3:20)
-    at Module._compile (node:internal/modules/cjs/loader:1521:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-    at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    '/app/backend/src/middleware/requirePermission.js',
-    '/app/backend/src/domains/feedback/feedback.routes.js',
-    '/app/backend/routes/index.js',
-    '/app/backend/server.js'
-  ]
+Redis Client Connected
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+DEBUG: User object before isActive check: {
+  id: '091d685c-7f9e-4b3f-8044-c2f4787a2955',
+  email: 'superadmin@example.com',
+  isActive: true
 }
-Node.js v20.19.5
+NODE_ENV: production
+JWT_SECRET_FILE: /run/secrets/jwt_secret
+Secret read from file. Length: 32
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error in requirePermission middleware: TypeError: Cannot read properties of undefined (reading 'User')
+    at /app/backend/src/middleware/requirePermission.js:14:33
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

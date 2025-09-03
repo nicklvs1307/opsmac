@@ -32,6 +32,7 @@ const login = async (email, password) => {
     throw new ForbiddenError('Conta temporariamente bloqueada devido a muitas tentativas de login');
   }
 
+  console.log('DEBUG: User object before isActive check:', { id: user.id, email: user.email, isActive: user.isActive });
   if (!user.isActive) {
     throw new UnauthorizedError('Conta desativada. Entre em contato com o suporte');
   }

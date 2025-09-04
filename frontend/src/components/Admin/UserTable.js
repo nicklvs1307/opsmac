@@ -47,21 +47,24 @@ const UserTable = ({ users, loading, canAddUser, canEditUser }) => {
               </TableCell>
             </TableRow>
           ) : (
-            users.map((user) => (
-              <TableRow key={user.id} hover>
-                <TableCell>{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.roles[0]?.name}</TableCell>
-                <TableCell align="right">
-                  {canEditUser && (
-                    <IconButton onClick={() => handleEditClick(user.id)}>
-                      <EditIcon />
-                    </IconButton>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))
-          )}
+            users.map((user) => {
+              console.log('User object in UserTable:', user);
+              console.log('User roles in UserTable:', user.roles);
+              return (
+                <TableRow key={user.id} hover>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.roles[0]?.name}</TableCell>
+                  <TableCell align="right">
+                    {canEditUser && (
+                      <IconButton onClick={() => handleEditClick(user.id)}>
+                        <EditIcon />
+                      </IconButton>
+                    )}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
         </TableBody>
       </Table>
     </TableContainer>

@@ -1,4 +1,4 @@
-(índice):1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+users:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
@@ -6,7 +6,8 @@ ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin 
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
 ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-main.ae510d81.js:2 [Violation] 'message' handler took 287ms
+main.ae510d81.js:2 [Violation] 'message' handler took 239ms
+[Violation] Forced reflow while executing JavaScript took 32ms
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
@@ -14,6 +15,12 @@ ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin 
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
 ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey read
 AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
@@ -21,7 +28,7 @@ Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-(anônimo) @ Axios.js:213
+Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
 (anônimo) @ AuthContext.js:73
 nl @ react-dom.production.min.js:243
@@ -29,12 +36,6 @@ _c @ react-dom.production.min.js:285
 (anônimo) @ react-dom.production.min.js:281
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey read
 react-dom.production.min.js:188 TypeError: Cannot read properties of undefined (reading 'name')
     at UserTable.js:54:39
     at Array.map (<anonymous>)
@@ -86,7 +87,7 @@ Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-(anônimo) @ Axios.js:213
+Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
 X0 @ adminQueries.js:19
 fetchFn @ query.js:300
@@ -99,7 +100,11 @@ t.subscribe @ subscribable.js:16
 (anônimo) @ useBaseQuery.js:60
 nl @ react-dom.production.min.js:243
 _c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
 adminQueries.js:14 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/admin/users".
@@ -109,7 +114,7 @@ Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-(anônimo) @ Axios.js:213
+Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
 G0 @ adminQueries.js:14
 fetchFn @ query.js:300
@@ -122,6 +127,10 @@ t.subscribe @ subscribable.js:16
 (anônimo) @ useBaseQuery.js:60
 nl @ react-dom.production.min.js:243
 _c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14

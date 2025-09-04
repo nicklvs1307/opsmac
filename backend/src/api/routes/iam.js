@@ -28,7 +28,7 @@ const auditService = {
 // Helper to get tenantId and userId from request
 const getAuthContext = (req) => {
   const userId = req.user?.id; // Assuming user ID is available on req.user
-  const restaurantId = req.restaurant?.id || req.params.restaurantId; // Assuming restaurant ID is on req.restaurant or req.params
+  const restaurantId = req.restaurant?.id || req.query.restaurantId; // Assuming restaurant ID is on req.restaurant or req.query
   return { userId, restaurantId };
 };
 

@@ -16,7 +16,7 @@ export const useGetFeedbacks = (restaurantId, filters, page) => {
         limit: 10,
         ...filters,
       };
-      const { data } = await axiosInstance.get(`/api/feedback/restaurant/${restaurantId}`, {
+      const { data } = await axiosInstance.get(`/feedback/restaurant/${restaurantId}`, {
         params,
       });
       return data;
@@ -33,7 +33,7 @@ export const useGetFeedbackById = (feedbackId) => {
   return useQuery(
     ['feedback', feedbackId],
     async () => {
-      const { data } = await axiosInstance.get(`/api/feedback/${feedbackId}`);
+      const { data } = await axiosInstance.get(`/feedback/${feedbackId}`);
       return data;
     },
     {
@@ -45,7 +45,7 @@ export const useGetFeedbackById = (feedbackId) => {
 // Hook to create a new feedback
 export const useCreateFeedback = () => {
   const queryClient = useQueryClient();
-  return useMutation((newFeedback) => axiosInstance.post('/api/feedback', newFeedback), {
+  return useMutation((newFeedback) => axiosInstance.post('/feedback', newFeedback), {
     onSuccess: () => {
       queryClient.invalidateQueries('feedbacks');
       toast.success('Feedback criado com sucesso!');
@@ -61,7 +61,7 @@ export const useReplyFeedback = () => {
   const queryClient = useQueryClient();
   return useMutation(
     ({ feedbackId, replyText }) =>
-      axiosInstance.post(`/api/feedback/${feedbackId}/reply`, { response: replyText }),
+      axiosInstance.post(`/feedback/${feedbackId}/reply`, { response: replyText }),
     {
       onSuccess: (data, variables) => {
         queryClient.invalidateQueries('feedbacks');
@@ -78,7 +78,7 @@ export const useReplyFeedback = () => {
 // Hook to delete a feedback
 export const useDeleteFeedback = () => {
   const queryClient = useQueryClient();
-  return useMutation((feedbackId) => axiosInstance.delete(`/api/feedback/${feedbackId}`), {
+  return useMutation((feedbackId) => axiosInstance.delete(`/feedback/${feedbackId}`), {
     onSuccess: () => {
       queryClient.invalidateQueries('feedbacks');
       toast.success('Feedback excluído com sucesso!');
@@ -98,7 +98,7 @@ export const useGetPublicQRCode = (qrId) => {
   return useQuery(
     ['publicQRCode', qrId],
     async () => {
-      const { data } = await axiosInstance.get(`/api/qr-codes/public/${qrId}`);
+      const { data } = await axiosInstance.get(`/qr-codes/public/${qrId}`);
       return data;
     },
     {
@@ -109,7 +109,7 @@ export const useGetPublicQRCode = (qrId) => {
 
 // Hook to track a QR code scan
 export const useScanQRCode = () => {
-  return useMutation((qrId) => axiosInstance.post(`/api/qr-codes/${qrId}/scan`));
+  return useMutation((qrId) => axiosInstance.post(`/qr-codes/${qrId}/scan`));
 };
 
 // Hook to create a new public feedback

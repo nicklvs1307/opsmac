@@ -3,7 +3,7 @@ import axiosInstance from '@/services/axiosInstance';
 
 const fetchDashboardData = async (restaurantId) => {
   // This endpoint needs to be created in the backend
-  const { data } = await axiosInstance.get(`/api/stock/dashboard?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(`/stock/dashboard?restaurant_id=${restaurantId}`);
   return data;
 };
 

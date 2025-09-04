@@ -37,8 +37,15 @@ exports.createUser = async (userData, creatorUser) => {
   }
 
   const user = await models.User.create({
-    name, email, password, phone, roleId: role.id, restaurantId: finalRestaurantId
+    name, email, password, phone, restaurantId: finalRestaurantId
   });
+
+  await models.UserRole.create({
+    userId: user.id,
+    roleId: role.id,
+    restaurantId: finalRestaurantId,
+  });
+
   return user;
 };
 
@@ -63,7 +70,6 @@ exports.createRestaurantWithOwner = async (data) => {
       name: ownerName,
       email: ownerEmail,
       password: ownerPassword,
-      roleId: ownerRole.id,
       // restaurantId will be updated after restaurant is created
     }, { transaction: t });
 
@@ -78,6 +84,13 @@ exports.createRestaurantWithOwner = async (data) => {
 
     // 5. Update the user with the new restaurantId
     await owner.update({ restaurantId: restaurant.id }, { transaction: t });
+
+    // 6. Create the user-role association
+    await models.UserRole.create({
+      userId: owner.id,
+      roleId: ownerRole.id,
+      restaurantId: restaurant.id,
+    }, { transaction: t });
 
     return { restaurant, owner };
   });

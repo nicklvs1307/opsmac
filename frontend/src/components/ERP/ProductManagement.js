@@ -38,22 +38,22 @@ const fetchProducts = async () => {
 };
 
 const fetchCategories = async () => {
-  const { data } = await axiosInstance.get('/api/categories');
+  const { data } = await axiosInstance.get('/categories');
   return data;
 };
 
 const createProduct = async (newProduct) => {
-  const { data } = await axiosInstance.post('/api/products', newProduct);
+  const { data } = await axiosInstance.post('/products', newProduct);
   return data;
 };
 
 const updateProduct = async ({ id, ...updatedProduct }) => {
-  const { data } = await axiosInstance.put(`/api/products/${id}`, updatedProduct);
+  const { data } = await axiosInstance.put(`/products/${id}`, updatedProduct);
   return data;
 };
 
 const deleteProduct = async (id) => {
-  await axiosInstance.delete(`/api/products/${id}`);
+  await axiosInstance.delete(`/products/${id}`);
 };
 
 const fetchAddons = async () => {

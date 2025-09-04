@@ -7,7 +7,7 @@ const STOCK_PRODUCTS_QUERY_KEYS = {
 
 // API Functions
 const fetchAllStocks = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/stock?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(`/stock?restaurant_id=${restaurantId}`);
   return data;
 };
 

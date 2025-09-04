@@ -16,29 +16,29 @@ const fetchRewards = async ({ queryKey }) => {
     limit: 12,
     ...filters,
   };
-  const response = await axiosInstance.get(`/api/rewards/restaurant/${restaurantId}`, {
+  const response = await axiosInstance.get(`/rewards/restaurant/${restaurantId}`, {
     params,
   });
   return response.data;
 };
 
 const fetchAnalytics = async () => {
-  const response = await axiosInstance.get('/api/rewards/analytics');
+  const response = await axiosInstance.get('/rewards/analytics');
   return response.data;
 };
 
 const fetchSelectedRewardAnalytics = async (rewardId) => {
-  const response = await axiosInstance.get(`/api/rewards/${rewardId}/analytics`);
+  const response = await axiosInstance.get(`/rewards/${rewardId}/analytics`);
   return response.data;
 };
 
 const createReward = async (rewardData) => {
-  const response = await axiosInstance.post('/api/rewards', rewardData);
+  const response = await axiosInstance.post('/rewards', rewardData);
   return response.data;
 };
 
 const updateReward = async ({ id, ...rewardData }) => {
-  const response = await axiosInstance.put(`/api/rewards/${id}`, rewardData);
+  const response = await axiosInstance.put(`/rewards/${id}`, rewardData);
   return response.data;
 };
 

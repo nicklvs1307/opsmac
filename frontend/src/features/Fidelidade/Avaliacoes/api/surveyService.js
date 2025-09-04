@@ -12,35 +12,35 @@ const SURVEY_QUERY_KEYS = {
 
 // API Functions
 const createSurvey = async (surveyData) => {
-  const { data } = await axiosInstance.post('/api/surveys', surveyData);
+  const { data } = await axiosInstance.post('/surveys', surveyData);
   return data;
 };
 
 const fetchSurvey = async (id) => {
-  const { data } = await axiosInstance.get(`/api/surveys/${id}`);
+  const { data } = await axiosInstance.get(`/surveys/${id}`);
   return data;
 };
 
 const fetchRewards = async (restaurantId) => {
   if (!restaurantId) return [];
   const { data } = await axiosInstance.get(
-    `/api/rewards/restaurant/${restaurantId}?is_active=true`
+    `/rewards/restaurant/${restaurantId}?is_active=true`
   );
   return data.rewards;
 };
 
 const fetchNpsCriteria = async () => {
-  const { data } = await axiosInstance.get('/api/nps-criteria');
+  const { data } = await axiosInstance.get('/nps-criteria');
   return data;
 };
 
 const updateSurvey = async ({ id, surveyData }) => {
-  const { data } = await axiosInstance.put(`/api/surveys/${id}`, surveyData);
+  const { data } = await axiosInstance.put(`/surveys/${id}`, surveyData);
   return data;
 };
 
 const fetchSurveyResults = async (surveyId) => {
-  const { data } = await axiosInstance.get(`/api/surveys/${surveyId}/results`);
+  const { data } = await axiosInstance.get(`/surveys/${surveyId}/results`);
   return data;
 };
 
@@ -107,7 +107,7 @@ export const useSurveyResults = (surveyId, options) => {
 
 const fetchSurveys = async (restaurantId, filters) => {
   const params = { ...filters, restaurant_id: restaurantId };
-  const { data } = await axiosInstance.get('/api/surveys', { params });
+  const { data } = await axiosInstance.get('/surveys', { params });
   return data;
 };
 
@@ -123,7 +123,7 @@ export const useSurveys = (restaurantId, filters, options) => {
 };
 
 const deleteSurvey = async (id) => {
-  await axiosInstance.delete(`/api/surveys/${id}`);
+  await axiosInstance.delete(`/surveys/${id}`);
 };
 
 export const useDeleteSurvey = (options) => {

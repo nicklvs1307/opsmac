@@ -10,34 +10,34 @@ const QR_CODE_QUERY_KEYS = {
 
 // API Functions
 const generateQRCode = async (payload) => {
-  const response = await axiosInstance.post('/api/qrcode', payload);
+  const response = await axiosInstance.post('/qrcode', payload);
   return response.data;
 };
 
 const downloadQRCodeImage = async (id) => {
-  const response = await axiosInstance.get(`/api/qrcode/${id}/image`, {
+  const response = await axiosInstance.get(`/qrcode/${id}/image`, {
     responseType: 'blob',
   });
   return response.data;
 };
 
 const printQRCode = async (id) => {
-  await axiosInstance.post(`/api/qrcode/${id}/print`);
+  await axiosInstance.post(`/qrcode/${id}/print`);
 };
 
 const fetchQRCodeDetails = async (id) => {
-  const response = await axiosInstance.get(`/api/qrcode/${id}`);
+  const response = await axiosInstance.get(`/qrcode/${id}`);
   return response.data;
 };
 
 const fetchRestaurantQRCodes = async ({ restaurantId, page, limit, filters }) => {
   const params = { page, limit, ...filters };
-  const response = await axiosInstance.get(`/api/qrcode/restaurant/${restaurantId}`, { params });
+  const response = await axiosInstance.get(`/qrcode/restaurant/${restaurantId}`, { params });
   return response.data;
 };
 
 const fetchQRCodeAnalytics = async (id) => {
-  const response = await axiosInstance.get(`/api/qrcode/${id}/analytics`);
+  const response = await axiosInstance.get(`/qrcode/${id}/analytics`);
   return response.data;
 };
 

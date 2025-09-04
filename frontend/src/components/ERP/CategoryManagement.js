@@ -22,7 +22,7 @@ import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 
 const fetchCategories = async () => {
-  const { data } = await axiosInstance.get('/api/categories');
+  const { data } = await axiosInstance.get('/categories');
   return data;
 };
 

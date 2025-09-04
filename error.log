@@ -1,13 +1,8 @@
-Connection to postgres (10.0.1.221) 5432 port [tcp/postgresql] succeeded!
-Postgres is up - executing command
-Database is up, running migrations...
-Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
-Loaded configuration file "backend/config/config.js".
-Using environment "production".
-No migrations were executed, database schema was already up to date.
-Running seeders...
-Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
-Loaded configuration file "backend/config/config.js".
-Using environment "production".
-== 001-seed-permission-system: migrating =======
-ERROR: column "module_id" of relation "features" does not exist
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/api/iam/tree?restaurantId=045b05e6-1c1b-4b48-bd29-389e0b579ee0
+Método da solicitação
+GET
+Código de status
+404 Not Found
+
+{"error":"Rota não encontrada"}

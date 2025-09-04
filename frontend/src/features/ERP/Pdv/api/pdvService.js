@@ -15,19 +15,19 @@ const PDV_QUERY_KEYS = {
 
 // API Functions
 const fetchOrders = async ({ restaurantId, filterStatus }) => {
-  const { data } = await axiosInstance.get(`/api/orders/restaurant/${restaurantId}`, {
+  const { data } = await axiosInstance.get(`/orders/restaurant/${restaurantId}`, {
     params: { status: filterStatus },
   });
   return data;
 };
 
 const fetchRestaurantStatus = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/restaurant/${restaurantId}`);
+  const { data } = await axiosInstance.get(`/restaurant/${restaurantId}`);
   return data;
 };
 
 const fetchProducts = async ({ restaurantId, categoryId, searchTerm }) => {
-  let url = `/api/products?restaurant_id=${restaurantId}`;
+  let url = `/products?restaurant_id=${restaurantId}`;
   if (categoryId) {
     url += `&category_id=${categoryId}`;
   }
@@ -39,65 +39,65 @@ const fetchProducts = async ({ restaurantId, categoryId, searchTerm }) => {
 };
 
 const fetchCategories = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/categories?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(`/categories?restaurant_id=${restaurantId}`);
   return data;
 };
 
 const fetchTables = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/restaurant/${restaurantId}/tables`);
+  const { data } = await axiosInstance.get(`/restaurant/${restaurantId}/tables`);
   return data;
 };
 
 const fetchCashRegisterSession = async ({ restaurantId, userId }) => {
   const { data } = await axiosInstance.get(
-    `/api/cash-register/current-session?restaurant_id=${restaurantId}&user_id=${userId}`
+    `/cash-register/current-session?restaurant_id=${restaurantId}&user_id=${userId}`
   );
   return data;
 };
 
 const fetchCashOrders = async (sessionId) => {
   const { data } = await axiosInstance.get(
-    `/api/cash-register/cash-orders?session_id=${sessionId}`
+    `/cash-register/cash-orders?session_id=${sessionId}`
   );
   return data;
 };
 
 const fetchCustomers = async ({ restaurantId, searchTerm }) => {
   const { data } = await axiosInstance.get(
-    `/api/customers/restaurant/${restaurantId}?search=${searchTerm}`
+    `/customers/restaurant/${restaurantId}?search=${searchTerm}`
   );
   return data;
 };
 
 const updateOrderStatus = async ({ restaurantId, orderId, status }) => {
   const { data } = await axiosInstance.put(
-    `/api/orders/restaurant/${restaurantId}/${orderId}/status`,
+    `/orders/restaurant/${restaurantId}/${orderId}/status`,
     { status }
   );
   return data;
 };
 
 const updateRestaurantOpenStatus = async ({ restaurantId, is_open }) => {
-  const { data } = await axiosInstance.put(`/api/restaurant/${restaurantId}/status/open`, {
+  const { data } = await axiosInstance.put(`/restaurant/${restaurantId}/status/open`, {
     is_open,
   });
   return data;
 };
 
 const updateRestaurantPosStatus = async ({ restaurantId, pos_status }) => {
-  const { data } = await axiosInstance.put(`/api/restaurant/${restaurantId}/pos-status`, {
+  const { data } = await axiosInstance.put(`/restaurant/${restaurantId}/pos-status`, {
     pos_status,
   });
   return data;
 };
 
 const createPublicOrder = async (orderData) => {
-  const { data } = await axiosInstance.post('/api/public/orders', orderData);
+  const { data } = await axiosInstance.post('/public/orders', orderData);
   return data;
 };
 
 const createTableOrder = async ({ restaurantId, orderData }) => {
-  const { data } = await axiosInstance.post(`/api/restaurant/${restaurantId}/orders`, orderData);
+  const { data } = await axiosInstance.post(`/restaurant/${restaurantId}/orders`, orderData);
   return data;
 };
 

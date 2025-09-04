@@ -9,17 +9,17 @@ const PURCHASES_QUERY_KEYS = {
 
 // API Functions
 const fetchProducts = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/products?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(`/products?restaurant_id=${restaurantId}`);
   return data;
 };
 
 const fetchSuppliers = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/suppliers?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(`/suppliers?restaurant_id=${restaurantId}`);
   return data;
 };
 
 const createPurchase = ({ restaurantId, purchaseData }) => {
-  return axiosInstance.post(`/api/stock/restaurant/${restaurantId}/move`, purchaseData);
+  return axiosInstance.post(`/stock/restaurant/${restaurantId}/move`, purchaseData);
 };
 
 // React Query Hooks

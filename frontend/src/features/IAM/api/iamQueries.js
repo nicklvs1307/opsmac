@@ -8,7 +8,7 @@ export const useGetPermissionTree = (restaurantId, options) => {
   return useQuery(
     ['permissionTree', restaurantId],
     async () => {
-      const { data } = await axiosInstance.get(`/api/iam/tree?restaurantId=${restaurantId}`);
+      const { data } = await axiosInstance.get(`/iam/tree?restaurantId=${restaurantId}`);
       return data;
     },
     options
@@ -20,7 +20,7 @@ export const useGetRoles = (restaurantId, options) => {
   return useQuery(
     ['roles', restaurantId],
     async () => {
-      const { data } = await axiosInstance.get(`/api/iam/roles?restaurantId=${restaurantId}`);
+      const { data } = await axiosInstance.get(`/iam/roles?restaurantId=${restaurantId}`);
       return data;
     },
     options
@@ -30,7 +30,7 @@ export const useGetRoles = (restaurantId, options) => {
 // Create a new role
 export const useCreateRole = () => {
   return useMutation(async ({ restaurantId, key, name }) => {
-    const { data } = await axiosInstance.post('/api/iam/roles', { restaurantId, key, name });
+    const { data } = await axiosInstance.post('/iam/roles', { restaurantId, key, name });
     return data;
   });
 };
@@ -38,7 +38,7 @@ export const useCreateRole = () => {
 // Update a role
 export const useUpdateRole = () => {
   return useMutation(async ({ roleId, restaurantId, name }) => {
-    const { data } = await axiosInstance.patch(`/api/iam/roles/${roleId}`, { restaurantId, name });
+    const { data } = await axiosInstance.patch(`/iam/roles/${roleId}`, { restaurantId, name });
     return data;
   });
 };
@@ -46,14 +46,14 @@ export const useUpdateRole = () => {
 // Delete a role
 export const useDeleteRole = () => {
   return useMutation(async ({ roleId, restaurantId }) => {
-    await axiosInstance.delete(`/api/iam/roles/${roleId}`, { data: { restaurantId } }); // DELETE with body
+    await axiosInstance.delete(`/iam/roles/${roleId}`, { data: { restaurantId } }); // DELETE with body
   });
 };
 
 // Set permissions for a role
 export const useSetRolePermissions = () => {
   return useMutation(async ({ roleId, restaurantId, permissions }) => {
-    const { data } = await axiosInstance.post(`/api/iam/roles/${roleId}/permissions`, {
+    const { data } = await axiosInstance.post(`/iam/roles/${roleId}/permissions`, {
       permissions,
     });
     return data;
@@ -66,7 +66,7 @@ export const useGetUserRoles = (userId, restaurantId, options) => {
     ['userRoles', userId, restaurantId],
     async () => {
       const { data } = await axiosInstance.get(
-        `/api/iam/users/${userId}/roles?restaurantId=${restaurantId}`
+        `/iam/users/${userId}/roles?restaurantId=${restaurantId}`
       );
       return data;
     },
@@ -77,7 +77,7 @@ export const useGetUserRoles = (userId, restaurantId, options) => {
 // Assign a role to a user
 export const useAssignUserRole = () => {
   return useMutation(async ({ userId, restaurantId, roleId }) => {
-    const { data } = await axiosInstance.post(`/api/iam/users/${userId}/roles`, {
+    const { data } = await axiosInstance.post(`/iam/users/${userId}/roles`, {
       restaurantId,
       roleId,
     });
@@ -88,7 +88,7 @@ export const useAssignUserRole = () => {
 // Remove a role from a user
 export const useRemoveUserRole = () => {
   return useMutation(async ({ userId, restaurantId, roleId }) => {
-    await axiosInstance.delete(`/api/iam/users/${userId}/roles`, {
+    await axiosInstance.delete(`/iam/users/${userId}/roles`, {
       data: { restaurantId, roleId },
     });
   });
@@ -100,7 +100,7 @@ export const useGetUserPermissionOverrides = (userId, restaurantId, options) => 
     ['userPermissionOverrides', userId, restaurantId],
     async () => {
       const { data } = await axiosInstance.get(
-        `/api/iam/users/${userId}/overrides?restaurantId=${restaurantId}`
+        `/iam/users/${userId}/overrides?restaurantId=${restaurantId}`
       );
       return data;
     },
@@ -111,7 +111,7 @@ export const useGetUserPermissionOverrides = (userId, restaurantId, options) => 
 // Set user permission overrides
 export const useSetUserPermissionOverrides = () => {
   return useMutation(async ({ userId, restaurantId, overrides }) => {
-    const { data } = await axiosInstance.post(`/api/iam/users/${userId}/overrides`, { overrides });
+    const { data } = await axiosInstance.post(`/iam/users/${userId}/overrides`, { overrides });
     return data;
   });
 };
@@ -119,7 +119,7 @@ export const useSetUserPermissionOverrides = () => {
 // Set tenant entitlements (Superadmin only)
 export const useSetEntitlement = () => {
   return useMutation(async ({ restaurantId, entityType, entityId, status, source, metadata }) => {
-    const { data } = await axiosInstance.post('/api/iam/entitlements', {
+    const { data } = await axiosInstance.post('/iam/entitlements', {
       restaurantId,
       entityType,
       entityId,
@@ -134,7 +134,7 @@ export const useSetEntitlement = () => {
 // Remove tenant entitlement (Superadmin only)
 export const useRemoveEntitlement = () => {
   return useMutation(async ({ restaurantId, entityType, entityId }) => {
-    await axiosInstance.delete('/api/iam/entitlements', {
+    await axiosInstance.delete('/iam/entitlements', {
       data: { restaurantId, entityType, entityId },
     });
   });
@@ -146,7 +146,7 @@ export const useGetRolePermissions = (roleId, restaurantId, options) => {
     ['rolePermissions', roleId, restaurantId],
     async () => {
       const { data } = await axiosInstance.get(
-        `/api/iam/roles/${roleId}/permissions?restaurantId=${restaurantId}`
+        `/iam/roles/${roleId}/permissions?restaurantId=${restaurantId}`
       );
       return data;
     },

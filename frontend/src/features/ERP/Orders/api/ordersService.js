@@ -8,7 +8,7 @@ const ORDERS_QUERY_KEYS = {
 
 // API Functions
 const fetchOrders = async ({ restaurantId, filterStatus }) => {
-  const { data } = await axiosInstance.get(`/api/orders/restaurant/${restaurantId}`, {
+  const { data } = await axiosInstance.get(`/orders/restaurant/${restaurantId}`, {
     params: { status: filterStatus },
   });
   return data;
@@ -16,7 +16,7 @@ const fetchOrders = async ({ restaurantId, filterStatus }) => {
 
 const updateOrderStatus = async ({ restaurantId, orderId, status }) => {
   const { data } = await axiosInstance.put(
-    `/api/orders/restaurant/${restaurantId}/${orderId}/status`,
+    `/orders/restaurant/${restaurantId}/${orderId}/status`,
     { status }
   );
   return data;

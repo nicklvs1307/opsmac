@@ -15,7 +15,7 @@ const RestaurantDetailPage = () => {
       try {
         setLoading(true);
         // const data = await adminApi.getRestaurantById(id);
-        const response = await axiosInstance.get(`/api/admin/restaurants/${id}`);
+        const response = await axiosInstance.get(`/admin/restaurants/${id}`);
         setRestaurant(response.data);
       } catch (err) {
         setError('Falha ao buscar detalhes do restaurante.');

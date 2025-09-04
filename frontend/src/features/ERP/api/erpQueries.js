@@ -27,58 +27,58 @@ const ERP_QUERY_KEYS = {
 // API Functions - Financial Categories
 const fetchFinancialCategories = async (restaurantId) => {
   const response = await axiosInstance.get(
-    `/api/financial/categories?restaurant_id=${restaurantId}`
+    `/financial/categories?restaurant_id=${restaurantId}`
   );
   return response.data;
 };
 const createFinancialCategory = async (newCategory) => {
-  const response = await axiosInstance.post('/api/financial/categories', newCategory);
+  const response = await axiosInstance.post('/financial/categories', newCategory);
   return response.data;
 };
 const updateFinancialCategory = async ({ id, fields }) => {
-  const response = await axiosInstance.put(`/api/financial/categories/${id}`, fields);
+  const response = await axiosInstance.put(`/financial/categories/${id}`, fields);
   return response.data;
 };
 const deleteFinancialCategory = async (categoryId) => {
-  const response = await axiosInstance.delete(`/api/financial/categories/${categoryId}`);
+  const response = await axiosInstance.delete(`/financial/categories/${categoryId}`);
   return response.data;
 };
 
 // API Functions - Financial Transactions
 const fetchFinancialTransactions = async (filters) => {
   const response = await axiosInstance.get(
-    `/api/financial/transactions?restaurant_id=${filters.restaurantId}`
+    `/financial/transactions?restaurant_id=${filters.restaurantId}`
   );
   return response.data;
 };
 const createFinancialTransaction = async (newTransaction) => {
-  const response = await axiosInstance.post('/api/financial/transactions', newTransaction);
+  const response = await axiosInstance.post('/financial/transactions', newTransaction);
   return response.data;
 };
 const updateFinancialTransaction = async ({ id, fields }) => {
-  const response = await axiosInstance.put(`/api/financial/transactions/${id}`, fields);
+  const response = await axiosInstance.put(`/financial/transactions/${id}`, fields);
   return response.data;
 };
 const deleteFinancialTransaction = async (transactionId) => {
-  const response = await axiosInstance.delete(`/api/financial/transactions/${transactionId}`);
+  const response = await axiosInstance.delete(`/financial/transactions/${transactionId}`);
   return response.data;
 };
 
 // API Functions - Ingredients
 const fetchIngredients = async () => {
-  const response = await axiosInstance.get('/api/ingredients');
+  const response = await axiosInstance.get('/ingredients');
   return response.data;
 };
 const createIngredient = async (newIngredient) => {
-  const response = await axiosInstance.post('/api/ingredients', newIngredient);
+  const response = await axiosInstance.post('/ingredients', newIngredient);
   return response.data;
 };
 const updateIngredient = async ({ id, updatedIngredient }) => {
-  const response = await axiosInstance.put(`/api/ingredients/${id}`, updatedIngredient);
+  const response = await axiosInstance.put(`/ingredients/${id}`, updatedIngredient);
   return response.data;
 };
 const deleteIngredient = async (id) => {
-  const response = await axiosInstance.delete(`/api/ingredients/${id}`);
+  const response = await axiosInstance.delete(`/ingredients/${id}`);
   return response.data;
 };
 
@@ -102,221 +102,221 @@ const deleteMenuData = async ({ key, id }) => {
 
 // API Functions - Orders
 const fetchOrders = async () => {
-  const response = await axiosInstance.get('/api/orders');
+  const response = await axiosInstance.get('/orders');
   return response.data;
 };
 const updateOrderStatus = async ({ orderId, status }) => {
-  const response = await axiosInstance.put(`/api/orders/${orderId}/status`, { status });
+  const response = await axiosInstance.put(`/orders/${orderId}/status`, { status });
   return response.data;
 };
 
 // API Functions - Payment Methods
 const fetchPaymentMethods = async (restaurantId) => {
   const response = await axiosInstance.get(
-    `/api/financial/payment-methods?restaurant_id=${restaurantId}`
+    `/financial/payment-methods?restaurant_id=${restaurantId}`
   );
   return response.data;
 };
 const createPaymentMethod = async (newMethod) => {
-  const response = await axiosInstance.post('/api/financial/payment-methods', newMethod);
+  const response = await axiosInstance.post('/financial/payment-methods', newMethod);
   return response.data;
 };
 const updatePaymentMethod = async ({ id, fields }) => {
-  const response = await axiosInstance.put(`/api/financial/payment-methods/${id}`, fields);
+  const response = await axiosInstance.put(`/financial/payment-methods/${id}`, fields);
   return response.data;
 };
 const deletePaymentMethod = async (id) => {
-  const response = await axiosInstance.delete(`/api/financial/payment-methods/${id}`);
+  const response = await axiosInstance.delete(`/financial/payment-methods/${id}`);
   return response.data;
 };
 
 // API Functions - PDV
 const fetchPdvOrders = async (filterStatus) => {
   const response = await axiosInstance.get(
-    `/api/orders${filterStatus ? `?status=${filterStatus}` : ''}`
+    `/orders${filterStatus ? `?status=${filterStatus}` : ''}`
   );
   return response.data;
 };
 const fetchRestaurantDetails = async (restaurantId) => {
-  const response = await axiosInstance.get(`/api/restaurant/${restaurantId}`);
+  const response = await axiosInstance.get(`/restaurant/${restaurantId}`);
   return response.data;
 };
 const fetchCategories = async (restaurantId) => {
-  const response = await axiosInstance.get(`/api/categories?restaurant_id=${restaurantId}`);
+  const response = await axiosInstance.get(`/categories?restaurant_id=${restaurantId}`);
   return response.data;
 };
 const createCategory = async (newCategory) => {
-  const response = await axiosInstance.post('/api/categories', newCategory);
+  const response = await axiosInstance.post('/categories', newCategory);
   return response.data;
 };
 const updateCategory = async ({ id, fields }) => {
-  const response = await axiosInstance.put(`/api/categories/${id}`, fields);
+  const response = await axiosInstance.put(`/categories/${id}`, fields);
   return response.data;
 };
 const deleteCategory = async (categoryId) => {
-  const response = await axiosInstance.delete(`/api/categories/${categoryId}`);
+  const response = await axiosInstance.delete(`/categories/${categoryId}`);
   return response.data;
 };
 const toggleCategoryStatus = async (categoryId) => {
-  const response = await axiosInstance.patch(`/api/categories/${categoryId}/toggle-status`);
+  const response = await axiosInstance.patch(`/categories/${categoryId}/toggle-status`);
   return response.data;
 };
 const fetchProducts = async (restaurantId) => {
-  const response = await axiosInstance.get(`/api/products?restaurant_id=${restaurantId}`);
+  const response = await axiosInstance.get(`/products?restaurant_id=${restaurantId}`);
   return response.data;
 };
 const createProduct = async (newProduct) => {
-  const response = await axiosInstance.post('/api/products', newProduct);
+  const response = await axiosInstance.post('/products', newProduct);
   return response.data;
 };
 const updateProduct = async ({ id, fields }) => {
-  const response = await axiosInstance.put(`/api/products/${id}`, fields);
+  const response = await axiosInstance.put(`/products/${id}`, fields);
   return response.data;
 };
 const deleteProduct = async (productId) => {
-  const response = await axiosInstance.delete(`/api/products/${productId}`);
+  const response = await axiosInstance.delete(`/products/${productId}`);
   return response.data;
 };
 const toggleProductStatus = async (productId) => {
-  const response = await axiosInstance.patch(`/api/products/${productId}/toggle-status`);
+  const response = await axiosInstance.patch(`/products/${productId}/toggle-status`);
   return response.data;
 };
 const fetchAddons = async (restaurantId) => {
-  const response = await axiosInstance.get(`/api/addons?restaurant_id=${restaurantId}`);
+  const response = await axiosInstance.get(`/addons?restaurant_id=${restaurantId}`);
   return response.data;
 };
 const createAddon = async (newAddon) => {
-  const response = await axiosInstance.post('/api/addons', newAddon);
+  const response = await axiosInstance.post('/addons', newAddon);
   return response.data;
 };
 const updateAddon = async ({ id, fields }) => {
-  const response = await axiosInstance.put(`/api/addons/${id}`, fields);
+  const response = await axiosInstance.put(`/addons/${id}`, fields);
   return response.data;
 };
 const deleteAddon = async (addonId) => {
-  const response = await axiosInstance.delete(`/api/addons/${addonId}`);
+  const response = await axiosInstance.delete(`/addons/${addonId}`);
   return response.data;
 };
 const toggleAddonStatus = async (addonId) => {
-  const response = await axiosInstance.patch(`/api/addons/${addonId}/toggle-status`);
+  const response = await axiosInstance.patch(`/addons/${addonId}/toggle-status`);
   return response.data;
 };
 const updateRestaurantStatus = async ({ restaurantId, is_open }) => {
-  const response = await axiosInstance.put(`/api/restaurant/${restaurantId}/status/open`, {
+  const response = await axiosInstance.put(`/restaurant/${restaurantId}/status/open`, {
     is_open,
   });
   return response.data;
 };
 const updatePosStatus = async ({ restaurantId, pos_status }) => {
-  const response = await axiosInstance.put(`/api/restaurant/${restaurantId}/pos-status`, {
+  const response = await axiosInstance.put(`/restaurant/${restaurantId}/pos-status`, {
     pos_status,
   });
   return response.data;
 };
 const createPublicOrder = async (orderData) => {
-  const response = await axiosInstance.post('/api/public/orders', orderData);
+  const response = await axiosInstance.post('/public/orders', orderData);
   return response.data;
 };
 const createRestaurantOrder = async ({ restaurantId, orderData }) => {
-  const response = await axiosInstance.post(`/api/restaurant/${restaurantId}/orders`, orderData);
+  const response = await axiosInstance.post(`/restaurant/${restaurantId}/orders`, orderData);
   return response.data;
 };
 const fetchRestaurantTables = async (restaurantId) => {
-  const response = await axiosInstance.get(`/api/restaurant/${restaurantId}/tables`);
+  const response = await axiosInstance.get(`/restaurant/${restaurantId}/tables`);
   return response.data;
 };
 const fetchCustomersBySearch = async ({ restaurantId, searchTerm }) => {
   const response = await axiosInstance.get(
-    `/api/customers?restaurant_id=${restaurantId}&search=${searchTerm}`
+    `/customers?restaurant_id=${restaurantId}&search=${searchTerm}`
   );
   return response.data;
 };
 const fetchCurrentCashRegisterSession = async ({ restaurantId, userId }) => {
   const response = await axiosInstance.get(
-    `/api/cash-register/current-session?restaurant_id=${restaurantId}&user_id=${userId}`
+    `/cash-register/current-session?restaurant_id=${restaurantId}&user_id=${userId}`
   );
   return response.data;
 };
 const fetchCashRegisterOrders = async (sessionId) => {
   const response = await axiosInstance.get(
-    `/api/cash-register/cash-orders?session_id=${sessionId}`
+    `/cash-register/cash-orders?session_id=${sessionId}`
   );
   return response.data;
 };
 const openCashRegister = async (sessionData) => {
-  const response = await axiosInstance.post('/api/cash-register/open', sessionData);
+  const response = await axiosInstance.post('/cash-register/open', sessionData);
   return response.data;
 };
 const recordWithdrawal = async (data) => {
-  const response = await axiosInstance.post('/api/cash-register/withdrawal', data);
+  const response = await axiosInstance.post('/cash-register/withdrawal', data);
   return response.data;
 };
 const recordReinforcement = async (data) => {
-  const response = await axiosInstance.post('/api/cash-register/reinforcement', data);
+  const response = await axiosInstance.post('/cash-register/reinforcement', data);
   return response.data;
 };
 
 // API Functions - Purchases
 const fetchSuppliers = async (restaurantId) => {
-  const response = await axiosInstance.get(`/api/suppliers?restaurant_id=${restaurantId}`);
+  const response = await axiosInstance.get(`/suppliers?restaurant_id=${restaurantId}`);
   return response.data;
 };
 const moveStock = async (data) => {
-  const response = await axiosInstance.post('/api/stock/move', data);
+  const response = await axiosInstance.post('/stock/move', data);
   return response.data;
 };
 
 // API Functions - Stock Dashboard
 const fetchStockDashboard = async (restaurantId) => {
-  const response = await axiosInstance.get(`/api/stock/dashboard?restaurant_id=${restaurantId}`);
+  const response = await axiosInstance.get(`/stock/dashboard?restaurant_id=${restaurantId}`);
   return response.data;
 };
 
 // API Functions - Stock Movements
 const fetchStockMovements = async () => {
-  const response = await axiosInstance.get('/api/stock');
+  const response = await axiosInstance.get('/stock');
   return response.data;
 };
 const fetchStockHistory = async (productId) => {
-  const response = await axiosInstance.get(`/api/stock/history/${productId}`);
+  const response = await axiosInstance.get(`/stock/history/${productId}`);
   return response.data;
 };
 
 // API Functions - Stock Products
 const fetchStockProducts = async (restaurantId) => {
-  const response = await axiosInstance.get(`/api/stock?restaurant_id=${restaurantId}`);
+  const response = await axiosInstance.get(`/stock?restaurant_id=${restaurantId}`);
   return response.data;
 };
 
 // API Functions - Suppliers
 const createSupplier = async (newSupplier) => {
-  const response = await axiosInstance.post('/api/suppliers', newSupplier);
+  const response = await axiosInstance.post('/suppliers', newSupplier);
   return response.data;
 };
 const updateSupplier = async ({ id, updatedSupplier }) => {
-  const response = await axiosInstance.put(`/api/suppliers/${id}`, updatedSupplier);
+  const response = await axiosInstance.put(`/suppliers/${id}`, updatedSupplier);
   return response.data;
 };
 const deleteSupplier = async (id) => {
-  const response = await axiosInstance.delete(`/api/suppliers/${id}`);
+  const response = await axiosInstance.delete(`/suppliers/${id}`);
   return response.data;
 };
 
 // API Functions - Tables
 const fetchTables = async () => {
-  const response = await axiosInstance.get('/api/tables');
+  const response = await axiosInstance.get('/tables');
   return response.data;
 };
 const createTable = async (table) => {
-  const response = await axiosInstance.post('/api/tables', table);
+  const response = await axiosInstance.post('/tables', table);
   return response.data;
 };
 const updateTable = async ({ id, table }) => {
-  const response = await axiosInstance.put(`/api/tables/${id}`, table);
+  const response = await axiosInstance.put(`/tables/${id}`, table);
   return response.data;
 };
 const deleteTable = async (id) => {
-  const response = await axiosInstance.delete(`/api/tables/${id}`);
+  const response = await axiosInstance.delete(`/tables/${id}`);
   return response.data;
 };
 const generateQrCode = async (id) => {

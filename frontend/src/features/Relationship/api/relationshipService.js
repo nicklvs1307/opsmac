@@ -9,17 +9,17 @@ const RELATIONSHIP_QUERY_KEYS = {
 
 // API Functions
 const fetchCustomers = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/customers/restaurant/${restaurantId}`);
+  const { data } = await axiosInstance.get(`/customers/restaurant/${restaurantId}`);
   return data;
 };
 
 const fetchWhatsappSettings = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/settings/${restaurantId}/whatsapp`);
+  const { data } = await axiosInstance.get(`/settings/${restaurantId}/whatsapp`);
   return data;
 };
 
 const sendManualMessage = async ({ restaurantId, recipientPhoneNumber, messageText }) => {
-  const { data } = await axiosInstance.post(`/api/whatsapp/send-manual`, {
+  const { data } = await axiosInstance.post(`/whatsapp/send-manual`, {
     restaurant_id: restaurantId,
     recipient_phone_number: recipientPhoneNumber,
     message_text: messageText,
@@ -28,7 +28,7 @@ const sendManualMessage = async ({ restaurantId, recipientPhoneNumber, messageTe
 };
 
 const saveAutomaticCampaigns = async ({ restaurantId, settings }) => {
-  const { data } = await axiosInstance.put(`/api/settings/${restaurantId}`, {
+  const { data } = await axiosInstance.put(`/settings/${restaurantId}`, {
     settings: {
       whatsapp_messages: settings,
     },

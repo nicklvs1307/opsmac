@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 // Hook to fetch roles
 export const useGetRoles = () => {
   return useQuery('roles', async () => {
-    const { data } = await axiosInstance.get(`/api/permissions/my-restaurant/roles`);
+    const { data } = await axiosInstance.get(`/permissions/my-restaurant/roles`);
     return data;
   });
 };
@@ -18,7 +18,7 @@ export const useGetRoles = () => {
 export const useDeleteRole = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (roleId) => axiosInstance.delete(`/api/permissions/my-restaurant/roles/${roleId}`),
+    (roleId) => axiosInstance.delete(`/permissions/my-restaurant/roles/${roleId}`),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('roles');

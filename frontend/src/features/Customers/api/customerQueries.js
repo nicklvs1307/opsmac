@@ -11,32 +11,32 @@ const CUSTOMER_QUERY_KEYS = {
 
 // API Functions
 const fetchCustomerBirthdays = async (params) => {
-  const response = await axiosInstance.get('/api/customers/birthdays', { params });
+  const response = await axiosInstance.get('/customers/birthdays', { params });
   return response.data;
 };
 
 const fetchCustomerDashboardMetrics = async (params) => {
-  const response = await axiosInstance.get('/api/customers/dashboard-metrics', { params });
+  const response = await axiosInstance.get('/customers/dashboard-metrics', { params });
   return response.data;
 };
 
 const fetchCustomerDetail = async (id) => {
-  const response = await axiosInstance.get(`/api/customers/${id}/details`);
+  const response = await axiosInstance.get(`/customers/${id}/details`);
   return response.data;
 };
 
 const resetCustomerVisits = async (id) => {
-  const response = await axiosInstance.post(`/api/customers/${id}/reset-visits`);
+  const response = await axiosInstance.post(`/customers/${id}/reset-visits`);
   return response.data;
 };
 
 const clearCustomerCheckins = async (id) => {
-  const response = await axiosInstance.post(`/api/customers/${id}/clear-checkins`);
+  const response = await axiosInstance.post(`/customers/${id}/clear-checkins`);
   return response.data;
 };
 
 const updateCustomer = async ({ id, data }) => {
-  const response = await axiosInstance.put(`/api/customers/${id}`, data);
+  const response = await axiosInstance.put(`/customers/${id}`, data);
   return response.data;
 };
 

@@ -19,13 +19,13 @@ const fetchCashFlowReport = async ({ restaurantId, filters }) => {
     return null; // Don't fetch if dates are not set
   }
   const { data } = await axiosInstance.get(
-    `/api/financial/reports/cash-flow?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`
+    `/financial/reports/cash-flow?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`
   );
   return data;
 };
 
 const fetchCurrentStockPosition = async ({ restaurantId }) => {
-  const { data } = await axiosInstance.get(`/api/stock?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(`/stock?restaurant_id=${restaurantId}`);
   return data;
 };
 
@@ -35,14 +35,14 @@ const fetchDREReport = async ({ restaurantId, filters }) => {
     return null; // Don't fetch if dates are not set
   }
   const { data } = await axiosInstance.get(
-    `/api/financial/reports/dre?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`
+    `/financial/reports/dre?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`
   );
   return data;
 };
 
 const fetchGeneratedCoupons = async ({ restaurantId, filters }) => {
   const { status, search, page, limit } = filters;
-  let url = `/api/coupons/restaurant/${restaurantId}?page=${page}&limit=${limit}`;
+  let url = `/coupons/restaurant/${restaurantId}?page=${page}&limit=${limit}`;
   if (status) url += `&status=${status}`;
   if (search) url += `&search=${search}`;
   const { data } = await axiosInstance.get(url);
@@ -51,7 +51,7 @@ const fetchGeneratedCoupons = async ({ restaurantId, filters }) => {
 
 const fetchFinancialCategories = async ({ restaurantId, filters }) => {
   const { type } = filters;
-  let url = `/api/financial/categories?restaurant_id=${restaurantId}`;
+  let url = `/financial/categories?restaurant_id=${restaurantId}`;
   if (type) url += `&type=${type}`;
   const { data } = await axiosInstance.get(url);
   return data;
@@ -63,14 +63,14 @@ const fetchSalesByPaymentMethodReport = async ({ restaurantId, filters }) => {
     return null; // Don't fetch if dates are not set
   }
   const { data } = await axiosInstance.get(
-    `/api/financial/reports/sales-by-payment-method?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`
+    `/financial/reports/sales-by-payment-method?restaurant_id=${restaurantId}&start_date=${start_date}&end_date=${end_date}`
   );
   return data;
 };
 
 const fetchStockPositionHistory = async ({ restaurantId, filters }) => {
   const { start_date, end_date, item_id, type } = filters;
-  let url = `/api/stock/history?restaurant_id=${restaurantId}`;
+  let url = `/stock/history?restaurant_id=${restaurantId}`;
   if (start_date) url += `&start_date=${start_date}`;
   if (end_date) url += `&end_date=${end_date}`;
   if (item_id) url += `&item_id=${item_id}`;
@@ -80,7 +80,7 @@ const fetchStockPositionHistory = async ({ restaurantId, filters }) => {
 };
 
 const fetchStockItems = async ({ restaurantId }) => {
-  const { data } = await axiosInstance.get(`/api/stock?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(`/stock?restaurant_id=${restaurantId}`);
   return data;
 };
 

@@ -9,17 +9,17 @@ const STOCK_QUERY_KEYS = {
 
 // API Functions
 const fetchStocks = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/stock/restaurant/${restaurantId}`);
+  const { data } = await axiosInstance.get(`/stock/restaurant/${restaurantId}`);
   return data;
 };
 
 const createStockMovement = ({ restaurantId, movement }) => {
-  return axiosInstance.post(`/api/stock/restaurant/${restaurantId}/move`, movement);
+  return axiosInstance.post(`/stock/restaurant/${restaurantId}/move`, movement);
 };
 
 const fetchStockHistory = async ({ restaurantId, productId }) => {
   const { data } = await axiosInstance.get(
-    `/api/stock/restaurant/${restaurantId}/history/${productId}`
+    `/stock/restaurant/${restaurantId}/history/${productId}`
   );
   return data;
 };

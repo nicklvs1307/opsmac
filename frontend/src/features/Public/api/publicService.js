@@ -17,7 +17,7 @@ export const useGetDineInMenu = (tableId) => {
   return useQuery(
     ['dineInMenu', tableId],
     async () => {
-      const { data } = await axiosInstance.get(`/api/public/dine-in-menu/${tableId}`);
+      const { data } = await axiosInstance.get(`/public/dine-in-menu/${tableId}`);
       return data;
     },
     {
@@ -28,7 +28,7 @@ export const useGetDineInMenu = (tableId) => {
 
 // Hook to spin the wheel
 export const useSpinWheel = () => {
-  return useMutation((rewardData) => axiosInstance.post('/api/rewards/spin-wheel', rewardData));
+  return useMutation((rewardData) => axiosInstance.post('/rewards/spin-wheel', rewardData));
 };
 
 // Hook to fetch public restaurant data
@@ -48,14 +48,14 @@ export const useGetPublicRestaurant = (restaurantSlug) => {
 // Hook to validate a coupon
 export const useValidateCoupon = () => {
   return useMutation((couponData) =>
-    axiosInstance.post('/api/coupons/public/validate', couponData)
+    axiosInstance.post('/coupons/public/validate', couponData)
   );
 };
 
 // Hook to perform a public check-in
 export const usePublicCheckin = (restaurantSlug) => {
   return useMutation((checkinData) =>
-    axiosInstance.post(`/api/checkin/public/${restaurantSlug}`, checkinData)
+    axiosInstance.post(`/checkin/public/${restaurantSlug}`, checkinData)
   );
 };
 
@@ -64,7 +64,7 @@ export const useGetDeliveryMenu = (restaurantSlug) => {
   return useQuery(
     ['deliveryMenu', restaurantSlug],
     async () => {
-      const { data } = await axiosInstance.get(`/api/public/products/delivery/${restaurantSlug}`);
+      const { data } = await axiosInstance.get(`/public/products/delivery/${restaurantSlug}`);
       const groupedByCategory = data.products.reduce((acc, product) => {
         const category = product.category?.name || 'Outros';
         if (!acc[category]) {
@@ -83,7 +83,7 @@ export const useGetDeliveryMenu = (restaurantSlug) => {
 
 // Hook to create a delivery order
 export const useCreateDeliveryOrder = () => {
-  return useMutation((orderData) => axiosInstance.post('/api/public/orders', orderData));
+  return useMutation((orderData) => axiosInstance.post('/public/orders', orderData));
 };
 
 // Hook to fetch dine-in menu
@@ -119,7 +119,7 @@ export const useCallWaiter = () => {
 
 // Hook to create a dine-in order
 export const useCreateDineInOrder = () => {
-  return useMutation((orderData) => axiosInstance.post('/api/public/dine-in/order', orderData));
+  return useMutation((orderData) => axiosInstance.post('/public/dine-in/order', orderData));
 };
 
 // Hook to start a table session
@@ -134,7 +134,7 @@ export const useGetPublicMenu = (restaurantSlug) => {
   return useQuery(
     ['publicMenu', restaurantSlug],
     async () => {
-      const { data } = await axiosInstance.get(`/api/public/products/${restaurantSlug}`);
+      const { data } = await axiosInstance.get(`/public/products/${restaurantSlug}`);
       return data;
     },
     {

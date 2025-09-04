@@ -8,12 +8,12 @@ const SUPPLIER_QUERY_KEYS = {
 
 // API Functions
 const fetchSuppliers = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/api/suppliers?restaurant_id=${restaurantId}`);
+  const { data } = await axiosInstance.get(`/suppliers?restaurant_id=${restaurantId}`);
   return data;
 };
 
 const createSupplier = (newSupplier) => {
-  return axiosInstance.post('/api/suppliers', newSupplier);
+  return axiosInstance.post('/suppliers', newSupplier);
 };
 
 const updateSupplier = ({ id, updatedSupplier }) => {

@@ -22,7 +22,7 @@ import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 
 const fetchAddons = async () => {
-  const { data } = await axiosInstance.get('/api/addons');
+  const { data } = await axiosInstance.get('/addons');
   return data;
 };
 

@@ -28,6 +28,8 @@ const login = async (email, password) => {
     throw new UnauthorizedError('Credenciais inválidas');
   }
 
+  console.log('DEBUG: User object after findOne in login:', JSON.stringify(user, null, 2));
+
   if (user.isLocked()) {
     throw new ForbiddenError('Conta temporariamente bloqueada devido a muitas tentativas de login');
   }
@@ -114,6 +116,8 @@ const getMe = async (userId) => {
     if (!user) {
         throw new NotFoundError('Usuário não encontrado');
     }
+
+    console.log('DEBUG: User object after findByPk in getMe:', JSON.stringify(user, null, 2));
 
     let permissionSnapshot = null;
     let primaryRestaurant = null;

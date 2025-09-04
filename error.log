@@ -4,34 +4,143 @@ Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
 DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
-Error getting permission tree: Error: Unable to find a valid association for model, 'Submodule'
-    at PostgresQueryGenerator.<anonymous> (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:631:21)
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.quote (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:600:18)
-    at PostgresQueryGenerator.getQueryOrders (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1585:34)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1024:27)
-    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
-    at Module.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async IamService.buildSnapshot (/app/backend/src/services/iamService.js:46:24)
-    at async /app/backend/src/api/routes/iam.js:78:22
 DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
-Error getting permission tree: Error: Unable to find a valid association for model, 'Submodule'
-    at PostgresQueryGenerator.<anonymous> (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:631:21)
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.quote (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:600:18)
-    at PostgresQueryGenerator.getQueryOrders (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1585:34)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1024:27)
-    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
-    at Module.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async IamService.buildSnapshot (/app/backend/src/services/iamService.js:46:24)
-    at async /app/backend/src/api/routes/iam.js:78:22
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
 
-    URL da solicitação
-https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=7c98bdc6-c854-4611-acc1-6418115dd067
-Método da solicitação
-GET
-Código de status
-500 Internal Server Error
-{"error":"Internal Server Error"}
+(índice):1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+ ProtectedRoute Debug: isAuthenticated true
+ ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ ProtectedRoute Debug: featureKey undefined
+ ProtectedRoute Debug: actionKey undefined
+ ProtectedRoute Debug: Super Admin bypass triggered.
+main.cff75e45.js:2 [Violation] 'message' handler took 389ms
+[Violation] Forced reflow while executing JavaScript took 104ms
+ ProtectedRoute Debug: isAuthenticated true
+ ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ ProtectedRoute Debug: featureKey undefined
+ ProtectedRoute Debug: actionKey undefined
+ ProtectedRoute Debug: Super Admin bypass triggered.
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+ ProtectedRoute Debug: isAuthenticated true
+ ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ ProtectedRoute Debug: featureKey restaurants
+ ProtectedRoute Debug: actionKey read
+ ProtectedRoute Debug: isAuthenticated true
+ ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ ProtectedRoute Debug: featureKey restaurants
+ ProtectedRoute Debug: actionKey update
+main.cff75e45.js:2 [Violation] 'message' handler took 448ms
+[Violation] Forced reflow while executing JavaScript took 91ms
+ 
+ds @ main.cff75e45.js:2
+o.componentDidCatch.r.callback @ main.cff75e45.js:2
+Uo @ main.cff75e45.js:2
+bl @ main.cff75e45.js:2
+xl @ main.cff75e45.js:2
+yl @ main.cff75e45.js:2
+(anônimo) @ main.cff75e45.js:2
+jc @ main.cff75e45.js:2
+lc @ main.cff75e45.js:2
+qa @ main.cff75e45.js:2
+_c @ main.cff75e45.js:2
+(anônimo) @ main.cff75e45.js:2
+_ @ main.cff75e45.js:2
+P @ main.cff75e45.js:2
+ React Router caught the following error during render  {componentStack: '\n    at _1 (https://feedelizapro.towersfy.com/stat…towersfy.com/static/js/main.cff75e45.js:2:486173)'}
+componentDidCatch @ main.cff75e45.js:2
+o.componentDidCatch.r.callback @ main.cff75e45.js:2
+Uo @ main.cff75e45.js:2
+bl @ main.cff75e45.js:2
+xl @ main.cff75e45.js:2
+yl @ main.cff75e45.js:2
+(anônimo) @ main.cff75e45.js:2
+jc @ main.cff75e45.js:2
+lc @ main.cff75e45.js:2
+qa @ main.cff75e45.js:2
+_c @ main.cff75e45.js:2
+(anônimo) @ main.cff75e45.js:2
+_ @ main.cff75e45.js:2
+P @ main.cff75e45.js:2
+ ProtectedRoute Debug: isAuthenticated true
+ ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey restaurants
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey read
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey restaurants
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
+react-dom.production.min.js:188 TypeError: Cannot read properties of undefined (reading 'forEach')
+    at RestaurantEditPage.js:102:25
+    at Array.forEach (<anonymous>)
+    at RestaurantEditPage.js:84:30
+    at nl (react-dom.production.min.js:243:332)
+    at _c (react-dom.production.min.js:285:111)
+    at react-dom.production.min.js:282:409
+    at jc (react-dom.production.min.js:280:398)
+    at lc (react-dom.production.min.js:272:439)
+    at qa (react-dom.production.min.js:127:105)
+    at react-dom.production.min.js:266:273
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+bl @ react-dom.production.min.js:260
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+hooks.tsx:631 React Router caught the following error during render TypeError: Cannot read properties of undefined (reading 'forEach')
+    at RestaurantEditPage.js:102:25
+    at Array.forEach (<anonymous>)
+    at RestaurantEditPage.js:84:30
+    at nl (react-dom.production.min.js:243:332)
+    at _c (react-dom.production.min.js:285:111)
+    at react-dom.production.min.js:282:409
+    at jc (react-dom.production.min.js:280:398)
+    at lc (react-dom.production.min.js:272:439)
+    at qa (react-dom.production.min.js:127:105)
+    at react-dom.production.min.js:266:273 {componentStack: '\n    at _1 (https://feedelizapro.towersfy.com/stat…towersfy.com/static/js/main.cff75e45.js:2:486173)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+bl @ react-dom.production.min.js:260
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+main.cff75e45.js:2 [Violation] 'click' handler took 486ms
+[Violation] Forced reflow while executing JavaScript took 57ms

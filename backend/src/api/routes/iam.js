@@ -29,6 +29,9 @@ const auditService = {
 const getAuthContext = (req) => {
   const userId = req.user?.id; // Assuming user ID is available on req.user
   const restaurantId = req.restaurant?.id || req.query.restaurantId; // Assuming restaurant ID is on req.restaurant or req.query
+  console.log('DEBUG: getAuthContext - req.user:', req.user); // Add this line
+  console.log('DEBUG: getAuthContext - req.restaurant:', req.restaurant); // Add this line
+  console.log('DEBUG: getAuthContext - req.query.restaurantId:', req.query.restaurantId); // Add this line
   return { userId, restaurantId };
 };
 
@@ -68,6 +71,7 @@ const getAuthContext = (req) => {
  */
 router.get('/tree', async (req, res) => {
   const { userId, restaurantId } = getAuthContext(req);
+  console.log('DEBUG: /iam/tree - userId:', userId, 'restaurantId:', restaurantId); // Add this line
 
   if (!userId || !restaurantId) {
     return res.status(401).json({ error: 'Unauthorized: Missing user or restaurant context.' });

@@ -7,6 +7,7 @@ export const fetchUsers = async () => {
 
 export const fetchRestaurants = async () => {
   const response = await axiosInstance.get('/admin/restaurants');
+  console.log('DEBUG: fetchRestaurants - response.data:', response.data); // Add this line
   return response.data;
 };
 

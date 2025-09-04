@@ -78,7 +78,7 @@ const RestaurantEditPage = () => {
 
   // Effect to populate form and selected modules when data loads
   useEffect(() => {
-    if (restaurant && permissionTree) {
+    if (restaurant && permissionTree && permissionTree.modules) {
       reset(restaurant); // Populate form fields with restaurant data
 
       const initialSelected = {};
@@ -89,21 +89,27 @@ const RestaurantEditPage = () => {
           submodules: {},
           features: {},
         };
-        module.submodules.forEach((submodule) => {
-          initialSelected[module.id].submodules[submodule.id] = {
-            checked: submodule.status === 'active',
-            indeterminate: false,
-            features: {},
-          };
-          submodule.features.forEach((feature) => {
-            initialSelected[module.id].submodules[submodule.id].features[feature.id] =
-              feature.status === 'active';
+        if (module.submodules) {
+          module.submodules.forEach((submodule) => {
+            initialSelected[module.id].submodules[submodule.id] = {
+              checked: submodule.status === 'active',
+              indeterminate: false,
+              features: {},
+            };
+            if (submodule.features) {
+              submodule.features.forEach((feature) => {
+                initialSelected[module.id].submodules[submodule.id].features[feature.id] =
+                  feature.status === 'active';
+              });
+            }
           });
-        });
-        module.features.forEach((feature) => {
-          // Direct features under module
-          initialSelected[module.id].features[feature.id] = feature.status === 'active';
-        });
+        }
+        if (module.features) {
+          module.features.forEach((feature) => {
+            // Direct features under module
+            initialSelected[module.id].features[feature.id] = feature.status === 'active';
+          });
+        }
       });
 
       // This part needs to be more robust to handle indeterminate states correctly

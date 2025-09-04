@@ -1,12 +1,11 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/admin/restaurants/7c98bdc6-c854-4611-acc1-6418115dd067
-Método da solicitação
-GET
-Código de status
-404 Not Found
-{"error":"Rota não encontrada"}
 edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
 AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
@@ -14,7 +13,7 @@ Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
+(anônimo) @ Axios.js:213
 (anônimo) @ bind.js:5
 (anônimo) @ AuthContext.js:73
 nl @ react-dom.production.min.js:243
@@ -22,17 +21,10 @@ _c @ react-dom.production.min.js:285
 (anônimo) @ react-dom.production.min.js:281
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
+main.95f4aaf9.js:2 [Violation] 'message' handler took 246ms
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
-ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-main.95f4aaf9.js:2 [Violation] 'message' handler took 223ms
-[Violation] Forced reflow while executing JavaScript took 34ms
- ProtectedRoute Debug: isAuthenticated true
- ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
- ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
@@ -47,40 +39,23 @@ RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - restaurantId from params: 7
 RestaurantEditPage.js:48 DEBUG: RestaurantEditPage - found restaurant: undefined
 RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
 RestaurantEditPage.js:48 DEBUG: RestaurantEditPage - found restaurant: undefined
+main.95f4aaf9.js:2 [Violation] 'message' handler took 150ms
 RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
 RestaurantEditPage.js:48 DEBUG: RestaurantEditPage - found restaurant: undefined
-adminService.js:11  GET https://feedelizaapi.towersfy.com/api/admin/restaurants/7c98bdc6-c854-4611-acc1-6418115dd067 404 (Not Found)
+adminService.js:12 DEBUG: fetchRestaurants - response.data: {id: '7c98bdc6-c854-4611-acc1-6418115dd067', name: 'Endereço teste', slug: 'endereco-teste', description: '1', address: 'Rua Avenida Brasil', …}
+RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
+RestaurantEditPage.js:48 DEBUG: RestaurantEditPage - found restaurant: {id: '7c98bdc6-c854-4611-acc1-6418115dd067', name: 'Endereço teste', slug: 'endereco-teste', description: '1', address: 'Rua Avenida Brasil', …}
+adminService.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants/7c98bdc6-c854-4611-acc1-6418115dd067".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
+(anônimo) @ Axios.js:213
 (anônimo) @ bind.js:5
 (anônimo) @ adminService.js:11
-enabled @ RestaurantEditPage.js:42
-fetchFn @ query.js:300
-c @ retryer.js:95
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-adminService.js:15 DEBUG: fetchRestaurants - error: xt {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ adminService.js:15
-await in (anônimo)
-enabled @ RestaurantEditPage.js:42
+(anônimo) @ RestaurantEditPage.js:42
 fetchFn @ query.js:300
 c @ retryer.js:95
 u @ retryer.js:156
@@ -99,37 +74,7 @@ ac @ react-dom.production.min.js:269
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
 RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
-RestaurantEditPage.js:48 DEBUG: RestaurantEditPage - found restaurant: undefined
-adminService.js:11 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants/7c98bdc6-c854-4611-acc1-6418115dd067".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ adminService.js:11
-enabled @ RestaurantEditPage.js:42
-fetchFn @ query.js:300
-c @ retryer.js:95
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
-RestaurantEditPage.js:48 DEBUG: RestaurantEditPage - found restaurant: undefined
+RestaurantEditPage.js:48 DEBUG: RestaurantEditPage - found restaurant: {id: '7c98bdc6-c854-4611-acc1-6418115dd067', name: 'Endereço teste', slug: 'endereco-teste', description: '1', address: 'Rua Avenida Brasil', …}
 iamQueries.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=7c98bdc6-c854-4611-acc1-6418115dd067".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
@@ -137,7 +82,7 @@ Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
+(anônimo) @ Axios.js:213
 (anônimo) @ bind.js:5
 (anônimo) @ iamQueries.js:11
 fetchFn @ query.js:300
@@ -157,123 +102,52 @@ jc @ react-dom.production.min.js:280
 ac @ react-dom.production.min.js:269
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
-adminService.js:11  GET https://feedelizaapi.towersfy.com/api/admin/restaurants/7c98bdc6-c854-4611-acc1-6418115dd067 404 (Not Found)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ adminService.js:11
-enabled @ RestaurantEditPage.js:42
-fetchFn @ query.js:300
-c @ retryer.js:95
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
+main.95f4aaf9.js:2 [Violation] 'message' handler took 754ms
+[Violation] Forced reflow while executing JavaScript took 107ms
+react-dom.production.min.js:188 TypeError: Cannot read properties of undefined (reading 'forEach')
+    at RestaurantEditPage.js:103:25
+    at Array.forEach (<anonymous>)
+    at RestaurantEditPage.js:85:30
+    at nl (react-dom.production.min.js:243:332)
+    at _c (react-dom.production.min.js:285:111)
+    at react-dom.production.min.js:281:391
+    at _ (scheduler.production.min.js:13:203)
+    at MessagePort.P (scheduler.production.min.js:14:128)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+bl @ react-dom.production.min.js:260
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
 (anônimo) @ react-dom.production.min.js:282
 jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-adminService.js:15 DEBUG: fetchRestaurants - error: xt {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ adminService.js:15
-await in (anônimo)
-enabled @ RestaurantEditPage.js:42
-fetchFn @ query.js:300
-c @ retryer.js:95
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
 lc @ react-dom.production.min.js:272
 qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
-query.js:358 xt {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-onError @ query.js:358
-f @ retryer.js:67
-(anônimo) @ retryer.js:132
-Promise.catch
-c @ retryer.js:116
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
+hooks.tsx:631 React Router caught the following error during render TypeError: Cannot read properties of undefined (reading 'forEach')
+    at RestaurantEditPage.js:103:25
+    at Array.forEach (<anonymous>)
+    at RestaurantEditPage.js:85:30
+    at nl (react-dom.production.min.js:243:332)
+    at _c (react-dom.production.min.js:285:111)
+    at react-dom.production.min.js:281:391
+    at _ (scheduler.production.min.js:13:203)
+    at MessagePort.P (scheduler.production.min.js:14:128) {componentStack: '\n    at j1 (https://feedelizapro.towersfy.com/stat…towersfy.com/static/js/main.95f4aaf9.js:2:486173)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+bl @ react-dom.production.min.js:260
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
 lc @ react-dom.production.min.js:272
 qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
-RestaurantEditPage.js:48 DEBUG: RestaurantEditPage - found restaurant: undefined
-adminService.js:11 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants/7c98bdc6-c854-4611-acc1-6418115dd067".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ adminService.js:11
-enabled @ RestaurantEditPage.js:42
-fetchFn @ query.js:300
-c @ retryer.js:95
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
 _c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
+(anônimo) @ react-dom.production.min.js:281
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
+https://feedelizapro.towersfy.com/admin/restaurants/7c98bdc6-c854-4611-acc1-6418115dd067/edit

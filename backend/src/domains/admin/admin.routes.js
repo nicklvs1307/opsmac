@@ -26,6 +26,7 @@ router.put('/users/:id', updateUserValidation, adminController.updateUser);
 router.post('/restaurants', createRestaurantValidation, adminController.createRestaurant);
 router.post('/restaurants/create-with-owner', createRestaurantWithOwnerValidation, adminController.createRestaurantWithOwner);
 router.get('/restaurants', adminController.listRestaurants);
+router.get('/restaurants/:id', adminController.getRestaurantById);
 router.put('/restaurants/:id', updateRestaurantValidation, adminController.updateRestaurant);
 
 // Module Management

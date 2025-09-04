@@ -210,6 +210,11 @@ exports.listRestaurants = async () => {
   return formattedRestaurants;
 };
 
+exports.getRestaurantById = async (restaurantId) => {
+  const restaurant = await models.Restaurant.findByPk(restaurantId);
+  return restaurant;
+};
+
 exports.updateRestaurant = async (restaurantId, updateData) => {
   const restaurant = await models.Restaurant.findByPk(restaurantId);
   if (!restaurant) {

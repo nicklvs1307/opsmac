@@ -69,6 +69,18 @@ exports.listRestaurants = async (req, res, next) => {
   }
 };
 
+exports.getRestaurantById = async (req, res, next) => {
+  try {
+    const restaurant = await adminService.getRestaurantById(req.params.id);
+    if (!restaurant) {
+      throw new NotFoundError('Restaurante não encontrado');
+    }
+    res.status(200).json(restaurant);
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.updateRestaurant = async (req, res, next) => {
   try {
     handleValidationErrors(req);

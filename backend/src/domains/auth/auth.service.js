@@ -84,7 +84,7 @@ const login = async (email, password) => {
     name: user.name,
     email: user.email,
     phone: user.phone,
-    role: user.role,
+    roles: user.roles,
     avatar: user.avatar,
     isActive: user.isActive,
     emailVerified: user.emailVerified,
@@ -148,7 +148,7 @@ const getMe = async (userId) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
-        role: user.role, // This might need adjustment if a user can have multiple roles
+        roles: user.roles, // This might need adjustment if a user can have multiple roles
         avatar: user.avatar,
         isActive: user.isActive,
         emailVerified: user.emailVerified,

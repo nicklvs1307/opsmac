@@ -1,8 +1,66 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/api/iam/tree?restaurantId=045b05e6-1c1b-4b48-bd29-389e0b579ee0
-Método da solicitação
-GET
-Código de status
-404 Not Found
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated false
+ProtectedRoute.js:16 ProtectedRoute Debug: user null
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot undefined
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin undefined
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+serviceWorkerRegistration.js:74 Content is cached for offline use.
+feedelizaapi.towersfy.com/api/auth/login:1  Failed to load resource: the server responded with a status of 500 ()
+feedelizaapi.towersfy.com/api/auth/login:1  Failed to load resource: the server responded with a status of 500 ()
+AuthContext.js:89  POST https://feedelizaapi.towersfy.com/api/auth/login 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+login @ AuthContext.js:89
+onSubmit @ Login.js:25
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+AuthContext.js:89 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/auth/login".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+login @ AuthContext.js:89
+onSubmit @ Login.js:25
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
 
-{"error":"Rota não encontrada"}
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/auth/login
+Método da solicitação
+POST
+Código de status
+500 Internal Server Error
+

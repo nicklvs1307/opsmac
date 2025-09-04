@@ -1,6 +1,6 @@
 'use strict';
 
-const { models } = require('../../models'); // Adjust path to models as needed
+const models = require('../../models'); // Adjust path to models as needed
 const { Op } = require('sequelize');
 const redisClient = require('../config/redisClient'); // Import redisClient
 

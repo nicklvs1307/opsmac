@@ -52,7 +52,7 @@ class IamService {
           as: 'features',
         }],
       }],
-      order: [['sortOrder', 'ASC'], [models.Submodule, 'sortOrder', 'ASC'], [models.Submodule, models.Feature, 'sortOrder', 'ASC']],
+      order: [['sortOrder', 'ASC'], ['submodules', 'sortOrder', 'ASC'], ['submodules', 'features', 'sortOrder', 'ASC']],
     });
 
     // Get entitlements for the restaurant

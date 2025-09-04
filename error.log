@@ -1,72 +1,37 @@
-URL da solicitação
+> feedeliza-plus@1.0.0 start
+> node backend/server.js
+Redis Client Connected
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Error getting permission tree: Error: Unable to find a valid association for model, 'Submodule'
+    at PostgresQueryGenerator.<anonymous> (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:631:21)
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.quote (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:600:18)
+    at PostgresQueryGenerator.getQueryOrders (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1585:34)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1024:27)
+    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
+    at Module.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async IamService.buildSnapshot (/app/backend/src/services/iamService.js:46:24)
+    at async /app/backend/src/api/routes/iam.js:78:22
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Error getting permission tree: Error: Unable to find a valid association for model, 'Submodule'
+    at PostgresQueryGenerator.<anonymous> (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:631:21)
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.quote (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:600:18)
+    at PostgresQueryGenerator.getQueryOrders (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1585:34)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1024:27)
+    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
+    at Module.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async IamService.buildSnapshot (/app/backend/src/services/iamService.js:46:24)
+    at async /app/backend/src/api/routes/iam.js:78:22
+
+    URL da solicitação
 https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=7c98bdc6-c854-4611-acc1-6418115dd067
 Método da solicitação
 GET
 Código de status
 500 Internal Server Error
 {"error":"Internal Server Error"}
-
-https://feedelizapro.towersfy.com/admin/restaurants/7c98bdc6-c854-4611-acc1-6418115dd067/edit
-
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Error ConnectionTimeoutError: Connection timeout
-    at Socket.<anonymous> (/app/node_modules/@redis/client/dist/lib/client/socket.js:177:124)
-    at Object.onceWrapper (node:events:638:28)
-    at Socket.emit (node:events:524:28)
-    at Socket._onTimeout (node:net:595:8)
-    at listOnTimeout (node:internal/timers:581:17)
-    at process.processTimers (node:internal/timers:519:7)
-Redis Client Connected
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-DEBUG: authMiddleware - error: NotFoundError: Usuário não encontrado
-    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:115:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
-  statusCode: 404
-}
-Error caught by middleware: NotFoundError: Usuário não encontrado
-    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:115:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
-  statusCode: 404
-}
-DEBUG: User object before isActive check: {
-  id: '4d6acf9d-9558-4c17-8fab-e9690d02d407',
-  email: 'superadmin@example.com',
-  isActive: true
-}
-NODE_ENV: production
-JWT_SECRET_FILE: /run/secrets/jwt_secret
-Secret read from file. Length: 32
-DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e
-Error getting permission tree: TypeError: Cannot read properties of undefined (reading 'User')
-    at IamService.buildSnapshot (/app/backend/src/services/iamService.js:33:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async /app/backend/src/api/routes/iam.js:78:22
-DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e
-Error getting permission tree: TypeError: Cannot read properties of undefined (reading 'User')
-    at IamService.buildSnapshot (/app/backend/src/services/iamService.js:33:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async /app/backend/src/api/routes/iam.js:78:22
-DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
-Error getting permission tree: TypeError: Cannot read properties of undefined (reading 'User')
-    at IamService.buildSnapshot (/app/backend/src/services/iamService.js:33:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async /app/backend/src/api/routes/iam.js:78:22
-DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
-Error getting permission tree: TypeError: Cannot read properties of undefined (reading 'User')
-    at IamService.buildSnapshot (/app/backend/src/services/iamService.js:33:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async /app/backend/src/api/routes/iam.js:78:22
-DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
-Error getting permission tree: TypeError: Cannot read properties of undefined (reading 'User')
-    at IamService.buildSnapshot (/app/backend/src/services/iamService.js:33:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async /app/backend/src/api/routes/iam.js:78:22
-DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
-Error getting permission tree: TypeError: Cannot read properties of undefined (reading 'User')
-    at IamService.buildSnapshot (/app/backend/src/services/iamService.js:33:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async /app/backend/src/api/routes/iam.js:78:22

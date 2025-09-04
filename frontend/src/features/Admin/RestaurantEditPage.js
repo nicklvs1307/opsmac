@@ -43,8 +43,13 @@ const RestaurantEditPage = () => {
     enabled: user?.role?.name === 'super_admin', // Only fetch all restaurants if super admin
   });
 
+  console.log('DEBUG: RestaurantEditPage - allRestaurants:', allRestaurants); // Add this line
+  console.log('DEBUG: RestaurantEditPage - restaurantId from params:', restaurantId); // Add this line
+
   // Find the specific restaurant from the fetched list
   const restaurant = allRestaurants?.find((r) => r.id === restaurantId);
+
+  console.log('DEBUG: RestaurantEditPage - found restaurant:', restaurant); // Add this line
 
   // Fetch permission tree (modules, submodules, features) for the selected restaurant
   const {

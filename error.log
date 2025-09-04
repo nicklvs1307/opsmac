@@ -1,30 +1,14 @@
 edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
-ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ AuthContext.js:73
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-main.4945edd6.js:2 [Violation] 'message' handler took 317ms
-[Violation] Forced reflow while executing JavaScript took 56ms
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ ProtectedRoute Debug: isAuthenticated true
+ ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ ProtectedRoute Debug: featureKey undefined
+ ProtectedRoute Debug: actionKey undefined
+ ProtectedRoute Debug: Super Admin bypass triggered.
+main.f653c5bb.js:2 [Violation] 'message' handler took 193ms
+ ProtectedRoute Debug: isAuthenticated true
+ ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
@@ -45,6 +29,21 @@ RestaurantEditPage.js:52 DEBUG: RestaurantEditPage - found restaurant: undefined
 RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - allRestaurants: undefined
 RestaurantEditPage.js:47 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
 RestaurantEditPage.js:52 DEBUG: RestaurantEditPage - found restaurant: undefined
+AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ AuthContext.js:73
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
 RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - allRestaurants: undefined
 RestaurantEditPage.js:47 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
 RestaurantEditPage.js:52 DEBUG: RestaurantEditPage - found restaurant: undefined
@@ -55,7 +54,7 @@ Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
+(anônimo) @ Axios.js:213
 (anônimo) @ bind.js:5
 (anônimo) @ iamQueries.js:11
 fetchFn @ query.js:300

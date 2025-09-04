@@ -6,9 +6,14 @@ export const fetchUsers = async () => {
 };
 
 export const fetchRestaurants = async () => {
-  const response = await axiosInstance.get('/admin/restaurants');
-  console.log('DEBUG: fetchRestaurants - response.data:', response.data); // Add this line
-  return response.data;
+  try {
+    const response = await axiosInstance.get('/admin/restaurants');
+    console.log('DEBUG: fetchRestaurants - response.data:', response.data); // Add this line
+    return response.data;
+  } catch (error) {
+    console.error('DEBUG: fetchRestaurants - error:', error); // Add this line
+    throw error; // Re-throw the error so react-query can catch it
+  }
 };
 
 export const saveUser = async (payload) => {

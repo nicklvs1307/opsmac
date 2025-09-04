@@ -32,7 +32,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     // Anexa um objeto de usuário limpo e seguro à requisição.
-    req.user = { id: user.id }; // Set only the ID for testing
+    req.user = user;
 
     next();
   } catch (error) {

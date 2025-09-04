@@ -39,7 +39,14 @@ exports.createUser = async (userData, creatorUser) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await models.User.create({
-    name, email, passwordHash: hashedPassword, phone, restaurantId: finalRestaurantId
+    name, email, passwordHash: hashedPassword, phone
+  });
+
+  // Add user-restaurant association
+  await models.UserRestaurant.create({
+    userId: user.id,
+    restaurantId: finalRestaurantId,
+    isOwner: false, // Not an owner by default
   });
 
   await models.UserRole.create({
@@ -85,8 +92,12 @@ exports.createRestaurantWithOwner = async (data) => {
       ...data,
     }, { transaction: t });
 
-    // 5. Update the user with the new restaurantId
-    await owner.update({ restaurantId: restaurant.id }, { transaction: t });
+    // 5. Create the user-restaurant association
+    await models.UserRestaurant.create({
+      userId: owner.id,
+      restaurantId: restaurant.id,
+      isOwner: true, // Mark as owner
+    }, { transaction: t });
 
     // 6. Create the user-role association
     await models.UserRole.create({

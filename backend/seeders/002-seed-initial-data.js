@@ -9,6 +9,10 @@ module.exports = {
       'SELECT id FROM "roles" WHERE key = \'super_admin\';',
       { type: queryInterface.sequelize.QueryTypes.SELECT }
     );
+
+    if (!roles || roles.length === 0) {
+      throw new Error('A função super_admin não foi encontrada. Rode o seeder de permissões primeiro.');
+    }
     const superAdminRoleId = roles[0].id;
 
     // --- Seed Super Admin User ---
@@ -22,6 +26,7 @@ module.exports = {
       name: 'Super Admin',
       password_hash: hashedPassword,
       is_superadmin: true,
+      is_active: true,
       created_at: new Date(),
       updated_at: new Date(),
     }], {});
@@ -52,6 +57,7 @@ module.exports = {
     await queryInterface.bulkInsert('user_roles', [{
         user_id: superAdminId,
         role_id: superAdminRoleId,
+        restaurant_id: restaurantId, // Assuming superadmin is linked to the default restaurant
         created_at: new Date(),
         updated_at: new Date(),
     }], {});
@@ -61,6 +67,6 @@ module.exports = {
     await queryInterface.bulkDelete('user_roles', null, {});
     await queryInterface.bulkDelete('user_restaurants', null, {});
     await queryInterface.bulkDelete('restaurants', null, {});
-    await queryInterface.bulkDelete('users', null, {});
+    await queryInterface.bulkDelete('users', { email: 'superadmin@example.com' }, {});
   }
 };

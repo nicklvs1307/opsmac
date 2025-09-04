@@ -1,33 +1,13 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Connected
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-Error caught by middleware: NotFoundError: Usuário não encontrado
-    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:115:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
-  statusCode: 404
-}
-DEBUG: User object before isActive check: {
-  id: '9e214f96-cdf9-4a5a-bbf0-a57eca9ae576',
-  email: 'superadmin@example.com',
-  isActive: true
-}
-NODE_ENV: production
-JWT_SECRET_FILE: /run/secrets/jwt_secret
-Secret read from file. Length: 32
-Error caught by middleware: NotFoundError: A função de 'owner' não foi encontrada.
-    at /app/backend/src/domains/admin/admin.service.js:58:13
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async /app/node_modules/sequelize/lib/sequelize.js:507:18
-    at async exports.createRestaurantWithOwner (/app/backend/src/domains/admin/admin.controller.js:56:35) {
-  statusCode: 404
-}
-Error caught by middleware: NotFoundError: A função de 'owner' não foi encontrada.
-    at /app/backend/src/domains/admin/admin.service.js:58:13
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async /app/node_modules/sequelize/lib/sequelize.js:507:18
-    at async exports.createRestaurantWithOwner (/app/backend/src/domains/admin/admin.controller.js:56:35) {
-  statusCode: 404
-}
+Connection to postgres (10.0.1.221) 5432 port [tcp/postgresql] succeeded!
+Postgres is up - executing command
+Database is up, running migrations...
+Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
+Loaded configuration file "backend/config/config.js".
+Using environment "production".
+No migrations were executed, database schema was already up to date.
+Running seeders...
+Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
+Loaded configuration file "backend/config/config.js".
+Using environment "production".
+== 001-seed-permission-system: migrating =======
+ERROR: column "module_id" of relation "features" does not exist

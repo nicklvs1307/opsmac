@@ -4,15 +4,16 @@ const bcrypt = require('bcryptjs');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    // Clean up existing data
-    await queryInterface.bulkDelete('user_restaurants', null, {});
-    await queryInterface.bulkDelete('restaurants', null, {});
-    await queryInterface.bulkDelete('users', null, {});
+    // --- Get Super Admin Role ---
+    const roles = await queryInterface.sequelize.query(
+      'SELECT id FROM "roles" WHERE key = \'super_admin\';',
+      { type: queryInterface.sequelize.QueryTypes.SELECT }
+    );
+    const superAdminRoleId = roles[0].id;
 
     // --- Seed Super Admin User ---
     const superAdminId = uuidv4();
     const salt = await bcrypt.genSalt(12);
-    // Using a more secure default password
     const hashedPassword = await bcrypt.hash('superadmin@123', salt);
 
     await queryInterface.bulkInsert('users', [{
@@ -21,7 +22,6 @@ module.exports = {
       name: 'Super Admin',
       password_hash: hashedPassword,
       is_superadmin: true,
-      is_active: true,
       created_at: new Date(),
       updated_at: new Date(),
     }], {});
@@ -47,9 +47,18 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
     }], {});
+
+    // --- Link User to Role ---
+    await queryInterface.bulkInsert('user_roles', [{
+        user_id: superAdminId,
+        role_id: superAdminRoleId,
+        created_at: new Date(),
+        updated_at: new Date(),
+    }], {});
   },
 
   async down (queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('user_roles', null, {});
     await queryInterface.bulkDelete('user_restaurants', null, {});
     await queryInterface.bulkDelete('restaurants', null, {});
     await queryInterface.bulkDelete('users', null, {});

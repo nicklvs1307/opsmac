@@ -1,12 +1,11 @@
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated false
-ProtectedRoute.js:16 ProtectedRoute Debug: user null
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot undefined
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin undefined
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
-serviceWorkerRegistration.js:74 Content is cached for offline use.
-feedelizaapi.towersfy.com/api/auth/login:1  Failed to load resource: the server responded with a status of 500 ()
-feedelizaapi.towersfy.com/api/auth/login:1  Failed to load resource: the server responded with a status of 500 ()
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/auth/login
+Método da solicitação
+POST
+Código de status
+500 Internal Server Error
+{"error":"Erro interno do servidor","message":"Algo deu errado"}
+main.cff75e45.js:2 [Violation] 'message' handler took 172ms
 AuthContext.js:89  POST https://feedelizaapi.towersfy.com/api/auth/login 500 (Internal Server Error)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
@@ -56,11 +55,150 @@ Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
 
-
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/auth/login
-Método da solicitação
-POST
-Código de status
-500 Internal Server Error
-
+> feedeliza-plus@1.0.0 start
+> node backend/server.js
+Redis Client Connected
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+DEBUG: User object before isActive check: {
+  id: '854b76f7-7135-4f0b-a343-61a5af865b88',
+  email: 'superadmin@example.com',
+  isActive: true
+}
+NODE_ENV: production
+JWT_SECRET_FILE: /run/secrets/jwt_secret
+Secret read from file. Length: 32
+Error caught by middleware: NotFoundError: Usuário não encontrado
+    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:115:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
+  statusCode: 404
+}
+DEBUG: User object before isActive check: {
+  id: 'ed76ef98-5dc1-495f-8fe2-aab96ec68712',
+  email: 'superadmin@example.com',
+  isActive: true
+}
+NODE_ENV: production
+JWT_SECRET_FILE: /run/secrets/jwt_secret
+Secret read from file. Length: 32
+DEBUG: User object before isActive check: {
+  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
+  email: 'lucas@teste.com',
+  isActive: true
+}
+Error caught by middleware: Error: Illegal arguments: string, object
+    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
+    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
+    at new Promise (<anonymous>)
+    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
+    at User.comparePassword (/app/backend/models/User.js:85:19)
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+DEBUG: User object before isActive check: {
+  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
+  email: 'lucas@teste.com',
+  isActive: true
+}
+Error caught by middleware: Error: Illegal arguments: string, object
+    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
+    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
+    at new Promise (<anonymous>)
+    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
+    at User.comparePassword (/app/backend/models/User.js:85:19)
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+DEBUG: User object before isActive check: {
+  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
+  email: 'lucas@teste.com',
+  isActive: true
+}
+Error caught by middleware: Error: Illegal arguments: string, object
+    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
+    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
+    at new Promise (<anonymous>)
+    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
+    at User.comparePassword (/app/backend/models/User.js:85:19)
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+DEBUG: User object before isActive check: {
+  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
+  email: 'lucas@teste.com',
+  isActive: true
+}
+Error caught by middleware: Error: Illegal arguments: string, object
+    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
+    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
+    at new Promise (<anonymous>)
+    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
+    at User.comparePassword (/app/backend/models/User.js:85:19)
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+DEBUG: User object before isActive check: {
+  id: 'ed76ef98-5dc1-495f-8fe2-aab96ec68712',
+  email: 'superadmin@example.com',
+  isActive: true
+}
+NODE_ENV: production
+JWT_SECRET_FILE: /run/secrets/jwt_secret
+Secret read from file. Length: 32
+DEBUG: User object before isActive check: {
+  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
+  email: 'lucas@teste.com',
+  isActive: true
+}
+Error caught by middleware: Error: Illegal arguments: string, object
+    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
+    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
+    at new Promise (<anonymous>)
+    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
+    at User.comparePassword (/app/backend/models/User.js:85:19)
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+DEBUG: User object before isActive check: {
+  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
+  email: 'lucas@teste.com',
+  isActive: true
+}
+Error caught by middleware: Error: Illegal arguments: string, object
+    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
+    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
+    at new Promise (<anonymous>)
+    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
+    at User.comparePassword (/app/backend/models/User.js:85:19)
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+DEBUG: User object before isActive check: {
+  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
+  email: 'lucas@teste.com',
+  isActive: true
+}
+Error caught by middleware: Error: Illegal arguments: string, object
+    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
+    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
+    at new Promise (<anonymous>)
+    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
+    at User.comparePassword (/app/backend/models/User.js:85:19)
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+DEBUG: User object before isActive check: {
+  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
+  email: 'lucas@teste.com',
+  isActive: true
+}
+Error caught by middleware: Error: Illegal arguments: string, object
+    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
+    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
+    at new Promise (<anonymous>)
+    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
+    at User.comparePassword (/app/backend/models/User.js:85:19)
+    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)

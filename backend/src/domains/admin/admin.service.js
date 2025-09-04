@@ -2,6 +2,7 @@ const models = require('models');
 const { sequelize } = models;
 const { BadRequestError, NotFoundError } = require('utils/errors');
 const { generateUniqueSlug } = require('utils/slugGenerator');
+const bcrypt = require('bcryptjs');
 
 // User Management
 exports.createUser = async (userData, creatorUser) => {
@@ -36,8 +37,9 @@ exports.createUser = async (userData, creatorUser) => {
     finalRestaurantId = restaurantId;
   }
 
+  const hashedPassword = await bcrypt.hash(password, 10);
   const user = await models.User.create({
-    name, email, password, phone, restaurantId: finalRestaurantId
+    name, email, passwordHash: hashedPassword, phone, restaurantId: finalRestaurantId
   });
 
   await models.UserRole.create({
@@ -66,10 +68,11 @@ exports.createRestaurantWithOwner = async (data) => {
     }
 
     // 3. Create the owner user
+    const hashedPassword = await bcrypt.hash(ownerPassword, 10);
     const owner = await models.User.create({
       name: ownerName,
       email: ownerEmail,
-      password: ownerPassword,
+      passwordHash: hashedPassword,
       // restaurantId will be updated after restaurant is created
     }, { transaction: t });
 

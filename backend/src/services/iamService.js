@@ -188,6 +188,7 @@ class IamService {
       await redisClient.set(cacheKey, JSON.stringify(snapshot), 'EX', 86400); // Cache for 24 hours
     }
 
+    console.log(`DEBUG: Final permission snapshot for user ${userId} in restaurant ${restaurantId}:`, JSON.stringify(snapshot, null, 2));
     return snapshot;
   }
 

@@ -87,7 +87,7 @@ exports.createRestaurantWithOwner = async (data) => {
 exports.listUsers = async () => {
   const users = await models.User.findAll({
     attributes: ['id', 'name', 'email'], // Only direct attributes
-    include: [{ model: models.Role, as: 'role', attributes: ['name'] }], // Include the associated role
+    include: [{ model: models.Role, as: 'roles', attributes: ['name'] }], // Include the associated role
     order: [['name', 'ASC']]
   });
   return users;
@@ -154,12 +154,33 @@ exports.createRestaurant = async (restaurantData) => {
 exports.listRestaurants = async () => {
   const restaurants = await models.Restaurant.findAll({
     include: [
-      { model: models.User, as: 'owner', attributes: ['id', 'name', 'email'] }, // Include owner details
-      { model: models.Feature, as: 'features', attributes: ['id', 'name', 'description', 'path'], through: { attributes: [] } } // Include features
+      {
+        model: models.UserRestaurant,
+        as: 'users',
+        where: { isOwner: true },
+        required: false,
+        include: [{
+          model: models.User,
+          as: 'user',
+          attributes: ['id', 'name', 'email']
+        }]
+      }
     ],
     order: [['name', 'ASC']]
   });
-  return restaurants;
+
+  const formattedRestaurants = restaurants.map(r => {
+      const restaurantJson = r.toJSON();
+      if (restaurantJson.users && restaurantJson.users.length > 0) {
+          restaurantJson.owner = restaurantJson.users[0].user;
+      } else {
+          restaurantJson.owner = null;
+      }
+      delete restaurantJson.users;
+      return restaurantJson;
+  });
+
+  return formattedRestaurants;
 };
 
 exports.updateRestaurant = async (restaurantId, updateData) => {

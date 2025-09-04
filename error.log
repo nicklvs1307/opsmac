@@ -1,45 +1,127 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Connected
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: Role is associated to User using an alias. You've included an alias (role), but it does not match the alias(es) defined in your association (roles).
-    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:574:15)
-    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
-    at /app/node_modules/sequelize/lib/model.js:421:37
+(índice):1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+main.ae510d81.js:2 [Violation] 'message' handler took 287ms
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ AuthContext.js:73
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '091d685c-7f9e-4b3f-8044-c2f4787a2955', name: 'Super Admin', email: 'superadmin@example.com', isActive: true, restaurants: Array(0), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey read
+react-dom.production.min.js:188 TypeError: Cannot read properties of undefined (reading 'name')
+    at UserTable.js:54:39
     at Array.map (<anonymous>)
-    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
-    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.listUsers (/app/backend/src/domains/admin/admin.service.js:88:17)
-    at async exports.listUsers (/app/backend/src/domains/admin/admin.controller.js:25:19)
-Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: User is not associated to Restaurant!
-    at Restaurant._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:565:13)
-    at Restaurant._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
-    at /app/node_modules/sequelize/lib/model.js:421:37
+    at t1 (UserTable.js:50:19)
+    at vi (react-dom.production.min.js:160:137)
+    at As (react-dom.production.min.js:196:258)
+    at wl (react-dom.production.min.js:291:88)
+    at xc (react-dom.production.min.js:279:389)
+    at gc (react-dom.production.min.js:279:320)
+    at vc (react-dom.production.min.js:279:180)
+    at oc (react-dom.production.min.js:270:88)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+bl @ react-dom.production.min.js:260
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+hooks.tsx:631 React Router caught the following error during render TypeError: Cannot read properties of undefined (reading 'name')
+    at UserTable.js:54:39
     at Array.map (<anonymous>)
-    at Restaurant._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
-    at Restaurant.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.listRestaurants (/app/backend/src/domains/admin/admin.service.js:155:23)
-    at async exports.listRestaurants (/app/backend/src/domains/admin/admin.controller.js:65:25)
-Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: Role is associated to User using an alias. You've included an alias (role), but it does not match the alias(es) defined in your association (roles).
-    at User._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:574:15)
-    at User._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
-    at /app/node_modules/sequelize/lib/model.js:421:37
-    at Array.map (<anonymous>)
-    at User._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
-    at User.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.listUsers (/app/backend/src/domains/admin/admin.service.js:88:17)
-    at async exports.listUsers (/app/backend/src/domains/admin/admin.controller.js:25:19)
-Error caught by middleware: EagerLoadingError [SequelizeEagerLoadingError]: User is not associated to Restaurant!
-    at Restaurant._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:565:13)
-    at Restaurant._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
-    at /app/node_modules/sequelize/lib/model.js:421:37
-    at Array.map (<anonymous>)
-    at Restaurant._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
-    at Restaurant.findAll (/app/node_modules/sequelize/lib/model.js:1124:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.listRestaurants (/app/backend/src/domains/admin/admin.service.js:155:23)
-    at async exports.listRestaurants (/app/backend/src/domains/admin/admin.controller.js:65:25)
+    at t1 (UserTable.js:50:19)
+    at vi (react-dom.production.min.js:160:137)
+    at As (react-dom.production.min.js:196:258)
+    at wl (react-dom.production.min.js:291:88)
+    at xc (react-dom.production.min.js:279:389)
+    at gc (react-dom.production.min.js:279:320)
+    at vc (react-dom.production.min.js:279:180)
+    at oc (react-dom.production.min.js:270:88) {componentStack: '\n    at t1 (https://feedelizapro.towersfy.com/stat…towersfy.com/static/js/main.ae510d81.js:2:486173)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+bl @ react-dom.production.min.js:260
+xl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminQueries.js:19 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+X0 @ adminQueries.js:19
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminQueries.js:14 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/admin/users".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+G0 @ adminQueries.js:14
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14

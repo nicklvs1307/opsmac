@@ -51,7 +51,7 @@ const UserTable = ({ users, loading, canAddUser, canEditUser }) => {
               <TableRow key={user.id} hover>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.role.name}</TableCell>
+                <TableCell>{user.roles[0]?.name}</TableCell>
                 <TableCell align="right">
                   {canEditUser && (
                     <IconButton onClick={() => handleEditClick(user.id)}>

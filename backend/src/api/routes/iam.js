@@ -25,15 +25,7 @@ const auditService = {
   }
 };
 
-// Helper to get tenantId and userId from request
-const getAuthContext = (req) => {
-  const userId = req.user?.id; // Assuming user ID is available on req.user
-  const restaurantId = req.restaurant?.id || req.query.restaurantId; // Assuming restaurant ID is on req.restaurant or req.query
-  console.log('DEBUG: getAuthContext - req.user:', req.user); // Add this line
-  console.log('DEBUG: getAuthContext - req.restaurant:', req.restaurant); // Add this line
-  console.log('DEBUG: getAuthContext - req.query.restaurantId:', req.query.restaurantId); // Add this line
-  return { userId, restaurantId };
-};
+ 
 
 /**
  * @swagger
@@ -70,7 +62,9 @@ const getAuthContext = (req) => {
  *         description: Unauthorized
  */
 router.get('/tree', async (req, res) => {
-  const { userId, restaurantId } = getAuthContext(req);
+  const userId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Directly use req.query.restaurantId
+
   console.log('DEBUG: /iam/tree - userId:', userId, 'restaurantId:', restaurantId); // Add this line
 
   if (!userId || !restaurantId) {
@@ -130,7 +124,8 @@ router.get('/tree', async (req, res) => {
  *         description: Payment Required (feature locked)
  */
 router.post('/check', async (req, res) => {
-  const { userId, restaurantId } = getAuthContext(req);
+  const userId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { featureKey, actionKey } = req.body;
 
   if (!userId || !restaurantId) {
@@ -169,7 +164,7 @@ router.post('/check', async (req, res) => {
  *         description: List of roles
  */
 router.get('/roles', requirePermission('roles.manage', 'read'), async (req, res) => {
-  const { restaurantId } = getAuthContext(req);
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   if (!restaurantId) {
     return res.status(401).json({ error: 'Unauthorized: Missing restaurant context.' });
   }
@@ -209,7 +204,8 @@ router.get('/roles', requirePermission('roles.manage', 'read'), async (req, res)
  *         description: Role created successfully
  */
 router.post('/roles', requirePermission('roles.manage', 'create'), async (req, res) => {
-  const { userId, restaurantId } = getAuthContext(req);
+  const userId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { key, name } = req.body;
 
   if (!restaurantId || !key || !name) {
@@ -257,7 +253,8 @@ router.post('/roles', requirePermission('roles.manage', 'create'), async (req, r
  *         description: Role updated successfully
  */
 router.patch('/roles/:id', requirePermission('roles.manage', 'update'), async (req, res) => {
-  const { userId, restaurantId } = getAuthContext(req);
+  const userId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { id } = req.params;
   const { name } = req.body;
 
@@ -302,7 +299,8 @@ router.patch('/roles/:id', requirePermission('roles.manage', 'update'), async (r
  *         description: Role deleted successfully
  */
 router.delete('/roles/:id', requirePermission('roles.manage', 'delete'), async (req, res) => {
-  const { userId, restaurantId } = getAuthContext(req);
+  const userId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { id } = req.params;
 
   if (!restaurantId) {
@@ -377,7 +375,8 @@ router.delete('/roles/:id', requirePermission('roles.manage', 'delete'), async (
  *         description: Permissions set successfully
  */
 router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'), async (req, res) => {
-  const { userId, restaurantId } = getAuthContext(req);
+  const userId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { id: roleId } = req.params;
   const { permissions } = req.body;
 
@@ -445,7 +444,8 @@ router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'
  *         description: Role assigned successfully
  */
 router.post('/users/:id/roles', requirePermission('users.manage', 'update'), async (req, res) => {
-  const { userId: actorUserId, restaurantId } = getAuthContext(req);
+  const actorUserId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { id: targetUserId } = req.params;
   const { roleId } = req.body;
 
@@ -510,7 +510,8 @@ router.post('/users/:id/roles', requirePermission('users.manage', 'update'), asy
  *         description: Role removed successfully
  */
 router.delete('/users/:id/roles', requirePermission('users.manage', 'update'), async (req, res) => {
-  const { userId: actorUserId, restaurantId } = getAuthContext(req);
+  const actorUserId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { id: targetUserId } = req.params;
   const { roleId } = req.body;
 
@@ -578,7 +579,8 @@ router.delete('/users/:id/roles', requirePermission('users.manage', 'update'), a
  *         description: Overrides set successfully
  */
 router.post('/users/:id/overrides', requirePermission('users.manage', 'update'), async (req, res) => {
-  const { userId: actorUserId, restaurantId } = getAuthContext(req);
+  const actorUserId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { id: targetUserId } = req.params;
   const { overrides } = req.body;
 
@@ -656,8 +658,9 @@ router.post('/users/:id/overrides', requirePermission('users.manage', 'update'),
  *         description: Entitlement set successfully
  */
 router.post('/entitlements', requirePermission('entitlements.manage', 'create'), async (req, res) => {
-  const { userId, restaurantId: reqRestaurantId } = getAuthContext(req);
-  const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
+  const userId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const { restaurantId: bodyRestaurantId, entityType, entityId, status, source, metadata } = req.body;
 
   // Ensure only superadmin can set entitlements for other restaurants
   const user = await models.User.findByPk(userId);
@@ -725,8 +728,9 @@ router.post('/entitlements', requirePermission('entitlements.manage', 'create'),
  *         description: Entitlement removed successfully
  */
 router.delete('/entitlements', requirePermission('entitlements.manage', 'delete'), async (req, res) => {
-  const { userId } = getAuthContext(req);
-  const { restaurantId, entityType, entityId } = req.body;
+  const userId = req.user?.id;
+  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const { restaurantId: bodyRestaurantId, entityType, entityId } = req.body;
 
   // Ensure only superadmin can delete entitlements for other restaurants
   const user = await models.User.findByPk(userId);

@@ -1,70 +1,38 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/auth/login
-Método da solicitação
-POST
-Código de status
-500 Internal Server Error
-
-{"error":"Erro interno do servidor","message":"Algo deu errado"}
-
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
 Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
-DEBUG: User object before isActive check: {
-  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
-  email: 'lucas@teste.com',
-  isActive: true
+DEBUG: authMiddleware - user: {
+  id: 'ed76ef98-5dc1-495f-8fe2-aab96ec68712',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: undefined,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [],
+  restaurant: null,
+  restaurantId: null,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
 }
-Error caught by middleware: Error: Illegal arguments: string, object
-    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
-    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
-    at new Promise (<anonymous>)
-    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
-    at User.comparePassword (/app/backend/models/User.js:85:19)
-    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
-DEBUG: User object before isActive check: {
-  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
-  email: 'lucas@teste.com',
-  isActive: true
-}
-Error caught by middleware: Error: Illegal arguments: string, object
-    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
-    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
-    at new Promise (<anonymous>)
-    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
-    at User.comparePassword (/app/backend/models/User.js:85:19)
-    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
-DEBUG: User object before isActive check: {
-  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
-  email: 'lucas@teste.com',
-  isActive: true
-}
-Error caught by middleware: Error: Illegal arguments: string, object
-    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
-    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
-    at new Promise (<anonymous>)
-    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
-    at User.comparePassword (/app/backend/models/User.js:85:19)
-    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
-DEBUG: User object before isActive check: {
-  id: '3048ac7c-f157-4ad5-9411-425d6bb6fb7f',
-  email: 'lucas@teste.com',
-  isActive: true
-}
-Error caught by middleware: Error: Illegal arguments: string, object
-    at _async (/app/node_modules/bcryptjs/dist/bcrypt.js:286:46)
-    at /app/node_modules/bcryptjs/dist/bcrypt.js:307:17
-    at new Promise (<anonymous>)
-    at bcrypt.compare (/app/node_modules/bcryptjs/dist/bcrypt.js:306:20)
-    at User.comparePassword (/app/backend/models/User.js:85:19)
-    at Object.login (/app/backend/src/domains/auth/auth.service.js:40:38)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async login (/app/backend/src/domains/auth/auth.controller.js:17:20)
+DEBUG: getAuthContext - req.user: undefined
+DEBUG: getAuthContext - req.restaurant: undefined
+DEBUG: getAuthContext - req.query.restaurantId: 62a528e4-3370-4d46-b14e-c876c82e08df
+DEBUG: /iam/tree - userId: undefined restaurantId: 62a528e4-3370-4d46-b14e-c876c82e08df
+DEBUG: getAuthContext - req.user: undefined
+DEBUG: getAuthContext - req.restaurant: undefined
+DEBUG: getAuthContext - req.query.restaurantId: 62a528e4-3370-4d46-b14e-c876c82e08df
+DEBUG: /iam/tree - userId: undefined restaurantId: 62a528e4-3370-4d46-b14e-c876c82e08df

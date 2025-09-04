@@ -268,7 +268,7 @@ const RestaurantEditPage = () => {
     queryClient.invalidateQueries(['permissionTree', restaurantId]); // Invalidate permission tree
   };
 
-  if (isLoadingRestaurants || isLoadingPermissionTree) {
+  if (isLoadingRestaurant || isLoadingPermissionTree) {
     return (
       <Box
         sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
@@ -278,10 +278,10 @@ const RestaurantEditPage = () => {
     );
   }
 
-  if (isErrorRestaurants || isErrorPermissionTree) {
+  if (isErrorRestaurant || isErrorPermissionTree) {
     return (
       <Alert severity="error">
-        Erro ao carregar dados: {errorRestaurants?.message || errorPermissionTree?.message}
+        Erro ao carregar dados: {errorRestaurant?.message || errorPermissionTree?.message}
       </Alert>
     );
   }

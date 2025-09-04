@@ -1,14 +1,38 @@
+main.e8189caa.js:sourcemap:2 ProtectedRoute Debug: isAuthenticated true
+main.e8189caa.js:sourcemap:2 ProtectedRoute Debug: user Object
+main.e8189caa.js:sourcemap:2 ProtectedRoute Debug: user.permissionSnapshot null
+main.e8189caa.js:sourcemap:2 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin undefined
+main.e8189caa.js:sourcemap:2 ProtectedRoute Debug: featureKey undefined
+main.e8189caa.js:sourcemap:2 ProtectedRoute Debug: actionKey undefined
+
+-----
+
 edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
- ProtectedRoute Debug: isAuthenticated true
- ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
- ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
- ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
- ProtectedRoute Debug: featureKey undefined
- ProtectedRoute Debug: actionKey undefined
- ProtectedRoute Debug: Super Admin bypass triggered.
-main.f653c5bb.js:2 [Violation] 'message' handler took 193ms
- ProtectedRoute Debug: isAuthenticated true
- ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ AuthContext.js:73
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+main.e8189caa.js:2 [Violation] 'message' handler took 979ms
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
@@ -26,24 +50,10 @@ RestaurantEditPage.js:52 DEBUG: RestaurantEditPage - found restaurant: undefined
 RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - allRestaurants: undefined
 RestaurantEditPage.js:47 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
 RestaurantEditPage.js:52 DEBUG: RestaurantEditPage - found restaurant: undefined
+main.e8189caa.js:2 [Violation] 'message' handler took 426ms
 RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - allRestaurants: undefined
 RestaurantEditPage.js:47 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
 RestaurantEditPage.js:52 DEBUG: RestaurantEditPage - found restaurant: undefined
-AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ AuthContext.js:73
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
 RestaurantEditPage.js:46 DEBUG: RestaurantEditPage - allRestaurants: undefined
 RestaurantEditPage.js:47 DEBUG: RestaurantEditPage - restaurantId from params: 7c98bdc6-c854-4611-acc1-6418115dd067
 RestaurantEditPage.js:52 DEBUG: RestaurantEditPage - found restaurant: undefined
@@ -74,3 +84,64 @@ jc @ react-dom.production.min.js:280
 ac @ react-dom.production.min.js:269
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
+
+> feedeliza-plus@1.0.0 start
+> node backend/server.js
+Redis Client Error ConnectionTimeoutError: Connection timeout
+    at Socket.<anonymous> (/app/node_modules/@redis/client/dist/lib/client/socket.js:177:124)
+    at Object.onceWrapper (node:events:638:28)
+    at Socket.emit (node:events:524:28)
+    at Socket._onTimeout (node:net:595:8)
+    at listOnTimeout (node:internal/timers:581:17)
+    at process.processTimers (node:internal/timers:519:7)
+Redis Client Connected
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.
+DEBUG: authMiddleware - error: NotFoundError: Usuário não encontrado
+    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:115:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
+  statusCode: 404
+}
+Error caught by middleware: NotFoundError: Usuário não encontrado
+    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:115:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
+  statusCode: 404
+}
+DEBUG: User object before isActive check: {
+  id: '75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344',
+  email: 'lucas@teste.com',
+  isActive: true
+}
+NODE_ENV: production
+JWT_SECRET_FILE: /run/secrets/jwt_secret
+Secret read from file. Length: 32
+DEBUG: /iam/tree - userId: 4d6acf9d-9558-4c17-8fab-e9690d02d407 restaurantId: 7c98bdc6-c854-4611-acc1-6418115dd067
+Cache stale for snapshot: perm_snapshot:7c98bdc6-c854-4611-acc1-6418115dd067:4d6acf9d-9558-4c17-8fab-e9690d02d407, rebuilding.

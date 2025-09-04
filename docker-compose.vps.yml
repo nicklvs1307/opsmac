@@ -39,6 +39,7 @@ services:
     image: feedeliza-backend:latest
     depends_on:
       - migrations # Ensure migrations run first
+      - redis # Ensure redis is up before backend
     environment:
       # For production, these will be read from secrets
       DB_PASSWORD_FILE: /run/secrets/db_password # For production secrets
@@ -101,12 +102,15 @@ services:
 
   
 
+  
+
 networks:
   towersfy_network:
     external: true # Usando a rede existente do Traefik
 
 volumes:
   uploads_data:
+  redis_data: # Add redis_data volume
 
 # Declaração dos secrets que serão usados. O Docker espera que eles já existam no Swarm.
 secrets:

@@ -5,14 +5,15 @@ export const fetchUsers = async () => {
   return response.data;
 };
 
-export const fetchRestaurants = async () => {
+export const fetchRestaurants = async (id) => {
   try {
-    const response = await axiosInstance.get('/admin/restaurants');
-    console.log('DEBUG: fetchRestaurants - response.data:', response.data); // Add this line
+    const url = id ? `/admin/restaurants/${id}` : '/admin/restaurants';
+    const response = await axiosInstance.get(url);
+    console.log('DEBUG: fetchRestaurants - response.data:', response.data);
     return response.data;
   } catch (error) {
-    console.error('DEBUG: fetchRestaurants - error:', error); // Add this line
-    throw error; // Re-throw the error so react-query can catch it
+    console.error('DEBUG: fetchRestaurants - error:', error);
+    throw error;
   }
 };
 

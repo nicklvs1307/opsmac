@@ -185,7 +185,7 @@ class IamService {
     }
 
     if (redisClient) {
-      await redisClient.set(cacheKey, JSON.stringify(snapshot), 'EX', 3600); // Cache for 1 hour
+      await redisClient.set(cacheKey, JSON.stringify(snapshot), 'EX', 86400); // Cache for 24 hours
     }
 
     return snapshot;

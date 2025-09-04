@@ -33,23 +33,19 @@ const RestaurantEditPage = () => {
 
   const [selectedModules, setSelectedModules] = useState({}); // State for module states
 
-  // Fetch all restaurants (to find the specific one)
+  // Fetch the specific restaurant
   const {
-    data: allRestaurants,
-    isLoading: isLoadingRestaurants,
-    isError: isErrorRestaurants,
-    error: errorRestaurants,
-  } = useQuery('adminRestaurants', fetchRestaurants, {
-    enabled: user?.role?.name === 'super_admin', // Only fetch all restaurants if super admin
+    data: restaurant, // Renamed from allRestaurants to restaurant
+    isLoading: isLoadingRestaurant, // Renamed from isLoadingRestaurants
+    isError: isErrorRestaurant, // Renamed from isErrorRestaurants
+    error: errorRestaurant, // Renamed from errorRestaurants
+  } = useQuery(['restaurant', restaurantId], () => fetchRestaurants(restaurantId), {
+    enabled: !!restaurantId, // Only fetch if restaurantId is available
   });
 
-  console.log('DEBUG: RestaurantEditPage - allRestaurants:', allRestaurants); // Add this line
   console.log('DEBUG: RestaurantEditPage - restaurantId from params:', restaurantId); // Add this line
 
-  // Find the specific restaurant from the fetched list
-  const restaurant = allRestaurants?.find((r) => r.id === restaurantId);
-
-  console.log('DEBUG: RestaurantEditPage - found restaurant:', restaurant); // Add this line
+  console.log('DEBUG: RestaurantEditPage - found restaurant:', restaurant); // This will now directly log the fetched restaurant
 
   // Fetch permission tree (modules, submodules, features) for the selected restaurant
   const {
@@ -70,7 +66,7 @@ const RestaurantEditPage = () => {
   const saveRestaurantMutation = useMutation(saveRestaurant, {
     onSuccess: () => {
       toast.success('Detalhes do restaurante atualizados com sucesso!');
-      queryClient.invalidateQueries('adminRestaurants'); // Invalidate to refetch updated list
+      queryClient.invalidateQueries(['restaurant', restaurantId]); // Invalidate to refetch updated list
     },
     onError: (err) => {
       toast.error(err.response?.data?.message || 'Erro ao atualizar detalhes do restaurante.');

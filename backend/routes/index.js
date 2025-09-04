@@ -85,5 +85,5 @@ module.exports = [
     { path: '/api/restaurant/:restaurantId', router: restaurantRoutes },
     { path: '/api/health', router: healthRoutes },
     
-    { path: '/api/iam', router: iamRoutes, middleware: [auth] },
+    { path: '/api/iam', router: iamRoutes },
 ];

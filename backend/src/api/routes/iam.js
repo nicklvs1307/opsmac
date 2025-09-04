@@ -5,6 +5,9 @@ const router = express.Router();
 const iamService = require('../../services/iamService');
 const requirePermission = require('../../middleware/requirePermission');
 const { models } = require('../../../models');
+const { auth } = require('../../middleware/authMiddleware'); // Import auth middleware
+
+router.use(auth); // Apply auth middleware to all IAM routes
 
 // Placeholder for auditService - to be implemented later
 const auditService = {

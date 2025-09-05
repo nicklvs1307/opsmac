@@ -111,7 +111,7 @@ const UserEditPage = () => {
         name: targetUser.name || '',
         email: targetUser.email || '',
         phone: targetUser.phone || '',
-        roleId: targetUser.role?.id || '', // Use roleId instead of roleName
+        roleId: targetUser.roles?.[0]?.id || '', // Use roleId from the roles array
       });
     }
   }, [targetUser, reset]);

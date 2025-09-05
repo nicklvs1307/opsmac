@@ -113,8 +113,8 @@ exports.createRestaurantWithOwner = async (data) => {
 
 exports.listUsers = async () => {
   const users = await models.User.findAll({
-    attributes: ['id', 'name', 'email'], // Only direct attributes
-    include: [{ model: models.Role, as: 'roles', attributes: ['name'] }], // Include the associated role
+    attributes: ['id', 'name', 'email', 'phone'], // Only direct attributes
+    include: [{ model: models.Role, as: 'roles', attributes: ['id', 'name'] }], // Include the associated role
     order: [['name', 'ASC']]
   });
   return users;

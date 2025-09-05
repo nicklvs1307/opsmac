@@ -109,19 +109,19 @@ const PermissionTree = ({ availableModules, selectedModules, onSelectionChange, 
                   const newSelected = JSON.parse(JSON.stringify(selectedModules));
                   newSelected[module.id].checked = e.target.checked;
                   // Set all features and their actions within this module
-                  module.features.forEach((feature) => {
+                  module.features?.forEach((feature) => {
                     newSelected[module.id].features[feature.id].checked = e.target.checked;
-                    feature.actions.forEach((action) => {
+                    feature.actions?.forEach((action) => {
                       newSelected[module.id].features[feature.id].actions[action.id] =
                         e.target.checked;
                     });
                   });
-                  module.submodules.forEach((submodule) => {
+                  module.submodules?.forEach((submodule) => {
                     newSelected[module.id].submodules[submodule.id].checked = e.target.checked;
-                    submodule.features.forEach((feature) => {
+                    submodule.features?.forEach((feature) => {
                       newSelected[module.id].submodules[submodule.id].features[feature.id].checked =
                         e.target.checked;
-                      feature.actions.forEach((action) => {
+                      feature.actions?.forEach((action) => {
                         newSelected[module.id].submodules[submodule.id].features[
                           feature.id
                         ].actions[action.id] = e.target.checked;
@@ -149,7 +149,7 @@ const PermissionTree = ({ availableModules, selectedModules, onSelectionChange, 
                       onChange={(e) => {
                         const newSelected = JSON.parse(JSON.stringify(selectedModules));
                         newSelected[module.id].features[feature.id].checked = e.target.checked;
-                        feature.actions.forEach((action) => {
+                        feature.actions?.forEach((action) => {
                           newSelected[module.id].features[feature.id].actions[action.id] =
                             e.target.checked;
                         });
@@ -203,11 +203,11 @@ const PermissionTree = ({ availableModules, selectedModules, onSelectionChange, 
                       onChange={(e) => {
                         const newSelected = JSON.parse(JSON.stringify(selectedModules));
                         newSelected[module.id].submodules[submodule.id].checked = e.target.checked;
-                        submodule.features.forEach((feature) => {
+                        submodule.features?.forEach((feature) => {
                           newSelected[module.id].submodules[submodule.id].features[
                             feature.id
                           ].checked = e.target.checked;
-                          feature.actions.forEach((action) => {
+                          feature.actions?.forEach((action) => {
                             newSelected[module.id].submodules[submodule.id].features[
                               feature.id
                             ].actions[action.id] = e.target.checked;
@@ -245,7 +245,7 @@ const PermissionTree = ({ availableModules, selectedModules, onSelectionChange, 
                               newSelected[module.id].submodules[submodule.id].features[
                                 feature.id
                               ].checked = e.target.checked;
-                              feature.actions.forEach((action) => {
+                              feature.actions?.forEach((action) => {
                                 newSelected[module.id].submodules[submodule.id].features[
                                   feature.id
                                 ].actions[action.id] = e.target.checked;

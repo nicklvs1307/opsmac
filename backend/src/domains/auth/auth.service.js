@@ -132,13 +132,13 @@ const getMe = async (userId) => {
     } else {
         // For regular users, determine the primary restaurant and build permissions
         if (user.userRestaurants && user.userRestaurants.length > 0) {
-            const ownedRestaurant = user.userRestaurants.find(ur => ur.isOwner)?.restaurant;
+            const ownedRestaurant = user.restaurants.find(ur => ur.isOwner)?.restaurant;
             if (ownedRestaurant) {
                 primaryRestaurant = ownedRestaurant;
                 primaryRestaurantId = ownedRestaurant.id;
             } else {
-                primaryRestaurant = user.userRestaurants[0].restaurant;
-                primaryRestaurantId = user.userRestaurants[0].restaurant.id;
+                primaryRestaurant = user.restaurants[0].restaurant;
+                primaryRestaurantId = user.restaurants[0].restaurant.id;
             }
         }
 
@@ -157,7 +157,7 @@ const getMe = async (userId) => {
         isActive: user.isActive,
         emailVerified: user.emailVerified,
         lastLogin: user.lastLogin,
-        restaurants: user.userRestaurants?.map(ur => ur.restaurant) || [],
+        restaurants: user.restaurants?.map(ur => ur.restaurant) || [],
         restaurant: primaryRestaurant,
         restaurantId: primaryRestaurantId,
         permissionSnapshot: permissionSnapshot,

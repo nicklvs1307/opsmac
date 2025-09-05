@@ -100,8 +100,26 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         setAuthToken(token);
         dispatch({ type: AUTH_ACTIONS.SET_USER, payload: user });
+
+        const selectedRestaurantId = user.restaurants && user.restaurants.length > 0 ? user.restaurants[0].id : null;
+
+        let permissionSnapshot = null;
+        if (selectedRestaurantId) {
+          try {
+            const permResponse = await axiosInstance.get(`/api/iam/${selectedRestaurantId}/tree`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            permissionSnapshot = permResponse.data;
+            dispatch({ type: AUTH_ACTIONS.SET_PERMISSION_SNAPSHOT, payload: permissionSnapshot });
+          } catch (permError) {
+            console.error("Failed to fetch permissions during login:", permError);
+          }
+        }
+
         toast.success(`Bem-vindo, ${user.name}!`);
-        return { success: true, user };
+        return { success: true, user: { ...user, permissionSnapshot } };
       } else {
         throw new Error('Token não recebido do servidor');
       }

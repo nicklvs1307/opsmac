@@ -25,6 +25,7 @@ const usePermissions = () => {
           Authorization: `Bearer ${user.token}`,
         },
       });
+      console.log('usePermissions Debug: API response for permission tree:', response.data);
 
       // Dispatch to global context
       if (dispatch) {

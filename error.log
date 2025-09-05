@@ -1,17 +1,35 @@
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/admin/users
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+{"error":"Erro interno do servidor","message":"Algo deu errado"}
+
+edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+ ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
 ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-O XHR terminou de carregar: GET "<URL>".
-O XHR terminou de carregar: GET "<URL>".
-O XHR terminou de carregar: GET "<URL>".
-O XHR terminou de carregar: GET "<URL>".
-O XHR terminou de carregar: GET "<URL>".
-main.0d4a029f.js:2 [Violation] 'message' handler took 282ms
-[Violation] Forced reflow while executing JavaScript took 52ms
+AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ AuthContext.js:73
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+main.0d4a029f.js:2 [Violation] 'message' handler took 201ms
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
@@ -25,85 +43,799 @@ ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
-edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-main.0d4a029f.js:2 [Violation] 'message' handler took 4613ms
-main.0d4a029f.js:2 [Violation] 'message' handler took 2300ms
-PermissionTree.js:112 Uncaught TypeError: Cannot read properties of undefined (reading 'forEach')
-    at onChange (PermissionTree.js:112:35)
-    at onChange (SwitchBase.js:120:7)
-    at Object.Te (react-dom.production.min.js:54:317)
-    at We (react-dom.production.min.js:54:471)
-    at react-dom.production.min.js:55:35
-    at Dn (react-dom.production.min.js:105:68)
-    at zn (react-dom.production.min.js:106:380)
-    at react-dom.production.min.js:117:104
-    at cc (react-dom.production.min.js:273:42)
-    at Me (react-dom.production.min.js:52:375)
-onChange @ PermissionTree.js:112
-onChange @ SwitchBase.js:120
-Te @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-Kt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
-PermissionTree.js:112 Uncaught TypeError: Cannot read properties of undefined (reading 'forEach')
-    at onChange (PermissionTree.js:112:35)
-    at onChange (SwitchBase.js:120:7)
-    at Object.Te (react-dom.production.min.js:54:317)
-    at We (react-dom.production.min.js:54:471)
-    at react-dom.production.min.js:55:35
-    at Dn (react-dom.production.min.js:105:68)
-    at zn (react-dom.production.min.js:106:380)
-    at react-dom.production.min.js:117:104
-    at cc (react-dom.production.min.js:273:42)
-    at Me (react-dom.production.min.js:52:375)
-onChange @ PermissionTree.js:112
-onChange @ SwitchBase.js:120
-Te @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-Kt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
-PermissionTree.js:112 Uncaught TypeError: Cannot read properties of undefined (reading 'forEach')
-    at onChange (PermissionTree.js:112:35)
-    at onChange (SwitchBase.js:120:7)
-    at Object.Te (react-dom.production.min.js:54:317)
-    at We (react-dom.production.min.js:54:471)
-    at react-dom.production.min.js:55:35
-    at Dn (react-dom.production.min.js:105:68)
-    at zn (react-dom.production.min.js:106:380)
-    at react-dom.production.min.js:117:104
-    at cc (react-dom.production.min.js:273:42)
-    at Me (react-dom.production.min.js:52:375)
-onChange @ PermissionTree.js:112
-onChange @ SwitchBase.js:120
-Te @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-Kt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
-[Violation] 'click' handler took 936ms
-[Violation] Forced reflow while executing JavaScript took 38ms
-main.0d4a029f.js:2 [Violation] 'submit' handler took 823ms
+adminService.js:4  GET https://feedelizaapi.towersfy.com/api/admin/users 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+g1 @ adminService.js:4
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminService.js:4 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/admin/users".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+g1 @ adminService.js:4
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:23 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/iam/roles?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:23
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:102 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/iam/users/75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344/overrides?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:102
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:11
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminService.js:4  GET https://feedelizaapi.towersfy.com/api/admin/users 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+g1 @ adminService.js:4
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminService.js:4 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/admin/users".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+g1 @ adminService.js:4
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
 
+                }
+              ]
+            },
+            {
+              "id": "62048c3b-f27d-41fe-85e5-68baa70c1ec1",
+              "key": "financial:payables:recurring",
+              "name": "Recorrencia",
+              "description": "Recorrencia",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            }
+          ]
+        },
+
+{
+          "id": "4867073d-6a9c-4e7b-98b5-820ca8163b56",
+          "key": "general",
+          "name": "Geral",
+          "description": null,
+          "locked": false,
+          "status": "active",
+          "features": [
+            {
+              "id": "2e459365-fe02-46cc-8795-3ec1cdb9248d",
+              "key": "financial:receivables",
+              "name": "Contas a Receber",
+              "description": "Contas a Receber",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            }
+          ]
+        },
+
+{
+          "id": "189cf288-eff2-4e21-a822-66f6bfbedbe8",
+          "key": "cash-flow",
+          "name": "Fluxo de Caixa",
+          "description": null,
+          "locked": false,
+          "status": "active",
+          "features": [
+            {
+              "id": "6e0a45d2-f96e-4644-bb94-d3ed8b78b31d",
+              "key": "financial:cash-flow:dashboard",
+              "name": "Painel",
+              "description": "Painel",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            },
+            {
+              "id": "09670d88-e39d-41e3-b1b4-18e193b59075",
+              "key": "financial:cash-flow:view",
+              "name": "Visão",
+              "description": "Visão",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            },
+            {
+              "id": "a47c87a2-35c6-4fd5-b35e-7f059ca6aa53",
+              "key": "financial:cash-flow:projection",
+              "name": "Projeção",
+              "description": "Projeção",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            },
+            {
+              "id": "6ca59041-73ff-4f3a-96e5-78355bc99c52",
+              "key": "financial:cash-flow:history",
+              "name": "Historico",
+              "description": "Historico",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            }
+          ]
+        },
+
+{
+          "id": "cc897afc-29d5-424a-8839-d4e79766fb81",
+          "key": "dre",
+          "name": "DRE",
+          "description": null,
+          "locked": false,
+          "status": "active",
+          "features": [
+            {
+              "id": "857b3fd3-f9cd-4ae7-bfa3-a4d8b4833ead",
+              "key": "financial:dre:view",
+              "name": "Visão",
+              "description": "Visão",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            },
+            {
+              "id": "2effb155-a383-4e0d-9338-f78d6ec4c185",
+              "key": "financial:dre:revenue",
+              "name": "Receita",
+              "description": "Receita",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            },
+            {
+              "id": "3e17a2f2-1c00-43fa-a298-0bc161d6ce5d",
+              "key": "financial:dre:cmv",
+              "name": "Custo Variavel (CMV)",
+              "description": "Custo Variavel (CMV)",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            },
+            {
+              "id": "cd36410b-ea1d-490d-9ce0-8dc8d1c168dc",
+              "key": "financial:dre:gross-margin",
+              "name": "Margem Bruta",
+              "description": "Margem Bruta",
+              "flags": {},
+              "locked": false,
+              "status": "active",
+              "actions": [
+                {
+                  "id": 1,
+                  "key": "create",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 2,
+                  "key": "read",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 3,
+                  "key": "update",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 4,
+                  "key": "delete",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 5,
+                  "key": "export",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 6,
+                  "key": "approve",
+                  "allowed": true,
+                  "reason": "superadmin"
+                },
+                {
+                  "id": 7,
+                  "key": "manage_permissions",
+                  "allowed": true,
+                  "reason": "superadmin"
+                }
+              ]
+            },
+            {
               "id": "cb15ae58-bee3-4f75-b8de-c2d7e782d7a9",
               "key": "financial:dre:fixed-costs",
               "name": "Custos Fixos",
@@ -1108,4 +1840,141 @@ main.0d4a029f.js:2 [Violation] 'submit' handler took 823ms
       ]
     }
   ]
+}
+DEBUG: User object after findByPk in getMe: {
+  "id": "4d6acf9d-9558-4c17-8fab-e9690d02d407",
+  "email": "superadmin@example.com",
+  "name": "Super Admin",
+  "passwordHash": "$2a$12$GKRsexD.LtoYS1/Hih9scekRvgZYFcn3CeEFwpeyKxP7Yttg97KAK",
+  "isSuperadmin": true,
+  "loginAttempts": 0,
+  "lockUntil": null,
+  "isActive": true,
+  "createdAt": "2025-09-04T18:40:24.612Z",
+  "updatedAt": "2025-09-04T18:40:24.612Z",
+
+  "roles": [
+    {
+      "id": "f9925b74-1594-479c-a510-9a10aadc54f1",
+      "restaurantId": null,
+      "key": "super_admin",
+      "name": "super_admin",
+      "isSystem": true,
+      "createdAt": "2025-09-04T18:40:23.934Z",
+      "updatedAt": "2025-09-04T18:40:23.934Z",
+      "restaurant_id": null,
+      "UserRole": {
+        "userId": "4d6acf9d-9558-4c17-8fab-e9690d02d407",
+        "restaurantId": "fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e",
+        "roleId": "f9925b74-1594-479c-a510-9a10aadc54f1",
+        "createdAt": "2025-09-04T18:40:24.621Z",
+        "updatedAt": "2025-09-04T18:40:24.621Z",
+        "role_id": "f9925b74-1594-479c-a510-9a10aadc54f1",
+        "user_id": "4d6acf9d-9558-4c17-8fab-e9690d02d407",
+        "restaurant_id": "fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e"
+      }
+    }
+  ],
+  "restaurants": [
+    {
+      "userId": "4d6acf9d-9558-4c17-8fab-e9690d02d407",
+      "restaurantId": "fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e",
+      "isOwner": true,
+      "createdAt": "2025-09-04T18:40:24.618Z",
+      "updatedAt": "2025-09-04T18:40:24.618Z",
+      "restaurant_id": "fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e",
+      "user_id": "4d6acf9d-9558-4c17-8fab-e9690d02d407",
+      "restaurant": {
+        "id": "fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e",
+        "name": "Restaurante Padrão",
+        "slug": "restaurante-padrao",
+        "description": null,
+        "address": "Rua Padrão, 123",
+        "city": "Cidade Padrão",
+        "state": "SP",
+        "zipCode": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "logo": null,
+        "planKey": null,
+        "status": "active",
+        "permVersion": "1",
+        "createdAt": "2025-09-04T18:40:24.616Z",
+        "updatedAt": "2025-09-04T18:40:24.616Z"
+      }
+    }
+  ]
+}
+Error caught by middleware: Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async exports.listUsers (/app/backend/src/domains/admin/admin.service.js:115:17)
+    at async exports.listUsers (/app/backend/src/domains/admin/admin.controller.js:25:19) {
+  name: 'SequelizeDatabaseError',
+  parent: error: column User.phone does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 108,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '52',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: 'SELECT "User"."id", "User"."name", "User"."email", "User"."phone", "roles"."id" AS "roles.id", "roles"."name" AS "roles.name", "roles->UserRole"."user_id" AS "roles.UserRole.userId", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurantId", "roles->UserRole"."role_id" AS "roles.UserRole.roleId", "roles->UserRole"."created_at" AS "roles.UserRole.createdAt", "roles->UserRole"."updated_at" AS "roles.UserRole.updatedAt", "roles->UserRole"."role_id" AS "roles.UserRole.role_id", "roles->UserRole"."user_id" AS "roles.UserRole.user_id", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurant_id" FROM "users" AS "User" LEFT OUTER JOIN ( "user_roles" AS "roles->UserRole" INNER JOIN "roles" AS "roles" ON "roles"."id" = "roles->UserRole"."role_id") ON "User"."id" = "roles->UserRole"."user_id" ORDER BY "User"."name" ASC;',
+    parameters: undefined
+  },
+  original: error: column User.phone does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 108,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '52',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: 'SELECT "User"."id", "User"."name", "User"."email", "User"."phone", "roles"."id" AS "roles.id", "roles"."name" AS "roles.name", "roles->UserRole"."user_id" AS "roles.UserRole.userId", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurantId", "roles->UserRole"."role_id" AS "roles.UserRole.roleId", "roles->UserRole"."created_at" AS "roles.UserRole.createdAt", "roles->UserRole"."updated_at" AS "roles.UserRole.updatedAt", "roles->UserRole"."role_id" AS "roles.UserRole.role_id", "roles->UserRole"."user_id" AS "roles.UserRole.user_id", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurant_id" FROM "users" AS "User" LEFT OUTER JOIN ( "user_roles" AS "roles->UserRole" INNER JOIN "roles" AS "roles" ON "roles"."id" = "roles->UserRole"."role_id") ON "User"."id" = "roles->UserRole"."user_id" ORDER BY "User"."name" ASC;',
+    parameters: undefined
+  },
+  sql: 'SELECT "User"."id", "User"."name", "User"."email", "User"."phone", "roles"."id" AS "roles.id", "roles"."name" AS "roles.name", "roles->UserRole"."user_id" AS "roles.UserRole.userId", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurantId", "roles->UserRole"."role_id" AS "roles.UserRole.roleId", "roles->UserRole"."created_at" AS "roles.UserRole.createdAt", "roles->UserRole"."updated_at" AS "roles.UserRole.updatedAt", "roles->UserRole"."role_id" AS "roles.UserRole.role_id", "roles->UserRole"."user_id" AS "roles.UserRole.user_id", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurant_id" FROM "users" AS "User" LEFT OUTER JOIN ( "user_roles" AS "roles->UserRole" INNER JOIN "roles" AS "roles" ON "roles"."id" = "roles->UserRole"."role_id") ON "User"."id" = "roles->UserRole"."user_id" ORDER BY "User"."name" ASC;',
+  parameters: {}
 }

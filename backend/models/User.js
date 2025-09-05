@@ -38,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     passwordHash: {
       type: DataTypes.TEXT,
       field: 'password_hash',

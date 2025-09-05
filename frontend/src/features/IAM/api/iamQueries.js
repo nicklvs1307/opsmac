@@ -77,8 +77,7 @@ export const useGetUserRoles = (userId, restaurantId, options) => {
 // Assign a role to a user
 export const useAssignUserRole = () => {
   return useMutation(async ({ userId, restaurantId, roleId }) => {
-    const { data } = await axiosInstance.post(`/iam/users/${userId}/roles`, {
-      restaurantId,
+    const { data } = await axiosInstance.post(`/iam/users/${userId}/roles?restaurantId=${restaurantId}`, {
       roleId,
     });
     return data;
@@ -88,8 +87,8 @@ export const useAssignUserRole = () => {
 // Remove a role from a user
 export const useRemoveUserRole = () => {
   return useMutation(async ({ userId, restaurantId, roleId }) => {
-    await axiosInstance.delete(`/iam/users/${userId}/roles`, {
-      data: { restaurantId, roleId },
+    await axiosInstance.delete(`/iam/users/${userId}/roles?restaurantId=${restaurantId}`, {
+      data: { roleId },
     });
   });
 };

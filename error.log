@@ -1,89 +1,167 @@
-AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: 'e8efacd5-d284-4b37-8808-9df45f27304c', name: 'Lucas Niquele', email: 'lucas@teste.com', phone: '3598989898', roles: Array(1), …}
-AuthContext.js:81 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles
+Método da solicitação
+POST
+Código de status
+400 Bad Request
+
+{"error":"Bad Request: restaurantId and roleId are required."}
+edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+[Violation] 'click' handler took 867ms
+[Violation] Forced reflow while executing JavaScript took 69ms
+main.a9edba43.js:2 [Violation] 'submit' handler took 1082ms
+main.a9edba43.js:2 [Violation] 'submit' handler took 749ms
+UserEditPage.js:196 UserEditPage Debug: selectedRestaurantId: 8067995c-7225-43ab-86c1-6bd8cec6040e
+UserEditPage.js:197 UserEditPage Debug: currentRoleId: undefined
+UserEditPage.js:198 UserEditPage Debug: newRoleId: c50f28c0-ead0-458f-b080-86cf00113a54
+adminService.js:23 O XHR terminou de carregar: PUT "https://feedelizaapi.towersfy.com/api/admin/users/e8efacd5-d284-4b37-8808-9df45f27304c".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
+(anônimo) @ Axios.js:226
 (anônimo) @ bind.js:5
-(anônimo) @ AuthContext.js:81
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
+b1 @ adminService.js:23
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:184
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+iamQueries.js:80  POST https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles 400 (Bad Request)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:80
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:210
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+UserEditPage.js:210 xt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ mutation.js:106
+Promise.catch
+t.execute @ mutation.js:102
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:210
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+iamQueries.js:80 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:80
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:210
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
 
-
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Connected
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-DEBUG: User object after findByPk in getMe: {
-  "id": "e8efacd5-d284-4b37-8808-9df45f27304c",
-  "email": "lucas@teste.com",
-  "name": "Lucas Niquele",
-  "phone": "3598989898",
-  "passwordHash": "$2a$10$be5AUpWsdkNRJewlcgobreECyE4oKMz3ROJeIN0pTSlZTT9tx10XW",
-  "isSuperadmin": false,
-  "loginAttempts": 0,
-  "lockUntil": null,
-  "isActive": true,
-  "createdAt": "2025-09-05T19:30:29.543Z",
-  "updatedAt": "2025-09-05T19:32:13.997Z",
-
-  "roles": [
-    {
-      "id": "c50f28c0-ead0-458f-b080-86cf00113a54",
-      "restaurantId": null,
-      "key": "owner",
-      "name": "owner",
-      "isSystem": true,
-      "createdAt": "2025-09-05T19:26:12.940Z",
-      "updatedAt": "2025-09-05T19:26:12.940Z",
-      "restaurant_id": null,
-      "UserRole": {
-        "userId": "e8efacd5-d284-4b37-8808-9df45f27304c",
-        "restaurantId": "f215e84e-2ad1-43c1-8a5f-01b74f847aa7",
-        "roleId": "c50f28c0-ead0-458f-b080-86cf00113a54",
-        "createdAt": "2025-09-05T19:30:29.591Z",
-        "updatedAt": "2025-09-05T19:30:29.591Z",
-        "role_id": "c50f28c0-ead0-458f-b080-86cf00113a54",
-        "user_id": "e8efacd5-d284-4b37-8808-9df45f27304c",
-        "restaurant_id": "f215e84e-2ad1-43c1-8a5f-01b74f847aa7"
-      }
-    }
-  ],
-  "restaurants": [
-    {
-      "userId": "e8efacd5-d284-4b37-8808-9df45f27304c",
-      "restaurantId": "f215e84e-2ad1-43c1-8a5f-01b74f847aa7",
-      "isOwner": true,
-      "createdAt": "2025-09-05T19:30:29.588Z",
-      "updatedAt": "2025-09-05T19:30:29.588Z",
-      "restaurant_id": "f215e84e-2ad1-43c1-8a5f-01b74f847aa7",
-      "user_id": "e8efacd5-d284-4b37-8808-9df45f27304c",
-      "restaurant": {
-        "id": "f215e84e-2ad1-43c1-8a5f-01b74f847aa7",
-        "name": "Towersfy",
-        "slug": "towersfy",
-        "description": "1111",
-        "address": "Rua Avenida Brasil",
-        "city": "Andradas",
-        "state": "MG",
-        "zipCode": null,
-        "phone": null,
-        "email": null,
-        "website": null,
-        "logo": null,
-        "planKey": null,
-        "status": "active",
-        "permVersion": "1",
-        "createdAt": "2025-09-05T19:30:29.584Z",
-        "updatedAt": "2025-09-05T19:30:29.584Z"
-      }
-    }
-  ]
-}

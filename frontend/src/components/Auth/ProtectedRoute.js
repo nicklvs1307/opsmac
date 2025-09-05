@@ -5,17 +5,19 @@ import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const ProtectedRoute = ({ children, featureKey, actionKey }) => {
   const { isAuthenticated, loading: authLoading, user } = useAuth();
-  const { can, loading: permissionsLoading, error: permissionsError } = usePermissions();
+  // Get permissionSnapshot directly from usePermissions hook
+  const { can, loading: permissionsLoading, error: permissionsError, permissionSnapshot } = usePermissions();
 
-  // If authentication is still loading, show nothing or a loader
+  // If authentication or permissions are still loading, show nothing or a loader
   if (authLoading || permissionsLoading) {
     return <div>Loading...</div>; // Or a proper spinner component
   }
 
   console.log('ProtectedRoute Debug: isAuthenticated', isAuthenticated);
   console.log('ProtectedRoute Debug: user', user);
-  console.log('ProtectedRoute Debug: user.permissionSnapshot', user?.permissionSnapshot);
-  console.log('ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin', user?.permissionSnapshot?.isSuperAdmin);
+  // Now we check the permissionSnapshot from the hook, not directly from user
+  console.log('ProtectedRoute Debug: permissionSnapshot from hook', permissionSnapshot);
+  console.log('ProtectedRoute Debug: isSuperAdmin from hook', permissionSnapshot?.isSuperAdmin);
   console.log('ProtectedRoute Debug: featureKey', featureKey);
   console.log('ProtectedRoute Debug: actionKey', actionKey);
 
@@ -25,7 +27,8 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
 
   // Allow access for super admin if authenticated and no specific permission is required
   // This handles the root path where featureKey/actionKey might be undefined
-  if (user && user.permissionSnapshot && user.permissionSnapshot.isSuperAdmin && !featureKey && !actionKey) {
+  // Use permissionSnapshot from the hook, which is guaranteed to be loaded if permissionsLoading is false
+  if (permissionSnapshot && permissionSnapshot.isSuperAdmin && !featureKey && !actionKey) {
     console.log('ProtectedRoute Debug: Super Admin bypass triggered.');
     return children;
   }
@@ -43,9 +46,6 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
   }
 
   // If permission is denied, redirect to an unauthorized page
-  // Note: The backend's 402 (Payment Required) is handled by axios interceptor
-  // and should ideally trigger a toast/modal, not a redirect here.
-  // This redirect is for a hard 403 (Forbidden).
   return <Navigate to="/unauthorized" replace />;
 };
 

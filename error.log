@@ -1,1138 +1,209 @@
+main.3b46a040.js:sourcemap:2 AuthContext Debug: User object after SET_USER: {id: '15611f34-41d1-4216-b356-6c66dcee52a1', name: 'Lucas Niquele', email: 'lucas@teste.com', phone: '3598989898', roles: Array(1), …}
+main.3b46a040.js:sourcemap:2 ProtectedRoute Debug: isAuthenticated true
+main.3b46a040.js:sourcemap:2 ProtectedRoute Debug: user {id: '15611f34-41d1-4216-b356-6c66dcee52a1', name: 'Lucas Niquele', email: 'lucas@teste.com', phone: '3598989898', roles: Array(1), …}
+main.3b46a040.js:sourcemap:2 ProtectedRoute Debug: user.permissionSnapshot null
+main.3b46a040.js:sourcemap:2 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin undefined
+main.3b46a040.js:sourcemap:2 ProtectedRoute Debug: featureKey undefined
+main.3b46a040.js:sourcemap:2 ProtectedRoute Debug: actionKey undefined
+main.3b46a040.js:sourcemap:2 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ main.3b46a040.js:sourcemap:2
+xhr @ main.3b46a040.js:sourcemap:2
+Ur @ main.3b46a040.js:sourcemap:2
+Promise.then
+_request @ main.3b46a040.js:sourcemap:2
+request @ main.3b46a040.js:sourcemap:2
+(anônimo) @ main.3b46a040.js:sourcemap:2
+(anônimo) @ main.3b46a040.js:sourcemap:2
+(anônimo) @ main.3b46a040.js:sourcemap:2
+nl @ main.3b46a040.js:sourcemap:2
+_c @ main.3b46a040.js:sourcemap:2
+(anônimo) @ main.3b46a040.js:sourcemap:2
+_ @ main.3b46a040.js:sourcemap:2
+P @ main.3b46a040.js:sourcemap:2
+main.3b46a040.js:sourcemap:2 O XHR terminou de carregar: GET "https://feedelizapro.towersfy.com/api/iam/3c9ec4fb-9949-43fb-89aa-077551bb3c52/tree".
+(anônimo) @ main.3b46a040.js:sourcemap:2
+xhr @ main.3b46a040.js:sourcemap:2
+Ur @ main.3b46a040.js:sourcemap:2
+_request @ main.3b46a040.js:sourcemap:2
+request @ main.3b46a040.js:sourcemap:2
+(anônimo) @ main.3b46a040.js:sourcemap:2
+(anônimo) @ main.3b46a040.js:sourcemap:2
+(anônimo) @ main.3b46a040.js:sourcemap:2
+(anônimo) @ main.3b46a040.js:sourcemap:2
+nl @ main.3b46a040.js:sourcemap:2
+_c @ main.3b46a040.js:sourcemap:2
+(anônimo) @ main.3b46a040.js:sourcemap:2
+_ @ main.3b46a040.js:sourcemap:2
+P @ main.3b46a040.js:sourcemap:2
+
+
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/admin/users/15611f34-41d1-4216-b356-6c66dcee52a1
+https://feedelizaapi.towersfy.com/api/iam/users/15611f34-41d1-4216-b356-6c66dcee52a1/roles
 Método da solicitação
-PUT
+POST
 Código de status
 400 Bad Request
-Endereço remoto
-95.217.16.187:443
-{"error":"Dados inválidos"}
+{"error":"Bad Request: restaurantId and roleId are required."}
+AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: 'f4cd259a-7e02-4392-8259-0b36fbfc2995', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: 'f4cd259a-7e02-4392-8259-0b36fbfc2995', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] Forced reflow while executing JavaScript took 38ms
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: 'f4cd259a-7e02-4392-8259-0b36fbfc2995', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: 'f4cd259a-7e02-4392-8259-0b36fbfc2995', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
+edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+main.3b46a040.js:2 [Violation] 'mousedown' handler took 260ms
+[Violation] Forced reflow while executing JavaScript took 222ms
+[Violation] 'click' handler took 1133ms
+[Violation] Forced reflow while executing JavaScript took 87ms
+main.3b46a040.js:2 [Violation] 'submit' handler took 997ms
+main.3b46a040.js:2 [Violation] 'submit' handler took 916ms
+adminService.js:23 O XHR terminou de carregar: PUT "https://feedelizaapi.towersfy.com/api/admin/users/15611f34-41d1-4216-b356-6c66dcee52a1".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+b1 @ adminService.js:23
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:184
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+iamQueries.js:80  POST https://feedelizaapi.towersfy.com/api/iam/users/15611f34-41d1-4216-b356-6c66dcee52a1/roles 400 (Bad Request)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:80
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:206
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+UserEditPage.js:206 xt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ mutation.js:106
+Promise.catch
+t.execute @ mutation.js:102
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:206
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+iamQueries.js:80 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/iam/users/15611f34-41d1-4216-b356-6c66dcee52a1/roles".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:80
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:206
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
 
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "1e69a9e0-720e-420c-959c-17551648d3ae",
-              "key": "admin:users:edit",
-              "name": "Editar Usuários",
-              "description": "Editar Usuários",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "742f29b9-abb3-4441-8a72-9bbc20315adc",
-              "key": "admin:users:delete",
-              "name": "Excluir Usuários",
-              "description": "Excluir Usuários",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            }
-          ]
-        },
-
-{
-          "id": "8f3187ad-500b-4d47-8cae-fef01035c2e3",
-          "key": "restaurants",
-          "name": "Restaurantes",
-          "description": null,
-          "locked": false,
-          "status": "active",
-          "features": [
-            {
-              "id": "94419598-b38d-4a95-b2a7-1b99131a3375",
-              "key": "admin:restaurants:view",
-              "name": "Visualizar Restaurantes",
-              "description": "Visualizar Restaurantes",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "97edb9e4-f27b-4048-a6a9-fdaf56baa299",
-              "key": "admin:restaurants:create",
-              "name": "Criar Restaurantes",
-              "description": "Criar Restaurantes",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "2d4dd668-d543-4eec-945c-19bdea907dfa",
-              "key": "admin:restaurants:edit",
-              "name": "Editar Restaurantes",
-              "description": "Editar Restaurantes",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "ffd312f6-cce9-4338-9fca-2033f980c8c2",
-              "key": "admin:restaurants:delete",
-              "name": "Excluir Restaurantes",
-              "description": "Excluir Restaurantes",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            }
-          ]
-        },
-
-{
-          "id": "a11cac71-8ee0-4544-a764-136da4e44e81",
-          "key": "permissions",
-          "name": "Permissões",
-          "description": null,
-          "locked": false,
-          "status": "active",
-          "features": [
-            {
-              "id": "3c314e01-8e64-4a24-9766-a5ccc7a80337",
-              "key": "admin:permissions:view",
-              "name": "Visualizar Permissões",
-              "description": "Visualizar Permissões",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            }
-          ]
-
-}
-      ]
-    },
-    {
-      "id": "ff19a7ef-8ed2-4e4b-8456-2460207f044d",
-      "key": "stock",
-      "name": "Estoque",
-      "description": null,
-      "visible": true,
-      "locked": false,
-      "status": "active",
-      "submodules": [
-
-{
-          "id": "42e17d6a-fd1e-46e6-8541-e62bd950d617",
-          "key": "general",
-          "name": "Geral",
-          "description": null,
-          "locked": false,
-          "status": "active",
-          "features": [
-            {
-              "id": "948688cb-7006-4a02-883b-c9606aaea4c9",
-              "key": "stock:dashboard",
-              "name": "Dashboard",
-              "description": "Dashboard",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "917a66bd-97e5-43ba-bf47-c8d52ea1a4d7",
-              "key": "stock:movements",
-              "name": "Movimentações",
-              "description": "Movimentações",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "7402e85f-993c-4ff1-b608-3b6596898142",
-              "key": "stock:suppliers",
-              "name": "Fornecedores",
-              "description": "Fornecedores",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "34bcb74a-87af-47f1-9ea6-e6ae521ba6f9",
-              "key": "stock:purchases",
-              "name": "Compras",
-              "description": "Compras",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "5784a4e6-395e-4ffc-ae90-9b21fe682ca2",
-              "key": "stock:sales",
-              "name": "Vendas",
-              "description": "Vendas",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "187a1133-9f2d-4973-9713-f9f8d7872523",
-              "key": "stock:products",
-              "name": "Produtos",
-              "description": "Produtos",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "e087c6c3-ac3f-405e-9110-562a0885b1fd",
-              "key": "stock:products:create",
-              "name": "Cadastro de Produtos",
-              "description": "Cadastro de Produtos",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "c3caf692-9770-4025-b744-68b32436d618",
-              "key": "stock:ingredients",
-              "name": "Ingredientes e Insumos",
-              "description": "Ingredientes e Insumos",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "7ce6828d-860a-4f30-9d1b-5039a2da2d6f",
-              "key": "stock:settings",
-              "name": "Configurações",
-              "description": "Configurações",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "0a2716d6-eb49-429b-8e72-400f3ae7b862",
-              "key": "stock:reports",
-              "name": "Relatorios",
-              "description": "Relatorios",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "3214aed8-3835-431b-b762-1bdffdd1d335",
-              "key": "stock:counting",
-              "name": "Contagem de Estoque",
-              "description": "Contagem de Estoque",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "f0631f9b-c4ef-420e-a142-29d05811ac36",
-              "key": "stock:inventory",
-              "name": "Inventario",
-              "description": "Inventario",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 5,
-                  "key": "export",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 6,
-                  "key": "approve",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 7,
-                  "key": "manage_permissions",
-                  "allowed": true,
-                  "reason": "superadmin"
-                }
-              ]
-            },
-            {
-              "id": "ecedabc6-be9b-4baa-9bf6-acbc40aa3aa9",
-              "key": "stock:cmv",
-              "name": "CMV",
-              "description": "CMV",
-              "flags": {},
-              "locked": false,
-              "status": "active",
-              "actions": [
-                {
-                  "id": 1,
-                  "key": "create",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 2,
-                  "key": "read",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 3,
-                  "key": "update",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
-                {
-                  "id": 4,
-                  "key": "delete",
-                  "allowed": true,
-                  "reason": "superadmin"
-                },
                 {
                   "id": 5,
                   "key": "export",
@@ -5022,12 +4093,135 @@ DEBUG: User object after findByPk in getMe: {
     }
   ]
 }
-Error caught by middleware: BadRequestError: Dados inválidos
-    at handleValidationErrors (/app/backend/src/domains/admin/admin.controller.js:8:11)
-    at exports.updateUser (/app/backend/src/domains/admin/admin.controller.js:34:5)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
-  statusCode: 400
+DEBUG: User object after findByPk in getMe: {
+  "id": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+  "email": "superadmin@example.com",
+  "name": "Super Admin",
+  "phone": null,
+  "passwordHash": "$2a$12$E2iJPaym/xUVIb//DhMIzOzk1QmaInqwqJPpFBEl4OhbWefiurtHi",
+  "isSuperadmin": true,
+  "loginAttempts": 0,
+  "lockUntil": null,
+  "isActive": true,
+  "createdAt": "2025-09-05T18:23:48.685Z",
+  "updatedAt": "2025-09-05T18:23:48.685Z",
+
+  "roles": [
+    {
+      "id": "d6ea0ff0-35fb-4063-8d5b-c4fbee468609",
+      "restaurantId": null,
+      "key": "super_admin",
+      "name": "super_admin",
+      "isSystem": true,
+      "createdAt": "2025-09-05T18:23:48.069Z",
+      "updatedAt": "2025-09-05T18:23:48.069Z",
+      "restaurant_id": null,
+      "UserRole": {
+        "userId": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+        "restaurantId": "06af84e2-2035-4552-8c48-3041b4c4fd68",
+        "roleId": "d6ea0ff0-35fb-4063-8d5b-c4fbee468609",
+        "createdAt": "2025-09-05T18:23:48.694Z",
+        "updatedAt": "2025-09-05T18:23:48.694Z",
+        "role_id": "d6ea0ff0-35fb-4063-8d5b-c4fbee468609",
+        "user_id": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+        "restaurant_id": "06af84e2-2035-4552-8c48-3041b4c4fd68"
+      }
+    }
+  ],
+  "restaurants": [
+    {
+      "userId": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+      "restaurantId": "06af84e2-2035-4552-8c48-3041b4c4fd68",
+      "isOwner": true,
+      "createdAt": "2025-09-05T18:23:48.692Z",
+      "updatedAt": "2025-09-05T18:23:48.692Z",
+      "restaurant_id": "06af84e2-2035-4552-8c48-3041b4c4fd68",
+      "user_id": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+      "restaurant": {
+        "id": "06af84e2-2035-4552-8c48-3041b4c4fd68",
+        "name": "Restaurante Padrão",
+        "slug": "restaurante-padrao",
+        "description": "1111",
+        "address": "Rua Padrão, 123",
+        "city": "Cidade Padrão",
+        "state": "SP",
+        "zipCode": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "logo": null,
+        "planKey": null,
+        "status": "active",
+        "permVersion": "1",
+        "createdAt": "2025-09-05T18:23:48.689Z",
+        "updatedAt": "2025-09-05T18:24:41.634Z"
+      }
+    }
+  ]
+}
+DEBUG: User object after findByPk in getMe: {
+  "id": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+  "email": "superadmin@example.com",
+  "name": "Super Admin",
+  "phone": null,
+  "passwordHash": "$2a$12$E2iJPaym/xUVIb//DhMIzOzk1QmaInqwqJPpFBEl4OhbWefiurtHi",
+  "isSuperadmin": true,
+  "loginAttempts": 0,
+  "lockUntil": null,
+  "isActive": true,
+  "createdAt": "2025-09-05T18:23:48.685Z",
+  "updatedAt": "2025-09-05T18:23:48.685Z",
+
+  "roles": [
+    {
+      "id": "d6ea0ff0-35fb-4063-8d5b-c4fbee468609",
+      "restaurantId": null,
+      "key": "super_admin",
+      "name": "super_admin",
+      "isSystem": true,
+      "createdAt": "2025-09-05T18:23:48.069Z",
+      "updatedAt": "2025-09-05T18:23:48.069Z",
+      "restaurant_id": null,
+      "UserRole": {
+        "userId": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+        "restaurantId": "06af84e2-2035-4552-8c48-3041b4c4fd68",
+        "roleId": "d6ea0ff0-35fb-4063-8d5b-c4fbee468609",
+        "createdAt": "2025-09-05T18:23:48.694Z",
+        "updatedAt": "2025-09-05T18:23:48.694Z",
+        "role_id": "d6ea0ff0-35fb-4063-8d5b-c4fbee468609",
+        "user_id": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+        "restaurant_id": "06af84e2-2035-4552-8c48-3041b4c4fd68"
+      }
+    }
+  ],
+  "restaurants": [
+    {
+      "userId": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+      "restaurantId": "06af84e2-2035-4552-8c48-3041b4c4fd68",
+      "isOwner": true,
+      "createdAt": "2025-09-05T18:23:48.692Z",
+      "updatedAt": "2025-09-05T18:23:48.692Z",
+      "restaurant_id": "06af84e2-2035-4552-8c48-3041b4c4fd68",
+      "user_id": "f4cd259a-7e02-4392-8259-0b36fbfc2995",
+      "restaurant": {
+        "id": "06af84e2-2035-4552-8c48-3041b4c4fd68",
+        "name": "Restaurante Padrão",
+        "slug": "restaurante-padrao",
+        "description": "1111",
+        "address": "Rua Padrão, 123",
+        "city": "Cidade Padrão",
+        "state": "SP",
+        "zipCode": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "logo": null,
+        "planKey": null,
+        "status": "active",
+        "permVersion": "1",
+        "createdAt": "2025-09-05T18:23:48.689Z",
+        "updatedAt": "2025-09-05T18:24:41.634Z"
+      }
+    }
+  ]
 }

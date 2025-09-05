@@ -65,8 +65,15 @@ const usePermissions = () => {
       // Optimized search for feature and action
       let foundFeature = null;
       for (const mod of permissionSnapshot.modules) {
+        // Check features directly under the module
+        let feat = mod.features?.find((f) => f.key === featureKey);
+        if (feat) {
+          foundFeature = feat;
+          break;
+        }
+        // Check features within submodules
         for (const submod of mod.submodules) {
-          const feat = submod.features.find((f) => f.key === featureKey);
+          feat = submod.features.find((f) => f.key === featureKey);
           if (feat) {
             foundFeature = feat;
             break;

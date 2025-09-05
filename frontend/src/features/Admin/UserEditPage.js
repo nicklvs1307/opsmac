@@ -193,6 +193,10 @@ const UserEditPage = () => {
     const currentRoleId = targetUser?.role?.id; // Assuming user object has role.id
     const newRoleId = data.roleId;
 
+    console.log('UserEditPage Debug: selectedRestaurantId:', selectedRestaurantId);
+    console.log('UserEditPage Debug: currentRoleId:', currentRoleId);
+    console.log('UserEditPage Debug: newRoleId:', newRoleId);
+
     if (currentRoleId !== newRoleId) {
       try {
         if (currentRoleId) {

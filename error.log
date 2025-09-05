@@ -1,13 +1,21 @@
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles
+https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles?restaurantId=8067995c-7225-43ab-86c1-6bd8cec6040e
 Método da solicitação
 POST
 Código de status
-400 Bad Request
+404 Not Found
+{"error":"User or Role not found or does not belong to this restaurant."}
 
-{"error":"Bad Request: restaurantId and roleId are required."}
-edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+(índice):1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
 AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
@@ -27,22 +35,220 @@ ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin 
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
 ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+dashboardQueries.js:14  GET https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d 401 (Unauthorized)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:14
+enabled @ dashboardQueries.js:24
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboardQueries.js:14 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:14
+enabled @ dashboardQueries.js:24
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboardQueries.js:14  GET https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d 401 (Unauthorized)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:14
+enabled @ dashboardQueries.js:24
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 xt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboardQueries.js:30 Error fetching dashboard data: xt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ dashboardQueries.js:30
+(anônimo) @ notifyManager.js:62
+notifyFn @ notifyManager.js:10
+(anônimo) @ notifyManager.js:77
+(anônimo) @ notifyManager.js:76
+cc @ react-dom.production.min.js:273
+(anônimo) @ notifyManager.js:75
+Promise.then
+S @ utils.js:322
+t.flush @ notifyManager.js:74
+t.batch @ notifyManager.js:30
+t.dispatch @ query.js:392
+onError @ query.js:348
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+Dashboard.js:94 Error fetching dashboard data: xt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+sV @ Dashboard.js:94
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboardQueries.js:14 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:14
+enabled @ dashboardQueries.js:24
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey read
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
-O XHR terminou de carregar: GET "<URL>".
-O XHR terminou de carregar: GET "<URL>".
-O XHR terminou de carregar: GET "<URL>".
-O XHR terminou de carregar: GET "<URL>".
-O XHR terminou de carregar: GET "<URL>".
-O XHR terminou de carregar: GET "<URL>".
-[Violation] 'click' handler took 867ms
-[Violation] Forced reflow while executing JavaScript took 69ms
-main.a9edba43.js:2 [Violation] 'submit' handler took 1082ms
-main.a9edba43.js:2 [Violation] 'submit' handler took 749ms
+[Violation] 'click' handler took 1250ms
+[Violation] Forced reflow while executing JavaScript took 97ms
+[Violation] 'click' handler took 1240ms
+main.ec124501.js:2 [Violation] 'submit' handler took 996ms
+main.ec124501.js:2 [Violation] 'submit' handler took 1101ms
 UserEditPage.js:196 UserEditPage Debug: selectedRestaurantId: 8067995c-7225-43ab-86c1-6bd8cec6040e
 UserEditPage.js:197 UserEditPage Debug: currentRoleId: undefined
 UserEditPage.js:198 UserEditPage Debug: newRoleId: c50f28c0-ead0-458f-b080-86cf00113a54
@@ -78,7 +284,7 @@ Me @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
-iamQueries.js:80  POST https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles 400 (Bad Request)
+iamQueries.js:80  POST https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles?restaurantId=8067995c-7225-43ab-86c1-6bd8cec6040e 404 (Not Found)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -111,7 +317,7 @@ Me @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
-UserEditPage.js:210 xt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+UserEditPage.js:210 xt {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
 (anônimo) @ mutation.js:106
 Promise.catch
 t.execute @ mutation.js:102
@@ -131,7 +337,7 @@ Me @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
-iamQueries.js:80 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles".
+iamQueries.js:80 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles?restaurantId=8067995c-7225-43ab-86c1-6bd8cec6040e".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -164,4 +370,3 @@ Me @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
-

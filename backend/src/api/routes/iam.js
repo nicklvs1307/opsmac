@@ -458,7 +458,15 @@ router.post('/users/:id/roles', requirePermission('users.manage', 'update'), asy
 
   try {
     const user = await models.User.findByPk(targetUserId);
-    const role = await models.Role.findOne({ where: { id: roleId, restaurantId } });
+    const role = await models.Role.findOne({
+      where: {
+        id: roleId,
+        [Op.or]: [
+          { restaurantId: restaurantId },
+          { restaurantId: null, is_system: true }
+        ]
+      }
+    });
 
     if (!user || !role) {
       return res.status(404).json({ error: 'User or Role not found or does not belong to this restaurant.' });

@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const iamService = require('../../services/iamService');
 const requirePermission = require('../../middleware/requirePermission');
-const { models } = require('../../../models');
+const models = require('../../../models');
 const { auth } = require('../../middleware/authMiddleware'); // Import auth middleware
 
 router.use(auth); // Apply auth middleware to all IAM routes
@@ -166,7 +166,7 @@ router.post('/check', async (req, res) => {
  *       200:
  *         description: List of roles
  */
-router.get('/roles', async (req, res) => {
+router.get('/roles', requirePermission('roles.manage', 'read'), async (req, res) => {
   const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   if (!restaurantId) {
     return res.status(401).json({ error: 'Unauthorized: Missing restaurant context.' });

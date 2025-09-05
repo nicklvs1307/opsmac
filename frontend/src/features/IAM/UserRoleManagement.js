@@ -109,10 +109,10 @@ const UserRoleManagement = () => {
             <tr key={u.id}>
               <td>{u.name}</td>
               <td>{u.email}</td>
-              <td>{u.role ? u.role.name : 'N/A'}</td>
+              <td>{u.roles && u.roles.length > 0 ? u.roles[0].name : 'N/A'}</td>
               <td>
                 <select
-                  value={u.role?.id || ''} // Use u.role.id
+                  value={u.roles && u.roles.length > 0 ? u.roles[0].id : ''} // Use u.roles[0].id
                   onChange={(e) => handleRoleChange(u.id, e.target.value)}
                   disabled={
                     isLoadingUsers ||

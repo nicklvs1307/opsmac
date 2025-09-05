@@ -484,7 +484,7 @@ router.post('/users/:id/roles', requirePermission('users.manage', 'update'), asy
     return res.json({ message: 'Role assigned successfully.' });
   } catch (error) {
     console.error('Error assigning role:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: error.message || 'Internal Server Error' });
   }
 });
 

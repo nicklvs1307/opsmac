@@ -33,6 +33,7 @@ const authReducer = (state, action) => {
       };
     case AUTH_ACTIONS.SET_USER:
       const user = action.payload || {};
+      console.log('AuthContext Debug: User object after SET_USER:', user);
       return {
         ...state,
         user: { ...user, token: localStorage.getItem('token') }, // Ensure token is part of user object
@@ -119,12 +120,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updateUser = async (userData) => {
+    // eslint-disable-next-line no-unused-vars
+    const { permissionSnapshot, roles, restaurants, token, id, ...payload } = userData;
+
     try {
-      const updatedUser = await updateProfileMutation.mutateAsync(userData);
+      const updatedUser = await updateProfileMutation.mutateAsync(payload);
       dispatch({ type: AUTH_ACTIONS.UPDATE_USER, payload: updatedUser });
       toast.success('Perfil atualizado com sucesso!');
       return { success: true };
     } catch (error) {
+      console.error("Failed to update user. Payload sent:", payload);
       const message = error.response?.data?.message || 'Erro ao atualizar perfil';
       toast.error(message);
       return { success: false, message };

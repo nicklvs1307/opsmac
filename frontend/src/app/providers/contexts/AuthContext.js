@@ -19,7 +19,8 @@ const AUTH_ACTIONS = {
   SET_LOADING: 'SET_LOADING',
   UPDATE_USER: 'UPDATE_USER',
   INIT: 'INIT',
-  SET_SELECTED_RESTAURANT: 'SET_SELECTED_RESTAURANT', // New action
+  SET_SELECTED_RESTAURANT: 'SET_SELECTED_RESTAURANT',
+  SET_PERMISSION_SNAPSHOT: 'SET_PERMISSION_SNAPSHOT',
 };
 
 const authReducer = (state, action) => {
@@ -52,8 +53,14 @@ const authReducer = (state, action) => {
       return { ...state, loading: action.payload };
     case AUTH_ACTIONS.UPDATE_USER:
       return { ...state, user: { ...state.user, ...action.payload } };
-    case AUTH_ACTIONS.SET_SELECTED_RESTAURANT: // New action handler
+    case AUTH_ACTIONS.SET_SELECTED_RESTAURANT:
       return { ...state, selectedRestaurantId: action.payload };
+    case AUTH_ACTIONS.SET_PERMISSION_SNAPSHOT:
+      if (!state.user) return state;
+      return {
+        ...state,
+        user: { ...state.user, permissionSnapshot: action.payload },
+      };
     default:
       return state;
   }
@@ -129,7 +136,7 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: AUTH_ACTIONS.SET_SELECTED_RESTAURANT, payload: restaurantId });
   };
 
-  const value = { ...state, login, logout, updateUser, setSelectedRestaurant };
+  const value = { ...state, login, logout, updateUser, setSelectedRestaurant, dispatch };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

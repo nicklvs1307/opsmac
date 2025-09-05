@@ -2,8 +2,11 @@ import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import axios from 'axios';
 
+// Import AUTH_ACTIONS to use the action type
+import AuthContext from '@/app/providers/contexts/AuthContext';
+
 const usePermissions = () => {
-  const { user, selectedRestaurantId } = useAuth();
+  const { user, selectedRestaurantId, dispatch } = useAuth(); // Get dispatch from context
   const [permissionSnapshot, setPermissionSnapshot] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,6 +25,13 @@ const usePermissions = () => {
           Authorization: `Bearer ${user.token}`,
         },
       });
+
+      // Dispatch to global context
+      if (dispatch) {
+        dispatch({ type: 'SET_PERMISSION_SNAPSHOT', payload: response.data });
+      }
+
+      // Set local state
       setPermissionSnapshot(response.data);
     } catch (err) {
       console.error('Failed to fetch permission snapshot:', err);
@@ -29,20 +39,21 @@ const usePermissions = () => {
     } finally {
       setLoading(false);
     }
-  }, [user, selectedRestaurantId]);
+  }, [user, selectedRestaurantId, dispatch]); // Add dispatch to dependency array
 
   useEffect(() => {
-    // Prioritize the snapshot from the auth context, especially for Super Admin
+    // The user object from context is the source of truth.
     if (user?.permissionSnapshot) {
       setPermissionSnapshot(user.permissionSnapshot);
       setLoading(false);
     } else if (selectedRestaurantId) {
-      // Only fetch if there's a restaurant and no snapshot from auth
+      // If no snapshot in context, fetch it.
       fetchPermissions();
     } else {
-      // No user, no restaurant, no permissions
+      // No user, no restaurant, no permissions.
       setLoading(false);
     }
+    // Re-run when user or restaurant changes.
   }, [user, selectedRestaurantId, fetchPermissions]);
 
   const can = useCallback(
@@ -59,9 +70,9 @@ const usePermissions = () => {
 
       // If there's no module data (e.g., non-superadmin with no restaurant), deny.
       if (!permissionSnapshot.modules) {
-          return false;
+        return false;
       }
-      
+
       // Optimized search for feature and action
       let foundFeature = null;
       for (const mod of permissionSnapshot.modules) {

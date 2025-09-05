@@ -1,230 +1,411 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Connected
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-DEBUG: User object after findOne in login: {
-  "id": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-  "email": "lucas@teste.com",
-  "name": "Lucas",
-  "passwordHash": "$2a$10$c.L9vt93alPO/3tFX8uNDOhbpwUXKFxUvwjEOMrHQKhiZRpnxgFwm",
-  "isSuperadmin": false,
-  "loginAttempts": 0,
-  "lockUntil": null,
-  "isActive": true,
-  "createdAt": "2025-09-04T18:41:43.893Z",
-  "updatedAt": "2025-09-04T18:41:43.893Z",
-
-  "roles": [
-    {
-      "id": "d8f97665-4238-40e2-8638-648bf5f13e71",
-      "restaurantId": null,
-      "key": "owner",
-      "name": "owner",
-      "isSystem": true,
-      "createdAt": "2025-09-04T18:40:23.934Z",
-      "updatedAt": "2025-09-04T18:40:23.934Z",
-      "restaurant_id": null,
-      "UserRole": {
-        "userId": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-        "restaurantId": "7c98bdc6-c854-4611-acc1-6418115dd067",
-        "roleId": "d8f97665-4238-40e2-8638-648bf5f13e71",
-        "createdAt": "2025-09-04T18:41:43.958Z",
-        "updatedAt": "2025-09-04T18:41:43.958Z",
-        "role_id": "d8f97665-4238-40e2-8638-648bf5f13e71",
-        "user_id": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-        "restaurant_id": "7c98bdc6-c854-4611-acc1-6418115dd067"
-      }
-    }
-  ],
-  "restaurants": [
-    {
-      "userId": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-      "restaurantId": "7c98bdc6-c854-4611-acc1-6418115dd067",
-      "isOwner": true,
-      "createdAt": "2025-09-04T18:41:43.950Z",
-      "updatedAt": "2025-09-04T18:41:43.950Z",
-      "restaurant_id": "7c98bdc6-c854-4611-acc1-6418115dd067",
-      "user_id": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-      "restaurant": {
-        "id": "7c98bdc6-c854-4611-acc1-6418115dd067",
-        "name": "Endereço teste",
-        "slug": "endereco-teste",
-        "description": "1",
-        "address": "Rua Avenida Brasil",
-        "city": "Andradas",
-        "state": "MG",
-        "zipCode": null,
-        "phone": null,
-        "email": null,
-        "website": null,
-        "logo": null,
-        "planKey": null,
-        "status": "active",
-        "permVersion": "1",
-        "createdAt": "2025-09-04T18:41:43.944Z",
-        "updatedAt": "2025-09-04T18:41:43.944Z"
-      }
-    }
-  ]
-}
-DEBUG: User object before isActive check: {
-  id: '75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344',
-  email: 'lucas@teste.com',
-  isActive: true
-}
-NODE_ENV: production
-JWT_SECRET_FILE: /run/secrets/jwt_secret
-Secret read from file. Length: 32
-DEBUG: User object after findByPk in getMe: {
-  "id": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-  "email": "lucas@teste.com",
-  "name": "Lucas",
-  "passwordHash": "$2a$10$c.L9vt93alPO/3tFX8uNDOhbpwUXKFxUvwjEOMrHQKhiZRpnxgFwm",
-  "isSuperadmin": false,
-  "loginAttempts": 0,
-  "lockUntil": null,
-  "isActive": true,
-  "createdAt": "2025-09-04T18:41:43.893Z",
-  "updatedAt": "2025-09-04T18:41:43.893Z",
-
-  "roles": [
-    {
-      "id": "d8f97665-4238-40e2-8638-648bf5f13e71",
-      "restaurantId": null,
-      "key": "owner",
-      "name": "owner",
-      "isSystem": true,
-      "createdAt": "2025-09-04T18:40:23.934Z",
-      "updatedAt": "2025-09-04T18:40:23.934Z",
-      "restaurant_id": null,
-      "UserRole": {
-        "userId": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-        "restaurantId": "7c98bdc6-c854-4611-acc1-6418115dd067",
-        "roleId": "d8f97665-4238-40e2-8638-648bf5f13e71",
-        "createdAt": "2025-09-04T18:41:43.958Z",
-        "updatedAt": "2025-09-04T18:41:43.958Z",
-        "role_id": "d8f97665-4238-40e2-8638-648bf5f13e71",
-        "user_id": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-        "restaurant_id": "7c98bdc6-c854-4611-acc1-6418115dd067"
-      }
-    }
-  ],
-  "restaurants": [
-    {
-      "userId": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-      "restaurantId": "7c98bdc6-c854-4611-acc1-6418115dd067",
-      "isOwner": true,
-      "createdAt": "2025-09-04T18:41:43.950Z",
-      "updatedAt": "2025-09-04T18:41:43.950Z",
-      "restaurant_id": "7c98bdc6-c854-4611-acc1-6418115dd067",
-      "user_id": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-      "restaurant": {
-        "id": "7c98bdc6-c854-4611-acc1-6418115dd067",
-        "name": "Endereço teste",
-        "slug": "endereco-teste",
-        "description": "1",
-        "address": "Rua Avenida Brasil",
-        "city": "Andradas",
-        "state": "MG",
-        "zipCode": null,
-        "phone": null,
-        "email": null,
-        "website": null,
-        "logo": null,
-        "planKey": null,
-        "status": "active",
-        "permVersion": "1",
-        "createdAt": "2025-09-04T18:41:43.944Z",
-        "updatedAt": "2025-09-04T18:41:43.944Z"
-      }
-    }
-  ]
-}
-DEBUG: User object after findByPk in getMe: {
-  "id": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-  "email": "lucas@teste.com",
-  "name": "Lucas",
-  "passwordHash": "$2a$10$c.L9vt93alPO/3tFX8uNDOhbpwUXKFxUvwjEOMrHQKhiZRpnxgFwm",
-  "isSuperadmin": false,
-  "loginAttempts": 0,
-  "lockUntil": null,
-  "isActive": true,
-  "createdAt": "2025-09-04T18:41:43.893Z",
-  "updatedAt": "2025-09-04T18:41:43.893Z",
-
-  "roles": [
-    {
-      "id": "d8f97665-4238-40e2-8638-648bf5f13e71",
-      "restaurantId": null,
-      "key": "owner",
-      "name": "owner",
-      "isSystem": true,
-      "createdAt": "2025-09-04T18:40:23.934Z",
-      "updatedAt": "2025-09-04T18:40:23.934Z",
-      "restaurant_id": null,
-      "UserRole": {
-        "userId": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-        "restaurantId": "7c98bdc6-c854-4611-acc1-6418115dd067",
-        "roleId": "d8f97665-4238-40e2-8638-648bf5f13e71",
-        "createdAt": "2025-09-04T18:41:43.958Z",
-        "updatedAt": "2025-09-04T18:41:43.958Z",
-        "role_id": "d8f97665-4238-40e2-8638-648bf5f13e71",
-        "user_id": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-        "restaurant_id": "7c98bdc6-c854-4611-acc1-6418115dd067"
-      }
-    }
-  ],
-  "restaurants": [
-    {
-      "userId": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-      "restaurantId": "7c98bdc6-c854-4611-acc1-6418115dd067",
-      "isOwner": true,
-      "createdAt": "2025-09-04T18:41:43.950Z",
-      "updatedAt": "2025-09-04T18:41:43.950Z",
-      "restaurant_id": "7c98bdc6-c854-4611-acc1-6418115dd067",
-      "user_id": "75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344",
-      "restaurant": {
-        "id": "7c98bdc6-c854-4611-acc1-6418115dd067",
-        "name": "Endereço teste",
-        "slug": "endereco-teste",
-        "description": "1",
-        "address": "Rua Avenida Brasil",
-        "city": "Andradas",
-        "state": "MG",
-        "zipCode": null,
-        "phone": null,
-        "email": null,
-        "website": null,
-        "logo": null,
-        "planKey": null,
-        "status": "active",
-        "permVersion": "1",
-        "createdAt": "2025-09-04T18:41:43.944Z",
-        "updatedAt": "2025-09-04T18:41:43.944Z"
-      }
-    }
-  ]
-}
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/iam/roles?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+{"error":"Internal Server Error"}
 
-main.83944e97.js:sourcemap:2 ProtectedRoute Debug: isAuthenticated true
-main.83944e97.js:sourcemap:2 ProtectedRoute Debug: user {id: '75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344', name: 'Lucas', email: 'lucas@teste.com', roles: Array(1), isActive: true, …}
-main.83944e97.js:sourcemap:2 ProtectedRoute Debug: user.permissionSnapshot null
-main.83944e97.js:sourcemap:2 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin undefined
-main.83944e97.js:sourcemap:2 ProtectedRoute Debug: featureKey undefined
-main.83944e97.js:sourcemap:2 ProtectedRoute Debug: actionKey undefined
-main.83944e97.js:sourcemap:2 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
-(anônimo) @ main.83944e97.js:sourcemap:2
-xhr @ main.83944e97.js:sourcemap:2
-Ur @ main.83944e97.js:sourcemap:2
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/iam/users/75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344/overrides?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e
+Método da solicitação
+GET
+Código de status
+404 Not Found
+{"error":"Rota não encontrada"}
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/iam/users/75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344/overrides?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e
+Método da solicitação
+GET
+Código de status
+404 Not Found
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/iam/roles?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e
+Método da solicitação
+GET
+Código de status
+500 Internal Server Error
+
+
+edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+AuthContext.js:73 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
 Promise.then
-_request @ main.83944e97.js:sourcemap:2
-request @ main.83944e97.js:sourcemap:2
-(anônimo) @ main.83944e97.js:sourcemap:2
-(anônimo) @ main.83944e97.js:sourcemap:2
-(anônimo) @ main.83944e97.js:sourcemap:2
-nl @ main.83944e97.js:sourcemap:2
-_c @ main.83944e97.js:sourcemap:2
-(anônimo) @ main.83944e97.js:sourcemap:2
-_ @ main.83944e97.js:sourcemap:2
-P @ main.83944e97.js:sourcemap:2
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ AuthContext.js:73
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+main.0d4a029f.js:2 [Violation] 'message' handler took 296ms
+[Violation] Forced reflow while executing JavaScript took 50ms
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '4d6acf9d-9558-4c17-8fab-e9690d02d407', name: 'Super Admin', email: 'superadmin@example.com', roles: Array(1), isActive: true, …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
+iamQueries.js:23  GET https://feedelizaapi.towersfy.com/api/iam/roles?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:23
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:102  GET https://feedelizaapi.towersfy.com/api/iam/users/75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344/overrides?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:102
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminService.js:4 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/admin/users".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+g1 @ adminService.js:4
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:102 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/iam/users/75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344/overrides?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:102
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:23 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/iam/roles?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:23
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:11
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:102  GET https://feedelizaapi.towersfy.com/api/iam/users/75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344/overrides?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e 404 (Not Found)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:102
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:23  GET https://feedelizaapi.towersfy.com/api/iam/roles?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:23
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 xt {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:102 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/iam/users/75f8ae7b-33a8-42a6-bfdb-e9ab7d6c3344/overrides?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:102
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:23 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/iam/roles?restaurantId=fd9e8bbb-15ee-4e04-8f0b-d931e09ac55e".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:23
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14

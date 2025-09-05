@@ -166,7 +166,7 @@ router.post('/check', async (req, res) => {
  *       200:
  *         description: List of roles
  */
-router.get('/roles', requirePermission('roles.manage', 'read'), async (req, res) => {
+router.get('/roles', async (req, res) => {
   const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   if (!restaurantId) {
     return res.status(401).json({ error: 'Unauthorized: Missing restaurant context.' });
@@ -532,6 +532,52 @@ router.delete('/users/:id/roles', requirePermission('users.manage', 'update'), a
     return res.json({ message: 'Role removed successfully.' });
   } catch (error) {
     console.error('Error removing role:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+/**
+ * @swagger
+ * /iam/users/{id}/overrides:
+ *   get:
+ *     summary: Get user permission overrides
+ *     tags: [IAM]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID of the user to get overrides for
+ *       - in: query
+ *         name: restaurantId
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID of the restaurant (tenant)
+ *     responses:
+ *       200:
+ *         description: List of user permission overrides
+ */
+router.get('/users/:id/overrides', requirePermission('users.manage', 'read'), async (req, res) => {
+  const restaurantId = req.query.restaurantId;
+  const { id: targetUserId } = req.params;
+
+  if (!restaurantId || !targetUserId) {
+    return res.status(400).json({ error: 'Bad Request: restaurantId and userId are required.' });
+  }
+
+  try {
+    const overrides = await models.UserPermissionOverride.findAll({
+      where: { userId: targetUserId, restaurantId },
+    });
+    return res.json(overrides);
+  } catch (error) {
+    console.error('Error getting user overrides:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 });

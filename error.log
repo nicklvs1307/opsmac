@@ -1,35 +1,20 @@
-main.0c002045.js:2 [Violation] 'message' handler took 180ms
-AuthContext.js:36 AuthContext Debug: User object after SET_USER: {message: 'Login realizado com sucesso', id: 'e8efacd5-d284-4b37-8808-9df45f27304c', name: 'Lucas Niquele', email: 'lucas@teste.com', phone: '3598989898', …}
-AuthContext.js:97 O XHR terminou de carregar: POST "https://feedelizaapi.towersfy.com/api/auth/login".
+AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: 'e8efacd5-d284-4b37-8808-9df45f27304c', name: 'Lucas Niquele', email: 'lucas@teste.com', phone: '3598989898', roles: Array(1), …}
+AuthContext.js:81 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-(anônimo) @ Axios.js:226
+Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
-login @ AuthContext.js:97
-onSubmit @ Login.js:25
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Te @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Me @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-Kt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {message: 'Login realizado com sucesso', id: 'e8efacd5-d284-4b37-8808-9df45f27304c', name: 'Lucas Niquele', email: 'lucas@teste.com', phone: '3598989898', …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot null
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin undefined
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+(anônimo) @ AuthContext.js:81
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+
 
 > feedeliza-plus@1.0.0 start
 > node backend/server.js

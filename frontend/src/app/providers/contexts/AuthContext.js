@@ -95,13 +95,12 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await axiosInstance.post('/auth/login', { email, password });
-      const { token, ...user } = response.data;
+      const { token, ...userDataFromApi } = response.data;
 
       if (token) {
         setAuthToken(token);
-        dispatch({ type: AUTH_ACTIONS.SET_USER, payload: user });
 
-        const selectedRestaurantId = user.restaurants && user.restaurants.length > 0 ? user.restaurants[0].id : null;
+        const selectedRestaurantId = userDataFromApi.restaurants && userDataFromApi.restaurants.length > 0 ? userDataFromApi.restaurants[0].id : null;
 
         let permissionSnapshot = null;
         if (selectedRestaurantId) {
@@ -112,14 +111,23 @@ export const AuthProvider = ({ children }) => {
               },
             });
             permissionSnapshot = permResponse.data;
-            dispatch({ type: AUTH_ACTIONS.SET_PERMISSION_SNAPSHOT, payload: permissionSnapshot });
           } catch (permError) {
             console.error("Failed to fetch permissions during login:", permError);
           }
         }
 
-        toast.success(`Bem-vindo, ${user.name}!`);
-        return { success: true, user: { ...user, permissionSnapshot } };
+        // Construct the complete user object with permissionSnapshot
+        const completeUser = {
+          ...userDataFromApi,
+          token: token, // Ensure token is part of user object
+          permissionSnapshot: permissionSnapshot,
+        };
+
+        // Dispatch the complete user object in one go
+        dispatch({ type: AUTH_ACTIONS.SET_USER, payload: completeUser });
+
+        toast.success(`Bem-vindo, ${userDataFromApi.name}!`);
+        return { success: true, user: completeUser };
       } else {
         throw new Error('Token não recebido do servidor');
       }

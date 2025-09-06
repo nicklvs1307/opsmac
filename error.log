@@ -1,5 +1,8 @@
 edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
 AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
 O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
@@ -11,6 +14,16 @@ O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+main.987ffbd0.js:2 [Violation] 'message' handler took 211ms
+[Violation] Forced reflow while executing JavaScript took 30ms
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
@@ -18,147 +31,17 @@ ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin 
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
 ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-main.49914509.js:2 [Violation] 'message' handler took 308ms
-[Violation] Forced reflow while executing JavaScript took 58ms
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
-ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey restaurants
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
+adminService.js:12 DEBUG: fetchRestaurants - response.data: {id: '8067995c-7225-43ab-86c1-6bd8cec6040e', name: 'Restaurante Padrão', slug: 'restaurante-padrao', description: null, address: 'Rua Padrão, 123', …}
 PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-main.49914509.js:2 [Violation] 'message' handler took 161ms
+main.987ffbd0.js:2 [Violation] 'message' handler took 218ms
+[Violation] Forced reflow while executing JavaScript took 64ms
 PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-adminService.js:23 O XHR terminou de carregar: PUT "https://feedelizaapi.towersfy.com/api/admin/users/e8efacd5-d284-4b37-8808-9df45f27304c".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:226
-(anônimo) @ bind.js:5
-x1 @ adminService.js:23
-fn @ mutation.js:132
-c @ retryer.js:95
-u @ retryer.js:156
-t.executeMutation @ mutation.js:126
-(anônimo) @ mutation.js:86
-Promise.then
-t.execute @ mutation.js:85
-r.mutate @ mutationObserver.js:83
-(anônimo) @ UserEditPage.js:173
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Te @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Ie @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-Kt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-iamQueries.js:113  POST https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/overrides 400 (Bad Request)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:226
-(anônimo) @ bind.js:5
-(anônimo) @ iamQueries.js:113
-fn @ mutation.js:132
-c @ retryer.js:95
-u @ retryer.js:156
-t.executeMutation @ mutation.js:126
-(anônimo) @ mutation.js:86
-Promise.then
-t.execute @ mutation.js:85
-r.mutate @ mutationObserver.js:83
-(anônimo) @ UserEditPage.js:197
-await in (anônimo)
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Te @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Ie @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-Kt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
-UserEditPage.js:197 bt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ mutation.js:106
-Promise.catch
-t.execute @ mutation.js:102
-r.mutate @ mutationObserver.js:83
-(anônimo) @ UserEditPage.js:197
-await in (anônimo)
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Te @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Ie @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-Kt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-iamQueries.js:113 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/overrides".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:226
-(anônimo) @ bind.js:5
-(anônimo) @ iamQueries.js:113
-fn @ mutation.js:132
-c @ retryer.js:95
-u @ retryer.js:156
-t.executeMutation @ mutation.js:126
-(anônimo) @ mutation.js:86
-Promise.then
-t.execute @ mutation.js:85
-r.mutate @ mutationObserver.js:83
-(anônimo) @ UserEditPage.js:197
-await in (anônimo)
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Te @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Ie @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-Kt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
@@ -171,8 +54,10 @@ ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey restaurants
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
-adminService.js:12 DEBUG: fetchRestaurants - response.data: {id: '8067995c-7225-43ab-86c1-6bd8cec6040e', name: 'Restaurante Padrão', slug: 'restaurante-padrao', description: null, address: 'Rua Padrão, 123', …}
+main.987ffbd0.js:2 [Violation] 'click' handler took 210ms
+adminService.js:12 DEBUG: fetchRestaurants - response.data: {id: 'f215e84e-2ad1-43c1-8a5f-01b74f847aa7', name: 'Towersfy', slug: 'towersfy', description: '1111', address: 'Rua Avenida Brasil', …}
 PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+main.987ffbd0.js:2 [Violation] 'message' handler took 164ms
 [Violation] Forced reflow while executing JavaScript took 33ms
 PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
 PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
@@ -182,13 +67,7 @@ PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, 
 PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
 PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
 PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-[Violation] 'click' handler took 171ms
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-adminService.js:35 O XHR terminou de carregar: PUT "https://feedelizaapi.towersfy.com/api/admin/restaurants/8067995c-7225-43ab-86c1-6bd8cec6040e".
+adminService.js:35 O XHR terminou de carregar: PUT "https://feedelizaapi.towersfy.com/api/admin/restaurants/f215e84e-2ad1-43c1-8a5f-01b74f847aa7".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -220,7 +99,8 @@ Ie @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
-adminService.js:12 DEBUG: fetchRestaurants - response.data: {id: '8067995c-7225-43ab-86c1-6bd8cec6040e', name: 'Restaurante Padrão', slug: 'restaurante-padrao', description: null, address: 'Rua Padrão, 123', …}
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+adminService.js:12 DEBUG: fetchRestaurants - response.data: {id: 'f215e84e-2ad1-43c1-8a5f-01b74f847aa7', name: 'Towersfy', slug: 'towersfy', description: '1111', address: 'Rua Avenida Brasil', …}
 PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
 iamQueries.js:121  POST https://feedelizaapi.towersfy.com/api/iam/entitlements 400 (Bad Request)
 (anônimo) @ xhr.js:195
@@ -275,7 +155,6 @@ Ie @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
-PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
 iamQueries.js:121 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/iam/entitlements".
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
@@ -309,3 +188,156 @@ Ie @ react-dom.production.min.js:52
 Un @ react-dom.production.min.js:109
 Kt @ react-dom.production.min.js:74
 Ht @ react-dom.production.min.js:73
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey read
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
+UserEditPage.js:47 UserEditPage Debug: allRoles undefined
+UserEditPage.js:47 UserEditPage Debug: allRoles undefined
+UserEditPage.js:47 UserEditPage Debug: allRoles undefined
+UserEditPage.js:47 UserEditPage Debug: allRoles undefined
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+adminService.js:23 O XHR terminou de carregar: PUT "https://feedelizaapi.towersfy.com/api/admin/users/e8efacd5-d284-4b37-8808-9df45f27304c".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+x1 @ adminService.js:23
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:174
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Ie @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+iamQueries.js:113  POST https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/overrides 400 (Bad Request)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:113
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:198
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Ie @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+UserEditPage.js:198 bt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ mutation.js:106
+Promise.catch
+t.execute @ mutation.js:102
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:198
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Ie @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+UserEditPage.js:47 UserEditPage Debug: allRoles []
+iamQueries.js:113 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/overrides".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:113
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:198
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Ie @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]0: description: nullid: "c9d2f5e0-3e6d-46ae-8014-a0d1b9e1707c"key: "fidelity"locked: falsename: "Fidelidade"status: "active"submodules: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]visible: true[[Prototype]]: Objectconstructor: ƒ Object()hasOwnProperty: ƒ hasOwnProperty()isPrototypeOf: ƒ isPrototypeOf()propertyIsEnumerable: ƒ propertyIsEnumerable()toLocaleString: ƒ toLocaleString()toString: ƒ toString()valueOf: ƒ valueOf()__defineGetter__: ƒ __defineGetter__()__defineSetter__: ƒ __defineSetter__()__lookupGetter__: ƒ __lookupGetter__()__lookupSetter__: ƒ __lookupSetter__()__proto__: (…)get __proto__: ƒ __proto__()set __proto__: ƒ __proto__()1: description: nullid: "ba4f6508-8033-49cf-8ab6-69e727fe231f"key: "admin"locked: falsename: "Admin"status: "active"submodules: Array(4)0: {id: '477a7803-7f43-47aa-b071-b1efec199bc4', key: 'general', name: 'Geral', description: null, locked: false, …}1: {id: '154ba670-353e-4603-8efe-011bc536c43f', key: 'users', name: 'Usuários', description: null, locked: false, …}2: {id: 'dd13fa7d-c249-4fe8-b5c5-bb839f3c49c3', key: 'restaurants', name: 'Restaurantes', description: null, locked: false, …}3: {id: 'f9347fa4-f2de-4cc8-afa7-3eaed703d853', key: 'permissions', name: 'Permissões', description: null, locked: false, …}length: 4[[Prototype]]: Array(0)visible: true[[Prototype]]: Object2: description: nullid: "eb1e2f5d-3990-4487-9dec-bc0fc914e4ff"key: "stock"locked: falsename: "Estoque"status: "active"submodules: (2) [{…}, {…}]visible: true[[Prototype]]: Object3: description: nullid: "e9c64d4c-cda3-43a5-9cfc-1ab8727cbead"key: "orders"locked: falsename: "Pedidos"status: "active"submodules: (2) [{…}, {…}]visible: true[[Prototype]]: Object4: description: nullid: "e4b13209-1638-4272-ab18-3ac9aa5a8978"key: "management"locked: falsename: "Gestão"status: "active"submodules: [{…}]visible: true[[Prototype]]: Object5: description: nullid: "0dd56dde-324f-4753-b8b4-3424714ef8ed"key: "cdv"locked: falsename: "CDV"status: "active"submodules: [{…}]visible: true[[Prototype]]: Object6: description: nullid: "26045a8e-941b-44f0-8469-85ccf1477183"key: "financial"locked: falsename: "Financeiro"status: "active"submodules: (6) [{…}, {…}, {…}, {…}, {…}, {…}]visible: true[[Prototype]]: Object7: description: nullid: "a34edc66-efac-4780-9e7e-18fab079f70c"key: "settings"locked: falsename: "Configurações"status: "active"submodules: Array(1)0: {id: '03813368-aae2-4e88-ad55-21234444cd0b', key: 'general', name: 'Geral', description: null, locked: false, …}length: 1[[Prototype]]: Array(0)visible: true[[Prototype]]: Objectlength: 8[[Prototype]]: Array(0)

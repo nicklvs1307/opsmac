@@ -166,20 +166,32 @@ class IamController {
   // --- User Permission Overrides ---
   async setUserPermissionOverride(req, res) {
     try {
-      const { userId, restaurantId } = req.params;
-      const { featureId, actionId, allowed } = req.body;
+      const { userId } = req.params;
+      const { restaurantId, overrides } = req.body; // Get restaurantId and overrides from body
 
-      const [override, created] = await models.UserPermissionOverride.findOrCreate({
-        where: { user_id: userId, restaurant_id: restaurantId, feature_id: featureId, action_id: actionId },
-        defaults: { allowed },
+      // Clear existing overrides for the user in this restaurant to simplify logic
+      await models.UserPermissionOverride.destroy({
+        where: { user_id: userId, restaurant_id: restaurantId }
       });
 
-      if (!created) {
-        await override.update({ allowed });
+      // Insert new overrides
+      const newOverrides = overrides.map(o => ({
+        user_id: userId,
+        restaurant_id: restaurantId,
+        feature_id: o.featureId,
+        action_id: o.actionId,
+        allowed: o.allowed,
+        created_at: new Date(),
+        updated_at: new Date(),
+      }));
+
+      if (newOverrides.length > 0) {
+        await models.UserPermissionOverride.bulkCreate(newOverrides);
       }
+
       await iamService.bumpPermVersion(restaurantId);
-      await createAuditLog(req.user.id, restaurantId, created ? 'CREATE' : 'UPDATE', 'UserPermissionOverride', override.id, { userId, featureId, actionId, allowed });
-      return res.status(200).json(override);
+      await createAuditLog(req.user.id, restaurantId, 'UPDATE', 'UserPermissionOverride', userId, { count: newOverrides.length, userId, restaurantId });
+      return res.status(200).json({ message: 'User permission overrides updated successfully' });
     } catch (error) {
       console.error('Error setting user permission override:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -202,7 +214,7 @@ class IamController {
   // --- Restaurant Entitlements ---
   async setRestaurantEntitlement(req, res) {
     try {
-      const { restaurantId } = req.params;
+      const { restaurantId } = req.body;
       const { entityType, entityId, status, source, metadata } = req.body;
 
       const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({

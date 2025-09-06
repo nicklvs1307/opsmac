@@ -350,17 +350,19 @@ const UserCreatePage = () => {
             </Grid>
           </Grid>
 
-          <Box sx={{ mt: 4 }}>
-            <Typography variant="h5" gutterBottom>
-              Permissões do Usuário
-            </Typography>
-            <PermissionTree
-              availableModules={permissionTree?.modules}
-              selectedModules={selectedFeatures}
-              onSelectionChange={handlePermissionChange}
-              disabled={!can('admin_users', 'manage_permissions')}
-            />
-          </Box>
+          {permissionTree?.modules?.length > 0 && Object.keys(selectedFeatures).length > 0 && (
+            <Box sx={{ mt: 4 }}>
+              <Typography variant="h5" gutterBottom>
+                Permissões do Usuário
+              </Typography>
+              <PermissionTree
+                availableModules={permissionTree?.modules}
+                selectedModules={selectedFeatures}
+                onSelectionChange={handlePermissionChange}
+                disabled={!can('admin_users', 'manage_permissions')}
+              />
+            </Box>
+          )}
 
           <Box sx={{ mt: 4, display: 'flex', gap: 2 }}>
             <Button

@@ -110,7 +110,7 @@ export const useGetUserPermissionOverrides = (userId, restaurantId, options) => 
 // Set user permission overrides
 export const useSetUserPermissionOverrides = () => {
   return useMutation(async ({ userId, restaurantId, overrides }) => {
-    const { data } = await axiosInstance.post(`/iam/users/${userId}/overrides`, { overrides });
+    const { data } = await axiosInstance.post(`/iam/users/${userId}/overrides`, { restaurantId, overrides });
     return data;
   });
 };

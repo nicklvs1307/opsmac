@@ -1,241 +1,3 @@
-
-(índice):1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
-ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-main.0c421d1c.js:2 [Violation] 'message' handler took 180ms
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
-ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-AuthContext.js:81 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ AuthContext.js:81
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-dashboardQueries.js:14  GET https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d 401 (Unauthorized)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:14
-(anônimo) @ dashboardQueries.js:24
-fetchFn @ query.js:300
-c @ retryer.js:95
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-dashboardQueries.js:14 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:14
-(anônimo) @ dashboardQueries.js:24
-fetchFn @ query.js:300
-c @ retryer.js:95
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-dashboardQueries.js:14  GET https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d 401 (Unauthorized)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:14
-(anônimo) @ dashboardQueries.js:24
-fetchFn @ query.js:300
-c @ retryer.js:95
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-query.js:358 xt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-onError @ query.js:358
-f @ retryer.js:67
-(anônimo) @ retryer.js:132
-Promise.catch
-c @ retryer.js:116
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-dashboardQueries.js:30 Error fetching dashboard data: xt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-onError @ dashboardQueries.js:30
-(anônimo) @ notifyManager.js:62
-(anônimo) @ notifyManager.js:10
-(anônimo) @ notifyManager.js:77
-(anônimo) @ notifyManager.js:76
-cc @ react-dom.production.min.js:273
-(anônimo) @ notifyManager.js:75
-Promise.then
-S @ utils.js:322
-(anônimo) @ notifyManager.js:74
-(anônimo) @ notifyManager.js:30
-t.dispatch @ query.js:392
-onError @ query.js:348
-f @ retryer.js:67
-(anônimo) @ retryer.js:132
-Promise.catch
-c @ retryer.js:116
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-Dashboard.js:94 Error fetching dashboard data: xt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-sV @ Dashboard.js:94
-vi @ react-dom.production.min.js:160
-As @ react-dom.production.min.js:196
-wl @ react-dom.production.min.js:291
-xc @ react-dom.production.min.js:279
-gc @ react-dom.production.min.js:279
-vc @ react-dom.production.min.js:279
-ac @ react-dom.production.min.js:267
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-dashboardQueries.js:14 Falha ao carregar XHR: GET "https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:14
-(anônimo) @ dashboardQueries.js:24
-fetchFn @ query.js:300
-c @ retryer.js:95
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d
-Método da solicitação
-GET
-Código de status
-401 Unauthorized
-{"error":"Unauthorized: User not authenticated."}
-
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
 Redis Client Connected
@@ -307,3 +69,165 @@ DEBUG: User object after findByPk in getMe: {
     }
   ]
 }
+DEBUG: User object after findByPk in getMe: {
+  "id": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+  "email": "superadmin@example.com",
+  "name": "Super Admin",
+  "phone": null,
+  "passwordHash": "$2a$12$AXK8ylcmRyDJAVGiaAP9cehthPRRzWlTFtptakri8l6iRS9x.69mu",
+  "isSuperadmin": true,
+  "loginAttempts": 0,
+  "lockUntil": null,
+  "isActive": true,
+  "createdAt": "2025-09-05T19:26:13.667Z",
+  "updatedAt": "2025-09-05T19:26:13.667Z",
+
+  "roles": [
+    {
+      "id": "ef442338-948b-4bbd-9c48-f6490742edce",
+      "restaurantId": null,
+      "key": "super_admin",
+      "name": "super_admin",
+      "isSystem": true,
+      "createdAt": "2025-09-05T19:26:12.940Z",
+      "updatedAt": "2025-09-05T19:26:12.940Z",
+      "restaurant_id": null,
+      "UserRole": {
+        "userId": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+        "restaurantId": "8067995c-7225-43ab-86c1-6bd8cec6040e",
+        "roleId": "ef442338-948b-4bbd-9c48-f6490742edce",
+        "createdAt": "2025-09-05T19:26:13.698Z",
+        "updatedAt": "2025-09-05T19:26:13.698Z",
+        "role_id": "ef442338-948b-4bbd-9c48-f6490742edce",
+        "user_id": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+        "restaurant_id": "8067995c-7225-43ab-86c1-6bd8cec6040e"
+      }
+    }
+  ],
+  "restaurants": [
+    {
+      "userId": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+      "restaurantId": "8067995c-7225-43ab-86c1-6bd8cec6040e",
+      "isOwner": true,
+      "createdAt": "2025-09-05T19:26:13.688Z",
+      "updatedAt": "2025-09-05T19:26:13.688Z",
+      "restaurant_id": "8067995c-7225-43ab-86c1-6bd8cec6040e",
+      "user_id": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+      "restaurant": {
+        "id": "8067995c-7225-43ab-86c1-6bd8cec6040e",
+        "name": "Restaurante Padrão",
+        "slug": "restaurante-padrao",
+        "description": null,
+        "address": "Rua Padrão, 123",
+        "city": "Cidade Padrão",
+        "state": "SP",
+        "zipCode": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "logo": null,
+        "planKey": null,
+        "status": "active",
+        "permVersion": "1",
+        "createdAt": "2025-09-05T19:26:13.673Z",
+        "updatedAt": "2025-09-05T19:26:13.673Z"
+      }
+    }
+  ]
+}
+Error caught by middleware: BadRequestError: ID do restaurante não encontrado nos parâmetros da rota.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:9:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 400
+}
+DEBUG: User object after findByPk in getMe: {
+  "id": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+  "email": "superadmin@example.com",
+  "name": "Super Admin",
+  "phone": null,
+  "passwordHash": "$2a$12$AXK8ylcmRyDJAVGiaAP9cehthPRRzWlTFtptakri8l6iRS9x.69mu",
+  "isSuperadmin": true,
+  "loginAttempts": 0,
+  "lockUntil": null,
+  "isActive": true,
+  "createdAt": "2025-09-05T19:26:13.667Z",
+  "updatedAt": "2025-09-05T19:26:13.667Z",
+
+  "roles": [
+    {
+      "id": "ef442338-948b-4bbd-9c48-f6490742edce",
+      "restaurantId": null,
+      "key": "super_admin",
+      "name": "super_admin",
+      "isSystem": true,
+      "createdAt": "2025-09-05T19:26:12.940Z",
+      "updatedAt": "2025-09-05T19:26:12.940Z",
+      "restaurant_id": null,
+      "UserRole": {
+        "userId": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+        "restaurantId": "8067995c-7225-43ab-86c1-6bd8cec6040e",
+        "roleId": "ef442338-948b-4bbd-9c48-f6490742edce",
+        "createdAt": "2025-09-05T19:26:13.698Z",
+        "updatedAt": "2025-09-05T19:26:13.698Z",
+        "role_id": "ef442338-948b-4bbd-9c48-f6490742edce",
+        "user_id": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+        "restaurant_id": "8067995c-7225-43ab-86c1-6bd8cec6040e"
+      }
+    }
+  ],
+  "restaurants": [
+    {
+      "userId": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+      "restaurantId": "8067995c-7225-43ab-86c1-6bd8cec6040e",
+      "isOwner": true,
+      "createdAt": "2025-09-05T19:26:13.688Z",
+      "updatedAt": "2025-09-05T19:26:13.688Z",
+      "restaurant_id": "8067995c-7225-43ab-86c1-6bd8cec6040e",
+      "user_id": "6c76bff1-e1e7-483a-854e-734e1cfe8b92",
+      "restaurant": {
+        "id": "8067995c-7225-43ab-86c1-6bd8cec6040e",
+        "name": "Restaurante Padrão",
+        "slug": "restaurante-padrao",
+        "description": null,
+        "address": "Rua Padrão, 123",
+        "city": "Cidade Padrão",
+        "state": "SP",
+        "zipCode": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "logo": null,
+        "planKey": null,
+        "status": "active",
+        "permVersion": "1",
+        "createdAt": "2025-09-05T19:26:13.673Z",
+        "updatedAt": "2025-09-05T19:26:13.673Z"
+      }
+    }
+  ]
+}
+Error caught by middleware: BadRequestError: ID do restaurante não encontrado nos parâmetros da rota.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:9:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 400
+}
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/dashboard/overview/8067995c-7225-43ab-86c1-6bd8cec6040e?period=30d
+Método da solicitação
+GET
+Código de status
+400 Bad Request
+{"error":"ID do restaurante não encontrado nos parâmetros da rota."}

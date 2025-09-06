@@ -2,6 +2,11 @@ const { ForbiddenError, BadRequestError } = require('../utils/errors');
 
 const checkRestaurantOwnership = (req, res, next) => {
   try {
+    // Super Admins can access anything, so we bypass all other checks.
+    if (req.user && req.user.isSuperadmin) {
+      return next();
+    }
+
     const restaurantIdFromParams = req.params.restaurantId;
 
     if (!restaurantIdFromParams) {
@@ -9,12 +14,7 @@ const checkRestaurantOwnership = (req, res, next) => {
       return next(new BadRequestError('ID do restaurante não encontrado nos parâmetros da rota.'));
     }
 
-    const { role, restaurantId: userRestaurantId, restaurant } = req.user;
-
-    // Super Admins can access anything
-    if (role.name === 'super_admin') {
-      return next();
-    }
+    const { restaurantId: userRestaurantId, restaurant } = req.user;
 
     // If the user is not a super_admin, they must have a restaurant ID.
     if (!userRestaurantId) {

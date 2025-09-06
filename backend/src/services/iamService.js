@@ -92,6 +92,8 @@ class IamService {
       userOverrideMap.set(`${uo.featureId}-${uo.actionId}`, uo.allowed);
     });
 
+    const allActions = await models.Action.findAll(); // Get all possible actions ONCE
+
     const snapshot = {
       restaurantId: restaurant.id,
       userId: user.id,
@@ -146,7 +148,6 @@ class IamService {
           };
 
           // Determine allowed actions for this feature
-          const allActions = await models.Action.findAll(); // Get all possible actions
           for (const action of allActions) {
             let allowed = false;
             let reason = 'default-deny';

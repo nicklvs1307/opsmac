@@ -44,12 +44,7 @@ const UserEditPage = () => {
   const targetUser = allUsers?.find((u) => u.id === userId);
 
   const { data: allRoles, isLoading: isLoadingAllRoles, isError: isErrorAllRoles } = useGetRoles(selectedRestaurantId, { enabled: !!selectedRestaurantId });
-  const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(selectedRestaurantId, { 
-    enabled: !!selectedRestaurantId,
-    onSuccess: (data) => {
-      console.log('UserEditPage - Fetched permissionTree:', data);
-    }
-  });
+  const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(selectedRestaurantId, { enabled: !!selectedRestaurantId });
   const { data: fetchedUserOverrides, isLoading: isLoadingUserOverrides, isError: isErrorUserOverrides } = useGetUserPermissionOverrides(userId, selectedRestaurantId, {
     enabled: !!userId && !!selectedRestaurantId,
   });
@@ -214,11 +209,6 @@ const UserEditPage = () => {
   if (isLoadingUsers || isLoadingAllRoles || isLoadingPermissionTree || isLoadingUserOverrides) return <CircularProgress />;
   if (isErrorUsers || isErrorAllRoles || isErrorPermissionTree || isErrorUserOverrides) return <Alert severity="error">Error loading data.</Alert>;
   if (!targetUser) return <Alert severity="warning">User not found.</Alert>;
-
-  console.log('UserEditPage - Rendering PermissionTree with:', {
-    availableModules: permissionTree?.modules,
-    selectedPermissions,
-  });
 
   return (
     <Box sx={{ p: 3 }}>

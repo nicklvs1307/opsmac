@@ -31,12 +31,7 @@ const RestaurantEditPage = () => {
   const { can } = usePermissions();
 
   const { data: restaurant, isLoading: isLoadingRestaurant, isError: isErrorRestaurant } = useQuery(['restaurant', restaurantId], () => fetchRestaurants(restaurantId), { enabled: !!restaurantId });
-  const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(restaurantId, { 
-    enabled: !!restaurantId,
-    onSuccess: (data) => {
-      console.log('RestaurantEditPage - Fetched permissionTree:', data);
-    }
-  });
+  const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(restaurantId, { enabled: !!restaurantId });
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm();
   const saveRestaurantMutation = useMutation(saveRestaurant, { onSuccess: () => queryClient.invalidateQueries(['restaurant', restaurantId]) });
@@ -173,11 +168,6 @@ const RestaurantEditPage = () => {
   if (isLoadingRestaurant || isLoadingPermissionTree) return <CircularProgress />;
   if (isErrorRestaurant || isErrorPermissionTree) return <Alert severity="error">Error loading data.</Alert>;
   if (!restaurant) return <Alert severity="warning">Restaurant not found.</Alert>;
-
-  console.log('RestaurantEditPage - Rendering PermissionTree with:', {
-    availableModules: permissionTree?.modules,
-    selectedPermissions,
-  });
 
   return (
     <Box sx={{ p: 3 }}>

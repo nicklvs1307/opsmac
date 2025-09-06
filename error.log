@@ -12,8 +12,8 @@ O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
-main.d9560c67.js:2 [Violation] 'message' handler took 310ms
-[Violation] Forced reflow while executing JavaScript took 54ms
+main.5b212832.js:2 [Violation] 'message' handler took 299ms
+[Violation] Forced reflow while executing JavaScript took 50ms
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
@@ -27,7 +27,8 @@ ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
-UserEditPage.js:213 UserEditPage - Rendering PermissionTree with: {availableModules: Array(8), selectedPermissions: {…}}
+UserEditPage.js:50 UserEditPage - Fetched permissionTree: {restaurantId: '8067995c-7225-43ab-86c1-6bd8cec6040e', userId: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', permVersion: '1', isSuperAdmin: true, isOwner: true, …}
+UserEditPage.js:218 UserEditPage - Rendering PermissionTree with: {availableModules: Array(8), selectedPermissions: {…}}
 TreeView.js:8 MUI: The TreeView component was moved from `@mui/lab` to `@mui/x-tree-view`.
 
 You should use `import { TreeView } from '@mui/x-tree-view'`
@@ -44,4 +45,74 @@ vc @ react-dom.production.min.js:279
 ac @ react-dom.production.min.js:267
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
-UserEditPage.js:213 UserEditPage - Rendering PermissionTree with: {availableModules: Array(8), selectedPermissions: {…}}
+UserEditPage.js:218 UserEditPage - Rendering PermissionTree with: {availableModules: Array(8), selectedPermissions: {…}}
+
+edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+O XHR terminou de carregar: GET "<URL>".
+main.5b212832.js:2 [Violation] 'message' handler took 299ms
+[Violation] Forced reflow while executing JavaScript took 50ms
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
+UserEditPage.js:50 UserEditPage - Fetched permissionTree: {restaurantId: '8067995c-7225-43ab-86c1-6bd8cec6040e', userId: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', permVersion: '1', isSuperAdmin: true, isOwner: true, …}
+UserEditPage.js:218 UserEditPage - Rendering PermissionTree with: {availableModules: Array(8), selectedPermissions: {…}}
+TreeView.js:8 MUI: The TreeView component was moved from `@mui/lab` to `@mui/x-tree-view`.
+
+You should use `import { TreeView } from '@mui/x-tree-view'`
+or `import { TreeView } from '@mui/x-tree-view/TreeView'`
+
+More information about this migration on our blog: https://mui.com/blog/lab-tree-view-to-mui-x/.
+(anônimo) @ TreeView.js:8
+vi @ react-dom.production.min.js:160
+js @ react-dom.production.min.js:192
+wl @ react-dom.production.min.js:293
+bc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+UserEditPage.js:218 UserEditPage - Rendering PermissionTree with: {availableModules: Array(8), selectedPermissions: {…}}
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey restaurants
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey read
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey restaurants
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
+adminService.js:12 DEBUG: fetchRestaurants - response.data: {id: 'f215e84e-2ad1-43c1-8a5f-01b74f847aa7', name: 'Towersfy', slug: 'towersfy', description: '1111', address: 'Rua Avenida Brasil', …}
+RestaurantEditPage.js:37 RestaurantEditPage - Fetched permissionTree: {restaurantId: 'f215e84e-2ad1-43c1-8a5f-01b74f847aa7', userId: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', permVersion: '1', isSuperAdmin: true, isOwner: false, …}
+RestaurantEditPage.js:177 RestaurantEditPage - Rendering PermissionTree with: {availableModules: Array(8), selectedPermissions: {…}}
+[Violation] Forced reflow while executing JavaScript took 32ms
+RestaurantEditPage.js:177 RestaurantEditPage - Rendering PermissionTree with: {availableModules: Array(8), selectedPermissions: {…}}

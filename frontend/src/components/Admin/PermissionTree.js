@@ -12,8 +12,11 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const PermissionTree = ({ availableModules, selectedPermissions, onPermissionChange, disabled }) => {
   if (!availableModules) {
+    console.log('PermissionTree Debug: availableModules is null or undefined', availableModules);
     return null;
   }
+
+  console.log('PermissionTree Debug: availableModules', availableModules);
 
   const renderTree = (modules) => {
     return modules.map(moduleNode => (

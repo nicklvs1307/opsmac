@@ -22,11 +22,18 @@ module.exports = function override(config) {
   });
 
   // Remove the specific aliases for @mui/material and @mui/icons-material
-  // as they might be interfering with sub-imports.
   if (config.resolve.alias) {
     delete config.resolve.alias['@mui/material'];
     delete config.resolve.alias['@mui/icons-material'];
   }
+
+  // Add rule to handle fully specified imports for mjs and js files
+  config.module.rules.push({
+    test: /\.m?js$/,
+    resolve: {
+      fullySpecified: false,
+    },
+  });
 
   return config;
 };

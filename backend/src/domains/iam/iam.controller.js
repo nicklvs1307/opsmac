@@ -230,9 +230,9 @@ class IamController {
       console.log(`source: ${source}, type: ${typeof source}, length: ${source?.length}`);
 
       // Basic validation
-      if (!restaurantId || !entityType || !entityId || !status || !source) {
-        return res.status(400).json({ error: 'Bad Request: Missing required fields for entitlement.' });
-      }
+      // if (!restaurantId || !entityType || !entityId || !status || !source) {
+      //   return res.status(400).json({ error: 'Bad Request: Missing required fields for entitlement.' });
+      // }
 
       const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({
         where: { restaurant_id: restaurantId, entity_type: entityType, entity_id: entityId },
@@ -246,8 +246,8 @@ class IamController {
       await createAuditLog(req.user.id, restaurantId, created ? 'CREATE' : 'UPDATE', 'RestaurantEntitlement', entitlement.id, { entityType, entityId, status });
       return res.status(200).json(entitlement);
     } catch (error) {
-      console.error('Error setting restaurant entitlement:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
+      console.error('Error setting restaurant entitlement:', error.name, error.message, error.errors);
+      return res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
   }
 

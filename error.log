@@ -1,53 +1,25 @@
-root@ServerAgents:~/opsmac# npm cache clean --force
-npm warn using --force Recommended protections disabled.
-root@ServerAgents:~/opsmac# git pull origin main
-From https://github.com/nicklvs1307/opsmac
- * branch            main       -> FETCH_HEAD
-Updating 6f558d4..7e79749
-error: Your local changes to the following files would be overwritten by merge:
-        frontend/package.json
-Please commit your changes or stash them before you merge.
-error: The following untracked working tree files would be overwritten by merge:
-        frontend/package-lock.json
-Please move or remove them before you merge.
-Aborting
-root@ServerAgents:~/opsmac# git reset --hard origin/main
-HEAD is now at 7e79749 feat: atualiza projeto feedeliza
-root@ServerAgents:~/opsmac# git clean -fd
-Removing =
-Removing CACHED
-Removing ERROR
-Removing [builder
-Removing [internal]
-Removing [stage-1
-Removing backend/package-lock.json
-Removing backend/public/
-Removing exporting
-Removing extracting
-Removing feedeliza-plus@1.0.0
-Removing migrations/
-Removing naming
-Removing node
-Removing resolve
-Removing set
-Removing sha256:1e5a4c89cee5c0826c540ab06d4b6b491c96eda01837f430bd47f0d26702d6e3
-Removing sha256:25ff2da83641908f65c3a74d80409d6b1b62ccfaab220b9ea70b80df5a2e0549
-Removing sha256:42a516af16b852e33b7682d5ef8acbd5d13fe08fecadc7ed98605ba5e3b26ab8
-Removing sha256:4a86014ec6994761b7f3118cf47e4b4fd6bac15fc6fa262c4f356386bbc0e9d9
-Removing sha256:60e48a050b6408d0c5dd59b98b6e36bf0937a0bbe99304e3e9c0e63b7563443a
-Removing sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
-Removing sha256:929b04d7c782f04f615cf785488fed452b6569f87c73ff666ad553a7554f0006
-Removing sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e
-Removing sha256:ee77c6cd7c1886ecc802ad6cedef3a8ec1ea27d1fb96162bf03dd3710839b8da
-Removing sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870
-Removing transferring
-Removing writing
-root@ServerAgents:~/opsmac# git pull origin main
-From https://github.com/nicklvs1307/opsmac
- * branch            main       -> FETCH_HEAD
-Already up to date.
-root@ServerAgents:~/opsmac# git pull origin main
-From https://github.com/nicklvs1307/opsmac
- * branch            main       -> FETCH_HEAD
-Already up to date.
-root@ServerAgents:~/opsmac# git pull origin main
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           13.0s
+------
+ > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.325 + npm run build
+0.596
+0.596 > feedeliza-plus@1.0.0 build
+0.596 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.596
+2.685 Creating an optimized production build...
+12.79 Failed to compile.
+12.79
+12.79 Module not found: Error: You attempted to import /app/frontend/node_modules/@mui/material/index.js which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
+12.79 You can either move it inside src/, or add a symlink to it from project's node_modules/.
+12.79
+12.79
+------
+Dockerfile.frontend:27
+--------------------
+  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
+  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  28 |
+  29 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

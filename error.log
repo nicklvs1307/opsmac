@@ -1,121 +1,205 @@
-edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-
-10
-O XHR terminou de carregar: GET "<URL>".
+rror while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)Entenda o erro
+AuthContext.js:80 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ AuthContext.js:80
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+adminService.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants/f215e84e-2ad1-43c1-8a5f-01b74f847aa7".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ adminService.js:11
+X5.enabled @ RestaurantEditPage.js:33
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=f215e84e-2ad1-43c1-8a5f-01b74f847aa7".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:11
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
 adminService.js:33 O XHR terminou de carregar: PUT "https://feedelizaapi.towersfy.com/api/admin/restaurants/f215e84e-2ad1-43c1-8a5f-01b74f847aa7".
-RestaurantEditPage.js:157 Sending restaurant entitlement: 
-{restaurantId: 'f215e84e-2ad1-43c1-8a5f-01b74f847aa7', entityType: 'module', entityId: 'c9d2f5e0-3e6d-46ae-8014-a0d1b9e1707c', status: 'active', source: 'admin_ui', …}
-entityId
-: 
-"c9d2f5e0-3e6d-46ae-8014-a0d1b9e1707c"
-entityType
-: 
-"module"
-metadata
-: 
-[[Prototype]]
-: 
-Object
-constructor
-: 
-ƒ Object()
-hasOwnProperty
-: 
-ƒ hasOwnProperty()
-isPrototypeOf
-: 
-ƒ isPrototypeOf()
-propertyIsEnumerable
-: 
-ƒ propertyIsEnumerable()
-toLocaleString
-: 
-ƒ toLocaleString()
-toString
-: 
-ƒ toString()
-valueOf
-: 
-ƒ valueOf()
-__defineGetter__
-: 
-ƒ __defineGetter__()
-__defineSetter__
-: 
-ƒ __defineSetter__()
-__lookupGetter__
-: 
-ƒ __lookupGetter__()
-__lookupSetter__
-: 
-ƒ __lookupSetter__()
-__proto__
-: 
-(…)
-get __proto__
-: 
-ƒ __proto__()
-set __proto__
-: 
-ƒ __proto__()
-restaurantId
-: 
-"f215e84e-2ad1-43c1-8a5f-01b74f847aa7"
-source
-: 
-"admin_ui"
-status
-: 
-"active"
-[[Prototype]]
-: 
-Object
-iamQueries.js:121 
- POST https://feedelizaapi.towersfy.com/api/iam/entitlements 400 (Bad Request)
-Promise.then		
-(anônimo)	@	iamQueries.js:121
-Promise.then		
-(anônimo)	@	RestaurantEditPage.js:158
-RestaurantEditPage.js:158 
-bt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-code
-: 
-"ERR_BAD_REQUEST"
-config
-: 
-{transitional: {…}, adapter: Array(3), transformRequest: Array(1), transformResponse: Array(1), timeout: 0, …}
-message
-: 
-"Request failed with status code 400"
-name
-: 
-"AxiosError"
-request
-: 
-XMLHttpRequest {onreadystatechange: null, readyState: 4, timeout: 0, withCredentials: false, upload: XMLHttpRequestUpload, …}
-response
-: 
-{data: {…}, status: 400, statusText: '', headers: Yt, config: {…}, …}
-status
-: 
-400
-stack
-: 
-"AxiosError: Request failed with status code 400\n    at nr (https://feedelizapro.towersfy.com/static/js/main.7d101d44.js:2:381862)\n    at XMLHttpRequest.v (https://feedelizapro.towersfy.com/static/js/main.7d101d44.js:2:386441)\n    at Xr.request (https://feedelizapro.towersfy.com/static/js/main.7d101d44.js:2:397613)\n    at async Object.mutationFn (https://feedelizapro.towersfy.com/static/js/main.7d101d44.js:2:1621827)"
-[[Prototype]]
-: 
-Error
-Promise.catch		
-(anônimo)	@	RestaurantEditPage.js:158
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+j1 @ adminService.js:33
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ RestaurantEditPage.js:139
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Ie @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+RestaurantEditPage.js:157 Sending restaurant entitlement: {restaurantId: 'f215e84e-2ad1-43c1-8a5f-01b74f847aa7', entityType: 'module', entityId: 'c9d2f5e0-3e6d-46ae-8014-a0d1b9e1707c', status: 'locked', source: 'admin_ui', …}entityId: "c9d2f5e0-3e6d-46ae-8014-a0d1b9e1707c"entityType: "module"metadata: {}restaurantId: "f215e84e-2ad1-43c1-8a5f-01b74f847aa7"source: "admin_ui"status: "locked"[[Prototype]]: Object
+adminService.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants/f215e84e-2ad1-43c1-8a5f-01b74f847aa7".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ adminService.js:11
+X5.enabled @ RestaurantEditPage.js:33
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+(anônimo) @ queryClient.js:191
+(anônimo) @ queryClient.js:190
+t.batch @ notifyManager.js:25
+t.refetchQueries @ queryClient.js:189
+(anônimo) @ queryClient.js:178
+t.batch @ notifyManager.js:25
+t.invalidateQueries @ queryClient.js:173
+onSuccess @ RestaurantEditPage.js:37
+(anônimo) @ mutation.js:92
+Promise.then
+t.execute @ mutation.js:91
+r.mutate @ mutationObserver.js:83
+(anônimo) @ RestaurantEditPage.js:139
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Ie @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+iamQueries.js:121  POST https://feedelizaapi.towersfy.com/api/iam/entitlements 400 (Bad Request)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:121
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ RestaurantEditPage.js:158
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Ie @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73Entenda o erro
+RestaurantEditPage.js:158 bt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ mutation.js:106
+Promise.catch
+t.execute @ mutation.js:102
+r.mutate @ mutationObserver.js:83
+(anônimo) @ RestaurantEditPage.js:158
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Ie @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73Entenda o erro
 iamQueries.js:121 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/iam/entitlements".
-Promise.then		
-(anônimo)	@	iamQueries.js:121
-Promise.then		
-(anônimo)	@	RestaurantEditPage.js:158
 URL da solicitação
 https://feedelizaapi.towersfy.com/api/iam/entitlements
 Método da solicitação
 POST
 Código de status
 400 Bad Request
-{"error":"Bad Request: Missing required fields for entitlement."}

@@ -220,6 +220,7 @@ class IamController {
   // --- Restaurant Entitlements ---
   async setRestaurantEntitlement(req, res) {
     try {
+      console.log('setRestaurantEntitlement - received req.body:', req.body);
       const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
 
       // Basic validation

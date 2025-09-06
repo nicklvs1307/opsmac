@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQueryClient } from 'react-query';
+import { useQueryClient, useQuery } from 'react-query';
 import usePermissions from '@/hooks/usePermissions';
 import toast from 'react-hot-toast';
 import {
@@ -14,8 +14,8 @@ import {
   useGetPermissionTree,
   useGetUserPermissionOverrides,
   useSetUserPermissionOverrides,
-  useGetUsers,
 } from './api/iamQueries';
+import { fetchUsers } from '@/services/adminService';
 import PermissionTree from '@/components/Admin/PermissionTree';
 
 const UserPermissionOverridesPage = () => {
@@ -25,7 +25,7 @@ const UserPermissionOverridesPage = () => {
 
   const [selectedPermissions, setSelectedPermissions] = useState({});
 
-  const { data: users, isLoading: isLoadingUsers, isError: isErrorUsers } = useGetUsers(restaurantId, { enabled: !!restaurantId });
+  const { data: users, isLoading: isLoadingUsers, isError: isErrorUsers } = useQuery('adminUsers', fetchUsers);
   const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(restaurantId, { enabled: !!restaurantId });
   const { data: fetchedUserOverrides, isLoading: isLoadingUserOverrides, isError: isErrorUserOverrides } = useGetUserPermissionOverrides(userId, restaurantId, {
     enabled: !!userId && !!restaurantId,

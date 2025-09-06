@@ -15,11 +15,13 @@ import {
   MenuItem,
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient, useQuery } from 'react-query';
 import { toast } from 'react-hot-toast';
 import {
-  useGetUsers,
-  useSaveUser,
+  fetchUsers,
+  saveUser,
+} from '@/services/adminService';
+import {
   useGetPermissionTree,
   useGetRoles,
   useGetUserPermissionOverrides,
@@ -38,7 +40,7 @@ const UserEditPage = () => {
   const { selectedRestaurantId } = useAuth();
   const { can } = usePermissions();
 
-  const { data: allUsers, isLoading: isLoadingUsers, isError: isErrorUsers } = useGetUsers(selectedRestaurantId, { enabled: !!selectedRestaurantId });
+  const { data: allUsers, isLoading: isLoadingUsers, isError: isErrorUsers } = useQuery('adminUsers', fetchUsers);
   const targetUser = allUsers?.find((u) => u.id === userId);
 
   const { data: allRoles, isLoading: isLoadingAllRoles, isError: isErrorAllRoles } = useGetRoles(selectedRestaurantId, { enabled: !!selectedRestaurantId });
@@ -48,7 +50,7 @@ const UserEditPage = () => {
   });
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm();
-  const saveUserMutation = useMutation(useSaveUser, { onSuccess: () => queryClient.invalidateQueries('adminUsers') });
+  const saveUserMutation = useMutation(saveUser, { onSuccess: () => queryClient.invalidateQueries('adminUsers') });
   const assignUserRoleMutation = useAssignUserRole();
   const removeUserRoleMutation = useRemoveUserRole();
   const saveUserPermissionOverridesMutation = useSetUserPermissionOverrides();
@@ -139,22 +141,27 @@ const UserEditPage = () => {
     let newSelected = JSON.parse(JSON.stringify(selectedPermissions));
     const [moduleId, submoduleId, featureId, actionId] = path;
 
+    const setChildrenState = (branch, value) => {
+      branch.checked = value;
+      if (branch.actions) {
+        Object.keys(branch.actions).forEach(key => { branch.actions[key] = value; });
+      }
+      if (branch.features) {
+        Object.values(branch.features).forEach(feat => setChildrenState(feat, value));
+      }
+      if (branch.submodules) {
+        Object.values(branch.submodules).forEach(sub => setChildrenState(sub, value));
+      }
+    };
+
     if (actionId) {
       newSelected[moduleId].submodules[submoduleId].features[featureId].actions[actionId] = checked;
     } else if (featureId) {
-      Object.keys(newSelected[moduleId].submodules[submoduleId].features[featureId].actions).forEach(actId => {
-        newSelected[moduleId].submodules[submoduleId].features[featureId].actions[actId] = checked;
-      });
+      setChildrenState(newSelected[moduleId].submodules[submoduleId].features[featureId], checked);
     } else if (submoduleId) {
-      Object.values(newSelected[moduleId].submodules[submoduleId].features).forEach(feat => {
-        Object.keys(feat.actions).forEach(actId => { feat.actions[actId] = checked; });
-      });
+      setChildrenState(newSelected[moduleId].submodules[submoduleId], checked);
     } else if (moduleId) {
-      Object.values(newSelected[moduleId].submodules).forEach(sub => {
-        Object.values(sub.features).forEach(feat => {
-          Object.keys(feat.actions).forEach(actId => { feat.actions[actId] = checked; });
-        });
-      });
+      setChildrenState(newSelected[moduleId], checked);
     }
 
     const updatedState = updateParentStates(newSelected, permissionTree);

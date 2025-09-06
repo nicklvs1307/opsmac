@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          205.3s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          206.4s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.309 + npm run build
-0.595
-0.595 > feedeliza-plus@1.0.0 build
-0.595 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.595
-4.092 Creating an optimized production build...
-203.9 Failed to compile.
-203.9
-203.9 Attempted import error: 'useGetRestaurant' is not exported from '@/features/IAM/api/iamQueries' (imported as 'useGetRestaurant').
-203.9
-203.9
+0.645 + npm run build
+1.165
+1.165 > feedeliza-plus@1.0.0 build
+1.165 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+1.165
+4.937 Creating an optimized production build...
+204.9 Failed to compile.
+204.9
+204.9 Attempted import error: 'useGetUsers' is not exported from '@/features/IAM/api/iamQueries' (imported as 'useGetUsers').
+204.9
+204.9
 ------
 Dockerfile.frontend:27
 --------------------

@@ -1,17 +1,19 @@
-=> ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           25.5s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          190.8s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.540 + npm run build
-1.086
-1.086 > feedeliza-plus@1.0.0 build
-1.086 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-1.086
-5.157 Creating an optimized production build...
-25.21 Failed to compile.
-25.21
-25.21 Module not found: Error: Can't resolve '@mui/x-tree-view/TreeView' in '/app/frontend/src/components/Admin'
-25.21
-25.21
+0.319 + npm run build
+0.600
+0.600 > feedeliza-plus@1.0.0 build
+0.600 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.600
+2.839 Creating an optimized production build...
+189.7 Failed to compile.
+189.7
+189.7 [eslint]
+189.7 src/components/Admin/PermissionTree.js
+189.7 Syntax error: Expected corresponding JSX closing tag for <SimpleTreeView>. (81:4) (81:4)
+189.7
+189.7
 ------
 Dockerfile.frontend:27
 --------------------

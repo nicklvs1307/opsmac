@@ -78,7 +78,7 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
       sx={{ flexGrow: 1, overflowY: 'auto' }}
     >
       {renderTree(availableModules)}
-    </TreeView>
+    </SimpleTreeView>
   );
 };
 

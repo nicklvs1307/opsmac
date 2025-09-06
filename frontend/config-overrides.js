@@ -22,24 +22,9 @@ module.exports = function override(config) {
     '@mui/icons-material': path.resolve(__dirname, 'node_modules/@mui/icons-material/index.js'),
   };
 
-  config.module.rules = config.module.rules.map(rule => {
-    if (rule.oneOf) {
-      return {
-        ...rule,
-        oneOf: rule.oneOf.map(oneOfRule => {
-          if (oneOfRule.loader && oneOfRule.loader.includes('babel-loader')) {
-            return {
-              ...oneOfRule,
-              include: Array.isArray(oneOfRule.include)
-                ? [...oneOfRule.include, path.resolve(__dirname, 'node_modules')]
-                : [oneOfRule.include, path.resolve(__dirname, 'node_modules')],
-            };
-          }
-          return oneOfRule;
-        }),
-      };
-    }
-    return rule;
+  // Remove ModuleScopePlugin
+  config.resolve.plugins = config.resolve.plugins.filter(plugin => {
+    return plugin.constructor.name !== 'ModuleScopePlugin';
   });
 
   return config;

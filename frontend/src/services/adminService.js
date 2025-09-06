@@ -9,10 +9,8 @@ export const fetchRestaurants = async (id) => {
   try {
     const url = id ? `/admin/restaurants/${id}` : '/admin/restaurants';
     const response = await axiosInstance.get(url);
-    console.log('DEBUG: fetchRestaurants - response.data:', response.data);
     return response.data;
   } catch (error) {
-    console.error('DEBUG: fetchRestaurants - error:', error);
     throw error;
   }
 };

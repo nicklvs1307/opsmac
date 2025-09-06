@@ -44,7 +44,6 @@ const UserEditPage = () => {
   const targetUser = allUsers?.find((u) => u.id === userId);
 
   const { data: allRoles, isLoading: isLoadingAllRoles, isError: isErrorAllRoles } = useGetRoles(selectedRestaurantId, { enabled: !!selectedRestaurantId });
-  console.log('UserEditPage Debug: allRoles', allRoles);
   const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(selectedRestaurantId, { enabled: !!selectedRestaurantId });
   const { data: fetchedUserOverrides, isLoading: isLoadingUserOverrides, isError: isErrorUserOverrides } = useGetUserPermissionOverrides(userId, selectedRestaurantId, {
     enabled: !!userId && !!selectedRestaurantId,
@@ -195,6 +194,7 @@ const UserEditPage = () => {
       });
 
       if (selectedRestaurantId) {
+        console.log('Sending user permission overrides:', { userId, restaurantId: selectedRestaurantId, overrides });
         await saveUserPermissionOverridesMutation.mutateAsync({ userId, restaurantId: selectedRestaurantId, overrides });
         toast.success('User permissions updated successfully!');
       } else {

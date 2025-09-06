@@ -33,7 +33,6 @@ const authReducer = (state, action) => {
       };
     case AUTH_ACTIONS.SET_USER:
       const user = action.payload || {};
-      console.log('AuthContext Debug: User object after SET_USER:', user);
       return {
         ...state,
         user: { ...user, token: localStorage.getItem('token') }, // Ensure token is part of user object

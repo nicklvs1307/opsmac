@@ -14,8 +14,10 @@ import { useForm, Controller } from 'react-hook-form';
 import { useMutation, useQueryClient, useQuery } from 'react-query';
 import { toast } from 'react-hot-toast';
 import {
-  useGetRestaurant,
-  useSaveRestaurant,
+  fetchRestaurants,
+  saveRestaurant,
+} from '@/services/adminService';
+import {
   useGetPermissionTree,
   useSetEntitlement,
 } from '@/features/IAM/api/iamQueries';
@@ -28,11 +30,11 @@ const RestaurantEditPage = () => {
   const queryClient = useQueryClient();
   const { can } = usePermissions();
 
-  const { data: restaurant, isLoading: isLoadingRestaurant, isError: isErrorRestaurant } = useGetRestaurant(restaurantId, { enabled: !!restaurantId });
+  const { data: restaurant, isLoading: isLoadingRestaurant, isError: isErrorRestaurant } = useQuery(['restaurant', restaurantId], () => fetchRestaurants(restaurantId), { enabled: !!restaurantId });
   const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(restaurantId, { enabled: !!restaurantId });
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm();
-  const saveRestaurantMutation = useMutation(useSaveRestaurant, { onSuccess: () => queryClient.invalidateQueries(['restaurant', restaurantId]) });
+  const saveRestaurantMutation = useMutation(saveRestaurant, { onSuccess: () => queryClient.invalidateQueries(['restaurant', restaurantId]) });
   const setEntitlementMutation = useSetEntitlement();
 
   const [selectedPermissions, setSelectedPermissions] = useState({});
@@ -57,9 +59,8 @@ const RestaurantEditPage = () => {
 
         submodule.features.forEach(feature => {
           const featureState = newSelected[module.id].submodules[submodule.id].features[feature.id];
-          // Entitlement is a simple boolean check, no actions array
           if (!featureState.checked) submoduleChecked = false;
-          if (featureState.indeterminate || featureState.checked) submoduleIndeterminate = true; // This part might not be needed for entitlements
+          if (featureState.indeterminate || featureState.checked) submoduleIndeterminate = true;
         });
 
         const subState = newSelected[module.id].submodules[submodule.id];

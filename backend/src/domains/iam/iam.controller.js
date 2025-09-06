@@ -223,6 +223,12 @@ class IamController {
       console.log('setRestaurantEntitlement - received req.body:', req.body);
       const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
 
+      console.log(`restaurantId: ${restaurantId}, type: ${typeof restaurantId}, length: ${restaurantId?.length}`);
+      console.log(`entityType: ${entityType}, type: ${typeof entityType}, length: ${entityType?.length}`);
+      console.log(`entityId: ${entityId}, type: ${typeof entityId}, length: ${entityId?.length}`);
+      console.log(`status: ${status}, type: ${typeof status}, length: ${status?.length}`);
+      console.log(`source: ${source}, type: ${typeof source}, length: ${source?.length}`);
+
       // Basic validation
       if (!restaurantId || !entityType || !entityId || !status || !source) {
         return res.status(400).json({ error: 'Bad Request: Missing required fields for entitlement.' });

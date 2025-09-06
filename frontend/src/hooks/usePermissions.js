@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
-import axios from 'axios';
+import axiosInstance from '@/services/axiosInstance';
 
 // Import AUTH_ACTIONS to use the action type
 import AuthContext from '@/app/providers/contexts/AuthContext';
@@ -20,7 +20,7 @@ const usePermissions = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`/api/iam/${selectedRestaurantId}/tree`, {
+      const response = await axiosInstance.get(`/iam/tree?restaurantId=${selectedRestaurantId}`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

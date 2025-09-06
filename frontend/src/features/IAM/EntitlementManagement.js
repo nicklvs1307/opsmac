@@ -23,7 +23,7 @@ const EntitlementManagement = () => {
   const setEntitlementMutation = useSetEntitlement();
 
   const handleToggleEntitlement = async (entityId, entityType, currentStatus) => {
-    if (!can('entitlements', 'update')) {
+    if (!can('admin:permissions', 'update')) {
       toast.error('You do not have permission to update entitlements.');
       return;
     }
@@ -83,7 +83,7 @@ const EntitlementManagement = () => {
                 <td>
                   <button
                     onClick={() => handleToggleEntitlement(module.id, 'module', module.status)}
-                    disabled={setEntitlementMutation.isLoading || !can('entitlements', 'update')}
+                    disabled={setEntitlementMutation.isLoading || !can('admin:permissions', 'update')}
                   >
                     {module.status === 'active' ? 'Deactivate' : 'Activate'}
                   </button>
@@ -98,7 +98,7 @@ const EntitlementManagement = () => {
                       onClick={() =>
                         handleToggleEntitlement(submodule.id, 'submodule', submodule.status)
                       }
-                      disabled={setEntitlementMutation.isLoading || !can('entitlements', 'update')}
+                      disabled={setEntitlementMutation.isLoading || !can('admin:permissions', 'update')}
                     >
                       {submodule.status === 'active' ? 'Deactivate' : 'Activate'}
                     </button>
@@ -112,7 +112,7 @@ const EntitlementManagement = () => {
                   <td>
                     <button
                       onClick={() => handleToggleEntitlement(feature.id, 'feature', feature.status)}
-                      disabled={setEntitlementMutation.isLoading || !can('entitlements', 'update')}
+                      disabled={setEntitlementMutation.isLoading || !can('admin:permissions', 'update')}
                     >
                       {feature.status === 'active' ? 'Deactivate' : 'Activate'}
                     </button>

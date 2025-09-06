@@ -185,7 +185,7 @@ const RestaurantEditPage = () => {
             <PermissionTree availableModules={permissionTree?.modules} selectedPermissions={selectedPermissions} onPermissionChange={handlePermissionChange} disabled={!can('entitlements', 'update')} />
           </Box>
           <Box sx={{ mt: 4, display: 'flex', gap: 2 }}>
-            <Button type="submit" variant="contained" color="primary" disabled={saveRestaurantMutation.isLoading || setEntitlementMutation.isLoading || !can('restaurants', 'update')}>Save Changes</Button>
+            <Button type="submit" variant="contained" color="primary" disabled={saveRestaurantMutation.isLoading || setEntitlementMutation.isLoading || !can('admin:restaurants', 'edit')}>Save Changes</Button>
             <Button variant="outlined" onClick={() => navigate('/admin/restaurants')}>Cancel</Button>
           </Box>
         </form>

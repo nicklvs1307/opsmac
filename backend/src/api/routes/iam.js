@@ -5,29 +5,14 @@ const router = express.Router();
 const iamService = require('../../services/iamService');
 const requirePermission = require('../../middleware/requirePermission');
 const models = require('../../../models');
+const roleService = require('../../services/roleService');
+const entitlementService = require('../../services/entitlementService');
 const { auth } = require('../../middleware/authMiddleware'); // Import auth middleware
 const { Op } = require('sequelize'); // Import Op for Sequelize operators
 
 router.use(auth); // Apply auth middleware to all IAM routes
 
-// Placeholder for auditService - to be implemented later
-const auditService = {
-  log: async (actor, tenantId, action, resource, payload) => {
-    console.log(`AUDIT LOG: User ${actor?.id} in tenant ${tenantId} performed ${action} on ${resource} with payload ${JSON.stringify(payload)}`);
-    // In a real application, this would save to the audit_logs table
-    try {
-      await models.AuditLog.create({
-        actorUserId: actor?.id,
-        restaurantId: tenantId,
-        action: action,
-        resource: resource,
-        payload: payload,
-      });
-    } catch (error) {
-      console.error('Error saving audit log:', error);
-    }
-  }
-};
+const auditService = require('../../services/auditService');
 
  
 
@@ -173,7 +158,7 @@ router.get('/roles', requirePermission('roles.manage', 'read'), async (req, res)
     return res.status(401).json({ error: 'Unauthorized: Missing restaurant context.' });
   }
   try {
-    const roles = await models.Role.findAll({ where: { restaurantId: restaurantId } });
+    const roles = await roleService.getRoles(restaurantId);
     return res.json(roles);
   } catch (error) {
     console.error('Error listing roles:', error);
@@ -217,7 +202,7 @@ router.post('/roles', requirePermission('roles.manage', 'create'), async (req, r
   }
 
   try {
-    const newRole = await models.Role.create({ restaurantId, key, name });
+    const newRole = await roleService.createRole(restaurantId, key, name);
     await iamService.bumpPermVersion(restaurantId);
     await auditService.log(req.user, restaurantId, 'ROLE_CREATED', `Role:${newRole.id}`, { key, name });
     return res.status(201).json(newRole);
@@ -267,12 +252,7 @@ router.patch('/roles/:id', requirePermission('roles.manage', 'update'), async (r
   }
 
   try {
-    const role = await models.Role.findOne({ where: { id, restaurantId } });
-    if (!role) {
-      return res.status(404).json({ error: 'Role not found or does not belong to this restaurant.' });
-    }
-    role.name = name;
-    await role.save();
+    const role = await roleService.updateRole(id, restaurantId, name);
     await iamService.bumpPermVersion(restaurantId);
     await auditService.log(req.user, restaurantId, 'ROLE_UPDATED', `Role:${role.id}`, { newName: name });
     return res.json(role);
@@ -312,18 +292,7 @@ router.delete('/roles/:id', requirePermission('roles.manage', 'delete'), async (
   }
 
   try {
-    const role = await models.Role.findOne({ where: { id, restaurantId } });
-    if (!role) {
-      return res.status(404).json({ error: 'Role not found or does not belong to this restaurant.' });
-    }
-
-    // Check if role is in use by any user
-    const usersWithRole = await models.UserRole.count({ where: { roleId: id } });
-    if (usersWithRole > 0) {
-      return res.status(409).json({ error: 'Conflict: Role is currently assigned to users and cannot be deleted.' });
-    }
-
-    await role.destroy();
+    await roleService.deleteRole(id, restaurantId);
     await iamService.bumpPermVersion(restaurantId);
     await auditService.log(req.user, restaurantId, 'ROLE_DELETED', `Role:${id}`, {});
     return res.status(204).send();
@@ -378,6 +347,50 @@ router.delete('/roles/:id', requirePermission('roles.manage', 'delete'), async (
  *       200:
  *         description: Permissions set successfully
  */
+/**
+ * @swagger
+ * /iam/roles/{id}/permissions:
+ *   get:
+ *     summary: Get permissions for a role
+ *     tags: [IAM]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID of the role to get permissions for
+ *       - in: query
+ *         name: restaurantId
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID of the restaurant (tenant)
+ *     responses:
+ *       200:
+ *         description: List of role permissions
+ */
+router.get('/roles/:id/permissions', requirePermission('roles.manage', 'read'), async (req, res) => {
+  const restaurantId = req.query.restaurantId;
+  const { id: roleId } = req.params;
+
+  if (!restaurantId || !roleId) {
+    return res.status(400).json({ error: 'Bad Request: restaurantId and roleId are required.' });
+  }
+
+  try {
+    const rolePermissions = await roleService.getRolePermissions(roleId);
+    return res.json(rolePermissions);
+  } catch (error) {
+    console.error('Error getting role permissions:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'), async (req, res) => {
   const userId = req.user?.id;
   const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
@@ -389,22 +402,7 @@ router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'
   }
 
   try {
-    const role = await models.Role.findOne({ where: { id: roleId, restaurantId } });
-    if (!role) {
-      return res.status(404).json({ error: 'Role not found or does not belong to this restaurant.' });
-    }
-
-    // Delete existing permissions for this role
-    await models.RolePermission.destroy({ where: { roleId: roleId } });
-
-    // Create new permissions
-    const newPermissions = permissions.map(p => ({
-      roleId: roleId,
-      featureId: p.featureId,
-      actionId: p.actionId,
-      allowed: p.allowed,
-    }));
-    await models.RolePermission.bulkCreate(newPermissions);
+    await roleService.setRolePermissions(roleId, permissions);
 
     await iamService.bumpPermVersion(restaurantId);
     await auditService.log(req.user, restaurantId, 'ROLE_PERMISSIONS_UPDATED', `Role:${roleId}`, { permissions });
@@ -447,7 +445,7 @@ router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'
  *       200:
  *         description: Role assigned successfully
  */
-router.post('/users/:id/roles', requirePermission('users.manage', 'update'), async (req, res) => {
+router.post('/users/:id/roles', requirePermission('admin:users', 'update'), async (req, res) => {
   const actorUserId = req.user?.id;
   const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { id: targetUserId } = req.params;
@@ -458,28 +456,7 @@ router.post('/users/:id/roles', requirePermission('users.manage', 'update'), asy
   }
 
   try {
-    const user = await models.User.findByPk(targetUserId);
-    const role = await models.Role.findOne({
-      where: {
-        id: roleId,
-        [Op.or]: [
-          { restaurantId: restaurantId },
-          { restaurantId: null, is_system: true }
-        ]
-      }
-    });
-
-    if (!user || !role) {
-      return res.status(404).json({ error: 'User or Role not found or does not belong to this restaurant.' });
-    }
-
-    // Check if user already has this role
-    const existingUserRole = await models.UserRole.findOne({ where: { userId: targetUserId, restaurantId, roleId } });
-    if (existingUserRole) {
-      return res.status(409).json({ error: 'Conflict: User already has this role.' });
-    }
-
-    await models.UserRole.create({ userId: targetUserId, restaurantId, roleId });
+    await roleService.assignUserRole(targetUserId, restaurantId, roleId);
     await iamService.bumpPermVersion(restaurantId);
     await auditService.log(req.user, restaurantId, 'USER_ROLE_ASSIGNED', `User:${targetUserId}/Role:${roleId}`, {});
     return res.json({ message: 'Role assigned successfully.' });
@@ -521,7 +498,7 @@ router.post('/users/:id/roles', requirePermission('users.manage', 'update'), asy
  *       200:
  *         description: Role removed successfully
  */
-router.delete('/users/:id/roles', requirePermission('users.manage', 'update'), async (req, res) => {
+router.delete('/users/:id/roles', requirePermission('admin:users', 'update'), async (req, res) => {
   const actorUserId = req.user?.id;
   const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { id: targetUserId } = req.params;
@@ -532,10 +509,7 @@ router.delete('/users/:id/roles', requirePermission('users.manage', 'update'), a
   }
 
   try {
-    const result = await models.UserRole.destroy({ where: { userId: targetUserId, restaurantId, roleId } });
-    if (result === 0) {
-      return res.status(404).json({ error: 'User role not found.' });
-    }
+    await roleService.removeUserRole(targetUserId, restaurantId, roleId);
     await iamService.bumpPermVersion(restaurantId);
     await auditService.log(req.user, restaurantId, 'USER_ROLE_REMOVED', `User:${targetUserId}/Role:${roleId}`, {});
     return res.json({ message: 'Role removed successfully.' });
@@ -581,9 +555,7 @@ router.get('/users/:id/overrides', requirePermission('users.manage', 'read'), as
   }
 
   try {
-    const overrides = await models.UserPermissionOverride.findAll({
-      where: { userId: targetUserId, restaurantId },
-    });
+    const overrides = await roleService.getUserPermissionOverrides(targetUserId, restaurantId);
     return res.json(overrides);
   } catch (error) {
     console.error('Error getting user overrides:', error);
@@ -636,7 +608,7 @@ router.get('/users/:id/overrides', requirePermission('users.manage', 'read'), as
  *       200:
  *         description: Overrides set successfully
  */
-router.post('/users/:id/overrides', requirePermission('users.manage', 'update'), async (req, res) => {
+router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), async (req, res) => {
   const actorUserId = req.user?.id;
   const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { id: targetUserId } = req.params;
@@ -647,23 +619,7 @@ router.post('/users/:id/overrides', requirePermission('users.manage', 'update'),
   }
 
   try {
-    const user = await models.User.findByPk(targetUserId);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found.' });
-    }
-
-    // Delete existing overrides for this user in this restaurant
-    await models.UserPermissionOverride.destroy({ where: { userId: targetUserId, restaurantId } });
-
-    // Create new overrides
-    const newOverrides = overrides.map(o => ({
-      userId: targetUserId,
-      restaurantId: restaurantId,
-      featureId: o.featureId,
-      actionId: o.actionId,
-      allowed: o.allowed,
-    }));
-    await models.UserPermissionOverride.bulkCreate(newOverrides);
+    await roleService.setUserPermissionOverrides(targetUserId, restaurantId, overrides);
 
     await iamService.bumpPermVersion(restaurantId);
     await auditService.log(req.user, restaurantId, 'USER_OVERRIDES_UPDATED', `User:${targetUserId}`, { overrides });
@@ -732,17 +688,7 @@ router.post('/entitlements', requirePermission('entitlements.manage', 'create'),
 
   try {
     // Upsert logic: try to find and update, otherwise create
-    const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({
-      where: { restaurantId, entityType, entityId },
-      defaults: { status, source, metadata },
-    });
-
-    if (!created) {
-      entitlement.status = status;
-      entitlement.source = source;
-      entitlement.metadata = metadata || {};
-      await entitlement.save();
-    }
+    const entitlement = await entitlementService.setEntitlement(restaurantId, entityType, entityId, status, source, metadata);
 
     await iamService.bumpPermVersion(restaurantId);
     await auditService.log(req.user, restaurantId, 'ENTITLEMENT_SET', `Restaurant:${restaurantId}/${entityType}:${entityId}`, { status, source, metadata });
@@ -785,7 +731,7 @@ router.post('/entitlements', requirePermission('entitlements.manage', 'create'),
  *       204:
  *         description: Entitlement removed successfully
  */
-router.delete('/entitlements', requirePermission('entitlements.manage', 'delete'), async (req, res) => {
+router.delete('/entitlements', requirePermission('admin:permissions', 'delete'), async (req, res) => {
   const userId = req.user?.id;
   const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
   const { restaurantId: bodyRestaurantId, entityType, entityId } = req.body;
@@ -801,10 +747,7 @@ router.delete('/entitlements', requirePermission('entitlements.manage', 'delete'
   }
 
   try {
-    const result = await models.RestaurantEntitlement.destroy({ where: { restaurantId, entityType, entityId } });
-    if (result === 0) {
-      return res.status(404).json({ error: 'Entitlement not found.' });
-    }
+    await entitlementService.removeEntitlement(restaurantId, entityType, entityId);
 
     await iamService.bumpPermVersion(restaurantId);
     await auditService.log(req.user, restaurantId, 'ENTITLEMENT_REMOVED', `Restaurant:${restaurantId}/${entityType}:${entityId}`, {});
@@ -816,3 +759,4 @@ router.delete('/entitlements', requirePermission('entitlements.manage', 'delete'
 });
 
 module.exports = router;
+

@@ -171,20 +171,20 @@ const RoleManagement = () => {
           <li key={role.id}>
             {role.name} ({role.key}) {role.isSystem && '(System)'} {/* Use camelCase */}
             {can('roles', 'update') && <button onClick={() => handleEditClick(role)}>Edit</button>}
-            {can('roles', 'delete') && (
+            {can('admin:roles', 'delete') && (
               <button
                 onClick={() => handleDeleteRole(role.id)}
                 disabled={
                   createRoleMutation.isLoading ||
                   deleteRoleMutation.isLoading ||
                   updateRoleMutation.isLoading ||
-                  !can('roles', 'delete')
+                  !can('admin:roles', 'delete')
                 }
               >
                 Delete
               </button>
             )}
-            {can('role_permissions', 'read') && (
+            {can('admin:permissions', 'read') && (
               <Link to={`/admin/iam/${selectedRestaurantId}/roles/${role.id}/permissions`}>
                 Manage Permissions
               </Link>
@@ -197,3 +197,4 @@ const RoleManagement = () => {
 };
 
 export default RoleManagement;
+ent;

@@ -236,7 +236,7 @@ const UserEditPage = () => {
             <PermissionTree availableModules={permissionTree?.modules} selectedPermissions={selectedPermissions} onPermissionChange={handlePermissionChange} disabled={!can('admin_users', 'manage_permissions')} />
           </Box>
           <Box sx={{ mt: 4, display: 'flex', gap: 2 }}>
-            <Button type="submit" variant="contained" color="primary" disabled={saveUserMutation.isLoading || assignUserRoleMutation.isLoading || removeUserRoleMutation.isLoading || saveUserPermissionOverridesMutation.isLoading || !can('admin_users', 'update')}>Save Changes</Button>
+            <Button type="submit" variant="contained" color="primary" disabled={saveUserMutation.isLoading || assignUserRoleMutation.isLoading || removeUserRoleMutation.isLoading || saveUserPermissionOverridesMutation.isLoading || !can('admin:users', 'edit')}>Save Changes</Button>
             <Button variant="outlined" onClick={() => navigate('/admin/users')}>Cancel</Button>
           </Box>
         </form>

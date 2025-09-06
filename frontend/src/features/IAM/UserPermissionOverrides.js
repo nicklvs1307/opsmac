@@ -161,12 +161,12 @@ const UserPermissionOverridesPage = () => {
             availableModules={permissionTree.modules}
             selectedPermissions={selectedPermissions}
             onPermissionChange={handlePermissionChange}
-            disabled={!can('user_overrides', 'update')}
+            disabled={!can('admin:users', 'update')}
           />
           <Button
             variant="contained"
             onClick={handleSave}
-            disabled={setUserPermissionOverridesMutation.isLoading || !can('user_overrides', 'update')}
+            disabled={setUserPermissionOverridesMutation.isLoading || !can('admin:users', 'update')}
             sx={{ mt: 3 }}
           >
             {setUserPermissionOverridesMutation.isLoading ? <CircularProgress size={24} /> : 'Save Overrides'}

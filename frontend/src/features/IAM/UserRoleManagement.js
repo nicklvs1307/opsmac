@@ -41,7 +41,7 @@ const UserRoleManagement = () => {
   const removeUserRoleMutation = useRemoveUserRole();
 
   const handleRoleChange = async (userId, newRoleId) => {
-    if (!can('user_roles', 'update')) {
+    if (!can('admin:users', 'update')) {
       toast.error('You do not have permission to update user roles.');
       return;
     }
@@ -119,7 +119,7 @@ const UserRoleManagement = () => {
                     isLoadingRoles ||
                     assignUserRoleMutation.isLoading ||
                     removeUserRoleMutation.isLoading ||
-                    !can('user_roles', 'update')
+                    !can('admin:users', 'update')
                   }
                 >
                   <option value="">Select Role</option>
@@ -131,7 +131,7 @@ const UserRoleManagement = () => {
                 </select>
               </td>
               <td>
-                {can('user_overrides', 'read') && (
+                {can('admin:users', 'read') && (
                   <Link to={`/admin/iam/${selectedRestaurantId}/users/${u.id}/overrides`}>
                     Manage Overrides
                   </Link>

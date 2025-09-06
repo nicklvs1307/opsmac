@@ -2,7 +2,7 @@
 
 const models = require('../../models'); // Adjust path to models as needed
 const { Op } = require('sequelize');
-const redisClient = require('../config/redisClient'); // Import redisClient
+const cacheService = require('./cacheService');
 
 class IamService {
   /**
@@ -15,10 +15,9 @@ class IamService {
   async buildSnapshot(restaurantId, userId) {
     const cacheKey = `perm_snapshot:${restaurantId}:${userId}`;
     
-    if (redisClient) {
-      const cachedSnapshot = await redisClient.get(cacheKey);
-      if (cachedSnapshot) {
-        const snapshot = JSON.parse(cachedSnapshot);
+    const cachedSnapshot = await cacheService.get(cacheKey);
+    if (cachedSnapshot) {
+      const snapshot = cachedSnapshot;
         // Verify perm_version to ensure cache is not stale
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (restaurant && snapshot.permVersion === restaurant.perm_version) {
@@ -185,9 +184,7 @@ class IamService {
       snapshot.modules.push(moduleData);
     }
 
-    if (redisClient) {
-      await redisClient.set(cacheKey, JSON.stringify(snapshot), 'EX', 86400); // Cache for 24 hours
-    }
+    await cacheService.set(cacheKey, snapshot, 86400); // Cache for 24 hours
 
     console.log(`DEBUG: Final permission snapshot for user ${userId} in restaurant ${restaurantId}:`, JSON.stringify(snapshot, null, 2));
     return snapshot;
@@ -343,10 +340,7 @@ class IamService {
 
       console.error(`DEBUG: After bump - Restaurant ${restaurantId} perm_version: ${restaurant.perm_version}`); // Changed to console.error
 
-      if (redisClient) {
-        const delResult = await redisClient.del(`perm_snapshot:${restaurantId}:*`);
-        console.error(`DEBUG: Redis DEL for perm_snapshot:${restaurantId}:* result: ${delResult}`); // Changed to console.error
-      }
+      await cacheService.publish('perm_invalidation', { restaurantId });
 
       console.log(`Perm_version for restaurant ${restaurantId} bumped to ${restaurant.permVersion}`);
       return true;

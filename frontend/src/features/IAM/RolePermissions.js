@@ -135,7 +135,7 @@ const RolePermissions = () => {
       </h1>
       <p>Restaurant ID: {restaurantId}</p>
 
-      {can('role_permissions', 'update') && (
+      {can('admin:permissions', 'update') && (
         <button onClick={handleSavePermissions} disabled={setRolePermissionsMutation.isLoading}>
           Save Permissions
         </button>
@@ -165,7 +165,7 @@ const RolePermissions = () => {
                       handlePermissionChange(feature.id, action.id, e.target.checked)
                     }
                     disabled={
-                      !can('role_permissions', 'update') || setRolePermissionsMutation.isLoading
+                      !can('admin:permissions', 'update') || setRolePermissionsMutation.isLoading
                     }
                   />
                 </td>

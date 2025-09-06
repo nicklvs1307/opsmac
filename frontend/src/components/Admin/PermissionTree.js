@@ -6,7 +6,7 @@ import {
   FormGroup,
   FormControlLabel,
 } from '@mui/material';
-import { TreeView } from '@mui/x-tree-view/TreeView';
+import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -72,7 +72,7 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
   };
 
   return (
-    <TreeView
+    <SimpleTreeView
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
       sx={{ flexGrow: 1, overflowY: 'auto' }}

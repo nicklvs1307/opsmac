@@ -1,18 +1,17 @@
- => [builder  9/10] RUN if [ -z "https://feedelizaapi.towersfy.com/api" ]; then echo "Error:   0.4s
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          187.9s
+=> ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           25.5s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.486 + npm run build
-0.727
-0.727 > feedeliza-plus@1.0.0 build
-0.727 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.727
-2.772 Creating an optimized production build...
-186.9 Failed to compile.
-186.9
-186.9 Attempted import error: 'TreeView' is not exported from '@mui/x-tree-view' (imported as 'TreeView').
-186.9
-186.9
+0.540 + npm run build
+1.086
+1.086 > feedeliza-plus@1.0.0 build
+1.086 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+1.086
+5.157 Creating an optimized production build...
+25.21 Failed to compile.
+25.21
+25.21 Module not found: Error: Can't resolve '@mui/x-tree-view/TreeView' in '/app/frontend/src/components/Admin'
+25.21
+25.21
 ------
 Dockerfile.frontend:27
 --------------------

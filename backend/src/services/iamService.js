@@ -352,6 +352,3 @@ class IamService {
 }
 
 module.exports = new IamService();
-
-module.exports = new IamService();
-;

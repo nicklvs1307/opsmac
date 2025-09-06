@@ -1,18 +1,51 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           13.0s
+=> ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build            4.9s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.325 + npm run build
-0.596
-0.596 > feedeliza-plus@1.0.0 build
-0.596 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.596
-2.685 Creating an optimized production build...
-12.79 Failed to compile.
-12.79
-12.79 Module not found: Error: You attempted to import /app/frontend/node_modules/@mui/material/index.js which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
-12.79 You can either move it inside src/, or add a symlink to it from project's node_modules/.
-12.79
-12.79
+0.340 + npm run build
+0.640
+0.640 > feedeliza-plus@1.0.0 build
+0.640 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.640
+3.828 Creating an optimized production build...
+4.697 Failed to compile.
+4.697
+4.698 Invalid configuration object. Webpack has been initialized using a configuration object that does not match the API schema.
+4.698  - configuration.module.rules[1] should be one of these:
+4.698    ["..." | false | 0 | "" | null | undefined | object { assert?, compiler?, dependency?, descriptionData?, enforce?, exclude?, generator?, include?, issuer?, issuerLayer?, layer?, loader?, mimetype?, oneOf?, options?, parser?, realResource?, resolve?, resource?, resourceFragment?, resourceQuery?, rules?, scheme?, sideEffects?, test?, type?, use?, with? }, ...]
+4.698    -> A rule.
+4.698    Details:
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be an instance of RegExp.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be a string.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be an instance of function.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be an object:
+4.698       object { and?, not?, or? }
+4.698       -> Logic operators used in a condition matcher.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be an array:
+4.698       [RegExp | string | function | object { and?, not?, or? } | [(recursive), ...], ...]
+4.698       -> A list of rule conditions matching an absolute path.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be one of these:
+4.698       RegExp | string | function | object { and?, not?, or? } | [(recursive), ...]
+4.698       -> A condition matcher matching an absolute path.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be one of these:
+4.698       RegExp | string | function | object { and?, not?, or? } | [(recursive), ...]
+4.698       -> A rule condition matching an absolute path.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be an instance of RegExp.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be a string.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be an instance of function.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be an object:
+4.698       object { and?, not?, or? }
+4.698       -> Logic operators used in a condition matcher.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be an array:
+4.698       [RegExp | string | function | object { and?, not?, or? } | [(recursive), ...], ...]
+4.698       -> A list of rule conditions matching an absolute path.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be one of these:
+4.698       RegExp | string | function | object { and?, not?, or? } | [(recursive), ...]
+4.698       -> A condition matcher matching an absolute path.
+4.698     * configuration.module.rules[1].oneOf[4].include[0] should be one of these:
+4.698       RegExp | string | function | object { and?, not?, or? } | [(recursive), ...]
+4.698       -> A rule condition matching an absolute path.
+4.698
+4.698
 ------
 Dockerfile.frontend:27
 --------------------

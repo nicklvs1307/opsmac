@@ -30,10 +30,9 @@ module.exports = function override(config) {
           if (oneOfRule.loader && oneOfRule.loader.includes('babel-loader')) {
             return {
               ...oneOfRule,
-              include: [
-                oneOfRule.include,
-                path.resolve(__dirname, 'node_modules'),
-              ],
+              include: Array.isArray(oneOfRule.include)
+                ? [...oneOfRule.include, path.resolve(__dirname, 'node_modules')]
+                : [oneOfRule.include, path.resolve(__dirname, 'node_modules')],
             };
           }
           return oneOfRule;

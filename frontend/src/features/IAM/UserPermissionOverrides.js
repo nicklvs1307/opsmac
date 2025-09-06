@@ -78,22 +78,28 @@ const UserPermissionOverridesPage = () => {
 
   useEffect(() => {
     if (fetchedUserOverrides && permissionTree) {
+      // Create a map for quick lookup of existing user overrides
+      const userOverrideMap = new Map();
+      fetchedUserOverrides.forEach(override => {
+        userOverrideMap.set(`${override.featureId}-${override.actionId}`, override.allowed);
+      });
+
       let initialSelected = {};
       permissionTree.modules?.forEach(module => {
         initialSelected[module.id] = {
-          checked: false,
-          indeterminate: false,
+          checked: false, // Will be updated by updateParentStates
+          indeterminate: false, // Will be updated by updateParentStates
           submodules: module.submodules?.reduce((accSub, submodule) => {
             accSub[submodule.id] = {
-              checked: false,
-              indeterminate: false,
+              checked: false, // Will be updated by updateParentStates
+              indeterminate: false, // Will be updated by updateParentStates
               features: submodule.features?.reduce((accFeat, feature) => {
                 accFeat[feature.id] = {
-                  checked: false,
-                  indeterminate: false,
+                  checked: false, // Will be updated by updateParentStates
+                  indeterminate: false, // Will be updated by updateParentStates
                   actions: feature.actions?.reduce((accAct, action) => {
-                    const override = fetchedUserOverrides.find(o => o.featureId === feature.id && o.actionId === action.id);
-                    accAct[action.id] = override ? override.allowed : false;
+                    // Default to false if not explicitly allowed in userOverrideMap
+                    accAct[action.id] = userOverrideMap.get(`${feature.id}-${action.id}`) || false;
                     return accAct;
                   }, {}),
                 };

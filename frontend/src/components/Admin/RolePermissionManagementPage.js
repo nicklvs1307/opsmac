@@ -83,22 +83,28 @@ const RolePermissionManagementPage = () => {
   useEffect(() => {
     if (fetchedRolePermissions && permissionTree) {
       let initialSelected = {};
+      // Create a map for quick lookup of existing role permissions
+      const rolePermMap = new Map();
+      fetchedRolePermissions.forEach(rp => {
+        rolePermMap.set(`${rp.featureId}-${rp.actionId}`, rp.allowed);
+      });
+
+      let initialSelected = {};
       permissionTree.modules?.forEach(module => {
         initialSelected[module.id] = {
-          checked: false,
-          indeterminate: false,
+          checked: false, // Will be updated by updateParentStates
+          indeterminate: false, // Will be updated by updateParentStates
           submodules: module.submodules?.reduce((accSub, submodule) => {
             accSub[submodule.id] = {
-              checked: false,
-              indeterminate: false,
+              checked: false, // Will be updated by updateParentStates
+              indeterminate: false, // Will be updated by updateParentStates
               features: submodule.features?.reduce((accFeat, feature) => {
                 accFeat[feature.id] = {
-                  checked: false,
-                  indeterminate: false,
+                  checked: false, // Will be updated by updateParentStates
+                  indeterminate: false, // Will be updated by updateParentStates
                   actions: feature.actions?.reduce((accAct, action) => {
-                    accAct[action.id] = fetchedRolePermissions.some(
-                      rp => rp.featureId === feature.id && rp.actionId === action.id && rp.allowed
-                    );
+                    // Default to false if not explicitly allowed in rolePermMap
+                    accAct[action.id] = rolePermMap.get(`${feature.id}-${action.id}`) || false;
                     return accAct;
                   }, {}),
                 };

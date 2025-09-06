@@ -210,6 +210,11 @@ const UserEditPage = () => {
   if (isErrorUsers || isErrorAllRoles || isErrorPermissionTree || isErrorUserOverrides) return <Alert severity="error">Error loading data.</Alert>;
   if (!targetUser) return <Alert severity="warning">User not found.</Alert>;
 
+  console.log('UserEditPage - Rendering PermissionTree with:', {
+    availableModules: permissionTree?.modules,
+    selectedPermissions,
+  });
+
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom>Edit User: {targetUser.name}</Typography>

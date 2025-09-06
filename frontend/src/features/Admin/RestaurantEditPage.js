@@ -169,6 +169,11 @@ const RestaurantEditPage = () => {
   if (isErrorRestaurant || isErrorPermissionTree) return <Alert severity="error">Error loading data.</Alert>;
   if (!restaurant) return <Alert severity="warning">Restaurant not found.</Alert>;
 
+  console.log('RestaurantEditPage - Rendering PermissionTree with:', {
+    availableModules: permissionTree?.modules,
+    selectedPermissions,
+  });
+
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom>Edit Restaurant: {restaurant.name}</Typography>

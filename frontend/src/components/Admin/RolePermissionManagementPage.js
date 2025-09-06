@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Typography,
@@ -9,13 +9,7 @@ import {
   Button,
   CircularProgress,
   Alert,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
 } from '@mui/material';
-import { TreeView, TreeItem } from '@mui/lab';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useQueryClient } from 'react-query';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import usePermissions from '@/hooks/usePermissions';
@@ -27,72 +21,72 @@ import {
   useGetRolePermissions,
   useSetRolePermissions,
 } from '@/features/IAM/api/iamQueries';
+import PermissionTree from './PermissionTree'; // Import the dumb component
 
 const RolePermissionManagementPage = () => {
-  const { user: currentUser, selectedRestaurantId } = useAuth();
+  const { selectedRestaurantId } = useAuth();
   const { can } = usePermissions();
   const queryClient = useQueryClient();
-  const isSuperAdmin = currentUser?.role?.name === 'super_admin';
 
   const [selectedRoleId, setSelectedRoleId] = useState('');
-  const [selectedPermissions, setSelectedPermissions] = useState({}); // { moduleId: { features: { featureId: { actions: { actionId: boolean } } } } }
+  const [selectedPermissions, setSelectedPermissions] = useState({});
 
-  // Fetch roles based on user type
-  const {
-    data: allRoles,
-    isLoading: isLoadingAllRoles,
-    isError: isErrorAllRoles,
-    error: errorAllRoles,
-  } = useGetRoles(selectedRestaurantId, { enabled: !!selectedRestaurantId });
-
-  const roles = allRoles; // Assuming useGetRoles returns all roles for the selected restaurant
-  const isLoadingRoles = isLoadingAllRoles;
-  const isErrorRoles = isErrorAllRoles;
-
-  // Fetch permission tree (features and actions catalog)
-  const {
-    data: permissionTree,
-    isLoading: isLoadingPermissionTree,
-    isError: isErrorPermissionTree,
-    error: errorPermissionTree,
-  } = useGetPermissionTree(selectedRestaurantId, { enabled: !!selectedRestaurantId });
-
-  // Fetch permissions for the selected role
-  const {
-    data: fetchedRolePermissions,
-    isLoading: isLoadingRolePermissions,
-    isError: isErrorRolePermissions,
-    error: errorRolePermissions,
-  } = useGetRolePermissions(selectedRoleId, selectedRestaurantId, {
+  const { data: roles, isLoading: isLoadingRoles, isError: isErrorRoles } = useGetRoles(selectedRestaurantId, { enabled: !!selectedRestaurantId });
+  const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(selectedRestaurantId, { enabled: !!selectedRestaurantId });
+  const { data: fetchedRolePermissions, isLoading: isLoadingRolePermissions, isError: isErrorRolePermissions } = useGetRolePermissions(selectedRoleId, selectedRestaurantId, {
     enabled: !!selectedRoleId && !!selectedRestaurantId,
   });
 
-  // Mutation for updating role permissions
   const setRolePermissionsMutation = useSetRolePermissions();
 
-  // Effect to set initial selected permissions when a role is selected or fetchedRolePermissions change
+  const updateParentStates = useCallback((permissions, tree) => {
+    if (!tree || !tree.modules) return permissions;
+    const newSelected = JSON.parse(JSON.stringify(permissions));
+
+    tree.modules.forEach(module => {
+      let moduleChecked = true;
+      let moduleIndeterminate = false;
+
+      module.submodules.forEach(submodule => {
+        let submoduleChecked = true;
+        let submoduleIndeterminate = false;
+
+        submodule.features.forEach(feature => {
+          const featureActions = newSelected[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
+          const actionKeys = Object.keys(featureActions);
+          const checkedCount = actionKeys.filter(key => featureActions[key]).length;
+
+          const featureState = newSelected[module.id].submodules[submodule.id].features[feature.id];
+          featureState.checked = actionKeys.length > 0 && checkedCount === actionKeys.length;
+          featureState.indeterminate = checkedCount > 0 && checkedCount < actionKeys.length;
+
+          if (!featureState.checked) submoduleChecked = false;
+          if (featureState.indeterminate || featureState.checked) submoduleIndeterminate = true;
+        });
+
+        const subState = newSelected[module.id].submodules[submodule.id];
+        subState.checked = submoduleChecked;
+        subState.indeterminate = !submoduleChecked && submoduleIndeterminate;
+
+        if (!subState.checked) moduleChecked = false;
+        if (subState.indeterminate || subState.checked) moduleIndeterminate = true;
+      });
+
+      const modState = newSelected[module.id];
+      modState.checked = moduleChecked;
+      modState.indeterminate = !moduleChecked && moduleIndeterminate;
+    });
+
+    return newSelected;
+  }, []);
+
   useEffect(() => {
     if (fetchedRolePermissions && permissionTree) {
-      const initialSelected = {};
-      permissionTree.modules.forEach((module) => {
+      let initialSelected = {};
+      permissionTree.modules.forEach(module => {
         initialSelected[module.id] = {
           checked: false,
           indeterminate: false,
-          features: module.submodules.reduce((accSub, submodule) => {
-            submodule.features.forEach((feature) => {
-              accSub[feature.id] = {
-                checked: false,
-                indeterminate: false,
-                actions: feature.actions.reduce((accAct, action) => {
-                  accAct[action.id] = fetchedRolePermissions.some(
-                    (rp) => rp.featureId === feature.id && rp.actionId === action.id && rp.allowed
-                  );
-                  return accAct;
-                }, {}),
-              };
-            });
-            return accSub;
-          }, {}),
           submodules: module.submodules.reduce((accSub, submodule) => {
             accSub[submodule.id] = {
               checked: false,
@@ -103,7 +97,7 @@ const RolePermissionManagementPage = () => {
                   indeterminate: false,
                   actions: feature.actions.reduce((accAct, action) => {
                     accAct[action.id] = fetchedRolePermissions.some(
-                      (rp) => rp.featureId === feature.id && rp.actionId === action.id && rp.allowed
+                      rp => rp.featureId === feature.id && rp.actionId === action.id && rp.allowed
                     );
                     return accAct;
                   }, {}),
@@ -115,54 +109,55 @@ const RolePermissionManagementPage = () => {
           }, {}),
         };
       });
-      setSelectedPermissions(initialSelected);
+      const updatedState = updateParentStates(initialSelected, permissionTree);
+      setSelectedPermissions(updatedState);
     }
-  }, [fetchedRolePermissions, permissionTree]);
+  }, [fetchedRolePermissions, permissionTree, updateParentStates]);
 
-  // Helper function to update parent checkbox states (checked/indeterminate)
+  const handlePermissionChange = (path, checked) => {
+    let newSelected = JSON.parse(JSON.stringify(selectedPermissions));
+    const [moduleId, submoduleId, featureId, actionId] = path;
 
-  // Handle permission change
-  const handlePermissionChange = (newSelected) => {
-    setSelectedPermissions(newSelected);
+    const setChildrenState = (branch, value) => {
+      branch.checked = value;
+      if (branch.actions) {
+        Object.keys(branch.actions).forEach(key => { branch.actions[key] = value; });
+      }
+      if (branch.features) {
+        Object.values(branch.features).forEach(feat => setChildrenState(feat, value));
+      }
+      if (branch.submodules) {
+        Object.values(branch.submodules).forEach(sub => setChildrenState(sub, value));
+      }
+    };
+
+    if (actionId) {
+      newSelected[moduleId].submodules[submoduleId].features[featureId].actions[actionId] = checked;
+    } else if (featureId) {
+      setChildrenState(newSelected[moduleId].submodules[submoduleId].features[featureId], checked);
+    } else if (submoduleId) {
+      setChildrenState(newSelected[moduleId].submodules[submoduleId], checked);
+    } else if (moduleId) {
+      setChildrenState(newSelected[moduleId], checked);
+    }
+
+    const updatedState = updateParentStates(newSelected, permissionTree);
+    setSelectedPermissions(updatedState);
   };
 
-  // Handle save
   const handleSave = async () => {
     if (!selectedRoleId) {
-      toast.error('Por favor, selecione uma função.');
+      toast.error('Please select a role.');
       return;
     }
 
     const permissionsToSave = [];
-    permissionTree.modules.forEach((module) => {
-      module.features.forEach((feature) => {
-        feature.actions.forEach((action) => {
-          const isActionSelected =
-            selectedPermissions[module.id]?.features[feature.id]?.actions[action.id];
-          if (isActionSelected !== undefined) {
-            // Only add if explicitly set
-            permissionsToSave.push({
-              featureId: feature.id,
-              actionId: action.id,
-              allowed: isActionSelected,
-            });
-          }
-        });
-      });
-      module.submodules.forEach((submodule) => {
-        submodule.features.forEach((feature) => {
-          feature.actions.forEach((action) => {
-            const isActionSelected =
-              selectedPermissions[module.id]?.submodules[submodule.id]?.features[feature.id]
-                ?.actions[action.id];
-            if (isActionSelected !== undefined) {
-              // Only add if explicitly set
-              permissionsToSave.push({
-                featureId: feature.id,
-                actionId: action.id,
-                allowed: isActionSelected,
-              });
-            }
+    permissionTree.modules.forEach(module => {
+      module.submodules.forEach(submodule => {
+        submodule.features.forEach(feature => {
+          const actions = selectedPermissions[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
+          Object.keys(actions).forEach(actionId => {
+            permissionsToSave.push({ featureId: feature.id, actionId, allowed: actions[actionId] });
           });
         });
       });
@@ -174,305 +169,45 @@ const RolePermissionManagementPage = () => {
         restaurantId: selectedRestaurantId,
         permissions: permissionsToSave,
       });
-      toast.success('Permissões atualizadas com sucesso!');
+      toast.success('Permissions updated successfully!');
       queryClient.invalidateQueries(['rolePermissions', selectedRoleId, selectedRestaurantId]);
-      queryClient.invalidateQueries(['permissionTree', selectedRestaurantId]); // Invalidate permission tree
+      queryClient.invalidateQueries(['permissionTree', selectedRestaurantId]);
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Erro ao atualizar permissões.');
+      toast.error(error.response?.data?.message || 'Failed to update permissions.');
     }
   };
 
-  if (!selectedRestaurantId || !selectedRoleId) {
-    return <div>Invalid URL. Missing restaurant ID or role ID.</div>;
-  }
+  if (isLoadingRoles || isLoadingPermissionTree || isLoadingRolePermissions) return <CircularProgress />;
+  if (isErrorRoles || isErrorPermissionTree || isErrorRolePermissions) return <Alert severity="error">Error loading permission data.</Alert>;
 
-  if (isLoadingRoles || isLoadingPermissionTree || isLoadingRolePermissions) {
-    return <CircularProgress />;
-  }
-
-  if (isErrorRoles || isErrorPermissionTree || isErrorRolePermissions) {
-    return <Alert severity="error">Erro ao carregar dados de permissões.</Alert>;
-  }
-
-  if (!roles || !permissionTree) {
-    return <div>No data available.</div>;
-  }
-
-  const selectedRole = roles.find((r) => r.id === selectedRoleId);
-  if (!selectedRole) {
-    return <div>Role not found.</div>;
-  }
+  const selectedRole = roles?.find((r) => r.id === selectedRoleId);
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        Gerenciamento de Permissões para Função: {selectedRole.name} ({selectedRole.key})
-      </Typography>
+      <Typography variant="h4" gutterBottom>Role Permission Management</Typography>
       <FormControl fullWidth sx={{ mb: 3 }}>
-        <InputLabel id="select-role-label">Selecionar Função</InputLabel>
-        <Select
-          labelId="select-role-label"
-          value={selectedRoleId}
-          label="Selecionar Função"
-          onChange={(e) => setSelectedRoleId(e.target.value)}
-        >
-          <MenuItem value="">
-            <em>Nenhum</em>
-          </MenuItem>
-          {roles?.map((role) => (
-            <MenuItem key={role.id} value={role.id}>
-              {role.name}{' '}
-              {role.restaurantId
-                ? `(Restaurante: ${role.restaurantId})` // Assuming restaurant name is not directly available here
-                : '(Global)'}
-            </MenuItem>
-          ))}
+        <InputLabel>Select Role</InputLabel>
+        <Select value={selectedRoleId} label="Select Role" onChange={(e) => setSelectedRoleId(e.target.value)}>
+          {roles?.map((role) => <MenuItem key={role.id} value={role.id}>{role.name}</MenuItem>)}
         </Select>
       </FormControl>
 
-      {selectedRoleId && (
+      {selectedRoleId && permissionTree && selectedRole && (
         <Box sx={{ mt: 4 }}>
-          <Typography variant="h5" gutterBottom>
-            Atribuir Permissões
-          </Typography>
-          <TreeView
-            defaultCollapseIcon={<ExpandMoreIcon />}
-            defaultExpandIcon={<ChevronRightIcon />}
-            multiSelect
-          >
-            {permissionTree?.modules.map((moduleNode) => (
-              <TreeItem
-                key={moduleNode.id}
-                nodeId={moduleNode.id.toString()}
-                label={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Checkbox
-                      checked={selectedPermissions[moduleNode.id]?.checked || false}
-                      indeterminate={selectedPermissions[moduleNode.id]?.indeterminate || false}
-                      onChange={(e) => {
-                        const newSelected = JSON.parse(JSON.stringify(selectedPermissions));
-                        newSelected[moduleNode.id].checked = e.target.checked;
-                        // Set all features and their actions within this module
-                        moduleNode.features.forEach((feature) => {
-                          newSelected[moduleNode.id].features[feature.id] = {
-                            ...newSelected[moduleNode.id].features[feature.id],
-                            checked: e.target.checked,
-                          };
-                          feature.actions.forEach((action) => {
-                            newSelected[moduleNode.id].features[feature.id].actions[action.id] =
-                              e.target.checked;
-                          });
-                        });
-                        moduleNode.submodules.forEach((submodule) => {
-                          newSelected[moduleNode.id].submodules[submodule.id] = {
-                            ...newSelected[moduleNode.id].submodules[submodule.id],
-                            checked: e.target.checked,
-                          };
-                          submodule.features.forEach((feature) => {
-                            newSelected[moduleNode.id].submodules[submodule.id].features[
-                              feature.id
-                            ] = {
-                              ...newSelected[moduleNode.id].submodules[submodule.id].features[
-                                feature.id
-                              ],
-                              checked: e.target.checked,
-                            };
-                            feature.actions.forEach((action) => {
-                              newSelected[moduleNode.id].submodules[submodule.id].features[
-                                feature.id
-                              ].actions[action.id] = e.target.checked;
-                            });
-                          });
-                        });
-                        // updateParentStates(newSelected, moduleNode.id); // This helper is not available here
-                        handlePermissionChange(newSelected);
-                      }}
-                      disabled={!can('role_permissions', 'update')}
-                    />
-                    <Typography variant="body1">{moduleNode.name}</Typography>
-                  </Box>
-                }
-              >
-                {moduleNode.submodules?.map((submoduleNode) => (
-                  <TreeItem
-                    key={submoduleNode.id}
-                    nodeId={submoduleNode.id.toString()}
-                    label={
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Checkbox
-                          checked={
-                            selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]
-                              ?.checked || false
-                          }
-                          indeterminate={
-                            selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]
-                              ?.indeterminate || false
-                          }
-                          onChange={(e) => {
-                            const newSelected = JSON.parse(JSON.stringify(selectedPermissions));
-                            newSelected[moduleNode.id].submodules[submoduleNode.id].checked =
-                              e.target.checked;
-                            submoduleNode.features.forEach((feature) => {
-                              newSelected[moduleNode.id].submodules[submoduleNode.id].features[
-                                feature.id
-                              ] = {
-                                ...newSelected[moduleNode.id].submodules[submoduleNode.id].features[
-                                  feature.id
-                                ],
-                                checked: e.target.checked,
-                              };
-                              feature.actions.forEach((action) => {
-                                newSelected[moduleNode.id].submodules[submoduleNode.id].features[
-                                  feature.id
-                                ].actions[action.id] = e.target.checked;
-                              });
-                            });
-                            handlePermissionChange(newSelected);
-                          }}
-                          disabled={!can('role_permissions', 'update')}
-                        />
-                        <Typography variant="body1">{submoduleNode.name}</Typography>
-                      </Box>
-                    }
-                  >
-                    {submoduleNode.features?.map((featureNode) => (
-                      <TreeItem
-                        key={featureNode.id}
-                        nodeId={featureNode.id.toString()}
-                        label={
-                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Checkbox
-                              checked={
-                                selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]
-                                  ?.features[featureNode.id]?.checked || false
-                              }
-                              indeterminate={
-                                selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]
-                                  ?.features[featureNode.id]?.indeterminate || false
-                              }
-                              onChange={(e) => {
-                                const newSelected = JSON.parse(JSON.stringify(selectedPermissions));
-                                newSelected[moduleNode.id].submodules[submoduleNode.id].features[
-                                  featureNode.id
-                                ].checked = e.target.checked;
-                                featureNode.actions.forEach((action) => {
-                                  newSelected[moduleNode.id].submodules[submoduleNode.id].features[
-                                    featureNode.id
-                                  ].actions[action.id] = e.target.checked;
-                                });
-                                handlePermissionChange(newSelected);
-                              }}
-                              disabled={!can('role_permissions', 'update')}
-                            />
-                            <Typography variant="body1">{featureNode.name}</Typography>
-                          </Box>
-                        }
-                      >
-                        <FormGroup sx={{ ml: 4 }}>
-                          {featureNode.actions?.map((action) => (
-                            <FormControlLabel
-                              key={action.id}
-                              control={
-                                <Checkbox
-                                  checked={
-                                    selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]
-                                      ?.features[featureNode.id]?.actions[action.id] || false
-                                  }
-                                  onChange={(e) => {
-                                    const newSelected = JSON.parse(
-                                      JSON.stringify(selectedPermissions)
-                                    );
-                                    newSelected[moduleNode.id].submodules[
-                                      submoduleNode.id
-                                    ].features[featureNode.id].actions[action.id] =
-                                      e.target.checked;
-                                    handlePermissionChange(newSelected);
-                                  }}
-                                  disabled={!can('role_permissions', 'update')}
-                                />
-                              }
-                              label={action.key}
-                              sx={{ display: 'block' }}
-                            />
-                          ))}
-                        </FormGroup>
-                      </TreeItem>
-                    ))}
-                  </TreeItem>
-                ))}
-                {moduleNode.features?.map((featureNode) => (
-                  <TreeItem
-                    key={featureNode.id}
-                    nodeId={featureNode.id.toString()}
-                    label={
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Checkbox
-                          checked={
-                            selectedPermissions[moduleNode.id]?.features[featureNode.id]?.checked ||
-                            false
-                          }
-                          indeterminate={
-                            selectedPermissions[moduleNode.id]?.features[featureNode.id]
-                              ?.indeterminate || false
-                          }
-                          onChange={(e) => {
-                            const newSelected = JSON.parse(JSON.stringify(selectedPermissions));
-                            newSelected[moduleNode.id].features[featureNode.id].checked =
-                              e.target.checked;
-                            featureNode.actions.forEach((action) => {
-                              newSelected[moduleNode.id].features[featureNode.id].actions[
-                                action.id
-                              ] = e.target.checked;
-                            });
-                            handlePermissionChange(newSelected);
-                          }}
-                          disabled={!can('role_permissions', 'update')}
-                        />
-                        <Typography variant="body1">{featureNode.name}</Typography>
-                      </Box>
-                    }
-                  >
-                    <FormGroup sx={{ ml: 4 }}>
-                      {featureNode.actions?.map((action) => (
-                        <FormControlLabel
-                          key={action.id}
-                          control={
-                            <Checkbox
-                              checked={
-                                selectedPermissions[moduleNode.id]?.features[featureNode.id]
-                                  ?.actions[action.id] || false
-                              }
-                              onChange={(e) => {
-                                const newSelected = JSON.parse(JSON.stringify(selectedPermissions));
-                                newSelected[moduleNode.id].features[featureNode.id].actions[
-                                  action.id
-                                ] = e.target.checked;
-                                handlePermissionChange(newSelected);
-                              }}
-                              disabled={!can('role_permissions', 'update')}
-                            />
-                          }
-                          label={action.key}
-                          sx={{ display: 'block' }}
-                        />
-                      ))}
-                    </FormGroup>
-                  </TreeItem>
-                ))}
-              </TreeItem>
-            ))}
-          </TreeView>
+          <Typography variant="h5" gutterBottom>Assign Permissions for {selectedRole.name}</Typography>
+          <PermissionTree
+            availableModules={permissionTree.modules}
+            selectedPermissions={selectedPermissions}
+            onPermissionChange={handlePermissionChange}
+            disabled={!can('role_permissions', 'update')}
+          />
           <Button
             variant="contained"
             onClick={handleSave}
             disabled={setRolePermissionsMutation.isLoading || !can('role_permissions', 'update')}
             sx={{ mt: 3 }}
           >
-            {setRolePermissionsMutation.isLoading ? (
-              <CircularProgress size={24} />
-            ) : (
-              'Salvar Permissões'
-            )}
+            {setRolePermissionsMutation.isLoading ? <CircularProgress size={24} /> : 'Save Permissions'}
           </Button>
         </Box>
       )}

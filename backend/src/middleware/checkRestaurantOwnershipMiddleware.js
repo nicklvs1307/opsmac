@@ -2,6 +2,7 @@ const { ForbiddenError, BadRequestError } = require('../utils/errors');
 
 const checkRestaurantOwnership = (req, res, next) => {
   try {
+    console.log('DEBUG: req.user in checkRestaurantOwnership:', req.user);
     // Super Admins can access anything, so we bypass all other checks.
     if (req.user && req.user.isSuperadmin) {
       return next();

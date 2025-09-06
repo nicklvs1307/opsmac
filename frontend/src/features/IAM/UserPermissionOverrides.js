@@ -1,212 +1,199 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAuth } from '@/app/providers/contexts/AuthContext';
-import usePermissions from '@/hooks/usePermissions';
 import { useQueryClient } from 'react-query';
-import { toast } from 'react-hot-toast';
+import usePermissions from '@/hooks/usePermissions';
+import toast from 'react-hot-toast';
+import {
+  Box,
+  Typography,
+  Button,
+  CircularProgress,
+  Alert,
+} from '@mui/material';
 import {
   useGetPermissionTree,
   useGetUserPermissionOverrides,
   useSetUserPermissionOverrides,
+  useGetUsers,
 } from './api/iamQueries';
-import { fetchUsers } from '@/services/adminService'; // To fetch target user details
+import PermissionTree from '@/components/Admin/PermissionTree';
 
-const UserPermissionOverrides = () => {
+const UserPermissionOverridesPage = () => {
   const { restaurantId, userId } = useParams();
-  const { selectedRestaurantId } = useAuth(); // Use selectedRestaurantId from AuthContext
   const { can } = usePermissions();
   const queryClient = useQueryClient();
 
-  // Fetch all users to find the specific target user
-  const {
-    data: allUsers,
-    isLoading: isLoadingAllUsers,
-    isError: isErrorAllUsers,
-    error: errorAllUsers,
-  } = queryClient.getQueryData('adminUsers')
-    ? {
-        data: queryClient.getQueryData('adminUsers'),
-        isLoading: false,
-        isError: false,
-        error: null,
-      }
-    : queryClient.fetchQuery('adminUsers', fetchUsers);
-  const targetUser = allUsers?.find((u) => u.id === userId);
+  const [selectedPermissions, setSelectedPermissions] = useState({});
 
-  // Fetch permission tree (features and actions catalog)
-  const {
-    data: permissionTree,
-    isLoading: isLoadingPermissionTree,
-    isError: isErrorPermissionTree,
-    error: errorPermissionTree,
-  } = useGetPermissionTree(selectedRestaurantId, { enabled: !!selectedRestaurantId });
-
-  // Fetch current user overrides
-  const {
-    data: fetchedUserOverrides,
-    isLoading: isLoadingUserOverrides,
-    isError: isErrorUserOverrides,
-    error: errorUserOverrides,
-  } = useGetUserPermissionOverrides(userId, selectedRestaurantId, {
-    enabled: !!userId && !!selectedRestaurantId,
+  const { data: users, isLoading: isLoadingUsers, isError: isErrorUsers } = useGetUsers(restaurantId, { enabled: !!restaurantId });
+  const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(restaurantId, { enabled: !!restaurantId });
+  const { data: fetchedUserOverrides, isLoading: isLoadingUserOverrides, isError: isErrorUserOverrides } = useGetUserPermissionOverrides(userId, restaurantId, {
+    enabled: !!userId && !!restaurantId,
   });
 
-  const [userOverrides, setUserOverrides] = useState({}); // { featureId: { actionId: allowed } }
-
-  // Mutation for saving user permission overrides
   const setUserPermissionOverridesMutation = useSetUserPermissionOverrides();
 
-  useEffect(() => {
-    if (fetchedUserOverrides) {
-      const currentOverrides = {};
-      fetchedUserOverrides.forEach((uo) => {
-        if (!currentOverrides[uo.featureId]) {
-          // Use camelCase
-          currentOverrides[uo.featureId] = {};
-        }
-        currentOverrides[uo.featureId][uo.actionId] = uo.allowed; // Use camelCase
-      });
-      setUserOverrides(currentOverrides);
-    }
-  }, [fetchedUserOverrides]);
+  const targetUser = users?.find(u => u.id === userId);
 
-  const handleOverrideChange = (featureId, actionId, allowed) => {
-    setUserOverrides((prev) => ({
-      ...prev,
-      [featureId]: {
-        ...prev[featureId],
-        [actionId]: allowed,
-      },
-    }));
+  const updateParentStates = useCallback((permissions, tree) => {
+    if (!tree || !tree.modules) return permissions;
+    const newSelected = JSON.parse(JSON.stringify(permissions));
+
+    tree.modules.forEach(module => {
+      let moduleChecked = true;
+      let moduleIndeterminate = false;
+
+      module.submodules.forEach(submodule => {
+        let submoduleChecked = true;
+        let submoduleIndeterminate = false;
+
+        submodule.features.forEach(feature => {
+          const featureActions = newSelected[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
+          const actionKeys = Object.keys(featureActions);
+          const checkedCount = actionKeys.filter(key => featureActions[key]).length;
+
+          const featureState = newSelected[module.id].submodules[submodule.id].features[feature.id];
+          featureState.checked = actionKeys.length > 0 && checkedCount === actionKeys.length;
+          featureState.indeterminate = checkedCount > 0 && checkedCount < actionKeys.length;
+
+          if (!featureState.checked) submoduleChecked = false;
+          if (featureState.indeterminate || featureState.checked) submoduleIndeterminate = true;
+        });
+
+        const subState = newSelected[module.id].submodules[submodule.id];
+        subState.checked = submoduleChecked;
+        subState.indeterminate = !submoduleChecked && submoduleIndeterminate;
+
+        if (!subState.checked) moduleChecked = false;
+        if (subState.indeterminate || subState.checked) moduleIndeterminate = true;
+      });
+
+      const modState = newSelected[module.id];
+      modState.checked = moduleChecked;
+      modState.indeterminate = !moduleChecked && moduleIndeterminate;
+    });
+
+    return newSelected;
+  }, []);
+
+  useEffect(() => {
+    if (fetchedUserOverrides && permissionTree) {
+      let initialSelected = {};
+      permissionTree.modules.forEach(module => {
+        initialSelected[module.id] = {
+          checked: false,
+          indeterminate: false,
+          submodules: module.submodules.reduce((accSub, submodule) => {
+            accSub[submodule.id] = {
+              checked: false,
+              indeterminate: false,
+              features: submodule.features.reduce((accFeat, feature) => {
+                accFeat[feature.id] = {
+                  checked: false,
+                  indeterminate: false,
+                  actions: feature.actions.reduce((accAct, action) => {
+                    const override = fetchedUserOverrides.find(o => o.featureId === feature.id && o.actionId === action.id);
+                    accAct[action.id] = override ? override.allowed : false;
+                    return accAct;
+                  }, {}),
+                };
+                return accFeat;
+              }, {}),
+            };
+            return accSub;
+          }, {}),
+        };
+      });
+      const updatedState = updateParentStates(initialSelected, permissionTree);
+      setSelectedPermissions(updatedState);
+    }
+  }, [fetchedUserOverrides, permissionTree, updateParentStates]);
+
+  const handlePermissionChange = (path, checked) => {
+    let newSelected = JSON.parse(JSON.stringify(selectedPermissions));
+    const [moduleId, submoduleId, featureId, actionId] = path;
+
+    const setChildrenState = (branch, value) => {
+      branch.checked = value;
+      if (branch.actions) {
+        Object.keys(branch.actions).forEach(key => { branch.actions[key] = value; });
+      }
+      if (branch.features) {
+        Object.values(branch.features).forEach(feat => setChildrenState(feat, value));
+      }
+      if (branch.submodules) {
+        Object.values(branch.submodules).forEach(sub => setChildrenState(sub, value));
+      }
+    };
+
+    if (actionId) {
+      newSelected[moduleId].submodules[submoduleId].features[featureId].actions[actionId] = checked;
+    } else if (featureId) {
+      setChildrenState(newSelected[moduleId].submodules[submoduleId].features[featureId], checked);
+    } else if (submoduleId) {
+      setChildrenState(newSelected[moduleId].submodules[submoduleId], checked);
+    } else if (moduleId) {
+      setChildrenState(newSelected[moduleId], checked);
+    }
+
+    const updatedState = updateParentStates(newSelected, permissionTree);
+    setSelectedPermissions(updatedState);
   };
 
-  const handleSaveOverrides = async () => {
-    try {
-      const overridesToSave = [];
-      // Iterate through the permissionTree structure to build the overrides array
-      permissionTree.modules.forEach((module) => {
-        module.features.forEach((feature) => {
-          feature.actions.forEach((action) => {
-            const isActionSelected = userOverrides[feature.id]?.[action.id];
-            if (isActionSelected !== undefined) {
-              // Only add if explicitly set
-              overridesToSave.push({
-                featureId: feature.id,
-                actionId: action.id,
-                allowed: isActionSelected,
-              });
-            }
-          });
-        });
-        module.submodules.forEach((submodule) => {
-          submodule.features.forEach((feature) => {
-            feature.actions.forEach((action) => {
-              const isActionSelected = userOverrides[feature.id]?.[action.id];
-              if (isActionSelected !== undefined) {
-                // Only add if explicitly set
-                overridesToSave.push({
-                  featureId: feature.id,
-                  actionId: action.id,
-                  allowed: isActionSelected,
-                });
-              }
-            });
+  const handleSave = async () => {
+    const overridesToSave = [];
+    permissionTree.modules.forEach(module => {
+      module.submodules.forEach(submodule => {
+        submodule.features.forEach(feature => {
+          const actions = selectedPermissions[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
+          Object.keys(actions).forEach(actionId => {
+            overridesToSave.push({ featureId: feature.id, actionId, allowed: actions[actionId] });
           });
         });
       });
+    });
 
+    try {
       await setUserPermissionOverridesMutation.mutateAsync({
         userId,
-        restaurantId: selectedRestaurantId,
+        restaurantId,
         overrides: overridesToSave,
       });
-      toast.success('User overrides updated successfully!');
-      queryClient.invalidateQueries(['userPermissionOverrides', userId, selectedRestaurantId]);
-      queryClient.invalidateQueries(['permissionTree', selectedRestaurantId]); // Invalidate permission tree
-    } catch (err) {
-      console.error('Failed to save user overrides:', err);
-      toast.error(err.response?.data?.message || 'Failed to save user overrides.');
+      toast.success('User permission overrides updated successfully!');
+      queryClient.invalidateQueries(['userPermissionOverrides', userId, restaurantId]);
+      queryClient.invalidateQueries(['permissionTree', restaurantId]);
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to update user overrides.');
     }
   };
 
-  const allFeatures =
-    permissionTree?.modules.flatMap((m) => m.submodules.flatMap((sm) => sm.features)) || [];
-  const allActions =
-    permissionTree?.modules.flatMap((m) =>
-      m.submodules.flatMap((sm) => sm.features.flatMap((f) => f.actions))
-    ) || [];
-
-  if (!restaurantId || !userId) {
-    return <div>Invalid URL. Missing restaurant ID or user ID.</div>;
-  }
-
-  if (isLoadingAllUsers || isLoadingPermissionTree || isLoadingUserOverrides) {
-    return <div>Loading user overrides...</div>;
-  }
-
-  if (isErrorAllUsers || isErrorPermissionTree || isErrorUserOverrides) {
-    return (
-      <div>
-        Error:{' '}
-        {errorAllUsers?.message || errorPermissionTree?.message || errorUserOverrides?.message}
-      </div>
-    );
-  }
-
-  if (!targetUser) {
-    return <div>User not found.</div>;
-  }
+  if (isLoadingUsers || isLoadingPermissionTree || isLoadingUserOverrides) return <CircularProgress />;
+  if (isErrorUsers || isErrorPermissionTree || isErrorUserOverrides) return <Alert severity="error">Error loading data.</Alert>;
+  if (!targetUser) return <Alert severity="error">User not found.</Alert>;
 
   return (
-    <div>
-      <h1>
-        Manage Overrides for User: {targetUser.name} ({targetUser.email})
-      </h1>
-      <p>Restaurant ID: {restaurantId}</p>
-
-      {can('user_overrides', 'update') && (
-        <button
-          onClick={handleSaveOverrides}
-          disabled={setUserPermissionOverridesMutation.isLoading}
-        >
-          Save Overrides
-        </button>
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom>Manage Permission Overrides for {targetUser.name}</Typography>
+      {permissionTree && (
+        <Box sx={{ mt: 4 }}>
+          <PermissionTree
+            availableModules={permissionTree.modules}
+            selectedPermissions={selectedPermissions}
+            onPermissionChange={handlePermissionChange}
+            disabled={!can('user_overrides', 'update')}
+          />
+          <Button
+            variant="contained"
+            onClick={handleSave}
+            disabled={setUserPermissionOverridesMutation.isLoading || !can('user_overrides', 'update')}
+            sx={{ mt: 3 }}
+          >
+            {setUserPermissionOverridesMutation.isLoading ? <CircularProgress size={24} /> : 'Save Overrides'}
+          </Button>
+        </Box>
       )}
-
-      <table>
-        <thead>
-          <tr>
-            <th>Feature</th>
-            {allActions.map((action) => (
-              <th key={action.id}>{action.key}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {allFeatures.map((feature) => (
-            <tr key={feature.id}>
-              <td>
-                {feature.name} ({feature.key})
-              </td>
-              {allActions.map((action) => (
-                <td key={action.id}>
-                  <input
-                    type="checkbox"
-                    checked={!!userOverrides[feature.id]?.[action.id]}
-                    onChange={(e) => handleOverrideChange(feature.id, action.id, e.target.checked)}
-                    disabled={
-                      !can('user_overrides', 'update') ||
-                      setUserPermissionOverridesMutation.isLoading
-                    }
-                  />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    </Box>
   );
 };
 
-export default UserPermissionOverrides;
+export default UserPermissionOverridesPage;

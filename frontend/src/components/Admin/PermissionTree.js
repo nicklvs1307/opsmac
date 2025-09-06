@@ -59,24 +59,29 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
               <TreeItem
                 key={featureNode.id}
                 nodeId={`${moduleNode.id}-${submoduleNode.id}-${featureNode.id}`}
-                label={
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.features[featureNode.id]?.checked || false}
-                        indeterminate={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.features[featureNode.id]?.indeterminate || false}
-                        onChange={(e) => onPermissionChange([moduleNode.id, submoduleNode.id, featureNode.id], e.target.checked)}
-                        disabled={disabled}
-                      />
-                    }
-                    label={featureNode.name}
-                  />
-                }
+                label={featureNode.name}
               >
-                <FormGroup sx={{ ml: 4 }}>
-                                    {featureNode.actions?.map(action => (
-                    <FormControlLabel
-                      key={action.id}
+                {/* Actions will be re-added later */}
+              </TreeItem>
+            ))}
+          </TreeItem>
+        ))}
+      </TreeItem>
+    ));
+  };
+
+  return (
+    <TreeView
+      defaultCollapseIcon={<ExpandMoreIcon />}
+      defaultExpandIcon={<ChevronRightIcon />}
+      sx={{ flexGrow: 1, overflowY: 'auto' }}
+    >
+      {renderTree(availableModules)}
+    </TreeView>
+  );
+};
+
+export default PermissionTree;tion.id}
                       control={
                         <Checkbox
                           checked={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.features[featureNode.id]?.actions[action.id] || false}

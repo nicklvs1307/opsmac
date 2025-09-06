@@ -334,17 +334,17 @@ class IamService {
         return false;
       }
 
-      console.log(`DEBUG: Before bump - Restaurant ${restaurantId} perm_version: ${restaurant.perm_version}`); // Add this log
+      console.error(`DEBUG: Before bump - Restaurant ${restaurantId} perm_version: ${restaurant.perm_version}`); // Changed to console.error
 
       // Increment perm_version
       restaurant.perm_version = (restaurant.perm_version || 0) + 1;
-      await restaurant.save();
+      await restaurant.save(); // Ensure save happens before cache invalidation
 
-      console.log(`DEBUG: After bump - Restaurant ${restaurantId} perm_version: ${restaurant.perm_version}`); // Add this log
+      console.error(`DEBUG: After bump - Restaurant ${restaurantId} perm_version: ${restaurant.perm_version}`); // Changed to console.error
 
       if (redisClient) {
-        const delResult = await redisClient.del(`perm_snapshot:${restaurantId}:*`); // Capture result
-        console.log(`DEBUG: Redis DEL for perm_snapshot:${restaurantId}:* result: ${delResult}`); // Log result
+        const delResult = await redisClient.del(`perm_snapshot:${restaurantId}:*`);
+        console.error(`DEBUG: Redis DEL for perm_snapshot:${restaurantId}:* result: ${delResult}`); // Changed to console.error
       }
 
       console.log(`Perm_version for restaurant ${restaurantId} bumped to ${restaurant.permVersion}`);

@@ -117,62 +117,56 @@ const UserEditPage = () => {
   }, [targetUser, reset]);
 
   useEffect(() => {
-    if (permissionTree && userPermissionOverrides) {
+    if (permissionTree) { // Only depend on permissionTree, as it contains effective permissions
       const initialSelected = {};
       permissionTree.modules.forEach((module) => {
-        initialSelected[module.id] = {
-          checked: false,
-          indeterminate: false,
-          features: module.submodules.reduce((accSub, submodule) => {
-            submodule.features.forEach((feature) => {
-              accSub[feature.id] = {
-                checked: userPermissionOverrides.some(
-                  (override) => override.featureId === feature.id && override.allowed
-                ),
-                indeterminate: false,
-                actions: feature.actions.reduce((accAct, action) => {
-                  accAct[action.id] = userPermissionOverrides.some(
-                    (override) =>
-                      override.featureId === feature.id &&
-                      override.actionId === action.id &&
-                      override.allowed
-                  );
-                  return accAct;
-                }, {}),
-              };
+        const moduleFeatures = {};
+        const moduleSubmodules = {};
+
+        // Process features directly under the module
+        module.features.forEach((feature) => {
+          const featureActions = {};
+          feature.actions.forEach((action) => {
+            featureActions[action.id] = action.allowed; // Use action.allowed directly
+          });
+          moduleFeatures[feature.id] = {
+            checked: Object.values(featureActions).some(Boolean), // Check if any action is allowed
+            indeterminate: false, // Will be updated by PermissionTree's internal logic
+            actions: featureActions,
+          };
+        });
+
+        // Process submodules and their features
+        module.submodules.forEach((submodule) => {
+          const submoduleFeatures = {};
+          submodule.features.forEach((feature) => {
+            const featureActions = {};
+            feature.actions.forEach((action) => {
+              featureActions[action.id] = action.allowed; // Use action.allowed directly
             });
-            return accSub;
-          }, {}),
-          submodules: module.submodules.reduce((accSub, submodule) => {
-            accSub[submodule.id] = {
-              checked: false,
-              indeterminate: false,
-              features: submodule.features.reduce((accFeat, feature) => {
-                accFeat[feature.id] = {
-                  checked: userPermissionOverrides.some(
-                    (override) => override.featureId === feature.id && override.allowed
-                  ),
-                  indeterminate: false,
-                  actions: feature.actions.reduce((accAct, action) => {
-                    accAct[action.id] = userPermissionOverrides.some(
-                      (override) =>
-                        override.featureId === feature.id &&
-                        override.actionId === action.id &&
-                        override.allowed
-                    );
-                    return accAct;
-                  }, {}),
-                };
-                return accFeat;
-              }, {}),
+            submoduleFeatures[feature.id] = {
+              checked: Object.values(featureActions).some(Boolean), // Check if any action is allowed
+              indeterminate: false, // Will be updated by PermissionTree's internal logic
+              actions: featureActions,
             };
-            return accSub;
-          }, {}),
+          });
+          moduleSubmodules[submodule.id] = {
+            checked: Object.values(submoduleFeatures).some(f => f.checked || f.indeterminate), // Check if any feature in submodule is allowed
+            indeterminate: false, // Will be updated by PermissionTree's internal logic
+            features: submoduleFeatures,
+          };
+        });
+
+        initialSelected[module.id] = {
+          checked: Object.values(moduleFeatures).some(f => f.checked || f.indeterminate) || Object.values(moduleSubmodules).some(sm => sm.checked || sm.indeterminate), // Check if any feature or submodule is allowed
+          indeterminate: false, // Will be updated by PermissionTree's internal logic
+          features: moduleFeatures,
+          submodules: moduleSubmodules,
         };
       });
       setSelectedFeatures(initialSelected);
     }
-  }, [permissionTree, userPermissionOverrides]);
+  }, [permissionTree]); // Only re-run when permissionTree changes
 
   const handlePermissionChange = (newSelectedFeatures) => {
     setSelectedFeatures(newSelectedFeatures);

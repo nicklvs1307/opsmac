@@ -33,6 +33,9 @@ const RestaurantEditPage = () => {
   const { data: restaurant, isLoading: isLoadingRestaurant, isError: isErrorRestaurant } = useQuery(['restaurant', restaurantId], () => fetchRestaurants(restaurantId), { enabled: !!restaurantId });
   const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(restaurantId, { enabled: !!restaurantId });
 
+  console.log('RestaurantEditPage Debug: permissionTree', permissionTree);
+  console.log('RestaurantEditPage Debug: can("admin:permissions", "update")', can('admin:permissions', 'update'));
+
   const { control, handleSubmit, reset, formState: { errors } } = useForm();
   const saveRestaurantMutation = useMutation(saveRestaurant, { onSuccess: () => queryClient.invalidateQueries(['restaurant', restaurantId]) });
   const setEntitlementMutation = useSetEntitlement();

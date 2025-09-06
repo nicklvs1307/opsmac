@@ -45,6 +45,9 @@ const UserEditPage = () => {
 
   const { data: allRoles, isLoading: isLoadingAllRoles, isError: isErrorAllRoles } = useGetRoles(selectedRestaurantId, { enabled: !!selectedRestaurantId });
   const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(selectedRestaurantId, { enabled: !!selectedRestaurantId });
+
+  console.log('UserEditPage Debug: permissionTree', permissionTree);
+  console.log('UserEditPage Debug: can("admin:users", "manage_permissions")', can('admin:users', 'manage_permissions'));
   const { data: fetchedUserOverrides, isLoading: isLoadingUserOverrides, isError: isErrorUserOverrides } = useGetUserPermissionOverrides(userId, selectedRestaurantId, {
     enabled: !!userId && !!selectedRestaurantId,
   });

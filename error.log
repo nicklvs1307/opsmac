@@ -1,22 +1,18 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          113.0s
+ => [builder  9/10] RUN if [ -z "https://feedelizaapi.towersfy.com/api" ]; then echo "Error:   0.4s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          187.9s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.349 + npm run build
-0.803
-0.803 > feedeliza-plus@1.0.0 build
-0.803 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.803
-4.777 Creating an optimized production build...
-111.9 Failed to compile.
-111.9
-111.9 Module not found: Error: Can't resolve '@mui/material/styles' in '/app/frontend/node_modules/@mui/x-tree-view/esm/TreeItemDragAndDropOverlay'
-111.9 Did you mean 'index.js'?
-111.9 BREAKING CHANGE: The request '@mui/material/styles' failed to resolve only because it was resolved as fully specified
-111.9 (probably because the origin is strict EcmaScript Module, e. g. a module with javascript mimetype, a '*.mjs' file, or a '*.js' file where the package.json contains '"type": "module"').
-111.9 The extension in the request is mandatory for it to be fully specified.
-111.9 Add the extension to the request.
-111.9
-111.9
+0.486 + npm run build
+0.727
+0.727 > feedeliza-plus@1.0.0 build
+0.727 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.727
+2.772 Creating an optimized production build...
+186.9 Failed to compile.
+186.9
+186.9 Attempted import error: 'TreeView' is not exported from '@mui/x-tree-view' (imported as 'TreeView').
+186.9
+186.9
 ------
 Dockerfile.frontend:27
 --------------------

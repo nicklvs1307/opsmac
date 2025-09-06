@@ -194,9 +194,14 @@ const UserEditPage = () => {
       });
 
       if (selectedRestaurantId) {
-        console.log('Sending user permission overrides:', { userId, restaurantId: selectedRestaurantId, overrides });
-        await saveUserPermissionOverridesMutation.mutateAsync({ userId, restaurantId: selectedRestaurantId, overrides });
-        toast.success('User permissions updated successfully!');
+        if (overrides.length > 0) { // Only send if there are actual overrides
+          console.log('Sending user permission overrides:', { userId, restaurantId: selectedRestaurantId, overrides });
+          await saveUserPermissionOverridesMutation.mutateAsync({ userId, restaurantId: selectedRestaurantId, overrides });
+          toast.success('User permissions updated successfully!');
+        } else {
+          console.log('No permission overrides to save. Skipping mutation.');
+          toast.success('User permissions updated successfully (no changes applied).'); // Provide feedback
+        }
       } else {
         toast.error('Restaurant ID is missing. Cannot save user permission overrides.');
       }

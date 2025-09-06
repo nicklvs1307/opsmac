@@ -1,17 +1,19 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           19.8s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          187.3s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.333 + npm run build
-0.636
-0.636 > feedeliza-plus@1.0.0 build
-0.636 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.636
-3.872 Creating an optimized production build...
-19.58 Failed to compile.
-19.58
-19.58 Module not found: Error: Can't resolve '@mui/icons-material/Search' in '/app/frontend/src/features/Rewards'
-19.58
-19.58
+0.358 + npm run build
+0.669
+0.669 > feedeliza-plus@1.0.0 build
+0.669 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.669
+4.322 Creating an optimized production build...
+186.2 Failed to compile.
+186.2
+186.2 [eslint]
+186.2 src/components/Admin/PermissionTree.js
+186.2 Syntax error: Unexpected token (84:37) (84:37)
+186.2
+186.2
 ------
 Dockerfile.frontend:27
 --------------------

@@ -81,7 +81,7 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
   );
 };
 
-export default PermissionTree;tion.id}
+export default PermissionTree;
                       control={
                         <Checkbox
                           checked={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.features[featureNode.id]?.actions[action.id] || false}

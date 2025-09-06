@@ -82,34 +82,4 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
 };
 
 export default PermissionTree;
-                      control={
-                        <Checkbox
-                          checked={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.features[featureNode.id]?.actions[action.id] || false}
-                          onChange={(e) => onPermissionChange([moduleNode.id, submoduleNode.id, featureNode.id, action.id], e.target.checked)}
-                          disabled={disabled}
-                        />
-                      }
-                      label={action.key}
-                    />
-                  ))}
-                </FormGroup>
-              </TreeItem>
-            ))}
-          </TreeItem>
-        ))}
-      </TreeItem>
-    ));
-  };
-
-  return (
-    <TreeView
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
-      sx={{ flexGrow: 1, overflowY: 'auto' }}
-    >
-      {renderTree(availableModules)}
-    </TreeView>
-  );
-};
-
-export default PermissionTree;
+                      

@@ -1,19 +1,19 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          187.3s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          190.1s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.358 + npm run build
-0.669
-0.669 > feedeliza-plus@1.0.0 build
-0.669 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.669
-4.322 Creating an optimized production build...
-186.2 Failed to compile.
-186.2
-186.2 [eslint]
-186.2 src/components/Admin/PermissionTree.js
-186.2 Syntax error: Unexpected token (84:37) (84:37)
-186.2
-186.2
+0.722 + npm run build
+1.155
+1.155 > feedeliza-plus@1.0.0 build
+1.155 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+1.155
+4.979 Creating an optimized production build...
+188.2 Failed to compile.
+188.2
+188.2 [eslint]
+188.2 src/components/Admin/PermissionTree.js
+188.2 Syntax error: Unexpected token (86:24) (86:24)
+188.2
+188.2
 ------
 Dockerfile.frontend:27
 --------------------

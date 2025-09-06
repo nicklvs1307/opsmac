@@ -82,7 +82,6 @@ const RolePermissionManagementPage = () => {
 
   useEffect(() => {
     if (fetchedRolePermissions && permissionTree) {
-      let initialSelected = {};
       // Create a map for quick lookup of existing role permissions
       const rolePermMap = new Map();
       fetchedRolePermissions.forEach(rp => {

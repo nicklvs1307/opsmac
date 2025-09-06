@@ -1,113 +1,26 @@
-edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
- AuthContext Debug: User object after SET_USER: {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
-ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-main.20ed9dd8.js:2 [Violation] 'message' handler took 253ms
-[Violation] Forced reflow while executing JavaScript took 37ms
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
-ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
-ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
-ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
-ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
-ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
-ProtectedRoute.js:19 ProtectedRoute Debug: featureKey restaurants
-ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
-AuthContext.js:81 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ AuthContext.js:81
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-adminService.js:12 DEBUG: fetchRestaurants - response.data: {id: 'f215e84e-2ad1-43c1-8a5f-01b74f847aa7', name: 'Towersfy', slug: 'towersfy', description: '1111', address: 'Rua Avenida Brasil', …}
-adminService.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants/f215e84e-2ad1-43c1-8a5f-01b74f847aa7".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ adminService.js:11
-P1.enabled @ RestaurantEditPage.js:33
-fetchFn @ query.js:300
-c @ retryer.js:95
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-iamQueries.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=f215e84e-2ad1-43c1-8a5f-01b74f847aa7".
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ iamQueries.js:11
-fetchFn @ query.js:300
-c @ retryer.js:95
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-TreeView.js:8 MUI: The TreeView component was moved from `@mui/lab` to `@mui/x-tree-view`.
-
-You should use `import { TreeView } from '@mui/x-tree-view'`
-or `import { TreeView } from '@mui/x-tree-view/TreeView'`
-
-More information about this migration on our blog: https://mui.com/blog/lab-tree-view-to-mui-x/.
-(anônimo) @ TreeView.js:8
-vi @ react-dom.production.min.js:160
-js @ react-dom.production.min.js:192
-wl @ react-dom.production.min.js:293
-bc @ react-dom.production.min.js:279
-gc @ react-dom.production.min.js:279
-vc @ react-dom.production.min.js:279
-ac @ react-dom.production.min.js:267
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-main.20ed9dd8.js:2 [Violation] 'message' handler took 154ms
-[Violation] Forced reflow while executing JavaScript took 62ms
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          210.9s
+------
+ > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.419 + npm run build
+0.967
+0.967 > feedeliza-plus@1.0.0 build
+0.967 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.967
+4.579 Creating an optimized production build...
+209.2 Failed to compile.
+209.2
+209.2 [eslint]
+209.2 src/components/Admin/RolePermissionManagementPage.js
+209.2 Syntax error: Identifier 'initialSelected' has already been declared. (92:10) (92:10)
+209.2
+209.2
+------
+Dockerfile.frontend:27
+--------------------
+  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
+  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  28 |
+  29 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

@@ -85,31 +85,6 @@ const UserPermissionOverridesPage = () => {
       });
 
       let initialSelected = {};
-      permissionTree.modules?.forEach(module => {
-        initialSelected[module.id] = {
-          checked: false, // Will be updated by updateParentStates
-          indeterminate: false, // Will be updated by updateParentStates
-          submodules: module.submodules?.reduce((accSub, submodule) => {
-            accSub[submodule.id] = {
-              checked: false, // Will be updated by updateParentStates
-              indeterminate: false, // Will be updated by updateParentStates
-              features: submodule.features?.reduce((accFeat, feature) => {
-                accFeat[feature.id] = {
-                  checked: false, // Will be updated by updateParentStates
-                  indeterminate: false, // Will be updated by updateParentStates
-                  actions: feature.actions?.reduce((accAct, action) => {
-                    // Default to false if not explicitly allowed in userOverrideMap
-                    accAct[action.id] = userOverrideMap.get(`${feature.id}-${action.id}`) || false;
-                    return accAct;
-                  }, {}),
-                };
-                return accFeat;
-              }, {}),
-            };
-            return accSub;
-          }, {}),
-        };
-      });
       const updatedState = updateParentStates(initialSelected, permissionTree);
       setSelectedPermissions(updatedState);
     }

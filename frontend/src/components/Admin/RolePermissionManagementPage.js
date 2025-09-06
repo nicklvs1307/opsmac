@@ -83,19 +83,19 @@ const RolePermissionManagementPage = () => {
   useEffect(() => {
     if (fetchedRolePermissions && permissionTree) {
       let initialSelected = {};
-      permissionTree.modules.forEach(module => {
+      permissionTree.modules?.forEach(module => {
         initialSelected[module.id] = {
           checked: false,
           indeterminate: false,
-          submodules: module.submodules.reduce((accSub, submodule) => {
+          submodules: module.submodules?.reduce((accSub, submodule) => {
             accSub[submodule.id] = {
               checked: false,
               indeterminate: false,
-              features: submodule.features.reduce((accFeat, feature) => {
+              features: submodule.features?.reduce((accFeat, feature) => {
                 accFeat[feature.id] = {
                   checked: false,
                   indeterminate: false,
-                  actions: feature.actions.reduce((accAct, action) => {
+                  actions: feature.actions?.reduce((accAct, action) => {
                     accAct[action.id] = fetchedRolePermissions.some(
                       rp => rp.featureId === feature.id && rp.actionId === action.id && rp.allowed
                     );
@@ -152,9 +152,9 @@ const RolePermissionManagementPage = () => {
     }
 
     const permissionsToSave = [];
-    permissionTree.modules.forEach(module => {
-      module.submodules.forEach(submodule => {
-        submodule.features.forEach(feature => {
+    permissionTree.modules?.forEach(module => {
+      module.submodules?.forEach(submodule => {
+        submodule.features?.forEach(feature => {
           const actions = selectedPermissions[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
           Object.keys(actions).forEach(actionId => {
             permissionsToSave.push({ featureId: feature.id, actionId, allowed: actions[actionId] });

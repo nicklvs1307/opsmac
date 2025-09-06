@@ -82,15 +82,15 @@ const RestaurantEditPage = () => {
   useEffect(() => {
     if (permissionTree) {
       let initialSelected = {};
-      permissionTree.modules.forEach(module => {
+      permissionTree.modules?.forEach(module => {
         initialSelected[module.id] = {
           checked: module.status === 'active',
           indeterminate: false,
-          submodules: module.submodules.reduce((accSub, submodule) => {
+          submodules: module.submodules?.reduce((accSub, submodule) => {
             accSub[submodule.id] = {
               checked: submodule.status === 'active',
               indeterminate: false,
-              features: submodule.features.reduce((accFeat, feature) => {
+              features: submodule.features?.reduce((accFeat, feature) => {
                 accFeat[feature.id] = {
                   checked: feature.status === 'active',
                   indeterminate: false,
@@ -140,13 +140,13 @@ const RestaurantEditPage = () => {
       toast.success('Restaurant details updated successfully!');
 
       const entitlements = [];
-      permissionTree.modules.forEach(module => {
+      permissionTree.modules?.forEach(module => {
         const moduleState = selectedPermissions[module.id];
         entitlements.push({ entityType: 'module', entityId: module.id, status: moduleState.checked ? 'active' : 'locked', source: 'admin_ui' });
-        module.submodules.forEach(submodule => {
+        module.submodules?.forEach(submodule => {
           const submoduleState = moduleState.submodules[submodule.id];
           entitlements.push({ entityType: 'submodule', entityId: submodule.id, status: submoduleState.checked ? 'active' : 'locked', source: 'admin_ui' });
-          submodule.features.forEach(feature => {
+          submodule.features?.forEach(feature => {
             const featureState = submoduleState.features[feature.id];
             entitlements.push({ entityType: 'feature', entityId: feature.id, status: featureState.checked ? 'active' : 'locked', source: 'admin_ui' });
           });

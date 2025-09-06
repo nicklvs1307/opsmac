@@ -34,7 +34,7 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
           />
         }
       >
-        {moduleNode.submodules.map(submoduleNode => (
+                {moduleNode.submodules?.map(submoduleNode => (
           <TreeItem
             key={submoduleNode.id}
             nodeId={`${moduleNode.id}-${submoduleNode.id}`}
@@ -52,7 +52,7 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
               />
             }
           >
-            {submoduleNode.features.map(featureNode => (
+                        {submoduleNode.features?.map(featureNode => (
               <TreeItem
                 key={featureNode.id}
                 nodeId={`${moduleNode.id}-${submoduleNode.id}-${featureNode.id}`}
@@ -71,7 +71,7 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
                 }
               >
                 <FormGroup sx={{ ml: 4 }}>
-                  {featureNode.actions.map(action => (
+                                    {featureNode.actions?.map(action => (
                     <FormControlLabel
                       key={action.id}
                       control={

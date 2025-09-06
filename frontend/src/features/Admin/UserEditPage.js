@@ -107,19 +107,19 @@ const UserEditPage = () => {
   useEffect(() => {
     if (fetchedUserOverrides && permissionTree) {
       let initialSelected = {};
-      permissionTree.modules.forEach(module => {
+      permissionTree.modules?.forEach(module => {
         initialSelected[module.id] = {
           checked: false,
           indeterminate: false,
-          submodules: module.submodules.reduce((accSub, submodule) => {
+          submodules: module.submodules?.reduce((accSub, submodule) => {
             accSub[submodule.id] = {
               checked: false,
               indeterminate: false,
-              features: submodule.features.reduce((accFeat, feature) => {
+              features: submodule.features?.reduce((accFeat, feature) => {
                 accFeat[feature.id] = {
                   checked: false,
                   indeterminate: false,
-                  actions: feature.actions.reduce((accAct, action) => {
+                  actions: feature.actions?.reduce((accAct, action) => {
                     const override = fetchedUserOverrides.find(o => o.featureId === feature.id && o.actionId === action.id);
                     accAct[action.id] = override ? override.allowed : false;
                     return accAct;
@@ -182,9 +182,9 @@ const UserEditPage = () => {
       }
 
       const overrides = [];
-      permissionTree.modules.forEach(module => {
-        module.submodules.forEach(submodule => {
-          submodule.features.forEach(feature => {
+      permissionTree.modules?.forEach(module => {
+        module.submodules?.forEach(submodule => {
+          submodule.features?.forEach(feature => {
             const actions = selectedPermissions[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
             Object.keys(actions).forEach(actionId => {
               overrides.push({ featureId: feature.id, actionId, allowed: actions[actionId] });

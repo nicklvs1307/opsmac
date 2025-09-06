@@ -223,8 +223,15 @@ class IamController {
       const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
 
       // Basic validation
-      if (!restaurantId || !entityType || !entityId || !status || !source) {
-        return res.status(400).json({ error: 'Bad Request: Missing required fields for entitlement.' });
+      const missingFields = [];
+      if (!restaurantId) missingFields.push('restaurantId');
+      if (!entityType) missingFields.push('entityType');
+      if (!entityId) missingFields.push('entityId');
+      if (!status) missingFields.push('status');
+      if (!source) missingFields.push('source');
+
+      if (missingFields.length > 0) {
+        return res.status(400).json({ error: `Bad Request: Missing required fields for entitlement: ${missingFields.join(', ')}.` });
       }
 
       const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({

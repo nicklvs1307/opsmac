@@ -26,7 +26,7 @@ class IamService {
         } else {
           console.log(`Cache stale for snapshot: ${cacheKey}, rebuilding.`);
         }
-      }
+    }
 
     const user = await models.User.findByPk(userId);
     const restaurant = await models.Restaurant.findByPk(restaurantId);

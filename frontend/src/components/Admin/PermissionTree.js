@@ -20,7 +20,7 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
   console.log('PermissionTree Debug: availableModules', availableModules);
 
   const renderTree = (modules) => {
-    return modules.map(moduleNode => (
+    return modules.map((moduleNode, index) => (
       <TreeItem
         key={moduleNode.id || `module-${index}`}
         nodeId={moduleNode.id ? moduleNode.id.toString() : `module-${index}`}

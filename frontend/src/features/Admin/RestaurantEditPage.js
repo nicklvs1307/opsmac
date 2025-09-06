@@ -33,9 +33,6 @@ const RestaurantEditPage = () => {
   const { data: restaurant, isLoading: isLoadingRestaurant, isError: isErrorRestaurant } = useQuery(['restaurant', restaurantId], () => fetchRestaurants(restaurantId), { enabled: !!restaurantId });
   const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(restaurantId, { enabled: !!restaurantId });
 
-  console.log('RestaurantEditPage Debug: permissionTree', permissionTree);
-  console.log('RestaurantEditPage Debug: can("admin:permissions", "update")', can('admin:permissions', 'update'));
-
   const { control, handleSubmit, reset, formState: { errors } } = useForm();
   const saveRestaurantMutation = useMutation(saveRestaurant, { onSuccess: () => queryClient.invalidateQueries(['restaurant', restaurantId]) });
   const setEntitlementMutation = useSetEntitlement();
@@ -183,10 +180,12 @@ const RestaurantEditPage = () => {
             <Grid item xs={12} sm={6}><Controller name="cuisine_type" control={control} render={({ field }) => <TextField {...field} label="Cuisine Type" fullWidth />} /></Grid>
             <Grid item xs={12} sm={6}><Controller name="description" control={control} render={({ field }) => <TextField {...field} label="Description" fullWidth multiline rows={4} />} /></Grid>
           </Grid>
-          <Box sx={{ mt: 3 }}>
-            <Typography variant="h5" gutterBottom>Enabled Modules</Typography>
-            <PermissionTree availableModules={permissionTree?.modules} selectedPermissions={selectedPermissions} onPermissionChange={handlePermissionChange} disabled={!can('entitlements', 'update')} />
-          </Box>
+          {permissionTree?.modules?.length > 0 && (
+            <Box sx={{ mt: 3 }}>
+              <Typography variant="h5" gutterBottom>Enabled Modules</Typography>
+              <PermissionTree availableModules={permissionTree?.modules} selectedPermissions={selectedPermissions} onPermissionChange={handlePermissionChange} disabled={!can('admin:permissions', 'update')} />
+            </Box>
+          )}
           <Box sx={{ mt: 4, display: 'flex', gap: 2 }}>
             <Button type="submit" variant="contained" color="primary" disabled={saveRestaurantMutation.isLoading || setEntitlementMutation.isLoading || !can('admin:restaurants', 'edit')}>Save Changes</Button>
             <Button variant="outlined" onClick={() => navigate('/admin/restaurants')}>Cancel</Button>

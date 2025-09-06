@@ -1,9 +1,9 @@
 const { models } = require('../../config/database');
-const { generateToken } = require('services/jwtService');
-const { UnauthorizedError, ForbiddenError, NotFoundError } = require('utils/errors');
+const { generateToken } = require('../../services/jwtService');
+const { UnauthorizedError, ForbiddenError, NotFoundError } = require('../../utils/errors');
 
-const { getModuleHierarchy } = require('services/menuService');
-const iamService = require('services/iamService'); // Import the new IAM service
+const { getModuleHierarchy } = require('../../services/menuService');
+const iamService = require('../../services/iamService'); // Import the new IAM service
 
 // Helper to build the menu hierarchy with access flags
 

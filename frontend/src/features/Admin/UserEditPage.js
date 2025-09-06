@@ -44,7 +44,12 @@ const UserEditPage = () => {
   const targetUser = allUsers?.find((u) => u.id === userId);
 
   const { data: allRoles, isLoading: isLoadingAllRoles, isError: isErrorAllRoles } = useGetRoles(selectedRestaurantId, { enabled: !!selectedRestaurantId });
-  const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(selectedRestaurantId, { enabled: !!selectedRestaurantId });
+  const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(selectedRestaurantId, { 
+    enabled: !!selectedRestaurantId,
+    onSuccess: (data) => {
+      console.log('UserEditPage - Fetched permissionTree:', data);
+    }
+  });
   const { data: fetchedUserOverrides, isLoading: isLoadingUserOverrides, isError: isErrorUserOverrides } = useGetUserPermissionOverrides(userId, selectedRestaurantId, {
     enabled: !!userId && !!selectedRestaurantId,
   });

@@ -136,6 +136,7 @@ const AdminRestaurantsPage = () => {
     try {
       // Send each entitlement update individually (or batch if backend supports)
       for (const entitlement of entitlementsToUpdate) {
+        console.log('AdminRestaurantsPage Debug: Sending entitlement:', entitlement);
         await setEntitlementMutation.mutateAsync({
           restaurantId: selectedRestaurantForModules.id,
           ...entitlement,

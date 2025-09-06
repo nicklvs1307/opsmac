@@ -16,5 +16,11 @@ module.exports = function override(config) {
     '@/assets': 'src/assets',
   })(config);
 
+  config.resolve.alias = {
+    ...config.resolve.alias,
+    '@mui/material': path.resolve(__dirname, 'node_modules/@mui/material/index.js'),
+    '@mui/icons-material': path.resolve(__dirname, 'node_modules/@mui/icons-material/index.js'),
+  };
+
   return config;
 };

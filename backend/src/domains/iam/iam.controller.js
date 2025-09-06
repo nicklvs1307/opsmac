@@ -223,7 +223,7 @@ class IamController {
       const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
 
       // Basic validation
-      if (!restaurantId || !entityType || !entityId || !status || !source || metadata === undefined) {
+      if (!restaurantId || !entityType || !entityId || !status || !source) {
         return res.status(400).json({ error: 'Bad Request: Missing required fields for entitlement.' });
       }
 

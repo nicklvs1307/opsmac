@@ -16,16 +16,17 @@ module.exports = function override(config) {
     '@/assets': 'src/assets',
   })(config);
 
-  config.resolve.alias = {
-    ...config.resolve.alias,
-    '@mui/material': path.resolve(__dirname, 'node_modules/@mui/material/index.js'),
-    '@mui/icons-material': path.resolve(__dirname, 'node_modules/@mui/icons-material/index.js'),
-  };
-
   // Remove ModuleScopePlugin
   config.resolve.plugins = config.resolve.plugins.filter(plugin => {
     return plugin.constructor.name !== 'ModuleScopePlugin';
   });
+
+  // Remove the specific aliases for @mui/material and @mui/icons-material
+  // as they might be interfering with sub-imports.
+  if (config.resolve.alias) {
+    delete config.resolve.alias['@mui/material'];
+    delete config.resolve.alias['@mui/icons-material'];
+  }
 
   return config;
 };

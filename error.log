@@ -1,51 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build            5.4s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           19.8s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.314 + npm run build
-0.643
-0.643 > feedeliza-plus@1.0.0 build
-0.643 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.643
-4.154 Creating an optimized production build...
-5.165 Failed to compile.
-5.165
-5.165 Invalid configuration object. Webpack has been initialized using a configuration object that does not match the API schema.
-5.165  - configuration.module.rules[1] should be one of these:
-5.165    ["..." | false | 0 | "" | null | undefined | object { assert?, compiler?, dependency?, descriptionData?, enforce?, exclude?, generator?, include?, issuer?, issuerLayer?, layer?, loader?, mimetype?, oneOf?, options?, parser?, realResource?, resolve?, resource?, resourceFragment?, resourceQuery?, rules?, scheme?, sideEffects?, test?, type?, use?, with? }, ...]
-5.165    -> A rule.
-5.165    Details:
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be an instance of RegExp.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be a string.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be an instance of function.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be an object:
-5.165       object { and?, not?, or? }
-5.165       -> Logic operators used in a condition matcher.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be an array:
-5.165       [RegExp | string | function | object { and?, not?, or? } | [(recursive), ...], ...]
-5.165       -> A list of rule conditions matching an absolute path.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be one of these:
-5.165       RegExp | string | function | object { and?, not?, or? } | [(recursive), ...]
-5.165       -> A condition matcher matching an absolute path.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be one of these:
-5.165       RegExp | string | function | object { and?, not?, or? } | [(recursive), ...]
-5.165       -> A rule condition matching an absolute path.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be an instance of RegExp.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be a string.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be an instance of function.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be an object:
-5.165       object { and?, not?, or? }
-5.165       -> Logic operators used in a condition matcher.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be an array:
-5.165       [RegExp | string | function | object { and?, not?, or? } | [(recursive), ...], ...]
-5.165       -> A list of rule conditions matching an absolute path.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be one of these:
-5.165       RegExp | string | function | object { and?, not?, or? } | [(recursive), ...]
-5.165       -> A condition matcher matching an absolute path.
-5.165     * configuration.module.rules[1].oneOf[4].include[0] should be one of these:
-5.165       RegExp | string | function | object { and?, not?, or? } | [(recursive), ...]
-5.165       -> A rule condition matching an absolute path.
-5.165
-5.165
+0.333 + npm run build
+0.636
+0.636 > feedeliza-plus@1.0.0 build
+0.636 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.636
+3.872 Creating an optimized production build...
+19.58 Failed to compile.
+19.58
+19.58 Module not found: Error: Can't resolve '@mui/icons-material/Search' in '/app/frontend/src/features/Rewards'
+19.58
+19.58
 ------
 Dockerfile.frontend:27
 --------------------

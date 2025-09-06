@@ -142,13 +142,13 @@ const RestaurantEditPage = () => {
       const entitlements = [];
       permissionTree.modules?.forEach(module => {
         const moduleState = selectedPermissions[module.id];
-        entitlements.push({ entityType: 'module', entityId: module.id, status: moduleState.checked ? 'active' : 'locked', source: 'admin_ui' });
+        entitlements.push({ entityType: 'module', entityId: module.id, status: moduleState.checked ? 'active' : 'locked', source: 'admin_ui', metadata: {} });
         module.submodules?.forEach(submodule => {
           const submoduleState = moduleState.submodules[submodule.id];
-          entitlements.push({ entityType: 'submodule', entityId: submodule.id, status: submoduleState.checked ? 'active' : 'locked', source: 'admin_ui' });
+          entitlements.push({ entityType: 'submodule', entityId: submodule.id, status: submoduleState.checked ? 'active' : 'locked', source: 'admin_ui', metadata: {} });
           submodule.features?.forEach(feature => {
             const featureState = submoduleState.features[feature.id];
-            entitlements.push({ entityType: 'feature', entityId: feature.id, status: featureState.checked ? 'active' : 'locked', source: 'admin_ui' });
+            entitlements.push({ entityType: 'feature', entityId: feature.id, status: featureState.checked ? 'active' : 'locked', source: 'admin_ui', metadata: {} });
           });
         });
       });

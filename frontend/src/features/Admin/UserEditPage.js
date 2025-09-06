@@ -193,8 +193,12 @@ const UserEditPage = () => {
         });
       });
 
-      await saveUserPermissionOverridesMutation.mutateAsync({ userId, restaurantId: selectedRestaurantId, overrides });
-      toast.success('User permissions updated successfully!');
+      if (selectedRestaurantId) {
+        await saveUserPermissionOverridesMutation.mutateAsync({ userId, restaurantId: selectedRestaurantId, overrides });
+        toast.success('User permissions updated successfully!');
+      } else {
+        toast.error('Restaurant ID is missing. Cannot save user permission overrides.');
+      }
 
       queryClient.invalidateQueries('adminUsers');
       queryClient.invalidateQueries(['userRoles', userId, selectedRestaurantId]);

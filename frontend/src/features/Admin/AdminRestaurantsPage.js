@@ -89,6 +89,7 @@ const AdminRestaurantsPage = () => {
           entityId: module.id,
           status: currentModuleState.checked ? 'active' : 'locked',
           source: 'admin_ui',
+          metadata: {},
         });
 
         module.submodules.forEach((submodule) => {
@@ -99,6 +100,7 @@ const AdminRestaurantsPage = () => {
               entityId: submodule.id,
               status: currentSubmoduleState.checked ? 'active' : 'locked',
               source: 'admin_ui',
+              metadata: {},
             });
 
             submodule.features.forEach((feature) => {
@@ -109,6 +111,7 @@ const AdminRestaurantsPage = () => {
                   entityId: feature.id,
                   status: currentFeatureState ? 'active' : 'locked',
                   source: 'admin_ui',
+                  metadata: {},
                 });
               }
             });
@@ -123,6 +126,7 @@ const AdminRestaurantsPage = () => {
               entityId: feature.id,
               status: currentFeatureState ? 'active' : 'locked',
               source: 'admin_ui',
+              metadata: {},
             });
           }
         });

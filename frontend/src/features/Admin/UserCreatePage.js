@@ -189,27 +189,31 @@ const UserCreatePage = () => {
         });
 
         if (overrides.length > 0) {
-          saveUserPermissionOverridesMutation.mutate(
-            {
-              userId: newUser.id,
-              restaurantId: selectedRestaurantId,
-              overrides,
-            },
-            {
-              onSuccess: () => {
-                toast.success('Permissões do usuário salvas com sucesso!');
-                queryClient.invalidateQueries([
-                  'userPermissionOverrides',
-                  newUser.id,
-                  selectedRestaurantId,
-                ]);
-                queryClient.invalidateQueries(['permissionTree', selectedRestaurantId]);
+          if (selectedRestaurantId) {
+            saveUserPermissionOverridesMutation.mutate(
+              {
+                userId: newUser.id,
+                restaurantId: selectedRestaurantId,
+                overrides,
               },
-              onError: (err) => {
-                toast.error(err.response?.data?.message || 'Erro ao salvar permissões do usuário.');
-              },
-            }
-          );
+              {
+                onSuccess: () => {
+                  toast.success('Permissões do usuário salvas com sucesso!');
+                  queryClient.invalidateQueries([
+                    'userPermissionOverrides',
+                    newUser.id,
+                    selectedRestaurantId,
+                  ]);
+                  queryClient.invalidateQueries(['permissionTree', selectedRestaurantId]);
+                },
+                onError: (err) => {
+                  toast.error(err.response?.data?.message || 'Erro ao salvar permissões do usuário.');
+                },
+              }
+            );
+          } else {
+            toast.error('Restaurant ID is missing. Cannot save user permission overrides.');
+          }
         }
       }
 

@@ -184,7 +184,7 @@ const UserEditPage = () => {
     }
 
     // Handle role assignment/removal
-    const currentRoleId = targetUser?.role?.id; // Assuming user object has role.id
+    const currentRoleId = targetUser?.roles?.[0]?.id; // Get current role ID from the first role in the array
     const newRoleId = data.roleId;
 
     console.log('UserEditPage Debug: selectedRestaurantId:', selectedRestaurantId);
@@ -193,21 +193,35 @@ const UserEditPage = () => {
 
     if (currentRoleId !== newRoleId) {
       try {
-        if (currentRoleId) {
+        if (currentRoleId && !newRoleId) { // User had a role, now wants no role
           await removeUserRoleMutation.mutateAsync({
             userId,
             restaurantId: selectedRestaurantId,
             roleId: currentRoleId,
           });
-        }
-        if (newRoleId) {
+          toast.success('Função do usuário removida com sucesso!');
+        } else if (!currentRoleId && newRoleId) { // User had no role, now wants a role
           await assignUserRoleMutation.mutateAsync({
             userId,
             restaurantId: selectedRestaurantId,
             roleId: newRoleId,
           });
+          toast.success('Função do usuário atribuída com sucesso!');
+        } else if (currentRoleId && newRoleId) { // User changing from one role to another
+          await removeUserRoleMutation.mutateAsync({
+            userId,
+            restaurantId: selectedRestaurantId,
+            roleId: currentRoleId,
+          });
+          await assignUserRoleMutation.mutateAsync({
+            userId,
+            restaurantId: selectedRestaurantId,
+            roleId: newRoleId,
+          });
+          toast.success('Função do usuário atualizada com sucesso!');
         }
-        toast.success('Função do usuário atualizada com sucesso!');
+        // If currentRoleId and newRoleId are both empty, or both are the same and not empty, do nothing.
+
         queryClient.invalidateQueries(['userRoles', userId, selectedRestaurantId]);
         queryClient.invalidateQueries(['permissionTree', selectedRestaurantId]); // Invalidate permission tree
       } catch (err) {

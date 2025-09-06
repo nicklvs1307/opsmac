@@ -1,4 +1,3 @@
-edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
 AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
@@ -12,8 +11,13 @@ O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
 O XHR terminou de carregar: GET "<URL>".
-main.33555688.js:2 [Violation] 'message' handler took 313ms
-[Violation] Forced reflow while executing JavaScript took 52ms
+O XHR terminou de carregar: GET "<URL>".
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] Forced reflow while executing JavaScript took 59ms
 ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
 ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
@@ -27,56 +31,136 @@ ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin
 ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
 ProtectedRoute.js:19 ProtectedRoute Debug: featureKey users
 ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
-react-dom.production.min.js:188 TypeError: Cannot read properties of undefined (reading 'forEach')
-    at UserEditPage.js:127:25
-    at Array.forEach (<anonymous>)
-    at UserEditPage.js:122:30
-    at nl (react-dom.production.min.js:243:332)
-    at _c (react-dom.production.min.js:285:111)
-    at lc (react-dom.production.min.js:272:185)
-    at qa (react-dom.production.min.js:127:105)
-    at react-dom.production.min.js:282:470
-    at jc (react-dom.production.min.js:280:398)
-    at ac (react-dom.production.min.js:269:269)
-ds @ react-dom.production.min.js:188
-o.componentDidCatch.r.callback @ react-dom.production.min.js:189
-Uo @ react-dom.production.min.js:156
-bl @ react-dom.production.min.js:260
-xl @ react-dom.production.min.js:259
-yl @ react-dom.production.min.js:258
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-hooks.tsx:631 React Router caught the following error during render TypeError: Cannot read properties of undefined (reading 'forEach')
-    at UserEditPage.js:127:25
-    at Array.forEach (<anonymous>)
-    at UserEditPage.js:122:30
-    at nl (react-dom.production.min.js:243:332)
-    at _c (react-dom.production.min.js:285:111)
-    at lc (react-dom.production.min.js:272:185)
-    at qa (react-dom.production.min.js:127:105)
-    at react-dom.production.min.js:282:470
-    at jc (react-dom.production.min.js:280:398)
-    at ac (react-dom.production.min.js:269:269) {componentStack: '\n    at o6 (https://feedelizapro.towersfy.com/stat…towersfy.com/static/js/main.33555688.js:2:486879)'}
-componentDidCatch @ hooks.tsx:631
-o.componentDidCatch.r.callback @ react-dom.production.min.js:189
-Uo @ react-dom.production.min.js:156
-bl @ react-dom.production.min.js:260
-xl @ react-dom.production.min.js:259
-yl @ react-dom.production.min.js:258
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-main.33555688.js:2 [Violation] 'message' handler took 2431ms
+edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+main.94e62953.js:2 [Violation] 'submit' handler took 1065ms
+main.94e62953.js:2 [Violation] 'submit' handler took 899ms
+UserEditPage.js:190 UserEditPage Debug: selectedRestaurantId: 8067995c-7225-43ab-86c1-6bd8cec6040e
+UserEditPage.js:191 UserEditPage Debug: currentRoleId: undefined
+UserEditPage.js:192 UserEditPage Debug: newRoleId: c50f28c0-ead0-458f-b080-86cf00113a54
+adminService.js:23 O XHR terminou de carregar: PUT "https://feedelizaapi.towersfy.com/api/admin/users/e8efacd5-d284-4b37-8808-9df45f27304c".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+b1 @ adminService.js:23
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:178
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+[Violation] Forced reflow while executing JavaScript took 30ms
+iamQueries.js:80  POST https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles?restaurantId=8067995c-7225-43ab-86c1-6bd8cec6040e 409 (Conflict)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:80
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:204
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+UserEditPage.js:204 xt {message: 'Request failed with status code 409', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ mutation.js:106
+Promise.catch
+t.execute @ mutation.js:102
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:204
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+iamQueries.js:80 Falha ao carregar XHR: POST "https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles?restaurantId=8067995c-7225-43ab-86c1-6bd8cec6040e".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+(anônimo) @ Axios.js:226
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:80
+fn @ mutation.js:132
+c @ retryer.js:95
+u @ retryer.js:156
+t.executeMutation @ mutation.js:126
+(anônimo) @ mutation.js:86
+Promise.then
+t.execute @ mutation.js:85
+r.mutate @ mutationObserver.js:83
+(anônimo) @ UserEditPage.js:204
+await in (anônimo)
+(anônimo) @ createFormControl.ts:1260
+await in (anônimo)
+Te @ react-dom.production.min.js:54
+We @ react-dom.production.min.js:54
+(anônimo) @ react-dom.production.min.js:55
+Dn @ react-dom.production.min.js:105
+zn @ react-dom.production.min.js:106
+(anônimo) @ react-dom.production.min.js:117
+cc @ react-dom.production.min.js:273
+Me @ react-dom.production.min.js:52
+Un @ react-dom.production.min.js:109
+Kt @ react-dom.production.min.js:74
+Ht @ react-dom.production.min.js:73
+
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/roles?restaurantId=8067995c-7225-43ab-86c1-6bd8cec6040e
+Método da solicitação
+POST
+Código de status
+409 Conflict
+{"error":"Conflict: User already has this role."}

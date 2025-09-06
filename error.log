@@ -1,29 +1,491 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          211.6s
-------
- > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.343 + npm run build
-0.625
-0.625 > feedeliza-plus@1.0.0 build
-0.625 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.625
-4.116 Creating an optimized production build...
-210.0 Failed to compile.
-210.0
-210.0 [eslint]
-210.0 src/components/Admin/PermissionTree.js
-210.0   Line 25:41:  'index' is not defined  no-undef
-210.0   Line 26:70:  'index' is not defined  no-undef
-210.0
-210.0 Search for the keywords to learn more about each error.
-210.0
-210.0
-------
-Dockerfile.frontend:27
---------------------
-  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
-  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  28 |
-  29 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+https://feedelizapro.towersfy.com/admin/restaurants/f215e84e-2ad1-43c1-8a5f-01b74f847aa7/edit
+edit:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+AuthContext.js:36 AuthContext Debug: User object after SET_USER: {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+AuthContext.js:81 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/auth/me".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ AuthContext.js:81
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+main.73ca7d69.js:2 [Violation] 'message' handler took 301ms
+[Violation] Forced reflow while executing JavaScript took 50ms
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey undefined
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey undefined
+ProtectedRoute.js:29 ProtectedRoute Debug: Super Admin bypass triggered.
+ProtectedRoute.js:15 ProtectedRoute Debug: isAuthenticated true
+ProtectedRoute.js:16 ProtectedRoute Debug: user {id: '6c76bff1-e1e7-483a-854e-734e1cfe8b92', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+ProtectedRoute.js:17 ProtectedRoute Debug: user.permissionSnapshot {isSuperAdmin: true, permissions: {…}}
+ProtectedRoute.js:18 ProtectedRoute Debug: user.permissionSnapshot.isSuperAdmin true
+ProtectedRoute.js:19 ProtectedRoute Debug: featureKey restaurants
+ProtectedRoute.js:20 ProtectedRoute Debug: actionKey update
+adminService.js:12 DEBUG: fetchRestaurants - response.data: {id: 'f215e84e-2ad1-43c1-8a5f-01b74f847aa7', name: 'Towersfy', slug: 'towersfy', description: '1111', address: 'Rua Avenida Brasil', …}
+PermissionTree.js:20 PermissionTree Debug: availableModules (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+adminService.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/admin/restaurants/f215e84e-2ad1-43c1-8a5f-01b74f847aa7".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ adminService.js:11
+X5.enabled @ RestaurantEditPage.js:33
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+iamQueries.js:11 O XHR terminou de carregar: GET "https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=f215e84e-2ad1-43c1-8a5f-01b74f847aa7".
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ iamQueries.js:11
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+react-dom.production.min.js:188 Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+hooks.tsx:631 React Router caught the following error during render Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398) {componentStack: '\n    at https://feedelizapro.towersfy.com/static/j…towersfy.com/static/js/main.73ca7d69.js:2:488549)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+react-dom.production.min.js:188 Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+hooks.tsx:631 React Router caught the following error during render Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398) {componentStack: '\n    at https://feedelizapro.towersfy.com/static/j…towersfy.com/static/js/main.73ca7d69.js:2:488549)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+react-dom.production.min.js:188 Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+hooks.tsx:631 React Router caught the following error during render Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398) {componentStack: '\n    at https://feedelizapro.towersfy.com/static/j…towersfy.com/static/js/main.73ca7d69.js:2:488549)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+react-dom.production.min.js:188 Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+hooks.tsx:631 React Router caught the following error during render Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398) {componentStack: '\n    at https://feedelizapro.towersfy.com/static/j…towersfy.com/static/js/main.73ca7d69.js:2:488549)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+react-dom.production.min.js:188 Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+hooks.tsx:631 React Router caught the following error during render Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398) {componentStack: '\n    at https://feedelizapro.towersfy.com/static/j…towersfy.com/static/js/main.73ca7d69.js:2:488549)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+react-dom.production.min.js:188 Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+hooks.tsx:631 React Router caught the following error during render Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398) {componentStack: '\n    at https://feedelizapro.towersfy.com/static/j…towersfy.com/static/js/main.73ca7d69.js:2:488549)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+react-dom.production.min.js:188 Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+hooks.tsx:631 React Router caught the following error during render Error: MUI X: The Tree View component requires all items to have a unique `id` property.
+Alternatively, you can use the `getItemId` prop to specify a custom id for each item.
+Two items were provided with the same id in the `items` prop: "undefined"
+    at useTreeViewJSXItems.js:25:13
+    at Object.insertJSXItem (useEventCallback.js:18:11)
+    at useTreeViewJSXItems.js:129:21
+    at nl (react-dom.production.min.js:243:332)
+    at xl (react-dom.production.min.js:260:147)
+    at bl (react-dom.production.min.js:259:446)
+    at bl (react-dom.production.min.js:259:343)
+    at yl (react-dom.production.min.js:258:431)
+    at react-dom.production.min.js:282:96
+    at jc (react-dom.production.min.js:280:398) {componentStack: '\n    at https://feedelizapro.towersfy.com/static/j…towersfy.com/static/js/main.73ca7d69.js:2:488549)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+main.73ca7d69.js:2 [Violation] 'message' handler took 542ms
+[Violation] Forced reflow while executing JavaScript took 52ms

@@ -22,8 +22,8 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
   const renderTree = (modules) => {
     return modules.map(moduleNode => (
       <TreeItem
-        key={moduleNode.id}
-        nodeId={moduleNode.id.toString()}
+        key={moduleNode.id || `module-${index}`}
+        nodeId={moduleNode.id ? moduleNode.id.toString() : `module-${index}`}
         label={
           <FormControlLabel
             control={
@@ -38,10 +38,10 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
           />
         }
       >
-                {moduleNode.submodules?.map(submoduleNode => (
+                {moduleNode.submodules?.map((submoduleNode, subIndex) => (
           <TreeItem
-            key={submoduleNode.id}
-            nodeId={`${moduleNode.id}-${submoduleNode.id}`}
+            key={submoduleNode.id || `submodule-${moduleNode.id}-${subIndex}`}
+            nodeId={submoduleNode.id ? `${moduleNode.id}-${submoduleNode.id}` : `submodule-${moduleNode.id}-${subIndex}`}
             label={
               <FormControlLabel
                 control={
@@ -56,10 +56,10 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
               />
             }
           >
-                        {submoduleNode.features?.map(featureNode => (
+                        {submoduleNode.features?.map((featureNode, featureIndex) => (
               <TreeItem
-                key={featureNode.id}
-                nodeId={`${moduleNode.id}-${submoduleNode.id}-${featureNode.id}`}
+                key={featureNode.id || `feature-${moduleNode.id}-${submoduleNode.id}-${featureIndex}`}
+                nodeId={featureNode.id ? `${moduleNode.id}-${submoduleNode.id}-${featureNode.id}` : `feature-${moduleNode.id}-${submoduleNode.id}-${featureIndex}`}
                 label={featureNode.name}
               >
                 {/* Actions will be re-added later */}

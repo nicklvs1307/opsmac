@@ -169,6 +169,11 @@ class IamController {
       const { userId } = req.params;
       const { restaurantId, overrides } = req.body; // Get restaurantId and overrides from body
 
+      // Basic validation
+      if (!restaurantId || !Array.isArray(overrides)) {
+        return res.status(400).json({ error: 'Bad Request: restaurantId and overrides array are required.' });
+      }
+
       // Clear existing overrides for the user in this restaurant to simplify logic
       await models.UserPermissionOverride.destroy({
         where: { user_id: userId, restaurant_id: restaurantId }
@@ -214,8 +219,12 @@ class IamController {
   // --- Restaurant Entitlements ---
   async setRestaurantEntitlement(req, res) {
     try {
-      const { restaurantId } = req.body;
-      const { entityType, entityId, status, source, metadata } = req.body;
+      const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
+
+      // Basic validation
+      if (!restaurantId || !entityType || !entityId || !status || !source || metadata === undefined) {
+        return res.status(400).json({ error: 'Bad Request: Missing required fields for entitlement.' });
+      }
 
       const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({
         where: { restaurant_id: restaurantId, entity_type: entityType, entity_id: entityId },

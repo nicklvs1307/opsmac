@@ -46,7 +46,7 @@ const iamRoutes = require('../src/api/routes/iam');
 module.exports = [
     { path: '/api/auth', router: authRoutes },
     { path: '/api/feedback', router: feedbackRoutes },
-    { path: '/api/dashboard/:restaurantId', router: dashboardRoutes, middleware: [auth, checkRestaurantOwnership] }, // Modified this line
+    { path: '/api/dashboard/:restaurantId', router: dashboardRoutes },
     { path: '/api/rewards', router: rewardsRoutes },
     { path: '/api/qrcode', router: qrcodeRoutes },
     { path: '/api/whatsapp', router: whatsappRoutes },

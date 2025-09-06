@@ -1,4 +1,6 @@
 const express = require('express');
+const { auth } = require('../../middleware/authMiddleware');
+const { checkRestaurantOwnership } = require('../../middleware/checkRestaurantOwnershipMiddleware');
 const requirePermission = require('../../middleware/requirePermission');
 const dashboardController = require('./dashboard.controller');
 const {
@@ -9,10 +11,14 @@ const {
 
 const router = express.Router();
 
-// As rotas aqui não precisam do :restaurantId, auth e checkRestaurantOwnership
-// pois serão aplicados no index.js ao montar o router principal
+// Aplicando middlewares na ordem correta
+// 1. Autenticação
+router.use(auth);
 
-// Adicionamos a verificação de permissão para todas as rotas de dashboard
+// 2. Verificar posse do restaurante
+router.use(checkRestaurantOwnership);
+
+// 3. Verificar permissão específica para o dashboard
 router.use(requirePermission('dashboard', 'read'));
 
 router.get('/overview', getDashboardOverviewValidation, dashboardController.getDashboardOverview);

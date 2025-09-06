@@ -117,49 +117,49 @@ const UserEditPage = () => {
   }, [targetUser, reset]);
 
   useEffect(() => {
-    if (permissionTree) { // Only depend on permissionTree, as it contains effective permissions
+    if (permissionTree) {
       const initialSelected = {};
-      permissionTree.modules.forEach((module) => {
+      permissionTree.modules?.forEach((module) => {
         const moduleFeatures = {};
         const moduleSubmodules = {};
 
         // Process features directly under the module
-        module.features.forEach((feature) => {
+        module.features?.forEach((feature) => {
           const featureActions = {};
-          feature.actions.forEach((action) => {
-            featureActions[action.id] = action.allowed; // Use action.allowed directly
+          feature.actions?.forEach((action) => {
+            featureActions[action.id] = action.allowed;
           });
           moduleFeatures[feature.id] = {
-            checked: Object.values(featureActions).some(Boolean), // Check if any action is allowed
-            indeterminate: false, // Will be updated by PermissionTree's internal logic
+            checked: Object.values(featureActions).some(Boolean),
+            indeterminate: false,
             actions: featureActions,
           };
         });
 
         // Process submodules and their features
-        module.submodules.forEach((submodule) => {
+        module.submodules?.forEach((submodule) => {
           const submoduleFeatures = {};
-          submodule.features.forEach((feature) => {
+          submodule.features?.forEach((feature) => {
             const featureActions = {};
-            feature.actions.forEach((action) => {
-              featureActions[action.id] = action.allowed; // Use action.allowed directly
+            feature.actions?.forEach((action) => {
+              featureActions[action.id] = action.allowed;
             });
             submoduleFeatures[feature.id] = {
-              checked: Object.values(featureActions).some(Boolean), // Check if any action is allowed
-              indeterminate: false, // Will be updated by PermissionTree's internal logic
+              checked: Object.values(featureActions).some(Boolean),
+              indeterminate: false,
               actions: featureActions,
             };
           });
           moduleSubmodules[submodule.id] = {
-            checked: Object.values(submoduleFeatures).some(f => f.checked || f.indeterminate), // Check if any feature in submodule is allowed
-            indeterminate: false, // Will be updated by PermissionTree's internal logic
+            checked: Object.values(submoduleFeatures).some(f => f.checked || f.indeterminate),
+            indeterminate: false,
             features: submoduleFeatures,
           };
         });
 
         initialSelected[module.id] = {
-          checked: Object.values(moduleFeatures).some(f => f.checked || f.indeterminate) || Object.values(moduleSubmodules).some(sm => sm.checked || sm.indeterminate), // Check if any feature or submodule is allowed
-          indeterminate: false, // Will be updated by PermissionTree's internal logic
+          checked: Object.values(moduleFeatures).some(f => f.checked || f.indeterminate) || Object.values(moduleSubmodules).some(sm => sm.checked || sm.indeterminate),
+          indeterminate: false,
           features: moduleFeatures,
           submodules: moduleSubmodules,
         };

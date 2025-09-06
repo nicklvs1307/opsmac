@@ -197,4 +197,3 @@ const RoleManagement = () => {
 };
 
 export default RoleManagement;
-ent;

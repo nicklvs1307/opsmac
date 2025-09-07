@@ -65,19 +65,17 @@ class EntitlementService {
       await cacheService.delByPattern(`perm_snapshot:${restaurantId}:*`);
       console.log(`[EntitlementService] Cleared permission snapshots for restaurant ${restaurantId}.`);
     } catch (error) {
-      console.error(`[EntitlementService] Error in setEntitlements: ${error.name} - ${error.message} - Details:`, error.errors, error); // Added error object
+      console.error(`[EntitlementService] Error in setEntitlements: ${error.name} - ${error.message} - Details:`, error.errors, error);
       console.log(`[EntitlementService] Rolling back transaction.`);
-      await transaction.rollback();
+      if (transaction) { // Defensive check
+        await transaction.rollback();
+      } else {
+        console.error(`[EntitlementService] Transaction object was undefined, cannot rollback.`);
+      }
       console.log(`[EntitlementService] Transaction rolled back.`);
-      throw error; // This throw should cause the frontend mutation to fail
+      throw error;
     }
-    } catch (error) {
-      console.error(`[EntitlementService] Error in setEntitlements: ${error.name} - ${error.message}`, error.errors);
-      console.log(`[EntitlementService] Rolling back transaction.`);
-      await transaction.rollback();
-      console.log(`[EntitlementService] Transaction rolled back.`);
-      throw error; // This throw should cause the frontend mutation to fail
-    }
+    
   }
 }
 

@@ -57,7 +57,19 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
               <TreeItem
                 key={featureNode.id || `feature-${moduleNode.id}-${submoduleNode.id}-${featureIndex}`}
                 itemId={featureNode.id ? `${moduleNode.id}-${submoduleNode.id}-${featureNode.id}` : `feature-${moduleNode.id}-${submoduleNode.id}-${featureIndex}`}
-                label={featureNode.name}
+                label={
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.features[featureNode.id]?.checked || false}
+                        indeterminate={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.features[featureNode.id]?.indeterminate || false}
+                        onChange={(e) => onPermissionChange([moduleNode.id, submoduleNode.id, featureNode.id], e.target.checked)}
+                        disabled={disabled}
+                      />
+                    }
+                    label={featureNode.name}
+                  />
+                }
               >
                 {/* Actions will be re-added later */}
               </TreeItem>

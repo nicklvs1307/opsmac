@@ -92,14 +92,184 @@ class IamService {
 
     const allActions = await models.Action.findAll(); // Get all possible actions ONCE
 
+    async buildSnapshot(restaurantId, userId) {
+    console.log(`DEBUG: buildSnapshot called for userId: ${userId}, restaurantId: ${restaurantId}`); // ADD THIS LOG
+    const cacheKey = `perm_snapshot:${restaurantId}:${userId}`;
+    
+    const cachedSnapshot = await cacheService.get(cacheKey);
+    if (cachedSnapshot) {
+      const snapshot = cachedSnapshot;
+        // Verify perm_version to ensure cache is not stale
+        const restaurant = await models.Restaurant.findByPk(restaurantId);
+        if (restaurant && snapshot.permVersion === restaurant.perm_version) {
+          // console.log(`Cache hit for snapshot: ${cacheKey}`);
+          return snapshot;
+        } else {
+          // console.log(`Cache stale for snapshot: ${cacheKey}, rebuilding.`);
+        }
+    }
+
+    const user = await models.User.findByPk(userId);
+    const restaurant = await models.Restaurant.findByPk(restaurantId);
+
+    if (!user || !restaurant) {
+      return { error: 'User or Restaurant not found' };
+    }
+
+    const isSuperAdmin = user.isSuperadmin;
+    const isOwner = await models.UserRestaurant.findOne({
+      where: { userId: userId, restaurantId: restaurantId, isOwner: true },
+    });
+
+    // Get all modules, submodules, features, and actions
+    const allModules = await models.Module.findAll({
+      include: [{
+        model: models.Submodule,
+        as: 'submodules',
+        include: [{
+          model: models.Feature,
+          as: 'features',
+        }],
+      }],
+      order: [['sortOrder', 'ASC']],
+    });
+
+    // Get entitlements for the restaurant
+    const entitlements = await models.RestaurantEntitlement.findAll({
+      where: { restaurant_id: restaurantId },
+    });
+    const entitlementMap = new Map();
+    entitlements.forEach(e => entitlementMap.set(`${e.entityType}-${e.entityId}`, e.status));
+
+    // Get user roles and their permissions
+    const userRoles = await models.UserRole.findAll({
+      where: { userId: userId, restaurantId: restaurantId },
+      include: [{
+        model: models.Role,
+        as: 'role',
+        include: [{
+          model: models.RolePermission,
+          as: 'permissions',
+          include: [{ model: models.Feature, as: 'feature' }, { model: models.Action, as: 'action' }],
+        }],
+      }],
+    });
+
+    const rolePermissionsMap = new Map(); // Map: featureId-actionId -> allowed
+    userRoles.forEach(ur => {
+      ur.role.permissions.forEach(rp => {
+        rolePermissionsMap.set(`${rp.featureId}-${rp.actionId}`, rp.allowed);
+      });
+    });
+
+    // Get user overrides
+    const userOverrides = await models.UserPermissionOverride.findAll({
+      where: { userId: userId, restaurantId: restaurantId },
+    });
+    const userOverrideMap = new Map(); // Map: featureId-actionId -> allowed
+    userOverrides.forEach(uo => {
+      userOverrideMap.set(`${uo.featureId}-${uo.actionId}`, uo.allowed);
+    });
+
+    const allActions = await models.Action.findAll(); // Get all possible actions ONCE
+
     const snapshot = {
       restaurantId: restaurant.id,
       userId: user.id,
-      permVersion: restaurant.permVersion,
+      permVersion: restaurant.perm_version,
       isSuperAdmin: isSuperAdmin,
       isOwner: !!isOwner,
       modules: [],
     };
+
+    for (const module of allModules) {
+      const moduleStatus = entitlementMap.get(`module-${module.id}`) || 'locked'; // Default to locked
+      const moduleLocked = moduleStatus === 'locked' || moduleStatus === 'hidden';
+
+      const moduleData = {
+        id: module.id,
+        key: module.key,
+        name: module.name,
+        description: module.description,
+        visible: module.visible,
+        locked: moduleLocked,
+        status: moduleStatus,
+        submodules: [],
+      };
+
+      for (const submodule of module.submodules) {
+        const submoduleStatus = entitlementMap.get(`submodule-${submodule.id}`) || 'locked'; // Default to locked
+        const submoduleLocked = moduleLocked || submoduleStatus === 'locked' || submoduleStatus === 'hidden';
+
+        const submoduleData = {
+          id: submodule.id,
+          key: submodule.key,
+          name: submodule.name,
+          description: submodule.description,
+          locked: submoduleLocked,
+          status: submoduleStatus,
+          features: [],
+        };
+
+        for (const feature of submodule.features) {
+          const featureStatus = entitlementMap.get(`feature-${feature.id}`) || 'locked'; // Default to locked
+          const featureLocked = submoduleLocked || featureStatus === 'locked' || featureStatus === 'hidden';
+
+          const featureData = {
+            id: feature.id,
+            key: feature.key,
+            name: feature.name,
+            description: feature.description,
+            flags: feature.flags,
+            locked: featureLocked,
+            status: featureStatus,
+            actions: [],
+          };
+
+          // Determine allowed actions for this feature
+          for (const action of allActions) {
+            let allowed = false;
+            let reason = 'default-deny';
+
+            // Order of precedence: user override > role permission > default deny
+            const userOverrideAllowed = userOverrideMap.get(`${feature.id}-${action.id}`);
+            if (userOverrideAllowed !== undefined) {
+              allowed = userOverrideAllowed;
+              reason = userOverrideAllowed ? 'user-allow' : 'user-deny';
+            } else {
+              const rolePermissionAllowed = rolePermissionsMap.get(`${feature.id}-${action.id}`);
+              if (rolePermissionAllowed !== undefined) {
+                allowed = rolePermissionAllowed;
+                reason = rolePermissionAllowed ? 'role-allow' : 'role-deny';
+              }
+            }
+
+            // Superadmin and Owner bypass
+            if (isSuperAdmin || (isOwner && !featureLocked)) { // Owner bypasses if feature is not locked by entitlement
+                allowed = true;
+                reason = isSuperAdmin ? 'superadmin' : 'owner';
+            }
+
+            featureData.actions.push({
+              id: action.id,
+              key: action.key,
+              allowed: allowed && !featureLocked, // A locked feature means no actions are allowed
+              reason: featureLocked ? 'entitlement-locked' : reason,
+            });
+          }
+          submoduleData.features.push(featureData);
+        }
+        moduleData.submodules.push(submoduleData);
+      }
+      snapshot.modules.push(moduleData);
+    }
+
+    await cacheService.set(cacheKey, snapshot, 86400); // Cache for 24 hours
+
+    // console.log(`DEBUG: Final permission snapshot for user ${userId} in restaurant ${restaurantId}:`, JSON.stringify(snapshot, null, 2));
+    console.log(`DEBUG: Returning snapshot for userId: ${userId}, restaurantId: ${restaurantId}. isSuperAdmin: ${snapshot.isSuperAdmin}, isOwner: ${snapshot.isOwner}`); // ADD THIS LOG
+    return snapshot;
+  }
 
     for (const module of allModules) {
       const moduleStatus = entitlementMap.get(`module-${module.id}`) || 'locked'; // Default to locked

@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }) => {
           token: token, // Ensure token is part of user object
           permissionSnapshot: permissionSnapshot,
         };
-
+        console.log('DEBUG: Complete user object after login:', JSON.stringify(completeUser, null, 2)); // ADD THIS LOG
         // Dispatch the complete user object in one go
         dispatch({ type: AUTH_ACTIONS.SET_USER, payload: completeUser });
 

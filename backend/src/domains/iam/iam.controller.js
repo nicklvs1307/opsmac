@@ -235,17 +235,13 @@ class IamController {
         return res.status(400).json({ error: `Bad Request: Missing required fields for entitlement: ${missingFields.join(', ')}.`, missingFields: missingFields });
       }
 
-      console.log(`DEBUG: Processing entitlement - restaurantId: ${restaurantId}, entityType: ${entityType}, entityId: ${entityId}, status: ${status}`);
       const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({
         where: { restaurant_id: restaurantId, entity_type: entityType, entity_id: entityId },
         defaults: { status, source, metadata },
       });
 
       if (!created) {
-        console.log(`DEBUG: Updating existing entitlement ${entitlement.id} with status: ${status}`);
         await entitlement.update({ status, source, metadata });
-      } else {
-        console.log(`DEBUG: Created new entitlement ${entitlement.id} with status: ${status}`);
       }
       await iamService.bumpPermVersion(restaurantId);
       await createAuditLog(req.user.id, restaurantId, created ? 'CREATE' : 'UPDATE', 'RestaurantEntitlement', entitlement.id, { entityType, entityId, status });

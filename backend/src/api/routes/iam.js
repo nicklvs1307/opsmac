@@ -610,9 +610,8 @@ router.get('/users/:id/overrides', requirePermission('users.manage', 'read'), as
  */
 router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), async (req, res) => {
   const actorUserId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const { restaurantId, overrides } = req.body; // Get restaurantId and overrides from body
   const { id: targetUserId } = req.params;
-  const { overrides } = req.body;
 
   if (!restaurantId || !overrides || !Array.isArray(overrides)) {
     return res.status(400).json({ error: 'Bad Request: restaurantId and overrides array are required.' });

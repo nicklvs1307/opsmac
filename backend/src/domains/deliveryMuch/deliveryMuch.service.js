@@ -43,7 +43,7 @@ async function handleOrderCreated(orderData) {
     deliveryType: orderData.delivery_type,
     notes: orderData.notes,
   });
-  console.log(`Novo pedido Delivery Much ${orderData.id} registrado para o restaurante ${localRestaurant.name}.`);
+  // console.log(`Novo pedido Delivery Much ${orderData.id} registrado para o restaurante ${localRestaurant.name}.`);
 }
 
 // Moved from backend/services/deliveryMuchService.js
@@ -51,7 +51,7 @@ async function handleOrderUpdated(orderData) {
   const order = await models.Order.findOne({ where: { externalOrderId: orderData.id, platform: 'delivery_much' } });
   if (order) {
     await order.update({ status: orderData.status });
-    console.log(`Status do pedido Delivery Much ${orderData.id} atualizado para ${orderData.status}.`);
+    // console.log(`Status do pedido Delivery Much ${orderData.id} atualizado para ${orderData.status}.`);
   } else {
     console.warn(`Pedido Delivery Much ${orderData.id} não encontrado para atualização de status.`);
   }
@@ -100,7 +100,7 @@ exports.checkDeliveryMuchModuleEnabled = async (restaurantIdFromPayload, userId)
 };
 
 exports.handleWebhook = async (event) => {
-  console.log('Webhook Delivery Much recebido:', JSON.stringify(event, null, 2));
+  // console.log('Webhook Delivery Much recebido:', JSON.stringify(event, null, 2));
   await processWebhookEvent(event); // Call the integrated function
 };
 

@@ -43,7 +43,7 @@ async function handleOrderCreated(orderData) {
     delivery_type: orderData.delivery_type,
     notes: orderData.notes,
   });
-  console.log(`Novo pedido Uai Rango ${orderData.id} registrado para o restaurante ${localRestaurant.name}.`);
+  // console.log(`Novo pedido Uai Rango ${orderData.id} registrado para o restaurante ${localRestaurant.name}.`);
 }
 
 // Moved from backend/services/uaiRangoService.js
@@ -51,7 +51,7 @@ async function handleOrderUpdated(orderData) {
   const order = await models.Order.findOne({ where: { external_order_id: orderData.id, platform: 'uai_rango' } });
   if (order) {
     await order.update({ status: orderData.status });
-    console.log(`Status do pedido Uai Rango ${orderData.id} atualizado para ${orderData.status}.`);
+    // console.log(`Status do pedido Uai Rango ${orderData.id} atualizado para ${orderData.status}.`);
   } else {
     console.warn(`Pedido Uai Rango ${orderData.id} não encontrado para atualização de status.`);
   }
@@ -100,7 +100,7 @@ exports.checkUaiRangoModuleEnabled = async (restaurantIdFromPayload, userId) => 
 };
 
 exports.handleWebhook = async (event) => {
-  console.log('Webhook Uai Rango recebido:', JSON.stringify(event, null, 2));
+  // console.log('Webhook Uai Rango recebido:', JSON.stringify(event, null, 2));
   await processWebhookEventInternal(event);
 };
 

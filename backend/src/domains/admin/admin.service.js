@@ -173,7 +173,7 @@ exports.createRestaurant = async (restaurantData) => {
     { restaurantId: restaurant.id },
     { where: { id: ownerId } }
   );
-  console.log('User after restaurantId update:', await models.User.findByPk(ownerId));
+  // console.log('User after restaurantId update:', await models.User.findByPk(ownerId));
 
   return restaurant;
 };

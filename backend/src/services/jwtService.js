@@ -12,13 +12,13 @@ const { UnauthorizedError } = require('utils/errors');
 
 const generateToken = (userId) => {
   let secret;
-  console.log('NODE_ENV:', process.env.NODE_ENV);
-  console.log('JWT_SECRET_FILE:', process.env.JWT_SECRET_FILE);
+  // console.log('NODE_ENV:', process.env.NODE_ENV);
+  // console.log('JWT_SECRET_FILE:', process.env.JWT_SECRET_FILE);
 
   if (process.env.NODE_ENV === 'production' && process.env.JWT_SECRET_FILE) {
     try {
       secret = fs.readFileSync(process.env.JWT_SECRET_FILE, 'utf8').trim();
-      console.log('Secret read from file. Length:', secret.length);
+      // console.log('Secret read from file. Length:', secret.length);
       if (secret.length === 0) {
         console.error('Secret read from file is an empty string after trim!');
       }
@@ -28,7 +28,7 @@ const generateToken = (userId) => {
     }
   } else if (process.env.JWT_SECRET) {
     secret = process.env.JWT_SECRET;
-    console.log('Secret read from env. Length:', secret.length);
+    // console.log('Secret read from env. Length:', secret.length);
   } else {
     throw new Error('JWT_SECRET não está definido no .env ou no arquivo de segredo.');
   }

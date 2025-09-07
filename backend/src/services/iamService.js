@@ -21,10 +21,10 @@ class IamService {
         // Verify perm_version to ensure cache is not stale
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (restaurant && snapshot.permVersion === restaurant.perm_version) {
-          console.log(`Cache hit for snapshot: ${cacheKey}`);
+          // console.log(`Cache hit for snapshot: ${cacheKey}`);
           return snapshot;
         } else {
-          console.log(`Cache stale for snapshot: ${cacheKey}, rebuilding.`);
+          // console.log(`Cache stale for snapshot: ${cacheKey}, rebuilding.`);
         }
     }
 
@@ -185,7 +185,7 @@ class IamService {
 
     await cacheService.set(cacheKey, snapshot, 86400); // Cache for 24 hours
 
-    console.log(`DEBUG: Final permission snapshot for user ${userId} in restaurant ${restaurantId}:`, JSON.stringify(snapshot, null, 2));
+    // console.log(`DEBUG: Final permission snapshot for user ${userId} in restaurant ${restaurantId}:`, JSON.stringify(snapshot, null, 2));
     return snapshot;
   }
 
@@ -341,7 +341,7 @@ class IamService {
 
       await cacheService.publish('perm_invalidation', { restaurantId });
 
-      console.log(`Perm_version for restaurant ${restaurantId} bumped to ${restaurant.permVersion}`);
+      // console.log(`Perm_version for restaurant ${restaurantId} bumped to ${restaurant.permVersion}`);
       return true;
     } catch (error) {
       console.error(`Error bumping perm_version for restaurant ${restaurantId}:`, error);

@@ -375,7 +375,7 @@ async function getWhatsappAnalyticsInternal(restaurantId, period) {
 exports.verifyWebhook = (mode, token, challenge) => {
   const WHATSAPP_VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
   if (mode === 'subscribe' && token === WHATSAPP_VERIFY_TOKEN) {
-    console.log('Webhook do WhatsApp verificado!');
+    // console.log('Webhook do WhatsApp verificado!');
     return challenge;
   } else {
     throw new ForbiddenError('Verificação de webhook falhou.');

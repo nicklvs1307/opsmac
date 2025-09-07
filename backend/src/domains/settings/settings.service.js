@@ -98,7 +98,7 @@ exports.testWhatsappMessage = async (restaurantId, recipient, message) => {
   }
   // Simulate sending message
   // await sendWhatsAppMessage(restaurant.whatsapp_api_url, restaurant.whatsapp_api_key, restaurant.whatsapp_instance_id, recipient, message);
-  console.log(`Simulating WhatsApp test message to ${recipient}: ${message}`);
+  // console.log(`Simulating WhatsApp test message to ${recipient}: ${message}`);
 };
 
 // Restaurant Profile

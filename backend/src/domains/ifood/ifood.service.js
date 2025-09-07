@@ -46,7 +46,7 @@ async function handleOrderPlaced(payload, correlationId) {
       notes: notes,
     });
 
-    console.log(`Novo pedido iFood ${orderId} registrado para o restaurante ${localRestaurant.name}.`);
+    // console.log(`Novo pedido iFood ${orderId} registrado para o restaurante ${localRestaurant.name}.`);
 
   } catch (error) {
     console.error(`Erro ao processar ORDER_PLACED para o pedido ${orderId}:`, error);
@@ -60,7 +60,7 @@ async function handleOrderStatusUpdate(orderId, newStatus) {
     const order = await models.Order.findOne({ where: { external_order_id: orderId, platform: 'ifood' } });
     if (order) {
       await order.update({ status: newStatus });
-      console.log(`Status do pedido iFood ${orderId} atualizado para ${newStatus}.`);
+      // console.log(`Status do pedido iFood ${orderId} atualizado para ${newStatus}.`);
     } else {
       console.warn(`Pedido iFood ${orderId} não encontrado para atualização de status.`);
     }
@@ -98,7 +98,7 @@ async function processWebhookEventInternal(event) {
       await handleOrderStatusUpdate(event.payload.orderId, 'rejected');
       break;
     default:
-      console.log(`Evento iFood não tratado: ${event.code}`);
+      // console.log(`Evento iFood não tratado: ${event.code}`);
       break;
   }
 }
@@ -113,6 +113,6 @@ exports.checkIfoodModuleEnabled = async (restaurantIdFromPayload) => {
 };
 
 exports.handleWebhook = async (event) => {
-  console.log('Webhook iFood recebido:', JSON.stringify(event, null, 2));
+  // console.log('Webhook iFood recebido:', JSON.stringify(event, null, 2));
   await processWebhookEventInternal(event);
 };

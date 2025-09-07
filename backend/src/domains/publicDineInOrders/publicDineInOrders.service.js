@@ -23,9 +23,9 @@ exports.createDineInOrder = async (cartItems, sessionId, restaurant_id, table_id
   });
 
   const escPosCommands = generateEscPosCommands(order, restaurant.name);
-  console.log('--- ESC/POS COMMANDS GENERATED (DINE-IN) ---');
-  console.log(escPosCommands);
-  console.log('--------------------------------------------');
+  // console.log('--- ESC/POS COMMANDS GENERATED (DINE-IN) ---');
+  // console.log(escPosCommands);
+  // console.log('--------------------------------------------');
 
   return order;
 };

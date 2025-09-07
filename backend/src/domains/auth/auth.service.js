@@ -28,13 +28,13 @@ const login = async (email, password) => {
     throw new UnauthorizedError('Credenciais inválidas');
   }
 
-  console.log('DEBUG: User object after findOne in login:', JSON.stringify(user, null, 2));
+  // console.log('DEBUG: User object after findOne in login:', JSON.stringify(user, null, 2));
 
   if (user.isLocked()) {
     throw new ForbiddenError('Conta temporariamente bloqueada devido a muitas tentativas de login');
   }
 
-  console.log('DEBUG: User object before isActive check:', { id: user.id, email: user.email, isActive: user.isActive });
+  // console.log('DEBUG: User object before isActive check:', { id: user.id, email: user.email, isActive: user.isActive });
   if (!user.isActive) {
     throw new UnauthorizedError('Conta desativada. Entre em contato com o suporte');
   }
@@ -117,7 +117,7 @@ const getMe = async (userId) => {
         throw new NotFoundError('Usuário não encontrado');
     }
 
-    console.log('DEBUG: User object after findByPk in getMe:', JSON.stringify(user, null, 2));
+    // console.log('DEBUG: User object after findByPk in getMe:', JSON.stringify(user, null, 2));
 
     let permissionSnapshot = null;
     let primaryRestaurant = null;

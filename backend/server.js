@@ -101,10 +101,10 @@ app.use((err, req, res, next) => {
 const startServer = async () => {
   try {
     await sequelize.authenticate();
-    console.log('✅ Conexão com banco de dados estabelecida');
+    // console.log('✅ Conexão com banco de dados estabelecida');
     
     app.listen(PORT, () => {
-      console.log(`🚀 Servidor rodando na porta ${PORT}`);
+      // console.log(`🚀 Servidor rodando na porta ${PORT}`);
     });
   } catch (error) {
     console.error('❌ Erro ao iniciar servidor:', error);
@@ -116,13 +116,13 @@ startServer();
 
 // Graceful shutdown
 process.on('SIGTERM', async () => {
-  console.log('🔄 Encerrando servidor...');
+  // console.log('🔄 Encerrando servidor...');
   await sequelize.close();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
-  console.log('🔄 Encerrando servidor...');
+  // console.log('🔄 Encerrando servidor...');
   await sequelize.close();
   process.exit(0);
 });

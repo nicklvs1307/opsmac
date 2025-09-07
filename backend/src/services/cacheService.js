@@ -23,7 +23,7 @@ class CacheService {
   async del(keyPattern) {
     if (!redisClient) return;
     const result = await redisClient.del(keyPattern);
-    console.log(`CacheService: Deleted ${result} keys matching pattern ${keyPattern}`);
+    // console.log(`CacheService: Deleted ${result} keys matching pattern ${keyPattern}`);
     return result;
   }
 

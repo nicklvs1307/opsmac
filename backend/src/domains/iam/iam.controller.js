@@ -256,6 +256,7 @@ class IamController {
     try {
       const { restaurantId } = req.params;
       const entitlements = await models.RestaurantEntitlement.findAll({ where: { restaurant_id: restaurantId } });
+      console.log('DEBUG: getRestaurantEntitlements response:', JSON.stringify(entitlements, null, 2));
       return res.json(entitlements);
     } catch (error) {
       console.error('Error getting restaurant entitlements:', error);

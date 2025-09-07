@@ -145,7 +145,9 @@ const RestaurantEditPage = () => {
         setChildren(newSelected[moduleId], checked);
     }
 
+    console.log('DEBUG: newSelected after direct change (before updateParentStates):', JSON.stringify(newSelected, null, 2));
     const updatedState = updateParentStates(newSelected, permissionTree);
+    console.log('DEBUG: updatedState after updateParentStates:', JSON.stringify(updatedState, null, 2));
     setSelectedPermissions(updatedState);
   };
 

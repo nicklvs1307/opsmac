@@ -103,3 +103,10 @@ exports.createWaiterCallValidation = [
 exports.updateWaiterCallValidation = [
   body('status').isIn(['pending', 'resolved', 'cancelled']).withMessage('Invalid call status.'),
 ];
+
+exports.updateRestaurantValidation = [
+  body('name').optional().notEmpty().withMessage('Name is required.').isLength({ min: 2, max: 100 }).withMessage('Name must be between 2 and 100 characters.'),
+  body('address').optional().isString().withMessage('Address must be a string.'),
+  body('cuisine_type').optional().isString().withMessage('Cuisine type must be a string.'),
+  body('description').optional().isString().withMessage('Description must be a string.'),
+];

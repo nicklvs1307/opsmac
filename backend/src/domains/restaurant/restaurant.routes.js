@@ -20,13 +20,14 @@ const {
   updateWaiterOrderValidation,
   createWaiterCallValidation,
   updateWaiterCallValidation,
+  updateRestaurantValidation, // Added this line
 } = require('./restaurant.validation');
 
 const router = express.Router();
 
 // Rotas de Gerenciamento de Restaurante
 router.get('/', auth, requirePermission('restaurant_management', 'read'), restaurantController.getRestaurantById);
-router.put('/', auth, requirePermission('restaurant_management', 'update'), restaurantController.updateRestaurant);
+router.put('/', auth, requirePermission('restaurant_management', 'update'), updateRestaurantValidation, restaurantController.updateRestaurant); // Added updateRestaurantValidation
 router.put('/status/open', auth, requirePermission('restaurant_management', 'update'), updateRestaurantStatusValidation, restaurantController.updateRestaurantOpenStatus);
 router.put('/pos-status', auth, requirePermission('restaurant_management', 'update'), updateRestaurantPosStatusValidation, restaurantController.updateRestaurantPosStatus);
 

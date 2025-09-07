@@ -29,7 +29,6 @@ export const saveUser = async (payload) => {
 export const saveRestaurant = async (payload) => {
   const { restaurantId, ...restaurantData } = payload; // Destructure restaurantId from payload
   if (restaurantId) {
-    // Note: This route might need checking, the admin route is likely /admin/restaurants/:id
     const response = await axiosInstance.put(`/admin/restaurants/${restaurantId}`, restaurantData);
     return response.data;
   } else {

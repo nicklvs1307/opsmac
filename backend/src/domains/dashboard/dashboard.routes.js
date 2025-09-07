@@ -21,9 +21,9 @@ router.use(checkRestaurantOwnership);
 // 3. Verificar permissão específica para o dashboard
 router.use(requirePermission('dashboard', 'read'));
 
-router.get('/overview', getDashboardOverviewValidation, dashboardController.getDashboardOverview);
-router.get('/analytics', getDashboardAnalyticsValidation, dashboardController.getDashboardAnalytics);
-router.get('/reports', generateReportValidation, dashboardController.generateReport);
-router.get('/rewards/analytics', dashboardController.getRewardsAnalytics);
+router.get('/:restaurantId/overview', getDashboardOverviewValidation, dashboardController.getDashboardOverview);
+router.get('/:restaurantId/analytics', getDashboardAnalyticsValidation, dashboardController.getDashboardAnalytics);
+router.get('/:restaurantId/reports', generateReportValidation, dashboardController.generateReport);
+router.get('/:restaurantId/rewards/analytics', dashboardController.getRewardsAnalytics);
 
 module.exports = router;

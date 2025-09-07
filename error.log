@@ -1,23 +1,34 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/admin/restaurants/fe1d1bec-5a7f-4486-ba38-81c22e131269
-Método da solicitação
-PUT
-Código de status
-400 Bad Request
-{"error":"Dados inválidos"}
-
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-Redis Client Connected
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-DEBUG: /iam/tree - userId: 0e11f6e3-36f3-4719-9ed3-c503d4e42b9f restaurantId: fe1d1bec-5a7f-4486-ba38-81c22e131269
-Error caught by middleware: BadRequestError: Dados inválidos
-    at handleValidationErrors (/app/backend/src/domains/admin/admin.controller.js:8:11)
-    at exports.updateRestaurant (/app/backend/src/domains/admin/admin.controller.js:86:5)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
-  statusCode: 400
-}
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          211.7s
+------
+ > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.314 + npm run build
+0.870
+0.870 > feedeliza-plus@1.0.0 build
+0.870 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.870
+4.726 Creating an optimized production build...
+210.2 Failed to compile.
+210.2
+210.2 [eslint]
+210.2 src/features/Admin/RestaurantEditPage.js
+210.2   Line 217:22:  'MenuItem' is not defined  react/jsx-no-undef
+210.2   Line 218:22:  'MenuItem' is not defined  react/jsx-no-undef
+210.2   Line 219:22:  'MenuItem' is not defined  react/jsx-no-undef
+210.2   Line 220:22:  'MenuItem' is not defined  react/jsx-no-undef
+210.2   Line 221:22:  'MenuItem' is not defined  react/jsx-no-undef
+210.2   Line 222:22:  'MenuItem' is not defined  react/jsx-no-undef
+210.2   Line 223:22:  'MenuItem' is not defined  react/jsx-no-undef
+210.2
+210.2 Search for the keywords to learn more about each error.
+210.2
+210.2
+------
+Dockerfile.frontend:27
+--------------------
+  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
+  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  28 |
+  29 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

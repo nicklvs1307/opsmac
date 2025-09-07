@@ -82,13 +82,8 @@ const usePermissions = () => {
         // If a specific featureKey is requested, find it and check if it's locked.
         let foundFeatureForOwnerCheck = null;
         for (const mod of permissionSnapshot.modules) {
-            let feat = mod.features?.find((f) => f.key === featureKey);
-            if (feat) {
-                foundFeatureForOwnerCheck = feat;
-                break;
-            }
             for (const submod of mod.submodules) {
-                feat = submod.features.find((f) => f.key === featureKey);
+                const feat = submod.features.find((f) => f.key === featureKey);
                 if (feat) {
                     foundFeatureForOwnerCheck = feat;
                     break;
@@ -111,15 +106,8 @@ const usePermissions = () => {
       // Optimized search for feature and action
       let foundFeature = null;
       for (const mod of permissionSnapshot.modules) {
-        // Check features directly under the module
-        let feat = mod.features?.find((f) => f.key === featureKey);
-        if (feat) {
-          foundFeature = feat;
-          break;
-        }
-        // Check features within submodules
         for (const submod of mod.submodules) {
-          feat = submod.features.find((f) => f.key === featureKey);
+          const feat = submod.features.find((f) => f.key === featureKey);
           if (feat) {
             foundFeature = feat;
             break;

@@ -16,9 +16,8 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
     return <Navigate to="/login" replace />;
   }
 
-  // Allow access for super admin if authenticated and no specific permission is required
-  // This handles the root path where featureKey/actionKey might be undefined
-  if (user && user.permissionSnapshot && user.permissionSnapshot.isSuperAdmin && !featureKey && !actionKey) {
+  // If authenticated and is a superadmin, grant access immediately for any route.
+  if (isAuthenticated && user && user.permissionSnapshot && user.permissionSnapshot.isSuperAdmin) {
     return children;
   }
 

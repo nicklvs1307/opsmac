@@ -10,6 +10,7 @@ import {
   Checkbox,
   CircularProgress,
   Box,
+  Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import usePermissions from '@/hooks/usePermissions';

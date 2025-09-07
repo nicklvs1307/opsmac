@@ -94,7 +94,7 @@ const RestaurantEditPage = () => {
 
   useEffect(() => {
     if (permissionTree && restaurantEntitlements) {
-      const entitlementMap = new Map(restaurantEntitlements.map(e => [`${e.entity_type}-${e.entity_id}`, e.status === 'active']));
+      const entitlementMap = new Map(restaurantEntitlements.map(e => [`${e.entityType}-${e.entityId}`, e.status === 'active']));
 
       let initialSelected = {};
       permissionTree.modules?.forEach(module => {

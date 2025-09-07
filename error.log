@@ -1,17 +1,38 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-/app/backend/src/services/iamService.js:193
-    for (const module of allModules) {
-         ^^^^^
-SyntaxError: Unexpected token 'const'
-    at wrapSafe (node:internal/modules/cjs/loader:1464:18)
-    at Module._compile (node:internal/modules/cjs/loader:1495:20)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-    at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/src/domains/auth/auth.service.js:6:20)
-    at Module._compile (node:internal/modules/cjs/loader:1521:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-Node.js v20.19.5
+serviceWorkerRegistration.js:74 Content is cached for offline use.
+AuthContext.js:124 DEBUG: Complete user object after login: {
+  "message": "Login realizado com sucesso",
+  "id": "7128427d-c9ee-49c1-ac2c-ea856990d4c3",
+  "name": "lucas",
+  "email": "lucas@teste.com",
+  "phone": "3598989898",
+  "roles": [
+    {
+      "id": "53c77e59-8cb5-49c4-ba0c-b2ebc6b0d39f",
+      "restaurantId": null,
+      "key": "owner",
+      "name": "owner",
+      "isSystem": true,
+      "createdAt": "2025-09-07T01:10:30.761Z",
+      "updatedAt": "2025-09-07T01:10:30.761Z",
+      "restaurant_id": null,
+      "UserRole": {
+        "userId": "7128427d-c9ee-49c1-ac2c-ea856990d4c3",
+        "restaurantId": "fe1d1bec-5a7f-4486-ba38-81c22e131269",
+        "roleId": "53c77e59-8cb5-49c4-ba0c-b2ebc6b0d39f",
+        "createdAt": "2025-09-07T01:13:47.962Z",
+        "updatedAt": "2025-09-07T01:13:47.962Z",
+        "role_id": "53c77e59-8cb5-49c4-ba0c-b2ebc6b0d39f",
+        "user_id": "7128427d-c9ee-49c1-ac2c-ea856990d4c3",
+        "restaurant_id": "fe1d1bec-5a7f-4486-ba38-81c22e131269"
+      }
+    }
+  ],
+  "isActive": true,
+  "restaurants": [],
+  "restaurant": null,
+  "restaurantId": null,
+  "permissionSnapshot": null,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MTI4NDI3ZC1jOWVlLTQ5YzEtYWMyYy1lYTg1Njk5MGQ0YzMiLCJpYXQiOjE3NTcyNzk5NDEsImV4cCI6MTc1Nzg4NDc0MX0.-1pbdbyipVKOlm4U4yO9oIPyAj5f5wuHK-38glinOxM"
+}
+[Violation] Forced reflow while executing JavaScript took 31ms
+usePermissions.js:62 can check: {featureKey: undefined, actionKey: undefined, loading: false, error: null, hasSnapshot: false, …}

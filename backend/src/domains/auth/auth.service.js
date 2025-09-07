@@ -91,7 +91,7 @@ const login = async (email, password) => {
     isActive: user.isActive,
     emailVerified: user.emailVerified,
     lastLogin: user.lastLogin,
-    restaurants: user.userRestaurants?.map(ur => ur.restaurant) || [], // All associated restaurants
+    restaurants: user.restaurants?.map(ur => ur.restaurant) || [], // All associated restaurants
     restaurant: primaryRestaurant, // The selected/primary restaurant
     restaurantId: primaryRestaurantId, // The ID of the selected/primary restaurant
     permissionSnapshot: permissionSnapshot, // The full permission snapshot

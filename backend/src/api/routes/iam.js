@@ -62,6 +62,9 @@ router.get('/tree', async (req, res) => {
 
   try {
     const snapshot = await iamService.buildSnapshot(restaurantId, userId);
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
     return res.json(snapshot);
   } catch (error) {
     console.error('Error getting permission tree:', error);
@@ -782,6 +785,9 @@ router.get('/restaurants/:restaurantId/entitlements', requirePermission('entitle
 
   try {
     const entitlements = await models.RestaurantEntitlement.findAll({ where: { restaurant_id: restaurantId } });
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
     return res.json(entitlements);
   } catch (error) {
     console.error('Error getting restaurant entitlements:', error);

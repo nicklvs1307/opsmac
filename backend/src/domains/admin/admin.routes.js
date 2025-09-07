@@ -14,20 +14,17 @@ const {
 
 const router = express.Router();
 
-// Protect all routes in this file with a single permission check
-router.use(auth, requirePermission('admin_panel', 'access'));
-
 // User Management
-router.post('/users', createUserValidation, adminController.createUser);
-router.get('/users', adminController.listUsers);
-router.put('/users/:id', updateUserValidation, adminController.updateUser);
+router.post('/users', auth, requirePermission('admin:users', 'create'), createUserValidation, adminController.createUser);
+router.get('/users', auth, requirePermission('admin:users', 'read'), adminController.listUsers);
+router.put('/users/:id', auth, requirePermission('admin:users', 'update'), updateUserValidation, adminController.updateUser);
 
 // Restaurant Management
-router.post('/restaurants', createRestaurantValidation, adminController.createRestaurant);
-router.post('/restaurants/create-with-owner', createRestaurantWithOwnerValidation, adminController.createRestaurantWithOwner);
-router.get('/restaurants', adminController.listRestaurants);
-router.get('/restaurants/:id', adminController.getRestaurantById);
-router.put('/restaurants/:id', updateRestaurantValidation, adminController.updateRestaurant);
+router.post('/restaurants', auth, requirePermission('admin:restaurants', 'create'), createRestaurantValidation, adminController.createRestaurant);
+router.post('/restaurants/create-with-owner', auth, requirePermission('admin:restaurants', 'create'), createRestaurantWithOwnerValidation, adminController.createRestaurantWithOwner);
+router.get('/restaurants', auth, requirePermission('admin:restaurants', 'read'), adminController.listRestaurants);
+router.get('/restaurants/:id', auth, requirePermission('admin:restaurants', 'read'), adminController.getRestaurantById);
+router.put('/restaurants/:id', auth, requirePermission('admin:restaurants', 'update'), updateRestaurantValidation, adminController.updateRestaurant);
 
 // Module Management
 router.get('/modules', adminController.listModules);

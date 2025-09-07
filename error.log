@@ -1,28 +1,782 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          213.6s
-------
- > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.343 + npm run build
-0.894
-0.894 > feedeliza-plus@1.0.0 build
-0.894 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.894
-4.565 Creating an optimized production build...
-212.4 Failed to compile.
-212.4
-212.4 [eslint]
-212.4 src/features/Dashboard/api/dashboardQueries.js
-212.4   Line 17:20:  React Hook "useAuth" is called in function "fetchDashboardOverview" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use"  react-hooks/rules-of-hooks
-212.4
-212.4 Search for the keywords to learn more about each error.
-212.4
-212.4
-------
-Dockerfile.frontend:27
---------------------
-  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
-  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  28 |
-  29 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+serviceWorkerRegistration.js:74 Content is cached for offline use.
+AuthContext.js:124 DEBUG: Complete user object after login: {
+  "message": "Login realizado com sucesso",
+  "id": "7128427d-c9ee-49c1-ac2c-ea856990d4c3",
+  "name": "lucas",
+  "email": "lucas@teste.com",
+  "phone": "3598989898",
+  "roles": [
+    {
+      "id": "53c77e59-8cb5-49c4-ba0c-b2ebc6b0d39f",
+      "restaurantId": null,
+      "key": "owner",
+      "name": "owner",
+      "isSystem": true,
+      "createdAt": "2025-09-07T01:10:30.761Z",
+      "updatedAt": "2025-09-07T01:10:30.761Z",
+      "restaurant_id": null,
+      "UserRole": {
+        "userId": "7128427d-c9ee-49c1-ac2c-ea856990d4c3",
+        "restaurantId": "fe1d1bec-5a7f-4486-ba38-81c22e131269",
+        "roleId": "53c77e59-8cb5-49c4-ba0c-b2ebc6b0d39f",
+        "createdAt": "2025-09-07T01:13:47.962Z",
+        "updatedAt": "2025-09-07T01:13:47.962Z",
+        "role_id": "53c77e59-8cb5-49c4-ba0c-b2ebc6b0d39f",
+        "user_id": "7128427d-c9ee-49c1-ac2c-ea856990d4c3",
+        "restaurant_id": "fe1d1bec-5a7f-4486-ba38-81c22e131269"
+      }
+    }
+  ],
+  "isActive": true,
+  "restaurants": [
+    {
+      "id": "fe1d1bec-5a7f-4486-ba38-81c22e131269",
+      "name": "Tower",
+      "slug": "tower",
+      "description": "aaa",
+      "address": "Avenida Doutor Bias Fortes 52",
+      "city": "Andradas",
+      "state": "MG",
+      "zipCode": null,
+      "phone": null,
+      "email": null,
+      "website": null,
+      "logo": null,
+      "planKey": null,
+      "status": "active",
+      "permVersion": "1",
+      "createdAt": "2025-09-07T01:13:47.954Z",
+      "updatedAt": "2025-09-07T01:13:47.954Z"
+    }
+  ],
+  "restaurant": null,
+  "restaurantId": null,
+  "permissionSnapshot": {
+    "restaurantId": "fe1d1bec-5a7f-4486-ba38-81c22e131269",
+    "userId": "7128427d-c9ee-49c1-ac2c-ea856990d4c3",
+    "isSuperAdmin": false,
+    "isOwner": true,
+    "modules": [
+      {
+        "id": "6be7b2f9-36a6-4416-a065-919c55c4d37d",
+        "key": "fidelity",
+        "name": "Fidelidade",
+        "description": null,
+        "visible": true,
+        "locked": false,
+        "status": "active",
+        "submodules": [
+          {
+            "id": "bde2aa86-ab18-4efb-a2b7-cac22ae00a68",
+            "key": "general",
+            "name": "Geral",
+            "description": null,
+            "locked": false,
+            "status": "active",
+            "features": [
+              {
+                "id": "3c13c8e1-be2c-426f-a829-3045ac2f6180",
+                "key": "fidelity:general:dashboard",
+                "name": "Painel Inicial",
+                "description": "Painel Inicial",
+                "flags": {},
+                "locked": false,
+                "status": "active",
+                "actions": [
+                  {
+                    "id": 1,
+                    "key": "create",
+                    "allowed": true,
+                    "reason": "owner"
+                  },
+                  {
+                    "id": 2,
+                    "key": "read",
+                    "allowed": true,
+                    "reason": "owner"
+                  },
+                  {
+                    "id": 3,
+                    "key": "update",
+                    "allowed": true,
+                    "reason": "owner"
+                  },
+                  {
+                    "id": 4,
+                    "key": "delete",
+                    "allowed": true,
+                    "reason": "owner"
+                  },
+                  {
+                    "id": 5,
+                    "key": "export",
+                    "allowed": true,
+                    "reason": "owner"
+                  },
+                  {
+                    "id": 6,
+                    "key": "approve",
+                    "allowed": true,
+                    "reason": "owner"
+                  },
+                  {
+                    "id": 7,
+                    "key": "manage_permissions",
+                    "allowed": true,
+                    "reason": "owner"
+                  }
+                ]
+              },
+              {
+                "id": "c47b0ae1-7fbf-4e55-ab99-cc0ce50dc118",
+                "key": "fidelity:general:monthly-summary",
+                "name": "Resumo do mês",
+                "description": "Resumo do mês",
+                "flags": {},
+                "locked": false,
+                "status": "active",
+                "actions": [
+                  {
+                    "id": 1,
+                    "key": "create",
+                    "allowed": true,
+                    "reason": "owner"
+                  },
+                  {
+                    "id": 2,
+                    "key": "read",
+                    "allowed": true,
+                    "reason": "owner"
+                  },
+                  {
+                    "id": 3,
+                    "key": "update",
+                    "allowed": true,
+                    "reason": "owner"
+                  },
+                  {
+                    "id": 4,
+                    "key": "delete",
+                    "allowed": true,
+                    "reason": "owner"
+           
+usePermissions.js:62 can check: {featureKey: undefined, actionKey: undefined, loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'fidelity', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'monthly_summary', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'satisfaction_overview', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'surveys_comparison', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'evolution', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'benchmarking', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'multiple_choice', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'word_clouds', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'checkin_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'checkin_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'checkin_active', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'satisfaction_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'satisfaction_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'satisfaction_surveys', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'responses_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'responses_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'responses_replicas', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'responses_goals', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'responses_import', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'relationship_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'relationship_ranking', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'relationship_dispatches', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'relationship_campaigns', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'relationship_messages', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'relationship_birthdays', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'relationship_customers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'relationship_segmentation', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'coupons_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'coupons_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'coupons_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'coupons_validation', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'coupons_raffle', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'coupons_rewards', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'coupons_rewards_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'coupons_rewards_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'coupons_redemption_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'automation_flows', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'fidelity_integrations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'fidelity_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_movements', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_suppliers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_purchases', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_sales', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_products', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_products_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_ingredients', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_inventory', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_cmv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_adjustments', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_lots', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'stock_alerts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'orders', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'orders_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'orders_pdv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'orders_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'orders_integrations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'orders_delivery', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'orders_sales_report', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'orders_tables', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'management_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'management_schedule', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'management_commissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'management_costs', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'management_team', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'management_production', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'management_permissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'cdv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_print', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_print_group', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_count', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_count_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_labels_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_labels_delete', actionKey: 'delete', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_expirations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_expirations_alert', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_payables_suppliers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_payables_deadlines', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_payables_invoices', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_payables_recurring', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_receivables', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cash_flow_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cash_flow_view', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cash_flow_projection', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cash_flow_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_view', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_revenue', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_cmv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_gross_margin', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_fixed_costs', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_net_profit', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'payment_methods', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'payments_fees', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'payments_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_invoices', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_taxes', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_sefaz', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_profile', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_business', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_security', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_whatsapp', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_notifications', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_appearance', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'admin_users', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'admin_restaurants', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'admin_roles_permissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fidelity', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'monthly_summary', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'satisfaction_overview', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'surveys_comparison', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'evolution', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'benchmarking', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'multiple_choice', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'word_clouds', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'checkin_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'checkin_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'checkin_active', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'satisfaction_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'satisfaction_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'satisfaction_surveys', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'responses_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'responses_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'responses_replicas', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'responses_goals', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'responses_import', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'relationship_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'relationship_ranking', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'relationship_dispatches', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'relationship_campaigns', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'relationship_messages', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'relationship_birthdays', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'relationship_customers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'relationship_segmentation', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'coupons_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'coupons_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'coupons_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'coupons_validation', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'coupons_raffle', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'coupons_rewards', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'coupons_rewards_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'coupons_rewards_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'coupons_redemption_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'automation_flows', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fidelity_integrations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fidelity_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_movements', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_suppliers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_purchases', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_sales', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_products', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_products_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_ingredients', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_inventory', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_technical_sheet_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_technical_sheet_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_cmv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_adjustments', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_lots', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'stock_alerts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'orders', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'orders_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'orders_pdv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'orders_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'orders_integrations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'orders_delivery', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'orders_sales_report', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'orders_tables', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'management_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'management_schedule', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'management_commissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'management_costs', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'management_team', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'management_production', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'management_permissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_labels', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_labels_print', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_labels_print_group', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_labels_count', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_labels_count_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_labels_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_labels_delete', actionKey: 'delete', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_expirations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cdv_expirations_alert', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_payables_suppliers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_payables_deadlines', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_payables_invoices', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_payables_recurring', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'financial_receivables', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cash_flow_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cash_flow_view', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cash_flow_projection', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'cash_flow_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_view', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_revenue', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_cmv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_gross_margin', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_fixed_costs', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'dre_net_profit', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'payment_methods', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'payments_fees', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'payments_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_invoices', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_taxes', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_sefaz', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'fiscal_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_profile', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_business', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_security', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_whatsapp', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_notifications', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'settings_appearance', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'admin_users', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'admin_restaurants', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+ can check: {featureKey: 'admin_roles_permissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
+main.6c2afe63.js:2 [Violation] 'message' handler took 383ms
+[Violation] Forced reflow while executing JavaScript took 37ms
+ can check: {featureKey: 'fidelity', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'monthly_summary', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'satisfaction_overview', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'surveys_comparison', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'evolution', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'benchmarking', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'multiple_choice', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'word_clouds', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'checkin_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'checkin_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'checkin_active', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'satisfaction_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'satisfaction_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'satisfaction_surveys', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_replicas', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_goals', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_import', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_ranking', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_dispatches', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_campaigns', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_messages', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_birthdays', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_customers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_segmentation', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_validation', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_raffle', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_rewards', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_rewards_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_rewards_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_redemption_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'automation_flows', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'fidelity_integrations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'fidelity_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_movements', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_suppliers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_purchases', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_sales', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_products', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_products_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_ingredients', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_inventory', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_technical_sheet_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_technical_sheet_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_cmv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_adjustments', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_lots', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'stock_alerts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'orders', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'orders_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'orders_pdv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'orders_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'orders_integrations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'orders_delivery', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'orders_sales_report', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'orders_tables', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'management_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'management_schedule', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'management_commissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'management_costs', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'management_team', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'management_production', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'management_permissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_labels', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_labels_print', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_labels_print_group', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_labels_count', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_labels_count_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_labels_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_labels_delete', actionKey: 'delete', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_expirations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cdv_expirations_alert', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'financial', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'financial_payables_suppliers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'financial_payables_deadlines', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'financial_payables_invoices', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'financial_payables_recurring', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'financial_receivables', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cash_flow_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cash_flow_view', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cash_flow_projection', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'cash_flow_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'dre_view', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'dre_revenue', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'dre_cmv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'dre_gross_margin', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'dre_fixed_costs', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'dre_net_profit', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'payment_methods', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'payments_fees', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'payments_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'fiscal_invoices', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'fiscal_taxes', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'fiscal_sefaz', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'fiscal_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'fiscal_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'settings_profile', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'settings_business', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'settings_security', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'settings_whatsapp', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'settings_notifications', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'settings_appearance', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'admin_users', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'admin_restaurants', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'admin_roles_permissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'fidelity', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'monthly_summary', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'satisfaction_overview', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'surveys_comparison', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'evolution', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'benchmarking', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'multiple_choice', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'word_clouds', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'checkin_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'checkin_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'checkin_active', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'satisfaction_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'satisfaction_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'satisfaction_surveys', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_replicas', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_goals', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'responses_import', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_ranking', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_dispatches', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_campaigns', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_messages', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_birthdays', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_customers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'relationship_segmentation', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_validation', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_raffle', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_rewards', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_rewards_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_rewards_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'coupons_redemption_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'automation_flows', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+ can check: {featureKey: 'fidelity_integrations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'fidelity_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_movements', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_suppliers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_purchases', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_sales', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_products', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_products_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_ingredients', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_inventory', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_cmv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_adjustments', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_lots', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'stock_alerts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'orders', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'orders_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'orders_pdv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'orders_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'orders_integrations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'orders_delivery', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'orders_sales_report', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'orders_tables', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'management_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'management_schedule', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'management_commissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'management_costs', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'management_team', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'management_production', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'management_permissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_print', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_print_group', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_count', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_count_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_labels_delete', actionKey: 'delete', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_expirations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cdv_expirations_alert', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'financial', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'financial_payables_suppliers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'financial_payables_deadlines', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'financial_payables_invoices', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'financial_payables_recurring', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'financial_receivables', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cash_flow_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cash_flow_view', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cash_flow_projection', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'cash_flow_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'dre_view', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'dre_revenue', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'dre_cmv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'dre_gross_margin', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'dre_fixed_costs', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'dre_net_profit', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'payment_methods', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'payments_fees', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'payments_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'fiscal_invoices', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'fiscal_taxes', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'fiscal_sefaz', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'fiscal_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'fiscal_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'settings_profile', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'settings_business', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'settings_security', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'settings_whatsapp', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'settings_notifications', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'settings_appearance', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'admin_users', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'admin_restaurants', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+usePermissions.js:62 can check: {featureKey: 'admin_roles_permissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
+main.6c2afe63.js:2 [Violation] 'message' handler took 325ms
+dashboardQueries.js:20  GET https://feedelizaapi.towersfy.com/api/dashboard/fe1d1bec-5a7f-4486-ba38-81c22e131269/overview?period=30d 401 (Unauthorized)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:20
+enabled @ dashboardQueries.js:35
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboardQueries.js:20  GET https://feedelizaapi.towersfy.com/api/dashboard/fe1d1bec-5a7f-4486-ba38-81c22e131269/overview?period=30d 401 (Unauthorized)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:20
+enabled @ dashboardQueries.js:35
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 bt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboardQueries.js:41 Error fetching dashboard data: bt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ dashboardQueries.js:41
+(anônimo) @ notifyManager.js:62
+notifyFn @ notifyManager.js:10
+(anônimo) @ notifyManager.js:77
+(anônimo) @ notifyManager.js:76
+cc @ react-dom.production.min.js:273
+(anônimo) @ notifyManager.js:75
+Promise.then
+k @ utils.js:322
+t.flush @ notifyManager.js:74
+t.batch @ notifyManager.js:30
+t.dispatch @ query.js:392
+onError @ query.js:348
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+Dashboard.js:94 Error fetching dashboard data: bt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+sV @ Dashboard.js:94
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+bc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14

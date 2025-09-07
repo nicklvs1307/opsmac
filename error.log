@@ -1,7 +1,7 @@
 URL da solicitação
-https://feedelizaapi.towersfy.com/api/iam/users/e8efacd5-d284-4b37-8808-9df45f27304c/overrides
+https://feedelizaapi.towersfy.com/api/iam/entitlements
 Método da solicitação
 POST
 Código de status
 400 Bad Request
-{"error":"Bad Request: restaurantId and overrides array are required."}
+{"error":"Bad Request: Missing required fields for entitlement."}

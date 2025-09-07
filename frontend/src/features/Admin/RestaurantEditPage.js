@@ -136,6 +136,10 @@ const RestaurantEditPage = () => {
 
   const onSubmit = async (data) => {
     try {
+      if (!restaurantId) {
+        toast.error('Restaurant ID is missing. Cannot save entitlements.');
+        return;
+      }
       await saveRestaurantMutation.mutateAsync({ ...data, restaurantId });
       toast.success('Restaurant details updated successfully!');
 

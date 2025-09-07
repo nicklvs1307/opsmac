@@ -1,7 +1,24 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/iam/entitlements
-Método da solicitação
-POST
-Código de status
-400 Bad Request
-{"error":"Bad Request: Missing required fields for entitlement."}
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          220.4s
+------
+ > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.318 + npm run build
+0.747
+0.747 > feedeliza-plus@1.0.0 build
+0.747 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.747
+4.534 Creating an optimized production build...
+217.7 Failed to compile.
+217.7
+217.7 Attempted import error: 'useSetEntitlement' is not exported from '@/features/IAM/api/iamQueries' (imported as 'useSetEntitlement').
+217.7
+217.7
+------
+Dockerfile.frontend:27
+--------------------
+  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
+  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  28 |
+  29 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

@@ -3,7 +3,7 @@ import { useAuth } from '@/app/providers/contexts/AuthContext';
 import usePermissions from '@/hooks/usePermissions';
 import { useQueryClient } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { useGetPermissionTree, useSetEntitlement } from './api/iamQueries';
+import { useGetPermissionTree, useSetEntitlements } from './api/iamQueries';
 
 const EntitlementManagement = () => {
   const { selectedRestaurantId } = useAuth(); // Use selectedRestaurantId from AuthContext
@@ -20,7 +20,7 @@ const EntitlementManagement = () => {
     enabled: !!selectedRestaurantId,
   });
 
-  const setEntitlementMutation = useSetEntitlement();
+  const setEntitlementsMutation = useSetEntitlements();
 
   const handleToggleEntitlement = async (entityId, entityType, currentStatus) => {
     if (!can('admin:permissions', 'update')) {
@@ -30,14 +30,18 @@ const EntitlementManagement = () => {
 
     const newStatus = currentStatus === 'active' ? 'locked' : 'active';
 
+    const entitlement = {
+      entityType,
+      entityId,
+      status: newStatus,
+      source: 'manual_admin', // Or a more specific source
+      metadata: { updatedBy: 'admin_user' },
+    };
+
     try {
-      await setEntitlementMutation.mutateAsync({
+      await setEntitlementsMutation.mutateAsync({
         restaurantId: selectedRestaurantId,
-        entityType,
-        entityId,
-        status: newStatus,
-        source: 'manual_admin', // Or a more specific source
-        metadata: { updatedBy: 'admin_user' },
+        entitlements: [entitlement],
       });
       toast.success('Entitlement updated successfully!');
       queryClient.invalidateQueries(['permissionTree', selectedRestaurantId]); // Invalidate cache
@@ -83,7 +87,7 @@ const EntitlementManagement = () => {
                 <td>
                   <button
                     onClick={() => handleToggleEntitlement(module.id, 'module', module.status)}
-                    disabled={setEntitlementMutation.isLoading || !can('admin:permissions', 'update')}
+                    disabled={setEntitlementsMutation.isLoading || !can('admin:permissions', 'update')}
                   >
                     {module.status === 'active' ? 'Deactivate' : 'Activate'}
                   </button>
@@ -98,7 +102,7 @@ const EntitlementManagement = () => {
                       onClick={() =>
                         handleToggleEntitlement(submodule.id, 'submodule', submodule.status)
                       }
-                      disabled={setEntitlementMutation.isLoading || !can('admin:permissions', 'update')}
+                      disabled={setEntitlementsMutation.isLoading || !can('admin:permissions', 'update')}
                     >
                       {submodule.status === 'active' ? 'Deactivate' : 'Activate'}
                     </button>
@@ -112,7 +116,7 @@ const EntitlementManagement = () => {
                   <td>
                     <button
                       onClick={() => handleToggleEntitlement(feature.id, 'feature', feature.status)}
-                      disabled={setEntitlementMutation.isLoading || !can('admin:permissions', 'update')}
+                      disabled={setEntitlementsMutation.isLoading || !can('admin:permissions', 'update')}
                     >
                       {feature.status === 'active' ? 'Deactivate' : 'Activate'}
                     </button>

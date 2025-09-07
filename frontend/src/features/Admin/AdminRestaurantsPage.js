@@ -9,7 +9,7 @@ import { useSaveAdminRestaurant, useCreateRestaurantWithOwner } from './api/admi
 // Hooks
 import usePermissions from '@/hooks/usePermissions';
 import useAdminData from '@/hooks/useAdminData';
-import { useGetPermissionTree, useSetEntitlement } from '@/features/IAM/api/iamQueries';
+import { useGetPermissionTree, useSetEntitlements } from '@/features/IAM/api/iamQueries';
 
 // Components
 import RestaurantTable from '@/components/Admin/RestaurantTable';
@@ -134,14 +134,10 @@ const AdminRestaurantsPage = () => {
     });
 
     try {
-      // Send each entitlement update individually (or batch if backend supports)
-      for (const entitlement of entitlementsToUpdate) {
-        console.log('AdminRestaurantsPage Debug: Sending entitlement:', entitlement);
-        await setEntitlementMutation.mutateAsync({
-          restaurantId: selectedRestaurantForModules.id,
-          ...entitlement,
-        });
-      }
+      await setEntitlementsMutation.mutateAsync({
+        restaurantId: selectedRestaurantForModules.id,
+        entitlements: entitlementsToUpdate,
+      });
       toast.success('Funcionalidades do restaurante atualizadas com sucesso!');
       queryClient.invalidateQueries(['permissionTree', selectedRestaurantForModules.id]); // Invalidate permission tree
       handleCloseModuleModal(); // Close modal after saving
@@ -159,7 +155,7 @@ const AdminRestaurantsPage = () => {
   // React Query Mutations
   const saveRestaurantMutation = useSaveAdminRestaurant();
   const createRestaurantWithOwnerMutation = useCreateRestaurantWithOwner();
-  const setEntitlementMutation = useSetEntitlement();
+  const setEntitlementsMutation = useSetEntitlements();
 
   return (
     <Box sx={{ p: 4 }}>
@@ -201,7 +197,7 @@ const AdminRestaurantsPage = () => {
           selectedModuleStates={selectedModuleStates}
           setSelectedModuleStates={setSelectedModuleStates}
           onSaveModules={handleSaveModules}
-          loading={setEntitlementMutation.isLoading || isLoadingPermissionTree}
+          loading={setEntitlementsMutation.isLoading || isLoadingPermissionTree}
         />
       )}
     </Box>

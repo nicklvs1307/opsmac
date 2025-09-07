@@ -30,6 +30,8 @@ class EntitlementService {
     const transaction = await models.sequelize.transaction();
     try {
       console.log(`[EntitlementService] Starting setEntitlements for restaurant: ${restaurantId}`);
+      console.log(`[EntitlementService] Received restaurantId: ${restaurantId}`);
+      console.log(`[EntitlementService] Received entitlements:`, JSON.stringify(entitlements, null, 2));
       console.log(`[EntitlementService] Entitlements to process: ${entitlements.length}`);
 
       // Clear existing entitlements for this restaurant

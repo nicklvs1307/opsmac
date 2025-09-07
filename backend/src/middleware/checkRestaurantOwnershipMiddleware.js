@@ -8,11 +8,10 @@ const checkRestaurantOwnership = (req, res, next) => {
       return next();
     }
 
-    const restaurantIdFromParams = req.params.restaurantId;
+    const restaurantIdFromRequest = req.params.restaurantId || req.query.restaurantId || req.body.restaurantId;
 
-    if (!restaurantIdFromParams) {
-      // This middleware should only be on routes with :restaurantId
-      return next(new BadRequestError('ID do restaurante não encontrado nos parâmetros da rota.'));
+    if (!restaurantIdFromRequest) {
+      return next(new BadRequestError('ID do restaurante não encontrado nos parâmetros da rota, query ou corpo da requisição.'));
     }
 
     const { restaurantId: userRestaurantId, restaurant } = req.user;

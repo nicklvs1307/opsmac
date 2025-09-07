@@ -1,4 +1,5 @@
 'use strict';
+const fs = require('fs'); // Add this line
 const { models } = require('../../../models');
 const { Op } = require('sequelize');
 const iamService = require('../../services/iamService'); // For permission checks/snapshots
@@ -220,9 +221,12 @@ class IamController {
   // --- Restaurant Entitlements ---
   async setRestaurantEntitlement(req, res) {
     try {
-      console.log('Backend: setRestaurantEntitlement - req.body:', req.body); // Add this log
+      const logMessage = `\n--- ${new Date().toISOString()} ---\nBackend: setRestaurantEntitlement - req.body: ${JSON.stringify(req.body, null, 2)}\n`;
+      fs.appendFileSync('backend_debug.log', logMessage); // Write to file
+
       const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
-      console.log('Backend: setRestaurantEntitlement - destructured:', { restaurantId, entityType, entityId, status, source }); // Add this log
+      const destructuredLogMessage = `Backend: setRestaurantEntitlement - destructured: ${JSON.stringify({ restaurantId, entityType, entityId, status, source }, null, 2)}\n`;
+      fs.appendFileSync('backend_debug.log', destructuredLogMessage); // Write to file
 
       // Basic validation
       const missingFields = [];

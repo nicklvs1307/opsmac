@@ -29,8 +29,13 @@ class EntitlementService {
   async setEntitlements(restaurantId, entitlements) {
     const transaction = await models.sequelize.transaction();
     try {
+      console.log(`[EntitlementService] Starting setEntitlements for restaurant: ${restaurantId}`);
+      console.log(`[EntitlementService] Entitlements to process: ${entitlements.length}`);
+
       // Clear existing entitlements for this restaurant
-      await models.RestaurantEntitlement.destroy({ where: { restaurant_id: restaurantId }, transaction });
+      console.log(`[EntitlementService] Destroying existing entitlements for restaurant: ${restaurantId}`);
+      const destroyResult = await models.RestaurantEntitlement.destroy({ where: { restaurant_id: restaurantId }, transaction });
+      console.log(`[EntitlementService] Destroyed ${destroyResult} existing entitlements.`);
 
       // Bulk insert new entitlements
       const newEntitlements = entitlements.map(ent => ({
@@ -43,13 +48,22 @@ class EntitlementService {
       }));
 
       if (newEntitlements.length > 0) {
-        await models.RestaurantEntitlement.bulkCreate(newEntitlements, { transaction });
+        console.log(`[EntitlementService] Bulk creating ${newEntitlements.length} new entitlements.`);
+        const bulkCreateResult = await models.RestaurantEntitlement.bulkCreate(newEntitlements, { transaction });
+        console.log(`[EntitlementService] Bulk created ${bulkCreateResult.length} entitlements.`);
+      } else {
+        console.log(`[EntitlementService] No new entitlements to create.`);
       }
 
+      console.log(`[EntitlementService] Committing transaction.`);
       await transaction.commit();
+      console.log(`[EntitlementService] Transaction committed successfully.`);
     } catch (error) {
+      console.error(`[EntitlementService] Error in setEntitlements: ${error.name} - ${error.message}`, error.errors);
+      console.log(`[EntitlementService] Rolling back transaction.`);
       await transaction.rollback();
-      throw error;
+      console.log(`[EntitlementService] Transaction rolled back.`);
+      throw error; // This throw should cause the frontend mutation to fail
     }
   }
 }

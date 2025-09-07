@@ -854,7 +854,7 @@ router.post('/entitlements/bulk', requirePermission('entitlements.manage', 'upda
     await auditService.log(req.user, restaurantId, 'ENTITLEMENTS_BULK_SET', `Restaurant:${restaurantId}`, { count: entitlements.length });
     return res.json({ message: 'Entitlements set successfully.' });
   } catch (error) {
-    console.error('Error setting entitlements in bulk:', error);
+    console.error('Error setting entitlements in bulk:', error.name, error.message, error.errors);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 });

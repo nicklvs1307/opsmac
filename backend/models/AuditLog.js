@@ -43,15 +43,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       field: 'created_at',
     },
-    updatedAt: {
-      type: DataTypes.DATE,
-      field: 'updated_at',
-    },
   }, {
     sequelize,
     modelName: 'AuditLog',
     tableName: 'audit_logs',
-    timestamps: true,
+    timestamps: false, // Audit logs are immutable
     underscored: true,
   });
 

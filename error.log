@@ -1,7 +1,5 @@
-main.71e14de2.js:2 [Violation] 'message' handler took 228ms
-[Violation] Forced reflow while executing JavaScript took 75ms
-serviceWorkerRegistration.js:74 Content is cached for offline use.
-AuthContext.js:124 DEBUG: Complete user object after login: {
+main.51df617f.js:sourcemap:2 Content is cached for offline use.
+main.51df617f.js:sourcemap:2 DEBUG: Complete user object after login: {
   "message": "Login realizado com sucesso",
   "id": "7128427d-c9ee-49c1-ac2c-ea856990d4c3",
   "name": "lucas",
@@ -162,622 +160,769 @@ AuthContext.js:124 DEBUG: Complete user object after login: {
                     "allowed": true,
                     "reason": "owner"
            
-usePermissions.js:62 can check: {featureKey: undefined, actionKey: undefined, loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'monthly_summary', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_overview', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'surveys_comparison', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'evolution', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'benchmarking', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'multiple_choice', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'word_clouds', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_active', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_surveys', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_replicas', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_goals', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_import', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_ranking', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_dispatches', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_campaigns', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_messages', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_birthdays', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_customers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_segmentation', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_validation', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_raffle', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_redemption_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'automation_flows', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity_integrations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_movements', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_suppliers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_purchases', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_sales', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_products', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_products_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_ingredients', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_inventory', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_cmv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_adjustments', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_lots', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_alerts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_pdv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_integrations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_delivery', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_sales_report', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_tables', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_schedule', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_commissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_costs', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_team', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_production', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_permissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_print', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_print_group', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_count', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_count_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_delete', actionKey: 'delete', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_expirations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_expirations_alert', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_suppliers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_deadlines', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_invoices', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_recurring', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_receivables', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_view', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_projection', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_view', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_revenue', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_cmv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_gross_margin', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_fixed_costs', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_net_profit', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'payment_methods', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'payments_fees', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'payments_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_invoices', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_taxes', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_sefaz', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_profile', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_business', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_security', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_whatsapp', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_notifications', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_appearance', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'admin_users', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'admin_restaurants', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'admin_roles_permissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'monthly_summary', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_overview', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'surveys_comparison', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'evolution', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'benchmarking', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'multiple_choice', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'word_clouds', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_active', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_surveys', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_replicas', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_goals', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'responses_import', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_ranking', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_dispatches', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_campaigns', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_messages', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_birthdays', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_customers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_segmentation', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_validation', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_raffle', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards_management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_redemption_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'automation_flows', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity_integrations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_movements', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_suppliers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_purchases', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_sales', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_products', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_products_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_ingredients', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_inventory', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_create', actionKey: 'create', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_cmv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_adjustments', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_lots', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'stock_alerts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_pdv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_list', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_integrations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_delivery', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_sales_report', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'orders_tables', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_schedule', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_commissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_costs', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_team', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_production', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'management_permissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_print', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_print_group', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_count', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_count_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_delete', actionKey: 'delete', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_expirations', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_expirations_alert', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_suppliers', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_deadlines', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_invoices', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_recurring', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'financial_receivables', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_dashboard', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_view', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_projection', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_history', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_view', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_revenue', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_cmv', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_gross_margin', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_fixed_costs', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'dre_net_profit', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'payment_methods', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'payments_fees', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'payments_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_invoices', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_taxes', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_sefaz', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_reports', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_settings', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_profile', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_business', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_security', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_whatsapp', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_notifications', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'settings_appearance', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'admin_users', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'admin_restaurants', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-usePermissions.js:62 can check: {featureKey: 'admin_roles_permissions', actionKey: 'read', loading: true, error: null, hasSnapshot: false, …}
-main.71e14de2.js:2 [Violation] 'message' handler took 311ms
-usePermissions.js:62 can check: {featureKey: 'fidelity', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'monthly_summary', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_overview', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'surveys_comparison', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'evolution', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'benchmarking', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'multiple_choice', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'word_clouds', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_active', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_surveys', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_replicas', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_goals', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_import', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_ranking', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_dispatches', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_campaigns', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_messages', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_birthdays', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_customers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_segmentation', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_validation', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_raffle', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_redemption_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'automation_flows', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity_integrations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_movements', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_suppliers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_purchases', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_sales', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_products', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_products_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_ingredients', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_inventory', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_cmv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_adjustments', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_lots', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_alerts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_pdv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_integrations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_delivery', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_sales_report', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_tables', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_schedule', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_commissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_costs', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_team', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_production', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_permissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_print', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_print_group', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_count', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_count_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_delete', actionKey: 'delete', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_expirations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_expirations_alert', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_suppliers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_deadlines', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_invoices', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_recurring', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_receivables', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_view', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_projection', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_view', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_revenue', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_cmv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_gross_margin', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_fixed_costs', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_net_profit', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'payment_methods', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'payments_fees', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'payments_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_invoices', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_taxes', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_sefaz', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_profile', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_business', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_security', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_whatsapp', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_notifications', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_appearance', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'admin_users', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'admin_restaurants', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'admin_roles_permissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'monthly_summary', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_overview', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'surveys_comparison', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'evolution', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'benchmarking', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'multiple_choice', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'word_clouds', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'checkin_active', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'satisfaction_surveys', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_replicas', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_goals', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'responses_import', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_ranking', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_dispatches', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_campaigns', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_messages', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_birthdays', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_customers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'relationship_segmentation', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_validation', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_raffle', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards_management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_rewards_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'coupons_redemption_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'automation_flows', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity_integrations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fidelity_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_movements', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_suppliers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_purchases', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_sales', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_products', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_products_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_ingredients', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_inventory', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_create', actionKey: 'create', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_technical_sheet_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_cmv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_adjustments', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_lots', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'stock_alerts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_pdv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_list', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_integrations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_delivery', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_sales_report', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'orders_tables', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_schedule', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_commissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_costs', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_team', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_production', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'management_permissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_print', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_print_group', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_count', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_count_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_labels_delete', actionKey: 'delete', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_stock_counts', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_expirations', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cdv_expirations_alert', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_suppliers', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_deadlines', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_invoices', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_payables_recurring', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'financial_receivables', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_dashboard', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_view', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_projection', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'cash_flow_history', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_view', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_revenue', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_cmv', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_gross_margin', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_fixed_costs', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'dre_net_profit', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'payment_methods', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'payments_fees', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'payments_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_invoices', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_taxes', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_sefaz', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_reports', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'fiscal_settings', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_profile', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_business', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_security', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_whatsapp', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_notifications', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'settings_appearance', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'admin_users', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'admin_restaurants', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-usePermissions.js:62 can check: {featureKey: 'admin_roles_permissions', actionKey: 'read', loading: false, error: null, hasSnapshot: true, …}
-main.71e14de2.js:2 [Violation] 'message' handler took 204ms
-dashboardQueries.js:14  GET https://feedelizaapi.towersfy.com/api/dashboard/overview/fe1d1bec-5a7f-4486-ba38-81c22e131269?period=30d 400 (Bad Request)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:14
-enabled @ dashboardQueries.js:24
-fetchFn @ query.js:300
-c @ retryer.js:95
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-dashboardQueries.js:14  GET https://feedelizaapi.towersfy.com/api/dashboard/overview/fe1d1bec-5a7f-4486-ba38-81c22e131269?period=30d 400 (Bad Request)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:14
-enabled @ dashboardQueries.js:24
-fetchFn @ query.js:300
-c @ retryer.js:95
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-query.js:358 bt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-onError @ query.js:358
-f @ retryer.js:67
-(anônimo) @ retryer.js:132
-Promise.catch
-c @ retryer.js:116
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-dashboardQueries.js:30 Error fetching dashboard data: bt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-onError @ dashboardQueries.js:30
-(anônimo) @ notifyManager.js:62
-notifyFn @ notifyManager.js:10
-(anônimo) @ notifyManager.js:77
-(anônimo) @ notifyManager.js:76
-cc @ react-dom.production.min.js:273
-(anônimo) @ notifyManager.js:75
-Promise.then
-k @ utils.js:322
-t.flush @ notifyManager.js:74
-t.batch @ notifyManager.js:30
-t.dispatch @ query.js:392
-onError @ query.js:348
-f @ retryer.js:67
-(anônimo) @ retryer.js:132
-Promise.catch
-c @ retryer.js:116
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
-(anônimo) @ react-dom.production.min.js:282
-jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-Dashboard.js:94 Error fetching dashboard data: bt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-sV @ Dashboard.js:94
-vi @ react-dom.production.min.js:160
-As @ react-dom.production.min.js:196
-wl @ react-dom.production.min.js:291
-bc @ react-dom.production.min.js:279
-gc @ react-dom.production.min.js:279
-vc @ react-dom.production.min.js:279
-ac @ react-dom.production.min.js:267
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+feedelizaapi.towersfy.com/api/dashboard/fe1d1bec-5a7f-4486-ba38-81c22e131269/overview?period=30d:1  Failed to load resource: the server responded with a status of 400 ()
+feedelizaapi.towersfy.com/api/dashboard/fe1d1bec-5a7f-4486-ba38-81c22e131269/overview?period=30d:1  Failed to load resource: the server responded with a status of 400 ()
+main.51df617f.js:sourcemap:2 bt
+onError @ main.51df617f.js:sourcemap:2
+main.51df617f.js:sourcemap:2 Error fetching dashboard data: bt
+onError @ main.51df617f.js:sourcemap:2
+main.51df617f.js:sourcemap:2 Error fetching dashboard data: bt
+sV @ main.51df617f.js:sourcemap:2
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+main.51df617f.js:sourcemap:2 can check: Object
+
+
+
+> feedeliza-plus@1.0.0 start
+> node backend/server.js
+Redis Client Connected
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+DEBUG: /iam/tree - userId: 7128427d-c9ee-49c1-ac2c-ea856990d4c3 restaurantId: fe1d1bec-5a7f-4486-ba38-81c22e131269
+DEBUG: checkRestaurantOwnership - req.params: {}
+DEBUG: checkRestaurantOwnership - req.query: { period: '30d' }
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: BadRequestError: ID do restaurante não encontrado nos parâmetros da rota, query ou corpo da requisição.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:17:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 400
+}
+DEBUG: checkRestaurantOwnership - req.params: {}
+DEBUG: checkRestaurantOwnership - req.query: { period: '30d' }
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: BadRequestError: ID do restaurante não encontrado nos parâmetros da rota, query ou corpo da requisição.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:17:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 400
+}

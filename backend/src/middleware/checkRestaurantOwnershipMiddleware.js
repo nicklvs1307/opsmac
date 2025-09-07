@@ -25,7 +25,7 @@ const checkRestaurantOwnership = (req, res, next) => {
     }
 
     // Check if the user's restaurant ID matches the one in the URL params.
-    if (userRestaurantId !== restaurantIdFromParams) {
+    if (userRestaurantId !== restaurantIdFromRequest) {
       return next(new ForbiddenError('Acesso negado. Você não tem permissão para acessar este restaurante.'));
     }
 

@@ -15,15 +15,12 @@ const router = express.Router();
 // 1. Autenticação
 router.use(auth);
 
-// 2. Verificar posse do restaurante
-router.use(checkRestaurantOwnership);
-
-// 3. Verificar permissão específica para o dashboard
+// 2. Verificar permissão específica para o dashboard
 router.use(requirePermission('dashboard', 'read'));
 
-router.get('/overview', getDashboardOverviewValidation, dashboardController.getDashboardOverview);
-router.get('/analytics', getDashboardAnalyticsValidation, dashboardController.getDashboardAnalytics);
-router.get('/reports', generateReportValidation, dashboardController.generateReport);
-router.get('/rewards/analytics', dashboardController.getRewardsAnalytics);
+router.get('/:restaurantId/overview', checkRestaurantOwnership, getDashboardOverviewValidation, dashboardController.getDashboardOverview);
+router.get('/:restaurantId/analytics', checkRestaurantOwnership, getDashboardAnalyticsValidation, dashboardController.getDashboardAnalytics);
+router.get('/:restaurantId/reports', checkRestaurantOwnership, generateReportValidation, dashboardController.generateReport);
+router.get('/:restaurantId/rewards/analytics', checkRestaurantOwnership, dashboardController.getRewardsAnalytics);
 
 module.exports = router;

@@ -4,9 +4,12 @@ import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui
 import { menuStructure } from './menuStructure';
 import usePermissions from '@/hooks/usePermissions';
 import { useTheme } from '@mui/material/styles';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const Menu = () => {
   const theme = useTheme();
+  const { user } = useAuth();
+  const { can, permissionSnapshot } = usePermissions();
 
   const getNavLinkStyle = ({ isActive }) => ({
     display: 'flex',
@@ -22,13 +25,14 @@ const Menu = () => {
     },
   });
 
-  const { can } = usePermissions();
-
   const renderMenuItems = (items) => {
     return items.map((item, index) => {
-      // Check module-level permission if module is defined
-      if (item.module && !can(item.module, 'read')) {
-        return null;
+      // Check module-level visibility and locked status from permissionSnapshot
+      if (item.module) {
+        const moduleInSnapshot = permissionSnapshot?.modules.find(m => m.key === item.module);
+        if (!moduleInSnapshot || !moduleInSnapshot.visible || moduleInSnapshot.locked) {
+          return null;
+        }
       }
 
       // Check item-level permission if featureKey and actionKey are defined
@@ -64,6 +68,11 @@ const Menu = () => {
       );
     });
   };
+
+  // Only render menu if permissionSnapshot is available
+  if (!permissionSnapshot) {
+    return null;
+  }
 
   return <List>{renderMenuItems(menuStructure)}</List>;
 };

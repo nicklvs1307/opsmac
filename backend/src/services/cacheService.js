@@ -20,11 +20,22 @@ class CacheService {
     await redisClient.set(key, JSON.stringify(value), 'EX', ttlSeconds);
   }
 
-  async del(keyPattern) {
+  async delExact(key) { // Renamed from del to delExact for clarity
     if (!redisClient) return;
-    const result = await redisClient.del(keyPattern);
-    // console.log(`CacheService: Deleted ${result} keys matching pattern ${keyPattern}`);
+    const result = await redisClient.del(key);
+    // console.log(`CacheService: Deleted ${result} exact key: ${key}`);
     return result;
+  }
+
+  async delByPattern(pattern) {
+    if (!redisClient) return;
+    const keys = await redisClient.keys(pattern);
+    if (keys.length > 0) {
+      const result = await redisClient.del(keys);
+      // console.log(`CacheService: Deleted ${result} keys matching pattern ${pattern}`);
+      return result;
+    }
+    return 0;
   }
 
   async publish(channel, message) {

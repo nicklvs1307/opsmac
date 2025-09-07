@@ -1,6 +1,7 @@
 'use strict';
 
 const models = require('../../models');
+const cacheService = require('./cacheService'); // Import cacheService
 
 class EntitlementService {
   async setEntitlement(restaurantId, entityType, entityId, status, source, metadata) {
@@ -60,6 +61,9 @@ class EntitlementService {
       console.log(`[EntitlementService] Committing transaction.`);
       await transaction.commit();
       console.log(`[EntitlementService] Transaction committed successfully.`);
+      // Explicitly clear permission snapshots for this restaurant
+      await cacheService.delByPattern(`perm_snapshot:${restaurantId}:*`);
+      console.log(`[EntitlementService] Cleared permission snapshots for restaurant ${restaurantId}.`);
     } catch (error) {
       console.error(`[EntitlementService] Error in setEntitlements: ${error.name} - ${error.message}`, error.errors);
       console.log(`[EntitlementService] Rolling back transaction.`);

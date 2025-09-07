@@ -42,7 +42,7 @@ class EntitlementService {
 
       // Bulk insert new entitlements
       const newEntitlements = entitlements.map(ent => ({
-        restaurant_id: restaurantId,
+        restaurant_id: ent.restaurantId || restaurantId, // Ensure restaurant_id is correctly assigned
         entityType: ent.entityType,
         entityId: ent.entityId,
         status: ent.status,
@@ -64,6 +64,13 @@ class EntitlementService {
       // Explicitly clear permission snapshots for this restaurant
       await cacheService.delByPattern(`perm_snapshot:${restaurantId}:*`);
       console.log(`[EntitlementService] Cleared permission snapshots for restaurant ${restaurantId}.`);
+    } catch (error) {
+      console.error(`[EntitlementService] Error in setEntitlements: ${error.name} - ${error.message} - Details:`, error.errors, error); // Added error object
+      console.log(`[EntitlementService] Rolling back transaction.`);
+      await transaction.rollback();
+      console.log(`[EntitlementService] Transaction rolled back.`);
+      throw error; // This throw should cause the frontend mutation to fail
+    }
     } catch (error) {
       console.error(`[EntitlementService] Error in setEntitlements: ${error.name} - ${error.message}`, error.errors);
       console.log(`[EntitlementService] Rolling back transaction.`);

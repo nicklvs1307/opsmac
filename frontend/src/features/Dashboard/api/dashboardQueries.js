@@ -11,7 +11,7 @@ const fetchDashboardOverview = async ({ restaurantId, period }) => {
   if (!restaurantId) {
     throw new Error('Restaurant ID is required to fetch dashboard data.');
   }
-  const response = await axiosInstance.get(`/dashboard/overview/${restaurantId}`, {
+  const response = await axiosInstance.get(`/dashboard/${restaurantId}/overview`, {
     params: { period },
   });
   return response.data;

@@ -104,7 +104,7 @@ export const AuthProvider = ({ children }) => {
         let permissionSnapshot = null;
         if (selectedRestaurantId) {
           try {
-            const permResponse = await axiosInstance.get(`/api/iam/${selectedRestaurantId}/tree`, {
+            const permResponse = await axiosInstance.get(`/iam/tree?restaurantId=${selectedRestaurantId}`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },

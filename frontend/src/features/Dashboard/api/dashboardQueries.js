@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
+import { useAuth } from '@/app/providers/contexts/AuthContext'; // Import useAuth
 
 // Query Keys
 const DASHBOARD_QUERY_KEYS = {
@@ -11,8 +12,18 @@ const fetchDashboardOverview = async ({ restaurantId, period }) => {
   if (!restaurantId) {
     throw new Error('Restaurant ID is required to fetch dashboard data.');
   }
+
+  // Get the user and token from AuthContext
+  const { user } = useAuth();
+  if (!user || !user.token) {
+    throw new Error('User not authenticated or token not available.');
+  }
+
   const response = await axiosInstance.get(`/dashboard/${restaurantId}/overview`, {
     params: { period },
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
   });
   return response.data;
 };

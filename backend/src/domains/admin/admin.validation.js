@@ -20,7 +20,7 @@ exports.createRestaurantValidation = [
   body('name').trim().notEmpty().withMessage('Nome do restaurante é obrigatório'),
   body('ownerId').isUUID().withMessage('ID do proprietário inválido'),
   body('address').optional().isString().withMessage('Endereço deve ser uma string.'),
-  body('cuisine_type').optional().isString().withMessage('Tipo de cozinha deve ser uma string.'),
+  body('cuisine_type').optional().isIn(['Brazilian', 'Italian', 'Japanese', 'Mexican', 'American', 'Other']).withMessage('Tipo de cozinha inválido.'),
   body('description').optional().isString().withMessage('Descrição deve ser uma string.'),
 ];
 
@@ -28,7 +28,7 @@ exports.updateRestaurantValidation = [
   body('name').optional().trim().notEmpty().withMessage('Nome do restaurante é obrigatório'),
   body('ownerId').optional().isUUID().withMessage('ID do proprietário inválido'),
   body('address').optional().isString().withMessage('Endereço deve ser uma string.'),
-  body('cuisine_type').optional().isString().withMessage('Tipo de cozinha deve ser uma string.'),
+  body('cuisine_type').optional().isIn(['Brazilian', 'Italian', 'Japanese', 'Mexican', 'American', 'Other']).withMessage('Tipo de cozinha inválido.'),
   body('description').optional().isString().withMessage('Descrição deve ser uma string.'),
 ];
 

@@ -201,7 +201,30 @@ const RestaurantEditPage = () => {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}><Controller name="name" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <TextField {...field} label="Restaurant Name" fullWidth error={!!errors.name} helperText={errors.name?.message} />} /></Grid>
             <Grid item xs={12} sm={6}><Controller name="address" control={control} render={({ field }) => <TextField {...field} label="Address" fullWidth />} /></Grid>
-            <Grid item xs={12} sm={6}><Controller name="cuisine_type" control={control} render={({ field }) => <TextField {...field} label="Cuisine Type" fullWidth />} /></Grid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="cuisine_type"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    select // Use select prop to make it a dropdown
+                    label="Cuisine Type"
+                    fullWidth
+                    InputLabelProps={{ shrink: true }} // Ensures label is always "shrunk" for select
+                  >
+                    {/* Hardcoded options for now. In a real app, these would come from an API */}
+                    <MenuItem value=""><em>None</em></MenuItem>
+                    <MenuItem value="Brazilian">Brazilian</MenuItem>
+                    <MenuItem value="Italian">Italian</MenuItem>
+                    <MenuItem value="Japanese">Japanese</MenuItem>
+                    <MenuItem value="Mexican">Mexican</MenuItem>
+                    <MenuItem value="American">American</MenuItem>
+                    <MenuItem value="Other">Other</MenuItem>
+                  </TextField>
+                )}
+              />
+            </Grid>
             <Grid item xs={12} sm={6}><Controller name="description" control={control} render={({ field }) => <TextField {...field} label="Description" fullWidth multiline rows={4} />} /></Grid>
           </Grid>
           {permissionTree?.modules?.length > 0 && (

@@ -1,6 +1,7 @@
 'use strict';
 
 const redisClient = require('../config/redisClient');
+const cacheService = require('../services/cacheService');
 const CHANNEL = 'perm_invalidation';
 
 // This worker subscribes to the invalidation channel and clears relevant cache keys.
@@ -16,8 +17,8 @@ if (redisClient) {
       const { restaurantId } = JSON.parse(message);
       // console.log(`Received invalidation message for restaurant ${restaurantId}. Clearing cache.`);
       // Invalidate all snapshots for this restaurant
-      redisClient.del(`perm_snapshot:${restaurantId}:*`)
-        .then(res => { /* console.log(`Cleared ${res} keys for restaurant ${restaurantId}`) */ }) // Use the original redisClient for DEL
+      cacheService.delByPattern(`perm_snapshot:${restaurantId}:*`)
+        .then(res => { /* console.log(`Cleared ${res} keys for restaurant ${restaurantId}`) */ })
         .catch(err => console.error(`Error clearing cache for ${restaurantId}:`, err));
     }
   });

@@ -1,5 +1,4 @@
 'use strict';
-const fs = require('fs'); // Add this line
 const { models } = require('../../../models');
 const { Op } = require('sequelize');
 const iamService = require('../../services/iamService'); // For permission checks/snapshots
@@ -221,12 +220,7 @@ class IamController {
   // --- Restaurant Entitlements ---
   async setRestaurantEntitlement(req, res) {
     try {
-      const logMessage = `\n--- ${new Date().toISOString()} ---\nBackend: setRestaurantEntitlement - req.body: ${JSON.stringify(req.body, null, 2)}\n`;
-      fs.appendFileSync('backend_debug.log', logMessage); // Write to file
-
       const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
-      const destructuredLogMessage = `Backend: setRestaurantEntitlement - destructured: ${JSON.stringify({ restaurantId, entityType, entityId, status, source }, null, 2)}\n`;
-      fs.appendFileSync('backend_debug.log', destructuredLogMessage); // Write to file
 
       // Basic validation
       const missingFields = [];
@@ -237,7 +231,8 @@ class IamController {
       if (!source) missingFields.push('source');
 
       if (missingFields.length > 0) {
-        return res.status(400).json({ error: `Bad Request: Missing required fields for entitlement: ${missingFields.join(', ')}.` });
+        // Include the missing fields in the error response for debugging
+        return res.status(400).json({ error: `Bad Request: Missing required fields for entitlement: ${missingFields.join(', ')}.`, missingFields: missingFields });
       }
 
       const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({

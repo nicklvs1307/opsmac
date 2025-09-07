@@ -55,7 +55,7 @@ class IamService {
 
     // Get entitlements for the restaurant
     const entitlements = await models.RestaurantEntitlement.findAll({
-      where: { restaurantId: restaurantId },
+      where: { restaurant_id: restaurantId },
     });
     const entitlementMap = new Map();
     entitlements.forEach(e => entitlementMap.set(`${e.entityType}-${e.entityId}`, e.status));

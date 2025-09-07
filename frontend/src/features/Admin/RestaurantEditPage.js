@@ -177,6 +177,7 @@ const RestaurantEditPage = () => {
         }
       });
 
+      console.log('Entitlements being sent:', JSON.stringify(entitlements, null, 2));
       await setEntitlementsMutation.mutateAsync({ restaurantId, entitlements });
       toast.success('Restaurant entitlements updated successfully!');
 

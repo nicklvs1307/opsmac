@@ -1,15 +1,17 @@
-           restaurant_id             | entity_type |              entity_id               | status |  source  | metadata |        created_at         |        updated_at         
---------------------------------------+-------------+--------------------------------------+--------+----------+----------+---------------------------+---------------------------
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | module      | 6be7b2f9-36a6-4416-a065-919c55c4d37d | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | submodule   | bde2aa86-ab18-4efb-a2b7-cac22ae00a68 | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | 3c13c8e1-be2c-426f-a829-3045ac2f6180 | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | c47b0ae1-7fbf-4e55-ab99-cc0ce50dc118 | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | 5f163a6d-8d41-480f-8188-53fcfa2bfc8c | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | 321b545d-db4f-4873-8e15-ecb3b5f007eb | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | 9a701b5c-7276-427d-b0ef-6967d5a5a5a9 | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | db0176ff-2ad9-4ede-8779-9d30fd409088 | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | c4a25276-2cbb-47a2-98b8-3e676fe916ab | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | ed6544c7-8609-4f7f-94ca-0d88e225befa | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | 3d6127ba-ca08-4326-a5a3-98f070821ef5 | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | feature     | ffa9ff59-3c05-4eaa-9d40-82aa753502e9 | active | admin_ui | {}       | 2025-09-07 20:13:43.37+00 | 2025-09-07 20:13:43.37+00
- fe1d1bec-5a7f-4486-ba38-81c22e131269 | submodule   | 99f35c24-4606-417f-b89e-4a0680e41489 | active | admin_ui :
+> feedeliza-plus@1.0.0 start
+> node backend/server.js
+/app/backend/src/services/iamService.js:95
+    async buildSnapshot(restaurantId, userId) {
+          ^^^^^^^^^^^^^
+SyntaxError: Unexpected identifier 'buildSnapshot'
+    at wrapSafe (node:internal/modules/cjs/loader:1464:18)
+    at Module._compile (node:internal/modules/cjs/loader:1495:20)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/backend/src/domains/auth/auth.service.js:6:20)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+Node.js v20.19.5

@@ -42,7 +42,7 @@ class EntitlementService {
 
       // Bulk insert new entitlements
       const newEntitlements = entitlements.map(ent => ({
-        restaurantId: restaurantId,
+        restaurant_id: restaurantId,
         entityType: ent.entityType,
         entityId: ent.entityId,
         status: ent.status,

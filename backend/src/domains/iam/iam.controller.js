@@ -220,7 +220,9 @@ class IamController {
   // --- Restaurant Entitlements ---
   async setRestaurantEntitlement(req, res) {
     try {
+      console.log('Backend: setRestaurantEntitlement - req.body:', req.body); // Add this log
       const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
+      console.log('Backend: setRestaurantEntitlement - destructured:', { restaurantId, entityType, entityId, status, source }); // Add this log
 
       // Basic validation
       const missingFields = [];

@@ -757,5 +757,107 @@ router.delete('/entitlements', requirePermission('admin:permissions', 'delete'),
   }
 });
 
+/**
+ * @swagger
+ * /iam/restaurants/{restaurantId}/entitlements:
+ *   get:
+ *     summary: Get entitlements for a restaurant
+ *     tags: [IAM]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: restaurantId
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID of the restaurant
+ *     responses:
+ *       200:
+ *         description: List of entitlements
+ */
+router.get('/restaurants/:restaurantId/entitlements', requirePermission('entitlements.manage', 'read'), async (req, res) => {
+  const { restaurantId } = req.params;
+
+  try {
+    const entitlements = await models.RestaurantEntitlement.findAll({ where: { restaurant_id: restaurantId } });
+    return res.json(entitlements);
+  } catch (error) {
+    console.error('Error getting restaurant entitlements:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+/**
+ * @swagger
+ * /iam/entitlements/bulk:
+ *   post:
+ *     summary: Set tenant entitlements in bulk (Superadmin only)
+ *     tags: [IAM]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - restaurantId
+ *               - entitlements
+ *             properties:
+ *               restaurantId:
+ *                 type: string
+ *                 format: uuid
+ *               entitlements:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   required:
+ *                     - entityType
+ *                     - entityId
+ *                     - status
+ *                     - source
+ *                   properties:
+ *                     entityType:
+ *                       type: string
+ *                     entityId:
+ *                       type: string
+ *                     status:
+ *                       type: string
+ *                     source:
+ *                       type: string
+ *                     metadata:
+ *                       type: object
+ *     responses:
+ *       200:
+ *         description: Entitlements set successfully
+ */
+router.post('/entitlements/bulk', requirePermission('entitlements.manage', 'update'), async (req, res) => {
+  const userId = req.user?.id;
+  const { restaurantId, entitlements } = req.body;
+
+  // Ensure only superadmin can set entitlements
+  const user = await models.User.findByPk(userId);
+  if (!user || !user.isSuperadmin) {
+    return res.status(403).json({ error: 'Forbidden: Only superadmins can manage entitlements.' });
+  }
+
+  if (!restaurantId || !entitlements || !Array.isArray(entitlements)) {
+    return res.status(400).json({ error: 'Bad Request: restaurantId and entitlements array are required.' });
+  }
+
+  try {
+    await entitlementService.setEntitlements(restaurantId, entitlements);
+    await iamService.bumpPermVersion(restaurantId);
+    await auditService.log(req.user, restaurantId, 'ENTITLEMENTS_BULK_SET', `Restaurant:${restaurantId}`, { count: entitlements.length });
+    return res.json({ message: 'Entitlements set successfully.' });
+  } catch (error) {
+    console.error('Error setting entitlements in bulk:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router;
 

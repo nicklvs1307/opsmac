@@ -25,6 +25,33 @@ class EntitlementService {
       throw new Error('Entitlement not found.');
     }
   }
+
+  async setEntitlements(restaurantId, entitlements) {
+    const transaction = await models.sequelize.transaction();
+    try {
+      // Clear existing entitlements for this restaurant
+      await models.RestaurantEntitlement.destroy({ where: { restaurant_id: restaurantId }, transaction });
+
+      // Bulk insert new entitlements
+      const newEntitlements = entitlements.map(ent => ({
+        restaurant_id: restaurantId,
+        entity_type: ent.entityType,
+        entity_id: ent.entityId,
+        status: ent.status,
+        source: ent.source,
+        metadata: ent.metadata,
+      }));
+
+      if (newEntitlements.length > 0) {
+        await models.RestaurantEntitlement.bulkCreate(newEntitlements, { transaction });
+      }
+
+      await transaction.commit();
+    } catch (error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
 }
 
 module.exports = new EntitlementService();

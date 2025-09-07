@@ -19,7 +19,8 @@ import {
 } from '@/services/adminService';
 import {
   useGetPermissionTree,
-  useSetEntitlement,
+  useSetEntitlements, // Changed from useSetEntitlement
+  useGetRestaurantEntitlements, // Added this hook
 } from '@/features/IAM/api/iamQueries';
 import usePermissions from '@/hooks/usePermissions';
 import PermissionTree from '@/components/Admin/PermissionTree';
@@ -30,12 +31,19 @@ const RestaurantEditPage = () => {
   const queryClient = useQueryClient();
   const { can } = usePermissions();
 
-  const { data: restaurant, isLoading: isLoadingRestaurant, isError: isErrorRestaurant } = useQuery(['restaurant', restaurantId], () => fetchRestaurants(restaurantId), { enabled: !!restaurantId });
+  const { data: restaurant, isLoading: isLoadingRestaurant, isError: isErrorRestaurant } = useQuery([
+    'restaurant',
+    restaurantId
+  ], () => fetchRestaurants(restaurantId), { enabled: !!restaurantId });
+
   const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(restaurantId, { enabled: !!restaurantId });
+
+  // Fetch the specific entitlements for this restaurant
+  const { data: restaurantEntitlements, isLoading: isLoadingEntitlements, isError: isErrorEntitlements } = useGetRestaurantEntitlements(restaurantId, { enabled: !!restaurantId });
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm();
   const saveRestaurantMutation = useMutation(saveRestaurant, { onSuccess: () => queryClient.invalidateQueries(['restaurant', restaurantId]) });
-  const setEntitlementMutation = useSetEntitlement();
+  const setEntitlementsMutation = useSetEntitlements(); // Changed from useSetEntitlement
 
   const [selectedPermissions, setSelectedPermissions] = useState({});
 
@@ -58,43 +66,49 @@ const RestaurantEditPage = () => {
         let submoduleIndeterminate = false;
 
         submodule.features.forEach(feature => {
-          const featureState = newSelected[module.id].submodules[submodule.id].features[feature.id];
-          if (!featureState.checked) submoduleChecked = false;
-          if (featureState.indeterminate || featureState.checked) submoduleIndeterminate = true;
+          const featureState = newSelected[module.id]?.submodules[submodule.id]?.features[feature.id];
+          if (!featureState?.checked) submoduleChecked = false;
+          if (featureState?.indeterminate || featureState?.checked) submoduleIndeterminate = true;
         });
 
-        const subState = newSelected[module.id].submodules[submodule.id];
-        subState.checked = submoduleChecked;
-        subState.indeterminate = !submoduleChecked && submoduleIndeterminate;
+        const subState = newSelected[module.id]?.submodules[submodule.id];
+        if(subState) {
+          subState.checked = submoduleChecked;
+          subState.indeterminate = !submoduleChecked && submoduleIndeterminate;
 
-        if (!subState.checked) moduleChecked = false;
-        if (subState.indeterminate || subState.checked) moduleIndeterminate = true;
+          if (!subState.checked) moduleChecked = false;
+          if (subState.indeterminate || subState.checked) moduleIndeterminate = true;
+        }
       });
 
       const modState = newSelected[module.id];
-      modState.checked = moduleChecked;
-      modState.indeterminate = !moduleChecked && moduleIndeterminate;
+      if(modState) {
+        modState.checked = moduleChecked;
+        modState.indeterminate = !moduleChecked && moduleIndeterminate;
+      }
     });
 
     return newSelected;
   }, []);
 
   useEffect(() => {
-    if (permissionTree) {
+    if (permissionTree && restaurantEntitlements) {
+      const entitlementMap = new Map(restaurantEntitlements.map(e => [`${e.entity_type}-${e.entity_id}`, e.status === 'active']));
+
       let initialSelected = {};
       permissionTree.modules?.forEach(module => {
         initialSelected[module.id] = {
-          checked: module.status === 'active',
+          checked: entitlementMap.get(`module-${module.id}`) || false,
           indeterminate: false,
           submodules: module.submodules?.reduce((accSub, submodule) => {
             accSub[submodule.id] = {
-              checked: submodule.status === 'active',
+              checked: entitlementMap.get(`submodule-${submodule.id}`) || false,
               indeterminate: false,
               features: submodule.features?.reduce((accFeat, feature) => {
                 accFeat[feature.id] = {
-                  checked: feature.status === 'active',
+                  checked: entitlementMap.get(`feature-${feature.id}`) || false,
                   indeterminate: false,
-                  actions: {},
+                  actions: {}, // Actions are not managed for restaurant entitlements
                 };
                 return accFeat;
               }, {}),
@@ -106,7 +120,7 @@ const RestaurantEditPage = () => {
       const updatedState = updateParentStates(initialSelected, permissionTree);
       setSelectedPermissions(updatedState);
     }
-  }, [permissionTree, updateParentStates]);
+  }, [permissionTree, restaurantEntitlements, updateParentStates]);
 
   const handlePermissionChange = (path, checked) => {
     let newSelected = JSON.parse(JSON.stringify(selectedPermissions));
@@ -137,7 +151,7 @@ const RestaurantEditPage = () => {
   const onSubmit = async (data) => {
     try {
       if (!restaurantId) {
-        toast.error('Restaurant ID is missing. Cannot save entitlements.');
+        toast.error('Restaurant ID is missing. Cannot save.');
         return;
       }
       await saveRestaurantMutation.mutateAsync({ ...data, restaurantId });
@@ -146,32 +160,36 @@ const RestaurantEditPage = () => {
       const entitlements = [];
       permissionTree.modules?.forEach(module => {
         const moduleState = selectedPermissions[module.id];
-        entitlements.push({ entityType: 'module', entityId: module.id, status: moduleState.checked ? 'active' : 'locked', source: 'admin_ui', metadata: {} });
-        module.submodules?.forEach(submodule => {
-          const submoduleState = moduleState.submodules[submodule.id];
-          entitlements.push({ entityType: 'submodule', entityId: submodule.id, status: submoduleState.checked ? 'active' : 'locked', source: 'admin_ui', metadata: {} });
-          submodule.features?.forEach(feature => {
-            const featureState = submoduleState.features[feature.id];
-            entitlements.push({ entityType: 'feature', entityId: feature.id, status: featureState.checked ? 'active' : 'locked', source: 'admin_ui', metadata: {} });
-          });
-        });
+        if (moduleState) {
+            entitlements.push({ entityType: 'module', entityId: module.id, status: moduleState.checked ? 'active' : 'locked', source: 'admin_ui', metadata: {} });
+            module.submodules?.forEach(submodule => {
+                const submoduleState = moduleState.submodules[submodule.id];
+                if (submoduleState) {
+                    entitlements.push({ entityType: 'submodule', entityId: submodule.id, status: submoduleState.checked ? 'active' : 'locked', source: 'admin_ui', metadata: {} });
+                    submodule.features?.forEach(feature => {
+                        const featureState = submoduleState.features[feature.id];
+                        if (featureState) {
+                            entitlements.push({ entityType: 'feature', entityId: feature.id, status: featureState.checked ? 'active' : 'locked', source: 'admin_ui', metadata: {} });
+                        }
+                    });
+                }
+            });
+        }
       });
 
-      for (const entitlement of entitlements) {
-        console.log('Sending restaurant entitlement:', { restaurantId, ...entitlement });
-        await setEntitlementMutation.mutateAsync({ restaurantId, ...entitlement });
-      }
+      await setEntitlementsMutation.mutateAsync({ restaurantId, entitlements });
       toast.success('Restaurant entitlements updated successfully!');
 
       queryClient.invalidateQueries(['permissionTree', restaurantId]);
+      queryClient.invalidateQueries(['restaurantEntitlements', restaurantId]);
 
     } catch (err) {
       toast.error(err.response?.data?.message || 'An error occurred.');
     }
   };
 
-  if (isLoadingRestaurant || isLoadingPermissionTree) return <CircularProgress />;
-  if (isErrorRestaurant || isErrorPermissionTree) return <Alert severity="error">Error loading data.</Alert>;
+  if (isLoadingRestaurant || isLoadingPermissionTree || isLoadingEntitlements) return <CircularProgress />;
+  if (isErrorRestaurant || isErrorPermissionTree || isErrorEntitlements) return <Alert severity="error">Error loading data.</Alert>;
   if (!restaurant) return <Alert severity="warning">Restaurant not found.</Alert>;
 
   return (
@@ -192,7 +210,7 @@ const RestaurantEditPage = () => {
             </Box>
           )}
           <Box sx={{ mt: 4, display: 'flex', gap: 2 }}>
-            <Button type="submit" variant="contained" color="primary" disabled={saveRestaurantMutation.isLoading || setEntitlementMutation.isLoading || !can('admin:restaurants', 'edit')}>Save Changes</Button>
+            <Button type="submit" variant="contained" color="primary" disabled={saveRestaurantMutation.isLoading || setEntitlementsMutation.isLoading || !can('admin:restaurants', 'edit')}>Save Changes</Button>
             <Button variant="outlined" onClick={() => navigate('/admin/restaurants')}>Cancel</Button>
           </Box>
         </form>

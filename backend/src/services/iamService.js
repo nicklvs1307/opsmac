@@ -102,7 +102,7 @@ class IamService {
     };
 
     for (const module of allModules) {
-      const moduleStatus = entitlementMap.get(`module-${module.id}`) || 'active'; // Default to active
+      const moduleStatus = entitlementMap.get(`module-${module.id}`) || 'locked'; // Default to locked
       const moduleLocked = moduleStatus === 'locked' || moduleStatus === 'hidden';
 
       const moduleData = {
@@ -117,8 +117,8 @@ class IamService {
       };
 
       for (const submodule of module.submodules) {
-        const submoduleStatus = entitlementMap.get(`submodule-${submodule.id}`) || moduleStatus;
-        const submoduleLocked = submoduleStatus === 'locked' || submoduleStatus === 'hidden' || moduleLocked;
+        const submoduleStatus = entitlementMap.get(`submodule-${submodule.id}`) || 'locked'; // Default to locked
+        const submoduleLocked = moduleLocked || submoduleStatus === 'locked' || submoduleStatus === 'hidden';
 
         const submoduleData = {
           id: submodule.id,
@@ -131,8 +131,8 @@ class IamService {
         };
 
         for (const feature of submodule.features) {
-          const featureStatus = entitlementMap.get(`feature-${feature.id}`) || submoduleStatus;
-          const featureLocked = featureStatus === 'locked' || featureStatus === 'hidden' || submoduleLocked;
+          const featureStatus = entitlementMap.get(`feature-${feature.id}`) || 'locked'; // Default to locked
+          const featureLocked = submoduleLocked || featureStatus === 'locked' || featureStatus === 'hidden';
 
           const featureData = {
             id: feature.id,

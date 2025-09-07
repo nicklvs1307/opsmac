@@ -116,27 +116,29 @@ export const useSetUserPermissionOverrides = () => {
 };
 
 // Set tenant entitlements (Superadmin only)
-export const useSetEntitlement = () => {
-  return useMutation(async ({ restaurantId, entityType, entityId, status, source, metadata }) => {
-    const { data } = await axiosInstance.post('/iam/entitlements', {
+export const useSetEntitlements = () => {
+  return useMutation(async ({ restaurantId, entitlements }) => {
+    const { data } = await axiosInstance.post('/iam/entitlements/bulk', {
       restaurantId,
-      entityType,
-      entityId,
-      status,
-      source,
-      metadata,
+      entitlements,
     });
     return data;
   });
 };
 
-// Remove tenant entitlement (Superadmin only)
-export const useRemoveEntitlement = () => {
-  return useMutation(async ({ restaurantId, entityType, entityId }) => {
-    await axiosInstance.delete('/iam/entitlements', {
-      data: { restaurantId, entityType, entityId },
-    });
-  });
+// Fetch entitlements for a restaurant
+export const useGetRestaurantEntitlements = (restaurantId, options) => {
+  return useQuery(
+    ['restaurantEntitlements', restaurantId],
+    async () => {
+      const { data } = await axiosInstance.get(`/iam/restaurants/${restaurantId}/entitlements`);
+      return data;
+    },
+    {
+      enabled: !!restaurantId, // Only run if restaurantId is available
+      ...options,
+    }
+  );
 };
 
 // Fetch permissions for a specific role

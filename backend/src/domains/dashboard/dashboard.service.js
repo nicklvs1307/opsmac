@@ -1,4 +1,5 @@
-const { models } = require('config/config');
+const db = require('../../../models');
+const models = db.models;
 const { Op, fn, col, literal } = require('sequelize');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 

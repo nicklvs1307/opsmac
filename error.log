@@ -3,35 +3,115 @@
 Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'between')
-    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:19:26)
+DEBUG: authMiddleware - error: NotFoundError: Usuário não encontrado
+    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:117:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
+  statusCode: 404
+}
+Error caught by middleware: NotFoundError: Usuário não encontrado
+    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:117:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
+  statusCode: 404
+}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:38:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:38:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: Before bump - Restaurant b3adad74-2fd6-47eb-a356-e5fe3c83c446 perm_version: undefined
+DEBUG: After bump - Restaurant b3adad74-2fd6-47eb-a356-e5fe3c83c446 perm_version: 1
+DEBUG: authMiddleware - error: NotFoundError: Usuário não encontrado
+    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:117:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
+  statusCode: 404
+}
+Error caught by middleware: NotFoundError: Usuário não encontrado
+    at Object.getMe (/app/backend/src/domains/auth/auth.service.js:117:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async authMiddleware (/app/backend/src/middleware/authMiddleware.js:24:18) {
+  statusCode: 404
+}
+Error counting checkins: TypeError: Cannot read properties of undefined (reading 'Checkin')
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:26:38)
     at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'between')
-    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:19:26)
+Error caught by middleware: Error: Failed to get checkin count
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:31:15)
     at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error in getSurveyAnalytics:  TypeError: Cannot read properties of undefined (reading 'SurveyResponse')
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.service.js:159:45)
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.controller.js:88:43)
+Error counting checkins: TypeError: Cannot read properties of undefined (reading 'Checkin')
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:26:38)
+    at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'SurveyResponse')
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.service.js:159:45)
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.controller.js:88:43)
+Error caught by middleware: Error: Failed to get checkin count
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:31:15)
+    at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error in getSurveyAnalytics:  TypeError: Cannot read properties of undefined (reading 'SurveyResponse')
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.service.js:159:45)
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.controller.js:88:43)
+DEBUG: Before bump - Restaurant 8cc4b53c-28a8-4a23-86c4-a2dea347ecbe perm_version: undefined
+DEBUG: After bump - Restaurant 8cc4b53c-28a8-4a23-86c4-a2dea347ecbe perm_version: 1
+Error counting checkins: TypeError: Cannot read properties of undefined (reading 'Checkin')
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:26:38)
+    at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'SurveyResponse')
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.service.js:159:45)
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.controller.js:88:43)
+Error caught by middleware: Error: Failed to get checkin count
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:31:15)
+    at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error counting checkins: TypeError: Cannot read properties of undefined (reading 'Checkin')
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:26:38)
+    at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error caught by middleware: Error: Failed to get checkin count
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:31:15)
+    at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 Error caught by middleware: Error
     at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
@@ -39,10 +119,10 @@ Error caught by middleware: Error
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
     at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Object.getActiveCheckins (/app/backend/src/domains/checkin/checkin.service.js:459:26)
-    at async exports.getActiveCheckins (/app/backend/src/domains/checkin/checkin.controller.js:98:28) {
+    at async Object.getCheckinAnalytics (/app/backend/src/domains/checkin/checkin.service.js:400:33)
+    at async exports.getCheckinAnalytics (/app/backend/src/domains/checkin/checkin.controller.js:88:23) {
   name: 'SequelizeDatabaseError',
-  parent: error: column Checkin.status does not exist
+  parent: error: column "checkincount" does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -57,7 +137,7 @@ Error caught by middleware: Error
     code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '513',
+    position: '514',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,
@@ -69,10 +149,10 @@ Error caught by middleware: Error
     file: 'parse_relation.c',
     line: '3647',
     routine: 'errorMissingColumn',
-    sql: `SELECT "Checkin"."id", "Checkin"."customer_id" AS "customerId", "Checkin"."restaurant_id" AS "restaurantId", "Checkin"."created_at" AS "createdAt", "Checkin"."updated_at" AS "updatedAt", "Checkin"."customer_id", "Checkin"."restaurant_id", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."phone" AS "customer.phone", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'active' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9' ORDER BY "Checkin"."checkinTime" ASC;`,
+    sql: `SELECT "Checkin"."customer_id" AS "customerId", COUNT("Checkin"."id") AS "checkinCount", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'b3adad74-2fd6-47eb-a356-e5fe3c83c446' GROUP BY "customerId", "customer"."id", "customer"."name", "customer"."email" ORDER BY checkinCount DESC LIMIT 10;`,
     parameters: undefined
   },
-  original: error: column Checkin.status does not exist
+  original: error: column "checkincount" does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -87,7 +167,7 @@ Error caught by middleware: Error
     code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '513',
+    position: '514',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,
@@ -99,10 +179,10 @@ Error caught by middleware: Error
     file: 'parse_relation.c',
     line: '3647',
     routine: 'errorMissingColumn',
-    sql: `SELECT "Checkin"."id", "Checkin"."customer_id" AS "customerId", "Checkin"."restaurant_id" AS "restaurantId", "Checkin"."created_at" AS "createdAt", "Checkin"."updated_at" AS "updatedAt", "Checkin"."customer_id", "Checkin"."restaurant_id", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."phone" AS "customer.phone", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'active' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9' ORDER BY "Checkin"."checkinTime" ASC;`,
+    sql: `SELECT "Checkin"."customer_id" AS "customerId", COUNT("Checkin"."id") AS "checkinCount", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'b3adad74-2fd6-47eb-a356-e5fe3c83c446' GROUP BY "customerId", "customer"."id", "customer"."name", "customer"."email" ORDER BY checkinCount DESC LIMIT 10;`,
     parameters: undefined
   },
-  sql: `SELECT "Checkin"."id", "Checkin"."customer_id" AS "customerId", "Checkin"."restaurant_id" AS "restaurantId", "Checkin"."created_at" AS "createdAt", "Checkin"."updated_at" AS "updatedAt", "Checkin"."customer_id", "Checkin"."restaurant_id", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."phone" AS "customer.phone", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'active' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9' ORDER BY "Checkin"."checkinTime" ASC;`,
+  sql: `SELECT "Checkin"."customer_id" AS "customerId", COUNT("Checkin"."id") AS "checkinCount", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'b3adad74-2fd6-47eb-a356-e5fe3c83c446' GROUP BY "customerId", "customer"."id", "customer"."name", "customer"."email" ORDER BY checkinCount DESC LIMIT 10;`,
   parameters: {}
 }
 Error caught by middleware: Error
@@ -111,10 +191,10 @@ Error caught by middleware: Error
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
     at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Object.getActiveCheckins (/app/backend/src/domains/checkin/checkin.service.js:459:26)
-    at async exports.getActiveCheckins (/app/backend/src/domains/checkin/checkin.controller.js:98:28) {
+    at async Object.getCheckinAnalytics (/app/backend/src/domains/checkin/checkin.service.js:400:33)
+    at async exports.getCheckinAnalytics (/app/backend/src/domains/checkin/checkin.controller.js:88:23) {
   name: 'SequelizeDatabaseError',
-  parent: error: column Checkin.status does not exist
+  parent: error: column "checkincount" does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -129,7 +209,7 @@ Error caught by middleware: Error
     code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '513',
+    position: '514',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,
@@ -141,10 +221,10 @@ Error caught by middleware: Error
     file: 'parse_relation.c',
     line: '3647',
     routine: 'errorMissingColumn',
-    sql: `SELECT "Checkin"."id", "Checkin"."customer_id" AS "customerId", "Checkin"."restaurant_id" AS "restaurantId", "Checkin"."created_at" AS "createdAt", "Checkin"."updated_at" AS "updatedAt", "Checkin"."customer_id", "Checkin"."restaurant_id", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."phone" AS "customer.phone", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'active' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9' ORDER BY "Checkin"."checkinTime" ASC;`,
+    sql: `SELECT "Checkin"."customer_id" AS "customerId", COUNT("Checkin"."id") AS "checkinCount", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'b3adad74-2fd6-47eb-a356-e5fe3c83c446' GROUP BY "customerId", "customer"."id", "customer"."name", "customer"."email" ORDER BY checkinCount DESC LIMIT 10;`,
     parameters: undefined
   },
-  original: error: column Checkin.status does not exist
+  original: error: column "checkincount" does not exist
       at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
       at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
       at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
@@ -159,7 +239,7 @@ Error caught by middleware: Error
     code: '42703',
     detail: undefined,
     hint: undefined,
-    position: '513',
+    position: '514',
     internalPosition: undefined,
     internalQuery: undefined,
     where: undefined,
@@ -171,271 +251,45 @@ Error caught by middleware: Error
     file: 'parse_relation.c',
     line: '3647',
     routine: 'errorMissingColumn',
-    sql: `SELECT "Checkin"."id", "Checkin"."customer_id" AS "customerId", "Checkin"."restaurant_id" AS "restaurantId", "Checkin"."created_at" AS "createdAt", "Checkin"."updated_at" AS "updatedAt", "Checkin"."customer_id", "Checkin"."restaurant_id", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."phone" AS "customer.phone", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'active' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9' ORDER BY "Checkin"."checkinTime" ASC;`,
+    sql: `SELECT "Checkin"."customer_id" AS "customerId", COUNT("Checkin"."id") AS "checkinCount", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'b3adad74-2fd6-47eb-a356-e5fe3c83c446' GROUP BY "customerId", "customer"."id", "customer"."name", "customer"."email" ORDER BY checkinCount DESC LIMIT 10;`,
     parameters: undefined
   },
-  sql: `SELECT "Checkin"."id", "Checkin"."customer_id" AS "customerId", "Checkin"."restaurant_id" AS "restaurantId", "Checkin"."created_at" AS "createdAt", "Checkin"."updated_at" AS "updatedAt", "Checkin"."customer_id", "Checkin"."restaurant_id", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."phone" AS "customer.phone", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'active' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9' ORDER BY "Checkin"."checkinTime" ASC;`,
+  sql: `SELECT "Checkin"."customer_id" AS "customerId", COUNT("Checkin"."id") AS "checkinCount", "customer"."id" AS "customer.id", "customer"."name" AS "customer.name", "customer"."email" AS "customer.email" FROM "checkins" AS "Checkin" LEFT OUTER JOIN "customers" AS "customer" ON "Checkin"."customer_id" = "customer"."id" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'b3adad74-2fd6-47eb-a356-e5fe3c83c446' GROUP BY "customerId", "customer"."id", "customer"."name", "customer"."email" ORDER BY checkinCount DESC LIMIT 10;`,
   parameters: {}
 }
-Error caught by middleware: NotFoundError: Restaurante não encontrado
-    at exports.getRestaurantSettings (/app/backend/src/domains/settings/settings.service.js:19:11)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.getRestaurantSettings (/app/backend/src/domains/settings/settings.controller.js:31:18) {
-  statusCode: 404
-}
-Error caught by middleware: TypeError: next is not a function
-    at exports.listRewards (/app/backend/src/domains/rewards/rewards.service.js:35:5)
-    at exports.listRewards (/app/backend/src/domains/rewards/rewards.controller.js:16:39)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: NotFoundError: Restaurante não encontrado
-    at exports.getRestaurantSettings (/app/backend/src/domains/settings/settings.service.js:19:11)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.getRestaurantSettings (/app/backend/src/domains/settings/settings.controller.js:31:18) {
-  statusCode: 404
-}
-Error caught by middleware: TypeError: next is not a function
-    at exports.listRewards (/app/backend/src/domains/rewards/rewards.service.js:35:5)
-    at exports.listRewards (/app/backend/src/domains/rewards/rewards.controller.js:16:39)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
-    at async Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
-    at async Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:20)
-    at async Object.getCheckinAnalytics (/app/backend/src/domains/checkin/checkin.service.js:392:25)
-    at async exports.getCheckinAnalytics (/app/backend/src/domains/checkin/checkin.controller.js:88:23) {
-  name: 'SequelizeDatabaseError',
-  parent: error: column Checkin.status does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 112,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: undefined,
-    position: '63',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT count(*) AS "count" FROM "checkins" AS "Checkin" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9';`,
-    parameters: undefined
-  },
-  original: error: column Checkin.status does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 112,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: undefined,
-    position: '63',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT count(*) AS "count" FROM "checkins" AS "Checkin" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9';`,
-    parameters: undefined
-  },
-  sql: `SELECT count(*) AS "count" FROM "checkins" AS "Checkin" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9';`,
-  parameters: {}
-}
-Error caught by middleware: Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
-    at async Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
-    at async Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:20)
-    at async Object.getCheckinAnalytics (/app/backend/src/domains/checkin/checkin.service.js:392:25)
-    at async exports.getCheckinAnalytics (/app/backend/src/domains/checkin/checkin.controller.js:88:23) {
-  name: 'SequelizeDatabaseError',
-  parent: error: column Checkin.status does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 112,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: undefined,
-    position: '63',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT count(*) AS "count" FROM "checkins" AS "Checkin" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9';`,
-    parameters: undefined
-  },
-  original: error: column Checkin.status does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 112,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: undefined,
-    position: '63',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT count(*) AS "count" FROM "checkins" AS "Checkin" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9';`,
-    parameters: undefined
-  },
-  sql: `SELECT count(*) AS "count" FROM "checkins" AS "Checkin" WHERE "Checkin"."status" = 'completed' AND "Checkin"."restaurant_id" = 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9';`,
-  parameters: {}
-}
-Error in getSurveyAnalytics:  TypeError: Cannot read properties of undefined (reading 'SurveyResponse')
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.service.js:159:45)
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.controller.js:88:43)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'SurveyResponse')
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.service.js:159:45)
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.controller.js:88:43)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error in getSurveyAnalytics:  TypeError: Cannot read properties of undefined (reading 'SurveyResponse')
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.service.js:159:45)
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.controller.js:88:43)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'SurveyResponse')
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.service.js:159:45)
-    at exports.getSurveyAnalytics (/app/backend/src/domains/survey/survey.controller.js:88:43)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: NotFoundError: Restaurante não encontrado
-    at exports.getRestaurantSettings (/app/backend/src/domains/settings/settings.service.js:19:11)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.getRestaurantSettings (/app/backend/src/domains/settings/settings.controller.js:31:18) {
-  statusCode: 404
-}
-Error caught by middleware: ForbiddenError: Usuário não está associado a um restaurante.
-    at exports.listNpsCriteria (/app/backend/src/domains/npsCriteria/npsCriteria.controller.js:17:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
-  statusCode: 403
-}
-Error caught by middleware: TypeError: next is not a function
-    at exports.listRewards (/app/backend/src/domains/rewards/rewards.service.js:35:5)
-    at exports.listRewards (/app/backend/src/domains/rewards/rewards.controller.js:16:39)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: NotFoundError: Restaurante não encontrado
-    at exports.getRestaurantSettings (/app/backend/src/domains/settings/settings.service.js:19:11)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async exports.getRestaurantSettings (/app/backend/src/domains/settings/settings.controller.js:31:18) {
-  statusCode: 404
-}
-Error caught by middleware: ForbiddenError: Usuário não está associado a um restaurante.
-    at exports.listNpsCriteria (/app/backend/src/domains/npsCriteria/npsCriteria.controller.js:17:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
-  statusCode: 403
-}
-Error caught by middleware: TypeError: next is not a function
-    at exports.listRewards (/app/backend/src/domains/rewards/rewards.service.js:35:5)
-    at exports.listRewards (/app/backend/src/domains/rewards/rewards.controller.js:16:39)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
-    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:17:34)
-    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
-    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:17:34)
-    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'between')
-    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:19:26)
+Error counting checkins: TypeError: Cannot read properties of undefined (reading 'Checkin')
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:26:38)
     at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'between')
-    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:19:26)
+Error caught by middleware: Error: Failed to get checkin count
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:31:15)
     at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Coupon')
-    at exports.getCouponAnalytics (/app/backend/src/domains/coupons/coupons.service.js:105:37)
-    at exports.getCouponAnalytics (/app/backend/src/domains/coupons/coupons.controller.js:60:44)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/backend/src/middleware/requirePermission.js:28:16
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Coupon')
-    at exports.listCoupons (/app/backend/src/domains/coupons/coupons.service.js:16:49)
-    at exports.listCoupons (/app/backend/src/domains/coupons/coupons.controller.js:18:58)
+Error counting checkins: TypeError: Cannot read properties of undefined (reading 'Checkin')
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:26:38)
+    at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Coupon')
-    at exports.getCouponAnalytics (/app/backend/src/domains/coupons/coupons.service.js:105:37)
-    at exports.getCouponAnalytics (/app/backend/src/domains/coupons/coupons.controller.js:60:44)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/backend/src/middleware/requirePermission.js:28:16
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Coupon')
-    at exports.listCoupons (/app/backend/src/domains/coupons/coupons.service.js:16:49)
-    at exports.listCoupons (/app/backend/src/domains/coupons/coupons.controller.js:18:58)
+Error caught by middleware: Error: Failed to get checkin count
+    at Object.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.service.js:31:15)
+    at exports.getDashboardOverview (/app/backend/src/domains/dashboard/dashboard.controller.js:17:41)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:18:34)
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:18:34)
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

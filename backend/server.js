@@ -7,7 +7,8 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
-const { sequelize, models } = require('models');
+const db = require('models');
+const { sequelize, models } = db;
 const { BaseError } = require('utils/errors');
 
 // Importação de Rotas

@@ -1,4 +1,6 @@
-const { models } = require('../../config/database');
+const db = require('../../../models');
+const models = db.models;
+const sequelize = db.sequelize;
 const { Op, fn, col, literal } = require('sequelize');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 const { sendWhatsAppMessage } = require('services/integrations/whatsappApiClient');
@@ -413,7 +415,7 @@ async function getCheckinAnalytics(restaurantId, period) {
       attributes: ['name', 'email'],
     }],
     group: ['customerId', 'customer.id', 'customer.name', 'customer.email'],
-    order: [[literal('checkinCount'), 'DESC']],
+    order: [[sequelize.literal('checkinCount'), 'DESC']],
     limit: 10,
   });
 

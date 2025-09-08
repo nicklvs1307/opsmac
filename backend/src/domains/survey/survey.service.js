@@ -1,4 +1,4 @@
-const { models } = require('models');
+const models = require('../../models');
 const { Op } = require('sequelize');
 const { surveyTemplates } = require('../../utils/surveyTemplates');
 const { generateUniqueSlug } = require('utils/slugGenerator');

@@ -10,6 +10,12 @@ const usePermissions = () => {
   const can = useCallback((featureKey, actionKey) => {
     // console.log('can check:', { featureKey, actionKey, loading, error, hasSnapshot: !!permissionSnapshot, isOwner: permissionSnapshot?.isOwner, isSuperAdmin: permissionSnapshot?.isSuperAdmin });
 
+    // If featureKey or actionKey are not provided, deny permission.
+    // This prevents errors when components call `can` with undefined values.
+    if (!featureKey || !actionKey) {
+      return false;
+    }
+
     // If auth is still loading, or there's an error, or no snapshot yet, deny.
     if (loading || error || !permissionSnapshot) {
       return false;

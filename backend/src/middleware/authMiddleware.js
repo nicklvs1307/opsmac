@@ -33,6 +33,7 @@ const authMiddleware = async (req, res, next) => {
 
     // Anexa um objeto de usuário limpo e seguro à requisição.
     req.user = user;
+    console.log('DEBUG: authMiddleware - req.user after assignment:', JSON.stringify(req.user, null, 2));
 
     next();
   } catch (error) {

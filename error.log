@@ -1,16 +1,3 @@
-AuthContext.js:82 AuthContext useEffect: Running
-AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGYwNTE2NS0wMTQ0LTRhOWEtYWIyMC1jOGE0MTc3MzlmNTUiLCJpYXQiOjE3NTcyOTM4MTQsImV4cCI6MTc1Nzg5ODYxNH0.HL-zaORUQte7NnJ4Sf6sA2Ag33g-ZGbFUgzTqkaRiSM
-AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
-AuthContext.js:92 AuthContext useEffect: /auth/me successful {user: {…}}
-AuthContext.js:99 AuthContext useEffect: Attempting to fetch /iam/tree
-AuthContext.js:106 AuthContext useEffect: /iam/tree successful {restaurantId: 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9', userId: 'b4f05165-0144-4a9a-ab20-c8a417739f55', isSuperAdmin: false, isOwner: true, modules: Array(8)}
-usePermissions.js:62 can check: {featureKey: undefined, actionKey: undefined, loading: false, error: null, hasSnapshot: false, …}
-{
-    "loading": false,
-    "error": null,
-    "hasSnapshot": false
-}
-
 {
     "user": {
         "id": "b4f05165-0144-4a9a-ab20-c8a417739f55",
@@ -68,9 +55,1486 @@ usePermissions.js:62 can check: {featureKey: undefined, actionKey: undefined, lo
 }
 
 AuthContext.js:82 AuthContext useEffect: Running
-AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGYwNTE2NS0wMTQ0LTRhOWEtYWIyMC1jOGE0MTc3MzlmNTUiLCJpYXQiOjE3NTcyOTM4MTQsImV4cCI6MTc1Nzg5ODYxNH0.HL-zaORUQte7NnJ4Sf6sA2Ag33g-ZGbFUgzTqkaRiSM
+AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGYwNTE2NS0wMTQ0LTRhOWEtYWIyMC1jOGE0MTc3MzlmNTUiLCJpYXQiOjE3NTcyOTQ0NzAsImV4cCI6MTc1Nzg5OTI3MH0.JuzKL9dBAC6oyUsAUTCM2tpTMTh2WoUSIgaOJqrIQJ4
 AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
 AuthContext.js:92 AuthContext useEffect: /auth/me successful {user: {…}}
 AuthContext.js:99 AuthContext useEffect: Attempting to fetch /iam/tree
 AuthContext.js:106 AuthContext useEffect: /iam/tree successful {restaurantId: 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9', userId: 'b4f05165-0144-4a9a-ab20-c8a417739f55', isSuperAdmin: false, isOwner: true, modules: Array(8)}
-usePermissions.js:62 can check: {featureKey: undefined, actionKey: undefined, loading: false, error: null, hasSnapshot: false, …}
+react-dom.production.min.js:188 TypeError: Cannot read properties of undefined (reading 'split')
+    at usePermissions.js:27:36
+    at Df (ProtectedRoute.js:32:7)
+    at vi (react-dom.production.min.js:160:137)
+    at As (react-dom.production.min.js:196:258)
+    at wl (react-dom.production.min.js:291:88)
+    at bc (react-dom.production.min.js:279:389)
+    at gc (react-dom.production.min.js:279:320)
+    at vc (react-dom.production.min.js:279:180)
+    at oc (react-dom.production.min.js:270:88)
+    at ac (react-dom.production.min.js:267:429)
+ds @ react-dom.production.min.js:188
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+hooks.tsx:631 React Router caught the following error during render TypeError: Cannot read properties of undefined (reading 'split')
+    at usePermissions.js:27:36
+    at Df (ProtectedRoute.js:32:7)
+    at vi (react-dom.production.min.js:160:137)
+    at As (react-dom.production.min.js:196:258)
+    at wl (react-dom.production.min.js:291:88)
+    at bc (react-dom.production.min.js:279:389)
+    at gc (react-dom.production.min.js:279:320)
+    at vc (react-dom.production.min.js:279:180)
+    at oc (react-dom.production.min.js:270:88)
+    at ac (react-dom.production.min.js:267:429) {componentStack: '\n    at Df (https://feedelizapro.towersfy.com/stat…towersfy.com/static/js/main.daa857e0.js:2:489660)'}
+componentDidCatch @ hooks.tsx:631
+o.componentDidCatch.r.callback @ react-dom.production.min.js:189
+Uo @ react-dom.production.min.js:156
+xl @ react-dom.production.min.js:260
+bl @ react-dom.production.min.js:259
+yl @ react-dom.production.min.js:258
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+
+> feedeliza-plus@1.0.0 start
+> node backend/server.js
+Redis Client Connected
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+Error caught by middleware: ForbiddenError: Usuário não está associado a um restaurante.
+    at exports.listNpsCriteria (/app/backend/src/domains/npsCriteria/npsCriteria.controller.js:17:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+Error caught by middleware: ForbiddenError: Usuário não está associado a um restaurante.
+    at exports.listNpsCriteria (/app/backend/src/domains/npsCriteria/npsCriteria.controller.js:17:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: /iam/tree - userId: 04dc169f-2965-45cb-abad-8aab69a115d5 restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+[EntitlementService] Starting setEntitlements for restaurant: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+[EntitlementService] Received restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+[EntitlementService] Received entitlements: [
+  {
+    "entityType": "module",
+    "entityId": "a6a6e462-aa6f-4e7d-9138-ce0adcb9a63e",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "9fd463e2-01d1-4442-9b24-08cfe339a84a",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "58ebc6fe-ba02-4668-a07b-17c5d45af6e1",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "815e7bda-5faf-4cdc-96c5-ed5a87d995b6",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "3aed3ac7-c73b-418e-87f7-8a27ad258273",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "06ddb51a-d28b-4291-a385-00bc6277c816",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "75744f05-11cd-4e63-a23d-808099a0fdcb",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "5e347f2c-97a3-4ad7-b330-402548bdba19",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "7e8d2f14-0355-4e8b-bdf2-0eb82e9cd39c",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "58cf3502-d35d-460f-a151-5e1af8becb76",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "fae326b1-dc57-444e-91ab-b87ddabd87c0",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "ddad46ae-2aec-4919-bafa-476370d6e74a",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "dd6991a1-d7ca-451e-aa9f-010f7f0e5b44",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "dd48b773-1f0a-4b10-afe0-8c80839291dc",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "264eac82-689c-41ed-ae2f-a978c2af2437",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "4e488df8-4af6-4885-b3f5-55e6554fa6c9",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "2733c0e6-49e0-439b-bf7f-ac226aecdde9",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "73d5fc9b-abfe-4953-9e3d-5fc8f886842b",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "e417967a-fbe5-4b3f-9e36-546704daf612",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "b8281064-9f54-440e-85b1-c98fb26069a0",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "93b8df0e-726a-4192-a436-bde0a974fcd8",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "b665f57a-b1e6-418c-823b-d052ab421fb8",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "85fd6251-2bee-4a33-b441-37b4f9b16e55",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "630b3afc-2f9f-4981-b654-2bec8cfa85ee",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "80467cd9-500a-45f3-9f11-9955b8bc574a",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "c93ffc13-9926-4319-b0bb-11a3f0d4d978",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "43c7a82d-0965-43d9-9211-e8914833998b",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "09983b0c-fd75-42b9-b839-34d2b50ecdac",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "5cafe12f-0c47-4eb5-9e91-4d04dfe1d06e",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "5ccb1e9b-6f92-4743-b1fc-2b80000a786b",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "1c94fa6b-c0c0-4443-9e90-83fd349de337",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "7d215f02-309c-442c-be9d-1b0539606ae8",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "9622b38a-837a-44f5-9442-3ad7e0594133",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "34ee3822-ebed-4bf4-a3f6-b5cef67a256c",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "19420ff8-c9f2-4ca2-b9b0-23c1c7d61962",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "1b30a612-f605-41b9-9a2f-f60dff6c743e",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "25ece565-14d6-4d98-a478-7ff4990cb1c6",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "34e69d08-d258-4f25-b7c8-c6a795e40d33",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "40cf0c59-572a-4f3c-9da6-f0508006966f",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "9e09c958-77c1-4496-8792-82c5eaff49ae",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "2b9c97ed-f04f-4008-88e2-59136b3ba825",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "afdf31b6-a5cb-4b2e-abf2-cf1db42ec69b",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "ef1dcd71-5a23-4329-a64d-83686128ef1c",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "7cc863cb-3cdb-4859-ab35-9a1c704b1f0a",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "34cfc700-b01f-4101-b3ac-51a56814ab0e",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "6b3e7f19-45cb-4d78-b0fd-b60ee6fde090",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "6685e421-41be-4afe-93e2-1d29254bd06c",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "02510cd5-c83f-413e-b29e-b45f4af796ab",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "778f42c9-ac3f-4f55-95ba-0bb6bc0175fd",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "db260bc2-11ba-4514-adc3-4524d252cbf3",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "e64f5d64-a2f5-4a28-a33a-95d86908fab0",
+    "status": "active",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "module",
+    "entityId": "ded9815e-94a8-495f-8f98-6e47b84df797",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "f4222b4f-bec7-46c3-aeb6-cccdd7f921fe",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "27f37a39-310a-4c0a-9173-e4e6b7dc3845",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "ccf5754c-f704-4248-aa4f-8b23c203de0a",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "93a181f4-cafc-41f3-9f54-a6788e4d02a3",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "b50e1b35-e358-49a8-87c8-f91760a19a45",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "d61451c1-d88b-4705-9d3a-618d8a4af463",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "7a8b7d2a-1543-4d87-86d8-3a36e328084d",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "20c6cbb7-cece-42f1-9e2e-08424a69675c",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "8e80b2ff-7a84-48f9-a190-3ffda1200d55",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "d1b350f2-52e7-4ade-881e-d0868b60c852",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "d0d13275-4b45-481f-b288-7d4255a7b0d6",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "d44d682a-c46b-4787-b196-143bc0488f6b",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "dbf14221-c65b-49c8-be82-5f86d8ad4c7b",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "a7d2e050-fe46-4b28-8afa-c4c7c4e80a34",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "module",
+    "entityId": "bcba6675-7e7b-42dc-bc63-fed34a33823a",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "bcdfd318-5e79-4df6-8650-ec191bf0f811",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "b94f9b87-9d30-4622-822b-14621ae0bc1a",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "c6bda241-bed8-4f01-ac16-3820f3717291",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "7272fff8-77db-4fa7-a25e-ff0e9a08b55c",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "f2f5a6c9-b02f-4b7a-9e67-b361474a4be6",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "a7b6108e-3bce-4dae-a7d5-aad8c145b9b6",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "cf83fa81-165d-4312-b5a1-e59291427b1f",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "558b08c0-4e49-43d7-915b-d0463d78609f",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "317f31e0-16b8-49b2-8aa9-588596a3ed18",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "dd0badba-4b97-4c45-9437-d3d9715685e9",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "b3c07fa0-869f-44c6-99f6-dbe395b486b2",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "de4086c2-c5c5-4cfe-93cf-88459344599a",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "bcf40cff-8b92-4173-949b-49414624843c",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "6157b849-fd9e-469f-b435-45e63c3fa999",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "2138ee84-495b-496d-a9d7-ec75a1f68a62",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "3317b655-1461-4c27-9719-a3c1fb9e5860",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "e6e9859c-5936-4b1b-b60c-0e6ae9e0ff7f",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "6a372db3-ab73-4b78-8115-7ce924884b38",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "2d5fc945-639c-4465-b8c5-0083efadbbd8",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "64a12423-051b-45d2-87bf-b664259826ca",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "706f59ff-3329-4227-9ca1-cf1a96c39f8b",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "e1fc3711-0528-437e-9b8f-c07db1e1ae45",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "37189d9d-eca8-4a1e-9181-d70c3c851961",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "module",
+    "entityId": "10b3f589-c2e9-4030-ad2c-8ab29f30c127",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "fcffc716-a16b-4a7a-a578-b1271d4b84ec",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "dc115001-e65c-4831-9ecf-0dc2d2f8513d",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "ce0838a1-3f7f-4788-813c-bb9e162d5763",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "b8dd7d79-817a-445d-ba06-61044a616846",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "35a015aa-ab1b-4f81-b6ca-40b49d4bd733",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "6237c88d-4d96-47ff-a5ad-db6a1bf21f62",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "d57bc9c0-4afd-40d1-92d0-5ef78e9a1917",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "5a2a763d-1fcf-4826-83e2-a2dabad11080",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "1fd3b623-15b4-45b1-ab62-daca34cd7406",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "d1b47912-4efc-46b3-b35a-4088a18ab66f",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "c38659e8-dfdf-41d2-8cc6-4b3b7b592ba2",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "174ec0f9-653f-4183-9719-24ec1a12fbc2",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "f9c70bc4-3603-4f85-b149-6de868f46e18",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "module",
+    "entityId": "c70309fa-0cfc-4f95-8441-1bc7f8cdf344",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "e988699b-cafc-4400-8a79-20d6469f7e64",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "9316c37a-ef86-457f-b8d6-66fde0bc8b74",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "8d7efa21-d386-498c-b587-748a220741ef",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "521f2768-9649-4e4c-8c0c-47ec05090509",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "ae8693db-048b-4956-ae70-45577109d5b9",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "737fd7e5-e9aa-4b0f-ba62-c10322a6749e",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "9e6b2910-82b3-46b6-9a46-997f85d4ace2",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "f1c34680-ef98-408d-8f3c-eceedea54947",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "module",
+    "entityId": "43b70872-b8e3-4210-9844-52bb1dee4915",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "780c491e-d9bd-43d2-b575-e24d32c0b229",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "98a01059-b4fa-4416-8a72-cc95d896060c",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "2bb55097-33f2-46f9-b6ba-53d9d24a762f",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "7c3c9f7c-1b35-4e72-b319-b5cea33ccc97",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "a80fb6f6-05d6-444c-9fb1-a018f71ffb24",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "eb63db9b-b424-4416-b5a5-0b9b7e5c737e",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "04726e5e-2957-44c7-a13a-ebc3295fd204",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "6c1dee61-49e0-4906-a167-19d810c6cdd3",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "af3bc848-a9ba-4235-a827-65c9cc93fbca",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "9c02893c-4f3d-41eb-a1d4-cf4903cccaae",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "277a76ba-f057-4493-bf0b-3ea5b9bef307",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "388e6cf3-aa49-46f0-b07e-9c2afdf403cf",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "module",
+    "entityId": "e878feeb-ff1a-4f63-9a28-dfe197902391",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "22c82c37-6732-484d-8aae-6b1f8d763100",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "b01aba51-0fd3-4cb5-9141-5016d1854c36",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "0f8f9cd0-74df-4404-a770-667770902ff2",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "8d301641-e3b1-4de2-a561-44b8ed29c03f",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "42c39eaf-74cc-4155-a11e-ee5c71bd8ab2",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "6644b917-6d76-4cc7-afa6-d05a89545303",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "45a3764b-63c3-499b-b432-c5b074caf8ae",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "675b76b1-9ad0-463e-888c-b9461c51abd7",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "af925371-84ce-4087-b8b4-a8c7249b1713",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "7d818e5b-1ac2-4e0f-9a03-4288c92eea6a",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "ef35a70c-db67-4d6c-ba2d-a1c4bb2efab0",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "c3c38b9c-c9f3-4e73-9413-1831438fc4de",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "84b74b06-a56e-483e-9456-c9ddacb1853a",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "1d1832cd-f6af-4cb3-b440-1d025c83ac37",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "bc09e7ae-1498-4b1a-9f5c-73f12f4d4b88",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "70ddd797-4481-4261-b592-351e52fb48b7",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "c2245352-b5d2-4bb0-b96b-94a4f2c7da37",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "3fc996cc-6f42-4692-9945-a54235d47a68",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "f9214eec-77e7-49bb-903f-b858a723e0ef",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "38f6601e-8607-442a-be75-cc4925945feb",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "258c3b17-ce1d-4ad2-88ee-2cc03e4fe7f5",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "0ef927a3-e855-4417-a88b-7c2352a8b2f1",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "4db88459-feef-4a17-b4f5-bc0a24c9f7f4",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "c8ffffe7-6d3d-4aa2-8857-8fbf54ef32d4",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "f87ec749-24b5-48e7-b3e7-36114c9f66bc",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "9a320d29-ac3e-4f9c-96d3-224228a5f2c2",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "d7d0e3f6-3f2f-4058-b317-6443e61f261f",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "50daeef5-1ee3-45cd-bc4e-41baf9283daa",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "43201fc8-8d62-4ce4-bdcc-0bb9a9c8f0eb",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "module",
+    "entityId": "b8e9d029-2341-4096-a658-8c86e7beae05",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "submodule",
+    "entityId": "b54e32f7-5da7-472d-a710-87d2fd678c3b",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "51f42d66-bb6d-49bb-9bc6-f409eeb3aa34",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "65735dd9-a878-455d-bd64-fd4455d18ba1",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "0978fd22-e476-4d6a-9e02-4e160fb0fee9",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "249df605-7c09-4ca7-af50-cf33f4ffdd60",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "12f6cf2f-bfcc-4d88-bdec-771e6f88ab71",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "c06e534d-2df8-42eb-b164-b7f515292edd",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "1511d6d3-1e23-4a8e-8312-e4b1d4d8cac5",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  },
+  {
+    "entityType": "feature",
+    "entityId": "58b02898-ebdf-4027-b4b4-8b6c5a1190e9",
+    "status": "locked",
+    "source": "admin_ui",
+    "metadata": {}
+  }
+]
+[EntitlementService] Entitlements to process: 166
+[EntitlementService] Destroying existing entitlements for restaurant: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+[EntitlementService] Destroyed 0 existing entitlements.
+[EntitlementService] Bulk creating 166 new entitlements.
+[EntitlementService] Bulk created 166 entitlements.
+[EntitlementService] Committing transaction.
+[EntitlementService] Transaction committed successfully.
+[EntitlementService] Cleared permission snapshots for restaurant 90518ce3-97f3-4bee-bd3e-18a3f7f75e29.
+DEBUG: Before bump - Restaurant 90518ce3-97f3-4bee-bd3e-18a3f7f75e29 perm_version: undefined
+DEBUG: After bump - Restaurant 90518ce3-97f3-4bee-bd3e-18a3f7f75e29 perm_version: 1
+DEBUG: /iam/tree - userId: 04dc169f-2965-45cb-abad-8aab69a115d5 restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+DEBUG: Returning snapshot for userId: 04dc169f-2965-45cb-abad-8aab69a115d5, restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29. isSuperAdmin: true, isOwner: true
+DEBUG: /iam/tree - userId: 04dc169f-2965-45cb-abad-8aab69a115d5 restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+DEBUG: Before bump - Restaurant 90518ce3-97f3-4bee-bd3e-18a3f7f75e29 perm_version: undefined
+DEBUG: After bump - Restaurant 90518ce3-97f3-4bee-bd3e-18a3f7f75e29 perm_version: 1
+DEBUG: /iam/tree - userId: 04dc169f-2965-45cb-abad-8aab69a115d5 restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+Error caught by middleware: ForbiddenError: Usuário não está associado a um restaurante.
+    at exports.listNpsCriteria (/app/backend/src/domains/npsCriteria/npsCriteria.controller.js:17:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+Error caught by middleware: ForbiddenError: Usuário não está associado a um restaurante.
+    at exports.listNpsCriteria (/app/backend/src/domains/npsCriteria/npsCriteria.controller.js:17:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: /iam/tree - userId: 04dc169f-2965-45cb-abad-8aab69a115d5 restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+Error caught by middleware: ForbiddenError: Usuário não está associado a um restaurante.
+    at exports.listNpsCriteria (/app/backend/src/domains/npsCriteria/npsCriteria.controller.js:17:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+Error caught by middleware: ForbiddenError: Usuário não está associado a um restaurante.
+    at exports.listNpsCriteria (/app/backend/src/domains/npsCriteria/npsCriteria.controller.js:17:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:17:34)
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:17:34)
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+DEBUG: checkRestaurantOwnership - req.params: { restaurantId: '90518ce3-97f3-4bee-bd3e-18a3f7f75e29' }
+DEBUG: checkRestaurantOwnership - req.query: {}
+DEBUG: checkRestaurantOwnership - req.body: {}
+Error caught by middleware: ForbiddenError: Acesso negado. Usuário não está associado a um restaurante.
+    at checkRestaurantOwnership (/app/backend/src/middleware/checkRestaurantOwnershipMiddleware.js:24:19)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/backend/src/middleware/authMiddleware.js:37:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  statusCode: 403
+}
+Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:17:34)
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:17:34)
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+DEBUG: /iam/tree - userId: 04dc169f-2965-45cb-abad-8aab69a115d5 restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:17:34)
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+Error caught by middleware: TypeError: Cannot read properties of undefined (reading 'Survey')
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.service.js:17:34)
+    at exports.listSurveys (/app/backend/src/domains/survey/survey.controller.js:17:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+DEBUG: /iam/tree - userId: 04dc169f-2965-45cb-abad-8aab69a115d5 restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+DEBUG: /iam/tree - userId: 04dc169f-2965-45cb-abad-8aab69a115d5 restaurantId: 90518ce3-97f3-4bee-bd3e-18a3f7f75e29
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+DEBUG: /iam/tree - userId: b4f05165-0144-4a9a-ab20-c8a417739f55 restaurantId: a42013f2-2970-4a72-b94c-6c8ed3e09fc9

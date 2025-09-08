@@ -1,7 +1,17 @@
 URL da solicitação
+https://feedelizaapi.towersfy.com/api/surveys/analytics/a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+Método da solicitação
+GET
+Código de status
+500 Internal Server Erro
+{"error":"Erro interno do servidor","message":"Algo deu errado"}
+
+URL da solicitação
 https://feedelizaapi.towersfy.com/api/dashboard/a42013f2-2970-4a72-b94c-6c8ed3e09fc9/overview?period=30d
 Método da solicitação
 GET
 Código de status
-404 Not Found
-{"error":"Rota não encontrada"}
+500 Internal Server Error
+Endereço remoto
+95.217.16.187:443
+{"error":"Erro interno do servidor","message":"Algo deu errado"}

@@ -11,52 +11,78 @@ const getRestaurantIdFromUser = async (userId) => {
 
 // --- Dashboard Overview Functions ---
 async function getDashboardOverview(restaurantId, query) {
-  const today = new Date();
-  const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
-  const dateFilter = {
-    createdAt: { [Op.between]: [startOfMonth, endOfMonth] }
-  };
+    const dateFilter = {
+        createdAt: { [Op.between]: [startOfMonth, endOfMonth] }
+    };
 
-  const totalCheckins = await models.Checkin.count({
-    where: { restaurantId, ...dateFilter }
-  });
+    let totalCheckins, newCustomers, totalSurveyResponses, redeemedCoupons, feedbackStats;
 
-  const newCustomers = await models.Customer.count({
-    where: { restaurantId, ...dateFilter }
-  });
-
-  const totalSurveyResponses = await models.SurveyResponse.count({
-    where: { restaurantId, ...dateFilter }
-  });
-
-  const redeemedCoupons = await models.Coupon.count({
-    where: {
-      restaurantId,
-      status: 'used',
-      redeemed_at: { [Op.between]: [startOfMonth, endOfMonth] }
+    try {
+        totalCheckins = await models.Checkin.count({
+            where: { restaurantId, ...dateFilter }
+        });
+    } catch (error) {
+        console.error("Error counting checkins:", error);
+        throw new Error("Failed to get checkin count");
     }
-  });
 
-  // Basic NPS/CSAT average for the month (simplified, could be more complex)
-  const feedbackStats = await models.Feedback.findOne({
-    where: { restaurantId, ...dateFilter },
-    attributes: [
-      [fn('AVG', col('npsScore')), 'avgNpsScore'],
-      [fn('AVG', col('rating')), 'avgRating']
-    ],
-    raw: true
-  });
+    try {
+        newCustomers = await models.Customer.count({
+            where: { restaurantId, ...dateFilter }
+        });
+    } catch (error) {
+        console.error("Error counting new customers:", error);
+        throw new Error("Failed to get new customer count");
+    }
 
-  return {
-    totalCheckins,
-    newCustomers,
-    totalSurveyResponses,
-    redeemedCoupons,
-    avgNpsScore: feedbackStats?.avgNpsScore || 0,
-    avgRating: feedbackStats?.avgRating || 0,
-  };
+    try {
+        totalSurveyResponses = await models.SurveyResponse.count({
+            where: { restaurantId, ...dateFilter }
+        });
+    } catch (error) {
+        console.error("Error counting survey responses:", error);
+        throw new Error("Failed to get survey response count");
+    }
+
+    try {
+        redeemedCoupons = await models.Coupon.count({
+            where: {
+                restaurantId,
+                status: 'used',
+                redeemed_at: { [Op.between]: [startOfMonth, endOfMonth] }
+            }
+        });
+    } catch (error) {
+        console.error("Error counting redeemed coupons:", error);
+        throw new Error("Failed to get redeemed coupon count");
+    }
+
+    try {
+        feedbackStats = await models.Feedback.findOne({
+            where: { restaurantId, ...dateFilter },
+            attributes: [
+                [fn('AVG', col('npsScore')), 'avgNpsScore'],
+                [fn('AVG', col('rating')), 'avgRating']
+            ],
+            raw: true
+        });
+    } catch (error) {
+        console.error("Error getting feedback stats:", error);
+        throw new Error("Failed to get feedback stats");
+    }
+
+    return {
+        totalCheckins,
+        newCustomers,
+        totalSurveyResponses,
+        redeemedCoupons,
+        avgNpsScore: feedbackStats?.avgNpsScore || 0,
+        avgRating: feedbackStats?.avgRating || 0,
+    };
 }
 
 async function getDashboardAnalytics(restaurantId, query) {

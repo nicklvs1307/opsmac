@@ -155,95 +155,100 @@ exports.getSurveyById = async (id, restaurant_id) => {
 };
 
 exports.getSurveyAnalytics = async (restaurantId) => {
-    const totalResponses = await models.SurveyResponse.count({
-        include: [{
-            model: models.Survey,
-            where: { restaurant_id: restaurantId },
-            attributes: []
-        }]
-    });
-
-    const allAnswers = await models.Answer.findAll({
-        include: [{
-            model: models.Question,
-            as: 'question',
-            attributes: ['question_type', 'nps_criterion_id'],
+    try {
+        const totalResponses = await models.SurveyResponse.count({
             include: [{
                 model: models.Survey,
                 where: { restaurant_id: restaurantId },
                 attributes: []
-            }, {
-                model: models.NpsCriterion,
-                as: 'npsCriterion',
-                attributes: ['id', 'name'],
             }]
-        }]
-    });
+        });
 
-    let npsSum = 0;
-    let npsCount = 0;
-    let csatSum = 0;
-    let csatCount = 0;
-    const npsByCriterion = {};
+        const allAnswers = await models.Answer.findAll({
+            include: [{
+                model: models.Question,
+                as: 'question',
+                attributes: ['question_type', 'nps_criterion_id'],
+                include: [{
+                    model: models.Survey,
+                    where: { restaurant_id: restaurantId },
+                    attributes: []
+                }, {
+                    model: models.NpsCriterion,
+                    as: 'npsCriterion',
+                    attributes: ['id', 'name'],
+                }]
+            }]
+        });
 
-    allAnswers.forEach(answer => {
-        if (answer.Question) {
-            const value = parseInt(answer.answer_value, 10);
-            if (!isNaN(value)) {
-                if (answer.Question.question_type === 'nps') {
-                    npsSum += value;
-                    npsCount++;
+        let npsSum = 0;
+        let npsCount = 0;
+        let csatSum = 0;
+        let csatCount = 0;
+        const npsByCriterion = {};
 
-                    const criterionId = answer.Question.nps_criterion_id;
-                    const criterionName = answer.Question.npsCriterion?.name || 'Unknown Criterion';
+        allAnswers.forEach(answer => {
+            if (answer.question) { // Adjusted to use the correct alias 'question'
+                const value = parseInt(answer.answer_value, 10);
+                if (!isNaN(value)) {
+                    if (answer.question.question_type === 'nps') {
+                        npsSum += value;
+                        npsCount++;
 
-                    if (criterionId) {
-                        if (!npsByCriterion[criterionId]) {
-                            npsByCriterion[criterionId] = {
-                                id: criterionId,
-                                name: criterionName,
-                                promoters: 0,
-                                neutrals: 0,
-                                detractors: 0,
-                                totalResponses: 0,
-                            };
+                        const criterionId = answer.question.nps_criterion_id;
+                        const criterionName = answer.question.npsCriterion?.name || 'Unknown Criterion';
+
+                        if (criterionId) {
+                            if (!npsByCriterion[criterionId]) {
+                                npsByCriterion[criterionId] = {
+                                    id: criterionId,
+                                    name: criterionName,
+                                    promoters: 0,
+                                    neutrals: 0,
+                                    detractors: 0,
+                                    totalResponses: 0,
+                                };
+                            }
+
+                            if (value >= 9) {
+                                npsByCriterion[criterionId].promoters++;
+                            } else if (value >= 7) {
+                                npsByCriterion[criterionId].neutrals++;
+                            } else {
+                                npsByCriterion[criterionId].detractors++;
+                            }
+                            npsByCriterion[criterionId].totalResponses++;
                         }
-
-                        if (value >= 9) {
-                            npsByCriterion[criterionId].promoters++;
-                        } else if (value >= 7) {
-                            npsByCriterion[criterionId].neutrals++;
-                        } else {
-                            npsByCriterion[criterionId].detractors++;
-                        }
-                        npsByCriterion[criterionId].totalResponses++;
+                    } else if (answer.question.question_type === 'csat') {
+                        csatSum += value;
+                        csatCount++;
                     }
-                } else if (answer.Question.question_type === 'csat') {
-                    csatSum += value;
-                    csatCount++;
                 }
             }
-        }
-    });
+        });
 
-    const npsMetricsPerCriterion = Object.values(npsByCriterion).map(criterion => {
-        const { promoters, neutrals, detractors, totalResponses } = criterion;
-        const npsScore = totalResponses > 0 ? ((promoters - detractors) / totalResponses) * 100 : null;
-        return { ...criterion, npsScore };
-    });
+        const npsMetricsPerCriterion = Object.values(npsByCriterion).map(criterion => {
+            const { promoters, neutrals, detractors, totalResponses } = criterion;
+            const npsScore = totalResponses > 0 ? ((promoters - detractors) / totalResponses) * 100 : null;
+            return { ...criterion, npsScore };
+        });
 
-    const averageNps = npsCount > 0 ? npsSum / npsCount : null;
-    const averageCsat = csatCount > 0 ? csatSum / csatCount : null;
+        const averageNps = npsCount > 0 ? npsSum / npsCount : null;
+        const averageCsat = csatCount > 0 ? csatSum / csatCount : null;
 
-    const restaurant = await models.Restaurant.findByPk(restaurantId);
+        const restaurant = await models.Restaurant.findByPk(restaurantId);
 
-    return {
-        totalResponses,
-        averageNps,
-        averageCsat,
-        npsMetricsPerCriterion,
-        npsCriteriaScores: restaurant?.npsCriteriaScores || {}
-    };
+        return {
+            totalResponses,
+            averageNps,
+            averageCsat,
+            npsMetricsPerCriterion,
+            npsCriteriaScores: restaurant?.npsCriteriaScores || {}
+        };
+    } catch (error) {
+        console.error("Error in getSurveyAnalytics: ", error);
+        throw error; // Re-throw the error to be caught by the global error handler
+    }
 };
 
 exports.getSurveysComparisonAnalytics = async (restaurantId, surveyIds) => {

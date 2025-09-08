@@ -1,4 +1,5 @@
-const { models, Op, fn, col, literal } = require('config/config');
+const { models } = require('config/config');
+const { Op, fn, col, literal } = require('sequelize');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 // Helper function to get restaurant ID from authenticated user

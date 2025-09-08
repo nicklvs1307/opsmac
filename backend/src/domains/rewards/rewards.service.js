@@ -10,10 +10,9 @@ const getRestaurantIdFromUser = async (userId) => {
   return user?.restaurants?.[0]?.id;
 };
 
-exports.listRewards = async (req, res, next) => {
+exports.listRewards = async (restaurantId, query) => {
   try {
-    const { restaurantId } = req.params;
-    const { page = 1, limit = 12 } = req.query;
+    const { page = 1, limit = 12 } = query;
     const offset = (page - 1) * limit;
 
     const { count, rows } = await models.Reward.findAndCountAll({
@@ -23,101 +22,75 @@ exports.listRewards = async (req, res, next) => {
       order: [['createdAt', 'DESC']],
     });
 
-    res.json({
+    return {
       rewards: rows,
       pagination: {
         total_items: count,
         total_pages: Math.ceil(count / limit),
         current_page: parseInt(page),
       },
-    });
+    };
   } catch (error) {
-    next(error);
+    throw error;
   }
 };
 
-exports.getRewardById = async (req, res, next) => {
+exports.getRewardById = async (id) => {
   try {
-    const { id } = req.params;
     const reward = await models.Reward.findByPk(id);
 
     if (!reward) {
       throw new NotFoundError('Recompensa não encontrada.');
     }
 
-    res.json(reward);
+    return reward;
   } catch (error) {
-    next(error);
+    throw error;
   }
 };
 
-exports.createReward = async (req, res, next) => {
+exports.createReward = async (rewardData, userId) => {
   try {
-    // Assuming validationResult is imported or handled elsewhere
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //   throw new BadRequestError('Dados inválidos');
-    // }
-
-    const rewardData = req.body;
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = await getRestaurantIdFromUser(userId);
 
     if (!restaurantId) {
       throw new BadRequestError('Restaurante não encontrado para o usuário.');
     }
 
-    const reward = await models.Reward.create({ ...rewardData, restaurant_id: restaurantId, created_by: req.user.userId });
-    res.status(201).json(reward);
+    const reward = await models.Reward.create({ ...rewardData, restaurant_id: restaurantId, created_by: userId });
+    return reward;
   } catch (error) {
-    next(error);
+    throw error;
   }
 };
 
-exports.updateReward = async (req, res, next) => {
+exports.updateReward = async (id, updateData) => {
   try {
-    // Assuming validationResult is imported or handled elsewhere
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //   throw new BadRequestError('Dados inválidos');
-    // }
-
-    const { id } = req.params;
-    const updateData = req.body;
-
     const reward = await models.Reward.findByPk(id);
     if (!reward) {
       throw new NotFoundError('Recompensa não encontrada.');
     }
     await reward.update(updateData);
-    res.json(reward);
+    return reward;
   } catch (error) {
-    next(error);
+    throw error;
   }
 };
 
-exports.deleteReward = async (req, res, next) => {
+exports.deleteReward = async (id) => {
   try {
-    const { id } = req.params;
     const result = await models.Reward.destroy({ where: { id: id } });
     if (result === 0) {
       throw new NotFoundError('Recompensa não encontrada.');
     }
-    res.status(204).send();
+    return { message: 'Recompensa excluída com sucesso.' };
   } catch (error) {
-    next(error);
+    throw error;
   }
 };
 
-exports.spinWheel = async (req, res, next) => {
+exports.spinWheel = async (reward_id, customer_id) => {
   try {
-    // Assuming validationResult is imported or handled elsewhere
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //   throw new BadRequestError('Dados inválidos');
-    // }
-
-    const { reward_id, customer_id } = req.body;
-
     const reward = await models.Reward.findByPk(reward_id);
     if (!reward || reward.reward_type !== 'spin_the_wheel') {
       throw new NotFoundError('Recompensa da roleta não encontrada ou não é do tipo roleta.');
@@ -143,16 +116,16 @@ exports.spinWheel = async (req, res, next) => {
         reward_type: coupon.reward_type,
       },
     };
-    res.status(200).json(responsePayload);
+    return responsePayload;
 
   } catch (error) {
-    next(error);
+    throw error;
   }
 };
 
-exports.getRewardsAnalytics = async (req, res, next) => {
+exports.getRewardsAnalytics = async (userId) => {
   try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = await getRestaurantIdFromUser(userId);
     if (!restaurantId) {
       throw new BadRequestError('Restaurante não encontrado para o usuário autenticado.');
     }
@@ -175,17 +148,17 @@ exports.getRewardsAnalytics = async (req, res, next) => {
 
     const redemptionRate = totalCoupons > 0 ? (redeemedCoupons / totalCoupons) * 100 : 0;
 
-    res.json({
+    return {
       total_rewards: totalRewards,
       active_rewards: activeRewards,
       rewards_by_type: rewardsByType,
       total_coupons_generated: totalCoupons,
       total_coupons_redeemed: redeemedCoupons,
       redemption_rate: redemptionRate.toFixed(2)
-    });
+    };
 
   } catch (error) {
-    next(error);
+    throw error;
   }
 };
 

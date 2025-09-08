@@ -32,8 +32,7 @@ exports.getRewardById = async (req, res, next) => {
 exports.createReward = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const reward = await rewardsService.createReward(req.body, restaurantId, req.user.userId);
+    const reward = await rewardsService.createReward(req.body, req.user.userId);
     res.status(201).json(reward);
   } catch (error) {
     next(error);
@@ -52,8 +51,8 @@ exports.updateReward = async (req, res, next) => {
 
 exports.deleteReward = async (req, res, next) => {
   try {
-    await rewardsService.deleteReward(req.params.id);
-    res.status(204).send();
+    const result = await rewardsService.deleteReward(req.params.id);
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
@@ -72,8 +71,7 @@ exports.spinWheel = async (req, res, next) => {
 
 exports.getRewardsAnalytics = async (req, res, next) => {
   try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const data = await rewardsService.getRewardsAnalytics(restaurantId);
+    const data = await rewardsService.getRewardsAnalytics(req.user.userId);
     res.json(data);
   } catch (error) {
     next(error);

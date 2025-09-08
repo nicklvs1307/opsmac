@@ -44,7 +44,7 @@ module.exports = (db) => {
         const technicalSpecification = await models.TechnicalSpecification.findOne({
             where: { product_id: productId },
             include: [
-                {n
+                {
                     model: models.RecipeIngredient,
                     as: 'recipeIngredients',
                     include: [

@@ -20,7 +20,7 @@ const saiposRoutes = require('../src/domains/saipos/saipos.routes');
 const uaiRangoRoutes = require('../src/domains/uaiRango/uaiRango.routes');
 const deliveryMuchRoutes = require('../src/domains/deliveryMuch/deliveryMuch.routes');
 const productRoutes = require('../src/domains/products/products.routes');
-const { auth } = require('middleware/authMiddleware')(db);
+
 const { checkRestaurantOwnership } = require('../src/middleware/checkRestaurantOwnershipMiddleware');
 const publicProductsRoutes = require('../src/domains/publicProducts/publicProducts.routes');
 const stockRoutes = require('../src/domains/stock/stock.routes');
@@ -43,7 +43,9 @@ const healthRoutes = require('../src/domains/health/health.routes');
 const requirePermission = require('../src/middleware/requirePermission');
 const iamRoutes = require('../src/api/routes/iam');
 
-module.exports = (db) => [
+module.exports = (db) => {
+    const { auth } = require('middleware/authMiddleware')(db);
+    return [
     { path: '/api/auth', router: authRoutes(db) },
     { path: '/api/feedback', router: feedbackRoutes(db) },
     { path: '/api/dashboard/:restaurantId', router: dashboardRoutes(db) },

@@ -59,8 +59,8 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Configuração das Rotas
-allRoutes.forEach(route => {
-  app.use(route.path, route.router(db));
+allRoutes(db).forEach(route => {
+  app.use(route.path, route.router);
 });
 
 // Swagger UI

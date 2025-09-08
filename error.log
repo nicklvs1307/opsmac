@@ -1,33 +1,63 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
-node:internal/modules/cjs/loader:1210
-
-  throw err;
-  ^
-Error: Cannot find module '../../models'
-Require stack:
-- /app/backend/src/domains/survey/survey.service.js
-- /app/backend/src/domains/survey/survey.controller.js
-- /app/backend/src/domains/survey/survey.routes.js
-- /app/backend/routes/index.js
-- /app/backend/server.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
-    at Module._resolveFilename (/app/node_modules/module-alias/index.js:49:29)
-    at Module._load (node:internal/modules/cjs/loader:1038:27)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/src/domains/survey/survey.service.js:1:16)
-    at Module._compile (node:internal/modules/cjs/loader:1521:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-    at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    '/app/backend/src/domains/survey/survey.service.js',
-    '/app/backend/src/domains/survey/survey.controller.js',
-    '/app/backend/src/domains/survey/survey.routes.js',
-    '/app/backend/routes/index.js',
-    '/app/backend/server.js'
-  ]
+{
+    "user": {
+        "id": "b4f05165-0144-4a9a-ab20-c8a417739f55",
+        "name": "Lucas Niquele",
+        "email": "lucas@teste.com",
+        "phone": "3598989898",
+        "roles": [
+            {
+                "id": "26f17709-d148-46df-8d76-ec234bbc5f6d",
+                "restaurantId": null,
+                "key": "owner",
+                "name": "owner",
+                "isSystem": true,
+                "createdAt": "2025-09-08T00:12:53.800Z",
+                "updatedAt": "2025-09-08T00:12:53.800Z",
+                "restaurant_id": null,
+                "UserRole": {
+                    "userId": "b4f05165-0144-4a9a-ab20-c8a417739f55",
+                    "restaurantId": "a42013f2-2970-4a72-b94c-6c8ed3e09fc9",
+                    "roleId": "26f17709-d148-46df-8d76-ec234bbc5f6d",
+                    "createdAt": "2025-09-08T00:14:43.117Z",
+                    "updatedAt": "2025-09-08T00:14:43.117Z",
+                    "role_id": "26f17709-d148-46df-8d76-ec234bbc5f6d",
+                    "user_id": "b4f05165-0144-4a9a-ab20-c8a417739f55",
+                    "restaurant_id": "a42013f2-2970-4a72-b94c-6c8ed3e09fc9"
+                }
+            }
+        ],
+        "isActive": true,
+        "restaurants": [
+            {
+                "id": "a42013f2-2970-4a72-b94c-6c8ed3e09fc9",
+                "name": "Towersfy",
+                "slug": "towersfy",
+                "description": "123456",
+                "address": "Rua Avenida Brasil",
+                "city": "Andradas",
+                "state": "MG",
+                "zipCode": null,
+                "phone": null,
+                "email": null,
+                "website": null,
+                "logo": null,
+                "planKey": null,
+                "status": "active",
+                "permVersion": "1",
+                "createdAt": "2025-09-08T00:14:43.104Z",
+                "updatedAt": "2025-09-08T00:14:43.104Z"
+            }
+        ],
+        "restaurant": null,
+        "restaurantId": null,
+        "permissionSnapshot": null
+    }
 }
-Node.js v20.19.5
+
+AuthContext.js:82 AuthContext useEffect: Running
+AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGYwNTE2NS0wMTQ0LTRhOWEtYWIyMC1jOGE0MTc3MzlmNTUiLCJpYXQiOjE3NTcyOTcxNzMsImV4cCI6MTc1NzkwMTk3M30.xBxhOqSUwU99D3WICt2b_5j-4sDecQADOttuIgFJWkU
+AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
+unauthorized:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+AuthContext.js:92 AuthContext useEffect: /auth/me successful {user: {…}}user: email: "lucas@teste.com"id: "b4f05165-0144-4a9a-ab20-c8a417739f55"isActive: truename: "Lucas Niquele"permissionSnapshot: nullphone: "3598989898"restaurant: nullrestaurantId: nullrestaurants: Array(1)0: address: "Rua Avenida Brasil"city: "Andradas"createdAt: "2025-09-08T00:14:43.104Z"description: "123456"email: nullid: "a42013f2-2970-4a72-b94c-6c8ed3e09fc9"logo: nullname: "Towersfy"permVersion: "1"phone: nullplanKey: nullslug: "towersfy"state: "MG"status: "active"updatedAt: "2025-09-08T00:14:43.104Z"website: nullzipCode: null[[Prototype]]: Objectlength: 1[[Prototype]]: Array(0)roles: Array(1)0: UserRole: createdAt: "2025-09-08T00:14:43.117Z"restaurantId: "a42013f2-2970-4a72-b94c-6c8ed3e09fc9"restaurant_id: "a42013f2-2970-4a72-b94c-6c8ed3e09fc9"roleId: "26f17709-d148-46df-8d76-ec234bbc5f6d"role_id: "26f17709-d148-46df-8d76-ec234bbc5f6d"updatedAt: "2025-09-08T00:14:43.117Z"userId: "b4f05165-0144-4a9a-ab20-c8a417739f55"user_id: "b4f05165-0144-4a9a-ab20-c8a417739f55"[[Prototype]]: ObjectcreatedAt: "2025-09-08T00:12:53.800Z"id: "26f17709-d148-46df-8d76-ec234bbc5f6d"isSystem: truekey: "owner"name: "owner"restaurantId: nullrestaurant_id: nullupdatedAt: "2025-09-08T00:12:53.800Z"[[Prototype]]: Objectlength: 1[[Prototype]]: Array(0)[[Prototype]]: Object[[Prototype]]: Object
+AuthContext.js:99 AuthContext useEffect: Attempting to fetch /iam/tree
+AuthContext.js:106 AuthContext useEffect: /iam/tree successful {restaurantId: 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9', userId: 'b4f05165-0144-4a9a-ab20-c8a417739f55', isSuperAdmin: false, isOwner: true, modules: Array(8)}

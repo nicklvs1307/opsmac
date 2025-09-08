@@ -21,6 +21,13 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
     return children;
   }
 
+  // If featureKey and actionKey are not provided, and user is authenticated (and not superadmin),
+  // it means this is a base protected route (like the main dashboard).
+  // In this case, we only need to ensure the user is authenticated.
+  if (!featureKey && !actionKey) {
+    return children;
+  }
+
   // If there's an error fetching permissions, or no snapshot, deny access
   if (permissionsError || !can) {
     // This might indicate a serious issue or misconfiguration

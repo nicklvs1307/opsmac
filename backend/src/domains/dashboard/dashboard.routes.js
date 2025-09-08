@@ -9,15 +9,15 @@ const {
     generateReportValidation
 } = require('./dashboard.validation');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // Aplicando middlewares na ordem correta
 // 1. Autenticação
 router.use(auth);
 
-router.get('/:restaurantId/overview', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardOverviewValidation, dashboardController.getDashboardOverview);
-router.get('/:restaurantId/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardAnalyticsValidation, dashboardController.getDashboardAnalytics);
-router.get('/:restaurantId/reports', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), generateReportValidation, dashboardController.generateReport);
-router.get('/:restaurantId/rewards/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), dashboardController.getRewardsAnalytics);
+router.get('/overview', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardOverviewValidation, dashboardController.getDashboardOverview);
+router.get('/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardAnalyticsValidation, dashboardController.getDashboardAnalytics);
+router.get('/reports', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), generateReportValidation, dashboardController.generateReport);
+router.get('/rewards/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), dashboardController.getRewardsAnalytics);
 
 module.exports = router;

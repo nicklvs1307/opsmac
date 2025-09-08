@@ -13,7 +13,7 @@ const handleValidationErrors = (req) => {
 exports.getDashboardOverview = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const { restaurantId } = req.params;
     const data = await dashboardService.getDashboardOverview(restaurantId, req.query);
     res.json(data);
   } catch (error) {
@@ -24,7 +24,7 @@ exports.getDashboardOverview = async (req, res, next) => {
 exports.getDashboardAnalytics = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const { restaurantId } = req.params;
     const data = await dashboardService.getDashboardAnalytics(restaurantId, req.query);
     res.json(data);
   } catch (error) {
@@ -35,7 +35,7 @@ exports.getDashboardAnalytics = async (req, res, next) => {
 exports.generateReport = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const { restaurantId } = req.params;
     const { report_type } = req.query;
     const reportData = await dashboardService.generateReport(restaurantId, report_type, req.query);
     res.json({
@@ -50,7 +50,7 @@ exports.generateReport = async (req, res, next) => {
 
 exports.getRewardsAnalytics = async (req, res, next) => {
   try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const { restaurantId } = req.params;
     const data = await dashboardService.getRewardsAnalytics(restaurantId);
     res.json(data);
   } catch (error) {

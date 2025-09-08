@@ -131,7 +131,7 @@ const getMe = async (userId) => {
         };
     } else {
         // For regular users, determine the primary restaurant and build permissions
-        if (user.userRestaurants && user.userRestaurants.length > 0) {
+        if (user.restaurants && user.restaurants.length > 0) {
             const ownedRestaurant = user.restaurants.find(ur => ur.isOwner)?.restaurant;
             if (ownedRestaurant) {
                 primaryRestaurant = ownedRestaurant;

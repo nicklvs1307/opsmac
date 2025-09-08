@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth } = require('../../middleware/authMiddleware')(db);
+
 const requirePermission = require('../../middleware/requirePermission');
 const upload = require('../../middleware/uploadMiddleware');
 const productsController = require('./products.controller');
@@ -16,6 +16,7 @@ router.delete('/:id', auth, requirePermission('products', 'delete'), productsCon
 router.patch('/:id/toggle-status', auth, requirePermission('products', 'update'), productsController.toggleProductStatus);
 
 module.exports = (db) => {
+  const { auth } = require('../../middleware/authMiddleware')(db);
   // You can use db here if needed in the future
   return router;
 };

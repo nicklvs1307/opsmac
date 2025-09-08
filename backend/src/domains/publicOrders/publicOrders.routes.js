@@ -4,9 +4,11 @@ const {
     createPublicOrderValidation
 } = require('domains/publicOrders/publicOrders.validation');
 
-const router = express.Router();
+module.exports = (db) => {
+  const router = express.Router();
 
-// Rotas de Pedidos Públicos
-router.post('/', createPublicOrderValidation, publicOrdersController.createPublicOrder);
+  // Rotas de Pedidos Públicos
+  router.post('/', createPublicOrderValidation, publicOrdersController.createPublicOrder);
 
-module.exports = router;
+  return router;
+};

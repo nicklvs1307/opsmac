@@ -1,9 +1,11 @@
 const express = require('express');
 const healthController = require('domains/health/health.controller');
 
-const router = express.Router();
+module.exports = (db) => {
+  const router = express.Router();
 
-// Rotas de Saúde
-router.get('/', healthController.getHealthStatus);
+  // Rotas de Saúde
+  router.get('/', healthController.getHealthStatus);
 
-module.exports = router;
+  return router;
+};

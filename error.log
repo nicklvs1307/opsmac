@@ -1,63 +1,104 @@
-{
-    "user": {
-        "id": "b4f05165-0144-4a9a-ab20-c8a417739f55",
-        "name": "Lucas Niquele",
-        "email": "lucas@teste.com",
-        "phone": "3598989898",
-        "roles": [
-            {
-                "id": "26f17709-d148-46df-8d76-ec234bbc5f6d",
-                "restaurantId": null,
-                "key": "owner",
-                "name": "owner",
-                "isSystem": true,
-                "createdAt": "2025-09-08T00:12:53.800Z",
-                "updatedAt": "2025-09-08T00:12:53.800Z",
-                "restaurant_id": null,
-                "UserRole": {
-                    "userId": "b4f05165-0144-4a9a-ab20-c8a417739f55",
-                    "restaurantId": "a42013f2-2970-4a72-b94c-6c8ed3e09fc9",
-                    "roleId": "26f17709-d148-46df-8d76-ec234bbc5f6d",
-                    "createdAt": "2025-09-08T00:14:43.117Z",
-                    "updatedAt": "2025-09-08T00:14:43.117Z",
-                    "role_id": "26f17709-d148-46df-8d76-ec234bbc5f6d",
-                    "user_id": "b4f05165-0144-4a9a-ab20-c8a417739f55",
-                    "restaurant_id": "a42013f2-2970-4a72-b94c-6c8ed3e09fc9"
-                }
-            }
-        ],
-        "isActive": true,
-        "restaurants": [
-            {
-                "id": "a42013f2-2970-4a72-b94c-6c8ed3e09fc9",
-                "name": "Towersfy",
-                "slug": "towersfy",
-                "description": "123456",
-                "address": "Rua Avenida Brasil",
-                "city": "Andradas",
-                "state": "MG",
-                "zipCode": null,
-                "phone": null,
-                "email": null,
-                "website": null,
-                "logo": null,
-                "planKey": null,
-                "status": "active",
-                "permVersion": "1",
-                "createdAt": "2025-09-08T00:14:43.104Z",
-                "updatedAt": "2025-09-08T00:14:43.104Z"
-            }
-        ],
-        "restaurant": null,
-        "restaurantId": null,
-        "permissionSnapshot": null
-    }
-}
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=a42013f2-2970-4a72-b94c-6c8ed3e09fc9
+Método da solicitação
+GET
+Código de status
+401 Unauthorized
+{"error":"Unauthorized: Missing restaurant context."}
 
 AuthContext.js:82 AuthContext useEffect: Running
 AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGYwNTE2NS0wMTQ0LTRhOWEtYWIyMC1jOGE0MTc3MzlmNTUiLCJpYXQiOjE3NTcyOTcxNzMsImV4cCI6MTc1NzkwMTk3M30.xBxhOqSUwU99D3WICt2b_5j-4sDecQADOttuIgFJWkU
 AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
-unauthorized:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:92 AuthContext useEffect: /auth/me successful {user: {…}}user: email: "lucas@teste.com"id: "b4f05165-0144-4a9a-ab20-c8a417739f55"isActive: truename: "Lucas Niquele"permissionSnapshot: nullphone: "3598989898"restaurant: nullrestaurantId: nullrestaurants: Array(1)0: address: "Rua Avenida Brasil"city: "Andradas"createdAt: "2025-09-08T00:14:43.104Z"description: "123456"email: nullid: "a42013f2-2970-4a72-b94c-6c8ed3e09fc9"logo: nullname: "Towersfy"permVersion: "1"phone: nullplanKey: nullslug: "towersfy"state: "MG"status: "active"updatedAt: "2025-09-08T00:14:43.104Z"website: nullzipCode: null[[Prototype]]: Objectlength: 1[[Prototype]]: Array(0)roles: Array(1)0: UserRole: createdAt: "2025-09-08T00:14:43.117Z"restaurantId: "a42013f2-2970-4a72-b94c-6c8ed3e09fc9"restaurant_id: "a42013f2-2970-4a72-b94c-6c8ed3e09fc9"roleId: "26f17709-d148-46df-8d76-ec234bbc5f6d"role_id: "26f17709-d148-46df-8d76-ec234bbc5f6d"updatedAt: "2025-09-08T00:14:43.117Z"userId: "b4f05165-0144-4a9a-ab20-c8a417739f55"user_id: "b4f05165-0144-4a9a-ab20-c8a417739f55"[[Prototype]]: ObjectcreatedAt: "2025-09-08T00:12:53.800Z"id: "26f17709-d148-46df-8d76-ec234bbc5f6d"isSystem: truekey: "owner"name: "owner"restaurantId: nullrestaurant_id: nullupdatedAt: "2025-09-08T00:12:53.800Z"[[Prototype]]: Objectlength: 1[[Prototype]]: Array(0)[[Prototype]]: Object[[Prototype]]: Object
+surveys:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+AuthContext.js:92 AuthContext useEffect: /auth/me successful {user: {…}}
 AuthContext.js:99 AuthContext useEffect: Attempting to fetch /iam/tree
 AuthContext.js:106 AuthContext useEffect: /iam/tree successful {restaurantId: 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9', userId: 'b4f05165-0144-4a9a-ab20-c8a417739f55', isSuperAdmin: false, isOwner: true, modules: Array(8)}
+main.ad9d39e5.js:2 [Violation] 'message' handler took 223ms
+[Violation] Forced reflow while executing JavaScript took 32ms
+surveyService.js:110  GET https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=a42013f2-2970-4a72-b94c-6c8ed3e09fc9 401 (Unauthorized)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ surveyService.js:110
+N0.p.enabled @ surveyService.js:117
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+surveyService.js:110  GET https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=a42013f2-2970-4a72-b94c-6c8ed3e09fc9 401 (Unauthorized)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ surveyService.js:110
+N0.p.enabled @ surveyService.js:117
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 bt {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14

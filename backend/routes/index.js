@@ -89,3 +89,4 @@ module.exports = (db) => {
     
     { path: '/api/iam', router: iamRoutes(db) },
 ];
+};

@@ -1,12 +1,12 @@
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
 DEBUG: Value of auth before /me route: [AsyncFunction: authMiddleware]
-/app/backend/src/domains/rewards/rewards.service.js:379
-        listRewards,
+/app/backend/src/domains/rewards/rewards.service.js:380
+        getRewardById,
 
 ^
-ReferenceError: listRewards is not defined
-    at module.exports (/app/backend/src/domains/rewards/rewards.service.js:379:9)
+ReferenceError: getRewardById is not defined
+    at module.exports (/app/backend/src/domains/rewards/rewards.service.js:380:9)
     at module.exports (/app/backend/src/domains/rewards/rewards.controller.js:6:56)
     at module.exports (/app/backend/src/domains/rewards/rewards.routes.js:6:62)
     at module.exports (/app/backend/routes/index.js:52:37)

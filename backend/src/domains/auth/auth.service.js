@@ -117,7 +117,7 @@ const getMe = async (userId) => {
         throw new NotFoundError('Usuário não encontrado');
     }
 
-    // console.log('DEBUG: User object after findByPk in getMe:', JSON.stringify(user, null, 2));
+    console.log('DEBUG: User object after findByPk in getMe:', JSON.stringify(user, null, 2));
 
     let permissionSnapshot = null;
     let primaryRestaurant = null;

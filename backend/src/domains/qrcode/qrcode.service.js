@@ -1,12 +1,12 @@
-const QRCodeLib = require('qrcode'); // Renamed to avoid conflict with model name
+const QRCodeLib = require('qrcode');
 const { Op, fn, col } = require('sequelize');
-const { NotFoundError, BadRequestError } = require('utils/errors'); // Assuming these are needed
+const { NotFoundError, BadRequestError } = require('utils/errors');
 
 module.exports = (db) => {
     const models = db.models;
 
-    exports.generateQRCodeImage = async (qrCode, size, format) => {
-        const qrCodeUrl = qrCode.feedback_url; // Ou a URL que o QR Code deve apontar
+    const generateQRCodeImage = async (qrCode, size, format) => {
+        const qrCodeUrl = qrCode.feedback_url;
         const options = {
             errorCorrectionLevel: 'H',
             type: format === 'svg' ? 'svg' : 'image/png',
@@ -26,9 +26,9 @@ module.exports = (db) => {
         }
     };
 
-    exports.generatePrintableQRCode = async (qrCode, options) => {
-        const { include_info, size } = options;
-        const qrCodeImage = await exports.generateQRCodeImage(qrCode, 200, 'png'); // Tamanho fixo para impressão
+    const generatePrintableQRCode = async (qrCode, options) => {
+        const { include_info } = options;
+        const qrCodeImage = await generateQRCodeImage(qrCode, 200, 'png');
 
         let html = `
     <!DOCTYPE html>
@@ -66,18 +66,13 @@ module.exports = (db) => {
         return html;
     };
 
-    exports.recordScan = async (qrCode, scanData) => {
-        // Atualizar contadores no modelo QRCode
+    const recordScan = async (qrCode, scanData) => {
         await qrCode.increment('total_scans');
         await qrCode.update({ last_scan: new Date() });
-
-        // Opcional: Registrar scan em uma tabela de logs de scans para análises mais detalhadas
-        // await models.QRCodeScanLog.create({ qr_code_id: qrCode.id, ...scanData });
-
-        return qrCode; // Retorna o QR Code atualizado
+        return qrCode;
     };
 
-    exports.getQRCodeAnalytics = async (qrCode, period) => {
+    const getQRCodeAnalytics = async (qrCode, period) => {
         const days = { '7d': 7, '30d': 30, '90d': 90 };
         const startDate = new Date();
         startDate.setDate(startDate.getDate() - days[period]);
@@ -130,7 +125,7 @@ module.exports = (db) => {
         };
     };
 
-    exports.cloneQRCode = async (originalQRCode, tableNumbers) => {
+    const cloneQRCode = async (originalQRCode, tableNumbers) => {
         const clonedQRCodes = [];
         for (const tableNumber of tableNumbers) {
             const clonedQRCode = await models.QRCode.create({
@@ -149,16 +144,14 @@ module.exports = (db) => {
         return clonedQRCodes;
     };
 
-    exports.getRestaurantQRCodeStats = async (restaurantId) => {
+    const getRestaurantQRCodeStats = async (restaurantId) => {
         return await models.QRCode.getTableStats(restaurantId);
     };
 
-    // New functions for QRCode service
-    exports.generateShortUrl = async (qrCode) => {
+    const generateShortUrl = async (qrCode) => {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
 
-        // Gerar código único
         do {
             result = '';
             for (let i = 0; i < 8; i++) {
@@ -169,13 +162,12 @@ module.exports = (db) => {
         return result;
     };
 
-    exports.recordFeedback = async (qrCode) => {
+    const recordFeedback = async (qrCode) => {
         const now = new Date();
 
         await qrCode.increment('total_feedbacks');
         await qrCode.update({ last_feedback: now });
 
-        // Atualizar taxa de conversão
         const analytics = { ...qrCode.analytics };
         if (qrCode.total_scans > 0) {
             analytics.conversion_rate = (qrCode.total_feedbacks / qrCode.total_scans) * 100;
@@ -184,18 +176,15 @@ module.exports = (db) => {
         await qrCode.update({ analytics });
     };
 
-    exports.updateQRCodeStats = async (qrCode) => {
-        const { models } = db;
-
-        // Calcular estatísticas de feedback para esta mesa
+    const updateQRCodeStats = async (qrCode) => {
         const feedbackStats = await models.Feedback.findOne({
             where: {
                 restaurant_id: qrCode.restaurant_id,
                 table_number: qrCode.table_number
             },
             attributes: [
-                db.sequelize.fn('COUNT', db.sequelize.col('id')), 'total'],
-            [db.sequelize.fn('AVG', db.sequelize.col('rating')), 'average']
+                [fn('COUNT', col('id')), 'total'],
+                [fn('AVG', col('rating')), 'average']
             ],
             raw: true
         });
@@ -210,7 +199,7 @@ module.exports = (db) => {
         return qrCode;
     };
 
-    exports.generateQRCodeDataAndUrl = async (qrCode) => {
+    const generateQRCodeDataAndUrl = async (qrCode) => {
         const baseUrl = process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com';
 
         if (qrCode.qr_type === 'checkin') {
@@ -227,7 +216,6 @@ module.exports = (db) => {
             const table = await models.Table.findOne({ where: { restaurant_id: qrCode.restaurant_id, table_number: qrCode.table_number } });
             let tableId;
             if (!table) {
-                // Se a mesa não existir, crie uma. Isso garante que o QR code sempre aponte para uma mesa válida.
                 const newTable = await models.Table.create({
                     restaurant_id: qrCode.restaurant_id,
                     table_number: qrCode.table_number,
@@ -254,15 +242,15 @@ module.exports = (db) => {
         }
     };
 
-    exports.handleQRCodeBeforeCreate = async (qrCode) => {
-        await exports.generateQRCodeDataAndUrl(qrCode);
+    const handleQRCodeBeforeCreate = async (qrCode) => {
+        await generateQRCodeDataAndUrl(qrCode);
         if (!qrCode.short_url) {
-            qrCode.short_url = await exports.generateShortUrl(qrCode);
+            qrCode.short_url = await generateShortUrl(qrCode);
         }
     };
 
-    exports.handleQRCodeAfterCreate = async (qrCode) => {
-        await exports.generateQRCodeImage(qrCode, qrCode.settings?.size || 200, 'png'); // Use service function
+    const handleQRCodeAfterCreate = async (qrCode) => {
+        await generateQRCodeImage(qrCode, qrCode.settings?.size || 200, 'png');
     };
 
     return {

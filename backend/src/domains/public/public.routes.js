@@ -1,4 +1,5 @@
 const express = require('express');
+const asyncHandler = require('../../utils/asyncHandler');
 
 module.exports = (db) => {
     const apiAuth = require('middleware/apiAuthMiddleware')(db);
@@ -11,11 +12,11 @@ module.exports = (db) => {
     const router = express.Router();
 
     // Rotas Públicas
-    router.get('/test-endpoint', apiAuth, publicController.testEndpoint);
-    router.post('/feedback', apiAuth, submitPublicFeedbackValidation, publicController.submitPublicFeedback);
-    router.post('/checkin/:restaurantSlug', publicController.registerPublicCheckin);
-    router.get('/restaurant/:restaurantSlug', publicController.getRestaurantInfoBySlug);
-    router.get('/surveys/:identifier', publicController.getPublicSurveyByIdentifier);
+    router.get('/test-endpoint', apiAuth, asyncHandler(publicController.testEndpoint));
+    router.post('/feedback', apiAuth, submitPublicFeedbackValidation, asyncHandler(publicController.submitPublicFeedback));
+    router.post('/checkin/:restaurantSlug', asyncHandler(publicController.registerPublicCheckin));
+    router.get('/restaurant/:restaurantSlug', asyncHandler(publicController.getRestaurantInfoBySlug));
+    router.get('/surveys/:identifier', asyncHandler(publicController.getPublicSurveyByIdentifier));
 
     return router;
 };

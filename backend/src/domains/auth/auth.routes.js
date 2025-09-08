@@ -1,6 +1,7 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const authMiddleware = require('middleware/authMiddleware');
+const asyncHandler = require('../../utils/asyncHandler');
 
 module.exports = (db) => {
     const authController = require('./auth.controller')(db);
@@ -8,25 +9,21 @@ module.exports = (db) => {
 
     const router = express.Router();
 
-    const { auth } = authMiddleware(db); // Initialize auth middleware with db
+    const { auth } = authMiddleware(db);
 
-    // Rate limiting para rotas de autenticação
     const authLimiter = rateLimit({
-        windowMs: 15 * 60 * 1000, // 15 minutos
+        windowMs: 15 * 60 * 1000,
         max: 20,
         message: { error: 'Muitas tentativas de login. Tente novamente em 15 minutos.' },
         standardHeaders: true,
         legacyHeaders: false
     });
 
-    // Rotas de Autenticação
-    router.post('/login', authLimiter, loginValidation, authController.login);
-    console.log('DEBUG: Value of auth before /me route:', auth);
-    router.get('/me', auth, authController.getMe);
-    router.put('/profile', auth, updateProfileValidation, authController.updateProfile);
-    router.put('/change-password', auth, changePasswordValidation, authController.changePassword);
-
-    router.post('/logout', authController.logout);
+    router.post('/login', authLimiter, loginValidation, asyncHandler(authController.login));
+    router.get('/me', auth, asyncHandler(authController.getMe));
+    router.put('/profile', auth, updateProfileValidation, asyncHandler(authController.updateProfile));
+    router.put('/change-password', auth, changePasswordValidation, asyncHandler(authController.changePassword));
+    router.post('/logout', asyncHandler(authController.logout));
 
     return router;
 };

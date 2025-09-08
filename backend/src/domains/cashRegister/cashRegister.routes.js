@@ -1,26 +1,26 @@
 const express = require('express');
-
 const requirePermission = require('../../middleware/requirePermission');
-const cashRegisterController = require('./cashRegister.controller');
-const {
-    openSessionValidation,
-    recordMovementValidation,
-    closeSessionValidation
-} = require('./cashRegister.validation');
+const asyncHandler = require('../../utils/asyncHandler');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
-  const router = express.Router();
+    const { auth } = require('../../middleware/authMiddleware')(db);
+    const cashRegisterController = require('./cashRegister.controller')(db);
+    const {
+        openSessionValidation,
+        recordMovementValidation,
+        closeSessionValidation
+    } = require('./cashRegister.validation');
 
-  // Rotas de Caixa
-  router.post('/open', auth, requirePermission('cashRegister', 'create'), openSessionValidation, cashRegisterController.openSession);
-  router.get('/current-session', auth, requirePermission('cashRegister', 'read'), cashRegisterController.getCurrentSession);
-  router.post('/withdrawal', auth, requirePermission('cashRegister', 'update'), recordMovementValidation, cashRegisterController.recordReinforcement);
-  router.post('/reinforcement', auth, requirePermission('cashRegister', 'update'), recordMovementValidation, cashRegisterController.recordReinforcement);
-  router.get('/categories', auth, requirePermission('cashRegister', 'read'), cashRegisterController.getCashRegisterCategories);
-  router.get('/movements', auth, requirePermission('cashRegister', 'read'), cashRegisterController.getMovements);
-  router.put('/close', auth, requirePermission('cashRegister', 'update'), closeSessionValidation, cashRegisterController.closeSession);
-  router.get('/cash-orders', auth, requirePermission('cashRegister', 'read'), cashRegisterController.getCashOrders);
+    const router = express.Router();
 
-  return router;
+    router.post('/open', auth, requirePermission('cashRegister', 'create'), openSessionValidation, asyncHandler(cashRegisterController.openSession));
+    router.get('/current-session', auth, requirePermission('cashRegister', 'read'), asyncHandler(cashRegisterController.getCurrentSession));
+    router.post('/withdrawal', auth, requirePermission('cashRegister', 'update'), recordMovementValidation, asyncHandler(cashRegisterController.recordWithdrawal));
+    router.post('/reinforcement', auth, requirePermission('cashRegister', 'update'), recordMovementValidation, asyncHandler(cashRegisterController.recordReinforcement));
+    router.get('/categories', auth, requirePermission('cashRegister', 'read'), asyncHandler(cashRegisterController.getCashRegisterCategories));
+    router.get('/movements', auth, requirePermission('cashRegister', 'read'), asyncHandler(cashRegisterController.getMovements));
+    router.put('/close', auth, requirePermission('cashRegister', 'update'), closeSessionValidation, asyncHandler(cashRegisterController.closeSession));
+    router.get('/cash-orders', auth, requirePermission('cashRegister', 'read'), asyncHandler(cashRegisterController.getCashOrders));
+
+    return router;
 };

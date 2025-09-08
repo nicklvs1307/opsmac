@@ -1,100 +1,82 @@
-const cashRegisterService = require('./cashRegister.service');
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
-const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
-const handleValidationErrors = (req) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    throw new BadRequestError('Dados inválidos', errors.array());
-  }
-};
+module.exports = (db) => {
+    const cashRegisterService = require('./cashRegister.service')(db);
+    const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
-exports.openSession = async (req, res, next) => {
-  try {
-    handleValidationErrors(req);
-    const { openingCash, openingObservations } = req.body;
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const session = await cashRegisterService.openSession(restaurantId, req.user.userId, openingCash, openingObservations);
-    res.status(201).json(session);
-  } catch (error) {
-    next(error);
-  }
-};
+    const handleValidationErrors = (req) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new BadRequestError('Dados inválidos', errors.array());
+        }
+    };
 
-exports.getCurrentSession = async (req, res, next) => {
-  try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const session = await cashRegisterService.getCurrentSession(restaurantId, req.user.userId);
-    res.json(session);
-  } catch (error) {
-    next(error);
-  }
-};
+    const openSession = async (req, res, next) => {
+        handleValidationErrors(req);
+        const { openingCash, openingObservations } = req.body;
+        const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+        const session = await cashRegisterService.openSession(restaurantId, req.user.userId, openingCash, openingObservations);
+        res.status(201).json(session);
+    };
 
-exports.recordWithdrawal = async (req, res, next) => {
-  try {
-    handleValidationErrors(req);
-    const { sessionId, amount, categoryId, observations } = req.body;
-    const movement = await cashRegisterService.recordMovement(sessionId, 'withdrawal', amount, categoryId, observations, req.user.userId);
-    res.status(201).json(movement);
-  } catch (error) {
-    next(error);
-  }
-};
+    const getCurrentSession = async (req, res, next) => {
+        const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+        const session = await cashRegisterService.getCurrentSession(restaurantId, req.user.userId);
+        res.json(session);
+    };
 
-exports.recordReinforcement = async (req, res, next) => {
-  try {
-    handleValidationErrors(req);
-    const { sessionId, amount, observations } = req.body;
-    const movement = await cashRegisterService.recordMovement(sessionId, 'reinforcement', amount, null, observations, req.user.userId);
-    res.status(201).json(movement);
-  } catch (error) {
-    next(error);
-  }
-};
+    const recordWithdrawal = async (req, res, next) => {
+        handleValidationErrors(req);
+        const { sessionId, amount, categoryId, observations } = req.body;
+        const movement = await cashRegisterService.recordMovement(sessionId, 'withdrawal', amount, categoryId, observations, req.user.userId);
+        res.status(201).json(movement);
+    };
 
-exports.getCashRegisterCategories = async (req, res, next) => {
-  try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const { type } = req.query;
-    const categories = await cashRegisterService.getCashRegisterCategories(restaurantId, type);
-    res.json(categories);
-  } catch (error) {
-    next(error);
-  }
-};
+    const recordReinforcement = async (req, res, next) => {
+        handleValidationErrors(req);
+        const { sessionId, amount, observations } = req.body;
+        const movement = await cashRegisterService.recordMovement(sessionId, 'reinforcement', amount, null, observations, req.user.userId);
+        res.status(201).json(movement);
+    };
 
-exports.getMovements = async (req, res, next) => {
-  try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const { sessionId } = req.query;
-    const movements = await cashRegisterService.getMovements(restaurantId, sessionId);
-    res.json(movements);
-  } catch (error) {
-    next(error);
-  }
-};
+    const getCashRegisterCategories = async (req, res, next) => {
+        const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+        const { type } = req.query;
+        const categories = await cashRegisterService.getCashRegisterCategories(restaurantId, type);
+        res.json(categories);
+    };
 
-exports.closeSession = async (req, res, next) => {
-  try {
-    handleValidationErrors(req);
-    const { sessionId, closingCash, closingObservations } = req.body;
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const session = await cashRegisterService.closeSession(sessionId, restaurantId, req.user.userId, closingCash, closingObservations);
-    res.json(session);
-  } catch (error) {
-    next(error);
-  }
-};
+    const getMovements = async (req, res, next) => {
+        const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+        const { sessionId } = req.query;
+        const movements = await cashRegisterService.getMovements(restaurantId, sessionId);
+        res.json(movements);
+    };
 
-exports.getCashOrders = async (req, res, next) => {
-  try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
-    const { sessionId } = req.query;
-    const orders = await cashRegisterService.getCashOrders(restaurantId, sessionId);
-    res.json(orders);
-  } catch (error) {
-    next(error);
-  }
+    const closeSession = async (req, res, next) => {
+        handleValidationErrors(req);
+        const { sessionId, closingCash, closingObservations } = req.body;
+        const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+        const session = await cashRegisterService.closeSession(sessionId, restaurantId, req.user.userId, closingCash, closingObservations);
+        res.json(session);
+    };
+
+    const getCashOrders = async (req, res, next) => {
+        const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+        const { sessionId } = req.query;
+        const orders = await cashRegisterService.getCashOrders(restaurantId, sessionId);
+        res.json(orders);
+    };
+
+    return {
+        openSession,
+        getCurrentSession,
+        recordWithdrawal,
+        recordReinforcement,
+        getCashRegisterCategories,
+        getMovements,
+        closeSession,
+        getCashOrders,
+    };
 };

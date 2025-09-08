@@ -79,27 +79,33 @@ export const AuthProvider = ({ children }) => {
 
   // On app start, check for token and fetch user
   useEffect(() => {
+    console.log('AuthContext useEffect: Running');
     const token = localStorage.getItem('token');
+    console.log('AuthContext useEffect: Token from localStorage:', token);
+
     if (token) {
       setAuthToken(token);
+      console.log('AuthContext useEffect: Attempting to fetch /auth/me');
       axiosInstance
         .get('/auth/me')
-        .then(async (response) => { // Make this async to await permission fetch
+        .then(async (response) => {
+          console.log('AuthContext useEffect: /auth/me successful', response.data);
           const userData = response.data.user;
           let permissionSnapshot = null;
 
-          // Fetch permission snapshot if user data is available and a restaurant is selected
           const selectedRestaurantId = userData.restaurants && userData.restaurants.length > 0 ? userData.restaurants[0].id : null;
           if (selectedRestaurantId) {
             try {
+              console.log('AuthContext useEffect: Attempting to fetch /iam/tree');
               const permResponse = await axiosInstance.get(`/iam/tree?restaurantId=${selectedRestaurantId}`, {
                 headers: {
                   Authorization: `Bearer ${token}`,
                 },
               });
               permissionSnapshot = permResponse.data;
+              console.log('AuthContext useEffect: /iam/tree successful', permissionSnapshot);
             } catch (permError) {
-              console.error("Failed to fetch permissions during /auth/me:", permError);
+              console.error("AuthContext useEffect: Failed to fetch permissions during /auth/me:", permError);
             }
           }
 
@@ -107,17 +113,18 @@ export const AuthProvider = ({ children }) => {
             type: AUTH_ACTIONS.SET_USER,
             payload: {
               ...userData,
-              permissionSnapshot: permissionSnapshot, // Pass snapshot to reducer
+              permissionSnapshot: permissionSnapshot,
             },
           });
         })
-        .catch(() => {
-          // Token is invalid, logout
+        .catch((error) => {
+          console.error('AuthContext useEffect: /auth/me failed:', error);
           setAuthToken(null);
-          localStorage.removeItem('token'); // Ensure token is removed from localStorage
+          localStorage.removeItem('token');
           dispatch({ type: AUTH_ACTIONS.LOGOUT });
         });
     } else {
+      console.log('AuthContext useEffect: No token found in localStorage');
       dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: false });
     }
   }, []);

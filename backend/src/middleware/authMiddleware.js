@@ -1,51 +1,53 @@
 const { verifyToken } = require('../services/jwtService');
-const authService = require('../domains/auth/auth.service');
-const { models } = require('../config/database'); // Path ajustado para a config original
 const { UnauthorizedError, ForbiddenError } = require('utils/errors');
 
-const authMiddleware = async (req, res, next) => {
-  try {
-    const authHeader = req.header('Authorization');
-    if (!authHeader) {
-      // Usar next(error) permite que um error handler centralizado formate a resposta.
-      return next(new UnauthorizedError('Acesso negado. Token não fornecido.'));
-    }
+module.exports = (db) => {
+    const authService = require('../domains/auth/auth.service')(db);
 
-    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : authHeader;
-    if (!token) {
-      return next(new UnauthorizedError('Acesso negado. Formato do token inválido.'));
-    }
+    const authMiddleware = async (req, res, next) => {
+        try {
+            const authHeader = req.header('Authorization');
+            if (!authHeader) {
+                // Usar next(error) permite que um error handler centralizado formate a resposta.
+                return next(new UnauthorizedError('Acesso negado. Token não fornecido.'));
+            }
 
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return next(new UnauthorizedError('Token inválido ou expirado.'));
-    }
+            const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : authHeader;
+            if (!token) {
+                return next(new UnauthorizedError('Acesso negado. Formato do token inválido.'));
+            }
 
-    const user = await authService.getMe(decoded.userId);
+            const decoded = verifyToken(token);
+            if (!decoded) {
+                return next(new UnauthorizedError('Token inválido ou expirado.'));
+            }
 
-    if (!user) {
-      return next(new UnauthorizedError('Usuário do token não encontrado.'));
-    }
+            const user = await authService.getMe(decoded.userId);
 
-    if (!user.isActive) {
-        return next(new ForbiddenError('Acesso negado. A conta do usuário está desativada.'));
-    }
+            if (!user) {
+                return next(new UnauthorizedError('Usuário do token não encontrado.'));
+            }
 
-    // Anexa um objeto de usuário limpo e seguro à requisição.
-    req.user = user;
-    
+            if (!user.isActive) {
+                return next(new ForbiddenError('Acesso negado. A conta do usuário está desativada.'));
+            }
 
-    next();
-  } catch (error) {
-    console.error('DEBUG: authMiddleware - error:', error);
-    // Passa qualquer erro inesperado para o error handler central.
-    next(error);
-  }
-};
+            // Anexa um objeto de usuário limpo e seguro à requisição.
+            req.user = user;
 
-const { checkRestaurantOwnership } = require('middleware/checkRestaurantOwnershipMiddleware');
 
-module.exports = {
-  auth: authMiddleware,
-  checkRestaurantOwnership: checkRestaurantOwnership
+            next();
+        } catch (error) {
+            console.error('DEBUG: authMiddleware - error:', error);
+            // Passa qualquer erro inesperado para o error handler central.
+            next(error);
+        }
+    };
+
+    const { checkRestaurantOwnership } = require('middleware/checkRestaurantOwnershipMiddleware');
+
+    return {
+        auth: authMiddleware,
+        checkRestaurantOwnership: checkRestaurantOwnership
+    };
 };

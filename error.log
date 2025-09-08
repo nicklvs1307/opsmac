@@ -7,11 +7,11 @@ TypeError: Cannot read properties of undefined (reading 'apply')
     at /app/node_modules/express/lib/router/index.js:646:15
     at next (/app/node_modules/express/lib/router/index.js:216:14)
     at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-    at Object.router (/app/node_modules/express/lib/router/index.js:47:12)
-    at /app/backend/server.js:63:29
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (/app/backend/server.js:62:11)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
+    at module.exports (/app/backend/routes/index.js:47:34)
+    at Object.<anonymous> (/app/backend/server.js:62:1)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
     at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
 Node.js v20.19.5

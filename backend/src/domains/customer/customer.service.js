@@ -5,26 +5,64 @@ module.exports = (db) => {
     const sequelize = db.sequelize;
 
     const getCustomerDashboardMetrics = async (restaurantId) => {
-        const totalCustomers = await models.Customer.count({
-            where: { restaurantId: restaurantId }
-        });
-
-        const mostCheckins = await models.Checkin.findAll({
-            attributes: [
-                'customerId',
-                [fn('COUNT', col('Checkin.id')), 'checkinCount'],
-            ],
-            where: { restaurantId: restaurantId },
-            group: ['customerId', 'customer.id', 'customer.name'],
-            order: [[literal('checkinCount'), 'DESC']],
-            limit: 5,
-            include: [{
-                model: models.Customer,
-                as: 'customer',
-                attributes: ['name'],
-                required: false
-            }]
-        });
+        const [
+            totalCustomers,
+            mostCheckins,
+            mostFeedbacks,
+            engagedCustomersCount,
+            loyalCustomers
+        ] = await Promise.all([
+            models.Customer.count({
+                where: { restaurantId: restaurantId }
+            }),
+            models.Checkin.findAll({
+                attributes: [
+                    'customerId',
+                    [fn('COUNT', col('Checkin.id')), 'checkinCount'],
+                ],
+                where: { restaurantId: restaurantId },
+                group: ['customerId', 'customer.id', 'customer.name'],
+                order: [[literal('checkinCount'), 'DESC']],
+                limit: 5,
+                include: [{
+                    model: models.Customer,
+                    as: 'customer',
+                    attributes: ['name'],
+                    required: false
+                }]
+            }),
+            models.Feedback.findAll({
+                attributes: [
+                    'customerId',
+                    [fn('COUNT', col('Feedback.id')), 'feedbackCount'],
+                ],
+                where: { restaurantId: restaurantId },
+                group: ['customerId', 'customer.id', 'customer.name'],
+                order: [[literal('feedbackCount'), 'DESC']],
+                limit: 5,
+                include: [{
+                    model: models.Customer,
+                    as: 'customer',
+                    attributes: ['name'],
+                    required: false
+                }]
+            }),
+            models.Checkin.count({
+                distinct: true,
+                col: 'customerId',
+                where: {
+                    restaurantId: restaurantId,
+                }
+            }),
+            models.Checkin.findAll({
+                attributes: ['customerId'],
+                where: {
+                    restaurantId: restaurantId,
+                },
+                group: ['customerId'],
+                having: sequelize.literal('COUNT("id") > 1')
+            })
+        ]);
 
         const mostCheckinsFormatted = mostCheckins.map(c => ({
             customerId: c.customerId,
@@ -32,46 +70,13 @@ module.exports = (db) => {
             customerName: c.customer ? c.customer.name : 'Desconhecido'
         }));
 
-        const mostFeedbacks = await models.Feedback.findAll({
-            attributes: [
-                'customerId',
-                [fn('COUNT', col('Feedback.id')), 'feedbackCount'],
-            ],
-            where: { restaurantId: restaurantId },
-            group: ['customerId', 'customer.id', 'customer.name'],
-            order: [[literal('feedbackCount'), 'DESC']],
-            limit: 5,
-            include: [{
-                model: models.Customer,
-                as: 'customer',
-                attributes: ['name'],
-                required: false
-            }]
-        });
-
         const mostFeedbacksFormatted = mostFeedbacks.map(f => ({
             customerId: f.customerId,
             feedbackCount: f.dataValues.feedbackCount,
             customerName: f.customer ? f.customer.name : 'Desconhecido'
         }));
 
-        const engagedCustomersCount = await models.Checkin.count({
-            distinct: true,
-            col: 'customerId',
-            where: {
-                restaurantId: restaurantId,
-            }
-        });
         const engagementRate = totalCustomers > 0 ? engagedCustomersCount / totalCustomers : 0;
-
-        const loyalCustomers = await models.Checkin.findAll({
-            attributes: ['customerId'],
-            where: {
-                restaurantId: restaurantId,
-            },
-            group: ['customerId'],
-            having: sequelize.literal('COUNT("id") > 1')
-        });
         const loyalCustomersCount = loyalCustomers.length;
         const loyaltyRate = totalCustomers > 0 ? loyalCustomersCount / totalCustomers : 0;
 

@@ -12,7 +12,7 @@ const handleValidationErrors = (req) => {
 exports.createTable = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const restaurant_id = tablesService.getRestaurantId(req.user, req.query, req.body);
+    const restaurant_id = req.context.restaurantId;
     const { table_number } = req.body;
     const table = await tablesService.createTable(restaurant_id, table_number);
     res.status(201).json(table);
@@ -23,7 +23,7 @@ exports.createTable = async (req, res, next) => {
 
 exports.listTables = async (req, res, next) => {
   try {
-    const restaurant_id = tablesService.getRestaurantId(req.user, req.query, req.body);
+    const restaurant_id = req.context.restaurantId;
     const tables = await tablesService.listTables(restaurant_id);
     res.json(tables);
   } catch (error) {

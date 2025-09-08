@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator');
 const { BadRequestError, ForbiddenError } = require('utils/errors');
-const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
 module.exports = (db) => {
     const whatsappService = require('./whatsapp.service')(db);
@@ -37,6 +36,7 @@ module.exports = (db) => {
         sendFeedbackRequest: async (req, res, next) => {
             try {
                 handleValidationErrors(req);
+                const restaurantId = req.context.restaurantId;
                 const result = await whatsappService.sendFeedbackRequest(req.body, req.user.userId);
                 res.json({
                     message: 'Solicitação de feedback enviada com sucesso',
@@ -51,6 +51,7 @@ module.exports = (db) => {
         sendBulkFeedback: async (req, res, next) => {
             try {
                 handleValidationErrors(req);
+                const restaurantId = req.context.restaurantId;
                 const results = await whatsappService.sendBulkFeedback(req.body, req.user.userId);
                 res.json({
                     message: 'Envio em massa concluído',
@@ -64,6 +65,7 @@ module.exports = (db) => {
         sendManualMessage: async (req, res, next) => {
             try {
                 handleValidationErrors(req);
+                const restaurantId = req.context.restaurantId;
                 const result = await whatsappService.sendManualMessage(req.body, req.user.userId);
                 res.json({ message: 'Mensagem enviada com sucesso!', whatsapp_message_id: result.whatsapp_message_id });
             } catch (error) {
@@ -74,7 +76,7 @@ module.exports = (db) => {
         listMessages: async (req, res, next) => {
             try {
                 handleValidationErrors(req);
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 const { messages, pagination } = await whatsappService.listMessages(restaurantId, req.query);
                 res.json({ messages, pagination });
             } catch (error) {
@@ -84,7 +86,7 @@ module.exports = (db) => {
 
         getWhatsappAnalytics: async (req, res, next) => {
             try {
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 const analytics = await whatsappService.getWhatsappAnalytics(restaurantId, req.query.period);
                 res.json(analytics);
             } catch (error) {

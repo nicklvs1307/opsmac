@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useDashboardAnalytics } from '@/services/dashboardService';
+import { useDashboardAnalytics } from '@/features/Dashboard/api/dashboardQueries';
 import {
   LineChart,
   Line,

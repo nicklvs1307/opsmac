@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import apiClient from '@/shared/lib/axiosInstance';
+import React, { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -11,30 +10,31 @@ import {
   Button,
   CircularProgress,
   Alert,
+  Typography,
 } from '@mui/material';
 import EditLabelItemModal from './EditLabelItemModal';
+import { useLabelItems, useUpdateLabelItem } from '../../features/CDV/api/labelQueries';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const ManageLabelItems = () => {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const fetchItems = async () => {
-    try {
-      const response = await apiClient.get('/labels/items');
-      setItems(response.data);
-    } catch (err) {
-      setError('Failed to fetch items.');
+  const {
+    data: items,
+    isLoading,
+    isError,
+    error,
+  } = useLabelItems({
+    onError: (err) => {
+      toast.error(t('label_management.fetch_error'));
       console.error(err);
-    }
-    setLoading(false);
-  };
+    },
+  });
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
+  const updateLabelItemMutation = useUpdateLabelItem();
 
   const handleOpenModal = (item) => {
     setSelectedItem(item);
@@ -48,56 +48,51 @@ const ManageLabelItems = () => {
 
   const handleSave = async (updatedItem) => {
     try {
-      const response = await apiClient.patch(
-        `/labels/items/${updatedItem.type}/${updatedItem.id}`,
-        updatedItem
-      );
-      // Update the item in the local state
-      setItems(
-        items.map((item) =>
-          item.id === updatedItem.id && item.type === updatedItem.type ? response.data : item
-        )
-      );
+      await updateLabelItemMutation.mutateAsync(updatedItem);
+      toast.success(t('label_management.update_success'));
       handleCloseModal();
     } catch (err) {
+      toast.error(err.response?.data?.msg || t('label_management.update_error'));
       console.error('Failed to update item', err);
-      // You could set an error state for the modal here
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return <CircularProgress />;
   }
 
-  if (error) {
-    return <Alert severity="error">{error}</Alert>;
+  if (isError) {
+    return <Alert severity="error">{error?.message || t('common.error_loading_data')}</Alert>;
   }
 
   return (
     <>
+      <Typography variant="h5" gutterBottom>
+        {t('label_management.title')}
+      </Typography>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label={t('label_management.table_aria_label')}>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Type</TableCell>
-              <TableCell align="right">Default Expiration (Days)</TableCell>
-              <TableCell>Default Status</TableCell>
-              <TableCell align="center">Actions</TableCell>
+              <TableCell>{t('label_management.table_header_name')}</TableCell>
+              <TableCell>{t('label_management.table_header_type')}</TableCell>
+              <TableCell align="right">{t('label_management.table_header_default_expiration')}</TableCell>
+              <TableCell>{t('label_management.table_header_default_status')}</TableCell>
+              <TableCell align="center">{t('label_management.table_header_actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {items.map((item) => (
+            {items?.map((item) => (
               <TableRow key={`${item.type}-${item.id}`}>
                 <TableCell component="th" scope="row">
                   {item.name}
                 </TableCell>
                 <TableCell>{item.type}</TableCell>
-                <TableCell align="right">{item.default_expiration_days || 'Not set'}</TableCell>
-                <TableCell>{item.default_label_status || 'Not set'}</TableCell>
+                <TableCell align="right">{item.default_expiration_days || t('common.not_set')}</TableCell>
+                <TableCell>{item.default_label_status || t('common.not_set')}</TableCell>
                 <TableCell align="center">
                   <Button variant="contained" size="small" onClick={() => handleOpenModal(item)}>
-                    Edit
+                    {t('common.edit')}
                   </Button>
                 </TableCell>
               </TableRow>

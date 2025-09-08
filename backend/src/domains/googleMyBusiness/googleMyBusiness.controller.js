@@ -14,7 +14,7 @@ module.exports = (db) => {
     return {
         checkGMBModuleEnabled: async (req, res, next) => {
             try {
-                req.restaurant = await googleMyBusinessService.checkGMBModuleEnabled(req.user.userId);
+                req.restaurant = await googleMyBusinessService.checkGMBModuleEnabled(req.context.restaurantId);
                 next();
             } catch (error) {
                 next(error);
@@ -23,7 +23,7 @@ module.exports = (db) => {
 
         getAuthUrl: async (req, res, next) => {
             try {
-                const authUrl = await googleMyBusinessService.getAuthUrl(req.user.userId);
+                const authUrl = await googleMyBusinessService.getAuthUrl(req.context.restaurantId);
                 res.json({ authUrl });
             } catch (error) {
                 next(error);
@@ -33,7 +33,9 @@ module.exports = (db) => {
         oauth2Callback: async (req, res, next) => {
             try {
                 const { code } = req.query;
-                const redirectUrl = await googleMyBusinessService.oauth2Callback(code);
+                // For oauth2Callback, the restaurantId is passed in the 'state' parameter during auth URL generation
+                // and retrieved from there in the service. So no change here.
+                const redirectUrl = await googleMyBusinessService.oauth2Callback(code, req.query.state);
                 res.redirect(redirectUrl);
             } catch (error) {
                 console.error('Error processing GMB OAuth2 callback:', error.message);
@@ -43,7 +45,7 @@ module.exports = (db) => {
 
         getLocations: async (req, res, next) => {
             try {
-                const locations = await googleMyBusinessService.getLocations(req.user.userId);
+                const locations = await googleMyBusinessService.getLocations(req.context.restaurantId);
                 res.json({ locations });
             } catch (error) {
                 next(error);
@@ -53,7 +55,7 @@ module.exports = (db) => {
         getReviews: async (req, res, next) => {
             try {
                 const { locationName } = req.params;
-                const reviews = await googleMyBusinessService.getReviews(req.user.userId, locationName);
+                const reviews = await googleMyBusinessService.getReviews(req.context.restaurantId, locationName);
                 res.json({ reviews });
             } catch (error) {
                 next(error);
@@ -65,7 +67,7 @@ module.exports = (db) => {
                 handleValidationErrors(req);
                 const { locationName, reviewName } = req.params;
                 const { comment } = req.body;
-                const reply = await googleMyBusinessService.replyToReview(req.user.userId, locationName, reviewName, comment);
+                const reply = await googleMyBusinessService.replyToReview(req.context.restaurantId, locationName, reviewName, comment);
                 res.json({ reply });
             } catch (error) {
                 next(error);

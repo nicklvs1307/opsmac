@@ -1,7 +1,6 @@
 const ordersService = require('./orders.service');
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
-const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);
@@ -12,7 +11,7 @@ const handleValidationErrors = (req) => {
 
 exports.getAllOrders = async (req, res, next) => {
   try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = req.context.restaurantId;
     const { status, platform, delivery_type, search } = req.query;
     const orders = await ordersService.getAllOrders(restaurantId, status, platform, delivery_type, search);
     res.json(orders);
@@ -24,7 +23,7 @@ exports.getAllOrders = async (req, res, next) => {
 exports.updateOrderStatus = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = req.context.restaurantId;
     const { id } = req.params;
     const { status } = req.body;
     const order = await ordersService.updateOrderStatus(id, restaurantId, status);

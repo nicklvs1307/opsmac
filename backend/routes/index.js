@@ -43,50 +43,52 @@ const healthRoutes = require('../src/domains/health/health.routes');
 const requirePermission = require('../src/middleware/requirePermission');
 const iamRoutes = require('../src/api/routes/iam');
 
+const getRestaurantContext = require('../src/middleware/getRestaurantContextMiddleware');
+
 module.exports = (db) => {
     const { auth } = require('../src/middleware/authMiddleware')(db);
     return [
     { path: '/api/auth', router: authRoutes(db) },
     { path: '/api/feedback', router: feedbackRoutes(db) },
-    { path: '/api/dashboard/:restaurantId', router: dashboardRoutes(db) },
-    { path: '/api/rewards', router: rewardsRoutes(db) },
-    { path: '/api/qrcode', router: qrcodeRoutes(db) },
-    { path: '/api/whatsapp', router: whatsappRoutes(db) },
-    { path: '/api/customers', router: customerRoutes(db) },
-    { path: '/api/settings', router: settingsRoutes(db) },
-    { path: '/api/coupons', router: couponsRoutes(db) },
-    { path: '/api/checkin', router: checkinRoutes(db) },
+    { path: '/api/dashboard/:restaurantId', middleware: [auth, getRestaurantContext], router: dashboardRoutes(db) },
+    { path: '/api/rewards', middleware: [auth, getRestaurantContext], router: rewardsRoutes(db) },
+    { path: '/api/qrcode', middleware: [auth, getRestaurantContext], router: qrcodeRoutes(db) },
+    { path: '/api/whatsapp', middleware: [auth, getRestaurantContext], router: whatsappRoutes(db) },
+    { path: '/api/customers', middleware: [auth, getRestaurantContext], router: customerRoutes(db) },
+    { path: '/api/settings', middleware: [auth, getRestaurantContext], router: settingsRoutes(db) },
+    { path: '/api/coupons', middleware: [auth, getRestaurantContext], router: couponsRoutes(db) },
+    { path: '/api/checkin', middleware: [auth, getRestaurantContext], router: checkinRoutes(db) },
     { path: '/api/public/surveys', router: publicSurveyRoutes(db) },
     { path: '/api/public', router: publicRoutes(db) },
     { path: '/api/public/v2', router: publicRoutesV2(db) },
-    { path: '/api/surveys', router: surveyRoutes(db) },
-    { path: '/api/admin', router: adminRoutes(db) },
-    { path: '/api/nps-criteria', router: npsCriteriaRoutes(db) },
-    { path: '/api/ifood', router: ifoodRoutes(db) },
-    { path: '/api/google-my-business', router: googleMyBusinessRoutes(db) },
-    { path: '/api/saipos', router: saiposRoutes(db) },
-    { path: '/api/uai-rango', router: uaiRangoRoutes(db) },
-    { path: '/api/delivery-much', router: deliveryMuchRoutes(db) },
+    { path: '/api/surveys', middleware: [auth, getRestaurantContext], router: surveyRoutes(db) },
+    { path: '/api/admin', middleware: [auth, getRestaurantContext], router: adminRoutes(db) },
+    { path: '/api/nps-criteria', middleware: [auth, getRestaurantContext], router: npsCriteriaRoutes(db) },
+    { path: '/api/ifood', router: ifoodRoutes(db) }, // Webhooks are public
+    { path: '/api/google-my-business', router: googleMyBusinessRoutes(db) }, // Webhooks are public
+    { path: '/api/saipos', router: saiposRoutes(db) }, // Webhooks are public
+    { path: '/api/uai-rango', router: uaiRangoRoutes(db) }, // Webhooks are public
+    { path: '/api/delivery-much', router: deliveryMuchRoutes(db) }, // Webhooks are public
     
-    { path: '/api/products', router: productRoutes(db) },
+    { path: '/api/products', middleware: [auth, getRestaurantContext], router: productRoutes(db) },
     { path: '/api/public/products', router: publicProductsRoutes(db) },
     { path: '/api/public/orders', router: publicOrdersRoutes(db) },
-    { path: '/api/stock', router: stockRoutes(db) },
-    { path: '/api/tables', router: tablesRoutes(db) },
+    { path: '/api/stock', middleware: [auth, getRestaurantContext], router: stockRoutes(db) },
+    { path: '/api/tables', middleware: [auth, getRestaurantContext], router: tablesRoutes(db) },
     { path: '/api/public/menu/dine-in', router: publicDineInMenuRoutes(db) },
     { path: '/api/public/dine-in', router: publicDineInOrdersRoutes(db) },
-    { path: '/api/orders', router: ordersRoutes(db) },
-    { path: '/api/ingredients', router: ingredientsRoutes(db) },
-    { path: '/api/technical-specifications', router: technicalSpecificationsRoutes(db) },
-    { path: '/api/categories', router: categoriesRoutes(db) },
-    { path: '/api/addons', router: addonRoutes(db) },
-    { path: '/api/suppliers', router: supplierRoutes(db) },
-    { path: '/api/cash-register', router: cashRegisterRoutes(db) },
-    { path: '/api/financial', router: financialRoutes(db) },
-    { path: '/api/labels', router: labelsRoutes(db) },
-    { path: '/api/restaurant/:restaurantId', router: restaurantRoutes(db) },
+    { path: '/api/orders', middleware: [auth, getRestaurantContext], router: ordersRoutes(db) },
+    { path: '/api/ingredients', middleware: [auth, getRestaurantContext], router: ingredientsRoutes(db) },
+    { path: '/api/technical-specifications', middleware: [auth, getRestaurantContext], router: technicalSpecificationsRoutes(db) },
+    { path: '/api/categories', middleware: [auth, getRestaurantContext], router: categoriesRoutes(db) },
+    { path: '/api/addons', middleware: [auth, getRestaurantContext], router: addonRoutes(db) },
+    { path: '/api/suppliers', middleware: [auth, getRestaurantContext], router: supplierRoutes(db) },
+    { path: '/api/cash-register', middleware: [auth, getRestaurantContext], router: cashRegisterRoutes(db) },
+    { path: '/api/financial', middleware: [auth, getRestaurantContext], router: financialRoutes(db) },
+    { path: '/api/labels', middleware: [auth, getRestaurantContext], router: labelsRoutes(db) },
+    { path: '/api/restaurant/:restaurantId', middleware: [auth, getRestaurantContext], router: restaurantRoutes(db) },
     { path: '/api/health', router: healthRoutes(db) },
     
-    { path: '/api/iam', router: iamRoutes(db) },
+    { path: '/api/iam', middleware: [auth, getRestaurantContext], router: iamRoutes(db) },
 ];
 };

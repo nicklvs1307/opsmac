@@ -1,8 +1,70 @@
 import React from 'react';
 import { Box, Card, CardContent, Typography, Avatar, useTheme, alpha } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { TrendingUp, TrendingDown } from '@mui/icons-material';
 
 import { useTranslation } from 'react-i18next';
+
+// Define keyframes as constants
+const countUpKeyframes = `
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const pulseIconKeyframes = `
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
+const fadeInKeyframes = `
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+// Styled Card component for the main container
+const StyledCard = styled(Card)(({ theme, bgColor, defaultBgColor }) => ({
+  height: '100%',
+  background: bgColor || defaultBgColor,
+  color: 'white',
+  position: 'relative',
+  overflow: 'visible',
+  borderRadius: 3,
+  transition: 'all 0.3s ease',
+  boxShadow: `0 10px 20px ${alpha(theme.palette.common.black, 0.1)}`,
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: `0 15px 30px ${alpha(theme.palette.common.black, 0.15)}`,
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background: `radial-gradient(circle at top right, ${alpha(theme.palette.common.white, 0.1)}, transparent 70%)`,
+    zIndex: 1,
+  },
+}));
 
 /**
  * MetricCard - Um componente reutilizável para exibir métricas com visual moderno
@@ -51,31 +113,10 @@ const MetricCard = ({
     (trend ? t('metric_card.trend_text', { trend: `${trend > 0 ? '+' : ''}${trend}` }) : '');
 
   return (
-    <Card
-      sx={{
-        height: '100%',
-        background: bgColor || defaultBgColor,
-        color: 'white',
-        position: 'relative',
-        overflow: 'visible',
-        borderRadius: 3,
-        transition: 'all 0.3s ease',
-        boxShadow: `0 10px 20px ${alpha(theme.palette.common.black, 0.1)}`,
-        '&:hover': {
-          transform: 'translateY(-5px)',
-          boxShadow: `0 15px 30px ${alpha(theme.palette.common.black, 0.15)}`,
-        },
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: `radial-gradient(circle at top right, ${alpha(theme.palette.common.white, 0.1)}, transparent 70%)`,
-          zIndex: 1,
-        },
-      }}
+    <StyledCard
+      elevation={0}
+      bgColor={bgColor}
+      defaultBgColor={defaultBgColor}
     >
       <CardContent sx={{ pb: 2, position: 'relative', zIndex: 2 }}>
         <Box display="flex" justifyContent="space-between" alignItems="flex-start">
@@ -101,17 +142,8 @@ const MetricCard = ({
                 fontSize: '2.5rem',
                 lineHeight: 1,
                 textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                animation: 'countUp 1s ease-out',
-                '@keyframes countUp': {
-                  '0%': {
-                    opacity: 0,
-                    transform: 'translateY(10px)',
-                  },
-                  '100%': {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                },
+                animation: `countUp 1s ease-out`,
+                '@keyframes countUp': countUpKeyframes,
               }}
             >
               {valuePrefix}
@@ -138,18 +170,8 @@ const MetricCard = ({
               width: 48,
               height: 48,
               boxShadow: `0 4px 8px ${alpha(theme.palette.common.black, 0.2)}`,
-              animation: 'pulseIcon 2s infinite',
-              '@keyframes pulseIcon': {
-                '0%': {
-                  transform: 'scale(1)',
-                },
-                '50%': {
-                  transform: 'scale(1.05)',
-                },
-                '100%': {
-                  transform: 'scale(1)',
-                },
-              },
+              animation: `pulseIcon 2s infinite`,
+              '@keyframes pulseIcon': pulseIconKeyframes,
             }}
           >
             {icon}
@@ -166,17 +188,8 @@ const MetricCard = ({
               px: 1.5,
               py: 0.75,
               width: 'fit-content',
-              animation: 'fadeIn 0.5s ease-in-out',
-              '@keyframes fadeIn': {
-                '0%': {
-                  opacity: 0,
-                  transform: 'translateY(5px)',
-                },
-                '100%': {
-                  opacity: 1,
-                  transform: 'translateY(0)',
-                },
-              },
+              animation: `fadeIn 0.5s ease-in-out`,
+              '@keyframes fadeIn': fadeInKeyframes,
             }}
           >
             {trend > 0 ? (
@@ -201,7 +214,7 @@ const MetricCard = ({
           </Box>
         )}
       </CardContent>
-    </Card>
+    </StyledCard>
   );
 };
 

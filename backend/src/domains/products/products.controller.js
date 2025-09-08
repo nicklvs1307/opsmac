@@ -1,7 +1,6 @@
 const productsService = require('./products.service');
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
-const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);
@@ -25,7 +24,7 @@ exports.uploadProductImage = async (req, res, next) => {
 exports.createProduct = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = req.context.restaurantId;
     const product = await productsService.createProduct(req.body, restaurantId);
     res.status(201).json(product);
   } catch (error) {
@@ -35,7 +34,7 @@ exports.createProduct = async (req, res, next) => {
 
 exports.listProducts = async (req, res, next) => {
   try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = req.context.restaurantId;
     const { category_id } = req.query;
     const products = await productsService.listProducts(restaurantId, category_id);
     res.json(products);
@@ -46,7 +45,7 @@ exports.listProducts = async (req, res, next) => {
 
 exports.getProductById = async (req, res, next) => {
   try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = req.context.restaurantId;
     const product = await productsService.getProductById(req.params.id, restaurantId);
     res.json(product);
   } catch (error) {
@@ -57,7 +56,7 @@ exports.getProductById = async (req, res, next) => {
 exports.updateProduct = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = req.context.restaurantId;
     const product = await productsService.updateProduct(req.params.id, restaurantId, req.body);
     res.json(product);
   } catch (error) {
@@ -67,7 +66,7 @@ exports.updateProduct = async (req, res, next) => {
 
 exports.deleteProduct = async (req, res, next) => {
   try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = req.context.restaurantId;
     await productsService.deleteProduct(req.params.id, restaurantId);
     res.json({ message: 'Produto removido com sucesso' });
   } catch (error) {
@@ -77,7 +76,7 @@ exports.deleteProduct = async (req, res, next) => {
 
 exports.toggleProductStatus = async (req, res, next) => {
   try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const restaurantId = req.context.restaurantId;
     const product = await productsService.toggleProductStatus(req.params.id, restaurantId);
     res.json(product);
   } catch (error) {

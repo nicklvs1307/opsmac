@@ -1,4 +1,3 @@
-const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
 
@@ -16,7 +15,7 @@ module.exports = (db) => {
         createFeedback: async (req, res, next) => {
             try {
                 handleValidation(req);
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 const reqInfo = { ip: req.ip, userAgent: req.get('User-Agent') };
                 const { feedback, points_earned } = await feedbackService.createFeedback(req.body, restaurantId, reqInfo);
                 res.status(201).json({ message: 'Feedback criado com sucesso', feedback, points_earned });
@@ -28,7 +27,7 @@ module.exports = (db) => {
         listFeedbacks: async (req, res, next) => {
             try {
                 handleValidation(req);
-                const { restaurantId } = req.params;
+                const restaurantId = req.context.restaurantId;
                 const { count, rows } = await feedbackService.listFeedbacks(restaurantId, req.query);
                 res.json({
                     feedbacks: rows,
@@ -46,7 +45,7 @@ module.exports = (db) => {
 
         getFeedbackById: async (req, res, next) => {
             try {
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 const feedback = await feedbackService.getFeedbackById(req.params.id, restaurantId);
                 res.json({ feedback });
             } catch (error) {
@@ -57,7 +56,7 @@ module.exports = (db) => {
         updateFeedback: async (req, res, next) => {
             try {
                 handleValidation(req);
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 const updatedFeedback = await feedbackService.updateFeedback(req.params.id, restaurantId, req.user.userId, req.body);
                 res.json({ message: 'Feedback atualizado com sucesso', feedback: updatedFeedback });
             } catch (error) {
@@ -67,7 +66,7 @@ module.exports = (db) => {
 
         deleteFeedback: async (req, res, next) => {
             try {
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 await feedbackService.deleteFeedback(req.params.id, restaurantId, req.user);
                 res.json({ message: 'Feedback deletado com sucesso' });
             } catch (error) {
@@ -78,7 +77,7 @@ module.exports = (db) => {
         respondToFeedback: async (req, res, next) => {
             try {
                 handleValidation(req);
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 const feedback = await feedbackService.respondToFeedback(req.params.id, restaurantId, req.user.userId, req.body.response_text);
                 res.json({ message: 'Resposta enviada com sucesso', feedback });
             } catch (error) {
@@ -88,7 +87,7 @@ module.exports = (db) => {
 
         getFeedbackWordFrequency: async (req, res, next) => {
             try {
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 const wordFrequency = await feedbackService.getFeedbackWordFrequency(restaurantId, req.query);
                 res.json(wordFrequency);
             } catch (error) {

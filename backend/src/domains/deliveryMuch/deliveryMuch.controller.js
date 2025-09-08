@@ -3,7 +3,9 @@ const { BadRequestError, ForbiddenError } = require('utils/errors');
 
 exports.checkDeliveryMuchModuleEnabled = async (req, res, next) => {
   try {
-    const restaurantId = req.body.restaurantId; // Ajuste conforme o payload real do Delivery Much
+    // For authenticated routes, req.context.restaurantId will be available.
+    // For webhook routes, it will come from req.body.restaurantId.
+    const restaurantId = req.context?.restaurantId || req.body.restaurantId;
     const restaurant = await deliveryMuchService.checkDeliveryMuchModuleEnabled(restaurantId, req.user?.userId);
     req.restaurant = restaurant; // Anexa o objeto do restaurante à requisição
     next();
@@ -23,7 +25,8 @@ exports.handleWebhook = async (req, res, next) => {
 
 exports.getOrders = async (req, res, next) => {
   try {
-    const orders = await deliveryMuchService.getOrders(req.user.userId, req.query.status);
+    const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
+    const orders = await deliveryMuchService.getOrders(restaurantId, req.query.status);
     res.json({ orders });
   } catch (error) {
     next(error);

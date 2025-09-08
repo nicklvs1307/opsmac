@@ -115,9 +115,9 @@ module.exports = (db) => {
 
         updateRestaurantFeatures: async (req, res, next) => {
             try {
-
                 handleValidationErrors(req);
-                const features = await adminService.updateRestaurantFeatures(req.params.id, req.body.enabledFeatureIds);
+                const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
+                const features = await adminService.updateRestaurantFeatures(restaurantId, req.body.enabledFeatureIds);
                 res.status(200).json({ message: 'Funcionalidades atualizadas com sucesso', features });
             } catch (error) {
                 next(error);
@@ -127,7 +127,7 @@ module.exports = (db) => {
         // Feature Management
         getRestaurantFeatures: async (req, res, next) => {
             try {
-                const features = await adminService.getRestaurantFeatures(req.params.id);
+                const features = await adminService.getRestaurantFeatures(req.context.restaurantId);
                 res.status(200).json(features);
             } catch (error) {
                 next(error);

@@ -13,7 +13,7 @@ const handleValidationErrors = (req) => {
 // --- GERENCIAMENTO DO RESTAURANTE ---
 exports.getRestaurantById = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const restaurant = await restaurantService.getRestaurantById(restaurantId);
     res.json(restaurant);
   } catch (error) {
@@ -24,7 +24,7 @@ exports.getRestaurantById = async (req, res, next) => {
 exports.updateRestaurant = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const restaurantData = req.body;
     const updatedRestaurant = await restaurantService.updateRestaurant(restaurantId, restaurantData);
     res.json(updatedRestaurant);
@@ -36,7 +36,7 @@ exports.updateRestaurant = async (req, res, next) => {
 exports.updateRestaurantOpenStatus = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const { is_open } = req.body;
     const updatedRestaurant = await restaurantService.updateRestaurantStatus(restaurantId, { is_open });
     res.json(updatedRestaurant);
@@ -48,7 +48,7 @@ exports.updateRestaurantOpenStatus = async (req, res, next) => {
 exports.updateRestaurantPosStatus = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const { pos_status } = req.body;
     const updatedRestaurant = await restaurantService.updateRestaurantStatus(restaurantId, { pos_status });
     res.json(updatedRestaurant);
@@ -60,7 +60,7 @@ exports.updateRestaurantPosStatus = async (req, res, next) => {
 // --- USUÁRIOS DO RESTAURANTE ---
 exports.listRestaurantUsers = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const users = await restaurantService.listRestaurantUsers(restaurantId);
     res.json(users);
   } catch (error) {
@@ -71,7 +71,7 @@ exports.listRestaurantUsers = async (req, res, next) => {
 exports.createRestaurantUser = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newUser = await restaurantService.createRestaurantUser(restaurantId, req.body);
     res.status(201).json(newUser);
   } catch (error) {
@@ -103,7 +103,7 @@ exports.deleteRestaurantUser = async (req, res, next) => {
 // --- ADICIONAIS (ADDONS) ---
 exports.getRestaurantAddons = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const addons = await restaurantService.getRestaurantAddons(restaurantId);
     res.json(addons);
   } catch (error) {
@@ -114,7 +114,7 @@ exports.getRestaurantAddons = async (req, res, next) => {
 exports.createRestaurantAddon = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newAddon = await restaurantService.createRestaurantAddon(restaurantId, req.body);
     res.status(201).json(newAddon);
   } catch (error) {
@@ -146,7 +146,7 @@ exports.deleteRestaurantAddon = async (req, res, next) => {
 // --- CATEGORIAS DE CAIXA ---
 exports.getRestaurantCashRegisterCategories = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const categories = await restaurantService.getRestaurantCashRegisterCategories(restaurantId);
     res.json(categories);
   } catch (error) {
@@ -157,7 +157,7 @@ exports.getRestaurantCashRegisterCategories = async (req, res, next) => {
 exports.createRestaurantCashRegisterCategory = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newCategory = await restaurantService.createRestaurantCashRegisterCategory(restaurantId, req.body);
     res.status(201).json(newCategory);
   } catch (error) {
@@ -189,7 +189,7 @@ exports.deleteRestaurantCashRegisterCategory = async (req, res, next) => {
 // --- CATEGORIAS ---
 exports.getRestaurantCategories = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const categories = await restaurantService.getRestaurantCategories(restaurantId);
     res.json(categories);
   } catch (error) {
@@ -200,7 +200,7 @@ exports.getRestaurantCategories = async (req, res, next) => {
 exports.createRestaurantCategory = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newCategory = await restaurantService.createRestaurantCategory(restaurantId, req.body);
     res.status(201).json(newCategory);
   } catch (error) {
@@ -232,7 +232,7 @@ exports.deleteRestaurantCategory = async (req, res, next) => {
 // --- CATEGORIAS FINANCEIRAS ---
 exports.getRestaurantFinancialCategories = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const categories = await restaurantService.getRestaurantFinancialCategories(restaurantId);
     res.json(categories);
   } catch (error) {
@@ -243,7 +243,7 @@ exports.getRestaurantFinancialCategories = async (req, res, next) => {
 exports.createRestaurantFinancialCategory = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newCategory = await restaurantService.createRestaurantFinancialCategory(restaurantId, req.body);
     res.status(201).json(newCategory);
   } catch (error) {
@@ -275,7 +275,7 @@ exports.deleteRestaurantFinancialCategory = async (req, res, next) => {
 // --- INGREDIENTES ---
 exports.getRestaurantIngredients = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const ingredients = await restaurantService.getRestaurantIngredients(restaurantId);
     res.json(ingredients);
   } catch (error) {
@@ -286,7 +286,7 @@ exports.getRestaurantIngredients = async (req, res, next) => {
 exports.createRestaurantIngredient = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newIngredient = await restaurantService.createRestaurantIngredient(restaurantId, req.body);
     res.status(201).json(newIngredient);
   } catch (error) {
@@ -318,7 +318,7 @@ exports.deleteRestaurantIngredient = async (req, res, next) => {
 // --- PRODUTOS ---
 exports.getRestaurantProducts = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const products = await restaurantService.getRestaurantProducts(restaurantId);
     res.json(products);
   } catch (error) {
@@ -329,7 +329,7 @@ exports.getRestaurantProducts = async (req, res, next) => {
 exports.createRestaurantProduct = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newProduct = await restaurantService.createRestaurantProduct(restaurantId, req.body);
     res.status(201).json(newProduct);
   } catch (error) {
@@ -361,7 +361,7 @@ exports.deleteRestaurantProduct = async (req, res, next) => {
 // --- FORNECEDORES ---
 exports.getRestaurantSuppliers = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const suppliers = await restaurantService.getRestaurantSuppliers(restaurantId);
     res.json(suppliers);
   } catch (error) {
@@ -372,7 +372,7 @@ exports.getRestaurantSuppliers = async (req, res, next) => {
 exports.createRestaurantSupplier = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newSupplier = await restaurantService.createRestaurantSupplier(restaurantId, req.body);
     res.status(201).json(newSupplier);
   } catch (error) {
@@ -404,7 +404,7 @@ exports.deleteRestaurantSupplier = async (req, res, next) => {
 // --- MESAS ---
 exports.getRestaurantTables = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const tables = await restaurantService.getRestaurantTables(restaurantId);
     res.json(tables);
   } catch (error) {
@@ -415,7 +415,7 @@ exports.getRestaurantTables = async (req, res, next) => {
 exports.createRestaurantTable = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newTable = await restaurantService.createRestaurantTable(restaurantId, req.body);
     res.status(201).json(newTable);
   } catch (error) {
@@ -447,7 +447,7 @@ exports.deleteRestaurantTable = async (req, res, next) => {
 // --- FICHAS TÉCNICAS ---
 exports.getRestaurantTechnicalSpecifications = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const specs = await restaurantService.getRestaurantTechnicalSpecifications(restaurantId);
     res.json(specs);
   } catch (error) {
@@ -458,7 +458,7 @@ exports.getRestaurantTechnicalSpecifications = async (req, res, next) => {
 exports.createRestaurantTechnicalSpecification = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newSpec = await restaurantService.createRestaurantTechnicalSpecification(restaurantId, req.body);
     res.status(201).json(newSpec);
   } catch (error) {
@@ -490,7 +490,7 @@ exports.deleteRestaurantTechnicalSpecification = async (req, res, next) => {
 // --- GARÇOM (WAITER/PDV) ---
 exports.getWaiterProducts = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const products = await restaurantService.getWaiterProducts(restaurantId);
     res.json(products);
   } catch (error) {
@@ -501,7 +501,7 @@ exports.getWaiterProducts = async (req, res, next) => {
 exports.createWaiterOrder = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newOrder = await restaurantService.createWaiterOrder(restaurantId, req.body);
     res.status(201).json(newOrder);
   } catch (error) {
@@ -532,7 +532,7 @@ exports.getWaiterOrderById = async (req, res, next) => {
 
 exports.getWaiterOrders = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const orders = await restaurantService.getWaiterOrders(restaurantId);
     res.json(orders);
   } catch (error) {
@@ -543,7 +543,7 @@ exports.getWaiterOrders = async (req, res, next) => {
 exports.createWaiterCall = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const newCall = await restaurantService.createWaiterCall(restaurantId, req.body);
     res.status(201).json(newCall);
   } catch (error) {
@@ -564,7 +564,7 @@ exports.updateWaiterCall = async (req, res, next) => {
 
 exports.getWaiterCalls = async (req, res, next) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.context.restaurantId;
     const calls = await restaurantService.getWaiterCalls(restaurantId);
     res.json(calls);
   } catch (error) {

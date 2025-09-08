@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
-const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
 module.exports = (db) => {
     const rewardsService = require('./rewards.service')(db);
@@ -15,7 +14,7 @@ module.exports = (db) => {
     return {
         listRewards: async (req, res, next) => {
             try {
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 const data = await rewardsService.listRewards(restaurantId, req.query);
                 res.json(data);
             } catch (error) {
@@ -35,7 +34,8 @@ module.exports = (db) => {
         createReward: async (req, res, next) => {
             try {
                 handleValidationErrors(req);
-                const reward = await rewardsService.createReward(req.body, req.user.userId);
+                const restaurantId = req.context.restaurantId;
+                const reward = await rewardsService.createReward(req.body, restaurantId);
                 res.status(201).json(reward);
             } catch (error) {
                 next(error);
@@ -74,7 +74,8 @@ module.exports = (db) => {
 
         getRewardsAnalytics: async (req, res, next) => {
             try {
-                const data = await rewardsService.getRewardsAnalytics(req.user.userId);
+                const restaurantId = req.context.restaurantId;
+                const data = await rewardsService.getRewardsAnalytics(restaurantId);
                 res.json(data);
             } catch (error) {
                 next(error);

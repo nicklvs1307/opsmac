@@ -44,10 +44,7 @@ module.exports = (db) => {
         }
     };
 
-    const { checkRestaurantOwnership } = require('middleware/checkRestaurantOwnershipMiddleware');
-
     return {
         auth: authMiddleware,
-        checkRestaurantOwnership: checkRestaurantOwnership
     };
 };

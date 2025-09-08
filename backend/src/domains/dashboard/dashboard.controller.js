@@ -2,7 +2,6 @@ module.exports = (db) => {
     const dashboardService = require('./dashboard.service')(db);
     const { validationResult } = require('express-validator');
     const { BadRequestError } = require('utils/errors');
-    const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
     const handleValidationErrors = (req) => {
         const errors = validationResult(req);
@@ -15,7 +14,7 @@ module.exports = (db) => {
         getDashboardOverview: async (req, res, next) => {
             try {
                 handleValidationErrors(req);
-                const { restaurantId } = req.params;
+                const restaurantId = req.context.restaurantId;
                 const data = await dashboardService.getDashboardOverview(restaurantId, req.query);
                 res.json(data);
             } catch (error) {
@@ -26,7 +25,7 @@ module.exports = (db) => {
         getDashboardAnalytics: async (req, res, next) => {
             try {
                 handleValidationErrors(req);
-                const { restaurantId } = req.params;
+                const restaurantId = req.context.restaurantId;
                 const data = await dashboardService.getDashboardAnalytics(restaurantId, req.query);
                 res.json(data);
             } catch (error) {
@@ -37,7 +36,7 @@ module.exports = (db) => {
         generateReport: async (req, res, next) => {
             try {
                 handleValidationErrors(req);
-                const { restaurantId } = req.params;
+                const restaurantId = req.context.restaurantId;
                 const { report_type } = req.query;
                 const reportData = await dashboardService.generateReport(restaurantId, report_type, req.query);
                 res.json({
@@ -52,7 +51,7 @@ module.exports = (db) => {
 
         getRewardsAnalytics: async (req, res, next) => {
             try {
-                const { restaurantId } = req.params;
+                const restaurantId = req.context.restaurantId;
                 const data = await dashboardService.getRewardsAnalytics(restaurantId);
                 res.json(data);
             } catch (error) {

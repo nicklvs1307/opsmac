@@ -12,8 +12,9 @@ const handleValidationErrors = (req) => {
 exports.createSupplier = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { name, contact_person, phone, email, address, restaurant_id } = req.body;
-    const supplier = await suppliersService.createSupplier(name, contact_person, phone, email, address, restaurant_id);
+    const restaurantId = req.context.restaurantId;
+    const { name, contact_person, phone, email, address } = req.body;
+    const supplier = await suppliersService.createSupplier(name, contact_person, phone, email, address, restaurantId);
     res.status(201).json(supplier);
   } catch (error) {
     next(error);
@@ -22,8 +23,8 @@ exports.createSupplier = async (req, res, next) => {
 
 exports.getAllSuppliers = async (req, res, next) => {
   try {
-    const { restaurant_id } = req.query;
-    const suppliers = await suppliersService.getAllSuppliers(restaurant_id);
+    const restaurantId = req.context.restaurantId;
+    const suppliers = await suppliersService.getAllSuppliers(restaurantId);
     res.status(200).json(suppliers);
   } catch (error) {
     next(error);

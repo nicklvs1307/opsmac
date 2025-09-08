@@ -21,61 +21,38 @@ module.exports = (db) => {
             createdAt: { [Op.between]: [startOfMonth, endOfMonth] }
         };
 
-        let totalCheckins, newCustomers, totalSurveyResponses, redeemedCoupons, feedbackStats;
-
-        try {
-            totalCheckins = await models.Checkin.count({
+        const [
+            totalCheckins,
+            newCustomers,
+            totalSurveyResponses,
+            redeemedCoupons,
+            feedbackStats
+        ] = await Promise.all([
+            models.Checkin.count({
                 where: { restaurantId, ...dateFilter }
-            });
-        } catch (error) {
-            console.error("Error counting checkins:", error);
-            throw new Error("Failed to get checkin count");
-        }
-
-        try {
-            newCustomers = await models.Customer.count({
+            }),
+            models.Customer.count({
                 where: { restaurantId, ...dateFilter }
-            });
-        } catch (error) {
-            console.error("Error counting new customers:", error);
-            throw new Error("Failed to get new customer count");
-        }
-
-        try {
-            totalSurveyResponses = await models.SurveyResponse.count({
+            }),
+            models.SurveyResponse.count({
                 where: { restaurantId, ...dateFilter }
-            });
-        } catch (error) {
-            console.error("Error counting survey responses:", error);
-            throw new Error("Failed to get survey response count");
-        }
-
-        try {
-            redeemedCoupons = await models.Coupon.count({
+            }),
+            models.Coupon.count({
                 where: {
                     restaurantId,
                     status: 'used',
                     redeemed_at: { [Op.between]: [startOfMonth, endOfMonth] }
                 }
-            });
-        } catch (error) {
-            console.error("Error counting redeemed coupons:", error);
-            throw new Error("Failed to get redeemed coupon count");
-        }
-
-        try {
-            feedbackStats = await models.Feedback.findOne({
+            }),
+            models.Feedback.findOne({
                 where: { restaurantId, ...dateFilter },
                 attributes: [
                     [fn('AVG', col('npsScore')), 'avgNpsScore'],
                     [fn('AVG', col('rating')), 'avgRating']
                 ],
                 raw: true
-            });
-        } catch (error) {
-            console.error("Error getting feedback stats:", error);
-            throw new Error("Failed to get feedback stats");
-        }
+            })
+        ]);
 
         return {
             totalCheckins,
@@ -102,34 +79,38 @@ module.exports = (db) => {
             dateFilter.createdAt = { [Op.lte]: endDate };
         }
 
-        const totalCheckins = await models.Checkin.count({
-            where: { restaurantId, ...dateFilter }
-        });
-
-        const newCustomers = await models.Customer.count({
-            where: { restaurantId, ...dateFilter }
-        });
-
-        const totalSurveyResponses = await models.SurveyResponse.count({
-            where: { restaurantId, ...dateFilter }
-        });
-
-        const redeemedCoupons = await models.Coupon.count({
-            where: {
-                restaurantId,
-                status: 'used',
-                redeemed_at: dateFilter.createdAt ? dateFilter.createdAt : { [Op.not]: null } // Use redeemed_at for coupons
-            }
-        });
-
-        const feedbackStats = await models.Feedback.findOne({
-            where: { restaurantId, ...dateFilter },
-            attributes: [
-                [fn('AVG', col('npsScore')), 'avgNpsScore'],
-                [fn('AVG', col('rating')), 'avgRating']
-            ],
-            raw: true
-        });
+        const [
+            totalCheckins,
+            newCustomers,
+            totalSurveyResponses,
+            redeemedCoupons,
+            feedbackStats
+        ] = await Promise.all([
+            models.Checkin.count({
+                where: { restaurantId, ...dateFilter }
+            }),
+            models.Customer.count({
+                where: { restaurantId, ...dateFilter }
+            }),
+            models.SurveyResponse.count({
+                where: { restaurantId, ...dateFilter }
+            }),
+            models.Coupon.count({
+                where: {
+                    restaurantId,
+                    status: 'used',
+                    redeemed_at: dateFilter.createdAt ? dateFilter.createdAt : { [Op.not]: null }
+                }
+            }),
+            models.Feedback.findOne({
+                where: { restaurantId, ...dateFilter },
+                attributes: [
+                    [fn('AVG', col('npsScore')), 'avgNpsScore'],
+                    [fn('AVG', col('rating')), 'avgRating']
+                ],
+                raw: true
+            })
+        ]);
 
         return {
             totalCheckins,

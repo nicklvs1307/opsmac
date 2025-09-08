@@ -2,7 +2,6 @@ module.exports = (db) => {
     const checkinService = require('./checkin.service')(db);
     const { validationResult } = require('express-validator');
     const { BadRequestError, ForbiddenError } = require('utils/errors');
-    const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
     const handleValidationErrors = (req) => {
         const errors = validationResult(req);
@@ -14,16 +13,10 @@ module.exports = (db) => {
     return {
         checkCheckinModuleEnabled: async (req, res, next) => {
             try {
-                let restaurantId = null;
-                let restaurantSlug = null;
-
-                if (req.user && req.user.restaurants && req.user.restaurants[0]) {
-                    restaurantId = req.user.restaurants[0].id;
-                } else if (req.params.restaurantSlug) {
-                    restaurantSlug = req.params.restaurantSlug;
-                } else if (req.params.restaurantId) {
-                    restaurantId = req.params.restaurantId;
-                }
+                // With getRestaurantContextMiddleware, req.context.restaurant and req.context.restaurantId are already set
+                // for authenticated routes. For public routes, we might still need to derive it.
+                const restaurantId = req.context?.restaurantId || req.params.restaurantId;
+                const restaurantSlug = req.params.restaurantSlug; // Still needed for public routes
 
                 const restaurant = await checkinService.checkCheckinModuleEnabled(restaurantId, restaurantSlug);
                 req.restaurant = restaurant; // Anexa o objeto do restaurante à requisição para uso posterior
@@ -36,7 +29,7 @@ module.exports = (db) => {
         recordCheckin: async (req, res, next) => {
             try {
                 handleValidationErrors(req);
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 const { customerId } = req.body;
                 const checkin = await checkinService.recordCheckin(customerId, restaurantId);
                 res.status(201).json({ message: 'Check-in registrado com sucesso', checkin });

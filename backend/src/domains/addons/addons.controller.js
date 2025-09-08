@@ -1,7 +1,6 @@
 const addonsService = require('./addons.service');
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
-const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);
@@ -12,10 +11,7 @@ const handleValidationErrors = (req) => {
 
 exports.listAddons = async (req, res, next) => {
   try {
-    const { restaurantId } = req.query;
-    if (!restaurantId) {
-      throw new BadRequestError('Restaurant ID is required');
-    }
+    const restaurantId = req.context.restaurantId;
     const addons = await addonsService.listAddons(restaurantId);
     res.json(addons);
   } catch (error) {
@@ -26,7 +22,8 @@ exports.listAddons = async (req, res, next) => {
 exports.createAddon = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const { name, price, restaurantId } = req.body;
+    const restaurantId = req.context.restaurantId;
+    const { name, price } = req.body;
     const newAddon = await addonsService.createAddon(name, price, restaurantId);
     res.json(newAddon);
   } catch (error) {

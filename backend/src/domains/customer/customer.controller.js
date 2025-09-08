@@ -1,4 +1,3 @@
-const { getRestaurantIdFromUser } = require('services/restaurantAuthService');
 const { BadRequestError } = require('utils/errors');
 
 module.exports = (db) => {
@@ -7,7 +6,7 @@ module.exports = (db) => {
     // Helper para obter o restaurantId e passá-lo para o serviço
     const withRestaurantId = (serviceFunction) => async (req, res, next) => {
         try {
-            const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+            const restaurantId = req.context.restaurantId;
             if (!restaurantId) {
                 throw new BadRequestError('Restaurante não encontrado para o usuário.');
             }
@@ -21,7 +20,7 @@ module.exports = (db) => {
     return {
         getCustomerDashboardMetrics: async (req, res, next) => {
             try {
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 if (!restaurantId) {
                     throw new BadRequestError('Restaurante não encontrado para o usuário.');
                 }
@@ -60,7 +59,7 @@ module.exports = (db) => {
 
         listCustomers: async (req, res, next) => {
             try {
-                const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+                const restaurantId = req.context.restaurantId;
                 if (!restaurantId) {
                     throw new BadRequestError('Restaurante não encontrado para o usuário.');
                 }

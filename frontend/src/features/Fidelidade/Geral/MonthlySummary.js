@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useDashboardOverview } from '@/services/dashboardService'; // Import the new hook
+import { useDashboardOverview } from '@/features/Dashboard/api/dashboardQueries'; // Import the new hook
 import {
   LineChart,
   Line,

@@ -14,6 +14,7 @@ import {
   alpha,
   CircularProgress,
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import {
   Visibility,
   VisibilityOff,
@@ -26,6 +27,71 @@ import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
+// Define keyframes as constants
+const fadeInKeyframes = `
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const shakeKeyframes = `
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+`;
+
+// Styled Paper component for the main form container
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  p: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  borderRadius: 3,
+  position: 'relative',
+  overflow: 'hidden',
+  background:
+    theme.palette.mode === 'dark'
+      ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.8)} 0%, ${alpha(theme.palette.background.paper, 0.9)} 100%)`
+      : `linear-gradient(135deg, ${alpha('#f8f9fa', 0.8)} 0%, ${alpha('#ffffff', 0.9)} 100%)`,
+  backdropFilter: 'blur(10px)',
+  border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
+  boxShadow: `0 10px 40px ${alpha(theme.palette.common.black, 0.1)}`,
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '4px',
+    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+    zIndex: 1,
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: `radial-gradient(circle at top right, ${alpha(theme.palette.primary.light, 0.1)}, transparent 70%)`,
+    zIndex: 0,
+  },
+}));
 
 const LoginForm = ({
   onSubmit,
@@ -71,44 +137,8 @@ const LoginForm = ({
   };
 
   return (
-    <Paper
+    <StyledPaper
       elevation={0}
-      sx={{
-        p: 4,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        borderRadius: 3,
-        position: 'relative',
-        overflow: 'hidden',
-        background:
-          theme.palette.mode === 'dark'
-            ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.8)} 0%, ${alpha(theme.palette.background.paper, 0.9)} 100%)`
-            : `linear-gradient(135deg, ${alpha('#f8f9fa', 0.8)} 0%, ${alpha('#ffffff', 0.9)} 100%)`,
-        backdropFilter: 'blur(10px)',
-        border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
-        boxShadow: `0 10px 40px ${alpha(theme.palette.common.black, 0.1)}`,
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '4px',
-          background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-          zIndex: 1,
-        },
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: `radial-gradient(circle at top right, ${alpha(theme.palette.primary.light, 0.1)}, transparent 70%)`,
-          zIndex: 0,
-        },
-      }}
     >
       {/* Logo/Title */}
       <Box
@@ -134,17 +164,8 @@ const LoginForm = ({
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 textShadow: `0 2px 10px ${alpha(theme.palette.primary.main, 0.3)}`,
-                animation: 'fadeIn 0.8s ease-in-out',
-                '@keyframes fadeIn': {
-                  '0%': {
-                    opacity: 0,
-                    transform: 'translateY(-10px)',
-                  },
-                  '100%': {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                },
+                animation: `fadeIn 0.8s ease-in-out`,
+                '@keyframes fadeIn': fadeInKeyframes,
               }}
             >
               {finalAppName}
@@ -153,17 +174,8 @@ const LoginForm = ({
               variant="body1"
               color="text.secondary"
               sx={{
-                animation: 'fadeIn 0.8s ease-in-out 0.2s both',
-                '@keyframes fadeIn': {
-                  '0%': {
-                    opacity: 0,
-                    transform: 'translateY(-10px)',
-                  },
-                  '100%': {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                },
+                animation: `fadeIn 0.8s ease-in-out 0.2s both`,
+                '@keyframes fadeIn': fadeInKeyframes,
               }}
             >
               {finalAppDescription}
@@ -201,17 +213,8 @@ const LoginForm = ({
             mb: 3,
             fontWeight: 600,
             color: theme.palette.text.primary,
-            animation: 'fadeIn 0.8s ease-in-out 0.4s both',
-            '@keyframes fadeIn': {
-              '0%': {
-                opacity: 0,
-                transform: 'translateY(-10px)',
-              },
-              '100%': {
-                opacity: 1,
-                transform: 'translateY(0)',
-              },
-            },
+            animation: `fadeIn 0.8s ease-in-out 0.4s both`,
+            '@keyframes fadeIn': fadeInKeyframes,
           }}
         >
           {t('login_form.enter_account')}
@@ -223,21 +226,8 @@ const LoginForm = ({
             sx={{
               mb: 2,
               borderRadius: 2,
-              animation: 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
-              '@keyframes shake': {
-                '10%, 90%': {
-                  transform: 'translate3d(-1px, 0, 0)',
-                },
-                '20%, 80%': {
-                  transform: 'translate3d(2px, 0, 0)',
-                },
-                '30%, 50%, 70%': {
-                  transform: 'translate3d(-4px, 0, 0)',
-                },
-                '40%, 60%': {
-                  transform: 'translate3d(4px, 0, 0)',
-                },
-              },
+              animation: `shake 0.5s cubic-bezier(.36,.07,.19,.97) both`,
+              '@keyframes shake': shakeKeyframes,
             }}
           >
             {error}
@@ -266,17 +256,8 @@ const LoginForm = ({
                 ),
               }}
               sx={{
-                animation: 'fadeIn 0.8s ease-in-out 0.6s both',
-                '@keyframes fadeIn': {
-                  '0%': {
-                    opacity: 0,
-                    transform: 'translateY(10px)',
-                  },
-                  '100%': {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                },
+                animation: `fadeIn 0.8s ease-in-out 0.6s both`,
+                '@keyframes fadeIn': fadeInKeyframes,
                 '& .MuiOutlinedInput-root': {
                   borderRadius: 2,
                   transition: 'all 0.3s ease',
@@ -324,17 +305,8 @@ const LoginForm = ({
                 ),
               }}
               sx={{
-                animation: 'fadeIn 0.8s ease-in-out 0.8s both',
-                '@keyframes fadeIn': {
-                  '0%': {
-                    opacity: 0,
-                    transform: 'translateY(10px)',
-                  },
-                  '100%': {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                },
+                animation: `fadeIn 0.8s ease-in-out 0.8s both`,
+                '@keyframes fadeIn': fadeInKeyframes,
                 '& .MuiOutlinedInput-root': {
                   borderRadius: 2,
                   transition: 'all 0.3s ease',
@@ -368,17 +340,8 @@ const LoginForm = ({
             boxShadow: `0 4px 14px ${alpha(theme.palette.primary.main, 0.4)}`,
             position: 'relative',
             overflow: 'hidden',
-            animation: 'fadeIn 0.8s ease-in-out 1s both',
-            '@keyframes fadeIn': {
-              '0%': {
-                opacity: 0,
-                transform: 'translateY(10px)',
-              },
-              '100%': {
-                opacity: 1,
-                transform: 'translateY(0)',
-              },
-            },
+            animation: `fadeIn 0.8s ease-in-out 1s both`,
+            '@keyframes fadeIn': fadeInKeyframes,
             '&::after': {
               content: '""',
               position: 'absolute',
@@ -409,15 +372,8 @@ const LoginForm = ({
           sx={{
             textAlign: 'center',
             mt: 2,
-            animation: 'fadeIn 0.8s ease-in-out 1.2s both',
-            '@keyframes fadeIn': {
-              '0%': {
-                opacity: 0,
-              },
-              '100%': {
-                opacity: 1,
-              },
-            },
+            animation: `fadeIn 0.8s ease-in-out 1.2s both`,
+            '@keyframes fadeIn': fadeInKeyframes,
           }}
         >
           <Link
@@ -473,15 +429,8 @@ const LoginForm = ({
             borderRadius: 2,
             width: '100%',
             border: `1px dashed ${alpha(theme.palette.divider, 0.3)}`,
-            animation: 'fadeIn 0.8s ease-in-out 1.4s both',
-            '@keyframes fadeIn': {
-              '0%': {
-                opacity: 0,
-              },
-              '100%': {
-                opacity: 1,
-              },
-            },
+            animation: `fadeIn 0.8s ease-in-out 1.4s both`,
+            '@keyframes fadeIn': fadeInKeyframes,
           }}
         >
           <Typography variant="caption" color="text.secondary" align="center" display="block">
@@ -492,7 +441,7 @@ const LoginForm = ({
           </Typography>
         </Box>
       )}
-    </Paper>
+    </StyledPaper>
   );
 };
 

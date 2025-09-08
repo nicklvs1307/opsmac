@@ -7,7 +7,7 @@ const requirePermission = require('../../middleware/requirePermission');
 const models = require('../../../models');
 const roleService = require('../../services/roleService');
 const entitlementService = require('../../services/entitlementService');
-const { auth } = require('../../middleware/authMiddleware'); // Import auth middleware
+
 const { Op } = require('sequelize'); // Import Op for Sequelize operators
 
 router.use(auth); // Apply auth middleware to all IAM routes
@@ -841,5 +841,7 @@ router.post('/entitlements/bulk', requirePermission('entitlements.manage', 'upda
   }
 });
 
-module.exports = router;
+module.exports = (db) => {
+  return router;
+};
 

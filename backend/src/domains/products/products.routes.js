@@ -15,4 +15,7 @@ router.put('/:id', auth, requirePermission('products', 'update'), productsContro
 router.delete('/:id', auth, requirePermission('products', 'delete'), productsController.deleteProduct);
 router.patch('/:id/toggle-status', auth, requirePermission('products', 'update'), productsController.toggleProductStatus);
 
-module.exports = router;
+module.exports = (db) => {
+  // You can use db here if needed in the future
+  return router;
+};

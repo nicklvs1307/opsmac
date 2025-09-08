@@ -44,7 +44,7 @@ const requirePermission = require('../src/middleware/requirePermission');
 const iamRoutes = require('../src/api/routes/iam');
 
 module.exports = (db) => {
-    const { auth } = require('middleware/authMiddleware')(db);
+    const { auth } = require('../src/middleware/authMiddleware')(db);
     return [
     { path: '/api/auth', router: authRoutes(db) },
     { path: '/api/feedback', router: feedbackRoutes(db) },

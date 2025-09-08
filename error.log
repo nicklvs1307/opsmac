@@ -1,5 +1,76 @@
+AuthContext.js:82 AuthContext useEffect: Running
+AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGYwNTE2NS0wMTQ0LTRhOWEtYWIyMC1jOGE0MTc3MzlmNTUiLCJpYXQiOjE3NTcyOTM4MTQsImV4cCI6MTc1Nzg5ODYxNH0.HL-zaORUQte7NnJ4Sf6sA2Ag33g-ZGbFUgzTqkaRiSM
+AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
+AuthContext.js:92 AuthContext useEffect: /auth/me successful {user: {…}}
+AuthContext.js:99 AuthContext useEffect: Attempting to fetch /iam/tree
+AuthContext.js:106 AuthContext useEffect: /iam/tree successful {restaurantId: 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9', userId: 'b4f05165-0144-4a9a-ab20-c8a417739f55', isSuperAdmin: false, isOwner: true, modules: Array(8)}
+usePermissions.js:62 can check: {featureKey: undefined, actionKey: undefined, loading: false, error: null, hasSnapshot: false, …}
 {
     "loading": false,
     "error": null,
     "hasSnapshot": false
 }
+
+{
+    "user": {
+        "id": "b4f05165-0144-4a9a-ab20-c8a417739f55",
+        "name": "Lucas Niquele",
+        "email": "lucas@teste.com",
+        "phone": "3598989898",
+        "roles": [
+            {
+                "id": "26f17709-d148-46df-8d76-ec234bbc5f6d",
+                "restaurantId": null,
+                "key": "owner",
+                "name": "owner",
+                "isSystem": true,
+                "createdAt": "2025-09-08T00:12:53.800Z",
+                "updatedAt": "2025-09-08T00:12:53.800Z",
+                "restaurant_id": null,
+                "UserRole": {
+                    "userId": "b4f05165-0144-4a9a-ab20-c8a417739f55",
+                    "restaurantId": "a42013f2-2970-4a72-b94c-6c8ed3e09fc9",
+                    "roleId": "26f17709-d148-46df-8d76-ec234bbc5f6d",
+                    "createdAt": "2025-09-08T00:14:43.117Z",
+                    "updatedAt": "2025-09-08T00:14:43.117Z",
+                    "role_id": "26f17709-d148-46df-8d76-ec234bbc5f6d",
+                    "user_id": "b4f05165-0144-4a9a-ab20-c8a417739f55",
+                    "restaurant_id": "a42013f2-2970-4a72-b94c-6c8ed3e09fc9"
+                }
+            }
+        ],
+        "isActive": true,
+        "restaurants": [
+            {
+                "id": "a42013f2-2970-4a72-b94c-6c8ed3e09fc9",
+                "name": "Towersfy",
+                "slug": "towersfy",
+                "description": "123456",
+                "address": "Rua Avenida Brasil",
+                "city": "Andradas",
+                "state": "MG",
+                "zipCode": null,
+                "phone": null,
+                "email": null,
+                "website": null,
+                "logo": null,
+                "planKey": null,
+                "status": "active",
+                "permVersion": "1",
+                "createdAt": "2025-09-08T00:14:43.104Z",
+                "updatedAt": "2025-09-08T00:14:43.104Z"
+            }
+        ],
+        "restaurant": null,
+        "restaurantId": null,
+        "permissionSnapshot": null
+    }
+}
+
+AuthContext.js:82 AuthContext useEffect: Running
+AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGYwNTE2NS0wMTQ0LTRhOWEtYWIyMC1jOGE0MTc3MzlmNTUiLCJpYXQiOjE3NTcyOTM4MTQsImV4cCI6MTc1Nzg5ODYxNH0.HL-zaORUQte7NnJ4Sf6sA2Ag33g-ZGbFUgzTqkaRiSM
+AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
+AuthContext.js:92 AuthContext useEffect: /auth/me successful {user: {…}}
+AuthContext.js:99 AuthContext useEffect: Attempting to fetch /iam/tree
+AuthContext.js:106 AuthContext useEffect: /iam/tree successful {restaurantId: 'a42013f2-2970-4a72-b94c-6c8ed3e09fc9', userId: 'b4f05165-0144-4a9a-ab20-c8a417739f55', isSuperAdmin: false, isOwner: true, modules: Array(8)}
+usePermissions.js:62 can check: {featureKey: undefined, actionKey: undefined, loading: false, error: null, hasSnapshot: false, …}

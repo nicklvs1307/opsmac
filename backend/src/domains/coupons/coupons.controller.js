@@ -13,7 +13,7 @@ const handleValidationErrors = (req) => {
 exports.listCoupons = async (req, res, next) => {
   try {
     handleValidationErrors(req);
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const { restaurantId } = req.params;
     const { page, limit, status, search } = req.query;
     const { coupons, pagination } = await couponsService.listCoupons(restaurantId, page, limit, status, search);
     res.json({ coupons, pagination });
@@ -56,7 +56,7 @@ exports.createCoupon = async (req, res, next) => {
 
 exports.getCouponAnalytics = async (req, res, next) => {
   try {
-    const restaurantId = await getRestaurantIdFromUser(req.user.userId);
+    const { restaurantId } = req.params;
     const analytics = await couponsService.getCouponAnalytics(restaurantId);
     res.json(analytics);
   } catch (error) {

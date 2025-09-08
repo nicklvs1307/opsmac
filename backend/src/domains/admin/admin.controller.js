@@ -134,16 +134,6 @@ module.exports = (db) => {
             }
         },
 
-        // This is a duplicate function, keeping it for now as it's used in the routes
-        // It should be removed after refactoring the routes to use only one updateRestaurantFeatures
-        // exports.updateRestaurantFeatures = async (req, res, next) => {
-        //   try {
-        //     handleValidationErrors(req);
-        //     const features = await adminService.updateRestaurantFeatures(req.params.id, req.body.enabledFeatureIds);
-        //     res.status(200).json({ message: 'Funcionalidades atualizadas com sucesso', features });
-        //   } catch (error) {
-        //     next(error);
-        //   }
-        // };
+        
     };
 };

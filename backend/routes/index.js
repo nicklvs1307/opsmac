@@ -21,7 +21,7 @@ const uaiRangoRoutes = require('../src/domains/uaiRango/uaiRango.routes');
 const deliveryMuchRoutes = require('../src/domains/deliveryMuch/deliveryMuch.routes');
 const productRoutes = require('../src/domains/products/products.routes');
 
-const { checkRestaurantOwnership } = require('../src/middleware/checkRestaurantOwnershipMiddleware');
+
 const publicProductsRoutes = require('../src/domains/publicProducts/publicProducts.routes');
 const stockRoutes = require('../src/domains/stock/stock.routes');
 const tablesRoutes = require('../src/domains/tables/tables.routes');

@@ -41,13 +41,6 @@ module.exports = (db) => {
         return oauth2Client;
     };
 
-    const getRestaurantIdFromUser = async (userId) => {
-        const user = await models.User.findByPk(userId, {
-            include: [{ model: models.Restaurant, as: 'restaurants' }]
-        });
-        return user?.restaurants?.[0]?.id;
-    };
-
     const getAuthUrlInternal = async (restaurantId) => {
         const oauth2Client = await initializeOAuthClient(restaurantId);
         const scopes = ['https://www.googleapis.com/auth/business.manage'];
@@ -122,12 +115,7 @@ module.exports = (db) => {
         return res.data;
     };
 
-    const checkGMBModuleEnabled = async (userId) => {
-        const restaurantId = await getRestaurantIdFromUser(userId);
-        if (!restaurantId) {
-            throw new BadRequestError('Restaurante não encontrado para o usuário autenticado.');
-        }
-
+    const checkGMBModuleEnabled = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant || !restaurant.settings?.enabled_modules?.includes('google_my_business_integration')) {
             throw new ForbiddenError('Módulo Google My Business não habilitado para este restaurante.');
@@ -135,11 +123,7 @@ module.exports = (db) => {
         return restaurant;
     };
 
-    const getAuthUrl = async (userId) => {
-        const restaurantId = await getRestaurantIdFromUser(userId);
-        if (!restaurantId) {
-            throw new BadRequestError('Restaurante não encontrado para o usuário.');
-        }
+    const getAuthUrl = async (restaurantId) => {
         return getAuthUrlInternal(restaurantId);
     };
 
@@ -155,29 +139,17 @@ module.exports = (db) => {
         return process.env.FRONTEND_URL + '/integrations?status=success&integration=google-my_business';
     };
 
-    const getLocations = async (userId) => {
-        const restaurantId = await getRestaurantIdFromUser(userId);
-        if (!restaurantId) {
-            throw new BadRequestError('Restaurante não encontrado para o usuário.');
-        }
+    const getLocations = async (restaurantId) => {
         return getLocationsInternal(restaurantId);
     };
 
-    const getReviews = async (userId, locationName) => {
-        const restaurantId = await getRestaurantIdFromUser(userId);
-        if (!restaurantId) {
-            throw new BadRequestError('Restaurante não encontrado para o usuário.');
-        }
+    const getReviews = async (restaurantId, locationName) => {
         return getReviewsInternal(restaurantId, `locations/${locationName}`);
     };
 
-    const replyToReview = async (userId, locationName, reviewName, comment) => {
+    const replyToReview = async (restaurantId, locationName, reviewName, comment) => {
         if (!comment) {
             throw new BadRequestError('Comentário da resposta é obrigatório.');
-        }
-        const restaurantId = await getRestaurantIdFromUser(userId);
-        if (!restaurantId) {
-            throw new BadRequestError('Restaurante não encontrado para o usuário.');
         }
         return replyToReviewInternal(restaurantId, `locations/${locationName}/reviews/${reviewName}`, comment);
     };

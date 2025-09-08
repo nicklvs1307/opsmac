@@ -1,16 +1,5 @@
-const lodash = require('lodash');
-const crypto = require('crypto');
-const { NotFoundError } = require('utils/errors');
-
 module.exports = (db) => {
     const models = db.models;
-
-    const getRestaurantIdFromUser = async (userId) => {
-        const user = await models.User.findByPk(userId, {
-            include: [{ model: models.Restaurant, as: 'restaurants' }]
-        });
-        return user?.restaurants?.[0]?.id;
-    };
 
     const getRestaurantSettings = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
@@ -124,7 +113,6 @@ module.exports = (db) => {
     };
 
     return {
-        getRestaurantIdFromUser,
         getRestaurantSettings,
         updateRestaurantSettings,
         uploadRestaurantLogo,

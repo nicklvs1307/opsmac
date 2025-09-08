@@ -1,53 +1,64 @@
-const { models } = require('config/config');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
-exports.createIngredient = async (name, unit_of_measure, cost_per_unit, restaurantId) => {
-  const ingredient = await models.Ingredient.create({
-    name,
-    unit_of_measure,
-    cost_per_unit,
-    restaurant_id: restaurantId,
-  });
-  return ingredient;
-};
+module.exports = (db) => {
+    const models = db.models;
 
-exports.listIngredients = async (restaurantId) => {
-  const ingredients = await models.Ingredient.findAll({
-    where: { restaurant_id: restaurantId },
-    order: [['name', 'ASC']],
-  });
-  return ingredients;
-};
+    const createIngredient = async (name, unit_of_measure, cost_per_unit, restaurantId) => {
+        const ingredient = await models.Ingredient.create({
+            name,
+            unit_of_measure,
+            cost_per_unit,
+            restaurant_id: restaurantId,
+        });
+        return ingredient;
+    };
 
-exports.getIngredientById = async (id, restaurantId) => {
-  const ingredient = await models.Ingredient.findOne({
-    where: { id, restaurant_id: restaurantId },
-  });
-  if (!ingredient) {
-    throw new NotFoundError('Ingrediente não encontrado.');
-  }
-  return ingredient;
-};
+    const listIngredients = async (restaurantId) => {
+        const ingredients = await models.Ingredient.findAll({
+            where: { restaurant_id: restaurantId },
+            order: [['name', 'ASC']],
+        });
+        return ingredients;
+    };
 
-exports.updateIngredient = async (id, name, unit_of_measure, cost_per_unit, restaurantId) => {
-  const ingredient = await models.Ingredient.findOne({
-    where: { id, restaurant_id: restaurantId },
-  });
-  if (!ingredient) {
-    throw new NotFoundError('Ingrediente não encontrado.');
-  }
+    const getIngredientById = async (id, restaurantId) => {
+        const ingredient = await models.Ingredient.findOne({
+            where: { id, restaurant_id: restaurantId },
+        });
+        if (!ingredient) {
+            throw new NotFoundError('Ingrediente não encontrado.');
+        }
+        return ingredient;
+    };
 
-  await ingredient.update({ name, unit_of_measure, cost_per_unit });
-  return ingredient;
-};
+    const updateIngredient = async (id, name, unit_of_measure, cost_per_unit, restaurantId) => {
+        const ingredient = await models.Ingredient.findOne({
+            where: { id, restaurant_id: restaurantId },
+        });
+        if (!ingredient) {
+            throw new NotFoundError('Ingrediente não encontrado.');
+        }
 
-exports.deleteIngredient = async (id, restaurantId) => {
-  const ingredient = await models.Ingredient.findOne({
-    where: { id, restaurant_id: restaurantId },
-  });
-  if (!ingredient) {
-    throw new NotFoundError('Ingrediente não encontrado.');
-  }
+        await ingredient.update({ name, unit_of_measure, cost_per_unit });
+        return ingredient;
+    };
 
-  await ingredient.destroy();
+    const deleteIngredient = async (id, restaurantId) => {
+        const ingredient = await models.Ingredient.findOne({
+            where: { id, restaurant_id: restaurantId },
+        });
+        if (!ingredient) {
+            throw new NotFoundError('Ingrediente não encontrado.');
+        }
+
+        await ingredient.destroy();
+    };
+
+    return {
+        createIngredient,
+        listIngredients,
+        getIngredientById,
+        updateIngredient,
+        deleteIngredient,
+    };
 };

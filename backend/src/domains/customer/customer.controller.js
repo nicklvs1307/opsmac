@@ -7,9 +7,6 @@ module.exports = (db) => {
     const withRestaurantId = (serviceFunction) => async (req, res, next) => {
         try {
             const restaurantId = req.context.restaurantId;
-            if (!restaurantId) {
-                throw new BadRequestError('Restaurante não encontrado para o usuário.');
-            }
             const result = await serviceFunction(restaurantId, req.params, req.query, req.body);
             res.json(result);
         } catch (error) {

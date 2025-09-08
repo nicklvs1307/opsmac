@@ -68,21 +68,7 @@ module.exports = (db) => {
         return models.Order.findAll({ where });
     };
 
-    const checkSaiposModuleEnabled = async (restaurantIdFromPayload, userId) => {
-        let restaurantId = restaurantIdFromPayload;
-        if (userId) {
-            const user = await models.User.findByPk(userId, {
-                include: [{ model: models.Restaurant, as: 'restaurants' }]
-            });
-            if (user && user.restaurants && user.restaurants[0]) {
-                restaurantId = user.restaurants[0].id;
-            }
-        }
-
-        if (!restaurantId) {
-            throw new BadRequestError('ID do restaurante ausente. Não é possível verificar o módulo.');
-        }
-
+    const checkSaiposModuleEnabled = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant || !restaurant.settings?.enabled_modules?.includes('saipos_integration')) {
             throw new ForbiddenError('Módulo Saipos não habilitado para este restaurante.');
@@ -90,15 +76,7 @@ module.exports = (db) => {
         return restaurant;
     };
 
-    const handleWebhook = async (event) => {
-        await processWebhookEventInternal(event);
-    };
-
-    const getOrders = async (userId, status) => {
-        const user = await models.User.findByPk(userId, {
-            include: [{ model: models.Restaurant, as: 'restaurants' }]
-        });
-        const restaurantId = user?.restaurants?.[0]?.id;
+    const getOrders = async (restaurantId, status) => {
         if (!restaurantId) {
             throw new BadRequestError('Restaurante não encontrado para o usuário.');
         }

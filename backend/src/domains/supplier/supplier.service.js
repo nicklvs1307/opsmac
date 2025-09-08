@@ -1,36 +1,47 @@
-const { models } = require('config/config');
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
-exports.createSupplier = async (name, contact_person, phone, email, address, restaurant_id) => {
-  const supplier = await models.Supplier.create({ name, contact_person, phone, email, address, restaurant_id });
-  return supplier;
-};
+module.exports = (db) => {
+    const models = db.models;
 
-exports.getAllSuppliers = async (restaurant_id) => {
-  const suppliers = await models.Supplier.findAll({ where: { restaurant_id } });
-  return suppliers;
-};
+    const createSupplier = async (name, contact_person, phone, email, address, restaurant_id) => {
+        const supplier = await models.Supplier.create({ name, contact_person, phone, email, address, restaurant_id });
+        return supplier;
+    };
 
-exports.getSupplierById = async (id) => {
-  const supplier = await models.Supplier.findByPk(id);
-  if (!supplier) {
-    throw new NotFoundError('Supplier not found');
-  }
-  return supplier;
-};
+    const getAllSuppliers = async (restaurant_id) => {
+        const suppliers = await models.Supplier.findAll({ where: { restaurant_id } });
+        return suppliers;
+    };
 
-exports.updateSupplier = async (id, name, contact_person, phone, email, address) => {
-  const [updated] = await models.Supplier.update({ name, contact_person, phone, email, address }, { where: { id } });
-  if (!updated) {
-    throw new NotFoundError('Supplier not found');
-  }
-  const updatedSupplier = await models.Supplier.findByPk(id);
-  return updatedSupplier;
-};
+    const getSupplierById = async (id) => {
+        const supplier = await models.Supplier.findByPk(id);
+        if (!supplier) {
+            throw new NotFoundError('Supplier not found');
+        }
+        return supplier;
+    };
 
-exports.deleteSupplier = async (id) => {
-  const deleted = await models.Supplier.destroy({ where: { id } });
-  if (!deleted) {
-    throw new NotFoundError('Supplier not found');
-  }
+    const updateSupplier = async (id, name, contact_person, phone, email, address) => {
+        const [updated] = await models.Supplier.update({ name, contact_person, phone, email, address }, { where: { id } });
+        if (!updated) {
+            throw new NotFoundError('Supplier not found');
+        }
+        const updatedSupplier = await models.Supplier.findByPk(id);
+        return updatedSupplier;
+    };
+
+    const deleteSupplier = async (id) => {
+        const deleted = await models.Supplier.destroy({ where: { id } });
+        if (!deleted) {
+            throw new NotFoundError('Supplier not found');
+        }
+    };
+
+    return {
+        createSupplier,
+        getAllSuppliers,
+        getSupplierById,
+        updateSupplier,
+        deleteSupplier,
+    };
 };

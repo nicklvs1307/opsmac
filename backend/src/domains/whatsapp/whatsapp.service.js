@@ -237,23 +237,23 @@ module.exports = (db) => {
         }
     };
 
-    const sendFeedbackRequest = async (data, userId) => {
-        const { phone_number, customer_name, restaurant_id, table_number, custom_message } = data;
-        const restaurant = await models.Restaurant.findByPk(restaurant_id);
+    const sendFeedbackRequest = async (restaurantId, data, userId) => {
+        const { phone_number, customer_name, table_number, custom_message } = data;
+        const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) throw new NotFoundError('Restaurante não encontrado');
         return await sendFeedbackRequestInternal(restaurant, phone_number, customer_name, table_number, custom_message, userId);
     };
 
-    const sendBulkFeedback = async (data, userId) => {
-        const { recipients, restaurant_id, custom_message } = data;
-        const restaurant = await models.Restaurant.findByPk(restaurant_id);
+    const sendBulkFeedback = async (restaurantId, data, userId) => {
+        const { recipients, custom_message } = data;
+        const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) throw new NotFoundError('Restaurante não encontrado');
         return await sendBulkFeedbackInternal(restaurant, recipients, custom_message, userId);
     };
 
-    const sendManualMessage = async (data, userId) => {
-        const { recipient_phone_number, message_text, restaurant_id } = data;
-        const restaurant = await models.Restaurant.findByPk(restaurant_id);
+    const sendManualMessage = async (restaurantId, data, userId) => {
+        const { recipient_phone_number, message_text } = data;
+        const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) throw new NotFoundError('Restaurante não encontrado');
         return await sendManualMessageInternal(restaurant, recipient_phone_number, message_text, userId);
     };

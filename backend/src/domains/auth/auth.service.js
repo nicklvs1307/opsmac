@@ -1,8 +1,7 @@
-const { generateToken } = require('../../services/jwtService');
-const { UnauthorizedError, ForbiddenError, NotFoundError } = require('../../utils/errors');
+const { generateToken } = require('services/jwtService');
+const { UnauthorizedError, ForbiddenError, NotFoundError } = require('utils/errors');
 
-const { getModuleHierarchy } = require('../../services/menuService');
-const iamService = require('../../services/iamService'); // Import the new IAM service
+const iamService = require('services/iamService'); // Import the new IAM service
 
 module.exports = (db) => {
     const models = db.models;

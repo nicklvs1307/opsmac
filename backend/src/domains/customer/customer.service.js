@@ -152,6 +152,9 @@ module.exports = (db) => {
                 restaurantId: restaurantId
             }
         });
+        if (!customer) {
+            throw new NotFoundError('Cliente não encontrado.');
+        }
         return customer;
     };
 
@@ -162,6 +165,9 @@ module.exports = (db) => {
                 restaurantId: restaurantId
             }
         });
+        if (!customer) {
+            throw new NotFoundError('Cliente não encontrado.');
+        }
         return customer;
     };
 
@@ -172,7 +178,9 @@ module.exports = (db) => {
                 restaurantId: restaurantId
             }
         });
-        if (!customer) return null;
+        if (!customer) {
+            throw new NotFoundError('Cliente não encontrado.');
+        }
         await customer.update(updateData);
         return customer;
     };
@@ -184,7 +192,9 @@ module.exports = (db) => {
                 restaurantId: restaurantId
             }
         });
-        if (!customer) return 0;
+        if (!customer) {
+            throw new NotFoundError('Cliente não encontrado.');
+        }
         await customer.destroy();
         return 1;
     };
@@ -212,7 +222,9 @@ module.exports = (db) => {
                 restaurantId: restaurantId
             }
         });
-        if (!customer) return null;
+        if (!customer) {
+            throw new NotFoundError('Cliente não encontrado.');
+        }
         await customer.update({ totalVisits: 0 });
         return customer;
     };
@@ -224,7 +236,9 @@ module.exports = (db) => {
                 restaurantId: restaurantId
             }
         });
-        if (!customer) return 0;
+        if (!customer) {
+            throw new NotFoundError('Cliente não encontrado.');
+        }
         await models.Checkin.destroy({
             where: {
                 customerId: customerId,

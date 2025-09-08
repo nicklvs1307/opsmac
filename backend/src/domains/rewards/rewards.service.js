@@ -1,16 +1,6 @@
-const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
-const { spinWheel: spinWheelService } = require('services/wheelService.js');
-
 module.exports = (db) => {
     const models = db.models;
     const { Op, fn, col } = require('sequelize');
-
-    const getRestaurantIdFromUser = async (userId) => {
-        const user = await models.User.findByPk(userId, {
-            include: [{ model: models.Restaurant, as: 'restaurants' }]
-        });
-        return user?.restaurants?.[0]?.id;
-    };
 
     const listRewards = async (restaurantId, query) => {
         const { page = 1, limit = 12 } = query;
@@ -41,8 +31,7 @@ module.exports = (db) => {
         return reward;
     };
 
-    const createReward = async (rewardData, userId) => {
-        const restaurantId = await getRestaurantIdFromUser(userId);
+    const createReward = async (rewardData, restaurantId) => {
         if (!restaurantId) {
             throw new BadRequestError('Restaurante não encontrado para o usuário.');
         }
@@ -193,8 +182,7 @@ module.exports = (db) => {
         };
     };
 
-    const getRewardsAnalytics = async (userId) => {
-        const restaurantId = await getRestaurantIdFromUser(userId);
+    const getRewardsAnalytics = async (restaurantId) => {
         if (!restaurantId) {
             throw new BadRequestError('Restaurante não encontrado para o usuário autenticado.');
         }

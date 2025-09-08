@@ -4,6 +4,7 @@ const requirePermission = require('../../middleware/requirePermission');
 module.exports = (db) => {
     const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
     const dashboardController = require('./dashboard.controller')(db);
+    const { getDashboardOverviewValidation, getDashboardAnalyticsValidation, generateReportValidation } = require('./dashboard.validation');
     const router = express.Router({ mergeParams: true });
 
     // Aplicando middlewares na ordem correta

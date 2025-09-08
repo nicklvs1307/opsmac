@@ -27,6 +27,11 @@ const Menu = () => {
 
   const renderMenuItems = (items) => {
     return items.map((item, index) => {
+      // Hide admin module for non-superadmins
+      if (item.module === 'admin' && !user?.isSuperAdmin) {
+        return null;
+      }
+
       // Check module-level visibility and locked status from permissionSnapshot
       if (item.module) {
         const moduleInSnapshot = permissionSnapshot?.modules.find(m => m.key === item.module);

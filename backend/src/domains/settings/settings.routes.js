@@ -17,8 +17,8 @@ const router = express.Router();
 router.post('/profile/avatar', auth, upload.single('avatar'), settingsController.uploadUserAvatar);
 
 // Restaurant Settings - Requires settings:edit permission
-router.get('/:restaurantId', auth, checkRestaurantOwnership, requirePermission('settings', 'read'), settingsController.getRestaurantSettings);
-router.put('/:restaurantId', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), updateRestaurantSettingsValidation, settingsController.updateRestaurantSettings);
+router.get('/:restaurantId', auth, checkRestaurantOwnership, requirePermission('settings:view', 'read'), settingsController.getRestaurantSettings);
+router.put('/:restaurantId', auth, checkRestaurantOwnership, requirePermission('settings:edit', 'update'), updateRestaurantSettingsValidation, settingsController.updateRestaurantSettings);
 
 // Restaurant Logo Upload
 router.post('/:restaurantId/logo', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), upload.single('logo'), settingsController.uploadRestaurantLogo);
@@ -37,7 +37,7 @@ router.post('/:restaurantId/whatsapp/test', auth, checkRestaurantOwnership, requ
 router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), updateRestaurantProfileValidation, settingsController.updateRestaurantProfile);
 
 // NPS Criteria
-router.get('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, requirePermission('npsCriteria', 'read'), settingsController.getNpsCriteria);
-router.put('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, requirePermission('npsCriteria', 'update'), updateNpsCriteriaValidation, settingsController.updateNpsCriteria);
+router.get('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, requirePermission('npsCriteria:view', 'read'), settingsController.getNpsCriteria);
+router.put('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, requirePermission('npsCriteria:edit', 'update'), updateNpsCriteriaValidation, settingsController.updateNpsCriteria);
 
 module.exports = router;

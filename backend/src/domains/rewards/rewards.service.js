@@ -365,7 +365,7 @@ module.exports = (db) => {
         }
     };
 
-    exports.handleRewardBeforeUpdate = (reward) => {
+    const handleRewardBeforeUpdate = (reward) => {
         // Atualizar data de validade se days_valid mudou
         if (reward.changed('days_valid') && reward.days_valid) {
             const validUntil = new Date(reward.valid_from);

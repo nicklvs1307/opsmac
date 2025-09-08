@@ -1,7 +1,7 @@
 const express = require('express');
-const { auth } = require('../../middleware/authMiddleware');
 const requirePermission = require('../../middleware/requirePermission');
 module.exports = (db) => {
+    const { auth } = require('../../middleware/authMiddleware')(db);
     const npsCriteriaController = require('./npsCriteria.controller')(db);
     const {
         npsCriterionValidation

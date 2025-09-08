@@ -1,7 +1,7 @@
 const express = require('express');
-const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware');
 const requirePermission = require('../../middleware/requirePermission');
 module.exports = (db) => {
+    const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
     const couponsController = require('./coupons.controller')(db);
     const {
         listCouponsValidation,

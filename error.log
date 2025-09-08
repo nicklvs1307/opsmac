@@ -1,18 +1,17 @@
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
-DEBUG: Value of auth before /me route: [AsyncFunction: authMiddleware]
-/app/node_modules/express/lib/router/index.js:462
-    throw new TypeError('Router.use() requires a middleware function')
-    ^
-TypeError: Router.use() requires a middleware function
-    at Function.use (/app/node_modules/express/lib/router/index.js:462:11)
-    at module.exports (/app/backend/src/domains/dashboard/dashboard.routes.js:10:12)
-    at module.exports (/app/backend/routes/index.js:51:53)
-    at Object.<anonymous> (/app/backend/server.js:62:1)
+/app/backend/src/domains/dashboard/dashboard.routes.js:2
+const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
+                                                                                      ^
+ReferenceError: db is not defined
+    at Object.<anonymous> (/app/backend/src/domains/dashboard/dashboard.routes.js:2:87)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
     at Module.load (node:internal/modules/cjs/loader:1266:32)
     at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
-    at node:internal/main/run_main_module:28:49
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/backend/routes/index.js:3:25)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
 Node.js v20.19.5

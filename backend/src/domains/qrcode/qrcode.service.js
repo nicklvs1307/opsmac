@@ -1,34 +1,36 @@
-const { models } = require('config/config');
 const QRCodeLib = require('qrcode'); // Renamed to avoid conflict with model name
 const { Op, fn, col } = require('sequelize');
 const { NotFoundError, BadRequestError } = require('utils/errors'); // Assuming these are needed
 
-exports.generateQRCodeImage = async (qrCode, size, format) => {
-  const qrCodeUrl = qrCode.feedback_url; // Ou a URL que o QR Code deve apontar
-  const options = {
-    errorCorrectionLevel: 'H',
-    type: format === 'svg' ? 'svg' : 'image/png',
-    quality: 0.92,
-    margin: 1,
-    width: size,
-    color: {
-      dark: '#000000FF',
-      light: '#FFFFFFFF'
-    }
-  };
+module.exports = (db) => {
+    const models = db.models;
 
-  if (format === 'svg') {
-    return await QRCodeLib.toString(qrCodeUrl, options);
-  } else {
-    return await QRCodeLib.toBuffer(qrCodeUrl, options);
-  }
-};
+    exports.generateQRCodeImage = async (qrCode, size, format) => {
+        const qrCodeUrl = qrCode.feedback_url; // Ou a URL que o QR Code deve apontar
+        const options = {
+            errorCorrectionLevel: 'H',
+            type: format === 'svg' ? 'svg' : 'image/png',
+            quality: 0.92,
+            margin: 1,
+            width: size,
+            color: {
+                dark: '#000000FF',
+                light: '#FFFFFFFF'
+            }
+        };
 
-exports.generatePrintableQRCode = async (qrCode, options) => {
-  const { include_info, size } = options;
-  const qrCodeImage = await exports.generateQRCodeImage(qrCode, 200, 'png'); // Tamanho fixo para impressão
+        if (format === 'svg') {
+            return await QRCodeLib.toString(qrCodeUrl, options);
+        } else {
+            return await QRCodeLib.toBuffer(qrCodeUrl, options);
+        }
+    };
 
-  let html = `
+    exports.generatePrintableQRCode = async (qrCode, options) => {
+        const { include_info, size } = options;
+        const qrCodeImage = await exports.generateQRCodeImage(qrCode, 200, 'png'); // Tamanho fixo para impressão
+
+        let html = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -47,218 +49,234 @@ exports.generatePrintableQRCode = async (qrCode, options) => {
             <img src="data:image/png;base64,${qrCodeImage.toString('base64')}" alt="QR Code">
   `;
 
-  if (include_info) {
-    html += `
+        if (include_info) {
+            html += `
             <div class="info">
                 <div class="table-number">Mesa ${qrCode.table_number}</div>
                 <div class="restaurant-name">${qrCode.restaurant?.name || ''}</div>
             </div>
     `;
-  }
+        }
 
-  html += `
+        html += `
         </div>
     </body>
     </html>
   `;
-  return html;
-};
+        return html;
+    };
 
-exports.recordScan = async (qrCode, scanData) => {
-  // Atualizar contadores no modelo QRCode
-  await qrCode.increment('total_scans');
-  await qrCode.update({ last_scan: new Date() });
+    exports.recordScan = async (qrCode, scanData) => {
+        // Atualizar contadores no modelo QRCode
+        await qrCode.increment('total_scans');
+        await qrCode.update({ last_scan: new Date() });
 
-  // Opcional: Registrar scan em uma tabela de logs de scans para análises mais detalhadas
-  // await models.QRCodeScanLog.create({ qr_code_id: qrCode.id, ...scanData });
+        // Opcional: Registrar scan em uma tabela de logs de scans para análises mais detalhadas
+        // await models.QRCodeScanLog.create({ qr_code_id: qrCode.id, ...scanData });
 
-  return qrCode; // Retorna o QR Code atualizado
-};
+        return qrCode; // Retorna o QR Code atualizado
+    };
 
-exports.getQRCodeAnalytics = async (qrCode, period) => {
-  const days = { '7d': 7, '30d': 30, '90d': 90 };
-  const startDate = new Date();
-  startDate.setDate(startDate.getDate() - days[period]);
+    exports.getQRCodeAnalytics = async (qrCode, period) => {
+        const days = { '7d': 7, '30d': 30, '90d': 90 };
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - days[period]);
 
-  const feedbacks = await models.Feedback.findAll({
-    where: {
-      restaurant_id: qrCode.restaurant_id,
-      table_number: qrCode.table_number,
-      source: 'qrcode',
-      created_at: {
-        [Op.gte]: startDate
-      }
-    },
-    attributes: ['rating', 'created_at', 'feedback_type'],
-    order: [['created_at', 'ASC']]
-  });
+        const feedbacks = await models.Feedback.findAll({
+            where: {
+                restaurant_id: qrCode.restaurant_id,
+                table_number: qrCode.table_number,
+                source: 'qrcode',
+                created_at: {
+                    [Op.gte]: startDate
+                }
+            },
+            attributes: ['rating', 'created_at', 'feedback_type'],
+            order: [['created_at', 'ASC']]
+        });
 
-  const totalFeedbacks = feedbacks.length;
-  const averageRating = totalFeedbacks > 0 ? 
-    feedbacks.reduce((sum, f) => sum + f.rating, 0) / totalFeedbacks : 0;
-  
-  const ratingDistribution = [1, 2, 3, 4, 5].map(rating => ({
-    rating,
-    count: feedbacks.filter(f => f.rating === rating).length
-  }));
+        const totalFeedbacks = feedbacks.length;
+        const averageRating = totalFeedbacks > 0 ?
+            feedbacks.reduce((sum, f) => sum + f.rating, 0) / totalFeedbacks : 0;
 
-  const conversionRate = qrCode.total_scans > 0 ? 
-    (qrCode.total_feedbacks / qrCode.total_scans * 100).toFixed(2) : 0;
+        const ratingDistribution = [1, 2, 3, 4, 5].map(rating => ({
+            rating,
+            count: feedbacks.filter(f => f.rating === rating).length
+        }));
 
-  return {
-    qrcode_analytics: {
-      total_scans: qrCode.total_scans,
-      total_feedbacks: qrCode.total_feedbacks,
-      average_rating: qrCode.average_rating,
-      conversion_rate: parseFloat(conversionRate),
-      last_scan: qrCode.last_scan,
-      last_feedback: qrCode.last_feedback
-    },
-    period_analytics: {
-      period,
-      total_feedbacks: totalFeedbacks,
-      average_rating: parseFloat(averageRating.toFixed(1)),
-      rating_distribution: ratingDistribution,
-      feedbacks_timeline: feedbacks.map(f => ({
-        date: f.created_at.toISOString().split('T')[0],
-        rating: f.rating,
-        type: f.feedback_type
-      }))
-    }
-  };
-};
+        const conversionRate = qrCode.total_scans > 0 ?
+            (qrCode.total_feedbacks / qrCode.total_scans * 100).toFixed(2) : 0;
 
-exports.cloneQRCode = async (originalQRCode, tableNumbers) => {
-  const clonedQRCodes = [];
-  for (const tableNumber of tableNumbers) {
-    const clonedQRCode = await models.QRCode.create({
-      table_number: tableNumber,
-      table_name: originalQRCode.table_name ? `${originalQRCode.table_name} (Cópia)` : null,
-      location_description: originalQRCode.location_description,
-      capacity: originalQRCode.capacity,
-      area: originalQRCode.area,
-      settings: originalQRCode.settings,
-      print_settings: originalQRCode.print_settings,
-      restaurant_id: originalQRCode.restaurant_id,
-      created_by: originalQRCode.created_by
-    });
-    clonedQRCodes.push(clonedQRCode);
-  }
-  return clonedQRCodes;
-};
+        return {
+            qrcode_analytics: {
+                total_scans: qrCode.total_scans,
+                total_feedbacks: qrCode.total_feedbacks,
+                average_rating: qrCode.average_rating,
+                conversion_rate: parseFloat(conversionRate),
+                last_scan: qrCode.last_scan,
+                last_feedback: qrCode.last_feedback
+            },
+            period_analytics: {
+                period,
+                total_feedbacks: totalFeedbacks,
+                average_rating: parseFloat(averageRating.toFixed(1)),
+                rating_distribution: ratingDistribution,
+                feedbacks_timeline: feedbacks.map(f => ({
+                    date: f.created_at.toISOString().split('T')[0],
+                    rating: f.rating,
+                    type: f.feedback_type
+                }))
+            }
+        };
+    };
 
-exports.getRestaurantQRCodeStats = async (restaurantId) => {
-  return await models.QRCode.getTableStats(restaurantId);
-};
+    exports.cloneQRCode = async (originalQRCode, tableNumbers) => {
+        const clonedQRCodes = [];
+        for (const tableNumber of tableNumbers) {
+            const clonedQRCode = await models.QRCode.create({
+                table_number: tableNumber,
+                table_name: originalQRCode.table_name ? `${originalQRCode.table_name} (Cópia)` : null,
+                location_description: originalQRCode.location_description,
+                capacity: originalQRCode.capacity,
+                area: originalQRCode.area,
+                settings: originalQRCode.settings,
+                print_settings: originalQRCode.print_settings,
+                restaurant_id: originalQRCode.restaurant_id,
+                created_by: originalQRCode.created_by
+            });
+            clonedQRCodes.push(clonedQRCode);
+        }
+        return clonedQRCodes;
+    };
 
-// New functions for QRCode service
-exports.generateShortUrl = async (qrCode) => {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
+    exports.getRestaurantQRCodeStats = async (restaurantId) => {
+        return await models.QRCode.getTableStats(restaurantId);
+    };
 
-  // Gerar código único
-  do {
-    result = '';
-    for (let i = 0; i < 8; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-  } while (await models.QRCode.findOne({ where: { short_url: result } }));
+    // New functions for QRCode service
+    exports.generateShortUrl = async (qrCode) => {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
 
-  return result;
-};
+        // Gerar código único
+        do {
+            result = '';
+            for (let i = 0; i < 8; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+        } while (await models.QRCode.findOne({ where: { short_url: result } }));
 
-exports.recordFeedback = async (qrCode) => {
-  const now = new Date();
+        return result;
+    };
 
-  await qrCode.increment('total_feedbacks');
-  await qrCode.update({ last_feedback: now });
+    exports.recordFeedback = async (qrCode) => {
+        const now = new Date();
 
-  // Atualizar taxa de conversão
-  const analytics = { ...qrCode.analytics };
-  if (qrCode.total_scans > 0) {
-    analytics.conversion_rate = (qrCode.total_feedbacks / qrCode.total_scans) * 100;
-  }
+        await qrCode.increment('total_feedbacks');
+        await qrCode.update({ last_feedback: now });
 
-  await qrCode.update({ analytics });
-};
+        // Atualizar taxa de conversão
+        const analytics = { ...qrCode.analytics };
+        if (qrCode.total_scans > 0) {
+            analytics.conversion_rate = (qrCode.total_feedbacks / qrCode.total_scans) * 100;
+        }
 
-exports.updateQRCodeStats = async (qrCode) => {
-  const { models } = sequelize;
+        await qrCode.update({ analytics });
+    };
 
-  // Calcular estatísticas de feedback para esta mesa
-  const feedbackStats = await models.Feedback.findOne({
-    where: {
-      restaurant_id: qrCode.restaurant_id,
-      table_number: qrCode.table_number
-    },
-    attributes: [
-      [sequelize.fn('COUNT', sequelize.col('id')), 'total'],
-      [sequelize.fn('AVG', sequelize.col('rating')), 'average']
-    ],
-    raw: true
-  });
+    exports.updateQRCodeStats = async (qrCode) => {
+        const { models } = db;
 
-  if (feedbackStats && feedbackStats.total > 0) {
-    await qrCode.update({
-      total_feedbacks: parseInt(feedbackStats.total),
-      average_rating: parseFloat(feedbackStats.average || 0).toFixed(2)
-    });
-  }
+        // Calcular estatísticas de feedback para esta mesa
+        const feedbackStats = await models.Feedback.findOne({
+            where: {
+                restaurant_id: qrCode.restaurant_id,
+                table_number: qrCode.table_number
+            },
+            attributes: [
+                db.sequelize.fn('COUNT', db.sequelize.col('id')), 'total'],
+            [db.sequelize.fn('AVG', db.sequelize.col('rating')), 'average']
+            ],
+            raw: true
+        });
 
-  return qrCode;
-};
+        if (feedbackStats && feedbackStats.total > 0) {
+            await qrCode.update({
+                total_feedbacks: parseInt(feedbackStats.total),
+                average_rating: parseFloat(feedbackStats.average || 0).toFixed(2)
+            });
+        }
 
-exports.generateQRCodeDataAndUrl = async (qrCode) => {
-  const baseUrl = process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com';
+        return qrCode;
+    };
 
-  if (qrCode.qr_type === 'checkin') {
-    const restaurant = await models.Restaurant.findByPk(qrCode.restaurant_id);
-    if (!restaurant) throw new NotFoundError('Restaurante não encontrado para gerar URL de check-in.');
-    qrCode.feedback_url = `${baseUrl}/checkin/public/${restaurant.slug}`;
-    qrCode.qr_code_data = JSON.stringify({
-      type: 'checkin',
-      restaurant_slug: restaurant.slug,
-      url: qrCode.feedback_url,
-      created_at: new Date().toISOString()
-    });
-  } else if (qrCode.qr_type === 'menu') {
-    const table = await models.Table.findOne({ where: { restaurant_id: qrCode.restaurant_id, table_number: qrCode.table_number } });
-    let tableId;
-    if (!table) {
-      // Se a mesa não existir, crie uma. Isso garante que o QR code sempre aponte para uma mesa válida.
-      const newTable = await models.Table.create({
-        restaurant_id: qrCode.restaurant_id,
-        table_number: qrCode.table_number,
-      });
-      tableId = newTable.id;
-    } else {
-      tableId = table.id;
-    }
-    qrCode.feedback_url = `${baseUrl}/menu/dine-in/${tableId}`;
-    qrCode.qr_code_data = JSON.stringify({
-      type: 'menu',
-      table_id: tableId,
-      url: qrCode.feedback_url,
-      created_at: new Date().toISOString()
-    });
-  } else { // Default to feedback
-    qrCode.feedback_url = `${baseUrl}/feedback/new?qrCodeId=${qrCode.id}`;
-    qrCode.qr_code_data = JSON.stringify({
-      type: 'feedback',
-      qr_code_id: qrCode.id,
-      url: qrCode.feedback_url,
-      created_at: new Date().toISOString()
-    });
-  }
-};
+    exports.generateQRCodeDataAndUrl = async (qrCode) => {
+        const baseUrl = process.env.FRONTEND_URL || 'https://feedelizapro.towersfy.com';
 
-exports.handleQRCodeBeforeCreate = async (qrCode) => {
-  await exports.generateQRCodeDataAndUrl(qrCode);
-  if (!qrCode.short_url) {
-    qrCode.short_url = await exports.generateShortUrl(qrCode);
-  }
-};
+        if (qrCode.qr_type === 'checkin') {
+            const restaurant = await models.Restaurant.findByPk(qrCode.restaurant_id);
+            if (!restaurant) throw new NotFoundError('Restaurante não encontrado para gerar URL de check-in.');
+            qrCode.feedback_url = `${baseUrl}/checkin/public/${restaurant.slug}`;
+            qrCode.qr_code_data = JSON.stringify({
+                type: 'checkin',
+                restaurant_slug: restaurant.slug,
+                url: qrCode.feedback_url,
+                created_at: new Date().toISOString()
+            });
+        } else if (qrCode.qr_type === 'menu') {
+            const table = await models.Table.findOne({ where: { restaurant_id: qrCode.restaurant_id, table_number: qrCode.table_number } });
+            let tableId;
+            if (!table) {
+                // Se a mesa não existir, crie uma. Isso garante que o QR code sempre aponte para uma mesa válida.
+                const newTable = await models.Table.create({
+                    restaurant_id: qrCode.restaurant_id,
+                    table_number: qrCode.table_number,
+                });
+                tableId = newTable.id;
+            } else {
+                tableId = table.id;
+            }
+            qrCode.feedback_url = `${baseUrl}/menu/dine-in/${tableId}`;
+            qrCode.qr_code_data = JSON.stringify({
+                type: 'menu',
+                table_id: tableId,
+                url: qrCode.feedback_url,
+                created_at: new Date().toISOString()
+            });
+        } else { // Default to feedback
+            qrCode.feedback_url = `${baseUrl}/feedback/new?qrCodeId=${qrCode.id}`;
+            qrCode.qr_code_data = JSON.stringify({
+                type: 'feedback',
+                qr_code_id: qrCode.id,
+                url: qrCode.feedback_url,
+                created_at: new Date().toISOString()
+            });
+        }
+    };
 
-exports.handleQRCodeAfterCreate = async (qrCode) => {
-  await exports.generateQRCodeImage(qrCode, qrCode.settings?.size || 200, 'png'); // Use service function
+    exports.handleQRCodeBeforeCreate = async (qrCode) => {
+        await exports.generateQRCodeDataAndUrl(qrCode);
+        if (!qrCode.short_url) {
+            qrCode.short_url = await exports.generateShortUrl(qrCode);
+        }
+    };
+
+    exports.handleQRCodeAfterCreate = async (qrCode) => {
+        await exports.generateQRCodeImage(qrCode, qrCode.settings?.size || 200, 'png'); // Use service function
+    };
+
+    return {
+        generateQRCodeImage,
+        generatePrintableQRCode,
+        recordScan,
+        getQRCodeAnalytics,
+        cloneQRCode,
+        getRestaurantQRCodeStats,
+        generateShortUrl,
+        recordFeedback,
+        updateQRCodeStats,
+        generateQRCodeDataAndUrl,
+        handleQRCodeBeforeCreate,
+        handleQRCodeAfterCreate,
+    };
 };

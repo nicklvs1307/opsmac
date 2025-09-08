@@ -1,18 +1,21 @@
 const express = require('express');
-const apiAuth = require('middleware/apiAuthMiddleware');
-const publicController = require('./public.controller');
-const {
-    submitPublicFeedbackValidation,
-    registerPublicCheckinValidation
-} = require('domains/public/public.validation');
 
-const router = express.Router();
+module.exports = (db) => {
+    const apiAuth = require('middleware/apiAuthMiddleware')(db);
+    const publicController = require('./public.controller')(db);
+    const {
+        submitPublicFeedbackValidation,
+        registerPublicCheckinValidation
+    } = require('domains/public/public.validation');
 
-// Rotas Públicas
-router.get('/test-endpoint', apiAuth, publicController.testEndpoint);
-router.post('/feedback', apiAuth, submitPublicFeedbackValidation, publicController.submitPublicFeedback);
-router.post('/checkin/:restaurantSlug', publicController.registerPublicCheckin);
-router.get('/restaurant/:restaurantSlug', publicController.getRestaurantInfoBySlug);
-router.get('/surveys/:identifier', publicController.getPublicSurveyByIdentifier);
+    const router = express.Router();
 
-module.exports = router;
+    // Rotas Públicas
+    router.get('/test-endpoint', apiAuth, publicController.testEndpoint);
+    router.post('/feedback', apiAuth, submitPublicFeedbackValidation, publicController.submitPublicFeedback);
+    router.post('/checkin/:restaurantSlug', publicController.registerPublicCheckin);
+    router.get('/restaurant/:restaurantSlug', publicController.getRestaurantInfoBySlug);
+    router.get('/surveys/:identifier', publicController.getPublicSurveyByIdentifier);
+
+    return router;
+};

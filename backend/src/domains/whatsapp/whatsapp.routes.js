@@ -1,36 +1,39 @@
 const express = require('express');
-const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware');
 const { logUserAction } = require('../../middleware/logUserActionMiddleware');
 const requirePermission = require('../../middleware/requirePermission');
-const whatsappController = require('./whatsapp.controller');
-const {
-    sendFeedbackRequestValidation,
-    sendBulkFeedbackValidation,
-    sendManualMessageValidation,
-    listMessagesValidation
-} = require('./whatsapp.validation');
 
-const router = express.Router();
+module.exports = (db) => {
+    const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
+    const whatsappController = require('./whatsapp.controller')(db);
+    const {
+        sendFeedbackRequestValidation,
+        sendBulkFeedbackValidation,
+        sendManualMessageValidation,
+        listMessagesValidation
+    } = require('./whatsapp.validation');
 
-// Webhook verification for WhatsApp
-router.get('/webhook', whatsappController.verifyWebhook);
+    const router = express.Router();
 
-// Webhook to receive WhatsApp messages
-router.post('/webhook', whatsappController.receiveWebhook);
+    // Webhook verification for WhatsApp
+    router.get('/webhook', whatsappController.verifyWebhook);
 
-// Send feedback request via WhatsApp
-router.post('/send-feedback-request', auth, requirePermission('whatsapp', 'create'), sendFeedbackRequestValidation, logUserAction('send_whatsapp_feedback'), whatsappController.sendFeedbackRequest);
+    // Webhook to receive WhatsApp messages
+    router.post('/webhook', whatsappController.receiveWebhook);
 
-// Send bulk feedback requests
-router.post('/send-bulk-feedback', auth, requirePermission('whatsapp', 'create'), sendBulkFeedbackValidation, logUserAction('send_bulk_whatsapp_feedback'), whatsappController.sendBulkFeedback);
+    // Send feedback request via WhatsApp
+    router.post('/send-feedback-request', auth, requirePermission('whatsapp', 'create'), sendFeedbackRequestValidation, logUserAction('send_whatsapp_feedback'), whatsappController.sendFeedbackRequest);
 
-// Send manual message
-router.post('/send-manual', auth, requirePermission('whatsapp', 'create'), sendManualMessageValidation, logUserAction('send_manual_whatsapp_message'), whatsappController.sendManualMessage);
+    // Send bulk feedback requests
+    router.post('/send-bulk-feedback', auth, requirePermission('whatsapp', 'create'), sendBulkFeedbackValidation, logUserAction('send_bulk_whatsapp_feedback'), whatsappController.sendBulkFeedback);
 
-// List WhatsApp messages
-router.get('/messages/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), listMessagesValidation, whatsappController.listMessages);
+    // Send manual message
+    router.post('/send-manual', auth, requirePermission('whatsapp', 'create'), sendManualMessageValidation, logUserAction('send_manual_whatsapp_message'), whatsappController.sendManualMessage);
 
-// Get WhatsApp analytics
-router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), whatsappController.getWhatsappAnalytics);
+    // List WhatsApp messages
+    router.get('/messages/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), listMessagesValidation, whatsappController.listMessages);
 
-module.exports = router;
+    // Get WhatsApp analytics
+    router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), whatsappController.getWhatsappAnalytics);
+
+    return router;
+};

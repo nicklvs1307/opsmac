@@ -1,13 +1,16 @@
 const express = require('express');
-const { auth } = require('../../middleware/authMiddleware');
 const requirePermission = require('../../middleware/requirePermission');
-const uaiRangoController = require('./uaiRango.controller');
 
-const router = express.Router();
+module.exports = (db) => {
+    const { auth } = require('../../middleware/authMiddleware')(db);
+    const uaiRangoController = require('./uaiRango.controller')(db);
 
-// Rotas do Uai Rango
-// A verificação do módulo deve ser feita dentro do controller para webhooks públicos
-router.post('/webhook', uaiRangoController.handleWebhook);
-router.get('/orders', auth, requirePermission('uaiRango', 'read'), uaiRangoController.getOrders);
+    const router = express.Router();
 
-module.exports = router;
+    // Rotas do Uai Rango
+    // A verificação do módulo deve ser feita dentro do controller para webhooks públicos
+    router.post('/webhook', uaiRangoController.handleWebhook);
+    router.get('/orders', auth, requirePermission('uaiRango', 'read'), uaiRangoController.getOrders);
+
+    return router;
+};

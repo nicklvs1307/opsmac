@@ -1,10 +1,13 @@
 const express = require('express');
-const ifoodController = require('./ifood.controller');
 
-const router = express.Router();
+module.exports = (db) => {
+    const ifoodController = require('./ifood.controller')(db);
 
-// Rota para receber webhooks do iFood
-// A verificação do módulo deve ser feita dentro do controller para webhooks públicos
-router.post('/webhook', ifoodController.handleWebhook);
+    const router = express.Router();
 
-module.exports = router;
+    // Rota para receber webhooks do iFood
+    // A verificação do módulo deve ser feita dentro do controller para webhooks públicos
+    router.post('/webhook', ifoodController.handleWebhook);
+
+    return router;
+};

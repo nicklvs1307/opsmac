@@ -9,9 +9,9 @@ const {
 const router = express.Router();
 
 // Rotas de Critérios de NPS
-router.get('/', auth, requirePermission('npsCriteria', 'read'), npsCriteriaController.listNpsCriteria);
-router.post('/', auth, requirePermission('npsCriteria', 'create'), npsCriterionValidation, npsCriteriaController.createNpsCriterion);
-router.put('/:id', auth, requirePermission('npsCriteria', 'update'), npsCriterionValidation, npsCriteriaController.updateNpsCriterion);
-router.delete('/:id', auth, requirePermission('npsCriteria', 'delete'), npsCriteriaController.deleteNpsCriterion);
+router.get('/', auth, requirePermission('npsCriteria:view', 'read'), npsCriteriaController.listNpsCriteria);
+router.post('/', auth, requirePermission('npsCriteria:edit', 'create'), npsCriterionValidation, npsCriteriaController.createNpsCriterion);
+router.put('/:id', auth, requirePermission('npsCriteria:edit', 'update'), npsCriterionValidation, npsCriteriaController.updateNpsCriterion);
+router.delete('/:id', auth, requirePermission('npsCriteria:edit', 'delete'), npsCriteriaController.deleteNpsCriterion);
 
 module.exports = router;

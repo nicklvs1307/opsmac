@@ -15,12 +15,9 @@ const router = express.Router();
 // 1. Autenticação
 router.use(auth);
 
-// 2. Verificar permissão específica para o dashboard
-router.use(requirePermission('dashboard', 'read'));
-
-router.get('/:restaurantId/overview', checkRestaurantOwnership, getDashboardOverviewValidation, dashboardController.getDashboardOverview);
-router.get('/:restaurantId/analytics', checkRestaurantOwnership, getDashboardAnalyticsValidation, dashboardController.getDashboardAnalytics);
-router.get('/:restaurantId/reports', checkRestaurantOwnership, generateReportValidation, dashboardController.generateReport);
-router.get('/:restaurantId/rewards/analytics', checkRestaurantOwnership, dashboardController.getRewardsAnalytics);
+router.get('/:restaurantId/overview', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardOverviewValidation, dashboardController.getDashboardOverview);
+router.get('/:restaurantId/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardAnalyticsValidation, dashboardController.getDashboardAnalytics);
+router.get('/:restaurantId/reports', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), generateReportValidation, dashboardController.generateReport);
+router.get('/:restaurantId/rewards/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), dashboardController.getRewardsAnalytics);
 
 module.exports = router;

@@ -1,12 +1,10 @@
 const lodash = require('lodash');
 const crypto = require('crypto');
 const { NotFoundError } = require('utils/errors');
-const { sendWhatsAppMessage } = require('services/integrations/whatsappApiClient'); // Assuming this is the correct path
 
 module.exports = (db) => {
     const models = db.models;
 
-    // Helper function to get restaurant ID from authenticated user
     const getRestaurantIdFromUser = async (userId) => {
         const user = await models.User.findByPk(userId, {
             include: [{ model: models.Restaurant, as: 'restaurants' }]
@@ -14,8 +12,7 @@ module.exports = (db) => {
         return user?.restaurants?.[0]?.id;
     };
 
-    // Restaurant Settings
-    exports.getRestaurantSettings = async (restaurantId) => {
+    const getRestaurantSettings = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
@@ -23,7 +20,7 @@ module.exports = (db) => {
         return restaurant.settings || {};
     };
 
-    exports.updateRestaurantSettings = async (restaurantId, settings) => {
+    const updateRestaurantSettings = async (restaurantId, settings) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
@@ -33,7 +30,7 @@ module.exports = (db) => {
         return updatedSettings;
     };
 
-    exports.uploadRestaurantLogo = async (restaurantId, filename) => {
+    const uploadRestaurantLogo = async (restaurantId, filename) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
@@ -43,8 +40,7 @@ module.exports = (db) => {
         return logoUrl;
     };
 
-    // API Token Management
-    exports.getApiToken = async (restaurantId) => {
+    const getApiToken = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
@@ -52,7 +48,7 @@ module.exports = (db) => {
         return restaurant.api_token;
     };
 
-    exports.generateApiToken = async (restaurantId) => {
+    const generateApiToken = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
@@ -62,7 +58,7 @@ module.exports = (db) => {
         return newApiToken;
     };
 
-    exports.revokeApiToken = async (restaurantId) => {
+    const revokeApiToken = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
@@ -70,8 +66,7 @@ module.exports = (db) => {
         await restaurant.update({ api_token: null });
     };
 
-    // WhatsApp Settings
-    exports.getWhatsappSettings = async (restaurantId) => {
+    const getWhatsappSettings = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
@@ -85,7 +80,7 @@ module.exports = (db) => {
         };
     };
 
-    exports.updateWhatsappSettings = async (restaurantId, settingsData) => {
+    const updateWhatsappSettings = async (restaurantId, settingsData) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
@@ -93,18 +88,14 @@ module.exports = (db) => {
         await restaurant.update(settingsData);
     };
 
-    exports.testWhatsappMessage = async (restaurantId, recipient, message) => {
+    const testWhatsappMessage = async (restaurantId, recipient, message) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
         }
-        // Simulate sending message
-        // await sendWhatsAppMessage(restaurant.whatsapp_api_url, restaurant.whatsapp_api_key, restaurant.whatsapp_instance_id, recipient, message);
-
     };
 
-    // Restaurant Profile
-    exports.updateRestaurantProfile = async (restaurantId, profileData) => {
+    const updateRestaurantProfile = async (restaurantId, profileData) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');
@@ -113,8 +104,7 @@ module.exports = (db) => {
         return restaurant;
     };
 
-    // NPS Criteria
-    exports.getNpsCriteria = async (restaurantId) => {
+    const getNpsCriteria = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId, {
             attributes: ['npsCriteriaScores']
         });
@@ -124,7 +114,7 @@ module.exports = (db) => {
         return restaurant.npsCriteriaScores || [];
     };
 
-    exports.updateNpsCriteria = async (restaurantId, nps_criteria) => {
+    const updateNpsCriteria = async (restaurantId, nps_criteria) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado');

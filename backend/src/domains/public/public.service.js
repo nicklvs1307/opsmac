@@ -4,7 +4,7 @@ const { NotFoundError, BadRequestError } = require('utils/errors');
 module.exports = (db) => {
     const models = db.models;
 
-    exports.submitPublicFeedback = async (restaurant_id, customer_id, rating, comment, nps_score) => {
+    const submitPublicFeedback = async (restaurant_id, customer_id, rating, comment, nps_score) => {
         let customer = null;
         if (customer_id) {
             customer = await models.Customer.findOne({
@@ -18,7 +18,7 @@ module.exports = (db) => {
             }
         }
 
-        const newFeedback = await models.Feedback.create({
+        return models.Feedback.create({
             restaurant_id,
             customer_id: customer?.id,
             rating,
@@ -26,10 +26,9 @@ module.exports = (db) => {
             nps_score,
             source: 'web'
         });
-        return newFeedback;
     };
 
-    exports.registerPublicCheckin = async (restaurant, phone_number, cpf, customer_name, table_number) => {
+    const registerPublicCheckin = async (restaurant, phone_number, cpf, customer_name, table_number) => {
         const checkinProgramSettings = restaurant.settings?.checkin_program_settings || {};
         const checkinDurationMinutes = checkinProgramSettings.checkin_duration_minutes || 1440;
         const identificationMethod = checkinProgramSettings.identification_method || 'phone';
@@ -232,16 +231,15 @@ module.exports = (db) => {
         return { checkin, customer_total_visits: customer.total_visits, reward_earned: rewardEarned };
     };
 
-    exports.getRestaurantInfoBySlug = async (restaurantSlug) => {
-        const restaurant = await models.Restaurant.findOne({
+    const getRestaurantInfoBySlug = async (restaurantSlug) => {
+        return models.Restaurant.findOne({
             where: { slug: restaurantSlug },
             attributes: ['id', 'name', 'settings', 'slug', 'logo']
         });
-        return restaurant;
     };
 
-    exports.getPublicSurveyByIdentifier = async (identifier) => {
-        const survey = await models.Survey.findOne({
+    const getPublicSurveyByIdentifier = async (identifier) => {
+        return models.Survey.findOne({
             where: {
                 [db.Sequelize.Op.or]: [
                     { id: identifier },
@@ -257,7 +255,6 @@ module.exports = (db) => {
                 },
             ],
         });
-        return survey;
     };
 
     return {

@@ -1,15 +1,15 @@
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
 DEBUG: Value of auth before /me route: [AsyncFunction: authMiddleware]
-/app/backend/src/domains/whatsapp/whatsapp.service.js:453
-        verifyWebhook,
+/app/backend/src/domains/customer/customer.service.js:247
+        getCustomerDashboardMetrics,
 
 ^
-ReferenceError: verifyWebhook is not defined
-    at module.exports (/app/backend/src/domains/whatsapp/whatsapp.service.js:453:9)
-    at module.exports (/app/backend/src/domains/whatsapp/whatsapp.controller.js:6:58)
-    at module.exports (/app/backend/src/domains/whatsapp/whatsapp.routes.js:7:64)
-    at module.exports (/app/backend/routes/index.js:54:38)
+ReferenceError: getCustomerDashboardMetrics is not defined
+    at module.exports (/app/backend/src/domains/customer/customer.service.js:247:9)
+    at module.exports (/app/backend/src/domains/customer/customer.controller.js:5:58)
+    at module.exports (/app/backend/src/domains/customer/customer.routes.js:6:64)
+    at module.exports (/app/backend/routes/index.js:55:39)
     at Object.<anonymous> (/app/backend/server.js:62:1)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)

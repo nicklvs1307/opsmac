@@ -6,8 +6,7 @@ const OAuth2 = google.auth.OAuth2;
 module.exports = (db) => {
     const models = db.models;
 
-    // Helper to initialize OAuth2 client (Moved from backend/services/googleMyBusinessService.js)
-    async function initializeOAuthClient(restaurantId) {
+    const initializeOAuthClient = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             throw new NotFoundError('Restaurante não encontrado.');
@@ -26,7 +25,6 @@ module.exports = (db) => {
             });
         }
 
-        // Refresh token if expired
         oauth2Client.on('tokens', async (tokens) => {
             if (tokens.refresh_token) {
                 await restaurant.update({
@@ -41,32 +39,27 @@ module.exports = (db) => {
         });
 
         return oauth2Client;
-    }
+    };
 
-    // Helper function to get restaurantId from user (already exists in the file, but adding for clarity)
-    async function getRestaurantIdFromUser(userId) {
+    const getRestaurantIdFromUser = async (userId) => {
         const user = await models.User.findByPk(userId, {
             include: [{ model: models.Restaurant, as: 'restaurants' }]
         });
         return user?.restaurants?.[0]?.id;
-    }
+    };
 
-    // Moved from backend/services/googleMyBusinessService.js
-    async function getAuthUrlInternal(restaurantId) {
+    const getAuthUrlInternal = async (restaurantId) => {
         const oauth2Client = await initializeOAuthClient(restaurantId);
-        const scopes = [
-            'https://www.googleapis.com/auth/business.manage',
-        ];
+        const scopes = ['https://www.googleapis.com/auth/business.manage'];
         return oauth2Client.generateAuthUrl({
             access_type: 'offline',
             scope: scopes,
             prompt: 'consent',
-            state: restaurantId, // Pass restaurantId in state to retrieve it in callback
+            state: restaurantId,
         });
-    }
+    };
 
-    // Moved from backend/services/googleMyBusinessService.js
-    async function processOAuth2CallbackInternal(restaurantId, code) {
+    const processOAuth2CallbackInternal = async (restaurantId, code) => {
         const oauth2Client = await initializeOAuthClient(restaurantId);
         const { tokens } = await oauth2Client.getToken(code);
 
@@ -79,10 +72,9 @@ module.exports = (db) => {
             gmb_access_token: tokens.access_token,
             gmb_refresh_token: tokens.refresh_token,
         });
-    }
+    };
 
-    // Moved from backend/services/googleMyBusinessService.js
-    async function getLocationsInternal(restaurantId) {
+    const getLocationsInternal = async (restaurantId) => {
         const oauth2Client = await initializeOAuthClient(restaurantId);
         const mybusiness = google.mybusinessaccountmanagement({
             version: 'v1',
@@ -99,11 +91,10 @@ module.exports = (db) => {
             parent: account.name,
         });
         return locationsRes.data.locations || [];
-    }
+    };
 
-    // Moved from backend/services/googleMyBusinessService.js
-    async function getReviewsInternal(restaurantId, locationName) {
-        const oauth2Client = await initializeOAuth2Client(restaurantId);
+    const getReviewsInternal = async (restaurantId, locationName) => {
+        const oauth2Client = await initializeOAuthClient(restaurantId);
         const mybusiness = google.mybusinessreviews({
             version: 'v1',
             auth: oauth2Client,
@@ -113,10 +104,9 @@ module.exports = (db) => {
             parent: locationName,
         });
         return res.data.reviews || [];
-    }
+    };
 
-    // Moved from backend/services/googleMyBusinessService.js
-    async function replyToReviewInternal(restaurantId, reviewName, comment) {
+    const replyToReviewInternal = async (restaurantId, reviewName, comment) => {
         const oauth2Client = await initializeOAuthClient(restaurantId);
         const mybusiness = google.mybusinessreviews({
             version: 'v1',
@@ -130,10 +120,9 @@ module.exports = (db) => {
             },
         });
         return res.data;
-    }
+    };
 
-
-    exports.checkGMBModuleEnabled = async (userId) => {
+    const checkGMBModuleEnabled = async (userId) => {
         const restaurantId = await getRestaurantIdFromUser(userId);
         if (!restaurantId) {
             throw new BadRequestError('Restaurante não encontrado para o usuário autenticado.');
@@ -146,49 +135,43 @@ module.exports = (db) => {
         return restaurant;
     };
 
-    exports.getAuthUrl = async (userId) => {
+    const getAuthUrl = async (userId) => {
         const restaurantId = await getRestaurantIdFromUser(userId);
         if (!restaurantId) {
             throw new BadRequestError('Restaurante não encontrado para o usuário.');
         }
-        return await getAuthUrlInternal(restaurantId);
+        return getAuthUrlInternal(restaurantId);
     };
 
-    exports.oauth2Callback = async (code) => {
+    const oauth2Callback = async (code, state) => {
         if (!code) {
             throw new BadRequestError('Código de autorização não fornecido.');
         }
-
-        // TODO: Precisamos de uma forma de associar este callback ao restaurante correto.
-        // Uma solução seria passar o restaurantId no state do OAuth URL, mas isso requer mais complexidade.
-        // Para simplificar o teste inicial, vamos usar um restaurantId fixo ou o primeiro encontrado.
-        // This part needs to be handled carefully. For now, I'll keep the existing logic but note the TODO.
-        const restaurant = await models.Restaurant.findOne(); // Apenas para teste, NÃO USAR EM PRODUÇÃO
-        if (!restaurant) {
-            throw new NotFoundError('Nenhum restaurante encontrado para processar o callback.');
+        if (!state) {
+            throw new BadRequestError('State (ID do restaurante) não fornecido.');
         }
 
-        await processOAuth2CallbackInternal(restaurant.id, code);
+        await processOAuth2CallbackInternal(state, code);
         return process.env.FRONTEND_URL + '/integrations?status=success&integration=google-my_business';
     };
 
-    exports.getLocations = async (userId) => {
+    const getLocations = async (userId) => {
         const restaurantId = await getRestaurantIdFromUser(userId);
         if (!restaurantId) {
             throw new BadRequestError('Restaurante não encontrado para o usuário.');
         }
-        return await getLocationsInternal(restaurantId);
+        return getLocationsInternal(restaurantId);
     };
 
-    exports.getReviews = async (userId, locationName) => {
+    const getReviews = async (userId, locationName) => {
         const restaurantId = await getRestaurantIdFromUser(userId);
         if (!restaurantId) {
             throw new BadRequestError('Restaurante não encontrado para o usuário.');
         }
-        return await getReviewsInternal(restaurantId, `locations/${locationName}`);
+        return getReviewsInternal(restaurantId, `locations/${locationName}`);
     };
 
-    exports.replyToReview = async (userId, locationName, reviewName, comment) => {
+    const replyToReview = async (userId, locationName, reviewName, comment) => {
         if (!comment) {
             throw new BadRequestError('Comentário da resposta é obrigatório.');
         }
@@ -196,7 +179,7 @@ module.exports = (db) => {
         if (!restaurantId) {
             throw new BadRequestError('Restaurante não encontrado para o usuário.');
         }
-        return await replyToReviewInternal(restaurantId, `locations/${locationName}/reviews/${reviewName}`, comment);
+        return replyToReviewInternal(restaurantId, `locations/${locationName}/reviews/${reviewName}`, comment);
     };
 
     return {

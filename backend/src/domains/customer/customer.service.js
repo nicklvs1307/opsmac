@@ -4,7 +4,7 @@ module.exports = (db) => {
     const models = db.models;
     const sequelize = db.sequelize;
 
-    exports.getCustomerDashboardMetrics = async (restaurantId) => {
+    const getCustomerDashboardMetrics = async (restaurantId) => {
         const totalCustomers = await models.Customer.count({
             where: { restaurantId: restaurantId }
         });
@@ -84,7 +84,7 @@ module.exports = (db) => {
         };
     };
 
-    exports.getBirthdayCustomers = async (restaurantId) => {
+    const getBirthdayCustomers = async (restaurantId) => {
         const currentMonth = new Date().getMonth() + 1;
 
         const birthdays = await models.Customer.findAll({
@@ -97,7 +97,7 @@ module.exports = (db) => {
         return birthdays;
     };
 
-    exports.listCustomers = async (restaurantId, page, limit, search, segment, sort) => {
+    const listCustomers = async (restaurantId, page, limit, search, segment, sort) => {
         const offset = (page - 1) * limit;
 
         let whereClause = { restaurantId: restaurantId };
@@ -135,12 +135,12 @@ module.exports = (db) => {
         };
     };
 
-    exports.createCustomer = async (customerData, restaurantId) => {
+    const createCustomer = async (customerData, restaurantId) => {
         const newCustomer = await models.Customer.create({ ...customerData, restaurantId: restaurantId });
         return newCustomer;
     };
 
-    exports.getCustomerByPhone = async (phone, restaurantId) => {
+    const getCustomerByPhone = async (phone, restaurantId) => {
         const customer = await models.Customer.findOne({
             where: {
                 phone: phone,
@@ -150,7 +150,7 @@ module.exports = (db) => {
         return customer;
     };
 
-    exports.getCustomerById = async (customerId, restaurantId) => {
+    const getCustomerById = async (customerId, restaurantId) => {
         const customer = await models.Customer.findOne({
             where: {
                 id: customerId,
@@ -160,7 +160,7 @@ module.exports = (db) => {
         return customer;
     };
 
-    exports.updateCustomer = async (customerId, restaurantId, updateData) => {
+    const updateCustomer = async (customerId, restaurantId, updateData) => {
         const customer = await models.Customer.findOne({
             where: {
                 id: customerId,
@@ -172,7 +172,7 @@ module.exports = (db) => {
         return customer;
     };
 
-    exports.deleteCustomer = async (customerId, restaurantId) => {
+    const deleteCustomer = async (customerId, restaurantId) => {
         const customer = await models.Customer.findOne({
             where: {
                 id: customerId,
@@ -184,7 +184,7 @@ module.exports = (db) => {
         return 1;
     };
 
-    exports.getCustomerDetails = async (customerId, restaurantId) => {
+    const getCustomerDetails = async (customerId, restaurantId) => {
         const customer = await models.Customer.findOne({
             where: {
                 id: customerId,
@@ -200,7 +200,7 @@ module.exports = (db) => {
         return customer;
     };
 
-    exports.resetCustomerVisits = async (customerId, restaurantId) => {
+    const resetCustomerVisits = async (customerId, restaurantId) => {
         const customer = await models.Customer.findOne({
             where: {
                 id: customerId,
@@ -212,7 +212,7 @@ module.exports = (db) => {
         return customer;
     };
 
-    exports.clearCustomerCheckins = async (customerId, restaurantId) => {
+    const clearCustomerCheckins = async (customerId, restaurantId) => {
         const customer = await models.Customer.findOne({
             where: {
                 id: customerId,
@@ -229,7 +229,7 @@ module.exports = (db) => {
         return 1;
     };
 
-    exports.publicRegisterCustomer = async (customerData) => {
+    const publicRegisterCustomer = async (customerData) => {
         const { name, phone, birthDate, restaurantId } = customerData;
 
         let customer = await models.Customer.findOne({ where: { phone: phone, restaurantId: restaurantId } });

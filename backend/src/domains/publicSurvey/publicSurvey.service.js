@@ -4,7 +4,7 @@ const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors
 module.exports = (db) => {
     const models = db.models;
 
-    exports.getNextSurvey = async (restaurantSlug, customerId) => {
+    const getNextSurvey = async (restaurantSlug, customerId) => {
         const restaurant = await models.Restaurant.findOne({
             where: { slug: restaurantSlug },
             attributes: ['id', 'name', 'logo', 'slug', 'settings'],
@@ -76,7 +76,7 @@ module.exports = (db) => {
         return { survey: targetSurvey, restaurant: targetSurvey.restaurant };
     };
 
-    exports.getPublicSurveyBySlugs = async (restaurantSlug, surveySlug) => {
+    const getPublicSurveyBySlugs = async (restaurantSlug, surveySlug) => {
         const restaurant = await models.Restaurant.findOne({
             where: { slug: restaurantSlug },
             attributes: ['id'],
@@ -119,7 +119,7 @@ module.exports = (db) => {
         return { survey, restaurant: survey.restaurant };
     };
 
-    exports.submitSurveyResponses = async (surveySlug, answers, customer_id) => {
+    const submitSurveyResponses = async (surveySlug, answers, customer_id) => {
         const survey = await models.Survey.findOne({
             where: { slug: surveySlug, status: 'active' },
             include: [{
@@ -318,7 +318,7 @@ module.exports = (db) => {
         return { responseId: newSurveyResponse.id, reward: rewardData };
     };
 
-    exports.linkCustomerToResponse = async (responseId, customer_id) => {
+    const linkCustomerToResponse = async (responseId, customer_id) => {
         const surveyResponse = await models.SurveyResponse.findByPk(responseId, {
             include: [{
                 model: models.Survey,

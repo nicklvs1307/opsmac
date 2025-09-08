@@ -1,11 +1,12 @@
+const { Op } = require('sequelize');
+const { surveyTemplates } = require('../../utils/surveyTemplates');
+const { generateUniqueSlug } = require('utils/slugGenerator');
+const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
+
 module.exports = (db) => {
     const models = db.models;
-    const { Op } = require('sequelize');
-    const { surveyTemplates } = require('../../utils/surveyTemplates');
-    const { generateUniqueSlug } = require('utils/slugGenerator');
-    const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
-    exports.listSurveys = async (restaurant_id, search) => {
+    const listSurveys = async (restaurant_id, search) => {
         const where = {
             restaurant_id,
             status: { [Op.in]: ['active', 'draft'] }
@@ -15,14 +16,13 @@ module.exports = (db) => {
             where.title = { [Op.iLike]: `%${search}%` };
         }
 
-        const surveys = await models.Survey.findAll({
+        return models.Survey.findAll({
             where,
             include: ['questions']
         });
-        return surveys;
     };
 
-    exports.createSurvey = async (type, title, slug, description, questions, status, user_id, restaurant_id) => {
+    const createSurvey = async (type, title, slug, description, questions, status, user_id, restaurant_id) => {
         const existingSurvey = await models.Survey.findOne({ where: { slug } });
         if (existingSurvey) {
             throw new BadRequestError('Este slug já está em uso. Por favor, escolha outro.');
@@ -57,14 +57,12 @@ module.exports = (db) => {
             }
         }
 
-        const newSurvey = await models.Survey.findByPk(survey.id, {
+        return models.Survey.findByPk(survey.id, {
             include: ['questions']
         });
-
-        return newSurvey;
     };
 
-    exports.updateSurvey = async (id, title, slug, description, questions, status, restaurant_id) => {
+    const updateSurvey = async (id, title, slug, description, questions, status, restaurant_id) => {
         let survey = await models.Survey.findByPk(id);
 
         if (!survey) {
@@ -103,14 +101,12 @@ module.exports = (db) => {
             }
         }
 
-        const updatedSurvey = await models.Survey.findByPk(survey.id, {
+        return models.Survey.findByPk(survey.id, {
             include: ['questions']
         });
-
-        return updatedSurvey;
     };
 
-    exports.updateSurveyStatus = async (id, status, restaurant_id) => {
+    const updateSurveyStatus = async (id, status, restaurant_id) => {
         const survey = await models.Survey.findByPk(id);
         if (!survey) {
             throw new NotFoundError('Pesquisa não encontrada');
@@ -125,7 +121,7 @@ module.exports = (db) => {
         return survey;
     };
 
-    exports.deleteSurvey = async (id, restaurant_id) => {
+    const deleteSurvey = async (id, restaurant_id) => {
         const survey = await models.Survey.findByPk(id);
 
         if (!survey) {
@@ -139,7 +135,7 @@ module.exports = (db) => {
         await survey.destroy();
     };
 
-    exports.getSurveyById = async (id, restaurant_id) => {
+    const getSurveyById = async (id, restaurant_id) => {
         const survey = await models.Survey.findByPk(id, {
             include: ['questions']
         });
@@ -155,7 +151,7 @@ module.exports = (db) => {
         return survey;
     };
 
-    exports.getSurveyAnalytics = async (restaurantId) => {
+    const getSurveyAnalytics = async (restaurantId) => {
         try {
             const totalResponses = await models.SurveyResponse.count({
                 include: [{
@@ -189,7 +185,7 @@ module.exports = (db) => {
             const npsByCriterion = {};
 
             allAnswers.forEach(answer => {
-                if (answer.question) { // Adjusted to use the correct alias 'question'
+                if (answer.question) {
                     const value = parseInt(answer.answer_value, 10);
                     if (!isNaN(value)) {
                         if (answer.question.question_type === 'nps') {
@@ -248,11 +244,11 @@ module.exports = (db) => {
             };
         } catch (error) {
             console.error("Error in getSurveyAnalytics: ", error);
-            throw error; // Re-throw the error to be caught by the global error handler
+            throw error;
         }
     };
 
-    exports.getSurveysComparisonAnalytics = async (restaurantId, surveyIds) => {
+    const getSurveysComparisonAnalytics = async (restaurantId, surveyIds) => {
         const comparisonData = [];
 
         for (const surveyId of surveyIds) {
@@ -262,7 +258,7 @@ module.exports = (db) => {
             });
 
             if (survey) {
-                const analytics = await exports.getSurveyAnalytics(restaurantId); // Re-use existing analytics logic
+                const analytics = await getSurveyAnalytics(restaurantId);
                 comparisonData.push({
                     surveyId: survey.id,
                     title: survey.title,
@@ -276,7 +272,7 @@ module.exports = (db) => {
         return comparisonData;
     };
 
-    exports.getQuestionAnswersDistribution = async (restaurantId, surveyId, questionId) => {
+    const getQuestionAnswersDistribution = async (restaurantId, surveyId, questionId) => {
         const question = await models.Question.findOne({
             where: { id: questionId, survey_id: surveyId },
             include: [{
@@ -307,5 +303,17 @@ module.exports = (db) => {
             questionType: question.question_type,
             distribution,
         };
+    };
+
+    return {
+        listSurveys,
+        createSurvey,
+        updateSurvey,
+        updateSurveyStatus,
+        deleteSurvey,
+        getSurveyById,
+        getSurveyAnalytics,
+        getSurveysComparisonAnalytics,
+        getQuestionAnswersDistribution,
     };
 };

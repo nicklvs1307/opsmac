@@ -4,15 +4,15 @@
         throw new Error(msg);
 
 ^
-Error: Route.post() requires a callback function but got a [object Undefined]
-    at Route.<computed> [as post] (/app/node_modules/express/lib/router/route.js:216:15)
-    at proto.<computed> [as post] (/app/node_modules/express/lib/router/index.js:521:19)
-    at Object.<anonymous> (/app/backend/src/domains/tables/tables.routes.js:12:8)
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (/app/node_modules/express/lib/router/route.js:216:15)
+    at proto.<computed> [as get] (/app/node_modules/express/lib/router/index.js:521:19)
+    at Object.<anonymous> (/app/backend/src/domains/orders/orders.routes.js:12:8)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
     at Module.load (node:internal/modules/cjs/loader:1266:32)
     at Module._load (node:internal/modules/cjs/loader:1091:12)
     at Module.require (node:internal/modules/cjs/loader:1289:19)
     at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/backend/routes/index.js:27:22)
+    at Object.<anonymous> (/app/backend/routes/index.js:31:22)
 Node.js v20.19.5

@@ -46,7 +46,7 @@ class DeliveryMuchService {
       this.accessToken = access_token;
       this.expiresAt = Date.now() + expires_in * 1000; // Convert to milliseconds
 
-      // console.log('Delivery Much authentication successful.');
+      
       return access_token;
     } catch (error) {
       console.error('Error authenticating with Delivery Much:', error.response?.data || error.message);
@@ -56,7 +56,7 @@ class DeliveryMuchService {
 
   async getAccessToken() {
     if (!this.accessToken || Date.now() >= this.expiresAt) {
-      // console.log('Access token do Delivery Much expirado ou não existe. Autenticando novamente...');
+      
       await this.authenticate();
     }
     return this.accessToken;

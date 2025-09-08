@@ -23,7 +23,7 @@ class CacheService {
   async delExact(key) { // Renamed from del to delExact for clarity
     if (!redisClient) return;
     const result = await redisClient.del(key);
-    // console.log(`CacheService: Deleted ${result} exact key: ${key}`);
+    
     return result;
   }
 
@@ -32,7 +32,7 @@ class CacheService {
     const keys = await redisClient.keys(pattern);
     if (keys.length > 0) {
       const result = await redisClient.del(keys);
-      // console.log(`CacheService: Deleted ${result} keys matching pattern ${pattern}`);
+      
       return result;
     }
     return 0;

@@ -43,7 +43,7 @@ async function handleOrderCreated(orderData) {
     delivery_type: orderData.delivery_type,
     notes: orderData.notes,
   });
-  // console.log(`Novo pedido Saipos ${orderData.id} registrado para o restaurante ${localRestaurant.name}.`);
+  
 }
 
 // Moved from backend/services/saiposService.js
@@ -51,7 +51,7 @@ async function handleOrderUpdated(orderData) {
   const order = await models.Order.findOne({ where: { external_order_id: orderData.id, platform: 'saipos' } });
   if (order) {
     await order.update({ status: orderData.status });
-    // console.log(`Status do pedido Saipos ${orderData.id} atualizado para ${orderData.status}.`);
+    
   } else {
     console.warn(`Pedido Saipos ${orderData.id} não encontrado para atualização de status.`);
   }
@@ -101,7 +101,7 @@ exports.checkSaiposModuleEnabled = async (restaurantIdFromPayload, userId) => {
 };
 
 exports.handleWebhook = async (event) => {
-  // console.log('Webhook Saipos recebido:', JSON.stringify(event, null, 2));
+  
   await processWebhookEventInternal(event);
 };
 

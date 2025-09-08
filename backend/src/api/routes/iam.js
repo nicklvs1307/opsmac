@@ -54,7 +54,7 @@ router.get('/tree', async (req, res) => {
   const userId = req.user?.id;
   const restaurantId = req.query.restaurantId; // Directly use req.query.restaurantId
 
-  console.log('DEBUG: /iam/tree - userId:', userId, 'restaurantId:', restaurantId); // Add this line
+  
 
   if (!userId || !restaurantId) {
     return res.status(401).json({ error: 'Unauthorized: Missing user or restaurant context.' });

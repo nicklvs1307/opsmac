@@ -15,10 +15,10 @@ if (redisClient) {
   subscriber.on('message', (channel, message) => {
     if (channel === CHANNEL) {
       const { restaurantId } = JSON.parse(message);
-      // console.log(`Received invalidation message for restaurant ${restaurantId}. Clearing cache.`);
+      
       // Invalidate all snapshots for this restaurant
       cacheService.delByPattern(`perm_snapshot:${restaurantId}:*`)
-        .then(res => { /* console.log(`Cleared ${res} keys for restaurant ${restaurantId}`) */ })
+        
         .catch(err => console.error(`Error clearing cache for ${restaurantId}:`, err));
     }
   });
@@ -27,7 +27,7 @@ if (redisClient) {
     if (err) {
       console.error('Failed to subscribe to Redis channel:', err);
     } else {
-      // console.log(`Subscribed to Redis channel: ${CHANNEL}`);
+      
     }
   });
 } else {

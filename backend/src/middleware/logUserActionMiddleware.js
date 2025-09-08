@@ -14,7 +14,7 @@ const logUserAction = (action) => {
     
     // Log para desenvolvimento
     if (process.env.NODE_ENV === 'development') {
-      // console.log(`[${req.userAction.timestamp.toISOString()}] ${action} - User: ${req.user?.userId || 'Anonymous'} - ${req.method} ${req.originalUrl}`);
+      
     }
     
     next();

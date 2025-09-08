@@ -112,7 +112,7 @@ exports.getRestaurantModules = async (req, res, next) => {
 
 exports.updateRestaurantFeatures = async (req, res, next) => {
   try {
-    // console.log('Received enabledFeatureIds:', req.body.enabledFeatureIds); // Updated log
+    
     handleValidationErrors(req);
     const features = await adminService.updateRestaurantFeatures(req.params.id, req.body.enabledFeatureIds);
     res.status(200).json({ message: 'Funcionalidades atualizadas com sucesso', features });

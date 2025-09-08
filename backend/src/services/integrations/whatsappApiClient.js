@@ -3,7 +3,7 @@ const axios = require('axios');
 const sendWhatsAppMessage = async (instanceUrl, apiKey, instanceId, recipientPhoneNumber, message) => {
   try {
     const url = `${instanceUrl}/message/sendText/${instanceId}`;
-    // console.log('URL construída para Evolution API:', url);
+    
     const headers = {
       'Content-Type': 'application/json',
       'apikey': apiKey,

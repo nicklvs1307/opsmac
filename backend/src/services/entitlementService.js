@@ -30,15 +30,15 @@ class EntitlementService {
   async setEntitlements(restaurantId, entitlements) {
     const transaction = await models.sequelize.transaction();
     try {
-      console.log(`[EntitlementService] Starting setEntitlements for restaurant: ${restaurantId}`);
-      console.log(`[EntitlementService] Received restaurantId: ${restaurantId}`);
-      console.log(`[EntitlementService] Received entitlements:`, JSON.stringify(entitlements, null, 2));
-      console.log(`[EntitlementService] Entitlements to process: ${entitlements.length}`);
+      
+      
+      
+      
 
       // Clear existing entitlements for this restaurant
-      console.log(`[EntitlementService] Destroying existing entitlements for restaurant: ${restaurantId}`);
+      
       const destroyResult = await models.RestaurantEntitlement.destroy({ where: { restaurant_id: restaurantId }, transaction });
-      console.log(`[EntitlementService] Destroyed ${destroyResult} existing entitlements.`);
+      
 
       // Bulk insert new entitlements
       const newEntitlements = entitlements.map(ent => ({
@@ -51,28 +51,28 @@ class EntitlementService {
       }));
 
       if (newEntitlements.length > 0) {
-        console.log(`[EntitlementService] Bulk creating ${newEntitlements.length} new entitlements.`);
+        
         const bulkCreateResult = await models.RestaurantEntitlement.bulkCreate(newEntitlements, { transaction });
-        console.log(`[EntitlementService] Bulk created ${bulkCreateResult.length} entitlements.`);
+        
       } else {
-        console.log(`[EntitlementService] No new entitlements to create.`);
+        
       }
 
-      console.log(`[EntitlementService] Committing transaction.`);
+      
       await transaction.commit();
-      console.log(`[EntitlementService] Transaction committed successfully.`);
+      
       // Explicitly clear permission snapshots for this restaurant
       await cacheService.delByPattern(`perm_snapshot:${restaurantId}:*`);
-      console.log(`[EntitlementService] Cleared permission snapshots for restaurant ${restaurantId}.`);
+      
     } catch (error) {
       console.error(`[EntitlementService] Error in setEntitlements: ${error.name} - ${error.message} - Details:`, error.errors, error);
-      console.log(`[EntitlementService] Rolling back transaction.`);
+      
       if (transaction) { // Defensive check
         await transaction.rollback();
       } else {
         console.error(`[EntitlementService] Transaction object was undefined, cannot rollback.`);
       }
-      console.log(`[EntitlementService] Transaction rolled back.`);
+      
       throw error;
     }
     

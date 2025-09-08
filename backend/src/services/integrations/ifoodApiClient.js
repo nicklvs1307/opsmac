@@ -39,7 +39,7 @@ class IfoodService {
       this.refreshToken = refreshToken;
       this.expiresAt = Date.now() + expiresIn * 1000; // Convert to milliseconds
 
-      // console.log('iFood authentication successful.');
+      
       return accessToken;
     } catch (error) {
       console.error('Error authenticating with iFood:', error.response?.data || error.message);
@@ -49,7 +49,7 @@ class IfoodService {
 
   async getAccessToken() {
     if (!this.accessToken || Date.now() >= this.expiresAt) {
-      // console.log('Access token expirado ou não existe. Autenticando novamente...');
+      
       await this.authenticate();
     }
     return this.accessToken;
@@ -85,7 +85,7 @@ class IfoodService {
           'x-correlation-id': uuidv4(),
         },
       });
-      // console.log(`Order ${orderId} confirmed on iFood.`);
+      
     } catch (error) {
       console.error(`Error confirming iFood order ${orderId}:`, error.response?.data || error.message);
       throw new Error(`Falha ao confirmar pedido ${orderId} no iFood.`);
@@ -102,7 +102,7 @@ class IfoodService {
           'x-correlation-id': uuidv4(),
         },
       });
-      // console.log(`Order ${orderId} rejected on iFood.`);
+      
     } catch (error) {
       console.error(`Error rejecting iFood order ${orderId}:`, error.response?.data || error.message);
       throw new Error(`Falha ao rejeitar pedido ${orderId} no iFood.`);

@@ -1,10 +1,10 @@
-const db = require('../../../models');
-const models = db.models;
-const sequelize = db.sequelize;
-const { Op } = require('sequelize');
-const { NotFoundError, BadRequestError } = require('utils/errors');
+module.exports = (db) => {
+    const models = db.models;
+    const sequelize = db.sequelize;
+    const { Op } = require('sequelize');
+    const { NotFoundError, BadRequestError } = require('utils/errors');
 
-exports.listCoupons = async (restaurantId, page, limit, status, search) => {
+    exports.listCoupons = async (restaurantId, page, limit, status, search) => {
   const offset = (page - 1) * limit;
 
   const where = { restaurantId: restaurantId };
@@ -198,17 +198,19 @@ exports.publicValidateCoupon = async (code, restaurantSlug) => {
   };
 };
 
-exports.handleBeforeCreateCoupon = async (coupon) => {
-  // Gerar QR Code data
-  if (!coupon.qrCodeData) {
-    coupon.qrCodeData = JSON.stringify({
-      type: 'coupon',
-      code: coupon.code,
-      restaurantId: coupon.restaurantId,
-      expiresAt: coupon.expiresAt,
-      generatedAt: coupon.generatedAt,
-    });
-  }
+    return {
+        listCoupons,
+        expireCoupons,
+        redeemCoupon,
+        createCoupon,
+        getCouponAnalytics,
+        validateCoupon,
+        publicValidateCoupon,
+        handleBeforeCreateCoupon,
+        handleAfterCreateCoupon,
+        handleBeforeUpdateCoupon,
+        handleAfterUpdateCoupon,
+    };
 };
 
 exports.handleAfterCreateCoupon = async (coupon) => {

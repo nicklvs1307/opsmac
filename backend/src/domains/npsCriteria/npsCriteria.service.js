@@ -1,7 +1,8 @@
-const { models } = require('config/config');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
+module.exports = (db) => {
+    const models = db.models;
+    const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
-exports.listNpsCriteria = async (restaurantId) => {
+    exports.listNpsCriteria = async (restaurantId) => {
   const criteria = await models.NpsCriterion.findAll({
     where: { restaurant_id: restaurantId },
     order: [['name', 'ASC']]
@@ -43,4 +44,12 @@ exports.deleteNpsCriterion = async (id, restaurantId) => {
   }
 
   await criterion.destroy();
+};
+
+    return {
+        listNpsCriteria,
+        createNpsCriterion,
+        updateNpsCriterion,
+        deleteNpsCriterion,
+    };
 };

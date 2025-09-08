@@ -8,7 +8,6 @@ const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const db = require('models');
-const { sequelize, models } = db;
 const { BaseError } = require('utils/errors');
 
 // Importação de Rotas
@@ -61,7 +60,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Configuração das Rotas
 allRoutes.forEach(route => {
-  app.use(route.path, route.router);
+  app.use(route.path, route.router(db));
 });
 
 // Swagger UI

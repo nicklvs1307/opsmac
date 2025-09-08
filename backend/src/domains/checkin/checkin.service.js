@@ -1,11 +1,11 @@
-const db = require('../../../models');
-const models = db.models;
-const sequelize = db.sequelize;
-const { Op, fn, col, literal } = require('sequelize');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
-const { sendWhatsAppMessage } = require('services/integrations/whatsappApiClient');
+module.exports = (db) => {
+    const models = db.models;
+    const sequelize = db.sequelize;
+    const { Op, fn, col, literal } = require('sequelize');
+    const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
+    const { sendWhatsAppMessage } = require('services/integrations/whatsappApiClient');
 
-async function recordCheckin(customerId, restaurantId) {
+    async function recordCheckin(customerId, restaurantId) {
   const restaurant = await models.Restaurant.findByPk(restaurantId);
   if (!restaurant) {
     throw new NotFoundError('Restaurante não encontrado');
@@ -473,10 +473,11 @@ async function getActiveCheckins(restaurantId) {
   return activeCheckins;
 }
 
-module.exports = {
-  recordCheckin,
-  recordPublicCheckin,
-  checkoutCheckin,
-  getCheckinAnalytics,
-  getActiveCheckins,
+    return {
+        recordCheckin,
+        recordPublicCheckin,
+        checkoutCheckin,
+        getCheckinAnalytics,
+        getActiveCheckins,
+    };
 };

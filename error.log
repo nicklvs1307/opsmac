@@ -1,11 +1,11 @@
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
-/app/node_modules/express/lib/router/index.js:462
-    throw new TypeError('Router.use() requires a middleware function')
-    ^
-TypeError: Router.use() requires a middleware function
-    at Function.use (/app/node_modules/express/lib/router/index.js:462:11)
-    at Object.<anonymous> (/app/backend/src/api/routes/iam.js:13:8)
+/app/backend/src/api/routes/iam.js:13
+router.use(auth); // Apply auth middleware to all IAM routes
+
+           ^
+ReferenceError: auth is not defined
+    at Object.<anonymous> (/app/backend/src/api/routes/iam.js:13:12)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
     at Module.load (node:internal/modules/cjs/loader:1266:32)
@@ -14,4 +14,5 @@ TypeError: Router.use() requires a middleware function
     at require (node:internal/modules/helpers:182:18)
     at Object.<anonymous> (/app/backend/routes/index.js:44:19)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
 Node.js v20.19.5

@@ -10,7 +10,8 @@ const entitlementService = require('../../services/entitlementService');
 
 const { Op } = require('sequelize'); // Import Op for Sequelize operators
 
-router.use(auth); // Apply auth middleware to all IAM routes
+const auth = require('../../middleware/authMiddleware')(models.sequelize); // Import and initialize auth middleware
+router.use(auth.auth); // Apply auth middleware to all IAM routes
 
 const auditService = require('../../services/auditService');
 

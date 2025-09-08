@@ -218,39 +218,53 @@ class IamController {
   }
 
   // --- Restaurant Entitlements ---
-  async setRestaurantEntitlement(req, res) {
+  async setRestaurantEntitlements(req, res) {
+    const { restaurantId, entitlements } = req.body;
+    const userId = req.user.id;
+
+    if (!restaurantId || !Array.isArray(entitlements)) {
+      return res.status(400).json({ error: 'Bad Request: restaurantId and entitlements array are required.' });
+    }
+
+    const t = await models.sequelize.transaction();
     try {
-      const { restaurantId, entityType, entityId, status, source, metadata } = req.body;
+      let createdCount = 0;
+      let updatedCount = 0;
 
-      // Basic validation
-      const missingFields = [];
-      if (!restaurantId) missingFields.push('restaurantId');
-      if (!entityType) missingFields.push('entityType');
-      if (!entityId) missingFields.push('entityId');
-      if (!status) missingFields.push('status');
-      if (!source) missingFields.push('source');
+      for (const entitlementData of entitlements) {
+        const { entityType, entityId, status, source, metadata } = entitlementData;
 
-      if (missingFields.length > 0) {
-        // Include the missing fields in the error response for debugging
-        return res.status(400).json({ error: `Bad Request: Missing required fields for entitlement: ${missingFields.join(', ')}.`, missingFields: missingFields });
+        const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({
+          where: { restaurant_id: restaurantId, entity_type: entityType, entity_id: entityId },
+          defaults: { status, source, metadata: metadata || {} },
+          transaction: t,
+        });
+
+        if (created) {
+          createdCount++;
+        } else if (entitlement.status !== status) {
+          await entitlement.update({ status, source, metadata: metadata || {} }, { transaction: t });
+          updatedCount++;
+        }
       }
 
-      const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({
-        where: { restaurant_id: restaurantId, entity_type: entityType, entity_id: entityId },
-        defaults: { status, source, metadata },
-      });
-
-      if (!created) {
-        await entitlement.update({ status, source, metadata });
+      await t.commit();
+      
+      // Bump version only once after all changes
+      if (createdCount > 0 || updatedCount > 0) {
+        await iamService.bumpPermVersion(restaurantId);
+        await createAuditLog(userId, restaurantId, 'BULK_UPDATE', 'RestaurantEntitlement', restaurantId, { createdCount, updatedCount });
       }
-      await iamService.bumpPermVersion(restaurantId);
-      await createAuditLog(req.user.id, restaurantId, created ? 'CREATE' : 'UPDATE', 'RestaurantEntitlement', entitlement.id, { entityType, entityId, status });
-      return res.status(200).json(entitlement);
+
+      return res.status(200).json({ message: 'Entitlements updated successfully', createdCount, updatedCount });
     } catch (error) {
-      console.error('Error setting restaurant entitlement:', error.name, error.message, error.errors);
+      await t.rollback();
+      console.error('Error bulk setting restaurant entitlements:', error);
       return res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
   }
+
+  
 
   async getRestaurantEntitlements(req, res) {
     try {

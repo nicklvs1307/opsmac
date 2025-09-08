@@ -17,7 +17,7 @@ const requirePermission = (featureKey, actionKey) => {
       }
 
       // Restaurant context is required for non-superadmins
-      const restaurantId = req.restaurant?.id || req.params.restaurantId || req.query.restaurant_id;
+      const restaurantId = req.restaurant?.id || req.params.restaurantId || req.query.restaurant_id || req.user.restaurantId;
       if (!restaurantId) {
         return res.status(401).json({ error: 'Unauthorized: Missing restaurant context.' });
       }

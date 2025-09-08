@@ -673,33 +673,9 @@ router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), 
  *       201:
  *         description: Entitlement set successfully
  */
-router.post('/entitlements', requirePermission('entitlements.manage', 'create'), async (req, res) => {
-  const userId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
-  const { restaurantId: bodyRestaurantId, entityType, entityId, status, source, metadata } = req.body;
+const IamController = require('../../domains/iam/iam.controller');
 
-  // Ensure only superadmin can set entitlements for other restaurants
-  const user = await models.User.findByPk(userId);
-  if (!user || !user.isSuperadmin) {
-    return res.status(403).json({ error: 'Forbidden: Only superadmins can manage entitlements.' });
-  }
-
-  if (!restaurantId || !entityType || !entityId || !status || !source) {
-    return res.status(400).json({ error: 'Bad Request: Missing required fields for entitlement.' });
-  }
-
-  try {
-    // Upsert logic: try to find and update, otherwise create
-    const entitlement = await entitlementService.setEntitlement(restaurantId, entityType, entityId, status, source, metadata);
-
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'ENTITLEMENT_SET', `Restaurant:${restaurantId}/${entityType}:${entityId}`, { status, source, metadata });
-    return res.status(created ? 201 : 200).json(entitlement);
-  } catch (error) {
-    console.error('Error setting entitlement:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+router.post('/entitlements', requirePermission('entitlements.manage', 'update'), IamController.setRestaurantEntitlements);
 
 /**
  * @swagger

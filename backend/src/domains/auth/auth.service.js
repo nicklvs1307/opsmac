@@ -147,12 +147,28 @@ const getMe = async (userId) => {
         }
     }
 
+    console.log('DEBUG: User object about to be returned by getMe:', JSON.stringify({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        roles: user.roles,
+        avatar: user.avatar,
+        isActive: user.isActive,
+        emailVerified: user.emailVerified,
+        lastLogin: user.lastLogin,
+        restaurants: user.restaurants?.map(ur => ur.restaurant) || [],
+        restaurant: primaryRestaurant,
+        restaurantId: primaryRestaurantId,
+        permissionSnapshot: permissionSnapshot,
+    }, null, 2));
+
     return {
         id: user.id,
         name: user.name,
         email: user.email,
         phone: user.phone,
-        roles: user.roles, // This might need adjustment if a user can have multiple roles
+        roles: user.roles,
         avatar: user.avatar,
         isActive: user.isActive,
         emailVerified: user.emailVerified,

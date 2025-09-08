@@ -1,6 +1,5 @@
 const express = require('express');
-const { auth } = require('../../middleware/authMiddleware');
-const { checkRestaurantOwnership } = require('../../middleware/checkRestaurantOwnershipMiddleware');
+const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware');
 const requirePermission = require('../../middleware/requirePermission');
 const dashboardController = require('./dashboard.controller');
 const {

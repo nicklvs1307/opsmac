@@ -1,7 +1,8 @@
 const express = require('express');
 const requirePermission = require('../../middleware/requirePermission');
-    const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
+
 module.exports = (db) => {
+    const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
     const dashboardController = require('./dashboard.controller')(db);
     const router = express.Router({ mergeParams: true });
 

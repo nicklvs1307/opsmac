@@ -13,7 +13,7 @@ module.exports = (db) => {
         return user?.restaurants?.[0]?.id;
     };
 
-    exports.listRewards = async (restaurantId, query) => {
+    const listRewards = async (restaurantId, query) => {
         try {
             const { page = 1, limit = 12 } = query;
             const offset = (page - 1) * limit;
@@ -346,7 +346,7 @@ module.exports = (db) => {
         return true;
     };
 
-    exports.handleRewardBeforeSave = (reward) => {
+    const handleRewardBeforeSave = (reward) => {
         if (reward.reward_type === 'spin_the_wheel' && reward.wheel_config && reward.wheel_config.items) {
             reward.wheel_config.items.forEach(item => {
                 if (!item.id) {
@@ -356,7 +356,7 @@ module.exports = (db) => {
         }
     };
 
-    exports.handleRewardBeforeCreate = (reward) => {
+    const handleRewardBeforeCreate = (reward) => {
         // Definir data de validade baseada em dias_valid
         if (reward.days_valid && !reward.valid_until) {
             const validUntil = new Date(reward.valid_from);

@@ -35,13 +35,19 @@ const authReducer = (state, action) => {
       const user = action.payload || {};
       return {
         ...state,
-        user: { ...user, token: localStorage.getItem('token') }, // Ensure token is part of user object
+        user: {
+          ...user,
+          token: localStorage.getItem('token'), // Ensure token is part of user object
+          // Explicitly add permissionSnapshot from payload if it exists
+          permissionSnapshot: user.permissionSnapshot || state.user?.permissionSnapshot || null,
+        },
         isAuthenticated: true,
         loading: false,
         selectedRestaurantId:
           user.restaurants && user.restaurants.length > 0 ? user.restaurants[0].id : null, // Auto-select first restaurant
       };
     case AUTH_ACTIONS.LOGOUT:
+      localStorage.removeItem('token'); // Ensure token is removed on logout
       return {
         ...state,
         user: null,
@@ -78,12 +84,37 @@ export const AuthProvider = ({ children }) => {
       setAuthToken(token);
       axiosInstance
         .get('/auth/me')
-        .then((response) => {
-          dispatch({ type: AUTH_ACTIONS.SET_USER, payload: response.data.user });
+        .then(async (response) => { // Make this async to await permission fetch
+          const userData = response.data.user;
+          let permissionSnapshot = null;
+
+          // Fetch permission snapshot if user data is available and a restaurant is selected
+          const selectedRestaurantId = userData.restaurants && userData.restaurants.length > 0 ? userData.restaurants[0].id : null;
+          if (selectedRestaurantId) {
+            try {
+              const permResponse = await axiosInstance.get(`/iam/tree?restaurantId=${selectedRestaurantId}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+              permissionSnapshot = permResponse.data;
+            } catch (permError) {
+              console.error("Failed to fetch permissions during /auth/me:", permError);
+            }
+          }
+
+          dispatch({
+            type: AUTH_ACTIONS.SET_USER,
+            payload: {
+              ...userData,
+              permissionSnapshot: permissionSnapshot, // Pass snapshot to reducer
+            },
+          });
         })
         .catch(() => {
           // Token is invalid, logout
           setAuthToken(null);
+          localStorage.removeItem('token'); // Ensure token is removed from localStorage
           dispatch({ type: AUTH_ACTIONS.LOGOUT });
         });
     } else {
@@ -97,6 +128,7 @@ export const AuthProvider = ({ children }) => {
       const { token, ...userDataFromApi } = response.data;
 
       if (token) {
+        localStorage.setItem('token', token); // Persist token to localStorage
         setAuthToken(token);
 
         const selectedRestaurantId = userDataFromApi.restaurants && userDataFromApi.restaurants.length > 0 ? userDataFromApi.restaurants[0].id : null;
@@ -121,7 +153,7 @@ export const AuthProvider = ({ children }) => {
           token: token, // Ensure token is part of user object
           permissionSnapshot: permissionSnapshot,
         };
-        console.log('DEBUG: Complete user object after login:', JSON.stringify(completeUser, null, 2)); // ADD THIS LOG
+        console.log('DEBUG: Complete user object after login:', JSON.stringify(completeUser, null, 2));
         // Dispatch the complete user object in one go
         dispatch({ type: AUTH_ACTIONS.SET_USER, payload: completeUser });
 
@@ -139,6 +171,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     setAuthToken(null);
+    localStorage.removeItem('token'); // Ensure token is removed on logout
     dispatch({ type: AUTH_ACTIONS.LOGOUT });
     queryClient.clear();
     toast.success('Logout realizado com sucesso');

@@ -8,6 +8,8 @@ module.exports = (db) => {
 
     const router = express.Router();
 
+    const { auth } = authMiddleware(db); // Initialize auth middleware with db
+
     // Rate limiting para rotas de autenticação
     const authLimiter = rateLimit({
         windowMs: 15 * 60 * 1000, // 15 minutos
@@ -19,6 +21,7 @@ module.exports = (db) => {
 
     // Rotas de Autenticação
     router.post('/login', authLimiter, loginValidation, authController.login);
+    console.log('DEBUG: Value of auth before /me route:', auth);
     router.get('/me', auth, authController.getMe);
     router.put('/profile', auth, updateProfileValidation, authController.updateProfile);
     router.put('/change-password', auth, changePasswordValidation, authController.changePassword);

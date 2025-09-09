@@ -3,15 +3,15 @@ const express = require('express');
 const requirePermission = require('middleware/requirePermission');
 const { createUpdateTechnicalSpecificationValidation } = require('domains/technicalSpecifications/technicalSpecifications.validation');
 
-module.exports = (db, technicalSpecificationsController) => {
+module.exports = (db, { createTechnicalSpecification, getTechnicalSpecificationByProductId, updateTechnicalSpecification, deleteTechnicalSpecification }) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Fichas Técnicas
-  router.post('/', auth, requirePermission('technicalSpecifications', 'create'), createUpdateTechnicalSpecificationValidation, technicalSpecificationsController.createTechnicalSpecification);
-  router.get('/:productId', auth, requirePermission('technicalSpecifications', 'read'), technicalSpecificationsController.getTechnicalSpecificationByProductId);
-  router.put('/:productId', auth, requirePermission('technicalSpecifications', 'update'), createUpdateTechnicalSpecificationValidation, technicalSpecificationsController.updateTechnicalSpecification);
-  router.delete('/:productId', auth, requirePermission('technicalSpecifications', 'delete'), technicalSpecificationsController.deleteTechnicalSpecification);
+  router.post('/', auth, requirePermission('technicalSpecifications', 'create'), createUpdateTechnicalSpecificationValidation, createTechnicalSpecification);
+  router.get('/:productId', auth, requirePermission('technicalSpecifications', 'read'), getTechnicalSpecificationByProductId);
+  router.put('/:productId', auth, requirePermission('technicalSpecifications', 'update'), createUpdateTechnicalSpecificationValidation, updateTechnicalSpecification);
+  router.delete('/:productId', auth, requirePermission('technicalSpecifications', 'delete'), deleteTechnicalSpecification);
 
   return router;
 };

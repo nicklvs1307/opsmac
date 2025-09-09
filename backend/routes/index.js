@@ -144,11 +144,11 @@ module.exports = (db) => {
 
     // Initialize stockService and stockController here
     const stockService = stockServiceFactory(db);
-    const stockController = stockControllerFactory(stockService);
+    const { getDashboardData, getAllStocks, createStockMovement, getStockHistory } = stockControllerFactory(stockService);
 
     // Initialize tablesService and tablesController here
     const tablesService = tablesServiceFactory(db);
-    const tablesController = tablesControllerFactory(tablesService);
+    const { createTable, listTables } = tablesControllerFactory(tablesService);
 
     // Initialize publicDineInMenuService and publicDineInMenuController here
     const publicDineInMenuService = publicDineInMenuServiceFactory(db);
@@ -168,7 +168,7 @@ module.exports = (db) => {
 
     // Initialize technicalSpecificationsService and technicalSpecificationsController here
     const technicalSpecificationsService = technicalSpecificationsServiceFactory(db);
-    const technicalSpecificationsController = technicalSpecificationsControllerFactory(technicalSpecificationsService);
+    const { createTechnicalSpecification, getTechnicalSpecificationByProductId, updateTechnicalSpecification, deleteTechnicalSpecification } = technicalSpecificationsControllerFactory(technicalSpecificationsService);
 
     // Initialize categoriesService and categoriesController here
     const categoriesService = categoriesServiceFactory(db);
@@ -180,7 +180,7 @@ module.exports = (db) => {
 
     // Initialize supplierService and supplierController here
     const supplierService = supplierServiceFactory(db);
-    const supplierController = supplierControllerFactory(supplierService);
+    const { createSupplier, getAllSuppliers, getSupplierById, updateSupplier, deleteSupplier } = supplierControllerFactory(supplierService);
 
     // Initialize cashRegisterService and cashRegisterController here
     const cashRegisterService = cashRegisterServiceFactory(db);
@@ -208,14 +208,14 @@ module.exports = (db) => {
 
     // Initialize dashboardService and dashboardController here
     const dashboardService = dashboardServiceFactory(db);
-    const dashboardController = dashboardControllerFactory(dashboardService);
+    const { getDashboardAnalytics } = dashboardControllerFactory(dashboardService);
 
     
 
     return [
     { path: '/api/auth', router: authRoutes(db) },
     { path: '/api/feedback', router: feedbackRoutes(db) },
-    { path: '/api/dashboard/:restaurantId', middleware: [auth, getRestaurantContext], router: dashboardRoutes(db, dashboardController) },
+    { path: '/api/dashboard/:restaurantId', middleware: [auth, getRestaurantContext], router: dashboardRoutes(db, { getDashboardAnalytics }) },
     { path: '/api/rewards', middleware: [auth, getRestaurantContext], router: rewardsRoutes(db, { listRewards, getRewardById, createReward, updateReward, deleteReward, spinWheel, getRewardsAnalytics }, auth) },
     { path: '/api/qrcode', middleware: [auth, getRestaurantContext], router: qrcodeRoutes(db) },
     { path: '/api/whatsapp', middleware: [auth, getRestaurantContext], router: whatsappRoutes(db) },
@@ -238,16 +238,16 @@ module.exports = (db) => {
     { path: '/api/products', middleware: [auth, getRestaurantContext], router: productRoutes(db, productsController) },
     { path: '/api/public/products', router: publicProductsRoutes(db, publicProductsController) },
     { path: '/api/public/orders', router: publicOrdersRoutes(db) },
-    { path: '/api/stock', middleware: [auth, getRestaurantContext], router: stockRoutes(db, stockController) },
-    { path: '/api/tables', middleware: [auth, getRestaurantContext], router: tablesRoutes(db, tablesController) },
+    { path: '/api/stock', middleware: [auth, getRestaurantContext], router: stockRoutes(db, { getDashboardData, getAllStocks, createStockMovement, getStockHistory }) },
+    { path: '/api/tables', middleware: [auth, getRestaurantContext], router: tablesRoutes(db, { createTable, listTables }) },
     { path: '/api/public/menu/dine-in', router: publicDineInMenuRoutes(db, publicDineInMenuController) },
     { path: '/api/public/dine-in', router: publicDineInOrdersRoutes(db, publicDineInOrdersController) },
     { path: '/api/orders', middleware: [auth, getRestaurantContext], router: ordersRoutes(db, ordersController) },
     { path: '/api/ingredients', middleware: [auth, getRestaurantContext], router: ingredientsRoutes(db, ingredientsController) },
-    { path: '/api/technical-specifications', middleware: [auth, getRestaurantContext], router: technicalSpecificationsRoutes(db, technicalSpecificationsController) },
+    { path: '/api/technical-specifications', middleware: [auth, getRestaurantContext], router: technicalSpecificationsRoutes(db, { createTechnicalSpecification, getTechnicalSpecificationByProductId, updateTechnicalSpecification, deleteTechnicalSpecification }) },
     { path: '/api/categories', middleware: [auth, getRestaurantContext], router: categoriesRoutes(db, categoriesController) },
     { path: '/api/addons', middleware: [auth, getRestaurantContext], router: addonRoutes(db, addonsController) },
-    { path: '/api/suppliers', middleware: [auth, getRestaurantContext], router: supplierRoutes(db, supplierController) },
+    { path: '/api/suppliers', middleware: [auth, getRestaurantContext], router: supplierRoutes(db, { createSupplier, getAllSuppliers, getSupplierById, updateSupplier, deleteSupplier }) },
     { path: '/api/cash-register', middleware: [auth, getRestaurantContext], router: cashRegisterRoutes(db, cashRegisterController) },
     { path: '/api/financial', middleware: [auth, getRestaurantContext], router: financialRoutes(db, financialController) },
     { path: '/api/labels', middleware: [auth, getRestaurantContext], router: labelsRoutes(db, labelsController) },

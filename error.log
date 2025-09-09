@@ -1,8 +1,16 @@
-npm error code ENOENT
-npm error syscall open
-npm error path /app/package.json
-npm error errno -2
-npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
-npm error enoent This is related to npm not being able to find a file.
-npm error enoent
-npm error A complete log of this run can be found in: /root/.npm/_logs/2025-09-09T19_35_54_406Z-debug-0.log
+> feedeliza-plus@1.0.0 start
+> node server.js
+/app/src/domains/rewards/rewards.routes.js:5
+    router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, rewardsController.listRewards);
+    ^
+ReferenceError: router is not defined
+    at module.exports (/app/src/domains/rewards/rewards.routes.js:5:5)
+    at module.exports (/app/routes/index.js:217:79)
+    at Object.<anonymous> (/app/server.js:62:1)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49
+Node.js v20.19.5

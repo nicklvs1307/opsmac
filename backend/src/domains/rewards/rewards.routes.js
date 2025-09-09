@@ -1,13 +1,13 @@
 const express = require('express');
-const requirePermission = require('../../middleware/requirePermission');
+const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db, rewardsController) => {
-    const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
+    const { auth, checkRestaurantOwnership } = require('middleware/authMiddleware')(db);
         const {
         createRewardValidation,
         updateRewardValidation,
         spinWheelValidation
-    } = require('./rewards.validation');
+    } = require('domains/rewards/rewards.validation');
 
     const router = express.Router();
 

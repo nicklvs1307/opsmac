@@ -5,7 +5,7 @@ const qrcodeServiceFactory = require('domains/qrcode/qrcode.service');
 
 module.exports = (db) => {
     const { auth, checkRestaurantOwnership } = require('middleware/authMiddleware')(db);
-    const qrcodeService = qrcodeServiceFactory(db.models);
+    const qrcodeService = qrcodeServiceFactory(db);
     const qrcodeController = require('domains/qrcode/qrcode.controller')(qrcodeService);
     const { createQRCodeValidation, updateQRCodeValidation, generateImageValidation, generatePrintableValidation, analyticsValidation, cloneQRCodeValidation, listQRCodesValidation } = require('domains/qrcode/qrcode.validation');
 

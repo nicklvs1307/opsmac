@@ -1,5 +1,76 @@
-> feedeliza-plus@1.0.0 start
-> node backend/server.js
+    beforeBulkDestroy: [Function (anonymous)],
+    afterBulkDestroy: [Function (anonymous)],
+    beforeBulkRestore: [Function (anonymous)],
+    afterBulkRestore: [Function (anonymous)],
+    beforeBulkUpdate: [Function (anonymous)],
+    afterBulkUpdate: [Function (anonymous)],
+    beforeFind: [Function (anonymous)],
+    beforeFindAfterExpandIncludeAll: [Function (anonymous)],
+    beforeFindAfterOptions: [Function (anonymous)],
+    afterFind: [Function (anonymous)],
+    beforeCount: [Function (anonymous)],
+    beforeDefine: [Function (anonymous)],
+    afterDefine: [Function (anonymous)],
+    beforeInit: [Function (anonymous)],
+    afterInit: [Function (anonymous)],
+    beforeAssociate: [Function (anonymous)],
+    afterAssociate: [Function (anonymous)],
+    beforeConnect: [Function (anonymous)],
+    afterConnect: [Function (anonymous)],
+    beforeDisconnect: [Function (anonymous)],
+    afterDisconnect: [Function (anonymous)],
+    beforePoolAcquire: [Function (anonymous)],
+    afterPoolAcquire: [Function (anonymous)],
+    beforeSync: [Function (anonymous)],
+    afterSync: [Function (anonymous)],
+    beforeBulkSync: [Function (anonymous)],
+    afterBulkSync: [Function (anonymous)],
+    beforeQuery: [Function (anonymous)],
+    afterQuery: [Function (anonymous)],
+    Error: [class BaseError extends Error],
+    AccessDeniedError: [class AccessDeniedError extends ConnectionError],
+    AggregateError: [class AggregateError extends BaseError],
+    AssociationError: [class AssociationError extends BaseError],
+    AsyncQueueError: [class AsyncQueueError extends BaseError],
+    BaseError: [class BaseError extends Error],
+    BulkRecordError: [class BulkRecordError extends BaseError],
+    ConnectionAcquireTimeoutError: [class ConnectionAcquireTimeoutError extends ConnectionError],
+    ConnectionError: [class ConnectionError extends BaseError],
+    ConnectionRefusedError: [class ConnectionRefusedError extends ConnectionError],
+    ConnectionTimedOutError: [class ConnectionTimedOutError extends ConnectionError],
+    DatabaseError: [class DatabaseError extends BaseError],
+    EagerLoadingError: [class EagerLoadingError extends BaseError],
+    EmptyResultError: [class EmptyResultError extends BaseError],
+    ExclusionConstraintError: [class ExclusionConstraintError extends DatabaseError],
+    ForeignKeyConstraintError: [class ForeignKeyConstraintError extends DatabaseError],
+    HostNotFoundError: [class HostNotFoundError extends ConnectionError],
+    HostNotReachableError: [class HostNotReachableError extends ConnectionError],
+    InstanceError: [class InstanceError extends BaseError],
+    InvalidConnectionError: [class InvalidConnectionError extends ConnectionError],
+    OptimisticLockError: [class OptimisticLockError extends BaseError],
+    QueryError: [class QueryError extends BaseError],
+    SequelizeScopeError: [class SequelizeScopeError extends BaseError],
+    TimeoutError: [class TimeoutError extends DatabaseError],
+    UniqueConstraintError: [class UniqueConstraintError extends ValidationError],
+    UnknownConstraintError: [class UnknownConstraintError extends DatabaseError],
+    ValidationError: [class ValidationError extends BaseError],
+    ValidationErrorItem: [class ValidationErrorItem] {
+      TypeStringMap: [Object],
+      Origins: [Object]
+    },
+    ValidationErrorItemOrigin: { CORE: 'CORE', DB: 'DB', FUNCTION: 'FUNCTION' },
+    ValidationErrorItemType: {
+      'notnull violation': 'CORE',
+      'string violation': 'CORE',
+      'unique violation': 'DB',
+      'validation error': 'FUNCTION'
+    },
+    Sequelize: [Circular *8],
+    default: [Circular *8]
+  },
+  testConnection: [AsyncFunction (anonymous)],
+  syncDatabase: [AsyncFunction (anonymous)]
+}
 rewardsController at module.exports entry: {
   listRewards: [AsyncFunction: listRewards],
   getRewardById: [AsyncFunction: getRewardById],
@@ -16,7 +87,7 @@ rewardsController.listRewards before router.get: [AsyncFunction: listRewards]
 TypeError: Cannot read properties of undefined (reading 'models')
     at module.exports (/app/backend/src/domains/qrcode/qrcode.service.js:6:23)
     at module.exports (/app/backend/src/domains/qrcode/qrcode.routes.js:8:27)
-    at module.exports (/app/backend/routes/index.js:64:78)
+    at module.exports (/app/backend/routes/index.js:66:78)
     at Object.<anonymous> (/app/backend/server.js:62:1)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)

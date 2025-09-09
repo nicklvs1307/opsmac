@@ -4,7 +4,7 @@ const requirePermission = require('middleware/requirePermission');
 module.exports = (db) => {
     const { auth } = require('middleware/authMiddleware')(db);
     const customerController = require('domains/customer/customer.controller')(db);
-    const { createCustomerValidation, updateCustomerValidation } = require('domains/customer/customer.validation');
+    const { createCustomerValidation, updateCustomerValidation, publicRegisterCustomerValidation, customerQueryValidation, byPhoneValidation } = require('domains/customer/customer.validation');
 
     const router = express.Router();
 
@@ -20,11 +20,11 @@ module.exports = (db) => {
     router.post('/', requirePermission('customers', 'create'), createCustomerValidation, customerController.createCustomer);
     router.get('/by-phone', requirePermission('customers', 'read'), byPhoneValidation, customerController.getCustomerByPhone);
     router.get('/:id', requirePermission('customers', 'read'), customerController.getCustomerById);
-    router.put('/:id', requirePermission('customers', 'update'), customerController.updateCustomer);
+    router.put('/:id', requirePermission('customers', 'update'), updateCustomerValidation, customerController.updateCustomer);
     router.delete('/:id', requirePermission('customers', 'delete'), customerController.deleteCustomer);
     router.get('/:id/details', requirePermission('customers', 'read'), customerController.getCustomerDetails);
     router.post('/:id/reset-visits', requirePermission('customers', 'update'), customerController.resetCustomerVisits);
-    router.post('/:id/clear-checkins', requirePermission('customers', 'update'), (req, res, next) => customerController.clearCustomerCheckins(req, res, next));
+    router.post('/:id/clear-checkins', requirePermission('customers', 'update'), customerController.clearCustomerCheckins);
 
     return router;
 };

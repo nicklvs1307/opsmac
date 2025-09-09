@@ -7,7 +7,7 @@ module.exports = (db) => {
 
     // Rota para receber webhooks do iFood
     // A verificação do módulo deve ser feita dentro do controller para webhooks públicos
-    router.post('/webhook', (req, res, next) => ifoodController.handleWebhook(req, res, next));
+    router.post('/webhook', ifoodController.handleWebhook);
 
     return router;
 };

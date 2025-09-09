@@ -5,7 +5,7 @@ const asyncHandler = require('utils/asyncHandler');
 module.exports = (db) => {
     const { auth, checkRestaurantOwnership } = require('middleware/authMiddleware')(db);
     const checkinController = require('domains/checkin/checkin.controller')(db);
-    const { createCheckinValidation, updateCheckinValidation, getCheckinsValidation } = require('domains/checkin/checkin.validation');
+    const { createCheckinValidation, updateCheckinValidation, getCheckinsValidation, recordCheckinValidation, recordPublicCheckinValidation, analyticsValidation } = require('domains/checkin/checkin.validation');
 
     const router = express.Router();
 

@@ -14,7 +14,7 @@ module.exports = (db) => {
     // Rotas Públicas
     router.get('/test-endpoint', apiAuth, asyncHandler(publicController.testEndpoint));
     router.post('/feedback', apiAuth, submitPublicFeedbackValidation, asyncHandler(publicController.submitPublicFeedback));
-    router.post('/checkin/:restaurantSlug', asyncHandler(publicController.registerPublicCheckin));
+    router.post('/checkin/:restaurantSlug', registerPublicCheckinValidation, asyncHandler(publicController.registerPublicCheckin));
     router.get('/restaurant/:restaurantSlug', asyncHandler(publicController.getRestaurantInfoBySlug));
     router.get('/surveys/:identifier', asyncHandler(publicController.getPublicSurveyByIdentifier));
 

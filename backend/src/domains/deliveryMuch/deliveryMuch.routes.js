@@ -10,7 +10,7 @@ module.exports = (db) => {
     // Rotas do Delivery Much
     // O webhook é público e a verificação do módulo deve ser feita no controller.
     router.post('/webhook', deliveryMuchController.handleWebhook);
-    router.get('/orders', auth, requirePermission('deliveryMuch', 'read'), (req, res, next) => deliveryMuchController.getOrders(req, res, next));
+    router.get('/orders', auth, requirePermission('deliveryMuch', 'read'), deliveryMuchController.getOrders);
 
     return router;
 };

@@ -23,9 +23,13 @@ class IamController {
   // --- Role Management ---
   async createRole(req, res) {
     try {
-      const { restaurantId } = req.params;
+      const restaurantId = req.query.restaurantId; // Adjusted to req.query
       const { key, name, is_system } = req.body;
       const userId = req.user.id; // Assuming user ID is available from auth middleware
+
+      if (!restaurantId || !key || !name) {
+        return res.status(400).json({ error: 'Bad Request: restaurantId, key, and name are required.' });
+      }
 
       const role = await models.Role.create({ restaurant_id: restaurantId, key, name, is_system });
       await iamService.bumpPermVersion(restaurantId);
@@ -41,7 +45,10 @@ class IamController {
 
   async listRoles(req, res) {
     try {
-      const { restaurantId } = req.params;
+      const restaurantId = req.query.restaurantId; // Adjusted to req.query
+      if (!restaurantId) {
+        return res.status(400).json({ error: 'Bad Request: restaurantId is required.' });
+      }
       const roles = await models.Role.findAll({ where: { restaurant_id: restaurantId } });
       return res.json(roles);
     } catch (error) {
@@ -53,11 +60,16 @@ class IamController {
   async updateRole(req, res) {
     try {
       const { id } = req.params;
+      const restaurantId = req.query.restaurantId; // Adjusted to req.query
       const { name } = req.body; // Only name can be updated for now
       const role = await models.Role.findByPk(id);
       if (!role) {
         return res.status(404).json({ error: 'Role not found' });
       }
+      if (role.restaurant_id !== restaurantId) {
+        return res.status(403).json({ error: 'Forbidden: Role does not belong to the specified restaurant.' });
+      }
+      const oldName = role.name;
       await role.update({ name });
       await iamService.bumpPermVersion(role.restaurant_id);
       await createAuditLog(req.user.id, role.restaurant_id, 'UPDATE', 'Role', role.id, { oldName: oldName, newName: name });
@@ -71,12 +83,18 @@ class IamController {
   async deleteRole(req, res) {
     try {
       const { id } = req.params;
+      const restaurantId = req.query.restaurantId; // Adjusted to req.query
+      if (!restaurantId) {
+        return res.status(400).json({ error: 'Bad Request: restaurantId is required.' });
+      }
       const role = await models.Role.findByPk(id);
       if (!role) {
         return res.status(404).json({ error: 'Role not found' });
       }
+      if (role.restaurant_id !== restaurantId) {
+        return res.status(403).json({ error: 'Forbidden: Role does not belong to the specified restaurant.' });
+      }
       const roleName = role.name;
-      const restaurantId = role.restaurant_id;
       await role.destroy();
       await iamService.bumpPermVersion(restaurantId);
       await createAuditLog(req.user.id, restaurantId, 'DELETE', 'Role', id, { roleName });
@@ -90,8 +108,13 @@ class IamController {
   // --- Role Permission Management ---
   async setRolePermissions(req, res) {
     try {
-      const { roleId } = req.params;
+      const { id: roleId } = req.params;
+      const restaurantId = req.query.restaurantId; // Adjusted to req.query
       const { permissions } = req.body; // Array of { featureId, actionId, allowed }
+
+      if (!restaurantId || !permissions || !Array.isArray(permissions)) {
+        return res.status(400).json({ error: 'Bad Request: restaurantId and permissions array are required.' });
+      }
 
       // Clear existing permissions for the role
       await models.RolePermission.destroy({ where: { role_id: roleId } });
@@ -108,8 +131,8 @@ class IamController {
       await models.RolePermission.bulkCreate(newPermissions);
       const role = await models.Role.findByPk(roleId);
       if (role) {
-        await iamService.bumpPermVersion(role.restaurant_id);
-        await createAuditLog(req.user.id, role.restaurant_id, 'UPDATE', 'RolePermissions', roleId, { permissions: permissions });
+        await iamService.bumpPermVersion(restaurantId);
+        await createAuditLog(req.user.id, restaurantId, 'UPDATE', 'RolePermissions', roleId, { permissions: permissions });
       }
       return res.status(200).json({ message: 'Role permissions updated successfully' });
     } catch (error) {
@@ -138,8 +161,14 @@ class IamController {
   // --- User Role Management ---
   async assignUserRole(req, res) {
     try {
-      const { userId, restaurantId } = req.params;
+      const { id: userId } = req.params;
+      const restaurantId = req.query.restaurantId; // Adjusted to req.query
       const { roleId } = req.body;
+
+      if (!restaurantId || !roleId) {
+        return res.status(400).json({ error: 'Bad Request: restaurantId and roleId are required.' });
+      }
+
       const userRole = await models.UserRole.create({ user_id: userId, restaurant_id: restaurantId, role_id: roleId });
       await iamService.bumpPermVersion(restaurantId);
       await createAuditLog(req.user.id, restaurantId, 'CREATE', 'UserRole', userRole.id, { userId, roleId });
@@ -152,13 +181,43 @@ class IamController {
 
   async removeUserRole(req, res) {
     try {
-      const { userId, restaurantId, roleId } = req.params;
+      const { id: userId } = req.params;
+      const restaurantId = req.query.restaurantId; // Adjusted to req.query
+      const { roleId } = req.body; // Adjusted to req.body
+
+      if (!restaurantId || !roleId) {
+        return res.status(400).json({ error: 'Bad Request: restaurantId and roleId are required.' });
+      }
+
       await models.UserRole.destroy({ where: { user_id: userId, restaurant_id: restaurantId, role_id: roleId } });
       await iamService.bumpPermVersion(restaurantId);
       await createAuditLog(req.user.id, restaurantId, 'DELETE', 'UserRole', `${userId}-${roleId}`, { userId, roleId });
       return res.status(204).send();
     } catch (error) {
       console.error('Error removing user role:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  async getUserPermissionOverrides(req, res) {
+    const restaurantId = req.query.restaurantId;
+    const { id: targetUserId } = req.params;
+
+    if (!restaurantId || !targetUserId) {
+      return res.status(400).json({ error: 'Bad Request: restaurantId and userId are required.' });
+    }
+
+    try {
+      const overrides = await models.UserPermissionOverride.findAll({
+        where: { user_id: targetUserId, restaurant_id: restaurantId },
+        include: [
+          { model: models.Feature, as: 'feature', attributes: ['id', 'key', 'name'] },
+          { model: models.Action, as: 'action', attributes: ['id', 'key'] },
+        ],
+      });
+      return res.json(overrides);
+    } catch (error) {
+      console.error('Error getting user overrides:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
@@ -213,6 +272,33 @@ class IamController {
       return res.status(204).send();
     } catch (error) {
       console.error('Error deleting user permission override:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  async removeEntitlement(req, res) {
+    const userId = req.user?.id;
+    const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+    const { restaurantId: bodyRestaurantId, entityType, entityId } = req.body;
+
+    // Ensure only superadmin can delete entitlements for other restaurants
+    const user = await models.User.findByPk(userId);
+    if (!user || !user.isSuperadmin) {
+      return res.status(403).json({ error: 'Forbidden: Only superadmins can manage entitlements.' });
+    }
+
+    if (!restaurantId || !entityType || !entityId) {
+      return res.status(400).json({ error: 'Bad Request: Missing required fields for entitlement deletion.' });
+    }
+
+    try {
+      await entitlementService.removeEntitlement(restaurantId, entityType, entityId);
+
+      await iamService.bumpPermVersion(restaurantId);
+      await createAuditLog(req.user, restaurantId, 'ENTITLEMENT_REMOVED', `Restaurant:${restaurantId}/${entityType}:${entityId}`, {});
+      return res.status(204).send();
+    } catch (error) {
+      console.error('Error removing entitlement:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
@@ -276,6 +362,31 @@ class IamController {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
+
+  async setEntitlementsBulk(req, res) {
+    const userId = req.user?.id;
+    const { restaurantId, entitlements } = req.body;
+
+    // Ensure only superadmin can set entitlements
+    const user = await models.User.findByPk(userId);
+    if (!user || !user.isSuperadmin) {
+      return res.status(403).json({ error: 'Forbidden: Only superadmins can manage entitlements.' });
+    }
+
+    if (!restaurantId || !entitlements || !Array.isArray(entitlements)) {
+      return res.status(400).json({ error: 'Bad Request: restaurantId and entitlements array are required.' });
+    }
+
+    try {
+      await entitlementService.setEntitlements(restaurantId, entitlements);
+      await iamService.bumpPermVersion(restaurantId);
+      await createAuditLog(req.user, restaurantId, 'ENTITLEMENTS_BULK_SET', `Restaurant:${restaurantId}`, { count: entitlements.length });
+      return res.json({ message: 'Entitlements set successfully.' });
+    } catch (error) {
+      console.error('Error setting entitlements in bulk:', error.name, error.message, error.errors);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
   async listFeatures(req, res) {
     try {
       const features = await models.Feature.findAll({
@@ -308,6 +419,47 @@ class IamController {
       return res.json(actions);
     } catch (error) {
       console.error('Error listing actions:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  async getPermissionTree(req, res) {
+    const userId = req.user?.id;
+    const restaurantId = req.query.restaurantId;
+
+    if (!userId || !restaurantId) {
+      return res.status(401).json({ error: 'Unauthorized: Missing user or restaurant context.' });
+    }
+
+    try {
+      const snapshot = await iamService.buildSnapshot(restaurantId, userId);
+      res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      res.set('Pragma', 'no-cache');
+      res.set('Expires', '0');
+      return res.json(snapshot);
+    } catch (error) {
+      console.error('Error getting permission tree:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  async checkPermission(req, res) {
+    const userId = req.user?.id;
+    const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+    const { featureKey, actionKey } = req.body;
+
+    if (!userId || !restaurantId) {
+      return res.status(401).json({ error: 'Unauthorized: Missing user or restaurant context.' });
+    }
+    if (!featureKey || !actionKey) {
+      return res.status(400).json({ error: 'Bad Request: featureKey and actionKey are required.' });
+    }
+
+    try {
+      const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey);
+      return res.json(result);
+    } catch (error) {
+      console.error('Error checking permission:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }

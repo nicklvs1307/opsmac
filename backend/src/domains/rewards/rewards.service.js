@@ -1,4 +1,4 @@
-module.exports = (db) => {
+module.exports = (models) => {
     const { Op, fn, col } = require('sequelize');
     const { spinWheel: spinWheelService } = require('services/wheelService');
 
@@ -286,8 +286,5 @@ module.exports = (db) => {
         handleRewardBeforeSave,
         handleRewardBeforeCreate,
         handleRewardBeforeUpdate,
-    };
-};
-ndleRewardBeforeUpdate,
     };
 };

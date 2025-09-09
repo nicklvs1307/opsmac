@@ -27,7 +27,7 @@ module.exports = (db) => {
 
     // Feature Management
     router.get('/restaurants/:id/features', adminController.getRestaurantFeatures);
-    router.put('/restaurants/:id/features', updateRestaurantFeaturesValidation, adminController.updateRestaurantFeatures);
+    router.put('/restaurants/:id/features', updateRestaurantFeaturesValidation, (req, res, next) => adminController.updateRestaurantFeatures(req, res, next));
 
     return router;
 };

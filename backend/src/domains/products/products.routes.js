@@ -15,7 +15,7 @@ module.exports = (db, productsController) => {
   router.get('/', auth, requirePermission('products', 'read'), productsController.listProducts);
   router.get('/:id', auth, requirePermission('products', 'read'), productsController.getProductById);
   router.put('/:id', auth, requirePermission('products', 'update'), productsController.updateProduct);
-  router.delete('/:id', auth, requirePermission('products', 'delete'), productsController.deleteProduct);
+  router.delete('/:id', auth, requirePermission('products', 'delete'), (req, res, next) => productsController.deleteProduct(req, res, next));
   router.patch('/:id/toggle-status', auth, requirePermission('products', 'update'), productsController.toggleProductStatus);
   // You can use db here if needed in the future
   return router;

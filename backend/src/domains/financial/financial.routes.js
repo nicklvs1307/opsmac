@@ -17,7 +17,7 @@ module.exports = (db, financialController) => {
   router.get('/payment-methods', auth, requirePermission('financial', 'read'), financialController.getAllPaymentMethods);
   router.put('/payment-methods/:id', auth, requirePermission('financial_payment_methods', 'manage'), updatePaymentMethodValidation, financialController.updatePaymentMethod);
   router.delete('/payment-methods/:id', auth, requirePermission('financial_payment_methods', 'manage'), financialController.deletePaymentMethod);
-  router.get('/reports/sales-by-payment-method', auth, requirePermission('financial_reports', 'read'), reportValidation, financialController.getSalesByPaymentMethodReport);
+  router.get('/reports/sales-by-payment-method', auth, requirePermission('financial_reports', 'read'), reportValidation, (req, res, next) => financialController.getSalesByPaymentMethodReport(req, res, next));
 
   return router;
 };

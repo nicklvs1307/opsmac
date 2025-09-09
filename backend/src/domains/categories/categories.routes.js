@@ -13,7 +13,7 @@ module.exports = (db, categoriesController) => {
   router.get('/:id', auth, requirePermission('categories', 'read'), categoriesController.getCategoryById);
   router.put('/:id', auth, requirePermission('categories', 'update'), categoryValidation, categoriesController.updateCategory);
   router.delete('/:id', auth, requirePermission('categories', 'delete'), categoriesController.deleteCategory);
-  router.patch('/:id/toggle-status', auth, requirePermission('categories', 'update'), categoriesController.toggleCategoryStatus);
+  router.patch('/:id/toggle-status', auth, requirePermission('categories', 'update'), (req, res, next) => categoriesController.toggleCategoryStatus(req, res, next));
 
   return router;
 };

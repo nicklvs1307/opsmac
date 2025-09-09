@@ -9,7 +9,7 @@ module.exports = (db) => {
     // Rotas Públicas de Pesquisas
     router.get('/next/:restaurantSlug/:customerId?', publicSurveyController.getNextSurvey);
     router.get('/:restaurantSlug/:surveySlug', publicSurveyController.getPublicSurveyBySlugs);
-    router.post('/:slug/responses', submitResponsesValidation, publicSurveyController.submitSurveyResponses);
+    router.post('/:slug/responses', submitResponsesValidation, (req, res, next) => publicSurveyController.submitSurveyResponses(req, res, next));
     router.patch('/responses/:responseId/link-customer', linkCustomerValidation, publicSurveyController.linkCustomerToResponse);
 
     return router;

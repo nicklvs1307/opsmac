@@ -9,7 +9,7 @@ module.exports = (db, ordersController) => {
 
   // Rotas de Pedidos
   router.get('/', auth, requirePermission('orders', 'read'), ordersController.getAllOrders);
-  router.put('/:id/status', auth, requirePermission('orders', 'update'), updateOrderStatusValidation, ordersController.updateOrderStatus);
+  router.put('/:id/status', auth, requirePermission('orders', 'update'), updateOrderStatusValidation, (req, res, next) => ordersController.updateOrderStatus(req, res, next));
 
   return router;
 };

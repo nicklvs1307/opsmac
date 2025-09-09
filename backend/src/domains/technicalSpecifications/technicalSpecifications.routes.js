@@ -11,7 +11,7 @@ module.exports = (db, technicalSpecificationsController) => {
   router.post('/', auth, requirePermission('technicalSpecifications', 'create'), createUpdateTechnicalSpecificationValidation, technicalSpecificationsController.createTechnicalSpecification);
   router.get('/:productId', auth, requirePermission('technicalSpecifications', 'read'), technicalSpecificationsController.getTechnicalSpecificationByProductId);
   router.put('/:productId', auth, requirePermission('technicalSpecifications', 'update'), createUpdateTechnicalSpecificationValidation, technicalSpecificationsController.updateTechnicalSpecification);
-  router.delete('/:productId', auth, requirePermission('technicalSpecifications', 'delete'), technicalSpecificationsController.deleteTechnicalSpecification);
+  router.delete('/:productId', auth, requirePermission('technicalSpecifications', 'delete'), (req, res, next) => technicalSpecificationsController.deleteTechnicalSpecification(req, res, next));
 
   return router;
 };

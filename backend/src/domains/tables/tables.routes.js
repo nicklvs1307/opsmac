@@ -9,7 +9,7 @@ module.exports = (db, tablesController) => {
 
   // Rotas de Mesas
   router.post('/', auth, requirePermission('tables', 'create'), createTableValidation, tablesController.createTable);
-  router.get('/', auth, requirePermission('tables', 'read'), tablesController.listTables);
+  router.get('/', auth, requirePermission('tables', 'read'), (req, res, next) => tablesController.listTables(req, res, next));
 
   return router;
 };

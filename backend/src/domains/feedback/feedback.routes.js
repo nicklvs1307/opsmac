@@ -17,7 +17,7 @@ module.exports = (db) => {
     router.get('/word-frequency', requirePermission('feedback', 'read'), feedbackController.getFeedbackWordFrequency); // New route for word frequency
     router.put('/:id', requirePermission('feedback', 'update'), updateFeedbackValidation, logUserAction('update_feedback'), feedbackController.updateFeedback);
     router.delete('/:id', requirePermission('feedback', 'delete'), logUserAction('delete_feedback'), feedbackController.deleteFeedback);
-    router.post('/:id/respond', requirePermission('feedback', 'update'), respondToFeedbackValidation, logUserAction('respond_feedback'), feedbackController.respondToFeedback);
+    router.post('/:id/respond', requirePermission('feedback', 'update'), respondToFeedbackValidation, logUserAction('respond_feedback'), (req, res, next) => feedbackController.respondToFeedback(req, res, next));
 
     return router;
 };

@@ -24,7 +24,7 @@ module.exports = (db, rewardsController) => {
     router.post('/spin-wheel', spinWheelValidation, rewardsController.spinWheel);
 
     // Rotas de Analytics
-    router.get('/analytics', auth, requirePermission('fidelity:coupons:rewards', 'read'), rewardsController.getRewardsAnalytics);
+    router.get('/analytics', auth, requirePermission('fidelity:coupons:rewards', 'read'), (req, res, next) => rewardsController.getRewardsAnalytics(req, res, next));
 
     return router;
 };

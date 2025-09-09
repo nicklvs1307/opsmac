@@ -12,7 +12,7 @@ module.exports = (db, ingredientsController) => {
   router.get('/', auth, requirePermission('ingredients', 'read'), ingredientsController.listIngredients);
   router.get('/:id', auth, requirePermission('ingredients', 'read'), ingredientsController.getIngredientById);
   router.put('/:id', auth, requirePermission('ingredients', 'update'), updateIngredientValidation, ingredientsController.updateIngredient);
-  router.delete('/:id', auth, requirePermission('ingredients', 'delete'), ingredientsController.deleteIngredient);
+  router.delete('/:id', auth, requirePermission('ingredients', 'delete'), (req, res, next) => ingredientsController.deleteIngredient(req, res, next));
 
   return router;
 };

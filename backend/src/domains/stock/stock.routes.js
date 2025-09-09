@@ -11,7 +11,7 @@ module.exports = (db, stockController) => {
   router.get('/dashboard', auth, requirePermission('stock', 'read'), stockController.getDashboardData);
   router.get('/', auth, requirePermission('stock', 'read'), stockController.getAllStocks);
   router.post('/move', auth, requirePermission('stock', 'update'), createStockMovementValidation, stockController.createStockMovement);
-  router.get('/history/:productId', auth, requirePermission('stock', 'read'), stockController.getStockHistory);
+  router.get('/history/:productId', auth, requirePermission('stock', 'read'), (req, res, next) => stockController.getStockHistory(req, res, next));
 
   return router;
 };

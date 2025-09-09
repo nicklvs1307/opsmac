@@ -6,7 +6,7 @@ module.exports = (db, publicProductsController) => {
   // Rotas Públicas de Produtos
   router.get('/:restaurantSlug', publicProductsController.getProductsForPublicMenu);
   router.get('/delivery/:restaurantSlug', publicProductsController.getProductsForPublicDeliveryMenu);
-  router.get('/:restaurantSlug/:productId', publicProductsController.getSingleProductForPublicMenu);
+  router.get('/:restaurantSlug/:productId', (req, res, next) => publicProductsController.getSingleProductForPublicMenu(req, res, next));
 
   return router;
 };

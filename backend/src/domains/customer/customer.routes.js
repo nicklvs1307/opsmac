@@ -24,7 +24,7 @@ module.exports = (db) => {
     router.delete('/:id', requirePermission('customers', 'delete'), customerController.deleteCustomer);
     router.get('/:id/details', requirePermission('customers', 'read'), customerController.getCustomerDetails);
     router.post('/:id/reset-visits', requirePermission('customers', 'update'), customerController.resetCustomerVisits);
-    router.post('/:id/clear-checkins', requirePermission('customers', 'update'), customerController.clearCustomerCheckins);
+    router.post('/:id/clear-checkins', requirePermission('customers', 'update'), (req, res, next) => customerController.clearCustomerCheckins(req, res, next));
 
     return router;
 };

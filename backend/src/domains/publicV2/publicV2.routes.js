@@ -10,7 +10,7 @@ module.exports = (db) => {
     // Rotas Públicas V2
     router.get('/test-endpoint', publicV2Controller.testEndpoint);
     router.post('/feedback', apiAuth, feedbackValidation, publicV2Controller.submitFeedback);
-    router.post('/checkin', apiAuth, checkinValidation, publicV2Controller.registerCheckin);
+    router.post('/checkin', apiAuth, checkinValidation, (req, res, next) => publicV2Controller.registerCheckin(req, res, next));
 
     return router;
 };

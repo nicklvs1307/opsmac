@@ -675,7 +675,7 @@ router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), 
  *       201:
  *         description: Entitlement set successfully
  */
-router.post('/entitlements', requirePermission('entitlements.manage', 'update'), IamController.setRestaurantEntitlements);
+router.post('/entitlements', requirePermission('entitlements.manage', 'update'), (req, res, next) => IamController.setRestaurantEntitlements(req, res, next));
 
 /**
  * @swagger

@@ -12,7 +12,7 @@ module.exports = (db, labelsController) => {
   router.get('/items', auth, requirePermission('labels', 'read'), labelsController.getLabelItems);
   router.get('/stock-counts', auth, requirePermission('labels', 'read'), labelsController.getStockCounts);
   router.get('/productions', auth, requirePermission('labels', 'read'), labelsController.getProductions);
-  router.post('/print', auth, requirePermission('labels', 'create'), printLabelValidation, labelsController.printLabel);
+  router.post('/print', auth, requirePermission('labels', 'create'), printLabelValidation, (req, res, next) => labelsController.printLabel(req, res, next));
 
   return router;
 };

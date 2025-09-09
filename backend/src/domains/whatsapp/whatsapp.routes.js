@@ -28,7 +28,7 @@ module.exports = (db) => {
     router.get('/messages/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), listMessagesValidation, whatsappController.listMessages);
 
     // Get WhatsApp analytics
-    router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), whatsappController.getWhatsappAnalytics);
+    router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), (req, res, next) => whatsappController.getWhatsappAnalytics(req, res, next));
 
     return router;
 };

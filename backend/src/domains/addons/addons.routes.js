@@ -1,14 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const addonsController = require('./addons.controller');
-const {
-    addonValidation,
-    updateAddonValidation
-} = require('./addons.validation');
+const requirePermission = require('middleware/requirePermission');
+const addonsController = require('domains/addons/addons.controller');
+const { validateCreateAddon, validateUpdateAddon } = require('domains/addons/addons.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Addons

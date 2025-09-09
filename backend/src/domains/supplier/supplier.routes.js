@@ -1,10 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const supplierController = require('./supplier.controller');
+const requirePermission = require('middleware/requirePermission');
+const supplierController = require('domains/supplier/supplier.controller');
+const { createSupplierValidation, updateSupplierValidation } = require('domains/supplier/supplier.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Fornecedores

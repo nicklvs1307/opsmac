@@ -1,9 +1,9 @@
 const express = require('express');
-const requirePermission = require('../../middleware/requirePermission');
+const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db) => {
-    const { auth } = require('../../middleware/authMiddleware')(db);
-    const uaiRangoController = require('./uaiRango.controller')(db);
+    const { auth } = require('middleware/authMiddleware')(db);
+    const uaiRangoController = require('domains/uaiRango/uaiRango.controller')(db);
 
     const router = express.Router();
 

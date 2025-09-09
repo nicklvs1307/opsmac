@@ -2,11 +2,8 @@ const express = require('express');
 
 module.exports = (db) => {
     const apiAuth = require('middleware/apiAuthMiddleware')(db);
-    const publicV2Controller = require('./publicV2.controller')(db);
-    const {
-        feedbackValidation,
-        checkinValidation
-    } = require('domains/publicV2/publicV2.validation');
+    const publicV2Controller = require('domains/publicV2/publicV2.controller')(db);
+    const { getPublicV2DataValidation } = require('domains/publicV2/publicV2.validation');
 
     const router = express.Router();
 

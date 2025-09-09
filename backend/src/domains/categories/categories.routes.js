@@ -1,13 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const categoriesController = require('./categories.controller');
-const {
-    categoryValidation
-} = require('./categories.validation');
+const requirePermission = require('middleware/requirePermission');
+const categoriesController = require('domains/categories/categories.controller');
+const { createCategoryValidation, updateCategoryValidation } = require('domains/categories/categories.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Categorias

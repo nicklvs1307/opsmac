@@ -1,13 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const stockController = require('./stock.controller');
-const {
-    createStockMovementValidation
-} = require('./stock.validation');
+const requirePermission = require('middleware/requirePermission');
+const stockController = require('domains/stock/stock.controller');
+const { createStockValidation, updateStockValidation } = require('domains/stock/stock.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Estoque

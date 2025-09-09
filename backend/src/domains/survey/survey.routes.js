@@ -1,15 +1,11 @@
 const express = require('express');
-const requirePermission = require('../../middleware/requirePermission');
-const asyncHandler = require('../../utils/asyncHandler');
+const requirePermission = require('middleware/requirePermission');
+const asyncHandler = require('utils/asyncHandler');
 
 module.exports = (db) => {
-    const { auth } = require('../../middleware/authMiddleware')(db);
-    const surveyController = require('./survey.controller')(db);
-    const {
-        createSurveyValidation,
-        updateSurveyValidation,
-        updateSurveyStatusValidation
-    } = require('./survey.validation');
+    const { auth } = require('middleware/authMiddleware')(db);
+    const surveyController = require('domains/survey/survey.controller')(db);
+    const { createSurveyValidation, updateSurveyValidation, getSurveyValidation } = require('domains/survey/survey.validation');
 
     const router = express.Router();
 

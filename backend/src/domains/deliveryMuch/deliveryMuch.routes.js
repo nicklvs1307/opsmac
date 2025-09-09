@@ -1,9 +1,9 @@
 const express = require('express');
-const requirePermission = require('../../middleware/requirePermission');
+const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db) => {
-    const { auth } = require('../../middleware/authMiddleware')(db);
-    const deliveryMuchController = require('./deliveryMuch.controller')(db);
+    const { auth } = require('middleware/authMiddleware')(db);
+    const deliveryMuchController = require('domains/deliveryMuch/deliveryMuch.controller')(db);
 
     const router = express.Router();
 

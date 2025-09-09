@@ -1,14 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const ingredientsController = require('./ingredients.controller');
-const {
-    createIngredientValidation,
-    updateIngredientValidation
-} = require('./ingredients.validation');
+const requirePermission = require('middleware/requirePermission');
+const ingredientsController = require('domains/ingredients/ingredients.controller');
+const { createIngredientValidation, updateIngredientValidation } = require('domains/ingredients/ingredients.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Ingredientes

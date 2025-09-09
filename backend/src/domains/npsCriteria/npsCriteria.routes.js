@@ -1,13 +1,11 @@
 const express = require('express');
-const requirePermission = require('../../middleware/requirePermission');
-const asyncHandler = require('../../utils/asyncHandler');
+const requirePermission = require('middleware/requirePermission');
+const asyncHandler = require('utils/asyncHandler');
 
 module.exports = (db) => {
-    const { auth } = require('../../middleware/authMiddleware')(db);
-    const npsCriteriaController = require('./npsCriteria.controller')(db);
-    const {
-        npsCriterionValidation
-    } = require('./npsCriteria.validation');
+    const { auth } = require('middleware/authMiddleware')(db);
+    const npsCriteriaController = require('domains/npsCriteria/npsCriteria.controller')(db);
+    const { createNpsCriterionValidation, updateNpsCriterionValidation } = require('domains/npsCriteria/npsCriteria.validation');
 
     const router = express.Router();
 

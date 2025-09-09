@@ -1,11 +1,8 @@
 const express = require('express');
 
 module.exports = (db) => {
-    const publicSurveyController = require('./publicSurvey.controller')(db);
-    const {
-        submitResponsesValidation,
-        linkCustomerValidation
-    } = require('domains/publicSurvey/publicSurvey.validation');
+    const publicSurveyController = require('domains/publicSurvey/publicSurvey.controller')(db);
+    const { submitPublicSurveyValidation } = require('domains/publicSurvey/publicSurvey.validation');
 
     const router = express.Router();
 

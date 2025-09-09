@@ -1,10 +1,10 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const authMiddleware = require('middleware/authMiddleware');
-const asyncHandler = require('../../utils/asyncHandler');
+const asyncHandler = require('utils/asyncHandler');
 
 module.exports = (db) => {
-    const authController = require('./auth.controller')(db);
+    const authController = require('domains/auth/auth.controller')(db);
     const { loginValidation, updateProfileValidation, changePasswordValidation } = require('domains/auth/auth.validation');
 
     const router = express.Router();

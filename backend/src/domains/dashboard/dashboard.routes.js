@@ -1,9 +1,9 @@
 const express = require('express');
-const requirePermission = require('../../middleware/requirePermission');
-const asyncHandler = require('../../utils/asyncHandler');
+const requirePermission = require('middleware/requirePermission');
+const asyncHandler = require('utils/asyncHandler');
 
 module.exports = (db) => {
-    const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
+    const { auth, checkRestaurantOwnership } = require('middleware/authMiddleware')(db);
     const dashboardController = require('./dashboard.controller')(db);
 
     // --- START FIX --- 

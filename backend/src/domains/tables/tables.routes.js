@@ -1,13 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const tablesController = require('./tables.controller');
-const {
-    createTableValidation
-} = require('./tables.validation');
+const requirePermission = require('middleware/requirePermission');
+const tablesController = require('domains/tables/tables.controller');
+const { createTableValidation, updateTableValidation } = require('domains/tables/tables.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Mesas

@@ -1,13 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const technicalSpecificationsController = require('./technicalSpecifications.controller');
-const {
-    createUpdateTechnicalSpecificationValidation
-} = require('./technicalSpecifications.validation');
+const requirePermission = require('middleware/requirePermission');
+const technicalSpecificationsController = require('domains/technicalSpecifications/technicalSpecifications.controller');
+const { createTechnicalSpecificationValidation, updateTechnicalSpecificationValidation } = require('domains/technicalSpecifications/technicalSpecifications.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Fichas Técnicas

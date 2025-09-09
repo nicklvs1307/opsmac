@@ -1,7 +1,7 @@
 const express = require('express');
 
 module.exports = (db) => {
-    const ifoodController = require('./ifood.controller')(db);
+    const ifoodController = require('domains/ifood/ifood.controller')(db);
 
     const router = express.Router();
 

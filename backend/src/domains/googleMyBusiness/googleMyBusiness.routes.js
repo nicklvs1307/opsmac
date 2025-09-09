@@ -1,12 +1,10 @@
 const express = require('express');
-const requirePermission = require('../../middleware/requirePermission');
+const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db) => {
-    const { auth } = require('../../middleware/authMiddleware')(db);
-    const googleMyBusinessController = require('./googleMyBusiness.controller')(db);
-    const {
-        replyToReviewValidation
-    } = require('./googleMyBusiness.validation');
+    const { auth } = require('middleware/authMiddleware')(db);
+    const googleMyBusinessController = require('domains/googleMyBusiness/googleMyBusiness.controller')(db);
+    const { createReviewReplyValidation } = require('domains/googleMyBusiness/googleMyBusiness.validation');
 
     const router = express.Router();
 

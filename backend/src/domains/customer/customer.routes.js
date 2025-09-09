@@ -1,15 +1,10 @@
 const express = require('express');
-const requirePermission = require('../../middleware/requirePermission');
+const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db) => {
-    const { auth } = require('../../middleware/authMiddleware')(db);
-    const customerController = require('./customer.controller')(db);
-    const {
-        customerQueryValidation,
-        createCustomerValidation,
-        publicRegisterCustomerValidation,
-        byPhoneValidation
-    } = require('./customer.validation');
+    const { auth } = require('middleware/authMiddleware')(db);
+    const customerController = require('domains/customer/customer.controller')(db);
+    const { createCustomerValidation, updateCustomerValidation } = require('domains/customer/customer.validation');
 
     const router = express.Router();
 

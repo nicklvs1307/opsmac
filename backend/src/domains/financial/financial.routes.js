@@ -1,16 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const financialController = require('./financial.controller');
-const {
-    createTransactionValidation,
-    reportValidation,
-    createPaymentMethodValidation,
-    updatePaymentMethodValidation
-} = require('./financial.validation');
+const requirePermission = require('middleware/requirePermission');
+const financialController = require('domains/financial/financial.controller');
+const { createFinancialTransactionValidation, updateFinancialTransactionValidation } = require('domains/financial/financial.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas Financeiras

@@ -1,11 +1,12 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const upload = require('../../middleware/uploadMiddleware');
-const productsController = require('./products.controller');
+const requirePermission = require('middleware/requirePermission');
+const upload = require('middleware/uploadMiddleware');
+const productsController = require('domains/products/products.controller');
+const { createProductValidation, updateProductValidation } = require('domains/products/products.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Produtos

@@ -1,30 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const restaurantController = require('./restaurant.controller');
-const {
-  updateRestaurantStatusValidation,
-  updateRestaurantPosStatusValidation,
-  userValidation,
-  updateUserValidation,
-  addonValidation,
-  cashRegisterCategoryValidation,
-  categoryValidation,
-  financialCategoryValidation,
-  ingredientValidation,
-  productValidation,
-  supplierValidation,
-  tableValidation,
-  technicalSpecificationValidation,
-  createWaiterOrderValidation,
-  updateWaiterOrderValidation,
-  createWaiterCallValidation,
-  updateWaiterCallValidation,
-  updateRestaurantValidation, // Added this line
-} = require('./restaurant.validation');
+const requirePermission = require('middleware/requirePermission');
+const restaurantController = require('domains/restaurant/restaurant.controller');
+const { updateRestaurantStatusValidation, updateRestaurantPosStatusValidation, userValidation, updateUserValidation, addonValidation, cashRegisterCategoryValidation, categoryValidation, financialCategoryValidation, ingredientValidation, productValidation, supplierValidation, tableValidation, technicalSpecificationValidation, createWaiterOrderValidation, updateWaiterOrderValidation, createWaiterCallValidation, updateWaiterCallValidation, updateRestaurantValidation, } = require('domains/restaurant/restaurant.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Gerenciamento de Restaurante

@@ -1,16 +1,11 @@
 const express = require('express');
-const { logUserAction } = require('../../middleware/logUserActionMiddleware');
-const requirePermission = require('../../middleware/requirePermission');
+const { logUserAction } = require('middleware/logUserActionMiddleware');
+const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db) => {
-    const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
-    const whatsappController = require('./whatsapp.controller')(db);
-    const {
-        sendFeedbackRequestValidation,
-        sendBulkFeedbackValidation,
-        sendManualMessageValidation,
-        listMessagesValidation
-    } = require('./whatsapp.validation');
+    const { auth, checkRestaurantOwnership } = require('middleware/authMiddleware')(db);
+    const whatsappController = require('domains/whatsapp/whatsapp.controller')(db);
+    const { sendWhatsappMessageValidation } = require('domains/whatsapp/whatsapp.validation');
 
     const router = express.Router();
 

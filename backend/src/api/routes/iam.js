@@ -2,18 +2,18 @@
 
 const express = require('express');
 const router = express.Router();
-const iamService = require('../../services/iamService');
-const requirePermission = require('../../middleware/requirePermission');
-const models = require('../../../models');
-const roleService = require('../../services/roleService');
-const entitlementService = require('../../services/entitlementService');
+const iamService = require('services/iamService');
+const requirePermission = require('middleware/requirePermission');
+const models = require('models');
+const roleService = require('services/roleService');
+const entitlementService = require('services/entitlementService');
 
 const { Op } = require('sequelize'); // Import Op for Sequelize operators
 
-const auth = require('../../middleware/authMiddleware')(models.sequelize); // Import and initialize auth middleware
+const auth = require('middleware/authMiddleware')(models.sequelize); // Import and initialize auth middleware
 router.use(auth.auth); // Apply auth middleware to all IAM routes
 
-const auditService = require('../../services/auditService');
+const auditService = require('services/auditService');
 
  
 
@@ -674,7 +674,7 @@ router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), 
  *       201:
  *         description: Entitlement set successfully
  */
-const IamController = require('../../domains/iam/iam.controller');
+const IamController = require('domains/iam/iam.controller');
 
 router.post('/entitlements', requirePermission('entitlements.manage', 'update'), IamController.setRestaurantEntitlements);
 

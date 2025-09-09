@@ -1,13 +1,11 @@
 const express = require('express');
 
-const requirePermission = require('../../middleware/requirePermission');
-const ordersController = require('./orders.controller');
-const {
-    updateOrderStatusValidation
-} = require('./orders.validation');
+const requirePermission = require('middleware/requirePermission');
+const ordersController = require('domains/orders/orders.controller');
+const { createOrderValidation, updateOrderValidation } = require('domains/orders/orders.validation');
 
 module.exports = (db) => {
-  const { auth } = require('../../middleware/authMiddleware')(db);
+  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Pedidos

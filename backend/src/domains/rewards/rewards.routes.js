@@ -3,7 +3,7 @@ const requirePermission = require('../../middleware/requirePermission');
 
 module.exports = (db, rewardsController) => {
     const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
-    const {
+        const {
         createRewardValidation,
         updateRewardValidation,
         spinWheelValidation

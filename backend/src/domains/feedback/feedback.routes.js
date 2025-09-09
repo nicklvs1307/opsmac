@@ -5,7 +5,7 @@ const requirePermission = require('middleware/requirePermission');
 module.exports = (db) => {
     const { auth } = require('middleware/authMiddleware')(db);
     const feedbackController = require('domains/feedback/feedback.controller')(db);
-    const { createFeedbackValidation, getFeedbackValidation } = require('domains/feedback/feedback.validation');
+    const { createFeedbackValidation, getFeedbackValidation, listFeedbacksValidation, updateFeedbackValidation, respondToFeedbackValidation } = require('domains/feedback/feedback.validation');
 
     const router = express.Router();
 

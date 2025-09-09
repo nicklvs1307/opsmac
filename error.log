@@ -16,3 +16,63 @@ Error: Route.get() requires a callback function but got a [object Undefined]
     at Module._load (node:internal/modules/cjs/loader:1091:12)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
 Node.js v20.19.5
+
+Mestre ⚡ esse erro é bem típico no Express:
+
+Error: Route.get() requires a callback function but got a [object Undefined]
+
+
+👉 Isso significa que em algum router.get(...) você está passando undefined no lugar de uma função (controller).
+
+🔎 Pelo stacktrace:
+
+Arquivo culpado:
+/app/backend/src/domains/dashboard/dashboard.routes.js linha 13
+
+Esse arquivo está sendo importado em:
+/app/backend/routes/index.js linha 216
+
+E finalmente usado em:
+/app/backend/server.js linha 62
+
+✅ O que revisar em dashboard.routes.js
+
+Provavelmente algo assim está lá:
+
+const express = require("express");
+const router = express.Router();
+const dashboardController = require("./dashboard.controller");
+
+router.get("/alguma-rota", dashboardController.algumaFuncao); // <- aqui está undefined
+
+
+Se dashboardController.algumaFuncao não existe (ou não foi exportado corretamente no dashboard.controller.js), o Express reclama.
+
+🔧 Como depurar rápido
+
+Abra dashboard.routes.js e olhe a linha 13.
+
+Veja o que você está passando para router.get(...).
+
+Se for algo tipo controller.algumaCoisa, vai lá no controller e confirme se essa função está exportada.
+
+Exemplo de export correto:
+
+// dashboard.controller.js
+module.exports = {
+  getDashboard: (req, res) => {
+    res.json({ ok: true });
+  }
+};
+
+
+E no routes:
+
+const { getDashboard } = require("./dashboard.controller");
+router.get("/dashboard", getDashboard);
+
+🚀 Resumindo
+
+O erro não é no Express em si, mas no fato de você estar passando uma função inexistente como handler.
+
+Vai no dashboard.routes.js, linha 13, e confere: o que está sendo passado para router.get está undefined.

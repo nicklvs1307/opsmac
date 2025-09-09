@@ -121,10 +121,6 @@ const iamControllerFactory = require('domains/iam/iam.controller');
 const healthServiceFactory = require('domains/health/health.service');
 const healthControllerFactory = require('domains/health/health.controller');
 
-// Dashboard module explicit dependency injection
-const dashboardServiceFactory = require('domains/dashboard/dashboard.service');
-const dashboardControllerFactory = require('domains/dashboard/dashboard.controller');
-
 module.exports = (db) => {
     const { auth } = require('middleware/authMiddleware')(db);
 
@@ -204,16 +200,12 @@ module.exports = (db) => {
     const healthService = healthServiceFactory(db);
     const healthController = healthControllerFactory(healthService);
 
-    // Initialize dashboardService and dashboardController here
-    const dashboardService = dashboardServiceFactory(db);
-    const dashboardController = dashboardControllerFactory(dashboardService);
-
     
 
     return [
     { path: '/api/auth', router: authRoutes(db) },
     { path: '/api/feedback', router: feedbackRoutes(db) },
-    { path: '/api/dashboard/:restaurantId', middleware: [auth, getRestaurantContext], router: dashboardRoutes(db, dashboardController) },
+    { path: '/api/dashboard/:restaurantId', middleware: [auth, getRestaurantContext], router: dashboardRoutes(db) },
     { path: '/api/rewards', middleware: [auth, getRestaurantContext], router: rewardsRoutes(db, rewardsController) },
     { path: '/api/qrcode', middleware: [auth, getRestaurantContext], router: qrcodeRoutes(db) },
     { path: '/api/whatsapp', middleware: [auth, getRestaurantContext], router: whatsappRoutes(db) },

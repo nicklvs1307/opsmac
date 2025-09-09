@@ -12,7 +12,7 @@ module.exports = (db) => {
     };
 
     return {
-        verifyWebhook: (req, res) => {
+        verifyWebhook: (req, res, next) => {
             try {
                 const mode = req.query['hub.mode'];
                 const token = req.query['hub.verify_token'];

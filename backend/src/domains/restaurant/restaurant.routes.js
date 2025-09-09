@@ -82,7 +82,7 @@ module.exports = (db, restaurantController) => {
   router.put('/waiter/calls/:callId', auth, requirePermission('waiter_calls', 'update'), updateWaiterCallValidation, restaurantController.updateWaiterCall);
   router.get('/waiter/calls', auth, requirePermission('waiter_calls', 'read'), restaurantController.getWaiterCalls);
   router.get('/waiter/calls/:callId', auth, requirePermission('waiter_calls', 'read'), restaurantController.getWaiterCallById);
-  router.delete('/waiter/calls/:callId', auth, requirePermission('waiter_calls', 'delete'), (req, res, next) => restaurantController.deleteWaiterCall(req, res, next));
+  router.delete('/waiter/calls/:callId', auth, requirePermission('waiter_calls', 'delete'), restaurantController.deleteWaiterCall);
 
 
   return router;

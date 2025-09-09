@@ -5,7 +5,7 @@ const requirePermission = require('middleware/requirePermission');
 module.exports = (db) => {
     const { auth, checkRestaurantOwnership } = require('middleware/authMiddleware')(db);
     const whatsappController = require('domains/whatsapp/whatsapp.controller')(db);
-    const { sendWhatsappMessageValidation } = require('domains/whatsapp/whatsapp.validation');
+    const { sendWhatsappMessageValidation, sendFeedbackRequestValidation, sendBulkFeedbackValidation, sendManualMessageValidation, listMessagesValidation } = require('domains/whatsapp/whatsapp.validation');
 
     const router = express.Router();
 
@@ -28,7 +28,7 @@ module.exports = (db) => {
     router.get('/messages/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), listMessagesValidation, whatsappController.listMessages);
 
     // Get WhatsApp analytics
-    router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), (req, res, next) => whatsappController.getWhatsappAnalytics(req, res, next));
+    router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, requirePermission('whatsapp', 'read'), whatsappController.getWhatsappAnalytics);
 
     return router;
 };

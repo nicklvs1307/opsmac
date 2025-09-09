@@ -5,7 +5,7 @@ const asyncHandler = require('utils/asyncHandler');
 module.exports = (db) => {
     const { auth } = require('middleware/authMiddleware')(db);
     const surveyController = require('domains/survey/survey.controller')(db);
-    const { createSurveyValidation, updateSurveyValidation, getSurveyValidation } = require('domains/survey/survey.validation');
+    const { createSurveyValidation, updateSurveyValidation, getSurveyValidation, updateSurveyStatusValidation } = require('domains/survey/survey.validation');
 
     const router = express.Router();
 

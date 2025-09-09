@@ -10,7 +10,7 @@ module.exports = (db) => {
     // Rotas do Uai Rango
     // A verificação do módulo deve ser feita dentro do controller para webhooks públicos
     router.post('/webhook', uaiRangoController.handleWebhook);
-    router.get('/orders', auth, requirePermission('uaiRango', 'read'), (req, res, next) => uaiRangoController.getOrders(req, res, next));
+    router.get('/orders', auth, requirePermission('uaiRango', 'read'), uaiRangoController.getOrders);
 
     return router;
 };

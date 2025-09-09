@@ -1,3 +1,16 @@
+        const { validationResult } = require('express-validator');
+const { BadRequestError } = require('utils/errors');
+
+module.exports = (qrcodeService) => {
+
+    const handleValidationErrors = (req) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new BadRequestError('Dados inválidos', errors.array());
+        }
+    };
+
+    return {
         createQRCode: async (req, res, next) => {
             try {
                 handleValidationErrors(req);

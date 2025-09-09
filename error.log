@@ -1,23 +1,25 @@
- => [4/8] COPY backend/package*.json ./backend/                                                0.1s
- => ERROR [5/8] RUN npm install --prefix backend                                               1.7s
+[+] Building 1.1s (8/13)                                                             docker:default
+ => [internal] load build definition from Dockerfile.backend                                   0.0s
+ => => transferring dockerfile: 1.09kB                                                         0.0s
+ => [internal] load metadata for docker.io/library/node:20-alpine                              0.4s
+ => [internal] load .dockerignore                                                              0.0s
+ => => transferring context: 243B                                                              0.0s
+ => CACHED [1/9] FROM docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f  0.0s
+ => [internal] load build context                                                              0.1s
+ => => transferring context: 360B                                                              0.0s
+ => CANCELED [2/9] RUN apk --no-cache add netcat-openbsd                                       0.5s
+ => CACHED [3/9] WORKDIR /app                                                                  0.0s
+ => ERROR [4/9] COPY backend/package.json ./backend/                                           0.0s
 ------
- > [5/8] RUN npm install --prefix backend:
-1.634 npm error code ENOENT
-1.634 npm error syscall open
-1.634 npm error path /app/backend/package.json
-1.635 npm error errno -2
-1.635 npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/backend/package.json'
-1.635 npm error enoent This is related to npm not being able to find a file.
-1.635 npm error enoent
-1.637 npm error A complete log of this run can be found in: /root/.npm/_logs/2025-09-09T19_11_04_501Z-debug-0.log
+ > [4/9] COPY backend/package.json ./backend/:
 ------
-Dockerfile.backend:16
+Dockerfile.backend:13
 --------------------
-  14 |
-  15 |     # Instale as dependências do projeto principal
-  16 | >>> RUN npm install --prefix backend
-  17 |
-  18 |     # Copie o restante do código da aplicação
+  11 |     # Copie os arquivos package.json e package-lock.json para instalar as dependências
+  12 |     # Isso aproveita o cache do Docker se as dependências não mudarem
+  13 | >>> COPY backend/package.json ./backend/
+  14 |     RUN ls -l /app/backend/
+  15 |
 --------------------
-ERROR: failed to solve: process "/bin/sh -c npm install --prefix backend" did not complete successfully: exit code: 254
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref cd640843-0e55-4b2f-b002-bfbe8d4a0cc8::fgohurwngz77s53sm8tw0mnqy: "/backend/package.json": not found
 root@ServerAgents:~/opsmac#

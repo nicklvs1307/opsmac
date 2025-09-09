@@ -114,8 +114,8 @@ const restaurantServiceFactory = require('domains/restaurant/restaurant.service'
 const restaurantControllerFactory = require('domains/restaurant/restaurant.controller');
 
 // IAM module explicit dependency injection
-const iamServiceFactory = require('services/iamService');
-const iamControllerFactory = require('domains/iam/iam.controller');
+const iamServiceInstance = require('services/iamService');
+const iamControllerInstance = require('domains/iam/iam.controller');
 
 // Health module explicit dependency injection
 const healthServiceFactory = require('domains/health/health.service');
@@ -197,8 +197,8 @@ module.exports = (db) => {
     const restaurantController = restaurantControllerFactory(restaurantService);
 
     // Initialize iamService and iamController here
-    const iamService = iamServiceFactory;
-    const iamController = iamControllerFactory;
+        const iamService = iamServiceInstance;
+        const iamController = iamControllerInstance;
 
     // Initialize healthService and healthController here
     const healthService = healthServiceFactory(db);

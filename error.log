@@ -10,10 +10,10 @@ rewardsController at module.exports entry: {
   getRewardsAnalytics: [AsyncFunction: getRewardsAnalytics]
 }
 rewardsController.listRewards before router.get: [AsyncFunction: listRewards]
-/app/backend/src/domains/qrcode/qrcode.controller.js:12
-        listQRCodes: async (req, res, next) => {
-                   ^
-SyntaxError: Unexpected token ':'
+/app/backend/src/domains/qrcode/qrcode.controller.js:9
+            },
+             ^
+SyntaxError: Unexpected token ','
     at wrapSafe (node:internal/modules/cjs/loader:1464:18)
     at Module._compile (node:internal/modules/cjs/loader:1495:20)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)

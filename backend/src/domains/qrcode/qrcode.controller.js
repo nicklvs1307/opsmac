@@ -6,7 +6,7 @@
                 res.status(201).json({ message: 'QR Code criado com sucesso', qrcode });
             } catch (error) {
                 next(error);
-            },
+            }
         },
 
         listQRCodes: async (req, res, next) => {

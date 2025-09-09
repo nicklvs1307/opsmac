@@ -20,7 +20,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         listQRCodes: async (req, res, next) => {
             try {
@@ -39,7 +39,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         getQRCodeById: async (req, res, next) => {
             try {
@@ -49,7 +49,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         updateQRCode: async (req, res, next) => {
             try {
@@ -60,7 +60,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         deleteQRCode: async (req, res, next) => {
             try {
@@ -70,7 +70,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         generateQRCodeImage: async (req, res, next) => {
             try {
@@ -89,7 +89,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         generatePrintableQRCode: async (req, res, next) => {
             try {
@@ -103,7 +103,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         recordScan: async (req, res, next) => {
             try {
@@ -120,7 +120,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         redirectToShortUrl: async (req, res, next) => {
             try {
@@ -129,7 +129,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         getQRCodeAnalytics: async (req, res, next) => {
             try {
@@ -140,7 +140,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         cloneQRCode: async (req, res, next) => {
             try {
@@ -154,7 +154,7 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
+        },
 
         getRestaurantQRCodeStats: async (req, res, next) => {
             try {
@@ -164,7 +164,5 @@ module.exports = (qrcodeService) => {
             } catch (error) {
                 next(error);
             }
-        };
-
-    
-    
+        }
+    }};

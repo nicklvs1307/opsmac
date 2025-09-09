@@ -1,11 +1,11 @@
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
-/app/backend/src/domains/feedback/feedback.routes.js:15
-    router.get('/restaurant/:restaurantId', requirePermission('feedback', 'read'), listFeedbacksValidation, feedbackController.listFeedbacks);
-                                                                                   ^
-ReferenceError: listFeedbacksValidation is not defined
-    at module.exports (/app/backend/src/domains/feedback/feedback.routes.js:15:84)
-    at module.exports (/app/backend/routes/index.js:61:38)
+/app/backend/src/domains/rewards/rewards.routes.js:15
+    router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, requirePermission('fidelity:coupons:rewards', 'read'), rewardsController.listRewards);
+                                                                                                                                                     ^
+TypeError: Cannot read properties of undefined (reading 'listRewards')
+    at module.exports (/app/backend/src/domains/rewards/rewards.routes.js:15:150)
+    at module.exports (/app/backend/routes/index.js:63:79)
     at Object.<anonymous> (/app/backend/server.js:62:1)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)

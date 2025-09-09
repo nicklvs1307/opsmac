@@ -1,6 +1,7 @@
 module.exports = (db) => {
     const models = db.models;
     const { Op, fn, col } = require('sequelize');
+    const { spinWheel: spinWheelService } = require('services/wheelService');
 
     const listRewards = async (restaurantId, query) => {
         const { page = 1, limit = 12 } = query;

@@ -15,7 +15,9 @@ module.exports = (db) => {
     console.log('qrcodeController in qrcode.routes.js:', qrcodeController);
     console.log('qrcodeController.listQRCodes in qrcode.routes.js:', qrcodeController.listQRCodes);
     router.post('/', auth, requirePermission('qrcodes', 'create'), createQRCodeValidation, logUserAction('create_qrcode'), qrcodeController.createQRCode);
-    router.get('/restaurant/:restaurantId', qrcodeController.listQRCodes.bind(qrcodeController));
+    router.get('/restaurant/:restaurantId', async (req, res) => {
+        res.send('Test route works!');
+    });
     router.get('/:id', auth, requirePermission('qrcodes', 'read'), qrcodeController.getQRCodeById);
     router.put('/:id', auth, requirePermission('qrcodes', 'update'), updateQRCodeValidation, logUserAction('update_qrcode'), qrcodeController.updateQRCode);
     router.delete('/:id', auth, requirePermission('qrcodes', 'delete'), logUserAction('delete_qrcode'), qrcodeController.deleteQRCode);

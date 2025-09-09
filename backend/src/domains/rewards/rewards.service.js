@@ -1,5 +1,4 @@
 module.exports = (db) => {
-    const models = db.models;
     const { Op, fn, col } = require('sequelize');
     const { spinWheel: spinWheelService } = require('services/wheelService');
 

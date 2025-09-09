@@ -4,7 +4,9 @@ const requirePermission = require('../../middleware/requirePermission');
 module.exports = (db) => {
     const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
     const rewardsControllerFactory = require('./rewards.controller');
-    const rewardsController = rewardsControllerFactory(db);
+    const rewardsServiceFactory = require('./rewards.service');
+    const rewardsService = rewardsServiceFactory(db.models); // Pass db.models to the service factory
+    const rewardsController = rewardsControllerFactory(rewardsService); // Pass the initialized service to the controller factory
     const {
         createRewardValidation,
         updateRewardValidation,

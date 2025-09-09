@@ -132,6 +132,7 @@ module.exports = (db) => {
     // Initialize rewardsService and rewardsController here
     const rewardsService = rewardsServiceFactory(db.models);
     const rewardsController = rewardsControllerFactory(rewardsService);
+    console.log('rewardsController:', rewardsController);
 
     // Initialize productsService and productsController here
     const productsService = productsServiceFactory(db);

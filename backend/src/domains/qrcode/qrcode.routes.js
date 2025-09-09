@@ -12,6 +12,8 @@ module.exports = (db) => {
     const router = express.Router();
 
     // Rotas de QR Code
+    console.log('qrcodeController in qrcode.routes.js:', qrcodeController);
+    console.log('qrcodeController.listQRCodes in qrcode.routes.js:', qrcodeController.listQRCodes);
     router.post('/', auth, requirePermission('qrcodes', 'create'), createQRCodeValidation, logUserAction('create_qrcode'), qrcodeController.createQRCode);
     router.get('/restaurant/:restaurantId', qrcodeController.listQRCodes);
     router.get('/:id', auth, requirePermission('qrcodes', 'read'), qrcodeController.getQRCodeById);

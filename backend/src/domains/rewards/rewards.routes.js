@@ -3,7 +3,8 @@ const requirePermission = require('../../middleware/requirePermission');
 
 module.exports = (db) => {
     const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
-    const rewardsController = require('./rewards.controller')(db);
+    const rewardsControllerFactory = require('./rewards.controller');
+    const rewardsController = rewardsControllerFactory(db);
     const {
         createRewardValidation,
         updateRewardValidation,

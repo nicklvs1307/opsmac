@@ -10,13 +10,13 @@ WORKDIR /app
 
 # Copie os arquivos package.json e package-lock.json para instalar as dependências
 # Isso aproveita o cache do Docker se as dependências não mudarem
-COPY backend/package*.json ./
+COPY backend/package*.json ./backend/
 
 # Instale as dependências do projeto principal
-RUN npm install
+RUN npm install --prefix backend
 
 # Copie o restante do código da aplicação
-COPY . .
+COPY backend ./backend
 
 # Dê permissão de execução ao script de espera
 RUN chmod +x backend/scripts/wait-for-it.sh

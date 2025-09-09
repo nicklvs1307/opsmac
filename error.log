@@ -81,12 +81,14 @@ rewardsController at module.exports entry: {
   getRewardsAnalytics: [AsyncFunction: getRewardsAnalytics]
 }
 rewardsController.listRewards before router.get: [AsyncFunction: listRewards]
-/app/backend/src/domains/qrcode/qrcode.service.js:6
-    const models = db.models;
-                      ^
-TypeError: Cannot read properties of undefined (reading 'models')
-    at module.exports (/app/backend/src/domains/qrcode/qrcode.service.js:6:23)
-    at module.exports (/app/backend/src/domains/qrcode/qrcode.routes.js:8:27)
+/app/node_modules/express/lib/router/route.js:216
+        throw new Error(msg);
+
+^
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (/app/node_modules/express/lib/router/route.js:216:15)
+    at proto.<computed> [as get] (/app/node_modules/express/lib/router/index.js:521:19)
+    at module.exports (/app/backend/src/domains/qrcode/qrcode.routes.js:16:12)
     at module.exports (/app/backend/routes/index.js:66:78)
     at Object.<anonymous> (/app/backend/server.js:62:1)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
@@ -94,5 +96,4 @@ TypeError: Cannot read properties of undefined (reading 'models')
     at Module.load (node:internal/modules/cjs/loader:1266:32)
     at Module._load (node:internal/modules/cjs/loader:1091:12)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
-    at node:internal/main/run_main_module:28:49
 Node.js v20.19.5

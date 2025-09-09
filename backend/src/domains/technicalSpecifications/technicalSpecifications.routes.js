@@ -1,10 +1,9 @@
 const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
-const technicalSpecificationsController = require('domains/technicalSpecifications/technicalSpecifications.controller');
-const { createTechnicalSpecificationValidation, updateTechnicalSpecificationValidation } = require('domains/technicalSpecifications/technicalSpecifications.validation');
+const { createUpdateTechnicalSpecificationValidation } = require('domains/technicalSpecifications/technicalSpecifications.validation');
 
-module.exports = (db) => {
+module.exports = (db, technicalSpecificationsController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

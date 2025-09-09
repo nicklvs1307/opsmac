@@ -1,10 +1,9 @@
 const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
-const categoriesController = require('domains/categories/categories.controller');
-const { createCategoryValidation, updateCategoryValidation } = require('domains/categories/categories.validation');
+const { categoryValidation } = require('domains/categories/categories.validation');
 
-module.exports = (db) => {
+module.exports = (db, categoriesController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

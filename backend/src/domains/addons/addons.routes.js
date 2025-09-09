@@ -1,10 +1,9 @@
 const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
-const addonsController = require('domains/addons/addons.controller');
-const { validateCreateAddon, validateUpdateAddon } = require('domains/addons/addons.validation');
+const { addonValidation, updateAddonValidation } = require('domains/addons/addons.validation');
 
-module.exports = (db) => {
+module.exports = (db, addonsController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

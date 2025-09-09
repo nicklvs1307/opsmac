@@ -1,10 +1,9 @@
 const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
-const tablesController = require('domains/tables/tables.controller');
 const { createTableValidation, updateTableValidation } = require('domains/tables/tables.validation');
 
-module.exports = (db) => {
+module.exports = (db, tablesController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

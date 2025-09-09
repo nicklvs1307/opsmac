@@ -1,7 +1,6 @@
 const express = require('express');
-const publicProductsController = require('domains/publicProducts/publicProducts.controller');
 
-module.exports = (db) => {
+module.exports = (db, publicProductsController) => {
   const router = express.Router();
 
   // Rotas Públicas de Produtos

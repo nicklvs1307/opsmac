@@ -1,10 +1,9 @@
 const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
-const stockController = require('domains/stock/stock.controller');
-const { createStockValidation, updateStockValidation } = require('domains/stock/stock.validation');
+const { createStockMovementValidation } = require('domains/stock/stock.validation');
 
-module.exports = (db) => {
+module.exports = (db, stockController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

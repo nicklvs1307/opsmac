@@ -1,11 +1,10 @@
 const express = require('express');
 const requirePermission = require('middleware/requirePermission');
 const asyncHandler = require('utils/asyncHandler');
+const { openSessionValidation, recordMovementValidation, closeSessionValidation } = require('domains/cashRegister/cashRegister.validation');
 
-module.exports = (db) => {
+module.exports = (db, cashRegisterController) => {
     const { auth } = require('middleware/authMiddleware')(db);
-    const cashRegisterController = require('domains/cashRegister/cashRegister.controller')(db);
-    const { createCashRegisterValidation, updateCashRegisterValidation, createMovementValidation, updateMovementValidation } = require('domains/cashRegister/cashRegister.validation');
 
     const router = express.Router();
 

@@ -1,10 +1,9 @@
 const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
-const labelsController = require('domains/labels/labels.controller');
-const { createLabelValidation, updateLabelValidation } = require('domains/labels/labels.validation');
+const { printLabelValidation } = require('domains/labels/labels.validation');
 
-module.exports = (db) => {
+module.exports = (db, labelsController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

@@ -1,10 +1,9 @@
 const express = require('express');
-const publicDineInOrdersController = require('./publicDineInOrders.controller');
 const {
     createDineInOrderValidation
 } = require('domains/publicDineInOrders/publicDineInOrders.validation');
 
-module.exports = (db) => {
+module.exports = (db, publicDineInOrdersController) => {
   const router = express.Router();
 
   // Rotas de Pedidos para Consumo no Local

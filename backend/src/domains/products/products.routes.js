@@ -2,10 +2,10 @@ const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
 const upload = require('middleware/uploadMiddleware');
-const productsController = require('domains/products/products.controller');
+
 const { createProductValidation, updateProductValidation } = require('domains/products/products.validation');
 
-module.exports = (db) => {
+module.exports = (db, productsController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

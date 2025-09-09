@@ -1,10 +1,8 @@
 const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
-const supplierController = require('domains/supplier/supplier.controller');
-const { createSupplierValidation, updateSupplierValidation } = require('domains/supplier/supplier.validation');
 
-module.exports = (db) => {
+module.exports = (db, supplierController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

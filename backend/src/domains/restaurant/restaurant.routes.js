@@ -1,10 +1,9 @@
 const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
-const restaurantController = require('domains/restaurant/restaurant.controller');
 const { updateRestaurantStatusValidation, updateRestaurantPosStatusValidation, userValidation, updateUserValidation, addonValidation, cashRegisterCategoryValidation, categoryValidation, financialCategoryValidation, ingredientValidation, productValidation, supplierValidation, tableValidation, technicalSpecificationValidation, createWaiterOrderValidation, updateWaiterOrderValidation, createWaiterCallValidation, updateWaiterCallValidation, updateRestaurantValidation, } = require('domains/restaurant/restaurant.validation');
 
-module.exports = (db) => {
+module.exports = (db, restaurantController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

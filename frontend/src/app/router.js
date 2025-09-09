@@ -407,14 +407,6 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'fidelity/coupons/list',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CouponListPage />
-          </Suspense>
-        ),
-      },
-      {
         path: 'fidelity/coupons/management',
         element: (
           <Suspense fallback={<div>Carregando...</div>}>

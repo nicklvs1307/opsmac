@@ -1,30 +1,36 @@
-const { models } = require('config/config');
-const { NotFoundError } = require('utils/errors');
+module.exports = (db) => {
+  const { models } = db;
+  const { NotFoundError } = require('utils/errors');
 
-exports.getDineInMenu = async (restaurantSlug, tableNumber) => {
-  const restaurant = await models.Restaurant.findOne({
-    where: { slug: restaurantSlug }
-  });
+  const getDineInMenu = async (restaurantSlug, tableNumber) => {
+    const restaurant = await models.Restaurant.findOne({
+      where: { slug: restaurantSlug }
+    });
 
-  if (!restaurant) {
-    throw new NotFoundError('Restaurante não encontrado.');
-  }
-
-  const table = await models.Table.findOne({
-    where: {
-      restaurant_id: restaurant.id,
-      table_number: tableNumber
+    if (!restaurant) {
+      throw new NotFoundError('Restaurante não encontrado.');
     }
-  });
 
-  if (!table) {
-    throw new NotFoundError('Mesa não encontrada.');
-  }
+    const table = await models.Table.findOne({
+      where: {
+        restaurant_id: restaurant.id,
+        table_number: tableNumber
+      }
+    });
 
-  const products = await models.Product.findAll({
-    where: { restaurant_id: restaurant.id },
-    include: [{ model: models.Category, as: 'category', attributes: ['id', 'name'] }]
-  });
+    if (!table) {
+      throw new NotFoundError('Mesa não encontrada.');
+    }
 
-  return { products, table, restaurant };
+    const products = await models.Product.findAll({
+      where: { restaurant_id: restaurant.id },
+      include: [{ model: models.Category, as: 'category', attributes: ['id', 'name'] }]
+    });
+
+    return { products, table, restaurant };
+  };
+
+  return {
+    getDineInMenu,
+  };
 };

@@ -1,6 +1,4 @@
-module.exports = (db) => {
-    const healthService = require('./health.service')(db);
-
+module.exports = (healthService) => {
     const getHealthStatus = (req, res, next) => {
         try {
             const status = healthService.getHealthStatus();

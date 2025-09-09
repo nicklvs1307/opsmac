@@ -1,10 +1,9 @@
 const express = require('express');
 
 const requirePermission = require('middleware/requirePermission');
-const ingredientsController = require('domains/ingredients/ingredients.controller');
 const { createIngredientValidation, updateIngredientValidation } = require('domains/ingredients/ingredients.validation');
 
-module.exports = (db) => {
+module.exports = (db, ingredientsController) => {
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

@@ -1,25 +1,8 @@
-[+] Building 1.1s (8/13)                                                             docker:default
- => [internal] load build definition from Dockerfile.backend                                   0.0s
- => => transferring dockerfile: 1.09kB                                                         0.0s
- => [internal] load metadata for docker.io/library/node:20-alpine                              0.4s
- => [internal] load .dockerignore                                                              0.0s
- => => transferring context: 243B                                                              0.0s
- => CACHED [1/9] FROM docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f  0.0s
- => [internal] load build context                                                              0.1s
- => => transferring context: 360B                                                              0.0s
- => CANCELED [2/9] RUN apk --no-cache add netcat-openbsd                                       0.5s
- => CACHED [3/9] WORKDIR /app                                                                  0.0s
- => ERROR [4/9] COPY backend/package.json ./backend/                                           0.0s
-------
- > [4/9] COPY backend/package.json ./backend/:
-------
-Dockerfile.backend:13
---------------------
-  11 |     # Copie os arquivos package.json e package-lock.json para instalar as dependências
-  12 |     # Isso aproveita o cache do Docker se as dependências não mudarem
-  13 | >>> COPY backend/package.json ./backend/
-  14 |     RUN ls -l /app/backend/
-  15 |
---------------------
-ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref cd640843-0e55-4b2f-b002-bfbe8d4a0cc8::fgohurwngz77s53sm8tw0mnqy: "/backend/package.json": not found
-root@ServerAgents:~/opsmac#
+npm error code ENOENT
+npm error syscall open
+npm error path /app/package.json
+npm error errno -2
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+npm error enoent This is related to npm not being able to find a file.
+npm error enoent
+npm error A complete log of this run can be found in: /root/.npm/_logs/2025-09-09T19_32_57_695Z-debug-0.log

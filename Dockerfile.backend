@@ -16,7 +16,7 @@ COPY backend /app/backend
 WORKDIR /app/backend
 
 # Instale as dependências
-RUN npm install
+RUN npm install --prefix /app/backend
 
 # Volte para o diretório raiz do aplicativo para o restante das operações
 WORKDIR /app

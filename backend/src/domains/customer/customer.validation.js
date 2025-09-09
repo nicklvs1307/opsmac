@@ -24,3 +24,9 @@ exports.publicRegisterCustomerValidation = [
 exports.byPhoneValidation = [
   query('phone').notEmpty().withMessage('Número de telefone é obrigatório.')
 ];
+
+exports.updateCustomerValidation = [
+  body('name').optional().notEmpty().withMessage('Nome não pode ser vazio'),
+  body('phone').optional().notEmpty().withMessage('Telefone não pode ser vazio'),
+  body('birthDate').optional().isISO8601().withMessage('Data de nascimento inválida'),
+];

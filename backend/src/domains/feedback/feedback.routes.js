@@ -2,10 +2,6 @@ const express = require('express');
 const { logUserAction } = require('../../middleware/logUserActionMiddleware');
 const requirePermission = require('../../middleware/requirePermission');
 
-const express = require('express');
-const { logUserAction } = require('../../middleware/logUserActionMiddleware');
-const requirePermission = require('../../middleware/requirePermission');
-
 module.exports = (db) => {
     const { auth } = require('../../middleware/authMiddleware')(db);
     const feedbackController = require('./feedback.controller')(db);

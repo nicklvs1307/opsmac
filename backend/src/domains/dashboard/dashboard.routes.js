@@ -11,10 +11,7 @@ module.exports = (db) => {
 
     router.use(auth);
 
-    const getDashboardAnalyticsHandler = asyncHandler(dashboardController.getDashboardAnalytics);
-
-    // router.get('/overview', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardOverviewValidation, getDashboardAnalyticsHandler);
-    router.get('/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardAnalyticsHandler);
+    router.get('/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), asyncHandler(dashboardController.getDashboardAnalytics));
     // router.get('/reports', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), generateReportValidation, getDashboardAnalyticsHandler);
     // router.get('/rewards/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardAnalyticsHandler);
 

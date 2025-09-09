@@ -2,9 +2,9 @@
   "name": "feedeliza-plus",
   "version": "1.0.0",
   "description": "Clientes que voltam, marcas que crescem.",
-  "main": "backend/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node backend/server.js",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client": "cd frontend && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

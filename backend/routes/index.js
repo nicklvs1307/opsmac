@@ -194,7 +194,7 @@ module.exports = (db) => {
 
     // Initialize iamService and iamController here
     const iamService = iamServiceFactory;
-    const iamController = iamControllerFactory(iamService);
+    const iamController = iamControllerFactory;
 
     // Initialize healthService and healthController here
     const healthService = healthServiceFactory(db);

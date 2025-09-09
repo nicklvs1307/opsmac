@@ -4,7 +4,6 @@ const requirePermission = require('../../middleware/requirePermission');
 module.exports = (db) => {
     const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
     const rewardsController = require('./rewards.controller')(db);
-    console.log('DEBUG: rewardsController in routes:', rewardsController);
     const {
         createRewardValidation,
         updateRewardValidation,
@@ -24,7 +23,6 @@ module.exports = (db) => {
     router.post('/spin-wheel', spinWheelValidation, rewardsController.spinWheel);
 
     // Rotas de Analytics
-    console.log('DEBUG: getRewardsAnalytics:', rewardsController.getRewardsAnalytics);
     router.get('/analytics', auth, requirePermission('fidelity:coupons:rewards', 'read'), rewardsController.getRewardsAnalytics);
 
     return router;

@@ -1,7 +1,8 @@
 const authRoutes = require('domains/auth/auth.routes');
 const feedbackRoutes = require('domains/feedback/feedback.routes');
 const dashboardRoutes = require('domains/dashboard/dashboard.routes');
-const rewardsRoutes = require('domains/rewards/rewards.routes');
+delete require.cache[require.resolve('domains/rewards/rewards.routes.js')];
+const rewardsRoutes = require('domains/rewards/rewards.routes.js');
 const qrcodeRoutes = require('domains/qrcode/qrcode.routes');
 const whatsappRoutes = require('domains/whatsapp/whatsapp.routes');
 const customerRoutes = require('domains/customer/customer.routes');

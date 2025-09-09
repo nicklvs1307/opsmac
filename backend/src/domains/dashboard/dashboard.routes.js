@@ -10,10 +10,10 @@ module.exports = (db) => {
 
     router.use(auth);
 
-    router.get('/overview', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardOverviewValidation, asyncHandler(dashboardController.getDashboardOverview));
-    router.get('/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardAnalyticsValidation, asyncHandler(dashboardController.getDashboardAnalytics));
-    router.get('/reports', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), generateReportValidation, asyncHandler(dashboardController.generateReport));
-    router.get('/rewards/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), asyncHandler(dashboardController.getRewardsAnalytics));
+    // router.get('/overview', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardOverviewValidation, asyncHandler(dashboardController.getDashboardOverview));
+    router.get('/analytics', asyncHandler(dashboardController.getDashboardAnalytics));
+    // router.get('/reports', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), generateReportValidation, asyncHandler(dashboardController.generateReport));
+    // router.get('/rewards/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), asyncHandler(dashboardController.getRewardsAnalytics));
 
     return router;
 };

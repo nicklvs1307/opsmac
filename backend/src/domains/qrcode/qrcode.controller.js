@@ -158,9 +158,7 @@ module.exports = (qrcodeService) => {
 
         getRestaurantQRCodeStats: async (req, res, next) => {
             try {
-                const restaurantId = req.context.restaurantId;
-                const stats = await qrcodeService.getRestaurantQRCodeStats(restaurantId);
-                res.json({ stats });
+                res.json({ stats: "Test string from getRestaurantQRCodeStats" });
             } catch (error) {
                 next(error);
             }

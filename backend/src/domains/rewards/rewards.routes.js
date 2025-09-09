@@ -1,19 +1,8 @@
 const express = require('express');
 const requirePermission = require('../../middleware/requirePermission');
 
-module.exports = (db) => {
+module.exports = (db, rewardsController) => {
     const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
-    const rewardsControllerFactory = require('./rewards.controller');
-    const rewardsServiceFactory = require('./rewards.service');
-    const rewardsService = rewardsServiceFactory(db.models); // Pass db.models to the service factory
-    const rewardsController = rewardsControllerFactory(rewardsService); // Pass the initialized service to the controller factory
-
-    // --- START DEBUG/FIX ---
-    if (typeof rewardsController.listRewards !== 'function') {
-        throw new Error('rewardsController.listRewards is not a function. Actual type: ' + typeof rewardsController.listRewards);
-    }
-    // --- END DEBUG/FIX ---
-
     const {
         createRewardValidation,
         updateRewardValidation,

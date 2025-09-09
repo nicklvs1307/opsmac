@@ -56,6 +56,8 @@ module.exports = (db) => {
     const rewardsService = rewardsServiceFactory(db.models);
     const rewardsController = rewardsControllerFactory(rewardsService);
 
+    console.log('DB object in index.js before routes initialization:', db);
+
     return [
     { path: '/api/auth', router: authRoutes(db) },
     { path: '/api/feedback', router: feedbackRoutes(db) },

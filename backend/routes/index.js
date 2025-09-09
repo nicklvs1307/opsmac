@@ -1,7 +1,7 @@
 const authRoutes = require('domains/auth/auth.routes');
 const feedbackRoutes = require('domains/feedback/feedback.routes');
 const dashboardRoutes = require('domains/dashboard/dashboard.routes');
-delete require.cache[require.resolve('domains/rewards/rewards.routes.js')];
+
 const rewardsRoutes = require('domains/rewards/rewards.routes.js');
 const qrcodeRoutes = require('domains/qrcode/qrcode.routes');
 const whatsappRoutes = require('domains/whatsapp/whatsapp.routes');
@@ -131,8 +131,8 @@ module.exports = (db) => {
 
     // Initialize rewardsService and rewardsController here
     const rewardsService = rewardsServiceFactory(db.models);
-    const rewardsController = rewardsControllerFactory(rewardsService);
-    console.log('rewardsController:', rewardsController);
+    const { listRewards, getRewardById, createReward, updateReward, deleteReward, spinWheel, getRewardsAnalytics } = rewardsControllerFactory(rewardsService);
+    
 
     // Initialize productsService and productsController here
     const productsService = productsServiceFactory(db);
@@ -216,7 +216,7 @@ module.exports = (db) => {
     { path: '/api/auth', router: authRoutes(db) },
     { path: '/api/feedback', router: feedbackRoutes(db) },
     { path: '/api/dashboard/:restaurantId', middleware: [auth, getRestaurantContext], router: dashboardRoutes(db, dashboardController) },
-    { path: '/api/rewards', middleware: [auth, getRestaurantContext], router: rewardsRoutes(db, rewardsController, auth) },
+    { path: '/api/rewards', middleware: [auth, getRestaurantContext], router: rewardsRoutes(db, { listRewards, getRewardById, createReward, updateReward, deleteReward, spinWheel, getRewardsAnalytics }, auth) },
     { path: '/api/qrcode', middleware: [auth, getRestaurantContext], router: qrcodeRoutes(db) },
     { path: '/api/whatsapp', middleware: [auth, getRestaurantContext], router: whatsappRoutes(db) },
     { path: '/api/customers', middleware: [auth, getRestaurantContext], router: customerRoutes(db) },

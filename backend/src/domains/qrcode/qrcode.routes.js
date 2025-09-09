@@ -1,10 +1,12 @@
 const express = require('express');
 const { logUserAction } = require('middleware/logUserActionMiddleware');
 const requirePermission = require('middleware/requirePermission');
+const qrcodeServiceFactory = require('domains/qrcode/qrcode.service');
 
 module.exports = (db) => {
     const { auth, checkRestaurantOwnership } = require('middleware/authMiddleware')(db);
-    const qrcodeController = require('domains/qrcode/qrcode.controller')(db);
+    const qrcodeService = qrcodeServiceFactory(db.models);
+    const qrcodeController = require('domains/qrcode/qrcode.controller')(qrcodeService);
     const { createQRCodeValidation, updateQRCodeValidation, generateImageValidation, generatePrintableValidation, analyticsValidation, cloneQRCodeValidation, listQRCodesValidation } = require('domains/qrcode/qrcode.validation');
 
     const router = express.Router();

@@ -27,6 +27,9 @@ module.exports = (db) => {
     router.post('/:id/scan', qrcodeController.recordScan);
     router.get('/:id/analytics', auth, requirePermission('qrcodes', 'read'), analyticsValidation, qrcodeController.getQRCodeAnalytics);
     router.post('/:id/clone', auth, requirePermission('qrcodes', 'create'), cloneQRCodeValidation, logUserAction('clone_qrcode'), qrcodeController.cloneQRCode);
+    console.log('DEBUG: qrcodeService:', qrcodeService);
+    console.log('DEBUG: qrcodeController:', qrcodeController);
+    console.log('DEBUG: qrcodeController.getRestaurantQRCodeStats:', qrcodeController.getRestaurantQRCodeStats);
     router.get('/restaurant/:restaurantId/stats', auth, checkRestaurantOwnership, requirePermission('qrcodes', 'read'), (req, res, next) => qrcodeController.getRestaurantQRCodeStats(req, res, next));
 
     return router;

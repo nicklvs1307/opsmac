@@ -1,5 +1,24 @@
 > feedeliza-plus@1.0.0 start
 > node backend/server.js
+DEBUG: rewardsService in controller: {
+  listRewards: [AsyncFunction: listRewards],
+  getRewardById: [AsyncFunction: getRewardById],
+  createReward: [AsyncFunction: createReward],
+  updateReward: [AsyncFunction: updateReward],
+  deleteReward: [AsyncFunction: deleteReward],
+  spinWheel: [AsyncFunction: spinWheel],
+  getRewardsAnalytics: [AsyncFunction: getRewardsAnalytics],
+  isValidReward: [Function: isValidReward],
+  canCustomerUseReward: [AsyncFunction: canCustomerUseReward],
+  generateCouponForReward: [AsyncFunction: generateCouponForReward],
+  generateRewardCouponCode: [Function: generateRewardCouponCode],
+  updateRewardAnalytics: [AsyncFunction: updateRewardAnalytics],
+  checkRewardTriggerConditions: [Function: checkRewardTriggerConditions],
+  handleRewardBeforeSave: [Function: handleRewardBeforeSave],
+  handleRewardBeforeCreate: [Function: handleRewardBeforeCreate],
+  handleRewardBeforeUpdate: [Function: handleRewardBeforeUpdate]
+}
+DEBUG: listRewards in controller: [AsyncFunction: listRewards]
 /app/node_modules/express/lib/router/route.js:216
         throw new Error(msg);
 

@@ -4,6 +4,7 @@ const requirePermission = require('../../middleware/requirePermission');
 module.exports = (db) => {
     const { auth, checkRestaurantOwnership } = require('../../middleware/authMiddleware')(db);
     const rewardsController = require('./rewards.controller')(db);
+    console.log('DEBUG: rewardsController in routes:', rewardsController);
     const {
         createRewardValidation,
         updateRewardValidation,

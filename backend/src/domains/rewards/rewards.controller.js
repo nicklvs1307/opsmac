@@ -11,6 +11,8 @@ module.exports = (db) => {
         }
     };
 
+    console.log('DEBUG: rewardsService in controller:', rewardsService);
+    console.log('DEBUG: listRewards in controller:', rewardsService.listRewards);
     return {
         listRewards: async (req, res, next) => {
             try {

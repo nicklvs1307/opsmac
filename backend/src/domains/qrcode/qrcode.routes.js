@@ -30,7 +30,7 @@ module.exports = (db) => {
     console.log('DEBUG: qrcodeService:', qrcodeService);
     console.log('DEBUG: qrcodeController:', qrcodeController);
     console.log('DEBUG: qrcodeController.getRestaurantQRCodeStats:', qrcodeController.getRestaurantQRCodeStats);
-    router.get('/restaurant/:restaurantId/stats', auth, checkRestaurantOwnership, requirePermission('qrcodes', 'read'), (req, res, next) => qrcodeController.getRestaurantQRCodeStats(req, res, next));
+    router.get('/restaurant/:restaurantId/stats', (req, res, next) => qrcodeController.getRestaurantQRCodeStats(req, res, next));
 
     return router;
 };

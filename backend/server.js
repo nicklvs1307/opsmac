@@ -11,7 +11,8 @@ const db = require('models');
 const { BaseError } = require('utils/errors');
 
 // Importação de Rotas
-const allRoutes = require('./routes'); // Import the consolidated routes
+const routes = require('./routes');
+const errorHandler = require('./src/middlewares/errorHandler');
 
 const app = express();
 app.set('trust proxy', 1);
@@ -59,43 +60,14 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Configuração das Rotas
-allRoutes(db).forEach(route => {
-  app.use(route.path, route.router);
-});
+app.use("/api", routes(db));
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Rota 404 - Deve vir antes do tratador de erros
-app.use('*', (req, res) => {
-  res.status(404).json({ error: 'Rota não encontrada' });
-});
-
-// Middleware de Tratamento de Erros - O CORAÇÃO DA PADRONIZAÇÃO
-app.use((err, req, res, next) => {
-  console.error('Error caught by middleware:', err);
-
-  if (err instanceof BaseError) {
-    return res.status(err.statusCode).json({ error: err.message });
-  }
-
-  // Fallback para outros tipos de erros comuns
-  if (err.name === 'ValidationError') { // Erro de validação do Sequelize
-    return res.status(400).json({ error: 'Dados inválidos', details: err.errors.map(e => e.message) });
-  }
-  
-  if (err.name === 'UnauthorizedError') { // Erro do JWT
-    return res.status(401).json({ error: 'Token inválido ou expirado' });
-  }
-
-  // Erro genérico de servidor
-  res.status(500).json({
-    error: 'Erro interno do servidor',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Algo deu errado'
-  });
-});
+app.use(errorHandler);
 
 // Inicializar servidor
 const startServer = async () => {

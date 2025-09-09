@@ -11,7 +11,8 @@
     "build": "cd frontend && npm run build",
     "install-all": "npm install && cd frontend && npm install",
     "setup-db": "node database/setup.js",
-    "test:unit": "jest backend/tests/unit"
+    "test:unit": "jest backend/tests/unit",
+    "lint": "eslint src --ext .js"
   },
   "keywords": [
     "feedback",

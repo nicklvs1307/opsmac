@@ -1,4 +1,5 @@
-const express = require('express');
+const safeRouter = require('../../utils/safeRouter');
+const asyncHandler = require('../../middlewares/asyncHandler');
 const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db) => { // Added comment to force reload
@@ -6,25 +7,22 @@ module.exports = (db) => { // Added comment to force reload
     const { getCustomerDashboardMetrics, getBirthdayCustomers, listCustomers, createCustomer, getCustomerByPhone, getCustomerById, updateCustomer, deleteCustomer, getCustomerDetails, resetCustomerVisits, clearCustomerCheckins, publicRegisterCustomer } = require('domains/customer/customer.controller')(db);
     const { createCustomerValidation, updateCustomerValidation, publicRegisterCustomerValidation, customerQueryValidation, byPhoneValidation } = require('domains/customer/customer.validation');
 
-    const router = express.Router();
+    const router = safeRouter();
 
     // Rota pública
-    router.post('/public/register', publicRegisterCustomerValidation, publicRegisterCustomer);
+    router.post('/public/register', publicRegisterCustomerValidation, asyncHandler(publicRegisterCustomer));
 
-    // Todas as outras rotas são protegidas e requerem autenticação
-    router.use(auth);
-
-    router.get('/dashboard-metrics', requirePermission('customers', 'read'), getCustomerDashboardMetrics);
-    router.get('/birthdays', requirePermission('customers', 'read'), getBirthdayCustomers);
-    router.get('/', requirePermission('customers', 'read'), customerQueryValidation, listCustomers);
-    router.post('/', requirePermission('customers', 'create'), createCustomerValidation, createCustomer);
-    router.get('/by-phone', requirePermission('customers', 'read'), byPhoneValidation, getCustomerByPhone);
-    router.get('/:id', requirePermission('customers', 'read'), getCustomerById);
-    router.put('/:id', requirePermission('customers', 'update'), updateCustomerValidation, updateCustomer);
-    router.delete('/:id', requirePermission('customers', 'delete'), deleteCustomer);
-    router.get('/:id/details', requirePermission('customers', 'read'), getCustomerDetails);
-    router.post('/:id/reset-visits', requirePermission('customers', 'update'), resetCustomerVisits);
-    router.post('/:id/clear-checkins', requirePermission('customers', 'update'), clearCustomerCheckins);
+    router.get('/dashboard-metrics', auth, requirePermission('customers', 'read'), asyncHandler(getCustomerDashboardMetrics));
+    router.get('/birthdays', auth, requirePermission('customers', 'read'), asyncHandler(getBirthdayCustomers));
+    router.get('/', auth, requirePermission('customers', 'read'), customerQueryValidation, asyncHandler(listCustomers));
+    router.post('/', auth, requirePermission('customers', 'create'), createCustomerValidation, asyncHandler(createCustomer));
+    router.get('/by-phone', auth, requirePermission('customers', 'read'), byPhoneValidation, asyncHandler(getCustomerByPhone));
+    router.get('/:id', auth, requirePermission('customers', 'read'), asyncHandler(getCustomerById));
+    router.put('/:id', auth, requirePermission('customers', 'update'), updateCustomerValidation, asyncHandler(updateCustomer));
+    router.delete('/:id', auth, requirePermission('customers', 'delete'), asyncHandler(deleteCustomer));
+    router.get('/:id/details', auth, requirePermission('customers', 'read'), asyncHandler(getCustomerDetails));
+    router.post('/:id/reset-visits', auth, requirePermission('customers', 'update'), asyncHandler(resetCustomerVisits));
+    router.post('/:id/clear-checkins', auth, requirePermission('customers', 'update'), asyncHandler(clearCustomerCheckins));
 
     return router;
 };

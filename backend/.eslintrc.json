@@ -1,0 +1,10 @@
+{
+  "env": { "node": true, "es2022": true },
+  "extends": ["eslint:recommended", "plugin:node/recommended"],
+  "rules": {
+    "no-undef": "error",
+    "node/no-missing-require": "error",
+    "node/no-extraneous-require": "error",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+  }
+}

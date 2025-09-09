@@ -1,18 +1,310 @@
-> feedeliza-plus@1.0.0 start
-> node server.js
-/app/node_modules/express/lib/router/route.js:216
-        throw new Error(msg);
-
-^
-Error: Route.put() requires a callback function but got a [object Undefined]
-    at Route.<computed> [as put] (/app/node_modules/express/lib/router/route.js:216:15)
-    at proto.<computed> [as put] (/app/node_modules/express/lib/router/index.js:521:19)
-    at module.exports (/app/src/domains/customer/customer.routes.js:23:12)
-    at module.exports (/app/routes/index.js:222:81)
-    at Object.<anonymous> (/app/server.js:62:1)
-    at Module._compile (node:internal/modules/cjs/loader:1521:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-    at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
-Node.js v20.19.5
+0) Diagnóstico rápido (antes de mexer)
+
+Liste rotas que explodem:
+
+rg -n "router\.(get|post|put|patch|delete)\(" -S src | sort
+
+
+Ache possíveis imports/exports quebrados:
+
+rg -n "module\.exports\s*=" -S src
+rg -n "exports\." -S src
+rg -n "require\(.+controller" -S src
+
+
+Rode o servidor e confirme a pilha (você já tem): veja arquivo e linha exata no .routes.js.
+
+Se esse inventário apontar que os controllers não exportam o que as rotas chamam, é exatamente o bug.
+
+1) Padronize a estrutura (por domínio)
+/src
+  /domains
+    /customer
+      customer.routes.js
+      customer.controller.js
+      customer.service.js
+      customer.validation.js   (opcional)
+    /dashboard
+      dashboard.routes.js
+      dashboard.controller.js
+      dashboard.service.js
+  /routes
+    index.js
+  /middlewares
+    errorHandler.js
+    asyncHandler.js
+  /utils
+    safeRouter.js
+    apiClient.js
+server.js
+
+
+Regra de ouro: Routes só chamam Controllers; Controllers só lidam com HTTP; Services ficam com regra de negócio/DB.
+
+2) Crie util de Router “à prova de erro”
+
+Pegadinha clássica é passar undefined como handler. Este wrapper falha no boot com mensagem clara:
+
+// src/utils/safeRouter.js
+const express = require("express");
+const METHODS = ["get", "post", "put", "patch", "delete", "all", "use"];
+
+function safeRouter() {
+  const router = express.Router();
+  for (const m of METHODS) {
+    const orig = router[m].bind(router);
+    router[m] = (path, ...handlers) => {
+      handlers.forEach((h, i) => {
+        if (typeof h !== "function") {
+          throw new Error(`Router.${m}("${path}") handler[${i}] é ${typeof h}; expected function`);
+        }
+      });
+      return orig(path, ...handlers);
+    };
+  }
+  return router;
+}
+
+module.exports = safeRouter;
+
+
+Use esse safeRouter() em todas as rotas. Assim, qualquer undefined aparece cedo com stack útil.
+
+3) Middleware padrão para async/erros
+// src/middlewares/asyncHandler.js
+module.exports = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+
+// src/middlewares/errorHandler.js
+module.exports = (err, req, res, next) => {
+  console.error(err);
+  const status = err.status || 500;
+  res.status(status).json({ success: false, message: err.message || "Erro interno" });
+};
+
+4) Controller/Service de exemplo (modelo)
+// src/domains/customer/customer.service.js
+async function update(id, payload) {
+  // TODO: trocar por acesso real (Sequelize/Prisma/etc.)
+  // Ex.: return Customer.update(payload, { where: { id }, returning: true });
+  return { id, ...payload, updatedAt: new Date().toISOString() };
+}
+
+module.exports = { update };
+
+// src/domains/customer/customer.controller.js
+const service = require("./customer.service");
+
+async function updateCustomer(req, res) {
+  const { id } = req.params;
+  const data = await service.update(id, req.body);
+  res.json({ success: true, data });
+}
+
+module.exports = { updateCustomer };
+
+5) Rotas usando o safeRouter + asyncHandler
+// src/domains/customer/customer.routes.js
+const safeRouter = require("../../utils/safeRouter");
+const asyncHandler = require("../../middlewares/asyncHandler");
+const controller = require("./customer.controller");
+
+const router = safeRouter();
+
+router.put("/:id", asyncHandler(controller.updateCustomer));
+
+module.exports = router;
+
+
+Importante: controller.updateCustomer existe e é função. Se não existir, o safeRouter grita no boot.
+
+6) Carregador central de rotas
+
+Automatiza a montagem e evita erro de caminho:
+
+// src/routes/index.js
+const path = require("path");
+const fs = require("fs");
+const safeRouter = require("../utils/safeRouter");
+
+const router = safeRouter();
+const domainsDir = path.join(__dirname, "..", "domains");
+
+for (const entry of fs.readdirSync(domainsDir, { withFileTypes: true })) {
+  if (!entry.isDirectory()) continue;
+  const name = entry.name;
+  const routeFile = path.join(domainsDir, name, `${name}.routes.js`);
+  if (fs.existsSync(routeFile)) {
+    router.use(`/${name}`, require(routeFile));
+  }
+}
+
+// health
+router.get("/health", (req, res) => res.json({ ok: true }));
+
+module.exports = router;
+
+7) Server unificado
+// server.js
+const express = require("express");
+const routes = require("./src/routes");
+const errorHandler = require("./src/middlewares/errorHandler");
+
+const app = express();
+app.use(express.json());
+app.use("/api", routes);
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`🚀 Server on :${PORT}`));
+
+8) Cliente de API externa centralizado (opcional, mas recomendado)
+// src/utils/apiClient.js
+const axios = require("axios");
+
+const api = axios.create({
+  baseURL: process.env.EXTERNAL_API_URL,
+  timeout: 10000,
+});
+
+api.interceptors.response.use(
+  r => r,
+  err => {
+    const wrap = new Error(err.response?.data?.message || err.message);
+    wrap.status = err.response?.status || 500;
+    throw wrap;
+  }
+);
+
+module.exports = api;
+
+9) Validação de payload (ex.: Zod) — evita handlers receberem lixo
+// src/domains/customer/customer.validation.js
+const { z } = require("zod");
+
+const updateSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email().optional(),
+});
+
+function validateUpdate(req, res, next) {
+  const parsed = updateSchema.safeParse(req.body);
+  if (!parsed.success) {
+    const err = new Error(parsed.error.issues.map(i => i.message).join(", "));
+    err.status = 400;
+    return next(err);
+  }
+  next();
+}
+
+module.exports = { validateUpdate };
+
+
+Usando na rota:
+
+const { validateUpdate } = require("./customer.validation");
+router.put("/:id", validateUpdate, asyncHandler(controller.updateCustomer));
+
+10) ESLint para pegar undefined/imports quebrados
+
+Crie .eslintrc.json:
+
+{
+  "env": { "node": true, "es2022": true },
+  "extends": ["eslint:recommended", "plugin:node/recommended"],
+  "rules": {
+    "no-undef": "error",
+    "node/no-missing-require": "error",
+    "node/no-extraneous-require": "error",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+  }
+}
+
+
+Scripts no package.json:
+
+{
+  "scripts": {
+    "lint": "eslint src --ext .js",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  }
+}
+
+11) Smoke tests rápidos (Supertest)
+// test/health.test.js
+const request = require("supertest");
+const express = require("express");
+const routes = require("../src/routes");
+const errorHandler = require("../src/middlewares/errorHandler");
+
+function makeApp() {
+  const app = express();
+  app.use(express.json());
+  app.use("/api", routes);
+  app.use(errorHandler);
+  return app;
+}
+
+test("GET /api/health", async () => {
+  const app = makeApp();
+  const res = await request(app).get("/api/health");
+  expect(res.status).toBe(200);
+  expect(res.body.ok).toBe(true);
+});
+
+
+Adicione mais testes por domínio depois da refatoração básica.
+
+12) Roteiro de execução (para seu agente)
+
+Criar src/utils/safeRouter.js, src/middlewares/asyncHandler.js, src/middlewares/errorHandler.js.
+
+Reorganizar pastas dos domínios como na seção #1.
+
+Em cada *.routes.js:
+
+Trocar const router = express.Router() por const router = safeRouter().
+
+Garantir que todas as chamadas tenham handlers função (se houver controller.algo, confirmar export).
+
+Em cada *.controller.js:
+
+Exportar objeto com funções: module.exports = { minhaFuncao }.
+
+Nenhum module.exports = function () {} direto.
+
+Em cada *.service.js:
+
+Isolar regra de negócio/DB (sem req/res).
+
+Criar ou ajustar src/routes/index.js (auto-load dos domínios).
+
+Ajustar server.js para usar /api + errorHandler.
+
+Subir o app localmente:
+
+npm run lint
+npm start
+curl -s http://localhost:3000/api/health | jq
+
+
+Testar rotas críticas (exemplos):
+
+curl -X PUT http://localhost:3000/api/customer/123 -H "Content-Type: application/json" -d '{"name":"Teste"}'
+
+
+Se aparecer qualquer erro de “handler undefined”, o safeRouter vai apontar rota e método. Corrija o require/export do controller correspondente.
+
+Comitar por módulo refatorado:
+
+git add .
+git commit -m "refactor(domains): padroniza routes/controllers/services + safeRouter"
+
+13) (Opcional) Fail-fast geral — verificação estática de rotas
+
+Se quiser travar o boot caso um domínio esteja sem *.routes.js:
+
+// em src/routes/index.js, após o for:
+if (router.stack.length === 0) {
+  throw new Error("Nenhuma rota registrada. Verifique estrutura de domains/*/*.routes.js");
+}

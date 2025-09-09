@@ -595,7 +595,7 @@ module.exports = (restaurantService) => {
   return {
     getRestaurantById,
     updateRestaurant,
-    updateRestaurantStatus,
+    updateRestaurantOpenStatus,
     updateRestaurantPosStatus,
     listRestaurantUsers,
     createRestaurantUser,

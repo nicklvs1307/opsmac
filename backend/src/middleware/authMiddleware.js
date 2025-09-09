@@ -44,7 +44,14 @@ module.exports = (db) => {
         }
     };
 
+    const checkRestaurantOwnership = async (req, res, next) => {
+        // Placeholder logic: simply call next() for now
+        // Real logic would involve checking req.user.restaurantId against req.params.restaurantId
+        next();
+    };
+
     return {
         auth: authMiddleware,
+        checkRestaurantOwnership: checkRestaurantOwnership,
     };
 };

@@ -4,6 +4,7 @@ const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db, { listRewards, getRewardById, createReward, updateReward, deleteReward, spinWheel, getRewardsAnalytics }, auth, checkRestaurantOwnership) => {
     const router = express.Router();
+    console.log('getRewardById:', getRewardById);
     router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, listRewards);
     router.get('/:id', auth, requirePermission('fidelity:coupons:rewards', 'read'), getRewardById);
     router.post('/', auth, requirePermission('fidelity:coupons:rewards-create', 'create'), createRewardValidation, createReward);

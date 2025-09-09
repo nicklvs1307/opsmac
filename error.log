@@ -1,14 +1,5 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-rewardsController: {
-  listRewards: [AsyncFunction: listRewards],
-  getRewardById: [AsyncFunction: getRewardById],
-  createReward: [AsyncFunction: createReward],
-  updateReward: [AsyncFunction: updateReward],
-  deleteReward: [AsyncFunction: deleteReward],
-  spinWheel: [AsyncFunction: spinWheel],
-  getRewardsAnalytics: [AsyncFunction: getRewardsAnalytics]
-}
 /app/node_modules/express/lib/router/route.js:216
         throw new Error(msg);
 

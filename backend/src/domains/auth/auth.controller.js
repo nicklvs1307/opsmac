@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 module.exports = (db) => {
     console.log('DB object in auth.controller.js:', db);
     console.log('DB.models in auth.controller.js:', db.models);
-    const authService = require('./auth.service')(db);
+    const authService = require('./auth.service');
 
     const handleValidationErrors = (req) => {
         const errors = validationResult(req);
@@ -17,7 +17,7 @@ module.exports = (db) => {
     const login = async (req, res, next) => {
         handleValidationErrors(req);
         const { email, password } = req.body;
-        const result = await authService.login(email, password);
+        const result = await authService.login(db, email, password);
 
         res.json({
             message: 'Login realizado com sucesso',

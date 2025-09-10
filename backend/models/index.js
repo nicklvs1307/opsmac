@@ -64,4 +64,3 @@ db.syncDatabase = async (force = false) => {
 };
 
 module.exports = db;
-console.log('DB object exported from models/index.js:', db);

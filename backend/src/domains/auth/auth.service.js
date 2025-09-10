@@ -4,8 +4,6 @@ const { UnauthorizedError, ForbiddenError, NotFoundError } = require('utils/erro
 const iamService = require('services/iamService'); // Import the new IAM service
 const auditService = require('services/auditService'); // Import auditService
 
-console.log('DB object at auth.service.js module load:', db);
-
 // Helper to build the menu hierarchy with access flags
 
 

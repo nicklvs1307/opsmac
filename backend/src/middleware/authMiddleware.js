@@ -22,7 +22,6 @@ module.exports = (db) => {
                 return next(new UnauthorizedError('Token inválido ou expirado.'));
             }
 
-            console.log('DB object in authMiddleware before calling authService.getMe:', db);
             const user = await authService.getMe(db, decoded.userId);
 
             if (!user) {

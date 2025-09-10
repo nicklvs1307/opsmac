@@ -7,7 +7,7 @@
 Error: Route.post() requires a callback function but got a [object Promise]
     at Route.<computed> [as post] (/app/node_modules/express/lib/router/route.js:216:15)
     at proto.<computed> [as post] (/app/node_modules/express/lib/router/index.js:521:19)
-    at module.exports (/app/src/domains/public/public.routes.js:16:12)
+    at module.exports (/app/src/domains/publicV2/publicV2.routes.js:13:12)
     at module.exports (/app/routes/index.js:15:54)
     at Object.<anonymous> (/app/server.js:63:17)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)

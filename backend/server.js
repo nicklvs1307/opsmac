@@ -72,7 +72,7 @@ app.use(errorHandler);
 // Inicializar servidor
 const startServer = async () => {
   try {
-    await sequelize.authenticate();
+    await db.sequelize.authenticate();
     console.log('✅ Conexão com banco de dados estabelecida');
     
     app.listen(PORT, () => {
@@ -89,13 +89,13 @@ startServer();
 // Graceful shutdown
 process.on('SIGTERM', async () => {
   console.log('🔄 Encerrando servidor...');
-  await sequelize.close();
+  await db.sequelize.close();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
   console.log('🔄 Encerrando servidor...');
-  await sequelize.close();
+  await db.sequelize.close();
   process.exit(0);
 });
 

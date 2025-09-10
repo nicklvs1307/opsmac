@@ -1,18 +1,11 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-/app/src/domains/uaiRango/uaiRango.service.js:88
-        handleWebhook,
-
-^
-ReferenceError: handleWebhook is not defined
-    at module.exports (/app/src/domains/uaiRango/uaiRango.service.js:88:9)
-    at module.exports (/app/src/domains/uaiRango/uaiRango.controller.js:4:58)
-    at module.exports (/app/src/domains/uaiRango/uaiRango.routes.js:6:79)
-    at module.exports (/app/routes/index.js:15:54)
-    at Object.<anonymous> (/app/server.js:63:17)
+❌ Erro ao iniciar servidor: ReferenceError: sequelize is not defined
+    at startServer (/app/server.js:75:5)
+    at Object.<anonymous> (/app/server.js:87:1)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
     at Module.load (node:internal/modules/cjs/loader:1266:32)
     at Module._load (node:internal/modules/cjs/loader:1091:12)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
-Node.js v20.19.5
+    at node:internal/main/run_main_module:28:49

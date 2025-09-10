@@ -14,3 +14,6 @@ module.exports = (db) => {
     router.get('/:id', auth, requirePermission('labels', 'read'), asyncHandler(labelsController.getPrintedLabelById));
     router.put('/:id', auth, requirePermission('labels', 'update'), ...printLabelValidation, asyncHandler(labelsController.updatePrintedLabel));
     router.delete('/:id', auth, requirePermission('labels', 'delete'), asyncHandler(labelsController.deletePrintedLabel));
+
+    return router;
+};

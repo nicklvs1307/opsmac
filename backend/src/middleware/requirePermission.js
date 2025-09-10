@@ -10,6 +10,9 @@ const requirePermission = (featureKey, actionKey) => {
       return next(new UnauthorizedError('Acesso negado. Usuário não autenticado.'));
     }
 
+    console.log('req.user in requirePermission:', req.user);
+    console.log('req.user.isSuperadmin in requirePermission:', req.user?.isSuperadmin);
+
     // Add Super Admin bypass logic
     if (req.user.isSuperadmin) {
       // Super admin bypasses all permission and restaurant context checks

@@ -1,4 +1,419 @@
-
+      isDataURI: [Function],
+      isMagnetURI: [Function],
+      isMailtoURI: [Function],
+      isMimeType: [Function],
+      isLatLong: [Function],
+      ltrim: [Function],
+      rtrim: [Function],
+      trim: [Function],
+      escape: [Function],
+      unescape: [Function],
+      stripLow: [Function],
+      whitelist: [Function],
+      blacklist: [Function],
+      isWhitelisted: [Function],
+      normalizeEmail: [Function],
+      toString: [Function: toString],
+      isSlug: [Function],
+      isStrongPassword: [Function],
+      isTaxID: [Function],
+      isDate: [Function (anonymous)],
+      isTime: [Function],
+      isLicensePlate: [Function],
+      isVAT: [Function: isVAT],
+      ibanLocales: [Array],
+      default: [Circular *3],
+      isImmutable: [Function (anonymous)],
+      notNull: [Function (anonymous)],
+      extend: [Function: extend],
+      notEmpty: [Function: notEmpty],
+      len: [Function: len],
+      isUrl: [Function: isUrl],
+      isIPv6: [Function: isIPv6],
+      isIPv4: [Function: isIPv4],
+      notIn: [Function: notIn],
+      regex: [Function: regex],
+      notRegex: [Function: notRegex],
+      min: [Function: min],
+      max: [Function: max],
+      not: [Function: not],
+      notContains: [Function: notContains],
+      is: [Function: is],
+      isNull: [Function]
+    },
+    Model: Model,
+    QueryInterface: [class QueryInterface],
+    BelongsTo: <ref *4> [class BelongsTo extends Association] {
+      BelongsTo: [Circular *4],
+      default: [Circular *4]
+    },
+    HasOne: [class HasOne extends Association],
+    HasMany: <ref *5> [class HasMany extends Association] {
+      HasMany: [Circular *5],
+      default: [Circular *5]
+    },
+    BelongsToMany: <ref *6> [class BelongsToMany extends Association] {
+      BelongsToMany: [Circular *6],
+      default: [Circular *6]
+    },
+    DataTypes: {
+      ABSTRACT: [Function],
+      STRING: [Function],
+      CHAR: [Function],
+      TEXT: [Function],
+      NUMBER: [Function],
+      TINYINT: [Function],
+      SMALLINT: [Function],
+      MEDIUMINT: [Function],
+      INTEGER: [Function],
+      BIGINT: [Function],
+      FLOAT: [Function],
+      TIME: [Function],
+      DATE: [Function],
+      DATEONLY: [Function],
+      BOOLEAN: [Function],
+      NOW: [Function],
+      BLOB: [Function],
+      DECIMAL: [Function],
+      NUMERIC: [Function],
+      UUID: [Function],
+      UUIDV1: [Function],
+      UUIDV4: [Function],
+      HSTORE: [Function],
+      JSON: [Function],
+      JSONB: [Function],
+      VIRTUAL: [Function],
+      ARRAY: [Function],
+      ENUM: [Function],
+      RANGE: [Function],
+      REAL: [Function],
+      'DOUBLE PRECISION': [Function],
+      DOUBLE: [Function],
+      GEOMETRY: [Function],
+      GEOGRAPHY: [Function],
+      CIDR: [Function],
+      INET: [Function],
+      MACADDR: [Function],
+      CITEXT: [Function],
+      TSVECTOR: [Function],
+      postgres: [Object],
+      mysql: [Object],
+      mariadb: [Object],
+      sqlite: [Object],
+      mssql: [Object],
+      db2: [Object],
+      snowflake: [Object],
+      oracle: [Object]
+    },
+    ABSTRACT: [class ABSTRACT] { types: {}, key: 'ABSTRACT' },
+    STRING: [class STRING extends ABSTRACT] { types: [Object], key: 'STRING' },
+    CHAR: [class CHAR extends STRING] { types: [Object], key: 'CHAR' },
+    TEXT: [class TEXT extends ABSTRACT] { types: [Object], key: 'TEXT' },
+    NUMBER: [class NUMBER extends ABSTRACT] { types: {}, key: 'NUMBER' },
+    TINYINT: [class TINYINT extends INTEGER] { types: [Object], key: 'TINYINT' },
+    SMALLINT: [class SMALLINT extends INTEGER] {
+      types: [Object],
+      key: 'SMALLINT'
+    },
+    MEDIUMINT: [class MEDIUMINT extends INTEGER] {
+      types: [Object],
+      key: 'MEDIUMINT'
+    },
+    INTEGER: [class INTEGER extends NUMBER] { types: [Object], key: 'INTEGER' },
+    BIGINT: [class BIGINT extends INTEGER] { types: [Object], key: 'BIGINT' },
+    FLOAT: [class FLOAT extends NUMBER] { types: [Object], key: 'FLOAT' },
+    TIME: [class TIME extends ABSTRACT] { types: [Object], key: 'TIME' },
+    DATE: [class DATE extends ABSTRACT] { types: [Object], key: 'DATE' },
+    DATEONLY: [class DATEONLY extends ABSTRACT] {
+      types: [Object],
+      key: 'DATEONLY'
+    },
+    BOOLEAN: [class BOOLEAN extends ABSTRACT] {
+      parse: [Function: _sanitize],
+      types: [Object],
+      key: 'BOOLEAN'
+    },
+    NOW: [class NOW extends ABSTRACT] { types: {}, key: 'NOW' },
+    BLOB: [class BLOB extends ABSTRACT] { types: [Object], key: 'BLOB' },
+    DECIMAL: [class DECIMAL extends NUMBER] { types: [Object], key: 'DECIMAL' },
+    NUMERIC: [class DECIMAL extends NUMBER] { types: [Object], key: 'DECIMAL' },
+    UUID: [class UUID extends ABSTRACT] { types: [Object], key: 'UUID' },
+    UUIDV1: [class UUIDV1 extends ABSTRACT] { types: {}, key: 'UUIDV1' },
+    UUIDV4: [class UUIDV4 extends ABSTRACT] { types: {}, key: 'UUIDV4' },
+    HSTORE: [class HSTORE extends ABSTRACT] { types: [Object], key: 'HSTORE' },
+    JSON: [class JSONTYPE extends ABSTRACT] { types: [Object], key: 'JSON' },
+    JSONB: [class JSONB extends JSONTYPE] { types: [Object], key: 'JSONB' },
+    VIRTUAL: [class VIRTUAL extends ABSTRACT] { types: {}, key: 'VIRTUAL' },
+    ARRAY: [class ARRAY extends ABSTRACT] { types: {}, key: 'ARRAY' },
+    ENUM: [class ENUM extends ABSTRACT] { types: [Object], key: 'ENUM' },
+    RANGE: [class RANGE extends ABSTRACT] { types: [Object], key: 'RANGE' },
+    REAL: [class REAL extends NUMBER] { types: [Object], key: 'REAL' },
+    'DOUBLE PRECISION': [class DOUBLE extends NUMBER] {
+      types: [Object],
+      key: 'DOUBLE PRECISION'
+    },
+    DOUBLE: [class DOUBLE extends NUMBER] {
+      types: [Object],
+      key: 'DOUBLE PRECISION'
+    },
+    GEOMETRY: [class GEOMETRY extends ABSTRACT] {
+      types: [Object],
+      key: 'GEOMETRY'
+    },
+    GEOGRAPHY: [class GEOGRAPHY extends ABSTRACT] {
+      types: [Object],
+      key: 'GEOGRAPHY'
+    },
+    CIDR: [class CIDR extends ABSTRACT] { types: [Object], key: 'CIDR' },
+    INET: [class INET extends ABSTRACT] { types: [Object], key: 'INET' },
+    MACADDR: [class MACADDR extends ABSTRACT] { types: [Object], key: 'MACADDR' },
+    CITEXT: [class CITEXT extends ABSTRACT] { types: [Object], key: 'CITEXT' },
+    TSVECTOR: [class TSVECTOR extends ABSTRACT] {
+      types: [Object],
+      key: 'TSVECTOR'
+    },
+    postgres: {
+      DECIMAL: [class DECIMAL extends DECIMAL],
+      BLOB: [class BLOB extends BLOB],
+      STRING: [class STRING extends STRING],
+      CHAR: [class CHAR extends CHAR],
+      TEXT: [class TEXT extends TEXT],
+      CITEXT: [class CITEXT extends CITEXT],
+      TINYINT: [class TINYINT extends TINYINT],
+      SMALLINT: [class SMALLINT extends SMALLINT],
+      INTEGER: [Function],
+      BIGINT: [class BIGINT extends BIGINT],
+      BOOLEAN: [Function],
+      DATE: [class DATE extends DATE],
+      DATEONLY: [class DATEONLY extends DATEONLY],
+      REAL: [class REAL extends REAL],
+      'DOUBLE PRECISION': [class DOUBLE extends DOUBLE],
+      FLOAT: [class FLOAT extends FLOAT],
+      GEOMETRY: [class GEOMETRY extends GEOMETRY],
+      GEOGRAPHY: [class GEOGRAPHY extends GEOGRAPHY],
+      HSTORE: [class HSTORE extends HSTORE],
+      RANGE: [class RANGE extends RANGE],
+      ENUM: [class ENUM extends ENUM]
+    },
+
+    mysql: {
+      ENUM: [class ENUM extends ENUM],
+      DATE: [class DATE extends DATE],
+      DATEONLY: [class DATEONLY extends DATEONLY],
+      UUID: [class UUID extends UUID],
+      GEOMETRY: [class GEOMETRY extends GEOMETRY],
+      DECIMAL: [class DECIMAL extends DECIMAL],
+      JSON: [class JSONTYPE extends JSONTYPE]
+    },
+    mariadb: {
+      ENUM: [class ENUM extends ENUM],
+      DATE: [class DATE extends DATE],
+      DATEONLY: [class DATEONLY extends DATEONLY],
+      UUID: [class UUID extends UUID],
+      GEOMETRY: [class GEOMETRY extends GEOMETRY],
+      DECIMAL: [class DECIMAL extends DECIMAL],
+      JSON: [class JSONTYPE extends JSONTYPE]
+    },
+    sqlite: {
+      DATE: [class DATE extends DATE],
+      DATEONLY: [class DATEONLY extends DATEONLY],
+      STRING: [class STRING extends STRING],
+      CHAR: [class CHAR extends CHAR],
+      NUMBER: [class NUMBER extends NUMBER],
+      FLOAT: [Function],
+      REAL: [Function],
+      'DOUBLE PRECISION': [Function],
+      TINYINT: [class TINYINT extends TINYINT],
+      SMALLINT: [class SMALLINT extends SMALLINT],
+      MEDIUMINT: [class MEDIUMINT extends MEDIUMINT],
+      INTEGER: [class INTEGER extends INTEGER],
+      BIGINT: [class BIGINT extends BIGINT],
+      TEXT: [class TEXT extends TEXT],
+      ENUM: [class ENUM extends ENUM],
+      JSON: [class JSONTYPE extends JSONTYPE],
+      CITEXT: [class CITEXT extends CITEXT]
+    },
+
+    mssql: {
+      BLOB: [class BLOB extends BLOB],
+      BOOLEAN: [class BOOLEAN extends BOOLEAN],
+      ENUM: [class ENUM extends ENUM],
+      STRING: [class STRING extends STRING],
+      UUID: [class UUID extends UUID],
+      DATE: [class DATE extends DATE],
+      DATEONLY: [class DATEONLY extends DATEONLY],
+      NOW: [class NOW extends NOW],
+      TINYINT: [class TINYINT extends TINYINT],
+      SMALLINT: [class SMALLINT extends SMALLINT],
+      INTEGER: [class INTEGER extends INTEGER],
+      BIGINT: [class BIGINT extends BIGINT],
+      REAL: [class REAL extends REAL],
+      FLOAT: [class FLOAT extends FLOAT],
+      TEXT: [class TEXT extends TEXT]
+    },
+    db2: {
+      BLOB: [class BLOB extends BLOB],
+      BOOLEAN: [Function],
+      ENUM: [class ENUM extends ENUM],
+      STRING: [class STRING extends STRING],
+      UUID: [class UUID extends UUID],
+      DATE: [class DATE extends DATE],
+      DATEONLY: [class DATEONLY extends DATEONLY],
+      NOW: [class NOW extends NOW],
+      TINYINT: [class TINYINT extends TINYINT],
+      SMALLINT: [class SMALLINT extends SMALLINT],
+      INTEGER: [class INTEGER extends INTEGER],
+      DOUBLE: [Function],
+      'DOUBLE PRECISION': [Function],
+      BIGINT: [class BIGINT extends BIGINT],
+      REAL: [class REAL extends REAL],
+      FLOAT: [class FLOAT extends FLOAT],
+      TEXT: [class TEXT extends TEXT]
+    },
+    snowflake: {
+      TEXT: [class TEXT extends TEXT],
+      DATE: [class DATE extends DATE],
+      BOOLEAN: [class BOOLEAN extends BOOLEAN],
+      DATEONLY: [class DATEONLY extends DATEONLY],
+      UUID: [class UUID extends UUID],
+      JSON: [class JSONTYPE extends JSONTYPE]
+    },
+    oracle: {
+      BOOLEAN: [class BOOLEAN extends BOOLEAN],
+      'DOUBLE PRECISION': [class DOUBLE extends DOUBLE],
+      DOUBLE: [class DOUBLE extends DOUBLE],
+      STRING: [class STRING extends STRING],
+      TINYINT: [class TINYINT extends TINYINT],
+      SMALLINT: [class SMALLINT extends SMALLINT],
+      MEDIUMINT: [class MEDIUMINT extends MEDIUMINT],
+      BIGINT: [class BIGINT extends BIGINT],
+      NUMBER: [class NUMBER extends NUMBER],
+      INTEGER: [class INTEGER extends INTEGER],
+      FLOAT: [class FLOAT extends FLOAT],
+      UUID: [class UUID extends UUID],
+      DATEONLY: [class DATEONLY extends DATEONLY],
+      DATE: [class DATE extends DATE],
+      NOW: [class NOW extends NOW],
+      BLOB: [class BLOB extends BLOB],
+      ENUM: [class ENUM extends ENUM],
+      TEXT: [class TEXT extends TEXT],
+      CHAR: [class CHAR extends CHAR],
+      JSON: [class JSONTYPE extends JSONTYPE],
+      REAL: [class REAL extends REAL],
+      DECIMAL: [class DECIMAL extends DECIMAL]
+    },
+    Deferrable: {
+      INITIALLY_DEFERRED: [class INITIALLY_DEFERRED extends ABSTRACT],
+      INITIALLY_IMMEDIATE: [class INITIALLY_IMMEDIATE extends ABSTRACT],
+      NOT: [class NOT extends ABSTRACT],
+      SET_DEFERRED: [class SET_DEFERRED extends ABSTRACT],
+      SET_IMMEDIATE: [class SET_IMMEDIATE extends ABSTRACT]
+    },
+    Association: <ref *7> [class Association] {
+      BelongsTo: [Function],
+      HasOne: [class HasOne extends Association],
+      HasMany: [Function],
+      BelongsToMany: [Function],
+      default: [Circular *7],
+      Association: [Circular *7]
+    },
+    useInflection: [Function: useInflection],
+    _setupHooks: [Function: _setupHooks],
+    runHooks: [AsyncFunction: runHooks],
+    addHook: [Function: addHook],
+    removeHook: [Function: removeHook],
+    hasHook: [Function: hasHook],
+    hasHooks: [Function: hasHook],
+    beforeValidate: [Function (anonymous)],
+    afterValidate: [Function (anonymous)],
+    validationFailed: [Function (anonymous)],
+    beforeCreate: [Function (anonymous)],
+    afterCreate: [Function (anonymous)],
+    beforeDestroy: [Function (anonymous)],
+    afterDestroy: [Function (anonymous)],
+    beforeRestore: [Function (anonymous)],
+    afterRestore: [Function (anonymous)],
+    beforeUpdate: [Function (anonymous)],
+    afterUpdate: [Function (anonymous)],
+    beforeSave: [Function (anonymous)],
+    afterSave: [Function (anonymous)],
+    beforeUpsert: [Function (anonymous)],
+    afterUpsert: [Function (anonymous)],
+    beforeBulkCreate: [Function (anonymous)],
+    afterBulkCreate: [Function (anonymous)],
+    beforeBulkDestroy: [Function (anonymous)],
+    afterBulkDestroy: [Function (anonymous)],
+    beforeBulkRestore: [Function (anonymous)],
+    afterBulkRestore: [Function (anonymous)],
+    beforeBulkUpdate: [Function (anonymous)],
+    afterBulkUpdate: [Function (anonymous)],
+    beforeFind: [Function (anonymous)],
+    beforeFindAfterExpandIncludeAll: [Function (anonymous)],
+    beforeFindAfterOptions: [Function (anonymous)],
+    afterFind: [Function (anonymous)],
+    beforeCount: [Function (anonymous)],
+    beforeDefine: [Function (anonymous)],
+    afterDefine: [Function (anonymous)],
+    beforeInit: [Function (anonymous)],
+    afterInit: [Function (anonymous)],
+    beforeAssociate: [Function (anonymous)],
+    afterAssociate: [Function (anonymous)],
+    beforeConnect: [Function (anonymous)],
+    afterConnect: [Function (anonymous)],
+    beforeDisconnect: [Function (anonymous)],
+    afterDisconnect: [Function (anonymous)],
+    beforePoolAcquire: [Function (anonymous)],
+    afterPoolAcquire: [Function (anonymous)],
+    beforeSync: [Function (anonymous)],
+    afterSync: [Function (anonymous)],
+    beforeBulkSync: [Function (anonymous)],
+    afterBulkSync: [Function (anonymous)],
+    beforeQuery: [Function (anonymous)],
+    afterQuery: [Function (anonymous)],
+    Error: [class BaseError extends Error],
+    AccessDeniedError: [class AccessDeniedError extends ConnectionError],
+    AggregateError: [class AggregateError extends BaseError],
+    AssociationError: [class AssociationError extends BaseError],
+    AsyncQueueError: [class AsyncQueueError extends BaseError],
+    BaseError: [class BaseError extends Error],
+    BulkRecordError: [class BulkRecordError extends BaseError],
+    ConnectionAcquireTimeoutError: [class ConnectionAcquireTimeoutError extends ConnectionError],
+    ConnectionError: [class ConnectionError extends BaseError],
+    ConnectionRefusedError: [class ConnectionRefusedError extends ConnectionError],
+    ConnectionTimedOutError: [class ConnectionTimedOutError extends ConnectionError],
+    DatabaseError: [class DatabaseError extends BaseError],
+    EagerLoadingError: [class EagerLoadingError extends BaseError],
+    EmptyResultError: [class EmptyResultError extends BaseError],
+    ExclusionConstraintError: [class ExclusionConstraintError extends DatabaseError],
+    ForeignKeyConstraintError: [class ForeignKeyConstraintError extends DatabaseError],
+    HostNotFoundError: [class HostNotFoundError extends ConnectionError],
+    HostNotReachableError: [class HostNotReachableError extends ConnectionError],
+    InstanceError: [class InstanceError extends BaseError],
+    InvalidConnectionError: [class InvalidConnectionError extends ConnectionError],
+    OptimisticLockError: [class OptimisticLockError extends BaseError],
+    QueryError: [class QueryError extends BaseError],
+    SequelizeScopeError: [class SequelizeScopeError extends BaseError],
+    TimeoutError: [class TimeoutError extends DatabaseError],
+    UniqueConstraintError: [class UniqueConstraintError extends ValidationError],
+    UnknownConstraintError: [class UnknownConstraintError extends DatabaseError],
+    ValidationError: [class ValidationError extends BaseError],
+    ValidationErrorItem: [class ValidationErrorItem] {
+      TypeStringMap: [Object],
+      Origins: [Object]
+    },
+    ValidationErrorItemOrigin: { CORE: 'CORE', DB: 'DB', FUNCTION: 'FUNCTION' },
+    ValidationErrorItemType: {
+      'notnull violation': 'CORE',
+      'string violation': 'CORE',
+      'unique violation': 'DB',
+      'validation error': 'FUNCTION'
+    },
+    Sequelize: [Circular *8],
+    default: [Circular *8]
+  },
+  testConnection: [AsyncFunction (anonymous)],
+  syncDatabase: [AsyncFunction (anonymous)]
+}
 🚀 Servidor rodando na porta 5000
 Redis Client Connected
 models.User in getMe (before findByPk): User
@@ -6,64 +421,34 @@ models.User in getMe (before findByPk): User
 models.User in getMe (before findByPk): User
 models.User in getMe (before findByPk): User
 UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 models.User in getMe (before findByPk): User
 UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 models.User in getMe (before findByPk): User
 UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+models.User in getMe (before findByPk): User
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
@@ -73,10 +458,27 @@ UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 models.User in getMe (before findByPk): User
 UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
@@ -84,19 +486,13 @@ UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
 models.User in getMe (before findByPk): User
 models.User in getMe (before findByPk): User
 UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
@@ -104,16 +500,73 @@ UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
 models.User in getMe (before findByPk): User
 models.User in getMe (before findByPk): User
 UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:21:19
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+models.User in getMe (before findByPk): User
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+models.User in getMe (before findByPk): User
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
@@ -123,5 +576,27 @@ UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 models.User in getMe (before findByPk): User
 models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+models.User in getMe (before findByPk): User
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+models.User in getMe (before findByPk): User
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/middleware/requirePermission.js:22:19
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 models.User in getMe (before findByPk): User
 models.User in getMe (before findByPk): User

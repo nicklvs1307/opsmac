@@ -3,11 +3,11 @@
 /app/src/utils/safeRouter.js:11
           throw new Error(`Router.${m}("${path}") handler[${i}] é ${typeof h}; expected function`);
           ^
-Error: Router.get("/") handler[2] é object; expected function
+Error: Router.post("/") handler[2] é object; expected function
     at /app/src/utils/safeRouter.js:11:17
     at Array.forEach (<anonymous>)
-    at router.<computed> [as get] (/app/src/utils/safeRouter.js:9:16)
-    at module.exports (/app/src/domains/customer/customer.routes.js:17:12)
+    at router.<computed> [as post] (/app/src/utils/safeRouter.js:9:16)
+    at module.exports (/app/src/domains/customer/customer.routes.js:18:12)
     at module.exports (/app/routes/index.js:15:54)
     at Object.<anonymous> (/app/server.js:63:17)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)

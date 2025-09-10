@@ -12,7 +12,7 @@ module.exports = (db) => {
   // Rotas de Estoque
   router.get('/dashboard', auth, requirePermission('stock', 'read'), asyncHandler(stockController.getDashboardData));
   router.get('/', auth, requirePermission('stock', 'read'), asyncHandler(stockController.getAllStocks));
-  router.post('/move', auth, requirePermission('stock', 'update'), createStockMovementValidation, asyncHandler(stockController.createStockMovement));
+  router.post('/move', auth, requirePermission('stock', 'update'), ...createStockMovementValidation, asyncHandler(stockController.createStockMovement));
   router.get('/history/:productId', auth, requirePermission('stock', 'read'), asyncHandler(stockController.getStockHistory));
 
   return router;

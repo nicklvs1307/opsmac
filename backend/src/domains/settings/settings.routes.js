@@ -35,7 +35,7 @@ module.exports = (db) => {
 
     // NPS Criteria
     router.get('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, requirePermission('npsCriteria:view', 'read'), asyncHandler(settingsController.getNpsCriteria));
-    router.put('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, requirePermission('npsCriteria:edit', 'update'), updateNpsCriteriaValidation, asyncHandler(settingsController.updateNpsCriteria));
+    router.put('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, requirePermission('npsCriteria:edit', 'update'), ...updateNpsCriteriaValidation, asyncHandler(settingsController.updateNpsCriteria));
 
     return router;
 };

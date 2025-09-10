@@ -9,7 +9,7 @@ module.exports = (db) => {
   const router = express.Router();
 
   // Rotas de Mesas
-  router.post('/', auth, requirePermission('tables', 'create'), createTableValidation, asyncHandler(tablesController.createTable));
+  router.post('/', auth, requirePermission('tables', 'create'), ...createTableValidation, asyncHandler(tablesController.createTable));
   router.get('/', auth, requirePermission('tables', 'read'), asyncHandler(tablesController.listTables));
 
   return router;

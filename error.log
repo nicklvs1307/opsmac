@@ -1818,6 +1818,17 @@ DB object in authMiddleware before calling authService.getMe: <ref *1> Sequelize
       sequelize: [Circular *1],
       connectionManager: [Circular *3],
       queryGenerator: [PostgresQueryGenerator],
+DEBUG: authMiddleware - error: TypeError: Cannot read properties of undefined (reading 'findByPk')
+    at Object.getMe (/app/src/domains/auth/auth.service.js:103:32)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:26:44)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
       queryInterface: [PostgresQueryInterface]
     },
     versionPromise: null,
@@ -1839,7 +1850,7 @@ DB object in authMiddleware before calling authService.getMe: <ref *1> Sequelize
         _idleTimeout: 1000,
         _idlePrev: [TimersList],
         _idleNext: [TimersList],
-        _idleStart: 16853,
+        _idleStart: 16502,
         _onTimeout: [Function (anonymous)],
         _timerArgs: undefined,
         _repeat: null,
@@ -2100,17 +2111,6 @@ DB object in authMiddleware before calling authService.getMe: <ref *1> Sequelize
       _pg_settings: [Object],
       _pg_file_settings: [Object],
       _pg_hba_file_rules: [Object],
-DEBUG: authMiddleware - error: TypeError: Cannot read properties of undefined (reading 'findByPk')
-    at Object.getMe (/app/src/domains/auth/auth.service.js:104:36)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:26:44)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
-    at /app/node_modules/express/lib/router/index.js:286:9
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-    at router (/app/node_modules/express/lib/router/index.js:47:12)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
       _pg_timezone_abbrevs: [Object],
       _pg_timezone_names: [Object],
       _pg_config: [Object],
@@ -2315,7 +2315,7 @@ DEBUG: authMiddleware - error: TypeError: Cannot read properties of undefined (r
   }
 }
 TypeError: Cannot read properties of undefined (reading 'findByPk')
-    at Object.getMe (/app/src/domains/auth/auth.service.js:104:36)
+    at Object.getMe (/app/src/domains/auth/auth.service.js:103:32)
     at authMiddleware (/app/src/middleware/authMiddleware.js:26:44)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)

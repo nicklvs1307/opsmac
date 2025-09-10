@@ -1,17 +1,13 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-/app/src/domains/auth/auth.service.js:366
-};
-  
-SyntaxError: Unexpected end of input
-    at wrapSafe (node:internal/modules/cjs/loader:1464:18)
-    at Module._compile (node:internal/modules/cjs/loader:1495:20)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-    at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at module.exports (/app/src/middleware/authMiddleware.js:5:25)
-    at module.exports (/app/src/domains/addons/addons.routes.js:9:56)
-    at module.exports (/app/routes/index.js:15:54)
-Node.js v20.19.5
+Redis Client Connected
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+ERRO INESPERADO: TypeError: Cannot read properties of undefined (reading 'User')
+    at Object.login (/app/src/domains/auth/auth.service.js:12:33)
+    at login (/app/src/domains/auth/auth.controller.js:18:42)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

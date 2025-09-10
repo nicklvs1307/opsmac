@@ -2,6 +2,7 @@ const { verifyToken } = require('../services/jwtService');
 const { UnauthorizedError, ForbiddenError } = require('utils/errors');
 
 module.exports = (db) => {
+    console.log('DB object in authMiddleware.js:', db);
     const authService = require('../domains/auth/auth.service')(db);
 
     const authMiddleware = async (req, res, next) => {

@@ -5,6 +5,7 @@ const iamService = require('services/iamService'); // Import the new IAM service
 const auditService = require('services/auditService'); // Import auditService
 
 module.exports = (models) => {
+    console.log('Models object in auth.service.js:', models);
     // Helper to build the menu hierarchy with access flags
 
 

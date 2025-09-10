@@ -3,7 +3,7 @@ const { generateUniqueSlug } = require('utils/slugGenerator');
 const bcrypt = require('bcryptjs');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
     const sequelize = db.sequelize;
 
     const createUser = async (userData, creatorUser) => {

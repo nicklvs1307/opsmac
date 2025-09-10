@@ -1,9 +1,381 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
-❌ Erro ao iniciar servidor: TypeError: Cannot read properties of undefined (reading 'user')
-    at getRestaurantContext (/app/src/middleware/getRestaurantContextMiddleware.js:5:12)
-    at module.exports (/app/routes/index.js:14:16)
-    at startServer (/app/server.js:77:21)
+🚀 Servidor rodando na porta 5000
+Redis Client Connected
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'User')
+    at Object.listUsers (/app/src/domains/admin/admin.service.js:105:23)
+    at listUsers (/app/src/domains/admin/admin.controller.js:25:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+TypeError: Cannot read properties of undefined (reading 'Restaurant')
+    at Object.listRestaurants (/app/src/domains/admin/admin.service.js:168:42)
+    at listRestaurants (/app/src/domains/admin/admin.controller.js:52:52)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'User')
+    at Object.listUsers (/app/src/domains/admin/admin.service.js:105:23)
+    at listUsers (/app/src/domains/admin/admin.controller.js:25:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'Restaurant')
+    at Object.listRestaurants (/app/src/domains/admin/admin.service.js:168:42)
+    at listRestaurants (/app/src/domains/admin/admin.controller.js:52:52)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'Restaurant')
+    at Object.listRestaurants (/app/src/domains/admin/admin.service.js:168:42)
+    at listRestaurants (/app/src/domains/admin/admin.controller.js:52:52)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+TypeError: Cannot read properties of undefined (reading 'User')
+    at Object.listUsers (/app/src/domains/admin/admin.service.js:105:23)
+    at listUsers (/app/src/domains/admin/admin.controller.js:25:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'User')
+    at Object.listUsers (/app/src/domains/admin/admin.service.js:105:23)
+    at listUsers (/app/src/domains/admin/admin.controller.js:25:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+TypeError: Cannot read properties of undefined (reading 'Restaurant')
+    at Object.listRestaurants (/app/src/domains/admin/admin.service.js:168:42)
+    at listRestaurants (/app/src/domains/admin/admin.controller.js:52:52)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

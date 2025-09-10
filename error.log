@@ -818,7 +818,7 @@ DB.models in auth.controller.js: undefined
 🚀 Servidor rodando na porta 5000
 Redis Client Connected
 TypeError: Cannot read properties of undefined (reading 'User')
-    at Object.login (/app/src/domains/auth/auth.service.js:12:36)
+    at Object.login (/app/src/domains/auth/auth.service.js:12:33)
     at login (/app/src/domains/auth/auth.controller.js:20:42)
     at /app/src/utils/asyncHandler.js:3:25
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)

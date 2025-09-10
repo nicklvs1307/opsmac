@@ -1,10 +1,9 @@
-const { verifyToken } = require('../services/jwtService');
+const { verifyToken } = require('services/jwtService');
 const { UnauthorizedError, ForbiddenError } = require('utils/errors');
+const models = require('models'); // Directly import models (which is the db object)
+const authService = require('../domains/auth/auth.service')(models); // Initialize authService with models
 
-module.exports = (db) => {
-    console.log('DB object in authMiddleware.js:', db);
-    const authService = require('../domains/auth/auth.service')(db);
-
+module.exports = () => { // No longer takes db as an argument
     const authMiddleware = async (req, res, next) => {
         try {
             const authHeader = req.header('Authorization');

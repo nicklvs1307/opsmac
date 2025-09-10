@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'restaurant_id',
         as: 'restaurant',
       });
+      // Add association to Coupon
+      Reward.hasMany(models.Coupon, {
+        foreignKey: 'rewardId', // Use camelCase for foreignKey in model definition
+        as: 'coupons',
+      });
     }
   }
 

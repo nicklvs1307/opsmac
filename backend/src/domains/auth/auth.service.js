@@ -96,12 +96,13 @@ module.exports = (models) => {
             restaurants: user.restaurants?.map(ur => ur.restaurant) || [], // All associated restaurants
             restaurant: primaryRestaurant, // The selected/primary restaurant
             restaurantId: primaryRestaurantId, // The ID of the selected/primary restaurant
+            isSuperadmin: user.isSuperadmin, // Add this line
             permissionSnapshot: permissionSnapshot, // The full permission snapshot
         };
     };
 
     const getMe = async (userId) => {
-        console.log('models.User in getMe (before findByPk):', models.User);
+        // console.log('models.User in getMe (before findByPk):', models.User); // Removed this log
         if (!models.User) {
             console.error('models.User is undefined in getMe!');
             throw new Error('models.User is not defined. Cannot fetch user.');
@@ -170,6 +171,7 @@ module.exports = (models) => {
             restaurants: user.restaurants?.map(ur => ur.restaurant) || [],
             restaurant: primaryRestaurant,
             restaurantId: primaryRestaurantId,
+            isSuperadmin: user.isSuperadmin, // Add this line
             permissionSnapshot: permissionSnapshot,
         };
     };

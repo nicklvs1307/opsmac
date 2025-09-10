@@ -10,8 +10,8 @@ module.exports = (db) => {
 
     // Rotas Públicas V2
     router.get('/test-endpoint', asyncHandler(publicV2Controller.testEndpoint));
-    router.post('/feedback', apiAuth, feedbackValidation, asyncHandler(publicV2Controller.submitFeedback));
-    router.post('/checkin', apiAuth, checkinValidation, asyncHandler(publicV2Controller.registerCheckin));
+    router.post('/feedback', apiAuth, ...feedbackValidation, asyncHandler(publicV2Controller.submitFeedback));
+    router.post('/checkin', apiAuth, ...checkinValidation, asyncHandler(publicV2Controller.registerCheckin));
 
     return router;
 };

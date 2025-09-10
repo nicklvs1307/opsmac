@@ -11,7 +11,7 @@ module.exports = (db) => {
 
   // Rotas de Pedidos
   router.get('/', auth, requirePermission('orders', 'read'), asyncHandler(ordersController.getAllOrders)); // Envolver com asyncHandler
-  router.put('/:id/status', auth, requirePermission('orders', 'update'), updateOrderStatusValidation, asyncHandler(ordersController.updateOrderStatus)); // Envolver com asyncHandler
+  router.put('/:id/status', auth, requirePermission('orders', 'update'), ...updateOrderStatusValidation, asyncHandler(ordersController.updateOrderStatus)); // Envolver com asyncHandler
 
   return router;
 };

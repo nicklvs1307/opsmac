@@ -10,7 +10,7 @@ module.exports = (db) => {
   const router = express.Router();
 
   // Rotas de Pedidos Públicos
-  router.post('/', createPublicOrderValidation, asyncHandler(publicOrdersController.createPublicOrder));
+  router.post('/', ...createPublicOrderValidation, asyncHandler(publicOrdersController.createPublicOrder));
 
   return router;
 };

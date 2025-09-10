@@ -10,8 +10,8 @@ module.exports = (db) => {
     // Rotas Públicas de Pesquisas
     router.get('/next/:restaurantSlug/:customerId?', asyncHandler(publicSurveyController.getNextSurvey));
     router.get('/:restaurantSlug/:surveySlug', asyncHandler(publicSurveyController.getPublicSurveyBySlugs));
-    router.post('/:slug/responses', submitResponsesValidation, asyncHandler(publicSurveyController.submitSurveyResponses));
-    router.patch('/responses/:responseId/link-customer', linkCustomerValidation, asyncHandler(publicSurveyController.linkCustomerToResponse));
+    router.post('/:slug/responses', ...submitResponsesValidation, asyncHandler(publicSurveyController.submitSurveyResponses));
+    router.patch('/responses/:responseId/link-customer', ...linkCustomerValidation, asyncHandler(publicSurveyController.linkCustomerToResponse));
 
     return router;
 };

@@ -19,10 +19,10 @@ module.exports = (db) => {
         legacyHeaders: false
     });
 
-    router.post('/login', authLimiter, loginValidation, asyncHandler(authController.login));
+    router.post('/login', authLimiter, ...loginValidation, asyncHandler(authController.login));
     router.get('/me', auth, asyncHandler(authController.getMe));
-    router.put('/profile', auth, updateProfileValidation, asyncHandler(authController.updateProfile));
-    router.put('/change-password', auth, changePasswordValidation, asyncHandler(authController.changePassword));
+    router.put('/profile', auth, ...updateProfileValidation, asyncHandler(authController.updateProfile));
+    router.put('/change-password', auth, ...changePasswordValidation, asyncHandler(authController.changePassword));
     router.post('/logout', asyncHandler(authController.logout));
 
     return router;

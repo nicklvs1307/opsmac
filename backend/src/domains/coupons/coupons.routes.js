@@ -15,13 +15,13 @@ module.exports = (db) => {
 
     const router = express.Router();
 
-    router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, requirePermission('fidelity:coupons:list', 'read'), listCouponsValidation, asyncHandler(couponsController.listCoupons));
+    router.get('/restaurant/:restaurantId', auth, checkRestaurantOwnership, requirePermission('fidelity:coupons:list', 'read'), ...listCouponsValidation, asyncHandler(couponsController.listCoupons));
     router.post('/expire', auth, requirePermission('fidelity:coupons:management', 'update'), asyncHandler(couponsController.expireCoupons));
-    router.post('/:id/redeem', auth, requirePermission('fidelity:coupons:management', 'update'), redeemCouponValidation, asyncHandler(couponsController.redeemCoupon));
-    router.post('/', auth, requirePermission('fidelity:coupons:management', 'create'), createCouponValidation, asyncHandler(couponsController.createCoupon));
+    router.post('/:id/redeem', auth, requirePermission('fidelity:coupons:management', 'update'), ...redeemCouponValidation, asyncHandler(couponsController.redeemCoupon));
+    router.post('/', auth, requirePermission('fidelity:coupons:management', 'create'), ...createCouponValidation, asyncHandler(couponsController.createCoupon));
     router.get('/analytics/restaurant/:restaurantId', auth, checkRestaurantOwnership, requirePermission('fidelity:coupons:dashboard', 'read'), asyncHandler(couponsController.getCouponAnalytics));
-    router.post('/validate', auth, requirePermission('fidelity:coupons:validation', 'read'), validateCouponValidation, asyncHandler(couponsController.validateCoupon));
-    router.post('/public/validate', publicValidateCouponValidation, asyncHandler(couponsController.publicValidateCoupon));
+    router.post('/validate', auth, requirePermission('fidelity:coupons:validation', 'read'), ...validateCouponValidation, asyncHandler(couponsController.validateCoupon));
+    router.post('/public/validate', ...publicValidateCouponValidation, asyncHandler(couponsController.publicValidateCoupon));
 
     return router;
 };

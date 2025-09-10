@@ -10,7 +10,7 @@ module.exports = (db) => {
   const router = express.Router();
 
   // Rotas de Pedidos para Consumo no Local
-  router.post('/order', createDineInOrderValidation, asyncHandler(publicDineInOrdersController.createDineInOrder));
+  router.post('/order', ...createDineInOrderValidation, asyncHandler(publicDineInOrdersController.createDineInOrder));
 
   return router;
 };

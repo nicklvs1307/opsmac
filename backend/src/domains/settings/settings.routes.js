@@ -15,7 +15,7 @@ module.exports = (db) => {
 
     // Restaurant Settings - Requires settings:edit permission
     router.get('/:restaurantId', auth, checkRestaurantOwnership, requirePermission('settings:view', 'read'), asyncHandler(settingsController.getRestaurantSettings));
-    router.put('/:restaurantId', auth, checkRestaurantOwnership, requirePermission('settings:edit', 'update'), updateRestaurantSettingsValidation, asyncHandler(settingsController.updateRestaurantSettings));
+    router.put('/:restaurantId', auth, checkRestaurantOwnership, requirePermission('settings:edit', 'update'), ...updateRestaurantSettingsValidation, asyncHandler(settingsController.updateRestaurantSettings));
 
     // Restaurant Logo Upload
     router.post('/:restaurantId/logo', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), upload.single('logo'), asyncHandler(settingsController.uploadRestaurantLogo));
@@ -27,11 +27,11 @@ module.exports = (db) => {
 
     // WhatsApp Settings
     router.get('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, requirePermission('settings', 'read'), asyncHandler(settingsController.getWhatsappSettings));
-    router.put('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), updateWhatsappSettingsValidation, asyncHandler(settingsController.updateWhatsappSettings));
-    router.post('/:restaurantId/whatsapp/test', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), testWhatsappMessageValidation, asyncHandler(settingsController.testWhatsappMessage));
+    router.put('/:restaurantId/whatsapp', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), ...updateWhatsappSettingsValidation, asyncHandler(settingsController.updateWhatsappSettings));
+    router.post('/:restaurantId/whatsapp/test', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), ...testWhatsappMessageValidation, asyncHandler(settingsController.testWhatsappMessage));
 
     // Restaurant Profile
-    router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), updateRestaurantProfileValidation, asyncHandler(settingsController.updateRestaurantProfile));
+    router.put('/:restaurantId/profile', auth, checkRestaurantOwnership, requirePermission('settings', 'update'), ...updateRestaurantProfileValidation, asyncHandler(settingsController.updateRestaurantProfile));
 
     // NPS Criteria
     router.get('/:restaurantId/nps-criteria', auth, checkRestaurantOwnership, requirePermission('npsCriteria:view', 'read'), asyncHandler(settingsController.getNpsCriteria));

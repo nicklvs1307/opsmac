@@ -14,7 +14,7 @@ module.exports = (db) => {
     router.get('/oauth2callback', asyncHandler(googleMyBusinessController.oauth2Callback));
     router.get('/locations', auth, requirePermission('googleMyBusiness', 'read'), asyncHandler(googleMyBusinessController.getLocations));
     router.get('/locations/:locationName/reviews', auth, requirePermission('googleMyBusiness', 'read'), asyncHandler(googleMyBusinessController.getReviews));
-    router.post('/locations/:locationName/reviews/:reviewName/reply', auth, requirePermission('googleMyBusiness', 'manage'), replyToReviewValidation, asyncHandler(googleMyBusinessController.replyToReview));
+    router.post('/locations/:locationName/reviews/:reviewName/reply', auth, requirePermission('googleMyBusiness', 'manage'), ...replyToReviewValidation, asyncHandler(googleMyBusinessController.replyToReview));
 
     return router;
 };

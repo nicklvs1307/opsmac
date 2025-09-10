@@ -13,8 +13,8 @@ module.exports = (db) => {
 
   // Rotas de Produtos
   router.post('/image', auth, requirePermission('products', 'update'), upload.single('product_image'), asyncHandler(productsController.uploadProductImage)); // Envolver com asyncHandler
-  router.post('/', auth, requirePermission('products', 'create'), createProductValidation, asyncHandler(productsController.createProduct)); // Envolver com asyncHandler
-  router.put('/:id', auth, requirePermission('products', 'update'), updateProductValidation, asyncHandler(productsController.updateProduct)); // Envolver com asyncHandler
+  router.post('/', auth, requirePermission('products', 'create'), asyncHandler(productsController.createProduct)); // Envolver com asyncHandler
+  router.put('/:id', auth, requirePermission('products', 'update'), asyncHandler(productsController.updateProduct)); // Envolver com asyncHandler
   router.delete('/:id', auth, requirePermission('products', 'delete'), asyncHandler(productsController.deleteProduct)); // Envolver com asyncHandler
   router.patch('/:id/toggle-status', auth, requirePermission('products', 'update'), asyncHandler(productsController.toggleProductStatus)); // Envolver com asyncHandler
   // You can use db here if needed in the future

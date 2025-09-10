@@ -14,7 +14,7 @@ module.exports = (db) => { // Added comment to force reload
 
     router.get('/dashboard-metrics', auth, requirePermission('customers', 'read'), asyncHandler(getCustomerDashboardMetrics));
     router.get('/birthdays', auth, requirePermission('customers', 'read'), asyncHandler(getBirthdayCustomers));
-    router.get('/', auth, requirePermission('customers', 'read'), customerQueryValidation, asyncHandler(listCustomers));
+    router.get('/', auth, requirePermission('customers', 'read'), ...customerQueryValidation, asyncHandler(listCustomers));
     router.post('/', auth, requirePermission('customers', 'create'), createCustomerValidation, asyncHandler(createCustomer));
     router.get('/by-phone', auth, requirePermission('customers', 'read'), byPhoneValidation, asyncHandler(getCustomerByPhone));
     router.get('/:id', auth, requirePermission('customers', 'read'), asyncHandler(getCustomerById));

@@ -1,4 +1,5 @@
 const express = require('express');
+const asyncHandler = require('utils/asyncHandler');
 
 module.exports = (db) => {
     const ifoodController = require('domains/ifood/ifood.controller')(db);
@@ -7,7 +8,7 @@ module.exports = (db) => {
 
     // Rota para receber webhooks do iFood
     // A verificação do módulo deve ser feita dentro do controller para webhooks públicos
-    router.post('/webhook', ifoodController.handleWebhook);
+    router.post('/webhook', asyncHandler(ifoodController.handleWebhook));
 
     return router;
 };

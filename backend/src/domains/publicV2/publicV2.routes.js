@@ -1,4 +1,5 @@
 const express = require('express');
+const asyncHandler = require('utils/asyncHandler');
 
 module.exports = (db) => {
     const apiAuth = require('middleware/apiAuthMiddleware')(db);
@@ -8,9 +9,9 @@ module.exports = (db) => {
     const router = express.Router();
 
     // Rotas Públicas V2
-    router.get('/test-endpoint', publicV2Controller.testEndpoint);
-    router.post('/feedback', apiAuth, feedbackValidation, publicV2Controller.submitFeedback);
-    router.post('/checkin', apiAuth, checkinValidation, publicV2Controller.registerCheckin);
+    router.get('/test-endpoint', asyncHandler(publicV2Controller.testEndpoint));
+    router.post('/feedback', apiAuth, feedbackValidation, asyncHandler(publicV2Controller.submitFeedback));
+    router.post('/checkin', apiAuth, checkinValidation, asyncHandler(publicV2Controller.registerCheckin));
 
     return router;
 };

@@ -1,5 +1,5 @@
 const safeRouter = require('../../utils/safeRouter');
-const asyncHandler = require('../../middlewares/asyncHandler');
+const asyncHandler = require('utils/asyncHandler');
 const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db) => { // Added comment to force reload

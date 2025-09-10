@@ -1,18 +1,16 @@
 const express = require('express');
-
+const asyncHandler = require('utils/asyncHandler');
 const requirePermission = require('middleware/requirePermission');
-const { printLabelValidation } = require('domains/labels/labels.validation');
 
-module.exports = (db, labelsController) => {
-  const { auth } = require('middleware/authMiddleware')(db);
-  const router = express.Router();
+module.exports = (db) => {
+    const { auth } = require('middleware/authMiddleware')(db);
+    const labelsController = require('domains/labels/labels.controller')(db);
+    const { createPrintedLabelValidation, updatePrintedLabelValidation } = require('domains/labels/labels.validation');
 
-  // Rotas de Etiquetas
-  router.get('/users', auth, requirePermission('labels', 'read'), labelsController.getLabelUsers);
-  router.get('/items', auth, requirePermission('labels', 'read'), labelsController.getLabelItems);
-  router.get('/stock-counts', auth, requirePermission('labels', 'read'), labelsController.getStockCounts);
-  router.get('/productions', auth, requirePermission('labels', 'read'), labelsController.getProductions);
-  router.post('/print', auth, requirePermission('labels', 'create'), printLabelValidation, labelsController.printLabel);
+    const router = express.Router();
 
-  return router;
-};
+    router.post('/', auth, requirePermission('labels', 'create'), createPrintedLabelValidation, asyncHandler(labelsController.createPrintedLabel));
+    router.get('/', auth, requirePermission('labels', 'read'), asyncHandler(labelsController.listPrintedLabels));
+    router.get('/:id', auth, requirePermission('labels', 'read'), asyncHandler(labelsController.getPrintedLabelById));
+    router.put('/:id', auth, requirePermission('labels', 'update'), updatePrintedLabelValidation, asyncHandler(labelsController.updatePrintedLabel));
+    router.delete('/:id', auth, requirePermission('labels', 'delete'), asyncHandler(labelsController.deletePrintedLabel));

@@ -1,4 +1,5 @@
 const express = require('express');
+const asyncHandler = require('utils/asyncHandler');
 const requirePermission = require('middleware/requirePermission');
 
 module.exports = (db) => {
@@ -9,8 +10,8 @@ module.exports = (db) => {
 
     // Rotas da Saipos
     // A verificação do módulo deve ser feita dentro do controller para webhooks públicos
-    router.post('/webhook', saiposController.handleWebhook);
-    router.get('/orders', auth, requirePermission('saipos', 'read'), saiposController.getOrders);
+    router.post('/webhook', asyncHandler(saiposController.handleWebhook));
+    router.get('/orders', auth, requirePermission('saipos', 'read'), asyncHandler(saiposController.getOrders));
 
     return router;
 };

@@ -10,7 +10,7 @@ module.exports = (db) => { // Added comment to force reload
     const router = safeRouter();
 
     // Rota pública
-    router.post('/public/register', publicRegisterCustomerValidation, asyncHandler(publicRegisterCustomer));
+    router.post('/public/register', ...publicRegisterCustomerValidation, asyncHandler(publicRegisterCustomer));
 
     router.get('/dashboard-metrics', auth, requirePermission('customers', 'read'), asyncHandler(getCustomerDashboardMetrics));
     router.get('/birthdays', auth, requirePermission('customers', 'read'), asyncHandler(getBirthdayCustomers));

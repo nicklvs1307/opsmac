@@ -27,3 +27,21 @@ Require stack:
   ]
 }
 Node.js v20.19.5
+
+> feedeliza-plus@1.0.0 start
+> node server.js
+/app/src/utils/safeRouter.js:11
+          throw new Error(`Router.${m}("${path}") handler[${i}] é ${typeof h}; expected function`);
+          ^
+Error: Router.post("/public/register") handler[0] é object; expected function
+    at /app/src/utils/safeRouter.js:11:17
+    at Array.forEach (<anonymous>)
+    at router.<computed> [as post] (/app/src/utils/safeRouter.js:9:16)
+    at module.exports (/app/src/domains/customer/customer.routes.js:13:12)
+    at module.exports (/app/routes/index.js:15:54)
+    at Object.<anonymous> (/app/server.js:63:17)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+Node.js v20.19.5

@@ -102,6 +102,18 @@ module.exports = (db) => {
 
     const getMe = async (userId) => {
         console.log('db.User in getMe (before findByPk):', db.User);
+
+        if (!db.User) {
+            console.error('db.User is undefined in getMe! Attempting to re-assign from db.models.User');
+            // This is a workaround for debugging, not a permanent fix
+            if (db.models && db.models.User) {
+                db.User = db.models.User;
+                console.log('db.User re-assigned from db.models.User:', db.User);
+            } else {
+                console.error('db.models or db.models.User is also undefined!');
+            }
+        }
+
         const user = await db.User.findByPk(userId, {
             include: [
                 {

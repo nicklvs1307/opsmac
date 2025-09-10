@@ -820,7 +820,7 @@ Redis Client Connected
 db.User in getMe (before findByPk): User
 db.User in getMe (before findByPk): undefined
 DEBUG: authMiddleware - error: TypeError: Cannot read properties of undefined (reading 'findByPk')
-    at Object.getMe (/app/src/domains/auth/auth.service.js:104:32)
+    at Object.getMe (/app/src/domains/auth/auth.service.js:105:36)
     at authMiddleware (/app/src/middleware/authMiddleware.js:25:44)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
@@ -831,7 +831,7 @@ DEBUG: authMiddleware - error: TypeError: Cannot read properties of undefined (r
     at router (/app/node_modules/express/lib/router/index.js:47:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
 TypeError: Cannot read properties of undefined (reading 'findByPk')
-    at Object.getMe (/app/src/domains/auth/auth.service.js:104:32)
+    at Object.getMe (/app/src/domains/auth/auth.service.js:105:36)
     at authMiddleware (/app/src/middleware/authMiddleware.js:25:44)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)

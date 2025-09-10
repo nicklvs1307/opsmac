@@ -3,8 +3,8 @@
 Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
-ERRO INESPERADO: ReferenceError: User is not defined
-    at Object.login (/app/src/domains/auth/auth.service.js:14:20)
+ERRO INESPERADO: TypeError: Cannot read properties of undefined (reading 'User')
+    at Object.login (/app/src/domains/auth/auth.service.js:14:33)
     at login (/app/src/domains/auth/auth.controller.js:18:42)
     at /app/src/utils/asyncHandler.js:3:25
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)

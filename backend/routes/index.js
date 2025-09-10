@@ -2,13 +2,9 @@ const path = require("path");
 const fs = require("fs");
 const safeRouter = require("../src/utils/safeRouter");
 const getRestaurantContextMiddleware = require("../src/middleware/getRestaurantContextMiddleware"); // Import the middleware
-const authMiddleware = require("../src/middleware/authMiddleware"); // Import authMiddleware
 
 module.exports = (db) => {
     const router = safeRouter();
-
-    // Apply authMiddleware first to populate req.user
-    router.use(authMiddleware().auth); // Call authMiddleware as a function and get its 'auth' property
 
     // Apply the restaurant context middleware globally to all routes handled by this router
     router.use(getRestaurantContextMiddleware()); // Call it as a function to get the middleware

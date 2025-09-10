@@ -817,29 +817,30 @@ DB object in auth.controller.js: {
 DB.models in auth.controller.js: undefined
 🚀 Servidor rodando na porta 5000
 Redis Client Connected
-db.User in getMe (before findByPk): User
 db.User in getMe (before findByPk): undefined
-DEBUG: authMiddleware - error: TypeError: Cannot read properties of undefined (reading 'findByPk')
-    at Object.getMe (/app/src/domains/auth/auth.service.js:105:36)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:25:44)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
-    at /app/node_modules/express/lib/router/index.js:286:9
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-    at router (/app/node_modules/express/lib/router/index.js:47:12)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-TypeError: Cannot read properties of undefined (reading 'findByPk')
-    at Object.getMe (/app/src/domains/auth/auth.service.js:105:36)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:25:44)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
-    at /app/node_modules/express/lib/router/index.js:286:9
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-    at router (/app/node_modules/express/lib/router/index.js:47:12)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+db.User is undefined in getMe! Attempting to re-assign from db.models.User
+db.User re-assigned from db.models.User: User
+DEBUG: authMiddleware - error: Error: Include unexpected. Element has to be either a Model, an Association or an object.
+    at User._conformInclude (/app/node_modules/sequelize/lib/model.js:323:11)
+    at /app/node_modules/sequelize/lib/model.js:270:61
+    at Array.map (<anonymous>)
+    at User._conformIncludes (/app/node_modules/sequelize/lib/model.js:270:39)
+    at User._baseMerge (/app/node_modules/sequelize/lib/model.js:622:10)
+    at User._defaultsOptions (/app/node_modules/sequelize/lib/model.js:656:17)
+    at User._injectScope (/app/node_modules/sequelize/lib/model.js:2053:10)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1111:10)
+    at User.findOne (/app/node_modules/sequelize/lib/model.js:1240:23)
+    at User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:23)
+Error: Include unexpected. Element has to be either a Model, an Association or an object.
+    at User._conformInclude (/app/node_modules/sequelize/lib/model.js:323:11)
+    at /app/node_modules/sequelize/lib/model.js:270:61
+    at Array.map (<anonymous>)
+    at User._conformIncludes (/app/node_modules/sequelize/lib/model.js:270:39)
+    at User._baseMerge (/app/node_modules/sequelize/lib/model.js:622:10)
+    at User._defaultsOptions (/app/node_modules/sequelize/lib/model.js:656:17)
+    at User._injectScope (/app/node_modules/sequelize/lib/model.js:2053:10)
+    at User.findAll (/app/node_modules/sequelize/lib/model.js:1111:10)
+    at User.findOne (/app/node_modules/sequelize/lib/model.js:1240:23)
+    at User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:23)
 db.User in getMe (before findByPk): User
 db.User in getMe (before findByPk): User

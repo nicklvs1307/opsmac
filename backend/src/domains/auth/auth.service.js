@@ -9,17 +9,17 @@ module.exports = (db) => {
 
 
     const login = async (email, password) => {
-        let user = await db.User.findOne({
+        let user = await db.models.User.findOne({
             where: { email },
             include: [
                 {
-                    model: db.Role,
+                    model: db.models.Role,
                     as: 'roles',
                 },
                 {
-                    model: db.UserRestaurant,
+                    model: db.models.UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: db.Restaurant, as: 'restaurant' }],
+                    include: [{ model: db.models.Restaurant, as: 'restaurant' }],
                 },
             ],
         });
@@ -101,20 +101,24 @@ module.exports = (db) => {
     };
 
     const getMe = async (userId) => {
-        console.log('db.User in getMe (before findByPk):', db.User);
+        // Remove debugging log and workaround
+        // console.log('db.User in getMe (before findByPk):', db.User);
+        // if (!db.User) { ... }
 
-        if (!db.User) {
-            console.error('db.User is undefined in getMe! Attempting to re-assign from db.models.User');
-            // This is a workaround for debugging, not a permanent fix
-            if (db.models && db.models.User) {
-                db.User = db.models.User;
-                console.log('db.User re-assigned from db.models.User:', db.User);
-            } else {
-                console.error('db.models or db.models.User is also undefined!');
-            }
-        }
-
-        const user = await db.User.findByPk(userId, {
+        // Use db.models.User instead of db.User
+        const user = await db.models.User.findByPk(userId, {
+            include: [
+                {
+                    model: db.models.Role, // Use db.models.Role
+                    as: 'roles',
+                },
+                {
+                    model: db.models.UserRestaurant, // Use db.models.UserRestaurant
+                    as: 'restaurants',
+                    include: [{ model: db.models.Restaurant, as: 'restaurant' }], // Use db.models.Restaurant
+                },
+            ]
+        });
             include: [
                 {
                     model: db.Role,
@@ -182,7 +186,8 @@ module.exports = (db) => {
     };
 
     const updateProfile = async (userId, profileData) => {
-        const user = await db.User.findByPk(userId);
+        // Use db.models.User instead of db.User
+        const user = await db.models.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');
@@ -202,7 +207,8 @@ module.exports = (db) => {
     };
 
     const changePassword = async (userId, currentPassword, newPassword) => {
-        const user = await db.User.findByPk(userId);
+        // Use db.models.User instead of db.User
+        const user = await db.models.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');

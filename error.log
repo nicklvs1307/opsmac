@@ -3,29 +3,7 @@
 Redis Client Connected
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
-DEBUG: authMiddleware - error: ReferenceError: db is not defined
-    at Object.getMe (/app/src/domains/auth/auth.service.js:106:22)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:25:44)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-ERRO INESPERADO: ReferenceError: db is not defined
-    at Object.getMe (/app/src/domains/auth/auth.service.js:106:22)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:25:44)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-ERRO INESPERADO: ReferenceError: db is not defined
+ERRO INESPERADO: ReferenceError: User is not defined
     at Object.login (/app/src/domains/auth/auth.service.js:14:20)
     at login (/app/src/domains/auth/auth.controller.js:18:42)
     at /app/src/utils/asyncHandler.js:3:25

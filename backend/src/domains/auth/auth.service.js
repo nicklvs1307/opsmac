@@ -11,17 +11,17 @@ module.exports = (models) => {
 
 
     const login = async (email, password) => {
-        let user = await User.findOne({
+        let user = await models.User.findOne({
             where: { email },
             include: [
                 {
-                    model: Role,
+                    model: models.Role,
                     as: 'roles',
                 },
                 {
-                    model: UserRestaurant,
+                    model: models.UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: Restaurant, as: 'restaurant' }],
+                    include: [{ model: models.Restaurant, as: 'restaurant' }],
                 },
             ],
         });
@@ -103,16 +103,16 @@ module.exports = (models) => {
     };
 
     const getMe = async (userId) => {
-        const user = await User.findByPk(userId, {
+        const user = await models.User.findByPk(userId, {
             include: [
                 {
-                    model: Role,
+                    model: models.Role,
                     as: 'roles',
                 },
                 {
-                    model: UserRestaurant,
+                    model: models.UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: Restaurant, as: 'restaurant' }],
+                    include: [{ model: models.Restaurant, as: 'restaurant' }],
                 },
             ]
         });
@@ -171,7 +171,7 @@ module.exports = (models) => {
     };
 
     const updateProfile = async (userId, profileData) => {
-        const user = await User.findByPk(userId);
+        const user = await models.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');
@@ -191,7 +191,7 @@ module.exports = (models) => {
     };
 
     const changePassword = async (userId, currentPassword, newPassword) => {
-        const user = await User.findByPk(userId);
+        const user = await models.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');

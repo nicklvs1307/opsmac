@@ -23,7 +23,7 @@ module.exports = (db) => {
             }
 
             console.log('DB object in authMiddleware before calling authService.getMe:', db);
-            const user = await authService.getMe(decoded.userId);
+            const user = await authService.getMe(db, decoded.userId);
 
             if (!user) {
                 return next(new UnauthorizedError('Usuário do token não encontrado.'));

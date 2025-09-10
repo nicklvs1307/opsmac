@@ -100,7 +100,7 @@ module.exports = (db) => {
         };
     };
 
-    const getMe = async (userId) => {
+    const getMe = async (db, userId) => {
         const user = await db.User.findByPk(userId, {
             include: [
                 {
@@ -168,7 +168,7 @@ module.exports = (db) => {
         };
     };
 
-    const updateProfile = async (userId, profileData) => {
+    const updateProfile = async (db, userId, profileData) => {
         const user = await db.User.findByPk(userId);
 
         if (!user) {
@@ -188,7 +188,7 @@ module.exports = (db) => {
         };
     };
 
-    const changePassword = async (userId, currentPassword, newPassword) => {
+    const changePassword = async (db, userId, currentPassword, newPassword) => {
         const user = await db.User.findByPk(userId);
 
         if (!user) {

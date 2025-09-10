@@ -34,7 +34,7 @@ module.exports = (db) => {
     const updateProfile = async (req, res, next) => {
         handleValidationErrors(req);
         const { name, phone, avatar } = req.body;
-        const updatedUser = await authService.updateProfile(req.user.userId, { name, phone, avatar });
+        const updatedUser = await authService.updateProfile(db, req.user.userId, { name, phone, avatar });
 
         res.json({
             message: 'Perfil atualizado com sucesso',
@@ -45,7 +45,7 @@ module.exports = (db) => {
     const changePassword = async (req, res, next) => {
         handleValidationErrors(req);
         const { currentPassword, newPassword } = req.body;
-        await authService.changePassword(req.user.userId, currentPassword, newPassword);
+        await authService.changePassword(db, req.user.userId, currentPassword, newPassword);
 
         res.json({ message: 'Senha alterada com sucesso' });
     };

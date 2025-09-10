@@ -6,23 +6,21 @@ const auditService = require('services/auditService'); // Import auditService
 
 module.exports = (models) => {
     console.log('Models object in auth.service.js:', models);
-    const { User, Role, UserRestaurant, Restaurant } = models; // Destructure models here
-
     // Helper to build the menu hierarchy with access flags
 
 
     const login = async (email, password) => {
-        let user = await User.findOne({
+        let user = await models.User.findOne({
             where: { email },
             include: [
                 {
-                    model: Role,
+                    model: models.Role,
                     as: 'roles',
                 },
                 {
-                    model: UserRestaurant,
+                    model: models.UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: Restaurant, as: 'restaurant' }],
+                    include: [{ model: models.Restaurant, as: 'restaurant' }],
                 },
             ],
         });
@@ -104,21 +102,21 @@ module.exports = (models) => {
     };
 
     const getMe = async (userId) => {
-        // Remove debugging log and workaround
-        // console.log('db.User in getMe (before findByPk):', db.User);
-        // if (!db.User) { ... }
-
-        // Use models.User instead of db.User
-        const user = await User.findByPk(userId, {
+        console.log('models.User in getMe (before findByPk):', models.User);
+        if (!models.User) {
+            console.error('models.User is undefined in getMe!');
+            throw new Error('models.User is not defined. Cannot fetch user.');
+        }
+        const user = await models.User.findByPk(userId, {
             include: [
                 {
-                    model: Role, // Use models.Role
+                    model: models.Role, // Use models.Role
                     as: 'roles',
                 },
                 {
-                    model: UserRestaurant, // Use models.UserRestaurant
+                    model: models.UserRestaurant, // Use models.UserRestaurant
                     as: 'restaurants',
-                    include: [{ model: Restaurant, as: 'restaurant' }], // Use models.Restaurant
+                    include: [{ model: models.Restaurant, as: 'restaurant' }],
                 },
             ]
         });
@@ -179,7 +177,7 @@ module.exports = (models) => {
 
     const updateProfile = async (userId, profileData) => {
         // Use models.User instead of db.User
-        const user = await User.findByPk(userId);
+        const user = await models.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');
@@ -200,7 +198,7 @@ module.exports = (models) => {
 
     const changePassword = async (userId, currentPassword, newPassword) => {
         // Use models.User instead of db.User
-        const user = await User.findByPk(userId);
+        const user = await models.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');

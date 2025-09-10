@@ -6,21 +6,23 @@ const auditService = require('services/auditService'); // Import auditService
 
 module.exports = (models) => {
     console.log('Models object in auth.service.js:', models);
+    const { User, Role, UserRestaurant, Restaurant } = models; // Destructure models here
+
     // Helper to build the menu hierarchy with access flags
 
 
     const login = async (email, password) => {
-        let user = await models.User.findOne({
+        let user = await User.findOne({
             where: { email },
             include: [
                 {
-                    model: models.Role,
+                    model: Role,
                     as: 'roles',
                 },
                 {
-                    model: models.UserRestaurant,
+                    model: UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: models.Restaurant, as: 'restaurant' }],
+                    include: [{ model: Restaurant, as: 'restaurant' }],
                 },
             ],
         });
@@ -107,16 +109,16 @@ module.exports = (models) => {
         // if (!db.User) { ... }
 
         // Use models.User instead of db.User
-        const user = await models.User.findByPk(userId, {
+        const user = await User.findByPk(userId, {
             include: [
                 {
-                    model: models.Role, // Use models.Role
+                    model: Role, // Use models.Role
                     as: 'roles',
                 },
                 {
-                    model: models.UserRestaurant, // Use models.UserRestaurant
+                    model: UserRestaurant, // Use models.UserRestaurant
                     as: 'restaurants',
-                    include: [{ model: models.Restaurant, as: 'restaurant' }], // Use models.Restaurant
+                    include: [{ model: Restaurant, as: 'restaurant' }], // Use models.Restaurant
                 },
             ]
         });
@@ -177,7 +179,7 @@ module.exports = (models) => {
 
     const updateProfile = async (userId, profileData) => {
         // Use models.User instead of db.User
-        const user = await models.User.findByPk(userId);
+        const user = await User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');
@@ -198,7 +200,7 @@ module.exports = (models) => {
 
     const changePassword = async (userId, currentPassword, newPassword) => {
         // Use models.User instead of db.User
-        const user = await models.User.findByPk(userId);
+        const user = await User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');

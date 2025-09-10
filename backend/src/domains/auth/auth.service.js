@@ -4,22 +4,22 @@ const { UnauthorizedError, ForbiddenError, NotFoundError } = require('utils/erro
 const iamService = require('services/iamService'); // Import the new IAM service
 const auditService = require('services/auditService'); // Import auditService
 
-module.exports = (db) => {
+module.exports = (models) => {
     // Helper to build the menu hierarchy with access flags
 
 
     const login = async (email, password) => {
-        let user = await db.models.User.findOne({
+        let user = await models.User.findOne({
             where: { email },
             include: [
                 {
-                    model: db.models.Role,
+                    model: models.Role,
                     as: 'roles',
                 },
                 {
-                    model: db.models.UserRestaurant,
+                    model: models.UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: db.models.Restaurant, as: 'restaurant' }],
+                    include: [{ model: models.Restaurant, as: 'restaurant' }],
                 },
             ],
         });
@@ -105,17 +105,17 @@ module.exports = (db) => {
         // console.log('db.User in getMe (before findByPk):', db.User);
         // if (!db.User) { ... }
 
-        // Use db.models.User instead of db.User
-        const user = await db.models.User.findByPk(userId, {
+        // Use models.User instead of db.User
+        const user = await models.User.findByPk(userId, {
             include: [
                 {
-                    model: db.models.Role, // Use db.models.Role
+                    model: models.Role, // Use models.Role
                     as: 'roles',
                 },
                 {
-                    model: db.models.UserRestaurant, // Use db.models.UserRestaurant
+                    model: models.UserRestaurant, // Use models.UserRestaurant
                     as: 'restaurants',
-                    include: [{ model: db.models.Restaurant, as: 'restaurant' }], // Use db.models.Restaurant
+                    include: [{ model: models.Restaurant, as: 'restaurant' }], // Use models.Restaurant
                 },
             ]
         });
@@ -175,8 +175,8 @@ module.exports = (db) => {
     };
 
     const updateProfile = async (userId, profileData) => {
-        // Use db.models.User instead of db.User
-        const user = await db.models.User.findByPk(userId);
+        // Use models.User instead of db.User
+        const user = await models.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');
@@ -196,8 +196,8 @@ module.exports = (db) => {
     };
 
     const changePassword = async (userId, currentPassword, newPassword) => {
-        // Use db.models.User instead of db.User
-        const user = await db.models.User.findByPk(userId);
+        // Use models.User instead of db.User
+        const user = await models.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');

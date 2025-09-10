@@ -2,7 +2,7 @@ const { verifyToken } = require('../services/jwtService');
 const { UnauthorizedError, ForbiddenError } = require('utils/errors');
 
 module.exports = (db) => {
-    const authService = require('../domains/auth/auth.service')(db);
+    const authService = require('../domains/auth/auth.service')(db.models);
 
     const authMiddleware = async (req, res, next) => {
         try {

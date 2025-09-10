@@ -1,5 +1,5 @@
 'use strict';
-const { models } = require('../../../models');
+const models = require('../../../models');
 const { Op } = require('sequelize');
 const iamService = require('services/iamService'); // For permission checks/snapshots
 const auditService = require('../../services/auditService'); // Import auditService

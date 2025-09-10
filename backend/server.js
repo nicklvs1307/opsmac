@@ -59,8 +59,31 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Servir arquivos estáticos
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
-// Configuração das Rotas
-app.use("/api", routes(db));
+
+// Swagger UI
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('config/swagger');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use(errorHandler);
+
+// Inicializar servidor
+const startServer = async () => {
+  try {
+    await db.sequelize.authenticate();
+    console.log('✅ Conexão com banco de dados estabelecida');
+    
+    // Configuração das Rotas
+    app.use("/api", routes(db));
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Servidor rodando na porta ${PORT}`);
+    });
+  } catch (error) {
+    console.error('❌ Erro ao iniciar servidor:', error);
+    process.exit(1);
+  }
+};
 
 // Swagger UI
 const swaggerUi = require('swagger-ui-express');

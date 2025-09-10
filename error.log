@@ -1,13 +1,9 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-/app/node_modules/express/lib/router/route.js:216
-        throw new Error(msg);
-
-^
-Error: Route.post() requires a callback function but got a [object Promise]
-    at Route.<computed> [as post] (/app/node_modules/express/lib/router/route.js:216:15)
-    at proto.<computed> [as post] (/app/node_modules/express/lib/router/index.js:521:19)
-    at module.exports (/app/src/domains/publicV2/publicV2.routes.js:13:12)
+/app/routes/index.js:15
+            router.use(`/${name}`, require(routeFile)(db));
+                                                     ^
+TypeError: require(...) is not a function
     at module.exports (/app/routes/index.js:15:54)
     at Object.<anonymous> (/app/server.js:63:17)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
@@ -15,4 +11,5 @@ Error: Route.post() requires a callback function but got a [object Promise]
     at Module.load (node:internal/modules/cjs/loader:1266:32)
     at Module._load (node:internal/modules/cjs/loader:1091:12)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49
 Node.js v20.19.5

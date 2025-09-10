@@ -85,27 +85,7 @@ const startServer = async () => {
   }
 };
 
-// Swagger UI
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('config/swagger');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use(errorHandler);
-
-// Inicializar servidor
-const startServer = async () => {
-  try {
-    await db.sequelize.authenticate();
-    console.log('✅ Conexão com banco de dados estabelecida');
-    
-    app.listen(PORT, () => {
-      console.log(`🚀 Servidor rodando na porta ${PORT}`);
-    });
-  } catch (error) {
-    console.error('❌ Erro ao iniciar servidor:', error);
-    process.exit(1);
-  }
-};
 
 startServer();
 

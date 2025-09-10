@@ -119,18 +119,7 @@ module.exports = (db) => {
                 },
             ]
         });
-            include: [
-                {
-                    model: db.Role,
-                    as: 'roles',
-                },
-                {
-                    model: db.UserRestaurant,
-                    as: 'restaurants',
-                    include: [{ model: db.Restaurant, as: 'restaurant' }],
-                },
-            ]
-        });
+            
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');

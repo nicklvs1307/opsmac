@@ -1,17 +1,16 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-/app/src/domains/supplier/supplier.routes.js:32
-};
-  
-SyntaxError: Unexpected end of input
-    at wrapSafe (node:internal/modules/cjs/loader:1464:18)
-    at Module._compile (node:internal/modules/cjs/loader:1495:20)
+/app/src/domains/supplier/supplier.routes.js:13
+  router.post('/', auth, requirePermission('suppliers', 'create'), ...supplierValidation, asyncHandler(supplierController.createSupplier));
+                                                                      ^
+TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
+    at module.exports (/app/src/domains/supplier/supplier.routes.js:13:71)
+    at module.exports (/app/routes/index.js:15:54)
+    at Object.<anonymous> (/app/server.js:63:17)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
     at Module.load (node:internal/modules/cjs/loader:1266:32)
     at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at module.exports (/app/routes/index.js:15:36)
-    at Object.<anonymous> (/app/server.js:63:17)
-    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49
 Node.js v20.19.5

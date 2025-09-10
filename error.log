@@ -1,18 +1,17 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-/app/src/domains/saipos/saipos.service.js:88
-        handleWebhook,
-
-^
-ReferenceError: handleWebhook is not defined
-    at module.exports (/app/src/domains/saipos/saipos.service.js:88:9)
-    at module.exports (/app/src/domains/saipos/saipos.controller.js:5:54)
-    at module.exports (/app/src/domains/saipos/saipos.routes.js:7:73)
-    at module.exports (/app/routes/index.js:15:54)
-    at Object.<anonymous> (/app/server.js:63:17)
-    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+/app/src/domains/supplier/supplier.routes.js:32
+};
+  
+SyntaxError: Unexpected end of input
+    at wrapSafe (node:internal/modules/cjs/loader:1464:18)
+    at Module._compile (node:internal/modules/cjs/loader:1495:20)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
     at Module.load (node:internal/modules/cjs/loader:1266:32)
     at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18)
+    at module.exports (/app/routes/index.js:15:36)
+    at Object.<anonymous> (/app/server.js:63:17)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
 Node.js v20.19.5

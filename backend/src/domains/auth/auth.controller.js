@@ -3,7 +3,7 @@ const { loginValidation, updateProfileValidation, changePasswordValidation } = r
 const { validationResult } = require('express-validator');
 
 module.exports = (db) => {
-    const authService = require('./auth.service')(db);
+    const authService = require('./auth.service')(db.models);
 
     const handleValidationErrors = (req) => {
         const errors = validationResult(req);

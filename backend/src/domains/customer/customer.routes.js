@@ -1,7 +1,7 @@
 const safeRouter = require('../../utils/safeRouter');
 const asyncHandler = require('utils/asyncHandler');
 // const requirePermission = require('middleware/requirePermission'); // Removed
-const iamService = require('../services/iamService'); // Added
+const iamService = require('../../services/iamService'); // Added
 const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('utils/errors'); // Added
 
 module.exports = (db) => { // Added comment to force reload

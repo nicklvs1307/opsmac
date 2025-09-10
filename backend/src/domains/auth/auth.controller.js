@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 module.exports = (db) => {
     console.log('DB object in auth.controller.js:', db);
     console.log('DB.models in auth.controller.js:', db.models);
-    const authService = require('./auth.service');
+    const authService = require('./auth.service')(db);
 
     const handleValidationErrors = (req) => {
         const errors = validationResult(req);
@@ -17,7 +17,7 @@ module.exports = (db) => {
     const login = async (req, res, next) => {
         handleValidationErrors(req);
         const { email, password } = req.body;
-        const result = await authService.login(db, email, password);
+        const result = await authService.login(email, password);
 
         res.json({
             message: 'Login realizado com sucesso',
@@ -34,7 +34,7 @@ module.exports = (db) => {
     const updateProfile = async (req, res, next) => {
         handleValidationErrors(req);
         const { name, phone, avatar } = req.body;
-        const updatedUser = await authService.updateProfile(db, req.user.userId, { name, phone, avatar });
+        const updatedUser = await authService.updateProfile(req.user.userId, { name, phone, avatar });
 
         res.json({
             message: 'Perfil atualizado com sucesso',
@@ -45,7 +45,7 @@ module.exports = (db) => {
     const changePassword = async (req, res, next) => {
         handleValidationErrors(req);
         const { currentPassword, newPassword } = req.body;
-        await authService.changePassword(db, req.user.userId, currentPassword, newPassword);
+        await authService.changePassword(req.user.userId, currentPassword, newPassword);
 
         res.json({ message: 'Senha alterada com sucesso' });
     };

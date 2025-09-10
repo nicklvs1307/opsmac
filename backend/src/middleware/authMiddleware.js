@@ -2,7 +2,7 @@ const { verifyToken } = require('../services/jwtService');
 const { UnauthorizedError, ForbiddenError } = require('utils/errors');
 
 module.exports = (db) => {
-    const authService = require('../domains/auth/auth.service');
+    const authService = require('../domains/auth/auth.service')(db);
 
     const authMiddleware = async (req, res, next) => {
         try {
@@ -22,7 +22,7 @@ module.exports = (db) => {
                 return next(new UnauthorizedError('Token inválido ou expirado.'));
             }
 
-            const user = await authService.getMe(db, decoded.userId);
+            const user = await authService.getMe(decoded.userId);
 
             if (!user) {
                 return next(new UnauthorizedError('Usuário do token não encontrado.'));

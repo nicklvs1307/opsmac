@@ -1,6 +1,7 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-DB object exported from models/index.js: {
+✅ Conexão com banco de dados estabelecida
+DB object in auth.controller.js: {
   Action: Action,
   Addon: Addon,
   Answer: Answer,
@@ -74,7 +75,7 @@ DB object exported from models/index.js: {
       retry: [Object],
       transactionType: 'DEFERRED',
       isolationLevel: null,
-      databaseVersion: 0,
+      databaseVersion: '14.19.0',
       typeValidation: false,
       benchmark: false,
       minifyAliases: false,
@@ -172,9 +173,9 @@ DB object exported from models/index.js: {
       dialectName: 'postgres',
       pool: [Pool],
       lib: [PG],
-      nameOidMap: {},
+      nameOidMap: [Object],
       enumOids: [Object],
-      oidParserMap: Map(0) {}
+      oidParserMap: [Map]
     }
   },
   Sequelize: <ref *8> [class Sequelize] {
@@ -813,15 +814,32 @@ DB object exported from models/index.js: {
   testConnection: [AsyncFunction (anonymous)],
   syncDatabase: [AsyncFunction (anonymous)]
 }
-✅ Conexão com banco de dados estabelecida
-❌ Erro ao iniciar servidor: ReferenceError: db is not defined
-    at Object.<anonymous> (/app/src/domains/auth/auth.service.js:7:58)
-    at Module._compile (node:internal/modules/cjs/loader:1521:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-    at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at module.exports (/app/src/middleware/authMiddleware.js:5:25)
-    at module.exports (/app/src/domains/addons/addons.routes.js:9:56)
-    at module.exports (/app/routes/index.js:15:54)
+DB.models in auth.controller.js: undefined
+🚀 Servidor rodando na porta 5000
+Redis Client Connected
+db.User in getMe (before findByPk): User
+db.User in getMe (before findByPk): undefined
+DEBUG: authMiddleware - error: TypeError: Cannot read properties of undefined (reading 'findByPk')
+    at Object.getMe (/app/src/domains/auth/auth.service.js:104:32)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:25:44)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+TypeError: Cannot read properties of undefined (reading 'findByPk')
+    at Object.getMe (/app/src/domains/auth/auth.service.js:104:32)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:25:44)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+db.User in getMe (before findByPk): User
+db.User in getMe (before findByPk): User

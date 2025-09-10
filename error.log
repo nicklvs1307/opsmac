@@ -1,9 +1,13 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-/app/routes/index.js:15
-            router.use(`/${name}`, require(routeFile)(db));
-                                                     ^
-TypeError: require(...) is not a function
+/app/src/domains/saipos/saipos.service.js:88
+        handleWebhook,
+
+^
+ReferenceError: handleWebhook is not defined
+    at module.exports (/app/src/domains/saipos/saipos.service.js:88:9)
+    at module.exports (/app/src/domains/saipos/saipos.controller.js:5:54)
+    at module.exports (/app/src/domains/saipos/saipos.routes.js:7:73)
     at module.exports (/app/routes/index.js:15:54)
     at Object.<anonymous> (/app/server.js:63:17)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
@@ -11,5 +15,4 @@ TypeError: require(...) is not a function
     at Module.load (node:internal/modules/cjs/loader:1266:32)
     at Module._load (node:internal/modules/cjs/loader:1091:12)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
-    at node:internal/main/run_main_module:28:49
 Node.js v20.19.5

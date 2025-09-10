@@ -85,7 +85,7 @@ module.exports = (db) => {
 
     return {
         checkSaiposModuleEnabled,
-        handleWebhook,
+        processWebhookEventInternal,
         getOrders,
     };
 };

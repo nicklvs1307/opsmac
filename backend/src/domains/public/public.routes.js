@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('utils/asyncHandler');
 
 module.exports = (db) => {
-    const apiAuth = require('middleware/apiAuthMiddleware')(db);
+    const { apiAuth } = require('middleware/apiAuthMiddleware')(db);
     const publicController = require('./public.controller')(db);
     const {
         submitPublicFeedbackValidation,

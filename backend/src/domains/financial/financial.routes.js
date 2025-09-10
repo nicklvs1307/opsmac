@@ -4,7 +4,8 @@ const requirePermission = require('middleware/requirePermission');
 const { createTransactionValidation, reportValidation, createPaymentMethodValidation, updatePaymentMethodValidation } = require('domains/financial/financial.validation');
 const asyncHandler = require('utils/asyncHandler'); // Adicionar esta linha
 
-module.exports = (db, financialController) => {
+module.exports = (db) => {
+  const financialController = require('./financial.controller')(db);
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

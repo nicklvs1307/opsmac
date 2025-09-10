@@ -6,7 +6,8 @@ const asyncHandler = require('utils/asyncHandler'); // Adicionar esta linha
 
 const { createProductValidation, updateProductValidation } = require('domains/products/products.validation');
 
-module.exports = (db, productsController) => {
+module.exports = (db) => {
+  const productsController = require('./products.controller')(db);
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

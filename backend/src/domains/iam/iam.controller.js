@@ -3,6 +3,7 @@ const { models } = require('../../../models');
 const { Op } = require('sequelize');
 const iamService = require('../../services/iamService'); // For permission checks/snapshots
 const auditService = require('../../services/auditService'); // Import auditService
+const entitlementService = require('../../services/entitlementService'); // Import entitlementService
 const { UnauthorizedError, BadRequestError, ForbiddenError, PaymentRequiredError, NotFoundError, InternalServerError } = require('utils/errors'); // Import custom errors
 
 class IamController {

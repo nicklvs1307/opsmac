@@ -1,9 +1,14 @@
 const path = require("path");
 const fs = require("fs");
 const safeRouter = require("../src/utils/safeRouter");
+const getRestaurantContextMiddleware = require("../src/middleware/getRestaurantContextMiddleware"); // Import the middleware
 
 module.exports = (db) => {
     const router = safeRouter();
+
+    // Apply the restaurant context middleware globally to all routes handled by this router
+    router.use(getRestaurantContextMiddleware()); // Call it as a function to get the middleware
+
     const domainsDir = path.join(__dirname, "..", "src", "domains");
 
     for (const entry of fs.readdirSync(domainsDir, { withFileTypes: true })) {

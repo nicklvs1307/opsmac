@@ -3,12 +3,6 @@
 ✅ Conexão com banco de dados estabelecida
 🚀 Servidor rodando na porta 5000
 Redis Client Connected
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
 req.user in requirePermission: {
   id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
   name: 'Super Admin',
@@ -41,9 +35,10 @@ req.user in requirePermission: {
   ],
   restaurant: null,
   restaurantId: null,
+  isSuperadmin: true,
   permissionSnapshot: { isSuperAdmin: true, permissions: {} }
 }
-req.user.isSuperadmin in requirePermission: undefined
+req.user.isSuperadmin in requirePermission: true
 req.user in requirePermission: {
   id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
   name: 'Super Admin',
@@ -76,460 +71,28 @@ req.user in requirePermission: {
   ],
   restaurant: null,
   restaurantId: null,
+  isSuperadmin: true,
   permissionSnapshot: { isSuperAdmin: true, permissions: {} }
 }
-req.user.isSuperadmin in requirePermission: undefined
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'restaurantId')
+    at getCouponAnalytics (/app/src/domains/coupons/coupons.controller.js:47:46)
+    at /app/src/utils/asyncHandler.js:3:25
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: undefined
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
+    at /app/src/middleware/requirePermission.js:19:14
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
+TypeError: Cannot read properties of undefined (reading 'restaurantId')
+    at listCoupons (/app/src/domains/coupons/coupons.controller.js:17:46)
+    at /app/src/utils/asyncHandler.js:3:25
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-models.User in getMe (before findByPk): User
-models.User in getMe (before findByPk): User
 req.user in requirePermission: {
   id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
   name: 'Super Admin',
@@ -562,9 +125,21 @@ req.user in requirePermission: {
   ],
   restaurant: null,
   restaurantId: null,
+  isSuperadmin: true,
   permissionSnapshot: { isSuperAdmin: true, permissions: {} }
 }
-req.user.isSuperadmin in requirePermission: undefined
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'restaurantId')
+    at getCouponAnalytics (/app/src/domains/coupons/coupons.controller.js:47:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
 req.user in requirePermission: {
   id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
   name: 'Super Admin',
@@ -597,24 +172,288 @@ req.user in requirePermission: {
   ],
   restaurant: null,
   restaurantId: null,
+  isSuperadmin: true,
   permissionSnapshot: { isSuperAdmin: true, permissions: {} }
 }
-req.user.isSuperadmin in requirePermission: undefined
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'restaurantId')
+    at listCoupons (/app/src/domains/coupons/coupons.controller.js:17:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'restaurantId')
+    at getRestaurantSettings (/app/src/domains/settings/settings.controller.js:29:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/middleware/requirePermission.js:25:19
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'restaurantId')
+    at getRestaurantSettings (/app/src/domains/settings/settings.controller.js:29:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:39:13)
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:65:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:65:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'restaurantId')
+    at getRestaurantSettings (/app/src/domains/settings/settings.controller.js:29:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+req.user in requirePermission: {
+  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+TypeError: Cannot read properties of undefined (reading 'restaurantId')
+    at getRestaurantSettings (/app/src/domains/settings/settings.controller.js:29:46)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:50:9)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)

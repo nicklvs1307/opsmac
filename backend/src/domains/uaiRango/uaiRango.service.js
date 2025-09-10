@@ -85,7 +85,7 @@ module.exports = (db) => {
 
     return {
         checkUaiRangoModuleEnabled,
-        handleWebhook,
+        processWebhookEventInternal,
         getOrders,
     };
 };

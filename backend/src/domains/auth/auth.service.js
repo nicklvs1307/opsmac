@@ -11,17 +11,17 @@ module.exports = (models) => {
 
 
     const login = async (email, password) => {
-        let user = await db.User.findOne({
+        let user = await User.findOne({
             where: { email },
             include: [
                 {
-                    model: db.Role,
+                    model: Role,
                     as: 'roles',
                 },
                 {
-                    model: db.UserRestaurant,
+                    model: UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: db.Restaurant, as: 'restaurant' }],
+                    include: [{ model: Restaurant, as: 'restaurant' }],
                 },
             ],
         });
@@ -103,16 +103,16 @@ module.exports = (models) => {
     };
 
     const getMe = async (userId) => {
-        const user = await db.User.findByPk(userId, {
+        const user = await User.findByPk(userId, {
             include: [
                 {
-                    model: db.Role,
+                    model: Role,
                     as: 'roles',
                 },
                 {
-                    model: db.UserRestaurant,
+                    model: UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: db.Restaurant, as: 'restaurant' }],
+                    include: [{ model: Restaurant, as: 'restaurant' }],
                 },
             ]
         });
@@ -171,7 +171,7 @@ module.exports = (models) => {
     };
 
     const updateProfile = async (userId, profileData) => {
-        const user = await db.User.findByPk(userId);
+        const user = await User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');
@@ -191,7 +191,7 @@ module.exports = (models) => {
     };
 
     const changePassword = async (userId, currentPassword, newPassword) => {
-        const user = await db.User.findByPk(userId);
+        const user = await User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');

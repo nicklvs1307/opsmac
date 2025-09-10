@@ -1,13 +1,11 @@
 const express = require('express');
+const asyncHandler = require('utils/asyncHandler'); // Add this import
 
 module.exports = (db) => {
     const rewardsController = require('./rewards.controller')(db);
     const router = express.Router();
 
-    router.get('/:id', (req, res, next) => {
-        console.log('Inside route handler');
-        getRewardById(req, res, next);
-    });
+    router.get('/:id', asyncHandler(rewardsController.getRewardById)); // Correct delegation
 
     return router;
 };

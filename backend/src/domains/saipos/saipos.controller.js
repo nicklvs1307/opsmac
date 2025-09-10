@@ -1,36 +1,29 @@
 const { BadRequestError } = require('utils/errors');
+const auditService = require('../../services/auditService'); // Import auditService
 
 module.exports = (db) => {
     const saiposService = require('./saipos.service')(db);
 
     return {
         checkSaiposModuleEnabled: async (req, res, next) => {
-            try {
-                const restaurantId = req.body.restaurant_id; // Ajuste conforme o payload real da Saipos
-                const restaurant = await saiposService.checkSaiposModuleEnabled(restaurantId, req.user?.userId);
-                req.restaurant = restaurant; // Anexa o objeto do restaurante à requisição
-                next();
-            } catch (error) {
-                next(error);
-            }
+            const restaurantId = req.body.restaurant_id;
+            const restaurant = await saiposService.checkSaiposModuleEnabled(restaurantId, req.user?.userId);
+            req.restaurant = restaurant;
+            next();
         },
 
         handleWebhook: async (req, res, next) => {
-            try {
-                await saiposService.handleWebhook(req.body);
-                res.status(200).send('OK');
-            } catch (error) {
-                next(error);
-            }
+            await saiposService.handleWebhook(req.body);
+            // Webhooks don't have req.user, so pass null for user.
+            // restaurantId can be extracted from req.body if available in the webhook payload.
+            const restaurantId = req.body.restaurant_id || null;
+            await auditService.log(null, restaurantId, 'SAIPOS_WEBHOOK_RECEIVED', `WebhookType:${req.body.eventType}`, { payload: req.body });
+            res.status(200).send('OK');
         },
 
         getOrders: async (req, res, next) => {
-            try {
-                const orders = await saiposService.getOrders(req.user.userId, req.query.status);
-                res.json({ orders });
-            } catch (error) {
-                next(error);
-            }
+            const orders = await saiposService.getOrders(req.user.userId, req.query.status);
+            res.json({ orders });
         },
     };
 };

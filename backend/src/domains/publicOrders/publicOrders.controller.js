@@ -1,6 +1,7 @@
 const publicOrdersService = require('./publicOrders.service');
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
+const auditService = require('../../services/auditService'); // Import auditService
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);
@@ -10,14 +11,12 @@ const handleValidationErrors = (req) => {
 };
 
 exports.createPublicOrder = async (req, res, next) => {
-  try {
-    handleValidationErrors(req);
-    const { restaurant_id, delivery_type, total_amount, items, customer_details, delivery_address, payment_method, notes } = req.body;
-    const order = await publicOrdersService.createPublicOrder(
-      restaurant_id, delivery_type, total_amount, items, customer_details, delivery_address, payment_method, notes
-    );
-    res.status(201).json({ message: 'Pedido criado com sucesso!', orderId: order.id });
-  } catch (error) {
-    next(error);
-  }
+  handleValidationErrors(req);
+  const { restaurant_id, delivery_type, total_amount, items, customer_details, delivery_address, payment_method, notes } = req.body;
+  const order = await publicOrdersService.createPublicOrder(
+    restaurant_id, delivery_type, total_amount, items, customer_details, delivery_address, payment_method, notes
+  );
+  // No req.user for public routes, so pass null for user
+  await auditService.log(null, restaurant_id, 'PUBLIC_ORDER_CREATED', `Order:${order.id}`, { delivery_type, total_amount, customer_details });
+  res.status(201).json({ message: 'Pedido criado com sucesso!', orderId: order.id });
 };

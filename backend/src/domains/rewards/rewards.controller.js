@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
+const auditService = require('../../services/auditService'); // Import auditService
 
 module.exports = (db) => {
     const rewardsService = require('./rewards.service')(db);
@@ -14,73 +15,49 @@ module.exports = (db) => {
 
     return {
         listRewards: async (req, res, next) => {
-            try {
-                const restaurantId = req.context.restaurantId;
-                const data = await rewardsService.listRewards(restaurantId, req.query);
-                res.json(data);
-            } catch (error) {
-                next(error);
-            }
+            const restaurantId = req.context.restaurantId;
+            const data = await rewardsService.listRewards(restaurantId, req.query);
+            res.json(data);
         },
 
         getRewardById: async (req, res, next) => {
-            try {
-                const reward = await rewardsService.getRewardById(req.params.id);
-                res.json(reward);
-            } catch (error) {
-                next(error);
-            }
+            const reward = await rewardsService.getRewardById(req.params.id);
+            res.json(reward);
         },
 
         createReward: async (req, res, next) => {
-            try {
-                handleValidationErrors(req);
-                const restaurantId = req.context.restaurantId;
-                const reward = await rewardsService.createReward(req.body, restaurantId);
-                res.status(201).json(reward);
-            } catch (error) {
-                next(error);
-            }
+            handleValidationErrors(req);
+            const restaurantId = req.context.restaurantId;
+            const reward = await rewardsService.createReward(req.body, restaurantId);
+            await auditService.log(req.user, restaurantId, 'REWARD_CREATED', `Reward:${reward.id}`, { title: reward.title, type: reward.rewardType });
+            res.status(201).json(reward);
         },
 
         updateReward: async (req, res, next) => {
-            try {
-                handleValidationErrors(req);
-                const reward = await rewardsService.updateReward(req.params.id, req.body);
-                res.json(reward);
-            } catch (error) {
-                next(error);
-            }
+            handleValidationErrors(req);
+            const reward = await rewardsService.updateReward(req.params.id, req.body);
+            await auditService.log(req.user, req.context.restaurantId, 'REWARD_UPDATED', `Reward:${reward.id}`, { updatedData: req.body });
+            res.json(reward);
         },
 
         deleteReward: async (req, res, next) => {
-            try {
-                const result = await rewardsService.deleteReward(req.params.id);
-                res.status(200).json(result);
-            } catch (error) {
-                next(error);
-            }
+            const result = await rewardsService.deleteReward(req.params.id);
+            await auditService.log(req.user, req.context.restaurantId, 'REWARD_DELETED', `Reward:${req.params.id}`, {});
+            res.status(200).json(result);
         },
 
         spinWheel: async (req, res, next) => {
-            try {
-                handleValidationErrors(req);
-                const { reward_id, customer_id } = req.body;
-                const result = await rewardsService.spinWheel(reward_id, customer_id);
-                res.status(200).json(result);
-            } catch (error) {
-                next(error);
-            }
+            handleValidationErrors(req);
+            const { reward_id, customer_id } = req.body;
+            const result = await rewardsService.spinWheel(reward_id, customer_id);
+            await auditService.log(req.user, req.context.restaurantId, 'WHEEL_SPIN', `Reward:${reward_id}/Customer:${customer_id}`, { result });
+            res.status(200).json(result);
         },
 
         getRewardsAnalytics: async (req, res, next) => {
-            try {
-                const restaurantId = req.context.restaurantId;
-                const data = await rewardsService.getRewardsAnalytics(restaurantId);
-                res.json(data);
-            } catch (error) {
-                next(error);
-            }
+            const restaurantId = req.context.restaurantId;
+            const data = await rewardsService.getRewardsAnalytics(restaurantId);
+            res.json(data);
         },
     };
 };

@@ -1,6 +1,7 @@
 module.exports = (stockService) => {
   const { validationResult } = require('express-validator');
   const { BadRequestError } = require('utils/errors');
+  const auditService = require('../../services/auditService'); // Import auditService
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
@@ -10,44 +11,29 @@ module.exports = (stockService) => {
   };
 
   const getDashboardData = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const dashboardData = await stockService.getDashboardData(restaurantId);
-      res.json(dashboardData);
-    } catch (error) {
-      next(error);
-    }
+    const restaurantId = req.context.restaurantId;
+    const dashboardData = await stockService.getDashboardData(restaurantId);
+    res.json(dashboardData);
   };
 
   const getAllStocks = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const stocks = await stockService.getAllStocks(restaurantId);
-      res.json(stocks);
-    } catch (error) {
-      next(error);
-    }
+    const restaurantId = req.context.restaurantId;
+    const stocks = await stockService.getAllStocks(restaurantId);
+    res.json(stocks);
   };
 
   const createStockMovement = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const restaurantId = req.context.restaurantId;
-      const stockMovement = await stockService.createStockMovement(restaurantId, req.body);
-      res.status(201).json(stockMovement);
-    } catch (error) {
-      next(error);
-    }
+    handleValidationErrors(req);
+    const restaurantId = req.context.restaurantId;
+    const stockMovement = await stockService.createStockMovement(restaurantId, req.body);
+    await auditService.log(req.user, restaurantId, 'STOCK_MOVEMENT_CREATED', `Movement:${stockMovement.id}`, { type: stockMovement.type, quantity: stockMovement.quantity, productId: stockMovement.productId });
+    res.status(201).json(stockMovement);
   };
 
   const getStockHistory = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const history = await stockService.getStockHistory(restaurantId, req.params.productId);
-      res.json(history);
-    } catch (error) {
-      next(error);
-    }
+    const restaurantId = req.context.restaurantId;
+    const history = await stockService.getStockHistory(restaurantId, req.params.productId);
+    res.json(history);
   };
 
   return {

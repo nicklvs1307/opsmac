@@ -10,35 +10,23 @@ module.exports = (publicProductsService) => {
   };
 
   const getProductsForPublicMenu = async (req, res, next) => {
-    try {
-      const { restaurantSlug } = req.params;
-      const { category } = req.query;
-      const { products, restaurant } = await publicProductsService.getProductsForPublicMenu(restaurantSlug, category);
-      res.json({ products, restaurant });
-    } catch (error) {
-      next(error);
-    }
+    const { restaurantSlug } = req.params;
+    const { category } = req.query;
+    const { products, restaurant } = await publicProductsService.getProductsForPublicMenu(restaurantSlug, category);
+    res.json({ products, restaurant });
   };
 
   const getProductsForPublicDeliveryMenu = async (req, res, next) => {
-    try {
-      const { restaurantSlug } = req.params;
-      const { category } = req.query;
-      const { products, restaurant } = await publicProductsService.getProductsForPublicDeliveryMenu(restaurantSlug, category);
-      res.json({ products, restaurant });
-    } catch (error) {
-      next(error);
-    }
+    const { restaurantSlug } = req.params;
+    const { category } = req.query;
+    const { products, restaurant } = await publicProductsService.getProductsForPublicDeliveryMenu(restaurantSlug, category);
+    res.json({ products, restaurant });
   };
 
   const getSingleProductForPublicMenu = async (req, res, next) => {
-    try {
-      const { restaurantSlug, productId } = req.params;
-      const product = await publicProductsService.getSingleProductForPublicMenu(restaurantSlug, productId);
-      res.json(product);
-    } catch (error) {
-      next(error);
-    }
+    const { restaurantSlug, productId } = req.params;
+    const product = await publicProductsService.getSingleProductForPublicMenu(restaurantSlug, productId);
+    res.json(product);
   };
 
   return {

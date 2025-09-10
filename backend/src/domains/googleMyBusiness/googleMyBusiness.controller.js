@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
+const auditService = require('../../services/auditService'); // Import auditService
 
 module.exports = (db) => {
     const googleMyBusinessService = require('./googleMyBusiness.service')(db);
@@ -13,65 +14,45 @@ module.exports = (db) => {
 
     return {
         checkGMBModuleEnabled: async (req, res, next) => {
-            try {
-                req.restaurant = await googleMyBusinessService.checkGMBModuleEnabled(req.context.restaurantId);
-                next();
-            } catch (error) {
-                next(error);
-            }
+            req.restaurant = await googleMyBusinessService.checkGMBModuleEnabled(req.context.restaurantId);
+            next();
         },
 
         getAuthUrl: async (req, res, next) => {
-            try {
-                const authUrl = await googleMyBusinessService.getAuthUrl(req.context.restaurantId);
-                res.json({ authUrl });
-            } catch (error) {
-                next(error);
-            }
+            const authUrl = await googleMyBusinessService.getAuthUrl(req.context.restaurantId);
+            await auditService.log(req.user, req.context.restaurantId, 'GMB_AUTH_URL_REQUESTED', `Restaurant:${req.context.restaurantId}`, {});
+            res.json({ authUrl });
         },
 
         oauth2Callback: async (req, res, next) => {
-            try {
-                const { code } = req.query;
-                // For oauth2Callback, the restaurantId is passed in the 'state' parameter during auth URL generation
-                // and retrieved from there in the service. So no change here.
-                const redirectUrl = await googleMyBusinessService.oauth2Callback(code, req.query.state);
-                res.redirect(redirectUrl);
-            } catch (error) {
-                console.error('Error processing GMB OAuth2 callback:', error.message);
-                res.redirect(process.env.FRONTEND_URL + '/integrations?status=error&integration=google-my_business');
-            }
+            const { code } = req.query;
+            const redirectUrl = await googleMyBusinessService.oauth2Callback(code, req.query.state);
+            // The user is not authenticated at this point, so req.user is not available.
+            // The restaurantId should be extracted from the state parameter if possible for auditing.
+            const state = JSON.parse(req.query.state || '{}');
+            const restaurantId = state.restaurantId || null;
+            await auditService.log(null, restaurantId, 'GMB_OAUTH_CALLBACK', `Code:${code}`, { state: req.query.state });
+            res.redirect(redirectUrl);
         },
 
         getLocations: async (req, res, next) => {
-            try {
-                const locations = await googleMyBusinessService.getLocations(req.context.restaurantId);
-                res.json({ locations });
-            } catch (error) {
-                next(error);
-            }
+            const locations = await googleMyBusinessService.getLocations(req.context.restaurantId);
+            res.json({ locations });
         },
 
         getReviews: async (req, res, next) => {
-            try {
-                const { locationName } = req.params;
-                const reviews = await googleMyBusinessService.getReviews(req.context.restaurantId, locationName);
-                res.json({ reviews });
-            } catch (error) {
-                next(error);
-            }
+            const { locationName } = req.params;
+            const reviews = await googleMyBusinessService.getReviews(req.context.restaurantId, locationName);
+            res.json({ reviews });
         },
 
         replyToReview: async (req, res, next) => {
-            try {
-                handleValidationErrors(req);
-                const { locationName, reviewName } = req.params;
-                const { comment } = req.body;
-                const reply = await googleMyBusinessService.replyToReview(req.context.restaurantId, locationName, reviewName, comment);
-                res.json({ reply });
-            } catch (error) {
-                next(error);
-            }
+            handleValidationErrors(req);
+            const { locationName, reviewName } = req.params;
+            const { comment } = req.body;
+            const reply = await googleMyBusinessService.replyToReview(req.context.restaurantId, locationName, reviewName, comment);
+            await auditService.log(req.user, req.context.restaurantId, 'GMB_REVIEW_REPLIED', `Review:${reviewName}`, { locationName, comment });
+            res.json({ reply });
         },
     };
 };

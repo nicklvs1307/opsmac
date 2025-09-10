@@ -10,13 +10,9 @@ module.exports = (publicDineInMenuService) => {
   };
 
   const getDineInMenu = async (req, res, next) => {
-    try {
-      const { restaurantSlug, tableNumber } = req.params;
-      const { products, table, restaurant } = await publicDineInMenuService.getDineInMenu(restaurantSlug, tableNumber);
-      res.json({ products, table, restaurant });
-    } catch (error) {
-      next(error);
-    }
+    const { restaurantSlug, tableNumber } = req.params;
+    const { products, table, restaurant } = await publicDineInMenuService.getDineInMenu(restaurantSlug, tableNumber);
+    res.json({ products, table, restaurant });
   };
 
   return {

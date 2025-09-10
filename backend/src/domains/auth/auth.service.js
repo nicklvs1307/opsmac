@@ -5,23 +5,23 @@ const iamService = require('services/iamService'); // Import the new IAM service
 const auditService = require('services/auditService'); // Import auditService
 
 module.exports = (db) => {
-    const models = db.models;
+    // const models = db.models; // Removed
 
     // Helper to build the menu hierarchy with access flags
 
 
     const login = async (email, password) => {
-        let user = await models.User.findOne({
+        let user = await db.User.findOne({
             where: { email },
             include: [
                 {
-                    model: models.Role,
+                    model: db.Role,
                     as: 'roles',
                 },
                 {
-                    model: models.UserRestaurant,
+                    model: db.UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: models.Restaurant, as: 'restaurant' }],
+                    include: [{ model: db.Restaurant, as: 'restaurant' }],
                 },
             ],
         });
@@ -103,16 +103,16 @@ module.exports = (db) => {
     };
 
     const getMe = async (userId) => {
-        const user = await models.User.findByPk(userId, {
+        const user = await db.User.findByPk(userId, {
             include: [
                 {
-                    model: models.Role,
+                    model: db.Role,
                     as: 'roles',
                 },
                 {
-                    model: models.UserRestaurant,
+                    model: db.UserRestaurant,
                     as: 'restaurants',
-                    include: [{ model: models.Restaurant, as: 'restaurant' }],
+                    include: [{ model: db.Restaurant, as: 'restaurant' }],
                 },
             ]
         });
@@ -171,7 +171,7 @@ module.exports = (db) => {
     };
 
     const updateProfile = async (userId, profileData) => {
-        const user = await models.User.findByPk(userId);
+        const user = await db.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');
@@ -191,7 +191,7 @@ module.exports = (db) => {
     };
 
     const changePassword = async (userId, currentPassword, newPassword) => {
-        const user = await models.User.findByPk(userId);
+        const user = await db.User.findByPk(userId);
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');

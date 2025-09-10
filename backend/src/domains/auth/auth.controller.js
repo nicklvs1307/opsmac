@@ -13,55 +13,39 @@ module.exports = (db) => {
     };
 
     const login = async (req, res, next) => {
-        try {
-            handleValidationErrors(req);
-            const { email, password } = req.body;
-            const result = await authService.login(email, password);
+        handleValidationErrors(req);
+        const { email, password } = req.body;
+        const result = await authService.login(email, password);
 
-            res.json({
-                message: 'Login realizado com sucesso',
-                ...result,
-            });
-        } catch (error) {
-            next(error);
-        }
+        res.json({
+            message: 'Login realizado com sucesso',
+            ...result,
+        });
     };
 
     const getMe = async (req, res, next) => {
-        try {
-            // O middleware de autenticação já anexa o usuário à requisição (req.user).
-            // Não há necessidade de chamar authService.getMe novamente aqui.
-            res.json({ user: req.user });
-        } catch (error) {
-            next(error);
-        }
+        // O middleware de autenticação já anexa o usuário à requisição (req.user).
+        // Não há necessidade de chamar authService.getMe novamente aqui.
+        res.json({ user: req.user });
     };
 
     const updateProfile = async (req, res, next) => {
-        try {
-            handleValidationErrors(req);
-            const { name, phone, avatar } = req.body;
-            const updatedUser = await authService.updateProfile(req.user.userId, { name, phone, avatar });
+        handleValidationErrors(req);
+        const { name, phone, avatar } = req.body;
+        const updatedUser = await authService.updateProfile(req.user.userId, { name, phone, avatar });
 
-            res.json({
-                message: 'Perfil atualizado com sucesso',
-                user: updatedUser
-            });
-        } catch (error) {
-            next(error);
-        }
+        res.json({
+            message: 'Perfil atualizado com sucesso',
+            user: updatedUser
+        });
     };
 
     const changePassword = async (req, res, next) => {
-        try {
-            handleValidationErrors(req);
-            const { currentPassword, newPassword } = req.body;
-            await authService.changePassword(req.user.userId, currentPassword, newPassword);
+        handleValidationErrors(req);
+        const { currentPassword, newPassword } = req.body;
+        await authService.changePassword(req.user.userId, currentPassword, newPassword);
 
-            res.json({ message: 'Senha alterada com sucesso' });
-        } catch (error) {
-            next(error);
-        }
+        res.json({ message: 'Senha alterada com sucesso' });
     };
 
     const logout = (req, res) => {

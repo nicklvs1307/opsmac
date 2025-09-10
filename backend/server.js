@@ -12,7 +12,7 @@ const { BaseError } = require('utils/errors');
 
 // Importação de Rotas
 const routes = require('./routes');
-const errorHandler = require('./src/middlewares/errorHandler');
+const errorHandler = require('./src/middleware/errorHandler');
 
 const app = express();
 app.set('trust proxy', 1);

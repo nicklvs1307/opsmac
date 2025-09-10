@@ -1,6 +1,13 @@
-module.exports = (financialService) => {
+module.exports = (db) => {
   const { validationResult } = require('express-validator');
   const { BadRequestError } = require('utils/errors');
+
+  // Importar e inicializar os novos serviços
+  const transactionService = require('./transactionService')(db);
+  const financialCategoryService = require('./financialCategoryService')(db);
+  const reportService = require('./reportService')(db);
+  const paymentMethodService = require('./paymentMethodService')(db);
+
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
@@ -9,118 +16,78 @@ module.exports = (financialService) => {
     }
   };
 
-  const createTransaction = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const restaurantId = req.context.restaurantId;
-      const transaction = await financialService.createTransaction(restaurantId, req.user.userId, req.body);
-      res.status(201).json(transaction);
-    } catch (error) {
-      next(error);
-    }
+  const createTransaction = async (req, res) => {
+    handleValidationErrors(req);
+    const restaurantId = req.context.restaurantId;
+    const transaction = await transactionService.createTransaction(restaurantId, req.user.userId, req.body);
+    res.status(201).json(transaction);
   };
 
-  const getTransactions = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const { type, category_id, start_date, end_date } = req.query;
-      const transactions = await financialService.getTransactions(restaurantId, type, category_id, start_date, end_date);
-      res.json(transactions);
-    } catch (error) {
-      next(error);
-    }
+  const getTransactions = async (req, res) => {
+    const restaurantId = req.context.restaurantId;
+    const { type, category_id, start_date, end_date } = req.query;
+    const transactions = await transactionService.getTransactions(restaurantId, type, category_id, start_date, end_date);
+    res.json(transactions);
   };
 
-  const getFinancialCategories = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const { type } = req.query;
-      const categories = await financialService.getFinancialCategories(restaurantId, type);
-      res.json(categories);
-    } catch (error) {
-      next(error);
-    }
+  const getFinancialCategories = async (req, res) => {
+    const restaurantId = req.context.restaurantId;
+    const { type } = req.query;
+    const categories = await financialCategoryService.getFinancialCategories(restaurantId, type);
+    res.json(categories);
   };
 
-  const getCashFlowReport = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const restaurantId = req.context.restaurantId;
-      const { start_date, end_date } = req.query;
-      const report = await financialService.getCashFlowReport(restaurantId, start_date, end_date);
-      res.json(report);
-    } catch (error) {
-      next(error);
-    }
+  const getCashFlowReport = async (req, res) => {
+    handleValidationErrors(req);
+    const restaurantId = req.context.restaurantId;
+    const { start_date, end_date } = req.query;
+    const report = await reportService.getCashFlowReport(restaurantId, start_date, end_date);
+    res.json(report);
   };
 
-  const getDreReport = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const restaurantId = req.context.restaurantId;
-      const { start_date, end_date } = req.query;
-      const report = await financialService.getDreReport(restaurantId, start_date, end_date);
-      res.json(report);
-    } catch (error) {
-      next(error);
-    }
+  const getDreReport = async (req, res) => {
+    handleValidationErrors(req);
+    const restaurantId = req.context.restaurantId;
+    const { start_date, end_date } = req.query;
+    const report = await reportService.getDreReport(restaurantId, start_date, end_date);
+    res.json(report);
   };
 
-  const createPaymentMethod = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const restaurantId = req.context.restaurantId;
-      const paymentMethod = await financialService.createPaymentMethod(restaurantId, req.body);
-      res.status(201).json(paymentMethod);
-    } catch (error) {
-      next(error);
-    }
+  const createPaymentMethod = async (req, res) => {
+    handleValidationErrors(req);
+    const restaurantId = req.context.restaurantId;
+    const paymentMethod = await paymentMethodService.createPaymentMethod(restaurantId, req.body);
+    res.status(201).json(paymentMethod);
   };
 
-  const getAllPaymentMethods = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const { type, is_active } = req.query;
-      const paymentMethods = await financialService.getAllPaymentMethods(restaurantId, type, is_active);
-      res.json(paymentMethods);
-    }  catch (error) {
-      next(error);
-    }
+  const getAllPaymentMethods = async (req, res) => {
+    const restaurantId = req.context.restaurantId;
+    const { type, is_active } = req.query;
+    const paymentMethods = await paymentMethodService.getAllPaymentMethods(restaurantId, type, is_active);
+    res.json(paymentMethods);
   };
 
-  const updatePaymentMethod = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const { id } = req.params;
-      const restaurantId = req.context.restaurantId;
-      const paymentMethod = await financialService.updatePaymentMethod(id, restaurantId, req.body);
-      res.json(paymentMethod);
-    } catch (error) {
-      next(error);
-    }
+  const updatePaymentMethod = async (req, res) => {
+    handleValidationErrors(req);
+    const { id } = req.params;
+    const restaurantId = req.context.restaurantId;
+    const paymentMethod = await paymentMethodService.updatePaymentMethod(id, restaurantId, req.body);
+    res.json(paymentMethod);
   };
 
-  const deletePaymentMethod = async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const restaurantId = req.context.restaurantId;
-      await financialService.deletePaymentMethod(id, restaurantId);
-      res.json({ message: 'Payment method deleted successfully.' });
-    } catch (error) {
-      next(error);
-    }
+  const deletePaymentMethod = async (req, res) => {
+    const { id } = req.params;
+    const restaurantId = req.context.restaurantId;
+    await paymentMethodService.deletePaymentMethod(id, restaurantId);
+    res.status(204).send(); // Alterado para 204 No Content
   };
 
-  const getSalesByPaymentMethodReport = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const restaurantId = req.context.restaurantId;
-      const { start_date, end_date } = req.query;
-      const report = await financialService.getSalesByPaymentMethodReport(restaurantId, start_date, end_date);
-      res.json(report);
-    } catch (error) {
-      next(error);
-    }
+  const getSalesByPaymentMethodReport = async (req, res) => {
+    handleValidationErrors(req);
+    const restaurantId = req.context.restaurantId;
+    const { start_date, end_date } = req.query;
+    const report = await reportService.getSalesByPaymentMethodReport(restaurantId, start_date, end_date);
+    res.json(report);
   };
 
   return {

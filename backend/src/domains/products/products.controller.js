@@ -1,6 +1,13 @@
-module.exports = (productsService) => {
+module.exports = (db) => {
   const { validationResult } = require('express-validator');
   const { BadRequestError } = require('utils/errors');
+
+  // Import and initialize the new services
+  const productCrudService = require('./productCrudService')(db);
+  const productImageService = require('./productImageService')(); // No db needed
+  const productAddonService = require('./productAddonService')(db);
+  const productVariationService = require('./productVariationService')(db);
+
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
@@ -9,79 +16,51 @@ module.exports = (productsService) => {
     }
   };
 
-  const uploadProductImage = async (req, res, next) => {
-    try {
-      if (!req.file) {
-        throw new BadRequestError('Nenhum arquivo de imagem enviado.');
-      }
-      const imageUrl = await productsService.uploadProductImage(req.file.filename);
-      res.status(200).json({ imageUrl });
-    } catch (error) {
-      next(error);
+  const uploadProductImage = async (req, res) => {
+    if (!req.file) {
+      throw new BadRequestError('Nenhum arquivo de imagem enviado.');
     }
+    const imageUrl = await productImageService.uploadProductImage(req.file.filename);
+    res.status(200).json({ imageUrl });
   };
 
-  const createProduct = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const restaurantId = req.context.restaurantId;
-      const product = await productsService.createProduct(req.body, restaurantId);
-      res.status(201).json(product);
-    } catch (error) {
-      next(error);
-    }
+  const createProduct = async (req, res) => {
+    handleValidationErrors(req);
+    const restaurantId = req.context.restaurantId;
+    const product = await productCrudService.createProduct(req.body, restaurantId);
+    res.status(201).json(product);
   };
 
-  const listProducts = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const { category_id } = req.query;
-      const products = await productsService.listProducts(restaurantId, category_id);
-      res.json(products);
-    } catch (error) {
-      next(error);
-    }
+  const listProducts = async (req, res) => {
+    const restaurantId = req.context.restaurantId;
+    const { category_id } = req.query;
+    const products = await productCrudService.listProducts(restaurantId, category_id);
+    res.json(products);
   };
 
-  const getProductById = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const product = await productsService.getProductById(req.params.id, restaurantId);
-      res.json(product);
-    } catch (error) {
-      next(error);
-    }
+  const getProductById = async (req, res) => {
+    const restaurantId = req.context.restaurantId;
+    const product = await productCrudService.getProductById(req.params.id, restaurantId);
+    res.json(product);
   };
 
-  const updateProduct = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const restaurantId = req.context.restaurantId;
-      const product = await productsService.updateProduct(req.params.id, restaurantId, req.body);
-      res.json(product);
-    } catch (error) {
-      next(error);
-    }
+  const updateProduct = async (req, res) => {
+    handleValidationErrors(req);
+    const restaurantId = req.context.restaurantId;
+    const product = await productCrudService.updateProduct(req.params.id, restaurantId, req.body);
+    res.json(product);
   };
 
-  const deleteProduct = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      await productsService.deleteProduct(req.params.id, restaurantId);
-      res.json({ message: 'Produto removido com sucesso' });
-    } catch (error) {
-      next(error);
-    }
+  const deleteProduct = async (req, res) => {
+    const restaurantId = req.context.restaurantId;
+    await productCrudService.deleteProduct(req.params.id, restaurantId);
+    res.status(204).send(); // Alterado para 204 No Content
   };
 
-  const toggleProductStatus = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const product = await productsService.toggleProductStatus(req.params.id, restaurantId);
-      res.json(product);
-    } catch (error) {
-      next(error);
-    }
+  const toggleProductStatus = async (req, res) => {
+    const restaurantId = req.context.restaurantId;
+    const product = await productCrudService.toggleProductStatus(req.params.id, restaurantId);
+    res.json(product);
   };
 
   return {

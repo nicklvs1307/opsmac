@@ -10,27 +10,19 @@ module.exports = (ordersService) => {
   };
 
   const getAllOrders = async (req, res, next) => {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const { status, platform, delivery_type, search } = req.query;
-      const orders = await ordersService.getAllOrders(restaurantId, status, platform, delivery_type, search);
-      res.json(orders);
-    } catch (error) {
-      next(error);
-    }
+    const restaurantId = req.context.restaurantId;
+    const { status, platform, delivery_type, search } = req.query;
+    const orders = await ordersService.getAllOrders(restaurantId, status, platform, delivery_type, search);
+    res.json(orders);
   };
 
   const updateOrderStatus = async (req, res, next) => {
-    try {
-      handleValidationErrors(req);
-      const restaurantId = req.context.restaurantId;
-      const { id } = req.params;
-      const { status } = req.body;
-      const order = await ordersService.updateOrderStatus(id, restaurantId, status);
-      res.json({ message: 'Status do pedido atualizado com sucesso!', order });
-    } catch (error) {
-      next(error);
-    }
+    handleValidationErrors(req);
+    const restaurantId = req.context.restaurantId;
+    const { id } = req.params;
+    const { status } = req.body;
+    const order = await ordersService.updateOrderStatus(id, restaurantId, status);
+    res.json({ message: 'Status do pedido atualizado com sucesso!', order });
   };
 
   return {

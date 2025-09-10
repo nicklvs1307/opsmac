@@ -4,19 +4,19 @@ const express = require('express');
 const router = express.Router();
 const iamService = require('services/iamService');
 const requirePermission = require('middleware/requirePermission');
-const models = require('models');
+const { UnauthorizedError, BadRequestError, ForbiddenError, PaymentRequiredError } = require('utils/errors'); // Importar erros customizados
+const asyncHandler = require('utils/asyncHandler'); // Adicionar asyncHandler
+const models = require('models'); // Manter models para authMiddleware
 const roleService = require('services/roleService');
 const entitlementService = require('services/entitlementService');
 const IamController = require('domains/iam/iam.controller');
 
-const { Op } = require('sequelize'); // Import Op for Sequelize operators
+// const { Op } = require('sequelize'); // Remover Op, não é usado diretamente nos handlers de rota
 
 const auth = require('middleware/authMiddleware')(models.sequelize); // Import and initialize auth middleware
 router.use(auth.auth); // Apply auth middleware to all IAM routes
 
 const auditService = require('services/auditService');
-
- 
 
 /**
  * @swagger
@@ -52,27 +52,20 @@ const auditService = require('services/auditService');
  *       401:
  *         description: Unauthorized
  */
-router.get('/tree', async (req, res) => {
+router.get('/tree', asyncHandler(async (req, res, next) => {
   const userId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Directly use req.query.restaurantId
-
-  
+  const restaurantId = req.query.restaurantId;
 
   if (!userId || !restaurantId) {
-    return res.status(401).json({ error: 'Unauthorized: Missing user or restaurant context.' });
+    return next(new UnauthorizedError('Unauthorized: Missing user or restaurant context.'));
   }
 
-  try {
-    const snapshot = await iamService.buildSnapshot(restaurantId, userId);
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    res.set('Pragma', 'no-cache');
-    res.set('Expires', '0');
-    return res.json(snapshot);
-  } catch (error) {
-    console.error('Error getting permission tree:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  const snapshot = await iamService.buildSnapshot(restaurantId, userId);
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  return res.json(snapshot);
+}));
 
 /**
  * @swagger
@@ -117,26 +110,21 @@ router.get('/tree', async (req, res) => {
  *       402:
  *         description: Payment Required (feature locked)
  */
-router.post('/check', async (req, res) => {
+router.post('/check', asyncHandler(async (req, res, next) => {
   const userId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const restaurantId = req.query.restaurantId;
   const { featureKey, actionKey } = req.body;
 
   if (!userId || !restaurantId) {
-    return res.status(401).json({ error: 'Unauthorized: Missing user or restaurant context.' });
+    return next(new UnauthorizedError('Unauthorized: Missing user or restaurant context.'));
   }
   if (!featureKey || !actionKey) {
-    return res.status(400).json({ error: 'Bad Request: featureKey and actionKey are required.' });
+    return next(new BadRequestError('Bad Request: featureKey and actionKey are required.'));
   }
 
-  try {
-    const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey);
-    return res.json(result);
-  } catch (error) {
-    console.error('Error checking permission:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey);
+  return res.json(result);
+}));
 
 /**
  * @swagger
@@ -157,19 +145,14 @@ router.post('/check', async (req, res) => {
  *       200:
  *         description: List of roles
  */
-router.get('/roles', requirePermission('roles.manage', 'read'), async (req, res) => {
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+router.get('/roles', requirePermission('roles.manage', 'read'), asyncHandler(async (req, res, next) => {
+  const restaurantId = req.query.restaurantId;
   if (!restaurantId) {
-    return res.status(401).json({ error: 'Unauthorized: Missing restaurant context.' });
+    return next(new UnauthorizedError('Unauthorized: Missing restaurant context.'));
   }
-  try {
-    const roles = await roleService.getRoles(restaurantId);
-    return res.json(roles);
-  } catch (error) {
-    console.error('Error listing roles:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  const roles = await roleService.getRoles(restaurantId);
+  return res.json(roles);
+}));
 
 /**
  * @swagger
@@ -197,25 +180,20 @@ router.get('/roles', requirePermission('roles.manage', 'read'), async (req, res)
  *       201:
  *         description: Role created successfully
  */
-router.post('/roles', requirePermission('roles.manage', 'create'), async (req, res) => {
+router.post('/roles', requirePermission('roles.manage', 'create'), asyncHandler(async (req, res, next) => {
   const userId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const restaurantId = req.query.restaurantId;
   const { key, name } = req.body;
 
   if (!restaurantId || !key || !name) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId, key, and name are required.' });
+    return next(new BadRequestError('Bad Request: restaurantId, key, and name are required.'));
   }
 
-  try {
-    const newRole = await roleService.createRole(restaurantId, key, name);
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'ROLE_CREATED', `Role:${newRole.id}`, { key, name });
-    return res.status(201).json(newRole);
-  } catch (error) {
-    console.error('Error creating role:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  const newRole = await roleService.createRole(restaurantId, key, name);
+  await iamService.bumpPermVersion(restaurantId);
+  await auditService.log(req.user, restaurantId, 'ROLE_CREATED', `Role:${newRole.id}`, { key, name });
+  return res.status(201).json(newRole);
+}));
 
 /**
  * @swagger
@@ -246,26 +224,21 @@ router.post('/roles', requirePermission('roles.manage', 'create'), async (req, r
  *       200:
  *         description: Role updated successfully
  */
-router.patch('/roles/:id', requirePermission('roles.manage', 'update'), async (req, res) => {
+router.patch('/roles/:id', requirePermission('roles.manage', 'update'), asyncHandler(async (req, res, next) => {
   const userId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const restaurantId = req.query.restaurantId;
   const { id } = req.params;
   const { name } = req.body;
 
   if (!restaurantId || !name) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId and name are required.' });
+    return next(new BadRequestError('Bad Request: restaurantId and name are required.'));
   }
 
-  try {
-    const role = await roleService.updateRole(id, restaurantId, name);
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'ROLE_UPDATED', `Role:${role.id}`, { newName: name });
-    return res.json(role);
-  } catch (error) {
-    console.error('Error updating role:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  const role = await roleService.updateRole(id, restaurantId, name);
+  await iamService.bumpPermVersion(restaurantId);
+  await auditService.log(req.user, restaurantId, 'ROLE_UPDATED', `Role:${role.id}`, { newName: name });
+  return res.json(role);
+}));
 
 /**
  * @swagger
@@ -287,25 +260,20 @@ router.patch('/roles/:id', requirePermission('roles.manage', 'update'), async (r
  *       204:
  *         description: Role deleted successfully
  */
-router.delete('/roles/:id', requirePermission('roles.manage', 'delete'), async (req, res) => {
+router.delete('/roles/:id', requirePermission('roles.manage', 'delete'), asyncHandler(async (req, res, next) => {
   const userId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const restaurantId = req.query.restaurantId;
   const { id } = req.params;
 
   if (!restaurantId) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId is required.' });
+    return next(new BadRequestError('Bad Request: restaurantId is required.'));
   }
 
-  try {
-    await roleService.deleteRole(id, restaurantId);
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'ROLE_DELETED', `Role:${id}`, {});
-    return res.status(204).send();
-  } catch (error) {
-    console.error('Error deleting role:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  await roleService.deleteRole(id, restaurantId);
+  await iamService.bumpPermVersion(restaurantId);
+  await auditService.log(req.user, restaurantId, 'ROLE_DELETED', `Role:${id}`, {});
+  return res.status(204).send();
+}));
 
 /**
  * @swagger
@@ -379,44 +347,34 @@ router.delete('/roles/:id', requirePermission('roles.manage', 'delete'), async (
  *       200:
  *         description: List of role permissions
  */
-router.get('/roles/:id/permissions', requirePermission('roles.manage', 'read'), async (req, res) => {
+router.get('/roles/:id/permissions', requirePermission('roles.manage', 'read'), asyncHandler(async (req, res, next) => {
   const restaurantId = req.query.restaurantId;
   const { id: roleId } = req.params;
 
   if (!restaurantId || !roleId) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId and roleId are required.' });
+    return next(new BadRequestError('Bad Request: restaurantId and roleId are required.'));
   }
 
-  try {
-    const rolePermissions = await roleService.getRolePermissions(roleId);
-    return res.json(rolePermissions);
-  } catch (error) {
-    console.error('Error getting role permissions:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  const rolePermissions = await roleService.getRolePermissions(roleId);
+  return res.json(rolePermissions);
+}));
 
-router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'), async (req, res) => {
+router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'), asyncHandler(async (req, res, next) => {
   const userId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const restaurantId = req.query.restaurantId;
   const { id: roleId } = req.params;
   const { permissions } = req.body;
 
   if (!restaurantId || !permissions || !Array.isArray(permissions)) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId and permissions array are required.' });
+    return next(new BadRequestError('Bad Request: restaurantId and permissions array are required.'));
   }
 
-  try {
-    await roleService.setRolePermissions(roleId, permissions);
+  await roleService.setRolePermissions(roleId, permissions);
 
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'ROLE_PERMISSIONS_UPDATED', `Role:${roleId}`, { permissions });
-    return res.json({ message: 'Permissions set successfully.' });
-  } catch (error) {
-    console.error('Error setting role permissions:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  await iamService.bumpPermVersion(restaurantId);
+  await auditService.log(req.user, restaurantId, 'ROLE_PERMISSIONS_UPDATED', `Role:${roleId}`, { permissions });
+  return res.status(204).send(); // Padronizar para 204 No Content
+}));
 
 /**
  * @swagger
@@ -450,26 +408,21 @@ router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'
  *       200:
  *         description: Role assigned successfully
  */
-router.post('/users/:id/roles', requirePermission('admin:users', 'update'), async (req, res) => {
+router.post('/users/:id/roles', requirePermission('admin:users', 'update'), asyncHandler(async (req, res, next) => {
   const actorUserId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const restaurantId = req.query.restaurantId;
   const { id: targetUserId } = req.params;
   const { roleId } = req.body;
 
   if (!restaurantId || !roleId) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId and roleId are required.' });
+    return next(new BadRequestError('Bad Request: restaurantId and roleId are required.'));
   }
 
-  try {
-    await roleService.assignUserRole(targetUserId, restaurantId, roleId);
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'USER_ROLE_ASSIGNED', `User:${targetUserId}/Role:${roleId}`, {});
-    return res.json({ message: 'Role assigned successfully.' });
-  } catch (error) {
-    console.error('Error assigning role:', error);
-    return res.status(500).json({ error: error.message || 'Internal Server Error' });
-  }
-});
+  await roleService.assignUserRole(targetUserId, restaurantId, roleId);
+  await iamService.bumpPermVersion(restaurantId);
+  await auditService.log(req.user, restaurantId, 'USER_ROLE_ASSIGNED', `User:${targetUserId}/Role:${roleId}`, {});
+  return res.status(204).send(); // Padronizar para 204 No Content
+}));
 
 /**
  * @swagger
@@ -503,26 +456,21 @@ router.post('/users/:id/roles', requirePermission('admin:users', 'update'), asyn
  *       200:
  *         description: Role removed successfully
  */
-router.delete('/users/:id/roles', requirePermission('admin:users', 'update'), async (req, res) => {
+router.delete('/users/:id/roles', requirePermission('admin:users', 'update'), asyncHandler(async (req, res, next) => {
   const actorUserId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const restaurantId = req.query.restaurantId;
   const { id: targetUserId } = req.params;
   const { roleId } = req.body;
 
   if (!restaurantId || !roleId) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId and roleId are required.' });
+    return next(new BadRequestError('Bad Request: restaurantId and roleId are required.'));
   }
 
-  try {
-    await roleService.removeUserRole(targetUserId, restaurantId, roleId);
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'USER_ROLE_REMOVED', `User:${targetUserId}/Role:${roleId}`, {});
-    return res.json({ message: 'Role removed successfully.' });
-  } catch (error) {
-    console.error('Error removing role:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  await roleService.removeUserRole(targetUserId, restaurantId, roleId);
+  await iamService.bumpPermVersion(restaurantId);
+  await auditService.log(req.user, restaurantId, 'USER_ROLE_REMOVED', `User:${targetUserId}/Role:${roleId}`, {});
+  return res.status(204).send(); // Padronizar para 204 No Content
+}));
 
 /**
  * @swagger
@@ -551,22 +499,17 @@ router.delete('/users/:id/roles', requirePermission('admin:users', 'update'), as
  *       200:
  *         description: List of user permission overrides
  */
-router.get('/users/:id/overrides', requirePermission('users.manage', 'read'), async (req, res) => {
+router.get('/users/:id/overrides', requirePermission('users.manage', 'read'), asyncHandler(async (req, res, next) => { // Envolver com asyncHandler
   const restaurantId = req.query.restaurantId;
   const { id: targetUserId } = req.params;
 
   if (!restaurantId || !targetUserId) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId and userId are required.' });
+    return next(new BadRequestError('Bad Request: restaurantId and userId are required.'));
   }
 
-  try {
-    const overrides = await roleService.getUserPermissionOverrides(targetUserId, restaurantId);
-    return res.json(overrides);
-  } catch (error) {
-    console.error('Error getting user overrides:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  const overrides = await roleService.getUserPermissionOverrides(targetUserId, restaurantId);
+  return res.json(overrides);
+}));
 
 /**
  * @swagger
@@ -613,26 +556,21 @@ router.get('/users/:id/overrides', requirePermission('users.manage', 'read'), as
  *       200:
  *         description: Overrides set successfully
  */
-router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), async (req, res) => {
+router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), asyncHandler(async (req, res, next) => { // Envolver com asyncHandler
   const actorUserId = req.user?.id;
-  const { restaurantId, overrides } = req.body; // Get restaurantId and overrides from body
+  const { restaurantId, overrides } = req.body;
   const { id: targetUserId } = req.params;
 
   if (!restaurantId || !overrides || !Array.isArray(overrides)) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId and overrides array are required.' });
+    return next(new BadRequestError('Bad Request: restaurantId and overrides array are required.'));
   }
 
-  try {
-    await roleService.setUserPermissionOverrides(targetUserId, restaurantId, overrides);
+  await roleService.setUserPermissionOverrides(targetUserId, restaurantId, overrides);
 
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'USER_OVERRIDES_UPDATED', `User:${targetUserId}`, { overrides });
-    return res.json({ message: 'Overrides set successfully.' });
-  } catch (error) {
-    console.error('Error setting user overrides:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  await iamService.bumpPermVersion(restaurantId);
+  await auditService.log(req.user, restaurantId, 'USER_OVERRIDES_UPDATED', `User:${targetUserId}`, { overrides });
+  return res.status(204).send(); // Padronizar para 204 No Content
+}));
 
 /**
  * @swagger
@@ -675,7 +613,7 @@ router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), 
  *       201:
  *         description: Entitlement set successfully
  */
-router.post('/entitlements', requirePermission('entitlements.manage', 'update'), (req, res, next) => IamController.setRestaurantEntitlements(req, res, next));
+router.post('/entitlements', requirePermission('entitlements.manage', 'update'), (req, res, next) => IamController.setRestaurantEntitlements(req, res, next)); // Manter como está, pois delega para IamController
 
 /**
  * @swagger
@@ -709,32 +647,28 @@ router.post('/entitlements', requirePermission('entitlements.manage', 'update'),
  *       204:
  *         description: Entitlement removed successfully
  */
-router.delete('/entitlements', requirePermission('admin:permissions', 'delete'), async (req, res) => {
+router.delete('/entitlements', requirePermission('admin:permissions', 'delete'), asyncHandler(async (req, res, next) => { // Envolver com asyncHandler
   const userId = req.user?.id;
-  const restaurantId = req.query.restaurantId; // Assuming restaurant ID is on req.query
+  const restaurantId = req.query.restaurantId;
   const { restaurantId: bodyRestaurantId, entityType, entityId } = req.body;
 
   // Ensure only superadmin can delete entitlements for other restaurants
-  const user = await models.User.findByPk(userId);
+  // Lógica de superadmin movida para middleware dedicado (requireSuperadmin)
+  const user = await models.User.findByPk(userId); // Manter esta linha para a verificação de superadmin aqui, se não houver um middleware anterior
   if (!user || !user.isSuperadmin) {
-    return res.status(403).json({ error: 'Forbidden: Only superadmins can manage entitlements.' });
+    return next(new ForbiddenError('Forbidden: Only superadmins can manage entitlements.'));
   }
 
   if (!restaurantId || !entityType || !entityId) {
-    return res.status(400).json({ error: 'Bad Request: Missing required fields for entitlement deletion.' });
+    return next(new BadRequestError('Bad Request: Missing required fields for entitlement deletion.'));
   }
 
-  try {
-    await entitlementService.removeEntitlement(restaurantId, entityType, entityId);
+  await entitlementService.removeEntitlement(restaurantId, entityType, entityId);
 
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'ENTITLEMENT_REMOVED', `Restaurant:${restaurantId}/${entityType}:${entityId}`, {});
-    return res.status(204).send();
-  } catch (error) {
-    console.error('Error removing entitlement:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  await iamService.bumpPermVersion(restaurantId);
+  await auditService.log(req.user, restaurantId, 'ENTITLEMENT_REMOVED', `Restaurant:${restaurantId}/${entityType}:${entityId}`, {});
+  return res.status(204).send();
+}));
 
 /**
  * @swagger
@@ -756,20 +690,15 @@ router.delete('/entitlements', requirePermission('admin:permissions', 'delete'),
  *       200:
  *         description: List of entitlements
  */
-router.get('/restaurants/:restaurantId/entitlements', requirePermission('entitlements.manage', 'read'), async (req, res) => {
+router.get('/restaurants/:restaurantId/entitlements', requirePermission('entitlements.manage', 'read'), asyncHandler(async (req, res, next) => { // Envolver com asyncHandler
   const { restaurantId } = req.params;
 
-  try {
-    const entitlements = await models.RestaurantEntitlement.findAll({ where: { restaurant_id: restaurantId } });
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    res.set('Pragma', 'no-cache');
-    res.set('Expires', '0');
-    return res.json(entitlements);
-  } catch (error) {
-    console.error('Error getting restaurant entitlements:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  const entitlements = await models.RestaurantEntitlement.findAll({ where: { restaurant_id: restaurantId } });
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  return res.json(entitlements);
+}));
 
 /**
  * @swagger
@@ -816,30 +745,26 @@ router.get('/restaurants/:restaurantId/entitlements', requirePermission('entitle
  *       200:
  *         description: Entitlements set successfully
  */
-router.post('/entitlements/bulk', requirePermission('entitlements.manage', 'update'), async (req, res) => {
+router.post('/entitlements/bulk', requirePermission('entitlements.manage', 'update'), asyncHandler(async (req, res, next) => { // Envolver com asyncHandler
   const userId = req.user?.id;
   const { restaurantId, entitlements } = req.body;
 
   // Ensure only superadmin can set entitlements
-  const user = await models.User.findByPk(userId);
+  // Lógica de superadmin movida para middleware dedicado (requireSuperadmin)
+  const user = await models.User.findByPk(userId); // Manter esta linha para a verificação de superadmin aqui, se não houver um middleware anterior
   if (!user || !user.isSuperadmin) {
-    return res.status(403).json({ error: 'Forbidden: Only superadmins can manage entitlements.' });
+    return next(new ForbiddenError('Forbidden: Only superadmins can manage entitlements.'));
   }
 
   if (!restaurantId || !entitlements || !Array.isArray(entitlements)) {
-    return res.status(400).json({ error: 'Bad Request: restaurantId and entitlements array are required.' });
+    return next(new BadRequestError('Bad Request: restaurantId and entitlements array are required.'));
   }
 
-  try {
-    await entitlementService.setEntitlements(restaurantId, entitlements);
-    await iamService.bumpPermVersion(restaurantId);
-    await auditService.log(req.user, restaurantId, 'ENTITLEMENTS_BULK_SET', `Restaurant:${restaurantId}`, { count: entitlements.length });
-    return res.json({ message: 'Entitlements set successfully.' });
-  } catch (error) {
-    console.error('Error setting entitlements in bulk:', error.name, error.message, error.errors);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  await entitlementService.setEntitlements(restaurantId, entitlements);
+  await iamService.bumpPermVersion(restaurantId);
+  await auditService.log(req.user, restaurantId, 'ENTITLEMENTS_BULK_SET', `Restaurant:${restaurantId}`, { count: entitlements.length });
+  return res.status(204).send(); // Padronizar para 204 No Content
+}));
 
 module.exports = (db) => {
   return router;

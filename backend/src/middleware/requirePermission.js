@@ -1,42 +1,35 @@
 'use strict';
 const iamService = require('../services/iamService');
-const models = require('models'); // Ensure models are imported
+const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('utils/errors'); // Importar erros customizados
+// const models = require('models'); // Remover esta linha, não é mais necessária aqui
 
 const requirePermission = (featureKey, actionKey) => {
   return async (req, res, next) => {
-    try {
-      const userId = req.user?.id;
-      if (!userId) {
-        return res.status(401).json({ error: 'Unauthorized: User not authenticated.' });
-      }
+    const userId = req.user?.id;
+    if (!userId) {
+      return next(new UnauthorizedError('Acesso negado. Usuário não autenticado.'));
+    }
 
-      // Bypass for Super Admin
-      const user = await models.User.findByPk(userId);
-      if (user && user.isSuperadmin) {
-        return next();
-      }
+    // Lógica de bypass para Super Admin REMOVIDA.
+    // Assume-se que se um superadmin precisa de bypass, um middleware anterior (ex: requireSuperadmin) já o tratou.
+    // Se o usuário chegou aqui, ele não é um superadmin ou a rota não permite bypass.
 
-      // Restaurant context is required for non-superadmins
-      const restaurantId = req.restaurant?.id || req.params.restaurantId || req.query.restaurant_id || req.user.restaurantId;
-      if (!restaurantId) {
-        return res.status(401).json({ error: 'Unauthorized: Missing restaurant context.' });
-      }
+    // Restaurant context is required for non-superadmins
+    const restaurantId = req.context?.restaurantId || req.user.restaurantId; // Priorizar req.context
+    if (!restaurantId) {
+      return next(new UnauthorizedError('Acesso negado. Contexto do restaurante ausente.'));
+    }
 
-      const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey);
+    const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey);
 
-      if (result.allowed) {
-        return next();
-      }
+    if (result.allowed) {
+      return next();
+    }
 
-      if (result.locked) {
-        return res.status(402).json({ error: 'Payment Required: Feature is locked', reason: result.reason });
-      } else {
-        return res.status(403).json({ error: 'Forbidden: You do not have permission to perform this action.', reason: result.reason });
-      }
-
-    } catch (error) {
-      console.error('Error in requirePermission middleware:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
+    if (result.locked) {
+      return next(new PaymentRequiredError('Recurso bloqueado. Pagamento necessário.', result.reason)); // Usar PaymentRequiredError
+    } else {
+      return next(new ForbiddenError('Acesso negado. Você não tem permissão para realizar esta ação.', result.reason)); // Usar ForbiddenError
     }
   };
 };

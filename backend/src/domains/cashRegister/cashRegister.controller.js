@@ -1,6 +1,7 @@
 module.exports = (cashRegisterService) => {
   const { validationResult } = require('express-validator');
   const { BadRequestError } = require('utils/errors');
+  const auditService = require('../../services/auditService'); // Import auditService
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
@@ -14,6 +15,7 @@ module.exports = (cashRegisterService) => {
     const { openingCash, openingObservations } = req.body;
     const restaurantId = req.context.restaurantId;
     const session = await cashRegisterService.openSession(restaurantId, req.user.userId, openingCash, openingObservations);
+    await auditService.log(req.user, restaurantId, 'CASH_REGISTER_SESSION_OPENED', `Session:${session.id}`, { openingCash, openingObservations });
     res.status(201).json(session);
   };
 
@@ -27,6 +29,7 @@ module.exports = (cashRegisterService) => {
     handleValidationErrors(req);
     const { sessionId, amount, categoryId, observations } = req.body;
     const movement = await cashRegisterService.recordMovement(sessionId, 'withdrawal', amount, categoryId, observations, req.user.userId);
+    await auditService.log(req.user, req.context.restaurantId, 'CASH_REGISTER_WITHDRAWAL_RECORDED', `Movement:${movement.id}`, { sessionId, amount, categoryId, observations });
     res.status(201).json(movement);
   };
 
@@ -34,6 +37,7 @@ module.exports = (cashRegisterService) => {
     handleValidationErrors(req);
     const { sessionId, amount, observations } = req.body;
     const movement = await cashRegisterService.recordMovement(sessionId, 'reinforcement', amount, null, observations, req.user.userId);
+    await auditService.log(req.user, req.context.restaurantId, 'CASH_REGISTER_REINFORCEMENT_RECORDED', `Movement:${movement.id}`, { sessionId, amount, observations });
     res.status(201).json(movement);
   };
 
@@ -56,6 +60,7 @@ module.exports = (cashRegisterService) => {
     const { sessionId, closingCash, closingObservations } = req.body;
     const restaurantId = req.context.restaurantId;
     const session = await cashRegisterService.closeSession(sessionId, restaurantId, req.user.userId, closingCash, closingObservations);
+    await auditService.log(req.user, restaurantId, 'CASH_REGISTER_SESSION_CLOSED', `Session:${session.id}`, { closingCash, closingObservations });
     res.json(session);
   };
 

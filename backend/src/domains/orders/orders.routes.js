@@ -4,7 +4,8 @@ const requirePermission = require('middleware/requirePermission');
 const { updateOrderStatusValidation } = require('domains/orders/orders.validation');
 const asyncHandler = require('utils/asyncHandler'); // Adicionar esta linha
 
-module.exports = (db, ordersController) => {
+module.exports = (db) => {
+  const ordersController = require('./orders.controller')(db);
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

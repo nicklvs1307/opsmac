@@ -4,7 +4,8 @@ const requirePermission = require('middleware/requirePermission');
 const { categoryValidation } = require('domains/categories/categories.validation');
 const asyncHandler = require('utils/asyncHandler'); // Adicionar esta linha
 
-module.exports = (db, categoriesController) => {
+module.exports = (db) => {
+  const categoriesController = require('./categories.controller')(db);
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

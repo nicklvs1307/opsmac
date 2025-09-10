@@ -3,7 +3,8 @@ const express = require('express');
 const requirePermission = require('middleware/requirePermission');
 const { addonValidation, updateAddonValidation } = require('domains/addons/addons.validation');
 
-module.exports = (db, addonsController) => {
+module.exports = (db) => {
+  const addonsController = require('./addons.controller')(db);
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

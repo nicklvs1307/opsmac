@@ -1,7 +1,8 @@
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
 
-module.exports = (rewardsService) => {
+module.exports = (db) => {
+    const rewardsService = require('./rewards.service')(db);
     
 
     const handleValidationErrors = (req) => {

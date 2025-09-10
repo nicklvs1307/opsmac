@@ -1,4 +1,5 @@
 const { BadRequestError } = require('utils/errors');
+const auditService = require('../../services/auditService'); // Import auditService
 
 module.exports = (db) => {
     const customerService = require('./customer.service')(db);
@@ -16,38 +17,34 @@ module.exports = (db) => {
 
     return {
         getCustomerDashboardMetrics: async (req, res, next) => {
-            try {
-                const restaurantId = req.context.restaurantId;
-                if (!restaurantId) {
-                    throw new BadRequestError('Restaurante não encontrado para o usuário.');
-                }
-                const metrics = await customerService.getCustomerDashboardMetrics(restaurantId);
-
-                const mostCheckinsFormatted = metrics.mostCheckins.map(c => ({
-                    customerId: c.customerId,
-                    checkinCount: c.dataValues.checkinCount,
-                    customerName: c.customer ? c.customer.name : 'Desconhecido'
-                }));
-
-                const mostFeedbacksFormatted = metrics.mostFeedbacks.map(f => ({
-                    customerId: f.customerId,
-                    feedbackCount: f.dataValues.feedbackCount,
-                    customerName: f.customer ? f.customer.name : 'Desconhecido'
-                }));
-
-                const engagementRate = metrics.totalCustomers > 0 ? metrics.engagedCustomersCount / metrics.totalCustomers : 0;
-                const loyaltyRate = metrics.totalCustomers > 0 ? metrics.loyalCustomersCount / metrics.totalCustomers : 0;
-
-                res.json({
-                    totalCustomers: metrics.totalCustomers,
-                    mostCheckins: mostCheckinsFormatted,
-                    mostFeedbacks: mostFeedbacksFormatted,
-                    engagementRate: engagementRate.toFixed(2),
-                    loyaltyRate: loyaltyRate.toFixed(2),
-                });
-            } catch (error) {
-                next(error);
+            const restaurantId = req.context.restaurantId;
+            if (!restaurantId) {
+                throw new BadRequestError('Restaurante não encontrado para o usuário.');
             }
+            const metrics = await customerService.getCustomerDashboardMetrics(restaurantId);
+
+            const mostCheckinsFormatted = metrics.mostCheckins.map(c => ({
+                customerId: c.customerId,
+                checkinCount: c.dataValues.checkinCount,
+                customerName: c.customer ? c.customer.name : 'Desconhecido'
+            }));
+
+            const mostFeedbacksFormatted = metrics.mostFeedbacks.map(f => ({
+                customerId: f.customerId,
+                feedbackCount: f.dataValues.feedbackCount,
+                customerName: f.customer ? f.customer.name : 'Desconhecido'
+            }));
+
+            const engagementRate = metrics.totalCustomers > 0 ? metrics.engagedCustomersCount / metrics.totalCustomers : 0;
+            const loyaltyRate = metrics.totalCustomers > 0 ? metrics.loyalCustomersCount / metrics.totalCustomers : 0;
+
+            res.json({
+                totalCustomers: metrics.totalCustomers,
+                mostCheckins: mostCheckinsFormatted,
+                mostFeedbacks: mostFeedbacksFormatted,
+                engagementRate: engagementRate.toFixed(2),
+                loyaltyRate: loyaltyRate.toFixed(2),
+            });
         },
 
         getBirthdayCustomers: withRestaurantId(async (restaurantId) => {
@@ -55,25 +52,23 @@ module.exports = (db) => {
         }),
 
         listCustomers: async (req, res, next) => {
-            try {
-                const restaurantId = req.context.restaurantId;
-                if (!restaurantId) {
-                    throw new BadRequestError('Restaurante não encontrado para o usuário.');
-                }
-                const { count, rows } = await customerService.listCustomers(restaurantId, req.query);
-                res.json({
-                    customers: rows,
-                    totalPages: Math.ceil(count / (req.query.limit || 10)),
-                    currentPage: parseInt(req.query.page || 1),
-                    totalCustomers: count,
-                });
-            } catch (error) {
-                next(error);
+            const restaurantId = req.context.restaurantId;
+            if (!restaurantId) {
+                throw new BadRequestError('Restaurante não encontrado para o usuário.');
             }
+            const { count, rows } = await customerService.listCustomers(restaurantId, req.query);
+            res.json({
+                customers: rows,
+                totalPages: Math.ceil(count / (req.query.limit || 10)),
+                currentPage: parseInt(req.query.page || 1),
+                totalCustomers: count,
+            });
         },
 
         createCustomer: withRestaurantId(async (restaurantId, params, query, body) => {
-            return customerService.createCustomer(restaurantId, body);
+            const customer = await customerService.createCustomer(restaurantId, body);
+            await auditService.log(query.user, restaurantId, 'CUSTOMER_CREATED', `Customer:${customer.id}`, { name: customer.name, email: customer.email });
+            return customer;
         }),
 
         getCustomerByPhone: withRestaurantId(async (restaurantId, params, query) => {
@@ -85,35 +80,38 @@ module.exports = (db) => {
         }),
 
         updateCustomer: withRestaurantId(async (restaurantId, params, query, body) => {
-            return customerService.updateCustomer(restaurantId, params.id, body);
+            const customer = await customerService.updateCustomer(restaurantId, params.id, body);
+            await auditService.log(query.user, restaurantId, 'CUSTOMER_UPDATED', `Customer:${customer.id}`, { updatedData: body });
+            return customer;
         }),
 
-        deleteCustomer: withRestaurantId(async (restaurantId, params) => {
+        deleteCustomer: withRestaurantId(async (restaurantId, params, query) => {
             await customerService.deleteCustomer(restaurantId, params.id);
-            return {}; // Retorna um objeto vazio para indicar sucesso sem conteúdo
+            await auditService.log(query.user, restaurantId, 'CUSTOMER_DELETED', `Customer:${params.id}`, {});
+            return {};
         }),
 
         getCustomerDetails: withRestaurantId(async (restaurantId, params) => {
             return customerService.getCustomerDetails(restaurantId, params.id);
         }),
 
-        resetCustomerVisits: withRestaurantId(async (restaurantId, params) => {
+        resetCustomerVisits: withRestaurantId(async (restaurantId, params, query) => {
             const customer = await customerService.resetCustomerVisits(restaurantId, params.id);
+            await auditService.log(query.user, restaurantId, 'CUSTOMER_VISITS_RESET', `Customer:${customer.id}`, {});
             return { message: 'Visitas do cliente resetadas com sucesso.', customer };
         }),
 
-        clearCustomerCheckins: withRestaurantId(async (restaurantId, params) => {
+        clearCustomerCheckins: withRestaurantId(async (restaurantId, params, query) => {
             await customerService.clearCustomerCheckins(restaurantId, params.id);
+            await auditService.log(query.user, restaurantId, 'CUSTOMER_CHECKINS_CLEARED', `Customer:${params.id}`, {});
             return { message: 'Check-ins do cliente limpos com sucesso.' };
         }),
 
         publicRegisterCustomer: async (req, res, next) => {
-            try {
-                const result = await customerService.publicRegisterCustomer(req.body);
-                res.status(result.status).json(result);
-            } catch (error) {
-                next(error);
-            }
+            const result = await customerService.publicRegisterCustomer(req.body);
+            // No req.user for public routes, so pass null for user
+            await auditService.log(null, result.restaurantId, 'PUBLIC_CUSTOMER_REGISTERED', `Customer:${result.customer.id}`, { name: result.customer.name, email: result.customer.email });
+            res.status(result.status).json(result);
         },
     };
 };

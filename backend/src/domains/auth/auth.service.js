@@ -2,6 +2,7 @@ const { generateToken } = require('services/jwtService');
 const { UnauthorizedError, ForbiddenError, NotFoundError } = require('utils/errors');
 
 const iamService = require('services/iamService'); // Import the new IAM service
+const auditService = require('services/auditService'); // Import auditService
 
 module.exports = (db) => {
     const models = db.models;
@@ -80,6 +81,8 @@ module.exports = (db) => {
             }
         }
 
+
+        await auditService.log(user, primaryRestaurantId, 'USER_LOGIN', `User:${user.id}`, { email }); // Audit log for successful login
 
         return {
             token,
@@ -176,6 +179,8 @@ module.exports = (db) => {
 
         await user.update(profileData);
 
+        await auditService.log(user, null, 'USER_PROFILE_UPDATED', `User:${user.id}`, profileData); // Audit log for profile update
+
         return {
             id: user.id,
             name: user.name,
@@ -198,6 +203,7 @@ module.exports = (db) => {
         }
 
         await user.update({ password: newPassword });
+        await auditService.log(user, null, 'USER_PASSWORD_CHANGED', `User:${user.id}`, {}); // Audit log for password change
     };
 
 

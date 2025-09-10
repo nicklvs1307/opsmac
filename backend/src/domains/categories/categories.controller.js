@@ -1,6 +1,8 @@
-module.exports = (categoriesService) => {
+module.exports = (db) => {
+  const categoriesService = require('./categories.service')(db);
   const { validationResult } = require('express-validator');
   const { BadRequestError } = require('utils/errors');
+  const auditService = require('../../services/auditService'); // Import auditService
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
@@ -14,6 +16,7 @@ module.exports = (categoriesService) => {
     const { name } = req.body;
     const restaurantId = req.context.restaurantId;
     const category = await categoriesService.createCategory(name, restaurantId);
+    await auditService.log(req.user, restaurantId, 'CATEGORY_CREATED', `Category:${category.id}`, { name });
     res.status(201).json(category);
   };
 
@@ -35,6 +38,7 @@ module.exports = (categoriesService) => {
     const { name } = req.body;
     const restaurantId = req.context.restaurantId;
     const category = await categoriesService.updateCategory(id, name, restaurantId);
+    await auditService.log(req.user, restaurantId, 'CATEGORY_UPDATED', `Category:${category.id}`, { name });
     res.json(category);
   };
 
@@ -42,6 +46,7 @@ module.exports = (categoriesService) => {
     const { id } = req.params;
     const restaurantId = req.context.restaurantId;
     await categoriesService.deleteCategory(id, restaurantId);
+    await auditService.log(req.user, restaurantId, 'CATEGORY_DELETED', `Category:${id}`, {});
     res.status(204).send();
   };
 
@@ -49,6 +54,7 @@ module.exports = (categoriesService) => {
     const { id } = req.params;
     const restaurantId = req.context.restaurantId;
     const category = await categoriesService.toggleCategoryStatus(id, restaurantId);
+    await auditService.log(req.user, restaurantId, 'CATEGORY_STATUS_TOGGLED', `Category:${id}`, { newStatus: category.is_active });
     res.json(category);
   };
 

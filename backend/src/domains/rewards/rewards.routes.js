@@ -1,6 +1,7 @@
 const express = require('express');
 
-module.exports = (db, { getRewardById }) => {
+module.exports = (db) => {
+    const rewardsController = require('./rewards.controller')(db);
     const router = express.Router();
 
     router.get('/:id', (req, res, next) => {

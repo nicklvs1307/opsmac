@@ -1,4 +1,5 @@
-module.exports = (tablesService) => {
+module.exports = (db) => {
+  const tablesService = require('./tables.service')(db);
   const { validationResult } = require('express-validator');
   const { BadRequestError } = require('utils/errors');
 

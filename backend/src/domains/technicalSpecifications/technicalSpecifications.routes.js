@@ -3,7 +3,8 @@ const express = require('express');
 const requirePermission = require('middleware/requirePermission');
 const { createUpdateTechnicalSpecificationValidation } = require('domains/technicalSpecifications/technicalSpecifications.validation');
 
-module.exports = (db, { createTechnicalSpecification, getTechnicalSpecificationByProductId, updateTechnicalSpecification, deleteTechnicalSpecification }) => {
+module.exports = (db) => {
+  const technicalSpecificationsController = require('./technicalSpecifications.controller')(db);
   const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 

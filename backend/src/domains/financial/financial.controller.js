@@ -1,6 +1,7 @@
 module.exports = (db) => {
   const { validationResult } = require('express-validator');
   const { BadRequestError } = require('utils/errors');
+  const auditService = require('../../services/auditService'); // Import auditService
 
   // Importar e inicializar os novos serviços
   const transactionService = require('./transactionService')(db);
@@ -20,6 +21,7 @@ module.exports = (db) => {
     handleValidationErrors(req);
     const restaurantId = req.context.restaurantId;
     const transaction = await transactionService.createTransaction(restaurantId, req.user.userId, req.body);
+    await auditService.log(req.user, restaurantId, 'FINANCIAL_TRANSACTION_CREATED', `Transaction:${transaction.id}`, { type: transaction.type, amount: transaction.amount });
     res.status(201).json(transaction);
   };
 
@@ -57,6 +59,7 @@ module.exports = (db) => {
     handleValidationErrors(req);
     const restaurantId = req.context.restaurantId;
     const paymentMethod = await paymentMethodService.createPaymentMethod(restaurantId, req.body);
+    await auditService.log(req.user, restaurantId, 'FINANCIAL_PAYMENT_METHOD_CREATED', `PaymentMethod:${paymentMethod.id}`, { name: paymentMethod.name, type: paymentMethod.type });
     res.status(201).json(paymentMethod);
   };
 
@@ -72,6 +75,7 @@ module.exports = (db) => {
     const { id } = req.params;
     const restaurantId = req.context.restaurantId;
     const paymentMethod = await paymentMethodService.updatePaymentMethod(id, restaurantId, req.body);
+    await auditService.log(req.user, restaurantId, 'FINANCIAL_PAYMENT_METHOD_UPDATED', `PaymentMethod:${paymentMethod.id}`, { updatedData: req.body });
     res.json(paymentMethod);
   };
 
@@ -79,7 +83,8 @@ module.exports = (db) => {
     const { id } = req.params;
     const restaurantId = req.context.restaurantId;
     await paymentMethodService.deletePaymentMethod(id, restaurantId);
-    res.status(204).send(); // Alterado para 204 No Content
+    await auditService.log(req.user, restaurantId, 'FINANCIAL_PAYMENT_METHOD_DELETED', `PaymentMethod:${id}`, {});
+    res.status(204).send();
   };
 
   const getSalesByPaymentMethodReport = async (req, res) => {

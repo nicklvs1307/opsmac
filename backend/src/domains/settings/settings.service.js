@@ -1,5 +1,5 @@
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const getRestaurantSettings = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);

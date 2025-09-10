@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const { NotFoundError, BadRequestError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const getAllOrders = async (restaurantId, status, platform, delivery_type, search) => {
         const whereClause = {

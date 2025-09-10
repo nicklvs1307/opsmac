@@ -1,7 +1,7 @@
 const { NotFoundError, BadRequestError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const generateQrCodeUrl = (restaurantSlug, tableNumber) => {
         const frontendBaseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';

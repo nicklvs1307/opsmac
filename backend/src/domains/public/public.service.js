@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const { NotFoundError, BadRequestError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const submitPublicFeedback = async (restaurant_id, customer_id, rating, comment, nps_score) => {
         let customer = null;

@@ -1,7 +1,7 @@
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+        const models = db;
 
     const listAddons = async (restaurantId) => {
         return models.Addon.findAll({ where: { restaurantId: restaurantId } });

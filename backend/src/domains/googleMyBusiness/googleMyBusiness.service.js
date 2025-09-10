@@ -4,7 +4,7 @@ const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors
 const OAuth2 = google.auth.OAuth2;
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const initializeOAuthClient = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);

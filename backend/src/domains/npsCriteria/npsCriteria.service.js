@@ -1,7 +1,7 @@
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const listNpsCriteria = async (restaurantId) => {
         return models.NpsCriterion.findAll({

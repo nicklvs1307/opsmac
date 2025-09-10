@@ -1,7 +1,7 @@
 const { BadRequestError, ForbiddenError, NotFoundError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const handleOrderCreated = async (orderData) => {
         const restaurantId = orderData.restaurant_id;

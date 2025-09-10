@@ -1,7 +1,7 @@
 const { BadRequestError, NotFoundError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const createIngredient = async (name, unit_of_measure, cost_per_unit, restaurantId) => {
         const ingredient = await models.Ingredient.create({

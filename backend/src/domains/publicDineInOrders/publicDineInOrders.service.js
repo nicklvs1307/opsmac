@@ -2,7 +2,7 @@ const { BadRequestError, NotFoundError } = require('utils/errors');
 const { generateEscPosCommands } = require('utils/thermalPrinterService');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const createDineInOrder = async (cartItems, sessionId, restaurant_id, table_id) => {
         const restaurant = await models.Restaurant.findByPk(restaurant_id);

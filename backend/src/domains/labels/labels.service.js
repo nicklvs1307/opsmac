@@ -1,7 +1,7 @@
 const { NotFoundError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const getLabelUsers = async (restaurantId) => {
         const users = await models.User.findAll({

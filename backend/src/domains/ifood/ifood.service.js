@@ -1,7 +1,7 @@
 const { BadRequestError, ForbiddenError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const handleOrderPlaced = async (payload, correlationId) => {
         const { orderId, restaurantId, createdAt, totalAmount, deliveryFee, customer, items, deliveryAddress, paymentMethod, orderType, notes } = payload;

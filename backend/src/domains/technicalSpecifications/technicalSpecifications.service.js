@@ -1,7 +1,7 @@
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const createTechnicalSpecification = async (product_id, recipe_ingredients, restaurantId) => {
         const product = await models.Product.findOne({

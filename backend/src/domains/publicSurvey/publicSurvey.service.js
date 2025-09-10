@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const getNextSurvey = async (restaurantSlug, customerId) => {
         const restaurant = await models.Restaurant.findOne({

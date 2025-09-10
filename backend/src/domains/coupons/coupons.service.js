@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const { NotFoundError, BadRequestError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
     const sequelize = db.sequelize;
 
     const listCoupons = async (restaurantId, page, limit, status, search) => {

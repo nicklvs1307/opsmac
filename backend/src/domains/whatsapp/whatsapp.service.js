@@ -3,7 +3,7 @@ const { sendWhatsAppMessage } = require('services/integrations/whatsappApiClient
 const { Op } = require('sequelize');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const processIncomingMessageInternal = async (message, restaurant) => {
         const phoneNumber = message.from;

@@ -2,7 +2,7 @@ const { Op, fn, col } = require('sequelize');
 const { NotFoundError, BadRequestError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const getDashboardData = async (restaurantId) => {
         // Exemplo de dados do dashboard de estoque

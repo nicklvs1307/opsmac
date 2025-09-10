@@ -4,7 +4,7 @@ const { generateUniqueSlug } = require('utils/slugGenerator');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const listSurveys = async (restaurant_id, search) => {
         const where = {

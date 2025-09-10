@@ -4,10 +4,10 @@
 🚀 Servidor rodando na porta 5000
 Redis Client Connected
 req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
   roles: [
     Role {
       dataValues: [Object],
@@ -33,17 +33,84 @@ req.user in requirePermission: {
       isNewRecord: false
     }
   ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
 }
-req.user.isSuperadmin in requirePermission: true
+req.user.isSuperadmin in requirePermission: false
+ForbiddenError: Acesso negado. Você não tem permissão para realizar esta ação.
+    at /app/src/middleware/requirePermission.js:37:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
   roles: [
     Role {
       dataValues: [Object],
@@ -69,17 +136,84 @@ req.user in requirePermission: {
       isNewRecord: false
     }
   ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
 }
-req.user.isSuperadmin in requirePermission: true
+req.user.isSuperadmin in requirePermission: false
+ForbiddenError: Acesso negado. Você não tem permissão para realizar esta ação.
+    at /app/src/middleware/requirePermission.js:37:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
   roles: [
     Role {
       dataValues: [Object],
@@ -105,17 +239,81 @@ req.user in requirePermission: {
       isNewRecord: false
     }
   ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
 }
-req.user.isSuperadmin in requirePermission: true
+req.user.isSuperadmin in requirePermission: false
 req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
   roles: [
     Role {
       dataValues: [Object],
@@ -141,75 +339,97 @@ req.user in requirePermission: {
       isNewRecord: false
     }
   ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
       isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
 }
-req.user.isSuperadmin in requirePermission: true
-TypeError: Cannot read properties of undefined (reading 'Role')
-    at listRoles (/app/src/domains/iam/iam.controller.js:33:32)
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'Coupon')
+    at Object.getCouponAnalytics (/app/src/domains/coupons/coupons.service.js:103:43)
+    at getCouponAnalytics (/app/src/domains/coupons/coupons.controller.js:48:52)
     at /app/src/utils/asyncHandler.js:3:25
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/src/middleware/requirePermission.js:19:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-TypeError: Cannot read properties of undefined (reading 'UserPermissionOverride')
-    at getUserPermissionOverrides (/app/src/domains/iam/iam.controller.js:157:36)
+    at /app/src/middleware/requirePermission.js:31:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+TypeError: Cannot read properties of undefined (reading 'Coupon')
+    at Object.listCoupons (/app/src/domains/coupons/coupons.service.js:19:55)
+    at listCoupons (/app/src/domains/coupons/coupons.controller.js:19:66)
     at /app/src/utils/asyncHandler.js:3:25
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/src/middleware/requirePermission.js:19:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
   roles: [
     Role {
       dataValues: [Object],
@@ -235,269 +455,189 @@ req.user in requirePermission: {
       isNewRecord: false
     }
   ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
 }
-req.user.isSuperadmin in requirePermission: true
-TypeError: Cannot read properties of undefined (reading 'Role')
-    at listRoles (/app/src/domains/iam/iam.controller.js:33:32)
+req.user.isSuperadmin in requirePermission: false
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'Coupon')
+    at Object.listCoupons (/app/src/domains/coupons/coupons.service.js:19:55)
+    at listCoupons (/app/src/domains/coupons/coupons.controller.js:19:66)
     at /app/src/utils/asyncHandler.js:3:25
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/src/middleware/requirePermission.js:19:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-TypeError: Cannot read properties of undefined (reading 'UserPermissionOverride')
-    at getUserPermissionOverrides (/app/src/domains/iam/iam.controller.js:157:36)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+TypeError: Cannot read properties of undefined (reading 'Coupon')
+    at Object.getCouponAnalytics (/app/src/domains/coupons/coupons.service.js:103:43)
+    at getCouponAnalytics (/app/src/domains/coupons/coupons.controller.js:48:52)
     at /app/src/utils/asyncHandler.js:3:25
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/src/middleware/requirePermission.js:19:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-TypeError: Cannot read properties of undefined (reading 'RestaurantEntitlement')
-    at getRestaurantEntitlements (/app/src/domains/iam/iam.controller.js:279:39)
-    at /app/src/utils/asyncHandler.js:3:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/src/middleware/requirePermission.js:19:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-req.user in requirePermission: {
-  id: 'ba83f7f4-8aab-4123-801e-eca1847aa63e',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-TypeError: Cannot read properties of undefined (reading 'RestaurantEntitlement')
-    at getRestaurantEntitlements (/app/src/domains/iam/iam.controller.js:279:39)
-    at /app/src/utils/asyncHandler.js:3:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/src/middleware/requirePermission.js:19:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
+    at /app/src/middleware/requirePermission.js:31:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

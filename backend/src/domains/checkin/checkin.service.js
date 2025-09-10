@@ -2,7 +2,7 @@ const { Op, fn, col, literal } = require('sequelize');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
     const sequelize = db.sequelize;
 
     const recordCheckin = async (customerId, restaurantId) => {

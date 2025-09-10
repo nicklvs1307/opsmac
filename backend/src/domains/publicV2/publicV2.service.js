@@ -1,7 +1,7 @@
 const { NotFoundError, BadRequestError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const submitFeedback = async (restaurant_id, customer_id, rating, comment, nps_score) => {
         if (customer_id) {

@@ -1,5 +1,5 @@
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
     const { Op, fn, col, literal } = require('sequelize');
     const { BadRequestError, NotFoundError } = require('utils/errors');
 

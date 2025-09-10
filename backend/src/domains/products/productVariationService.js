@@ -1,7 +1,7 @@
 const { NotFoundError } = require('utils/errors');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const addProductVariation = async (productId, variationData) => {
         const product = await models.Product.findByPk(productId);

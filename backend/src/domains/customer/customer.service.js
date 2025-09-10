@@ -1,7 +1,7 @@
 const { Op, fn, col, literal } = require('sequelize');
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
     const sequelize = db.sequelize;
 
     const getCustomerDashboardMetrics = async (restaurantId) => {

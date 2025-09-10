@@ -11,7 +11,7 @@ const portugueseStopwords = new Set([
 ]);
 
 module.exports = (db) => {
-    const models = db.models;
+    const models = db;
 
     const findOrCreateCustomer = async (feedbackData, restaurantId) => {
         const { customerId, is_anonymous, customerData, source } = feedbackData;

@@ -10,9 +10,10 @@ const requirePermission = (featureKey, actionKey) => {
       return next(new UnauthorizedError('Acesso negado. Usuário não autenticado.'));
     }
 
-    // Lógica de bypass para Super Admin REMOVIDA.
-    // Assume-se que se um superadmin precisa de bypass, um middleware anterior (ex: requireSuperadmin) já o tratou.
-    // Se o usuário chegou aqui, ele não é um superadmin ou a rota não permite bypass.
+    // Add Super Admin bypass logic
+    if (req.user.isSuperadmin) {
+      return next(); // Super admin bypasses all permission checks
+    }
 
     // Restaurant context is required for non-superadmins
     const restaurantId = req.context?.restaurantId || req.user.restaurantId; // Priorizar req.context

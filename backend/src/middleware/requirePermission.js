@@ -12,7 +12,8 @@ const requirePermission = (featureKey, actionKey) => {
 
     // Add Super Admin bypass logic
     if (req.user.isSuperadmin) {
-      return next(); // Super admin bypasses all permission checks
+      // Super admin bypasses all permission and restaurant context checks
+      return next();
     }
 
     // Restaurant context is required for non-superadmins

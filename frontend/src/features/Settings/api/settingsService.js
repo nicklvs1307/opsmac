@@ -133,29 +133,32 @@ export const useUploadAvatar = (options) => {
 };
 
 export const useApiToken = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery([SETTINGS_QUERY_KEYS.apiToken, restaurantId], () => fetchApiToken(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
     ...options,
   });
 };
 
 export const useGeneralSettings = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     [SETTINGS_QUERY_KEYS.generalSettings, restaurantId],
     () => fetchSettings(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
       ...options,
     }
   );
 };
 
 export const useNpsCriteria = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     [SETTINGS_QUERY_KEYS.npsCriteria, restaurantId],
     () => fetchNpsCriteria(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
       ...options,
     }
   );
@@ -284,11 +287,12 @@ export const useSendTestWhatsappMessage = (options) => {
 };
 
 export const useWhatsappSettings = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     [SETTINGS_QUERY_KEYS.whatsappSettings, restaurantId],
     () => fetchWhatsappSettings(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
       ...options,
     }
   );

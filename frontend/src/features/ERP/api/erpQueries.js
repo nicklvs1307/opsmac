@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 // Query Keys
 const ERP_QUERY_KEYS = {
@@ -326,11 +327,12 @@ const generateQrCode = async (id) => {
 
 // React Query Hooks - Financial Categories
 export const useFinancialCategories = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(
     [ERP_QUERY_KEYS.financialCategories, restaurantId],
     () => fetchFinancialCategories(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
     }
   );
 };
@@ -361,11 +363,12 @@ export const useDeleteFinancialCategory = () => {
 
 // React Query Hooks - Financial Transactions
 export const useFinancialTransactions = (filters) => {
+  const { user } = useAuth();
   return useQuery(
     [ERP_QUERY_KEYS.financialTransactions, filters],
     () => fetchFinancialTransactions(filters),
     {
-      enabled: !!filters.restaurantId,
+      enabled: !!filters.restaurantId && !!user?.token,
     }
   );
 };
@@ -469,11 +472,12 @@ export const useUpdateOrderStatus = () => {
 
 // React Query Hooks - Payment Methods
 export const usePaymentMethods = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(
     [ERP_QUERY_KEYS.paymentMethods, restaurantId],
     () => fetchPaymentMethods(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
     }
   );
 };
@@ -507,17 +511,19 @@ export const usePdvOrders = (filterStatus) => {
   return useQuery([ERP_QUERY_KEYS.pdv, filterStatus], () => fetchPdvOrders(filterStatus));
 };
 export const useRestaurantDetails = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(
     [ERP_QUERY_KEYS.restaurant, restaurantId],
     () => fetchRestaurantDetails(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
     }
   );
 };
 export const useCategories = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery([ERP_QUERY_KEYS.categories, restaurantId], () => fetchCategories(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
   });
 };
 export const useCreateCategory = () => {
@@ -585,29 +591,32 @@ export const useCreateRestaurantOrder = () => {
   });
 };
 export const useRestaurantTables = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(
     [ERP_QUERY_KEYS.tables, restaurantId],
     () => fetchRestaurantTables(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
     }
   );
 };
 export const useCustomersBySearch = (restaurantId, searchTerm) => {
+  const { user } = useAuth();
   return useQuery(
     [ERP_QUERY_KEYS.customers, restaurantId, searchTerm],
     () => fetchCustomersBySearch({ restaurantId, searchTerm }),
     {
-      enabled: !!restaurantId && !!searchTerm,
+      enabled: !!restaurantId && !!searchTerm && !!user?.token,
     }
   );
 };
 export const useCurrentCashRegisterSession = (restaurantId, userId) => {
+  const { user } = useAuth();
   return useQuery(
     [ERP_QUERY_KEYS.cashRegisterSession, restaurantId, userId],
     () => fetchCurrentCashRegisterSession({ restaurantId, userId }),
     {
-      enabled: !!restaurantId && !!userId,
+      enabled: !!restaurantId && !!userId && !!user?.token,
     }
   );
 };
@@ -647,8 +656,9 @@ export const useRecordReinforcement = () => {
 
 // React Query Hooks - Purchases
 export const useProducts = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery([ERP_QUERY_KEYS.products, restaurantId], () => fetchProducts(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
   });
 };
 export const useCreateProduct = () => {
@@ -686,8 +696,9 @@ export const useToggleProductStatus = () => {
 
 // React Query Hooks - Addons
 export const useAddons = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery([ERP_QUERY_KEYS.addons, restaurantId], () => fetchAddons(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
   });
 };
 export const useCreateAddon = () => {
@@ -723,8 +734,9 @@ export const useToggleAddonStatus = () => {
   });
 };
 export const useSuppliers = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery([ERP_QUERY_KEYS.suppliers, restaurantId], () => fetchSuppliers(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
   });
 };
 export const useMoveStock = () => {
@@ -740,11 +752,12 @@ export const useMoveStock = () => {
 
 // React Query Hooks - Stock Dashboard
 export const useStockDashboard = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(
     [ERP_QUERY_KEYS.stockDashboard, restaurantId],
     () => fetchStockDashboard(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
     }
   );
 };
@@ -761,11 +774,12 @@ export const useStockHistory = (productId) => {
 
 // React Query Hooks - Stock Products
 export const useStockProducts = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(
     [ERP_QUERY_KEYS.stockProducts, restaurantId],
     () => fetchStockProducts(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
     }
   );
 };

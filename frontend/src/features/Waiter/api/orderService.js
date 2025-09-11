@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const WAITER_ORDER_QUERY_KEYS = {
   products: 'waiterProducts',
@@ -20,11 +21,12 @@ const createWaiterOrder = async ({ restaurantId, orderData }) => {
 
 // React Query Hooks
 export const useWaiterProducts = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     [WAITER_ORDER_QUERY_KEYS.products, restaurantId],
     () => fetchWaiterProducts(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
       ...options,
     }
   );

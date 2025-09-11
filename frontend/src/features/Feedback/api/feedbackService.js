@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 //================================================================================================
 // FEEDBACK
@@ -8,6 +9,7 @@ import toast from 'react-hot-toast';
 
 // Hook to fetch a list of feedbacks with filters
 export const useGetFeedbacks = (restaurantId, filters, page) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     ['feedbacks', restaurantId, filters, page],
     async () => {
@@ -22,7 +24,7 @@ export const useGetFeedbacks = (restaurantId, filters, page) => {
       return data;
     },
     {
-      enabled: !!restaurantId, // Only run the query if restaurantId is available
+      enabled: !!restaurantId && !!user?.token, // Modify this line
       keepPreviousData: true, // Useful for pagination
     }
   );
@@ -30,6 +32,7 @@ export const useGetFeedbacks = (restaurantId, filters, page) => {
 
 // Hook to fetch a single feedback by ID
 export const useGetFeedbackById = (feedbackId) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     ['feedback', feedbackId],
     async () => {
@@ -37,7 +40,7 @@ export const useGetFeedbackById = (feedbackId) => {
       return data;
     },
     {
-      enabled: !!feedbackId, // Only run the query if feedbackId is available
+      enabled: !!feedbackId && !!user?.token, // Modify this line
     }
   );
 };
@@ -131,6 +134,7 @@ export const useCreatePublicFeedback = () => {
 
 // Hook to fetch customers (for autocomplete in NewFeedback)
 export const useGetCustomersForFeedback = () => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     'customersForFeedback',
     async () => {
@@ -138,6 +142,7 @@ export const useGetCustomersForFeedback = () => {
       return data.customers || [];
     },
     {
+      enabled: !!user?.token, // Add this line
       staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     }
   );
@@ -145,6 +150,7 @@ export const useGetCustomersForFeedback = () => {
 
 // Hook to fetch QR Codes (for autocomplete in NewFeedback)
 export const useGetQRCodesForFeedback = (restaurantId) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     ['qrCodesForFeedback', restaurantId],
     async () => {
@@ -152,7 +158,7 @@ export const useGetQRCodesForFeedback = (restaurantId) => {
       return data.qrcodes || [];
     },
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
       staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     }
   );

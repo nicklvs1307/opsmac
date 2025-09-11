@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const fetchRestaurantById = async (restaurantId) => {
   const { data } = await axiosInstance.get(`/restaurant/${restaurantId}`);
@@ -7,9 +8,10 @@ const fetchRestaurantById = async (restaurantId) => {
 };
 
 export const useGetRestaurantById = (restaurantId, options) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(['restaurant', restaurantId], () => fetchRestaurantById(restaurantId), {
     ...options,
-    enabled: !!restaurantId && (options?.enabled ?? true),
+    enabled: !!restaurantId && !!user?.token && (options?.enabled ?? true),
   });
 };
 
@@ -24,8 +26,9 @@ const fetchRestaurantsByIds = async (restaurantIds) => {
 };
 
 export const useGetRestaurantsByIds = (restaurantIds, options) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(['restaurants', restaurantIds], () => fetchRestaurantsByIds(restaurantIds), {
     ...options,
-    enabled: restaurantIds?.length > 0 && (options?.enabled ?? true),
+    enabled: restaurantIds?.length > 0 && !!user?.token && (options?.enabled ?? true),
   });
 };

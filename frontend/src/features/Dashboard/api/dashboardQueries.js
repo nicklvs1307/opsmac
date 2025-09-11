@@ -54,11 +54,12 @@ const fetchDashboardAnalytics = async (restaurantId, params) => {
 };
 
 export const useDashboardAnalytics = (restaurantId, params) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     [DASHBOARD_QUERY_KEYS.analytics, restaurantId, params],
     () => fetchDashboardAnalytics(restaurantId, params),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
     }
   );
 };
@@ -71,11 +72,12 @@ const fetchEvolutionAnalytics = async (restaurantId, params) => {
 };
 
 export const useEvolutionAnalytics = (restaurantId, params) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     ['evolutionAnalytics', restaurantId, params],
     () => fetchEvolutionAnalytics(restaurantId, params),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
     }
   );
 };
@@ -88,11 +90,12 @@ const fetchRatingDistribution = async (restaurantId, params) => {
 };
 
 export const useRatingDistribution = (restaurantId, params) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     ['ratingDistribution', restaurantId, params],
     () => fetchRatingDistribution(restaurantId, params),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
     }
   );
 };

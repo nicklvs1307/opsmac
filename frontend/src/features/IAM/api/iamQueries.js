@@ -1,29 +1,38 @@
 import { useQuery, useMutation } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 // --- IAM API Hooks ---
 
 // Fetch permission snapshot (tree)
 export const useGetPermissionTree = (restaurantId, options) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     ['permissionTree', restaurantId],
     async () => {
       const { data } = await axiosInstance.get(`/iam/tree?restaurantId=${restaurantId}`);
       return data;
     },
-    options
+    {
+      enabled: !!restaurantId && !!user?.token && (options?.enabled ?? true), // Modify this line
+      ...options
+    }
   );
 };
 
 // Fetch all roles for a restaurant
 export const useGetRoles = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     ['roles', restaurantId],
     async () => {
       const { data } = await axiosInstance.get(`/iam/roles?restaurantId=${restaurantId}`);
       return data;
     },
-    options
+    {
+      enabled: !!restaurantId && !!user?.token && (options?.enabled ?? true),
+      ...options
+    }
   );
 };
 
@@ -62,6 +71,7 @@ export const useSetRolePermissions = () => {
 
 // Fetch user roles for a specific user in a restaurant
 export const useGetUserRoles = (userId, restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     ['userRoles', userId, restaurantId],
     async () => {
@@ -70,7 +80,10 @@ export const useGetUserRoles = (userId, restaurantId, options) => {
       );
       return data;
     },
-    options
+    {
+      enabled: !!userId && !!restaurantId && !!user?.token && (options?.enabled ?? true),
+      ...options
+    }
   );
 };
 
@@ -95,6 +108,7 @@ export const useRemoveUserRole = () => {
 
 // Fetch user permission overrides
 export const useGetUserPermissionOverrides = (userId, restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     ['userPermissionOverrides', userId, restaurantId],
     async () => {
@@ -103,7 +117,10 @@ export const useGetUserPermissionOverrides = (userId, restaurantId, options) => 
       );
       return data;
     },
-    options
+    {
+      enabled: !!userId && !!restaurantId && !!user?.token && (options?.enabled ?? true),
+      ...options
+    }
   );
 };
 
@@ -128,6 +145,7 @@ export const useSetEntitlements = () => {
 
 // Fetch entitlements for a restaurant
 export const useGetRestaurantEntitlements = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     ['restaurantEntitlements', restaurantId],
     async () => {
@@ -135,7 +153,7 @@ export const useGetRestaurantEntitlements = (restaurantId, options) => {
       return data;
     },
     {
-      enabled: !!restaurantId, // Only run if restaurantId is available
+      enabled: !!restaurantId && !!user?.token && (options?.enabled ?? true), // Modify this line
       ...options,
     }
   );
@@ -143,6 +161,7 @@ export const useGetRestaurantEntitlements = (restaurantId, options) => {
 
 // Fetch permissions for a specific role
 export const useGetRolePermissions = (roleId, restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     ['rolePermissions', roleId, restaurantId],
     async () => {
@@ -151,6 +170,9 @@ export const useGetRolePermissions = (roleId, restaurantId, options) => {
       );
       return data;
     },
-    options
+    {
+      enabled: !!roleId && !!restaurantId && !!user?.token && (options?.enabled ?? true),
+      ...options
+    }
   );
 };

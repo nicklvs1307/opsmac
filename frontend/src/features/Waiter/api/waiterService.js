@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const WAITER_QUERY_KEYS = {
   tables: 'waiterTables',
@@ -13,8 +14,9 @@ const fetchWaiterTables = async (restaurantId) => {
 
 // React Query Hooks
 export const useWaiterTables = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery([WAITER_QUERY_KEYS.tables, restaurantId], () => fetchWaiterTables(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
     ...options,
   });
 };

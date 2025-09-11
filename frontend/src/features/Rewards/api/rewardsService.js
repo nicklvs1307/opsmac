@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const REWARDS_QUERY_KEYS = {
   rewards: 'rewards',
@@ -48,28 +49,32 @@ const deleteReward = async (id) => {
 
 // React Query Hooks
 export const useRewards = (restaurantId, page, filters, options) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     [REWARDS_QUERY_KEYS.rewards, restaurantId, page, filters],
     () => fetchRewards({ queryKey: [null, restaurantId, page, filters] }),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
       ...options,
     }
   );
 };
 
 export const useRewardsAnalytics = (options) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(REWARDS_QUERY_KEYS.analytics, fetchAnalytics, {
+    enabled: !!user?.token, // Add this line
     ...options,
   });
 };
 
 export const useSelectedRewardAnalytics = (rewardId, options) => {
+  const { user } = useAuth(); // Add this line
   return useQuery(
     [REWARDS_QUERY_KEYS.selectedRewardAnalytics, rewardId],
     () => fetchSelectedRewardAnalytics(rewardId),
     {
-      enabled: !!rewardId,
+      enabled: !!rewardId && !!user?.token,
       ...options,
     }
   );

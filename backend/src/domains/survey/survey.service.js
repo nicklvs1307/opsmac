@@ -157,7 +157,7 @@ module.exports = (db) => {
                 include: [{
                     model: models.Survey,
                     as: 'survey',
-                    where: { 'survey.restaurant_id': restaurantId },
+                    where: { '$survey.restaurant_id
                     attributes: []
                 }]
             });
@@ -171,6 +171,315 @@ module.exports = (db) => {
                         model: models.Survey,
                         as: 'survey',
                         where: { 'survey.restaurant_id': restaurantId },
+                        attributes: []
+                    }, {
+                        model: models.NpsCriterion,
+                        as: 'npsCriterion',
+                        attributes: ['id', 'name'],
+                    }]
+                }]
+            });
+
+            let npsSum = 0;
+            let npsCount = 0;
+            let csatSum = 0;
+            let csatCount = 0;
+            const npsByCriterion = {};
+
+            allAnswers.forEach(answer => {
+                if (answer.question) {
+                    const value = parseInt(answer.answer_value, 10);
+                    if (!isNaN(value)) {
+                        if (answer.question.question_type === 'nps') {
+                            npsSum += value;
+                            npsCount++;
+
+                            const criterionId = answer.question.nps_criterion_id;
+                            const criterionName = answer.question.npsCriterion?.name || 'Unknown Criterion';
+
+                            if (criterionId) {
+                                if (!npsByCriterion[criterionId]) {
+                                    npsByCriterion[criterionId] = {
+                                        id: criterionId,
+                                        name: criterionName,
+                                        promoters: 0,
+                                        neutrals: 0,
+                                        detractors: 0,
+                                        totalResponses: 0,
+                                    };
+                                }
+
+                                if (value >= 9) {
+                                    npsByCriterion[criterionId].promoters++;
+                                } else if (value >= 7) {
+                                    npsByCriterion[criterionId].neutrals++;
+                                } else {
+                                    npsByCriterion[criterionId].detractors++;
+                                }
+                                npsByCriterion[criterionId].totalResponses++;
+                            }
+                        } else if (answer.question.question_type === 'csat') {
+                            csatSum += value;
+                            csatCount++;
+                        }
+                    }
+                }
+            });
+
+            const npsMetricsPerCriterion = Object.values(npsByCriterion).map(criterion => {
+                const { promoters, neutrals, detractors, totalResponses } = criterion;
+                const npsScore = totalResponses > 0 ? ((promoters - detractors) / totalResponses) * 100 : null;
+                return { ...criterion, npsScore };
+            });
+
+            const averageNps = npsCount > 0 ? npsSum / npsCount : null;
+            const averageCsat = csatCount > 0 ? csatSum / csatCount : null;
+
+            const restaurant = await models.Restaurant.findByPk(restaurantId);
+
+            return {
+                totalResponses,
+                averageNps,
+                averageCsat,
+                npsMetricsPerCriterion,
+                npsCriteriaScores: restaurant?.npsCriteriaScores || {}
+            };
+        } catch (error) {
+            console.error("Error in getSurveyAnalytics: ", error);
+            throw error;
+        }
+    };
+
+    const getSurveysComparisonAnalytics = async (restaurantId, surveyIds) => {
+        const comparisonData = [];
+
+        for (const surveyId of surveyIds) {
+            const survey = await models.Survey.findByPk(surveyId, {
+                where: { restaurant_id: restaurantId },
+                include: ['questions']
+            });
+
+            if (survey) {
+                const analytics = await getSurveyAnalytics(restaurantId);
+                comparisonData.push({
+                    surveyId: survey.id,
+                    title: survey.title,
+                    totalResponses: analytics.totalResponses,
+                    averageNps: analytics.averageNps,
+                    averageCsat: analytics.averageCsat,
+                    npsMetricsPerCriterion: analytics.npsMetricsPerCriterion,
+                });
+            }
+        }
+        return comparisonData;
+    };
+
+    const getQuestionAnswersDistribution = async (restaurantId, surveyId, questionId) => {
+        const question = await models.Question.findOne({
+            where: { id: questionId, survey_id: surveyId },
+            include: [{
+                model: models.Survey,
+                where: { restaurant_id: restaurantId },
+                attributes: []
+            }]
+        });
+
+        if (!question) {
+            throw new NotFoundError('Questão não encontrada ou não pertence a este restaurante/pesquisa.');
+        }
+
+        const answers = await models.Answer.findAll({
+            where: { question_id: questionId },
+            attributes: ['answer_value'],
+        });
+
+        const distribution = {};
+        answers.forEach(answer => {
+            const value = answer.answer_value;
+            distribution[value] = (distribution[value] || 0) + 1;
+        });
+
+        return {
+            questionId: question.id,
+            questionText: question.question_text,
+            questionType: question.question_type,
+            distribution,
+        };
+    };
+
+    return {
+        listSurveys,
+        createSurvey,
+        updateSurvey,
+        updateSurveyStatus,
+        deleteSurvey,
+        getSurveyById,
+        getSurveyAnalytics,
+        getSurveysComparisonAnalytics,
+        getQuestionAnswersDistribution,
+    };
+};: restaurantId },
+                    attributes: []
+                }]
+            });
+
+            const allAnswers = await models.Answer.findAll({
+                include: [{
+                    model: models.Question,
+                    as: 'question',
+                    attributes: ['question_type', 'nps_criterion_id'],
+                    include: [{
+                        model: models.Survey,
+                        as: 'survey',
+                        where: { '$survey.restaurant_id
+                        attributes: []
+                    }, {
+                        model: models.NpsCriterion,
+                        as: 'npsCriterion',
+                        attributes: ['id', 'name'],
+                    }]
+                }]
+            });
+
+            let npsSum = 0;
+            let npsCount = 0;
+            let csatSum = 0;
+            let csatCount = 0;
+            const npsByCriterion = {};
+
+            allAnswers.forEach(answer => {
+                if (answer.question) {
+                    const value = parseInt(answer.answer_value, 10);
+                    if (!isNaN(value)) {
+                        if (answer.question.question_type === 'nps') {
+                            npsSum += value;
+                            npsCount++;
+
+                            const criterionId = answer.question.nps_criterion_id;
+                            const criterionName = answer.question.npsCriterion?.name || 'Unknown Criterion';
+
+                            if (criterionId) {
+                                if (!npsByCriterion[criterionId]) {
+                                    npsByCriterion[criterionId] = {
+                                        id: criterionId,
+                                        name: criterionName,
+                                        promoters: 0,
+                                        neutrals: 0,
+                                        detractors: 0,
+                                        totalResponses: 0,
+                                    };
+                                }
+
+                                if (value >= 9) {
+                                    npsByCriterion[criterionId].promoters++;
+                                } else if (value >= 7) {
+                                    npsByCriterion[criterionId].neutrals++;
+                                } else {
+                                    npsByCriterion[criterionId].detractors++;
+                                }
+                                npsByCriterion[criterionId].totalResponses++;
+                            }
+                        } else if (answer.question.question_type === 'csat') {
+                            csatSum += value;
+                            csatCount++;
+                        }
+                    }
+                }
+            });
+
+            const npsMetricsPerCriterion = Object.values(npsByCriterion).map(criterion => {
+                const { promoters, neutrals, detractors, totalResponses } = criterion;
+                const npsScore = totalResponses > 0 ? ((promoters - detractors) / totalResponses) * 100 : null;
+                return { ...criterion, npsScore };
+            });
+
+            const averageNps = npsCount > 0 ? npsSum / npsCount : null;
+            const averageCsat = csatCount > 0 ? csatSum / csatCount : null;
+
+            const restaurant = await models.Restaurant.findByPk(restaurantId);
+
+            return {
+                totalResponses,
+                averageNps,
+                averageCsat,
+                npsMetricsPerCriterion,
+                npsCriteriaScores: restaurant?.npsCriteriaScores || {}
+            };
+        } catch (error) {
+            console.error("Error in getSurveyAnalytics: ", error);
+            throw error;
+        }
+    };
+
+    const getSurveysComparisonAnalytics = async (restaurantId, surveyIds) => {
+        const comparisonData = [];
+
+        for (const surveyId of surveyIds) {
+            const survey = await models.Survey.findByPk(surveyId, {
+                where: { restaurant_id: restaurantId },
+                include: ['questions']
+            });
+
+            if (survey) {
+                const analytics = await getSurveyAnalytics(restaurantId);
+                comparisonData.push({
+                    surveyId: survey.id,
+                    title: survey.title,
+                    totalResponses: analytics.totalResponses,
+                    averageNps: analytics.averageNps,
+                    averageCsat: analytics.averageCsat,
+                    npsMetricsPerCriterion: analytics.npsMetricsPerCriterion,
+                });
+            }
+        }
+        return comparisonData;
+    };
+
+    const getQuestionAnswersDistribution = async (restaurantId, surveyId, questionId) => {
+        const question = await models.Question.findOne({
+            where: { id: questionId, survey_id: surveyId },
+            include: [{
+                model: models.Survey,
+                where: { restaurant_id: restaurantId },
+                attributes: []
+            }]
+        });
+
+        if (!question) {
+            throw new NotFoundError('Questão não encontrada ou não pertence a este restaurante/pesquisa.');
+        }
+
+        const answers = await models.Answer.findAll({
+            where: { question_id: questionId },
+            attributes: ['answer_value'],
+        });
+
+        const distribution = {};
+        answers.forEach(answer => {
+            const value = answer.answer_value;
+            distribution[value] = (distribution[value] || 0) + 1;
+        });
+
+        return {
+            questionId: question.id,
+            questionText: question.question_text,
+            questionType: question.question_type,
+            distribution,
+        };
+    };
+
+    return {
+        listSurveys,
+        createSurvey,
+        updateSurvey,
+        updateSurveyStatus,
+        deleteSurvey,
+        getSurveyById,
+        getSurveyAnalytics,
+        getSurveysComparisonAnalytics,
+        getQuestionAnswersDistribution,
+    };
+};: restaurantId },
                         attributes: []
                     }, {
                         model: models.NpsCriterion,

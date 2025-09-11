@@ -45,9 +45,31 @@ module.exports = () => { // No longer takes db as an argument
     };
 
     const checkRestaurantOwnership = async (req, res, next) => {
-        // Placeholder logic: simply call next() for now
-        // Real logic would involve checking req.user.restaurantId against req.params.restaurantId
-        next();
+        try {
+            const restaurantId = req.params.restaurantId || req.context?.restaurantId;
+            if (!restaurantId) {
+                return next(new BadRequestError('ID do restaurante não fornecido.'));
+            }
+
+            const userRestaurantIds = req.user.restaurants.map(r => r.id);
+            const isOwner = req.user.isOwner; // Assuming isOwner is set in req.user by authService.getMe
+
+            if (!userRestaurantIds.includes(restaurantId) && !isOwner) {
+                return next(new ForbiddenError('Acesso negado. Você não tem permissão para acessar este restaurante.'));
+            }
+
+            // Fetch the restaurant object and attach it to req for later use
+            const restaurant = await models.Restaurant.findByPk(restaurantId);
+            if (!restaurant) {
+                return next(new NotFoundError('Restaurante não encontrado.'));
+            }
+
+            req.restaurant = restaurant;
+            next();
+        } catch (error) {
+            console.error('DEBUG: checkRestaurantOwnership - error:', error);
+            next(error);
+        }
     };
 
     return {

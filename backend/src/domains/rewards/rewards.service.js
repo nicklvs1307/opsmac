@@ -1,5 +1,6 @@
 module.exports = (models) => {
     const { Op, fn, col } = require('sequelize');
+const { BadRequestError, NotFoundError } = require('utils/errors');
     const { spinWheel: spinWheelService } = require('services/wheelService');
 
     const listRewards = async (restaurantId, query) => {

@@ -3,8 +3,8 @@ import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 
 // API Functions
-const fetchNpsCriteria = async () => {
-  const { data } = await axiosInstance.get('/npsCriteria');
+const fetchNpsCriteria = async (restaurantId) => {
+  const { data } = await axiosInstance.get(`/npsCriteria?restaurantId=${restaurantId}`);
   return data;
 };
 
@@ -29,8 +29,8 @@ const updateSatisfactionSettings = ({ restaurantId, settings }) => {
 };
 
 // React Query Hooks
-export const useNpsCriteria = () => {
-  return useQuery('npsCriteria', fetchNpsCriteria);
+export const useNpsCriteria = (restaurantId) => {
+  return useQuery('npsCriteria', () => fetchNpsCriteria(restaurantId));
 };
 
 export const useCreateNpsCriterion = () => {

@@ -1,29 +1,14 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
 ✅ Conexão com banco de dados estabelecida
-❌ Erro ao iniciar servidor: Error: Cannot find module '../../models/Reward'
-Require stack:
-- /app/src/domains/coupons/coupons.service.js
-- /app/src/domains/coupons/coupons.controller.js
-- /app/src/domains/coupons/coupons.routes.js
-- /app/routes/index.js
-- /app/server.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
-    at Module._resolveFilename (/app/node_modules/module-alias/index.js:49:29)
-    at Module._load (node:internal/modules/cjs/loader:1038:27)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/src/domains/coupons/coupons.service.js:4:16)
+❌ Erro ao iniciar servidor: ReferenceError: db is not defined
+    at Object.<anonymous> (/app/src/domains/rewards/rewards.routes.js:3:55)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
     at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    '/app/src/domains/coupons/coupons.service.js',
-    '/app/src/domains/coupons/coupons.controller.js',
-    '/app/src/domains/coupons/coupons.routes.js',
-    '/app/routes/index.js',
-    '/app/server.js'
-  ]
-}
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18)
+    at module.exports (/app/routes/index.js:22:36)
+    at startServer (/app/server.js:78:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

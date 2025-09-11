@@ -9,6 +9,7 @@ module.exports = (db) => {
 
     
     // Apply the restaurant context middleware globally to all routes handled by this router
+    console.log('Type of getRestaurantContextMiddleware():', typeof getRestaurantContextMiddleware());
     router.use(getRestaurantContextMiddleware()); // Call it as a function to get the middleware
     router.use(auth.auth); // Apply auth middleware globally
 

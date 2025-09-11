@@ -1,4 +1,4 @@
-'use strict';
+"""'use strict';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -22,10 +22,15 @@ module.exports = {
 
     // 3. Seed Modules
     const modulesData = [
-      { key: 'fidelity', name: 'Fidelidade' }, { key: 'stock', name: 'Estoque' },
-      { key: 'orders', name: 'Pedidos' }, { key: 'management', name: 'Gestão' },
-      { key: 'cdv', name: 'CDV' }, { key: 'financial', name: 'Financeiro' },
-      { key: 'settings', name: 'Configurações' }, { key: 'admin', name: 'Admin' },
+      { key: 'dashboard', name: 'Dashboard' },
+      { key: 'fidelity', name: 'Fidelidade' },
+      { key: 'stock', name: 'Estoque' },
+      { key: 'orders', name: 'Pedidos' },
+      { key: 'management', name: 'Gestão' },
+      { key: 'cdv', name: 'CDV' },
+      { key: 'financial', name: 'Financeiro' },
+      { key: 'settings', name: 'Configurações' },
+      { key: 'admin', name: 'Admin' },
     ].map(m => ({ ...m, id: Sequelize.literal('gen_random_uuid()'), created_at: new Date(), updated_at: new Date() }));
     await queryInterface.bulkInsert('modules', modulesData, {});
     const modules = await queryInterface.sequelize.query('SELECT id, key FROM "modules";', { type: Sequelize.QueryTypes.SELECT });
@@ -33,6 +38,7 @@ module.exports = {
 
     // 4. Seed Submodules
     const submodulesData = [
+      { module_id: moduleMap['dashboard'], key: 'general', name: 'Geral' },
       { module_id: moduleMap['fidelity'], key: 'general', name: 'Geral' },
       { module_id: moduleMap['fidelity'], key: 'checkin', name: 'Check in' },
       { module_id: moduleMap['fidelity'], key: 'satisfaction', name: 'Satisfação' },
@@ -53,7 +59,6 @@ module.exports = {
       { module_id: moduleMap['financial'], key: 'payments', name: 'Pagamentos' },
       { module_id: moduleMap['financial'], key: 'fiscal', name: 'Fiscal' },
       { module_id: moduleMap['settings'], key: 'general', name: 'Geral' },
-      { module_id: moduleMap['admin'], key: 'general', name: 'Geral' },
       { module_id: moduleMap['admin'], key: 'users', name: 'Usuários' },
       { module_id: moduleMap['admin'], key: 'restaurants', name: 'Restaurantes' },
       { module_id: moduleMap['admin'], key: 'permissions', name: 'Permissões' },
@@ -68,6 +73,10 @@ module.exports = {
 
     // 5. Seed Features
     const featuresToInsertRaw = [
+        // Dashboard Module
+        { key: 'dashboard:general:view', name: 'Visualizar Painel Geral', module: 'dashboard', submodule: 'general' },
+
+        // Fidelity Module
         { key: 'fidelity:general:dashboard', name: 'Painel Inicial', module: 'fidelity', submodule: 'general' },
         { key: 'fidelity:general:monthly-summary', name: 'Resumo do mês', module: 'fidelity', submodule: 'general' },
         { key: 'fidelity:general:satisfaction-overview', name: 'Satisfação', module: 'fidelity', submodule: 'general' },
@@ -76,17 +85,15 @@ module.exports = {
         { key: 'fidelity:general:benchmarking', name: 'Benchmarking', module: 'fidelity', submodule: 'general' },
         { key: 'fidelity:general:multiple-choice', name: 'Multipla Escolha', module: 'fidelity', submodule: 'general' },
         { key: 'fidelity:general:word-clouds', name: 'Nuvens de Palavras', module: 'fidelity', submodule: 'general' },
-        { key: 'dashboard:view', name: 'Visualizar Painel Geral', module: 'admin', submodule: 'general' },
         { key: 'fidelity:checkin:dashboard', name: 'Dashboard', module: 'fidelity', submodule: 'checkin' },
         { key: 'fidelity:checkin:settings', name: 'Configurações', module: 'fidelity', submodule: 'checkin' },
         { key: 'fidelity:checkin:active', name: 'Checkin Ativos', module: 'fidelity', submodule: 'checkin' },
-        { key: 'checkin:create', name: 'Criar Check-in', module: 'fidelity', submodule: 'checkin' },
-        { key: 'checkin:edit', name: 'Editar Check-in', module: 'fidelity', submodule: 'checkin' },
+        { key: 'fidelity:checkin:create', name: 'Criar Check-in', module: 'fidelity', submodule: 'checkin' },
+        { key: 'fidelity:checkin:edit', name: 'Editar Check-in', module: 'fidelity', submodule: 'checkin' },
         { key: 'fidelity:satisfaction:dashboard', name: 'Dashboard', module: 'fidelity', submodule: 'satisfaction' },
         { key: 'fidelity:satisfaction:settings', name: 'Configurações', module: 'fidelity', submodule: 'satisfaction' },
         { key: 'fidelity:satisfaction:surveys', name: 'Pesquisas', module: 'fidelity', submodule: 'satisfaction' },
-        { key: 'npsCriteria:view', name: 'Visualizar Critérios NPS', module: 'fidelity', submodule: 'satisfaction' },
-        { key: 'npsCriteria:edit', name: 'Editar Critérios NPS', module: 'fidelity', submodule: 'satisfaction' },
+        { key: 'fidelity:satisfaction:nps-criteria', name: 'Critérios NPS', module: 'fidelity', submodule: 'satisfaction' },
         { key: 'fidelity:responses:dashboard', name: 'Painel', module: 'fidelity', submodule: 'responses' },
         { key: 'fidelity:responses:management', name: 'Gestão as Respostas', module: 'fidelity', submodule: 'responses' },
         { key: 'fidelity:responses:replicas', name: 'Replicas', module: 'fidelity', submodule: 'responses' },
@@ -112,54 +119,64 @@ module.exports = {
         { key: 'fidelity:automation:flows', name: 'Fluxos', module: 'fidelity', submodule: 'automation' },
         { key: 'fidelity:integrations', name: 'Integrações', module: 'fidelity', submodule: 'general' },
         { key: 'fidelity:reports', name: 'Relatorios', module: 'fidelity', submodule: 'general' },
-        { key: 'stock:dashboard', name: 'Dashboard', module: 'stock', submodule: 'general' },
-        { key: 'stock:movements', name: 'Movimentações', module: 'stock', submodule: 'general' },
-        { key: 'stock:suppliers', name: 'Fornecedores', module: 'stock', submodule: 'general' },
-        { key: 'stock:purchases', name: 'Compras', module: 'stock', submodule: 'general' },
-        { key: 'stock:sales', name: 'Vendas', module: 'stock', submodule: 'general' },
-        { key: 'stock:products', name: 'Produtos', module: 'stock', submodule: 'general' },
-        { key: 'stock:products:create', name: 'Cadastro de Produtos', module: 'stock', submodule: 'general' },
-        { key: 'stock:ingredients', name: 'Ingredientes e Insumos', module: 'stock', submodule: 'general' },
-        { key: 'stock:settings', name: 'Configurações', module: 'stock', submodule: 'general' },
-        { key: 'stock:reports', name: 'Relatorios', module: 'stock', submodule: 'general' },
-        { key: 'stock:counting', name: 'Contagem de Estoque', module: 'stock', submodule: 'general' },
-        { key: 'stock:inventory', name: 'Inventario', module: 'stock', submodule: 'general' },
+
+        // Stock Module
+        { key: 'stock:general:dashboard', name: 'Dashboard', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:movements', name: 'Movimentações', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:suppliers', name: 'Fornecedores', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:purchases', name: 'Compras', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:sales', name: 'Vendas', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:products', name: 'Produtos', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:ingredients', name: 'Ingredientes e Insumos', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:settings', name: 'Configurações', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:reports', name: 'Relatorios', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:counting', name: 'Contagem de Estoque', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:inventory', name: 'Inventario', module: 'stock', submodule: 'general' },
         { key: 'stock:technical-sheet:create', name: 'Cadastro', module: 'stock', submodule: 'technical-sheet' },
         { key: 'stock:technical-sheet:list', name: 'Fichas Tecnicas', module: 'stock', submodule: 'technical-sheet' },
-        { key: 'stock:cmv', name: 'CMV', module: 'stock', submodule: 'general' },
-        { key: 'stock:adjustments', name: 'Perdas e Ajustes', module: 'stock', submodule: 'general' },
-        { key: 'stock:lots', name: 'Lotes e Validades', module: 'stock', submodule: 'general' },
-        { key: 'stock:alerts', name: 'Alertas', module: 'stock', submodule: 'general' },
-        { key: 'orders:dashboard', name: 'Painel', module: 'orders', submodule: 'general' },
-        { key: 'orders:pdv', name: 'PDV', module: 'orders', submodule: 'general' },
-        { key: 'orders:list', name: 'Pedidos', module: 'orders', submodule: 'general' },
-        { key: 'orders:integrations', name: 'Integrações', module: 'orders', submodule: 'general' },
-        { key: 'orders:delivery', name: 'Delivery', module: 'orders', submodule: 'general' },
-        { key: 'orders:sales-report', name: 'Relatorio de Vendas', module: 'orders', submodule: 'general' },
+        { key: 'stock:general:cmv', name: 'CMV', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:adjustments', name: 'Perdas e Ajustes', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:lots', name: 'Lotes e Validades', module: 'stock', submodule: 'general' },
+        { key: 'stock:general:alerts', name: 'Alertas', module: 'stock', submodule: 'general' },
+
+        // Orders Module
+        { key: 'orders:general:dashboard', name: 'Painel', module: 'orders', submodule: 'general' },
+        { key: 'orders:general:pdv', name: 'PDV', module: 'orders', submodule: 'general' },
+        { key: 'orders:general:list', name: 'Pedidos', module: 'orders', submodule: 'general' },
+        { key: 'orders:general:integrations', name: 'Integrações', module: 'orders', submodule: 'general' },
+        { key: 'orders:general:delivery', name: 'Delivery', module: 'orders', submodule: 'general' },
+        { key: 'orders:general:sales-report', name: 'Relatorio de Vendas', module: 'orders', submodule: 'general' },
+        { key: 'orders:general:categories', name: 'Categorias', module: 'orders', submodule: 'general' },
         { key: 'orders:hall:tables', name: 'Mesas', module: 'orders', submodule: 'hall' },
-        { key: 'management:dashboard', name: 'Dashboard', module: 'management', submodule: 'general' },
-        { key: 'management:schedule', name: 'Escala de Funcionarios', module: 'management', submodule: 'general' },
-        { key: 'management:commissions', name: 'Controle de Comissões', module: 'management', submodule: 'general' },
-        { key: 'management:costs', name: 'Custos Fixos e Variaveis', module: 'management', submodule: 'general' },
-        { key: 'management:team', name: 'Equipe', module: 'management', submodule: 'general' },
-        { key: 'management:production', name: 'Produção', module: 'management', submodule: 'general' },
-        { key: 'management:permissions', name: 'Permissões', module: 'management', submodule: 'general' },
-        { key: 'cdv:dashboard', name: 'Painel', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:labels', name: 'Etiquetas', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:labels:print', name: 'Impressão Etiquetas', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:labels:print-group', name: 'Impressão em Grupo', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:labels:count', name: 'Contagem de Etiquetas', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:labels:count-history', name: 'Historico de Contagem', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:labels:history', name: 'Historico de Etiquetas', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:labels:delete', name: 'Exclusão de Etiquetas', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:stock-count', name: 'Contagem de Estoque', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:expirations', name: 'Validades', module: 'cdv', submodule: 'general' },
-        { key: 'cdv:expirations-alert', name: 'Alerta de Validades', module: 'cdv', submodule: 'general' },
+
+        // Management Module
+        { key: 'management:general:dashboard', name: 'Dashboard', module: 'management', submodule: 'general' },
+        { key: 'management:general:schedule', name: 'Escala de Funcionarios', module: 'management', submodule: 'general' },
+        { key: 'management:general:commissions', name: 'Controle de Comissões', module: 'management', submodule: 'general' },
+        { key: 'management:general:costs', name: 'Custos Fixos e Variaveis', module: 'management', submodule: 'general' },
+        { key: 'management:general:team', name: 'Equipe', module: 'management', submodule: 'general' },
+        { key: 'management:general:production', name: 'Produção', module: 'management', submodule: 'general' },
+        { key: 'management:general:permissions', name: 'Permissões', module: 'management', submodule: 'general' },
+
+        // CDV Module
+        { key: 'cdv:general:dashboard', name: 'Painel', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:labels', name: 'Etiquetas', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:labels-print', name: 'Impressão Etiquetas', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:labels-print-group', name: 'Impressão em Grupo', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:labels-count', name: 'Contagem de Etiquetas', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:labels-count-history', name: 'Historico de Contagem', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:labels-history', name: 'Historico de Etiquetas', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:labels-delete', name: 'Exclusão de Etiquetas', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:stock-count', name: 'Contagem de Estoque', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:expirations', name: 'Validades', module: 'cdv', submodule: 'general' },
+        { key: 'cdv:general:expirations-alert', name: 'Alerta de Validades', module: 'cdv', submodule: 'general' },
+
+        // Financial Module
         { key: 'financial:payables:suppliers', name: 'Fornecedores', module: 'financial', submodule: 'payables' },
         { key: 'financial:payables:deadlines', name: 'Prazos', module: 'financial', submodule: 'payables' },
         { key: 'financial:payables:invoices', name: 'Boletos', module: 'financial', submodule: 'payables' },
         { key: 'financial:payables:recurring', name: 'Recorrencia', module: 'financial', submodule: 'payables' },
-        { key: 'financial:receivables', name: 'Contas a Receber', module: 'financial', submodule: 'general' },
+        { key: 'financial:general:receivables', name: 'Contas a Receber', module: 'financial', submodule: 'general' },
         { key: 'financial:cash-flow:dashboard', name: 'Painel', module: 'financial', submodule: 'cash-flow' },
         { key: 'financial:cash-flow:view', name: 'Visão', module: 'financial', submodule: 'cash-flow' },
         { key: 'financial:cash-flow:projection', name: 'Projeção', module: 'financial', submodule: 'cash-flow' },
@@ -178,30 +195,21 @@ module.exports = {
         { key: 'financial:fiscal:sefaz', name: 'Integração SEFAZ', module: 'financial', submodule: 'fiscal' },
         { key: 'financial:fiscal:reports', name: 'Relatórios', module: 'financial', submodule: 'fiscal' },
         { key: 'financial:fiscal:settings', name: 'Configurações', module: 'financial', submodule: 'fiscal' },
-        { key: 'settings:view', name: 'Visualizar Configurações', module: 'settings', submodule: 'general' },
-        { key: 'settings:edit', name: 'Editar Configurações', module: 'settings', submodule: 'general' },
-        { key: 'settings:profile:view', name: 'Visualizar Configurações de Perfil', module: 'settings', submodule: 'general' },
-        { key: 'settings:business:view', name: 'Visualizar Configurações da Empresa', module: 'settings', submodule: 'general' },
-        { key: 'settings:security:view', name: 'Visualizar Configurações de Segurança', module: 'settings', submodule: 'general' },
-        { key: 'settings:whatsapp:view', name: 'Visualizar Configurações de WhatsApp', module: 'settings', submodule: 'general' },
-        { key: 'settings:notifications:view', name: 'Visualizar Configurações de Notificações', module: 'settings', submodule: 'general' },
-        { key: 'settings:appearance:view', name: 'Visualizar Configurações de Aparência', module: 'settings', submodule: 'general' },
-        { key: 'admin:users:view', name: 'Visualizar Usuários', module: 'admin', submodule: 'users' },
-        { key: 'admin:users:create', name: 'Criar Usuários', module: 'admin', submodule: 'users' },
-        { key: 'admin:users:edit', name: 'Editar Usuários', module: 'admin', submodule: 'users' },
-        { key: 'admin:users:delete', name: 'Excluir Usuários', module: 'admin', submodule: 'users' },
-        { key: 'admin:restaurants:view', name: 'Visualizar Restaurantes', module: 'admin', submodule: 'restaurants' },
-        { key: 'admin:restaurants:create', name: 'Criar Restaurantes', module: 'admin', submodule: 'restaurants' },
-        { key: 'admin:restaurants:edit', name: 'Editar Restaurantes', module: 'admin', submodule: 'restaurants' },
-        { key: 'admin:restaurants:delete', name: 'Excluir Restaurantes', module: 'admin', submodule: 'restaurants' },
-        { key: 'admin:permissions:view', name: 'Visualizar Permissões', module: 'admin', submodule: 'permissions' },
-        { key: 'stock:products:view', name: 'Visualizar Produtos', module: 'stock', submodule: 'general' },
-        { key: 'stock:products:edit', name: 'Editar Produtos', module: 'stock', submodule: 'general' },
-        { key: 'stock:products:delete', name: 'Excluir Produtos', module: 'stock', submodule: 'general' },
-        { key: 'categories:view', name: 'Visualizar Categorias', module: 'orders', submodule: 'general' },
-        { key: 'categories:create', name: 'Criar Categorias', module: 'orders', submodule: 'general' },
-        { key: 'categories:edit', name: 'Editar Categorias', module: 'orders', submodule: 'general' },
-        { key: 'categories:delete', name: 'Excluir Categorias', module: 'orders', submodule: 'general' },
+
+        // Settings Module
+        { key: 'settings:general:view', name: 'Visualizar Configurações', module: 'settings', submodule: 'general' },
+        { key: 'settings:general:edit', name: 'Editar Configurações', module: 'settings', submodule: 'general' },
+        { key: 'settings:general:profile', name: 'Visualizar Configurações de Perfil', module: 'settings', submodule: 'general' },
+        { key: 'settings:general:business', name: 'Visualizar Configurações da Empresa', module: 'settings', submodule: 'general' },
+        { key: 'settings:general:security', name: 'Visualizar Configurações de Segurança', module: 'settings', submodule: 'general' },
+        { key: 'settings:general:whatsapp', name: 'Visualizar Configurações de WhatsApp', module: 'settings', submodule: 'general' },
+        { key: 'settings:general:notifications', name: 'Visualizar Configurações de Notificações', module: 'settings', submodule: 'general' },
+        { key: 'settings:general:appearance', name: 'Visualizar Configurações de Aparência', module: 'settings', submodule: 'general' },
+
+        // Admin Module
+        { key: 'admin:users', name: 'Gerenciar Usuários', module: 'admin', submodule: 'users' },
+        { key: 'admin:restaurants', name: 'Gerenciar Restaurantes', module: 'admin', submodule: 'restaurants' },
+        { key: 'admin:permissions', name: 'Gerenciar Permissões', module: 'admin', submodule: 'permissions' },
     ];
 
     const featuresData = featuresToInsertRaw.map(f => ({
@@ -251,15 +259,15 @@ module.exports = {
 
     // Owner permissions
     const ownerFeatures = [
+        'dashboard:general:view',
         'fidelity:general:dashboard',
-        'dashboard:view',
-        'settings:view',
-        'settings:profile:view',
-        'settings:business:view',
-        'settings:security:view',
-        'settings:whatsapp:view',
-        'settings:notifications:view',
-        'settings:appearance:view',
+        'settings:general:view',
+        'settings:general:profile',
+        'settings:general:business',
+        'settings:general:security',
+        'settings:general:whatsapp',
+        'settings:general:notifications',
+        'settings:general:appearance',
         'fidelity:coupons:list',
         'fidelity:coupons:rewards',
     ];
@@ -267,6 +275,7 @@ module.exports = {
     if (roleMap.owner) {
         for (const featureKey of ownerFeatures) {
             if (featureMap[featureKey]) {
+                // Owners get all actions for their allowed features
                 for (const action of actions) {
                     rolePermissions.push({
                         role_id: roleMap.owner,
@@ -285,6 +294,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
+    // This is a destructive migration, so the down method will just clear everything.
     await queryInterface.bulkDelete('role_permissions', null, {});
     await queryInterface.bulkDelete('user_roles', null, {});
     await queryInterface.bulkDelete('features', null, {});
@@ -294,3 +304,4 @@ module.exports = {
     await queryInterface.bulkDelete('actions', null, {});
   },
 };
+""

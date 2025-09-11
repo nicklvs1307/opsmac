@@ -22,6 +22,7 @@ module.exports = () => { // No longer takes db as an argument
                 return next(new UnauthorizedError('Token inválido ou expirado.'));
             }
 
+            console.log('Decoded userId:', decoded.userId);
             const user = await authService.getMe(decoded.userId);
 
             if (!user) {

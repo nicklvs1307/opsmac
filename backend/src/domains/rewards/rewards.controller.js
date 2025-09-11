@@ -28,7 +28,8 @@ module.exports = (db) => {
         createReward: async (req, res, next) => {
             handleValidationErrors(req);
             const restaurantId = req.context.restaurantId;
-            const reward = await rewardsService.createReward(req.body, restaurantId);
+            const userId = req.user.id; // Extract userId from req.user
+            const reward = await rewardsService.createReward(req.body, restaurantId, userId); // Pass userId
             await auditService.log(req.user, restaurantId, 'REWARD_CREATED', `Reward:${reward.id}`, { title: reward.title, type: reward.rewardType });
             res.status(201).json(reward);
         },

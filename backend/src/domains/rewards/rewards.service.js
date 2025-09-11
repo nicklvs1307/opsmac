@@ -32,7 +32,7 @@ const { BadRequestError, NotFoundError } = require('utils/errors');
         return reward;
     };
 
-    const createReward = async (rewardData, restaurantId) => {
+    const createReward = async (rewardData, restaurantId, userId) => {
         if (!restaurantId) {
             throw new BadRequestError('Restaurante não encontrado para o usuário.');
         }

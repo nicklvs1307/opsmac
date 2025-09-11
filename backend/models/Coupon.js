@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'rewardId', // Use camelCase for foreignKey in model definition
         as: 'reward',
       });
+      Coupon.belongsTo(models.Customer, {
+        foreignKey: 'customerId',
+        as: 'customer',
+      });
     }
   }
 
@@ -53,6 +57,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false, // Assuming a coupon must always be linked to a reward
       field: 'reward_id', // Explicitly map to snake_case column in DB for clarity, though underscored:true would handle it
+    },
+    customerId: {
+      type: DataTypes.UUID,
+      allowNull: true, 
+      field: 'customer_id',
     },
     restaurantId: {
       type: DataTypes.UUID,

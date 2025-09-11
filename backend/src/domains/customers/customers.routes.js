@@ -6,8 +6,8 @@ const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('uti
 
 module.exports = (db) => { // Added comment to force reload
     const { auth } = require('middleware/authMiddleware')(db);
-    const { getCustomerDashboardMetrics, getBirthdayCustomers, listCustomers, createCustomer, getCustomerByPhone, getCustomerById, updateCustomer, deleteCustomer, getCustomerDetails, resetCustomerVisits, clearCustomerCheckins, publicRegisterCustomer } = require('domains/customer/customer.controller')(db);
-    const { createCustomerValidation, updateCustomerValidation, publicRegisterCustomerValidation, customerQueryValidation, byPhoneValidation } = require('domains/customer/customer.validation');
+    const { getCustomerDashboardMetrics, getBirthdayCustomers, listCustomers, createCustomer, getCustomerByPhone, getCustomerById, updateCustomer, deleteCustomer, getCustomerDetails, resetCustomerVisits, clearCustomerCheckins, publicRegisterCustomer } = require('./customers.controller')(db);
+    const { createCustomerValidation, updateCustomerValidation, publicRegisterCustomerValidation, customerQueryValidation, byPhoneValidation } = require('./customers.validation');
 
     const router = safeRouter();
 
@@ -37,6 +37,7 @@ module.exports = (db) => { // Added comment to force reload
 
     router.get('/dashboard-metrics', auth, checkPermissionInline('customers', 'read'), asyncHandler(getCustomerDashboardMetrics));
     router.get('/birthdays', auth, checkPermissionInline('customers', 'read'), asyncHandler(getBirthdayCustomers));
+    router.get('/restaurant/:restaurantId', auth, checkPermissionInline('fidelity:relationship:customers', 'read'), asyncHandler(listCustomers)); // New route
     router.get('/', auth, checkPermissionInline('customers', 'read'), ...customerQueryValidation, asyncHandler(listCustomers));
     router.post('/', auth, checkPermissionInline('customers', 'create'), ...createCustomerValidation, asyncHandler(createCustomer));
     router.get('/by-phone', auth, checkPermissionInline('customers', 'read'), ...byPhoneValidation, asyncHandler(getCustomerByPhone));

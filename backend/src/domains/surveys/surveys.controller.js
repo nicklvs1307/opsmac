@@ -1,5 +1,5 @@
 module.exports = (db) => {
-    const surveyService = require('./survey.service')(db);
+    const surveyService = require('./surveys.service')(db);
     const { validationResult } = require('express-validator');
     const { BadRequestError } = require('utils/errors');
     const auditService = require('../../services/auditService'); // Import auditService

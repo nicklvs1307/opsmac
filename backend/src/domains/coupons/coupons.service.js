@@ -1,5 +1,7 @@
 const { Op } = require('sequelize');
 const { NotFoundError, BadRequestError } = require('utils/errors');
+const Customer = require('../../models/Customer');
+const Reward = require('../../models/Reward');
 
 module.exports = (db) => {
     const models = db;
@@ -20,12 +22,12 @@ module.exports = (db) => {
             where,
             include: [
                 {
-                    model: models.Reward,
+                    model: Reward,
                     as: 'reward',
                     attributes: ['id', 'title', 'rewardType']
                 },
                 {
-                    model: models.Customer,
+                    model: Customer,
                     as: 'customer',
                     attributes: ['id', 'name', 'email']
                 }
@@ -155,8 +157,8 @@ module.exports = (db) => {
         const coupon = await models.Coupon.findOne({
             where: { code, restaurantId: restaurantId },
             include: [
-                { model: models.Reward, as: 'reward' },
-                { model: models.Customer, as: 'customer' },
+                { model: Reward, as: 'reward' },
+                { model: Customer, as: 'customer' },
             ]
         });
 
@@ -179,8 +181,8 @@ module.exports = (db) => {
         const coupon = await models.Coupon.findOne({
             where: { code, restaurantId: restaurant.id },
             include: [
-                { model: models.Reward, as: 'reward' },
-                { model: models.Customer, as: 'customer' },
+                { model: Reward, as: 'reward' },
+                { model: Customer, as: 'customer' },
             ]
         });
 

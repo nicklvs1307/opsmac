@@ -15,6 +15,13 @@ module.exports = (sequelize, DataTypes) => {
       Customer.hasMany(models.Order, { foreignKey: 'customer_id', as: 'orders' });
       Customer.hasMany(models.WhatsappMessage, { foreignKey: 'customer_id', as: 'whatsappMessages' });
       Customer.hasMany(models.TableSession, { foreignKey: 'customer_id', as: 'tableSessions' });
+      Customer.hasMany(models.Coupon, { foreignKey: 'customerId', as: 'coupons' });
+    }
+
+    async addLoyaltyPoints(points, source) {
+      this.loyaltyPoints = (this.loyaltyPoints || 0) + points;
+      // Optionally, you could add a loyalty transaction record here
+      await this.save();
     }
   }
 
@@ -69,6 +76,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       field: 'survey_responses_count',
+    },
+    loyaltyPoints: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      field: 'loyalty_points',
     },
     createdAt: {
       type: DataTypes.DATE,

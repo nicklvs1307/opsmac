@@ -3,7 +3,7 @@ const { BadRequestError } = require('utils/errors');
 const auditService = require('../../services/auditService'); // Import auditService
 
 module.exports = (db) => {
-    const feedbackService = require('./feedback.service')(db);
+    const feedbackService = require('./feedbacks.service')(db);
 
     const handleValidation = (req) => {
         const errors = validationResult(req);

@@ -236,6 +236,9 @@ module.exports = (db) => {
             const averageCsat = csatCount > 0 ? csatSum / csatCount : null;
 
             const restaurant = await models.Restaurant.findByPk(restaurantId);
+            if (!restaurant) {
+                throw new NotFoundError('Restaurante não encontrado para análise de pesquisa.');
+            }
 
             return {
                 totalResponses,

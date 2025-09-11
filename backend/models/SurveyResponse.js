@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'survey_response_id',
         as: 'answers',
       });
+      SurveyResponse.belongsTo(models.Restaurant, {
+        foreignKey: 'restaurantId',
+        as: 'restaurant',
+      });
     }
   }
 
@@ -38,6 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     npsScore: {
       type: DataTypes.INTEGER,
       field: 'nps_score',
+    },
+    restaurantId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      field: 'restaurant_id',
     },
     createdAt: {
       type: DataTypes.DATE,

@@ -10,6 +10,7 @@ module.exports = (db) => {
     
     // Apply the restaurant context middleware globally to all routes handled by this router
     router.use(getRestaurantContextMiddleware()); // Call it as a function to get the middleware
+    router.use(auth.auth); // Apply auth middleware globally
 
     const domainsDir = path.join(__dirname, "..", "src", "domains");
 

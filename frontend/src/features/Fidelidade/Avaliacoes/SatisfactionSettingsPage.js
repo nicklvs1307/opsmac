@@ -47,7 +47,7 @@ const SatisfactionSettingsPage = () => {
     data: criteria,
     isLoading: isLoadingCriteria,
     isError: isCriteriaError,
-  } = useNpsCriteria();
+  } = useNpsCriteria(restaurantId);
   const { data: settingsData, isLoading: isLoadingSettings } =
     useSatisfactionSettings(restaurantId);
   const { data: rewardsData, isLoading: isLoadingRewards } = useRewards(restaurantId);

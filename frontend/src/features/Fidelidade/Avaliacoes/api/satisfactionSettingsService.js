@@ -30,8 +30,11 @@ const updateSatisfactionSettings = ({ restaurantId, settings }) => {
 
 // React Query Hooks
 export const useNpsCriteria = (restaurantId) => {
-  return useQuery('npsCriteria', () => fetchNpsCriteria(restaurantId));
-};
+  return useQuery(
+    [SATISFACTION_SETTINGS_QUERY_KEYS.npsCriteria, restaurantId],
+    () => fetchNpsCriteria(restaurantId),
+    {
+      enabled: !!restaurantId,
 
 export const useCreateNpsCriterion = () => {
   const queryClient = useQueryClient();

@@ -51,19 +51,15 @@ module.exports = (db) => {
             return customerService.getBirthdayCustomers(restaurantId);
         }),
 
-        listCustomers: async (req, res, next) => {
-            const restaurantId = req.context.restaurantId;
-            if (!restaurantId) {
-                throw new BadRequestError('Restaurante não encontrado para o usuário.');
-            }
-            const { count, rows } = await customerService.listCustomers(restaurantId, req.query);
-            res.json({
+        listCustomers: withRestaurantId(async (restaurantId, params, query) => {
+            const { count, rows } = await customerService.listCustomers(restaurantId, query);
+            return {
                 customers: rows,
-                totalPages: Math.ceil(count / (req.query.limit || 10)),
-                currentPage: parseInt(req.query.page || 1),
+                totalPages: Math.ceil(count / (query.limit || 10)),
+                currentPage: parseInt(query.page || 1),
                 totalCustomers: count,
-            });
-        },
+            };
+        }),
 
         createCustomer: withRestaurantId(async (restaurantId, params, query, body) => {
             const customer = await customerService.createCustomer(restaurantId, body);

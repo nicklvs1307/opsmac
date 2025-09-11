@@ -1,12 +1,187 @@
-/bin/sh: backend/scripts/wait-for-it.sh: not found
-Database is up, running migrations...
-Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
-Loaded configuration file "config/config.js".
-Using environment "production".
-No migrations were executed, database schema was already up to date.
-Running seeders...
-Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
-Loaded configuration file "config/config.js".
-Using environment "production".
-== 001-seed-permission-system: migrating =======
-ERROR: Invalid or unexpected token
+> feedeliza-plus@1.0.0 start
+> node server.js
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+Redis Client Connected
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+ReferenceError: NotFoundError is not defined
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:7:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async NpsCriterion.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:20:30)
+NotFoundError: Recompensa não encontrada.
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:30:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+ReferenceError: NotFoundError is not defined
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:7:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+NotFoundError: Recompensa não encontrada.
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:30:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async NpsCriterion.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:20:30)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d

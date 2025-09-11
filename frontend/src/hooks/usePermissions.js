@@ -26,18 +26,7 @@ const usePermissions = () => {
       return true;
     }
 
-    // Owner bypass (if feature is not locked by entitlement)
-    if (permissionSnapshot.isOwner) {
-      // For owner, we need to check if the module itself is locked or hidden by entitlement
-      // The featureKey might be 'moduleKey:submoduleKey:featureKey'
-      const moduleKey = featureKey.split(':')[0];
-      const moduleInSnapshot = permissionSnapshot.modules.find(m => m.key === moduleKey);
-
-      if (moduleInSnapshot && (moduleInSnapshot.locked || !moduleInSnapshot.visible)) {
-        return false; // Owner cannot access if module is locked or not visible by entitlement
-      }
-      return true; // Owner can access if module is not locked/hidden by entitlement
-    }
+    
 
     // Regular role-based and user override checks
     const feature = permissionSnapshot.modules

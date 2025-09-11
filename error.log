@@ -1,17 +1,19 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           46.6s
+=> ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          215.1s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.294 + npm run build
-1.014
-1.014 > feedeliza-plus@1.0.0 build
-1.014 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-1.014
-5.266 Creating an optimized production build...
-46.31 Failed to compile.
-46.31
-46.31 Module not found: Error: Can't resolve '../../app/providers/contexts/AuthContext' in '/app/frontend/src/features/Settings/api'
-46.31
-46.31
+0.330 + npm run build
+0.722
+0.722 > feedeliza-plus@1.0.0 build
+0.722 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.722
+4.330 Creating an optimized production build...
+213.8 Failed to compile.
+213.8
+213.8 [eslint]
+213.8 src/features/Settings/api/settingsService.js
+213.8 Syntax error: Unexpected token, expected "from" (4:19) (4:19)
+213.8
+213.8
 ------
 Dockerfile.frontend:27
 --------------------

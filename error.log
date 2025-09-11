@@ -1,24 +1,436 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           40.8s
-------
- > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.318 + npm run build
-0.598
-0.598 > feedeliza-plus@1.0.0 build
-0.598 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.598
-2.867 Creating an optimized production build...
-40.51 Failed to compile.
-40.51
-40.52 Module not found: Error: Can't resolve 'app/providers/contexts/AuthContext.js' in '/app/frontend/src/features/Settings/api'
-40.52
-40.52
-------
-Dockerfile.frontend:27
---------------------
-  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
-  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  28 |
-  29 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+> feedeliza-plus@1.0.0 start
+> node server.js
+✅ Conexão com banco de dados estabelecida
+Type of getRestaurantContextMiddleware(): function
+🚀 Servidor rodando na porta 5000
+Redis Client Connected
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Error: WHERE parameter "user_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.deleteQuery (/app/node_modules/sequelize/lib/dialects/postgres/query-generator.js:269:28)
+    at PostgresQueryInterface.bulkDelete (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:403:59)
+    at UserPermissionOverride.destroy (/app/node_modules/sequelize/lib/model.js:1838:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async setUserPermissionOverride (/app/src/domains/iam/iam.controller.js:176:5)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Error: WHERE parameter "user_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.deleteQuery (/app/node_modules/sequelize/lib/dialects/postgres/query-generator.js:269:28)
+    at PostgresQueryInterface.bulkDelete (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:403:59)
+    at UserPermissionOverride.destroy (/app/node_modules/sequelize/lib/model.js:1838:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async setUserPermissionOverride (/app/src/domains/iam/iam.controller.js:176:5)

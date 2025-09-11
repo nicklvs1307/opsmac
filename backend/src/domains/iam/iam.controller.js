@@ -166,7 +166,7 @@ class IamController {
 
   // --- User Permission Overrides ---
   async setUserPermissionOverride(req, res, next) {
-    const { userId } = req.params;
+    const { id: userId } = req.params;
     const { restaurantId, overrides } = req.body;
 
     if (!restaurantId || !Array.isArray(overrides)) {

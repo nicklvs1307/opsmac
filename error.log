@@ -1,16 +1,12 @@
-URL da solicitação
-https://feedelizaapi.towersfy.com/api/auth/login
-Método da solicitação
-POST
-Código de status
-401 Unauthorized
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Error</title>
-</head>
-<body>
-<pre>Unauthorized</pre>
-</body>
-</html>
+/bin/sh: backend/scripts/wait-for-it.sh: not found
+Database is up, running migrations...
+Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
+Loaded configuration file "config/config.js".
+Using environment "production".
+No migrations were executed, database schema was already up to date.
+Running seeders...
+Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
+Loaded configuration file "config/config.js".
+Using environment "production".
+== 001-seed-permission-system: migrating =======
+ERROR: Invalid or unexpected token

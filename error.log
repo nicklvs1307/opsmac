@@ -1,28 +1,9 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          217.2s
-------
- > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.370 + npm run build
-0.885
-0.885 > feedeliza-plus@1.0.0 build
-0.885 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.885
-4.783 Creating an optimized production build...
-216.0 Failed to compile.
-216.0
-216.0 [eslint]
-216.0 src/features/Fidelidade/Avaliacoes/api/satisfactionSettingsService.js
-216.0   Line 34:6:  'SATISFACTION_SETTINGS_QUERY_KEYS' is not defined  no-undef
-216.0
-216.0 Search for the keywords to learn more about each error.
-216.0
-216.0
-------
-Dockerfile.frontend:27
---------------------
-  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
-  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  28 |
-  29 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+> feedeliza-plus@1.0.0 start
+> node server.js
+✅ Conexão com banco de dados estabelecida
+❌ Erro ao iniciar servidor: TypeError: Router.use() requires a middleware function
+    at Function.use (/app/node_modules/express/lib/router/index.js:462:11)
+    at router.<computed> [as use] (/app/src/utils/safeRouter.js:14:14)
+    at module.exports (/app/routes/index.js:13:12)
+    at startServer (/app/server.js:78:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

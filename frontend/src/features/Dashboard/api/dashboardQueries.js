@@ -18,7 +18,7 @@ const fetchDashboardOverview = async ({ restaurantId, period, token }) => {
     throw new Error('User not authenticated or token not available.');
   }
 
-  const response = await axiosInstance.get(`/dashboard/${restaurantId}/overview`, {
+  const response = await axiosInstance.get(`/dashboard/${restaurantId}/analytics`, {
     params: { period },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -57,6 +57,40 @@ export const useDashboardAnalytics = (restaurantId, params) => {
   return useQuery(
     [DASHBOARD_QUERY_KEYS.analytics, restaurantId, params],
     () => fetchDashboardAnalytics(restaurantId, params),
+    {
+      enabled: !!restaurantId,
+    }
+  );
+};
+
+const fetchEvolutionAnalytics = async (restaurantId, params) => {
+  const response = await axiosInstance.get(`/dashboard/evolution-analytics?restaurantId=${restaurantId}`, {
+    params,
+  });
+  return response.data;
+};
+
+export const useEvolutionAnalytics = (restaurantId, params) => {
+  return useQuery(
+    ['evolutionAnalytics', restaurantId, params],
+    () => fetchEvolutionAnalytics(restaurantId, params),
+    {
+      enabled: !!restaurantId,
+    }
+  );
+};
+
+const fetchRatingDistribution = async (restaurantId, params) => {
+  const response = await axiosInstance.get(`/dashboard/rating-distribution?restaurantId=${restaurantId}`, {
+    params,
+  });
+  return response.data;
+};
+
+export const useRatingDistribution = (restaurantId, params) => {
+  return useQuery(
+    ['ratingDistribution', restaurantId, params],
+    () => fetchRatingDistribution(restaurantId, params),
     {
       enabled: !!restaurantId,
     }

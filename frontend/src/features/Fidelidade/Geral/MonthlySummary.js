@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useDashboardOverview } from '@/features/Dashboard/api/dashboardQueries'; // Import the new hook
+import { useDashboardOverview, useEvolutionAnalytics } from '@/features/Dashboard/api/dashboardQueries';
 import {
   LineChart,
   Line,
@@ -21,15 +21,21 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { format, subMonths } from 'date-fns';
 
 const MonthlySummary = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const { data: overviewData, isLoading, isError, error } = useDashboardOverview(restaurantId);
+  const { data: overviewData, isLoading: isLoadingOverview, isError: isErrorOverview, error: errorOverview } = useDashboardOverview(restaurantId);
 
-  if (isLoading) {
+  const twelveMonthsAgo = format(subMonths(new Date(), 12), 'yyyy-MM-dd');
+  const today = format(new Date(), 'yyyy-MM-dd');
+
+  const { data: evolutionData, isLoading: isLoadingEvolution, isError: isErrorEvolution, error: errorEvolution } = useEvolutionAnalytics(restaurantId, { start_date: twelveMonthsAgo, end_date: today, granularity: 'month' });
+
+  if (isLoadingOverview || isLoadingEvolution) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
         <CircularProgress size={60} />
@@ -37,23 +43,18 @@ const MonthlySummary = () => {
     );
   }
 
-  if (isError) {
+  if (isErrorOverview || isErrorEvolution) {
     return (
       <Alert severity="error" sx={{ mb: 2 }}>
-        {error?.message || t('common.error_loading_data')}
+        {errorOverview?.message || errorEvolution?.message || t('common.error_loading_data')}
       </Alert>
     );
   }
 
-  // Placeholder for chart data - in a real scenario, this would come from analytics API
-  const monthlyTrendData = [
-    { name: 'Jan', value: 400 },
-    { name: 'Feb', value: 300 },
-    { name: 'Mar', value: 200 },
-    { name: 'Apr', value: 278 },
-    { name: 'May', value: 189 },
-    { name: 'Jun', value: 239 },
-  ];
+  const monthlyTrendData = evolutionData?.map(d => ({
+      name: format(new Date(d.date), 'MMM/yy'),
+      value: d.checkins, // or any other metric you want to show
+  })) || [];
 
   return (
     <Box sx={{ p: 3 }}>

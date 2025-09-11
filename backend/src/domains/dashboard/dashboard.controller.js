@@ -44,5 +44,19 @@ module.exports = (db) => {
             const data = await dashboardService.getRewardsAnalytics(restaurantId);
             res.json(data);
         },
+
+        getEvolutionAnalytics: async (req, res, next) => {
+            handleValidationErrors(req);
+            const restaurantId = req.context.restaurantId;
+            const data = await dashboardService.getEvolutionAnalytics(restaurantId, req.query);
+            res.json(data);
+        },
+
+        getRatingDistribution: async (req, res, next) => {
+            handleValidationErrors(req);
+            const restaurantId = req.context.restaurantId;
+            const data = await dashboardService.getRatingDistribution(restaurantId, req.query);
+            res.json(data);
+        },
     };
 };

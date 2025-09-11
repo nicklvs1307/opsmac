@@ -4,20 +4,20 @@ import toast from 'react-hot-toast';
 
 // API Functions
 const fetchNpsCriteria = async () => {
-  const { data } = await axiosInstance.get('/nps-criteria');
+  const { data } = await axiosInstance.get('/npsCriteria');
   return data;
 };
 
 const createNpsCriterion = (name) => {
-  return axiosInstance.post('/nps-criteria', { name });
+  return axiosInstance.post('/npsCriteria', { name });
 };
 
 const updateNpsCriterion = ({ id, name }) => {
-  return axiosInstance.put(`/nps-criteria/${id}`, { name });
+  return axiosInstance.put(`/npsCriteria/${id}`, { name });
 };
 
 const deleteNpsCriterion = (id) => {
-  return axiosInstance.delete(`/nps-criteria/${id}`);
+  return axiosInstance.delete(`/npsCriteria/${id}`);
 };
 
 const fetchSatisfactionSettings = (restaurantId) => {

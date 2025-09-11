@@ -18,7 +18,7 @@ const fetchCouponAnalytics = async (restaurantId) => {
 };
 
 const fetchRewards = async (restaurantId) => {
-  const response = await axiosInstance.get(`/rewards/restaurant/${restaurantId}`);
+  const response = await axiosInstance.get(`/rewards/${restaurantId}`);
   return response.data;
 };
 

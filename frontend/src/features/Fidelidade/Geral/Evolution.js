@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useDashboardAnalytics } from '@/features/Dashboard/api/dashboardQueries';
+import { useEvolutionAnalytics } from '@/features/Dashboard/api/dashboardQueries';
 import {
   LineChart,
   Line,
@@ -33,11 +33,11 @@ const Evolution = () => {
   const [endDate, setEndDate] = useState(format(new Date(), 'yyyy-MM-dd'));
 
   const {
-    data: analyticsData,
+    data: evolutionData,
     isLoading,
     isError,
     error,
-  } = useDashboardAnalytics(restaurantId, { start_date: startDate, end_date: endDate });
+  } = useEvolutionAnalytics(restaurantId, { start_date: startDate, end_date: endDate });
 
   if (isLoading) {
     return (
@@ -55,66 +55,7 @@ const Evolution = () => {
     );
   }
 
-  // Transform data for charts (assuming analyticsData provides daily/monthly aggregates)
-  // For now, using placeholder data structure, assuming backend returns an array of daily/monthly stats
-  const transformedData = analyticsData
-    ? [
-        {
-          date: '2024-01',
-          checkins: 100,
-          newCustomers: 10,
-          surveys: 50,
-          coupons: 20,
-          nps: 60,
-          csat: 4.0,
-        },
-        {
-          date: '2024-02',
-          checkins: 120,
-          newCustomers: 12,
-          surveys: 55,
-          coupons: 25,
-          nps: 65,
-          csat: 4.2,
-        },
-        {
-          date: '2024-03',
-          checkins: 110,
-          newCustomers: 11,
-          surveys: 60,
-          coupons: 22,
-          nps: 63,
-          csat: 4.1,
-        },
-        {
-          date: '2024-04',
-          checkins: 130,
-          newCustomers: 15,
-          surveys: 65,
-          coupons: 30,
-          nps: 68,
-          csat: 4.5,
-        },
-        {
-          date: '2024-05',
-          checkins: 140,
-          newCustomers: 13,
-          surveys: 70,
-          coupons: 28,
-          nps: 70,
-          csat: 4.4,
-        },
-        {
-          date: '2024-06',
-          checkins: 150,
-          newCustomers: 16,
-          surveys: 75,
-          coupons: 35,
-          nps: 72,
-          csat: 4.6,
-        },
-      ]
-    : [];
+  const transformedData = evolutionData || [];
 
   return (
     <Box sx={{ p: 3 }}>

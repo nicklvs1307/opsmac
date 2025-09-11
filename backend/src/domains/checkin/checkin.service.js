@@ -335,7 +335,7 @@ module.exports = (db) => {
             include: [{
                 model: models.Customer,
                 as: 'customer',
-                attributes: ['name', 'email'],
+                attributes: ['id', 'name', 'email'],
             }],
             group: ['customerId', 'customer.id', 'customer.name', 'customer.email'],
             order: [[sequelize.literal('checkinCount'), 'DESC']],

@@ -17,34 +17,7 @@ import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useFeedbackWordFrequency } from '../Avaliacoes/api/satisfactionService';
 import { useSurveys } from '../Avaliacoes/api/surveyService';
-
-// Placeholder for WordCloud component. User needs to install react-wordcloud or similar.
-// Example: npm install react-wordcloud d3-scale d3-array
-const WordCloudComponent = ({ words }) => {
-  if (!words || words.length === 0) {
-    return (
-      <Typography variant="body1" align="center">
-        Nenhuma palavra para exibir na nuvem.
-      </Typography>
-    );
-  }
-  // In a real application, you would render the WordCloud component here.
-  // For example: <WordCloud words={words} options={{ rotations: 2, rotationAngles: [-90, 0] }} />
-  return (
-    <Box
-      sx={{
-        height: 400,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        border: '1px dashed grey',
-      }}
-    >
-      <Typography variant="h6">Word Cloud Placeholder</Typography>
-      <pre>{JSON.stringify(words.slice(0, 10), null, 2)}</pre>
-    </Box>
-  );
-};
+import ReactWordcloud from 'react-wordcloud';
 
 const WordClouds = () => {
   const { user } = useAuth();
@@ -99,6 +72,8 @@ const WordClouds = () => {
       </Box>
     );
   }
+
+  const words = wordFrequencyData?.map(item => ({ text: item.word, value: item.frequency })) || [];
 
   return (
     <Box sx={{ p: 3 }}>
@@ -189,9 +164,13 @@ const WordClouds = () => {
         <Alert severity="error" sx={{ mb: 2 }}>
           {t('word_clouds.error_loading_word_cloud')}
         </Alert>
-      ) : wordFrequencyData && wordFrequencyData.length > 0 ? (
-        <Paper elevation={3} sx={{ p: 3 }}>
-          <WordCloudComponent words={wordFrequencyData} />
+      ) : words.length > 0 ? (
+        <Paper elevation={3} sx={{ p: 3, height: 500 }}>
+          <ReactWordcloud words={words} options={{
+            rotations: 2,
+            rotationAngles: [-90, 0],
+            fontSizes: [20, 60],
+          }} />
         </Paper>
       ) : (
         <Alert severity="info">{t('word_clouds.no_data_to_display')}</Alert>

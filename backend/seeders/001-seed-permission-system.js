@@ -253,6 +253,7 @@ module.exports = {
     const ownerFeatures = [
         'fidelity:general:dashboard',
         'dashboard:view',
+        'settings:view',
         'settings:profile:view',
         'settings:business:view',
         'settings:security:view',

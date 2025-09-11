@@ -12,6 +12,7 @@ import {
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useSatisfactionAnalytics } from '../Avaliacoes/api/satisfactionService';
+import { useEvolutionAnalytics, useRatingDistribution } from '@/features/Dashboard/api/dashboardQueries';
 import {
   PieChart,
   Pie,
@@ -25,6 +26,7 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts';
+import { format, subMonths } from 'date-fns';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF'];
 
@@ -33,9 +35,15 @@ const SatisfactionOverview = () => {
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const { data: analyticsData, isLoading, isError, error } = useSatisfactionAnalytics(restaurantId);
+  const { data: analyticsData, isLoading: isLoadingAnalytics, isError: isErrorAnalytics, error: errorAnalytics } = useSatisfactionAnalytics(restaurantId);
 
-  if (isLoading) {
+  const twelveMonthsAgo = format(subMonths(new Date(), 12), 'yyyy-MM-dd');
+  const today = format(new Date(), 'yyyy-MM-dd');
+
+  const { data: evolutionData, isLoading: isLoadingEvolution, isError: isErrorEvolution, error: errorEvolution } = useEvolutionAnalytics(restaurantId, { start_date: twelveMonthsAgo, end_date: today, granularity: 'month' });
+  const { data: ratingDistributionData, isLoading: isLoadingRating, isError: isErrorRating, error: errorRating } = useRatingDistribution(restaurantId, { start_date: twelveMonthsAgo, end_date: today });
+
+  if (isLoadingAnalytics || isLoadingEvolution || isLoadingRating) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
         <CircularProgress size={60} />
@@ -43,33 +51,21 @@ const SatisfactionOverview = () => {
     );
   }
 
-  if (isError) {
+  if (isErrorAnalytics || isErrorEvolution || isErrorRating) {
     return (
       <Alert severity="error" sx={{ mb: 2 }}>
-        {error?.message || t('common.error_loading_data')}
+        {errorAnalytics?.message || errorEvolution?.message || errorRating?.message || t('common.error_loading_data')}
       </Alert>
     );
   }
 
   const { totalResponses, averageNps, averageCsat, npsMetricsPerCriterion } = analyticsData;
 
-  // Placeholder data for rating distribution and trends
-  const ratingDistributionData = [
-    { name: '5 Estrelas', value: 400 },
-    { name: '4 Estrelas', value: 300 },
-    { name: '3 Estrelas', value: 200 },
-    { name: '2 Estrelas', value: 100 },
-    { name: '1 Estrela', value: 50 },
-  ];
-
-  const monthlySatisfactionTrend = [
-    { name: 'Jan', nps: 50, csat: 4.2 },
-    { name: 'Feb', nps: 55, csat: 4.5 },
-    { name: 'Mar', nps: 60, csat: 4.0 },
-    { name: 'Apr', nps: 58, csat: 4.3 },
-    { name: 'May', nps: 62, csat: 4.6 },
-    { name: 'Jun', nps: 65, csat: 4.8 },
-  ];
+  const monthlySatisfactionTrend = evolutionData?.map(d => ({
+      name: format(new Date(d.date), 'MMM/yy'),
+      nps: d.nps,
+      csat: d.csat,
+  })) || [];
 
   return (
     <Box sx={{ p: 3 }}>

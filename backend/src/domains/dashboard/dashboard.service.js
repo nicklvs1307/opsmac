@@ -249,6 +249,123 @@ module.exports = (db) => {
         });
     }
 
+    async function getEvolutionAnalytics(restaurantId, query) {
+        const { start_date, end_date, granularity = 'day' } = query;
+
+        if (!start_date || !end_date) {
+            throw new BadRequestError('As datas de início e fim são obrigatórias.');
+        }
+
+        const startDate = new Date(start_date);
+        const endDate = new Date(end_date);
+
+        const dateFilter = {
+            createdAt: {
+                [Op.between]: [startDate, endDate],
+            },
+        };
+
+        const granularityFn = fn('DATE_TRUNC', granularity, col('createdAt'));
+
+        const checkins = await models.Checkin.findAll({
+            where: { restaurantId, ...dateFilter },
+            attributes: [
+                [granularityFn, 'date'],
+                [fn('COUNT', col('id')), 'count'],
+            ],
+            group: [granularityFn],
+            order: [[granularityFn, 'ASC']],
+            raw: true,
+        });
+
+        const newCustomers = await models.Customer.findAll({
+            where: { restaurantId, ...dateFilter },
+            attributes: [
+                [granularityFn, 'date'],
+                [fn('COUNT', col('id')), 'count'],
+            ],
+            group: [granularityFn],
+            order: [[granularityFn, 'ASC']],
+            raw: true,
+        });
+
+        const surveys = await models.SurveyResponse.findAll({
+            where: { restaurantId, ...dateFilter },
+            attributes: [
+                [granularityFn, 'date'],
+                [fn('COUNT', col('id')), 'count'],
+            ],
+            group: [granularityFn],
+            order: [[granularityFn, 'ASC']],
+            raw: true,
+        });
+
+        const coupons = await models.Coupon.findAll({
+            where: {
+                restaurantId,
+                status: 'used',
+                redeemed_at: { [Op.between]: [startDate, endDate] },
+            },
+            attributes: [
+                [fn('DATE_TRUNC', granularity, col('redeemed_at')), 'date'],
+                [fn('COUNT', col('id')), 'count'],
+            ],
+            group: [fn('DATE_TRUNC', granularity, col('redeemed_at'))],
+            order: [[fn('DATE_TRUNC', granularity, col('redeemed_at')), 'ASC']],
+            raw: true,
+        });
+
+        const nps = await models.Feedback.findAll({
+            where: { restaurantId, npsScore: { [Op.not]: null }, ...dateFilter },
+            attributes: [
+                [granularityFn, 'date'],
+                [fn('AVG', col('npsScore')), 'score'],
+            ],
+            group: [granularityFn],
+            order: [[granularityFn, 'ASC']],
+            raw: true,
+        });
+
+        const csat = await models.Feedback.findAll({
+            where: { restaurantId, rating: { [Op.not]: null }, ...dateFilter },
+            attributes: [
+                [granularityFn, 'date'],
+                [fn('AVG', col('rating')), 'score'],
+            ],
+            group: [granularityFn],
+            order: [[granularityFn, 'ASC']],
+            raw: true,
+        });
+
+        // Helper function to merge the results
+        const mergeData = (mainData, otherData, key) => {
+            const otherDataMap = new Map(otherData.map(d => [new Date(d.date).toISOString(), d.count]));
+            return mainData.map(d => {
+                const dateStr = new Date(d.date).toISOString();
+                return { ...d, [key]: otherDataMap.get(dateStr) || 0 };
+            });
+        };
+        
+        let evolutionData = checkins.map(d => ({ date: new Date(d.date).toISOString().split('T')[0], checkins: d.count }));
+        evolutionData = mergeData(evolutionData, newCustomers, 'newCustomers');
+        evolutionData = mergeData(evolutionData, surveys, 'surveys');
+        evolutionData = mergeData(evolutionData, coupons, 'coupons');
+        
+        const npsMap = new Map(nps.map(d => [new Date(d.date).toISOString(), d.score]));
+        const csatMap = new Map(csat.map(d => [new Date(d.date).toISOString(), d.score]));
+
+        evolutionData = evolutionData.map(d => {
+            const dateStr = new Date(d.date).toISOString();
+            return {
+                ...d,
+                nps: npsMap.has(dateStr) ? parseFloat(npsMap.get(dateStr)).toFixed(1) : 0,
+                csat: csatMap.has(dateStr) ? parseFloat(csatMap.get(dateStr)).toFixed(1) : 0,
+            };
+        });
+
+        return evolutionData;
+    }
+
     return {
         getDashboardOverview,
         getDashboardAnalytics,
@@ -258,5 +375,7 @@ module.exports = (db) => {
         generateComplaintsReport,
         generateTrendsReport,
         generateCustomersReport,
+        getEvolutionAnalytics,
+        getRatingDistribution,
     };
 };

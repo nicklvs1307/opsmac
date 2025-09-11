@@ -1,26 +1,29 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          229.7s
-------
- > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.330 + npm run build
-1.072
-1.072 > feedeliza-plus@1.0.0 build
-1.072 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-1.072
-5.378 Creating an optimized production build...
-228.6 Failed to compile.
-228.6
-228.6 [eslint]
-228.6 src/services/axiosInstance.js
-228.6 Syntax error: Unexpected token (9:0) (9:undefined)
-228.6
-228.6
-------
-Dockerfile.frontend:27
---------------------
-  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
-  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  28 |
-  29 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+> feedeliza-plus@1.0.0 start
+> node server.js
+✅ Conexão com banco de dados estabelecida
+❌ Erro ao iniciar servidor: Error: Cannot find module '../../models/Customer'
+Require stack:
+- /app/src/domains/coupons/coupons.service.js
+- /app/src/domains/coupons/coupons.controller.js
+- /app/src/domains/coupons/coupons.routes.js
+- /app/routes/index.js
+- /app/server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at Module._resolveFilename (/app/node_modules/module-alias/index.js:49:29)
+    at Module._load (node:internal/modules/cjs/loader:1038:27)
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/src/domains/coupons/coupons.service.js:3:18)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/app/src/domains/coupons/coupons.service.js',
+    '/app/src/domains/coupons/coupons.controller.js',
+    '/app/src/domains/coupons/coupons.routes.js',
+    '/app/routes/index.js',
+    '/app/server.js'
+  ]
+}

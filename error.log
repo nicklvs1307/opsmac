@@ -1,17 +1,31 @@
-> feedeliza-plus@1.0.0 start
-> node server.js
-✅ Conexão com banco de dados estabelecida
-Type of getRestaurantContextMiddleware(): function
-🚀 Servidor rodando na porta 5000
-Redis Client Connected
-UnauthorizedError: Acesso negado. Token não fornecido.
-    at authMiddleware (/app/src/middleware/authMiddleware.js:12:29)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
-    at /app/node_modules/express/lib/router/index.js:286:9
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at /app/src/middleware/getRestaurantContextMiddleware.js:4:5
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
-    at /app/node_modules/express/lib/router/index.js:286:9
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          215.0s
+------
+ > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.325 + npm run build
+0.632
+0.632 > feedeliza-plus@1.0.0 build
+0.632 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.632
+4.416 Creating an optimized production build...
+213.9 Failed to compile.
+213.9
+213.9 [eslint]
+213.9 src/features/Settings/api/settingsService.js
+213.9   Line 136:20:  'useAuth' is not defined  no-undef
+213.9   Line 144:20:  'useAuth' is not defined  no-undef
+213.9   Line 156:20:  'useAuth' is not defined  no-undef
+213.9   Line 290:20:  'useAuth' is not defined  no-undef
+213.9
+213.9 Search for the keywords to learn more about each error.
+213.9
+213.9
+------
+Dockerfile.frontend:27
+--------------------
+  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
+  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  28 |
+  29 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

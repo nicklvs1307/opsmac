@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
-import { useAuth } from 'app/providers/contexts/AuthContext.js'; // Import useAuth hook for authentication context
+import { useAuth } from '@/app/providers/contexts/AuthContext.js'; // Import useAuth hook for authentication context
 
 const SETTINGS_QUERY_KEYS = {
   apiToken: 'settingsApiToken',

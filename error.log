@@ -1,19 +1,21 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          229.6s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          217.2s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.330 + npm run build
-0.919
-0.919 > feedeliza-plus@1.0.0 build
-0.919 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.919
-4.853 Creating an optimized production build...
-228.6 Failed to compile.
-228.6
-228.6 [eslint]
-228.6 src/features/Fidelidade/Avaliacoes/api/satisfactionSettingsService.js
-228.6 Syntax error: Unexpected keyword 'export'. (39:0) (39:undefined)
-228.6
-228.6
+0.370 + npm run build
+0.885
+0.885 > feedeliza-plus@1.0.0 build
+0.885 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.885
+4.783 Creating an optimized production build...
+216.0 Failed to compile.
+216.0
+216.0 [eslint]
+216.0 src/features/Fidelidade/Avaliacoes/api/satisfactionSettingsService.js
+216.0   Line 34:6:  'SATISFACTION_SETTINGS_QUERY_KEYS' is not defined  no-undef
+216.0
+216.0 Search for the keywords to learn more about each error.
+216.0
+216.0
 ------
 Dockerfile.frontend:27
 --------------------

@@ -2,6 +2,11 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 
+const SATISFACTION_SETTINGS_QUERY_KEYS = {
+  npsCriteria: 'npsCriteria',
+  satisfactionSettings: 'satisfactionSettings',
+};
+
 // API Functions
 const fetchNpsCriteria = async (restaurantId) => {
   const { data } = await axiosInstance.get(`/npsCriteria?restaurantId=${restaurantId}`);

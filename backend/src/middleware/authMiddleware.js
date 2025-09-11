@@ -1,5 +1,5 @@
 const { verifyToken } = require('services/jwtService');
-const { UnauthorizedError, ForbiddenError } = require('utils/errors');
+const { UnauthorizedError, ForbiddenError, BadRequestError } = require('utils/errors');
 const models = require('models'); // Directly import models (which is the db object)
 const authService = require('../domains/auth/auth.service')(models); // Initialize authService with models
 

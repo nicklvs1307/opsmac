@@ -7,7 +7,7 @@ module.exports = (db) => {
     const router = safeRouter();
     const { auth } = require("../src/middleware/authMiddleware")(db); // Import auth middleware
 
-    router.use(auth); // Apply auth middleware globally
+    
     // Apply the restaurant context middleware globally to all routes handled by this router
     router.use(getRestaurantContextMiddleware()); // Call it as a function to get the middleware
 

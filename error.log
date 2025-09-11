@@ -1,16 +1,16 @@
-> feedeliza-plus@1.0.0 start
-> node server.js
-✅ Conexão com banco de dados estabelecida
-🚀 Servidor rodando na porta 5000
-Redis Client Connected
-UnauthorizedError: Acesso negado. Token não fornecido.
-    at authMiddleware (/app/src/middleware/authMiddleware.js:12:29)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
-    at /app/node_modules/express/lib/router/index.js:286:9
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-    at router (/app/node_modules/express/lib/router/index.js:47:12)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+URL da solicitação
+https://feedelizaapi.towersfy.com/api/auth/login
+Método da solicitação
+POST
+Código de status
+401 Unauthorized
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Unauthorized</pre>
+</body>
+</html>

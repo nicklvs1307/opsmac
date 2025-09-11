@@ -35,6 +35,9 @@ export const useNpsCriteria = (restaurantId) => {
     () => fetchNpsCriteria(restaurantId),
     {
       enabled: !!restaurantId,
+    }
+  );
+};
 
 export const useCreateNpsCriterion = () => {
   const queryClient = useQueryClient();

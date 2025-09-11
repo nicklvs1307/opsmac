@@ -5,7 +5,7 @@ module.exports = (db) => {
 
     const listNpsCriteria = async (restaurantId) => {
         return models.NpsCriterion.findAll({
-            where: { restaurant_id: restaurantId },
+            where: { restaurantId: restaurantId },
             order: [['name', 'ASC']]
         });
     };

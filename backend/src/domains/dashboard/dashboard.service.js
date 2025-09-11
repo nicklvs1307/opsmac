@@ -307,11 +307,11 @@ module.exports = (db) => {
                 redeemed_at: { [Op.between]: [startDate, endDate] },
             },
             attributes: [
-                [fn('DATE_TRUNC', granularity, col('redeemed_at')), 'date'],
+                [fn('DATE_TRUNC', granularity, col('updatedAt')), 'date'],
                 [fn('COUNT', col('id')), 'count'],
             ],
-            group: [fn('DATE_TRUNC', granularity, col('redeemed_at'))],
-            order: [[fn('DATE_TRUNC', granularity, col('redeemed_at')), 'ASC']],
+            group: [fn('DATE_TRUNC', granularity, col('updatedAt'))],
+            order: [[fn('DATE_TRUNC', granularity, col('updatedAt')), 'ASC']],
             raw: true,
         });
 

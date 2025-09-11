@@ -1,10 +1,2663 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
 ✅ Conexão com banco de dados estabelecida
-❌ Erro ao iniciar servidor: ReferenceError: getRatingDistribution is not defined
-    at module.exports (/app/src/domains/dashboard/dashboard.service.js:379:9)
-    at module.exports (/app/src/domains/dashboard/dashboard.controller.js:2:60)
-    at module.exports (/app/src/domains/dashboard/dashboard.routes.js:6:66)
-    at module.exports (/app/routes/index.js:20:54)
-    at startServer (/app/server.js:77:21)
+🚀 Servidor rodando na porta 5000
+Redis Client Connected
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:65:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:65:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+Error in getSurveyAnalytics:  EagerLoadingError [SequelizeEagerLoadingError]: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+SequelizeEagerLoadingError: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+Error in getSurveyAnalytics:  EagerLoadingError [SequelizeEagerLoadingError]: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+SequelizeEagerLoadingError: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+ReferenceError: NotFoundError is not defined
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:29:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+ForbiddenError: Usuário não está associado a um restaurante.
+    at listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:18:23)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:31:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ForbiddenError: Acesso negado. Você não tem permissão para realizar esta ação.
+    at /app/src/middleware/requirePermission.js:37:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ReferenceError: NotFoundError is not defined
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:29:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+ForbiddenError: Usuário não está associado a um restaurante.
+    at listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:18:23)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:31:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+ForbiddenError: Acesso negado. Você não tem permissão para realizar esta ação.
+    at /app/src/middleware/requirePermission.js:37:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+Error in getSurveyAnalytics:  EagerLoadingError [SequelizeEagerLoadingError]: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+SequelizeEagerLoadingError: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+Error in getSurveyAnalytics:  EagerLoadingError [SequelizeEagerLoadingError]: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+SequelizeEagerLoadingError: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:65:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:65:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ReferenceError: NotFoundError is not defined
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:29:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+ForbiddenError: Acesso negado. Você não tem permissão para realizar esta ação.
+    at /app/src/middleware/requirePermission.js:37:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ReferenceError: NotFoundError is not defined
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:29:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+ForbiddenError: Acesso negado. Você não tem permissão para realizar esta ação.
+    at /app/src/middleware/requirePermission.js:37:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getActiveCheckins (/app/src/domains/checkin/checkin.controller.js:72:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:31:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getActiveCheckins (/app/src/domains/checkin/checkin.controller.js:72:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:31:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+Error in getSurveyAnalytics:  EagerLoadingError [SequelizeEagerLoadingError]: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+SequelizeEagerLoadingError: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+Error in getSurveyAnalytics:  EagerLoadingError [SequelizeEagerLoadingError]: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+SequelizeEagerLoadingError: Survey is associated to SurveyResponse using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at SurveyResponse._getIncludedAssociation (/app/node_modules/sequelize/lib/model.js:576:13)
+    at SurveyResponse._validateIncludedElement (/app/node_modules/sequelize/lib/model.js:502:53)
+    at /app/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at SurveyResponse._validateIncludedElements (/app/node_modules/sequelize/lib/model.js:417:39)
+    at SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1252:12)
+    at SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.getSurveyAnalytics (/app/src/domains/survey/survey.service.js:156:36)
+    at async getSurveyAnalytics (/app/src/domains/survey/survey.controller.js:67:31)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+ReferenceError: NotFoundError is not defined
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:29:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+ForbiddenError: Usuário não está associado a um restaurante.
+    at listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:18:23)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:31:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ForbiddenError: Acesso negado. Você não tem permissão para realizar esta ação.
+    at /app/src/middleware/requirePermission.js:37:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ReferenceError: NotFoundError is not defined
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:29:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+ForbiddenError: Usuário não está associado a um restaurante.
+    at listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:18:23)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:31:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ForbiddenError: Acesso negado. Você não tem permissão para realizar esta ação.
+    at /app/src/middleware/requirePermission.js:37:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getActiveCheckins (/app/src/domains/checkin/checkin.controller.js:72:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:31:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+  name: 'Lucas Niquele',
+  email: 'lucas@teste.com',
+  phone: '3598989898',
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: Restaurant {
+    dataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    _previousDataValues: {
+      id: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+      name: 'Towersfy',
+      slug: 'towersfy',
+      description: 'Otimo',
+      address: 'Avenida Doutor Bias Fortes 52',
+      city: 'Andradas',
+      state: 'MG',
+      zipCode: null,
+      phone: null,
+      email: null,
+      website: null,
+      logo: null,
+      planKey: null,
+      status: 'active',
+      permVersion: '1',
+      createdAt: 2025-09-08T14:09:57.257Z,
+      updatedAt: 2025-09-08T14:09:57.257Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: undefined,
+      includeNames: undefined,
+      includeMap: undefined,
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false
+  },
+  restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+  isSuperadmin: false,
+  permissionSnapshot: {
+    restaurantId: 'b3adad74-2fd6-47eb-a356-e5fe3c83c446',
+    userId: 'adf95269-1abd-40b3-a0bc-6fb8ce12cef4',
+    isSuperAdmin: false,
+    isOwner: true,
+    modules: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ]
+  }
+}
+req.user.isSuperadmin in requirePermission: false
+TypeError: Cannot read properties of undefined (reading 'id')
+    at getActiveCheckins (/app/src/domains/checkin/checkin.controller.js:72:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:31:14
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

@@ -156,7 +156,8 @@ module.exports = (db) => {
             const totalResponses = await models.SurveyResponse.count({
                 include: [{
                     model: models.Survey,
-                    where: { restaurant_id: restaurantId },
+                    as: 'survey',
+                    where: { 'survey.restaurant_id': restaurantId },
                     attributes: []
                 }]
             });
@@ -168,7 +169,8 @@ module.exports = (db) => {
                     attributes: ['question_type', 'nps_criterion_id'],
                     include: [{
                         model: models.Survey,
-                        where: { restaurant_id: restaurantId },
+                        as: 'survey',
+                        where: { 'survey.restaurant_id': restaurantId },
                         attributes: []
                     }, {
                         model: models.NpsCriterion,

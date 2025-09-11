@@ -62,14 +62,14 @@ module.exports = (db) => {
 
         getCheckinAnalytics: async (req, res, next) => {
             handleValidationErrors(req);
-            const restaurantId = req.restaurant.id;
+            const restaurantId = req.params.restaurantId;
             const { period } = req.query;
             const analytics = await checkinService.getCheckinAnalytics(restaurantId, period);
             res.json(analytics);
         },
 
         getActiveCheckins: async (req, res, next) => {
-            const restaurantId = req.restaurant.id;
+            const restaurantId = req.params.restaurantId;
             const activeCheckins = await checkinService.getActiveCheckins(restaurantId);
             res.json({ activeCheckins });
         },

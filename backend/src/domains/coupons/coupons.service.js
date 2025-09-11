@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 const { NotFoundError, BadRequestError } = require('utils/errors');
 const Customer = require('models/Customer');
-const Reward = require('../../models/Reward');
+const Reward = require('models/Reward');
 
 module.exports = (db) => {
     const models = db;

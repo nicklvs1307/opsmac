@@ -1,7 +1,7 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
 ✅ Conexão com banco de dados estabelecida
-❌ Erro ao iniciar servidor: Error: Cannot find module '../../models/Customer'
+❌ Erro ao iniciar servidor: Error: Cannot find module '../../models/Reward'
 Require stack:
 - /app/src/domains/coupons/coupons.service.js
 - /app/src/domains/coupons/coupons.controller.js
@@ -13,7 +13,7 @@ Require stack:
     at Module._load (node:internal/modules/cjs/loader:1038:27)
     at Module.require (node:internal/modules/cjs/loader:1289:19)
     at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/src/domains/coupons/coupons.service.js:3:18)
+    at Object.<anonymous> (/app/src/domains/coupons/coupons.service.js:4:16)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
     at Module.load (node:internal/modules/cjs/loader:1266:32)

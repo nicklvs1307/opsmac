@@ -1,39 +1,10 @@
-root@ServerAgents:~/opsmac# cd frontend && npm uninstall react-wordcloud
-
-up to date, audited 1645 packages in 6s
-
-316 packages are looking for funding
-  run `npm fund` for details
-
-4 moderate severity vulnerabilities
-
-Some issues need review, and may require choosing
-a different dependency.
-
-Run `npm audit` for details.
-root@ServerAgents:~/opsmac/frontend# cd frontend && npm install react-wordcloud d3-scale d3-array
--bash: cd: frontend: No such file or directory
-root@ServerAgents:~/opsmac/frontend# cd ..
-root@ServerAgents:~/opsmac# cd frontend && npm install react-wordcloud d3-scale d3-array
-npm error code ERESOLVE
-npm error ERESOLVE unable to resolve dependency tree
-npm error
-npm error While resolving: feedeliza-plus@1.0.0
-npm error Found: react@18.3.1
-npm error node_modules/react
-npm error   react@"^18.3.1" from the root project
-npm error
-npm error Could not resolve dependency:
-npm error peer react@"^16.13.0" from react-wordcloud@1.2.7
-npm error node_modules/react-wordcloud
-npm error   react-wordcloud@"*" from the root project
-npm error
-npm error Fix the upstream dependency conflict, or retry
-npm error this command with --force or --legacy-peer-deps
-npm error to accept an incorrect (and potentially broken) dependency resolution.
-npm error
-npm error
-npm error For a full report see:
-npm error /root/.npm/_logs/2025-09-11T00_49_50_721Z-eresolve-report.txt
-npm error A complete log of this run can be found in: /root/.npm/_logs/2025-09-11T00_49_50_721Z-debug-0.log
-root@ServerAgents:~/opsmac/frontend#
+> feedeliza-plus@1.0.0 start
+> node server.js
+✅ Conexão com banco de dados estabelecida
+❌ Erro ao iniciar servidor: ReferenceError: getRatingDistribution is not defined
+    at module.exports (/app/src/domains/dashboard/dashboard.service.js:379:9)
+    at module.exports (/app/src/domains/dashboard/dashboard.controller.js:2:60)
+    at module.exports (/app/src/domains/dashboard/dashboard.routes.js:6:66)
+    at module.exports (/app/routes/index.js:20:54)
+    at startServer (/app/server.js:77:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

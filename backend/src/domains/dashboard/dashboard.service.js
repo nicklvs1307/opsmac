@@ -366,6 +366,44 @@ module.exports = (db) => {
         return evolutionData;
     }
 
+    async function getRatingDistribution(restaurantId, query) {
+        const { start_date, end_date } = query;
+
+        const dateFilter = {};
+        if (start_date && end_date) {
+            dateFilter.createdAt = {
+                [Op.between]: [new Date(start_date), new Date(end_date)],
+            };
+        }
+
+        const ratings = await models.Feedback.findAll({
+            where: {
+                restaurantId,
+                rating: { [Op.not]: null },
+                ...dateFilter,
+            },
+            attributes: [
+                'rating',
+                [fn('COUNT', col('id')), 'count'],
+            ],
+            group: ['rating'],
+            order: [['rating', 'DESC']],
+            raw: true,
+        });
+
+        const ratingMap = new Map(ratings.map(r => [r.rating, r.count]));
+
+        const distribution = [
+            { name: '5 Estrelas', value: parseInt(ratingMap.get(5) || 0) },
+            { name: '4 Estrelas', value: parseInt(ratingMap.get(4) || 0) },
+            { name: '3 Estrelas', value: parseInt(ratingMap.get(3) || 0) },
+            { name: '2 Estrelas', value: parseInt(ratingMap.get(2) || 0) },
+            { name: '1 Estrela', value: parseInt(ratingMap.get(1) || 0) },
+        ];
+
+        return distribution;
+    }
+
     return {
         getDashboardOverview,
         getDashboardAnalytics,

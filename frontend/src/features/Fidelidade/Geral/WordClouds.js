@@ -17,7 +17,7 @@ import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useFeedbackWordFrequency } from '../Avaliacoes/api/satisfactionService';
 import { useSurveys } from '../Avaliacoes/api/surveyService';
-import ReactWordcloud from 'react-wordcloud';
+import { WordCloud } from '@isoterik/react-word-cloud'; // Changed import
 
 const WordClouds = () => {
   const { user } = useAuth();
@@ -166,7 +166,7 @@ const WordClouds = () => {
         </Alert>
       ) : words.length > 0 ? (
         <Paper elevation={3} sx={{ p: 3, height: 500 }}>
-          <ReactWordcloud words={words} options={{
+          <WordCloud words={words} options={{
             rotations: 2,
             rotationAngles: [-90, 0],
             fontSizes: [20, 60],

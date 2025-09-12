@@ -5,8 +5,8 @@ import { menuStructure } from './menuStructure';
 import axiosInstance from '@/services/axiosInstance';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 
-const checkPermission = async (featureKey, actionKey) => {
-  const { data } = await axiosInstance.post('/iam/check', { featureKey, actionKey });
+const checkPermission = async (featureKey, actionKey, restaurantId) => {
+  const { data } = await axiosInstance.post(`/iam/check?restaurantId=${restaurantId}`, { featureKey, actionKey });
   return data;
 };
 
@@ -26,21 +26,24 @@ const extractPermissions = (items) => {
 const MenuRenderer = ({ onMobileClose }) => {
   const { user } = useAuth();
   const isSuperAdmin = user?.permissionSnapshot?.isSuperAdmin || false;
+  const restaurantId = user?.restaurants?.[0]?.id; // Get restaurantId from user
+
   const uniquePermissions = [...new Map(extractPermissions(menuStructure).map(item =>
     [`${item.featureKey}:${item.actionKey}`, item])).values()];
 
   const permissionQueries = useQueries(
     uniquePermissions.map(({ featureKey, actionKey }) => {
       return {
-        queryKey: ['permission', featureKey, actionKey],
-        queryFn: () => checkPermission(featureKey, actionKey),
+        queryKey: ['permission', featureKey, actionKey, restaurantId],
+        queryFn: () => checkPermission(featureKey, actionKey, restaurantId),
+        enabled: !!restaurantId, // Only enable query if restaurantId is available
         staleTime: 5 * 60 * 1000, // 5 minutes
         cacheTime: 15 * 60 * 1000, // 15 minutes
       };
     })
   );
 
-  const isLoading = permissionQueries.some(query => query.isLoading);
+  const isLoading = permissionQueries.some(query => query.isLoading) || !restaurantId;
 
   if (isLoading) {
     return <div>Carregando Menu...</div>; // Or a skeleton loader for the sidebar

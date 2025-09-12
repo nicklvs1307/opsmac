@@ -15,6 +15,9 @@ module.exports = (db) => {
         listSurveys: async (req, res, next) => {
             const { search } = req.query;
             const restaurant_id = req.query.restaurantId;
+            if (!restaurant_id) {
+                throw new BadRequestError('O ID do restaurante é obrigatório.');
+            }
             const surveys = await surveyService.listSurveys(restaurant_id, search);
             res.json(surveys);
         },

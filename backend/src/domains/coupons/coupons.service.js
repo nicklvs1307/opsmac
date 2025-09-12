@@ -63,7 +63,7 @@ module.exports = (db) => {
         return updatedCount;
     };
 
-    const redeemCoupon = async (id, restaurantId, orderValue, redemptionData = {}) => {
+    const redeemCoupon = async (id, restaurantId, orderValue) => {
         const coupon = await models.Coupon.findOne({
             where: { id, restaurantId: restaurantId }
         });
@@ -76,7 +76,7 @@ module.exports = (db) => {
             throw new BadRequestError('Cupom não pode ser resgatado (inativo, expirado ou já resgatado/cancelado).');
         }
 
-        return coupon.redeem(orderValue, redemptionData);
+        return coupon.redeem(orderValue);
     };
 
     const createCoupon = async (rewardId, customerId, restaurantId, expiresAt) => {
@@ -134,7 +134,7 @@ module.exports = (db) => {
                 status: 'redeemed'
             },
             attributes: [
-                [sequelize.fn('date_trunc', 'day', sequelize.col('redeemedAt')), 'date'],
+                [sequelize.fn('DATE', sequelize.col('redeemedAt')), 'date'],
                 [sequelize.fn('COUNT', sequelize.col('id')), 'count']
             ],
             group: ['date'],
@@ -151,33 +151,9 @@ module.exports = (db) => {
         };
     };
 
-    const validateCoupon = async (code, restaurantId) => {
+    const _validateCoupon = async (where) => {
         const coupon = await models.Coupon.findOne({
-            where: { code, restaurantId: restaurantId },
-            include: [
-                { model: models.Reward, as: 'reward' },
-                { model: models.Customer, as: 'customer' },
-            ]
-        });
-
-        if (!coupon) {
-            throw new NotFoundError('Cupom não encontrado ou não pertence ao seu restaurante.');
-        }
-
-        return {
-            ...coupon.toJSON(),
-            isValid: coupon.isValid()
-        };
-    };
-
-    const publicValidateCoupon = async (code, restaurantSlug) => {
-        const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
-        if (!restaurant) {
-            throw new NotFoundError('Restaurante não encontrado.');
-        }
-
-        const coupon = await models.Coupon.findOne({
-            where: { code, restaurantId: restaurant.id },
+            where,
             include: [
                 { model: models.Reward, as: 'reward' },
                 { model: models.Customer, as: 'customer' },
@@ -194,20 +170,22 @@ module.exports = (db) => {
         };
     };
 
-    const handleAfterCreateCoupon = async (coupon) => {
-        if (!coupon.notificationSent) {
-        }
+    const validateCoupon = async (code, restaurantId) => {
+        return _validateCoupon({ code, restaurantId });
     };
 
-    const handleBeforeUpdateCoupon = async (coupon) => {
-        if (coupon.changed('status') && coupon.status === 'redeemed' && !coupon.redeemedAt) {
-            coupon.redeemedAt = new Date();
+    const publicValidateCoupon = async (code, restaurantSlug) => {
+        const restaurant = await models.Restaurant.findOne({ where: { slug: restaurantSlug } });
+        if (!restaurant) {
+            throw new NotFoundError('Restaurante não encontrado.');
         }
 
-        if (coupon.changed('status') && coupon.status === 'cancelled' && !coupon.cancelledAt) {
-            coupon.cancelledAt = new Date();
-        }
+        return _validateCoupon({ code, restaurantId: restaurant.id });
     };
+
+    
+
+    
 
     const handleAfterUpdateCoupon = async (coupon) => {
         if (coupon.changed('status') && coupon.status === 'redeemed') {

@@ -95,33 +95,33 @@ module.exports = (db) => {
         let validStartDate = null;
         let validEndDate = null;
 
+        // Logic to determine date range
         if (period) {
-            validEndDate = new Date();
-            validStartDate = new Date();
             const days = parseInt(period.replace('d', ''));
-            if (!isNaN(days)) {
-                validStartDate.setDate(validStartDate.getDate() - days);
-            } else {
+            if (isNaN(days)) {
                 throw new BadRequestError('Período inválido.');
             }
+            validEndDate = new Date();
+            validStartDate = new Date();
+            validStartDate.setDate(validStartDate.getDate() - days);
         } else {
             if (start_date) {
-                const startDate = new Date(start_date);
-                if (startDate instanceof Date && !isNaN(startDate)) {
-                    validStartDate = startDate;
-                } else {
-                    throw new BadRequestError('Data de início inválida.');
-                }
+                validStartDate = new Date(start_date);
             }
-
             if (end_date) {
-                const endDate = new Date(end_date);
-                if (endDate instanceof Date && !isNaN(endDate)) {
-                    validEndDate = endDate;
-                } else {
-                    throw new BadRequestError('Data de fim inválida.');
-                }
+                validEndDate = new Date(end_date);
             }
+        }
+
+        // Validate dates before using them
+        if (validStartDate && isNaN(validStartDate.getTime())) {
+            throw new BadRequestError('Data de início inválida.');
+        }
+        if (validEndDate && isNaN(validEndDate.getTime())) {
+            throw new BadRequestError('Data de fim inválida.');
+        }
+        if (validStartDate && validEndDate && validStartDate > validEndDate) {
+            throw new BadRequestError('A data de início não pode ser posterior à data de fim.');
         }
 
         const dateFilter = {};
@@ -140,8 +140,6 @@ module.exports = (db) => {
             redeemedAtFilter.redeemed_at = { [Op.gte]: validStartDate };
         } else if (validEndDate) {
             redeemedAtFilter.redeemed_at = { [Op.lte]: validEndDate };
-        } else {
-            redeemedAtFilter.redeemed_at = { [Op.not]: null };
         }
 
         const [
@@ -155,13 +153,7 @@ module.exports = (db) => {
             models.Checkin.count({ where: { restaurantId, ...dateFilter } }),
             models.Customer.count({ where: { restaurantId, ...dateFilter } }),
             models.SurveyResponse.count({
-                where: { ...dateFilter },
-                include: [{
-                    model: models.Survey,
-                    as: 'survey',
-                    where: { restaurantId },
-                    attributes: []
-                }]
+                where: { restaurantId, ...dateFilter }
             }),
             models.Coupon.count({
                 where: {
@@ -172,15 +164,10 @@ module.exports = (db) => {
             }),
             models.SurveyResponse.findOne({
                 where: {
+                    restaurantId,
                     npsScore: { [Op.not]: null },
                     ...dateFilter
                 },
-                include: [{
-                    model: models.Survey,
-                    as: 'survey',
-                    where: { restaurantId },
-                    attributes: []
-                }],
                 attributes: [
                     [fn('AVG', col('npsScore')), 'avgNpsScore']
                 ],
@@ -342,8 +329,12 @@ module.exports = (db) => {
         const startDate = new Date(start_date);
         const endDate = new Date(end_date);
 
-        if (!(startDate instanceof Date && !isNaN(startDate)) || !(endDate instanceof Date && !isNaN(endDate))) {
+        if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
             throw new BadRequestError('As datas de início e fim devem ser válidas.');
+        }
+
+        if (startDate > endDate) {
+            throw new BadRequestError('A data de início não pode ser posterior à data de fim.');
         }
 
         const dateFilter = {

@@ -1,21 +1,233 @@
- => ERROR [5/8] RUN npm install                                                               32.1s
-------
- > [5/8] RUN npm install:
-31.74 npm warn tar TAR_ENTRY_ERROR ENOSPC: no space left on device, write
-31.74 npm notice
-31.74 npm notice New major version of npm available! 10.8.2 -> 11.6.0
-31.74 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.0
-31.74 npm notice To update run: npm install -g npm@11.6.0
-31.74 npm notice
-31.74 npm error A complete log of this run can be found in: /root/.npm/_logs/2025-09-12T20_12_38_792Z-debug-0.log
-------
-Dockerfile.backend:16
---------------------
-  14 |
-  15 |     # Instale as dependências do backend
-  16 | >>> RUN npm install
-  17 |
-  18 |     # Copie o restante dos arquivos do backend
---------------------
-ERROR: failed to solve: process "/bin/sh -c npm install" did not complete successfully: exit code: 1
-root@ServerAgents:~/opsmac#
+> feedeliza-plus@1.0.0 start
+> node server.js
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+Redis Client Connected
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 2)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async SurveyResponse.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async SurveyResponse.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async Promise.all (index 4)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Object.getCheckinAnalytics (/app/src/domains/checkin/checkin.service.js:325:39)
+    at async getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:67:31)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Object.getCheckinAnalytics (/app/src/domains/checkin/checkin.service.js:325:39)
+    at async getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:67:31)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async getActiveCheckins (/app/src/domains/checkin/checkin.controller.js:73:36)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async getActiveCheckins (/app/src/domains/checkin/checkin.controller.js:73:36)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
+    at Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async listSurveys (/app/src/domains/surveys/surveys.controller.js:18:29)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
+    at Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async listSurveys (/app/src/domains/surveys/surveys.controller.js:18:29)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 2)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Coupon.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Coupon.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 3)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)

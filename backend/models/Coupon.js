@@ -82,6 +82,25 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'coupons',
     timestamps: true,
     underscored: true, // This will map camelCase attributes to snake_case columns
+    hooks: {
+      beforeUpdate: (coupon, options) => {
+        if (coupon.changed('status') && coupon.status === 'redeemed' && !coupon.redeemedAt) {
+            coupon.redeemedAt = new Date();
+        }
+
+        if (coupon.changed('status') && coupon.status === 'cancelled' && !coupon.cancelledAt) {
+            coupon.cancelledAt = new Date();
+        }
+      },
+      afterUpdate: async (coupon, options) => {
+        if (coupon.changed('status') && coupon.status === 'redeemed') {
+            const reward = await coupon.getReward();
+            if (reward) {
+                await reward.updateAnalytics('redeemed', coupon.orderValue || 0);
+            }
+        }
+      }
+    }
   });
 
   return Coupon;

@@ -197,8 +197,5 @@ module.exports = (db) => {
         getCouponAnalytics,
         validateCoupon,
         publicValidateCoupon,
-        handleAfterCreateCoupon,
-        handleBeforeUpdateCoupon,
-        handleAfterUpdateCoupon,
     };
 };

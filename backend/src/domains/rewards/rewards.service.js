@@ -266,9 +266,5 @@ const { BadRequestError, NotFoundError } = require('utils/errors');
         generateRewardCouponCode,
         updateRewardAnalytics,
         checkRewardTriggerConditions,
-        handleRewardBeforeSave,
-        handleRewardBeforeCreate,
-        handleRewardBeforeUpdate,
-        listCoupons, // New
     };
 };

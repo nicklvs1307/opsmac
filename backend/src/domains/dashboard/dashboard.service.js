@@ -91,15 +91,27 @@ module.exports = (db) => {
     }
 
     async function getDashboardAnalytics(restaurantId, query) {
-        
-        // This can be expanded with more detailed analytics, e.g., trends over time
-        // For now, it will return similar data to overview but could be filtered by date range from query
-        const startDate = query.start_date ? new Date(query.start_date) : null;
-        const endDate = query.end_date ? new Date(query.end_date) : null;
+        const { start_date, end_date } = query;
+        let validStartDate = null;
+        let validEndDate = null;
 
-        // Validate dates
-        const validStartDate = startDate instanceof Date && !isNaN(startDate) ? startDate : null;
-        const validEndDate = endDate instanceof Date && !isNaN(endDate) ? endDate : null;
+        if (start_date) {
+            const startDate = new Date(start_date);
+            if (startDate instanceof Date && !isNaN(startDate)) {
+                validStartDate = startDate;
+            } else {
+                throw new BadRequestError('Data de início inválida.');
+            }
+        }
+
+        if (end_date) {
+            const endDate = new Date(end_date);
+            if (endDate instanceof Date && !isNaN(endDate)) {
+                validEndDate = endDate;
+            } else {
+                throw new BadRequestError('Data de fim inválida.');
+            }
+        }
 
         const dateFilter = {};
         if (validStartDate && validEndDate) {
@@ -110,6 +122,17 @@ module.exports = (db) => {
             dateFilter.createdAt = { [Op.lte]: validEndDate };
         }
 
+        const redeemedAtFilter = {};
+        if (validStartDate && validEndDate) {
+            redeemedAtFilter.redeemed_at = { [Op.between]: [validStartDate, validEndDate] };
+        } else if (validStartDate) {
+            redeemedAtFilter.redeemed_at = { [Op.gte]: validStartDate };
+        } else if (validEndDate) {
+            redeemedAtFilter.redeemed_at = { [Op.lte]: validEndDate };
+        } else {
+            redeemedAtFilter.redeemed_at = { [Op.not]: null };
+        }
+
         const [
             totalCheckins,
             newCustomers,
@@ -118,30 +141,21 @@ module.exports = (db) => {
             avgNpsScoreStats,
             avgRatingStats
         ] = await Promise.all([
-            models.Checkin.count({
-                where: { restaurantId, ...dateFilter }
-            }),
-            models.Customer.count({
-                where: { restaurantId, ...dateFilter }
-            }),
-            models.SurveyResponse.count({
-                where: { restaurantId, ...dateFilter }
-            }),
+            models.Checkin.count({ where: { restaurantId, ...dateFilter } }),
+            models.Customer.count({ where: { restaurantId, ...dateFilter } }),
+            models.SurveyResponse.count({ where: { restaurantId, ...dateFilter } }),
             models.Coupon.count({
                 where: {
                     restaurantId,
                     status: 'used',
-                    ...(validStartDate && validEndDate ? { redeemed_at: { [Op.between]: [validStartDate, validEndDate] } } : {}),
-                    ...(!validStartDate && !validEndDate ? { redeemed_at: { [Op.not]: null } } : {})
+                    ...redeemedAtFilter
                 }
             }),
             models.SurveyResponse.findOne({
                 where: {
                     restaurantId,
                     npsScore: { [Op.not]: null },
-                    ...(validStartDate && validEndDate ? { createdAt: { [Op.between]: [validStartDate, validEndDate] } } : {}),
-                    ...(validStartDate && !validEndDate ? { createdAt: { [Op.gte]: validStartDate } } : {}),
-                    ...(!validStartDate && validEndDate ? { createdAt: { [Op.lte]: validEndDate } } : {})
+                    ...dateFilter
                 },
                 attributes: [
                     [fn('AVG', col('npsScore')), 'avgNpsScore']
@@ -149,7 +163,11 @@ module.exports = (db) => {
                 raw: true
             }),
             models.Feedback.findOne({
-                where: { restaurantId, ...dateFilter, rating: { [Op.not]: null } },
+                where: {
+                    restaurantId,
+                    rating: { [Op.not]: null },
+                    ...dateFilter
+                },
                 attributes: [
                     [fn('AVG', col('rating')), 'avgRating']
                 ],
@@ -300,17 +318,19 @@ module.exports = (db) => {
         const startDate = new Date(start_date);
         const endDate = new Date(end_date);
 
-        // Validate dates
-        const validStartDate = startDate instanceof Date && !isNaN(startDate) ? startDate : null;
-        const validEndDate = endDate instanceof Date && !isNaN(endDate) ? endDate : null;
-
-        if (!validStartDate || !validEndDate) {
-            throw new BadRequestError('As datas de início e fim são obrigatórias e devem ser válidas.');
+        if (!(startDate instanceof Date && !isNaN(startDate)) || !(endDate instanceof Date && !isNaN(endDate))) {
+            throw new BadRequestError('As datas de início e fim devem ser válidas.');
         }
 
         const dateFilter = {
             createdAt: {
-                [Op.between]: [validStartDate, validEndDate],
+                [Op.between]: [startDate, endDate],
+            },
+        };
+
+        const redeemedAtFilter = {
+            redeemed_at: {
+                [Op.between]: [startDate, endDate],
             },
         };
 
@@ -363,7 +383,7 @@ module.exports = (db) => {
                 where: {
                     restaurantId,
                     status: 'used',
-                    redeemed_at: { [Op.between]: [startDate, endDate] },
+                    ...redeemedAtFilter,
                 },
                 attributes: [
                     [fn('DATE_TRUNC', granularity, col('updatedAt')), 'date'],

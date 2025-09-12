@@ -97,13 +97,17 @@ module.exports = (db) => {
         const startDate = query.start_date ? new Date(query.start_date) : null;
         const endDate = query.end_date ? new Date(query.end_date) : null;
 
+        // Validate dates
+        const validStartDate = startDate instanceof Date && !isNaN(startDate) ? startDate : null;
+        const validEndDate = endDate instanceof Date && !isNaN(endDate) ? endDate : null;
+
         const dateFilter = {};
-        if (startDate && endDate) {
-            dateFilter.createdAt = { [Op.between]: [startDate, endDate] };
-        } else if (startDate) {
-            dateFilter.createdAt = { [Op.gte]: startDate };
-        } else if (endDate) {
-            dateFilter.createdAt = { [Op.lte]: endDate };
+        if (validStartDate && validEndDate) {
+            dateFilter.createdAt = { [Op.between]: [validStartDate, validEndDate] };
+        } else if (validStartDate) {
+            dateFilter.createdAt = { [Op.gte]: validStartDate };
+        } else if (validEndDate) {
+            dateFilter.createdAt = { [Op.lte]: validEndDate };
         }
 
         const [
@@ -289,9 +293,17 @@ module.exports = (db) => {
         const startDate = new Date(start_date);
         const endDate = new Date(end_date);
 
+        // Validate dates
+        const validStartDate = startDate instanceof Date && !isNaN(startDate) ? startDate : null;
+        const validEndDate = endDate instanceof Date && !isNaN(endDate) ? endDate : null;
+
+        if (!validStartDate || !validEndDate) {
+            throw new BadRequestError('As datas de início e fim são obrigatórias e devem ser válidas.');
+        }
+
         const dateFilter = {
             createdAt: {
-                [Op.between]: [startDate, endDate],
+                [Op.between]: [validStartDate, validEndDate],
             },
         };
 

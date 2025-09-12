@@ -2,7 +2,7 @@
 const iamService = require('domains/iam/iam.service');
 const auditService = require('services/auditService'); // Import auditService
 
-const { UnauthorizedError, BadRequestError, ForbiddenError, PaymentRequiredError, NotFoundError, InternalServerError } = require('utils/errors'); // Import custom errors
+const { UnauthorizedError, BadRequestError, ForbiddenError, PaymentRequiredError, NotFoundError, InternalServerError } = require('utils/errors');
 
 class IamController {
   // --- Role Management ---

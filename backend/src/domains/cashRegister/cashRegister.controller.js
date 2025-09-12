@@ -1,6 +1,6 @@
 module.exports = (cashRegisterService) => {
   const { validationResult } = require('express-validator');
-  const BadRequestError = require('utils/errors/BadRequestError');
+  const { BadRequestError } = require('utils/errors');
   const auditService = require('services/auditService');
 
   const handleValidationErrors = (req) => {

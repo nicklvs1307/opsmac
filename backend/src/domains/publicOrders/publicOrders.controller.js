@@ -1,7 +1,7 @@
 module.exports = (publicOrdersService) => {
   const { validationResult } = require('express-validator');
   const { BadRequestError } = require('utils/errors');
-  const auditService = require('../../services/auditService'); // Import auditService
+  const auditService = require('services/auditService'); // Import auditService
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);

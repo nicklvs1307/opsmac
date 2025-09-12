@@ -1,6 +1,6 @@
 module.exports = (publicDineInMenuService) => {
   const { validationResult } = require('express-validator');
-  const { NotFoundError } = require('utils/errors');
+  const { BadRequestError } = require('utils/errors');
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);

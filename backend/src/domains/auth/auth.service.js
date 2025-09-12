@@ -142,7 +142,9 @@ module.exports = (models) => {
         } else {
             // For regular users, determine the primary restaurant and build permissions
             if (user.restaurants && user.restaurants.length > 0) { // Corrected from user.userRestaurants
+                console.log('DEBUG: getMe - inside user.restaurants check. user.restaurants:', user.restaurants);
                 const ownedRestaurant = user.restaurants.find(ur => ur.isOwner)?.restaurant;
+                console.log('DEBUG: getMe - ownedRestaurant:', ownedRestaurant);
                 if (ownedRestaurant) {
                     primaryRestaurant = ownedRestaurant;
                     primaryRestaurantId = ownedRestaurant.id;
@@ -150,6 +152,7 @@ module.exports = (models) => {
                     primaryRestaurant = user.restaurants[0].restaurant;
                     primaryRestaurantId = user.restaurants[0].restaurant.id;
                 }
+                console.log('DEBUG: getMe - primaryRestaurantId after logic:', primaryRestaurantId);
             }
 
             if (primaryRestaurantId) {

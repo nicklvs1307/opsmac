@@ -12,7 +12,6 @@ module.exports = (db) => {
     };
 
     return {
-        const { BadRequestError } = require('utils/errors'); // Ensure BadRequestError is imported
 
 // ... (rest of the file)
 

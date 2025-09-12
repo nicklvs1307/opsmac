@@ -31,7 +31,7 @@ module.exports = (db) => {
     };
 
     router.get('/',  checkPermissionInline('satisfaction_surveys', 'read'), asyncHandler(surveyController.listSurveys));
-    router.post('/', auth, checkPermissionInline('satisfaction_surveys', 'create'), ...createSurveyValidation, asyncHandler(surveyController.createSurvey));
+    router.post('/', checkPermissionInline('satisfaction_surveys', 'create'), ...createSurveyValidation, asyncHandler(surveyController.createSurvey));
     router.put('/:id',  checkPermissionInline('satisfaction_surveys', 'update'), ...updateSurveyValidation, asyncHandler(surveyController.updateSurvey));
     router.patch('/:id/status',  checkPermissionInline('satisfaction_surveys', 'update'), ...updateSurveyStatusValidation, asyncHandler(surveyController.updateSurveyStatus));
     router.delete('/:id',  checkPermissionInline('satisfaction_surveys', 'delete'), asyncHandler(surveyController.deleteSurvey));

@@ -110,7 +110,7 @@ module.exports = (models) => {
         const user = await models.User.findByPk(userId, {
             include: [
                 {
-                    model: models.Role, // Use models.Role
+                    model: models.Role,
                     as: 'roles',
                 },
                 {
@@ -141,7 +141,7 @@ module.exports = (models) => {
             };
         } else {
             // For regular users, determine the primary restaurant and build permissions
-            if (user.restaurants && user.restaurants.length > 0) {
+            if (user.restaurants && user.restaurants.length > 0) { // Corrected from user.userRestaurants
                 const ownedRestaurant = user.restaurants.find(ur => ur.isOwner)?.restaurant;
                 if (ownedRestaurant) {
                     primaryRestaurant = ownedRestaurant;
@@ -157,7 +157,7 @@ module.exports = (models) => {
             }
         }
 
-        console.log('DEBUG: auth.service.js - primaryRestaurantId before return:', primaryRestaurantId); // Added log
+        
 
         return {
             id: user.id,

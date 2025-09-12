@@ -7,8 +7,7 @@ const asyncHandler = require('utils/asyncHandler');
 const models = require('models'); // Keep models for authMiddleware initialization
 const IamController = require('domains/iam/iam.controller');
 
-const auth = require('middleware/authMiddleware')(models.sequelize);
-router.use(auth.auth);
+
 
 /**
  * @swagger

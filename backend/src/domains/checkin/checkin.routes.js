@@ -4,7 +4,7 @@ const iamService = require('../../services/iamService');
 const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('utils/errors');
 
 module.exports = (db) => {
-    const { auth, checkRestaurantOwnership } = require('middleware/authMiddleware')(db);
+    
     const checkinController = require('domains/checkin/checkin.controller')(db);
     const { createCheckinValidation, updateCheckinValidation, getCheckinsValidation, recordCheckinValidation, recordPublicCheckinValidation, analyticsValidation } = require('domains/checkin/checkin.validation');
 
@@ -30,11 +30,11 @@ module.exports = (db) => {
         }
     };
 
-    router.post('/record', auth, checkPermissionInline('checkin', 'create'), ...recordCheckinValidation, asyncHandler(checkinController.recordCheckin));
+    router.post('/record',  checkPermissionInline('checkin', 'create'), ...recordCheckinValidation, asyncHandler(checkinController.recordCheckin));
     router.post('/public/:restaurantSlug', ...recordPublicCheckinValidation, asyncHandler(checkinController.recordPublicCheckin));
-    router.put('/checkout/:checkinId', auth, checkPermissionInline('checkin', 'update'), asyncHandler(checkinController.checkoutCheckin));
-    router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, checkPermissionInline('checkin_dashboard', 'read'), ...analyticsValidation, asyncHandler(checkinController.getCheckinAnalytics));
-    router.get('/active/:restaurantId', auth, checkRestaurantOwnership, checkPermissionInline('checkin_active', 'read'), asyncHandler(checkinController.getActiveCheckins));
+    router.put('/checkout/:checkinId',  checkPermissionInline('checkin', 'update'), asyncHandler(checkinController.checkoutCheckin));
+    router.get('/analytics/:restaurantId',  checkPermissionInline('checkin_dashboard', 'read'), ...analyticsValidation, asyncHandler(checkinController.getCheckinAnalytics));
+    router.get('/active/:restaurantId',  checkPermissionInline('checkin_active', 'read'), asyncHandler(checkinController.getActiveCheckins));
 
     return router;
 };

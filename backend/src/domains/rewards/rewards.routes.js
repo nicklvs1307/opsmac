@@ -5,7 +5,7 @@ const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('uti
 const { createRewardValidation, updateRewardValidation, spinWheelValidation } = require('./rewards.validation');
 
 module.exports = (db) => {
-    const { auth } = require('middleware/authMiddleware')(db);
+    
     const rewardsController = require('./rewards.controller')(db);
     const router = express.Router();
 
@@ -29,15 +29,15 @@ module.exports = (db) => {
         }
     };
 
-    router.get('/analytics', auth, checkPermissionInline('coupons_dashboard', 'read'), asyncHandler(rewardsController.getRewardsAnalytics));
-    router.post('/spin-wheel', auth, spinWheelValidation, asyncHandler(rewardsController.spinWheel));
+    router.get('/analytics', checkPermissionInline('coupons_dashboard', 'read'), asyncHandler(rewardsController.getRewardsAnalytics));
+    router.post('/spin-wheel', spinWheelValidation, asyncHandler(rewardsController.spinWheel));
 
-    router.get('/:id', auth, checkPermissionInline('coupons_rewards', 'read'), asyncHandler(rewardsController.getRewardById));
-    router.get('/restaurant/:restaurantId', auth, checkPermissionInline('coupons_rewards', 'read'), asyncHandler(rewardsController.listRewards));
+    router.get('/:id', checkPermissionInline('coupons_rewards', 'read'), asyncHandler(rewardsController.getRewardById));
+    router.get('/restaurant/:restaurantId', checkPermissionInline('coupons_rewards', 'read'), asyncHandler(rewardsController.listRewards));
 
-    router.post('/', auth, checkPermissionInline('coupons_rewards_create', 'create'), createRewardValidation, asyncHandler(rewardsController.createReward));
-    router.put('/:id', auth, checkPermissionInline('coupons_rewards_management', 'update'), updateRewardValidation, asyncHandler(rewardsController.updateReward));
-    router.delete('/:id', auth, checkPermissionInline('coupons_rewards_management', 'delete'), asyncHandler(rewardsController.deleteReward));
+    router.post('/', checkPermissionInline('coupons_rewards_create', 'create'), createRewardValidation, asyncHandler(rewardsController.createReward));
+    router.put('/:id', checkPermissionInline('coupons_rewards_management', 'update'), updateRewardValidation, asyncHandler(rewardsController.updateReward));
+    router.delete('/:id', checkPermissionInline('coupons_rewards_management', 'delete'), asyncHandler(rewardsController.deleteReward));
 
 
     return router;

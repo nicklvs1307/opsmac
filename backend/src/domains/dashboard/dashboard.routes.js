@@ -30,7 +30,7 @@ module.exports = (db) => {
         }
     };
 
-    router.use(auth);
+    
 
     router.get('/:restaurantId/analytics', checkRestaurantOwnership, checkPermissionInline('dashboard', 'read'), asyncHandler(dashboardController.getDashboardAnalytics));
     router.get('/evolution-analytics', checkRestaurantOwnership, checkPermissionInline('dashboard', 'read'), asyncHandler(dashboardController.getEvolutionAnalytics));

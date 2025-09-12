@@ -5,7 +5,7 @@ const iamService = require('../../services/iamService'); // Added
 const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('utils/errors'); // Added
 
 module.exports = (db) => { // Added comment to force reload
-    const { auth } = require('middleware/authMiddleware')(db);
+    
     const { getCustomerDashboardMetrics, getBirthdayCustomers, listCustomers, createCustomer, getCustomerByPhone, getCustomerById, updateCustomer, deleteCustomer, getCustomerDetails, resetCustomerVisits, clearCustomerCheckins, publicRegisterCustomer } = require('./customers.controller')(db);
     const { createCustomerValidation, updateCustomerValidation, publicRegisterCustomerValidation, customerQueryValidation, byPhoneValidation } = require('./customers.validation');
 
@@ -35,18 +35,18 @@ module.exports = (db) => { // Added comment to force reload
     // Rota pública
     router.post('/public/register', ...publicRegisterCustomerValidation, asyncHandler(publicRegisterCustomer));
 
-    router.get('/dashboard-metrics', auth, checkPermissionInline('customers', 'read'), asyncHandler(getCustomerDashboardMetrics));
-    router.get('/birthdays', auth, checkPermissionInline('customers', 'read'), asyncHandler(getBirthdayCustomers));
-    router.get('/restaurant/:restaurantId', auth, checkPermissionInline('fidelity:relationship:customers', 'read'), asyncHandler(listCustomers)); // New route
-    router.get('/', auth, checkPermissionInline('customers', 'read'), ...customerQueryValidation, asyncHandler(listCustomers));
-    router.post('/', auth, checkPermissionInline('customers', 'create'), ...createCustomerValidation, asyncHandler(createCustomer));
-    router.get('/by-phone', auth, checkPermissionInline('customers', 'read'), ...byPhoneValidation, asyncHandler(getCustomerByPhone));
-    router.get('/:id', auth, checkPermissionInline('customers', 'read'), asyncHandler(getCustomerById));
-    router.put('/:id', auth, checkPermissionInline('customers', 'update'), ...updateCustomerValidation, asyncHandler(updateCustomer));
-    router.delete('/:id', auth, checkPermissionInline('customers', 'delete'), asyncHandler(deleteCustomer));
-    router.get('/:id/details', auth, checkPermissionInline('customers', 'read'), asyncHandler(getCustomerDetails));
-    router.post('/:id/reset-visits', auth, checkPermissionInline('customers', 'update'), asyncHandler(resetCustomerVisits));
-    router.post('/:id/clear-checkins', auth, checkPermissionInline('customers', 'update'), asyncHandler(clearCustomerCheckins));
+    router.get('/dashboard-metrics', checkPermissionInline('customers', 'read'), asyncHandler(getCustomerDashboardMetrics));
+    router.get('/birthdays', checkPermissionInline('customers', 'read'), asyncHandler(getBirthdayCustomers));
+    router.get('/restaurant/:restaurantId', checkPermissionInline('fidelity:relationship:customers', 'read'), asyncHandler(listCustomers)); // New route
+    router.get('/', checkPermissionInline('customers', 'read'), ...customerQueryValidation, asyncHandler(listCustomers));
+    router.post('/', checkPermissionInline('customers', 'create'), ...createCustomerValidation, asyncHandler(createCustomer));
+    router.get('/by-phone', checkPermissionInline('customers', 'read'), ...byPhoneValidation, asyncHandler(getCustomerByPhone));
+    router.get('/:id', checkPermissionInline('customers', 'read'), asyncHandler(getCustomerById));
+    router.put('/:id', checkPermissionInline('customers', 'update'), ...updateCustomerValidation, asyncHandler(updateCustomer));
+    router.delete('/:id', checkPermissionInline('customers', 'delete'), asyncHandler(deleteCustomer));
+    router.get('/:id/details', checkPermissionInline('customers', 'read'), asyncHandler(getCustomerDetails));
+    router.post('/:id/reset-visits', checkPermissionInline('customers', 'update'), asyncHandler(resetCustomerVisits));
+    router.post('/:id/clear-checkins', checkPermissionInline('customers', 'update'), asyncHandler(clearCustomerCheckins));
 
     return router;
 };

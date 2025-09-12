@@ -111,7 +111,8 @@ module.exports = (db) => {
             newCustomers,
             totalSurveyResponses,
             redeemedCoupons,
-            feedbackStats
+            avgNpsScoreStats,
+            avgRatingStats
         ] = await Promise.all([
             models.Checkin.count({
                 where: { restaurantId, ...dateFilter }
@@ -129,10 +130,16 @@ module.exports = (db) => {
                     redeemed_at: dateFilter.createdAt ? dateFilter.createdAt : { [Op.not]: null }
                 }
             }),
-            models.Feedback.findOne({
-                where: { restaurantId, ...dateFilter },
+            models.SurveyResponse.findOne({
+                where: { restaurantId, ...dateFilter, npsScore: { [Op.not]: null } },
                 attributes: [
-                    [fn('AVG', col('npsScore')), 'avgNpsScore'],
+                    [fn('AVG', col('npsScore')), 'avgNpsScore']
+                ],
+                raw: true
+            }),
+            models.Feedback.findOne({
+                where: { restaurantId, ...dateFilter, rating: { [Op.not]: null } },
+                attributes: [
                     [fn('AVG', col('rating')), 'avgRating']
                 ],
                 raw: true
@@ -144,8 +151,8 @@ module.exports = (db) => {
             newCustomers,
             totalSurveyResponses,
             redeemedCoupons,
-            avgNpsScore: feedbackStats?.avgNpsScore || 0,
-            avgRating: feedbackStats?.avgRating || 0,
+            avgNpsScore: avgNpsScoreStats?.avgNpsScore || 0,
+            avgRating: avgRatingStats?.avgRating || 0,
         };
     }
 

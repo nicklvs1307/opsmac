@@ -19,12 +19,9 @@ axiosInstance.interceptors.request.use(
   (config) => {
     // This part is now less critical if defaults are set correctly on load,
     // but it ensures the header is present even if defaults were somehow missed or overridden.
-    if (!config.headers.Authorization) {
-      // Only set if not already present
-      const currentToken = localStorage.getItem('token');
-      if (currentToken) {
-        config.headers.Authorization = `Bearer ${currentToken}`;
-      }
+    const currentToken = localStorage.getItem('token');
+    if (currentToken) {
+      config.headers.Authorization = `Bearer ${currentToken}`;
     }
     return config;
   },

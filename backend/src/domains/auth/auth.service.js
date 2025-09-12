@@ -157,7 +157,7 @@ module.exports = (models) => {
             }
         }
 
-
+        console.log('DEBUG: auth.service.js - primaryRestaurantId before return:', primaryRestaurantId); // Added log
 
         return {
             id: user.id,

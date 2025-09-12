@@ -1,153 +1,482 @@
-AuthContext.js:82 AuthContext useEffect: Running
-AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2OTE0MjksImV4cCI6MTc1ODI5NjIyOX0.NqIGw9q8VnP6z3aEJP1uwwcgCcUCzGuAMx66IwxUMxA
-AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
-dashboard:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:92 AuthContext useEffect: /auth/me successful {user: {…}}
-AuthContext.js:99 AuthContext useEffect: Attempting to fetch /iam/tree
-AuthContext.js:106 AuthContext useEffect: /iam/tree successful {restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8', userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d', isSuperAdmin: true, isOwner: true, modules: Array(9)}
-main.f1a9ed3f.js:2 [Violation] 'message' handler took 176ms
-dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:21
-enabled @ dashboardQueries.js:36
-fetchFn @ query.js:300
-c @ retryer.js:95
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-Ur @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-Xr.<computed> @ Axios.js:213
-(anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:21
-enabled @ dashboardQueries.js:36
-fetchFn @ query.js:300
-c @ retryer.js:95
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-query.js:358 xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
-onError @ query.js:358
-f @ retryer.js:67
-(anônimo) @ retryer.js:132
-Promise.catch
-c @ retryer.js:116
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-dashboardQueries.js:42 Error fetching dashboard data: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
-onError @ dashboardQueries.js:42
-(anônimo) @ notifyManager.js:62
-notifyFn @ notifyManager.js:10
-(anônimo) @ notifyManager.js:77
-(anônimo) @ notifyManager.js:76
-cc @ react-dom.production.min.js:273
-(anônimo) @ notifyManager.js:75
-Promise.then
-C @ utils.js:322
-t.flush @ notifyManager.js:74
-t.batch @ notifyManager.js:30
-t.dispatch @ query.js:392
-onError @ query.js:348
-f @ retryer.js:67
-(anônimo) @ retryer.js:132
-Promise.catch
-c @ retryer.js:116
-(anônimo) @ retryer.js:149
-Promise.then
-(anônimo) @ retryer.js:145
-Promise.catch
-c @ retryer.js:116
-u @ retryer.js:156
-t.fetch @ query.js:332
-r.executeFetch @ queryObserver.js:199
-r.onSubscribe @ queryObserver.js:40
-t.subscribe @ subscribable.js:16
-(anônimo) @ useBaseQuery.js:60
-nl @ react-dom.production.min.js:243
-_c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-Dashboard.js:94 Error fetching dashboard data: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
-vV @ Dashboard.js:94
-vi @ react-dom.production.min.js:160
-As @ react-dom.production.min.js:196
-wl @ react-dom.production.min.js:291
-xc @ react-dom.production.min.js:279
-gc @ react-dom.production.min.js:279
-vc @ react-dom.production.min.js:279
-ac @ react-dom.production.min.js:267
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
-
-https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Error</title>
-</head>
-<body>
-<pre>Internal Server Error</pre>
-</body>
-</html>
-
-
-https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Error</title>
-</head>
-<body>
-<pre>Internal Server Error</pre>
-</body>
-</html>
+> feedeliza-plus@1.0.0 start
+> node server.js
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+Redis Client Connected
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 2)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Coupon.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Coupon.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 3)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/rewards/rewards.routes.js:19:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+NotFoundError: Restaurante não encontrado
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/rewards/rewards.routes.js:19:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+NotFoundError: Restaurante não encontrado
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 2)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Coupon.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Coupon.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 3)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async SurveyResponse.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async SurveyResponse.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async Promise.all (index 4)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async SurveyResponse.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 2)
+    at async Object.getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.service.js:362:13)
+    at async getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.controller.js:51:26)
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Reward.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Reward.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Object.getRewardsAnalytics (/app/src/domains/rewards/rewards.service.js:192:31)
+    at async Object.getRewardsAnalytics (/app/src/domains/dashboard/dashboard.service.js:200:16)
+    at async getRewardsAnalytics (/app/src/domains/dashboard/dashboard.controller.js:44:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async SurveyResponse.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async SurveyResponse.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async Promise.all (index 4)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:154:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 0)
+    at async Object.getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.service.js:362:13)
+    at async getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.controller.js:51:26)
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Reward.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Reward.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Object.getRewardsAnalytics (/app/src/domains/rewards/rewards.service.js:192:31)
+    at async Object.getRewardsAnalytics (/app/src/domains/dashboard/dashboard.service.js:200:16)
+    at async getRewardsAnalytics (/app/src/domains/dashboard/dashboard.controller.js:44:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 0)
+    at async Object.getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.service.js:362:13)
+    at async getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.controller.js:51:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/surveys/surveys.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 0)
+    at async Object.getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.service.js:362:13)
+    at async getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.controller.js:51:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/surveys/surveys.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/surveys/surveys.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/surveys/surveys.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+NotFoundError: Restaurante não encontrado
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/rewards/rewards.routes.js:19:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/rewards/rewards.routes.js:19:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+NotFoundError: Restaurante não encontrado
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/checkin/checkin.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/checkin/checkin.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/surveys/surveys.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/surveys/surveys.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/rewards/rewards.routes.js:19:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+NotFoundError: Restaurante não encontrado
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/rewards/rewards.routes.js:19:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at param (/app/node_modules/express/lib/router/index.js:365:14)
+    at param (/app/node_modules/express/lib/router/index.js:376:14)
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:421:3)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+NotFoundError: Restaurante não encontrado
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/surveys/surveys.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
+    at /app/src/domains/surveys/surveys.routes.js:20:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)

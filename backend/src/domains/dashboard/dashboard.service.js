@@ -141,7 +141,7 @@ module.exports = (db) => {
         } else if (validEndDate) {
             redeemedAtFilter.redeemed_at = { [Op.lte]: validEndDate };
         } else {
-            // If no date range is specified, do not filter by redeemed_at
+            redeemedAtFilter.redeemed_at = { [Op.not]: null };
         }
 
         const [

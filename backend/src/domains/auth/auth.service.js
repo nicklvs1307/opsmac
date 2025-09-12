@@ -102,7 +102,6 @@ module.exports = (models) => {
     };
 
     const getMe = async (userId) => {
-        // console.log('models.User in getMe (before findByPk):', models.User); // Removed this log
         if (!models.User) {
             console.error('models.User is undefined in getMe!');
             throw new Error('models.User is not defined. Cannot fetch user.');
@@ -120,18 +119,26 @@ module.exports = (models) => {
                 },
             ]
         });
-            
-        
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');
         }
 
-
-
         let permissionSnapshot = null;
         let primaryRestaurant = null;
         let primaryRestaurantId = null;
+
+        // Determine the primary restaurant for all users, including superadmins
+        if (user.restaurants && user.restaurants.length > 0) {
+            const ownedRestaurant = user.restaurants.find(ur => ur.isOwner)?.restaurant;
+            if (ownedRestaurant) {
+                primaryRestaurant = ownedRestaurant;
+                primaryRestaurantId = ownedRestaurant.id;
+            } else {
+                primaryRestaurant = user.restaurants[0].restaurant;
+                primaryRestaurantId = user.restaurants[0].restaurant.id;
+            }
+        }
 
         if (user.isSuperadmin) {
             // For Super Admin, create a snapshot that grants all permissions
@@ -140,27 +147,11 @@ module.exports = (models) => {
                 permissions: {}, // Empty means no specific feature checks, relies on isSuperadmin
             };
         } else {
-            // For regular users, determine the primary restaurant and build permissions
-            if (user.restaurants && user.restaurants.length > 0) { // Corrected from user.userRestaurants
-                console.log('DEBUG: getMe - inside user.restaurants check. user.restaurants:', user.restaurants);
-                const ownedRestaurant = user.restaurants.find(ur => ur.isOwner)?.restaurant;
-                console.log('DEBUG: getMe - ownedRestaurant:', ownedRestaurant);
-                if (ownedRestaurant) {
-                    primaryRestaurant = ownedRestaurant;
-                    primaryRestaurantId = ownedRestaurant.id;
-                } else {
-                    primaryRestaurant = user.restaurants[0].restaurant;
-                    primaryRestaurantId = user.restaurants[0].restaurant.id;
-                }
-                console.log('DEBUG: getMe - primaryRestaurantId after logic:', primaryRestaurantId);
-            }
-
+            // For regular users, build permissions for the primary restaurant
             if (primaryRestaurantId) {
                 permissionSnapshot = await iamService.buildSnapshot(primaryRestaurantId, user.id);
             }
         }
-
-        
 
         return {
             id: user.id,
@@ -175,7 +166,7 @@ module.exports = (models) => {
             restaurants: user.restaurants?.map(ur => ur.restaurant) || [],
             restaurant: primaryRestaurant,
             restaurantId: primaryRestaurantId,
-            isSuperadmin: user.isSuperadmin, // Add this line
+            isSuperadmin: user.isSuperadmin,
             permissionSnapshot: permissionSnapshot,
         };
     };

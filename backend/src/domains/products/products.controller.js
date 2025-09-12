@@ -1,7 +1,7 @@
 module.exports = (db) => {
   const { validationResult } = require('express-validator');
   const { BadRequestError } = require('utils/errors');
-  const auditService = require('../../services/auditService'); // Import auditService
+  const auditService = require('services/auditService'); // Import auditService
 
   // Import and initialize the new services
   const productCrudService = require('./productCrudService')(db);

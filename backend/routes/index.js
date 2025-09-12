@@ -31,7 +31,4 @@ module.exports = (db) => {
     router.get("/health", (req, res) => res.json({ ok: true }));
 
     return router;
-};);
-
-    return router;
 };

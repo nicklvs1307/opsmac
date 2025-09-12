@@ -1,10 +1,9 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-✅ Conexão com banco de dados estabelecida
-❌ Erro ao iniciar servidor: /app/src/domains/customers/customer.service.js:57
-                    const loyalCustomersCount = await models.Checkin.count({
-                    ^^^^^
-SyntaxError: Unexpected token 'const'
+/app/routes/index.js:34
+};);
+  ^
+SyntaxError: Unexpected token ')'
     at wrapSafe (node:internal/modules/cjs/loader:1464:18)
     at Module._compile (node:internal/modules/cjs/loader:1495:20)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
@@ -12,6 +11,7 @@ SyntaxError: Unexpected token 'const'
     at Module._load (node:internal/modules/cjs/loader:1091:12)
     at Module.require (node:internal/modules/cjs/loader:1289:19)
     at require (node:internal/modules/helpers:182:18)
-    at module.exports (/app/src/domains/customers/customers.controller.js:5:29)
-    at module.exports (/app/src/domains/customers/customers.routes.js:9:288)
-    at module.exports (/app/routes/index.js:26:54)
+    at Object.<anonymous> (/app/server.js:16:16)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+Node.js v20.19.5

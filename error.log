@@ -2,11 +2,10 @@
 > node server.js
 ✅ Conexão com banco de dados estabelecida
 Type of getRestaurantContextMiddleware(): function
-❌ Erro ao iniciar servidor: /app/src/domains/dashboard/dashboard.service.js:420
-        ];
-
-^
-SyntaxError: missing ) after argument list
+❌ Erro ao iniciar servidor: /app/src/domains/rewards/rewards.service.js:282
+                { '$customer.name: { [Op.iLike]: `%${search}%` } },
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: Invalid or unexpected token
     at wrapSafe (node:internal/modules/cjs/loader:1464:18)
     at Module._compile (node:internal/modules/cjs/loader:1495:20)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
@@ -14,6 +13,6 @@ SyntaxError: missing ) after argument list
     at Module._load (node:internal/modules/cjs/loader:1091:12)
     at Module.require (node:internal/modules/cjs/loader:1289:19)
     at require (node:internal/modules/helpers:182:18)
-    at module.exports (/app/src/domains/dashboard/dashboard.controller.js:2:30)
+    at module.exports (/app/src/domains/dashboard/dashboard.service.js:5:28)
+    at module.exports (/app/src/domains/dashboard/dashboard.controller.js:2:60)
     at module.exports (/app/src/domains/dashboard/dashboard.routes.js:7:66)
-    at module.exports (/app/routes/index.js:25:54)

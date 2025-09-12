@@ -279,8 +279,8 @@ const { BadRequestError, NotFoundError } = require('utils/errors');
         if (search) {
             whereClause[Op.or] = [
                 { code: { [Op.iLike]: `%${search}%` } },
-                { '$customer.name: { [Op.iLike]: `%${search}%` } },
-                { '$reward.title: { [Op.iLike]: `%${search}%` } },
+                { '$customer.name$': { [Op.iLike]: `%${search}%` } },
+                { '$reward.title$': { [Op.iLike]: `%${search}%` } },
             ];
         }
         if (status) {

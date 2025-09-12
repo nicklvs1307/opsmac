@@ -169,8 +169,7 @@ const Sidebar = ({ menuStructure, permissionsMap, onMobileClose, isSuperAdmin })
         }
 
         return newItem;
-      })
-      .filter((item) => item.hasAccess || item.isLocked || (item.submenu && item.submenu.length > 0));
+      });
   };
 
   const filteredMenuItems = filterAndMapMenuItems(menuStructure);

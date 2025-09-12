@@ -1,10 +1,10 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
 ✅ Conexão com banco de dados estabelecida
-❌ Erro ao iniciar servidor: /app/src/domains/dashboard/dashboard.controller.js:15
-        const { BadRequestError } = require('utils/errors'); // Ensure BadRequestError is imported
-              ^
-SyntaxError: Unexpected token '{'
+❌ Erro ao iniciar servidor: /app/src/domains/dashboard/dashboard.controller.js:18
+const getDashboardOverview = async (req, res, next) => {
+      ^^^^^^^^^^^^^^^^^^^^
+SyntaxError: Unexpected identifier 'getDashboardOverview'
     at wrapSafe (node:internal/modules/cjs/loader:1464:18)
     at Module._compile (node:internal/modules/cjs/loader:1495:20)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)

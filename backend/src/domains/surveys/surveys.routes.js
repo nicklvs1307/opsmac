@@ -4,7 +4,7 @@ const iamService = require('../../services/iamService');
 const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('utils/errors');
 
 module.exports = (db) => {
-    const { auth } = require('middleware/authMiddleware')(db);
+    const { auth, checkRestaurantOwnership } = require('middleware/authMiddleware')(db);
     const surveyController = require('./surveys.controller')(db);
     const { createSurveyValidation, updateSurveyValidation, getSurveyValidation, updateSurveyStatusValidation } = require('./surveys.validation');
 
@@ -30,15 +30,15 @@ module.exports = (db) => {
         }
     };
 
-    router.get('/', auth, auth.checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'read'), asyncHandler(surveyController.listSurveys));
+    router.get('/', auth, checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'read'), asyncHandler(surveyController.listSurveys));
     router.post('/', auth, checkPermissionInline('satisfaction_surveys', 'create'), ...createSurveyValidation, asyncHandler(surveyController.createSurvey));
-    router.put('/:id', auth, auth.checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'update'), ...updateSurveyValidation, asyncHandler(surveyController.updateSurvey));
-    router.patch('/:id/status', auth, auth.checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'update'), ...updateSurveyStatusValidation, asyncHandler(surveyController.updateSurveyStatus));
-    router.delete('/:id', auth, auth.checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'delete'), asyncHandler(surveyController.deleteSurvey));
-    router.get('/:id', auth, auth.checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'read'), asyncHandler(surveyController.getSurveyById));
-    router.get('/analytics/:restaurantId', auth, auth.checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'read'), asyncHandler(surveyController.getSurveyAnalytics));
-    router.post('/comparison-analytics', auth, auth.checkRestaurantOwnership, checkPermissionInline('surveys_comparison', 'read'), asyncHandler(surveyController.getSurveysComparisonAnalytics));
-    router.get('/:surveyId/questions/:questionId/answers-distribution', auth, auth.checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'read'), asyncHandler(surveyController.getQuestionAnswersDistribution));
+    router.put('/:id', auth, checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'update'), ...updateSurveyValidation, asyncHandler(surveyController.updateSurvey));
+    router.patch('/:id/status', auth, checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'update'), ...updateSurveyStatusValidation, asyncHandler(surveyController.updateSurveyStatus));
+    router.delete('/:id', auth, checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'delete'), asyncHandler(surveyController.deleteSurvey));
+    router.get('/:id', auth, checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'read'), asyncHandler(surveyController.getSurveyById));
+    router.get('/analytics/:restaurantId', auth, checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'read'), asyncHandler(surveyController.getSurveyAnalytics));
+    router.post('/comparison-analytics', auth, checkRestaurantOwnership, checkPermissionInline('surveys_comparison', 'read'), asyncHandler(surveyController.getSurveysComparisonAnalytics));
+    router.get('/:surveyId/questions/:questionId/answers-distribution', auth, checkRestaurantOwnership, checkPermissionInline('satisfaction_surveys', 'read'), asyncHandler(surveyController.getQuestionAnswersDistribution));
 
     return router;
 };

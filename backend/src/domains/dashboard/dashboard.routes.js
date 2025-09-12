@@ -15,6 +15,8 @@ module.exports = (db) => {
         if (!userId) {
             return next(new UnauthorizedError('Acesso negado. Usuário não autenticado.'));
         }
+        console.log('DEBUG: dashboard.routes.js - req.context.restaurantId:', req.context?.restaurantId);
+        console.log('DEBUG: dashboard.routes.js - req.user.restaurantId:', req.user?.restaurantId);
         const restaurantId = req.context?.restaurantId || req.user.restaurantId;
         if (!restaurantId) {
             return next(new UnauthorizedError('Acesso negado. Contexto do restaurante ausente.'));

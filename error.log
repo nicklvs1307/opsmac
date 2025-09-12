@@ -1,3 +1,8 @@
+> feedeliza-plus@1.0.0 start
+> node server.js
+✅ Conexão com banco de dados estabelecida
+🚀 Servidor rodando na porta 5000
+Redis Client Connected
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
@@ -47,19 +52,71 @@ Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/domains/dashboard/dashboard.routes.js:20:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:69:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/domains/dashboard/dashboard.routes.js:20:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:69:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 UnauthorizedError: Unauthorized: Missing user or restaurant context.
     at checkPermission (/app/src/domains/iam/iam.controller.js:349:19)

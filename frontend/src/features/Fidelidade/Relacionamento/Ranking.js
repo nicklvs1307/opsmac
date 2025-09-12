@@ -17,6 +17,7 @@ import {
   MenuItem,
   Avatar,
   Chip,
+  Pagination,
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
@@ -28,6 +29,8 @@ const Ranking = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
 
   const [sortBy, setSortBy] = useState('total_visits'); // Default sort by total visits
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10); // Keep limit as 10 for top customers, or make it configurable
 
   const {
     data: customersData,
@@ -37,7 +40,8 @@ const Ranking = () => {
   } = useCustomersList({
     restaurantId,
     sort: sortBy,
-    limit: 10, // Top 10 customers
+    page,
+    limit,
   });
 
   if (isLoading) {
@@ -104,7 +108,7 @@ const Ranking = () => {
           >
             <MenuItem value="total_visits">{t('ranking.total_visits')}</MenuItem>
             <MenuItem value="loyalty_points">{t('ranking.loyalty_points')}</MenuItem>
-            {/* Add other sorting options as needed, e.g., total_spent */}
+            <MenuItem value="total_spent">{t('ranking.total_spent')}</MenuItem> {/* New */}
           </Select>
         </FormControl>
       </Paper>
@@ -118,7 +122,9 @@ const Ranking = () => {
               <TableCell>{t('ranking.segment')}</TableCell>
               <TableCell>
                 {t('ranking.metric_value', {
-                  metric: sortBy === 'total_visits' ? t('ranking.visits') : t('ranking.points'),
+                  metric: sortBy === 'total_visits' ? t('ranking.visits') :
+                          sortBy === 'loyalty_points' ? t('ranking.points') :
+                          t('ranking.spent'), // Modified
                 })}
               </TableCell>
             </TableRow>
@@ -133,7 +139,7 @@ const Ranking = () => {
             ) : (
               customers.map((customer, index) => (
                 <TableRow key={customer.id}>
-                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{(page - 1) * limit + index + 1}</TableCell> {/* Modified for pagination */}
                   <TableCell>
                     <Box display="flex" alignItems="center" gap={2}>
                       <Avatar sx={{ bgcolor: 'primary.main' }}>
@@ -152,7 +158,9 @@ const Ranking = () => {
                     />
                   </TableCell>
                   <TableCell>
-                    {sortBy === 'total_visits' ? customer.totalVisits : customer.loyaltyPoints}
+                    {sortBy === 'total_visits' ? customer.totalVisits :
+                     sortBy === 'loyalty_points' ? customer.loyaltyPoints :
+                     customer.totalSpent} {/* Modified */}
                   </TableCell>
                 </TableRow>
               ))
@@ -160,6 +168,15 @@ const Ranking = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+        <Pagination
+          count={customersData?.totalPages || 1}
+          page={customersData?.currentPage || 1}
+          onChange={(event, value) => setPage(value)}
+          color="primary"
+        />
+      </Box>
     </Box>
   );
 };

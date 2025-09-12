@@ -58,5 +58,17 @@ module.exports = (db) => {
             const data = await dashboardService.getRatingDistribution(restaurantId, req.query);
             res.json(data);
         },
+        spinWheel: async (req, res, next) => {
+            const restaurantId = req.context.restaurantId;
+            const { rewardId } = req.params;
+            const { customerId } = req.body; // Assuming customerId is sent in the body
+            const data = await dashboardService.spinWheel(rewardId, customerId, restaurantId);
+            res.json(data);
+        },
+        getBenchmarkingData: async (req, res, next) => {
+            const restaurantId = req.context.restaurantId;
+            const data = await dashboardService.getBenchmarkingData(restaurantId);
+            res.json(data);
+        },
     };
 };

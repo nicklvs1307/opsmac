@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Grid, Paper, Typography, CircularProgress, Alert } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Grid, Paper, Typography, CircularProgress, Alert, TextField, Button } from '@mui/material';
 import {
   BarChart as BarChartIcon,
   Star as StarIcon,
@@ -8,6 +8,7 @@ import {
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useSatisfactionAnalytics } from './api/satisfactionService';
+import { format, subMonths } from 'date-fns';
 
 // A simple card for displaying a metric
 const MetricCard = ({ title, value, icon, bgColor }) => (
@@ -40,7 +41,10 @@ const SatisfactionAnalyticsPage = () => {
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const { data, isLoading, error } = useSatisfactionAnalytics(restaurantId);
+  const [startDate, setStartDate] = useState(format(subMonths(new Date(), 12), 'yyyy-MM-dd'));
+  const [endDate, setEndDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+
+  const { data, isLoading, error } = useSatisfactionAnalytics(restaurantId, { start_date: startDate, end_date: endDate });
 
   if (isLoading) {
     return (
@@ -60,6 +64,40 @@ const SatisfactionAnalyticsPage = () => {
 
   return (
     <Box p={3}>
+      <Typography variant="h4" component="h1" gutterBottom>
+        {t('fidelity_general.satisfaction_analytics_title')}
+      </Typography>
+
+      <Paper sx={{ p: 3, mb: 3 }}>
+          <Grid container spacing={2} alignItems="center">
+              <Grid item xs={12} md={5}>
+                  <TextField
+                      label={t('common.start_date')}
+                      type="date"
+                      fullWidth
+                      InputLabelProps={{ shrink: true }}
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                  />
+              </Grid>
+              <Grid item xs={12} md={5}>
+                  <TextField
+                      label={t('common.end_date')}
+                      type="date"
+                      fullWidth
+                      InputLabelProps={{ shrink: true }}
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                  />
+              </Grid>
+              <Grid item xs={12} md={2}>
+                  <Button variant="contained" fullWidth>
+                      {t('common.apply_filters')}
+                  </Button>
+              </Grid>
+          </Grid>
+      </Paper>
+
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4}>
           <MetricCard

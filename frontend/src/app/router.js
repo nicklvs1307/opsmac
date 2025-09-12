@@ -284,201 +284,251 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/dashboard',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Dashboard />
-          </Suspense>
+          <ProtectedRoute featureKey="dashboard" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Dashboard />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/monthly-summary',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <MonthlySummary />
-          </Suspense>
+          <ProtectedRoute featureKey="loyalty_reports" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <MonthlySummary />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/satisfaction-overview',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <SatisfactionOverview />
-          </Suspense>
+          <ProtectedRoute featureKey="satisfaction_reports" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <SatisfactionOverview />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/surveys-comparison',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <SurveysComparison />
-          </Suspense>
+          <ProtectedRoute featureKey="survey_reports" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <SurveysComparison />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/evolution',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Evolution />
-          </Suspense>
+          <ProtectedRoute featureKey="loyalty_reports" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Evolution />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/benchmarking',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Benchmarking />
-          </Suspense>
+          <ProtectedRoute featureKey="loyalty_reports" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Benchmarking />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/multiple-choice',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <MultipleChoice />
-          </Suspense>
+          <ProtectedRoute featureKey="survey_reports" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <MultipleChoice />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/word-clouds',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <WordClouds />
-          </Suspense>
+          <ProtectedRoute featureKey="feedback_reports" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <WordClouds />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'feedback/new',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <NewFeedback />
-          </Suspense>
+          <ProtectedRoute featureKey="feedback_management" actionKey="create">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <NewFeedback />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'feedback/:id',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <FeedbackDetail />
-          </Suspense>
+          <ProtectedRoute featureKey="feedback_management" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <FeedbackDetail />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'qrcodes',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <QRCodeManage />
-          </Suspense>
+          <ProtectedRoute featureKey="qrcodes" actionKey="manage">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <QRCodeManage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'qrcodes/new',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <QRCodeGenerate />
-          </Suspense>
+          <ProtectedRoute featureKey="qrcodes" actionKey="create">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <QRCodeGenerate />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/coupons/rewards',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Rewards />
-          </Suspense>
+          <ProtectedRoute featureKey="rewards_management" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Rewards />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/coupons/rewards-management',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Rewards />
-          </Suspense>
+          <ProtectedRoute featureKey="rewards_management" actionKey="manage">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Rewards />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/coupons/rewards-create',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CouponCreatePage />
-          </Suspense>
+          <ProtectedRoute featureKey="coupons_management" actionKey="create">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CouponCreatePage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/coupons/edit/:id', // New route for editing coupons
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CouponEditPage />
-          </Suspense>
+          <ProtectedRoute featureKey="coupons_management" actionKey="update">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CouponEditPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/coupons/dashboard',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CouponDashboardPage />
-          </Suspense>
+          <ProtectedRoute featureKey="coupons_management" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CouponDashboardPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/coupons/list',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CouponListPage />
-          </Suspense>
+          <ProtectedRoute featureKey="coupons_management" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CouponListPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/coupons/management',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CouponListPage />
-          </Suspense>
+          <ProtectedRoute featureKey="coupons_management" actionKey="manage">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CouponListPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/coupons/validation',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CouponValidatorPage />
-          </Suspense>
+          <ProtectedRoute featureKey="coupons_management" actionKey="update">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CouponValidatorPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/coupons/raffle',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Raffle />
-          </Suspense>
+          <ProtectedRoute featureKey="raffle" actionKey="participate">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Raffle />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/relationship/customers',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Customers />
-          </Suspense>
+          <ProtectedRoute featureKey="customer_management" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Customers />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'customers/:id/details',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CustomerDetail />
-          </Suspense>
+          <ProtectedRoute featureKey="customer_management" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CustomerDetail />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/relationship/birthdays',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CustomerBirthdays />
-          </Suspense>
+          <ProtectedRoute featureKey="customer_management" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CustomerBirthdays />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'customers/dashboard',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CustomerDashboard />
-          </Suspense>
+          <ProtectedRoute featureKey="customer_management" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CustomerDashboard />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
@@ -497,49 +547,61 @@ export const router = createBrowserRouter([
           {
             path: 'profile',
             element: (
-              <Suspense fallback={<div>Carregando...</div>}>
-                <ProfileSettingsPage />
-              </Suspense>
+              <ProtectedRoute featureKey="user_profile" actionKey="update">
+                <Suspense fallback={<div>Carregando...</div>}>
+                  <ProfileSettingsPage />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           {
             path: 'business',
             element: (
-              <Suspense fallback={<div>Carregando...</div>}>
-                <BusinessSettingsPage />
-              </Suspense>
+              <ProtectedRoute featureKey="business_settings" actionKey="update">
+                <Suspense fallback={<div>Carregando...</div>}>
+                  <BusinessSettingsPage />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           {
             path: 'notifications',
             element: (
-              <Suspense fallback={<div>Carregando...</div>}>
-                <NotificationsSettingsPage />
-              </Suspense>
+              <ProtectedRoute featureKey="notification_settings" actionKey="update">
+                <Suspense fallback={<div>Carregando...</div>}>
+                  <NotificationsSettingsPage />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           {
             path: 'security',
             element: (
-              <Suspense fallback={<div>Carregando...</div>}>
-                <SecuritySettingsPage />
-              </Suspense>
+              <ProtectedRoute featureKey="security_settings" actionKey="update">
+                <Suspense fallback={<div>Carregando...</div>}>
+                  <SecuritySettingsPage />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           {
             path: 'appearance',
             element: (
-              <Suspense fallback={<div>Carregando...</div>}>
-                <AppearanceSettingsPage />
-              </Suspense>
+              <ProtectedRoute featureKey="appearance_settings" actionKey="update">
+                <Suspense fallback={<div>Carregando...</div>}>
+                  <AppearanceSettingsPage />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           {
             path: 'whatsapp',
             element: (
-              <Suspense fallback={<div>Carregando...</div>}>
-                <WhatsappSettingsPage />
-              </Suspense>
+              <ProtectedRoute featureKey="whatsapp_integration" actionKey="update">
+                <Suspense fallback={<div>Carregando...</div>}>
+                  <WhatsappSettingsPage />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           // NPS Criteria route is intentionally omitted
@@ -565,9 +627,11 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/checkin/active',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <ActiveCheckinsPage />
-          </Suspense>
+          <ProtectedRoute featureKey="checkin" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <ActiveCheckinsPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
@@ -1389,59 +1453,71 @@ export const router = createBrowserRouter([
       {
         path: 'admin/checkins',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CheckinAnalyticsPage />
-          </Suspense>
+          <ProtectedRoute featureKey="checkin_dashboard" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CheckinAnalyticsPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'admin/tables',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Tables />
-          </Suspense>
+          <ProtectedRoute featureKey="tables" actionKey="manage">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Tables />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'admin/qrcodes',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <QRCodeManage />
-          </Suspense>
+          <ProtectedRoute featureKey="qrcodes" actionKey="manage">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <QRCodeManage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'admin/waiter-calls',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <ComingSoon />
-          </Suspense>
+          <ProtectedRoute featureKey="waiter_calls" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <ComingSoon />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'admin/whatsapp-messages',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <ComingSoon />
-          </Suspense>
+          <ProtectedRoute featureKey="whatsapp_messages" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <ComingSoon />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'admin/losses',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <ComingSoon />
-          </Suspense>
+          <ProtectedRoute featureKey="losses" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <ComingSoon />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
-      {
-        path: 'admin/production',
-        element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <ProductionList />
-          </Suspense>
-        ),
-      },
+      // {
+      //   path: 'admin/production',
+      //   element: (
+      //     <Suspense fallback={<div>Carregando...</div>}>
+      //       <ProductionList />
+      //     </Suspense>
+      //   ),
+      // },
       {
         path: 'admin/suppliers',
         element: (

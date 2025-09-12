@@ -2,11 +2,9 @@ const express = require('express');
 const asyncHandler = require('utils/asyncHandler');
 const iamService = require('../../services/iamService');
 const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('utils/errors');
-const { createRewardValidation, updateRewardValidation, spinWheelValidation } = require('./rewards.validation');
 
 module.exports = (db) => {
-    
-    const rewardsController = require('./rewards.controller')(db);
+    const surveyRewardProgramController = require('./surveyRewardProgram.controller')(db);
     const router = express.Router();
 
     const checkPermissionInline = (featureKey, actionKey) => async (req, res, next) => {
@@ -29,17 +27,8 @@ module.exports = (db) => {
         }
     };
 
-    router.get('/analytics', checkPermissionInline('coupons_dashboard', 'read'), asyncHandler(rewardsController.getRewardsAnalytics));
-    router.post('/spin-wheel', spinWheelValidation, asyncHandler(rewardsController.spinWheel));
-
-    router.get('/:id', checkPermissionInline('coupons_rewards', 'read'), asyncHandler(rewardsController.getRewardById));
-    router.get('/restaurant/:restaurantId', checkPermissionInline('coupons_rewards', 'read'), asyncHandler(rewardsController.listRewards));
-
-    router.post('/', checkPermissionInline('coupons_rewards_create', 'create'), createRewardValidation, asyncHandler(rewardsController.createReward));
-    router.put('/:id', checkPermissionInline('coupons_rewards_management', 'update'), updateRewardValidation, asyncHandler(rewardsController.updateReward));
-    router.delete('/:id', checkPermissionInline('coupons_rewards_management', 'delete'), asyncHandler(rewardsController.deleteReward));
-router.get('/coupons', checkPermissionInline('coupons_generated', 'read'), asyncHandler(rewardsController.listCoupons)); // New route
-
+    router.get('/:restaurantId', checkPermissionInline('fidelity:surveys:reward_program', 'read'), asyncHandler(surveyRewardProgramController.getSurveyRewardProgram));
+    router.post('/', checkPermissionInline('fidelity:surveys:reward_program', 'write'), asyncHandler(surveyRewardProgramController.saveSurveyRewardProgram));
 
     return router;
 };

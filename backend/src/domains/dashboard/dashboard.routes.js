@@ -33,8 +33,11 @@ module.exports = (db) => {
     
 
     router.get('/:restaurantId/analytics', checkRestaurantOwnership, checkPermissionInline('dashboard', 'read'), asyncHandler(dashboardController.getDashboardAnalytics));
-    router.get('/evolution-analytics', checkRestaurantOwnership, checkPermissionInline('dashboard', 'read'), asyncHandler(dashboardController.getEvolutionAnalytics));
-    router.get('/rating-distribution', checkRestaurantOwnership, checkPermissionInline('dashboard', 'read'), asyncHandler(dashboardController.getRatingDistribution));
+router.get('/evolution-analytics', checkRestaurantOwnership, checkPermissionInline('dashboard', 'read'), asyncHandler(dashboardController.getEvolutionAnalytics));
+router.get('/rating-distribution', checkRestaurantOwnership, checkPermissionInline('dashboard', 'read'), asyncHandler(dashboardController.getRatingDistribution));
+router.get('/rewards-analytics', checkRestaurantOwnership, checkPermissionInline('fidelity:general:dashboard', 'read'), asyncHandler(dashboardController.getRewardsAnalytics)); // New route
+router.post('/rewards/:rewardId/spin-wheel', checkRestaurantOwnership, checkPermissionInline('fidelity:coupons:raffle', 'create'), asyncHandler(dashboardController.spinWheel)); // New route
+router.get('/benchmarking', checkRestaurantOwnership, checkPermissionInline('fidelity:general:benchmarking', 'read'), asyncHandler(dashboardController.getBenchmarkingData)); // New route
     // router.get('/reports', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), generateReportValidation, getDashboardAnalyticsHandler);
     // router.get('/rewards/analytics', checkRestaurantOwnership, requirePermission('fidelity:general:dashboard', 'read'), getDashboardAnalyticsHandler);
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -8,6 +8,8 @@ import {
   Alert,
   Card,
   CardContent,
+  TextField,
+  Button,
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
@@ -37,11 +39,12 @@ const SatisfactionOverview = () => {
 
   const { data: analyticsData, isLoading: isLoadingAnalytics, isError: isErrorAnalytics, error: errorAnalytics } = useSatisfactionAnalytics(restaurantId);
 
-  const twelveMonthsAgo = format(subMonths(new Date(), 12), 'yyyy-MM-dd');
-  const today = format(new Date(), 'yyyy-MM-dd');
+  const [startDate, setStartDate] = useState(format(subMonths(new Date(), 12), 'yyyy-MM-dd'));
+  const [endDate, setEndDate] = useState(format(new Date(), 'yyyy-MM-dd'));
 
-  const { data: evolutionData, isLoading: isLoadingEvolution, isError: isErrorEvolution, error: errorEvolution } = useEvolutionAnalytics(restaurantId, { start_date: twelveMonthsAgo, end_date: today, granularity: 'month' });
-  const { data: ratingDistributionData, isLoading: isLoadingRating, isError: isErrorRating, error: errorRating } = useRatingDistribution(restaurantId, { start_date: twelveMonthsAgo, end_date: today });
+  const { data: analyticsData, isLoading: isLoadingAnalytics, isError: isErrorAnalytics, error: errorAnalytics } = useSatisfactionAnalytics(restaurantId, { start_date: startDate, end_date: endDate });
+  const { data: evolutionData, isLoading: isLoadingEvolution, isError: isErrorEvolution, error: errorEvolution } = useEvolutionAnalytics(restaurantId, { start_date: startDate, end_date: endDate, granularity: 'month' });
+  const { data: ratingDistributionData, isLoading: isLoadingRating, isError: isErrorRating, error: errorRating } = useRatingDistribution(restaurantId, { start_date: startDate, end_date: endDate });
 
   if (isLoadingAnalytics || isLoadingEvolution || isLoadingRating) {
     return (
@@ -72,6 +75,36 @@ const SatisfactionOverview = () => {
       <Typography variant="h4" component="h1" gutterBottom>
         {t('fidelity_general.satisfaction_overview_title')}
       </Typography>
+
+      <Paper sx={{ p: 3, mb: 3 }}>
+          <Grid container spacing={2} alignItems="center">
+              <Grid item xs={12} md={5}>
+                  <TextField
+                      label={t('common.start_date')}
+                      type="date"
+                      fullWidth
+                      InputLabelProps={{ shrink: true }}
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                  />
+              </Grid>
+              <Grid item xs={12} md={5}>
+                  <TextField
+                      label={t('common.end_date')}
+                      type="date"
+                      fullWidth
+                      InputLabelProps={{ shrink: true }}
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                  />
+              </Grid>
+              <Grid item xs={12} md={2}>
+                  <Button variant="contained" fullWidth>
+                      {t('common.apply_filters')}
+                  </Button>
+              </Grid>
+          </Grid>
+      </Paper>
 
       <Grid container spacing={3} mb={4}>
         <Grid item xs={12} md={4}>

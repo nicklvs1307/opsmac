@@ -2,6 +2,7 @@ module.exports = (db) => {
     const models = db;
     const { Op, fn, col, literal } = require('sequelize');
     const { BadRequestError, NotFoundError } = require('utils/errors');
+    const rewardsService = require('domains/rewards/rewards.service')(db);
 
     // Helper function to get restaurant ID from authenticated user
     const getRestaurantIdFromUser = async (userId) => {
@@ -147,11 +148,7 @@ module.exports = (db) => {
     }
 
     async function getRewardsAnalytics(restaurantId) {
-        // This function is already implemented in rewards.service.js
-        // For now, we'll just return a placeholder or call the actual service if needed.
-        // To avoid circular dependencies, it's better to keep rewards analytics in rewards.service.js
-        // and just expose it via dashboard routes if it's a general dashboard metric.
-        return { message: "Rewards analytics handled by rewards.service.js" };
+        return await rewardsService.getRewardsAnalytics(restaurantId);
     }
 
     // --- Report Generation Functions (Existing) ---
@@ -423,32 +420,56 @@ module.exports = (db) => {
         ];
 
         // Helper function to merge the results
-        const mergeData = (mainData, otherData, key) => {
-            const otherDataMap = new Map(otherData.map(d => [new Date(d.date).toISOString(), d.count]));
+        const mergeData = (mainData, otherData, key, isSum = false) => {
+            const otherDataMap = new Map(otherData.map(d => [new Date(d.date).toISOString(), isSum ? d.sum : d.count]));
             return mainData.map(d => {
                 const dateStr = new Date(d.date).toISOString();
-                return { ...d, [key]: otherDataMap.get(dateStr) || 0 };
+                return { ...d, [key]: otherDataMap.has(dateStr) ? otherDataMap.get(dateStr) : 0 };
             });
         };
-        
+
         let evolutionData = checkins.map(d => ({ date: new Date(d.date).toISOString().split('T')[0], checkins: d.count }));
         evolutionData = mergeData(evolutionData, newCustomers, 'newCustomers');
         evolutionData = mergeData(evolutionData, surveys, 'surveys');
         evolutionData = mergeData(evolutionData, coupons, 'coupons');
-        
+        evolutionData = mergeData(evolutionData, loyaltyPointsEvolution, 'loyaltyPoints', true); // New
+        evolutionData = mergeData(evolutionData, totalSpentEvolution, 'totalSpent', true);    // New
+
         const npsMap = new Map(nps.map(d => [new Date(d.date).toISOString(), d.score]));
         const csatMap = new Map(csat.map(d => [new Date(d.date).toISOString(), d.score]));
+        const totalCustomersMap = new Map(totalCustomersEvolution.map(d => [new Date(d.date).toISOString(), d.count])); // New
+        const engagedCustomersMap = new Map(engagedCustomersEvolution.map(d => [new Date(d.date).toISOString(), d.count])); // New
+
+        // Process loyalCustomersEvolution to get count per period
+        const loyalCustomersCountPerPeriod = loyalCustomersEvolution.reduce((acc, curr) => {
+            const dateStr = new Date(curr.date).toISOString();
+            acc[dateStr] = (acc[dateStr] || 0) + 1;
+            return acc;
+        }, {});
 
         evolutionData = evolutionData.map(d => {
             const dateStr = new Date(d.date).toISOString();
+            const totalCust = totalCustomersMap.has(dateStr) ? totalCustomersMap.get(dateStr) : 0;
+            const engagedCust = engagedCustomersMap.has(dateStr) ? engagedCustomersMap.get(dateStr) : 0;
+            const loyalCust = loyalCustomersCountPerPeriod[dateStr] || 0;
+
+            const engagementRate = totalCust > 0 ? (engagedCust / totalCust) * 100 : 0;
+            const loyaltyRate = totalCust > 0 ? (loyalCust / totalCust) * 100 : 0;
+
             return {
                 ...d,
                 nps: npsMap.has(dateStr) ? parseFloat(npsMap.get(dateStr)).toFixed(1) : 0,
                 csat: csatMap.has(dateStr) ? parseFloat(csatMap.get(dateStr)).toFixed(1) : 0,
+                engagementRate: engagementRate.toFixed(2), // New
+                loyaltyRate: loyaltyRate.toFixed(2),       // New
             };
         });
 
         return evolutionData;
+    }
+
+    async function spinWheel(rewardId, customerId, restaurantId) {
+        return await rewardsService.spinWheel(rewardId, customerId, restaurantId);
     }
 
     async function getRatingDistribution(restaurantId, query) {
@@ -500,5 +521,89 @@ module.exports = (db) => {
         generateCustomersReport,
         getEvolutionAnalytics,
         getRatingDistribution,
+        spinWheel,
+        spinWheel,
+        getBenchmarkingData,
     };
 };
+
+    async function getBenchmarkingData(restaurantId) {
+        const today = new Date();
+        const currentMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+        const lastMonthStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+        const lastMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
+        const lastQuarterStart = new Date(today.getFullYear(), Math.floor(today.getMonth() / 3) * 3 - 3, 1); // Start of previous quarter
+        const lastQuarterEnd = new Date(today.getFullYear(), Math.floor(today.getMonth() / 3) * 3, 0); // End of previous quarter
+        const lastYearStart = new Date(today.getFullYear() - 1, 0, 1);
+        const lastYearEnd = new Date(today.getFullYear() - 1, 11, 31);
+
+        const fetchMetricsForPeriod = async (start, end) => {
+            const dateFilter = { createdAt: { [Op.between]: [start, end] } };
+            const [
+                totalCheckins,
+                newCustomers,
+                totalSurveyResponses,
+                redeemedCoupons,
+                feedbackStats,
+                totalLoyaltyPoints,
+                totalSpentOverall,
+                totalCustomersCount,
+                engagedCustomersCount,
+                loyalCustomers
+            ] = await Promise.all([
+                models.Checkin.count({ where: { restaurantId, ...dateFilter } }),
+                models.Customer.count({ where: { restaurantId, ...dateFilter } }),
+                models.SurveyResponse.count({ where: { restaurantId, ...dateFilter } }),
+                models.Coupon.count({ where: { restaurantId, status: 'used', redeemed_at: { [Op.between]: [start, end] } } }),
+                models.Feedback.findOne({
+                    where: { restaurantId, ...dateFilter },
+                    attributes: [
+                        [fn('AVG', col('npsScore')), 'avgNpsScore'],
+                        [fn('AVG', col('rating')), 'avgRating']
+                    ],
+                    raw: true
+                }),
+                models.Customer.sum('loyaltyPoints', { where: { restaurantId } }),
+                models.Customer.sum('totalSpent', { where: { restaurantId } }),
+                models.Customer.count({ where: { restaurantId } }),
+                models.Checkin.count({ distinct: true, col: 'customerId', where: { restaurantId } }),
+                models.Checkin.findAll({
+                    attributes: ['customerId'],
+                    where: { restaurantId },
+                    group: ['customerId'],
+                    having: db.sequelize.literal('COUNT("id") > 1')
+                })
+            ]);
+
+            const engagementRate = totalCustomersCount > 0 ? (engagedCustomersCount / totalCustomersCount) * 100 : 0;
+            const loyalCustomersCountValue = loyalCustomers.length;
+            const loyaltyRate = totalCustomersCount > 0 ? (loyalCustomersCountValue / totalCustomersCount) * 100 : 0;
+
+            return {
+                totalCheckins,
+                newCustomers,
+                totalSurveyResponses,
+                redeemedCoupons,
+                avgNpsScore: feedbackStats?.avgNpsScore || 0,
+                avgRating: feedbackStats?.avgRating || 0,
+                totalLoyaltyPoints: totalLoyaltyPoints || 0,
+                totalSpentOverall: totalSpentOverall || 0,
+                engagementRate: engagementRate.toFixed(2),
+                loyaltyRate: loyaltyRate.toFixed(2),
+            };
+        };
+
+        const [currentMonthData, lastMonthData, lastQuarterData, lastYearData] = await Promise.all([
+            fetchMetricsForPeriod(currentMonthStart, today),
+            fetchMetricsForPeriod(lastMonthStart, lastMonthEnd),
+            fetchMetricsForPeriod(lastQuarterStart, lastQuarterEnd),
+            fetchMetricsForPeriod(lastYearStart, lastYearEnd)
+        ]);
+
+        return {
+            currentMonth: currentMonthData,
+            lastMonth: lastMonthData,
+            lastQuarter: lastQuarterData,
+            lastYear: lastYearData,
+        };
+    }

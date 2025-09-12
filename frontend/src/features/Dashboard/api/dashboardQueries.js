@@ -99,3 +99,19 @@ export const useRatingDistribution = (restaurantId, params) => {
     }
   );
 };
+
+const fetchRewardsAnalytics = async (restaurantId) => {
+  const response = await axiosInstance.get(`/dashboard/rewards-analytics?restaurantId=${restaurantId}`);
+  return response.data;
+};
+
+export const useRewardsAnalytics = (restaurantId) => {
+  const { user } = useAuth();
+  return useQuery(
+    ['rewardsAnalytics', restaurantId],
+    () => fetchRewardsAnalytics(restaurantId),
+    {
+      enabled: !!restaurantId && !!user?.token,
+    }
+  );
+};

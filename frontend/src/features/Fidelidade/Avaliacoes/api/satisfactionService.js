@@ -3,7 +3,7 @@ import axiosInstance from '@/services/axiosInstance';
 
 const fetchSatisfactionAnalytics = async (restaurantId) => {
   // This endpoint needs to be created in the backend.
-  const { data } = await axiosInstance.get(`/survey/analytics/${restaurantId}`);
+  const { data } = await axiosInstance.get(`/surveys/analytics/${restaurantId}`);
   return data;
 };
 
@@ -27,7 +27,7 @@ export const useNpsCriteria = () => {
 };
 
 const fetchSurveysComparisonAnalytics = async (restaurantId, surveyIds) => {
-  const { data } = await axiosInstance.post(`/survey/comparison-analytics`, {
+  const { data } = await axiosInstance.post(`/surveys/comparison-analytics`, {
     restaurantId,
     surveyIds,
   });
@@ -46,7 +46,7 @@ export const useSurveysComparisonAnalytics = (restaurantId, surveyIds) => {
 
 const fetchQuestionAnswersDistribution = async (surveyId, questionId) => {
   const { data } = await axiosInstance.get(
-    `/survey/${surveyId}/questions/${questionId}/answers-distribution`
+    `/surveys/${surveyId}/questions/${questionId}/answers-distribution`
   );
   return data;
 };

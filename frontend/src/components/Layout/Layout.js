@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { Menu as MenuIcon, ChevronLeft as ChevronLeftIcon } from '@mui/icons-material';
 
-import Sidebar from './Sidebar';
+import MenuRenderer from './MenuRenderer';
 import Header from './Header';
 
 const drawerWidth = 280;
@@ -132,7 +132,7 @@ const Layout = ({ children }) => {
           </IconButton>
         )}
       </Toolbar>
-      <Sidebar onMobileClose={handleMobileDrawerClose} />
+      <MenuRenderer onMobileClose={handleMobileDrawerClose} />
     </Box>
   );
 

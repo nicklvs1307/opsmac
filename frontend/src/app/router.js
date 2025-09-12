@@ -147,6 +147,9 @@ import WhatsappSettingsPage from '@/features/Settings/pages/WhatsappSettingsPage
 // New Digital Menus Page Import
 import DeliveryMenuPage from '@/features/Orders/DigitalMenus/DeliveryMenuPage';
 
+import UnauthorizedPage from '@/features/Common/UnauthorizedPage';
+import FeatureLockedPage from '@/features/Common/FeatureLockedPage';
+
 const NotFound = () => {
   return (
     <div>
@@ -162,6 +165,22 @@ export const router = createBrowserRouter([
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <Login />
+      </Suspense>
+    ),
+  },
+  {
+    path: '/unauthorized',
+    element: (
+      <Suspense fallback={<div>Carregando...</div>}>
+        <UnauthorizedPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: '/feature-locked',
+    element: (
+      <Suspense fallback={<div>Carregando...</div>}>
+        <FeatureLockedPage />
       </Suspense>
     ),
   },

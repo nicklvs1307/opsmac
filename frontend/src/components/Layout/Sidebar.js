@@ -19,32 +19,10 @@ import {
 } from '@mui/material';
 import { ExpandLess, ExpandMore, ChevronRight } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { menuStructure } from './menuStructure';
-import usePermissions from '@/hooks/usePermissions';
 import { Lock } from '@mui/icons-material'; // Import Lock icon
 
-const findFirstAccessiblePath = (item) => {
-  if (!item || !item.hasAccess) {
-    return null;
-  }
-  if (item.path) {
-    return item.path;
-  }
-  if (item.submenu) {
-    // Use submenu instead of submodules and features
-    for (const subItem of item.submenu) {
-      const path = findFirstAccessiblePath(subItem);
-      if (path) {
-        return path;
-      }
-    }
-  }
-  return null;
-};
-
-const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, can }) => {
+const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, permissionsMap }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -57,7 +35,6 @@ const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, can }) => {
     event.stopPropagation();
 
     if (!item.hasAccess && !item.isLocked) {
-      // Only allow toggle if hasAccess or isLocked
       return;
     }
 
@@ -67,7 +44,7 @@ const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, can }) => {
       if (openSubmenu.anchor === event.currentTarget) {
         setOpenSubmenu({ anchor: null, items: [] });
       } else {
-        setOpenSubmenu({ anchor: event.currentTarget, items: item }); // Pass the item itself
+        setOpenSubmenu({ anchor: event.currentTarget, items: item });
       }
     }
   };
@@ -106,7 +83,7 @@ const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, can }) => {
             parentEl={openSubmenu.anchor}
             onClose={onClose}
             level={level + 1}
-            can={can}
+            permissionsMap={permissionsMap}
           />
         )}
       </ListItem>
@@ -148,14 +125,14 @@ const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, can }) => {
           parentEl={openSubmenu.anchor}
           onClose={onClose}
           level={level + 1}
-          can={can}
+          permissionsMap={permissionsMap}
         />
       )}
     </>
   );
 };
 
-const Sidebar = ({ onMobileClose }) => {
+const Sidebar = ({ menuStructure, permissionsMap, onMobileClose }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
@@ -164,31 +141,22 @@ const Sidebar = ({ onMobileClose }) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
-  const { can } = usePermissions();
-
   const filterAndMapMenuItems = (items) => {
     return items
       .map((item) => {
         let hasAccess = true;
-        let isLocked = false; // To indicate if a module is locked (not just no access)
+        let isLocked = false;
 
-        if (item.module) {
-          // Check module access
-          hasAccess = can(item.module, 'read');
-          // Assuming 'locked' status comes from the permission snapshot for modules
-          // This would need to be passed down from AuthContext or fetched here
-          // For now, we'll just use 'hasAccess'
-          isLocked = !hasAccess; // Simplified: if no access, consider it locked for display purposes
-        } else if (item.featureKey && item.actionKey) {
-          // Check feature access
-          hasAccess = can(item.featureKey, item.actionKey);
+        if (item.featureKey && item.actionKey) {
+          const perm = permissionsMap.get(`${item.featureKey}:${item.actionKey}`);
+          hasAccess = perm?.allowed || false;
+          isLocked = perm?.locked || false;
         }
 
         const newItem = { ...item, hasAccess, isLocked };
 
         if (item.submenu) {
           newItem.submenu = filterAndMapMenuItems(newItem.submenu);
-          // If a parent has no access, its children also effectively have no access
           if (!hasAccess) {
             newItem.submenu.forEach((sub) => {
               sub.hasAccess = false;
@@ -199,7 +167,7 @@ const Sidebar = ({ onMobileClose }) => {
 
         return newItem;
       })
-      .filter((item) => item.hasAccess || item.isLocked); // Keep locked items to display lock icon
+      .filter((item) => item.hasAccess || item.isLocked || (item.submenu && item.submenu.length > 0));
   };
 
   const filteredMenuItems = filterAndMapMenuItems(menuStructure);
@@ -215,7 +183,6 @@ const Sidebar = ({ onMobileClose }) => {
 
   const handleMenuToggle = (event, item) => {
     if (!item.hasAccess && !item.isLocked) {
-      // Only allow toggle if hasAccess or isLocked
       return;
     }
 
@@ -268,10 +235,9 @@ const Sidebar = ({ onMobileClose }) => {
                     onClick={(event) => handleMenuToggle(event, moduleItem)}
                     selected={isActive(moduleItem.path)}
                     sx={{ minHeight: 48, borderRadius: 2, mx: 1 }}
-                    disabled={!moduleItem.hasAccess} // Disable if no access
+                    disabled={!moduleItem.hasAccess}
                   >
                     <ListItemIcon sx={{ minWidth: 0, mr: 2, justifyContent: 'center' }}>
-                      {/* Assuming modules still have icons, otherwise provide a default or handle null */}
                       {moduleItem.icon}
                     </ListItemIcon>
                     <ListItemText
@@ -357,7 +323,7 @@ const Sidebar = ({ onMobileClose }) => {
             items={openPopper.items}
             parentEl={openPopper.anchor}
             onClose={handlePopperClose}
-            can={can}
+            permissionsMap={permissionsMap}
           />
         )}
       </Box>

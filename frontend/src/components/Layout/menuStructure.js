@@ -37,13 +37,13 @@ export const menuStructure = [
           {
             title: 'Resumo do mês',
             path: '/fidelity/monthly-summary',
-            featureKey: 'monthly_summary',
+            featureKey: 'dashboard', // Corrected feature key
             actionKey: 'read',
           },
           {
             title: 'Satisfação',
             path: '/fidelity/satisfaction-overview',
-            featureKey: 'satisfaction_overview',
+            featureKey: 'dashboard', // Corrected feature key
             actionKey: 'read',
           },
           {

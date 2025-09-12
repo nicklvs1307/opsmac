@@ -9,10 +9,7 @@ module.exports = (db) => {
 
     const router = express.Router();
 
-    console.log('DEBUG: surveyController:', surveyController);
-    console.log('DEBUG: surveyController.listSurveys:', surveyController.listSurveys);
-
-    router.get('/', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.listSurveys));
+    router.get('/', auth, asyncHandler(surveyController.listSurveys));
     router.post('/', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'create'), ...createSurveyValidation, asyncHandler(surveyController.createSurvey));
     router.put('/:id', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyValidation, asyncHandler(surveyController.updateSurvey));
     router.patch('/:id/status', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyStatusValidation, asyncHandler(surveyController.updateSurveyStatus));

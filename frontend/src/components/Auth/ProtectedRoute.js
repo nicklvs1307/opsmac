@@ -49,5 +49,3 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
 };
 
 export default ProtectedRoute;
-
-export default ProtectedRoute;

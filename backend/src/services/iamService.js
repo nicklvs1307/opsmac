@@ -198,14 +198,18 @@ class IamService {
    * @param {string} actionKey - The key of the action to check (e.g., 'create', 'read').
    * @returns {Promise<{allowed: boolean, reason: string}>}
    */
-  async checkPermission(restaurantId, userId, featureKey, actionKey) {
+  async checkPermission(restaurantId, userId, featureKey, actionKey, isSuperadmin) {
+    if (isSuperadmin) {
+        return { allowed: true, reason: 'superadmin' };
+    }
+
     const snapshot = await this.buildSnapshot(restaurantId, userId);
 
     if (!snapshot || snapshot.error) {
         return { allowed: false, reason: 'snapshot-error' };
     }
 
-    if (snapshot.isSuperAdmin) {
+    if (snapshot.isSuperAdmin) { // This check is redundant if we handle isSuperadmin at the beginning
         return { allowed: true, reason: 'superadmin' };
     }
 

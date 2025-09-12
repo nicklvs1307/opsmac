@@ -15,13 +15,16 @@ module.exports = (db) => {
         if (!userId) {
             return next(new UnauthorizedError('Acesso negado. Usuário não autenticado.'));
         }
-        console.log('DEBUG: dashboard.routes.js - req.context.restaurantId:', req.context?.restaurantId);
-        console.log('DEBUG: dashboard.routes.js - req.user.restaurantId:', req.user?.restaurantId);
+        // For superadmins, bypass restaurant context check
+        if (req.user.isSuperadmin) {
+            return next();
+        }
+
         const restaurantId = req.context?.restaurantId || req.user.restaurantId;
         if (!restaurantId) {
             return next(new UnauthorizedError('Acesso negado. Contexto do restaurante ausente.'));
         }
-        const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey);
+        const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey, req.user.isSuperadmin);
         if (result.allowed) {
             return next();
         }

@@ -342,7 +342,17 @@ class IamController {
 
   async checkPermission(req, res, next) {
     const userId = req.user?.id;
-    const restaurantId = req.context?.restaurantId; // Get restaurantId from req.context
+    let restaurantId = req.context?.restaurantId; // Get restaurantId from req.context
+
+    // For superadmins, bypass restaurant context check if not explicitly provided
+    if (req.user.isSuperadmin && !restaurantId) {
+        // Superadmins can operate without a specific restaurant context for some IAM operations
+        // Or, if a restaurantId is needed, it should be provided in the request.
+        // For now, we'll allow superadmins to proceed without a restaurantId if it's not present.
+        // Further refinement might be needed based on specific superadmin use cases.
+        restaurantId = 'superadmin_context'; // A placeholder or special value
+    }
+
     const { featureKey, actionKey } = req.body;
 
     if (!userId || !restaurantId) {
@@ -352,7 +362,7 @@ class IamController {
       return next(new BadRequestError('Bad Request: featureKey and actionKey are required.'));
     }
 
-    const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey);
+    const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey, req.user.isSuperadmin);
     return res.json(result);
   }
 }

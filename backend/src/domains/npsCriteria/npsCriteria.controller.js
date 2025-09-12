@@ -2,7 +2,7 @@ module.exports = (db) => {
     const npsCriteriaService = require('./npsCriteria.service')(db);
     const { validationResult } = require('express-validator');
     const { BadRequestError, ForbiddenError } = require('utils/errors');
-    const auditService = require('../../services/auditService'); // Import auditService
+    const auditService = require('services/auditService'); // Import auditService
 
     const handleValidationErrors = (req) => {
         const errors = validationResult(req);

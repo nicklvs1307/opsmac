@@ -1,6 +1,6 @@
 module.exports = (deliveryMuchService) => {
   const { BadRequestError, ForbiddenError } = require('utils/errors');
-  const auditService = require('../../services/auditService'); // Import auditService
+  const auditService = require('services/auditService'); // Import auditService
 
   return {
     checkDeliveryMuchModuleEnabled: async (req, res, next) => {

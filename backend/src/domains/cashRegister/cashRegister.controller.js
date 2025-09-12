@@ -81,20 +81,4 @@ module.exports = (cashRegisterService) => {
     closeSession,
     getCashOrders,
   };
-};nts,
-    closeSession,
-    getCashOrders,
-  };
-};nts,
-    closeSession,
-    getCashOrders,
-  };
-};nts,
-    closeSession,
-    getCashOrders,
-  };
-};nts,
-    closeSession,
-    getCashOrders,
-  };
 };

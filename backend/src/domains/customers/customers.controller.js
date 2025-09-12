@@ -1,5 +1,5 @@
 const { BadRequestError } = require('utils/errors');
-const auditService = require('../../services/auditService'); // Import auditService
+const auditService = require('services/auditService'); // Import auditService
 
 module.exports = (db) => {
     const customerService = require('./customer.service')(db);

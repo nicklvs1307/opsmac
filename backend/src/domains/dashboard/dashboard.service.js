@@ -91,25 +91,36 @@ module.exports = (db) => {
     }
 
     async function getDashboardAnalytics(restaurantId, query) {
-        const { start_date, end_date } = query;
+        const { start_date, end_date, period } = query;
         let validStartDate = null;
         let validEndDate = null;
 
-        if (start_date) {
-            const startDate = new Date(start_date);
-            if (startDate instanceof Date && !isNaN(startDate)) {
-                validStartDate = startDate;
+        if (period) {
+            validEndDate = new Date();
+            validStartDate = new Date();
+            const days = parseInt(period.replace('d', ''));
+            if (!isNaN(days)) {
+                validStartDate.setDate(validStartDate.getDate() - days);
             } else {
-                throw new BadRequestError('Data de início inválida.');
+                throw new BadRequestError('Período inválido.');
             }
-        }
+        } else {
+            if (start_date) {
+                const startDate = new Date(start_date);
+                if (startDate instanceof Date && !isNaN(startDate)) {
+                    validStartDate = startDate;
+                } else {
+                    throw new BadRequestError('Data de início inválida.');
+                }
+            }
 
-        if (end_date) {
-            const endDate = new Date(end_date);
-            if (endDate instanceof Date && !isNaN(endDate)) {
-                validEndDate = endDate;
-            } else {
-                throw new BadRequestError('Data de fim inválida.');
+            if (end_date) {
+                const endDate = new Date(end_date);
+                if (endDate instanceof Date && !isNaN(endDate)) {
+                    validEndDate = endDate;
+                } else {
+                    throw new BadRequestError('Data de fim inválida.');
+                }
             }
         }
 
@@ -130,7 +141,7 @@ module.exports = (db) => {
         } else if (validEndDate) {
             redeemedAtFilter.redeemed_at = { [Op.lte]: validEndDate };
         } else {
-            redeemedAtFilter.redeemed_at = { [Op.not]: null };
+            // If no date range is specified, do not filter by redeemed_at
         }
 
         const [

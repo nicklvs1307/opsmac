@@ -5,7 +5,7 @@ const getRestaurantContextMiddleware = require("../src/middleware/getRestaurantC
 
 module.exports = (db) => {
     const router = safeRouter();
-    const authMiddleware = require("../src/middleware/authMiddleware")(db); // Import auth middleware
+    const { auth } = require("../src/middleware/authMiddleware")(db); // Import auth middleware
 
     
 

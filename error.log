@@ -1,4 +1,4 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-12 23:41:00 [info] 	✅ Conexão com banco de dados estabelecida
-2025-09-12 23:41:00 [error] 	❌ Erro ao iniciar servidor: Unexpected end of input
+2025-09-12 23:52:52 [info] 	✅ Conexão com banco de dados estabelecida
+2025-09-12 23:52:53 [error] 	❌ Erro ao iniciar servidor: Unexpected end of input

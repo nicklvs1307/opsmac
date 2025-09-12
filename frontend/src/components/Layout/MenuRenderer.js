@@ -5,8 +5,16 @@ import { menuStructure } from './menuStructure';
 import axiosInstance from '@/services/axiosInstance';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 
-const checkPermission = async (featureKey, actionKey, restaurantId) => {
-  const { data } = await axiosInstance.post(`/iam/check?restaurantId=${restaurantId}`, { featureKey, actionKey });
+const checkPermission = async (featureKey, actionKey, restaurantId, token) => {
+  const { data } = await axiosInstance.post(
+    `/iam/check?restaurantId=${restaurantId}`,
+    { featureKey, actionKey },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return data;
 };
 
@@ -35,8 +43,8 @@ const MenuRenderer = ({ onMobileClose }) => {
     uniquePermissions.map(({ featureKey, actionKey }) => {
       return {
         queryKey: ['permission', featureKey, actionKey, restaurantId],
-        queryFn: () => checkPermission(featureKey, actionKey, restaurantId),
-        enabled: !!restaurantId, // Only enable query if restaurantId is available
+        queryFn: () => checkPermission(featureKey, actionKey, restaurantId, user?.token),
+        enabled: !!restaurantId && !!user?.token, // Only enable query if restaurantId and token are available
         staleTime: 5 * 60 * 1000, // 5 minutes
         cacheTime: 15 * 60 * 1000, // 15 minutes
       };

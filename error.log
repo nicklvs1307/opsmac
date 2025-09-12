@@ -1,100 +1,1000 @@
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-UnauthorizedError: Unauthorized: Missing user or restaurant context.
-    at checkPermission (/app/src/domains/iam/iam.controller.js:349:19)
-    at /app/src/utils/asyncHandler.js:3:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-UnauthorizedError: Unauthorized: Missing user or restaurant context.
-    at checkPermission (/app/src/domains/iam/iam.controller.js:349:19)
-    at /app/src/utils/asyncHandler.js:3:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-DEBUG: dashboard.routes.js - req.context.restaurantId: undefined
-DEBUG: dashboard.routes.js - req.user.restaurantId: null
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/domains/dashboard/dashboard.routes.js:22:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:69:13)
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
+    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
+    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-DEBUG: dashboard.routes.js - req.context.restaurantId: undefined
-DEBUG: dashboard.routes.js - req.user.restaurantId: null
-UnauthorizedError: Acesso negado. Contexto do restaurante ausente.
-    at /app/src/domains/dashboard/dashboard.routes.js:22:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:69:13)
+DEBUG: auth.service.js - user.restaurants: [
+  UserRestaurant {
+    dataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    _previousDataValues: {
+      userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      isOwner: true,
+      createdAt: 2025-09-11T14:43:34.920Z,
+      updatedAt: 2025-09-11T14:43:34.920Z,
+      restaurant_id: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8',
+      user_id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+      restaurant: [Restaurant]
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      include: [Array],
+      includeNames: [Array],
+      includeMap: [Object],
+      includeValidated: true,
+      raw: true,
+      attributes: undefined
+    },
+    isNewRecord: false,
+    restaurant: Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  }
+]
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
+    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
+    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

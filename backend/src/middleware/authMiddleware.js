@@ -35,7 +35,7 @@ module.exports = (db) => {
 
             // Anexa um objeto de usuário limpo e seguro à requisição.
             req.user = user;
-
+            console.log('DEBUG: authMiddleware - req.user.restaurantId after assignment:', req.user.restaurantId);
 
             next();
         } catch (error) {

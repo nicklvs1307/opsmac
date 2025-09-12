@@ -4,18 +4,25 @@
 🚀 Servidor rodando na porta 5000
 Redis Client Connected
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
@@ -24,101 +31,222 @@ Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
+DEBUG: getDashboardAnalytics - received restaurantId: null
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 2)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:115:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+DEBUG: getRestaurantContextMiddleware - req.user?.restaurantId: null
 DEBUG: getDashboardAnalytics - received restaurantId: null
 Error
     at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
@@ -128,17 +256,5 @@ Error
     at async Coupon.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
     at async Coupon.count (/app/node_modules/sequelize/lib/model.js:1306:20)
     at async Promise.all (index 3)
-    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:115:13)
-    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-DEBUG: getDashboardAnalytics - received restaurantId: null
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Feedback.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Feedback.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
-    at async Promise.all (index 4)
     at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:115:13)
     at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)

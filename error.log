@@ -2,8 +2,7 @@
 > node server.js
 ✅ Conexão com banco de dados estabelecida
 Type of getRestaurantContextMiddleware(): function
-❌ Erro ao iniciar servidor: TypeError: Router.use() requires a middleware function
-    at Function.use (/app/node_modules/express/lib/router/index.js:462:11)
-    at module.exports (/app/routes/index.js:16:12)
+❌ Erro ao iniciar servidor: ReferenceError: authMiddleware is not defined
+    at module.exports (/app/routes/index.js:16:16)
     at startServer (/app/server.js:78:21)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

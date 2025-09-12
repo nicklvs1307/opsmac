@@ -5,12 +5,11 @@ const { createTableValidation, updateTableValidation } = require('domains/tables
 
 module.exports = (db) => {
   const tablesController = require('./tables.controller')(db);
-  const { auth } = require('middleware/authMiddleware')(db);
   const router = express.Router();
 
   // Rotas de Mesas
-  router.post('/', auth, requirePermission('tables', 'create'), ...createTableValidation, asyncHandler(tablesController.createTable));
-  router.get('/', auth, requirePermission('tables', 'read'), asyncHandler(tablesController.listTables));
+  router.post('/', requirePermission('tables', 'create'), ...createTableValidation, asyncHandler(tablesController.createTable));
+  router.get('/', requirePermission('tables', 'read'), asyncHandler(tablesController.listTables));
 
   return router;
 };

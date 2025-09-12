@@ -84,16 +84,18 @@ module.exports = (db) => {
             const restaurantId = req.params.id; // Use req.params.id to match route
             const features = await adminService.updateRestaurantFeatures(restaurantId, req.body.enabledFeatureIds);
             await auditService.log(req.user, restaurantId, 'RESTAURANT_FEATURES_UPDATED', `Restaurant:${restaurantId}`, { enabledFeatureIds: req.body.enabledFeatureIds });
-            res.status(200).json({ message: 'Funcionalidades atualizadas com sucesso', features });
+            res.status(200).json({ success: true, message: 'Funcionalidades atualizadas com sucesso', data: features });
         },
 
         // Feature Management
         getRestaurantFeatures: async (req, res, next) => {
             const restaurantId = req.params.id; // Use req.params.id to match route
             const features = await adminService.getRestaurantFeatures(restaurantId);
-            res.status(200).json(features);
+            res.status(200).json({ success: true, data: features });
         },
 
         
     };
+}; };
+};;
 };

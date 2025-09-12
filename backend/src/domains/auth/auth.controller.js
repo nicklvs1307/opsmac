@@ -52,7 +52,7 @@ module.exports = (db) => {
     const logout = (req, res) => {
         // For stateless JWT, logout is handled client-side by deleting the token.
         // This endpoint can be kept for semantics, but it doesn't need to do anything on the server.
-        res.status(200).json({ message: 'Logout realizado com sucesso' });
+        res.status(200).json({ success: true, message: 'Logout realizado com sucesso' });
     };
 
     return {

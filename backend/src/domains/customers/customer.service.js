@@ -54,16 +54,15 @@ module.exports = (db) => {
                     restaurantId: restaurantId,
                 }
             }),
-            models.Checkin.count({
-                distinct: true,
-                col: 'customerId',
+            models.Checkin.findAll({
+                attributes: ['customerId'],
                 where: {
-                    restaurantId,
+                    restaurantId: restaurantId,
                     createdAt: { [Op.gte]: new Date(new Date() - 30 * 24 * 60 * 60 * 1000) }
                 },
                 group: ['customerId'],
-                having: sequelize.where(sequelize.fn('COUNT', sequelize.col('id')), '>', 1)
-            }).then(results => results.length),
+                having: sequelize.literal('COUNT("id") > 1')
+            })
         ]);
 
         const mostCheckinsFormatted = mostCheckins.map(c => ({

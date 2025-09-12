@@ -1,4 +1,5 @@
-const { BaseError } = require('utils/errors');
+const { BaseError } = require('utils/errors/BaseError'); // Corrected import path
+const logger = require('utils/logger'); // Import logger
 
 /**
  * Middleware de tratamento de erros centralizado.
@@ -10,21 +11,27 @@ const { BaseError } = require('utils/errors');
  * @param {import('express').NextFunction} next - A próxima função de middleware.
  */
 const errorHandler = (error, req, res, next) => {
-  // Se o erro é uma instância de nossos erros customizados, nós confiamos na mensagem e no status code.
+  // Log the error for debugging purposes
+  logger.error(`Error: ${error.message}`, { stack: error.stack, path: req.path, method: req.method });
+
+  // Default error values
+  let statusCode = 500;
+  let message = 'Ocorreu um erro interno no servidor.';
+
+  // Handle operational errors (e.g., BaseError, ApiError)
   if (error instanceof BaseError) {
-    return res.status(error.statusCode).json({
-      status: 'error',
-      message: error.message,
-    });
+    statusCode = error.statusCode;
+    message = error.message;
+  } else if (error.message && error.message.includes('Not allowed by CORS')) {
+    // Handle CORS errors specifically
+    statusCode = 403;
+    message = 'Requisição não permitida pela política de CORS.';
   }
 
-  // Para erros inesperados (erros de sistema, bugs), nós logamos o erro para depuração
-  // e enviamos uma resposta genérica para o cliente, para não expor detalhes da implementação.
-  console.error('ERRO INESPERADO:', error);
-
-  return res.status(500).json({
+  // Send the error response
+  return res.status(statusCode).json({
     status: 'error',
-    message: 'Ocorreu um erro interno no servidor.',
+    message: message,
   });
 };
 

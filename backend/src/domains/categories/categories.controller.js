@@ -17,19 +17,19 @@ module.exports = (db) => {
     const restaurantId = req.context.restaurantId;
     const category = await categoriesService.createCategory(name, restaurantId);
     await auditService.log(req.user, restaurantId, 'CATEGORY_CREATED', `Category:${category.id}`, { name });
-    res.status(201).json(category);
+    res.status(201).json({ success: true, data: category, message: 'Categoria criada com sucesso.' });
   };
 
   const listCategories = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const categories = await categoriesService.listCategories(restaurantId);
-    res.json(categories);
+    res.json({ success: true, data: categories });
   };
 
   const getCategoryById = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const category = await categoriesService.getCategoryById(req.params.id, restaurantId);
-    res.json(category);
+    res.json({ success: true, data: category });
   };
 
   const updateCategory = async (req, res, next) => {
@@ -39,7 +39,7 @@ module.exports = (db) => {
     const restaurantId = req.context.restaurantId;
     const category = await categoriesService.updateCategory(id, name, restaurantId);
     await auditService.log(req.user, restaurantId, 'CATEGORY_UPDATED', `Category:${category.id}`, { name });
-    res.json(category);
+    res.json({ success: true, data: category, message: 'Categoria atualizada com sucesso.' });
   };
 
   const deleteCategory = async (req, res, next) => {
@@ -47,7 +47,7 @@ module.exports = (db) => {
     const restaurantId = req.context.restaurantId;
     await categoriesService.deleteCategory(id, restaurantId);
     await auditService.log(req.user, restaurantId, 'CATEGORY_DELETED', `Category:${id}`, {});
-    res.status(204).send();
+    res.status(200).json({ success: true, message: 'Categoria removida com sucesso.' });
   };
 
   const toggleCategoryStatus = async (req, res, next) => {
@@ -55,7 +55,7 @@ module.exports = (db) => {
     const restaurantId = req.context.restaurantId;
     const category = await categoriesService.toggleCategoryStatus(id, restaurantId);
     await auditService.log(req.user, restaurantId, 'CATEGORY_STATUS_TOGGLED', `Category:${id}`, { newStatus: category.is_active });
-    res.json(category);
+    res.json({ success: true, data: category, message: 'Status da categoria atualizado com sucesso.' });
   };
 
   return {
@@ -66,4 +66,13 @@ module.exports = (db) => {
     deleteCategory,
     toggleCategoryStatus,
   };
+}; };
+};egory,
+    toggleCategoryStatus,
+  };
+}; };
+};y,
+    toggleCategoryStatus,
+  };
+}; };
 };

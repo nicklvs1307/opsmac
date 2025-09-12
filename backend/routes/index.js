@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const safeRouter = require("../src/utils/safeRouter");
-const getRestaurantContextMiddleware = require("../src/middleware/getRestaurantContextMiddleware"); // Import the middleware
+const getRestaurantContextMiddleware = require('middleware/getRestaurantContextMiddleware');
 
 module.exports = (db) => {
     const router = safeRouter();
@@ -29,6 +29,9 @@ module.exports = (db) => {
 
     // health check route
     router.get("/health", (req, res) => res.json({ ok: true }));
+
+    return router;
+};);
 
     return router;
 };

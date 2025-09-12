@@ -1,7 +1,6 @@
 const express = require('express');
 const asyncHandler = require('utils/asyncHandler');
-const iamService = require('../../services/iamService');
-const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('utils/errors');
+const checkinPermission = require('middleware/checkinPermission');
 
 module.exports = (db) => {
     
@@ -10,31 +9,11 @@ module.exports = (db) => {
 
     const router = express.Router();
 
-    const checkPermissionInline = (featureKey, actionKey) => async (req, res, next) => {
-        const userId = req.user?.id;
-        if (!userId) {
-            return next(new UnauthorizedError('Acesso negado. Usuário não autenticado.'));
-        }
-        const restaurantId = req.context?.restaurantId || req.user.restaurantId;
-        if (!restaurantId) {
-            return next(new UnauthorizedError('Acesso negado. Contexto do restaurante ausente.'));
-        }
-        const result = await iamService.checkPermission(restaurantId, userId, featureKey, actionKey);
-        if (result.allowed) {
-            return next();
-        }
-        if (result.locked) {
-            return next(new PaymentRequiredError('Recurso bloqueado. Pagamento necessário.', result.reason));
-        } else {
-            return next(new ForbiddenError('Acesso negado. Você não tem permissão para realizar esta ação.', result.reason));
-        }
-    };
-
-    router.post('/record',  checkPermissionInline('checkin', 'create'), ...recordCheckinValidation, asyncHandler(checkinController.recordCheckin));
+    router.post('/record',  checkinPermission('checkin', 'create'), ...recordCheckinValidation, asyncHandler(checkinController.recordCheckin));
     router.post('/public/:restaurantSlug', ...recordPublicCheckinValidation, asyncHandler(checkinController.recordPublicCheckin));
-    router.put('/checkout/:checkinId',  checkPermissionInline('checkin', 'update'), asyncHandler(checkinController.checkoutCheckin));
-    router.get('/analytics/:restaurantId',  checkPermissionInline('checkin_dashboard', 'read'), ...analyticsValidation, asyncHandler(checkinController.getCheckinAnalytics));
-    router.get('/active/:restaurantId',  checkPermissionInline('checkin_active', 'read'), asyncHandler(checkinController.getActiveCheckins));
+    router.put('/checkout/:checkinId',  checkinPermission('checkin', 'update'), asyncHandler(checkinController.checkoutCheckin));
+    router.get('/analytics/:restaurantId',  checkinPermission('checkin_dashboard', 'read'), ...analyticsValidation, asyncHandler(checkinController.getCheckinAnalytics));
+    router.get('/active/:restaurantId',  checkinPermission('checkin_active', 'read'), asyncHandler(checkinController.getActiveCheckins));
 
     return router;
 };

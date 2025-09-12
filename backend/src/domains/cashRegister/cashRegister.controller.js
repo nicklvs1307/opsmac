@@ -1,7 +1,7 @@
 module.exports = (cashRegisterService) => {
   const { validationResult } = require('express-validator');
-  const { BadRequestError } = require('utils/errors');
-  const auditService = require('../../services/auditService'); // Import auditService
+  const BadRequestError = require('utils/errors/BadRequestError');
+  const auditService = require('services/auditService');
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
@@ -16,13 +16,13 @@ module.exports = (cashRegisterService) => {
     const restaurantId = req.context.restaurantId;
     const session = await cashRegisterService.openSession(restaurantId, req.user.userId, openingCash, openingObservations);
     await auditService.log(req.user, restaurantId, 'CASH_REGISTER_SESSION_OPENED', `Session:${session.id}`, { openingCash, openingObservations });
-    res.status(201).json(session);
+                                res.status(201).json({ success: true, data: session, message: 'Sessão de caixa aberta com sucesso.' });
   };
 
   const getCurrentSession = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const session = await cashRegisterService.getCurrentSession(restaurantId, req.user.userId);
-    res.json(session);
+    res.json({ success: true, data: session });
   };
 
   const recordWithdrawal = async (req, res, next) => {
@@ -38,21 +38,21 @@ module.exports = (cashRegisterService) => {
     const { sessionId, amount, observations } = req.body;
     const movement = await cashRegisterService.recordMovement(sessionId, 'reinforcement', amount, null, observations, req.user.userId);
     await auditService.log(req.user, req.context.restaurantId, 'CASH_REGISTER_REINFORCEMENT_RECORDED', `Movement:${movement.id}`, { sessionId, amount, observations });
-    res.status(201).json(movement);
+    res.status(201).json({ success: true, data: movement, message: 'Reforço registrado com sucesso.' });
   };
 
   const getCashRegisterCategories = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const { type } = req.query;
     const categories = await cashRegisterService.getCashRegisterCategories(restaurantId, type);
-    res.json(categories);
+    res.json({ success: true, data: categories });
   };
 
   const getMovements = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const { sessionId } = req.query;
     const movements = await cashRegisterService.getMovements(restaurantId, sessionId);
-    res.json(movements);
+    res.json({ success: true, data: movements });
   };
 
   const closeSession = async (req, res, next) => {
@@ -61,14 +61,14 @@ module.exports = (cashRegisterService) => {
     const restaurantId = req.context.restaurantId;
     const session = await cashRegisterService.closeSession(sessionId, restaurantId, req.user.userId, closingCash, closingObservations);
     await auditService.log(req.user, restaurantId, 'CASH_REGISTER_SESSION_CLOSED', `Session:${session.id}`, { closingCash, closingObservations });
-    res.json(session);
+    res.json({ success: true, data: session, message: 'Sessão de caixa fechada com sucesso.' });
   };
 
   const getCashOrders = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const { sessionId } = req.query;
     const orders = await cashRegisterService.getCashOrders(restaurantId, sessionId);
-    res.json(orders);
+    res.json({ success: true, data: orders });
   };
 
   return {
@@ -78,6 +78,22 @@ module.exports = (cashRegisterService) => {
     recordReinforcement,
     getCashRegisterCategories,
     getMovements,
+    closeSession,
+    getCashOrders,
+  };
+};nts,
+    closeSession,
+    getCashOrders,
+  };
+};nts,
+    closeSession,
+    getCashOrders,
+  };
+};nts,
+    closeSession,
+    getCashOrders,
+  };
+};nts,
     closeSession,
     getCashOrders,
   };

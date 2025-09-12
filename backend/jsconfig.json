@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": ["./src/*"],
+      "middleware/*": ["./src/middleware/*"],
+      "config/*": ["./src/config/*"],
+      "domains/*": ["./src/domains/*"],
+      "services/*": ["./src/services/*"],
+      "utils/*": ["./src/utils/*"],
+      "models/*": ["./models/*"]
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "models/**/*"
   ],
   "exclude": [
     "node_modules"

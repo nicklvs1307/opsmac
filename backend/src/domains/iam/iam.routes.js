@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const requirePermission = require('middleware/requirePermission');
 const asyncHandler = require('utils/asyncHandler');
-const models = require('models'); // Keep models for authMiddleware initialization
 const IamController = require('domains/iam/iam.controller');
 const { requireSuperadmin } = require('middleware/adminAuthMiddleware');
 
@@ -454,7 +453,7 @@ router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), 
  *       201:
  *         description: Entitlement set successfully
  */
-router.post('/entitlements', requirePermission('entitlements.manage', 'update'), (req, res, next) => IamController.setRestaurantEntitlements(req, res, next)); // Manter como está, pois delega para IamController
+router.post('/entitlements', requirePermission('entitlements.manage', 'update'), asyncHandler(IamController.setRestaurantEntitlements));
 
 /**
  * @swagger

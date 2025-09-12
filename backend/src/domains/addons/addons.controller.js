@@ -46,7 +46,7 @@ module.exports = (db) => {
     const { id } = req.params;
     const addon = await addonsService.toggleAddonStatus(id);
     await auditService.log(req.user, req.context.restaurantId, 'ADDON_STATUS_TOGGLED', `Addon:${id}`, { newStatus: addon.is_active });
-    res.json(addon);
+    res.json({ success: true, data: addon, message: 'Status do addon atualizado com sucesso.' });
   };
 
   return {

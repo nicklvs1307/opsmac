@@ -3,7 +3,7 @@ const { UnauthorizedError, ForbiddenError, BadRequestError } = require('utils/er
 const models = require('models'); // Directly import models (which is the db object)
 const authService = require('../domains/auth/auth.service')(models); // Initialize authService with models
 
-module.exports = () => { // No longer takes db as an argument
+module.exports = (db) => {
     const authMiddleware = async (req, res, next) => {
         try {
             const authHeader = req.header('Authorization');

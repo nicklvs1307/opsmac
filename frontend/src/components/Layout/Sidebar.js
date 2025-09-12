@@ -132,7 +132,7 @@ const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, permissionsM
   );
 };
 
-const Sidebar = ({ menuStructure, permissionsMap, onMobileClose }) => {
+const Sidebar = ({ menuStructure, permissionsMap, onMobileClose, isSuperAdmin }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
@@ -147,7 +147,10 @@ const Sidebar = ({ menuStructure, permissionsMap, onMobileClose }) => {
         let hasAccess = true;
         let isLocked = false;
 
-        if (item.featureKey && item.actionKey) {
+        if (isSuperAdmin) {
+          hasAccess = true;
+          isLocked = false;
+        } else if (item.featureKey && item.actionKey) {
           const perm = permissionsMap.get(`${item.featureKey}:${item.actionKey}`);
           hasAccess = perm?.allowed || false;
           isLocked = perm?.locked || false;

@@ -3,6 +3,7 @@ import { useQueries } from 'react-query';
 import Sidebar from './Sidebar';
 import { menuStructure } from './menuStructure';
 import axiosInstance from '@/services/axiosInstance';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const checkPermission = async (featureKey, actionKey) => {
   const { data } = await axiosInstance.post('/iam/check', { featureKey, actionKey });
@@ -23,6 +24,8 @@ const extractPermissions = (items) => {
 };
 
 const MenuRenderer = ({ onMobileClose }) => {
+  const { user } = useAuth();
+  const isSuperAdmin = user?.permissionSnapshot?.isSuperAdmin || false;
   const uniquePermissions = [...new Map(extractPermissions(menuStructure).map(item =>
     [`${item.featureKey}:${item.actionKey}`, item])).values()];
 
@@ -49,7 +52,7 @@ const MenuRenderer = ({ onMobileClose }) => {
     permissionsMap.set(`${featureKey}:${actionKey}`, query.data);
   });
 
-  return <Sidebar menuStructure={menuStructure} permissionsMap={permissionsMap} onMobileClose={onMobileClose} />;
+  return <Sidebar menuStructure={menuStructure} permissionsMap={permissionsMap} onMobileClose={onMobileClose} isSuperAdmin={isSuperAdmin} />;
 };
 
 export default MenuRenderer;

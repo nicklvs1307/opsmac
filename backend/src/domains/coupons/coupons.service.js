@@ -187,14 +187,7 @@ module.exports = (db) => {
 
     
 
-    const handleAfterUpdateCoupon = async (coupon) => {
-        if (coupon.changed('status') && coupon.status === 'redeemed') {
-            const reward = await coupon.getReward();
-            if (reward) {
-                await reward.updateAnalytics('redeemed', coupon.orderValue || 0);
-            }
-        }
-    };
+    
 
     return {
         listCoupons,

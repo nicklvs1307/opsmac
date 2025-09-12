@@ -54,14 +54,16 @@ module.exports = (db) => {
                     restaurantId: restaurantId,
                 }
             }),
-            models.Checkin.findAll({
-                attributes: ['customerId'],
-                where: {
-                    restaurantId: restaurantId,
-                },
-                group: ['customerId'],
-                having: sequelize.literal('COUNT("id") > 1')
-            })
+                    const loyalCustomersCount = await models.Checkin.count({
+            distinct: true,
+            col: 'customerId',
+            where: {
+                restaurantId,
+                createdAt: { [Op.gte]: new Date(new Date() - 30 * 24 * 60 * 60 * 1000) }
+            },
+            group: ['customerId'],
+            having: sequelize.where(sequelize.fn('COUNT', sequelize.col('id')), '>', 1)
+        }).then(results => results.length);
         ]);
 
         const mostCheckinsFormatted = mostCheckins.map(c => ({
@@ -90,16 +92,19 @@ module.exports = (db) => {
     };
 
     const getBirthdayCustomers = async (restaurantId) => {
-        const currentMonth = new Date().getMonth() + 1;
+        const today = new Date();
+        const todayMonth = today.getMonth() + 1;
+        const todayDay = today.getDate();
 
-        const birthdays = await models.Customer.findAll({
+        return models.Customer.findAll({
             where: {
-                restaurantId: restaurantId,
-                [Op.and]: sequelize.where(sequelize.fn('EXTRACT', sequelize.literal('MONTH FROM "birthDate"')), currentMonth)
-            },
-            order: [[sequelize.literal('EXTRACT(DAY FROM "birthDate")'), 'ASC']],
+                restaurantId,
+                [Op.and]: [
+                    sequelize.where(sequelize.fn('MONTH', sequelize.col('birthDate')), todayMonth),
+                    sequelize.where(sequelize.fn('DAY', sequelize.col('birthDate')), todayDay)
+                ]
+            }
         });
-        return birthdays;
     };
 
     const listCustomers = async (restaurantId, page, limit, search, segment, sort) => {
@@ -140,9 +145,39 @@ module.exports = (db) => {
         };
     };
 
-    const createCustomer = async (customerData, restaurantId) => {
-        const newCustomer = await models.Customer.create({ ...customerData, restaurantId: restaurantId });
-        return newCustomer;
+    const createCustomer = async (restaurantId, customerData) => {
+        const { name, email, phone, birthDate, cpf, gender, zipCode, address, city, state, country } = customerData;
+
+        if (!name || (!email && !phone)) {
+            throw new BadRequestError('Nome e pelo menos um e-mail ou telefone são obrigatórios.');
+        }
+
+        // TODO: Add a unique constraint to the database on (restaurantId, email) and (restaurantId, phone) to prevent race conditions.
+        const existingCustomer = await models.Customer.findOne({
+            where: {
+                restaurantId,
+                [Op.or]: [{ email }, { phone }]
+            }
+        });
+
+        if (existingCustomer) {
+            throw new BadRequestError('Cliente já cadastrado com este e-mail ou telefone.');
+        }
+
+        return models.Customer.create({
+            restaurantId,
+            name,
+            email,
+            phone,
+            birthDate,
+            cpf,
+            gender,
+            zipCode,
+            address,
+            city,
+            state,
+            country
+        });
     };
 
     const getCustomerByPhone = async (phone, restaurantId) => {

@@ -22,29 +22,7 @@ module.exports = (db) => {
                 throw new BadRequestError('Restaurante não encontrado para o usuário.');
             }
             const metrics = await customerService.getCustomerDashboardMetrics(restaurantId);
-
-            const mostCheckinsFormatted = metrics.mostCheckins.map(c => ({
-                customerId: c.customerId,
-                checkinCount: c.dataValues.checkinCount,
-                customerName: c.customer ? c.customer.name : 'Desconhecido'
-            }));
-
-            const mostFeedbacksFormatted = metrics.mostFeedbacks.map(f => ({
-                customerId: f.customerId,
-                feedbackCount: f.dataValues.feedbackCount,
-                customerName: f.customer ? f.customer.name : 'Desconhecido'
-            }));
-
-            const engagementRate = metrics.totalCustomers > 0 ? metrics.engagedCustomersCount / metrics.totalCustomers : 0;
-            const loyaltyRate = metrics.totalCustomers > 0 ? metrics.loyalCustomersCount / metrics.totalCustomers : 0;
-
-            res.json({
-                totalCustomers: metrics.totalCustomers,
-                mostCheckins: mostCheckinsFormatted,
-                mostFeedbacks: mostFeedbacksFormatted,
-                engagementRate: engagementRate.toFixed(2),
-                loyaltyRate: loyaltyRate.toFixed(2),
-            });
+            res.json(metrics);
         },
 
         getBirthdayCustomers: withRestaurantId(async (restaurantId) => {

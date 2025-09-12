@@ -244,72 +244,13 @@ const { BadRequestError, NotFoundError } = require('utils/errors');
         return true;
     };
 
-    const handleRewardBeforeSave = (reward) => {
-        if (reward.reward_type === 'spin_the_wheel' && reward.wheel_config && reward.wheel_config.items) {
-            reward.wheel_config.items.forEach(item => {
-                if (!item.id) {
-                    item.id = models.DataTypes.UUIDV4();
-                }
-            });
-        }
-    };
+    
 
-    const handleRewardBeforeCreate = (reward) => {
-        if (reward.days_valid && !reward.valid_until) {
-            const validUntil = new Date(reward.valid_from);
-            validUntil.setDate(validUntil.getDate() + reward.days_valid);
-            reward.valid_until = validUntil;
-        }
-    };
+    
 
-    const handleRewardBeforeUpdate = (reward) => {
-        if (reward.changed('days_valid') && reward.days_valid) {
-            const validUntil = new Date(reward.valid_from);
-            validUntil.setDate(validUntil.getDate() + reward.days_valid);
-            reward.valid_until = validUntil;
-        }
-    };
+    
 
-    const listCoupons = async (restaurantId, query) => {
-        const { page = 1, limit = 10, search, status, rewardType } = query;
-        const offset = (page - 1) * limit;
-
-        let whereClause = { restaurant_id: restaurantId };
-
-        if (search) {
-            whereClause[Op.or] = [
-                { code: { [Op.iLike]: `%${search}%` } },
-                { '$customer.name$': { [Op.iLike]: `%${search}%` } },
-                { '$reward.title$': { [Op.iLike]: `%${search}%` } },
-            ];
-        }
-        if (status) {
-            whereClause.status = status;
-        }
-        if (rewardType) {
-            whereClause.reward_type = rewardType;
-        }
-
-        const { count, rows } = await models.Coupon.findAndCountAll({
-            where: whereClause,
-            include: [
-                { model: models.Customer, as: 'customer', attributes: ['id', 'name', 'email', 'phone'] },
-                { model: models.Reward, as: 'reward', attributes: ['id', 'title', 'description', 'reward_type'] },
-            ],
-            limit: parseInt(limit),
-            offset: parseInt(offset),
-            order: [['createdAt', 'DESC']],
-        });
-
-        return {
-            coupons: rows,
-            pagination: {
-                total_items: count,
-                total_pages: Math.ceil(count / limit),
-                current_page: parseInt(page),
-            },
-        };
-    };
+    
 
     return {
         listRewards,

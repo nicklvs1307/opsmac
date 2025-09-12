@@ -13,7 +13,7 @@ const portugueseStopwords = new Set([
 module.exports = (db) => {
     const models = db;
 
-    const findOrCreateCustomer = async (feedbackData, restaurantId) => {
+    const _findOrCreateCustomer = async (feedbackData, restaurantId) => {
         const { customerId, is_anonymous, customerData, source } = feedbackData;
         if (is_anonymous) return null;
 
@@ -104,7 +104,7 @@ module.exports = (db) => {
         if (!restaurant) throw new NotFoundError('Restaurante não encontrado');
         if (!restaurant.canCreateFeedback()) throw new ForbiddenError('Restaurante não está aceitando feedbacks no momento');
 
-        const customer = await findOrCreateCustomer(feedbackData, restaurantId);
+        const customer = await _findOrCreateCustomer(feedbackData, restaurantId);
 
         const feedback = await models.Feedback.create({
             ...feedbackData,
@@ -264,7 +264,6 @@ module.exports = (db) => {
     }
 
     return {
-        findOrCreateCustomer,
         handleLoyaltyAndRewards,
         handleWhatsAppNotification,
         createFeedback,

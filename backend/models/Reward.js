@@ -59,6 +59,31 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'rewards',
     timestamps: true,
     underscored: true,
+    hooks: {
+      beforeSave: (reward, options) => {
+        if (reward.reward_type === 'spin_the_wheel' && reward.wheel_config && reward.wheel_config.items) {
+            reward.wheel_config.items.forEach(item => {
+                if (!item.id) {
+                    item.id = DataTypes.UUIDV4();
+                }
+            });
+        }
+      },
+      beforeCreate: (reward, options) => {
+        if (reward.days_valid && !reward.valid_until) {
+            const validUntil = new Date(reward.valid_from);
+            validUntil.setDate(validUntil.getDate() + reward.days_valid);
+            reward.valid_until = validUntil;
+        }
+      },
+      beforeUpdate: (reward, options) => {
+        if (reward.changed('days_valid') && reward.days_valid) {
+            const validUntil = new Date(reward.valid_from);
+            validUntil.setDate(validUntil.getDate() + reward.days_valid);
+            reward.valid_until = validUntil;
+        }
+      }
+    }
   });
 
   return Reward;

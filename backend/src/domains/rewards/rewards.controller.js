@@ -60,10 +60,6 @@ module.exports = (db) => {
             const data = await rewardsService.getRewardsAnalytics(restaurantId);
             res.json(data);
         },
-        listCoupons: async (req, res, next) => {
-            const restaurantId = req.context.restaurantId;
-            const data = await rewardsService.listCoupons(restaurantId, req.query);
-            res.json(data);
-        },
+        
     };
 };

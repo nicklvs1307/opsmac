@@ -5,13 +5,11 @@ const asyncHandler = require('utils/asyncHandler');
 module.exports = (db) => {
     const { auth } = require('middleware/authMiddleware')(db);
     const surveyController = require('./surveys.controller')(db);
-    console.log('DEBUG: surveyController:', surveyController);
-    console.log('DEBUG: surveyController.listSurveys:', surveyController.listSurveys);
     const { createSurveyValidation, updateSurveyValidation, getSurveyValidation, updateSurveyStatusValidation } = require('./surveys.validation');
 
     const router = express.Router();
 
-    router.get('/', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.listSurveys));
+    router.get('/', auth, console.log('DEBUG: auth.checkRestaurantOwnership:', auth.checkRestaurantOwnership) || auth.checkRestaurantOwnership, console.log('DEBUG: requirePermission:', requirePermission) || requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.listSurveys));
     router.post('/', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'create'), ...createSurveyValidation, asyncHandler(surveyController.createSurvey));
     router.put('/:id', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyValidation, asyncHandler(surveyController.updateSurvey));
     router.patch('/:id/status', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyStatusValidation, asyncHandler(surveyController.updateSurveyStatus));

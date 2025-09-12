@@ -416,7 +416,7 @@ module.exports = (db) => {
                 having: db.sequelize.literal('COUNT("id") > 1'),
                 order: [[granularityFn, 'ASC']],
                 raw: true,
-            })
+            }),
         ];
 
         // Helper function to merge the results

@@ -472,6 +472,10 @@ module.exports = (db) => {
         return await rewardsService.spinWheel(rewardId, customerId, restaurantId);
     }
 
+    async function spinWheel(rewardId, customerId, restaurantId) {
+        return await rewardsService.spinWheel(rewardId, customerId, restaurantId);
+    }
+
     async function getRatingDistribution(restaurantId, query) {
         const { start_date, end_date } = query;
 
@@ -510,6 +514,113 @@ module.exports = (db) => {
         return distribution;
     }
 
+    async function getReport(restaurantId, reportType, query) {
+        const { start_date, end_date } = query;
+
+        const dateFilter = {};
+        if (start_date && end_date) {
+            dateFilter.createdAt = {
+                [Op.between]: [new Date(start_date), new Date(end_date)],
+            };
+        }
+
+        switch (reportType) {
+            case 'nps':
+                return await generateNPSReport(restaurantId, dateFilter);
+            case 'satisfaction':
+                return await generateSatisfactionReport(restaurantId, dateFilter);
+            case 'complaints':
+                return await generateComplaintsReport(restaurantId, dateFilter);
+            case 'trends':
+                return await generateTrendsReport(restaurantId, dateFilter);
+            case 'customers':
+                return await generateCustomersReport(restaurantId, dateFilter);
+            default:
+                throw new BadRequestError('Tipo de relatório inválido.');
+        }
+    }
+
+    async function getBenchmarkingData(restaurantId) {
+        const today = new Date();
+        const currentMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+        const lastMonthStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+        const lastMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
+        const lastQuarterStart = new Date(today.getFullYear(), Math.floor(today.getMonth() / 3) * 3 - 3, 1); // Start of previous quarter
+        const lastQuarterEnd = new Date(today.getFullYear(), Math.floor(today.getMonth() / 3) * 3, 0); // End of previous quarter
+        const lastYearStart = new Date(today.getFullYear() - 1, 0, 1);
+        const lastYearEnd = new Date(today.getFullYear() - 1, 11, 31);
+
+        const fetchMetricsForPeriod = async (start, end) => {
+            const dateFilter = { createdAt: { [Op.between]: [start, end] } };
+            const [
+                totalCheckins,
+                newCustomers,
+                totalSurveyResponses,
+                redeemedCoupons,
+                feedbackStats,
+                totalLoyaltyPoints,
+                totalSpentOverall,
+                totalCustomersCount,
+                engagedCustomersCount,
+                loyalCustomers
+            ] = await Promise.all([
+                models.Checkin.count({ where: { restaurantId, ...dateFilter } }),
+                models.Customer.count({ where: { restaurantId, ...dateFilter } }),
+                models.SurveyResponse.count({ where: { restaurantId, ...dateFilter } }),
+                models.Coupon.count({ where: { restaurantId, status: 'used', redeemed_at: { [Op.between]: [start, end] } } }),
+                models.Feedback.findOne({
+                    where: { restaurantId, ...dateFilter },
+                    attributes: [
+                        [fn('AVG', col('npsScore')), 'avgNpsScore'],
+                        [fn('AVG', col('rating')), 'avgRating']
+                    ],
+                    raw: true
+                }),
+                models.Customer.sum('loyaltyPoints', { where: { restaurantId } }),
+                models.Customer.sum('totalSpent', { where: { restaurantId } }),
+                models.Customer.count({ where: { restaurantId } }),
+                models.Checkin.count({ distinct: true, col: 'customerId', where: { restaurantId } }),
+                models.Checkin.findAll({
+                    attributes: ['customerId'],
+                    where: { restaurantId },
+                    group: ['customerId'],
+                    having: db.sequelize.literal('COUNT("id") > 1')
+                })
+            ]);
+
+            const engagementRate = totalCustomersCount > 0 ? (engagedCustomersCount / totalCustomersCount) * 100 : 0;
+            const loyalCustomersCountValue = loyalCustomers.length;
+            const loyaltyRate = totalCustomersCount > 0 ? (loyalCustomersCountValue / totalCustomersCount) * 100 : 0;
+
+            return {
+                totalCheckins,
+                newCustomers,
+                totalSurveyResponses,
+                redeemedCoupons,
+                avgNpsScore: feedbackStats?.avgNpsScore || 0,
+                avgRating: feedbackStats?.avgRating || 0,
+                totalLoyaltyPoints: totalLoyaltyPoints || 0,
+                totalSpentOverall: totalSpentOverall || 0,
+                engagementRate: engagementRate.toFixed(2),
+                loyaltyRate: loyaltyRate.toFixed(2),
+            };
+        };
+
+        const [currentMonthData, lastMonthData, lastQuarterData, lastYearData] = await Promise.all([
+            fetchMetricsForPeriod(currentMonthStart, today),
+            fetchMetricsForPeriod(lastMonthStart, lastMonthEnd),
+            fetchMetricsForPeriod(lastQuarterStart, lastQuarterEnd),
+            fetchMetricsForPeriod(lastYearStart, lastYearEnd)
+        ]);
+
+        return {
+            currentMonth: currentMonthData,
+            lastMonth: lastMonthData,
+            lastQuarter: lastQuarterData,
+            lastYear: lastYearData,
+        };
+    }
+
     return {
         getDashboardOverview,
         getDashboardAnalytics,
@@ -522,37 +633,36 @@ module.exports = (db) => {
         getEvolutionAnalytics,
         getRatingDistribution,
         spinWheel,
-        spinWheel,
         getBenchmarkingData,
         getReport,
     };
 };
 
-async function getReport(restaurantId, reportType, query) {
-    const { start_date, end_date } = query;
+    async function getReport(restaurantId, reportType, query) {
+        const { start_date, end_date } = query;
 
-    const dateFilter = {};
-    if (start_date && end_date) {
-        dateFilter.createdAt = {
-            [Op.between]: [new Date(start_date), new Date(end_date)],
-        };
-    }
+        const dateFilter = {};
+        if (start_date && end_date) {
+            dateFilter.createdAt = {
+                [Op.between]: [new Date(start_date), new Date(end_date)],
+            };
+        }
 
-    switch (reportType) {
-        case 'nps':
-            return await generateNPSReport(restaurantId, dateFilter);
-        case 'satisfaction':
-            return await generateSatisfactionReport(restaurantId, dateFilter);
-        case 'complaints':
-            return await generateComplaintsReport(restaurantId, dateFilter);
-        case 'trends':
-            return await generateTrendsReport(restaurantId, dateFilter);
-        case 'customers':
-            return await generateCustomersReport(restaurantId, dateFilter);
-        default:
-            throw new BadRequestError('Tipo de relatório inválido.');
+        switch (reportType) {
+            case 'nps':
+                return await generateNPSReport(restaurantId, dateFilter);
+            case 'satisfaction':
+                return await generateSatisfactionReport(restaurantId, dateFilter);
+            case 'complaints':
+                return await generateComplaintsReport(restaurantId, dateFilter);
+            case 'trends':
+                return await generateTrendsReport(restaurantId, dateFilter);
+            case 'customers':
+                return await generateCustomersReport(restaurantId, dateFilter);
+            default:
+                throw new BadRequestError('Tipo de relatório inválido.');
+        }
     }
-}
 
     async function getBenchmarkingData(restaurantId) {
         const today = new Date();

@@ -37,7 +37,7 @@ const SatisfactionOverview = () => {
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const { data: analyticsData, isLoading: isLoadingAnalytics, isError: isErrorAnalytics, error: errorAnalytics } = useSatisfactionAnalytics(restaurantId);
+  
 
   const [startDate, setStartDate] = useState(format(subMonths(new Date(), 12), 'yyyy-MM-dd'));
   const [endDate, setEndDate] = useState(format(new Date(), 'yyyy-MM-dd'));

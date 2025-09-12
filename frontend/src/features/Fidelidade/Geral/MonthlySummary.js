@@ -41,6 +41,8 @@ const MonthlySummary = () => {
 
   const { data: rewardsAnalyticsData, isLoading: isLoadingRewards, isError: isErrorRewards, error: errorRewards } = useRewardsAnalytics(restaurantId);
 
+  const [selectedMetric, setSelectedMetric] = useState('checkins');
+
   if (isLoadingOverview || isLoadingEvolution || isLoadingRewards) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
@@ -56,8 +58,6 @@ const MonthlySummary = () => {
       </Alert>
     );
   }
-
-  const [selectedMetric, setSelectedMetric] = useState('checkins');
 
   const monthlyTrendData = evolutionData?.map(d => ({
       name: format(new Date(d.date), 'MMM/yy'),

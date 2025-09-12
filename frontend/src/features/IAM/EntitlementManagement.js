@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { useGetPermissionTree, useSetEntitlements } from './api/iamQueries';
 
 const EntitlementManagement = () => {
-  const { selectedRestaurantId } = useAuth(); // Use selectedRestaurantId from AuthContext
+  const { selectedRestaurantId, user } = useAuth(); // Use selectedRestaurantId from AuthContext
   const { can } = usePermissions();
   const queryClient = useQueryClient();
 
@@ -23,7 +23,7 @@ const EntitlementManagement = () => {
   const setEntitlementsMutation = useSetEntitlements();
 
   const handleToggleEntitlement = async (entityId, entityType, currentStatus) => {
-    if (!can('admin:permissions', 'update')) {
+    if (!user?.permissionSnapshot?.isSuperAdmin) {
       toast.error('You do not have permission to update entitlements.');
       return;
     }
@@ -87,7 +87,7 @@ const EntitlementManagement = () => {
                 <td>
                   <button
                     onClick={() => handleToggleEntitlement(module.id, 'module', module.status)}
-                    disabled={setEntitlementsMutation.isLoading || !can('admin:permissions', 'update')}
+                    disabled={setEntitlementsMutation.isLoading || !user?.permissionSnapshot?.isSuperAdmin}
                   >
                     {module.status === 'active' ? 'Deactivate' : 'Activate'}
                   </button>
@@ -102,7 +102,7 @@ const EntitlementManagement = () => {
                       onClick={() =>
                         handleToggleEntitlement(submodule.id, 'submodule', submodule.status)
                       }
-                      disabled={setEntitlementsMutation.isLoading || !can('admin:permissions', 'update')}
+                      disabled={setEntitlementsMutation.isLoading || !user?.permissionSnapshot?.isSuperAdmin}
                     >
                       {submodule.status === 'active' ? 'Deactivate' : 'Activate'}
                     </button>
@@ -116,7 +116,7 @@ const EntitlementManagement = () => {
                   <td>
                     <button
                       onClick={() => handleToggleEntitlement(feature.id, 'feature', feature.status)}
-                      disabled={setEntitlementsMutation.isLoading || !can('admin:permissions', 'update')}
+                      disabled={setEntitlementsMutation.isLoading || !user?.permissionSnapshot?.isSuperAdmin}
                     >
                       {feature.status === 'active' ? 'Deactivate' : 'Activate'}
                     </button>

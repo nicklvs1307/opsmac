@@ -6,6 +6,7 @@ const requirePermission = require('middleware/requirePermission');
 const asyncHandler = require('utils/asyncHandler');
 const models = require('models'); // Keep models for authMiddleware initialization
 const IamController = require('domains/iam/iam.controller');
+const { requireSuperadmin } = require('middleware/adminAuthMiddleware');
 
 
 
@@ -487,7 +488,7 @@ router.post('/entitlements', requirePermission('entitlements.manage', 'update'),
  *       204:
  *         description: Entitlement removed successfully
  */
-router.delete('/entitlements', requirePermission('admin:permissions', 'delete'), asyncHandler(IamController.removeEntitlement));
+router.delete('/entitlements', requireSuperadmin, asyncHandler(IamController.removeEntitlement));
 
 /**
  * @swagger
@@ -556,7 +557,7 @@ router.get('/restaurants/:restaurantId/entitlements', requirePermission('entitle
  *       200:
  *         description: Entitlements set successfully
  */
-router.post('/entitlements/bulk', requirePermission('entitlements.manage', 'update'), asyncHandler(IamController.setEntitlementsBulk));
+router.post('/entitlements/bulk', requireSuperadmin, asyncHandler(IamController.setEntitlementsBulk));
 
 module.exports = (db) => {
   return router;

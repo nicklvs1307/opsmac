@@ -10,9 +10,8 @@ module.exports = (db) => {
     
 
     // Apply the restaurant context middleware globally to all routes handled by this router
-    console.log('Type of getRestaurantContextMiddleware():', typeof getRestaurantContextMiddleware());
-    const restaurantContextMiddleware = getRestaurantContextMiddleware();
-    router.use(restaurantContextMiddleware); // Call it as a function to get the middleware
+    // Apply the restaurant context middleware globally to all routes handled by this router
+    router.use(getRestaurantContextMiddleware());
     router.use(auth); // Apply authMiddleware globally
 
     const domainsDir = path.join(__dirname, "..", "src", "domains");

@@ -61,15 +61,15 @@ module.exports = (models) => {
             };
         } else {
             // For regular users, determine the primary restaurant and build permissions
-            if (user.userRestaurants && user.userRestaurants.length > 0) {
+                        if (user.restaurants && user.restaurants.length > 0) {
                 // Find the owned restaurant first, or the first associated one
-                const ownedRestaurant = user.userRestaurants.find(ur => ur.isOwner)?.restaurant;
+                const ownedRestaurant = user.restaurants.find(ur => ur.isOwner)?.restaurant;
                 if (ownedRestaurant) {
                     primaryRestaurant = ownedRestaurant;
                     primaryRestaurantId = ownedRestaurant.id;
                 } else {
-                    primaryRestaurant = user.userRestaurants[0].restaurant;
-                    primaryRestaurantId = user.userRestaurants[0].restaurant.id;
+                    primaryRestaurant = user.restaurants[0].restaurant;
+                    primaryRestaurantId = user.restaurants[0].restaurant.id;
                 }
             }
 

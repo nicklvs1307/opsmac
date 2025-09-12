@@ -4,18 +4,11 @@ const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('uti
 // const models = require('models'); // Remover esta linha, não é mais necessária aqui
 
 const requirePermission = (featureKey, actionKey) => {
-  const middleware = async (req, res, next) => {
-    // ...
-  };
-  console.log(`DEBUG: requirePermission('${featureKey}', '${actionKey}') returns:`, middleware);
-  return middleware;
+  return async (req, res, next) => {
     const userId = req.user?.id;
     if (!userId) {
       return next(new UnauthorizedError('Acesso negado. Usuário não autenticado.'));
     }
-
-    console.log('req.user in requirePermission:', req.user);
-    console.log('req.user.isSuperadmin in requirePermission:', req.user?.isSuperadmin);
 
     // Add Super Admin bypass logic
     if (req.user.isSuperadmin) {

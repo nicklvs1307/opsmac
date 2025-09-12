@@ -26,7 +26,12 @@ module.exports = (db) => {
             newCustomers,
             totalSurveyResponses,
             redeemedCoupons,
-            feedbackStats
+            feedbackStats,
+            totalLoyaltyPoints, // New
+            totalSpentOverall,  // New
+            totalCustomersCount, // New
+            engagedCustomersCount, // New
+            loyalCustomers // New
         ] = await Promise.all([
             models.Checkin.count({
                 where: { restaurantId, ...dateFilter }
@@ -51,8 +56,23 @@ module.exports = (db) => {
                     [fn('AVG', col('rating')), 'avgRating']
                 ],
                 raw: true
+            }),
+            // New queries for loyalty metrics
+            models.Customer.sum('loyaltyPoints', { where: { restaurantId } }), // totalLoyaltyPoints
+            models.Customer.sum('totalSpent', { where: { restaurantId } }),    // totalSpentOverall
+            models.Customer.count({ where: { restaurantId } }), // totalCustomersCount
+            models.Checkin.count({ distinct: true, col: 'customerId', where: { restaurantId } }), // engagedCustomersCount
+            models.Checkin.findAll({ // loyalCustomers
+                attributes: ['customerId'],
+                where: { restaurantId },
+                group: ['customerId'],
+                having: db.sequelize.literal('COUNT("id") > 1')
             })
         ]);
+
+        const engagementRate = totalCustomersCount > 0 ? (engagedCustomersCount / totalCustomersCount) * 100 : 0;
+        const loyalCustomersCountValue = loyalCustomers.length;
+        const loyaltyRate = totalCustomersCount > 0 ? (loyalCustomersCountValue / totalCustomersCount) * 100 : 0;
 
         return {
             totalCheckins,
@@ -61,6 +81,10 @@ module.exports = (db) => {
             redeemedCoupons,
             avgNpsScore: feedbackStats?.avgNpsScore || 0,
             avgRating: feedbackStats?.avgRating || 0,
+            totalLoyaltyPoints: totalLoyaltyPoints || 0, // New
+            totalSpentOverall: totalSpentOverall || 0,   // New
+            engagementRate: engagementRate.toFixed(2),    // New
+            loyaltyRate: loyaltyRate.toFixed(2),          // New
         };
     }
 
@@ -267,75 +291,136 @@ module.exports = (db) => {
 
         const granularityFn = fn('DATE_TRUNC', granularity, col('createdAt'));
 
-        const checkins = await models.Checkin.findAll({
-            where: { restaurantId, ...dateFilter },
-            attributes: [
-                [granularityFn, 'date'],
-                [fn('COUNT', col('id')), 'count'],
-            ],
-            group: [granularityFn],
-            order: [[granularityFn, 'ASC']],
-            raw: true,
-        });
-
-        const newCustomers = await models.Customer.findAll({
-            where: { restaurantId, ...dateFilter },
-            attributes: [
-                [granularityFn, 'date'],
-                [fn('COUNT', col('id')), 'count'],
-            ],
-            group: [granularityFn],
-            order: [[granularityFn, 'ASC']],
-            raw: true,
-        });
-
-        const surveys = await models.SurveyResponse.findAll({
-            where: { restaurantId, ...dateFilter },
-            attributes: [
-                [granularityFn, 'date'],
-                [fn('COUNT', col('id')), 'count'],
-            ],
-            group: [granularityFn],
-            order: [[granularityFn, 'ASC']],
-            raw: true,
-        });
-
-        const coupons = await models.Coupon.findAll({
-            where: {
-                restaurantId,
-                status: 'used',
-                redeemed_at: { [Op.between]: [startDate, endDate] },
-            },
-            attributes: [
-                [fn('DATE_TRUNC', granularity, col('updatedAt')), 'date'],
-                [fn('COUNT', col('id')), 'count'],
-            ],
-            group: [fn('DATE_TRUNC', granularity, col('updatedAt'))],
-            order: [[fn('DATE_TRUNC', granularity, col('updatedAt')), 'ASC']],
-            raw: true,
-        });
-
-        const nps = await models.Feedback.findAll({
-            where: { restaurantId, npsScore: { [Op.not]: null }, ...dateFilter },
-            attributes: [
-                [granularityFn, 'date'],
-                [fn('AVG', col('npsScore')), 'score'],
-            ],
-            group: [granularityFn],
-            order: [[granularityFn, 'ASC']],
-            raw: true,
-        });
-
-        const csat = await models.Feedback.findAll({
-            where: { restaurantId, rating: { [Op.not]: null }, ...dateFilter },
-            attributes: [
-                [granularityFn, 'date'],
-                [fn('AVG', col('rating')), 'score'],
-            ],
-            group: [granularityFn],
-            order: [[granularityFn, 'ASC']],
-            raw: true,
-        });
+        const [
+            checkins,
+            newCustomers,
+            surveys,
+            coupons,
+            nps,
+            csat,
+            loyaltyPointsEvolution, // New
+            totalSpentEvolution,    // New
+            totalCustomersEvolution, // New
+            engagedCustomersEvolution, // New
+            loyalCustomersEvolution // New
+        ] = await Promise.all([
+            models.Checkin.findAll({
+                where: { restaurantId, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'date'],
+                    [fn('COUNT', col('id')), 'count'],
+                ],
+                group: [granularityFn],
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            }),
+            models.Customer.findAll({
+                where: { restaurantId, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'date'],
+                    [fn('COUNT', col('id')), 'count'],
+                ],
+                group: [granularityFn],
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            }),
+            models.SurveyResponse.findAll({
+                where: { restaurantId, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'date'],
+                    [fn('COUNT', col('id')), 'count'],
+                ],
+                group: [granularityFn],
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            }),
+            models.Coupon.findAll({
+                where: {
+                    restaurantId,
+                    status: 'used',
+                    redeemed_at: { [Op.between]: [startDate, endDate] },
+                },
+                attributes: [
+                    [fn('DATE_TRUNC', granularity, col('updatedAt')), 'date'],
+                    [fn('COUNT', col('id')), 'count'],
+                ],
+                group: [fn('DATE_TRUNC', granularity, col('updatedAt'))],
+                order: [[fn('DATE_TRUNC', granularity, col('updatedAt')), 'ASC']],
+                raw: true,
+            }),
+            models.Feedback.findAll({
+                where: { restaurantId, npsScore: { [Op.not]: null }, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'date'],
+                    [fn('AVG', col('npsScore')), 'score'],
+                ],
+                group: [granularityFn],
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            }),
+            models.Feedback.findAll({
+                where: { restaurantId, rating: { [Op.not]: null }, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'date'],
+                    [fn('AVG', col('rating')), 'score'],
+                ],
+                group: [granularityFn],
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            }),
+            // New queries for loyalty evolution
+            models.Customer.findAll({
+                where: { restaurantId, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'date'],
+                    [fn('SUM', col('loyaltyPoints')), 'sum'],
+                ],
+                group: [granularityFn],
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            }),
+            models.Customer.findAll({
+                where: { restaurantId, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'date'],
+                    [fn('SUM', col('totalSpent')), 'sum'],
+                ],
+                group: [granularityFn],
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            }),
+            models.Customer.findAll({
+                where: { restaurantId, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'date'],
+                    [fn('COUNT', col('id')), 'count'],
+                ],
+                group: [granularityFn],
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            }),
+            models.Checkin.findAll({
+                where: { restaurantId, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'createdAt'],
+                    [fn('COUNT', fn('DISTINCT', col('customerId'))), 'count'],
+                ],
+                group: [granularityFn],
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            }),
+            models.Checkin.findAll({
+                where: { restaurantId, ...dateFilter },
+                attributes: [
+                    [granularityFn, 'createdAt'],
+                    'customerId'
+                ],
+                group: [granularityFn, 'customerId'],
+                having: db.sequelize.literal('COUNT("id") > 1'),
+                order: [[granularityFn, 'ASC']],
+                raw: true,
+            })
+        ];
 
         // Helper function to merge the results
         const mergeData = (mainData, otherData, key) => {

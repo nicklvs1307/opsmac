@@ -23,6 +23,22 @@ module.exports = (sequelize, DataTypes) => {
       // Optionally, you could add a loyalty transaction record here
       await this.save();
     }
+
+    async updateStats() {
+      // Recalculate total visits
+      const totalVisits = await this.getCheckins({
+        attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      });
+      this.totalVisits = totalVisits[0].dataValues.count;
+
+      // Recalculate total spent (assuming 'orders' association exists and has a 'total' field)
+      const totalSpentResult = await this.getOrders({
+        attributes: [[sequelize.fn('SUM', sequelize.col('total')), 'sum']],
+      });
+      this.totalSpent = totalSpentResult[0].dataValues.sum || 0;
+
+      await this.save();
+    }
   }
 
   Customer.init({

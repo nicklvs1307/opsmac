@@ -9,8 +9,8 @@ module.exports = (db) => {
 
     const router = express.Router();
 
-    router.get('/', auth, asyncHandler(surveyController.listSurveys));
-    router.post('/', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'create'), ...createSurveyValidation, asyncHandler(surveyController.createSurvey));
+    router.get('/', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.listSurveys));
+    router.post('/', auth, ...createSurveyValidation, asyncHandler(surveyController.createSurvey));
     router.put('/:id', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyValidation, asyncHandler(surveyController.updateSurvey));
     router.patch('/:id/status', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyStatusValidation, asyncHandler(surveyController.updateSurveyStatus));
     router.delete('/:id', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'delete'), asyncHandler(surveyController.deleteSurvey));

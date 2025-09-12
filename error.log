@@ -1,13 +1,1264 @@
+> feedeliza-plus@1.0.0 start
+> node server.js
+✅ Conexão com banco de dados estabelecida
+Type of getRestaurantContextMiddleware(): function
+🚀 Servidor rodando na porta 5000
+Redis Client Connected
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
+    at Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async listSurveys (/app/src/domains/surveys/surveys.controller.js:18:29)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
+    at Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async listSurveys (/app/src/domains/surveys/surveys.controller.js:18:29)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
+    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
+    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
+    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
+    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+BadRequestError: ID do restaurante não fornecido.
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:52:29)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
+    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
+    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+BadRequestError: ID do restaurante não fornecido.
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:52:29)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Error: WHERE parameter "restaurant_id" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
+    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
+    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
+    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
+    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
+    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
+    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+ForbiddenError: Usuário não está associado a um restaurante.
+    at listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:18:23)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+NotFoundError: Restaurante não encontrado
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+NotFoundError: Recompensa não encontrada.
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:30:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+ForbiddenError: Usuário não está associado a um restaurante.
+    at listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:18:23)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:19:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+NotFoundError: Restaurante não encontrado
+    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
+req.user in requirePermission: {
+  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
+  name: 'Super Admin',
+  email: 'superadmin@example.com',
+  phone: null,
+  roles: [
+    Role {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false,
+      UserRole: [UserRole]
+    }
+  ],
+  avatar: undefined,
+  isActive: true,
+  emailVerified: undefined,
+  lastLogin: undefined,
+  restaurants: [
+    Restaurant {
+      dataValues: [Object],
+      _previousDataValues: [Object],
+      uniqno: 1,
+      _changed: Set(0) {},
+      _options: [Object],
+      isNewRecord: false
+    }
+  ],
+  restaurant: null,
+  restaurantId: null,
+  isSuperadmin: true,
+  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
+}
+req.user.isSuperadmin in requirePermission: true
+NotFoundError: Recompensa não encontrada.
+    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:30:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
+
+    fetch("https://feedelizapro.towersfy.com/fidelity/satisfaction/surveys", {
+  "headers": {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap", {
+  "headers": {
+    "accept": "text/css,*/*;q=0.1",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "style",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site",
+    "sec-fetch-storage-access": "active",
+    "x-browser-channel": "stable",
+    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
+    "x-browser-validation": "XPdmRdCCj2OkELQ2uovjJFk6aKA=",
+    "x-browser-year": "2025",
+    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIk6HLAQiFoM0B",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.googleapis.com/icon?family=Material+Icons", {
+  "headers": {
+    "accept": "text/css,*/*;q=0.1",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "style",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site",
+    "sec-fetch-storage-access": "active",
+    "x-browser-channel": "stable",
+    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
+    "x-browser-validation": "XPdmRdCCj2OkELQ2uovjJFk6aKA=",
+    "x-browser-year": "2025",
+    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIk6HLAQiFoM0B",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/js/main.fb436165.js", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "script",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "same-origin",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/satisfaction/surveys"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/css/main.5ba1053a.css", {
+  "headers": {
+    "accept": "text/css,*/*;q=0.1",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "style",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "same-origin",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/satisfaction/surveys"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/favicon.ico", {
+  "headers": {
+    "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "image",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "same-origin",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/satisfaction/surveys"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "font",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "x-browser-channel": "stable",
+    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
+    "x-browser-validation": "XPdmRdCCj2OkELQ2uovjJFk6aKA=",
+    "x-browser-year": "2025",
+    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIk6HLAQiFoM0B",
+    "Referer": "https://fonts.googleapis.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "if-none-match": "W/\"502-c1EO2z/duH/d68KBBoGJW4+NhFs\"",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/manifest.json", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "if-modified-since": "Thu, 11 Sep 2025 23:00:30 GMT",
+    "if-none-match": "\"68c3548e-1eb\"",
+    "priority": "u=2",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "manifest",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/satisfaction/surveys"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizapro.towersfy.com/logo192.png", {
+  "headers": {
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/satisfaction/surveys"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/favicon.ico", {
+  "headers": {
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/favicon.ico", {
+  "headers": {
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/monthly-summary"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/npsCriteria?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/settings/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/rewards/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/npsCriteria?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/settings/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/rewards/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/favicon.ico", {
+  "headers": {
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/satisfaction/settings"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBGEe.woff2", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "font",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "x-browser-channel": "stable",
+    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
+    "x-browser-validation": "XPdmRdCCj2OkELQ2uovjJFk6aKA=",
+    "x-browser-year": "2025",
+    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIk6HLAQiFoM0B",
+    "Referer": "https://fonts.googleapis.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/npsCriteria?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/settings/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/rewards/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/survey/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/survey/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/favicon.ico", {
+  "headers": {
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/satisfaction/dashboard"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/survey/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+});
+
 AuthContext.js:82 AuthContext useEffect: Running
 AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI
 AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
-dashboard:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+surveys:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
 AuthContext.js:92 AuthContext useEffect: /auth/me successful {user: {…}}
 AuthContext.js:99 AuthContext useEffect: Attempting to fetch /iam/tree
 AuthContext.js:106 AuthContext useEffect: /iam/tree successful {restaurantId: 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8', userId: '29b580e3-2dcd-4da8-b7f0-650815cc304d', isSuperAdmin: true, isOwner: true, modules: Array(9)}
-main.fb436165.js:2 [Violation] 'message' handler took 208ms
-[Violation] Forced reflow while executing JavaScript took 30ms
-dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
+main.fb436165.js:2 [Violation] 'message' handler took 339ms
+[Violation] Forced reflow while executing JavaScript took 38ms
+surveyService.js:110  GET https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 500 (Internal Server Error)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -16,8 +1267,8 @@ _request @ Axios.js:163
 request @ Axios.js:40
 Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:21
-enabled @ dashboardQueries.js:36
+(anônimo) @ surveyService.js:110
+B0.p.enabled @ surveyService.js:117
 fetchFn @ query.js:300
 c @ retryer.js:95
 u @ retryer.js:156
@@ -35,7 +1286,7 @@ jc @ react-dom.production.min.js:280
 ac @ react-dom.production.min.js:269
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
-dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
+surveyService.js:110  GET https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 500 (Internal Server Error)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -44,8 +1295,8 @@ _request @ Axios.js:163
 request @ Axios.js:40
 Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
-(anônimo) @ dashboardQueries.js:21
-enabled @ dashboardQueries.js:36
+(anônimo) @ surveyService.js:110
+B0.p.enabled @ surveyService.js:117
 fetchFn @ query.js:300
 c @ retryer.js:95
 (anônimo) @ retryer.js:149
@@ -94,6 +1345,88 @@ jc @ react-dom.production.min.js:280
 ac @ react-dom.production.min.js:269
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
+main.fb436165.js:2 [Violation] 'click' handler took 234ms
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+enabled @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+enabled @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 bt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
 dashboardQueries.js:42 Error fetching dashboard data: bt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
 onError @ dashboardQueries.js:42
 (anônimo) @ notifyManager.js:62
@@ -125,13 +1458,11 @@ t.subscribe @ subscribable.js:16
 (anônimo) @ useBaseQuery.js:60
 nl @ react-dom.production.min.js:243
 _c @ react-dom.production.min.js:285
-lc @ react-dom.production.min.js:272
-qa @ react-dom.production.min.js:127
 (anônimo) @ react-dom.production.min.js:282
 jc @ react-dom.production.min.js:280
-ac @ react-dom.production.min.js:269
-_ @ scheduler.production.min.js:13
-P @ scheduler.production.min.js:14
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
 Dashboard.js:94 Error fetching dashboard data: bt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
 hV @ Dashboard.js:94
 vi @ react-dom.production.min.js:160
@@ -143,9 +1474,8 @@ vc @ react-dom.production.min.js:279
 ac @ react-dom.production.min.js:267
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
-main.fb436165.js:2 [Violation] 'click' handler took 216ms
-main.fb436165.js:2 [Violation] 'click' handler took 170ms
-dashboardQueries.js:68  GET https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month 500 (Internal Server Error)
+main.fb436165.js:2 [Violation] 'click' handler took 196ms
+dashboardQueries.js:68  GET https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month 400 (Bad Request)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -197,7 +1527,7 @@ jc @ react-dom.production.min.js:280
 lc @ react-dom.production.min.js:272
 qa @ react-dom.production.min.js:127
 (anônimo) @ react-dom.production.min.js:266
-dashboardQueries.js:68  GET https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month 500 (Internal Server Error)
+dashboardQueries.js:68  GET https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month 400 (Bad Request)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -228,7 +1558,7 @@ jc @ react-dom.production.min.js:280
 lc @ react-dom.production.min.js:272
 qa @ react-dom.production.min.js:127
 (anônimo) @ react-dom.production.min.js:266
-query.js:358 bt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+query.js:358 bt {message: 'Request failed with status code 400', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
 onError @ query.js:358
 f @ retryer.js:67
 (anônimo) @ retryer.js:132
@@ -586,7 +1916,7 @@ jc @ react-dom.production.min.js:280
 lc @ react-dom.production.min.js:272
 qa @ react-dom.production.min.js:127
 (anônimo) @ react-dom.production.min.js:266
-surveyService.js:110  GET https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 500 (Internal Server Error)
+satisfactionService.js:6  GET https://feedelizaapi.towersfy.com/api/survey/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 404 (Not Found)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -595,8 +1925,8 @@ _request @ Axios.js:163
 request @ Axios.js:40
 Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
-(anônimo) @ surveyService.js:110
-B0.p.enabled @ surveyService.js:117
+(anônimo) @ satisfactionService.js:6
+W7.enabled @ satisfactionService.js:18
 fetchFn @ query.js:300
 c @ retryer.js:95
 u @ retryer.js:156
@@ -612,7 +1942,7 @@ jc @ react-dom.production.min.js:280
 lc @ react-dom.production.min.js:272
 qa @ react-dom.production.min.js:127
 (anônimo) @ react-dom.production.min.js:266
-surveyService.js:110  GET https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 500 (Internal Server Error)
+satisfactionService.js:6  GET https://feedelizaapi.towersfy.com/api/survey/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 404 (Not Found)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
@@ -621,8 +1951,8 @@ _request @ Axios.js:163
 request @ Axios.js:40
 Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
-(anônimo) @ surveyService.js:110
-B0.p.enabled @ surveyService.js:117
+(anônimo) @ satisfactionService.js:6
+W7.enabled @ satisfactionService.js:18
 fetchFn @ query.js:300
 c @ retryer.js:95
 (anônimo) @ retryer.js:149
@@ -643,7 +1973,7 @@ jc @ react-dom.production.min.js:280
 lc @ react-dom.production.min.js:272
 qa @ react-dom.production.min.js:127
 (anônimo) @ react-dom.production.min.js:266
-query.js:358 bt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+query.js:358 bt {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
 onError @ query.js:358
 f @ retryer.js:67
 (anônimo) @ retryer.js:132
@@ -667,1219 +1997,3 @@ jc @ react-dom.production.min.js:280
 lc @ react-dom.production.min.js:272
 qa @ react-dom.production.min.js:127
 (anônimo) @ react-dom.production.min.js:266
-
-fetch("https://feedelizapro.towersfy.com/fidelity/dashboard", {
-  "headers": {
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "document",
-    "sec-fetch-mode": "navigate",
-    "sec-fetch-site": "same-origin",
-    "sec-fetch-user": "?1",
-    "upgrade-insecure-requests": "1"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap", {
-  "headers": {
-    "accept": "text/css,*/*;q=0.1",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "style",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "cross-site",
-    "sec-fetch-storage-access": "active",
-    "x-browser-channel": "stable",
-    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
-    "x-browser-validation": "XPdmRdCCj2OkELQ2uovjJFk6aKA=",
-    "x-browser-year": "2025",
-    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIk6HLAQiFoM0B",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://fonts.googleapis.com/icon?family=Material+Icons", {
-  "headers": {
-    "accept": "text/css,*/*;q=0.1",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "style",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "cross-site",
-    "sec-fetch-storage-access": "active",
-    "x-browser-channel": "stable",
-    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
-    "x-browser-validation": "XPdmRdCCj2OkELQ2uovjJFk6aKA=",
-    "x-browser-year": "2025",
-    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIk6HLAQiFoM0B",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/static/js/main.fb436165.js", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "script",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "same-origin",
-    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/static/css/main.5ba1053a.css", {
-  "headers": {
-    "accept": "text/css,*/*;q=0.1",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "style",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "same-origin",
-    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "font",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "cross-site",
-    "x-browser-channel": "stable",
-    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
-    "x-browser-validation": "XPdmRdCCj2OkELQ2uovjJFk6aKA=",
-    "x-browser-year": "2025",
-    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIk6HLAQiFoM0B",
-    "Referer": "https://fonts.googleapis.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/favicon.ico", {
-  "headers": {
-    "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "image",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "same-origin",
-    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "if-none-match": "W/\"502-c1EO2z/duH/d68KBBoGJW4+NhFs\"",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/manifest.json", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "if-modified-since": "Thu, 11 Sep 2025 23:00:30 GMT",
-    "if-none-match": "\"68c3548e-1eb\"",
-    "priority": "u=2",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "manifest",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-origin",
-    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizapro.towersfy.com/logo192.png", {
-  "headers": {
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/favicon.ico", {
-  "headers": {
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/fidelity/monthly-summary"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8&start_date=2024-09-11&end_date=2025-09-11&granularity=month", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/npsCriteria?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/settings/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/rewards/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/npsCriteria?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/settings/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/rewards/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/favicon.ico", {
-  "headers": {
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/fidelity/satisfaction/settings"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBGEe.woff2", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "font",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "cross-site",
-    "x-browser-channel": "stable",
-    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
-    "x-browser-validation": "XPdmRdCCj2OkELQ2uovjJFk6aKA=",
-    "x-browser-year": "2025",
-    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIk6HLAQiFoM0B",
-    "Referer": "https://fonts.googleapis.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/npsCriteria?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/settings/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/rewards/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/favicon.ico", {
-  "headers": {
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/fidelity/satisfaction/surveys"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/surveys?search=&restaurant_id=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc2MzE5NDcsImV4cCI6MTc1ODIzNjc0N30.QJfmyq80MPBUqkVz91b6bmn00HE0uv1dP4J7oLdCZfI",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-});
-
-> feedeliza-plus@1.0.0 start
-> node server.js
-✅ Conexão com banco de dados estabelecida
-Type of getRestaurantContextMiddleware(): function
-🚀 Servidor rodando na porta 5000
-Redis Client Connected
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-Error: WHERE parameter "restaurant_id" has invalid "undefined" value
-    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
-    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
-    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
-    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
-    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
-    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-Error: WHERE parameter "restaurant_id" has invalid "undefined" value
-    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
-    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
-    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
-    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
-    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
-    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-DEBUG: checkRestaurantOwnership - error: ReferenceError: BadRequestError is not defined
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:52:33)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-ReferenceError: BadRequestError is not defined
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:52:33)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Error: WHERE parameter "restaurant_id" has invalid "undefined" value
-    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
-    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
-    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
-    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
-    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
-    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-DEBUG: checkRestaurantOwnership - error: ReferenceError: BadRequestError is not defined
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:52:33)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-ReferenceError: BadRequestError is not defined
-    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:52:33)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-Error: WHERE parameter "restaurant_id" has invalid "undefined" value
-    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
-    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
-    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
-    at PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:430:37)
-    at Checkin.aggregate (/app/node_modules/sequelize/lib/model.js:1277:45)
-    at Checkin.count (/app/node_modules/sequelize/lib/model.js:1306:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-ForbiddenError: Usuário não está associado a um restaurante.
-    at listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:18:23)
-    at /app/src/utils/asyncHandler.js:3:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/src/middleware/requirePermission.js:19:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-NotFoundError: Restaurante não encontrado
-    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
-NotFoundError: Recompensa não encontrada.
-    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:30:19)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-ForbiddenError: Usuário não está associado a um restaurante.
-    at listNpsCriteria (/app/src/domains/npsCriteria/npsCriteria.controller.js:18:23)
-    at /app/src/utils/asyncHandler.js:3:25
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at /app/src/middleware/requirePermission.js:19:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at authMiddleware (/app/src/middleware/authMiddleware.js:40:13)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-NotFoundError: Restaurante não encontrado
-    at Object.getRestaurantSettings (/app/src/domains/settings/settings.service.js:11:19)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async getRestaurantSettings (/app/src/domains/settings/settings.controller.js:30:26)
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-NotFoundError: Recompensa não encontrada.
-    at Object.getRewardById (/app/src/domains/rewards/rewards.service.js:30:19)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async getRewardById (/app/src/domains/rewards/rewards.controller.js:24:28)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-Error: WHERE parameter "restaurant_id" has invalid "undefined" value
-    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
-    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
-    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
-    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
-    at Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async listSurveys (/app/src/domains/surveys/surveys.controller.js:18:29)
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-req.user in requirePermission: {
-  id: '29b580e3-2dcd-4da8-b7f0-650815cc304d',
-  name: 'Super Admin',
-  email: 'superadmin@example.com',
-  phone: null,
-  roles: [
-    Role {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false,
-      UserRole: [UserRole]
-    }
-  ],
-  avatar: undefined,
-  isActive: true,
-  emailVerified: undefined,
-  lastLogin: undefined,
-  restaurants: [
-    Restaurant {
-      dataValues: [Object],
-      _previousDataValues: [Object],
-      uniqno: 1,
-      _changed: Set(0) {},
-      _options: [Object],
-      isNewRecord: false
-    }
-  ],
-  restaurant: null,
-  restaurantId: null,
-  isSuperadmin: true,
-  permissionSnapshot: { isSuperAdmin: true, permissions: {} }
-}
-req.user.isSuperadmin in requirePermission: true
-Error: WHERE parameter "restaurant_id" has invalid "undefined" value
-    at PostgresQueryGenerator.whereItemQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1746:13)
-    at /app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1737:25
-    at Array.forEach (<anonymous>)
-    at PostgresQueryGenerator.whereItemsQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:1735:35)
-    at PostgresQueryGenerator.getWhereConditions (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:2078:19)
-    at PostgresQueryGenerator.selectQuery (/app/node_modules/sequelize/lib/dialects/abstract/query-generator.js:991:28)
-    at PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:59)
-    at Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:47)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async listSurveys (/app/src/domains/surveys/surveys.controller.js:18:29)

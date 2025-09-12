@@ -9,15 +9,15 @@ module.exports = (db) => {
 
     const router = express.Router();
 
-    router.get('/', auth, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.listSurveys));
-    router.post('/', auth, requirePermission('fidelity:satisfaction:surveys', 'create'), ...createSurveyValidation, asyncHandler(surveyController.createSurvey));
-    router.put('/:id', auth, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyValidation, asyncHandler(surveyController.updateSurvey));
-    router.patch('/:id/status', auth, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyStatusValidation, asyncHandler(surveyController.updateSurveyStatus));
-    router.delete('/:id', auth, requirePermission('fidelity:satisfaction:surveys', 'delete'), asyncHandler(surveyController.deleteSurvey));
-    router.get('/:id', auth, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.getSurveyById));
-    router.get('/analytics/:restaurantId', auth, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.getSurveyAnalytics));
-    router.post('/comparison-analytics', auth, requirePermission('fidelity:general:surveys-comparison', 'read'), asyncHandler(surveyController.getSurveysComparisonAnalytics));
-    router.get('/:surveyId/questions/:questionId/answers-distribution', auth, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.getQuestionAnswersDistribution));
+    router.get('/', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.listSurveys));
+    router.post('/', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'create'), ...createSurveyValidation, asyncHandler(surveyController.createSurvey));
+    router.put('/:id', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyValidation, asyncHandler(surveyController.updateSurvey));
+    router.patch('/:id/status', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'update'), ...updateSurveyStatusValidation, asyncHandler(surveyController.updateSurveyStatus));
+    router.delete('/:id', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'delete'), asyncHandler(surveyController.deleteSurvey));
+    router.get('/:id', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.getSurveyById));
+    router.get('/analytics/:restaurantId', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.getSurveyAnalytics));
+    router.post('/comparison-analytics', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:general:surveys-comparison', 'read'), asyncHandler(surveyController.getSurveysComparisonAnalytics));
+    router.get('/:surveyId/questions/:questionId/answers-distribution', auth, auth.checkRestaurantOwnership, requirePermission('fidelity:satisfaction:surveys', 'read'), asyncHandler(surveyController.getQuestionAnswersDistribution));
 
     return router;
 };

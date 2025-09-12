@@ -154,7 +154,15 @@ module.exports = (db) => {
         ] = await Promise.all([
             models.Checkin.count({ where: { restaurantId, ...dateFilter } }),
             models.Customer.count({ where: { restaurantId, ...dateFilter } }),
-            models.SurveyResponse.count({ where: { restaurantId, ...dateFilter } }),
+            models.SurveyResponse.count({
+                where: { ...dateFilter },
+                include: [{
+                    model: models.Survey,
+                    as: 'survey',
+                    where: { restaurantId },
+                    attributes: []
+                }]
+            }),
             models.Coupon.count({
                 where: {
                     restaurantId,
@@ -164,10 +172,15 @@ module.exports = (db) => {
             }),
             models.SurveyResponse.findOne({
                 where: {
-                    restaurantId,
                     npsScore: { [Op.not]: null },
                     ...dateFilter
                 },
+                include: [{
+                    model: models.Survey,
+                    as: 'survey',
+                    where: { restaurantId },
+                    attributes: []
+                }],
                 attributes: [
                     [fn('AVG', col('npsScore')), 'avgNpsScore']
                 ],

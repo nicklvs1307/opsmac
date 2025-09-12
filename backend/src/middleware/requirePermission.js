@@ -4,7 +4,11 @@ const { UnauthorizedError, ForbiddenError, PaymentRequiredError } = require('uti
 // const models = require('models'); // Remover esta linha, não é mais necessária aqui
 
 const requirePermission = (featureKey, actionKey) => {
-  return async (req, res, next) => {
+  const middleware = async (req, res, next) => {
+    // ...
+  };
+  console.log(`DEBUG: requirePermission('${featureKey}', '${actionKey}') returns:`, middleware);
+  return middleware;
     const userId = req.user?.id;
     if (!userId) {
       return next(new UnauthorizedError('Acesso negado. Usuário não autenticado.'));

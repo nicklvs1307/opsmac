@@ -1,5 +1,5 @@
 const express = require('express');
-const requirePermission = require('middleware/requirePermission');
+const requirePermission = require('../../middleware/requirePermission');
 const asyncHandler = require('utils/asyncHandler');
 
 module.exports = (db) => {

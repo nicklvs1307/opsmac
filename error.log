@@ -2,8 +2,6 @@
 > node server.js
 ✅ Conexão com banco de dados estabelecida
 Type of getRestaurantContextMiddleware(): function
-DEBUG: auth.checkRestaurantOwnership: undefined
-DEBUG: requirePermission: [Function: requirePermission]
 ❌ Erro ao iniciar servidor: Error: Route.get() requires a callback function but got a [object Undefined]
     at Route.<computed> [as get] (/app/node_modules/express/lib/router/route.js:216:15)
     at proto.<computed> [as get] (/app/node_modules/express/lib/router/index.js:521:19)

@@ -131,11 +131,18 @@ module.exports = (db) => {
                 where: {
                     restaurantId,
                     status: 'used',
-                    redeemed_at: dateFilter.createdAt ? dateFilter.createdAt : { [Op.not]: null }
+                    ...(validStartDate && validEndDate ? { redeemed_at: { [Op.between]: [validStartDate, validEndDate] } } : {}),
+                    ...(!validStartDate && !validEndDate ? { redeemed_at: { [Op.not]: null } } : {})
                 }
             }),
             models.SurveyResponse.findOne({
-                where: { restaurantId, ...dateFilter, npsScore: { [Op.not]: null } },
+                where: {
+                    restaurantId,
+                    npsScore: { [Op.not]: null },
+                    ...(validStartDate && validEndDate ? { createdAt: { [Op.between]: [validStartDate, validEndDate] } } : {}),
+                    ...(validStartDate && !validEndDate ? { createdAt: { [Op.gte]: validStartDate } } : {}),
+                    ...(!validStartDate && validEndDate ? { createdAt: { [Op.lte]: validEndDate } } : {})
+                },
                 attributes: [
                     [fn('AVG', col('npsScore')), 'avgNpsScore']
                 ],

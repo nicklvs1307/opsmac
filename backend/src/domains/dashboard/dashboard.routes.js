@@ -20,8 +20,7 @@ module.exports = (db) => {
             return next();
         }
 
-        console.log('DEBUG: dashboard.routes.js - req.context.restaurantId (before check):', req.context?.restaurantId);
-        console.log('DEBUG: dashboard.routes.js - req.user.restaurantId (before check):', req.user?.restaurantId);
+        
         const restaurantId = req.context?.restaurantId || req.user.restaurantId;
         if (!restaurantId) {
             return next(new UnauthorizedError('Acesso negado. Contexto do restaurante ausente.'));

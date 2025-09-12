@@ -121,7 +121,7 @@ module.exports = (models) => {
             ]
         });
             
-        console.log('DEBUG: auth.service.js - user.restaurants:', user.restaurants);
+        
 
         if (!user) {
             throw new NotFoundError('Usuário não encontrado');

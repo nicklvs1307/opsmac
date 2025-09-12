@@ -54,16 +54,16 @@ module.exports = (db) => {
                     restaurantId: restaurantId,
                 }
             }),
-                    const loyalCustomersCount = await models.Checkin.count({
-            distinct: true,
-            col: 'customerId',
-            where: {
-                restaurantId,
-                createdAt: { [Op.gte]: new Date(new Date() - 30 * 24 * 60 * 60 * 1000) }
-            },
-            group: ['customerId'],
-            having: sequelize.where(sequelize.fn('COUNT', sequelize.col('id')), '>', 1)
-        }).then(results => results.length);
+            models.Checkin.count({
+                distinct: true,
+                col: 'customerId',
+                where: {
+                    restaurantId,
+                    createdAt: { [Op.gte]: new Date(new Date() - 30 * 24 * 60 * 60 * 1000) }
+                },
+                group: ['customerId'],
+                having: sequelize.where(sequelize.fn('COUNT', sequelize.col('id')), '>', 1)
+            }).then(results => results.length),
         ]);
 
         const mostCheckinsFormatted = mostCheckins.map(c => ({

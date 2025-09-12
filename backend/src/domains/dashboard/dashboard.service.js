@@ -91,6 +91,7 @@ module.exports = (db) => {
     }
 
     async function getDashboardAnalytics(restaurantId, query) {
+        console.log('DEBUG: getDashboardAnalytics - received restaurantId:', restaurantId);
         // This can be expanded with more detailed analytics, e.g., trends over time
         // For now, it will return similar data to overview but could be filtered by date range from query
         const startDate = query.start_date ? new Date(query.start_date) : null;

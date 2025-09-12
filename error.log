@@ -1,4 +1,12 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-12 23:52:52 [info] 	✅ Conexão com banco de dados estabelecida
-2025-09-12 23:52:53 [error] 	❌ Erro ao iniciar servidor: Unexpected end of input
+2025-09-12 23:56:44 [info] 	✅ Conexão com banco de dados estabelecida
+2025-09-12 23:56:44 [info] 	Attempting to load route file: /app/src/domains/addons/addons.routes.js
+2025-09-12 23:56:44 [info] 	Attempting to load route file: /app/src/domains/admin/admin.routes.js
+2025-09-12 23:56:44 [info] 	Attempting to load route file: /app/src/domains/auth/auth.routes.js
+2025-09-12 23:56:44 [info] 	Attempting to load route file: /app/src/domains/cashRegister/cashRegister.routes.js
+2025-09-12 23:56:44 [info] 	Attempting to load route file: /app/src/domains/categories/categories.routes.js
+2025-09-12 23:56:44 [info] 	Attempting to load route file: /app/src/domains/checkin/checkin.routes.js
+2025-09-12 23:56:44 [info] 	Attempting to load route file: /app/src/domains/coupons/coupons.routes.js
+2025-09-12 23:56:44 [info] 	Attempting to load route file: /app/src/domains/customerSegmentation/customerSegmentation.routes.js
+2025-09-12 23:56:44 [error] 	❌ Erro ao iniciar servidor: Unexpected end of input

@@ -342,7 +342,7 @@ class IamController {
 
   async checkPermission(req, res, next) {
     const userId = req.user?.id;
-    const restaurantId = req.query.restaurantId;
+    const restaurantId = req.context?.restaurantId; // Get restaurantId from req.context
     const { featureKey, actionKey } = req.body;
 
     if (!userId || !restaurantId) {

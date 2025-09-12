@@ -12,19 +12,35 @@ module.exports = (db) => {
     };
 
     return {
-        getDashboardOverview: async (req, res, next) => {
-            handleValidationErrors(req);
-            const restaurantId = req.context.restaurantId;
-            const data = await dashboardService.getDashboardOverview(restaurantId, req.query);
-            res.json(data);
-        },
+        const { BadRequestError } = require('utils/errors'); // Ensure BadRequestError is imported
 
-        getDashboardAnalytics: async (req, res, next) => {
-            handleValidationErrors(req);
-            const restaurantId = req.context.restaurantId;
-            const data = await dashboardService.getDashboardAnalytics(restaurantId, req.query);
-            res.json(data);
-        },
+// ... (rest of the file)
+
+const getDashboardOverview = async (req, res, next) => {
+    try {
+        const restaurantId = req.user.restaurantId;
+        if (!restaurantId) {
+            return next(new BadRequestError('ID do restaurante não fornecido para o usuário.'));
+        }
+        const overview = await dashboardService.getDashboardOverview(restaurantId, req.query);
+        res.json(overview);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getDashboardAnalytics = async (req, res, next) => {
+    try {
+        const restaurantId = req.user.restaurantId;
+        if (!restaurantId) {
+            return next(new BadRequestError('ID do restaurante não fornecido para o usuário.'));
+        }
+        const analytics = await dashboardService.getDashboardAnalytics(restaurantId, req.query);
+        res.json(analytics);
+    } catch (error) {
+        next(error);
+    }
+};
 
         generateReport: async (req, res, next) => {
             handleValidationErrors(req);

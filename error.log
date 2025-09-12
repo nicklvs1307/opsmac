@@ -1,9 +1,4 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-12 23:30:53 [info] 	✅ Conexão com banco de dados estabelecida
-2025-09-12 23:30:53 [error] 	❌ Erro ao iniciar servidor: Cannot find module '/app/src/utils/errors/BadRequestError'
-Require stack:
-- /app/src/domains/cashRegister/cashRegister.controller.js
-- /app/src/domains/cashRegister/cashRegister.routes.js
-- /app/routes/index.js
-- /app/server.js
+2025-09-12 23:41:00 [info] 	✅ Conexão com banco de dados estabelecida
+2025-09-12 23:41:00 [error] 	❌ Erro ao iniciar servidor: Unexpected end of input

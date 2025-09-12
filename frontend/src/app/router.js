@@ -1451,7 +1451,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'admin/checkins',
+        path: 'fidelity/checkin/analytics',
         element: (
           <ProtectedRoute featureKey="checkin_dashboard" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
@@ -1461,7 +1461,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'admin/tables',
+        path: 'erp/tables',
         element: (
           <ProtectedRoute featureKey="tables" actionKey="manage">
             <Suspense fallback={<div>Carregando...</div>}>
@@ -1471,7 +1471,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'admin/qrcodes',
+        path: 'qrcodes/manage',
         element: (
           <ProtectedRoute featureKey="qrcodes" actionKey="manage">
             <Suspense fallback={<div>Carregando...</div>}>
@@ -1481,7 +1481,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'admin/waiter-calls',
+        path: 'waiter/calls',
         element: (
           <ProtectedRoute featureKey="waiter_calls" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
@@ -1491,7 +1491,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'admin/whatsapp-messages',
+        path: 'whatsapp/messages',
         element: (
           <ProtectedRoute featureKey="whatsapp_messages" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>

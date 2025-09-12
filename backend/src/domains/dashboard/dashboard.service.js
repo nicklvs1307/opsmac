@@ -524,8 +524,35 @@ module.exports = (db) => {
         spinWheel,
         spinWheel,
         getBenchmarkingData,
+        getReport,
     };
 };
+
+async function getReport(restaurantId, reportType, query) {
+    const { start_date, end_date } = query;
+
+    const dateFilter = {};
+    if (start_date && end_date) {
+        dateFilter.createdAt = {
+            [Op.between]: [new Date(start_date), new Date(end_date)],
+        };
+    }
+
+    switch (reportType) {
+        case 'nps':
+            return await generateNPSReport(restaurantId, dateFilter);
+        case 'satisfaction':
+            return await generateSatisfactionReport(restaurantId, dateFilter);
+        case 'complaints':
+            return await generateComplaintsReport(restaurantId, dateFilter);
+        case 'trends':
+            return await generateTrendsReport(restaurantId, dateFilter);
+        case 'customers':
+            return await generateCustomersReport(restaurantId, dateFilter);
+        default:
+            throw new BadRequestError('Tipo de relatório inválido.');
+    }
+}
 
     async function getBenchmarkingData(restaurantId) {
         const today = new Date();

@@ -70,5 +70,11 @@ module.exports = (db) => {
             const data = await dashboardService.getBenchmarkingData(restaurantId);
             res.json(data);
         },
+        getReport: async (req, res, next) => {
+            const restaurantId = req.context.restaurantId;
+            const { reportType } = req.params;
+            const data = await dashboardService.getReport(restaurantId, reportType, req.query);
+            res.json(data);
+        },
     };
 };

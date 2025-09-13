@@ -40,6 +40,17 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       field: 'is_redeemed',
     },
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+      field: 'is_active',
+    },
+    reward_type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: 'reward_type',
+    },
     restaurantId: {
       type: DataTypes.UUID,
       allowNull: false,

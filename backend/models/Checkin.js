@@ -44,6 +44,21 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 'active',
     },
+    checkinTime: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'checkin_time',
+    },
+    checkoutTime: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      field: 'checkout_time',
+    },
+    expiresAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      field: 'expires_at',
+    },
   }, {
     sequelize,
     modelName: 'Checkin',

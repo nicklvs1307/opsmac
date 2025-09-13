@@ -152,9 +152,9 @@ module.exports = (db) => {
         ] = await Promise.all([
             models.Checkin.count({ where: { restaurantId, ...dateFilter } }),
             models.Customer.count({ where: { restaurantId, ...dateFilter } }),
-            models.SurveyResponse.count({
-                where: { restaurantId, ...dateFilter }
-            }),
+            // models.SurveyResponse.count({
+            //     where: { restaurantId, ...dateFilter }
+            // }),
             models.Coupon.count({
                 where: {
                     restaurantId,
@@ -169,7 +169,7 @@ module.exports = (db) => {
                     ...dateFilter
                 },
                 attributes: [
-                    [fn('AVG', col('npsScore')), 'avgNpsScore']
+                    [sequelize.literal('AVG("nps_score")'), 'avgNpsScore']
                 ],
                 raw: true
             }),
@@ -349,7 +349,7 @@ module.exports = (db) => {
             },
         };
 
-        const granularityFn = fn('DATE_TRUNC', granularity, col('createdAt'));
+        const granularityFn = fn('DATE_TRUNC', granularity, col('Checkin.createdAt'));
 
         const [
             checkins,
@@ -476,7 +476,7 @@ module.exports = (db) => {
                     'customerId'
                 ],
                 group: [granularityFn, 'customerId'],
-                having: db.sequelize.literal('COUNT("id") > 1'),
+                having: db.sequelize.literal('COUNT("Checkin"."id") > 1'),
                 order: [[granularityFn, 'ASC']],
                 raw: true,
             }),

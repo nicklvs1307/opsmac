@@ -16,5 +16,5 @@ module.exports = (db) => {
     router.post('/apply-rules', checkinPermission('fidelity:relationship:segmentation', 'write'), asyncHandler(customerSegmentationController.applySegmentationRules));
 
     return router;
-}
+};
 

@@ -1,14 +1,20 @@
 const { createLogger, format, transports } = require('winston');
-const { combine, timestamp, printf, colorize, align } = format;
+const { combine, timestamp, printf, colorize, align, errors } = format;
 
-const logFormat = printf(({ level, message, timestamp }) => {
-  return `${timestamp} [${level}] ${message}`;
+// Custom format to handle error stacks
+const logFormat = printf(({ level, message, timestamp, stack }) => {
+  if (stack) {
+    // When an error object is logged, the stack property will be available
+    return `${timestamp} [${level}]: ${message}\n${stack}`;
+  }
+  return `${timestamp} [${level}]: ${message}`;
 });
 
 const logger = createLogger({
   level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
   format: combine(
     timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    errors({ stack: true }), // This is crucial to get the stack trace
     logFormat
   ),
   transports: [
@@ -19,11 +25,11 @@ const logger = createLogger({
         logFormat
       )
     }),
-    // Optionally, add file transports for production
+    // You can still add file transports if needed
     // new transports.File({ filename: 'error.log', level: 'error' }),
     // new transports.File({ filename: 'combined.log' })
   ],
-  exitOnError: false, // Do not exit on handled exceptions
+  exitOnError: false,
 });
 
 module.exports = logger;

@@ -1,4 +1,4 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-13 00:01:59 [info] 	✅ Conexão com banco de dados estabelecida
-2025-09-13 00:01:59 [error] 	❌ Erro ao iniciar servidor: Router.use() requires a middleware function but got a undefined
+2025-09-13 11:36:32 [info] 	✅ Conexão com banco de dados estabelecida
+2025-09-13 11:36:35 [error] 	❌ Erro ao iniciar servidor: Unexpected token '{'

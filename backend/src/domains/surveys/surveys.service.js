@@ -1,169 +1,111 @@
 module.exports = (db) => {
     const { Survey, Answer, NpsCriterion } = db;
+    const { Op } = require('sequelize');
+    const { NotFoundError } = require('utils/errors');
 
-    const listSurveys = async (restaurantId) => {
-        try {
-            const surveys = await Survey.findAll({
-                where: { restaurantId },
-                include: [
-                    {
-                        model: NpsCriterion,
-                        as: 'npsCriteria',
-                        through: { attributes: [] } // Exclude join table attributes
-                    }
-                ]
-            });
-            return surveys;
-        } catch (error) {
-            console.error('Error listing surveys:', error);
-            throw new Error('Failed to list surveys');
+    const listSurveys = async (restaurantId, search) => {
+        const where = { restaurantId };
+        if (search) {
+            where.title = { [Op.iLike]: `%${search}%` };
         }
+
+        return Survey.findAll({
+            where,
+            include: [
+                {
+                    model: NpsCriterion,
+                    as: 'npsCriteria',
+                    through: { attributes: [] } // Exclude join table attributes
+                }
+            ]
+        });
     };
 
-    const createSurvey = async (surveyData, restaurantId) => {
-        try {
-            const survey = await Survey.create({ ...surveyData, restaurantId });
-            if (surveyData.npsCriteria && surveyData.npsCriteria.length > 0) {
-                await survey.setNpsCriteria(surveyData.npsCriteria);
-            }
-            return survey;
-        } catch (error) {
-            console.error('Error creating survey:', error);
-            throw new Error('Failed to create survey');
+    const createSurvey = async (surveyData, restaurantId, userId) => {
+        const survey = await Survey.create({ ...surveyData, restaurantId, userId });
+        if (surveyData.npsCriteria && surveyData.npsCriteria.length > 0) {
+            await survey.setNpsCriteria(surveyData.npsCriteria);
         }
+        return survey;
     };
 
     const getSurveyById = async (surveyId, restaurantId) => {
-        try {
-            const survey = await Survey.findOne({
-                where: { id: surveyId, restaurantId },
-                include: [
-                    {
-                        model: NpsCriterion,
-                        as: 'npsCriteria',
-                        through: { attributes: [] }
-                    }
-                ]
-            });
-            return survey;
-        } catch (error) {
-            console.error('Error getting survey by ID:', error);
-            throw new Error('Failed to get survey by ID');
+        const survey = await Survey.findOne({
+            where: { id: surveyId, restaurantId },
+            include: [
+                {
+                    model: NpsCriterion,
+                    as: 'npsCriteria',
+                    through: { attributes: [] }
+                }
+            ]
+        });
+        if (!survey) {
+            throw new NotFoundError('Pesquisa não encontrada.');
         }
+        return survey;
     };
 
     const updateSurvey = async (surveyId, surveyData, restaurantId) => {
-        try {
-            const survey = await Survey.findOne({ where: { id: surveyId, restaurantId } });
-            if (!survey) {
-                return null;
-            }
-            await survey.update(surveyData);
-            if (surveyData.npsCriteria) {
-                await survey.setNpsCriteria(surveyData.npsCriteria);
-            }
-            return survey;
-        } catch (error) {
-            console.error('Error updating survey:', error);
-            throw new Error('Failed to update survey');
+        const survey = await getSurveyById(surveyId, restaurantId);
+        await survey.update(surveyData);
+        if (surveyData.npsCriteria) {
+            await survey.setNpsCriteria(surveyData.npsCriteria);
         }
+        return survey;
+    };
+
+    const updateSurveyStatus = async (surveyId, status, restaurantId) => {
+        const survey = await getSurveyById(surveyId, restaurantId);
+        await survey.update({ status });
+        return survey;
     };
 
     const deleteSurvey = async (surveyId, restaurantId) => {
-        try {
-            const survey = await Survey.findOne({ where: { id: surveyId, restaurantId } });
-            if (!survey) {
-                return false;
-            }
-            await survey.destroy();
-            return true;
-        } catch (error) {
-            console.error('Error deleting survey:', error);
-            throw new Error('Failed to delete survey');
-        }
+        const survey = await getSurveyById(surveyId, restaurantId);
+        await survey.destroy();
+        return true;
     };
 
-    const getSurveyAnswers = async (surveyId, restaurantId) => {
-        try {
-            const answers = await Answer.findAll({
-                where: { surveyId },
-                include: [{
-                    model: Survey,
-                    as: 'survey',
-                    where: { restaurantId },
-                    attributes: []
-                }]
-            });
-            return answers;
-        } catch (error) {
-            console.error('Error getting survey answers:', error);
-            throw new Error('Failed to get survey answers');
-        }
+    const getSurveyAnalytics = async (restaurantId, surveyId) => {
+        const survey = await getSurveyById(surveyId, restaurantId);
+
+        const totalAnswers = await Answer.count({
+            where: { surveyId }
+        });
+
+        // More complex analytics can be added here
+        const analytics = {
+            totalAnswers,
+        };
+
+        return analytics;
     };
 
-    const getSurveyWithAnswers = async (surveyId, restaurantId) => {
-        try {
-            const survey = await Survey.findOne({
-                where: { id: surveyId, restaurantId },
-                include: [
-                    {
-                        model: Answer,
-                        as: 'answers'
-                    },
-                    {
-                        model: NpsCriterion,
-                        as: 'npsCriteria',
-                        through: { attributes: [] }
-                    }
-                ]
-            });
-            return survey;
-        } catch (error) {
-            console.error('Error getting survey with answers:', error);
-            throw new Error('Failed to get survey with answers');
-        }
+    const getSurveysComparisonAnalytics = async (restaurantId, surveyIds) => {
+        // Placeholder for more complex comparison logic
+        const analytics = await Promise.all(surveyIds.map(id => getSurveyAnalytics(restaurantId, id)));
+        return analytics;
     };
 
-    const getSurveyAnalytics = async (surveyId, restaurantId) => {
-        try {
-            const survey = await Survey.findOne({
-                where: { id: surveyId, restaurantId }
-            });
-            if (!survey) {
-                return null;
-            }
+    const getQuestionAnswersDistribution = async (restaurantId, surveyId, questionId) => {
+        await getSurveyById(surveyId, restaurantId); // Ensures survey belongs to restaurant
 
-            const answers = await Answer.findAll({
-                where: { surveyId }
-            });
+        const distribution = await Answer.findAll({
+            where: {
+                surveyId,
+                // This assumes answers are stored in a way that can be grouped.
+                // This is a simplified example.
+                'answers.questionId': questionId 
+            },
+            attributes: [
+                ['answers.value', 'answer'],
+                [db.sequelize.fn('COUNT', db.sequelize.col('id')), 'count']
+            ],
+            group: ['answers.value']
+        });
 
-            // Basic analytics example: count answers
-            const analytics = {
-                totalAnswers: answers.length,
-                // More complex analytics can be added here
-            };
-
-            return analytics;
-        } catch (error) {
-            console.error('Error getting survey analytics:', error);
-            throw new Error('Failed to get survey analytics');
-        }
-    };
-
-    const getAllAnswersForRestaurant = async (restaurantId) => {
-        try {
-            const answers = await Answer.findAll({
-                include: [{
-                    model: Survey,
-                    as: 'survey',
-                    where: { '$survey.restaurant_id$': restaurantId },
-                }],
-            });
-            return answers;
-        } catch (error) {
-            console.error('Error getting all answers for restaurant:', error);
-            throw new Error('Failed to get all answers for restaurant');
-        }
+        return distribution;
     };
 
     return {
@@ -171,10 +113,10 @@ module.exports = (db) => {
         createSurvey,
         getSurveyById,
         updateSurvey,
+        updateSurveyStatus,
         deleteSurvey,
-        getSurveyAnswers,
-        getSurveyWithAnswers,
         getSurveyAnalytics,
-        getAllAnswersForRestaurant,
+        getSurveysComparisonAnalytics,
+        getQuestionAnswersDistribution,
     };
 };

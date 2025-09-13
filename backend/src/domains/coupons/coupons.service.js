@@ -4,6 +4,23 @@ const { NotFoundError, BadRequestError } = require('utils/errors');
 module.exports = (db) => {
     const models = db;
     const sequelize = db.sequelize;
+    const rewardsService = require('../rewards/rewards.service')(db);
+
+    // Helper Functions for explicit business logic
+    const _isCouponValid = (coupon) => {
+        if (!coupon) return false;
+        const now = new Date();
+        const expiresAt = coupon.expiresAt ? new Date(coupon.expiresAt) : null;
+        // A coupon is valid if it's active and has no expiration or the expiration is in the future.
+        return coupon.status === 'active' && (!expiresAt || expiresAt > now);
+    };
+
+    const _redeemCoupon = (coupon) => {
+        // The beforeUpdate hook on the Coupon model will handle setting redeemedAt
+        // and other associated logic like analytics.
+        return coupon.update({ status: 'redeemed' });
+    };
+
 
     const listCoupons = async (restaurantId, page, limit, status, search) => {
         const offset = (page - 1) * limit;
@@ -72,11 +89,11 @@ module.exports = (db) => {
             throw new NotFoundError('Cupom não encontrado ou não pertence ao seu restaurante.');
         }
 
-        if (!coupon.canBeRedeemed()) {
+        if (!_isCouponValid(coupon)) {
             throw new BadRequestError('Cupom não pode ser resgatado (inativo, expirado ou já resgatado/cancelado).');
         }
 
-        return coupon.redeem(orderValue);
+        return _redeemCoupon(coupon);
     };
 
     const createCoupon = async (rewardId, customerId, restaurantId, expiresAt) => {
@@ -94,7 +111,7 @@ module.exports = (db) => {
             throw new NotFoundError('Cliente não encontrado ou não pertence ao seu restaurante.');
         }
 
-        const { coupon } = await reward.generateCoupon(customerId, { expiresAt });
+        const { coupon } = await rewardsService.generateCouponForReward(reward, customerId, { expiresAt });
 
         return coupon;
     };
@@ -166,7 +183,7 @@ module.exports = (db) => {
 
         return {
             ...coupon.toJSON(),
-            isValid: coupon.isValid()
+            isValid: _isCouponValid(coupon)
         };
     };
 

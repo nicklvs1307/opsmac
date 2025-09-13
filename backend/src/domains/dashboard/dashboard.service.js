@@ -4,92 +4,6 @@ module.exports = (db) => {
     const { BadRequestError, NotFoundError } = require('utils/errors');
     const rewardsService = require('domains/rewards/rewards.service')(db);
 
-    // Helper function to get restaurant ID from authenticated user
-    const getRestaurantIdFromUser = async (userId) => {
-        const user = await models.User.findByPk(userId, {
-            include: [{ model: models.Restaurant, as: 'restaurants' }]
-        });
-        return user?.restaurants?.[0]?.id;
-    };
-
-    // --- Dashboard Overview Functions ---
-    async function getDashboardOverview(restaurantId, query) {
-        
-        const today = new Date();
-        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-
-        const dateFilter = {
-            createdAt: { [Op.between]: [startOfMonth, endOfMonth] }
-        };
-
-        const [
-            totalCheckins,
-            newCustomers,
-            totalSurveyResponses,
-            redeemedCoupons,
-            feedbackStats,
-            totalLoyaltyPoints, // New
-            totalSpentOverall,  // New
-            totalCustomersCount, // New
-            engagedCustomersCount, // New
-            loyalCustomers // New
-        ] = await Promise.all([
-            models.Checkin.count({
-                where: { restaurantId, ...dateFilter }
-            }),
-            models.Customer.count({
-                where: { restaurantId, ...dateFilter }
-            }),
-            models.SurveyResponse.count({
-                where: { restaurantId, ...dateFilter }
-            }),
-            models.Coupon.count({
-                where: {
-                    restaurantId,
-                    status: 'used',
-                    redeemed_at: { [Op.between]: [startOfMonth, endOfMonth] }
-                }
-            }),
-            models.Feedback.findOne({
-                where: { restaurantId, ...dateFilter },
-                attributes: [
-                    [fn('AVG', col('npsScore')), 'avgNpsScore'],
-                    [fn('AVG', col('rating')), 'avgRating']
-                ],
-                raw: true
-            }),
-            // New queries for loyalty metrics
-            models.Customer.sum('loyaltyPoints', { where: { restaurantId } }), // totalLoyaltyPoints
-            models.Customer.sum('totalSpent', { where: { restaurantId } }),    // totalSpentOverall
-            models.Customer.count({ where: { restaurantId } }), // totalCustomersCount
-            models.Checkin.count({ distinct: true, col: 'customerId', where: { restaurantId } }), // engagedCustomersCount
-            models.Checkin.findAll({ // loyalCustomers
-                attributes: ['customerId'],
-                where: { restaurantId },
-                group: ['customerId'],
-                having: literal('COUNT("id") > 1')
-            })
-        ]);
-
-        const engagementRate = totalCustomersCount > 0 ? (engagedCustomersCount / totalCustomersCount) * 100 : 0;
-        const loyalCustomersCountValue = loyalCustomers.length;
-        const loyaltyRate = totalCustomersCount > 0 ? (loyalCustomersCountValue / totalCustomersCount) * 100 : 0;
-
-        return {
-            totalCheckins,
-            newCustomers,
-            totalSurveyResponses,
-            redeemedCoupons,
-            avgNpsScore: feedbackStats?.avgNpsScore || 0,
-            avgRating: feedbackStats?.avgRating || 0,
-            totalLoyaltyPoints: totalLoyaltyPoints || 0, // New
-            totalSpentOverall: totalSpentOverall || 0,   // New
-            engagementRate: engagementRate.toFixed(2),    // New
-            loyaltyRate: loyaltyRate.toFixed(2),          // New
-        };
-    }
-
     async function getDashboardAnalytics(restaurantId, query) {
         const { start_date, end_date, period } = query;
         let validStartDate = null;
@@ -669,7 +583,6 @@ module.exports = (db) => {
             fetchMetricsForPeriod(currentMonthStart, today),
             fetchMetricsForPeriod(lastMonthStart, lastMonthEnd),
             fetchMetricsForPeriod(lastQuarterStart, lastQuarterEnd),
-            fetchMetricsForPeriod(lastQuarterStart, lastQuarterEnd),
             fetchMetricsForPeriod(lastYearStart, lastYearEnd)
         ]);
 
@@ -682,9 +595,8 @@ module.exports = (db) => {
     }
 
     return {
-        getDashboardOverview,
         getDashboardAnalytics,
-        getRewardsAnalytics, // Placeholder, as it's likely in rewards.service.js
+        getRewardsAnalytics,
         generateNPSReport,
         generateSatisfactionReport,
         generateComplaintsReport,

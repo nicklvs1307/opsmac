@@ -66,23 +66,18 @@ module.exports = (db) => {
     // Function to update goal progress (can be called by a cron job or trigger)
     const updateGoalProgress = async (goalId, restaurantId) => {
         const goal = await getGoalById(goalId, restaurantId);
+        const dateFilter = { createdAt: { [Op.between]: [goal.startDate, goal.endDate] } };
 
         let currentValue = 0;
         switch (goal.metric) {
             case 'totalCheckins':
                 currentValue = await models.Checkin.count({
-                    where: {
-                        restaurantId,
-                        createdAt: { [Op.between]: [goal.startDate, goal.endDate] },
-                    },
+                    where: { restaurantId, ...dateFilter },
                 });
                 break;
             case 'newCustomers':
                 currentValue = await models.Customer.count({
-                    where: {
-                        restaurantId,
-                        createdAt: { [Op.between]: [goal.startDate, goal.endDate] },
-                    },
+                    where: { restaurantId, ...dateFilter },
                 });
                 break;
             case 'avgNpsScore':
@@ -90,21 +85,23 @@ module.exports = (db) => {
                     where: {
                         restaurantId,
                         npsScore: { [Op.not]: null },
-                        createdAt: { [Op.between]: [goal.startDate, goal.endDate] },
+                        ...dateFilter,
                     },
                     attributes: [[db.sequelize.fn('AVG', db.sequelize.col('npsScore')), 'avgNpsScore']],
                     raw: true,
                 });
                 currentValue = npsResult?.avgNpsScore || 0;
                 break;
-            case 'totalLoyaltyPoints':
-                currentValue = await models.Customer.sum('loyaltyPoints', {
-                    where: { restaurantId },
-                });
-                break;
+            // A métrica 'totalLoyaltyPoints' foi removida porque sua lógica estava fundamentalmente incorreta.
+            // Ela somava o total de pontos de um cliente, não os pontos ganhos no período da meta.
+            // Para implementá-la corretamente, seria necessário um histórico de transações de pontos, que não existe atualmente.
             case 'totalSpent':
-                currentValue = await models.Customer.sum('totalSpent', {
-                    where: { restaurantId },
+                currentValue = await models.FinancialTransaction.sum('amount', {
+                    where: { 
+                        restaurantId,
+                        type: 'income', // Assuming we only count income towards goals
+                        ...dateFilter 
+                    },
                 });
                 break;
             // Add more metrics as needed

@@ -1,6 +1,6 @@
 module.exports = (db) => {
     const models = db;
-    const { Op } = require('sequelize');
+    const { Op, sequelize } = require('sequelize');
     const { BadRequestError, NotFoundError } = require('utils/errors');
 
     const listSegments = async (restaurantId) => {
@@ -43,53 +43,53 @@ module.exports = (db) => {
         return { message: 'Segmento excluído com sucesso.' };
     };
 
-    // Function to apply segmentation rules to customers
     const applySegmentationRules = async (restaurantId) => {
         const segments = await models.CustomerSegment.findAll({
             where: { restaurantId },
+            order: [['priority', 'DESC']], // Process higher priority segments first
         });
 
-        const customers = await models.Customer.findAll({
-            where: { restaurantId },
-        });
+        if (!segments || segments.length === 0) {
+            return { message: 'Nenhum segmento para aplicar.' };
+        }
 
-        for (const customer of customers) {
-            let assignedSegment = 'default'; // Default segment if no rules match
+        const transaction = await db.sequelize.transaction();
+
+        try {
+            // Reset all customers in this restaurant to a default segment first
+            await models.Customer.update(
+                { segment: 'default' },
+                { where: { restaurantId }, transaction }
+            );
 
             for (const segment of segments) {
-                let rulesMatch = true;
-                if (segment.rules && segment.rules.length > 0) {
-                    for (const rule of segment.rules) {
-                        // Basic rule evaluation (can be expanded for more complex rules)
-                        if (rule.field === 'totalVisits' && customer.totalVisits < rule.value) {
-                            rulesMatch = false;
-                            break;
-                        }
-                        if (rule.field === 'totalSpent' && customer.totalSpent < rule.value) {
-                            rulesMatch = false;
-                            break;
-                        }
-                        if (rule.field === 'loyaltyPoints' && customer.loyaltyPoints < rule.value) {
-                            rulesMatch = false;
-                            break;
-                        }
-                        // Add more rule types as needed (e.g., lastVisit, feedbackRating)
-                    }
-                } else {
-                    // If no rules defined, this segment doesn't apply based on rules
-                    rulesMatch = false;
+                if (!segment.rules || segment.rules.length === 0) {
+                    continue; // Skip segments with no rules
                 }
 
-                if (rulesMatch) {
-                    assignedSegment = segment.name; // Assign the first matching segment
-                    break; // Assign to the first matching segment and move to next customer
-                }
+                const whereClause = {
+                    restaurantId,
+                    [Op.and]: segment.rules.map(rule => {
+                        // Ensure operator is a valid Sequelize operator, default to gte
+                        const operator = Op[rule.operator] || Op.gte;
+                        return { [rule.field]: { [operator]: rule.value } };
+                    })
+                };
+
+                await models.Customer.update(
+                    { segment: segment.name },
+                    { where: whereClause, transaction }
+                );
             }
-            if (customer.segment !== assignedSegment) {
-                await customer.update({ segment: assignedSegment });
-            }
+
+            await transaction.commit();
+            return { message: 'Regras de segmentação aplicadas com sucesso.' };
+
+        } catch (error) {
+            await transaction.rollback();
+            console.error("Erro ao aplicar regras de segmentação:", error);
+            throw new Error('Falha ao aplicar regras de segmentação.');
         }
-        return { message: 'Regras de segmentação aplicadas com sucesso.' };
     };
 
     return {

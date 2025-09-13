@@ -1,91 +1,151 @@
 const { BadRequestError } = require('utils/errors');
-const auditService = require('services/auditService'); // Import auditService
+const auditService = require('services/auditService');
+const { validationResult } = require('express-validator');
 
 module.exports = (db) => {
     const customerService = require('./customer.service')(db);
 
-    // Helper para obter o restaurantId e passá-lo para o serviço
-    const withRestaurantId = (serviceFunction) => async (req, res, next) => {
-        try {
-            const restaurantId = req.context.restaurantId;
-            const result = await serviceFunction(restaurantId, req.params, req.query, req.body);
-            res.json(result);
-        } catch (error) {
-            next(error);
+    const handleValidationErrors = (req) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new BadRequestError('Dados inválidos', errors.array());
         }
     };
 
     return {
         getCustomerDashboardMetrics: async (req, res, next) => {
-            const restaurantId = req.context.restaurantId;
-            if (!restaurantId) {
-                throw new BadRequestError('Restaurante não encontrado para o usuário.');
+            try {
+                const restaurantId = req.context.restaurantId;
+                const metrics = await customerService.getCustomerDashboardMetrics(restaurantId);
+                res.json(metrics);
+            } catch (error) {
+                next(error);
             }
-            const metrics = await customerService.getCustomerDashboardMetrics(restaurantId);
-            res.json(metrics);
         },
 
-        getBirthdayCustomers: withRestaurantId(async (restaurantId) => {
-            return customerService.getBirthdayCustomers(restaurantId);
-        }),
+        getBirthdayCustomers: async (req, res, next) => {
+            try {
+                const restaurantId = req.context.restaurantId;
+                const customers = await customerService.getBirthdayCustomers(restaurantId);
+                res.json(customers);
+            } catch (error) {
+                next(error);
+            }
+        },
 
-        listCustomers: withRestaurantId(async (restaurantId, params, query) => {
-            const { count, rows } = await customerService.listCustomers(restaurantId, query);
-            return {
-                customers: rows,
-                totalPages: Math.ceil(count / (query.limit || 10)),
-                currentPage: parseInt(query.page || 1),
-                totalCustomers: count,
-            };
-        }),
+        listCustomers: async (req, res, next) => {
+            try {
+                handleValidationErrors(req);
+                const restaurantId = req.context.restaurantId;
+                const { count, rows } = await customerService.listCustomers(restaurantId, req.query);
+                res.json({
+                    customers: rows,
+                    totalPages: Math.ceil(count / (req.query.limit || 10)),
+                    currentPage: parseInt(req.query.page || 1),
+                    totalCustomers: count,
+                });
+            } catch (error) {
+                next(error);
+            }
+        },
 
-        createCustomer: withRestaurantId(async (restaurantId, params, query, body) => {
-            const customer = await customerService.createCustomer(restaurantId, body);
-            await auditService.log(query.user, restaurantId, 'CUSTOMER_CREATED', `Customer:${customer.id}`, { name: customer.name, email: customer.email });
-            return customer;
-        }),
+        createCustomer: async (req, res, next) => {
+            try {
+                handleValidationErrors(req);
+                const restaurantId = req.context.restaurantId;
+                const customer = await customerService.createCustomer(restaurantId, req.body);
+                await auditService.log(req.user, restaurantId, 'CUSTOMER_CREATED', `Customer:${customer.id}`, { name: customer.name, email: customer.email });
+                res.status(201).json(customer);
+            } catch (error) {
+                next(error);
+            }
+        },
 
-        getCustomerByPhone: withRestaurantId(async (restaurantId, params, query) => {
-            return customerService.getCustomerByPhone(restaurantId, query.phone);
-        }),
+        getCustomerByPhone: async (req, res, next) => {
+            try {
+                handleValidationErrors(req);
+                const restaurantId = req.context.restaurantId;
+                const customer = await customerService.getCustomerByPhone(restaurantId, req.query.phone);
+                res.json(customer);
+            } catch (error) {
+                next(error);
+            }
+        },
 
-        getCustomerById: withRestaurantId(async (restaurantId, params) => {
-            return customerService.getCustomerById(restaurantId, params.id);
-        }),
+        getCustomerById: async (req, res, next) => {
+            try {
+                const restaurantId = req.context.restaurantId;
+                const customer = await customerService.getCustomerById(restaurantId, req.params.id);
+                res.json(customer);
+            } catch (error) {
+                next(error);
+            }
+        },
 
-        updateCustomer: withRestaurantId(async (restaurantId, params, query, body) => {
-            const customer = await customerService.updateCustomer(restaurantId, params.id, body);
-            await auditService.log(query.user, restaurantId, 'CUSTOMER_UPDATED', `Customer:${customer.id}`, { updatedData: body });
-            return customer;
-        }),
+        updateCustomer: async (req, res, next) => {
+            try {
+                handleValidationErrors(req);
+                const restaurantId = req.context.restaurantId;
+                const customer = await customerService.updateCustomer(restaurantId, req.params.id, req.body);
+                await auditService.log(req.user, restaurantId, 'CUSTOMER_UPDATED', `Customer:${customer.id}`, { updatedData: req.body });
+                res.json(customer);
+            } catch (error) {
+                next(error);
+            }
+        },
 
-        deleteCustomer: withRestaurantId(async (restaurantId, params, query) => {
-            await customerService.deleteCustomer(restaurantId, params.id);
-            await auditService.log(query.user, restaurantId, 'CUSTOMER_DELETED', `Customer:${params.id}`, {});
-            return {};
-        }),
+        deleteCustomer: async (req, res, next) => {
+            try {
+                const restaurantId = req.context.restaurantId;
+                await customerService.deleteCustomer(restaurantId, req.params.id);
+                await auditService.log(req.user, restaurantId, 'CUSTOMER_DELETED', `Customer:${req.params.id}`, {});
+                res.status(200).json({ message: 'Cliente excluído com sucesso.' });
+            } catch (error) {
+                next(error);
+            }
+        },
 
-        getCustomerDetails: withRestaurantId(async (restaurantId, params) => {
-            return customerService.getCustomerDetails(restaurantId, params.id);
-        }),
+        getCustomerDetails: async (req, res, next) => {
+            try {
+                const restaurantId = req.context.restaurantId;
+                const details = await customerService.getCustomerDetails(restaurantId, req.params.id);
+                res.json(details);
+            } catch (error) {
+                next(error);
+            }
+        },
 
-        resetCustomerVisits: withRestaurantId(async (restaurantId, params, query) => {
-            const customer = await customerService.resetCustomerVisits(restaurantId, params.id);
-            await auditService.log(query.user, restaurantId, 'CUSTOMER_VISITS_RESET', `Customer:${customer.id}`, {});
-            return { message: 'Visitas do cliente resetadas com sucesso.', customer };
-        }),
+        resetCustomerVisits: async (req, res, next) => {
+            try {
+                const restaurantId = req.context.restaurantId;
+                const customer = await customerService.resetCustomerVisits(restaurantId, req.params.id);
+                await auditService.log(req.user, restaurantId, 'CUSTOMER_VISITS_RESET', `Customer:${customer.id}`, {});
+                res.json({ message: 'Visitas do cliente resetadas com sucesso.', customer });
+            } catch (error) {
+                next(error);
+            }
+        },
 
-        clearCustomerCheckins: withRestaurantId(async (restaurantId, params, query) => {
-            await customerService.clearCustomerCheckins(restaurantId, params.id);
-            await auditService.log(query.user, restaurantId, 'CUSTOMER_CHECKINS_CLEARED', `Customer:${params.id}`, {});
-            return { message: 'Check-ins do cliente limpos com sucesso.' };
-        }),
+        clearCustomerCheckins: async (req, res, next) => {
+            try {
+                const restaurantId = req.context.restaurantId;
+                await customerService.clearCustomerCheckins(restaurantId, req.params.id);
+                await auditService.log(req.user, restaurantId, 'CUSTOMER_CHECKINS_CLEARED', `Customer:${req.params.id}`, {});
+                res.json({ message: 'Check-ins do cliente limpos com sucesso.' });
+            } catch (error) {
+                next(error);
+            }
+        },
 
         publicRegisterCustomer: async (req, res, next) => {
-            const result = await customerService.publicRegisterCustomer(req.body);
-            // No req.user for public routes, so pass null for user
-            await auditService.log(null, result.restaurantId, 'PUBLIC_CUSTOMER_REGISTERED', `Customer:${result.customer.id}`, { name: result.customer.name, email: result.customer.email });
-            res.status(result.status).json(result);
+            try {
+                handleValidationErrors(req);
+                const result = await customerService.publicRegisterCustomer(req.body);
+                await auditService.log(null, result.restaurantId, 'PUBLIC_CUSTOMER_REGISTERED', `Customer:${result.customer.id}`, { name: result.customer.name, email: result.customer.email });
+                res.status(result.status || 201).json(result);
+            } catch (error) {
+                next(error);
+            }
         },
     };
 };

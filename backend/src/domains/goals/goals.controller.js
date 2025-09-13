@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const { BadRequestError } = require('utils/errors');
+const auditService = require('services/auditService');
 
 module.exports = (db) => {
     const goalsService = require('./goals.service')(db);
@@ -28,6 +29,7 @@ module.exports = (db) => {
             handleValidationErrors(req);
             const restaurantId = req.context.restaurantId;
             const newGoal = await goalsService.createGoal(req.body, restaurantId);
+            await auditService.log(req.user, restaurantId, 'GOAL_CREATED', `Goal:${newGoal.id}`, { name: newGoal.name });
             res.status(201).json(newGoal);
         },
 
@@ -35,18 +37,21 @@ module.exports = (db) => {
             handleValidationErrors(req);
             const restaurantId = req.context.restaurantId;
             const updatedGoal = await goalsService.updateGoal(req.params.id, req.body, restaurantId);
+            await auditService.log(req.user, restaurantId, 'GOAL_UPDATED', `Goal:${updatedGoal.id}`, { changes: req.body });
             res.json(updatedGoal);
         },
 
         deleteGoal: async (req, res, next) => {
             const restaurantId = req.context.restaurantId;
-            const result = await goalsService.deleteGoal(req.params.id, restaurantId);
-            res.status(200).json(result);
+            await goalsService.deleteGoal(req.params.id, restaurantId);
+            await auditService.log(req.user, restaurantId, 'GOAL_DELETED', `Goal:${req.params.id}`, {});
+            res.status(200).json({ message: 'Meta excluída com sucesso.' });
         },
 
         updateGoalProgress: async (req, res, next) => {
             const restaurantId = req.context.restaurantId;
             const updatedGoal = await goalsService.updateGoalProgress(req.params.id, restaurantId);
+            await auditService.log(req.user, restaurantId, 'GOAL_PROGRESS_UPDATED', `Goal:${updatedGoal.id}`, { progress: updatedGoal.currentValue });
             res.json(updatedGoal);
         },
     };

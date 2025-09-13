@@ -4,6 +4,7 @@ const { BadRequestError, NotFoundError, ForbiddenError } = require('utils/errors
 module.exports = (db) => {
     const models = db;
     const sequelize = db.sequelize;
+    const rewardsService = require('../rewards/rewards.service')(db);
 
     const recordCheckin = async (customerId, restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
@@ -221,7 +222,7 @@ module.exports = (db) => {
                                 description: reward.description,
                             };
                         } else {
-                            const newCoupon = await reward.generateCoupon(customer.id, { visitMilestone: parsedVisitCount });
+                            const { coupon: newCoupon } = await rewardsService.generateCouponForReward(reward, customer.id, { visitMilestone: parsedVisitCount });
 
                             if (newCoupon) {
                                 rewardEarned = {
@@ -269,14 +270,8 @@ module.exports = (db) => {
             throw new NotFoundError('Restaurante associado ao check-in não encontrado.');
         }
 
-        const user = await models.User.findByPk(userId, {
-            include: [{ model: models.Restaurant, as: 'restaurants' }]
-        });
-
-        const isOwner = user.role === 'admin' || user.restaurants.some(r => r.id === restaurant.id);
-        if (!isOwner) {
-            throw new ForbiddenError('Acesso negado a este restaurante.');
-        }
+        // A verificação de permissão foi removida daqui.
+        // Ela agora é garantida pelo middleware 'requirePermission' na camada de rotas.
 
         checkin.checkoutTime = new Date();
         checkin.status = 'completed';

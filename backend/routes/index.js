@@ -8,8 +8,8 @@ module.exports = (db) => {
     const { auth } = require("../src/middleware/authMiddleware")(db);
     const restaurantContextMiddleware = getRestaurantContextMiddleware();
 
-    // Apply restaurant context globally, as public routes might need it too
-    mainRouter.use(restaurantContextMiddleware);
+    // Apply restaurant context middleware after auth for private routes
+    // mainRouter.use(restaurantContextMiddleware);
 
     // Define which domains are public and should not have the auth middleware applied
     const publicDomains = [
@@ -40,7 +40,7 @@ module.exports = (db) => {
                 mainRouter.use(`/${domainName}`, domainRouter);
             } else {
                 // Private routes: apply auth middleware
-                mainRouter.use(`/${domainName}`, auth, domainRouter);
+                mainRouter.use(`/${domainName}`, auth, restaurantContextMiddleware, domainRouter);
             }
         }
     });

@@ -22,7 +22,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Lock } from '@mui/icons-material'; // Import Lock icon
 
-const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, permissionsMap }) => {
+const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, checkPermission }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -83,7 +83,7 @@ const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, permissionsM
             parentEl={openSubmenu.anchor}
             onClose={onClose}
             level={level + 1}
-            permissionsMap={permissionsMap}
+            checkPermission={checkPermission}
           />
         )}
       </ListItem>
@@ -125,14 +125,14 @@ const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, permissionsM
           parentEl={openSubmenu.anchor}
           onClose={onClose}
           level={level + 1}
-          permissionsMap={permissionsMap}
+          checkPermission={checkPermission}
         />
       )}
     </>
   );
 };
 
-const Sidebar = ({ menuStructure, permissionsMap, onMobileClose, isSuperAdmin }) => {
+const Sidebar = ({ menuStructure, checkPermission, onMobileClose, isSuperAdmin }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
@@ -151,9 +151,9 @@ const Sidebar = ({ menuStructure, permissionsMap, onMobileClose, isSuperAdmin })
           hasAccess = true;
           isLocked = false;
         } else if (item.featureKey && item.actionKey) {
-          const perm = permissionsMap.get(`${item.featureKey}:${item.actionKey}`);
-          hasAccess = perm?.allowed || false;
-          isLocked = perm?.locked || false;
+          const perm = checkPermission(item.featureKey, item.actionKey);
+          hasAccess = perm.allowed;
+          isLocked = perm.locked;
         }
 
         const newItem = { ...item, hasAccess, isLocked };
@@ -325,7 +325,7 @@ const Sidebar = ({ menuStructure, permissionsMap, onMobileClose, isSuperAdmin })
             items={openPopper.items}
             parentEl={openPopper.anchor}
             onClose={handlePopperClose}
-            permissionsMap={permissionsMap}
+            checkPermission={checkPermission}
           />
         )}
       </Box>

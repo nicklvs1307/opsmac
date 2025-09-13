@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }) => {
         .get('/auth/me')
         .then(async (response) => {
           console.log('AuthContext useEffect: /auth/me successful', response.data);
-          const userData = response.data.user;
+          const userData = response.data;
           let permissionSnapshot = null;
 
           const selectedRestaurantId = userData.restaurants && userData.restaurants.length > 0 ? userData.restaurants[0].id : null;

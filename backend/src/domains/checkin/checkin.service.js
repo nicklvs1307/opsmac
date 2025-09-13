@@ -328,7 +328,7 @@ module.exports = (db) => {
                 as: 'customer',
                 attributes: ['id', 'name', 'email'],
             }],
-            group: ['customerId', 'customer.id', 'customer.name', 'customer.email'],
+            group: ['Checkin.customerId', 'customer.id', 'customer.name', 'customer.email'],
             order: [['checkinCount', 'DESC']],
             limit: 10,
         });

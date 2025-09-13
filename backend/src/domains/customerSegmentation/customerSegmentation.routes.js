@@ -15,5 +15,6 @@ module.exports = (db) => {
     router.delete('/:id', checkinPermission('fidelity:relationship:segmentation', 'delete'), asyncHandler(customerSegmentationController.deleteSegment));
     router.post('/apply-rules', checkinPermission('fidelity:relationship:segmentation', 'write'), asyncHandler(customerSegmentationController.applySegmentationRules));
 
+    return router;
 }
 

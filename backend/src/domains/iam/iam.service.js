@@ -351,8 +351,8 @@ class IamService {
       }],
       order: [
         ['sort_order', 'ASC'],
-        [models.Submodule, 'sort_order', 'ASC'],
-        [models.Submodule, models.Feature, 'sort_order', 'ASC'],
+        ['submodules', 'sort_order', 'ASC'],
+        ['submodules', 'features', 'sort_order', 'ASC'],
       ],
     });
 

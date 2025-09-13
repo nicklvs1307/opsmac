@@ -14,7 +14,7 @@ module.exports = (db) => {
     return {
         listSurveys: async (req, res, next) => {
             const { search } = req.query;
-            const restaurant_id = req.query.restaurantId;
+            const restaurant_id = req.context.restaurantId;
             if (!restaurant_id) {
                 throw new BadRequestError('O ID do restaurante é obrigatório.');
             }
@@ -53,14 +53,14 @@ module.exports = (db) => {
 
         deleteSurvey: async (req, res, next) => {
             const { id } = req.params;
-            const restaurant_id = req.query.restaurantId; // Assumindo que restaurantId virá na query string
+            const restaurant_id = req.context.restaurantId;
             await surveyService.deleteSurvey(id, restaurant_id);
             res.json({ message: 'Pesquisa removida com sucesso' });
         },
 
         getSurveyById: async (req, res, next) => {
             const { id } = req.params;
-            const restaurant_id = req.query.restaurantId; // Assumindo que restaurantId virá na query string
+            const restaurant_id = req.context.restaurantId;
             const survey = await surveyService.getSurveyById(id, restaurant_id);
             res.json(survey);
         },

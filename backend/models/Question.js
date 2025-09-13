@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'question_id',
         as: 'answers',
       });
+      Question.belongsTo(models.NpsCriterion, {
+        foreignKey: 'nps_criterion_id',
+        as: 'npsCriterion',
+      });
     }
   }
 
@@ -25,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false,
       field: 'survey_id',
+    },
+    npsCriterionId: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      field: 'nps_criterion_id',
     },
     text: {
       type: DataTypes.TEXT,

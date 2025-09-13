@@ -252,13 +252,10 @@ class IamController {
     const userId = req.user?.id;
     let restaurantId = req.context?.restaurantId; // Get restaurantId from req.context
 
-    // For superadmins, bypass restaurant context check if not explicitly provided
+    // For superadmins, if no restaurantId is provided, pass null to the service layer.
+    // The service layer's checkPermission function will handle superadmin bypass.
     if (req.user.isSuperadmin && !restaurantId) {
-        // Superadmins can operate without a specific restaurant context for some IAM operations
-        // Or, if a restaurantId is needed, it should be provided in the request.
-        // For now, we'll allow superadmins to proceed without a restaurantId if it's not present.
-        // Further refinement might be needed based on specific superadmin use cases.
-        restaurantId = 'superadmin_context'; // A placeholder or special value
+        restaurantId = null;
     }
 
     const { featureKey, actionKey } = req.body;

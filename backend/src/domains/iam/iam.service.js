@@ -199,6 +199,7 @@ class IamService {
 
       for (const entitlementData of entitlements) {
         const { entityType, entityId, status, source, metadata } = entitlementData;
+        await this._validateEntitlementEntity(entityType, entityId); // ADDED LINE
 
         const [entitlement, created] = await models.RestaurantEntitlement.findOrCreate({
           where: { restaurant_id: restaurantId, entity_type: entityType, entity_id: entityId },
@@ -246,6 +247,7 @@ class IamService {
     try {
       for (const entitlementData of entitlements) {
         const { entityType, entityId, status, source, metadata } = entitlementData;
+        await this._validateEntitlementEntity(entityType, entityId); // ADDED LINE
         await models.RestaurantEntitlement.upsert({
           restaurant_id: restaurantId,
           entity_type: entityType,
@@ -412,15 +414,8 @@ class IamService {
               action.key,
               rolesPermissions,
               overridesMap,
-              entitlementsMap // Pass entitlementsMap to helper for more granular checks
+              isFeatureLocked // Pass the pre-calculated isFeatureLocked flag
             );
-
-            // If feature is locked by entitlement, override effective permission
-            if (isFeatureLocked) {
-              effectivePermission.allowed = false;
-              effectivePermission.locked = true;
-              effectivePermission.reason = effectivePermission.reason.includes('locked') ? effectivePermission.reason : `Feature locked by entitlement: ${featureEntitlementStatus}`;
-            }
 
             return {
               id: action.id,
@@ -492,18 +487,15 @@ class IamService {
     return { allowed: true, locked: false, reason: 'Placeholder result' };
   }
 
-  _getEffectivePermission(featureKey, actionKey, rolesPermissions, overridesMap, entitlementsMap) {
+  _getEffectivePermission(featureKey, actionKey, rolesPermissions, overridesMap, isFeatureLocked) {
     let allowed = false;
     let locked = false;
     let reason = 'Default denied';
 
-    // Check entitlements first (module, submodule, feature)
-    // This part needs to be more sophisticated, checking parent entitlements
-    // For now, let's assume feature-level entitlement check
-    const featureEntitlementStatus = entitlementsMap.feature && entitlementsMap.feature[featureKey];
-    if (featureEntitlementStatus === 'locked' || featureEntitlementStatus === 'hidden') {
+    // If feature is locked by entitlement (cascaded from module/submodule or direct feature entitlement)
+    if (isFeatureLocked) {
       locked = true;
-      reason = `Feature ${featureEntitlementStatus}`;
+      reason = 'Feature locked by entitlement';
       return { allowed, locked, reason };
     }
 
@@ -520,6 +512,26 @@ class IamService {
     }
 
     return { allowed, locked, reason };
+  }
+
+  async _validateEntitlementEntity(entityType, entityId) {
+    let entityExists = false;
+    switch (entityType) {
+      case 'module':
+        entityExists = await models.Module.findByPk(entityId);
+        break;
+      case 'submodule':
+        entityExists = await models.Submodule.findByPk(entityId);
+        break;
+      case 'feature':
+        entityExists = await models.Feature.findByPk(entityId);
+        break;
+      default:
+        throw new BadRequestError(`Invalid entityType: ${entityType}`);
+    }
+    if (!entityExists) {
+      throw new BadRequestError(`${entityType} with ID ${entityId} not found.`);
+    }
   }
 }
 

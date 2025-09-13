@@ -7,7 +7,7 @@ import { usePermission } from '@/hooks/usePermission';
 const MenuRenderer = ({ onMobileClose }) => {
   const { user, loading } = useAuth();
   const { checkPermission } = usePermission();
-  const isSuperadmin = user?.isSuperadmin || false;
+  const isSuperAdmin = user?.isSuperAdmin || false;
 
   if (loading || !user) {
     return <div>Carregando Menu...</div>; // Or a skeleton loader

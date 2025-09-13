@@ -1,28 +1,28 @@
-AuthContext.js:82 AuthContext useEffect: Running
-AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNTJhMjk1Yi00ZGJlLTRlZGEtODA1ZS03Y2U4YWZmNDhjNzEiLCJpYXQiOjE3NTc3ODc1NTAsImV4cCI6MTc1ODM5MjM1MH0.G17Jyc6lX-QKuFJi9sEnXBa85Ry4bmlbC-FMNAANcMI
-AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
-settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:92 AuthContext useEffect: /auth/me successful {}[[Prototype]]: Object
-main.e96b5b26.js:2 [Violation] 'message' handler took 257ms
-[Violation] Forced reflow while executing JavaScript took 31ms
-AuthContext.js:82 AuthContext useEffect: Running
-AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNTJhMjk1Yi00ZGJlLTRlZGEtODA1ZS03Y2U4YWZmNDhjNzEiLCJpYXQiOjE3NTc3ODc1NTAsImV4cCI6MTc1ODM5MjM1MH0.G17Jyc6lX-QKuFJi9sEnXBa85Ry4bmlbC-FMNAANcMI
-AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
-settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:92 AuthContext useEffect: /auth/me successful {}
-main.e96b5b26.js:2 [Violation] 'message' handler took 258ms
-[Violation] Forced reflow while executing JavaScript took 44ms
-main.e96b5b26.js:2 [Violation] 'click' handler took 315ms
-[Violation] Forced reflow while executing JavaScript took 45ms
-
-> feedeliza-plus@1.0.0 start
-> node server.js
-2025-09-13 18:35:53 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-13 18:35:57 [info]: 	🚀 Servidor rodando na porta 5000
-Redis Client Connected
-2025-09-13 18:36:08 [info]: 	170.254.46.100 - - [13/Sep/2025:18:36:08 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 18:36:08 [info]: 	170.254.46.100 - - [13/Sep/2025:18:36:08 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 18:36:09 [info]: 	170.254.46.100 - - [13/Sep/2025:18:36:09 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: d52a295b-4dbe-4eda-805e-7ce8aff48c71
-[IamService] Checking permission for userId: d52a295b-4dbe-4eda-805e-7ce8aff48c71, restaurantId: 90c6868b-adbe-4b93-8dac-cb6e877e7751, featureKey: fidelity:checkin:settings, actionKey: read, isSuperadmin: true
-2025-09-13 18:36:09 [info]: 	170.254.46.100 - - [13/Sep/2025:18:36:09 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          222.8s
+------
+ > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.333 + npm run build
+0.791
+0.791 > feedeliza-plus@1.0.0 build
+0.791 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.791
+4.082 Creating an optimized production build...
+221.5 Failed to compile.
+221.5
+221.6 [eslint]
+221.6 src/components/Layout/MenuRenderer.js
+221.6   Line 21:21:  'isSuperAdmin' is not defined  no-undef
+221.6
+221.6 Search for the keywords to learn more about each error.
+221.6
+221.6
+------
+Dockerfile.frontend:27
+--------------------
+  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
+  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  28 |
+  29 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

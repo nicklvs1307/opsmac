@@ -123,7 +123,7 @@ export const menuStructure = [
           {
             title: 'Pesquisas',
             path: '/fidelity/satisfaction/surveys',
-            featureKey: 'satisfaction_surveys',
+            featureKey: 'fidelity:satisfaction:surveys',
             actionKey: 'read',
           },
         ],

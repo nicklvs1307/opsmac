@@ -9,11 +9,11 @@ module.exports = (db) => {
 
     const router = express.Router();
 
-    router.post('/record',  checkinPermission('checkin', 'create'), ...recordCheckinValidation, asyncHandler(checkinController.recordCheckin));
+    router.post('/record',  checkinPermission('fidelity:checkin:create', 'create'), ...recordCheckinValidation, asyncHandler(checkinController.recordCheckin));
     router.post('/public/:restaurantSlug', ...recordPublicCheckinValidation, asyncHandler(checkinController.recordPublicCheckin));
-    router.put('/checkout/:checkinId',  checkinPermission('checkin', 'update'), asyncHandler(checkinController.checkoutCheckin));
-    router.get('/analytics/:restaurantId',  checkinPermission('checkin_dashboard', 'read'), ...analyticsValidation, asyncHandler(checkinController.getCheckinAnalytics));
-    router.get('/active/:restaurantId',  checkinPermission('checkin_active', 'read'), asyncHandler(checkinController.getActiveCheckins));
+    router.put('/checkout/:checkinId',  checkinPermission('fidelity:checkin:edit', 'update'), asyncHandler(checkinController.checkoutCheckin));
+    router.get('/analytics/:restaurantId',  checkinPermission('fidelity:checkin:dashboard', 'read'), ...analyticsValidation, asyncHandler(checkinController.getCheckinAnalytics));
+    router.get('/active/:restaurantId',  checkinPermission('fidelity:checkin:active', 'read'), asyncHandler(checkinController.getActiveCheckins));
 
     return router;
 };

@@ -314,7 +314,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/surveys-comparison',
         element: (
-          <ProtectedRoute featureKey="survey_reports" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:general:surveys-comparison" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <SurveysComparison />
             </Suspense>
@@ -344,7 +344,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/multiple-choice',
         element: (
-          <ProtectedRoute featureKey="survey_reports" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:general:surveys-comparison" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <MultipleChoice />
             </Suspense>
@@ -627,7 +627,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/checkin/active',
         element: (
-          <ProtectedRoute featureKey="checkin" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:checkin:active" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <ActiveCheckinsPage />
             </Suspense>

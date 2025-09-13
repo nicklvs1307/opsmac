@@ -99,7 +99,7 @@ const CheckinAnalyticsPage = () => {
     isLoading,
     isError,
     error,
-  } = useGetCheckinAnalytics(restaurantId, { enabled: can('checkin_dashboard', 'read') });
+  } = useGetCheckinAnalytics(restaurantId, { enabled: can('fidelity:checkin:dashboard', 'read') });
 
   const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
@@ -114,7 +114,7 @@ const CheckinAnalyticsPage = () => {
   };
 
   // Verifica se o usuário tem a feature para acessar a página
-  if (!can('checkin_dashboard', 'read')) {
+  if (!can('fidelity:checkin:dashboard', 'read')) {
     return (
       <Box sx={{ p: 4 }}>
         <Alert severity="warning">

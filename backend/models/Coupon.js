@@ -53,6 +53,12 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: true,
       field: 'is_active',
     },
+    status: {
+      type: DataTypes.ENUM('generated', 'sent', 'redeemed', 'expired', 'cancelled', 'used'),
+      allowNull: false,
+      defaultValue: 'generated',
+      field: 'status',
+    },
     rewardId: { // Add this field (camelCase)
       type: DataTypes.UUID,
       allowNull: false, // Assuming a coupon must always be linked to a reward

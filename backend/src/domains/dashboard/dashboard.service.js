@@ -68,7 +68,7 @@ module.exports = (db) => {
                 attributes: ['customerId'],
                 where: { restaurantId },
                 group: ['customerId'],
-                having: db.sequelize.literal('COUNT("id") > 1')
+                having: literal('COUNT("id") > 1')
             })
         ]);
 
@@ -152,9 +152,9 @@ module.exports = (db) => {
         ] = await Promise.all([
             models.Checkin.count({ where: { restaurantId, ...dateFilter } }),
             models.Customer.count({ where: { restaurantId, ...dateFilter } }),
-            // models.SurveyResponse.count({
-            //     where: { restaurantId, ...dateFilter }
-            // }),
+            models.SurveyResponse.count({
+                where: { restaurantId, ...dateFilter }
+            }),
             models.Coupon.count({
                 where: {
                     restaurantId,
@@ -169,7 +169,7 @@ module.exports = (db) => {
                     ...dateFilter
                 },
                 attributes: [
-                    [sequelize.literal('AVG("nps_score")'), 'avgNpsScore']
+                    [literal('AVG("nps_score")'), 'avgNpsScore']
                 ],
                 raw: true
             }),
@@ -476,7 +476,7 @@ module.exports = (db) => {
                     'customerId'
                 ],
                 group: [granularityFn, 'customerId'],
-                having: db.sequelize.literal('COUNT("Checkin"."id") > 1'),
+                having: literal('COUNT("Checkin"."id") > 1'),
                 order: [[granularityFn, 'ASC']],
                 raw: true,
             }),
@@ -643,7 +643,7 @@ module.exports = (db) => {
                     attributes: ['customerId'],
                     where: { restaurantId },
                     group: ['customerId'],
-                    having: db.sequelize.literal('COUNT("id") > 1')
+                    having: literal('COUNT("id") > 1')
                 })
             ]);
 

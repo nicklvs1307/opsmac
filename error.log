@@ -1,12 +1,106 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-13 15:54:36 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-13 15:54:40 [error]: 	❌ Erro ao iniciar servidor: require(...) is not a function
-TypeError: require(...) is not a function
-    at module.exports (/app/src/domains/surveys/surveys.controller.js:2:55)
-    at module.exports (/app/src/domains/surveys/surveys.routes.js:8:61)
-    at /app/routes/index.js:36:52
-    at Array.forEach (<anonymous>)
-    at module.exports (/app/routes/index.js:29:57)
-    at startServer (/app/server.js:80:21)
+2025-09-13 16:11:35 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-13 16:11:39 [info]: 	🚀 Servidor rodando na porta 5000
+Redis Client Connected
+2025-09-13 16:14:48 [info]: 	170.254.46.100 - - [13/Sep/2025:16:14:48 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 16:14:48 [info]: 	170.254.46.100 - - [13/Sep/2025:16:14:48 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 16:14:49 [info]: 	170.254.46.100 - - [13/Sep/2025:16:14:49 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: loyalty_reports, actionKey: read, isSuperadmin: true
+2025-09-13 16:14:49 [info]: 	170.254.46.100 - - [13/Sep/2025:16:14:49 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 16:15:18 [info]: 	170.254.46.100 - - [13/Sep/2025:16:15:18 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 16:15:19 [info]: 	170.254.46.100 - - [13/Sep/2025:16:15:19 +0000] "POST /api/auth/login HTTP/1.1" 200 1516 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 16:15:19 [info]: 	170.254.46.100 - - [13/Sep/2025:16:15:19 +0000] "OPTIONS /api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+[IamService] Building permission snapshot for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8
+2025-09-13 16:15:19 [info]: 	170.254.46.100 - - [13/Sep/2025:16:15:19 +0000] "GET /api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 16:15:20 [info]: 	170.254.46.100 - - [13/Sep/2025:16:15:20 +0000] "OPTIONS /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+2025-09-13 16:15:20 [info]: 	170.254.46.100 - - [13/Sep/2025:16:15:20 +0000] "GET /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+ReferenceError: sequelize is not defined
+    at Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:172:22)
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:49)
+    at /app/src/utils/asyncHandler.js:3:25
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/dashboardPermission.js:13:16
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:69:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+node:internal/process/promises:391
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Coupon.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Coupon.count (/app/node_modules/sequelize/lib/model.js:1306:20) {
+  name: 'SequelizeDatabaseError',
+  parent: error: column Coupon.status does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '61',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT count(*) AS "count" FROM "coupons" AS "Coupon" WHERE "Coupon"."status" = 'used' AND "Coupon"."redeemed_at" BETWEEN '2025-08-14 16:15:20.970 +00:00' AND '2025-09-13 16:15:20.970 +00:00' AND "Coupon"."restaurant_id" = 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8';`,
+    parameters: undefined
+  },
+  original: error: column Coupon.status does not exist
+      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
+      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
+      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
+      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
+    length: 111,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '61',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3647',
+    routine: 'errorMissingColumn',
+    sql: `SELECT count(*) AS "count" FROM "coupons" AS "Coupon" WHERE "Coupon"."status" = 'used' AND "Coupon"."redeemed_at" BETWEEN '2025-08-14 16:15:20.970 +00:00' AND '2025-09-13 16:15:20.970 +00:00' AND "Coupon"."restaurant_id" = 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8';`,
+    parameters: undefined
+  },
+  sql: `SELECT count(*) AS "count" FROM "coupons" AS "Coupon" WHERE "Coupon"."status" = 'used' AND "Coupon"."redeemed_at" BETWEEN '2025-08-14 16:15:20.970 +00:00' AND '2025-09-13 16:15:20.970 +00:00' AND "Coupon"."restaurant_id" = 'aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8';`,
+  parameters: {}
+}
+Node.js v20.19.5

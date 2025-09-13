@@ -290,7 +290,7 @@ class IamService {
     return actions;
   }
 
-    async buildSnapshot(restaurantId, userId) {
+  async buildSnapshot(restaurantId, userId) {
     if (!userId || !restaurantId) {
       throw new UnauthorizedError('Unauthorized: Missing user or restaurant context.');
     }
@@ -303,6 +303,9 @@ class IamService {
     if (!restaurant) {
       throw new NotFoundError('Restaurant not found');
     }
+
+    // Fetch all possible actions
+    const allActions = await models.Action.findAll();
 
     // Fetch user's roles for this restaurant
     const userRoles = await models.UserRole.findAll({
@@ -343,17 +346,13 @@ class IamService {
         include: [{
           model: models.Feature,
           as: 'features',
-          include: [{
-            model: models.Action,
-            as: 'actions',
-          }],
+          // Actions are no longer included here
         }],
       }],
       order: [
         ['sort_order', 'ASC'],
         [models.Submodule, 'sort_order', 'ASC'],
         [models.Submodule, models.Feature, 'sort_order', 'ASC'],
-        [models.Submodule, models.Feature, models.Action, 'id', 'ASC'],
       ],
     });
 
@@ -406,7 +405,8 @@ class IamService {
           const featureEntitlementStatus = entitlementsMap.feature && entitlementsMap.feature[feature.id];
           const isFeatureLocked = isSubmoduleLocked || featureEntitlementStatus === 'locked' || featureEntitlementStatus === 'hidden';
 
-          const processedActions = feature.actions.map(action => {
+          // Map over all possible actions for each feature
+          const processedActions = allActions.map(action => {
             const effectivePermission = this._getEffectivePermission(
               feature.key,
               action.key,

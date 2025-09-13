@@ -170,7 +170,15 @@ module.exports = (db) => {
                     include: [{
                         model: models.Survey,
                         as: 'survey',
-                        where: { '$survey.restaurant_id
+                        where: { '$survey.restaurant_id: restaurantId },
+                        attributes: []
+                    }, {
+                        model: models.NpsCriterion,
+                        as: 'npsCriterion',
+                        attributes: ['id', 'name'],
+                    }]
+                }]
+            });
 
             let npsSum = 0;
             let npsCount = 0;
@@ -465,6 +473,14 @@ module.exports = (db) => {
         getQuestionAnswersDistribution,
     };
 };: restaurantId },
+                        attributes: []
+                    }, {
+                        model: models.NpsCriterion,
+                        as: 'npsCriterion',
+                        attributes: ['id', 'name'],
+                    }]
+                }]
+            });: restaurantId },
                         attributes: []
                     }, {
                         model: models.NpsCriterion,

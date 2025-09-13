@@ -13,9 +13,14 @@ module.exports = (db) => {
             where,
             include: [
                 {
-                    model: NpsCriterion,
-                    as: 'npsCriteria',
-                    through: { attributes: [] } // Exclude join table attributes
+                    model: db.Question,
+                    as: 'questions',
+                    include: [
+                        {
+                            model: db.NpsCriterion,
+                            as: 'npsCriterion'
+                        }
+                    ]
                 }
             ]
         });
@@ -34,9 +39,14 @@ module.exports = (db) => {
             where: { id: surveyId, restaurantId },
             include: [
                 {
-                    model: NpsCriterion,
-                    as: 'npsCriteria',
-                    through: { attributes: [] }
+                    model: db.Question,
+                    as: 'questions',
+                    include: [
+                        {
+                            model: db.NpsCriterion,
+                            as: 'npsCriterion'
+                        }
+                    ]
                 }
             ]
         });

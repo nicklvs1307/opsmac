@@ -1,10 +1,10 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-13 15:17:03 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-13 15:17:07 [error]: 	❌ Erro ao iniciar servidor: Invalid or unexpected token
-/app/src/domains/surveys/surveys.service.js:173
-                        where: { '$survey.restaurant_id: restaurantId },
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-13 15:31:03 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-13 15:31:06 [error]: 	❌ Erro ao iniciar servidor: Invalid or unexpected token
+/app/src/domains/surveys/surveys.service.js:160
+                    where: { '$survey.restaurant_id: restaurantId },
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 SyntaxError: Invalid or unexpected token
     at wrapSafe (node:internal/modules/cjs/loader:1464:18)
     at Module._compile (node:internal/modules/cjs/loader:1495:20)

@@ -82,6 +82,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       field: 'updated_at',
     },
+    redeemedAt: {
+      type: DataTypes.DATE,
+      field: 'redeemed_at',
+    },
+    cancelledAt: {
+      type: DataTypes.DATE,
+      field: 'cancelled_at',
+    },
   }, {
     sequelize,
     modelName: 'Coupon',

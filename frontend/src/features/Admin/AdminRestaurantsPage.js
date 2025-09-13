@@ -183,7 +183,7 @@ const AdminRestaurantsPage = () => {
           isLoadingPermissionTree
         }
         canAddRestaurant={can('restaurants', 'create')}
-        canEditRestaurant={can('restaurants', 'update')}
+        canEditRestaurant={can('admin:restaurants', 'update')}
         canManageRestaurantModules={can('entitlements', 'update')}
         handleOpenModuleModal={handleOpenModuleModal}
       />

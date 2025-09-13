@@ -31,19 +31,19 @@ export const menuStructure = [
           {
             title: 'Painel Inicial',
             path: '/fidelity/dashboard',
-            featureKey: 'dashboard',
+            featureKey: 'fidelity:general:dashboard',
             actionKey: 'read',
           },
           {
             title: 'Resumo do mês',
             path: '/fidelity/monthly-summary',
-            featureKey: 'dashboard', // Corrected feature key
+            featureKey: 'fidelity:general:dashboard', // Corrected feature key
             actionKey: 'read',
           },
           {
             title: 'Satisfação',
             path: '/fidelity/satisfaction-overview',
-            featureKey: 'dashboard', // Corrected feature key
+            featureKey: 'fidelity:general:dashboard', // Corrected feature key
             actionKey: 'read',
           },
           {
@@ -73,7 +73,7 @@ export const menuStructure = [
           {
             title: 'Nuvens de Palavras',
             path: '/fidelity/word-clouds',
-            featureKey: 'word_clouds',
+            featureKey: 'fidelity:general:word-clouds',
             actionKey: 'read',
           },
         ],
@@ -92,7 +92,7 @@ export const menuStructure = [
           {
             title: 'Configurações',
             path: '/fidelity/checkin/settings',
-            featureKey: 'checkin_settings',
+            featureKey: 'fidelity:checkin:settings',
             actionKey: 'read',
           },
           {
@@ -117,7 +117,7 @@ export const menuStructure = [
           {
             title: 'Configurações',
             path: '/fidelity/satisfaction/settings',
-            featureKey: 'satisfaction_settings',
+            featureKey: 'fidelity:satisfaction:settings',
             actionKey: 'read',
           },
           {
@@ -160,7 +160,7 @@ export const menuStructure = [
           {
             title: 'Importar',
             path: '/fidelity/responses/import',
-            featureKey: 'responses_import',
+            featureKey: 'fidelity:responses:import',
             actionKey: 'read',
           },
         ],
@@ -215,7 +215,7 @@ export const menuStructure = [
           {
             title: 'Segmentação de Clientes',
             path: '/fidelity/relationship/segmentation',
-            featureKey: 'relationship_segmentation',
+            featureKey: 'fidelity:relationship:segmentation',
             actionKey: 'read',
           },
         ],
@@ -276,7 +276,7 @@ export const menuStructure = [
           {
             title: 'Relatorios de Resgate',
             path: '/fidelity/coupons/redemption-reports',
-            featureKey: 'coupons_redemption_reports',
+            featureKey: 'fidelity:coupons:redemption-reports',
             actionKey: 'read',
           },
         ],
@@ -289,7 +289,7 @@ export const menuStructure = [
           {
             title: 'Fluxos',
             path: '/fidelity/automation/flows',
-            featureKey: 'automation_flows',
+            featureKey: 'fidelity:automation:flows',
             actionKey: 'read',
           },
         ],
@@ -305,7 +305,7 @@ export const menuStructure = [
         title: 'Relatorios',
         icon: <ReportsIcon />,
         path: '/fidelity/reports',
-        featureKey: 'fidelity_reports',
+        featureKey: 'fidelity:reports',
         actionKey: 'read',
       },
     ],

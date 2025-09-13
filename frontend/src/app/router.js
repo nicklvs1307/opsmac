@@ -284,7 +284,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/dashboard',
         element: (
-          <ProtectedRoute featureKey="dashboard" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:general:dashboard" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <Dashboard />
             </Suspense>
@@ -294,7 +294,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/monthly-summary',
         element: (
-          <ProtectedRoute featureKey="loyalty_reports" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:general:monthly-summary" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <MonthlySummary />
             </Suspense>
@@ -304,7 +304,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/satisfaction-overview',
         element: (
-          <ProtectedRoute featureKey="satisfaction_reports" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:general:satisfaction-overview" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <SatisfactionOverview />
             </Suspense>
@@ -324,7 +324,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/evolution',
         element: (
-          <ProtectedRoute featureKey="loyalty_reports" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:general:evolution" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <Evolution />
             </Suspense>
@@ -334,7 +334,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/benchmarking',
         element: (
-          <ProtectedRoute featureKey="loyalty_reports" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:general:benchmarking" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <Benchmarking />
             </Suspense>
@@ -344,7 +344,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/multiple-choice',
         element: (
-          <ProtectedRoute featureKey="fidelity:general:surveys-comparison" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:general:multiple-choice" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <MultipleChoice />
             </Suspense>
@@ -354,7 +354,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/word-clouds',
         element: (
-          <ProtectedRoute featureKey="feedback_reports" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:general:word-clouds" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <WordClouds />
             </Suspense>
@@ -404,7 +404,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/rewards',
         element: (
-          <ProtectedRoute featureKey="rewards_management" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:coupons:rewards" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <Rewards />
             </Suspense>
@@ -414,7 +414,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/rewards-management',
         element: (
-          <ProtectedRoute featureKey="rewards_management" actionKey="manage">
+          <ProtectedRoute featureKey="fidelity:coupons:rewards-management" actionKey="manage">
             <Suspense fallback={<div>Carregando...</div>}>
               <Rewards />
             </Suspense>
@@ -424,7 +424,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/rewards-create',
         element: (
-          <ProtectedRoute featureKey="coupons_management" actionKey="create">
+          <ProtectedRoute featureKey="fidelity:coupons:rewards-create" actionKey="create">
             <Suspense fallback={<div>Carregando...</div>}>
               <CouponCreatePage />
             </Suspense>
@@ -434,7 +434,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/edit/:id', // New route for editing coupons
         element: (
-          <ProtectedRoute featureKey="coupons_management" actionKey="update">
+          <ProtectedRoute featureKey="fidelity:coupons:management" actionKey="update">
             <Suspense fallback={<div>Carregando...</div>}>
               <CouponEditPage />
             </Suspense>
@@ -444,7 +444,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/dashboard',
         element: (
-          <ProtectedRoute featureKey="coupons_management" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:coupons:dashboard" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <CouponDashboardPage />
             </Suspense>
@@ -454,7 +454,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/list',
         element: (
-          <ProtectedRoute featureKey="coupons_management" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:coupons:list" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <CouponListPage />
             </Suspense>
@@ -464,7 +464,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/management',
         element: (
-          <ProtectedRoute featureKey="coupons_management" actionKey="manage">
+          <ProtectedRoute featureKey="fidelity:coupons:management" actionKey="manage">
             <Suspense fallback={<div>Carregando...</div>}>
               <CouponListPage />
             </Suspense>
@@ -474,7 +474,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/validation',
         element: (
-          <ProtectedRoute featureKey="coupons_management" actionKey="update">
+          <ProtectedRoute featureKey="fidelity:coupons:validation" actionKey="update">
             <Suspense fallback={<div>Carregando...</div>}>
               <CouponValidatorPage />
             </Suspense>
@@ -484,7 +484,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/raffle',
         element: (
-          <ProtectedRoute featureKey="raffle" actionKey="participate">
+          <ProtectedRoute featureKey="fidelity:coupons:raffle" actionKey="participate">
             <Suspense fallback={<div>Carregando...</div>}>
               <Raffle />
             </Suspense>
@@ -494,7 +494,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/relationship/customers',
         element: (
-          <ProtectedRoute featureKey="customer_management" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:relationship:customers" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <Customers />
             </Suspense>
@@ -504,7 +504,7 @@ export const router = createBrowserRouter([
       {
         path: 'customers/:id/details',
         element: (
-          <ProtectedRoute featureKey="customer_management" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:relationship:customers" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <CustomerDetail />
             </Suspense>
@@ -514,7 +514,7 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/relationship/birthdays',
         element: (
-          <ProtectedRoute featureKey="customer_management" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:relationship:birthdays" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <CustomerBirthdays />
             </Suspense>
@@ -524,7 +524,7 @@ export const router = createBrowserRouter([
       {
         path: 'customers/dashboard',
         element: (
-          <ProtectedRoute featureKey="customer_management" actionKey="read">
+          <ProtectedRoute featureKey="fidelity:relationship:dashboard" actionKey="read">
             <Suspense fallback={<div>Carregando...</div>}>
               <CustomerDashboard />
             </Suspense>
@@ -611,17 +611,21 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/checkin/dashboard',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CheckinAnalyticsPage />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:checkin:dashboard" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CheckinAnalyticsPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/checkin/settings',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <CheckinSettingsPage />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:checkin:settings" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CheckinSettingsPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
@@ -637,153 +641,191 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/satisfaction/dashboard',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <SatisfactionAnalyticsPage />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:satisfaction:dashboard" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <SatisfactionAnalyticsPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/satisfaction/settings',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <SatisfactionSettingsPage />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:satisfaction:settings" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <SatisfactionSettingsPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/satisfaction/surveys',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <SurveyList />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:satisfaction:surveys" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <SurveyList />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/responses/management',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <FeedbackList />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:responses:management" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <FeedbackList />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/responses/dashboard',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <FeedbackList />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:responses:dashboard" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <FeedbackList />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/responses/replicas',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Replicas />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:responses:replicas" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Replicas />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/responses/goals',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Goals />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:responses:goals" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Goals />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/responses/import',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Import />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:responses:import" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Import />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/surveys/new',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <SurveyCreate />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:satisfaction:surveys" actionKey="create">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <SurveyCreate />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/surveys/edit/:id',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <SurveyEdit />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:satisfaction:surveys" actionKey="update">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <SurveyEdit />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/surveys/:id/results',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <SurveyResults />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:satisfaction:surveys" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <SurveyResults />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/relationship/dashboard',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <RelationshipDashboard />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:relationship:dashboard" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <RelationshipDashboard />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/relationship/ranking',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Ranking />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:relationship:ranking" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Ranking />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/relationship/dispatches',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Dispatches />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:relationship:dispatches" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Dispatches />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/relationship/campaigns',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Campaigns />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:relationship:campaigns" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Campaigns />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/relationship/messages',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Messages />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:relationship:messages" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Messages />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/relationship/segmentation',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <Segmentation />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:relationship:segmentation" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <Segmentation />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/integrations',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <IntegrationsPage />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:integrations" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <IntegrationsPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/reports',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <FidelityReports />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:reports" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <FidelityReports />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
@@ -1148,17 +1190,21 @@ export const router = createBrowserRouter([
       {
         path: 'fidelity/coupons/redemption-reports',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <GeneratedCouponsReport />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:coupons:redemption-reports" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <GeneratedCouponsReport />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: 'fidelity/automation/flows',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
-            <ComingSoon />
-          </Suspense>
+          <ProtectedRoute featureKey="fidelity:automation:flows" actionKey="read">
+            <Suspense fallback={<div>Carregando...</div>}>
+              <ComingSoon />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
@@ -1599,7 +1645,7 @@ export const router = createBrowserRouter([
       {
         path: 'admin/restaurants/:restaurantId/edit',
         element: (
-          <ProtectedRoute featureKey="restaurants" actionKey="update">
+          <ProtectedRoute featureKey="admin:restaurants" actionKey="update">
             <Suspense fallback={<div>Carregando...</div>}>
               <RestaurantEditPage />
             </Suspense>

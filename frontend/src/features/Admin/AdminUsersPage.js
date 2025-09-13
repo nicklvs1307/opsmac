@@ -29,7 +29,7 @@ const AdminUsersPage = () => {
         {t('admin_dashboard.users_title')}
       </Typography>
 
-      {can('users', 'create') && (
+      {can('admin:users', 'create') && (
         <Button
           variant="contained"
           color="primary"
@@ -43,8 +43,8 @@ const AdminUsersPage = () => {
       <UserTable
         users={users}
         loading={loading || saveUserMutation.isLoading}
-        canAddUser={can('users', 'create')}
-        canEditUser={can('users', 'update')}
+        canAddUser={can('admin:users', 'create')}
+        canEditUser={can('admin:users', 'update')}
       />
     </Box>
   );

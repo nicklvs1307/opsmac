@@ -324,7 +324,8 @@ class IamService {
     // Fetch user permission overrides
     const userOverrides = await models.UserPermissionOverride.findAll({
       where: { user_id: userId, restaurant_id: restaurantId },
-      include: [n            { model: models.Feature, as: 'feature', attributes: ['id', 'key', 'name'] },
+      include: [
+            { model: models.Feature, as: 'feature', attributes: ['id', 'key', 'name'] },
             { model: models.Action, as: 'action', attributes: ['id', 'key'] },
           ],
         });

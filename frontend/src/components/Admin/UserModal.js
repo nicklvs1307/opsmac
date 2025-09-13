@@ -19,7 +19,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
 // Esquema de Validação para o Usuário
-const userSchema = (t, editingUser, isSuperAdmin) =>
+const userSchema = (t, editingUser, isSuperadmin) =>
   yup.object().shape({
     name: yup
       .string()
@@ -42,7 +42,7 @@ const userSchema = (t, editingUser, isSuperAdmin) =>
         then: (schema) => schema.required(t('admin_dashboard.password_required')),
         otherwise: (schema) => schema.optional(),
       }),
-    restaurantId: isSuperAdmin
+    restaurantId: isSuperadmin
       ? yup.string().required(t('admin_dashboard.restaurant_id_required'))
       : yup.string().optional(), // Optional if not super admin, will be set automatically
   });
@@ -63,7 +63,7 @@ const UserModal = ({
   editingUser,
   onSave,
   restaurants = [],
-  isSuperAdmin,
+  isSuperadmin,
   loggedInUserRestaurantId,
 }) => {
   const { t } = useTranslation();
@@ -74,13 +74,13 @@ const UserModal = ({
     setValue,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(userSchema(t, editingUser, isSuperAdmin)),
-    context: { editingUser, isSuperAdmin },
+    resolver: yupResolver(userSchema(t, editingUser, isSuperadmin)),
+    context: { editingUser, isSuperadmin },
   });
 
   useEffect(() => {
     if (isOpen) {
-      const defaultRestaurantId = isSuperAdmin
+      const defaultRestaurantId = isSuperadmin
         ? editingUser?.restaurantId || ''
         : loggedInUserRestaurantId || '';
       reset(
@@ -100,11 +100,11 @@ const UserModal = ({
             }
       );
     }
-  }, [editingUser, isOpen, reset, isSuperAdmin, loggedInUserRestaurantId]);
+  }, [editingUser, isOpen, reset, isSuperadmin, loggedInUserRestaurantId]);
 
   const onSubmit = (data) => {
     // If not super admin, ensure restaurantId is set to the logged-in user's restaurantId
-    if (!isSuperAdmin && !data.restaurantId) {
+    if (!isSuperadmin && !data.restaurantId) {
       data.restaurantId = loggedInUserRestaurantId;
     }
     onSave(data);
@@ -198,7 +198,7 @@ const UserModal = ({
             </FormControl>
           )}
         />
-        {isSuperAdmin && (
+        {isSuperadmin && (
           <Controller
             name="restaurantId"
             control={control}

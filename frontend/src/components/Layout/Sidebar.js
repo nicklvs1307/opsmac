@@ -132,7 +132,7 @@ const Submenu = ({ items: parentItem, parentEl, onClose, level = 0, checkPermiss
   );
 };
 
-const Sidebar = ({ menuStructure, checkPermission, onMobileClose, isSuperAdmin }) => {
+const Sidebar = ({ menuStructure, checkPermission, onMobileClose, isSuperadmin }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
@@ -147,7 +147,7 @@ const Sidebar = ({ menuStructure, checkPermission, onMobileClose, isSuperAdmin }
         let hasAccess = true;
         let isLocked = false;
 
-        if (isSuperAdmin) {
+        if (isSuperadmin) {
           hasAccess = true;
           isLocked = false;
         } else if (item.featureKey && item.actionKey) {

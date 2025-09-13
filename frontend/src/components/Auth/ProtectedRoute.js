@@ -18,7 +18,7 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
   }
 
   // Superadmin bypass: If authenticated and is a superadmin, grant access immediately.
-  if (user?.permissionSnapshot?.isSuperAdmin) {
+  if (user?.permissionSnapshot?.isSuperadmin) {
     return children;
   }
 

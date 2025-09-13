@@ -23,7 +23,7 @@ const EntitlementManagement = () => {
   const setEntitlementsMutation = useSetEntitlements();
 
   const handleToggleEntitlement = async (entityId, entityType, currentStatus) => {
-    if (!user?.permissionSnapshot?.isSuperAdmin) {
+    if (!user?.permissionSnapshot?.isSuperadmin) {
       toast.error('You do not have permission to update entitlements.');
       return;
     }
@@ -87,7 +87,7 @@ const EntitlementManagement = () => {
                 <td>
                   <button
                     onClick={() => handleToggleEntitlement(module.id, 'module', module.status)}
-                    disabled={setEntitlementsMutation.isLoading || !user?.permissionSnapshot?.isSuperAdmin}
+                    disabled={setEntitlementsMutation.isLoading || !user?.permissionSnapshot?.isSuperadmin}
                   >
                     {module.status === 'active' ? 'Deactivate' : 'Activate'}
                   </button>
@@ -102,7 +102,7 @@ const EntitlementManagement = () => {
                       onClick={() =>
                         handleToggleEntitlement(submodule.id, 'submodule', submodule.status)
                       }
-                      disabled={setEntitlementsMutation.isLoading || !user?.permissionSnapshot?.isSuperAdmin}
+                      disabled={setEntitlementsMutation.isLoading || !user?.permissionSnapshot?.isSuperadmin}
                     >
                       {submodule.status === 'active' ? 'Deactivate' : 'Activate'}
                     </button>
@@ -116,7 +116,7 @@ const EntitlementManagement = () => {
                   <td>
                     <button
                       onClick={() => handleToggleEntitlement(feature.id, 'feature', feature.status)}
-                      disabled={setEntitlementsMutation.isLoading || !user?.permissionSnapshot?.isSuperAdmin}
+                      disabled={setEntitlementsMutation.isLoading || !user?.permissionSnapshot?.isSuperadmin}
                     >
                       {feature.status === 'active' ? 'Deactivate' : 'Activate'}
                     </button>

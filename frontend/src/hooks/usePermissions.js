@@ -22,7 +22,7 @@ const usePermissions = () => {
     }
 
     // Superadmin bypass
-    if (permissionSnapshot.isSuperAdmin) {
+    if (permissionSnapshot.isSuperadmin) {
       return true;
     }
 

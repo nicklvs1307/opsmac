@@ -28,7 +28,7 @@ const Menu = () => {
   const renderMenuItems = (items) => {
     return items.map((item, index) => {
       // Hide admin module for non-superadmins
-      if (item.module === 'admin' && !user?.isSuperAdmin) {
+      if (item.module === 'admin' && !user?.isSuperadmin) {
         return null;
       }
 

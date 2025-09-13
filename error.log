@@ -1,28 +1,23 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          222.8s
-------
- > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.333 + npm run build
-0.791
-0.791 > feedeliza-plus@1.0.0 build
-0.791 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.791
-4.082 Creating an optimized production build...
-221.5 Failed to compile.
-221.5
-221.6 [eslint]
-221.6 src/components/Layout/MenuRenderer.js
-221.6   Line 21:21:  'isSuperAdmin' is not defined  no-undef
-221.6
-221.6 Search for the keywords to learn more about each error.
-221.6
-221.6
-------
-Dockerfile.frontend:27
---------------------
-  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
-  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  28 |
-  29 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+> feedeliza-plus@1.0.0 start
+> node server.js
+2025-09-13 20:40:08 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-13 20:40:12 [error]: 	❌ Erro ao iniciar servidor: Cannot find module '/app/src/middleware/checkinPermission'
+Require stack:
+- /app/src/domains/rewards/rewards.routes.js
+- /app/routes/index.js
+- /app/server.js
+Error: Cannot find module '/app/src/middleware/checkinPermission'
+Require stack:
+- /app/src/domains/rewards/rewards.routes.js
+- /app/routes/index.js
+- /app/server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at Module._resolveFilename (/app/node_modules/module-alias/index.js:49:29)
+    at Module._load (node:internal/modules/cjs/loader:1038:27)
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app/src/domains/rewards/rewards.routes.js:5:27)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)

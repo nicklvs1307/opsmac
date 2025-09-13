@@ -1,6 +1,6 @@
 module.exports = (models) => {
     const { Op, fn, col } = require('sequelize');
-const { BadRequestError, NotFoundError } = require('utils/errors');
+    const { BadRequestError, NotFoundError } = require('utils/errors');
     const { spinWheel: spinWheelService } = require('services/wheelService');
 
     const listRewards = async (restaurantId, query) => {
@@ -24,8 +24,9 @@ const { BadRequestError, NotFoundError } = require('utils/errors');
         };
     };
 
-    const getRewardById = async (id) => {
-        const reward = await models.Reward.findByPk(id);
+    const getRewardById = async (id, restaurantId) => {
+        const whereClause = restaurantId ? { id, restaurant_id: restaurantId } : { id };
+        const reward = await models.Reward.findOne({ where: whereClause });
         if (!reward) {
             throw new NotFoundError('Recompensa não encontrada.');
         }
@@ -39,15 +40,16 @@ const { BadRequestError, NotFoundError } = require('utils/errors');
         return models.Reward.create({ ...rewardData, restaurant_id: restaurantId, created_by: userId });
     };
 
-    const updateReward = async (id, updateData) => {
-        const reward = await getRewardById(id);
+    const updateReward = async (id, updateData, restaurantId) => {
+        const reward = await getRewardById(id, restaurantId); // Pass restaurantId
         await reward.update(updateData);
         return reward;
     };
 
-    const deleteReward = async (id) => {
-        const result = await models.Reward.destroy({ where: { id: id } });
-        if (result === 0) {
+    const deleteReward = async (id, restaurantId) => {
+        const reward = await getRewardById(id, restaurantId); // Pass restaurantId
+        const result = await reward.destroy();
+        if (result === 0) { // destroy returns 0 if no rows were affected
             throw new NotFoundError('Recompensa não encontrada.');
         }
         return { message: 'Recompensa excluída com sucesso.' };
@@ -156,8 +158,8 @@ const { BadRequestError, NotFoundError } = require('utils/errors');
         return { coupon, winningItem, winningIndex };
     };
 
-    const spinWheel = async (reward_id, customer_id) => {
-        const reward = await getRewardById(reward_id);
+    const spinWheel = async (reward_id, customer_id, restaurantId) => {
+        const reward = await getRewardById(reward_id, restaurantId); // Pass restaurantId
         if (reward.reward_type !== 'spin_the_wheel') {
             throw new NotFoundError('Recompensa da roleta não encontrada ou não é do tipo roleta.');
         }

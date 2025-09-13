@@ -1,9 +1,18 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-13 12:18:55 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-13 12:18:58 [error]: 	❌ Erro ao iniciar servidor: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
-TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
-    at module.exports (/app/src/domains/products/products.routes.js:15:64)
-    at module.exports (/app/routes/index.js:26:54)
-    at startServer (/app/server.js:80:21)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-13 12:22:07 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-13 12:22:10 [info]: 	🚀 Servidor rodando na porta 5000
+Redis Client Connected
+2025-09-13 12:22:39 [info]: 	170.254.46.100 - - [13/Sep/2025:12:22:39 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 12:22:39 [info]: 	170.254.46.100 - - [13/Sep/2025:12:22:39 +0000] "POST /api/auth/login HTTP/1.1" 401 139 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+UnauthorizedError: Acesso negado. Token não fornecido.
+    at authMiddleware (/app/src/middleware/authMiddleware.js:12:29)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)
+    at /app/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)

@@ -87,8 +87,9 @@ module.exports = (db) => {
 
         getSurveyAnalytics: async (req, res, next) => {
             try {
+                const { id: surveyId } = req.params; // Extrai surveyId dos parâmetros da requisição
                 const restaurantId = req.context.restaurantId;
-                const analytics = await surveyService.getSurveyAnalytics(restaurantId);
+                const analytics = await surveyService.getSurveyAnalytics(restaurantId, surveyId);
                 res.json(analytics);
             } catch (error) {
                 next(error);

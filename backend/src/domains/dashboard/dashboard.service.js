@@ -91,6 +91,7 @@ module.exports = (db) => {
     }
 
     async function getDashboardAnalytics(restaurantId, query) {
+        console.log('DEBUG: dashboard.service.js - getDashboardAnalytics - received restaurantId:', restaurantId);
         const { start_date, end_date, period } = query;
         let validStartDate = null;
         let validEndDate = null;

@@ -1,18 +1,9 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-13 12:15:11 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-13 12:15:14 [error]: 	❌ Erro ao iniciar servidor: Unexpected token '{'
-/app/src/domains/iam/iam.service.js:327
-      include: [n            { model: models.Feature, as: 'feature', attributes: ['id', 'key', 'name'] },
-                             ^
-SyntaxError: Unexpected token '{'
-    at wrapSafe (node:internal/modules/cjs/loader:1464:18)
-    at Module._compile (node:internal/modules/cjs/loader:1495:20)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-    at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at Object.<anonymous> (/app/src/domains/iam/iam.controller.js:2:20)
-    at Module._compile (node:internal/modules/cjs/loader:1521:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+2025-09-13 12:18:55 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-13 12:18:58 [error]: 	❌ Erro ao iniciar servidor: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
+TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
+    at module.exports (/app/src/domains/products/products.routes.js:15:64)
+    at module.exports (/app/routes/index.js:26:54)
+    at startServer (/app/server.js:80:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

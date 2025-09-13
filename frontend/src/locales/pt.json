@@ -130,7 +130,8 @@
       "none": "Nenhum",
       "yes": "Sim",
       "others": "Outros",
-      "save": "Salvar"
+      "save": "Salvar",
+      "module_not_enabled": "Este módulo não está habilitado para o seu restaurante."
     },
     "coupon_analytics": {
       "error_loading_analytics": "Erro ao carregar analytics de cupons",
@@ -1219,6 +1220,7 @@
       "yes": "Sim",
       "others": "Outros",
       "save": "Salvar",
+      "module_not_enabled": "Este módulo não está habilitado para o seu restaurante.",
       "filters": "Filtros",
       "clear_filters": "Limpar Filtros",
       "all": "Todos",

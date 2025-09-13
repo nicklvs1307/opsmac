@@ -84,9 +84,10 @@ module.exports = (db) => {
         }
 
         const restaurant = await models.Restaurant.findByPk(restaurantId);
-        if (!restaurant || !restaurant.settings?.enabled_modules?.includes('delivery_much_integration')) {
-            throw new ForbiddenError('Módulo Delivery Much não habilitado para este restaurante.');
+        if (!restaurant) {
+            throw new NotFoundError('Restaurante não encontrado.'); // Or a more specific error if needed
         }
+        // The entitlement check is now handled by the permission system
         return restaurant;
     };
 

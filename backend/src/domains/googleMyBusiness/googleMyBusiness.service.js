@@ -117,9 +117,10 @@ module.exports = (db) => {
 
     const checkGMBModuleEnabled = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
-        if (!restaurant || !restaurant.settings?.enabled_modules?.includes('google_my_business_integration')) {
-            throw new ForbiddenError('Módulo Google My Business não habilitado para este restaurante.');
+        if (!restaurant) {
+            throw new NotFoundError('Restaurante não encontrado.');
         }
+        // The entitlement check is now handled by the permission system
         return restaurant;
     };
 

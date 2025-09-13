@@ -70,9 +70,10 @@ module.exports = (db) => {
 
     const checkSaiposModuleEnabled = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
-        if (!restaurant || !restaurant.settings?.enabled_modules?.includes('saipos_integration')) {
-            throw new ForbiddenError('Módulo Saipos não habilitado para este restaurante.');
+        if (!restaurant) {
+            throw new NotFoundError('Restaurante não encontrado.');
         }
+        // The entitlement check is now handled by the permission system
         return restaurant;
     };
 

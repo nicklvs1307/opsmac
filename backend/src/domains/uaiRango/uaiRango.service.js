@@ -70,9 +70,10 @@ module.exports = (db) => {
 
     const checkUaiRangoModuleEnabled = async (restaurantId) => {
         const restaurant = await models.Restaurant.findByPk(restaurantId);
-        if (!restaurant || !restaurant.settings?.enabled_modules?.includes('uai_rango_integration')) {
-            throw new ForbiddenError('Módulo Uai Rango não habilitado para este restaurante.');
+        if (!restaurant) {
+            throw new NotFoundError('Restaurante não encontrado.');
         }
+        // The entitlement check is now handled by the permission system
         return restaurant;
     };
 

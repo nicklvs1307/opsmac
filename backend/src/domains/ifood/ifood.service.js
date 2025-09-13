@@ -74,9 +74,10 @@ module.exports = (db) => {
 
     const checkIfoodModuleEnabled = async (restaurantIdFromPayload) => {
         const restaurant = await models.Restaurant.findByPk(restaurantIdFromPayload);
-        if (!restaurant || !restaurant.settings?.enabled_modules?.includes('ifood_integration')) {
-            throw new ForbiddenError('iFood integration module not enabled for this restaurant.');
+        if (!restaurant) {
+            throw new NotFoundError('Restaurante não encontrado.');
         }
+        // The entitlement check is now handled by the permission system
         return restaurant;
     };
 

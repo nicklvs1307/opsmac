@@ -278,10 +278,6 @@ module.exports = (db) => {
             throw new ForbiddenError('Acesso negado a este restaurante.');
         }
 
-        if (!restaurant.settings?.enabled_modules?.includes('checkin_program')) {
-            throw new ForbiddenError('Módulo de Check-in não habilitado para este restaurante.');
-        }
-
         checkin.checkoutTime = new Date();
         checkin.status = 'completed';
         await checkin.save();
@@ -338,7 +334,7 @@ module.exports = (db) => {
                 attributes: ['id', 'name', 'email'],
             }],
             group: ['customerId', 'customer.id', 'customer.name', 'customer.email'],
-            order: [[sequelize.literal('checkinCount'), 'DESC']],
+            order: [['checkinCount', 'DESC']],
             limit: 10,
         });
 

@@ -114,10 +114,10 @@ module.exports = (db) => {
         }
 
         // Validate dates before using them
-        if (validStartDate && isNaN(validStartDate.getTime())) {
+        if (validStartDate && (isNaN(validStartDate.getTime()) || !isFinite(validStartDate))) {
             throw new BadRequestError('Data de início inválida.');
         }
-        if (validEndDate && isNaN(validEndDate.getTime())) {
+        if (validEndDate && (isNaN(validEndDate.getTime()) || !isFinite(validEndDate))) {
             throw new BadRequestError('Data de fim inválida.');
         }
         if (validStartDate && validEndDate && validStartDate > validEndDate) {
@@ -329,7 +329,7 @@ module.exports = (db) => {
         const startDate = new Date(start_date);
         const endDate = new Date(end_date);
 
-        if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+        if ((startDate && isNaN(startDate.getTime())) || (endDate && isNaN(endDate.getTime())) || !isFinite(startDate) || !isFinite(endDate)) {
             throw new BadRequestError('As datas de início e fim devem ser válidas.');
         }
 

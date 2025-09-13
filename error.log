@@ -1,514 +1,600 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-13 13:22:57 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-13 13:23:01 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-13 13:47:10 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-13 13:47:16 [info]: 	🚀 Servidor rodando na porta 5000
 Redis Client Connected
-2025-09-13 13:24:42 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:42 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:42 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:42 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:45 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:45 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:45 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:45 +0000] "POST /api/auth/login HTTP/1.1" 200 1516 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:46 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:46 +0000] "OPTIONS /api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:47:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:47:49 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:47:50 [info]: 	170.254.46.100 - - [13/Sep/2025:13:47:50 +0000] "POST /api/auth/login HTTP/1.1" 200 1516 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:47:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:47:51 +0000] "OPTIONS /api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 [IamService] Building permission snapshot for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8
-2025-09-13 13:24:46 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:46 +0000] "GET /api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:47 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:47 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "OPTIONS /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:47:52 [info]: 	170.254.46.100 - - [13/Sep/2025:13:47:52 +0000] "GET /api/iam/tree?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:47:58 [info]: 	170.254.46.100 - - [13/Sep/2025:13:47:58 +0000] "OPTIONS /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+2025-09-13 13:47:59 [info]: 	170.254.46.100 - - [13/Sep/2025:13:47:59 +0000] "GET /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Coupon.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Coupon.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 3)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:152:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+2025-09-13 13:48:01 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:01 +0000] "GET /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 2)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:152:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+2025-09-13 13:48:13 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:13 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 [IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:48:16 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:16 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:48:17 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:17 +0000] "OPTIONS /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+2025-09-13 13:48:18 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:18 +0000] "GET /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async SurveyResponse.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async SurveyResponse.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 2)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:152:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: surveys_comparison, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:48:19 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:19 +0000] "GET /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.rawSelect (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:434:18)
+    at async Coupon.aggregate (/app/node_modules/sequelize/lib/model.js:1277:19)
+    at async Coupon.count (/app/node_modules/sequelize/lib/model.js:1306:20)
+    at async Promise.all (index 3)
+    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:152:13)
+    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+2025-09-13 13:48:28 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:28 +0000] "OPTIONS /api/checkin/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: evolution, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: satisfaction_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: benchmarking, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: multiple_choice, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: word_clouds, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: satisfaction_surveys, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: checkin_settings, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: responses_replicas, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: checkin_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: responses_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:48 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:48 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: responses_goals, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: checkin_active, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: responses_management, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: relationship_birthdays, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: relationship_dispatches, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: relationship_campaigns, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: relationship_messages, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: relationship_customers, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: satisfaction_settings, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: responses_import, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: relationship_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: relationship_ranking, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: coupons_raffle, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: coupons_rewards, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: coupons_rewards_management, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: coupons_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: relationship_segmentation, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: coupons_management, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: coupons_validation, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: coupons_list, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: coupons_rewards_create, actionKey: create, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: coupons_redemption_reports, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: automation_flows, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: fidelity_integrations, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: fidelity_reports, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_suppliers, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_purchases, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_movements, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_sales, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_reports, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: management_permissions, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_products, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_labels_delete, actionKey: delete, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_ingredients, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_products_create, actionKey: create, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_settings, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_stock_counts, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_inventory, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_technical_sheet_create, actionKey: create, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_technical_sheet_list, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_lots, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_alerts, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_cmv, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: stock_adjustments, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: orders_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: orders_pdv, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: orders_list, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: orders_delivery, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "GET /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: orders_integrations, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: orders_sales_report, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: management_schedule, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
+2025-09-13 13:48:28 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:28 +0000] "GET /api/checkin/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Error
     at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
     at /app/node_modules/sequelize/lib/sequelize.js:315:28
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async SurveyResponse.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async SurveyResponse.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
-    at async Promise.all (index 4)
-    at async Object.getDashboardAnalytics (/app/src/domains/dashboard/dashboard.service.js:152:13)
-    at async getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:25:26)
+    at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Object.getCheckinAnalytics (/app/src/domains/checkin/checkin.service.js:325:39)
+    at async getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:67:31)
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: management_commissions, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: management_costs, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: orders_tables, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: management_team, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: management_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: management_production, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_expirations, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_expirations_alert, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: dre_fixed_costs, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: financial_payables_deadlines, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cash_flow_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: financial_receivables, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:48:30 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:30 +0000] "GET /api/checkin/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Checkin.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Object.getCheckinAnalytics (/app/src/domains/checkin/checkin.service.js:325:39)
+    at async getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:67:31)
+2025-09-13 13:48:31 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:31 +0000] "OPTIONS /api/npsCriteria?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:48:31 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:31 +0000] "OPTIONS /api/settings/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:48:31 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:31 +0000] "OPTIONS /api/rewards/restaurant/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_dashboard, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: financial_payables_suppliers, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
 Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: dre_net_profit, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: fiscal_settings, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: settings_business, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: settings_profile, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: settings_security, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: settings_whatsapp, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_labels, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_labels_count_history, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_labels_print, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_labels_print_group, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: settings_notifications, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: settings_appearance, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_labels_history, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: admin_users, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: cdv_labels_count, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: admin_roles_permissions, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Decoded userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: admin_restaurants, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-[IamService] Checking permission for userId: 29b580e3-2dcd-4da8-b7f0-650815cc304d, restaurantId: aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8, featureKey: financial_payables_recurring, actionKey: read, isSuperadmin: true
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:49 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:49 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:50 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:50 +0000] "GET /api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:50 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:50 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:50 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:50 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:50 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:50 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:50 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:50 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:50 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:50 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:51 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:51 +0000] "POST /api/iam/check?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:57 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:57 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:57 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:57 +0000] "POST /api/iam/check HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-13 13:24:58 [info]: 	170.254.46.100 - - [13/Sep/2025:13:24:58 +0000] "POST /api/iam/check HTTP/1.1" 429 68 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:48:31 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:31 +0000] "GET /api/npsCriteria?restaurantId=aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:48:32 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:32 +0000] "GET /api/rewards/restaurant/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 78 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-13 13:48:32 [info]: 	170.254.46.100 - - [13/Sep/2025:13:48:32 +0000] "GET /api/settings/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 HTTP/1.1" 200 2 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 
 AuthContext.js:82 AuthContext useEffect: Running
-AuthContext.js:84 AuthContext useEffect: Token from localStorage: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyOWI1ODBlMy0yZGNkLTRkYTgtYjdmMC02NTA4MTVjYzMwNGQiLCJpYXQiOjE3NTc3Njk4ODUsImV4cCI6MTc1ODM3NDY4NX0._1UEGsb5sdwQHdq8IzCDTVB9Dt7aMKZt6icy1HamFdg
-AuthContext.js:88 AuthContext useEffect: Attempting to fetch /auth/me
-(índice):1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:90  GET https://feedelizaapi.towersfy.com/api/auth/me 429 (Too Many Requests)
+AuthContext.js:84 AuthContext useEffect: Token from localStorage: null
+AuthContext.js:127 AuthContext useEffect: No token found in localStorage
+main.7eb25615.js:2 [Violation] 'message' handler took 219ms
+[Violation] Forced reflow while executing JavaScript took 48ms
+login:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+AuthContext.js:163 DEBUG: Complete user object after login: {
+  "message": "Login realizado com sucesso",
+  "id": "29b580e3-2dcd-4da8-b7f0-650815cc304d",
+  "name": "Super Admin",
+  "email": "superadmin@example.com",
+  "phone": null,
+  "roles": [
+    {
+      "id": "69b8d219-8efa-4393-b0ca-e2192fdd146b",
+      "restaurantId": null,
+      "key": "super_admin",
+      "name": "super_admin",
+      "isSystem": true,
+      "createdAt": "2025-09-11T14:43:34.197Z",
+      "updatedAt": "2025-09-11T14:43:34.197Z",
+      "restaurant_id": null,
+      "UserRole": {
+        "userId": "29b580e3-2dcd-4da8-b7f0-650815cc304d",
+        "restaurantId": "aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8",
+        "roleId": "69b8d219-8efa-4393-b0ca-e2192fdd146b",
+        "createdAt": "2025-09-11T14:43:34.926Z",
+        "updatedAt": "2025-09-11T14:43:34.926Z",
+        "role_id": "69b8d219-8efa-4393-b0ca-e2192fdd146b",
+        "user_id": "29b580e3-2dcd-4da8-b7f0-650815cc304d",
+        "restaurant_id": "aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8"
+      }
+    }
+  ],
+  "isActive": true,
+  "restaurants": [
+    {
+      "id": "aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8",
+      "name": "Restaurante Padrão",
+      "slug": "restaurante-padrao",
+      "description": null,
+      "address": "Rua Padrão, 123",
+      "city": "Cidade Padrão",
+      "state": "SP",
+      "zipCode": null,
+      "phone": null,
+      "email": null,
+      "website": null,
+      "logo": null,
+      "planKey": null,
+      "status": "active",
+      "permVersion": "1",
+      "createdAt": "2025-09-11T14:43:34.914Z",
+      "updatedAt": "2025-09-11T14:43:34.914Z"
+    }
+  ],
+  "restaurant": null,
+  "restaurantId": null,
+  "isSuperadmin": true,
+  "permissionSnapshot": {
+    "restaurantId": "aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8",
+    "userId": "29b580e3-2dcd-4da8-b7f0-650815cc304d",
+    "permVersion": "1",
+    "modules": [
+      {
+        "id": "0b15fee7-b894-4e6e-9241-dc324f86bd5d",
+        "key": "dashboard",
+        "name": "Dashboard",
+        "submodules": [
+          {
+            "id": "f28e9f08-8c66-4dc6-86fc-bd2f25a5fbd3",
+            "key": "general",
+            "name": "Geral",
+            "features": [
+              {
+                "id": "a31ee4f5-83c6-45a9-b8d2-b3c101eafacf",
+                "key": "dashboard:general:view",
+                "name": "Visualizar Painel Geral",
+                "actions": [
+                  {
+                    "id": 1,
+                    "key": "create",
+                    "allowed": true,
+                    "locked": false,
+                    "reason": "Granted by role"
+                  },
+                  {
+                    "id": 2,
+                    "key": "read",
+                    "allowed": true,
+                    "locked": false,
+                    "reason": "Granted by role"
+                  },
+                  {
+                    "id": 3,
+                    "key": "update",
+                    "allowed": true,
+                    "locked": false,
+                    "reason": "Granted by role"
+                  },
+                  {
+                    "id": 4,
+                    "key": "delete",
+                    "allowed": true,
+                    "locked": false,
+                    "reason": "Granted by role"
+                  },
+                  {
+                    "id": 5,
+                    "key": "export",
+                    "allowed": true,
+                    "locked": false,
+                    "reason": "Granted by role"
+                  },
+                  {
+                    "id": 6,
+                    "key": "approve",
+                    "allowed": true,
+                    "locked": false,
+                    "reason": "Granted by role"
+                  },
+                  {
+                    "id": 7,
+                    "key": "manage_permissions",
+                    "allowed": true,
+                    "locked": false,
+                    "reason": "Granted by role"
+                  }
+                ],
+                "isLockedByEntitlement": false
+              }
+            ],
+            "isLockedByEntitlement": false
+          }
+        ],
+        "isLockedByEntitlement": false
+      },
+      {
+        "id": "6e7d1256-c901-4fd4-86dd-4e559a00afcd",
+        "key": "fidelity",
+        "name": "Fidelidade",
+        "submodules": [
+          {
+            "id": "2471b225-fea3-4ea3-86a6-e804690be058",
+            "key": "general",
+            "name": "Geral",
+            "features": [
+              {
+                "id": "4707475c-a1f6-47d4-bad4-5b9b544c358f",
+                "key": "fidelity:general:dashboard",
+                "name": "Painel Inicial",
+                "actions": [
+                  {
+                    "id": 1,
+                    "key": "create",
+                    "allowed": true,
+                    "locked": false,
+                    "reason": "Granted by role"
+                  },
+                  {
+                    "id": 2,
+                    "key": "read",
+                    "allowed": true,
+                    "loc
+main.7eb25615.js:2 [Violation] 'message' handler took 364ms
+[Violation] Forced reflow while executing JavaScript took 32ms
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-(anônimo) @ Axios.js:213
+Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
-(anônimo) @ AuthContext.js:90
+(anônimo) @ dashboardQueries.js:21
+enabled @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
 nl @ react-dom.production.min.js:243
 _c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
-AuthContext.js:121 AuthContext useEffect: /auth/me failed: xt {message: 'Request failed with status code 429', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ AuthContext.js:121
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+enabled @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
 Promise.catch
-(anônimo) @ AuthContext.js:120
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
 nl @ react-dom.production.min.js:243
 _c @ react-dom.production.min.js:285
-(anônimo) @ react-dom.production.min.js:281
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
 _ @ scheduler.production.min.js:13
 P @ scheduler.production.min.js:14
-main.f1a9ed3f.js:2 [Violation] 'message' handler took 342ms
-[Violation] Forced reflow while executing JavaScript took 37ms
-AuthContext.js:134  POST https://feedelizaapi.towersfy.com/api/auth/login 429 (Too Many Requests)
+query.js:358 xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboardQueries.js:42 Error fetching dashboard data: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ dashboardQueries.js:42
+(anônimo) @ notifyManager.js:62
+notifyFn @ notifyManager.js:10
+(anônimo) @ notifyManager.js:77
+(anônimo) @ notifyManager.js:76
+cc @ react-dom.production.min.js:273
+(anônimo) @ notifyManager.js:75
+Promise.then
+S @ utils.js:322
+t.flush @ notifyManager.js:74
+t.batch @ notifyManager.js:30
+t.dispatch @ query.js:392
+onError @ query.js:348
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+Dashboard.js:94 Error fetching dashboard data: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+mV @ Dashboard.js:94
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+main.7eb25615.js:2 [Violation] 'click' handler took 251ms
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
 (anônimo) @ xhr.js:195
 xhr @ xhr.js:15
 Ur @ dispatchRequest.js:51
 Promise.then
 _request @ Axios.js:163
 request @ Axios.js:40
-(anônimo) @ Axios.js:226
+Xr.<computed> @ Axios.js:213
 (anônimo) @ bind.js:5
-login @ AuthContext.js:134
-onSubmit @ Login.js:25
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Te @ react-dom.production.min.js:54
-We @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Dn @ react-dom.production.min.js:105
-zn @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
+(anônimo) @ dashboardQueries.js:21
+enabled @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8/analytics?period=30d 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+enabled @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+query.js:358 xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+dashboardQueries.js:42 Error fetching dashboard data: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ dashboardQueries.js:42
+(anônimo) @ notifyManager.js:62
+notifyFn @ notifyManager.js:10
+(anônimo) @ notifyManager.js:77
+(anônimo) @ notifyManager.js:76
 cc @ react-dom.production.min.js:273
-Ie @ react-dom.production.min.js:52
-Un @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
+(anônimo) @ notifyManager.js:75
+Promise.then
+S @ utils.js:322
+t.flush @ notifyManager.js:74
+t.batch @ notifyManager.js:30
+t.dispatch @ query.js:392
+onError @ query.js:348
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+Dashboard.js:94 Error fetching dashboard data: xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+mV @ Dashboard.js:94
+vi @ react-dom.production.min.js:160
+As @ react-dom.production.min.js:196
+wl @ react-dom.production.min.js:291
+xc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+vc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+_ @ scheduler.production.min.js:13
+P @ scheduler.production.min.js:14
+main.7eb25615.js:2 [Violation] 'click' handler took 184ms
+checkinService.js:43  GET https://feedelizaapi.towersfy.com/api/checkin/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+enabled @ checkinService.js:43
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+checkinService.js:43  GET https://feedelizaapi.towersfy.com/api/checkin/analytics/aae3c602-b96c-4f53-aa9a-4e5ddf2a41b8 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+Ur @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+Xr.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+enabled @ checkinService.js:43
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 xt {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+f @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+r.executeFetch @ queryObserver.js:199
+r.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+nl @ react-dom.production.min.js:243
+_c @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+jc @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266

@@ -2,34 +2,17 @@ import React, { createContext, useState, useMemo, useContext, useEffect } from '
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import { appBarDrawerTheme } from 'app/providers/contexts/theme/appBarDrawerTheme';
-import { cssBaselineTheme } from 'app/providers/contexts/theme/cssBaselineTheme';
-import { buttonTheme } from 'app/providers/contexts/theme/buttonTheme';
-import { cardTheme } from 'app/providers/contexts/theme/cardTheme';
-import { paperTheme } from 'app/providers/contexts/theme/paperTheme';
-import { formTheme } from 'app/providers/contexts/theme/formTheme';
-import { listTheme } from 'app/providers/contexts/theme/listTheme';
-import { dividerTheme } from 'app/providers/contexts/theme/dividerTheme';
-import { dialogTheme } from 'app/providers/contexts/theme/dialogTheme';
-import { appBarDrawerTheme } from 'themes/appBarDrawerTheme';
-import { cssBaselineTheme } from 'themes/cssBaselineTheme';
-import { buttonTheme } from 'themes/buttonTheme';
-import { cardTheme } from 'themes/cardTheme';
-import { paperTheme } from 'themes/paperTheme';
-import { formTheme } from 'themes/formTheme';
-import { listTheme } from 'themes/listTheme';
-import { dividerTheme } from 'themes/dividerTheme';
-import { dialogTheme } from '/dialogTheme';
-import { appBarDrawerTheme } from '/appBarDrawerTheme';
-import { cssBaselineTheme } from '/cssBaselineTheme';
-import { buttonTheme } from '/buttonTheme';
-import { cardTheme } from '/cardTheme';
-import { paperTheme } from '/paperTheme';
-import { formTheme } from '/formTheme';
-import { listTheme } from '/listTheme';
-import { dividerTheme } from '/dividerTheme';
-import { tableTheme } from '/tableTheme';
-import { tooltipTheme } from '/tooltipTheme';
+import { appBarDrawerTheme } from './theme/appBarDrawerTheme';
+import { cssBaselineTheme } from './theme/cssBaselineTheme';
+import { buttonTheme } from './theme/buttonTheme';
+import { cardTheme } from './theme/cardTheme';
+import { paperTheme } from './theme/paperTheme';
+import { formTheme } from './theme/formTheme';
+import { listTheme } from './theme/listTheme';
+import { dividerTheme } from './theme/dividerTheme';
+import { dialogTheme } from './theme/dialogTheme';
+import { tableTheme } from './theme/tableTheme';
+import { tooltipTheme } from './theme/tooltipTheme';
 
 const ThemeContext = createContext();
 

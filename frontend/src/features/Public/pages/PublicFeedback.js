@@ -1,4 +1,4 @@
-import React, { useState } => 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { useGetPublicQRCode, useCreatePublicFeedback } from 'features/Feedback/api/feedbackService'; // Corrected import

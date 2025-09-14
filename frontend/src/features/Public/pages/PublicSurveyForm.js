@@ -33,6 +33,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { Restaurant as RestaurantIcon } from '@mui/icons-material';
+import {
+  useGetPublicSurvey,
+  useSubmitSurveyResponse,
+  useLinkCustomerToResponse,
 } from '../api/publicService';
 import { useLoginCustomer, useRegisterCustomer } from '@/features/Auth/api/authService';
 

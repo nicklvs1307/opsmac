@@ -14,7 +14,7 @@ import {
   useGetPermissionTree,
   useGetUserPermissionOverrides,
   useSetUserPermissionOverrides,
-} from './api/iamQueries';
+} from '../api/iamQueries';
 import { fetchUsers } from '@/services/adminService';
 import PermissionTree from '@/components/Admin/PermissionTree';
 

@@ -9,7 +9,7 @@ import {
   useGetPermissionTree,
   useGetRolePermissions,
   useSetRolePermissions,
-} from './api/iamQueries';
+} from '../api/iamQueries';
 
 const RolePermissions = () => {
   const { restaurantId, roleId } = useParams();

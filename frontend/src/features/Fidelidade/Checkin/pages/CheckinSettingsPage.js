@@ -29,7 +29,7 @@ import {
   useGetCheckinSettings,
   useUpdateCheckinSettings,
   useUpdateRestaurantProfile,
-} from './api/checkinService';
+} from '../api/checkinService';
 import { useRewards } from '@/features/Coupons/api/couponQueries';
 import toast from 'react-hot-toast';
 

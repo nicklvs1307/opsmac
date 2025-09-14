@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           23.1s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           20.7s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.319 + npm run build
-1.034
-1.034 > feedeliza-plus@1.0.0 build
-1.034 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-1.034
-5.446 Creating an optimized production build...
-22.93 Failed to compile.
-22.93
-22.93 Module not found: Error: Can't resolve './api/surveyService' in '/app/frontend/src/features/Fidelidade/Avaliacoes/pages'
-22.93
-22.93
+0.316 + npm run build
+0.634
+0.634 > feedeliza-plus@1.0.0 build
+0.634 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.634
+3.035 Creating an optimized production build...
+20.50 Failed to compile.
+20.50
+20.50 Module not found: Error: Can't resolve './api/checkinService' in '/app/frontend/src/features/Fidelidade/Checkin/pages'
+20.50
+20.50
 ------
 Dockerfile.frontend:27
 --------------------

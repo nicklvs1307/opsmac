@@ -45,7 +45,7 @@ import {
   useCreateReward,
   useUpdateReward,
   useDeleteReward,
-} from './api/rewardsService';
+} from '../api/rewardsService';
 
 const Rewards = () => {
   const { user } = useAuth();

@@ -52,7 +52,7 @@ import {
   useDownloadQRCode,
   usePrintQRCode,
   useDeleteQRCode,
-} from './api/qrCodeService';
+} from '../api/qrCodeService';
 
 const QRCodeManage = () => {
   const navigate = useNavigate();

@@ -25,7 +25,7 @@ import {
   useCreateFeedback,
   useGetCustomersForFeedback,
   useGetQRCodesForFeedback,
-} from './api/feedbackService';
+} from '../api/feedbackService';
 
 const NewFeedback = () => {
   const navigate = useNavigate();

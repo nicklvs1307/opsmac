@@ -29,7 +29,7 @@ import {
   useUpdateTable,
   useDeleteTable,
   useGenerateQrCode,
-} from './api/tablesService';
+} from '../api/tablesService';
 
 const Tables = () => {
   const { user } = useAuth();

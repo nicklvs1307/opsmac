@@ -4,13 +4,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import { appBarDrawerTheme } from './theme/appBarDrawerTheme';
 import { cssBaselineTheme } from './theme/cssBaselineTheme';
-import { buttonTheme } from './theme/buttonTheme';
-import { cardTheme } from './theme/cardTheme';
-import { paperTheme } from './theme/paperTheme';
-import { formTheme } from './theme/formTheme';
-import { listTheme } from './theme/listTheme';
-import { dividerTheme } from './theme/dividerTheme';
+import buttonTheme from './theme/buttonTheme';
+import cardTheme from './theme/cardTheme';
 import { dialogTheme } from './theme/dialogTheme';
+import { dividerTheme } from './theme/dividerTheme';
+import formTheme from './theme/formTheme';
+import { listTheme } from './theme/listTheme';
+import paperTheme from './theme/paperTheme';
 import { tableTheme } from './theme/tableTheme';
 import { tooltipTheme } from './theme/tooltipTheme';
 

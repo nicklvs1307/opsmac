@@ -1,17 +1,18 @@
 "use strict";
-const iamService = require("domains/iam/iam.service");
-const auditService = require("services/auditService"); // Import auditService
+module.exports = (db) => {
+  const iamService = require("domains/iam/iam.service")(db);
+  const auditService = require("services/auditService"); // Import auditService
 
-const {
-  UnauthorizedError,
-  BadRequestError,
-  ForbiddenError,
-  PaymentRequiredError,
-  NotFoundError,
-  InternalServerError,
-} = require("utils/errors");
+  const {
+    UnauthorizedError,
+    BadRequestError,
+    ForbiddenError,
+    PaymentRequiredError,
+    NotFoundError,
+    InternalServerError,
+  } = require("utils/errors");
 
-class IamController {
+  class IamController {
   // --- Role Management ---
   async createRole(req, res, next) {
     const restaurantId = req.context.restaurantId;
@@ -381,4 +382,5 @@ class IamController {
   }
 }
 
-module.exports = new IamController();
+  return new IamController();
+};

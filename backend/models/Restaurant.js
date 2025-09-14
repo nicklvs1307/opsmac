@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     zipCode: {
       type: DataTypes.STRING(20),
-      field: 'zip_code',
+      field: 'zipCode',
     },
     phone: {
       type: DataTypes.STRING(20),

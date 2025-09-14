@@ -10,7 +10,6 @@ import { paperTheme } from './theme/paperTheme';
 import { formTheme } from './theme/formTheme';
 import { listTheme } from './theme/listTheme';
 import { dividerTheme } from './theme/dividerTheme';
-import { feedbackTheme } from './theme/feedbackTheme';
 import { dialogTheme } from './theme/dialogTheme';
 import { tableTheme } from './theme/tableTheme';
 import { tooltipTheme } from './theme/tooltipTheme';
@@ -182,7 +181,6 @@ export const ThemeProvider = ({ children }) => {
           ...formTheme(mode),
           ...listTheme(mode),
           ...dividerTheme(mode),
-          ...feedbackTheme(mode),
           ...dialogTheme(mode),
           ...tableTheme(mode),
           ...tooltipTheme(mode),

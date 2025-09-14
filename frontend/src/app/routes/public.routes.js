@@ -18,7 +18,7 @@ const publicRoutes = [
   {
     path: '/login',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Login />
       </Suspense>
     ),
@@ -26,7 +26,7 @@ const publicRoutes = [
   {
     path: '/unauthorized',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <UnauthorizedPage />
       </Suspense>
     ),
@@ -34,7 +34,7 @@ const publicRoutes = [
   {
     path: '/feature-locked',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <FeatureLockedPage />
       </Suspense>
     ),
@@ -42,7 +42,7 @@ const publicRoutes = [
   {
     path: '/feedback/:shortUrl',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PublicFeedback />
       </Suspense>
     ),
@@ -50,7 +50,7 @@ const publicRoutes = [
   {
     path: '/thank-you',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ThankYou />
       </Suspense>
     ),
@@ -58,7 +58,7 @@ const publicRoutes = [
   {
     path: '/public/surveys/:restaurantSlug/:surveySlug/:customerId?',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PublicSurveyForm />
       </Suspense>
     ),
@@ -66,7 +66,7 @@ const publicRoutes = [
   {
     path: '/checkin/public/:restaurantSlug',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PublicCheckin />
       </Suspense>
     ),
@@ -74,7 +74,7 @@ const publicRoutes = [
   {
     path: '/girar-roleta',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <GirarRoleta />
       </Suspense>
     ),
@@ -82,7 +82,7 @@ const publicRoutes = [
   {
     path: '/recompensa-ganha',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PublicReward />
       </Suspense>
     ),
@@ -90,7 +90,7 @@ const publicRoutes = [
   {
     path: '/menu/:restaurantSlug',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PublicMenu />
       </Suspense>
     ),
@@ -98,7 +98,7 @@ const publicRoutes = [
   {
     path: '/menu/delivery/:restaurantSlug',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PublicDeliveryMenu />
       </Suspense>
     ),
@@ -106,7 +106,7 @@ const publicRoutes = [
   {
     path: '/menu/:restaurantSlug/:tableNumber',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PublicDineInMenu />
       </Suspense>
     ),
@@ -114,7 +114,7 @@ const publicRoutes = [
   {
     path: '/register',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <CustomerRegistration />
       </Suspense>
     ),

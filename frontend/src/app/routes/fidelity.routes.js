@@ -58,7 +58,7 @@ const fidelityRoutes = [
     path: 'fidelity/dashboard',
     element: (
       <ProtectedRoute featureKey="fidelity:general:dashboard" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Dashboard />
         </Suspense>
       </ProtectedRoute>
@@ -68,7 +68,7 @@ const fidelityRoutes = [
     path: 'fidelity/monthly-summary',
     element: (
       <ProtectedRoute featureKey="fidelity:general:monthly-summary" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <MonthlySummary />
         </Suspense>
       </ProtectedRoute>
@@ -78,7 +78,7 @@ const fidelityRoutes = [
     path: 'fidelity/satisfaction-overview',
     element: (
       <ProtectedRoute featureKey="fidelity:general:satisfaction-overview" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SatisfactionOverview />
         </Suspense>
       </ProtectedRoute>
@@ -88,7 +88,7 @@ const fidelityRoutes = [
     path: 'fidelity/surveys-comparison',
     element: (
       <ProtectedRoute featureKey="fidelity:general:surveys-comparison" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SurveysComparison />
         </Suspense>
       </ProtectedRoute>
@@ -98,7 +98,7 @@ const fidelityRoutes = [
     path: 'fidelity/evolution',
     element: (
       <ProtectedRoute featureKey="fidelity:general:evolution" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Evolution />
         </Suspense>
       </ProtectedRoute>
@@ -108,7 +108,7 @@ const fidelityRoutes = [
     path: 'fidelity/benchmarking',
     element: (
       <ProtectedRoute featureKey="fidelity:general:benchmarking" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Benchmarking />
         </Suspense>
       </ProtectedRoute>
@@ -118,7 +118,7 @@ const fidelityRoutes = [
     path: 'fidelity/multiple-choice',
     element: (
       <ProtectedRoute featureKey="fidelity:general:multiple-choice" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <MultipleChoice />
         </Suspense>
       </ProtectedRoute>
@@ -128,7 +128,7 @@ const fidelityRoutes = [
     path: 'fidelity/word-clouds',
     element: (
       <ProtectedRoute featureKey="fidelity:general:word-clouds" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <WordClouds />
         </Suspense>
       </ProtectedRoute>
@@ -138,7 +138,7 @@ const fidelityRoutes = [
     path: 'feedback/new',
     element: (
       <ProtectedRoute featureKey="feedback_management" actionKey="create">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <NewFeedback />
         </Suspense>
       </ProtectedRoute>
@@ -148,7 +148,7 @@ const fidelityRoutes = [
     path: 'feedback/:id',
     element: (
       <ProtectedRoute featureKey="feedback_management" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <FeedbackDetail />
         </Suspense>
       </ProtectedRoute>
@@ -158,7 +158,7 @@ const fidelityRoutes = [
     path: 'qrcodes',
     element: (
       <ProtectedRoute featureKey="qrcodes" actionKey="manage">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <QRCodeManage />
         </Suspense>
       </ProtectedRoute>
@@ -168,7 +168,7 @@ const fidelityRoutes = [
     path: 'qrcodes/new',
     element: (
       <ProtectedRoute featureKey="qrcodes" actionKey="create">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <QRCodeGenerate />
         </Suspense>
       </ProtectedRoute>
@@ -178,7 +178,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/rewards',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:rewards" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Rewards />
         </Suspense>
       </ProtectedRoute>
@@ -188,7 +188,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/rewards-management',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:rewards-management" actionKey="manage">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Rewards />
         </Suspense>
       </ProtectedRoute>
@@ -198,7 +198,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/rewards-create',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:rewards-create" actionKey="create">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CouponCreatePage />
         </Suspense>
       </ProtectedRoute>
@@ -208,7 +208,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/edit/:id',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:management" actionKey="update">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CouponEditPage />
         </Suspense>
       </ProtectedRoute>
@@ -218,7 +218,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/dashboard',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:dashboard" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CouponDashboardPage />
         </Suspense>
       </ProtectedRoute>
@@ -228,7 +228,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/list',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:list" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CouponListPage />
         </Suspense>
       </ProtectedRoute>
@@ -238,7 +238,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/management',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:management" actionKey="manage">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CouponListPage />
         </Suspense>
       </ProtectedRoute>
@@ -248,7 +248,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/validation',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:validation" actionKey="update">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CouponValidatorPage />
         </Suspense>
       </ProtectedRoute>
@@ -258,7 +258,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/raffle',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:raffle" actionKey="participate">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Raffle />
         </Suspense>
       </ProtectedRoute>
@@ -268,7 +268,7 @@ const fidelityRoutes = [
     path: 'fidelity/relationship/customers',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:customers" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Customers />
         </Suspense>
       </ProtectedRoute>
@@ -278,7 +278,7 @@ const fidelityRoutes = [
     path: 'customers/:id/details',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:customers" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CustomerDetail />
         </Suspense>
       </ProtectedRoute>
@@ -288,7 +288,7 @@ const fidelityRoutes = [
     path: 'fidelity/relationship/birthdays',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:birthdays" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CustomerBirthdays />
         </Suspense>
       </ProtectedRoute>
@@ -298,7 +298,7 @@ const fidelityRoutes = [
     path: 'customers/dashboard',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:dashboard" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CustomerDashboard />
         </Suspense>
       </ProtectedRoute>
@@ -308,7 +308,7 @@ const fidelityRoutes = [
     path: 'fidelity/checkin/dashboard',
     element: (
       <ProtectedRoute featureKey="fidelity:checkin:dashboard" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CheckinAnalyticsPage />
         </Suspense>
       </ProtectedRoute>
@@ -318,7 +318,7 @@ const fidelityRoutes = [
     path: 'fidelity/checkin/settings',
     element: (
       <ProtectedRoute featureKey="fidelity:checkin:settings" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CheckinSettingsPage />
         </Suspense>
       </ProtectedRoute>
@@ -328,7 +328,7 @@ const fidelityRoutes = [
     path: 'fidelity/checkin/active',
     element: (
       <ProtectedRoute featureKey="fidelity:checkin:active" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <ActiveCheckinsPage />
         </Suspense>
       </ProtectedRoute>
@@ -338,7 +338,7 @@ const fidelityRoutes = [
     path: 'fidelity/satisfaction/dashboard',
     element: (
       <ProtectedRoute featureKey="fidelity:satisfaction:dashboard" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SatisfactionAnalyticsPage />
         </Suspense>
       </ProtectedRoute>
@@ -348,7 +348,7 @@ const fidelityRoutes = [
     path: 'fidelity/satisfaction/settings',
     element: (
       <ProtectedRoute featureKey="fidelity:satisfaction:settings" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SatisfactionSettingsPage />
         </Suspense>
       </ProtectedRoute>
@@ -358,7 +358,7 @@ const fidelityRoutes = [
     path: 'fidelity/satisfaction/surveys',
     element: (
       <ProtectedRoute featureKey="fidelity:satisfaction:surveys" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SurveyList />
         </Suspense>
       </ProtectedRoute>
@@ -368,7 +368,7 @@ const fidelityRoutes = [
     path: 'fidelity/responses/management',
     element: (
       <ProtectedRoute featureKey="fidelity:responses:management" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <FeedbackList />
         </Suspense>
       </ProtectedRoute>
@@ -378,7 +378,7 @@ const fidelityRoutes = [
     path: 'fidelity/responses/dashboard',
     element: (
       <ProtectedRoute featureKey="fidelity:responses:dashboard" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <FeedbackList />
         </Suspense>
       </ProtectedRoute>
@@ -388,7 +388,7 @@ const fidelityRoutes = [
     path: 'fidelity/responses/replicas',
     element: (
       <ProtectedRoute featureKey="fidelity:responses:replicas" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Replicas />
         </Suspense>
       </ProtectedRoute>
@@ -398,7 +398,7 @@ const fidelityRoutes = [
     path: 'fidelity/responses/goals',
     element: (
       <ProtectedRoute featureKey="fidelity:responses:goals" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Goals />
         </Suspense>
       </ProtectedRoute>
@@ -408,7 +408,7 @@ const fidelityRoutes = [
     path: 'fidelity/responses/import',
     element: (
       <ProtectedRoute featureKey="fidelity:responses:import" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Import />
         </Suspense>
       </ProtectedRoute>
@@ -418,7 +418,7 @@ const fidelityRoutes = [
     path: 'fidelity/surveys/new',
     element: (
       <ProtectedRoute featureKey="fidelity:satisfaction:surveys" actionKey="create">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SurveyCreate />
         </Suspense>
       </ProtectedRoute>
@@ -428,7 +428,7 @@ const fidelityRoutes = [
     path: 'fidelity/surveys/edit/:id',
     element: (
       <ProtectedRoute featureKey="fidelity:satisfaction:surveys" actionKey="update">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SurveyEdit />
         </Suspense>
       </ProtectedRoute>
@@ -438,7 +438,7 @@ const fidelityRoutes = [
     path: 'fidelity/surveys/:id/results',
     element: (
       <ProtectedRoute featureKey="fidelity:satisfaction:surveys" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SurveyResults />
         </Suspense>
       </ProtectedRoute>
@@ -448,7 +448,7 @@ const fidelityRoutes = [
     path: 'fidelity/relationship/dashboard',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:dashboard" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <RelationshipDashboard />
         </Suspense>
       </ProtectedRoute>
@@ -458,7 +458,7 @@ const fidelityRoutes = [
     path: 'fidelity/relationship/ranking',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:ranking" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Ranking />
         </Suspense>
       </ProtectedRoute>
@@ -468,7 +468,7 @@ const fidelityRoutes = [
     path: 'fidelity/relationship/dispatches',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:dispatches" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Dispatches />
         </Suspense>
       </ProtectedRoute>
@@ -478,7 +478,7 @@ const fidelityRoutes = [
     path: 'fidelity/relationship/campaigns',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:campaigns" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Campaigns />
         </Suspense>
       </ProtectedRoute>
@@ -488,7 +488,7 @@ const fidelityRoutes = [
     path: 'fidelity/relationship/messages',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:messages" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Messages />
         </Suspense>
       </ProtectedRoute>
@@ -498,7 +498,7 @@ const fidelityRoutes = [
     path: 'fidelity/relationship/segmentation',
     element: (
       <ProtectedRoute featureKey="fidelity:relationship:segmentation" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Segmentation />
         </Suspense>
       </ProtectedRoute>
@@ -508,7 +508,7 @@ const fidelityRoutes = [
     path: 'fidelity/integrations',
     element: (
       <ProtectedRoute featureKey="fidelity:integrations" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <IntegrationsPage />
         </Suspense>
       </ProtectedRoute>
@@ -518,7 +518,7 @@ const fidelityRoutes = [
     path: 'fidelity/reports',
     element: (
       <ProtectedRoute featureKey="fidelity:reports" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <FidelityReports />
         </Suspense>
       </ProtectedRoute>
@@ -528,7 +528,7 @@ const fidelityRoutes = [
     path: 'fidelity/coupons/redemption-reports',
     element: (
       <ProtectedRoute featureKey="fidelity:coupons:redemption-reports" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <GeneratedCouponsReport />
         </Suspense>
       </ProtectedRoute>
@@ -538,7 +538,7 @@ const fidelityRoutes = [
     path: 'fidelity/automation/flows',
     element: (
       <ProtectedRoute featureKey="fidelity:automation:flows" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <ComingSoon />
         </Suspense>
       </ProtectedRoute>
@@ -548,7 +548,7 @@ const fidelityRoutes = [
     path: 'fidelity/checkin/analytics',
     element: (
       <ProtectedRoute featureKey="checkin_dashboard" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CheckinAnalyticsPage />
         </Suspense>
       </ProtectedRoute>

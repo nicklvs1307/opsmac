@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
 
   // If authentication or permissions are still loading, show a loader
   if (authLoading || (featureKey && permissionsLoading)) {
-    return <div>Carregando...</div>; // Or a proper spinner component
+    return <div className="loading-spinner"></div>; // Or a proper spinner component
   }
 
   // If user is not authenticated, redirect to login

@@ -46,7 +46,7 @@ const adminRoutes = [
     path: 'admin/restaurant-settings',
     element: (
       <ProtectedRoute featureKey="restaurant_management" actionKey="update">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Settings />
         </Suspense>
       </ProtectedRoute>
@@ -56,7 +56,7 @@ const adminRoutes = [
     path: 'admin/modules',
     element: (
       <ProtectedRoute featureKey="modules" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <MenuManagement />
         </Suspense>
       </ProtectedRoute>
@@ -66,7 +66,7 @@ const adminRoutes = [
     path: 'admin/reports',
     element: (
       <ProtectedRoute featureKey="reports" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <ComingSoon />{' '}
           {/* Keep ComingSoon for now if no specific report component is ready */}
         </Suspense>
@@ -77,7 +77,7 @@ const adminRoutes = [
     path: 'admin/financial',
     element: (
       <ProtectedRoute featureKey="financial" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <ComingSoon /> {/* Placeholder for FinancialTransactionsPage */}
         </Suspense>
       </ProtectedRoute>
@@ -87,7 +87,7 @@ const adminRoutes = [
     path: 'admin/stock',
     element: (
       <ProtectedRoute featureKey="stock" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <StockDashboardPage />
         </Suspense>
       </ProtectedRoute>
@@ -97,7 +97,7 @@ const adminRoutes = [
     path: 'admin/products',
     element: (
       <ProtectedRoute featureKey="products" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <StockProductsPage /> {/* Assuming this is the main products page */}
         </Suspense>
       </ProtectedRoute>
@@ -107,7 +107,7 @@ const adminRoutes = [
     path: 'admin/coupons',
     element: (
       <ProtectedRoute featureKey="coupons" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CouponListPage />
         </Suspense>
       </ProtectedRoute>
@@ -117,7 +117,7 @@ const adminRoutes = [
     path: 'admin/surveys',
     element: (
       <ProtectedRoute featureKey="surveys" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SurveyList />
         </Suspense>
       </ProtectedRoute>
@@ -127,7 +127,7 @@ const adminRoutes = [
     path: 'fidelity/checkin/analytics',
     element: (
       <ProtectedRoute featureKey="checkin_dashboard" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <CheckinAnalyticsPage />
         </Suspense>
       </ProtectedRoute>
@@ -137,7 +137,7 @@ const adminRoutes = [
     path: 'erp/tables',
     element: (
       <ProtectedRoute featureKey="tables" actionKey="manage">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <Tables />
         </Suspense>
       </ProtectedRoute>
@@ -147,7 +147,7 @@ const adminRoutes = [
     path: 'qrcodes/manage',
     element: (
       <ProtectedRoute featureKey="qrcodes" actionKey="manage">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <QRCodeManage />
         </Suspense>
       </ProtectedRoute>
@@ -157,7 +157,7 @@ const adminRoutes = [
     path: 'waiter/calls',
     element: (
       <ProtectedRoute featureKey="waiter_calls" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <ComingSoon />
         </Suspense>
       </ProtectedRoute>
@@ -167,7 +167,7 @@ const adminRoutes = [
     path: 'whatsapp/messages',
     element: (
       <ProtectedRoute featureKey="whatsapp_messages" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <ComingSoon />
         </Suspense>
       </ProtectedRoute>
@@ -177,7 +177,7 @@ const adminRoutes = [
     path: 'admin/losses',
     element: (
       <ProtectedRoute featureKey="losses" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <ComingSoon />
         </Suspense>
       </ProtectedRoute>
@@ -186,7 +186,7 @@ const adminRoutes = [
   // {
   //   path: 'admin/production',
   //   element: (
-  //     <Suspense fallback={<div>Carregando...</div>}>
+  //     <Suspense fallback={<div className="loading-spinner"></div>}>
   //       <ProductionList />
   //     </Suspense>
   //   ),
@@ -195,7 +195,7 @@ const adminRoutes = [
     path: 'admin/suppliers',
     element: (
       <ProtectedRoute featureKey="suppliers" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <SuppliersPage />
         </Suspense>
       </ProtectedRoute>
@@ -205,7 +205,7 @@ const adminRoutes = [
     path: 'admin/roles-permissions',
     element: (
       <ProtectedRoute featureKey="role_management" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <RolePermissionManagementPage />
         </Suspense>
       </ProtectedRoute>
@@ -215,7 +215,7 @@ const adminRoutes = [
     path: 'admin/restaurant-modules',
     element: (
       <ProtectedRoute featureKey="modules" actionKey="manage">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <MenuManagement />
         </Suspense>
       </ProtectedRoute>
@@ -233,7 +233,7 @@ const adminRoutes = [
     path: 'admin/users',
     element: (
       <ProtectedRoute featureKey="users" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <AdminUsersPage />
         </Suspense>
       </ProtectedRoute>
@@ -243,7 +243,7 @@ const adminRoutes = [
     path: 'admin/users/:userId/edit',
     element: (
       <ProtectedRoute featureKey="users" actionKey="update">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <UserEditPage />
         </Suspense>
       </ProtectedRoute>
@@ -253,7 +253,7 @@ const adminRoutes = [
     path: 'admin/users/new',
     element: (
       <ProtectedRoute featureKey="users" actionKey="create">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <UserCreatePage />
         </Suspense>
       </ProtectedRoute>
@@ -263,7 +263,7 @@ const adminRoutes = [
     path: 'admin/restaurants',
     element: (
       <ProtectedRoute featureKey="restaurants" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <AdminRestaurantsPage />
         </Suspense>
       </ProtectedRoute>
@@ -273,7 +273,7 @@ const adminRoutes = [
     path: 'admin/restaurants/:restaurantId/edit',
     element: (
       <ProtectedRoute featureKey="admin:restaurants" actionKey="update">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <RestaurantEditPage />
         </Suspense>
       </ProtectedRoute>
@@ -283,7 +283,7 @@ const adminRoutes = [
     path: 'admin/restaurants/new',
     element: (
       <ProtectedRoute featureKey="restaurants" actionKey="create">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <RestaurantCreatePage />
         </Suspense>
       </ProtectedRoute>
@@ -293,7 +293,7 @@ const adminRoutes = [
     path: '/waiter',
     element: (
       <ProtectedRoute featureKey="waiter_app" actionKey="access">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <WaiterPage />
         </Suspense>
       </ProtectedRoute>
@@ -303,7 +303,7 @@ const adminRoutes = [
     path: '/waiter/order/:tableId',
     element: (
       <ProtectedRoute featureKey="waiter_app" actionKey="access">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <OrderPage />
         </Suspense>
       </ProtectedRoute>
@@ -313,7 +313,7 @@ const adminRoutes = [
     path: '/admin/iam/:restaurantId',
     element: (
       <ProtectedRoute featureKey="iam_admin" actionKey="access">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <IAMDashboard />
         </Suspense>
       </ProtectedRoute>
@@ -323,7 +323,7 @@ const adminRoutes = [
     path: '/admin/iam/:restaurantId/roles',
     element: (
       <ProtectedRoute featureKey="roles" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <RoleManagement />
         </Suspense>
       </ProtectedRoute>
@@ -333,7 +333,7 @@ const adminRoutes = [
     path: '/admin/iam/:restaurantId/roles/:roleId/permissions',
     element: (
       <ProtectedRoute featureKey="role_permissions" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <RolePermissions />
         </Suspense>
       </ProtectedRoute>
@@ -343,7 +343,7 @@ const adminRoutes = [
     path: '/admin/iam/:restaurantId/users/:userId/overrides',
     element: (
       <ProtectedRoute featureKey="user_overrides" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <UserPermissionOverrides />
         </Suspense>
       </ProtectedRoute>
@@ -353,7 +353,7 @@ const adminRoutes = [
     path: '/admin/iam/:restaurantId/entitlements',
     element: (
       <ProtectedRoute featureKey="entitlements" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <EntitlementManagement />
         </Suspense>
       </ProtectedRoute>
@@ -363,7 +363,7 @@ const adminRoutes = [
     path: '/admin/iam/:restaurantId/users',
     element: (
       <ProtectedRoute featureKey="user_roles" actionKey="read">
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div className="loading-spinner"></div>}>
           <UserRoleManagement />
         </Suspense>
       </ProtectedRoute>

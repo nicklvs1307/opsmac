@@ -12,7 +12,7 @@ const WhatsappSettingsPage = lazy(() => import('@/features/Settings/pages/Whatsa
 const settingsRoutes = {
   path: 'settings',
   element: (
-    <Suspense fallback={<div>Carregando...</div>}>
+    <Suspense fallback={<div className="loading-spinner"></div>}>
       {/* Settings component now acts as a redirect */}
       <Settings />
     </Suspense>
@@ -26,7 +26,7 @@ const settingsRoutes = {
       path: 'profile',
       element: (
         <ProtectedRoute featureKey="user_profile" actionKey="update">
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <ProfileSettingsPage />
           </Suspense>
         </ProtectedRoute>
@@ -36,7 +36,7 @@ const settingsRoutes = {
       path: 'business',
       element: (
         <ProtectedRoute featureKey="business_settings" actionKey="update">
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <BusinessSettingsPage />
           </Suspense>
         </ProtectedRoute>
@@ -46,7 +46,7 @@ const settingsRoutes = {
       path: 'notifications',
       element: (
         <ProtectedRoute featureKey="notification_settings" actionKey="update">
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <NotificationsSettingsPage />
           </Suspense>
         </ProtectedRoute>
@@ -56,7 +56,7 @@ const settingsRoutes = {
       path: 'security',
       element: (
         <ProtectedRoute featureKey="security_settings" actionKey="update">
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <SecuritySettingsPage />
           </Suspense>
         </ProtectedRoute>
@@ -66,7 +66,7 @@ const settingsRoutes = {
       path: 'appearance',
       element: (
         <ProtectedRoute featureKey="appearance_settings" actionKey="update">
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <AppearanceSettingsPage />
           </Suspense>
         </ProtectedRoute>
@@ -76,7 +76,7 @@ const settingsRoutes = {
       path: 'whatsapp',
       element: (
         <ProtectedRoute featureKey="whatsapp_integration" actionKey="update">
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <WhatsappSettingsPage />
           </Suspense>
         </ProtectedRoute>

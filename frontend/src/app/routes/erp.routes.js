@@ -60,7 +60,7 @@ const erpRoutes = [
   {
     path: 'erp/menu',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Menu />
       </Suspense>
     ),
@@ -68,7 +68,7 @@ const erpRoutes = [
   {
     path: 'stock/dashboard',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <StockDashboardPage />
       </Suspense>
     ),
@@ -76,7 +76,7 @@ const erpRoutes = [
   {
     path: 'stock/movements',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <StockMovementsPage />
       </Suspense>
     ),
@@ -84,7 +84,7 @@ const erpRoutes = [
   {
     path: 'stock/suppliers',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <SuppliersPage />
       </Suspense>
     ),
@@ -92,7 +92,7 @@ const erpRoutes = [
   {
     path: 'stock/purchases',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PurchasesPage />
       </Suspense>
     ),
@@ -100,7 +100,7 @@ const erpRoutes = [
   {
     path: 'stock/products',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <StockProductsPage />
       </Suspense>
     ),
@@ -108,7 +108,7 @@ const erpRoutes = [
   {
     path: 'stock/technical-sheet/list',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <TechnicalSpecificationManagement />
       </Suspense>
     ),
@@ -116,7 +116,7 @@ const erpRoutes = [
   {
     path: 'stock/products/create',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ProductsCreate />
       </Suspense>
     ),
@@ -124,7 +124,7 @@ const erpRoutes = [
   {
     path: 'stock/settings',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <StockSettings />
       </Suspense>
     ),
@@ -132,7 +132,7 @@ const erpRoutes = [
   {
     path: 'stock/reports',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <StockReports />
       </Suspense>
     ),
@@ -140,7 +140,7 @@ const erpRoutes = [
   {
     path: 'stock/inventory',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Inventory />
       </Suspense>
     ),
@@ -148,7 +148,7 @@ const erpRoutes = [
   {
     path: 'stock/technical-sheet/create',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <TechnicalSheetCreate />
       </Suspense>
     ),
@@ -156,7 +156,7 @@ const erpRoutes = [
   {
     path: 'stock/cmv',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <CMV />
       </Suspense>
     ),
@@ -164,7 +164,7 @@ const erpRoutes = [
   {
     path: 'stock/adjustments',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Adjustments />
       </Suspense>
     ),
@@ -172,7 +172,7 @@ const erpRoutes = [
   {
     path: 'stock/lots',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Lots />
       </Suspense>
     ),
@@ -180,7 +180,7 @@ const erpRoutes = [
   {
     path: 'stock/alerts',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Alerts />
       </Suspense>
     ),
@@ -188,7 +188,7 @@ const erpRoutes = [
   {
     path: 'integrations',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Integrations />
       </Suspense>
     ),
@@ -196,7 +196,7 @@ const erpRoutes = [
   {
     path: 'delivery',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Delivery />
       </Suspense>
     ),
@@ -204,7 +204,7 @@ const erpRoutes = [
   {
     path: 'sales-report',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <SalesReport />
       </Suspense>
     ),
@@ -212,7 +212,7 @@ const erpRoutes = [
   {
     path: 'digital-menus/delivery',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <DeliveryMenuPage />
       </Suspense>
     ),
@@ -220,7 +220,7 @@ const erpRoutes = [
   {
     path: 'management/dashboard',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ManagementDashboard />
       </Suspense>
     ),
@@ -228,7 +228,7 @@ const erpRoutes = [
   {
     path: 'management/schedule',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Schedule />
       </Suspense>
     ),
@@ -236,7 +236,7 @@ const erpRoutes = [
   {
     path: 'management/commissions',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Commissions />
       </Suspense>
     ),
@@ -244,7 +244,7 @@ const erpRoutes = [
   {
     path: 'management/costs',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Costs />
       </Suspense>
     ),
@@ -252,7 +252,7 @@ const erpRoutes = [
   {
     path: 'management/permissions',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ManagementPermissions />
       </Suspense>
     ),
@@ -267,7 +267,7 @@ const erpRoutes = [
       {
         path: 'dashboard',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <Orders />
           </Suspense>
         ),
@@ -275,7 +275,7 @@ const erpRoutes = [
       {
         path: 'pdv',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <Pdv />
           </Suspense>
         ),
@@ -283,7 +283,7 @@ const erpRoutes = [
       {
         path: 'list',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <Orders />
           </Suspense>
         ),
@@ -291,7 +291,7 @@ const erpRoutes = [
       {
         path: 'integrations',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <Integrations />
           </Suspense>
         ),
@@ -299,7 +299,7 @@ const erpRoutes = [
       {
         path: 'delivery',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <Delivery />
           </Suspense>
         ),
@@ -307,7 +307,7 @@ const erpRoutes = [
       {
         path: 'sales-report',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <SalesReport />
           </Suspense>
         ),
@@ -315,7 +315,7 @@ const erpRoutes = [
       {
         path: 'digital-menus/delivery',
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             <DeliveryMenuPage />
           </Suspense>
         ),
@@ -325,7 +325,7 @@ const erpRoutes = [
   {
     path: 'stock/ingredients',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Ingredients />
       </Suspense>
     ),
@@ -333,7 +333,7 @@ const erpRoutes = [
   {
     path: 'erp/payment-methods',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PaymentMethods />
       </Suspense>
     ),
@@ -341,7 +341,7 @@ const erpRoutes = [
   {
     path: 'erp/financial-categories',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <FinancialCategoriesPage />
       </Suspense>
     ),
@@ -349,7 +349,7 @@ const erpRoutes = [
   {
     path: 'management/team',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <TeamManagementPage />
       </Suspense>
     ),
@@ -357,7 +357,7 @@ const erpRoutes = [
   {
     path: 'management/production',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ProductionList />
       </Suspense>
     ),
@@ -365,7 +365,7 @@ const erpRoutes = [
   {
     path: 'reports/cash-flow',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <CashFlowReport />
       </Suspense>
     ),
@@ -373,7 +373,7 @@ const erpRoutes = [
   {
     path: 'reports/dre',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <DREReport />
       </Suspense>
     ),
@@ -381,7 +381,7 @@ const erpRoutes = [
   {
     path: 'reports/sales-by-payment-method',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <SalesByPaymentMethodReport />
       </Suspense>
     ),
@@ -389,7 +389,7 @@ const erpRoutes = [
   {
     path: 'reports/list-of-accounts',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ListOfAccountsReport />
       </Suspense>
     ),
@@ -397,7 +397,7 @@ const erpRoutes = [
   {
     path: 'reports/current-stock-position',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <CurrentStockPositionReport />
       </Suspense>
     ),
@@ -405,7 +405,7 @@ const erpRoutes = [
   {
     path: 'reports/stock-position-history',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <StockPositionHistoryReport />
       </Suspense>
     ),
@@ -413,7 +413,7 @@ const erpRoutes = [
   {
     path: 'validity-control/dashboard',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <LabelsDashboard />
       </Suspense>
     ),
@@ -421,7 +421,7 @@ const erpRoutes = [
   {
     path: 'validity-control/labels/print',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <PrintLabel />
       </Suspense>
     ),
@@ -429,7 +429,7 @@ const erpRoutes = [
   {
     path: 'validity-control/labels/print-group',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -437,7 +437,7 @@ const erpRoutes = [
   {
     path: 'validity-control/labels/count',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <CountProducts />
       </Suspense>
     ),
@@ -445,7 +445,7 @@ const erpRoutes = [
   {
     path: 'validity-control/labels/count-history',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <CountHistory />
       </Suspense>
     ),
@@ -453,7 +453,7 @@ const erpRoutes = [
   {
     path: 'validity-control/labels/history',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -461,7 +461,7 @@ const erpRoutes = [
   {
     path: 'validity-control/labels/delete',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <DeleteLabels />
       </Suspense>
     ),
@@ -469,7 +469,7 @@ const erpRoutes = [
   {
     path: 'validity-control/production',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <Production />
       </Suspense>
     ),
@@ -477,7 +477,7 @@ const erpRoutes = [
   {
     path: 'validity-control/labels',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <LabelsAdmin />
       </Suspense>
     ),
@@ -485,7 +485,7 @@ const erpRoutes = [
   {
     path: 'financial/payables/suppliers',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -493,7 +493,7 @@ const erpRoutes = [
   {
     path: 'financial/payables/deadlines',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -501,7 +501,7 @@ const erpRoutes = [
   {
     path: 'financial/payables/invoices',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -509,7 +509,7 @@ const erpRoutes = [
   {
     path: 'financial/payables/recurring',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -517,7 +517,7 @@ const erpRoutes = [
   {
     path: 'financial/receivables',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -525,7 +525,7 @@ const erpRoutes = [
   {
     path: 'financial/fiscal/invoices',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -533,7 +533,7 @@ const erpRoutes = [
   {
     path: 'financial/fiscal/taxes',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -541,7 +541,7 @@ const erpRoutes = [
   {
     path: 'financial/fiscal/sefaz',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -549,7 +549,7 @@ const erpRoutes = [
   {
     path: 'financial/fiscal/reports',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -557,7 +557,7 @@ const erpRoutes = [
   {
     path: 'financial/fiscal/settings',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -565,7 +565,7 @@ const erpRoutes = [
   {
     path: 'validity-control/stock-counts/:id',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <StockCountDetail />
       </Suspense>
     ),
@@ -573,7 +573,7 @@ const erpRoutes = [
   {
     path: 'validity-control/stock-counts',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <StockCountList />
       </Suspense>
     ),
@@ -581,7 +581,7 @@ const erpRoutes = [
   {
     path: 'validity-control/productions',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ProductionList />
       </Suspense>
     ),
@@ -589,7 +589,7 @@ const erpRoutes = [
   {
     path: 'validity-control/productions/new',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ProductionCreate />
       </Suspense>
     ),
@@ -597,7 +597,7 @@ const erpRoutes = [
   {
     path: 'validity-control/expirations',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),
@@ -605,7 +605,7 @@ const erpRoutes = [
   {
     path: 'validity-control/expirations-alert',
     element: (
-      <Suspense fallback={<div>Carregando...</div>}>
+      <Suspense fallback={<div className="loading-spinner"></div>}>
         <ComingSoon />
       </Suspense>
     ),

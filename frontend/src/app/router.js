@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<div>Carregando...</div>}>
+          <Suspense fallback={<div className="loading-spinner"></div>}>
             {/* Dashboard is the default for authenticated users */}
             <Navigate to="/fidelity/dashboard" replace />
           </Suspense>

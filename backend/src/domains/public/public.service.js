@@ -46,60 +46,6 @@ module.exports = (db) => {
     customer_name,
     table_number,
   ) => {
-    // ... (existing code)
-  };
-
-  const createPublicOrder = async (restaurant, orderData) => {
-    // Basic validation
-    if (!restaurant || !orderData || !orderData.items || orderData.items.length === 0) {
-      throw new BadRequestError("Dados do pedido inválidos.");
-    }
-
-    // Assuming orderData contains:
-    // {
-    //   customer_id: UUID (optional, if customer is known),
-    //   table_number: String (optional, for dine-in),
-    //   total_amount: Number,
-    //   status: String (e.g., 'pending'),
-    //   platform: String (e.g., 'public_web'),
-    //   delivery_type: String (e.g., 'delivery', 'pickup', 'dine_in'),
-    //   items: [
-    //     { product_id: UUID, quantity: Number, price: Number, notes: String }
-    //   ]
-    // }
-
-    const t = await models.sequelize.transaction();
-    try {
-      // Create the main order
-      const order = await models.Order.create({
-        restaurant_id: restaurant.id,
-        customer_id: orderData.customer_id,
-        table_number: orderData.table_number,
-        total_amount: orderData.total_amount,
-        status: orderData.status || 'pending', // Default to pending
-        platform: orderData.platform || 'public_web',
-        delivery_type: orderData.delivery_type || 'pickup',
-        // Add other relevant fields from orderData
-      }, { transaction: t });
-
-      // Create order items
-      const orderItems = orderData.items.map(item => ({
-        order_id: order.id,
-        product_id: item.product_id,
-        quantity: item.quantity,
-        price: item.price,
-        notes: item.notes,
-        // Add other relevant item fields
-      }));
-      await models.OrderItem.bulkCreate(orderItems, { transaction: t });
-
-      await t.commit();
-      return order;
-    } catch (error) {
-      await t.rollback();
-      throw new Error(`Erro ao criar pedido público: ${error.message}`);
-    }
-  };
     const checkinProgramSettings =
       restaurant.settings?.checkin_program_settings || {};
     const checkinDurationMinutes =
@@ -377,6 +323,58 @@ module.exports = (db) => {
       customer_total_visits: customer.total_visits,
       reward_earned: rewardEarned,
     };
+  };
+
+  const createPublicOrder = async (restaurant, orderData) => {
+    // Basic validation
+    if (!restaurant || !orderData || !orderData.items || orderData.items.length === 0) {
+      throw new BadRequestError("Dados do pedido inválidos.");
+    }
+
+    // Assuming orderData contains:
+    // {
+    //   customer_id: UUID (optional, if customer is known),
+    //   table_number: String (optional, for dine-in),
+    //   total_amount: Number,
+    //   status: String (e.g., 'pending'),
+    //   platform: String (e.g., 'public_web'),
+    //   delivery_type: String (e.g., 'delivery', 'pickup', 'dine_in'),
+    //   items: [
+    //     { product_id: UUID, quantity: Number, price: Number, notes: String }
+    //   ]
+    // }
+
+    const t = await models.sequelize.transaction();
+    try {
+      // Create the main order
+      const order = await models.Order.create({
+        restaurant_id: restaurant.id,
+        customer_id: orderData.customer_id,
+        table_number: orderData.table_number,
+        total_amount: orderData.total_amount,
+        status: orderData.status || 'pending', // Default to pending
+        platform: orderData.platform || 'public_web',
+        delivery_type: orderData.delivery_type || 'pickup',
+        // Add other relevant fields from orderData
+      }, { transaction: t });
+
+      // Create order items
+      const orderItems = orderData.items.map(item => ({
+        order_id: order.id,
+        product_id: item.product_id,
+        quantity: item.quantity,
+        price: item.price,
+        notes: item.notes,
+        // Add other relevant item fields
+      }));
+      await models.OrderItem.bulkCreate(orderItems, { transaction: t });
+
+      await t.commit();
+      return order;
+    } catch (error) {
+      await t.rollback();
+      throw new Error(`Erro ao criar pedido público: ${error.message}`);
+    }
   };
 
   const getRestaurantInfoBySlug = async (restaurantSlug) => {

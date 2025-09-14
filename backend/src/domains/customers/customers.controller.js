@@ -8,7 +8,8 @@ module.exports = (db) => {
   class CustomersController {
     constructor() {
       // Bind methods to the instance to ensure 'this' context is correct when used as Express middleware
-      this.getCustomerDashboardMetrics = this.getCustomerDashboardMetrics.bind(this);
+      this.getCustomerDashboardMetrics =
+        this.getCustomerDashboardMetrics.bind(this);
       this.getBirthdayCustomers = this.getBirthdayCustomers.bind(this);
       this.listCustomers = this.listCustomers.bind(this);
       this.createCustomer = this.createCustomer.bind(this);
@@ -32,7 +33,8 @@ module.exports = (db) => {
     async getCustomerDashboardMetrics(req, res, next) {
       try {
         const restaurantId = req.context.restaurantId;
-        const metrics = await customerService.getCustomerDashboardMetrics(restaurantId);
+        const metrics =
+          await customerService.getCustomerDashboardMetrics(restaurantId);
         res.json(metrics);
       } catch (error) {
         next(error);
@@ -42,7 +44,8 @@ module.exports = (db) => {
     async getBirthdayCustomers(req, res, next) {
       try {
         const restaurantId = req.context.restaurantId;
-        const customers = await customerService.getBirthdayCustomers(restaurantId);
+        const customers =
+          await customerService.getBirthdayCustomers(restaurantId);
         res.json(customers);
       } catch (error) {
         next(error);

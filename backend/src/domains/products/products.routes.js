@@ -14,6 +14,11 @@ module.exports = (db) => {
   const router = express.Router();
 
   // Rotas de Produtos
+  router.get(
+    "/",
+    requirePermission("products", "read"),
+    asyncHandler(productsController.getAllProducts),
+  );
   router.post(
     "/image",
     requirePermission("products", "update"),

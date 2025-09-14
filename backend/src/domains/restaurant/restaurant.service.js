@@ -12,6 +12,17 @@ module.exports = (db) => {
     return restaurant;
   };
 
+  const listRestaurants = async (restaurantIds) => {
+    const whereClause = {};
+    if (restaurantIds && restaurantIds.length > 0) {
+      whereClause.id = { [Op.in]: restaurantIds };
+    }
+    const restaurants = await models.Restaurant.findAll({
+      where: whereClause,
+    });
+    return restaurants;
+  };
+
   const updateRestaurant = async (restaurantId, restaurantData) => {
     const restaurant = await models.Restaurant.findByPk(restaurantId);
     if (!restaurant) {
@@ -589,6 +600,7 @@ module.exports = (db) => {
 
   return {
     getRestaurantById,
+    listRestaurants, // Added this line
     updateRestaurant,
     updateRestaurantStatus,
     listRestaurantUsers,

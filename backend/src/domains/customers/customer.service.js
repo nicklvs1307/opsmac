@@ -1,5 +1,5 @@
-const { Op, fn, col, literal } = require('sequelize');
-const { BadRequestError, NotFoundError } = require('utils/errors');
+const { Op, fn, col, literal } = require("sequelize");
+const { BadRequestError, NotFoundError } = require("utils/errors");
 
 class CustomerService {
   constructor(models, sequelize) {
@@ -16,67 +16,91 @@ class CustomerService {
       this.models.Customer.findOne({
         where: { restaurantId: restaurantId },
         attributes: [
-          [fn('COUNT', col('Customer.id')), 'totalCustomers'],
-          [fn('COUNT', fn('DISTINCT', col('checkins.customerId'))), 'engagedCustomersCount'],
-          [fn('COUNT', this.sequelize.literal('DISTINCT CASE WHEN "checkins"."createdAt" >= NOW() - INTERVAL \'30 day\' AND "checkins"."id" IS NOT NULL THEN "checkins"."customerId" END')), 'loyalCustomersCount']
+          [fn("COUNT", col("Customer.id")), "totalCustomers"],
+          [
+            fn("COUNT", fn("DISTINCT", col("checkins.customerId"))),
+            "engagedCustomersCount",
+          ],
+          [
+            fn(
+              "COUNT",
+              this.sequelize.literal(
+                'DISTINCT CASE WHEN "checkins"."createdAt" >= NOW() - INTERVAL \'30 day\' AND "checkins"."id" IS NOT NULL THEN "checkins"."customerId" END',
+              ),
+            ),
+            "loyalCustomersCount",
+          ],
         ],
-        include: [{
-          model: this.models.Checkin,
-          as: 'checkins',
-          attributes: [],
-          required: false
-        }],
-        raw: true
+        include: [
+          {
+            model: this.models.Checkin,
+            as: "checkins",
+            attributes: [],
+            required: false,
+          },
+        ],
+        raw: true,
       }),
       this.models.Checkin.findAll({
         attributes: [
-          'customerId',
-          [fn('COUNT', col('Checkin.id')), 'checkinCount'],
+          "customerId",
+          [fn("COUNT", col("Checkin.id")), "checkinCount"],
         ],
         where: { restaurantId: restaurantId },
-        group: ['customerId', 'customer.id', 'customer.name'],
-        order: [[literal('checkinCount'), 'DESC']],
+        group: ["customerId", "customer.id", "customer.name"],
+        order: [[literal("checkinCount"), "DESC"]],
         limit: 5,
-        include: [{
-          model: this.models.Customer,
-          as: 'customer',
-          attributes: ['name'],
-          required: false
-        }]
+        include: [
+          {
+            model: this.models.Customer,
+            as: "customer",
+            attributes: ["name"],
+            required: false,
+          },
+        ],
       }),
       this.models.Feedback.findAll({
         attributes: [
-          'customerId',
-          [fn('COUNT', col('Feedback.id')), 'feedbackCount'],
+          "customerId",
+          [fn("COUNT", col("Feedback.id")), "feedbackCount"],
         ],
         where: { restaurantId: restaurantId },
-        group: ['customerId', 'customer.id', 'customer.name'],
-        order: [[literal('feedbackCount'), 'DESC']],
+        group: ["customerId", "customer.id", "customer.name"],
+        order: [[literal("feedbackCount"), "DESC"]],
         limit: 5,
-        include: [{
-          model: this.models.Customer,
-          as: 'customer',
-          attributes: ['name'],
-          required: false
-        }]
+        include: [
+          {
+            model: this.models.Customer,
+            as: "customer",
+            attributes: ["name"],
+            required: false,
+          },
+        ],
       }),
     ]);
 
-    const mostCheckinsFormatted = mostCheckins.map(c => ({
+    const mostCheckinsFormatted = mostCheckins.map((c) => ({
       customerId: c.customerId,
       checkinCount: c.dataValues.checkinCount,
-      customerName: c.customer ? c.customer.name : 'Desconhecido'
+      customerName: c.customer ? c.customer.name : "Desconhecido",
     }));
 
-    const mostFeedbacksFormatted = mostFeedbacks.map(f => ({
+    const mostFeedbacksFormatted = mostFeedbacks.map((f) => ({
       customerId: f.customerId,
       feedbackCount: f.dataValues.feedbackCount,
-      customerName: f.customer ? f.customer.name : 'Desconhecido'
+      customerName: f.customer ? f.customer.name : "Desconhecido",
     }));
 
-    const engagementRate = customerAggregations.totalCustomers > 0 ? customerAggregations.engagedCustomersCount / customerAggregations.totalCustomers : 0;
+    const engagementRate =
+      customerAggregations.totalCustomers > 0
+        ? customerAggregations.engagedCustomersCount /
+          customerAggregations.totalCustomers
+        : 0;
     const loyalCustomersCount = customerAggregations.loyalCustomersCount;
-    const loyaltyRate = customerAggregations.totalCustomers > 0 ? loyalCustomersCount / customerAggregations.totalCustomers : 0;
+    const loyaltyRate =
+      customerAggregations.totalCustomers > 0
+        ? loyalCustomersCount / customerAggregations.totalCustomers
+        : 0;
 
     return {
       totalCustomers: parseInt(customerAggregations.totalCustomers) || 0,
@@ -96,10 +120,16 @@ class CustomerService {
       where: {
         restaurantId,
         [Op.and]: [
-          this.sequelize.where(this.sequelize.fn('MONTH', this.sequelize.col('birthDate')), todayMonth),
-          this.sequelize.where(this.sequelize.fn('DAY', this.sequelize.col('birthDate')), todayDay)
-        ]
-      }
+          this.sequelize.where(
+            this.sequelize.fn("MONTH", this.sequelize.col("birthDate")),
+            todayMonth,
+          ),
+          this.sequelize.where(
+            this.sequelize.fn("DAY", this.sequelize.col("birthDate")),
+            todayDay,
+          ),
+        ],
+      },
     });
   }
 
@@ -122,14 +152,14 @@ class CustomerService {
 
     let order = [];
     if (sort) {
-      order.push([sort, 'ASC']);
+      order.push([sort, "ASC"]);
     }
 
     const { count, rows } = await this.models.Customer.findAndCountAll({
       where: whereClause,
       limit: parseInt(limit),
       offset: parseInt(offset),
-      order: order.length > 0 ? order : [['createdAt', 'DESC']],
+      order: order.length > 0 ? order : [["createdAt", "DESC"]],
     });
 
     const totalPages = Math.ceil(count / limit);
@@ -143,34 +173,53 @@ class CustomerService {
   }
 
   async createCustomer(restaurantId, customerData) {
-    const { name, email, phone, birthDate, cpf, gender, zipCode, address, city, state, country } = customerData;
+    const {
+      name,
+      email,
+      phone,
+      birthDate,
+      cpf,
+      gender,
+      zipCode,
+      address,
+      city,
+      state,
+      country,
+    } = customerData;
 
     if (!name || (!email && !phone)) {
-      throw new BadRequestError('Nome e pelo menos um e-mail ou telefone são obrigatórios.');
+      throw new BadRequestError(
+        "Nome e pelo menos um e-mail ou telefone são obrigatórios.",
+      );
     }
 
     const t = await this.sequelize.transaction(); // Start transaction
     try {
-      const customer = await this.models.Customer.create({
-        restaurantId,
-        name,
-        email,
-        phone,
-        birthDate,
-        cpf,
-        gender,
-        zipCode,
-        address,
-        city,
-        state,
-        country
-      }, { transaction: t });
+      const customer = await this.models.Customer.create(
+        {
+          restaurantId,
+          name,
+          email,
+          phone,
+          birthDate,
+          cpf,
+          gender,
+          zipCode,
+          address,
+          city,
+          state,
+          country,
+        },
+        { transaction: t },
+      );
       await t.commit(); // Commit transaction
       return customer;
     } catch (error) {
       await t.rollback(); // Rollback transaction on error
-      if (error.name === 'SequelizeUniqueConstraintError') {
-        throw new BadRequestError('Cliente já cadastrado com este e-mail ou telefone.');
+      if (error.name === "SequelizeUniqueConstraintError") {
+        throw new BadRequestError(
+          "Cliente já cadastrado com este e-mail ou telefone.",
+        );
       }
       throw error;
     }
@@ -180,12 +229,12 @@ class CustomerService {
     const customer = await this.models.Customer.findOne({
       where: {
         id: customerId,
-        restaurantId: restaurantId
+        restaurantId: restaurantId,
       },
-      transaction
+      transaction,
     });
     if (!customer) {
-      throw new NotFoundError('Cliente não encontrado.');
+      throw new NotFoundError("Cliente não encontrado.");
     }
     return customer;
   }
@@ -194,11 +243,11 @@ class CustomerService {
     const customer = await this.models.Customer.findOne({
       where: {
         phone: phone,
-        restaurantId: restaurantId
-      }
+        restaurantId: restaurantId,
+      },
     });
     if (!customer) {
-      throw new NotFoundError('Cliente não encontrado.');
+      throw new NotFoundError("Cliente não encontrado.");
     }
     return customer;
   }
@@ -240,14 +289,36 @@ class CustomerService {
     const detailedCustomer = await this.models.Customer.findOne({
       where: {
         id: customer.id,
-        restaurantId: restaurantId
+        restaurantId: restaurantId,
       },
       include: [
-        { model: this.models.Checkin, as: 'checkins', limit: 10, order: [['checkinTime', 'DESC']] },
-        { model: this.models.Feedback, as: 'feedbacks', limit: 10, order: [['createdAt', 'DESC']] },
-        { model: this.models.Coupon, as: 'coupons', where: { status: 'redeemed' }, required: false, limit: 10, order: [['updatedAt', 'DESC']] },
-        { model: this.models.SurveyResponse, as: 'surveyResponses', limit: 10, order: [['createdAt', 'DESC']] }
-      ]
+        {
+          model: this.models.Checkin,
+          as: "checkins",
+          limit: 10,
+          order: [["checkinTime", "DESC"]],
+        },
+        {
+          model: this.models.Feedback,
+          as: "feedbacks",
+          limit: 10,
+          order: [["createdAt", "DESC"]],
+        },
+        {
+          model: this.models.Coupon,
+          as: "coupons",
+          where: { status: "redeemed" },
+          required: false,
+          limit: 10,
+          order: [["updatedAt", "DESC"]],
+        },
+        {
+          model: this.models.SurveyResponse,
+          as: "surveyResponses",
+          limit: 10,
+          order: [["createdAt", "DESC"]],
+        },
+      ],
     });
     return detailedCustomer;
   }
@@ -272,9 +343,9 @@ class CustomerService {
       await this.models.Checkin.destroy({
         where: {
           customerId: customerId,
-          restaurantId: restaurantId
+          restaurantId: restaurantId,
         },
-        transaction: t // Pass transaction
+        transaction: t, // Pass transaction
       });
       await t.commit(); // Commit transaction
       return 1;
@@ -289,18 +360,31 @@ class CustomerService {
 
     const t = await this.sequelize.transaction(); // Start transaction
     try {
-      const customer = await this.models.Customer.create({ name, phone, birthDate, restaurantId }, { transaction: t });
+      const customer = await this.models.Customer.create(
+        { name, phone, birthDate, restaurantId },
+        { transaction: t },
+      );
       await t.commit(); // Commit transaction
-      return { message: 'Cliente registrado com sucesso!', customer, status: 201 };
+      return {
+        message: "Cliente registrado com sucesso!",
+        customer,
+        status: 201,
+      };
     } catch (error) {
       await t.rollback(); // Rollback transaction on error
-      if (error.name === 'SequelizeUniqueConstraintError') {
+      if (error.name === "SequelizeUniqueConstraintError") {
         // If unique constraint error, try to find and update the existing customer
-        let customer = await this.models.Customer.findOne({ where: { phone: phone, restaurantId: restaurantId } });
+        let customer = await this.models.Customer.findOne({
+          where: { phone: phone, restaurantId: restaurantId },
+        });
         if (customer) {
           await customer.update({ name, birthDate }, { transaction: t }); // Pass transaction
           await t.commit(); // Commit transaction
-          return { message: 'Cliente atualizado com sucesso!', customer, status: 200 };
+          return {
+            message: "Cliente atualizado com sucesso!",
+            customer,
+            status: 200,
+          };
         }
       }
       throw error; // Re-throw other errors

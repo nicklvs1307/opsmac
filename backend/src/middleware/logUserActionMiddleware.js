@@ -13,8 +13,6 @@ const logUserAction = (action) => {
         req.method === "POST" || req.method === "PUT" ? req.body : undefined,
     };
 
-    
-
     next();
   };
 };

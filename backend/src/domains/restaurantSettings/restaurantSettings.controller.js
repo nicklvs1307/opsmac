@@ -1,6 +1,7 @@
 const restaurantSettingsService = require("./restaurantSettings.service");
 const { validationResult } = require("express-validator");
 const { BadRequestError } = require("utils/errors");
+const auditService = require("services/auditService");
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);
@@ -26,6 +27,13 @@ exports.updateRestaurant = async (req, res, next) => {
       req.context.restaurantId,
       req.body,
     );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_SETTINGS_UPDATED",
+      `Restaurant:${req.context.restaurantId}`,
+      { updatedData: req.body },
+    );
     res.json(restaurant);
   } catch (error) {
     next(error);
@@ -43,6 +51,13 @@ exports.updateRestaurantOpenStatus = async (req, res, next) => {
         req.context.restaurantId,
         is_open,
       );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_OPEN_STATUS_CHANGED",
+      `Restaurant:${req.context.restaurantId}`,
+      { is_open },
+    );
     res.json({
       message: "Status de abertura do restaurante atualizado com sucesso.",
       is_open: restaurant.is_open,
@@ -65,6 +80,13 @@ exports.updateRestaurantPosStatus = async (req, res, next) => {
         req.context.restaurantId,
         pos_status,
       );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_POS_STATUS_CHANGED",
+      `Restaurant:${req.context.restaurantId}`,
+      { pos_status },
+    );
     res.json({
       message: "Status do PDV atualizado com sucesso.",
       pos_status: restaurant.pos_status,
@@ -94,6 +116,13 @@ exports.updateRestaurantModule = async (req, res, next) => {
         req.params.moduleId,
         is_active,
       );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_MODULE_UPDATED",
+      `Module:${req.params.moduleId}`,
+      { is_active },
+    );
     res.json(updatedModule);
   } catch (error) {
     next(error);
@@ -120,6 +149,13 @@ exports.createRestaurantModule = async (req, res, next) => {
       module_id,
       is_active,
     );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_MODULE_CREATED",
+      `Module:${newModule.id}`,
+      { module_id, is_active },
+    );
     res.status(201).json(newModule);
   } catch (error) {
     next(error);
@@ -131,6 +167,13 @@ exports.deleteRestaurantModule = async (req, res, next) => {
     await restaurantSettingsService.deleteRestaurantModule(
       req.context.restaurantId,
       req.params.moduleId,
+    );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_MODULE_DELETED",
+      `Module:${req.params.moduleId}`,
+      {},
     );
     res.status(204).send();
   } catch (error) {
@@ -157,6 +200,13 @@ exports.updateRestaurantSettings = async (req, res, next) => {
         req.context.restaurantId,
         updateData,
       );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_GENERAL_SETTINGS_UPDATED",
+      `Restaurant:${req.context.restaurantId}`,
+      { updatedData },
+    );
     res.json(updatedSettings);
   } catch (error) {
     next(error);
@@ -184,6 +234,13 @@ exports.createRestaurantPaymentMethod = async (req, res, next) => {
         name,
         is_active,
       );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_PAYMENT_METHOD_CREATED",
+      `PaymentMethod:${newPaymentMethod.id}`,
+      { name, is_active },
+    );
     res.status(201).json(newPaymentMethod);
   } catch (error) {
     next(error);
@@ -200,6 +257,13 @@ exports.updateRestaurantPaymentMethod = async (req, res, next) => {
         name,
         is_active,
       );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_PAYMENT_METHOD_UPDATED",
+      `PaymentMethod:${req.params.paymentMethodId}`,
+      { name, is_active },
+    );
     res.json(updatedPaymentMethod);
   } catch (error) {
     next(error);
@@ -211,6 +275,13 @@ exports.deleteRestaurantPaymentMethod = async (req, res, next) => {
     await restaurantSettingsService.deleteRestaurantPaymentMethod(
       req.context.restaurantId,
       req.params.paymentMethodId,
+    );
+    await auditService.log(
+      req.user,
+      req.context.restaurantId,
+      "RESTAURANT_PAYMENT_METHOD_DELETED",
+      `PaymentMethod:${req.params.paymentMethodId}`,
+      {},
     );
     res.status(204).send();
   } catch (error) {

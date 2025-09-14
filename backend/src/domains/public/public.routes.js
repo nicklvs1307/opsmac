@@ -17,6 +17,10 @@ module.exports = (db) => {
   );
   router.post("/feedback", asyncHandler(publicController.submitPublicFeedback));
   router.post(
+    "/orders",
+    asyncHandler(publicController.createPublicOrder),
+  );
+  router.post(
     "/checkin/:restaurantSlug",
     asyncHandler(publicController.registerPublicCheckin),
   );

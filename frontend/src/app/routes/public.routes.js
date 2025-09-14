@@ -1,15 +1,15 @@
 import React, { Suspense } from 'react';
 import Login from '@/features/Auth/pages/Login';
-import PublicFeedback from '@/features/Public/PublicFeedback';
-import ThankYou from '@/features/Public/ThankYou';
-import PublicSurveyForm from '@/features/Public/PublicSurveyForm';
-import PublicCheckin from '@/features/Public/PublicCheckin';
-import PublicReward from '@/features/Public/PublicReward';
-import GirarRoleta from '@/features/Public/GirarRoleta';
-import PublicMenu from '@/features/Public/PublicMenu';
-import PublicDeliveryMenu from '@/features/Public/PublicDeliveryMenu';
-import PublicDineInMenu from '@/features/Public/DineInMenu';
-import CustomerRegistration from '@/features/Public/CustomerRegistration';
+import PublicFeedback from '@/features/Public/pages/PublicFeedback';
+import ThankYou from '@/features/Public/pages/ThankYou';
+import PublicSurveyForm from '@/features/Public/pages/PublicSurveyForm';
+import PublicCheckin from '@/features/Public/pages/PublicCheckin';
+import PublicReward from '@/features/Public/pages/PublicReward';
+import GirarRoleta from '@/features/Public/pages/GirarRoleta';
+import PublicMenu from '@/features/Public/pages/PublicMenu';
+import PublicDeliveryMenu from '@/features/Public/pages/PublicDeliveryMenu';
+import PublicDineInMenu from '@/features/Public/pages/DineInMenu';
+import CustomerRegistration from '@/features/Public/pages/CustomerRegistration';
 import UnauthorizedPage from '@/features/Common/UnauthorizedPage';
 import FeatureLockedPage from '@/features/Common/FeatureLockedPage';
 

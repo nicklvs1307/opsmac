@@ -40,35 +40,32 @@ module.exports = (db) => {
       res.status(201).json(newFeedback);
     },
 
-    registerPublicCheckin: async (req, res, next) => {
+    return {
+    testEndpoint,
+    submitPublicFeedback,
+    registerPublicCheckin,
+    createPublicOrder,
+    getRestaurantInfoBySlug,
+    getPublicSurveyByIdentifier,
+  };
+};
+
+    createPublicOrder: async (req, res, next) => {
       handleValidationErrors(req);
       const restaurant = req.restaurant;
-      const { phone_number, cpf, customer_name, table_number } = req.body;
-      const result = await publicService.registerPublicCheckin(
+      const orderData = req.body;
+      const newOrder = await publicService.createPublicOrder(
         restaurant,
-        phone_number,
-        cpf,
-        customer_name,
-        table_number,
+        orderData,
       );
-      // No req.user for public routes, so pass null for user
       await auditService.log(
         null,
         restaurant.id,
-        "PUBLIC_CHECKIN_REGISTERED",
-        `Checkin:${result.checkin.id}`,
-        {
-          phoneNumber: phone_number,
-          customerName: customer_name,
-          tableNumber: table_number,
-        },
+        "PUBLIC_ORDER_CREATED",
+        `Order:${newOrder.id}`,
+        { total: newOrder.total, items: newOrder.items.length },
       );
-      res.status(201).json({
-        message: "Check-in registrado com sucesso",
-        checkin: result.checkin,
-        customer_total_visits: result.customer_total_visits,
-        reward_earned: result.reward_earned,
-      });
+      res.status(201).json(newOrder);
     },
 
     getRestaurantInfoBySlug: async (req, res, next) => {

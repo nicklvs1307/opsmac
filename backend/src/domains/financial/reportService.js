@@ -1,11 +1,11 @@
 module.exports = (db) => {
-  const { Op, fn, col, literal } = require('sequelize');
-  const { BadRequestError } = require('utils/errors');
+  const { Op, fn, col, literal } = require("sequelize");
+  const { BadRequestError } = require("utils/errors");
   const { models } = db;
 
   const _getDateRangeFilter = (start_date, end_date) => {
     if (!start_date || !end_date) {
-      throw new BadRequestError('Start date and end date are required.');
+      throw new BadRequestError("Start date and end date are required.");
     }
 
     const startDate = new Date(start_date);
@@ -23,26 +23,31 @@ module.exports = (db) => {
   };
 
   const getCashFlowReport = async (restaurantId, start_date, end_date) => {
-    const { startDate, endDate, dateFilter } = _getDateRangeFilter(start_date, end_date);
+    const { startDate, endDate, dateFilter } = _getDateRangeFilter(
+      start_date,
+      end_date,
+    );
 
     const transactions = await models.FinancialTransaction.findAll({
       where: {
         restaurant_id: restaurantId,
         transaction_date: dateFilter,
       },
-      attributes: ['type', 'amount', 'transaction_date'],
+      attributes: ["type", "amount", "transaction_date"],
     });
 
     const cashMovements = await models.CashRegisterMovement.findAll({
       where: {
-        '$session.restaurant_id$': restaurantId
+        "$session.restaurant_id$": restaurantId,
       },
-      include: [{
-        model: models.CashRegisterSession,
-        as: 'session',
-        attributes: []
-      }],
-      attributes: ['type', 'amount', 'createdAt'],
+      include: [
+        {
+          model: models.CashRegisterSession,
+          as: "session",
+          attributes: [],
+        },
+      ],
+      attributes: ["type", "amount", "createdAt"],
     });
 
     let totalIncome = 0;
@@ -50,23 +55,24 @@ module.exports = (db) => {
     let totalReinforcement = 0;
     let totalWithdrawal = 0;
 
-    transactions.forEach(t => {
-      if (t.type === 'income') {
+    transactions.forEach((t) => {
+      if (t.type === "income") {
         totalIncome += Number(t.amount);
       } else {
         totalExpense += Number(t.amount);
       }
     });
 
-    cashMovements.forEach(m => {
-      if (m.type === 'reinforcement') {
+    cashMovements.forEach((m) => {
+      if (m.type === "reinforcement") {
         totalReinforcement += Number(m.amount);
       } else {
         totalWithdrawal += Number(m.amount);
       }
     });
 
-    const netCashFlow = (totalIncome + totalReinforcement) - (totalExpense + totalWithdrawal);
+    const netCashFlow =
+      totalIncome + totalReinforcement - (totalExpense + totalWithdrawal);
 
     return {
       totalIncome,
@@ -74,20 +80,23 @@ module.exports = (db) => {
       totalReinforcement,
       totalWithdrawal,
       netCashFlow,
-      startDate: startDate.toISOString().split('T')[0],
-      endDate: endDate.toISOString().split('T')[0],
+      startDate: startDate.toISOString().split("T")[0],
+      endDate: endDate.toISOString().split("T")[0],
     };
   };
 
   const getDreReport = async (restaurantId, start_date, end_date) => {
-    const { startDate, endDate, dateFilter } = _getDateRangeFilter(start_date, end_date);
+    const { startDate, endDate, dateFilter } = _getDateRangeFilter(
+      start_date,
+      end_date,
+    );
 
-    const totalSales = await models.Order.sum('total_amount', {
+    const totalSales = await models.Order.sum("total_amount", {
       where: {
         restaurant_id: restaurantId,
         order_date: dateFilter,
         status: {
-          [Op.in]: ['delivered', 'concluded'],
+          [Op.in]: ["delivered", "concluded"],
         },
       },
     });
@@ -96,27 +105,36 @@ module.exports = (db) => {
 
     const grossProfit = (totalSales || 0) - cmv;
 
-    const operationalExpenses = await models.FinancialTransaction.sum('amount', {
-      where: {
-        restaurant_id: restaurantId,
-        type: 'expense',
-        transaction_date: dateFilter,
+    const operationalExpenses = await models.FinancialTransaction.sum(
+      "amount",
+      {
+        where: {
+          restaurant_id: restaurantId,
+          type: "expense",
+          transaction_date: dateFilter,
+        },
       },
-    });
+    );
 
-    const cashWithdrawalExpenses = await models.CashRegisterMovement.sum('amount', {
-      where: {
-        type: 'withdrawal',
-        '$session.restaurant_id$': restaurantId,
+    const cashWithdrawalExpenses = await models.CashRegisterMovement.sum(
+      "amount",
+      {
+        where: {
+          type: "withdrawal",
+          "$session.restaurant_id$": restaurantId,
+        },
+        include: [
+          {
+            model: models.CashRegisterSession,
+            as: "session",
+            attributes: [],
+          },
+        ],
       },
-      include: [{
-        model: models.CashRegisterSession,
-        as: 'session',
-        attributes: []
-      }],
-    });
+    );
 
-    const totalOperationalExpenses = (operationalExpenses || 0) + (cashWithdrawalExpenses || 0);
+    const totalOperationalExpenses =
+      (operationalExpenses || 0) + (cashWithdrawalExpenses || 0);
 
     const operatingProfit = grossProfit - totalOperationalExpenses;
 
@@ -134,14 +152,18 @@ module.exports = (db) => {
       otherIncome,
       otherExpenses,
       netProfit,
-      startDate: startDate.toISOString().split('T')[0],
-      endDate: endDate.toISOString().split('T')[0],
+      startDate: startDate.toISOString().split("T")[0],
+      endDate: endDate.toISOString().split("T")[0],
     };
   };
 
-  const getSalesByPaymentMethodReport = async (restaurantId, start_date, end_date) => {
+  const getSalesByPaymentMethodReport = async (
+    restaurantId,
+    start_date,
+    end_date,
+  ) => {
     if (!start_date || !end_date) {
-      throw new BadRequestError('Start date and end date are required.');
+      throw new BadRequestError("Start date and end date are required.");
     }
 
     const startDate = new Date(start_date);
@@ -156,16 +178,22 @@ module.exports = (db) => {
           [Op.lte]: endDate,
         },
         status: {
-          [Op.in]: ['delivered', 'concluded'],
+          [Op.in]: ["delivered", "concluded"],
         },
       },
       attributes: [
-        'payment_method',
-        [models.Sequelize.fn('SUM', models.Sequelize.col('total_amount')), 'total_sales'],
-        [models.Sequelize.fn('COUNT', models.Sequelize.col('id')), 'total_orders'],
+        "payment_method",
+        [
+          models.Sequelize.fn("SUM", models.Sequelize.col("total_amount")),
+          "total_sales",
+        ],
+        [
+          models.Sequelize.fn("COUNT", models.Sequelize.col("id")),
+          "total_orders",
+        ],
       ],
-      group: ['payment_method'],
-      order: [['payment_method', 'ASC']], // Order by payment_method name
+      group: ["payment_method"],
+      order: [["payment_method", "ASC"]], // Order by payment_method name
     });
 
     return salesData;

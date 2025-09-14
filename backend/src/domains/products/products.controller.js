@@ -33,6 +33,21 @@ module.exports = (db) => {
     res.status(200).json({ imageUrl });
   };
 
+  const getAllProducts = async (req, res, next) => {
+    try {
+      const restaurantId = req.context.restaurantId;
+      const { category_id, search } = req.query;
+      const products = await productCrudService.listProducts(
+        restaurantId,
+        category_id,
+        search, // Assuming listProducts can handle search
+      );
+      res.json(products);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   const createProduct = async (req, res) => {
     handleValidationErrors(req);
     const restaurantId = req.context.restaurantId;
@@ -119,6 +134,7 @@ module.exports = (db) => {
   return {
     uploadProductImage,
     createProduct,
+    getAllProducts, // Added this line
     listProducts,
     getProductById,
     updateProduct,

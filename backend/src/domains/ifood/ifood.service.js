@@ -1,4 +1,8 @@
-const { BadRequestError, ForbiddenError, NotFoundError } = require("utils/errors");
+const {
+  BadRequestError,
+  ForbiddenError,
+  NotFoundError,
+} = require("utils/errors");
 
 module.exports = (db) => {
   const models = db;

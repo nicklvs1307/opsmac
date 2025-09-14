@@ -24,6 +24,23 @@ module.exports = (db) => {
     res.json(orders);
   };
 
+  const getOrdersByRestaurant = async (req, res, next) => {
+    try {
+      const { restaurantId } = req.params; // Get restaurantId from path params
+      const { status, platform, delivery_type, search } = req.query;
+      const orders = await ordersService.getAllOrders( // Reusing getAllOrders service method
+        restaurantId,
+        status,
+        platform,
+        delivery_type,
+        search,
+      );
+      res.json(orders);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   const updateOrderStatus = async (req, res, next) => {
     handleValidationErrors(req);
     const restaurantId = req.context.restaurantId;
@@ -46,6 +63,7 @@ module.exports = (db) => {
 
   return {
     getAllOrders,
+    getOrdersByRestaurant, // Added this line
     updateOrderStatus,
   };
 };

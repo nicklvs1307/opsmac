@@ -240,26 +240,41 @@ class IamService {
     await this.bumpPermVersion(restaurantId);
   }
 
-  async removeEntitlement(userId, restaurantId, entityType, entityId) {
-    // The superadmin check should happen in the controller or middleware
+  async removeEntitlement(
+    userId,
+    restaurantId,
+    entityType,
+    entityId,
+    isSuperadmin = false,
+  ) {
     // This service method assumes the caller has already performed the necessary authorization.
-    if (!restaurantId || !entityType || !entityId) {
+    if (!isSuperadmin && !restaurantId) {
+      throw new BadRequestError("Bad Request: restaurantId is required.");
+    }
+    if (!entityType || !entityId) {
       throw new BadRequestError(
-        "Bad Request: Missing required fields for entitlement deletion.",
+        "Bad Request: entityType and entityId are required.",
       );
     }
-    // Assuming entitlementService.removeEntitlement is a separate service
-    // If it's part of IAM, move its logic here. For now, keep it as a call to an external service.
-    // await entitlementService.removeEntitlement(restaurantId, entityType, entityId);
-    // For now, directly interact with models if entitlementService is not meant to be separate
-    await models.RestaurantEntitlement.destroy({
-      where: {
-        restaurant_id: restaurantId,
-        entity_type: entityType,
-        entity_id: entityId,
-      },
+
+    const whereClause = {
+      entity_type: entityType,
+      entity_id: entityId,
+    };
+
+    // Only scope to restaurant if not a superadmin
+    if (!isSuperadmin) {
+      whereClause.restaurant_id = restaurantId;
+    }
+
+    const result = await models.RestaurantEntitlement.destroy({
+      where: whereClause,
     });
-    await this.bumpPermVersion(restaurantId);
+
+    // Only bump version if a restaurantId was provided and something was deleted
+    if (result > 0 && restaurantId) {
+      await this.bumpPermVersion(restaurantId);
+    }
   }
 
   async setRestaurantEntitlements(restaurantId, entitlements) {
@@ -363,7 +378,10 @@ class IamService {
   async setEntitlementsBulk(restaurantId, entitlements, isSuperadmin = false) {
     // This service method assumes the caller has already performed the necessary authorization.
     // Superadmins can bypass restaurantId checks for system-wide entitlements.
-    if (!isSuperadmin && (!restaurantId || !entitlements || !Array.isArray(entitlements))) {
+    if (
+      !isSuperadmin &&
+      (!restaurantId || !entitlements || !Array.isArray(entitlements))
+    ) {
       throw new BadRequestError(
         "Bad Request: restaurantId and entitlements array are required.",
       );
@@ -803,8 +821,6 @@ class IamService {
 
     return { allowed, locked, reason };
   }
-
-  
 }
 
 module.exports = new IamService();

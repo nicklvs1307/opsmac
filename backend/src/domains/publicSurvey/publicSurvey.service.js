@@ -284,7 +284,12 @@ module.exports = (db) => {
     if (restaurant) {
       const currentNpsScores = restaurant.npsCriteriaScores || {};
       for (const criterionId in npsScoresByCriterion) {
-        if (Object.prototype.hasOwnProperty.call(npsScoresByCriterion, criterionId)) {
+        if (
+          Object.prototype.hasOwnProperty.call(
+            npsScoresByCriterion,
+            criterionId,
+          )
+        ) {
           const newScores = npsScoresByCriterion[criterionId];
           currentNpsScores[criterionId] = {
             promoters:

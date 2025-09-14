@@ -70,16 +70,40 @@ class AuthService {
     });
 
     if (!user) {
+      // Audit log for failed login: User not found
+      await auditService.log(
+        null, // No user object yet
+        null, // No restaurant context yet
+        "USER_LOGIN_FAILED",
+        `Email:${email}`,
+        { reason: "User not found" },
+      );
       throw new UnauthorizedError("Credenciais inválidas");
     }
 
     if (user.isLocked()) {
+      // Audit log for failed login: Account locked
+      await auditService.log(
+        user,
+        null, // No restaurant context yet
+        "USER_LOGIN_FAILED",
+        `User:${user.id}`,
+        { reason: "Account locked" },
+      );
       throw new ForbiddenError(
         "Conta temporariamente bloqueada devido a muitas tentativas de login",
       );
     }
 
     if (!user.isActive) {
+      // Audit log for failed login: Account deactivated
+      await auditService.log(
+        user,
+        null, // No restaurant context yet
+        "USER_LOGIN_FAILED",
+        `User:${user.id}`,
+        { reason: "Account deactivated" },
+      );
       throw new UnauthorizedError(
         "Conta desativada. Entre em contato com o suporte",
       );
@@ -88,6 +112,14 @@ class AuthService {
     const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
       await user.incrementLoginAttempts();
+      // Audit log for failed login: Incorrect password
+      await auditService.log(
+        user,
+        null, // No restaurant context yet
+        "USER_LOGIN_FAILED",
+        `User:${user.id}`,
+        { reason: "Incorrect password" },
+      );
       throw new UnauthorizedError("Credenciais inválidas");
     }
 

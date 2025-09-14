@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
-import Settings from '@/features/Settings/Settings';
+import Settings from '@/features/Settings/pages/Settings';
 import ProfileSettingsPage from '@/features/Settings/pages/ProfileSettingsPage';
 import BusinessSettingsPage from '@/features/Settings/pages/BusinessSettingsPage';
 import NotificationsSettingsPage from '@/features/Settings/pages/NotificationsSettingsPage';

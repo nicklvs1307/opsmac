@@ -16,6 +16,11 @@ module.exports = (db) => {
     requirePermission("orders", "read"),
     asyncHandler(ordersController.getAllOrders),
   );
+  router.get(
+    "/restaurant/:restaurantId",
+    requirePermission("orders", "read"), // Assuming same permission
+    asyncHandler(ordersController.getOrdersByRestaurant), // New controller method
+  );
   router.put(
     "/:id/status",
     requirePermission("orders", "update"),

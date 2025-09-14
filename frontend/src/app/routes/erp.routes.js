@@ -2,58 +2,58 @@ import React, { Suspense } from 'react';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 import { Navigate } from 'react-router-dom';
 
-import Tables from '@/features/ERP/Tables';
+import Tables from '@/features/ERP/pages/Tables';
 import TechnicalSpecificationManagement from '@/components/ERP/TechnicalSpecificationManagement';
-import StockDashboardPage from '@/features/ERP/Stock/StockDashboardPage';
-import StockMovementsPage from '@/features/ERP/Stock/StockMovementsPage';
-import SuppliersPage from '@/features/ERP/SuppliersPage';
-import PurchasesPage from '@/features/ERP/PurchasesPage';
-import StockProductsPage from '@/features/ERP/Stock/StockProductsPage';
-import Orders from '@/features/ERP/Orders';
-import Pdv from '@/features/ERP/Pdv';
-import Ingredients from '@/features/ERP/Ingredients';
-import Menu from '@/features/ERP/Menu';
-import LabelsDashboard from '@/features/CDV/Dashboard/pages';
-import PrintLabel from '@/features/CDV/PrintLabel/pages';
-import LabelsAdmin from '@/features/CDV/Admin/pages';
-import StockCountList from '@/features/CDV/StockCountList';
-import StockCountDetail from '@/features/CDV/StockCountDetail';
-import ProductionList from '@/features/CDV/ProductionList';
-import ProductionCreate from '@/features/CDV/ProductionCreate';
-import DeleteLabels from '@/features/CDV/DeleteLabels/pages';
-import Production from '@/features/CDV/Production/pages';
-import CountProducts from '@/features/CDV/CountProducts/pages';
-import CountHistory from '@/features/CDV/CountHistory/pages';
+import StockDashboardPage from '@/features/ERP/pages/StockDashboardPage';
+import StockMovementsPage from '@/features/ERP/pages/StockMovementsPage';
+import SuppliersPage from '@/features/ERP/pages/SuppliersPage';
+import PurchasesPage from '@/features/ERP/pages/PurchasesPage';
+import StockProductsPage from '@/features/ERP/pages/StockProductsPage';
+import Orders from '@/features/ERP/pages/Orders';
+import Pdv from '@/features/ERP/pages/Pdv';
+import Ingredients from '@/features/ERP/pages/Ingredients';
+import Menu from '@/features/ERP/pages/Menu';
+import LabelsDashboard from '@/features/ValidityControl/Dashboard/pages';
+import PrintLabel from '@/features/ValidityControl/PrintLabel/pages';
+import LabelsAdmin from '@/features/ValidityControl/Admin/pages';
+import StockCountList from '@/features/ValidityControl/StockCountList';
+import StockCountDetail from '@/features/ValidityControl/StockCountDetail';
+import ProductionList from '@/features/ValidityControl/ProductionList';
+import ProductionCreate from '@/features/ValidityControl/ProductionCreate';
+import DeleteLabels from '@/features/ValidityControl/DeleteLabels/pages';
+import Production from '@/features/ValidityControl/Production/pages';
+import CountProducts from '@/features/ValidityControl/CountProducts/pages';
+import CountHistory from '@/features/ValidityControl/CountHistory/pages';
 
-import CashFlowReport from '@/features/Reports/CashFlowReport';
-import DREReport from '@/features/Reports/DREReport';
-import SalesByPaymentMethodReport from '@/features/Reports/SalesByPaymentMethodReport';
-import ListOfAccountsReport from '@/features/Reports/ListOfAccountsReport';
-import CurrentStockPositionReport from '@/features/Reports/CurrentStockPositionReport';
-import StockPositionHistoryReport from '@/features/Reports/StockPositionHistoryReport';
-import PaymentMethods from '@/features/ERP/PaymentMethods';
-import FinancialCategoriesPage from '@/features/ERP/FinancialCategoriesPage';
-import TeamManagementPage from '@/features/Team/TeamManagementPage';
+import CashFlowReport from '@/features/Reports/pages/CashFlowReport';
+import DREReport from '@/features/Reports/pages/DREReport';
+import SalesByPaymentMethodReport from '@/features/Reports/pages/SalesByPaymentMethodReport';
+import ListOfAccountsReport from '@/features/Reports/pages/ListOfAccountsReport';
+import CurrentStockPositionReport from '@/features/Reports/pages/CurrentStockPositionReport';
+import StockPositionHistoryReport from '@/features/Reports/pages/StockPositionHistoryReport';
+import PaymentMethods from '@/features/ERP/pages/PaymentMethods';
+import FinancialCategoriesPage from '@/features/ERP/pages/FinancialCategoriesPage';
+import TeamManagementPage from '@/features/Team/pages/TeamManagementPage';
 import ComingSoon from '@/features/Common/ComingSoon';
 
-import ProductsCreate from '@/features/ERP/Stock/ProductsCreate';
-import StockSettings from '@/features/ERP/Stock/Settings';
-import StockReports from '@/features/ERP/Stock/Reports';
-import Inventory from '@/features/ERP/Stock/Inventory';
-import TechnicalSheetCreate from '@/features/ERP/Stock/TechnicalSheetCreate';
-import CMV from '@/features/ERP/Stock/CMV';
-import Adjustments from '@/features/ERP/Stock/Adjustments';
-import Lots from '@/features/ERP/Stock/Lots';
-import Alerts from '@/features/ERP/Stock/Alerts';
-import Integrations from '@/features/ERP/Orders/Integrations';
-import Delivery from '@/features/ERP/Orders/Delivery';
-import SalesReport from '@/features/ERP/Orders/SalesReport';
-import ManagementDashboard from '@/features/Management/Dashboard';
-import Schedule from '@/features/Management/Schedule';
-import Commissions from '@/features/Management/Commissions';
-import Costs from '@/features/Management/Costs';
-import ManagementPermissions from '@/features/Management/Permissions';
-import DeliveryMenuPage from '@/features/Orders/DigitalMenus/DeliveryMenuPage';
+import ProductsCreate from '@/features/ERP/Stock/pages/ProductsCreate';
+import StockSettings from '@/features/ERP/Stock/pages/Settings';
+import StockReports from '@/features/ERP/Stock/pages/Reports';
+import Inventory from '@/features/ERP/Stock/pages/Inventory';
+import TechnicalSheetCreate from '@/features/ERP/Stock/pages/TechnicalSheetCreate';
+import CMV from '@/features/ERP/Stock/pages/CMV';
+import Adjustments from '@/features/ERP/Stock/pages/Adjustments';
+import Lots from '@/features/ERP/Stock/pages/Lots';
+import Alerts from '@/features/ERP/Stock/pages/Alerts';
+import Integrations from '@/features/ERP/Orders/pages/Integrations';
+import Delivery from '@/features/ERP/Orders/pages/Delivery';
+import SalesReport from '@/features/ERP/Orders/pages/SalesReport';
+import ManagementDashboard from '@/features/Management/pages/Dashboard';
+import Schedule from '@/features/Management/pages/Schedule';
+import Commissions from '@/features/Management/pages/Commissions';
+import Costs from '@/features/Management/pages/Costs';
+import ManagementPermissions from '@/features/Management/pages/Permissions';
+import DeliveryMenuPage from '@/features/Orders/DigitalMenus/pages/DeliveryMenuPage';
 
 
 const erpRoutes = [
@@ -411,7 +411,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/dashboard',
+    path: 'validity-control/dashboard',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <LabelsDashboard />
@@ -419,7 +419,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/labels/print',
+    path: 'validity-control/labels/print',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <PrintLabel />
@@ -427,7 +427,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/labels/print-group',
+    path: 'validity-control/labels/print-group',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <ComingSoon />
@@ -435,7 +435,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/labels/count',
+    path: 'validity-control/labels/count',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <CountProducts />
@@ -443,7 +443,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/labels/count-history',
+    path: 'validity-control/labels/count-history',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <CountHistory />
@@ -451,7 +451,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/labels/history',
+    path: 'validity-control/labels/history',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <ComingSoon />
@@ -459,7 +459,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/labels/delete',
+    path: 'validity-control/labels/delete',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <DeleteLabels />
@@ -467,7 +467,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/production',
+    path: 'validity-control/production',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <Production />
@@ -475,7 +475,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/labels',
+    path: 'validity-control/labels',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <LabelsAdmin />
@@ -563,7 +563,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/stock-counts/:id',
+    path: 'validity-control/stock-counts/:id',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <StockCountDetail />
@@ -571,7 +571,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/stock-counts',
+    path: 'validity-control/stock-counts',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <StockCountList />
@@ -579,7 +579,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/productions',
+    path: 'validity-control/productions',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <ProductionList />
@@ -587,7 +587,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/productions/new',
+    path: 'validity-control/productions/new',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <ProductionCreate />
@@ -595,7 +595,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/expirations',
+    path: 'validity-control/expirations',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <ComingSoon />
@@ -603,7 +603,7 @@ const erpRoutes = [
     ),
   },
   {
-    path: 'cdv/expirations-alert',
+    path: 'validity-control/expirations-alert',
     element: (
       <Suspense fallback={<div>Carregando...</div>}>
         <ComingSoon />

@@ -30,12 +30,26 @@ module.exports = (db) => {
   const { auth } = require("middleware/authMiddleware")(db);
   const router = express.Router();
 
+  // Rotas para listar múltiplos restaurantes (para uso por superadmin ou sistemas internos)
+  router.get(
+    "/", // This will be /restaurants
+    auth,
+    requirePermission("restaurant_management", "read_all"), // A new permission for listing all
+    asyncHandler(restaurantController.listRestaurants),
+  );
+
   // Rotas de Gerenciamento de Restaurante
   router.get(
     "/",
     auth,
     requirePermission("restaurant_management", "read"),
     asyncHandler(restaurantController.getRestaurantById),
+  );
+  router.get(
+    "/:restaurantId", // New route for getting by ID
+    auth,
+    requirePermission("restaurant_management", "read"), // Assuming same permission
+    asyncHandler(restaurantController.getRestaurantById), // Reusing controller method
   );
   router.put(
     "/",

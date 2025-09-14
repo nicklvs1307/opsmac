@@ -11,26 +11,26 @@ import UserEditPage from '@/features/Admin/UserEditPage';
 import UserCreatePage from '@/features/Admin/UserCreatePage';
 import RolePermissionManagementPage from '@/components/Admin/RolePermissionManagementPage';
 
-import IAMDashboard from '@/features/IAM/IAMDashboard';
-import RoleManagement from '@/features/IAM/RoleManagement';
-import RolePermissions from '@/features/IAM/RolePermissions';
-import UserPermissionOverrides from '@/features/IAM/UserPermissionOverrides';
-import EntitlementManagement from '@/features/IAM/EntitlementManagement';
-import UserRoleManagement from '@/features/IAM/UserRoleManagement';
+import IAMDashboard from '@/features/IAM/pages/IAMDashboard';
+import RoleManagement from '@/features/IAM/pages/RoleManagement';
+import RolePermissions from '@/features/IAM/pages/RolePermissions';
+import UserPermissionOverrides from '@/features/IAM/pages/UserPermissionOverrides';
+import EntitlementManagement from '@/features/IAM/pages/EntitlementManagement';
+import UserRoleManagement from '@/features/IAM/pages/UserRoleManagement';
 
-import Settings from '@/features/Settings/Settings'; // Used for admin/restaurant-settings
-import StockDashboardPage from '@/features/ERP/Stock/StockDashboardPage'; // Used for admin/stock
-import StockProductsPage from '@/features/ERP/Stock/StockProductsPage'; // Used for admin/products
-import CouponListPage from '@/features/Coupons/CouponListPage'; // Used for admin/coupons
-import SurveyList from '@/features/Fidelidade/Avaliacoes/SurveyList'; // Used for admin/surveys
-import CheckinAnalyticsPage from '@/features/Fidelidade/Checkin/CheckinAnalyticsPage'; // Used for fidelity/checkin/analytics
-import Tables from '@/features/ERP/Tables'; // Used for erp/tables
-import QRCodeManage from '@/features/QRCode/QRCodeManage'; // Used for qrcodes/manage
-import SuppliersPage from '@/features/ERP/SuppliersPage'; // Used for admin/suppliers
-import ProductionList from '@/features/CDV/ProductionList'; // Used for admin/production (commented out)
+import Settings from '@/features/Settings/pages/Settings'; // Used for admin/restaurant-settings
+import StockDashboardPage from '@/features/ERP/pages/StockDashboardPage'; // Used for admin/stock
+import StockProductsPage from '@/features/ERP/pages/StockProductsPage'; // Used for admin/products
+import CouponListPage from '@/features/Coupons/pages/CouponListPage'; // Used for admin/coupons
+import SurveyList from '@/features/Fidelidade/Avaliacoes/pages/SurveyList'; // Used for admin/surveys
+import CheckinAnalyticsPage from '@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage'; // Used for fidelity/checkin/analytics
+import Tables from '@/features/ERP/pages/Tables'; // Used for erp/tables
+import QRCodeManage from '@/features/QRCode/pages/QRCodeManage'; // Used for qrcodes/manage
+import SuppliersPage from '@/features/ERP/pages/SuppliersPage'; // Used for admin/suppliers
+import ProductionList from '@/features/ValidityControl/ProductionList'; // Used for admin/production (commented out)
 import ComingSoon from '@/features/Common/ComingSoon';
-import WaiterPage from '@/features/Waiter/WaiterPage';
-import OrderPage from '@/features/Waiter/OrderPage';
+import WaiterPage from '@/features/Waiter/pages/WaiterPage';
+import OrderPage from '@/features/Waiter/pages/OrderPage';
 
 
 const adminRoutes = [

@@ -34,7 +34,7 @@ exports.updateUserValidation = [
     .withMessage("Email deve ter um formato válido"),
   body("phone")
     .optional()
-    .matches(/^[\+]?[1-9][\d]{0,15}$/)
+    .matches(/^[+]?[1-9][\d]{0,15}$/)
     .withMessage("Telefone deve ter um formato válido"),
   body("roleName")
     .optional()

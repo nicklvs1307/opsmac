@@ -13,9 +13,23 @@ module.exports = (restaurantService) => {
 
   // --- GERENCIAMENTO DO RESTAURANTE ---
   const getRestaurantById = async (req, res, next) => {
-    const restaurantId = req.context.restaurantId;
+    const restaurantId = req.params.restaurantId || req.context.restaurantId; // Use param if available, else context
     const restaurant = await restaurantService.getRestaurantById(restaurantId);
     res.json(restaurant);
+  };
+
+  const listRestaurants = async (req, res, next) => {
+    try {
+      const { ids } = req.query; // Expecting comma-separated IDs
+      let restaurantIds = [];
+      if (ids) {
+        restaurantIds = ids.split(',');
+      }
+      const restaurants = await restaurantService.listRestaurants(restaurantIds);
+      res.json(restaurants);
+    } catch (error) {
+      next(error);
+    }
   };
 
   const updateRestaurant = async (req, res, next) => {
@@ -772,6 +786,7 @@ module.exports = (restaurantService) => {
 
   return {
     getRestaurantById,
+    listRestaurants, // Added this line
     updateRestaurant,
     updateRestaurantOpenStatus,
     updateRestaurantPosStatus,

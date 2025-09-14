@@ -32,10 +32,13 @@ module.exports = (db) => {
     }
   };
 
-  const listProducts = async (restaurantId, category_id) => {
+  const listProducts = async (restaurantId, category_id, search) => {
     let whereClause = { restaurant_id: restaurantId };
     if (category_id) {
       whereClause.category_id = category_id;
+    }
+    if (search) {
+      whereClause.name = { [Op.iLike]: `%${search}%` }; // Assuming product has a 'name' field
     }
 
     const products = await models.Product.findAll({

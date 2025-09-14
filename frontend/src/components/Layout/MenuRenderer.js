@@ -1,6 +1,6 @@
 import React from 'react';
-import Sidebar from './Sidebar';
-import { menuStructure } from './menuStructure';
+import Sidebar from '@/components/Layout/Sidebar';
+import { menuStructure } from '@/components/Layout/menuStructure';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { usePermission } from '@/hooks/usePermission';
 

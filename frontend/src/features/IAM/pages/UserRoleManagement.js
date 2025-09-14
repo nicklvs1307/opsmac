@@ -4,7 +4,7 @@ import { useAuth } from '@/app/providers/contexts/AuthContext';
 import usePermissions from '@/hooks/usePermissions';
 import { useQueryClient } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { useGetRoles, useAssignUserRole, useRemoveUserRole } from './api/iamQueries';
+import { useGetRoles, useAssignUserRole, useRemoveUserRole } from '@/features/IAM/api/iamQueries';
 import { fetchUsers } from '@/services/adminService'; // To fetch users with their roles
 
 const UserRoleManagement = () => {

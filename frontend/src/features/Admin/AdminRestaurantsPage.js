@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { useSaveAdminRestaurant, useCreateRestaurantWithOwner } from './api/adminQueries';
+import { useSaveAdminRestaurant, useCreateRestaurantWithOwner } from '@/features/Admin/api/adminQueries';
 
 // Hooks
 import usePermissions from '@/hooks/usePermissions';

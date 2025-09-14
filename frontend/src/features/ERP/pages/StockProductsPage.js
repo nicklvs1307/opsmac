@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useAllStocks } from './Stock/api/stockProductsService';
+import { useAllStocks } from '@/features/ERP/Stock/api/stockProductsService';
 
 const StockProductsPage = () => {
   const { user } = useAuth();

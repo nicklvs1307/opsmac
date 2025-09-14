@@ -12,8 +12,8 @@ import {
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useSurveys } from '../Avaliacoes/api/surveyService';
-import { useQuestionAnswersDistribution } from '../Avaliacoes/api/satisfactionService';
+import { useSurveys } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
+import { useQuestionAnswersDistribution } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF1957'];

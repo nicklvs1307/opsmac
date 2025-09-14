@@ -21,7 +21,7 @@ import {
   useGetRolePermissions,
   useSetRolePermissions,
 } from '@/features/IAM/api/iamQueries';
-import PermissionTree from './PermissionTree'; // Import the dumb component
+import PermissionTree from '@/components/Admin/PermissionTree'; // Import the dumb component
 
 const RolePermissionManagementPage = () => {
   const { selectedRestaurantId } = useAuth();

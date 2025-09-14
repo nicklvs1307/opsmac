@@ -23,7 +23,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import SurveyRewardProgram from '../Pesquisas/SurveyRewardProgram';
+// import SurveyRewardProgram from '../Pesquisas/SurveyRewardProgram'; // Componente não encontrado, importação comentada
 import {
   useNpsCriteria,
   useCreateNpsCriterion,
@@ -256,7 +256,7 @@ const SatisfactionSettingsPage = () => {
       </Paper>
 
       <Paper sx={{ p: 3, mb: 3 }}>
-        <SurveyRewardProgram
+        {/* <SurveyRewardProgram
           control={control}
           errors={errors}
           fields={fields}
@@ -266,7 +266,7 @@ const SatisfactionSettingsPage = () => {
           loading={updateSettingsMutation.isLoading}
           onSave={handleSubmit(onSettingsSubmit)}
           t={t}
-        />
+        /> */}
       </Paper>
 
       <Paper sx={{ p: 3 }}>

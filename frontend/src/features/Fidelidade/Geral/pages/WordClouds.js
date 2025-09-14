@@ -15,8 +15,8 @@ import {
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useFeedbackWordFrequency } from '../Avaliacoes/api/satisfactionService';
-import { useSurveys } from '../Avaliacoes/api/surveyService';
+import { useFeedbackWordFrequency } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService';
+import { useSurveys } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
 import { WordCloud } from '@isoterik/react-word-cloud'; // Changed import
 
 const WordClouds = () => {

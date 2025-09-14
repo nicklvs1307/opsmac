@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import { useForm, useFieldArray } from 'react-hook-form';
-import SurveyRewardProgram from './SurveyRewardProgram'; // Import the component
+import SurveyRewardProgram from '@/features/Fidelidade/Pesquisas/pages/SurveyRewardProgram'; // Import the component
 
 // API Functions
 const fetchRewards = async ({ restaurantId, token }) => {

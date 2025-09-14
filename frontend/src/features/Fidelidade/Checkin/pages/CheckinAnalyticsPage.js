@@ -30,7 +30,7 @@ import {
 } from 'recharts';
 import { useTranslation } from 'react-i18next';
 import usePermissions from '@/hooks/usePermissions';
-import { useGetCheckinAnalytics } from './api/checkinService';
+import { useGetCheckinAnalytics } from '@/features/Fidelidade/Checkin/api/checkinService';
 
 const MetricCard = ({ title, value, icon, bgColor, iconColor }) => (
   <Card

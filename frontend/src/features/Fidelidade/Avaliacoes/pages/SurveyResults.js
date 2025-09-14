@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography, Paper, CircularProgress, Alert, Grid } from '@mui/material';
-import { useSurveyResults } from './api/surveyService'; // Import useSurveyResults
+import { useSurveyResults } from '@/features/Fidelidade/Avaliacoes/api/surveyService'; // Import useSurveyResults
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useAuth
 import { useTranslation } from 'react-i18next'; // Importar useTranslation
 

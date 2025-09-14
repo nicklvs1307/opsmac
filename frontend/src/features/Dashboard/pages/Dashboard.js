@@ -26,7 +26,7 @@ import {
 } from 'recharts';
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Adjust path as needed
 import { useTranslation } from 'react-i18next';
-import { useDashboardOverview } from './api/dashboardQueries'; // Import the react-query hook
+import { useDashboardOverview } from '@/features/Dashboard/api/dashboardQueries'; // Import the react-query hook
 
 const Dashboard = () => {
   const { user } = useAuth();

@@ -3,7 +3,7 @@ import { useAuth } from '@/app/providers/contexts/AuthContext';
 import usePermissions from '@/hooks/usePermissions';
 import { useQueryClient } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { useGetPermissionTree, useSetEntitlements } from './api/iamQueries';
+import { useGetPermissionTree, useSetEntitlements } from '@/features/IAM/api/iamQueries';
 
 const EntitlementManagement = () => {
   const { selectedRestaurantId, user } = useAuth(); // Use selectedRestaurantId from AuthContext

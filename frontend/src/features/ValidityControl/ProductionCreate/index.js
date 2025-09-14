@@ -23,7 +23,7 @@ import {
 import { Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast'; // Import toast for notifications
 
-import { useStockableItems, useCreateProductionRecord } from '../api/productionService';
+import { useStockableItems, useCreateProductionRecord } from '@/features/ValidityControl/api/productionService';
 
 const ProductionCreate = () => {
   const navigate = useNavigate();

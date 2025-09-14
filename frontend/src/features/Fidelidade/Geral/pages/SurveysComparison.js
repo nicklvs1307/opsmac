@@ -21,8 +21,8 @@ import {
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useSurveys } from '../Avaliacoes/api/surveyService'; // To get list of surveys
-import { useSurveysComparisonAnalytics } from '../Avaliacoes/api/satisfactionService'; // New hook
+import { useSurveys } from '@/features/Fidelidade/Avaliacoes/api/surveyService'; // To get list of surveys
+import { useSurveysComparisonAnalytics } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService'; // New hook
 import {
   BarChart,
   Bar,

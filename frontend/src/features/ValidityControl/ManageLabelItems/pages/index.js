@@ -13,7 +13,7 @@ import {
   CircularProgress,
   Alert,
 } from '@mui/material';
-import EditLabelItemModal from './components/EditLabelItemModal';
+// import EditLabelItemModal from './components/EditLabelItemModal'; // Componente não encontrado, importação comentada
 import toast from 'react-hot-toast'; // Import toast for notifications
 
 // Query function for fetching items
@@ -116,12 +116,12 @@ const ManageLabelItems = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <EditLabelItemModal
+      {/* <EditLabelItemModal
         open={isModalOpen}
         onClose={handleCloseModal}
         item={selectedItem}
         onSave={handleSave}
-      />
+      /> */}
     </>
   );
 };

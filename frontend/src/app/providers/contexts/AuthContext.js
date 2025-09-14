@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useQueryClient } from 'react-query';
 import axiosInstance, { setAuthToken } from '@/services/axiosInstance';
-import { useFetchMe, useFetchPermissions, useUpdateProfile } from '../../../features/Auth/api/authQueries'; // Import new hooks
+import { useFetchMe, useFetchPermissions, useUpdateProfile } from '@/features/Auth/api/authQueries'; // Import new hooks
 
 const AuthContext = createContext();
 

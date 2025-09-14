@@ -19,7 +19,7 @@ import {
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-import FinancialTransactionFormModal from '../../../shared/components/FinancialTransactionFormModal';
+// import FinancialTransactionFormModal from '../../../shared/components/FinancialTransactionFormModal'; // Componente não encontrado, importação comentada
 import {
   useFinancialTransactions,
   useFinancialCategories,
@@ -223,13 +223,13 @@ const FinancialTransactions = () => {
         </List>
       )}
 
-      <FinancialTransactionFormModal
+      {/* <FinancialTransactionFormModal
         open={formModalOpen}
         handleClose={() => setFormModalOpen(false)}
         handleSave={handleSaveTransaction}
         restaurantId={restaurantId}
         initialData={editingTransaction}
-      />
+      /> */}
     </Box>
   );
 };

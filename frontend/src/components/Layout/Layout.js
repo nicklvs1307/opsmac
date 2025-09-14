@@ -14,8 +14,8 @@ import {
 } from '@mui/material';
 import { Menu as MenuIcon, ChevronLeft as ChevronLeftIcon } from '@mui/icons-material';
 
-import MenuRenderer from './MenuRenderer';
-import Header from './Header';
+import MenuRenderer from '@/components/Layout/MenuRenderer';
+import Header from '@/components/Layout/Header';
 
 const drawerWidth = 280;
 

@@ -27,7 +27,7 @@ import {
 } from '@mui/icons-material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useStockDashboardData } from './Stock/api/stockDashboardService';
+import { useStockDashboardData } from '@/features/ERP/Stock/api/stockDashboardService';
 
 const MetricCard = ({ title, value, icon, bgColor, iconColor }) => (
   <Card

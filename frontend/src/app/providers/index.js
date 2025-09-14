@@ -1,6 +1,6 @@
 import React from 'react';
-import { AuthProvider } from './contexts/AuthContext';
-import { ThemeProvider } from './contexts/ThemeContext';
+import { AuthProvider } from '@/app/providers/contexts/AuthContext';
+import { ThemeProvider } from '@/app/providers/contexts/ThemeContext';
 
 const AppProvider = ({ children }) => {
   return (

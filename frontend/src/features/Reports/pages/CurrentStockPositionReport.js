@@ -16,7 +16,7 @@ import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
-import { useCurrentStockPosition } from '../api/financialReportsService';
+import { useCurrentStockPosition } from '@/features/Reports/api/financialReportsService';
 
 const CurrentStockPositionReport = () => {
   const { t } = useTranslation();

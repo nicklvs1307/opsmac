@@ -33,7 +33,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useAuth
 
-import { useCreateSurvey, useSurveyRewards, useSurveyNpsCriteria } from './api/surveyService';
+import { useCreateSurvey, useSurveyRewards, useSurveyNpsCriteria } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
 
 const SurveyCreate = () => {
   const [activeStep, setActiveStep] = useState(0);

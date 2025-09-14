@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useGetRoles, useDeleteRole } from './api/ownerService';
+import { useGetRoles, useDeleteRole } from '@/features/Owner/api/ownerService';
 // import RoleEditorModal from './RoleEditorModal'; // Commented out as file not found
 
 const RoleManagementPage = () => {

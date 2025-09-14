@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 // React Query Hooks
-import { useSaveAdminUser } from './api/adminQueries';
+import { useSaveAdminUser } from '@/features/Admin/api/adminQueries';
 
 // Hooks
 import usePermissions from '@/hooks/usePermissions';

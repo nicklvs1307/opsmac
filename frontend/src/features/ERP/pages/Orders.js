@@ -17,7 +17,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
-import { useOrders, useUpdateOrderStatus } from './Orders/api/ordersService';
+import { useOrders, useUpdateOrderStatus } from '@/features/ERP/Orders/api/ordersService';
 
 const Orders = () => {
   const { t } = useTranslation();

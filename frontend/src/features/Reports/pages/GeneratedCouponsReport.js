@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
-import { useGeneratedCouponsReport } from '../api/financialReportsService';
+import { useGeneratedCouponsReport } from '@/features/Reports/api/financialReportsService';
 
 const GeneratedCouponsReport = () => {
   const { t } = useTranslation();

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import usePermissions from '@/hooks/usePermissions';
-import { useGetRoles, useCreateRole, useDeleteRole, useUpdateRole } from './api/iamQueries';
+import { useGetRoles, useCreateRole, useDeleteRole, useUpdateRole } from '@/features/IAM/api/iamQueries';
 import { useQueryClient } from 'react-query';
 import { toast } from 'react-hot-toast';
 

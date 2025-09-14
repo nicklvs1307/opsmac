@@ -1,6 +1,6 @@
 import axios from 'axios';
 import toast from 'react-hot-toast'; // Keep toast for now, might be used elsewhere or for specific cases
-import { handleError } from '../utils/errorHandler'; // Import the new error handler
+import { handleError } from '@/utils/errorHandler'; // Import the new error handler
 
 const axiosInstance = axios.create({
   baseURL: (process.env.REACT_APP_API_URL || 'http://localhost:5000'),

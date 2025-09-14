@@ -19,7 +19,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import toast from 'react-hot-toast';
 
-import { useWaiterProducts, useCreateWaiterOrder } from './api/orderService';
+import { useWaiterProducts, useCreateWaiterOrder } from '@/features/Waiter/api/orderService';
 
 const OrderPage = () => {
   const { tableId } = useParams();

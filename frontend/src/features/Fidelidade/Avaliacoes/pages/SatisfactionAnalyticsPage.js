@@ -7,7 +7,7 @@ import {
 } from '@mui/icons-material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useSatisfactionAnalytics } from './api/satisfactionService';
+import { useSatisfactionAnalytics } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService';
 import { format, subMonths } from 'date-fns';
 
 // A simple card for displaying a metric

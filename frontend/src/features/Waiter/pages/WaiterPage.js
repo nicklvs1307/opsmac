@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import toast from 'react-hot-toast';
 
-import { useWaiterTables } from './api/waiterService';
+import { useWaiterTables } from '@/features/Waiter/api/waiterService';
 
 const WaiterPage = () => {
   const { user, logout } = useAuth();

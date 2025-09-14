@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useSatisfactionAnalytics } from '../Avaliacoes/api/satisfactionService';
+import { useSatisfactionAnalytics } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService';
 import { useEvolutionAnalytics, useRatingDistribution } from '@/features/Dashboard/api/dashboardQueries';
 import {
   PieChart,

@@ -17,7 +17,7 @@ import { ExitToApp as ExitToAppIcon } from '@mui/icons-material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import usePermissions from '@/hooks/usePermissions';
-import { useGetActiveCheckins, useCheckout } from './api/checkinService';
+import { useGetActiveCheckins, useCheckout } from '@/features/Fidelidade/Checkin/api/checkinService';
 
 const ActiveCheckinsPage = () => {
   const { user } = useAuth();

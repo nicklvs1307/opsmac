@@ -6,11 +6,11 @@ import Layout from '@/components/Layout/Layout';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 
 // Import modularized routes
-import publicRoutes from './routes/public.routes';
-import fidelityRoutes from './routes/fidelity.routes';
-import erpRoutes from './routes/erp.routes';
-import adminRoutes from './routes/admin.routes';
-import settingsRoutes from './routes/settings.routes';
+import publicRoutes from '@/app/routes/public.routes';
+import fidelityRoutes from '@/app/routes/fidelity.routes';
+import erpRoutes from '@/app/routes/erp.routes';
+import adminRoutes from '@/app/routes/admin.routes';
+import settingsRoutes from '@/app/routes/settings.routes';
 
 const NotFound = () => {
   return (

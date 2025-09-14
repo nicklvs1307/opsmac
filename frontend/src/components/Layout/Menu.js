@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { menuStructure } from './menuStructure';
+import { menuStructure } from '@/components/Layout/menuStructure';
 import usePermissions from '@/hooks/usePermissions';
 import { useTheme } from '@mui/material/styles';
 import { useAuth } from '@/app/providers/contexts/AuthContext';

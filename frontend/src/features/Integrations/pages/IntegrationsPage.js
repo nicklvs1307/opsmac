@@ -9,11 +9,11 @@ import {
   Settings as SaiposIcon,
 } from '@mui/icons-material';
 
-import IfoodIntegration from './IfoodIntegration';
-import UaiRangoIntegration from './UaiRangoIntegration';
-import GoogleMyBusinessIntegration from './GoogleMyBusinessIntegration';
-import SaiposIntegration from './SaiposIntegration';
-import DeliveryMuchIntegration from './DeliveryMuchIntegration';
+import IfoodIntegration from '@/features/Integrations/pages/IfoodIntegration';
+import UaiRangoIntegration from '@/features/Integrations/pages/UaiRangoIntegration';
+import GoogleMyBusinessIntegration from '@/features/Integrations/pages/GoogleMyBusinessIntegration';
+import SaiposIntegration from '@/features/Integrations/pages/SaiposIntegration';
+import DeliveryMuchIntegration from '@/features/Integrations/pages/DeliveryMuchIntegration';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

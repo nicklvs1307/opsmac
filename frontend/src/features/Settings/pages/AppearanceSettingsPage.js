@@ -14,7 +14,7 @@ import { useThemeMode } from '@/app/providers/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
-import { useUpdateGeneralSetting, useGeneralSettings } from '../api/settingsService'; // Adjusted import path
+import { useUpdateGeneralSetting, useGeneralSettings } from '@/features/Settings/api/settingsService'; // Adjusted import path
 
 const AppearanceSettingsPage = () => {
   const { user } = useAuth();

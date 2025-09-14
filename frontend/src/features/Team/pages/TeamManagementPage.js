@@ -31,7 +31,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import toast from 'react-hot-toast';
 
-import { useTeamMembers, useCreateUser, useUpdateUser, useDeleteUser } from './api/teamService';
+import { useTeamMembers, useCreateUser, useUpdateUser, useDeleteUser } from '@/features/Team/api/teamService';
 
 const TeamManagementPage = () => {
   const { user } = useAuth();

@@ -52,7 +52,7 @@ import CashRegisterOptionsModal from '@/components/UI/CashRegisterOptionsModal';
 import WithdrawalModal from '@/components/UI/WithdrawalModal';
 import ReinforcementModal from '@/components/UI/ReinforcementModal';
 import PartialSummaryModal from '@/components/UI/PartialSummaryModal';
-import StatCard from './components/StatCard';
+// import StatCard from './components/StatCard'; // Componente não encontrado, importação comentada
 
 import {
   usePdvOrders,
@@ -1175,7 +1175,7 @@ const Pdv = () => {
             >
               {/* Stats Cards */}
               <div className="grid grid-cols-auto-fill-minmax-200 gap-5 mb-8">
-                <StatCard
+                {/* <StatCard
                   icon={<ShoppingBasketIcon />}
                   title={t('pdv.orders_today')}
                   value={ordersTodayCount}
@@ -1198,7 +1198,7 @@ const Pdv = () => {
                   title={t('pdv.revenue_today')}
                   value={`R$ ${revenueToday.toFixed(2).replace('.', ',')}`}
                   color="primary"
-                />
+                /> */}
               </div>
               <div className="mt-8">
                 <div className="flex justify-between items-center mb-4">

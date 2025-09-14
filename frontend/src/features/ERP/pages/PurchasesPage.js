@@ -19,7 +19,7 @@ import {
   useProductsForPurchases,
   useSuppliersForPurchases,
   useCreatePurchase,
-} from './Stock/api/purchasesService';
+} from '../Stock/api/purchasesService';
 
 const PurchasesPage = () => {
   const { user } = useAuth();

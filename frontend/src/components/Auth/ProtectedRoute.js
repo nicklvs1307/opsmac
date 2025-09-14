@@ -55,11 +55,17 @@ const ProtectedRoute = ({ children, featureKey, actionKey }) => {
 
   // Handle permissions error
   if (permissionsError) {
-    console.error("Permissions system error:", permissionsError);
-    return <Navigate to="/unauthorized" replace />; // Or a specific error page
+    return (
+      <div className="loading-overlay">
+        <div>
+          <p>Ocorreu um erro ao carregar as permissões.</p>
+          <button onClick={() => refetchPermission()}>Tentar novamente</button>
+        </div>
+      </div>
+    );
   }
 
-  // Check if the user has the required permission
+  // If authentication or permissions are still loading, show a loader
   if (permission?.allowed) {
     return children;
   }

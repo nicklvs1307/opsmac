@@ -31,11 +31,12 @@ const updateProfile = async (userData) => {
 
 // React Query Hooks
 export const useFetchMe = () => {
-  return useQuery(AUTH_QUERY_KEYS.me, fetchMe, {
+  const token = localStorage.getItem('token');
+  return useQuery([AUTH_QUERY_KEYS.me, token], fetchMe, {
     staleTime: Infinity,
     cacheTime: Infinity,
     retry: false, // Don't retry on auth errors, the context will handle logout
-    enabled: false, // This query should be called manually by the AuthContext
+    enabled: !!token, // Only run if token is present
   });
 };
 

@@ -1,138 +1,150 @@
+fetch("https://feedelizapro.towersfy.com/fidelity/dashboard", {
+  "headers": {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=0, i",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "none",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.googleapis.com/icon?family=Material+Icons", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/js/main.1ba6f2e0.js", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/css/main.285c14a1.css", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2", {
+  "referrer": "",
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3NjVmMDBlNC0yZTc0LTQ2ZGUtOTM1OS1lOTg0MmI5MzI1OWEiLCJpYXQiOjE3NTc4ODAzNjEsImV4cCI6MTc1ODQ4NTE2MX0.ikX6YqeGLKkE9VexQ2rw5mObhO0GecLhNHvMurk98Y4",
+    "if-none-match": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\"",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/manifest.json", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizapro.towersfy.com/favicon.ico", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/logo192.png", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/fidelity/dashboard"
+  },
+  "body": null,
+  "method": "GET"
+});
+
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-14 20:00:21 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-14 20:00:24 [info]: 	🚀 Servidor rodando na porta 5000
-2025-09-14 20:00:24 [info]: 	Redis Client Connected
-2025-09-14 20:01:15 [info]: 	170.254.46.100 - - [14/Sep/2025:20:01:15 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error during User.findOne in login: Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
-    at async AuthService.login (/app/src/domains/auth/auth.service.js:59:14)
-    at async AuthController.login (/app/src/domains/auth/auth.controller.js:31:24) {
-  name: 'SequelizeDatabaseError',
-  parent: error: column restaurants->restaurant.created_at does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 214,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: 'Perhaps you meant to reference the column "restaurants->restaurant.createdAt".',
-    position: '2664',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT "User"."id", "User"."email", "User"."name", "User"."phone", "User"."password_hash" AS "passwordHash", "User"."is_superadmin" AS "isSuperadmin", "User"."login_attempts" AS "loginAttempts", "User"."lock_until" AS "lockUntil", "User"."is_active" AS "isActive", "User"."created_at" AS "createdAt", "User"."updated_at" AS "updatedAt", "roles"."id" AS "roles.id", "roles"."restaurant_id" AS "roles.restaurantId", "roles"."key" AS "roles.key", "roles"."name" AS "roles.name", "roles"."is_system" AS "roles.isSystem", "roles"."created_at" AS "roles.createdAt", "roles"."updated_at" AS "roles.updatedAt", "roles"."restaurant_id" AS "roles.restaurant_id", "roles->UserRole"."user_id" AS "roles.UserRole.userId", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurantId", "roles->UserRole"."role_id" AS "roles.UserRole.roleId", "roles->UserRole"."created_at" AS "roles.UserRole.createdAt", "roles->UserRole"."updated_at" AS "roles.UserRole.updatedAt", "roles->UserRole"."role_id" AS "roles.UserRole.role_id", "roles->UserRole"."user_id" AS "roles.UserRole.user_id", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurant_id", "restaurants"."user_id" AS "restaurants.userId", "restaurants"."restaurant_id" AS "restaurants.restaurantId", "restaurants"."is_owner" AS "restaurants.isOwner", "restaurants"."created_at" AS "restaurants.createdAt", "restaurants"."updated_at" AS "restaurants.updatedAt", "restaurants"."restaurant_id" AS "restaurants.restaurant_id", "restaurants"."user_id" AS "restaurants.user_id", "restaurants->restaurant"."id" AS "restaurants.restaurant.id", "restaurants->restaurant"."name" AS "restaurants.restaurant.name", "restaurants->restaurant"."slug" AS "restaurants.restaurant.slug", "restaurants->restaurant"."description" AS "restaurants.restaurant.description", "restaurants->restaurant"."address" AS "restaurants.restaurant.address", "restaurants->restaurant"."city" AS "restaurants.restaurant.city", "restaurants->restaurant"."state" AS "restaurants.restaurant.state", "restaurants->restaurant"."zipCode" AS "restaurants.restaurant.zipCode", "restaurants->restaurant"."phone" AS "restaurants.restaurant.phone", "restaurants->restaurant"."email" AS "restaurants.restaurant.email", "restaurants->restaurant"."website" AS "restaurants.restaurant.website", "restaurants->restaurant"."logo" AS "restaurants.restaurant.logo", "restaurants->restaurant"."plan_key" AS "restaurants.restaurant.planKey", "restaurants->restaurant"."status" AS "restaurants.restaurant.status", "restaurants->restaurant"."perm_version" AS "restaurants.restaurant.permVersion", "restaurants->restaurant"."settings" AS "restaurants.restaurant.settings", "restaurants->restaurant"."created_at" AS "restaurants.restaurant.createdAt", "restaurants->restaurant"."updated_at" AS "restaurants.restaurant.updatedAt" FROM "users" AS "User" LEFT OUTER JOIN ( "user_roles" AS "roles->UserRole" INNER JOIN "roles" AS "roles" ON "roles"."id" = "roles->UserRole"."role_id") ON "User"."id" = "roles->UserRole"."user_id" LEFT OUTER JOIN "user_restaurants" AS "restaurants" ON "User"."id" = "restaurants"."user_id" LEFT OUTER JOIN "restaurants" AS "restaurants->restaurant" ON "restaurants"."restaurant_id" = "restaurants->restaurant"."id" WHERE "User"."email" = 'superadmin@example.com';`,
-    parameters: undefined
-  },
-  original: error: column restaurants->restaurant.created_at does not exist
-      at Parser.parseErrorMessage (/app/node_modules/pg-protocol/dist/parser.js:285:98)
-      at Parser.handlePacket (/app/node_modules/pg-protocol/dist/parser.js:122:29)
-      at Parser.parse (/app/node_modules/pg-protocol/dist/parser.js:35:38)
-      at Socket.<anonymous> (/app/node_modules/pg-protocol/dist/index.js:11:42)
-      at Socket.emit (node:events:524:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TCP.onStreamRead (node:internal/stream_base_commons:191:23) {
-    length: 214,
-    severity: 'ERROR',
-    code: '42703',
-    detail: undefined,
-    hint: 'Perhaps you meant to reference the column "restaurants->restaurant.createdAt".',
-    position: '2664',
-    internalPosition: undefined,
-    internalQuery: undefined,
-    where: undefined,
-    schema: undefined,
-    table: undefined,
-    column: undefined,
-    dataType: undefined,
-    constraint: undefined,
-    file: 'parse_relation.c',
-    line: '3647',
-    routine: 'errorMissingColumn',
-    sql: `SELECT "User"."id", "User"."email", "User"."name", "User"."phone", "User"."password_hash" AS "passwordHash", "User"."is_superadmin" AS "isSuperadmin", "User"."login_attempts" AS "loginAttempts", "User"."lock_until" AS "lockUntil", "User"."is_active" AS "isActive", "User"."created_at" AS "createdAt", "User"."updated_at" AS "updatedAt", "roles"."id" AS "roles.id", "roles"."restaurant_id" AS "roles.restaurantId", "roles"."key" AS "roles.key", "roles"."name" AS "roles.name", "roles"."is_system" AS "roles.isSystem", "roles"."created_at" AS "roles.createdAt", "roles"."updated_at" AS "roles.updatedAt", "roles"."restaurant_id" AS "roles.restaurant_id", "roles->UserRole"."user_id" AS "roles.UserRole.userId", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurantId", "roles->UserRole"."role_id" AS "roles.UserRole.roleId", "roles->UserRole"."created_at" AS "roles.UserRole.createdAt", "roles->UserRole"."updated_at" AS "roles.UserRole.updatedAt", "roles->UserRole"."role_id" AS "roles.UserRole.role_id", "roles->UserRole"."user_id" AS "roles.UserRole.user_id", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurant_id", "restaurants"."user_id" AS "restaurants.userId", "restaurants"."restaurant_id" AS "restaurants.restaurantId", "restaurants"."is_owner" AS "restaurants.isOwner", "restaurants"."created_at" AS "restaurants.createdAt", "restaurants"."updated_at" AS "restaurants.updatedAt", "restaurants"."restaurant_id" AS "restaurants.restaurant_id", "restaurants"."user_id" AS "restaurants.user_id", "restaurants->restaurant"."id" AS "restaurants.restaurant.id", "restaurants->restaurant"."name" AS "restaurants.restaurant.name", "restaurants->restaurant"."slug" AS "restaurants.restaurant.slug", "restaurants->restaurant"."description" AS "restaurants.restaurant.description", "restaurants->restaurant"."address" AS "restaurants.restaurant.address", "restaurants->restaurant"."city" AS "restaurants.restaurant.city", "restaurants->restaurant"."state" AS "restaurants.restaurant.state", "restaurants->restaurant"."zipCode" AS "restaurants.restaurant.zipCode", "restaurants->restaurant"."phone" AS "restaurants.restaurant.phone", "restaurants->restaurant"."email" AS "restaurants.restaurant.email", "restaurants->restaurant"."website" AS "restaurants.restaurant.website", "restaurants->restaurant"."logo" AS "restaurants.restaurant.logo", "restaurants->restaurant"."plan_key" AS "restaurants.restaurant.planKey", "restaurants->restaurant"."status" AS "restaurants.restaurant.status", "restaurants->restaurant"."perm_version" AS "restaurants.restaurant.permVersion", "restaurants->restaurant"."settings" AS "restaurants.restaurant.settings", "restaurants->restaurant"."created_at" AS "restaurants.restaurant.createdAt", "restaurants->restaurant"."updated_at" AS "restaurants.restaurant.updatedAt" FROM "users" AS "User" LEFT OUTER JOIN ( "user_roles" AS "roles->UserRole" INNER JOIN "roles" AS "roles" ON "roles"."id" = "roles->UserRole"."role_id") ON "User"."id" = "roles->UserRole"."user_id" LEFT OUTER JOIN "user_restaurants" AS "restaurants" ON "User"."id" = "restaurants"."user_id" LEFT OUTER JOIN "restaurants" AS "restaurants->restaurant" ON "restaurants"."restaurant_id" = "restaurants->restaurant"."id" WHERE "User"."email" = 'superadmin@example.com';`,
-    parameters: undefined
-  },
-  sql: `SELECT "User"."id", "User"."email", "User"."name", "User"."phone", "User"."password_hash" AS "passwordHash", "User"."is_superadmin" AS "isSuperadmin", "User"."login_attempts" AS "loginAttempts", "User"."lock_until" AS "lockUntil", "User"."is_active" AS "isActive", "User"."created_at" AS "createdAt", "User"."updated_at" AS "updatedAt", "roles"."id" AS "roles.id", "roles"."restaurant_id" AS "roles.restaurantId", "roles"."key" AS "roles.key", "roles"."name" AS "roles.name", "roles"."is_system" AS "roles.isSystem", "roles"."created_at" AS "roles.createdAt", "roles"."updated_at" AS "roles.updatedAt", "roles"."restaurant_id" AS "roles.restaurant_id", "roles->UserRole"."user_id" AS "roles.UserRole.userId", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurantId", "roles->UserRole"."role_id" AS "roles.UserRole.roleId", "roles->UserRole"."created_at" AS "roles.UserRole.createdAt", "roles->UserRole"."updated_at" AS "roles.UserRole.updatedAt", "roles->UserRole"."role_id" AS "roles.UserRole.role_id", "roles->UserRole"."user_id" AS "roles.UserRole.user_id", "roles->UserRole"."restaurant_id" AS "roles.UserRole.restaurant_id", "restaurants"."user_id" AS "restaurants.userId", "restaurants"."restaurant_id" AS "restaurants.restaurantId", "restaurants"."is_owner" AS "restaurants.isOwner", "restaurants"."created_at" AS "restaurants.createdAt", "restaurants"."updated_at" AS "restaurants.updatedAt", "restaurants"."restaurant_id" AS "restaurants.restaurant_id", "restaurants"."user_id" AS "restaurants.user_id", "restaurants->restaurant"."id" AS "restaurants.restaurant.id", "restaurants->restaurant"."name" AS "restaurants.restaurant.name", "restaurants->restaurant"."slug" AS "restaurants.restaurant.slug", "restaurants->restaurant"."description" AS "restaurants.restaurant.description", "restaurants->restaurant"."address" AS "restaurants.restaurant.address", "restaurants->restaurant"."city" AS "restaurants.restaurant.city", "restaurants->restaurant"."state" AS "restaurants.restaurant.state", "restaurants->restaurant"."zipCode" AS "restaurants.restaurant.zipCode", "restaurants->restaurant"."phone" AS "restaurants.restaurant.phone", "restaurants->restaurant"."email" AS "restaurants.restaurant.email", "restaurants->restaurant"."website" AS "restaurants.restaurant.website", "restaurants->restaurant"."logo" AS "restaurants.restaurant.logo", "restaurants->restaurant"."plan_key" AS "restaurants.restaurant.planKey", "restaurants->restaurant"."status" AS "restaurants.restaurant.status", "restaurants->restaurant"."perm_version" AS "restaurants.restaurant.permVersion", "restaurants->restaurant"."settings" AS "restaurants.restaurant.settings", "restaurants->restaurant"."created_at" AS "restaurants.restaurant.createdAt", "restaurants->restaurant"."updated_at" AS "restaurants.restaurant.updatedAt" FROM "users" AS "User" LEFT OUTER JOIN ( "user_roles" AS "roles->UserRole" INNER JOIN "roles" AS "roles" ON "roles"."id" = "roles->UserRole"."role_id") ON "User"."id" = "roles->UserRole"."user_id" LEFT OUTER JOIN "user_restaurants" AS "restaurants" ON "User"."id" = "restaurants"."user_id" LEFT OUTER JOIN "restaurants" AS "restaurants->restaurant" ON "restaurants"."restaurant_id" = "restaurants->restaurant"."id" WHERE "User"."email" = 'superadmin@example.com';`,
-  parameters: {}
-}
-2025-09-14 20:01:15 [info]: 	170.254.46.100 - - [14/Sep/2025:20:01:15 +0000] "POST /api/auth/login HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
-    at async AuthService.login (/app/src/domains/auth/auth.service.js:59:14)
-    at async AuthController.login (/app/src/domains/auth/auth.controller.js:31:24)
-    [Violation] Forced reflow while executing JavaScript took 66ms
-login:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:117  POST https://feedelizaapi.towersfy.com/api/auth/login 500 (Internal Server Error)
-(anônimo) @ xhr.js:195
-xhr @ xhr.js:15
-gt @ dispatchRequest.js:51
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:226
-(anônimo) @ bind.js:5
-login @ AuthContext.js:117
-onSubmit @ Login.js:25
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Le @ react-dom.production.min.js:54
-Ue @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Ir @ react-dom.production.min.js:105
-Dr @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Oe @ react-dom.production.min.js:52
-Vr @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
-errorHandler.js:43 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
-(anônimo) @ errorHandler.js:43
-(anônimo) @ axiosInstance.js:36
-Promise.then
-_request @ Axios.js:163
-request @ Axios.js:40
-(anônimo) @ Axios.js:226
-(anônimo) @ bind.js:5
-login @ AuthContext.js:117
-onSubmit @ Login.js:25
-(anônimo) @ createFormControl.ts:1260
-await in (anônimo)
-Le @ react-dom.production.min.js:54
-Ue @ react-dom.production.min.js:54
-(anônimo) @ react-dom.production.min.js:55
-Ir @ react-dom.production.min.js:105
-Dr @ react-dom.production.min.js:106
-(anônimo) @ react-dom.production.min.js:117
-cc @ react-dom.production.min.js:273
-Oe @ react-dom.production.min.js:52
-Vr @ react-dom.production.min.js:109
-Qt @ react-dom.production.min.js:74
-Ht @ react-dom.production.min.js:73
+2025-09-14 21:57:16 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-14 21:57:20 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-14 21:57:20 [info]: 	Redis Client Connected
+2025-09-14 21:57:42 [info]: 	170.254.46.100 - - [14/Sep/2025:21:57:42 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 21:57:42 [info]: 	170.254.46.100 - - [14/Sep/2025:21:57:42 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 21:57:50 [info]: 	170.254.46.100 - - [14/Sep/2025:21:57:50 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 21:57:50 [info]: 	170.254.46.100 - - [14/Sep/2025:21:57:50 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:02:37 [info]: 	170.254.46.100 - - [14/Sep/2025:22:02:37 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:02:37 [info]: 	170.254.46.100 - - [14/Sep/2025:22:02:37 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:03:01 [info]: 	170.254.46.100 - - [14/Sep/2025:22:03:01 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:03:01 [info]: 	170.254.46.100 - - [14/Sep/2025:22:03:01 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:03:08 [info]: 	170.254.46.100 - - [14/Sep/2025:22:03:08 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:03:08 [info]: 	170.254.46.100 - - [14/Sep/2025:22:03:08 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:11:54 [info]: 	170.254.46.100 - - [14/Sep/2025:22:11:54 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:11:54 [info]: 	170.254.46.100 - - [14/Sep/2025:22:11:54 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:12:02 [info]: 	170.254.46.100 - - [14/Sep/2025:22:12:02 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:12:02 [info]: 	170.254.46.100 - - [14/Sep/2025:22:12:02 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:12:09 [info]: 	170.254.46.100 - - [14/Sep/2025:22:12:09 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:12:09 [info]: 	170.254.46.100 - - [14/Sep/2025:22:12:09 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:12:13 [info]: 	170.254.46.100 - - [14/Sep/2025:22:12:13 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:12:22 [info]: 	170.254.46.100 - - [14/Sep/2025:22:12:22 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:12:23 [info]: 	170.254.46.100 - - [14/Sep/2025:22:12:23 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:12:38 [info]: 	170.254.46.100 - - [14/Sep/2025:22:12:38 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 22:12:38 [info]: 	170.254.46.100 - - [14/Sep/2025:22:12:38 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"

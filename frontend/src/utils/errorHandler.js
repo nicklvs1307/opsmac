@@ -13,7 +13,7 @@ export const handleError = (error) => {
       case 401:
         toast.error(data.message || 'Não autorizado. Por favor, faça login novamente.');
         // Optionally, redirect to login page
-        // window.location.href = '/login';
+        window.location.href = '/login';
         break;
       case 403:
         toast.error(data.message || 'Você não tem permissão para acessar este recurso.');

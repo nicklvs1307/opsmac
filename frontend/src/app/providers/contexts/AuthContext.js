@@ -88,7 +88,6 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     if (token) {
       setAuthToken(token);
-      refetchUser(); // Manually trigger useFetchMe
     } else {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: false });
     }
@@ -113,6 +112,7 @@ export const AuthProvider = ({ children }) => {
   }, [userData, permissionSnapshot, isUserError]); // Add isUserError to dependencies
 
   const login = async (email, password) => {
+    dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: true });
     try {
       const response = await axiosInstance.post('/auth/login', { email, password });
       const { token, ...userDataFromApi } = response.data;
@@ -127,6 +127,7 @@ export const AuthProvider = ({ children }) => {
         await refetchUser(); // This will trigger the useEffect above to update state
 
         toast.success(`Bem-vindo, ${userDataFromApi.name}!`);
+        dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: false });
         return { success: true, user: userDataFromApi }; // Return userDataFromApi as user will be updated by useEffect
       } else {
         throw new Error('Token não recebido do servidor');
@@ -134,6 +135,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       const message = error.response?.data?.message || 'Erro ao fazer login';
       toast.error(message);
+      dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: false });
       return { success: false, message };
     }
   };

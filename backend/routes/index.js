@@ -34,6 +34,7 @@ module.exports = (db) => {
 
         if (fs.existsSync(routeFile)) {
             const domainRouter = require(routeFile)(db);
+            console.log(`DEBUG: Loading domain: ${domainName}, Router: ${!!domainRouter}`);
             
             if (publicDomains.includes(domainName)) {
                 // Public routes: no auth middleware

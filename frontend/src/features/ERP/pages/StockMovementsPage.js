@@ -29,7 +29,7 @@ import {
   useStocks,
   useCreateStockMovement,
   useStockHistory,
-} from './Stock/api/stockMovementsService';
+} from '../Stock/api/stockMovementsService';
 
 const StockMovementsPage = () => {
   const { user } = useAuth();

@@ -26,7 +26,7 @@ import {
   useCreateSupplier,
   useUpdateSupplier,
   useDeleteSupplier,
-} from './Stock/api/suppliersService';
+} from '../Stock/api/suppliersService';
 
 const SuppliersPage = () => {
   const { user } = useAuth();

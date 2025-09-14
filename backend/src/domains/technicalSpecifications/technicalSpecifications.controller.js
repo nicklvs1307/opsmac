@@ -1,12 +1,13 @@
 module.exports = (db) => {
-  const technicalSpecificationsService = require('./technicalSpecifications.service')(db);
-  const { validationResult } = require('express-validator');
-  const { BadRequestError } = require('utils/errors');
+  const technicalSpecificationsService =
+    require("./technicalSpecifications.service")(db);
+  const { validationResult } = require("express-validator");
+  const { BadRequestError } = require("utils/errors");
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new BadRequestError('Dados inválidos', errors.array());
+      throw new BadRequestError("Dados inválidos", errors.array());
     }
   };
 
@@ -15,10 +16,16 @@ module.exports = (db) => {
       handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
       const { product_id, recipe_ingredients } = req.body;
-      const technicalSpecification = await technicalSpecificationsService.createTechnicalSpecification(
-        product_id, recipe_ingredients, restaurantId
-      );
-      res.status(201).json({ message: 'Ficha técnica criada com sucesso!', technicalSpecificationId: technicalSpecification.id });
+      const technicalSpecification =
+        await technicalSpecificationsService.createTechnicalSpecification(
+          product_id,
+          recipe_ingredients,
+          restaurantId,
+        );
+      res.status(201).json({
+        message: "Ficha técnica criada com sucesso!",
+        technicalSpecificationId: technicalSpecification.id,
+      });
     } catch (error) {
       next(error);
     }
@@ -28,9 +35,11 @@ module.exports = (db) => {
     try {
       const { productId } = req.params;
       const restaurantId = req.context.restaurantId;
-      const technicalSpecification = await technicalSpecificationsService.getTechnicalSpecificationByProductId(
-        productId, restaurantId
-      );
+      const technicalSpecification =
+        await technicalSpecificationsService.getTechnicalSpecificationByProductId(
+          productId,
+          restaurantId,
+        );
       res.json(technicalSpecification);
     } catch (error) {
       next(error);
@@ -44,9 +53,14 @@ module.exports = (db) => {
       const { recipe_ingredients } = req.body;
       const restaurantId = req.context.restaurantId;
       await technicalSpecificationsService.updateTechnicalSpecification(
-        productId, recipe_ingredients, restaurantId
+        productId,
+        recipe_ingredients,
+        restaurantId,
       );
-      res.json({ message: 'Ficha técnica atualizada com sucesso!', technicalSpecificationId: productId });
+      res.json({
+        message: "Ficha técnica atualizada com sucesso!",
+        technicalSpecificationId: productId,
+      });
     } catch (error) {
       next(error);
     }
@@ -56,7 +70,10 @@ module.exports = (db) => {
     try {
       const { productId } = req.params;
       const restaurantId = req.context.restaurantId;
-      await technicalSpecificationsService.deleteTechnicalSpecification(productId, restaurantId);
+      await technicalSpecificationsService.deleteTechnicalSpecification(
+        productId,
+        restaurantId,
+      );
       res.status(204).send();
     } catch (error) {
       next(error);

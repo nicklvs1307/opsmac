@@ -1,21 +1,21 @@
-'use strict';
+"use strict";
 
-const models = require('../../models');
+const models = require("../../models");
 
 class CategoriesService {
   async createCategory(name, restaurantId) {
     // Placeholder implementation
-    return { id: 'new-category-id', name, restaurantId, created: true };
+    return { id: "new-category-id", name, restaurantId, created: true };
   }
 
   async listCategories(restaurantId) {
     // Placeholder implementation
-    return [{ id: 'category-1', name: 'Category 1', restaurantId }];
+    return [{ id: "category-1", name: "Category 1", restaurantId }];
   }
 
   async getCategoryById(id, restaurantId) {
     // Placeholder implementation
-    return { id, name: 'Category Name', restaurantId };
+    return { id, name: "Category Name", restaurantId };
   }
 
   async updateCategory(id, name, restaurantId) {

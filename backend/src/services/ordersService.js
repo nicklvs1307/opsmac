@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const models = require('../../models');
-const { Op } = require('sequelize');
+const models = require("../../models");
+const { Op } = require("sequelize");
 
 class OrdersService {
   async getAllOrders(restaurantId, status, platform, delivery_type, search) {

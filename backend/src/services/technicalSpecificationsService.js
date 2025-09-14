@@ -1,11 +1,15 @@
-'use strict';
+"use strict";
 
-const models = require('../../models');
+const models = require("../../models");
 
 class TechnicalSpecificationsService {
-  async createTechnicalSpecification(productId, recipeIngredients, restaurantId) {
+  async createTechnicalSpecification(
+    productId,
+    recipeIngredients,
+    restaurantId,
+  ) {
     // Placeholder implementation
-    return { id: 'new-ts-id', productId, restaurantId, created: true };
+    return { id: "new-ts-id", productId, restaurantId, created: true };
   }
 
   async getTechnicalSpecificationByProductId(productId, restaurantId) {
@@ -13,7 +17,11 @@ class TechnicalSpecificationsService {
     return { productId, restaurantId, data: {} };
   }
 
-  async updateTechnicalSpecification(productId, recipeIngredients, restaurantId) {
+  async updateTechnicalSpecification(
+    productId,
+    recipeIngredients,
+    restaurantId,
+  ) {
     // Placeholder implementation
     return { productId, restaurantId, updated: true };
   }

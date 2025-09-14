@@ -8,7 +8,9 @@ function safeRouter() {
     router[m] = (path, ...handlers) => {
       handlers.forEach((h, i) => {
         if (typeof h !== "function") {
-          throw new Error(`Router.${m}("${path}") handler[${i}] é ${typeof h}; expected function`);
+          throw new Error(
+            `Router.${m}("${path}") handler[${i}] é ${typeof h}; expected function`,
+          );
         }
       });
       return orig(path, ...handlers);

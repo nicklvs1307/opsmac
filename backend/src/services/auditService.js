@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const models = require('../../models');
+const models = require("../../models");
+const logger = require("utils/logger"); // Import logger
 
 class AuditService {
   async log(actor, tenantId, action, resource, payload) {
-    
     try {
       await models.AuditLog.create({
         actorUserId: actor?.id,
@@ -14,7 +14,7 @@ class AuditService {
         payload: payload,
       });
     } catch (error) {
-      console.error('Error saving audit log:', error);
+      logger.error("Error saving audit log:", error);
     }
   }
 }

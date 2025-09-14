@@ -1,5 +1,6 @@
 import axios from 'axios';
-import toast from 'react-hot-toast';
+import toast from 'react-hot-toast'; // Keep toast for now, might be used elsewhere or for specific cases
+import { handleError } from '../utils/errorHandler'; // Import the new error handler
 
 const axiosInstance = axios.create({
   baseURL: (process.env.REACT_APP_API_URL || 'http://localhost:5000'),
@@ -14,13 +15,11 @@ if (token) {
   axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
-// Interceptor to add the token to every request (redundant if defaults are set, but good as a fallback)
+// Interceptor to add the token to every request
 axiosInstance.interceptors.request.use(
   (config) => {
-    // This part is now less critical if defaults are set correctly on load,
-    // but it ensures the header is present even if defaults were somehow missed or overridden.
     const currentToken = localStorage.getItem('token');
-    if (currentToken) {
+    if (currentToken && !config.headers.Authorization) { // Only set if not already present
       config.headers.Authorization = `Bearer ${currentToken}`;
     }
     return config;
@@ -34,9 +33,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 403) {
-      toast.error('Você não tem permissão para acessar este recurso.');
-    }
+    handleError(error); // Use the centralized error handler
     return Promise.reject(error);
   }
 );

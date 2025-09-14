@@ -1,46 +1,75 @@
-'use strict';
+"use strict";
 
-const redisClient = require('../config/redisClient');
+const redisClient = require("../config/redisClient");
+const logger = require("utils/logger"); // Import logger
 
 class CacheService {
   constructor() {
     if (!redisClient) {
-      console.warn('Redis client not initialized. Caching will be disabled.');
+      logger.warn("Redis client not initialized. Caching will be disabled.");
     }
   }
 
   async get(key) {
     if (!redisClient) return null;
-    const data = await redisClient.get(key);
-    return data ? JSON.parse(data) : null;
+    try {
+      const data = await redisClient.get(key);
+      return data ? JSON.parse(data) : null;
+    } catch (error) {
+      logger.error(`Error getting key ${key} from Redis:`, error);
+      return null;
+    }
   }
 
   async set(key, value, ttlSeconds = 86400) {
     if (!redisClient) return;
-    await redisClient.set(key, JSON.stringify(value), 'EX', ttlSeconds);
+    try {
+      await redisClient.set(key, JSON.stringify(value), "EX", ttlSeconds);
+    } catch (error) {
+      logger.error(`Error setting key ${key} in Redis:`, error);
+    }
   }
 
-  async delExact(key) { // Renamed from del to delExact for clarity
-    if (!redisClient) return;
-    const result = await redisClient.del(key);
-    
-    return result;
+  async delExact(key) {
+    // Renamed from del to delExact for clarity
+    if (!redisClient) return 0;
+    try {
+      const result = await redisClient.del(key);
+      return result;
+    } catch (error) {
+      logger.error(`Error deleting key ${key} from Redis:`, error);
+      return 0;
+    }
   }
 
   async delByPattern(pattern) {
-    if (!redisClient) return;
-    const keys = await redisClient.keys(pattern);
-    if (keys.length > 0) {
-      const result = await redisClient.del(keys);
-      
-      return result;
+    if (!redisClient) return 0;
+    try {
+      const keys = await redisClient.keys(pattern);
+      if (keys.length > 0) {
+        const result = await redisClient.del(keys);
+        return result;
+      }
+      return 0;
+    } catch (error) {
+      logger.error(
+        `Error deleting keys by pattern ${pattern} from Redis:`,
+        error,
+      );
+      return 0;
     }
-    return 0;
   }
 
   async publish(channel, message) {
     if (!redisClient) return;
-    await redisClient.publish(channel, JSON.stringify(message));
+    try {
+      await redisClient.publish(channel, JSON.stringify(message));
+    } catch (error) {
+      logger.error(
+        `Error publishing message to channel ${channel} in Redis:`,
+        error,
+      );
+    }
   }
 }
 

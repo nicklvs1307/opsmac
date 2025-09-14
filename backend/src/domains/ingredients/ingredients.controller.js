@@ -1,12 +1,12 @@
 module.exports = (ingredientsService) => {
-  const { validationResult } = require('express-validator');
-  const { BadRequestError } = require('utils/errors');
-  const auditService = require('services/auditService'); // Import auditService
+  const { validationResult } = require("express-validator");
+  const { BadRequestError } = require("utils/errors");
+  const auditService = require("services/auditService"); // Import auditService
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new BadRequestError('Dados inválidos', errors.array());
+      throw new BadRequestError("Dados inválidos", errors.array());
     }
   };
 
@@ -14,8 +14,19 @@ module.exports = (ingredientsService) => {
     handleValidationErrors(req);
     const { name, unit_of_measure, cost_per_unit } = req.body;
     const restaurantId = req.context.restaurantId;
-    const ingredient = await ingredientsService.createIngredient(name, unit_of_measure, cost_per_unit, restaurantId);
-    await auditService.log(req.user, restaurantId, 'INGREDIENT_CREATED', `Ingredient:${ingredient.id}`, { name, unit_of_measure, cost_per_unit });
+    const ingredient = await ingredientsService.createIngredient(
+      name,
+      unit_of_measure,
+      cost_per_unit,
+      restaurantId,
+    );
+    await auditService.log(
+      req.user,
+      restaurantId,
+      "INGREDIENT_CREATED",
+      `Ingredient:${ingredient.id}`,
+      { name, unit_of_measure, cost_per_unit },
+    );
     res.status(201).json(ingredient);
   };
 
@@ -27,7 +38,10 @@ module.exports = (ingredientsService) => {
 
   const getIngredientById = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
-    const ingredient = await ingredientsService.getIngredientById(req.params.id, restaurantId);
+    const ingredient = await ingredientsService.getIngredientById(
+      req.params.id,
+      restaurantId,
+    );
     res.json(ingredient);
   };
 
@@ -36,8 +50,20 @@ module.exports = (ingredientsService) => {
     const { id } = req.params;
     const { name, unit_of_measure, cost_per_unit } = req.body;
     const restaurantId = req.context.restaurantId;
-    const ingredient = await ingredientsService.updateIngredient(id, name, unit_of_measure, cost_per_unit, restaurantId);
-    await auditService.log(req.user, restaurantId, 'INGREDIENT_UPDATED', `Ingredient:${ingredient.id}`, { name, unit_of_measure, cost_per_unit });
+    const ingredient = await ingredientsService.updateIngredient(
+      id,
+      name,
+      unit_of_measure,
+      cost_per_unit,
+      restaurantId,
+    );
+    await auditService.log(
+      req.user,
+      restaurantId,
+      "INGREDIENT_UPDATED",
+      `Ingredient:${ingredient.id}`,
+      { name, unit_of_measure, cost_per_unit },
+    );
     res.json(ingredient);
   };
 
@@ -45,7 +71,13 @@ module.exports = (ingredientsService) => {
     const { id } = req.params;
     const restaurantId = req.context.restaurantId;
     await ingredientsService.deleteIngredient(id, restaurantId);
-    await auditService.log(req.user, restaurantId, 'INGREDIENT_DELETED', `Ingredient:${id}`, {});
+    await auditService.log(
+      req.user,
+      restaurantId,
+      "INGREDIENT_DELETED",
+      `Ingredient:${id}`,
+      {},
+    );
     res.status(204).send();
   };
 

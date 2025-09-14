@@ -1,12 +1,12 @@
 module.exports = (db) => {
-  const tablesService = require('./tables.service')(db);
-  const { validationResult } = require('express-validator');
-  const { BadRequestError } = require('utils/errors');
+  const tablesService = require("./tables.service")(db);
+  const { validationResult } = require("express-validator");
+  const { BadRequestError } = require("utils/errors");
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new BadRequestError('Dados inválidos', errors.array());
+      throw new BadRequestError("Dados inválidos", errors.array());
     }
   };
 
@@ -15,7 +15,10 @@ module.exports = (db) => {
       handleValidationErrors(req);
       const restaurant_id = req.context.restaurantId;
       const { table_number } = req.body;
-      const table = await tablesService.createTable(restaurant_id, table_number);
+      const table = await tablesService.createTable(
+        restaurant_id,
+        table_number,
+      );
       res.status(201).json(table);
     } catch (error) {
       next(error);

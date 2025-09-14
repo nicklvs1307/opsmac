@@ -1,12 +1,12 @@
 module.exports = (labelsService) => {
-  const { validationResult } = require('express-validator');
-  const { BadRequestError } = require('utils/errors');
-  const auditService = require('services/auditService'); // Import auditService
+  const { validationResult } = require("express-validator");
+  const { BadRequestError } = require("utils/errors");
+  const auditService = require("services/auditService"); // Import auditService
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new BadRequestError('Dados inválidos', errors.array());
+      throw new BadRequestError("Dados inválidos", errors.array());
     }
   };
 
@@ -36,13 +36,31 @@ module.exports = (labelsService) => {
 
   const printLabel = async (req, res, next) => {
     handleValidationErrors(req);
-    const { labelable_id, labelable_type, expiration_date, quantity_printed, lot_number } = req.body;
+    const {
+      labelable_id,
+      labelable_type,
+      expiration_date,
+      quantity_printed,
+      lot_number,
+    } = req.body;
     const restaurantId = req.context.restaurantId;
     await labelsService.printLabel(
-      labelable_id, labelable_type, expiration_date, quantity_printed, lot_number, restaurantId, req.user.userId
+      labelable_id,
+      labelable_type,
+      expiration_date,
+      quantity_printed,
+      lot_number,
+      restaurantId,
+      req.user.userId,
     );
-    await auditService.log(req.user, restaurantId, 'LABEL_PRINTED', `Labelable:${labelable_type}:${labelable_id}`, { quantity_printed, lot_number });
-    res.status(200).json({ message: 'Label printed successfully!' });
+    await auditService.log(
+      req.user,
+      restaurantId,
+      "LABEL_PRINTED",
+      `Labelable:${labelable_type}:${labelable_id}`,
+      { quantity_printed, lot_number },
+    );
+    res.status(200).json({ message: "Label printed successfully!" });
   };
 
   return {

@@ -1,19 +1,26 @@
 module.exports = (db) => {
   const { models } = db;
-  const { BadRequestError, NotFoundError } = require('utils/errors');
-  const { generateEscPosCommands } = require('utils/thermalPrinterService');
+  const { BadRequestError, NotFoundError } = require("utils/errors");
+  const { generateEscPosCommands } = require("utils/thermalPrinterService");
 
-  const openSession = async (restaurantId, userId, openingCash, openingObservations) => {
+  const openSession = async (
+    restaurantId,
+    userId,
+    openingCash,
+    openingObservations,
+  ) => {
     const existingOpenSession = await models.CashRegisterSession.findOne({
       where: {
         restaurantId: restaurantId,
         userId: userId,
-        status: 'open',
+        status: "open",
       },
     });
 
     if (existingOpenSession) {
-      throw new BadRequestError('There is already an open cash register session for this user and restaurant.');
+      throw new BadRequestError(
+        "There is already an open cash register session for this user and restaurant.",
+      );
     }
 
     const session = await models.CashRegisterSession.create({
@@ -21,7 +28,7 @@ module.exports = (db) => {
       userId: userId,
       openingCash,
       openingObservations,
-      status: 'open',
+      status: "open",
     });
 
     return session;
@@ -32,21 +39,30 @@ module.exports = (db) => {
       where: {
         restaurantId: restaurantId,
         userId: userId,
-        status: 'open',
+        status: "open",
       },
     });
 
     if (!session) {
-      throw new NotFoundError('No open cash register session found for this user and restaurant.');
+      throw new NotFoundError(
+        "No open cash register session found for this user and restaurant.",
+      );
     }
 
     return session;
   };
 
-  const recordMovement = async (sessionId, type, amount, categoryId, observations, userId) => {
+  const recordMovement = async (
+    sessionId,
+    type,
+    amount,
+    categoryId,
+    observations,
+    userId,
+  ) => {
     const session = await models.CashRegisterSession.findByPk(sessionId);
-    if (!session || session.status !== 'open') {
-      throw new NotFoundError('Open cash register session not found.');
+    if (!session || session.status !== "open") {
+      throw new NotFoundError("Open cash register session not found.");
     }
 
     const movement = await models.CashRegisterMovement.create({
@@ -65,8 +81,8 @@ module.exports = (db) => {
     let whereClause = {
       [models.Sequelize.Op.or]: [
         { restaurantId: restaurantId },
-        { restaurantId: null } // Global categories
-      ]
+        { restaurantId: null }, // Global categories
+      ],
     };
 
     if (type) {
@@ -75,7 +91,7 @@ module.exports = (db) => {
 
     const categories = await models.CashRegisterCategory.findAll({
       where: whereClause,
-      order: [['name', 'ASC']],
+      order: [["name", "ASC"]],
     });
 
     return categories;
@@ -87,40 +103,50 @@ module.exports = (db) => {
     });
 
     if (!session) {
-      throw new NotFoundError('Cash register session not found for this restaurant.');
+      throw new NotFoundError(
+        "Cash register session not found for this restaurant.",
+      );
     }
 
     const movements = await models.CashRegisterMovement.findAll({
       where: { sessionId },
       include: [
-        { model: models.CashRegisterCategory, as: 'category' },
-        { model: models.User, as: 'user', attributes: ['id', 'name'] },
+        { model: models.CashRegisterCategory, as: "category" },
+        { model: models.User, as: "user", attributes: ["id", "name"] },
       ],
-      order: [['createdAt', 'ASC']],
+      order: [["createdAt", "ASC"]],
     });
 
     return movements;
   };
 
-  const closeSession = async (sessionId, restaurantId, userId, closingCash, closingObservations) => {
+  const closeSession = async (
+    sessionId,
+    restaurantId,
+    userId,
+    closingCash,
+    closingObservations,
+  ) => {
     const session = await models.CashRegisterSession.findOne({
       where: {
         id: sessionId,
         restaurantId: restaurantId,
         userId: userId,
-        status: 'open',
+        status: "open",
       },
     });
 
     if (!session) {
-      throw new NotFoundError('Open cash register session not found for this user and restaurant.');
+      throw new NotFoundError(
+        "Open cash register session not found for this user and restaurant.",
+      );
     }
 
     await session.update({
       closingCash,
       closingObservations,
       closingTime: new Date(),
-      status: 'closed',
+      status: "closed",
     });
 
     return session;
@@ -132,20 +158,22 @@ module.exports = (db) => {
     });
 
     if (!session) {
-      throw new NotFoundError('Cash register session not found for this restaurant.');
+      throw new NotFoundError(
+        "Cash register session not found for this restaurant.",
+      );
     }
 
     const orders = await models.Order.findAll({
       where: {
         restaurantId: restaurantId,
-        paymentMethod: 'cash',
+        paymentMethod: "cash",
         orderDate: {
           [models.Sequelize.Op.gte]: session.openingTime,
           [models.Sequelize.Op.lte]: session.closingTime || new Date(),
         },
       },
-      attributes: ['id', 'totalAmount', 'orderDate'],
-      order: [['orderDate', 'ASC']],
+      attributes: ["id", "totalAmount", "orderDate"],
+      order: [["orderDate", "ASC"]],
     });
 
     return orders;

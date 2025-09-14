@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useQueryClient } from 'react-query';
 import axiosInstance, { setAuthToken } from '@/services/axiosInstance';
-import { useUpdateProfile } from '../../../features/Auth/api/authQueries';
+import { useFetchMe, useFetchPermissions, useUpdateProfile } from '../../../features/Auth/api/authQueries'; // Import new hooks
 
 const AuthContext = createContext();
 
@@ -77,57 +77,40 @@ export const AuthProvider = ({ children }) => {
   const queryClient = useQueryClient();
   const updateProfileMutation = useUpdateProfile();
 
+  // Use useFetchMe hook for initial user data
+  const { data: userData, isLoading: isUserLoading, isError: isUserError, refetch: refetchUser } = useFetchMe();
+
+  // Use useFetchPermissions hook for permissions, dependent on selectedRestaurantId
+  const { data: permissionSnapshot, isLoading: isPermissionsLoading, isError: isPermissionsError } = useFetchPermissions(state.selectedRestaurantId);
+
   // On app start, check for token and fetch user
   useEffect(() => {
-    console.log('AuthContext useEffect: Running');
     const token = localStorage.getItem('token');
-    console.log('AuthContext useEffect: Token from localStorage:', token);
-
     if (token) {
       setAuthToken(token);
-      console.log('AuthContext useEffect: Attempting to fetch /auth/me');
-      axiosInstance
-        .get('/auth/me')
-        .then(async (response) => {
-          console.log('AuthContext useEffect: /auth/me successful', response.data);
-          const userData = response.data;
-          let permissionSnapshot = null;
-
-          const selectedRestaurantId = userData.restaurants && userData.restaurants.length > 0 ? userData.restaurants[0].id : null;
-          if (selectedRestaurantId) {
-            try {
-              console.log('AuthContext useEffect: Attempting to fetch /iam/tree');
-              const permResponse = await axiosInstance.get(`/iam/tree?restaurantId=${selectedRestaurantId}`, {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              });
-              permissionSnapshot = permResponse.data;
-              console.log('AuthContext useEffect: /iam/tree successful', permissionSnapshot);
-            } catch (permError) {
-              console.error("AuthContext useEffect: Failed to fetch permissions during /auth/me:", permError);
-            }
-          }
-
-          dispatch({
-            type: AUTH_ACTIONS.SET_USER,
-            payload: {
-              ...userData,
-              permissionSnapshot: permissionSnapshot,
-            },
-          });
-        })
-        .catch((error) => {
-          console.error('AuthContext useEffect: /auth/me failed:', error);
-          setAuthToken(null);
-          localStorage.removeItem('token');
-          dispatch({ type: AUTH_ACTIONS.LOGOUT });
-        });
+      refetchUser(); // Manually trigger useFetchMe
     } else {
-      console.log('AuthContext useEffect: No token found in localStorage');
       dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: false });
     }
   }, []);
+
+  // Update user state when userData or permissionSnapshot changes
+  useEffect(() => {
+    if (userData) {
+      const selectedRestaurantId = userData.restaurants && userData.restaurants.length > 0 ? userData.restaurants[0].id : null;
+      dispatch({
+        type: AUTH_ACTIONS.SET_USER,
+        payload: {
+          ...userData,
+          permissionSnapshot: permissionSnapshot, // Use data from useFetchPermissions
+        },
+      });
+    } else if (isUserError) {
+      setAuthToken(null);
+      localStorage.removeItem('token');
+      dispatch({ type: AUTH_ACTIONS.LOGOUT });
+    }
+  }, [userData, permissionSnapshot, isUserError]); // Add isUserError to dependencies
 
   const login = async (email, password) => {
     try {
@@ -138,34 +121,13 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', token); // Persist token to localStorage
         setAuthToken(token);
 
-        const selectedRestaurantId = userDataFromApi.restaurants && userDataFromApi.restaurants.length > 0 ? userDataFromApi.restaurants[0].id : null;
-
-        let permissionSnapshot = null;
-        if (selectedRestaurantId) {
-          try {
-            const permResponse = await axiosInstance.get(`/iam/tree?restaurantId=${selectedRestaurantId}`, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-            permissionSnapshot = permResponse.data;
-          } catch (permError) {
-            console.error("Failed to fetch permissions during login:", permError);
-          }
-        }
-
-        // Construct the complete user object with permissionSnapshot
-        const completeUser = {
-          ...userDataFromApi,
-          token: token, // Ensure token is part of user object
-          permissionSnapshot: permissionSnapshot,
-        };
-        console.log('DEBUG: Complete user object after login:', JSON.stringify(completeUser, null, 2));
-        // Dispatch the complete user object in one go
-        dispatch({ type: AUTH_ACTIONS.SET_USER, payload: completeUser });
+        // Invalidate and refetch user data and permissions after login
+        await queryClient.invalidateQueries('authMe');
+        await queryClient.invalidateQueries('iamPermissions');
+        await refetchUser(); // This will trigger the useEffect above to update state
 
         toast.success(`Bem-vindo, ${userDataFromApi.name}!`);
-        return { success: true, user: completeUser };
+        return { success: true, user: userDataFromApi }; // Return userDataFromApi as user will be updated by useEffect
       } else {
         throw new Error('Token não recebido do servidor');
       }

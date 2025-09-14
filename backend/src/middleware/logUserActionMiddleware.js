@@ -5,18 +5,16 @@ const logUserAction = (action) => {
       action,
       userId: req.user?.userId,
       ip: req.ip,
-      userAgent: req.get('User-Agent'),
+      userAgent: req.get("User-Agent"),
       timestamp: new Date(),
       method: req.method,
       url: req.originalUrl,
-      body: req.method === 'POST' || req.method === 'PUT' ? req.body : undefined
+      body:
+        req.method === "POST" || req.method === "PUT" ? req.body : undefined,
     };
+
     
-    // Log para desenvolvimento
-    if (process.env.NODE_ENV === 'development') {
-      
-    }
-    
+
     next();
   };
 };

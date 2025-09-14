@@ -1,17 +1,23 @@
-const express = require('express');
-const asyncHandler = require('utils/asyncHandler');
-const requirePermission = require('middleware/requirePermission');
+const express = require("express");
+const asyncHandler = require("utils/asyncHandler");
+const requirePermission = require("middleware/requirePermission");
 
 module.exports = (db) => {
-    const deliveryMuchService = require('./deliveryMuch.service')(db);
-    const deliveryMuchController = require('./deliveryMuch.controller')(deliveryMuchService);
+  const deliveryMuchService = require("./deliveryMuch.service")(db);
+  const deliveryMuchController = require("./deliveryMuch.controller")(
+    deliveryMuchService,
+  );
 
-    const router = express.Router();
+  const router = express.Router();
 
-    // Rotas do Delivery Much
-    // O webhook é público e a verificação do módulo deve ser feita no controller.
-    router.post('/webhook', asyncHandler(deliveryMuchController.handleWebhook));
-    router.get('/orders', requirePermission('deliveryMuch', 'read'), asyncHandler(deliveryMuchController.getOrders));
+  // Rotas do Delivery Much
+  // O webhook é público e a verificação do módulo deve ser feita no controller.
+  router.post("/webhook", asyncHandler(deliveryMuchController.handleWebhook));
+  router.get(
+    "/orders",
+    requirePermission("deliveryMuch", "read"),
+    asyncHandler(deliveryMuchController.getOrders),
+  );
 
-    return router;
+  return router;
 };

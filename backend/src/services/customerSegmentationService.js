@@ -1,4 +1,4 @@
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
 const calculateRFV = async (customer, models) => {
   let recency = null;
@@ -32,39 +32,44 @@ const determineNPSSegment = async (customer, models) => {
     where: {
       customer_id: customer.id,
     },
-    include: [{
-      model: models.Survey,
-      where: { type: 'nps_only' } // Assuming 'nps_only' type for NPS surveys
-    }, {
-      model: models.Answer,
-      as: 'answers',
-      include: [{
-        model: models.Question,
-        as: 'question',
-        where: { question_type: 'nps' }, // Filter directly on Question model
-        attributes: []
-      }]
-    }],
-    order: [['created_at', 'DESC']],
+    include: [
+      {
+        model: models.Survey,
+        where: { type: "nps_only" }, // Assuming 'nps_only' type for NPS surveys
+      },
+      {
+        model: models.Answer,
+        as: "answers",
+        include: [
+          {
+            model: models.Question,
+            as: "question",
+            where: { question_type: "nps" }, // Filter directly on Question model
+            attributes: [],
+          },
+        ],
+      },
+    ],
+    order: [["created_at", "DESC"]],
   });
 
   if (latestNpsResponse && latestNpsResponse.answers.length > 0) {
     const npsAnswer = latestNpsResponse.answers[0]; // Assuming one NPS question per survey
     const score = parseInt(npsAnswer.answer_value, 10);
     if (!isNaN(score)) {
-      if (score >= 9) return 'promoter';
-      if (score >= 7 && score <= 8) return 'passive';
-      if (score >= 0 && score <= 6) return 'detractor';
+      if (score >= 9) return "promoter";
+      if (score >= 7 && score <= 8) return "passive";
+      if (score >= 0 && score <= 6) return "detractor";
     }
   }
-  return 'unknown';
+  return "unknown";
 };
 
 const segmentCustomer = async (customer, models) => {
   const { recency, frequency, monetary } = await calculateRFV(customer, models);
   const npsSegment = await determineNPSSegment(customer, models);
 
-  let finalSegment = 'new'; // Default segment
+  let finalSegment = "new"; // Default segment
 
   // Update RFV scores
   customer.rfv_score = { recency, frequency, monetary };
@@ -72,28 +77,29 @@ const segmentCustomer = async (customer, models) => {
 
   // RFV-based segmentation (as per your update.txt)
   if (recency !== null && frequency !== null && monetary !== null) {
-    if (recency <= 7 && frequency > 5 && monetary >= 500) { // Example thresholds
-      finalSegment = 'champion';
+    if (recency <= 7 && frequency > 5 && monetary >= 500) {
+      // Example thresholds
+      finalSegment = "champion";
     } else if (frequency > 3 && monetary >= 200) {
-      finalSegment = 'loyal';
+      finalSegment = "loyal";
     } else if (recency <= 30 && frequency <= 2) {
-      finalSegment = 'promising';
+      finalSegment = "promising";
     } else if (recency > 30 && recency <= 90 && frequency >= 1) {
-      finalSegment = 'at_risk';
+      finalSegment = "at_risk";
     } else if (recency > 90) {
-      finalSegment = 'lost';
+      finalSegment = "lost";
     }
   }
 
   // Override or refine segment based on other criteria
   // Example: If customer has only 1 order and hasn't returned
   if (customer.total_orders === 1 && recency > 30) {
-    finalSegment = 'churned_single_purchase';
+    finalSegment = "churned_single_purchase";
   }
 
   // Example: High total spent, regardless of other factors
   if (monetary >= 1000) {
-    finalSegment = 'vip';
+    finalSegment = "vip";
   }
 
   // Update customer_segment field
@@ -104,11 +110,11 @@ const segmentCustomer = async (customer, models) => {
   if (customer.last_purchase_date) {
     const lastPurchaseDay = new Date(customer.last_purchase_date).getDay(); // 0 = Sunday, 6 = Saturday
     if (lastPurchaseDay === 0 || lastPurchaseDay === 6) {
-      purchaseBehaviorTags.push('weekend_shopper');
+      purchaseBehaviorTags.push("weekend_shopper");
     }
     const lastPurchaseHour = new Date(customer.last_purchase_date).getHours();
     if (lastPurchaseHour >= 18 || lastPurchaseHour < 6) {
-      purchaseBehaviorTags.push('night_shopper');
+      purchaseBehaviorTags.push("night_shopper");
     }
   }
   customer.purchase_behavior_tags = purchaseBehaviorTags;
@@ -116,11 +122,11 @@ const segmentCustomer = async (customer, models) => {
   // Update preferred communication channel (placeholder logic)
   // This would ideally come from user preferences or interaction history
   if (customer.whatsapp) {
-    customer.preferred_communication_channel = 'whatsapp';
+    customer.preferred_communication_channel = "whatsapp";
   } else if (customer.email) {
-    customer.preferred_communication_channel = 'email';
+    customer.preferred_communication_channel = "email";
   } else {
-    customer.preferred_communication_channel = 'none';
+    customer.preferred_communication_channel = "none";
   }
 
   // Update location details (placeholder logic)
@@ -136,7 +142,8 @@ const segmentCustomer = async (customer, models) => {
 
   // Update campaign interaction history (placeholder)
   // This would be populated by tracking campaign interactions
-  customer.campaign_interaction_history = customer.campaign_interaction_history || {};
+  customer.campaign_interaction_history =
+    customer.campaign_interaction_history || {};
 
   return customer;
 };

@@ -3,7 +3,7 @@ module.exports = (db) => {
   const { BadRequestError } = require('utils/errors');
   const { models } = db;
 
-  const getCashFlowReport = async (restaurantId, start_date, end_date) => {
+  const _getDateRangeFilter = (start_date, end_date) => {
     if (!start_date || !end_date) {
       throw new BadRequestError('Start date and end date are required.');
     }
@@ -12,13 +12,23 @@ module.exports = (db) => {
     const endDate = new Date(end_date);
     endDate.setHours(23, 59, 59, 999); // Set to end of day
 
+    return {
+      startDate,
+      endDate,
+      dateFilter: {
+        [Op.gte]: startDate,
+        [Op.lte]: endDate,
+      },
+    };
+  };
+
+  const getCashFlowReport = async (restaurantId, start_date, end_date) => {
+    const { startDate, endDate, dateFilter } = _getDateRangeFilter(start_date, end_date);
+
     const transactions = await models.FinancialTransaction.findAll({
       where: {
         restaurant_id: restaurantId,
-        transaction_date: {
-          [Op.gte]: startDate,
-          [Op.lte]: endDate,
-        },
+        transaction_date: dateFilter,
       },
       attributes: ['type', 'amount', 'transaction_date'],
     });
@@ -70,28 +80,19 @@ module.exports = (db) => {
   };
 
   const getDreReport = async (restaurantId, start_date, end_date) => {
-    if (!start_date || !end_date) {
-      throw new BadRequestError('Start date and end date are required.');
-    }
-
-    const startDate = new Date(start_date);
-    const endDate = new Date(end_date);
-    endDate.setHours(23, 59, 59, 999);
+    const { startDate, endDate, dateFilter } = _getDateRangeFilter(start_date, end_date);
 
     const totalSales = await models.Order.sum('total_amount', {
       where: {
         restaurant_id: restaurantId,
-        order_date: {
-          [Op.gte]: startDate,
-          [Op.lte]: endDate,
-        },
+        order_date: dateFilter,
         status: {
           [Op.in]: ['delivered', 'concluded'],
         },
       },
     });
 
-    const cmv = 0; // Placeholder
+    const cmv = 0; // TODO: Implement logic to calculate Cost of Goods Sold (CMV)
 
     const grossProfit = (totalSales || 0) - cmv;
 
@@ -99,10 +100,7 @@ module.exports = (db) => {
       where: {
         restaurant_id: restaurantId,
         type: 'expense',
-        transaction_date: {
-          [Op.gte]: startDate,
-          [Op.lte]: endDate,
-        },
+        transaction_date: dateFilter,
       },
     });
 
@@ -110,10 +108,6 @@ module.exports = (db) => {
       where: {
         type: 'withdrawal',
         '$session.restaurant_id$': restaurantId,
-        createdAt: {
-          [Op.gte]: startDate,
-          [Op.lte]: endDate,
-        },
       },
       include: [{
         model: models.CashRegisterSession,

@@ -1,13 +1,13 @@
 module.exports = (db) => {
-    const getHealthStatus = () => {
-        return {
-            status: 'OK',
-            timestamp: new Date().toISOString(),
-            uptime: process.uptime()
-        };
-    };
-
+  const getHealthStatus = () => {
     return {
-        getHealthStatus,
+      status: "OK",
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
     };
+  };
+
+  return {
+    getHealthStatus,
+  };
 };

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const models = require('../../models');
+const models = require("../../models");
 
 class AddonsService {
   async listAddons(restaurantId) {
@@ -10,7 +10,7 @@ class AddonsService {
 
   async createAddon(name, price, restaurantId) {
     // Placeholder implementation
-    return { id: 'new-addon-id', name, price, restaurantId, created: true };
+    return { id: "new-addon-id", name, price, restaurantId, created: true };
   }
 
   async updateAddon(id, name, price) {

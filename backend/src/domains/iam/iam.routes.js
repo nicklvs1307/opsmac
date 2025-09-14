@@ -1,13 +1,11 @@
-'use strict';
+"use strict";
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const requirePermission = require('middleware/requirePermission');
-const asyncHandler = require('utils/asyncHandler');
-const IamController = require('domains/iam/iam.controller');
-const { requireSuperadmin } = require('middleware/adminAuthMiddleware');
-
-
+const requirePermission = require("middleware/requirePermission");
+const asyncHandler = require("utils/asyncHandler");
+const IamController = require("domains/iam/iam.controller");
+const { requireSuperadmin } = require("middleware/adminAuthMiddleware");
 
 /**
  * @swagger
@@ -43,7 +41,7 @@ const { requireSuperadmin } = require('middleware/adminAuthMiddleware');
  *       401:
  *         description: Unauthorized
  */
-router.get('/tree', asyncHandler(IamController.getPermissionTree));
+router.get("/tree", asyncHandler(IamController.getPermissionTree));
 
 /**
  * @swagger
@@ -88,7 +86,7 @@ router.get('/tree', asyncHandler(IamController.getPermissionTree));
  *       402:
  *         description: Payment Required (feature locked)
  */
-router.post('/check', asyncHandler(IamController.checkPermission));
+router.post("/check", asyncHandler(IamController.checkPermission));
 
 /**
  * @swagger
@@ -109,7 +107,11 @@ router.post('/check', asyncHandler(IamController.checkPermission));
  *       200:
  *         description: List of roles
  */
-router.get('/roles', requirePermission('roles.manage', 'read'), asyncHandler(IamController.listRoles));
+router.get(
+  "/roles",
+  requirePermission("roles.manage", "read"),
+  asyncHandler(IamController.listRoles),
+);
 
 /**
  * @swagger
@@ -137,7 +139,11 @@ router.get('/roles', requirePermission('roles.manage', 'read'), asyncHandler(Iam
  *       201:
  *         description: Role created successfully
  */
-router.post('/roles', requirePermission('roles.manage', 'create'), asyncHandler(IamController.createRole));
+router.post(
+  "/roles",
+  requirePermission("roles.manage", "create"),
+  asyncHandler(IamController.createRole),
+);
 
 /**
  * @swagger
@@ -168,7 +174,11 @@ router.post('/roles', requirePermission('roles.manage', 'create'), asyncHandler(
  *       200:
  *         description: Role updated successfully
  */
-router.patch('/roles/:id', requirePermission('roles.manage', 'update'), asyncHandler(IamController.updateRole));
+router.patch(
+  "/roles/:id",
+  requirePermission("roles.manage", "update"),
+  asyncHandler(IamController.updateRole),
+);
 
 /**
  * @swagger
@@ -190,7 +200,11 @@ router.patch('/roles/:id', requirePermission('roles.manage', 'update'), asyncHan
  *       204:
  *         description: Role deleted successfully
  */
-router.delete('/roles/:id', requirePermission('roles.manage', 'delete'), asyncHandler(IamController.deleteRole));
+router.delete(
+  "/roles/:id",
+  requirePermission("roles.manage", "delete"),
+  asyncHandler(IamController.deleteRole),
+);
 
 /**
  * @swagger
@@ -264,9 +278,17 @@ router.delete('/roles/:id', requirePermission('roles.manage', 'delete'), asyncHa
  *       200:
  *         description: List of role permissions
  */
-router.get('/roles/:id/permissions', requirePermission('roles.manage', 'read'), asyncHandler(IamController.getRolePermissions));
+router.get(
+  "/roles/:id/permissions",
+  requirePermission("roles.manage", "read"),
+  asyncHandler(IamController.getRolePermissions),
+);
 
-router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'), asyncHandler(IamController.setRolePermissions));
+router.post(
+  "/roles/:id/permissions",
+  requirePermission("roles.manage", "update"),
+  asyncHandler(IamController.setRolePermissions),
+);
 
 /**
  * @swagger
@@ -300,7 +322,11 @@ router.post('/roles/:id/permissions', requirePermission('roles.manage', 'update'
  *       200:
  *         description: Role assigned successfully
  */
-router.post('/users/:id/roles', requirePermission('admin:users', 'update'), asyncHandler(IamController.assignUserRole));
+router.post(
+  "/users/:id/roles",
+  requirePermission("admin:users", "update"),
+  asyncHandler(IamController.assignUserRole),
+);
 
 /**
  * @swagger
@@ -334,7 +360,11 @@ router.post('/users/:id/roles', requirePermission('admin:users', 'update'), asyn
  *       200:
  *         description: Role removed successfully
  */
-router.delete('/users/:id/roles', requirePermission('admin:users', 'update'), asyncHandler(IamController.removeUserRole));
+router.delete(
+  "/users/:id/roles",
+  requirePermission("admin:users", "update"),
+  asyncHandler(IamController.removeUserRole),
+);
 
 /**
  * @swagger
@@ -363,7 +393,11 @@ router.delete('/users/:id/roles', requirePermission('admin:users', 'update'), as
  *       200:
  *         description: List of user permission overrides
  */
-router.get('/users/:id/overrides', requirePermission('users.manage', 'read'), asyncHandler(IamController.getUserPermissionOverrides));
+router.get(
+  "/users/:id/overrides",
+  requirePermission("users.manage", "read"),
+  asyncHandler(IamController.getUserPermissionOverrides),
+);
 
 /**
  * @swagger
@@ -410,7 +444,11 @@ router.get('/users/:id/overrides', requirePermission('users.manage', 'read'), as
  *       200:
  *         description: Overrides set successfully
  */
-router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), asyncHandler(IamController.setUserPermissionOverride));
+router.post(
+  "/users/:id/overrides",
+  requirePermission("admin:users", "update"),
+  asyncHandler(IamController.setUserPermissionOverride),
+);
 
 /**
  * @swagger
@@ -453,7 +491,11 @@ router.post('/users/:id/overrides', requirePermission('admin:users', 'update'), 
  *       201:
  *         description: Entitlement set successfully
  */
-router.post('/entitlements', requirePermission('entitlements.manage', 'update'), asyncHandler(IamController.setRestaurantEntitlements));
+router.post(
+  "/entitlements",
+  requirePermission("entitlements.manage", "update"),
+  asyncHandler(IamController.setRestaurantEntitlements),
+);
 
 /**
  * @swagger
@@ -487,7 +529,11 @@ router.post('/entitlements', requirePermission('entitlements.manage', 'update'),
  *       204:
  *         description: Entitlement removed successfully
  */
-router.delete('/entitlements', requireSuperadmin, asyncHandler(IamController.removeEntitlement));
+router.delete(
+  "/entitlements",
+  requireSuperadmin,
+  asyncHandler(IamController.removeEntitlement),
+);
 
 /**
  * @swagger
@@ -509,7 +555,11 @@ router.delete('/entitlements', requireSuperadmin, asyncHandler(IamController.rem
  *       200:
  *         description: List of entitlements
  */
-router.get('/restaurants/:restaurantId/entitlements', requirePermission('entitlements.manage', 'read'), asyncHandler(IamController.getRestaurantEntitlements));
+router.get(
+  "/restaurants/:restaurantId/entitlements",
+  requirePermission("entitlements.manage", "read"),
+  asyncHandler(IamController.getRestaurantEntitlements),
+);
 
 /**
  * @swagger
@@ -556,7 +606,11 @@ router.get('/restaurants/:restaurantId/entitlements', requirePermission('entitle
  *       200:
  *         description: Entitlements set successfully
  */
-router.post('/entitlements/bulk', requireSuperadmin, asyncHandler(IamController.setEntitlementsBulk));
+router.post(
+  "/entitlements/bulk",
+  requireSuperadmin,
+  asyncHandler(IamController.setEntitlementsBulk),
+);
 
 module.exports = (db) => {
   return router;

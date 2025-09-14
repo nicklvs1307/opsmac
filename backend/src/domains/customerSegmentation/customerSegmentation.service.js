@@ -1,103 +1,102 @@
 module.exports = (db) => {
-    const models = db;
-    const { Op, sequelize } = require('sequelize');
-    const { BadRequestError, NotFoundError } = require('utils/errors');
+  const models = db;
+  const { Op, sequelize } = require("sequelize");
+  const { BadRequestError, NotFoundError } = require("utils/errors");
 
-    const listSegments = async (restaurantId) => {
-        const segments = await models.CustomerSegment.findAll({
-            where: { restaurantId },
-        });
-        return segments;
-    };
+  const listSegments = async (restaurantId) => {
+    const segments = await models.CustomerSegment.findAll({
+      where: { restaurantId },
+    });
+    return segments;
+  };
 
-    const getSegmentById = async (segmentId, restaurantId) => {
-        const segment = await models.CustomerSegment.findOne({
-            where: { id: segmentId, restaurantId },
-        });
-        if (!segment) {
-            throw new NotFoundError('Segmento não encontrado.');
+  const getSegmentById = async (segmentId, restaurantId) => {
+    const segment = await models.CustomerSegment.findOne({
+      where: { id: segmentId, restaurantId },
+    });
+    if (!segment) {
+      throw new NotFoundError("Segmento não encontrado.");
+    }
+    return segment;
+  };
+
+  const createSegment = async (segmentData, restaurantId) => {
+    const { name, description, rules } = segmentData;
+    const newSegment = await models.CustomerSegment.create({
+      name,
+      description,
+      rules,
+      restaurantId,
+    });
+    return newSegment;
+  };
+
+  const updateSegment = async (segmentId, updateData, restaurantId) => {
+    const segment = await getSegmentById(segmentId, restaurantId);
+    await segment.update(updateData);
+    return segment;
+  };
+
+  const deleteSegment = async (segmentId, restaurantId) => {
+    const segment = await getSegmentById(segmentId, restaurantId);
+    await segment.destroy();
+    return { message: "Segmento excluído com sucesso." };
+  };
+
+  const applySegmentationRules = async (restaurantId) => {
+    const segments = await models.CustomerSegment.findAll({
+      where: { restaurantId },
+      order: [["priority", "DESC"]], // Process higher priority segments first
+    });
+
+    if (!segments || segments.length === 0) {
+      return { message: "Nenhum segmento para aplicar." };
+    }
+
+    const transaction = await db.sequelize.transaction();
+
+    try {
+      // Reset all customers in this restaurant to a default segment first
+      await models.Customer.update(
+        { segment: "default" },
+        { where: { restaurantId }, transaction },
+      );
+
+      for (const segment of segments) {
+        if (!segment.rules || segment.rules.length === 0) {
+          continue; // Skip segments with no rules
         }
-        return segment;
-    };
 
-    const createSegment = async (segmentData, restaurantId) => {
-        const { name, description, rules } = segmentData;
-        const newSegment = await models.CustomerSegment.create({
-            name,
-            description,
-            rules,
-            restaurantId,
-        });
-        return newSegment;
-    };
+        const whereClause = {
+          restaurantId,
+          [Op.and]: segment.rules.map((rule) => {
+            // Ensure operator is a valid Sequelize operator, default to gte
+            const operator = Op[rule.operator] || Op.gte;
+            return { [rule.field]: { [operator]: rule.value } };
+          }),
+        };
 
-    const updateSegment = async (segmentId, updateData, restaurantId) => {
-        const segment = await getSegmentById(segmentId, restaurantId);
-        await segment.update(updateData);
-        return segment;
-    };
+        await models.Customer.update(
+          { segment: segment.name },
+          { where: whereClause, transaction },
+        );
+      }
 
-    const deleteSegment = async (segmentId, restaurantId) => {
-        const segment = await getSegmentById(segmentId, restaurantId);
-        await segment.destroy();
-        return { message: 'Segmento excluído com sucesso.' };
-    };
+      await transaction.commit();
+      return { message: "Regras de segmentação aplicadas com sucesso." };
+    } catch (error) {
+      await transaction.rollback();
+      console.error("Erro ao aplicar regras de segmentação:", error);
+      throw new Error("Falha ao aplicar regras de segmentação.");
+    }
+  };
 
-    const applySegmentationRules = async (restaurantId) => {
-        const segments = await models.CustomerSegment.findAll({
-            where: { restaurantId },
-            order: [['priority', 'DESC']], // Process higher priority segments first
-        });
-
-        if (!segments || segments.length === 0) {
-            return { message: 'Nenhum segmento para aplicar.' };
-        }
-
-        const transaction = await db.sequelize.transaction();
-
-        try {
-            // Reset all customers in this restaurant to a default segment first
-            await models.Customer.update(
-                { segment: 'default' },
-                { where: { restaurantId }, transaction }
-            );
-
-            for (const segment of segments) {
-                if (!segment.rules || segment.rules.length === 0) {
-                    continue; // Skip segments with no rules
-                }
-
-                const whereClause = {
-                    restaurantId,
-                    [Op.and]: segment.rules.map(rule => {
-                        // Ensure operator is a valid Sequelize operator, default to gte
-                        const operator = Op[rule.operator] || Op.gte;
-                        return { [rule.field]: { [operator]: rule.value } };
-                    })
-                };
-
-                await models.Customer.update(
-                    { segment: segment.name },
-                    { where: whereClause, transaction }
-                );
-            }
-
-            await transaction.commit();
-            return { message: 'Regras de segmentação aplicadas com sucesso.' };
-
-        } catch (error) {
-            await transaction.rollback();
-            console.error("Erro ao aplicar regras de segmentação:", error);
-            throw new Error('Falha ao aplicar regras de segmentação.');
-        }
-    };
-
-    return {
-        listSegments,
-        getSegmentById,
-        createSegment,
-        updateSegment,
-        deleteSegment,
-        applySegmentationRules,
-    };
+  return {
+    listSegments,
+    getSegmentById,
+    createSegment,
+    updateSegment,
+    deleteSegment,
+    applySegmentationRules,
+  };
 };

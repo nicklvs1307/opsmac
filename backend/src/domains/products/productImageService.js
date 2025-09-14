@@ -1,9 +1,9 @@
 module.exports = () => {
-    const uploadProductImage = async (filename) => {
-        return `/uploads/${filename}`;
-    };
+  const uploadProductImage = async (filename) => {
+    return `/uploads/${filename}`;
+  };
 
-    return {
-        uploadProductImage,
-    };
+  return {
+    uploadProductImage,
+  };
 };

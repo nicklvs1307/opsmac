@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 
 module.exports = (db) => {
-    const router = express.Router();
-    // No routes defined yet
-    return router;
+  const router = express.Router();
+  // No routes defined yet
+  return router;
 };

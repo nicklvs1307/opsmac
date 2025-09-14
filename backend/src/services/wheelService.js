@@ -1,5 +1,9 @@
 const spinWheel = (wheelConfig) => {
-  if (!wheelConfig || !Array.isArray(wheelConfig.items) || wheelConfig.items.length === 0) {
+  if (
+    !wheelConfig ||
+    !Array.isArray(wheelConfig.items) ||
+    wheelConfig.items.length === 0
+  ) {
     throw new Error("Configuração da roleta inválida ou vazia.");
   }
 
@@ -9,7 +13,9 @@ const spinWheel = (wheelConfig) => {
   }
 
   if (totalProbability === 0) {
-    throw new Error("A soma das probabilidades dos itens da roleta deve ser maior que zero.");
+    throw new Error(
+      "A soma das probabilidades dos itens da roleta deve ser maior que zero.",
+    );
   }
 
   let randomNumber = Math.random() * totalProbability;

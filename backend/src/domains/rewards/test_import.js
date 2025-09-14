@@ -1,2 +1,1 @@
-const { spinWheel } = require('services/wheelService.js');
-
+const { spinWheel } = require("services/wheelService.js");

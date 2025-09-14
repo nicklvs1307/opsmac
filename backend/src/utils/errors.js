@@ -8,26 +8,32 @@ class BaseError extends Error {
 }
 
 class BadRequestError extends BaseError {
-  constructor(message = 'Bad Request') {
+  constructor(message = "Bad Request") {
     super(message, 400);
   }
 }
 
 class UnauthorizedError extends BaseError {
-  constructor(message = 'Unauthorized') {
+  constructor(message = "Unauthorized") {
     super(message, 401);
   }
 }
 
 class ForbiddenError extends BaseError {
-  constructor(message = 'Forbidden') {
+  constructor(message = "Forbidden") {
     super(message, 403);
   }
 }
 
 class NotFoundError extends BaseError {
-  constructor(message = 'Not Found') {
+  constructor(message = "Not Found") {
     super(message, 404);
+  }
+}
+
+class PaymentRequiredError extends BaseError {
+  constructor(message = "Payment Required") {
+    super(message, 402);
   }
 }
 
@@ -37,4 +43,5 @@ module.exports = {
   UnauthorizedError,
   ForbiddenError,
   NotFoundError,
+  PaymentRequiredError,
 };

@@ -1,4 +1,4 @@
-const slugify = require('slugify');
+const slugify = require("slugify");
 
 const generateUniqueSlug = async (model, name, currentSlug = null) => {
   let baseSlug = slugify(name, { lower: true, strict: true });

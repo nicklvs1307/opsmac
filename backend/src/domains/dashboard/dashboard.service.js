@@ -4,12 +4,11 @@ module.exports = (db) => {
     const { BadRequestError, NotFoundError } = require('utils/errors');
     const rewardsService = require('domains/rewards/rewards.service')(db);
 
-    async function getDashboardAnalytics(restaurantId, query) {
+    function _getDateFilters(query) {
         const { start_date, end_date, period } = query;
         let validStartDate = null;
         let validEndDate = null;
 
-        // Logic to determine date range
         if (period) {
             const days = parseInt(period.replace('d', ''));
             if (isNaN(days)) {
@@ -27,7 +26,6 @@ module.exports = (db) => {
             }
         }
 
-        // Validate dates before using them
         if (validStartDate && isNaN(validStartDate.getTime())) {
             throw new BadRequestError('Data de início inválida.');
         }
@@ -55,6 +53,18 @@ module.exports = (db) => {
         } else if (validEndDate) {
             redeemedAtFilter.redeemed_at = { [Op.lte]: validEndDate };
         }
+
+        return { dateFilter, redeemedAtFilter, validStartDate, validEndDate };
+    }
+
+    async function getDashboardAnalytics(restaurantId, query) {
+        const cacheKey = `dashboard_analytics:${restaurantId}:${JSON.stringify(query)}`;
+        const cachedData = await cacheService.get(cacheKey);
+        if (cachedData) {
+            return cachedData;
+        }
+
+        const { dateFilter, redeemedAtFilter } = _getDateFilters(query);
 
         const [
             totalCheckins,
@@ -100,7 +110,7 @@ module.exports = (db) => {
             })
         ]);
 
-        return {
+        const result = {
             totalCheckins,
             newCustomers,
             totalSurveyResponses,
@@ -108,6 +118,9 @@ module.exports = (db) => {
             avgNpsScore: avgNpsScoreStats?.avgNpsScore || 0,
             avgRating: avgRatingStats?.avgRating || 0,
         };
+
+        await cacheService.set(cacheKey, result, 3600); // Cache por 1 hora
+        return result;
     }
 
     async function getRewardsAnalytics(restaurantId) {
@@ -234,47 +247,28 @@ module.exports = (db) => {
     }
 
     async function getEvolutionAnalytics(restaurantId, query) {
-        const { start_date, end_date, granularity = 'day' } = query;
+        const cacheKey = `evolution_analytics:${restaurantId}:${JSON.stringify(query)}`;
+        const cachedData = await cacheService.get(cacheKey);
+        if (cachedData) {
+            return cachedData;
+        }
 
-        if (!start_date || !end_date) {
+        const { granularity = 'day' } = query;
+        const { dateFilter, redeemedAtFilter, validStartDate, validEndDate } = _getDateFilters(query);
+
+        if (!validStartDate || !validEndDate) {
             throw new BadRequestError('As datas de início e fim são obrigatórias.');
         }
-
-        const startDate = new Date(start_date);
-        const endDate = new Date(end_date);
-
-        if ((startDate && isNaN(startDate.getTime())) || (endDate && isNaN(endDate.getTime()))) {
-            throw new BadRequestError('As datas de início e fim devem ser válidas.');
-        }
-
-        if (startDate > endDate) {
-            throw new BadRequestError('A data de início não pode ser posterior à data de fim.');
-        }
-
-        const dateFilter = {
-            createdAt: {
-                [Op.between]: [startDate, endDate],
-            },
-        };
-
-        const redeemedAtFilter = {
-            redeemed_at: {
-                [Op.between]: [startDate, endDate],
-            },
-        };
 
         const granularityFn = fn('DATE_TRUNC', granularity, col('Checkin.createdAt'));
 
         const [
             checkins,
-            newCustomers,
+            customerAggregations, // Combined Customer data
             surveys,
             coupons,
             nps,
             csat,
-            loyaltyPointsEvolution, // New
-            totalSpentEvolution,    // New
-            totalCustomersEvolution, // New
             engagedCustomersEvolution, // New
             loyalCustomersEvolution // New
         ] = await Promise.all([
@@ -292,7 +286,10 @@ module.exports = (db) => {
                 where: { restaurantId, ...dateFilter },
                 attributes: [
                     [granularityFn, 'date'],
-                    [fn('COUNT', col('id')), 'count'],
+                    [fn('COUNT', col('id')), 'newCustomersCount'],
+                    [fn('SUM', col('loyaltyPoints')), 'loyaltyPointsSum'],
+                    [fn('SUM', col('totalSpent')), 'totalSpentSum'],
+                    [fn('COUNT', col('id')), 'totalCustomersCount'],
                 ],
                 group: [granularityFn],
                 order: [[granularityFn, 'ASC']],
@@ -332,42 +329,11 @@ module.exports = (db) => {
                 order: [[granularityFn, 'ASC']],
                 raw: true,
             }),
-            models.Feedback.findAll({
+                        models.Feedback.findAll({
                 where: { restaurantId, rating: { [Op.not]: null }, ...dateFilter },
                 attributes: [
                     [granularityFn, 'date'],
                     [fn('AVG', col('rating')), 'score'],
-                ],
-                group: [granularityFn],
-                order: [[granularityFn, 'ASC']],
-                raw: true,
-            }),
-            // New queries for loyalty evolution
-            models.Customer.findAll({
-                where: { restaurantId, ...dateFilter },
-                attributes: [
-                    [granularityFn, 'date'],
-                    [fn('SUM', col('loyaltyPoints')), 'sum'],
-                ],
-                group: [granularityFn],
-                order: [[granularityFn, 'ASC']],
-                raw: true,
-            }),
-            models.Customer.findAll({
-                where: { restaurantId, ...dateFilter },
-                attributes: [
-                    [granularityFn, 'date'],
-                    [fn('SUM', col('totalSpent')), 'sum'],
-                ],
-                group: [granularityFn],
-                order: [[granularityFn, 'ASC']],
-                raw: true,
-            }),
-            models.Customer.findAll({
-                where: { restaurantId, ...dateFilter },
-                attributes: [
-                    [granularityFn, 'date'],
-                    [fn('COUNT', col('id')), 'count'],
                 ],
                 group: [granularityFn],
                 order: [[granularityFn, 'ASC']],
@@ -442,6 +408,7 @@ module.exports = (db) => {
             };
         });
 
+        await cacheService.set(cacheKey, evolutionData, 3600); // Cache por 1 hora
         return evolutionData;
     }
 
@@ -450,14 +417,7 @@ module.exports = (db) => {
     }
 
     async function getRatingDistribution(restaurantId, query) {
-        const { start_date, end_date } = query;
-
-        const dateFilter = {};
-        if (start_date && end_date) {
-            dateFilter.createdAt = {
-                [Op.between]: [new Date(start_date), new Date(end_date)],
-            };
-        }
+        const { dateFilter } = _getDateFilters(query);
 
         const ratings = await models.Feedback.findAll({
             where: {
@@ -488,14 +448,7 @@ module.exports = (db) => {
     }
 
     async function getReport(restaurantId, reportType, query) {
-        const { start_date, end_date } = query;
-
-        const dateFilter = {};
-        if (start_date && end_date) {
-            dateFilter.createdAt = {
-                [Op.between]: [new Date(start_date), new Date(end_date)],
-            };
-        }
+        const { dateFilter } = _getDateFilters(query);
 
         switch (reportType) {
             case 'nps':
@@ -514,6 +467,12 @@ module.exports = (db) => {
     }
 
     async function getBenchmarkingData(restaurantId) {
+        const cacheKey = `benchmarking_data:${restaurantId}`;
+        const cachedData = await cacheService.get(cacheKey);
+        if (cachedData) {
+            return cachedData;
+        }
+
         const today = new Date();
         const currentMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
         const lastMonthStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
@@ -586,12 +545,15 @@ module.exports = (db) => {
             fetchMetricsForPeriod(lastYearStart, lastYearEnd)
         ]);
 
-        return {
+        const result = {
             currentMonth: currentMonthData,
             lastMonth: lastMonthData,
             lastQuarter: lastQuarterData,
             lastYear: lastYearData,
         };
+
+        await cacheService.set(cacheKey, result, 3600); // Cache por 1 hora
+        return result;
     }
 
     return {

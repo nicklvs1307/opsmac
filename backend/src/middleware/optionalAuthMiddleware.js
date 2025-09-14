@@ -1,16 +1,16 @@
-const jwt = require('jsonwebtoken');
-const { models } = require('config/config');
+const jwt = require("jsonwebtoken");
+const { models } = require("config/config");
 
 const optionalAuth = async (req, res, next) => {
   try {
-    const authHeader = req.header('Authorization');
-    
+    const authHeader = req.header("Authorization");
+
     if (!authHeader) {
       return next();
     }
 
-    const token = authHeader.startsWith('Bearer ') 
-      ? authHeader.slice(7) 
+    const token = authHeader.startsWith("Bearer ")
+      ? authHeader.slice(7)
       : authHeader;
 
     if (!token) {
@@ -20,13 +20,13 @@ const optionalAuth = async (req, res, next) => {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       const user = await models.User.findByPk(decoded.userId);
-      
+
       if (user && user.is_active) {
         req.user = {
           userId: user.id,
           email: user.email,
           role: user.role,
-          name: user.name
+          name: user.name,
         };
       }
     } catch (error) {
@@ -35,7 +35,7 @@ const optionalAuth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error('Erro no middleware de autenticação opcional:', error);
+    console.error("Erro no middleware de autenticação opcional:", error);
     next(); // Continuar mesmo com erro
   }
 };

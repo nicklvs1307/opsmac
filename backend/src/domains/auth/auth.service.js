@@ -71,7 +71,7 @@ class AuthService {
         ],
       });
     } catch (error) {
-      console.error("Error during User.findOne in login:", error);
+      logger.error("Error during User.findOne in login:", error);
       throw error;
     }
 

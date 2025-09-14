@@ -1,6 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
+const { LOGIN_ATTEMPTS_LIMIT, LOGIN_LOCK_DURATION_HOURS } = require('../config/security');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -95,8 +96,8 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.incrementLoginAttempts = async function () {
-    const LOCK_TIME = 15 * 60 * 1000; // 15 minutes
-    const MAX_LOGIN_ATTEMPTS = 5;
+    const MAX_LOGIN_ATTEMPTS = LOGIN_ATTEMPTS_LIMIT;
+    const LOCK_TIME = LOGIN_LOCK_DURATION_HOURS * 60 * 60 * 1000; // Convert hours to milliseconds
 
     if (this.isLocked()) {
       return; // Already locked, do nothing

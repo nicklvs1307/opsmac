@@ -82,11 +82,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     createdAt: {
       type: DataTypes.DATE,
-      field: 'created_at',
+      field: 'createdAt',
     },
     updatedAt: {
       type: DataTypes.DATE,
-      field: 'updated_at',
+      field: 'updatedAt',
     },
   }, {
     sequelize,

@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
-import { useDREReport } from './api/financialReportsService';
+import { useDREReport } from '../api/financialReportsService';
 
 const DREReport = () => {
   const { t } = useTranslation();

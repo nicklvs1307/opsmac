@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
-import { useCashFlowReport } from './api/financialReportsService';
+import { useCashFlowReport } from '../api/financialReportsService';
 
 const CashFlowReport = () => {
   const { t } = useTranslation();

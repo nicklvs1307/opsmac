@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
-import { useStockPositionHistoryReport, useStockItemsReport } from './api/financialReportsService';
+import { useStockPositionHistoryReport, useStockItemsReport } from '../api/financialReportsService';
 
 const StockPositionHistoryReport = () => {
   const { t } = useTranslation();

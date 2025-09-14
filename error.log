@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           16.3s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           15.7s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.414 + npm run build
-0.818
-0.818 > feedeliza-plus@1.0.0 build
-0.818 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.818
-3.261 Creating an optimized production build...
-16.00 Failed to compile.
-16.00
-16.00 Module not found: Error: Can't resolve 'api/publicService' in '/app/frontend/src/features/Public/pages'
-16.00
-16.00
+0.293 + npm run build
+0.709
+0.709 > feedeliza-plus@1.0.0 build
+0.709 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.709
+3.432 Creating an optimized production build...
+15.58 Failed to compile.
+15.58
+15.58 Module not found: Error: Can't resolve './api/financialReportsService' in '/app/frontend/src/features/Reports/pages'
+15.58
+15.58
 ------
 Dockerfile.frontend:27
 --------------------

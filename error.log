@@ -1,18 +1,24 @@
-> feedeliza-plus@1.0.0 start
-> node server.js
-2025-09-14 15:44:28 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-14 15:44:31 [error]: 	❌ Erro ao iniciar servidor: await is only valid in async functions and the top level bodies of modules
-/app/src/domains/public/public.service.js:140
-    customer = await models.Customer.findOne({ where: customerSearchCriteria });
-               ^^^^^
-SyntaxError: await is only valid in async functions and the top level bodies of modules
-    at wrapSafe (node:internal/modules/cjs/loader:1464:18)
-    at Module._compile (node:internal/modules/cjs/loader:1495:20)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-    at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at module.exports (/app/src/domains/public/public.controller.js:6:25)
-    at module.exports (/app/src/domains/public/public.routes.js:6:58)
-    at /app/routes/index.js:36:52
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           23.1s
+------
+ > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.319 + npm run build
+1.034
+1.034 > feedeliza-plus@1.0.0 build
+1.034 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+1.034
+5.446 Creating an optimized production build...
+22.93 Failed to compile.
+22.93
+22.93 Module not found: Error: Can't resolve './api/surveyService' in '/app/frontend/src/features/Fidelidade/Avaliacoes/pages'
+22.93
+22.93
+------
+Dockerfile.frontend:27
+--------------------
+  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
+  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  28 |
+  29 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

@@ -25,7 +25,7 @@ import {
   useSurveyRewards,
   useSurveyNpsCriteria,
   useUpdateSurvey,
-} from './api/surveyService';
+} from '../api/surveyService';
 
 const SurveyEdit = () => {
   const { id } = useParams();

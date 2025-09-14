@@ -31,7 +31,7 @@ import {
   useDeleteNpsCriterion,
   useSatisfactionSettings,
   useUpdateSatisfactionSettings,
-} from './api/satisfactionSettingsService';
+} from '@/features/Fidelidade/Avaliacoes/api/satisfactionSettingsService';
 import { useRewards } from '@/features/Coupons/api/couponQueries';
 
 const SatisfactionSettingsPage = () => {

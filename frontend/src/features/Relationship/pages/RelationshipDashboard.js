@@ -24,7 +24,7 @@ import {
   useFetchWhatsappSettings,
   useSendManualMessage,
   useSaveAutomaticCampaigns,
-} from './api/relationshipService';
+} from '@/features/Relationship/api/relationshipService';
 
 const RelationshipDashboard = () => {
   const { user } = useAuth();

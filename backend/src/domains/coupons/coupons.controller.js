@@ -1,22 +1,29 @@
-module.exports = (db) => {
-  const couponsService = require("./coupons.service")(db);
-  const { validationResult } = require("express-validator");
-  const { BadRequestError } = require("utils/errors");
-  const auditService = require("services/auditService"); // Import auditService
+"use strict";
+const { validationResult } = require("express-validator");
+const { BadRequestError } = require("utils/errors");
+const auditService = require("services/auditService");
 
-  const handleValidationErrors = (req) => {
+// Import service factory function
+const couponsServiceFactory = require("./coupons.service");
+
+class CouponsController {
+  constructor(db) {
+    this.couponsService = couponsServiceFactory(db);
+  }
+
+  handleValidationErrors(req) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new BadRequestError("Dados inválidos", errors.array());
     }
-  };
+  }
 
-  return {
-    listCoupons: async (req, res, next) => {
-      handleValidationErrors(req);
+  async listCoupons(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
       const { page, limit, status, search } = req.query;
-      const { coupons, pagination } = await couponsService.listCoupons(
+      const { coupons, pagination } = await this.couponsService.listCoupons(
         restaurantId,
         page,
         limit,
@@ -24,11 +31,15 @@ module.exports = (db) => {
         search,
       );
       res.json({ coupons, pagination });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    expireCoupons: async (req, res, next) => {
+  async expireCoupons(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
-      const updatedCount = await couponsService.expireCoupons(restaurantId);
+      const updatedCount = await this.couponsService.expireCoupons(restaurantId);
       await auditService.log(
         req.user,
         restaurantId,
@@ -37,11 +48,15 @@ module.exports = (db) => {
         {},
       );
       res.json({ updated: updatedCount });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    redeemCoupon: async (req, res, next) => {
+  async redeemCoupon(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
-      const coupon = await couponsService.redeemCoupon(
+      const coupon = await this.couponsService.redeemCoupon(
         req.params.id,
         restaurantId,
       );
@@ -53,13 +68,17 @@ module.exports = (db) => {
         { code: coupon.code },
       );
       res.json(coupon);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    createCoupon: async (req, res, next) => {
-      handleValidationErrors(req);
+  async createCoupon(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const { rewardId, customerId, expiresAt } = req.body;
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
-      const coupon = await couponsService.createCoupon(
+      const coupon = await this.couponsService.createCoupon(
         rewardId,
         customerId,
         restaurantId,
@@ -73,19 +92,27 @@ module.exports = (db) => {
         { code: coupon.code, rewardId, customerId },
       );
       res.status(201).json(coupon);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getCouponAnalytics: async (req, res, next) => {
+  async getCouponAnalytics(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
-      const analytics = await couponsService.getCouponAnalytics(restaurantId);
+      const analytics = await this.couponsService.getCouponAnalytics(restaurantId);
       res.json(analytics);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    validateCoupon: async (req, res, next) => {
-      handleValidationErrors(req);
+  async validateCoupon(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const { code } = req.body;
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
-      const validationResult = await couponsService.validateCoupon(
+      const validationResult = await this.couponsService.validateCoupon(
         code,
         restaurantId,
       );
@@ -97,12 +124,16 @@ module.exports = (db) => {
         { validationResult },
       );
       res.json(validationResult);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    publicValidateCoupon: async (req, res, next) => {
-      handleValidationErrors(req);
+  async publicValidateCoupon(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const { code, restaurantSlug } = req.body;
-      const validationResult = await couponsService.publicValidateCoupon(
+      const validationResult = await this.couponsService.publicValidateCoupon(
         code,
         restaurantSlug,
       );
@@ -115,6 +146,10 @@ module.exports = (db) => {
         { validationResult },
       );
       res.json(validationResult);
-    },
-  };
-};
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+module.exports = (db) => new CouponsController(db);

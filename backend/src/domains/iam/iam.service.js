@@ -1,6 +1,5 @@
 "use strict";
 
-const models = require("../../../models");
 const { Op } = require("sequelize");
 const {
   UnauthorizedError,
@@ -13,15 +12,16 @@ const {
 const redisClient = require("../../config/redisClient");
 
 class IamService {
-  constructor() {
-    // Initialize any dependencies here if needed
+  constructor(db) {
+    this.models = db;
+    // Initialize any other dependencies here if needed
   }
 
   async bumpPermVersion(restaurantId) {
     console.log(
       `[IamService] Bumping permission version for restaurantId: ${restaurantId}`,
     );
-    await models.Restaurant.increment("permVersion", {
+    await this.models.Restaurant.increment("permVersion", {
       by: 1,
       where: { id: restaurantId },
     });
@@ -36,7 +36,7 @@ class IamService {
   }
 
   async getRoleById(id) {
-    const role = await models.Role.findByPk(id);
+    const role = await this.models.Role.findByPk(id);
     if (!role) {
       throw new NotFoundError("Role not found");
     }
@@ -50,7 +50,7 @@ class IamService {
         "Bad Request: restaurantId, key, and name are required.",
       );
     }
-    const role = await models.Role.create({
+    const role = await this.models.Role.create({
       restaurant_id: restaurantId,
       key,
       name,
@@ -64,14 +64,14 @@ class IamService {
     if (!restaurantId) {
       throw new BadRequestError("Bad Request: restaurantId is required.");
     }
-    const roles = await models.Role.findAll({
+    const roles = await this.models.Role.findAll({
       where: { restaurant_id: restaurantId },
     });
     return roles;
   }
 
   async updateRole(id, restaurantId, name) {
-    const role = await models.Role.findByPk(id);
+    const role = await this.models.Role.findByPk(id);
     if (!role) {
       throw new NotFoundError("Role not found");
     }
@@ -89,7 +89,7 @@ class IamService {
     if (!restaurantId) {
       throw new BadRequestError("Bad Request: restaurantId is required.");
     }
-    const role = await models.Role.findByPk(id);
+    const role = await this.models.Role.findByPk(id);
     if (!role) {
       throw new NotFoundError("Role not found");
     }
@@ -110,7 +110,7 @@ class IamService {
       );
     }
 
-    await models.RolePermission.destroy({ where: { role_id: roleId } });
+    await this.models.RolePermission.destroy({ where: { role_id: roleId } });
 
     const newPermissions = permissions.map((p) => ({
       role_id: roleId,
@@ -121,9 +121,9 @@ class IamService {
       updated_at: new Date(),
     }));
     if (newPermissions.length > 0) {
-      await models.RolePermission.bulkCreate(newPermissions);
+      await this.models.RolePermission.bulkCreate(newPermissions);
     }
-    const role = await models.Role.findByPk(roleId);
+    const role = await this.models.Role.findByPk(roleId);
     if (role) {
       await this.bumpPermVersion(restaurantId);
     }
@@ -131,15 +131,15 @@ class IamService {
   }
 
   async getRolePermissions(roleId) {
-    const rolePermissions = await models.RolePermission.findAll({
+    const rolePermissions = await this.models.RolePermission.findAll({
       where: { role_id: roleId },
       include: [
         {
-          model: models.Feature,
+          model: this.models.Feature,
           as: "feature",
           attributes: ["id", "key", "name"],
         },
-        { model: models.Action, as: "action", attributes: ["id", "key"] },
+        { model: this.models.Action, as: "action", attributes: ["id", "key"] },
       ],
     });
     return rolePermissions;
@@ -152,7 +152,7 @@ class IamService {
         "Bad Request: restaurantId and roleId are required.",
       );
     }
-    const userRole = await models.UserRole.create({
+    const userRole = await this.models.UserRole.create({
       user_id: userId,
       restaurant_id: restaurantId,
       role_id: roleId,
@@ -167,7 +167,7 @@ class IamService {
         "Bad Request: restaurantId and roleId are required.",
       );
     }
-    await models.UserRole.destroy({
+    await this.models.UserRole.destroy({
       where: { user_id: userId, restaurant_id: restaurantId, role_id: roleId },
     });
     await this.bumpPermVersion(restaurantId);
@@ -179,15 +179,15 @@ class IamService {
         "Bad Request: restaurantId and userId are required.",
       );
     }
-    const overrides = await models.UserPermissionOverride.findAll({
+    const overrides = await this.models.UserPermissionOverride.findAll({
       where: { user_id: targetUserId, restaurant_id: restaurantId },
       include: [
         {
-          model: models.Feature,
+          model: this.models.Feature,
           as: "feature",
           attributes: ["id", "key", "name"],
         },
-        { model: models.Action, as: "action", attributes: ["id", "key"] },
+        { model: this.models.Action, as: "action", attributes: ["id", "key"] },
       ],
     });
     return overrides;
@@ -201,7 +201,7 @@ class IamService {
       );
     }
 
-    await models.UserPermissionOverride.destroy({
+    await this.models.UserPermissionOverride.destroy({
       where: { user_id: userId, restaurant_id: restaurantId },
     });
 
@@ -216,7 +216,7 @@ class IamService {
     }));
 
     if (newOverrides.length > 0) {
-      await models.UserPermissionOverride.bulkCreate(newOverrides);
+      await this.models.UserPermissionOverride.bulkCreate(newOverrides);
     }
 
     await this.bumpPermVersion(restaurantId);
@@ -229,7 +229,7 @@ class IamService {
     featureId,
     actionId,
   ) {
-    await models.UserPermissionOverride.destroy({
+    await this.models.UserPermissionOverride.destroy({
       where: {
         user_id: userId,
         restaurant_id: restaurantId,
@@ -267,7 +267,7 @@ class IamService {
       whereClause.restaurant_id = restaurantId;
     }
 
-    const result = await models.RestaurantEntitlement.destroy({
+    const result = await this.models.RestaurantEntitlement.destroy({
       where: whereClause,
     });
 
@@ -284,16 +284,16 @@ class IamService {
       );
     }
 
-    const t = await models.sequelize.transaction();
+    const t = await this.models.sequelize.transaction();
     try {
       let createdCount = 0;
       let updatedCount = 0;
 
       // Pre-fetch all modules, submodules, and features for efficient validation
       const [allModules, allSubmodules, allFeatures] = await Promise.all([
-        models.Module.findAll({ attributes: ["id"] }),
-        models.Submodule.findAll({ attributes: ["id"] }),
-        models.Feature.findAll({ attributes: ["id"] }),
+        this.models.Module.findAll({ attributes: ["id"] }),
+        this.models.Submodule.findAll({ attributes: ["id"] }),
+        this.models.Feature.findAll({ attributes: ["id"] }),
       ]);
 
       const moduleIds = new Set(allModules.map((m) => m.id));
@@ -327,7 +327,7 @@ class IamService {
         }
 
         const [entitlement, created] =
-          await models.RestaurantEntitlement.findOrCreate({
+          await this.models.RestaurantEntitlement.findOrCreate({
             where: {
               restaurant_id: restaurantId,
               entity_type: entityType,
@@ -369,7 +369,7 @@ class IamService {
   }
 
   async getRestaurantEntitlements(restaurantId) {
-    const entitlements = await models.RestaurantEntitlement.findAll({
+    const entitlements = await this.models.RestaurantEntitlement.findAll({
       where: { restaurant_id: restaurantId },
     });
     return entitlements;
@@ -390,13 +390,13 @@ class IamService {
     // If it's part of IAM, move its logic here. For now, keep it as a call to an external service.
     // await entitlementService.setEntitlements(restaurantId, entitlements);
     // For now, directly interact with models if entitlementService is not meant to be separate
-    const t = await models.sequelize.transaction();
+    const t = await this.models.sequelize.transaction();
     try {
       // Pre-fetch all modules, submodules, and features for efficient validation
       const [allModules, allSubmodules, allFeatures] = await Promise.all([
-        models.Module.findAll({ attributes: ["id"] }),
-        models.Submodule.findAll({ attributes: ["id"] }),
-        models.Feature.findAll({ attributes: ["id"] }),
+        this.models.Module.findAll({ attributes: ["id"] }),
+        this.models.Submodule.findAll({ attributes: ["id"] }),
+        this.models.Feature.findAll({ attributes: ["id"] }),
       ]);
 
       const moduleIds = new Set(allModules.map((m) => m.id));
@@ -429,7 +429,7 @@ class IamService {
           );
         }
 
-        await models.RestaurantEntitlement.upsert(
+        await this.models.RestaurantEntitlement.upsert(
           {
             restaurant_id: restaurantId,
             entity_type: entityType,
@@ -454,22 +454,22 @@ class IamService {
   }
 
   async listFeatures() {
-    const features = await models.Feature.findAll({
+    const features = await this.models.Feature.findAll({
       include: [
         {
-          model: models.Submodule,
+          model: this.models.Submodule,
           as: "submodule",
           include: [
             {
-              model: models.Module,
+              model: this.models.Module,
               as: "module",
             },
           ],
         },
       ],
       order: [
-        [models.Submodule, models.Module, "sort_order", "ASC"],
-        [models.Submodule, "sort_order", "ASC"],
+        [this.models.Submodule, this.models.Module, "sort_order", "ASC"],
+        [this.models.Submodule, "sort_order", "ASC"],
         ["sort_order", "ASC"],
       ],
     });
@@ -477,7 +477,7 @@ class IamService {
   }
 
   async listActions() {
-    const actions = await models.Action.findAll({
+    const actions = await this.models.Action.findAll({
       order: [["id", "ASC"]],
     });
     return actions;
@@ -493,7 +493,7 @@ class IamService {
       `[IamService] Building permission snapshot for userId: ${userId}, restaurantId: ${restaurantId}`,
     );
 
-    const restaurant = await models.Restaurant.findByPk(restaurantId, {
+    const restaurant = await this.models.Restaurant.findByPk(restaurantId, {
       attributes: ["permVersion"],
     });
 
@@ -502,27 +502,27 @@ class IamService {
     }
 
     // Fetch all possible actions
-    const allActions = await models.Action.findAll();
+    const allActions = await this.models.Action.findAll();
 
     // Fetch user's roles for this restaurant
-    const userRoles = await models.UserRole.findAll({
+    const userRoles = await this.models.UserRole.findAll({
       where: { user_id: userId, restaurant_id: restaurantId },
       include: [
         {
-          model: models.Role,
+          model: this.models.Role,
           as: "role",
           include: [
             {
-              model: models.RolePermission,
+              model: this.models.RolePermission,
               as: "permissions",
               include: [
                 {
-                  model: models.Feature,
+                  model: this.models.Feature,
                   as: "feature",
                   attributes: ["id", "key", "name"],
                 },
                 {
-                  model: models.Action,
+                  model: this.models.Action,
                   as: "action",
                   attributes: ["id", "key"],
                 },
@@ -534,32 +534,32 @@ class IamService {
     });
 
     // Fetch user permission overrides
-    const userOverrides = await models.UserPermissionOverride.findAll({
+    const userOverrides = await this.models.UserPermissionOverride.findAll({
       where: { user_id: userId, restaurant_id: restaurantId },
       include: [
         {
-          model: models.Feature,
+          model: this.models.Feature,
           as: "feature",
           attributes: ["id", "key", "name"],
         },
-        { model: models.Action, as: "action", attributes: ["id", "key"] },
+        { model: this.models.Action, as: "action", attributes: ["id", "key"] },
       ],
     });
 
     // Fetch restaurant entitlements
-    const restaurantEntitlements = await models.RestaurantEntitlement.findAll({
+    const restaurantEntitlements = await this.models.RestaurantEntitlement.findAll({
       where: { restaurant_id: restaurantId },
     });
 
     // Fetch all modules, submodules, and features
-    const allModules = await models.Module.findAll({
+    const allModules = await this.models.Module.findAll({
       include: [
         {
-          model: models.Submodule,
+          model: this.models.Submodule,
           as: "submodules",
           include: [
             {
-              model: models.Feature,
+              model: this.models.Feature,
               as: "features",
               // Actions are no longer included here
             },
@@ -823,4 +823,4 @@ class IamService {
   }
 }
 
-module.exports = new IamService();
+module.exports = (db) => new IamService(db);

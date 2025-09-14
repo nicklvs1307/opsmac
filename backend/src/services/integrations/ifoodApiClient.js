@@ -1,9 +1,8 @@
-const axios = require("axios");
+const createApiClient = require("utils/apiClientFactory");
 const { models } = require("config/config");
 const uuid = require("uuid");
 
-const IFOOD_AUTH_URL =
-  "https://merchant-api.ifood.com.br/authentication/v1.0/oauth/token";
+const IFOOD_AUTH_URL = "https://merchant-api.ifood.com.br/authentication/v1.0/oauth/token";
 const IFOOD_API_BASE_URL = "https://merchant-api.ifood.com.br";
 
 class IfoodService {
@@ -12,6 +11,9 @@ class IfoodService {
     this.accessToken = null;
     this.refreshToken = null;
     this.expiresAt = null;
+    // Create Axios instances
+    this.apiClient = createApiClient(IFOOD_API_BASE_URL, { "x-app-version": "1.0.0" });
+    this.authApiClient = createApiClient(IFOOD_AUTH_URL); // Specific instance for auth URL
   }
 
   async getCredentials() {
@@ -29,17 +31,12 @@ class IfoodService {
       await this.getCredentials();
 
     try {
-      const response = await axios.post(
-        IFOOD_AUTH_URL,
+      const response = await this.authApiClient.post( // Use authApiClient
+        "", // Empty path as baseURL is the full URL
         {
           grantType: "client_credentials",
           clientId: ifood_client_id,
           clientSecret: ifood_client_secret,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
         },
       );
 
@@ -50,10 +47,7 @@ class IfoodService {
 
       return accessToken;
     } catch (error) {
-      console.error(
-        "Error authenticating with iFood:",
-        error.response?.data || error.message,
-      );
+      // Error logging handled by interceptor
       throw new Error("Falha na autenticação com o iFood.");
     }
   }
@@ -68,12 +62,11 @@ class IfoodService {
   async getOrders(status = "PENDING") {
     try {
       const accessToken = await this.getAccessToken();
-      const response = await axios.get(
-        `${IFOOD_API_BASE_URL}/order/v1.0/events:polling`,
+      const response = await this.apiClient.get(
+        "/order/v1.0/events:polling",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "x-app-version": "1.0.0",
             "x-correlation-id": uuid.v4(), // Generate a unique correlation ID
           },
           params: {
@@ -83,10 +76,7 @@ class IfoodService {
       );
       return response.data;
     } catch (error) {
-      console.error(
-        "Error fetching iFood orders:",
-        error.response?.data || error.message,
-      );
+      // Error logging handled by interceptor
       throw new Error("Falha ao buscar pedidos do iFood.");
     }
   }
@@ -94,22 +84,18 @@ class IfoodService {
   async confirmOrder(orderId) {
     try {
       const accessToken = await this.getAccessToken();
-      await axios.post(
-        `${IFOOD_API_BASE_URL}/order/v1.0/orders/${orderId}/confirm`,
+      await this.apiClient.post(
+        `/order/v1.0/orders/${orderId}/confirm`,
         null,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "x-app-version": "1.0.0",
             "x-correlation-id": uuid.v4(),
           },
         },
       );
     } catch (error) {
-      console.error(
-        `Error confirming iFood order ${orderId}:`,
-        error.response?.data || error.message,
-      );
+      // Error logging handled by interceptor
       throw new Error(`Falha ao confirmar pedido ${orderId} no iFood.`);
     }
   }
@@ -117,22 +103,18 @@ class IfoodService {
   async rejectOrder(orderId, reason = "OTHER") {
     try {
       const accessToken = await this.getAccessToken();
-      await axios.post(
-        `${IFOOD_API_BASE_URL}/order/v1.0/orders/${orderId}/reject`,
+      await this.apiClient.post(
+        `/order/v1.0/orders/${orderId}/reject`,
         { reason },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "x-app-version": "1.0.0",
             "x-correlation-id": uuid.v4(),
           },
         },
       );
     } catch (error) {
-      console.error(
-        `Error rejecting iFood order ${orderId}:`,
-        error.response?.data || error.message,
-      );
+      // Error logging handled by interceptor
       throw new Error(`Falha ao rejeitar pedido ${orderId} no iFood.`);
     }
   }

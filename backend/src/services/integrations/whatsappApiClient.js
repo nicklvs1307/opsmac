@@ -1,4 +1,4 @@
-const axios = require("axios");
+const createApiClient = require("utils/apiClientFactory");
 
 const sendWhatsAppMessage = async (
   instanceUrl,
@@ -8,24 +8,24 @@ const sendWhatsAppMessage = async (
   message,
 ) => {
   try {
-    const url = `${instanceUrl}/message/sendText/${instanceId}`;
+    // Create an Axios instance for this specific request, using the dynamic instanceUrl
+    const whatsappApiClient = createApiClient(instanceUrl);
+
+    const urlPath = `/message/sendText/${instanceId}`;
 
     const headers = {
-      "Content-Type": "application/json",
       apikey: apiKey,
     };
     const data = {
       number: recipientPhoneNumber,
-      text: message, // Corrigido para enviar a propriedade 'text' diretamente
+      text: message,
     };
 
-    const response = await axios.post(url, data, { headers });
+    // Use the created apiClient instance
+    const response = await whatsappApiClient.post(urlPath, data, { headers });
     return { success: true, data: response.data };
   } catch (error) {
-    console.error(
-      "Erro ao enviar mensagem WhatsApp:",
-      error.response?.data || error.message,
-    );
+    // Error logging is now handled by the interceptor in apiClientFactory
     return { success: false, error: error.response?.data || error.message };
   }
 };

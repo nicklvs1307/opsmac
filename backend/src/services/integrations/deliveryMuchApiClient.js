@@ -1,7 +1,7 @@
-const axios = require("axios");
+const createApiClient = require("utils/apiClientFactory");
 const { models } = require("config/config");
 
-const DELIVERY_MUCH_API_BASE_URL = "https://api.deliverymuch.com.br"; // Verifique a URL base correta da API do Delivery Much
+const DELIVERY_MUCH_API_BASE_URL = "https://api.deliverymuch.com.br";
 
 class DeliveryMuchService {
   constructor(restaurantId) {
@@ -12,6 +12,8 @@ class DeliveryMuchService {
     this.password = null;
     this.accessToken = null;
     this.expiresAt = null;
+    // Create an Axios instance for Delivery Much
+    this.apiClient = createApiClient(DELIVERY_MUCH_API_BASE_URL);
   }
 
   async getCredentials() {
@@ -42,8 +44,8 @@ class DeliveryMuchService {
   async authenticate() {
     await this.getCredentials();
     try {
-      const response = await axios.post(
-        `${DELIVERY_MUCH_API_BASE_URL}/oauth/token`,
+      const response = await this.apiClient.post(
+        "/oauth/token", // Use relative path as baseURL is set
         {
           grant_type: "password",
           client_id: this.clientId,
@@ -52,9 +54,8 @@ class DeliveryMuchService {
           password: this.password,
         },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          // Headers can be set here if they override defaults or are dynamic
+          // "Content-Type" is already set by default in apiClientFactory
         },
       );
 
@@ -64,10 +65,8 @@ class DeliveryMuchService {
 
       return access_token;
     } catch (error) {
-      console.error(
-        "Error authenticating with Delivery Much:",
-        error.response?.data || error.message,
-      );
+      // Error logging is now handled by the interceptor in apiClientFactory,
+      // but we can still throw a specific error for this service.
       throw new Error("Falha na autenticação com o Delivery Much.");
     }
   }
@@ -82,7 +81,6 @@ class DeliveryMuchService {
   async getHeaders() {
     const accessToken = await this.getAccessToken();
     return {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     };
   }
@@ -90,7 +88,7 @@ class DeliveryMuchService {
   async getOrders(status = "pending") {
     try {
       const headers = await this.getHeaders();
-      const response = await axios.get(`${DELIVERY_MUCH_API_BASE_URL}/orders`, {
+      const response = await this.apiClient.get("/orders", { // Use relative path
         headers,
         params: {
           status: status,
@@ -98,10 +96,7 @@ class DeliveryMuchService {
       });
       return response.data;
     } catch (error) {
-      console.error(
-        "Error fetching Delivery Much orders:",
-        error.response?.data || error.message,
-      );
+      // Error logging is now handled by the interceptor in apiClientFactory
       throw new Error("Falha ao buscar pedidos do Delivery Much.");
     }
   }
@@ -109,8 +104,8 @@ class DeliveryMuchService {
   async updateOrderStatus(orderId, newStatus) {
     try {
       const headers = await this.getHeaders();
-      const response = await axios.put(
-        `${DELIVERY_MUCH_API_BASE_URL}/orders/${orderId}/status`,
+      const response = await this.apiClient.put(
+        `/orders/${orderId}/status`, // Use relative path
         {
           status: newStatus,
         },
@@ -120,10 +115,7 @@ class DeliveryMuchService {
       );
       return response.data;
     } catch (error) {
-      console.error(
-        `Error updating Delivery Much order ${orderId} status to ${newStatus}:`,
-        error.response?.data || error.message,
-      );
+      // Error logging is now handled by the interceptor in apiClientFactory
       throw new Error(
         `Falha ao atualizar status do pedido ${orderId} no Delivery Much.`,
       );

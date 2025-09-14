@@ -1,13 +1,15 @@
-const axios = require("axios");
+const createApiClient = require("utils/apiClientFactory");
 const { models } = require("config/config");
 
-const SAIPOS_API_BASE_URL = "https://api.saipos.com"; // Verifique a URL base correta da API da Saipos
+const SAIPOS_API_BASE_URL = "https://api.saipos.com";
 
 class SaiposService {
   constructor(restaurantId) {
     this.restaurantId = restaurantId;
     this.apiKey = null;
     this.saiposRestaurantId = null;
+    // Create an Axios instance for Saipos
+    this.apiClient = createApiClient(SAIPOS_API_BASE_URL);
   }
 
   async getCredentials() {
@@ -30,7 +32,6 @@ class SaiposService {
       throw new Error("API Key da Saipos não configurada.");
     }
     return {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${this.apiKey}`,
       // Outros headers que a Saipos possa exigir, como um ID de parceiro
     };
@@ -39,7 +40,7 @@ class SaiposService {
   async getOrders(status = "pending") {
     try {
       const headers = await this.getHeaders();
-      const response = await axios.get(`${SAIPOS_API_BASE_URL}/orders`, {
+      const response = await this.apiClient.get("/orders", {
         headers,
         params: {
           restaurant_id: this.saiposRestaurantId,
@@ -48,10 +49,7 @@ class SaiposService {
       });
       return response.data;
     } catch (error) {
-      console.error(
-        "Error fetching Saipos orders:",
-        error.response?.data || error.message,
-      );
+      // Error logging handled by interceptor
       throw new Error("Falha ao buscar pedidos da Saipos.");
     }
   }
@@ -59,8 +57,8 @@ class SaiposService {
   async updateOrderStatus(orderId, newStatus) {
     try {
       const headers = await this.getHeaders();
-      const response = await axios.put(
-        `${SAIPOS_API_BASE_URL}/orders/${orderId}/status`,
+      const response = await this.apiClient.put(
+        `/orders/${orderId}/status`,
         {
           status: newStatus,
         },
@@ -70,12 +68,9 @@ class SaiposService {
       );
       return response.data;
     } catch (error) {
-      console.error(
-        `Error updating Saipos order ${orderId} status to ${newStatus}:`,
-        error.response?.data || error.message,
-      );
+      // Error logging handled by interceptor
       throw new Error(
-        `Falha ao atualizar status do pedido ${orderId} na Saipos.`,
+        `Falha ao atualizar status do pedido ${orderId} na Saipos.`, 
       );
     }
   }

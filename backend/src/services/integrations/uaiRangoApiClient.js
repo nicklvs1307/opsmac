@@ -1,13 +1,15 @@
-const axios = require("axios");
+const createApiClient = require("utils/apiClientFactory");
 const { models } = require("config/config");
 
-const UAI_RANGO_API_BASE_URL = "https://api.uairango.com"; // Verifique a URL base correta da API do Uai Rango
+const UAI_RANGO_API_BASE_URL = "https://api.uairango.com";
 
 class UaiRangoService {
   constructor(restaurantId) {
     this.restaurantId = restaurantId;
     this.apiKey = null;
     this.uaiRangoRestaurantId = null;
+    // Create an Axios instance for Uai Rango
+    this.apiClient = createApiClient(UAI_RANGO_API_BASE_URL);
   }
 
   async getCredentials() {
@@ -30,7 +32,6 @@ class UaiRangoService {
       throw new Error("API Key do Uai Rango não configurada.");
     }
     return {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${this.apiKey}`,
       // Outros headers que o Uai Rango possa exigir
     };
@@ -39,7 +40,7 @@ class UaiRangoService {
   async getOrders(status = "pending") {
     try {
       const headers = await this.getHeaders();
-      const response = await axios.get(`${UAI_RANGO_API_BASE_URL}/orders`, {
+      const response = await this.apiClient.get("/orders", {
         headers,
         params: {
           restaurant_id: this.uaiRangoRestaurantId,
@@ -48,10 +49,7 @@ class UaiRangoService {
       });
       return response.data;
     } catch (error) {
-      console.error(
-        "Error fetching Uai Rango orders:",
-        error.response?.data || error.message,
-      );
+      // Error logging handled by interceptor
       throw new Error("Falha ao buscar pedidos do Uai Rango.");
     }
   }
@@ -59,8 +57,8 @@ class UaiRangoService {
   async updateOrderStatus(orderId, newStatus) {
     try {
       const headers = await this.getHeaders();
-      const response = await axios.put(
-        `${UAI_RANGO_API_BASE_URL}/orders/${orderId}/status`,
+      const response = await this.apiClient.put(
+        `/orders/${orderId}/status`,
         {
           status: newStatus,
         },
@@ -70,10 +68,7 @@ class UaiRangoService {
       );
       return response.data;
     } catch (error) {
-      console.error(
-        `Error updating Uai Rango order ${orderId} status to ${newStatus}:`,
-        error.response?.data || error.message,
-      );
+      // Error logging handled by interceptor
       throw new Error(
         `Falha ao atualizar status do pedido ${orderId} no Uai Rango.`,
       );

@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           17.4s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           17.5s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.308 + npm run build
-0.754
-0.754 > feedeliza-plus@1.0.0 build
-0.754 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.754
-3.258 Creating an optimized production build...
-17.18 Failed to compile.
-17.18
-17.19 Module not found: Error: Can't resolve '../Feedback/api/feedbackService' in '/app/frontend/src/features/Public/pages'
-17.19
-17.19
+0.430 + npm run build
+0.871
+0.871 > feedeliza-plus@1.0.0 build
+0.871 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.871
+3.241 Creating an optimized production build...
+17.35 Failed to compile.
+17.35
+17.35 Module not found: Error: Can't resolve './api/publicService' in '/app/frontend/src/features/Public/pages'
+17.35
+17.35
 ------
 Dockerfile.frontend:27
 --------------------

@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           17.9s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           17.4s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.371 + npm run build
-0.846
-0.846 > feedeliza-plus@1.0.0 build
-0.846 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.846
-4.624 Creating an optimized production build...
-17.77 Failed to compile.
-17.77
-17.77 Module not found: Error: Can't resolve './theme/feedbackTheme' in '/app/frontend/src/app/providers/contexts'
-17.77
-17.77
+0.308 + npm run build
+0.754
+0.754 > feedeliza-plus@1.0.0 build
+0.754 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.754
+3.258 Creating an optimized production build...
+17.18 Failed to compile.
+17.18
+17.19 Module not found: Error: Can't resolve '../Feedback/api/feedbackService' in '/app/frontend/src/features/Public/pages'
+17.19
+17.19
 ------
 Dockerfile.frontend:27
 --------------------

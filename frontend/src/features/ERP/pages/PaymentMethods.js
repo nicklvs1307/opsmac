@@ -32,7 +32,7 @@ import {
   useCreatePaymentMethod,
   useUpdatePaymentMethod,
   useDeletePaymentMethod,
-} from './api/paymentMethodsService';
+} from '@/features/ERP/api/paymentMethodsService';
 
 const PaymentMethods = () => {
   const { t } = useTranslation();

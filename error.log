@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           19.2s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           15.7s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.295 + npm run build
-0.617
-0.617 > feedeliza-plus@1.0.0 build
-0.617 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.617
-4.418 Creating an optimized production build...
-19.02 Failed to compile.
-19.02
-19.02 Module not found: Error: Can't resolve './api/erpQueries' in '/app/frontend/src/features/ERP/pages'
-19.02
-19.02
+0.377 + npm run build
+0.695
+0.695 > feedeliza-plus@1.0.0 build
+0.695 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.695
+3.084 Creating an optimized production build...
+15.51 Failed to compile.
+15.51
+15.51 Module not found: Error: Can't resolve './api/paymentMethodsService' in '/app/frontend/src/features/ERP/pages'
+15.51
+15.51
 ------
 Dockerfile.frontend:27
 --------------------

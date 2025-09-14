@@ -37,7 +37,7 @@ import {
   useCreateFinancialTransaction,
   useUpdateFinancialTransaction,
   useDeleteFinancialTransaction,
-} from './api/erpQueries'; // Import react-query hooks
+} from '@/features/ERP/api/erpQueries'; // Import react-query hooks
 
 const FinancialTransactionsPage = () => {
   const { t } = useTranslation();

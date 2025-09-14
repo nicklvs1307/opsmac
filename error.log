@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           15.3s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           19.2s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.365 + npm run build
-0.672
-0.672 > feedeliza-plus@1.0.0 build
-0.672 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.672
-3.017 Creating an optimized production build...
-15.08 Failed to compile.
-15.08
-15.08 Module not found: Error: Can't resolve '../Avaliacoes/api/satisfactionService' in '/app/frontend/src/features/Fidelidade/Geral/pages'
-15.08
-15.08
+0.295 + npm run build
+0.617
+0.617 > feedeliza-plus@1.0.0 build
+0.617 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.617
+4.418 Creating an optimized production build...
+19.02 Failed to compile.
+19.02
+19.02 Module not found: Error: Can't resolve './api/erpQueries' in '/app/frontend/src/features/ERP/pages'
+19.02
+19.02
 ------
 Dockerfile.frontend:27
 --------------------

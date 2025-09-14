@@ -16,7 +16,7 @@ import {
   useUpdateAddon,
   useDeleteAddon,
   useToggleAddonStatus,
-} from './api/erpQueries';
+} from '@/features/ERP/api/erpQueries';
 
 const Icon = ({ name }) => <i className={`fas fa-${name}`}></i>;
 

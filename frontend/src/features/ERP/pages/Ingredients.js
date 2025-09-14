@@ -32,7 +32,7 @@ import {
   useCreateIngredient,
   useUpdateIngredient,
   useDeleteIngredient,
-} from './api/erpQueries'; // Import react-query hooks
+} from '@/features/ERP/api/erpQueries'; // Import react-query hooks
 
 const Ingredients = () => {
   const { t } = useTranslation();

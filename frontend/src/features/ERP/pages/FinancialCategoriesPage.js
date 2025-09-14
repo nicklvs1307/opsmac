@@ -26,7 +26,7 @@ import {
   useCreateFinancialCategory,
   useUpdateFinancialCategory,
   useDeleteFinancialCategory,
-} from './api/erpQueries';
+} from '@/features/ERP/api/erpQueries';
 
 const FinancialCategoriesPage = () => {
   const { t } = useTranslation();

@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           10.6s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build            7.5s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.517 + npm run build
-1.324
-1.324 > feedeliza-plus@1.0.0 build
-1.324 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-1.324
-6.016 Creating an optimized production build...
-10.46 Failed to compile.
-10.46
-10.46 Module not found: Error: Can't resolve 'i18next-browser-languagedetector' in '/app/frontend/src'
-10.46
-10.46
+0.313 + npm run build
+0.728
+0.728 > feedeliza-plus@1.0.0 build
+0.728 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.728
+3.505 Creating an optimized production build...
+7.410 Failed to compile.
+7.410
+7.412 Module not found: Error: Can't resolve 'i18next-browser-languagedetector' in '/app/frontend/src'
+7.412
+7.412
 ------
 Dockerfile.frontend:27
 --------------------

@@ -1,15 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useCheckPermission } from '@/hooks/useRealtimePermissions';
 
 const ProtectedRoute = ({ children, featureKey, actionKey }) => {
   const { isAuthenticated, loading: authLoading, user } = useAuth();
-  const { data: permission, isLoading: permissionsLoading, isError: permissionsError } = useCheckPermission(featureKey, actionKey);
+  const { data: permission, isLoading: permissionsLoading, isError: permissionsError, refetch: refetchPermission } = useCheckPermission(featureKey, actionKey);
+  const [timedOut, setTimedOut] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (authLoading || (featureKey && permissionsLoading)) {
+        setTimedOut(true);
+      }
+    }, 10000); // 10 seconds
+
+    return () => clearTimeout(timer);
+  }, [authLoading, featureKey, permissionsLoading]);
 
   // If authentication or permissions are still loading, show a loader
   if (authLoading || (featureKey && permissionsLoading)) {
-    return <div className="loading-spinner"></div>; // Or a proper spinner component
+    if (timedOut) {
+      return (
+        <div className="loading-overlay">
+          <div>
+            <p>Ocorreu um erro ao carregar as permissões.</p>
+            <button onClick={() => refetchPermission()}>Tentar novamente</button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="loading-overlay">
+        <div className="loading-spinner"></div>
+      </div>
+    );
   }
 
   // If user is not authenticated, redirect to login

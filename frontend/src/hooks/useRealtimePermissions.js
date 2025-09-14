@@ -7,7 +7,7 @@ const checkPermission = async (featureKey, actionKey) => {
 };
 
 export const useCheckPermission = (featureKey, actionKey) => {
-  return useQuery(
+  const query = useQuery(
     ['permission', featureKey, actionKey], // Query key
     () => checkPermission(featureKey, actionKey),
     {
@@ -18,4 +18,6 @@ export const useCheckPermission = (featureKey, actionKey) => {
       refetchOnWindowFocus: false,
     }
   );
+
+  return { ...query, refetch: query.refetch };
 };

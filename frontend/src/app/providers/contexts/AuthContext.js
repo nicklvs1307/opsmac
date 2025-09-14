@@ -95,6 +95,9 @@ export const AuthProvider = ({ children }) => {
 
   // Update user state when userData or permissionSnapshot changes
   useEffect(() => {
+    console.log('AuthContext: userData', userData);
+    console.log('AuthContext: isUserLoading', isUserLoading);
+    console.log('AuthContext: isUserError', isUserError);
     if (userData) {
       const selectedRestaurantId = userData.restaurants && userData.restaurants.length > 0 ? userData.restaurants[0].id : null;
       dispatch({
@@ -109,7 +112,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('token');
       dispatch({ type: AUTH_ACTIONS.LOGOUT });
     }
-  }, [userData, permissionSnapshot, isUserError]); // Add isUserError to dependencies
+  }, [userData, permissionSnapshot, isUserError, isUserLoading]); // Add isUserError to dependencies
 
   const login = async (email, password) => {
     dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: true });

@@ -1,17 +1,18 @@
-import React, { Suspense } from 'react';
-import Login from '@/features/Auth/pages/Login';
-import PublicFeedback from '@/features/Public/pages/PublicFeedback';
-import ThankYou from '@/features/Public/pages/ThankYou';
-import PublicSurveyForm from '@/features/Public/pages/PublicSurveyForm';
-import PublicCheckin from '@/features/Public/pages/PublicCheckin';
-import PublicReward from '@/features/Public/pages/PublicReward';
-import GirarRoleta from '@/features/Public/pages/GirarRoleta';
-import PublicMenu from '@/features/Public/pages/PublicMenu';
-import PublicDeliveryMenu from '@/features/Public/pages/PublicDeliveryMenu';
-import PublicDineInMenu from '@/features/Public/pages/DineInMenu';
-import CustomerRegistration from '@/features/Public/pages/CustomerRegistration';
-import UnauthorizedPage from '@/features/Common/UnauthorizedPage';
-import FeatureLockedPage from '@/features/Common/FeatureLockedPage';
+import React, { Suspense, lazy } from 'react';
+
+const Login = lazy(() => import('@/features/Auth/pages/Login'));
+const PublicFeedback = lazy(() => import('@/features/Public/pages/PublicFeedback'));
+const ThankYou = lazy(() => import('@/features/Public/pages/ThankYou'));
+const PublicSurveyForm = lazy(() => import('@/features/Public/pages/PublicSurveyForm'));
+const PublicCheckin = lazy(() => import('@/features/Public/pages/PublicCheckin'));
+const PublicReward = lazy(() => import('@/features/Public/pages/PublicReward'));
+const GirarRoleta = lazy(() => import('@/features/Public/pages/GirarRoleta'));
+const PublicMenu = lazy(() => import('@/features/Public/pages/PublicMenu'));
+const PublicDeliveryMenu = lazy(() => import('@/features/Public/pages/PublicDeliveryMenu'));
+const PublicDineInMenu = lazy(() => import('@/features/Public/pages/DineInMenu'));
+const CustomerRegistration = lazy(() => import('@/features/Public/pages/CustomerRegistration'));
+const UnauthorizedPage = lazy(() => import('@/features/Common/UnauthorizedPage'));
+const FeatureLockedPage = lazy(() => import('@/features/Common/FeatureLockedPage'));
 
 const publicRoutes = [
   {

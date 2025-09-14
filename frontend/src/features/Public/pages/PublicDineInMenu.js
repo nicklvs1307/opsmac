@@ -52,7 +52,7 @@ import {
   useCallWaiter,
   useCreateDineInOrder,
   useStartTableSession,
-} from '../api/publicService';
+} from 'api/publicService';
 
 const premiumTheme = createTheme({
   palette: {

@@ -1,23 +1,29 @@
+"use strict";
 const { validationResult } = require("express-validator");
 const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService"); // Import auditService
+const auditService = require("services/auditService");
 
-module.exports = (db) => {
-  const feedbackService = require("./feedbacks.service")(db);
+// Import service factory function
+const feedbackServiceFactory = require("./feedbacks.service");
 
-  const handleValidation = (req) => {
+class FeedbacksController {
+  constructor(db) {
+    this.feedbackService = feedbackServiceFactory(db);
+  }
+
+  handleValidation(req) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new BadRequestError("Dados inválidos", errors.array());
     }
-  };
+  }
 
-  return {
-    createFeedback: async (req, res, next) => {
-      handleValidation(req);
+  async createFeedback(req, res, next) {
+    try {
+      this.handleValidation(req);
       const restaurantId = req.context.restaurantId;
       const reqInfo = { ip: req.ip, userAgent: req.get("User-Agent") };
-      const { feedback, points_earned } = await feedbackService.createFeedback(
+      const { feedback, points_earned } = await this.feedbackService.createFeedback(
         req.body,
         restaurantId,
         reqInfo,
@@ -34,12 +40,16 @@ module.exports = (db) => {
         feedback,
         points_earned,
       });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    listFeedbacks: async (req, res, next) => {
-      handleValidation(req);
+  async listFeedbacks(req, res, next) {
+    try {
+      this.handleValidation(req);
       const restaurantId = req.context.restaurantId;
-      const { count, rows } = await feedbackService.listFeedbacks(
+      const { count, rows } = await this.feedbackService.listFeedbacks(
         restaurantId,
         req.query,
       );
@@ -52,21 +62,29 @@ module.exports = (db) => {
           items_per_page: parseInt(req.query.limit || 20),
         },
       });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getFeedbackById: async (req, res, next) => {
+  async getFeedbackById(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
-      const feedback = await feedbackService.getFeedbackById(
+      const feedback = await this.feedbackService.getFeedbackById(
         req.params.id,
         restaurantId,
       );
       res.json({ feedback });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    updateFeedback: async (req, res, next) => {
-      handleValidation(req);
+  async updateFeedback(req, res, next) {
+    try {
+      this.handleValidation(req);
       const restaurantId = req.context.restaurantId;
-      const updatedFeedback = await feedbackService.updateFeedback(
+      const updatedFeedback = await this.feedbackService.updateFeedback(
         req.params.id,
         restaurantId,
         req.user.userId,
@@ -83,11 +101,15 @@ module.exports = (db) => {
         message: "Feedback atualizado com sucesso",
         feedback: updatedFeedback,
       });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    deleteFeedback: async (req, res, next) => {
+  async deleteFeedback(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
-      await feedbackService.deleteFeedback(
+      await this.feedbackService.deleteFeedback(
         req.params.id,
         restaurantId,
         req.user,
@@ -100,12 +122,16 @@ module.exports = (db) => {
         {},
       );
       res.json({ message: "Feedback deletado com sucesso" });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    respondToFeedback: async (req, res, next) => {
-      handleValidation(req);
+  async respondToFeedback(req, res, next) {
+    try {
+      this.handleValidation(req);
       const restaurantId = req.context.restaurantId;
-      const feedback = await feedbackService.respondToFeedback(
+      const feedback = await this.feedbackService.respondToFeedback(
         req.params.id,
         restaurantId,
         req.user.userId,
@@ -119,15 +145,23 @@ module.exports = (db) => {
         { responseText: req.body.response_text },
       );
       res.json({ message: "Resposta enviada com sucesso", feedback });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getFeedbackWordFrequency: async (req, res, next) => {
+  async getFeedbackWordFrequency(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
-      const wordFrequency = await feedbackService.getFeedbackWordFrequency(
+      const wordFrequency = await this.feedbackService.getFeedbackWordFrequency(
         restaurantId,
         req.query,
       );
       res.json(wordFrequency);
-    },
-  };
-};
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+module.exports = (db) => new FeedbacksController(db);

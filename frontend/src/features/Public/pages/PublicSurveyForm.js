@@ -37,7 +37,7 @@ import {
   useGetPublicSurvey,
   useSubmitSurveyResponse,
   useLinkCustomerToResponse,
-} from '@/features/Public/api/publicService';
+} from 'api/publicService';
 import { useLoginCustomer, useRegisterCustomer } from '@/features/Auth/api/authService';
 
 // Modal Component for Customer Identification

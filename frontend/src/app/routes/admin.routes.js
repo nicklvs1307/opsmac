@@ -1,36 +1,36 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 
-import AdminUsersPage from '@/features/Admin/AdminUsersPage';
-import AdminRestaurantsPage from '@/features/Admin/AdminRestaurantsPage';
-import RestaurantEditPage from '@/features/Admin/RestaurantEditPage';
-import MenuManagement from '@/features/Admin/MenuManagement';
-import RestaurantCreatePage from '@/features/Admin/RestaurantCreatePage';
-import UserEditPage from '@/features/Admin/UserEditPage';
-import UserCreatePage from '@/features/Admin/UserCreatePage';
-import RolePermissionManagementPage from '@/components/Admin/RolePermissionManagementPage';
+const AdminUsersPage = lazy(() => import('@/features/Admin/AdminUsersPage'));
+const AdminRestaurantsPage = lazy(() => import('@/features/Admin/AdminRestaurantsPage'));
+const RestaurantEditPage = lazy(() => import('@/features/Admin/RestaurantEditPage'));
+const MenuManagement = lazy(() => import('@/features/Admin/MenuManagement'));
+const RestaurantCreatePage = lazy(() => import('@/features/Admin/RestaurantCreatePage'));
+const UserEditPage = lazy(() => import('@/features/Admin/UserEditPage'));
+const UserCreatePage = lazy(() => import('@/features/Admin/UserCreatePage'));
+const RolePermissionManagementPage = lazy(() => import('@/components/Admin/RolePermissionManagementPage'));
 
-import IAMDashboard from '@/features/IAM/pages/IAMDashboard';
-import RoleManagement from '@/features/IAM/pages/RoleManagement';
-import RolePermissions from '@/features/IAM/pages/RolePermissions';
-import UserPermissionOverrides from '@/features/IAM/pages/UserPermissionOverrides';
-import EntitlementManagement from '@/features/IAM/pages/EntitlementManagement';
-import UserRoleManagement from '@/features/IAM/pages/UserRoleManagement';
+const IAMDashboard = lazy(() => import('@/features/IAM/pages/IAMDashboard'));
+const RoleManagement = lazy(() => import('@/features/IAM/pages/RoleManagement'));
+const RolePermissions = lazy(() => import('@/features/IAM/pages/RolePermissions'));
+const UserPermissionOverrides = lazy(() => import('@/features/IAM/pages/UserPermissionOverrides'));
+const EntitlementManagement = lazy(() => import('@/features/IAM/pages/EntitlementManagement'));
+const UserRoleManagement = lazy(() => import('@/features/IAM/pages/UserRoleManagement'));
 
-import Settings from '@/features/Settings/pages/Settings'; // Used for admin/restaurant-settings
-import StockDashboardPage from '@/features/ERP/pages/StockDashboardPage'; // Used for admin/stock
-import StockProductsPage from '@/features/ERP/pages/StockProductsPage'; // Used for admin/products
-import CouponListPage from '@/features/Coupons/pages/CouponListPage'; // Used for admin/coupons
-import SurveyList from '@/features/Fidelidade/Avaliacoes/pages/SurveyList'; // Used for admin/surveys
-import CheckinAnalyticsPage from '@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage'; // Used for fidelity/checkin/analytics
-import Tables from '@/features/ERP/pages/Tables'; // Used for erp/tables
-import QRCodeManage from '@/features/QRCode/pages/QRCodeManage'; // Used for qrcodes/manage
-import SuppliersPage from '@/features/ERP/pages/SuppliersPage'; // Used for admin/suppliers
-import ProductionList from '@/features/ValidityControl/ProductionList'; // Used for admin/production (commented out)
-import ComingSoon from '@/features/Common/ComingSoon';
-import WaiterPage from '@/features/Waiter/pages/WaiterPage';
-import OrderPage from '@/features/Waiter/pages/OrderPage';
+const Settings = lazy(() => import('@/features/Settings/pages/Settings'));
+const StockDashboardPage = lazy(() => import('@/features/ERP/pages/StockDashboardPage'));
+const StockProductsPage = lazy(() => import('@/features/ERP/pages/StockProductsPage'));
+const CouponListPage = lazy(() => import('@/features/Coupons/pages/CouponListPage'));
+const SurveyList = lazy(() => import('@/features/Fidelidade/Avaliacoes/pages/SurveyList'));
+const CheckinAnalyticsPage = lazy(() => import('@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage'));
+const Tables = lazy(() => import('@/features/ERP/pages/Tables'));
+const QRCodeManage = lazy(() => import('@/features/QRCode/pages/QRCodeManage'));
+const SuppliersPage = lazy(() => import('@/features/ERP/pages/SuppliersPage'));
+const ProductionList = lazy(() => import('@/features/ValidityControl/ProductionList'));
+const ComingSoon = lazy(() => import('@/features/Common/ComingSoon'));
+const WaiterPage = lazy(() => import('@/features/Waiter/pages/WaiterPage'));
+const OrderPage = lazy(() => import('@/features/Waiter/pages/OrderPage'));
 
 
 const adminRoutes = [

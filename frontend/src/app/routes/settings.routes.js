@@ -1,12 +1,13 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
-import Settings from '@/features/Settings/pages/Settings';
-import ProfileSettingsPage from '@/features/Settings/pages/ProfileSettingsPage';
-import BusinessSettingsPage from '@/features/Settings/pages/BusinessSettingsPage';
-import NotificationsSettingsPage from '@/features/Settings/pages/NotificationsSettingsPage';
-import SecuritySettingsPage from '@/features/Settings/pages/SecuritySettingsPage';
-import AppearanceSettingsPage from '@/features/Settings/pages/AppearanceSettingsPage';
-import WhatsappSettingsPage from '@/features/Settings/pages/WhatsappSettingsPage';
+
+const Settings = lazy(() => import('@/features/Settings/pages/Settings'));
+const ProfileSettingsPage = lazy(() => import('@/features/Settings/pages/ProfileSettingsPage'));
+const BusinessSettingsPage = lazy(() => import('@/features/Settings/pages/BusinessSettingsPage'));
+const NotificationsSettingsPage = lazy(() => import('@/features/Settings/pages/NotificationsSettingsPage'));
+const SecuritySettingsPage = lazy(() => import('@/features/Settings/pages/SecuritySettingsPage'));
+const AppearanceSettingsPage = lazy(() => import('@/features/Settings/pages/AppearanceSettingsPage'));
+const WhatsappSettingsPage = lazy(() => import('@/features/Settings/pages/WhatsappSettingsPage'));
 
 const settingsRoutes = {
   path: 'settings',

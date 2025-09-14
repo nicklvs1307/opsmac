@@ -1,40 +1,51 @@
+"use strict";
 const { validationResult } = require("express-validator");
 const { BadRequestError } = require("utils/errors");
 const auditService = require("services/auditService");
 
-module.exports = (db) => {
-  const customerSegmentationService = require("./customerSegmentation.service")(
-    db,
-  );
+// Import service factory function
+const customerSegmentationServiceFactory = require("./customerSegmentation.service");
 
-  const handleValidationErrors = (req) => {
+class CustomerSegmentationController {
+  constructor(db) {
+    this.customerSegmentationService = customerSegmentationServiceFactory(db);
+  }
+
+  handleValidationErrors(req) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new BadRequestError("Dados inválidos", errors.array());
     }
-  };
+  }
 
-  return {
-    listSegments: async (req, res, next) => {
+  async listSegments(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
-      const segments =
-        await customerSegmentationService.listSegments(restaurantId);
+      const segments = await this.customerSegmentationService.listSegments(restaurantId);
       res.json(segments);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getSegmentById: async (req, res, next) => {
+  async getSegmentById(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
-      const segment = await customerSegmentationService.getSegmentById(
+      const segment = await this.customerSegmentationService.getSegmentById(
         req.params.id,
         restaurantId,
       );
       res.json(segment);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    createSegment: async (req, res, next) => {
-      handleValidationErrors(req);
+  async createSegment(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const newSegment = await customerSegmentationService.createSegment(
+      const newSegment = await this.customerSegmentationService.createSegment(
         req.body,
         restaurantId,
       );
@@ -46,12 +57,16 @@ module.exports = (db) => {
         { name: newSegment.name },
       );
       res.status(201).json(newSegment);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    updateSegment: async (req, res, next) => {
-      handleValidationErrors(req);
+  async updateSegment(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const updatedSegment = await customerSegmentationService.updateSegment(
+      const updatedSegment = await this.customerSegmentationService.updateSegment(
         req.params.id,
         req.body,
         restaurantId,
@@ -64,11 +79,15 @@ module.exports = (db) => {
         { changes: req.body },
       );
       res.json(updatedSegment);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    deleteSegment: async (req, res, next) => {
+  async deleteSegment(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
-      await customerSegmentationService.deleteSegment(
+      await this.customerSegmentationService.deleteSegment(
         req.params.id,
         restaurantId,
       );
@@ -80,20 +99,27 @@ module.exports = (db) => {
         {},
       );
       res.status(200).json({ message: "Segmento excluído com sucesso." });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    applySegmentationRules: async (req, res, next) => {
+  async applySegmentationRules(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
-      const result =
-        await customerSegmentationService.applySegmentationRules(restaurantId);
+      const result = await this.customerSegmentationService.applySegmentationRules(restaurantId);
       await auditService.log(
         req.user,
         restaurantId,
         "SEGMENTATION_RULES_APPLIED",
         `Restaurant:${restaurantId}`,
-        {},
+        {}, 
       );
       res.status(200).json(result);
-    },
-  };
-};
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+module.exports = (db) => new CustomerSegmentationController(db);

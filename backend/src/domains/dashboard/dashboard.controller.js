@@ -1,58 +1,81 @@
-module.exports = (db) => {
-  const dashboardService = require("./dashboard.service")(db);
-  const { validationResult } = require("express-validator");
-  const { BadRequestError } = require("utils/errors");
-  const auditService = require("services/auditService");
+"use strict";
+const { validationResult } = require("express-validator");
+const { BadRequestError } = require("utils/errors");
+const auditService = require("services/auditService");
 
-  const handleValidationErrors = (req) => {
+// Import service factory function
+const dashboardServiceFactory = require("./dashboard.service");
+
+class DashboardController {
+  constructor(db) {
+    this.dashboardService = dashboardServiceFactory(db);
+  }
+
+  handleValidationErrors(req) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new BadRequestError("Dados inválidos", errors.array());
     }
-  };
+  }
 
-  return {
-    getDashboardAnalytics: async (req, res, next) => {
-      handleValidationErrors(req);
+  async getDashboardAnalytics(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const data = await dashboardService.getDashboardAnalytics(
+      const data = await this.dashboardService.getDashboardAnalytics(
         restaurantId,
         req.query,
       );
       res.json(data);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getRewardsAnalytics: async (req, res, next) => {
+  async getRewardsAnalytics(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
-      const data = await dashboardService.getRewardsAnalytics(restaurantId);
+      const data = await this.dashboardService.getRewardsAnalytics(restaurantId);
       res.json(data);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getEvolutionAnalytics: async (req, res, next) => {
-      handleValidationErrors(req);
+  async getEvolutionAnalytics(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const data = await dashboardService.getEvolutionAnalytics(
+      const data = await this.dashboardService.getEvolutionAnalytics(
         restaurantId,
         req.query,
       );
       res.json(data);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getRatingDistribution: async (req, res, next) => {
-      handleValidationErrors(req);
+  async getRatingDistribution(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const data = await dashboardService.getRatingDistribution(
+      const data = await this.dashboardService.getRatingDistribution(
         restaurantId,
         req.query,
       );
       res.json(data);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    spinWheel: async (req, res, next) => {
+  async spinWheel(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
       const { rewardId } = req.params;
       const { customerId } = req.body; // Assuming customerId is sent in the body
-      const data = await dashboardService.spinWheel(
+      const data = await this.dashboardService.spinWheel(
         rewardId,
         customerId,
         restaurantId,
@@ -65,18 +88,26 @@ module.exports = (db) => {
         { customerId },
       );
       res.json(data);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getBenchmarkingData: async (req, res, next) => {
+  async getBenchmarkingData(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
-      const data = await dashboardService.getBenchmarkingData(restaurantId);
+      const data = await this.dashboardService.getBenchmarkingData(restaurantId);
       res.json(data);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getReport: async (req, res, next) => {
+  async getReport(req, res, next) {
+    try {
       const restaurantId = req.context.restaurantId;
       const { reportType } = req.params;
-      const data = await dashboardService.getReport(
+      const data = await this.dashboardService.getReport(
         restaurantId,
         reportType,
         req.query,
@@ -84,6 +115,10 @@ module.exports = (db) => {
       // Audit log for report generation could be added here if desired
       // await auditService.log(req.user, restaurantId, 'REPORT_VIEWED', `ReportType:${reportType}`, { query: req.query });
       res.json(data);
-    },
-  };
-};
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+module.exports = (db) => new DashboardController(db);

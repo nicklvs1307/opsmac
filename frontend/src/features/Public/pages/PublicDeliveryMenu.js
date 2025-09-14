@@ -41,7 +41,7 @@ import {
   useGetPublicMenu,
   useGetPublicRestaurant,
   useCreateDeliveryOrder,
-} from './api/publicService';
+} from 'api/publicService';
 
 const PublicDeliveryMenu = () => {
   const { t } = useTranslation();

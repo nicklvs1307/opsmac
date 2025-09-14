@@ -11,7 +11,7 @@ import {
   Grid,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useGetPublicMenu } from './api/publicService';
+import { useGetPublicMenu } from 'api/publicService';
 
 const DineInMenu = () => {
   const { t } = useTranslation();

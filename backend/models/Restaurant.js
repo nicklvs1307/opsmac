@@ -75,6 +75,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 1,
       field: 'perm_version',
     },
+    settings: {
+      type: DataTypes.JSONB,
+      allowNull: false,
+      defaultValue: {},
+    },
     createdAt: {
       type: DataTypes.DATE,
       field: 'created_at',

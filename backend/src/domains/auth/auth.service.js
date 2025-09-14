@@ -54,20 +54,26 @@ class AuthService {
   }
 
   async login(email, password) {
-    let user = await this.models.User.findOne({
-      where: { email },
-      include: [
-        {
-          model: this.models.Role,
-          as: "roles",
-        },
-        {
-          model: this.models.UserRestaurant,
-          as: "restaurants",
-          include: [{ model: this.models.Restaurant, as: "restaurant" }],
-        },
-      ],
-    });
+    let user;
+    try {
+      user = await this.models.User.findOne({
+        where: { email },
+        include: [
+          {
+            model: this.models.Role,
+            as: "roles",
+          },
+          {
+            model: this.models.UserRestaurant,
+            as: "restaurants",
+            include: [{ model: this.models.Restaurant, as: "restaurant" }],
+          },
+        ],
+      });
+    } catch (error) {
+      console.error("Error during User.findOne in login:", error);
+      throw error;
+    }
 
     if (!user) {
       // Audit log for failed login: User not found

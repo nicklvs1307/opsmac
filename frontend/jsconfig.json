@@ -2,17 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "app/*": ["app/*"],
-      "assets/*": ["assets/*"],
-      "components/*": ["components/*"],
-      "config/*": ["config/*"],
-      "contexts/*": ["contexts/*"],
-      "features/*": ["features/*"],
-      "hooks/*": ["hooks/*"],
-      "locales/*": ["locales/*"],
-      "services/*": ["services/*"],
-      "styles/*": ["styles/*"],
-      "utils/*": ["utils/*"],
+      "@/*": ["*"],
       "/dialogTheme": ["app/providers/contexts/theme/dialogTheme"],
       "/appBarDrawerTheme": ["app/providers/contexts/theme/appBarDrawerTheme"],
       "/cssBaselineTheme": ["app/providers/contexts/theme/cssBaselineTheme"],

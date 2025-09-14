@@ -1,24 +1,99 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           20.7s
-------
- > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.316 + npm run build
-0.634
-0.634 > feedeliza-plus@1.0.0 build
-0.634 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.634
-3.035 Creating an optimized production build...
-20.50 Failed to compile.
-20.50
-20.50 Module not found: Error: Can't resolve './api/checkinService' in '/app/frontend/src/features/Fidelidade/Checkin/pages'
-20.50
-20.50
-------
-Dockerfile.frontend:27
---------------------
-  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
-  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
-  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
-  28 |
-  29 |     # Estágio final para servir os arquivos com NGINX
---------------------
-ERROR: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+> node server.js
+2025-09-14 16:09:01 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-14 16:09:06 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-14 16:09:06 [info]: 	Redis Client Connected
+2025-09-14 16:11:04 [info]: 	170.254.46.100 - - [14/Sep/2025:16:11:04 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 16:11:04 [info]: 	170.254.46.100 - - [14/Sep/2025:16:11:04 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 16:11:05 [info]: 	170.254.46.100 - - [14/Sep/2025:16:11:05 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 16:11:05 [info]: 	Decoded userId:
+2025-09-14 16:11:05 [error]: 	DEBUG: authMiddleware - error: column restaurants->restaurant.zip_code does not exist
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async AuthService.getMe (/app/src/domains/auth/auth.service.js:161:18)
+    at async authMiddleware (/app/src/middleware/authMiddleware.js:38:20)
+2025-09-14 16:11:05 [info]: 	170.254.46.100 - - [14/Sep/2025:16:11:05 +0000] "POST /api/iam/check HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async AuthService.getMe (/app/src/domains/auth/auth.service.js:161:18)
+    at async authMiddleware (/app/src/middleware/authMiddleware.js:38:20)
+2025-09-14 16:11:07 [info]: 	Decoded userId:
+2025-09-14 16:11:07 [error]: 	DEBUG: authMiddleware - error: column restaurants->restaurant.zip_code does not exist
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async AuthService.getMe (/app/src/domains/auth/auth.service.js:161:18)
+    at async authMiddleware (/app/src/middleware/authMiddleware.js:38:20)
+2025-09-14 16:11:07 [info]: 	170.254.46.100 - - [14/Sep/2025:16:11:07 +0000] "POST /api/iam/check HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async User.findByPk (/app/node_modules/sequelize/lib/model.js:1221:12)
+    at async AuthService.getMe (/app/src/domains/auth/auth.service.js:161:18)
+    at async authMiddleware (/app/src/middleware/authMiddleware.js:38:20)
+2025-09-14 16:11:14 [info]: 	170.254.46.100 - - [14/Sep/2025:16:11:14 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 16:11:14 [info]: 	170.254.46.100 - - [14/Sep/2025:16:11:14 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 16:12:19 [info]: 	170.254.46.100 - - [14/Sep/2025:16:12:19 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 16:12:19 [info]: 	170.254.46.100 - - [14/Sep/2025:16:12:19 +0000] "POST /api/auth/login HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async AuthService.login (/app/src/domains/auth/auth.service.js:57:16)
+    at async AuthController.login (/app/src/domains/auth/auth.controller.js:31:24)
+2025-09-14 16:12:23 [info]: 	170.254.46.100 - - [14/Sep/2025:16:12:23 +0000] "POST /api/auth/login HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async AuthService.login (/app/src/domains/auth/auth.service.js:57:16)
+    at async AuthController.login (/app/src/domains/auth/auth.controller.js:31:24)
+2025-09-14 16:21:22 [info]: 	35.233.68.216 - - [14/Sep/2025:16:21:22 +0000] "GET / HTTP/1.1" 404 139 "-" "python-requests/2.32.4"
+2025-09-14 17:17:10 [info]: 	170.254.46.100 - - [14/Sep/2025:17:17:10 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 17:17:11 [info]: 	170.254.46.100 - - [14/Sep/2025:17:17:11 +0000] "POST /api/auth/login HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async AuthService.login (/app/src/domains/auth/auth.service.js:57:16)
+    at async AuthController.login (/app/src/domains/auth/auth.controller.js:31:24)
+2025-09-14 17:17:28 [info]: 	170.254.46.100 - - [14/Sep/2025:17:17:28 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-14 17:17:28 [info]: 	170.254.46.100 - - [14/Sep/2025:17:17:28 +0000] "POST /api/auth/login HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async AuthService.login (/app/src/domains/auth/auth.service.js:57:16)
+    at async AuthController.login (/app/src/domains/auth/auth.controller.js:31:24)

@@ -1,10 +1,18 @@
-module.exports = (healthService) => {
-  const getHealthStatus = (req, res, next) => {
-    const status = healthService.getHealthStatus();
-    res.json(status);
-  };
+"use strict";
 
-  return {
-    getHealthStatus,
-  };
-};
+class HealthController {
+  constructor(healthService) {
+    this.healthService = healthService;
+  }
+
+  getHealthStatus(req, res, next) {
+    try {
+      const status = this.healthService.getHealthStatus();
+      res.json(status);
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+module.exports = (healthService) => new HealthController(healthService);

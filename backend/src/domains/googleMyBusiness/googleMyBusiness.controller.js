@@ -1,27 +1,37 @@
+"use strict";
 const { validationResult } = require("express-validator");
 const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService"); // Import auditService
+const auditService = require("services/auditService");
 
-module.exports = (db) => {
-  const googleMyBusinessService = require("./googleMyBusiness.service")(db);
+// Import service factory function
+const googleMyBusinessServiceFactory = require("./googleMyBusiness.service");
 
-  const handleValidationErrors = (req) => {
+class GoogleMyBusinessController {
+  constructor(db) {
+    this.googleMyBusinessService = googleMyBusinessServiceFactory(db);
+  }
+
+  handleValidationErrors(req) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new BadRequestError("Dados inválidos", errors.array());
     }
-  };
+  }
 
-  return {
-    checkGMBModuleEnabled: async (req, res, next) => {
-      req.restaurant = await googleMyBusinessService.checkGMBModuleEnabled(
+  async checkGMBModuleEnabled(req, res, next) {
+    try {
+      req.restaurant = await this.googleMyBusinessService.checkGMBModuleEnabled(
         req.context.restaurantId,
       );
       next();
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getAuthUrl: async (req, res, next) => {
-      const authUrl = await googleMyBusinessService.getAuthUrl(
+  async getAuthUrl(req, res, next) {
+    try {
+      const authUrl = await this.googleMyBusinessService.getAuthUrl(
         req.context.restaurantId,
       );
       await auditService.log(
@@ -32,11 +42,15 @@ module.exports = (db) => {
         {},
       );
       res.json({ authUrl });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    oauth2Callback: async (req, res, next) => {
+  async oauth2Callback(req, res, next) {
+    try {
       const { code } = req.query;
-      const redirectUrl = await googleMyBusinessService.oauth2Callback(
+      const redirectUrl = await this.googleMyBusinessService.oauth2Callback(
         code,
         req.query.state,
       );
@@ -52,29 +66,41 @@ module.exports = (db) => {
         { state: req.query.state },
       );
       res.redirect(redirectUrl);
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getLocations: async (req, res, next) => {
-      const locations = await googleMyBusinessService.getLocations(
+  async getLocations(req, res, next) {
+    try {
+      const locations = await this.googleMyBusinessService.getLocations(
         req.context.restaurantId,
       );
       res.json({ locations });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    getReviews: async (req, res, next) => {
+  async getReviews(req, res, next) {
+    try {
       const { locationName } = req.params;
-      const reviews = await googleMyBusinessService.getReviews(
+      const reviews = await this.googleMyBusinessService.getReviews(
         req.context.restaurantId,
         locationName,
       );
       res.json({ reviews });
-    },
+    } catch (error) {
+      next(error);
+    }
+  }
 
-    replyToReview: async (req, res, next) => {
-      handleValidationErrors(req);
+  async replyToReview(req, res, next) {
+    try {
+      this.handleValidationErrors(req);
       const { locationName, reviewName } = req.params;
       const { comment } = req.body;
-      const reply = await googleMyBusinessService.replyToReview(
+      const reply = await this.googleMyBusinessService.replyToReview(
         req.context.restaurantId,
         locationName,
         reviewName,
@@ -88,6 +114,10 @@ module.exports = (db) => {
         { locationName, comment },
       );
       res.json({ reply });
-    },
-  };
-};
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+module.exports = (db) => new GoogleMyBusinessController(db);

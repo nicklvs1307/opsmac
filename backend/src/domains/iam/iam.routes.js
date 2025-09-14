@@ -616,4 +616,4 @@ router.post(
 
 module.exports = (db) => {
   return router;
-}; }
+};

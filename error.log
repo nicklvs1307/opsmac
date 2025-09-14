@@ -1,13 +1,11 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-14 15:21:10 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-14 15:21:14 [error]: 	❌ Erro ao iniciar servidor: Unexpected token '{'
-/app/src/domains/public/public.controller.js:43
-
-    return {
-
-           ^
-SyntaxError: Unexpected token '{'
+2025-09-14 15:44:28 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-14 15:44:31 [error]: 	❌ Erro ao iniciar servidor: await is only valid in async functions and the top level bodies of modules
+/app/src/domains/public/public.service.js:140
+    customer = await models.Customer.findOne({ where: customerSearchCriteria });
+               ^^^^^
+SyntaxError: await is only valid in async functions and the top level bodies of modules
     at wrapSafe (node:internal/modules/cjs/loader:1464:18)
     at Module._compile (node:internal/modules/cjs/loader:1495:20)
     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
@@ -15,6 +13,6 @@ SyntaxError: Unexpected token '{'
     at Module._load (node:internal/modules/cjs/loader:1091:12)
     at Module.require (node:internal/modules/cjs/loader:1289:19)
     at require (node:internal/modules/helpers:182:18)
-    at module.exports (/app/src/domains/public/public.routes.js:6:28)
+    at module.exports (/app/src/domains/public/public.controller.js:6:25)
+    at module.exports (/app/src/domains/public/public.routes.js:6:58)
     at /app/routes/index.js:36:52
-    at Array.forEach (<anonymous>)

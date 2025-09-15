@@ -614,6 +614,5 @@ router.post(
   asyncHandler(IamController.setEntitlementsBulk),
 );
 
-module.exports = (db) => {
   return router;
 };

@@ -21,7 +21,8 @@ class CustomerSegmentationController {
   async listSegments(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId;
-      const segments = await this.customerSegmentationService.listSegments(restaurantId);
+      const segments =
+        await this.customerSegmentationService.listSegments(restaurantId);
       res.json(segments);
     } catch (error) {
       next(error);
@@ -66,11 +67,12 @@ class CustomerSegmentationController {
     try {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const updatedSegment = await this.customerSegmentationService.updateSegment(
-        req.params.id,
-        req.body,
-        restaurantId,
-      );
+      const updatedSegment =
+        await this.customerSegmentationService.updateSegment(
+          req.params.id,
+          req.body,
+          restaurantId,
+        );
       await auditService.log(
         req.user,
         restaurantId,
@@ -107,13 +109,16 @@ class CustomerSegmentationController {
   async applySegmentationRules(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId;
-      const result = await this.customerSegmentationService.applySegmentationRules(restaurantId);
+      const result =
+        await this.customerSegmentationService.applySegmentationRules(
+          restaurantId,
+        );
       await auditService.log(
         req.user,
         restaurantId,
         "SEGMENTATION_RULES_APPLIED",
         `Restaurant:${restaurantId}`,
-        {}, 
+        {},
       );
       res.status(200).json(result);
     } catch (error) {

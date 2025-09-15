@@ -56,9 +56,7 @@ const fetchCashRegisterSession = async ({ restaurantId, userId }) => {
 };
 
 const fetchCashOrders = async (sessionId) => {
-  const { data } = await axiosInstance.get(
-    `/cash-register/cash-orders?session_id=${sessionId}`
-  );
+  const { data } = await axiosInstance.get(`/cash-register/cash-orders?session_id=${sessionId}`);
   return data;
 };
 
@@ -70,10 +68,9 @@ const fetchCustomers = async ({ restaurantId, searchTerm }) => {
 };
 
 const updateOrderStatus = async ({ restaurantId, orderId, status }) => {
-  const { data } = await axiosInstance.put(
-    `/orders/restaurant/${restaurantId}/${orderId}/status`,
-    { status }
-  );
+  const { data } = await axiosInstance.put(`/orders/restaurant/${restaurantId}/${orderId}/status`, {
+    status,
+  });
   return data;
 };
 

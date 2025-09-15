@@ -16,7 +16,10 @@ import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
-import { useUploadAvatar, useUpdateProfileAndRestaurant } from '@/features/Settings/api/settingsService'; // Adjusted import path
+import {
+  useUploadAvatar,
+  useUpdateProfileAndRestaurant,
+} from '@/features/Settings/api/settingsService'; // Adjusted import path
 
 const getFullImageUrl = (relativePath) => {
   if (!relativePath) return '';

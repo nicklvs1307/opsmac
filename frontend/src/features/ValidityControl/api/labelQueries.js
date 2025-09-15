@@ -22,11 +22,7 @@ const updateLabelItem = async (updatedItem) => {
 
 // React Query Hooks
 export const useLabelItems = (options) => {
-  return useQuery(
-    LABEL_QUERY_KEYS.items,
-    fetchLabelItems,
-    options
-  );
+  return useQuery(LABEL_QUERY_KEYS.items, fetchLabelItems, options);
 };
 
 export const useUpdateLabelItem = () => {
@@ -37,7 +33,7 @@ export const useUpdateLabelItem = () => {
       queryClient.invalidateQueries(LABEL_QUERY_KEYS.items);
       // Optionally, update the cache directly for better UX
       queryClient.setQueryData(LABEL_QUERY_KEYS.items, (oldData) => {
-        return oldData?.map(item =>
+        return oldData?.map((item) =>
           item.id === data.id && item.type === data.type ? data : item
         );
       });

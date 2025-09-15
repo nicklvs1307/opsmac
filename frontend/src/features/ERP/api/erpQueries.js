@@ -27,9 +27,7 @@ const ERP_QUERY_KEYS = {
 
 // API Functions - Financial Categories
 const fetchFinancialCategories = async (restaurantId) => {
-  const response = await axiosInstance.get(
-    `/financial/categories?restaurant_id=${restaurantId}`
-  );
+  const response = await axiosInstance.get(`/financial/categories?restaurant_id=${restaurantId}`);
   return response.data;
 };
 const createFinancialCategory = async (newCategory) => {
@@ -239,9 +237,7 @@ const fetchCurrentCashRegisterSession = async ({ restaurantId, userId }) => {
   return response.data;
 };
 const fetchCashRegisterOrders = async (sessionId) => {
-  const response = await axiosInstance.get(
-    `/cash-register/cash-orders?session_id=${sessionId}`
-  );
+  const response = await axiosInstance.get(`/cash-register/cash-orders?session_id=${sessionId}`);
   return response.data;
 };
 const openCashRegister = async (sessionData) => {

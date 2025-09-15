@@ -85,7 +85,8 @@ class AdminController {
   async createRestaurantWithOwner(req, res, next) {
     try {
       this.handleValidationErrors(req);
-      const { restaurant, owner } = await this.adminService.createRestaurantWithOwner(req.body);
+      const { restaurant, owner } =
+        await this.adminService.createRestaurantWithOwner(req.body);
       await auditService.log(
         req.user,
         restaurant.id,
@@ -114,7 +115,9 @@ class AdminController {
 
   async getRestaurantById(req, res, next) {
     try {
-      const restaurant = await this.adminService.getRestaurantById(req.params.id);
+      const restaurant = await this.adminService.getRestaurantById(
+        req.params.id,
+      );
       if (!restaurant) {
         throw new NotFoundError("Restaurante não encontrado");
       }
@@ -158,7 +161,9 @@ class AdminController {
 
   async getRestaurantModules(req, res, next) {
     try {
-      const modules = await this.adminService.getRestaurantModules(req.params.id);
+      const modules = await this.adminService.getRestaurantModules(
+        req.params.id,
+      );
       res.status(200).json(modules);
     } catch (error) {
       next(error);
@@ -194,7 +199,8 @@ class AdminController {
   async getRestaurantFeatures(req, res, next) {
     try {
       const restaurantId = req.params.id; // Use req.params.id to match route
-      const features = await this.adminService.getRestaurantFeatures(restaurantId);
+      const features =
+        await this.adminService.getRestaurantFeatures(restaurantId);
       res.status(200).json({ success: true, data: features });
     } catch (error) {
       next(error);

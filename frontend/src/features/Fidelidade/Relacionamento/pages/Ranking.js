@@ -122,9 +122,12 @@ const Ranking = () => {
               <TableCell>{t('ranking.segment')}</TableCell>
               <TableCell>
                 {t('ranking.metric_value', {
-                  metric: sortBy === 'total_visits' ? t('ranking.visits') :
-                          sortBy === 'loyalty_points' ? t('ranking.points') :
-                          t('ranking.spent'), // Modified
+                  metric:
+                    sortBy === 'total_visits'
+                      ? t('ranking.visits')
+                      : sortBy === 'loyalty_points'
+                        ? t('ranking.points')
+                        : t('ranking.spent'), // Modified
                 })}
               </TableCell>
             </TableRow>
@@ -139,7 +142,8 @@ const Ranking = () => {
             ) : (
               customers.map((customer, index) => (
                 <TableRow key={customer.id}>
-                  <TableCell>{(page - 1) * limit + index + 1}</TableCell> {/* Modified for pagination */}
+                  <TableCell>{(page - 1) * limit + index + 1}</TableCell>{' '}
+                  {/* Modified for pagination */}
                   <TableCell>
                     <Box display="flex" alignItems="center" gap={2}>
                       <Avatar sx={{ bgcolor: 'primary.main' }}>
@@ -158,9 +162,12 @@ const Ranking = () => {
                     />
                   </TableCell>
                   <TableCell>
-                    {sortBy === 'total_visits' ? customer.totalVisits :
-                     sortBy === 'loyalty_points' ? customer.loyaltyPoints :
-                     customer.totalSpent} {/* Modified */}
+                    {sortBy === 'total_visits'
+                      ? customer.totalVisits
+                      : sortBy === 'loyalty_points'
+                        ? customer.loyaltyPoints
+                        : customer.totalSpent}{' '}
+                    {/* Modified */}
                   </TableCell>
                 </TableRow>
               ))

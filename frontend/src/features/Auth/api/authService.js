@@ -13,11 +13,14 @@ export const useLoginCustomer = () => {
 
 // Hook to register a customer
 export const useRegisterCustomer = () => {
-  return useMutation((customerData) => axiosInstance.post('/customers/public/register', customerData), {
-    onError: (error) => {
-      toast.error(
-        error.response?.data?.errors[0]?.msg || error.response?.data?.msg || 'Erro ao registrar.'
-      );
-    },
-  });
+  return useMutation(
+    (customerData) => axiosInstance.post('/customers/public/register', customerData),
+    {
+      onError: (error) => {
+        toast.error(
+          error.response?.data?.errors[0]?.msg || error.response?.data?.msg || 'Erro ao registrar.'
+        );
+      },
+    }
+  );
 };

@@ -10,8 +10,7 @@ const formTheme = (mode) => ({
             transition: 'all 0.3s ease',
           },
           '&:hover fieldset': {
-            borderColor:
-              mode === 'light' ? 'rgba(211, 47, 47, 0.5)' : 'rgba(255, 82, 82, 0.5)',
+            borderColor: mode === 'light' ? 'rgba(211, 47, 47, 0.5)' : 'rgba(255, 82, 82, 0.5)',
             boxShadow:
               mode === 'light'
                 ? '0 0 0 4px rgba(211, 47, 47, 0.08)'
@@ -33,8 +32,7 @@ const formTheme = (mode) => ({
       outlined: {
         borderRadius: 10,
         '&:hover .MuiOutlinedInput-notchedOutline': {
-          borderColor:
-            mode === 'light' ? 'rgba(211, 47, 47, 0.5)' : 'rgba(255, 82, 82, 0.5)',
+          borderColor: mode === 'light' ? 'rgba(211, 47, 47, 0.5)' : 'rgba(255, 82, 82, 0.5)',
           boxShadow:
             mode === 'light'
               ? '0 0 0 4px rgba(211, 47, 47, 0.08)'

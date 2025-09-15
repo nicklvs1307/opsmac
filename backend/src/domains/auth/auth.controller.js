@@ -25,75 +25,57 @@ module.exports = (db) => {
     }
 
     async login(req, res, next) {
-      try {
-        this._handleValidationErrors(req);
-        const { email, password } = req.body;
-        const result = await authService.login(email, password);
+      this._handleValidationErrors(req);
+      const { email, password } = req.body;
+      const result = await authService.login(email, password);
 
-        res.json({
-          message: "Login realizado com sucesso",
-          ...result,
-        });
-      } catch (error) {
-        next(error);
-      }
+      res.json({
+        message: "Login realizado com sucesso",
+        ...result,
+      });
     }
 
     async getMe(req, res, next) {
-      try {
-        // The authentication middleware already attaches the user to the request (req.user).
-        // No need to call authService.getMe again here.
-        res.json({ user: req.user });
-      } catch (error) {
-        next(error);
-      }
+      // The authentication middleware already attaches the user to the request (req.user).
+      // No need to call authService.getMe again here.
+      res.json({ user: req.user });
     }
 
     async updateProfile(req, res, next) {
-      try {
-        this._handleValidationErrors(req);
-        const { name, phone, avatar } = req.body;
-        const updatedUser = await authService.updateProfile(req.user.userId, {
-          name,
-          phone,
-          avatar,
-        });
+      this._handleValidationErrors(req);
+      const { name, phone, avatar } = req.body;
+      const updatedUser = await authService.updateProfile(req.user.userId, {
+        name,
+        phone,
+        avatar,
+      });
 
-        res.json({
-          message: "Perfil atualizado com sucesso",
-          user: updatedUser,
-        });
-      } catch (error) {
-        next(error);
-      }
+      res.json({
+        message: "Perfil atualizado com sucesso",
+        user: updatedUser,
+      });
     }
 
     async changePassword(req, res, next) {
-      try {
-        this._handleValidationErrors(req);
-        const { currentPassword, newPassword } = req.body;
-        await authService.changePassword(
-          req.user.userId,
-          currentPassword,
-          newPassword,
-        );
+      this._handleValidationErrors(req);
+      const { currentPassword, newPassword } = req.body;
+      await authService.changePassword(
+        req.user.userId,
+        currentPassword,
+        newPassword,
+      );
 
-        res.json({ message: "Senha alterada com sucesso" });
-      } catch (error) {
-        next(error);
-      }
+      res.json({ message: "Senha alterada com sucesso" });
     }
 
-    logout(req, res, next) {
-      try {
-        // For stateless JWT, logout is handled client-side by deleting the token.
-        // This endpoint can be kept for semantics, but it doesn't need to do anything on the server.
-        res
-          .status(200)
-          .json({ success: true, message: "Logout realizado com sucesso" });
-      } catch (error) {
-        next(error);
+    async logout(req, res, next) {
+      const token = req.header("Authorization")?.replace("Bearer ", "");
+      if (token) {
+        await authService.logout(token);
       }
+      res
+        .status(200)
+        .json({ success: true, message: "Logout realizado com sucesso" });
     }
   }
 

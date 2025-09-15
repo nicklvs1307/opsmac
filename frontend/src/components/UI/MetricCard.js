@@ -113,11 +113,7 @@ const MetricCard = ({
     (trend ? t('metric_card.trend_text', { trend: `${trend > 0 ? '+' : ''}${trend}` }) : '');
 
   return (
-    <StyledCard
-      elevation={0}
-      bgColor={bgColor}
-      defaultBgColor={defaultBgColor}
-    >
+    <StyledCard elevation={0} bgColor={bgColor} defaultBgColor={defaultBgColor}>
       <CardContent sx={{ pb: 2, position: 'relative', zIndex: 2 }}>
         <Box display="flex" justifyContent="space-between" alignItems="flex-start">
           <Box>

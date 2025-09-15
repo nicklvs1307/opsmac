@@ -137,9 +137,7 @@ const LoginForm = ({
   };
 
   return (
-    <StyledPaper
-      elevation={0}
-    >
+    <StyledPaper elevation={0}>
       {/* Logo/Title */}
       <Box
         sx={{

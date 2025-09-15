@@ -5,13 +5,11 @@ const buttonTheme = (mode) => ({
         textTransform: 'none',
         borderRadius: 10,
         fontWeight: 500,
-        boxShadow:
-          mode === 'light' ? '0 2px 4px rgba(0,0,0,0.08)' : '0 2px 4px rgba(0,0,0,0.2)',
+        boxShadow: mode === 'light' ? '0 2px 4px rgba(0,0,0,0.08)' : '0 2px 4px rgba(0,0,0,0.2)',
         transition: 'all 0.3s ease',
         '&:hover': {
           transform: 'translateY(-2px)',
-          boxShadow:
-            mode === 'light' ? '0 4px 8px rgba(0,0,0,0.12)' : '0 4px 8px rgba(0,0,0,0.3)',
+          boxShadow: mode === 'light' ? '0 4px 8px rgba(0,0,0,0.12)' : '0 4px 8px rgba(0,0,0,0.3)',
         },
         '&:active': {
           transform: 'translateY(0)',
@@ -19,8 +17,7 @@ const buttonTheme = (mode) => ({
       },
       contained: {
         '&.Mui-disabled': {
-          backgroundColor:
-            mode === 'light' ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.08)',
+          backgroundColor: mode === 'light' ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.08)',
           color: mode === 'light' ? 'rgba(0, 0, 0, 0.38)' : 'rgba(255, 255, 255, 0.38)',
         },
       },

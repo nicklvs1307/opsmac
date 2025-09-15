@@ -5,7 +5,12 @@ import { useCheckPermission } from '@/hooks/useRealtimePermissions';
 
 const ProtectedRoute = ({ children, featureKey, actionKey }) => {
   const { isAuthenticated, loading: authLoading, user } = useAuth();
-  const { data: permission, isLoading: permissionsLoading, isError: permissionsError, refetch: refetchPermission } = useCheckPermission(featureKey, actionKey);
+  const {
+    data: permission,
+    isLoading: permissionsLoading,
+    isError: permissionsError,
+    refetch: refetchPermission,
+  } = useCheckPermission(featureKey, actionKey);
   const [timedOut, setTimedOut] = useState(false);
 
   useEffect(() => {

@@ -31,7 +31,11 @@ import QRCode from 'qrcode.react';
 import toast from 'react-hot-toast';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 
-import { useGenerateQRCode, useDownloadQRCode, usePrintQRCode } from '@/features/QRCode/api/qrCodeService';
+import {
+  useGenerateQRCode,
+  useDownloadQRCode,
+  usePrintQRCode,
+} from '@/features/QRCode/api/qrCodeService';
 
 const steps = ['Informações Básicas', 'Configurações', 'Preview e Geração'];
 

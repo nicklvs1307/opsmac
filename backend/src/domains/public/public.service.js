@@ -39,7 +39,7 @@ module.exports = (db) => {
     });
   };
 
-    const registerPublicCheckin = async (
+  const registerPublicCheckin = async (
     restaurant,
     phone_number,
     cpf,
@@ -327,7 +327,12 @@ module.exports = (db) => {
 
   const createPublicOrder = async (restaurant, orderData) => {
     // Basic validation
-    if (!restaurant || !orderData || !orderData.items || orderData.items.length === 0) {
+    if (
+      !restaurant ||
+      !orderData ||
+      !orderData.items ||
+      orderData.items.length === 0
+    ) {
       throw new BadRequestError("Dados do pedido inválidos.");
     }
 
@@ -347,19 +352,22 @@ module.exports = (db) => {
     const t = await models.sequelize.transaction();
     try {
       // Create the main order
-      const order = await models.Order.create({
-        restaurant_id: restaurant.id,
-        customer_id: orderData.customer_id,
-        table_number: orderData.table_number,
-        total_amount: orderData.total_amount,
-        status: orderData.status || 'pending', // Default to pending
-        platform: orderData.platform || 'public_web',
-        delivery_type: orderData.delivery_type || 'pickup',
-        // Add other relevant fields from orderData
-      }, { transaction: t });
+      const order = await models.Order.create(
+        {
+          restaurant_id: restaurant.id,
+          customer_id: orderData.customer_id,
+          table_number: orderData.table_number,
+          total_amount: orderData.total_amount,
+          status: orderData.status || "pending", // Default to pending
+          platform: orderData.platform || "public_web",
+          delivery_type: orderData.delivery_type || "pickup",
+          // Add other relevant fields from orderData
+        },
+        { transaction: t },
+      );
 
       // Create order items
-      const orderItems = orderData.items.map(item => ({
+      const orderItems = orderData.items.map((item) => ({
         order_id: order.id,
         product_id: item.product_id,
         quantity: item.quantity,

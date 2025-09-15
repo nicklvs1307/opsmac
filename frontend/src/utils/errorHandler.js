@@ -22,13 +22,17 @@ export const handleError = (error) => {
         toast.error(data.message || 'Recurso não encontrado.');
         break;
       case 409:
-        toast.error(data.message || 'Conflito. O recurso já existe ou há um problema de concorrência.');
+        toast.error(
+          data.message || 'Conflito. O recurso já existe ou há um problema de concorrência.'
+        );
         break;
       case 422:
         toast.error(data.message || 'Dados inválidos. Verifique os campos e tente novamente.');
         break;
       case 500:
-        toast.error(data.message || 'Erro interno do servidor. Por favor, tente novamente mais tarde.');
+        toast.error(
+          data.message || 'Erro interno do servidor. Por favor, tente novamente mais tarde.'
+        );
         break;
       default:
         toast.error(data.message || `Erro ${status}: Algo deu errado.`);

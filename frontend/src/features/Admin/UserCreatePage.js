@@ -207,7 +207,9 @@ const UserCreatePage = () => {
                   queryClient.invalidateQueries(['permissionTree', selectedRestaurantId]);
                 },
                 onError: (err) => {
-                  toast.error(err.response?.data?.message || 'Erro ao salvar permissões do usuário.');
+                  toast.error(
+                    err.response?.data?.message || 'Erro ao salvar permissões do usuário.'
+                  );
                 },
               }
             );

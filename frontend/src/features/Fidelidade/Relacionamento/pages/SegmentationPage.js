@@ -24,7 +24,12 @@ import {
   MenuItem,
   Grid,
 } from '@mui/material';
-import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, PlayArrow as PlayArrowIcon } from '@mui/icons-material';
+import {
+  Add as AddIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  PlayArrow as PlayArrowIcon,
+} from '@mui/icons-material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
@@ -62,9 +67,13 @@ const deleteSegment = async ({ segmentId, token }) => {
 };
 
 const applySegmentationRules = async ({ restaurantId, token }) => {
-  const response = await axiosInstance.post(`/customerSegmentation/apply-rules`, { restaurantId }, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await axiosInstance.post(
+    `/customerSegmentation/apply-rules`,
+    { restaurantId },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   return response.data;
 };
 
@@ -131,7 +140,12 @@ const SegmentationPage = () => {
     },
   });
 
-  const { control, handleSubmit, reset, formState: { errors: formErrors } } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors: formErrors },
+  } = useForm({
     defaultValues: {
       name: '',
       description: '',
@@ -213,7 +227,11 @@ const SegmentationPage = () => {
           onClick={() => applyRulesMutation.mutate({ restaurantId, token })}
           disabled={applyRulesMutation.isLoading}
         >
-          {applyRulesMutation.isLoading ? <CircularProgress size={24} /> : t('segmentation.apply_rules')}
+          {applyRulesMutation.isLoading ? (
+            <CircularProgress size={24} />
+          ) : (
+            t('segmentation.apply_rules')
+          )}
         </Button>
       </Box>
 
@@ -237,7 +255,9 @@ const SegmentationPage = () => {
                   <IconButton onClick={() => handleOpenEditDialog(segment)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton onClick={() => deleteSegmentMutation.mutate({ segmentId: segment.id, token })}>
+                  <IconButton
+                    onClick={() => deleteSegmentMutation.mutate({ segmentId: segment.id, token })}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
@@ -248,7 +268,9 @@ const SegmentationPage = () => {
       </TableContainer>
 
       <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth maxWidth="md">
-        <DialogTitle>{editingSegment ? t('segmentation.edit_segment') : t('segmentation.create_segment')}</DialogTitle>
+        <DialogTitle>
+          {editingSegment ? t('segmentation.edit_segment') : t('segmentation.create_segment')}
+        </DialogTitle>
         <DialogContent>
           <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 2 }}>
             <TextField
@@ -288,12 +310,20 @@ const SegmentationPage = () => {
                       <InputLabel>{t('segmentation.form.rule_field')}</InputLabel>
                       <Select
                         label={t('segmentation.form.rule_field')}
-                        {...control.register(`rules.${index}.field`, { required: t('segmentation.form.rule_field_required') })}
+                        {...control.register(`rules.${index}.field`, {
+                          required: t('segmentation.form.rule_field_required'),
+                        })}
                         defaultValue={item.field}
                       >
-                        <MenuItem value="totalVisits">{t('segmentation.form.field_total_visits')}</MenuItem>
-                        <MenuItem value="totalSpent">{t('segmentation.form.field_total_spent')}</MenuItem>
-                        <MenuItem value="loyaltyPoints">{t('segmentation.form.field_loyalty_points')}</MenuItem>
+                        <MenuItem value="totalVisits">
+                          {t('segmentation.form.field_total_visits')}
+                        </MenuItem>
+                        <MenuItem value="totalSpent">
+                          {t('segmentation.form.field_total_spent')}
+                        </MenuItem>
+                        <MenuItem value="loyaltyPoints">
+                          {t('segmentation.form.field_loyalty_points')}
+                        </MenuItem>
                         {/* Add more fields as needed */}
                       </Select>
                     </FormControl>
@@ -303,7 +333,10 @@ const SegmentationPage = () => {
                       label={t('segmentation.form.rule_value')}
                       type="number"
                       fullWidth
-                      {...control.register(`rules.${index}.value`, { required: t('segmentation.form.rule_value_required'), setValueAs: v => parseFloat(v) })}
+                      {...control.register(`rules.${index}.value`, {
+                        required: t('segmentation.form.rule_value_required'),
+                        setValueAs: (v) => parseFloat(v),
+                      })}
                       defaultValue={item.value}
                       error={!!formErrors.rules?.[index]?.value}
                       helperText={formErrors.rules?.[index]?.value?.message}
@@ -332,7 +365,12 @@ const SegmentationPage = () => {
 
             <DialogActions>
               <Button onClick={handleCloseDialog}>{t('common.cancel')}</Button>
-              <Button type="submit" variant="contained" color="primary" disabled={createSegmentMutation.isLoading || updateSegmentMutation.isLoading}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={createSegmentMutation.isLoading || updateSegmentMutation.isLoading}
+              >
                 {editingSegment ? t('common.save_changes') : t('common.create')}
               </Button>
             </DialogActions>

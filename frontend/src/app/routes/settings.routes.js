@@ -4,9 +4,13 @@ import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 const Settings = lazy(() => import('@/features/Settings/pages/Settings'));
 const ProfileSettingsPage = lazy(() => import('@/features/Settings/pages/ProfileSettingsPage'));
 const BusinessSettingsPage = lazy(() => import('@/features/Settings/pages/BusinessSettingsPage'));
-const NotificationsSettingsPage = lazy(() => import('@/features/Settings/pages/NotificationsSettingsPage'));
+const NotificationsSettingsPage = lazy(
+  () => import('@/features/Settings/pages/NotificationsSettingsPage')
+);
 const SecuritySettingsPage = lazy(() => import('@/features/Settings/pages/SecuritySettingsPage'));
-const AppearanceSettingsPage = lazy(() => import('@/features/Settings/pages/AppearanceSettingsPage'));
+const AppearanceSettingsPage = lazy(
+  () => import('@/features/Settings/pages/AppearanceSettingsPage')
+);
 const WhatsappSettingsPage = lazy(() => import('@/features/Settings/pages/WhatsappSettingsPage'));
 
 const settingsRoutes = {

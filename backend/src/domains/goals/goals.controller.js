@@ -31,7 +31,10 @@ class GoalsController {
   async getGoalById(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId;
-      const goal = await this.goalsService.getGoalById(req.params.id, restaurantId);
+      const goal = await this.goalsService.getGoalById(
+        req.params.id,
+        restaurantId,
+      );
       res.json(goal);
     } catch (error) {
       next(error);
@@ -42,7 +45,10 @@ class GoalsController {
     try {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const newGoal = await this.goalsService.createGoal(req.body, restaurantId);
+      const newGoal = await this.goalsService.createGoal(
+        req.body,
+        restaurantId,
+      );
       await auditService.log(
         req.user,
         restaurantId,

@@ -23,7 +23,10 @@ class CategoriesController {
       this.handleValidationErrors(req);
       const { name } = req.body;
       const restaurantId = req.context.restaurantId;
-      const category = await this.categoriesService.createCategory(name, restaurantId);
+      const category = await this.categoriesService.createCategory(
+        name,
+        restaurantId,
+      );
       await auditService.log(
         req.user,
         restaurantId,
@@ -44,7 +47,8 @@ class CategoriesController {
   async listCategories(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId;
-      const categories = await this.categoriesService.listCategories(restaurantId);
+      const categories =
+        await this.categoriesService.listCategories(restaurantId);
       res.json({ success: true, data: categories });
     } catch (error) {
       next(error);

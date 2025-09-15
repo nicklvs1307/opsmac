@@ -73,7 +73,8 @@ const WordClouds = () => {
     );
   }
 
-  const words = wordFrequencyData?.map(item => ({ text: item.word, value: item.frequency })) || [];
+  const words =
+    wordFrequencyData?.map((item) => ({ text: item.word, value: item.frequency })) || [];
 
   return (
     <Box sx={{ p: 3 }}>
@@ -166,11 +167,14 @@ const WordClouds = () => {
         </Alert>
       ) : words.length > 0 ? (
         <Paper elevation={3} sx={{ p: 3, height: 500 }}>
-          <WordCloud words={words} options={{
-            rotations: 2,
-            rotationAngles: [-90, 0],
-            fontSizes: [20, 60],
-          }} />
+          <WordCloud
+            words={words}
+            options={{
+              rotations: 2,
+              rotationAngles: [-90, 0],
+              fontSizes: [20, 60],
+            }}
+          />
         </Paper>
       ) : (
         <Alert severity="info">{t('word_clouds.no_data_to_display')}</Alert>

@@ -76,7 +76,9 @@ const ManageLabelItems = () => {
             <TableRow>
               <TableCell>{t('label_management.table_header_name')}</TableCell>
               <TableCell>{t('label_management.table_header_type')}</TableCell>
-              <TableCell align="right">{t('label_management.table_header_default_expiration')}</TableCell>
+              <TableCell align="right">
+                {t('label_management.table_header_default_expiration')}
+              </TableCell>
               <TableCell>{t('label_management.table_header_default_status')}</TableCell>
               <TableCell align="center">{t('label_management.table_header_actions')}</TableCell>
             </TableRow>
@@ -88,7 +90,9 @@ const ManageLabelItems = () => {
                   {item.name}
                 </TableCell>
                 <TableCell>{item.type}</TableCell>
-                <TableCell align="right">{item.default_expiration_days || t('common.not_set')}</TableCell>
+                <TableCell align="right">
+                  {item.default_expiration_days || t('common.not_set')}
+                </TableCell>
                 <TableCell>{item.default_label_status || t('common.not_set')}</TableCell>
                 <TableCell align="center">
                   <Button variant="contained" size="small" onClick={() => handleOpenModal(item)}>

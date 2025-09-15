@@ -34,7 +34,7 @@ const Menu = () => {
 
       // Check module-level visibility and locked status from permissionSnapshot
       if (item.module) {
-        const moduleInSnapshot = permissionSnapshot?.modules.find(m => m.key === item.module);
+        const moduleInSnapshot = permissionSnapshot?.modules.find((m) => m.key === item.module);
         if (!moduleInSnapshot || !moduleInSnapshot.visible || moduleInSnapshot.locked) {
           return null;
         }

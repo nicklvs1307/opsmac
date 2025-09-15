@@ -231,7 +231,11 @@ const FidelityReports = () => {
         <Box display="flex" gap={2} alignItems="center" flexWrap="wrap">
           <FormControl sx={{ minWidth: 200 }}>
             <InputLabel>{t('reports.select_report')}</InputLabel>
-            <Select value={reportType} label={t('reports.select_report')} onChange={(e) => setReportType(e.target.value)}>
+            <Select
+              value={reportType}
+              label={t('reports.select_report')}
+              onChange={(e) => setReportType(e.target.value)}
+            >
               <MenuItem value="nps">{t('reports.type_nps')}</MenuItem>
               <MenuItem value="satisfaction">{t('reports.type_satisfaction')}</MenuItem>
               <MenuItem value="complaints">{t('reports.type_complaints')}</MenuItem>

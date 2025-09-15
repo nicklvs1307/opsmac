@@ -17,7 +17,10 @@ import {
 } from '@mui/material';
 import toast from 'react-hot-toast'; // Import toast for notifications
 
-import { useStockCounts, useStartNewStockCount } from '@/features/ValidityControl/api/stockCountService';
+import {
+  useStockCounts,
+  useStartNewStockCount,
+} from '@/features/ValidityControl/api/stockCountService';
 
 const StockCountList = () => {
   const queryClient = useQueryClient(); // Initialize queryClient

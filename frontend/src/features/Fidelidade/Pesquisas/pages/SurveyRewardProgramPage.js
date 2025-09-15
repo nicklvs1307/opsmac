@@ -50,14 +50,23 @@ const SurveyRewardProgramPage = () => {
     isLoading: isLoadingProgram,
     isError: isErrorProgram,
     error: errorProgram,
-  } = useQuery(['surveyRewardProgram', restaurantId], () => fetchSurveyRewardProgram({ restaurantId, token }), {
-    enabled: !!restaurantId && !!token,
-    onSuccess: (data) => {
-      reset(data); // Set form default values after data is fetched
-    },
-  });
+  } = useQuery(
+    ['surveyRewardProgram', restaurantId],
+    () => fetchSurveyRewardProgram({ restaurantId, token }),
+    {
+      enabled: !!restaurantId && !!token,
+      onSuccess: (data) => {
+        reset(data); // Set form default values after data is fetched
+      },
+    }
+  );
 
-  const { control, handleSubmit, reset, formState: { errors } } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: programData || { rewards_per_response: [] },
   });
 

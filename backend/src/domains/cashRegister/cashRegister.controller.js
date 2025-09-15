@@ -114,10 +114,11 @@ class CashRegisterController {
     try {
       const restaurantId = req.context.restaurantId;
       const { type } = req.query;
-      const categories = await this.cashRegisterService.getCashRegisterCategories(
-        restaurantId,
-        type,
-      );
+      const categories =
+        await this.cashRegisterService.getCashRegisterCategories(
+          restaurantId,
+          type,
+        );
       res.json({ success: true, data: categories });
     } catch (error) {
       next(error);
@@ -182,4 +183,5 @@ class CashRegisterController {
   }
 }
 
-module.exports = (cashRegisterService) => new CashRegisterController(cashRegisterService);
+module.exports = (cashRegisterService) =>
+  new CashRegisterController(cashRegisterService);

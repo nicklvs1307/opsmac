@@ -11,6 +11,7 @@ require('dotenv').config();
 const db = require('models');
 const { BaseError } = require('utils/errors');
 const logger = require('utils/logger'); // Import logger
+const { initCacheInvalidator, subscriberClient } = require('./src/jobs/cacheInvalidator'); // Import cache invalidator
 
 // Importação de Rotas
 const routes = require('./routes');
@@ -75,7 +76,10 @@ const startServer = async () => {
   try {
     await db.sequelize.authenticate();
     logger.info('✅ Conexão com banco de dados estabelecida'); // Use logger
-    
+
+    // Initialize cache invalidator
+    await initCacheInvalidator();
+
     // Configuração das Rotas
     app.use("/api", routes(db));
 
@@ -94,12 +98,14 @@ startServer();
 process.on('SIGTERM', async () => {
   logger.info('🔄 Encerrando servidor...'); // Use logger
   await db.sequelize.close();
+  await subscriberClient.quit(); // Close Redis subscriber client
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
   logger.info('🔄 Encerrando servidor...'); // Use logger
   await db.sequelize.close();
+  await subscriberClient.quit(); // Close Redis subscriber client
   process.exit(0);
 });
 

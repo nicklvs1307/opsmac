@@ -3,7 +3,9 @@ import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 import { Navigate } from 'react-router-dom';
 
 const Tables = lazy(() => import('@/features/ERP/pages/Tables'));
-const TechnicalSpecificationManagement = lazy(() => import('@/components/ERP/TechnicalSpecificationManagement'));
+const TechnicalSpecificationManagement = lazy(
+  () => import('@/components/ERP/TechnicalSpecificationManagement')
+);
 const StockDashboardPage = lazy(() => import('@/features/ERP/pages/StockDashboardPage'));
 const StockMovementsPage = lazy(() => import('@/features/ERP/pages/StockMovementsPage'));
 const SuppliersPage = lazy(() => import('@/features/ERP/pages/SuppliersPage'));
@@ -27,10 +29,16 @@ const CountHistory = lazy(() => import('@/features/ValidityControl/CountHistory/
 
 const CashFlowReport = lazy(() => import('@/features/Reports/pages/CashFlowReport'));
 const DREReport = lazy(() => import('@/features/Reports/pages/DREReport'));
-const SalesByPaymentMethodReport = lazy(() => import('@/features/Reports/pages/SalesByPaymentMethodReport'));
+const SalesByPaymentMethodReport = lazy(
+  () => import('@/features/Reports/pages/SalesByPaymentMethodReport')
+);
 const ListOfAccountsReport = lazy(() => import('@/features/Reports/pages/ListOfAccountsReport'));
-const CurrentStockPositionReport = lazy(() => import('@/features/Reports/pages/CurrentStockPositionReport'));
-const StockPositionHistoryReport = lazy(() => import('@/features/Reports/pages/StockPositionHistoryReport'));
+const CurrentStockPositionReport = lazy(
+  () => import('@/features/Reports/pages/CurrentStockPositionReport')
+);
+const StockPositionHistoryReport = lazy(
+  () => import('@/features/Reports/pages/StockPositionHistoryReport')
+);
 const PaymentMethods = lazy(() => import('@/features/ERP/pages/PaymentMethods'));
 const FinancialCategoriesPage = lazy(() => import('@/features/ERP/pages/FinancialCategoriesPage'));
 const TeamManagementPage = lazy(() => import('@/features/Team/pages/TeamManagementPage'));
@@ -53,8 +61,9 @@ const Schedule = lazy(() => import('@/features/Management/pages/Schedule'));
 const Commissions = lazy(() => import('@/features/Management/pages/Commissions'));
 const Costs = lazy(() => import('@/features/Management/pages/Costs'));
 const ManagementPermissions = lazy(() => import('@/features/Management/pages/Permissions'));
-const DeliveryMenuPage = lazy(() => import('@/features/Orders/DigitalMenus/pages/DeliveryMenuPage'));
-
+const DeliveryMenuPage = lazy(
+  () => import('@/features/Orders/DigitalMenus/pages/DeliveryMenuPage')
+);
 
 const erpRoutes = [
   {

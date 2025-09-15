@@ -112,19 +112,21 @@ const GeneratedCouponsPage = () => {
             size="small"
             value={search}
             onChange={handleSearchChange}
-            InputProps={
-              {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }
-            }
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
           />
           <FormControl size="small" sx={{ minWidth: 120 }}>
             <InputLabel>{t('generated_coupons.status_filter')}</InputLabel>
-            <Select value={status} label={t('generated_coupons.status_filter')} onChange={handleStatusChange}>
+            <Select
+              value={status}
+              label={t('generated_coupons.status_filter')}
+              onChange={handleStatusChange}
+            >
               <MenuItem value="">{t('common.all')}</MenuItem>
               <MenuItem value="active">{t('generated_coupons.status_active')}</MenuItem>
               <MenuItem value="used">{t('generated_coupons.status_used')}</MenuItem>
@@ -133,11 +135,17 @@ const GeneratedCouponsPage = () => {
           </FormControl>
           <FormControl size="small" sx={{ minWidth: 150 }}>
             <InputLabel>{t('generated_coupons.reward_type_filter')}</InputLabel>
-            <Select value={rewardType} label={t('generated_coupons.reward_type_filter')} onChange={handleRewardTypeChange}>
+            <Select
+              value={rewardType}
+              label={t('generated_coupons.reward_type_filter')}
+              onChange={handleRewardTypeChange}
+            >
               <MenuItem value="">{t('common.all')}</MenuItem>
               <MenuItem value="discount">{t('reward_management.form.type_discount')}</MenuItem>
               <MenuItem value="free_item">{t('reward_management.form.type_free_item')}</MenuItem>
-              <MenuItem value="spin_the_wheel">{t('reward_management.form.type_spin_the_wheel')}</MenuItem>
+              <MenuItem value="spin_the_wheel">
+                {t('reward_management.form.type_spin_the_wheel')}
+              </MenuItem>
             </Select>
           </FormControl>
         </Box>
@@ -161,13 +169,23 @@ const GeneratedCouponsPage = () => {
             {coupons.length > 0 ? (
               coupons.map((coupon) => (
                 <TableRow key={coupon.id}>
-                  <TableCell><strong>{coupon.code}</strong></TableCell>
-                  <TableCell>{coupon.customer ? coupon.customer.name : t('common.anonymous')}</TableCell>
-                  <TableCell>{coupon.reward ? coupon.reward.title : t('generated_coupons.no_reward_title')}</TableCell>
+                  <TableCell>
+                    <strong>{coupon.code}</strong>
+                  </TableCell>
+                  <TableCell>
+                    {coupon.customer ? coupon.customer.name : t('common.anonymous')}
+                  </TableCell>
+                  <TableCell>
+                    {coupon.reward ? coupon.reward.title : t('generated_coupons.no_reward_title')}
+                  </TableCell>
                   <TableCell>{coupon.value}</TableCell>
                   <TableCell>{coupon.reward_type}</TableCell>
                   <TableCell>{t(`generated_coupons.status_${coupon.status}`)}</TableCell>
-                  <TableCell>{coupon.expires_at ? new Date(coupon.expires_at).toLocaleDateString() : t('common.never')}</TableCell>
+                  <TableCell>
+                    {coupon.expires_at
+                      ? new Date(coupon.expires_at).toLocaleDateString()
+                      : t('common.never')}
+                  </TableCell>
                   <TableCell>{new Date(coupon.createdAt).toLocaleDateString()}</TableCell>
                 </TableRow>
               ))

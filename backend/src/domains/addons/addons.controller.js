@@ -33,7 +33,11 @@ class AddonsController {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
       const { name, price } = req.body;
-      const newAddon = await this.addonsService.createAddon(name, price, restaurantId);
+      const newAddon = await this.addonsService.createAddon(
+        name,
+        price,
+        restaurantId,
+      );
       await auditService.log(
         req.user,
         restaurantId,
@@ -52,7 +56,11 @@ class AddonsController {
       this.handleValidationErrors(req);
       const { id } = req.params;
       const { name, price } = req.body;
-      const updatedAddon = await this.addonsService.updateAddon(id, name, price);
+      const updatedAddon = await this.addonsService.updateAddon(
+        id,
+        name,
+        price,
+      );
       await auditService.log(
         req.user,
         req.context.restaurantId,
@@ -91,7 +99,7 @@ class AddonsController {
         req.user,
         req.context.restaurantId,
         "ADDON_STATUS_TOGGLED",
-        `Addon:${id}`, 
+        `Addon:${id}`,
         { newStatus: addon.is_active },
       );
       res.json({

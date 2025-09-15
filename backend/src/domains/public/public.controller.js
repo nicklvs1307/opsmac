@@ -65,8 +65,7 @@ module.exports = (db) => {
 
   const getPublicSurveyByIdentifier = async (req, res, next) => {
     const { identifier } = req.params;
-    const survey =
-      await publicService.getPublicSurveyByIdentifier(identifier);
+    const survey = await publicService.getPublicSurveyByIdentifier(identifier);
     res.json(survey);
   };
 

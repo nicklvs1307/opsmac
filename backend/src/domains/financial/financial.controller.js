@@ -67,10 +67,11 @@ class FinancialController {
     try {
       const restaurantId = req.context.restaurantId;
       const { type } = req.query;
-      const categories = await this.financialCategoryService.getFinancialCategories(
-        restaurantId,
-        type,
-      );
+      const categories =
+        await this.financialCategoryService.getFinancialCategories(
+          restaurantId,
+          type,
+        );
       res.json(categories);
     } catch (error) {
       next(error);
@@ -134,11 +135,12 @@ class FinancialController {
     try {
       const restaurantId = req.context.restaurantId;
       const { type, is_active } = req.query;
-      const paymentMethods = await this.paymentMethodService.getAllPaymentMethods(
-        restaurantId,
-        type,
-        is_active,
-      );
+      const paymentMethods =
+        await this.paymentMethodService.getAllPaymentMethods(
+          restaurantId,
+          type,
+          is_active,
+        );
       res.json(paymentMethods);
     } catch (error) {
       next(error);
@@ -178,7 +180,7 @@ class FinancialController {
         restaurantId,
         "FINANCIAL_PAYMENT_METHOD_DELETED",
         `PaymentMethod:${id}`,
-        {}, 
+        {},
       );
       res.status(204).send();
     } catch (error) {

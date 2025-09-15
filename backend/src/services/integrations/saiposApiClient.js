@@ -70,7 +70,7 @@ class SaiposService {
     } catch (error) {
       // Error logging handled by interceptor
       throw new Error(
-        `Falha ao atualizar status do pedido ${orderId} na Saipos.`, 
+        `Falha ao atualizar status do pedido ${orderId} na Saipos.`,
       );
     }
   }

@@ -1,17 +1,16 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-} from '@mui/material';
+import { Box, Typography, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-const PermissionTree = ({ availableModules, selectedPermissions, onPermissionChange, disabled }) => {
+const PermissionTree = ({
+  availableModules,
+  selectedPermissions,
+  onPermissionChange,
+  disabled,
+}) => {
   if (!availableModules) {
     return null;
   }
@@ -35,17 +34,29 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
           />
         }
       >
-                {moduleNode.submodules?.map((submoduleNode, subIndex) => (
+        {moduleNode.submodules?.map((submoduleNode, subIndex) => (
           <TreeItem
             key={submoduleNode.id || `submodule-${moduleNode.id}-${subIndex}`}
-            itemId={submoduleNode.id ? `${moduleNode.id}-${submoduleNode.id}` : `submodule-${moduleNode.id}-${subIndex}`}
+            itemId={
+              submoduleNode.id
+                ? `${moduleNode.id}-${submoduleNode.id}`
+                : `submodule-${moduleNode.id}-${subIndex}`
+            }
             label={
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.checked || false}
-                    indeterminate={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.indeterminate || false}
-                    onChange={(e) => onPermissionChange([moduleNode.id, submoduleNode.id], e.target.checked)}
+                    checked={
+                      selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.checked ||
+                      false
+                    }
+                    indeterminate={
+                      selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]
+                        ?.indeterminate || false
+                    }
+                    onChange={(e) =>
+                      onPermissionChange([moduleNode.id, submoduleNode.id], e.target.checked)
+                    }
                     disabled={disabled}
                   />
                 }
@@ -53,17 +64,34 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
               />
             }
           >
-                        {submoduleNode.features?.map((featureNode, featureIndex) => (
+            {submoduleNode.features?.map((featureNode, featureIndex) => (
               <TreeItem
-                key={featureNode.id || `feature-${moduleNode.id}-${submoduleNode.id}-${featureIndex}`}
-                itemId={featureNode.id ? `${moduleNode.id}-${submoduleNode.id}-${featureNode.id}` : `feature-${moduleNode.id}-${submoduleNode.id}-${featureIndex}`}
+                key={
+                  featureNode.id || `feature-${moduleNode.id}-${submoduleNode.id}-${featureIndex}`
+                }
+                itemId={
+                  featureNode.id
+                    ? `${moduleNode.id}-${submoduleNode.id}-${featureNode.id}`
+                    : `feature-${moduleNode.id}-${submoduleNode.id}-${featureIndex}`
+                }
                 label={
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.features[featureNode.id]?.checked || false}
-                        indeterminate={selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]?.features[featureNode.id]?.indeterminate || false}
-                        onChange={(e) => onPermissionChange([moduleNode.id, submoduleNode.id, featureNode.id], e.target.checked)}
+                        checked={
+                          selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]
+                            ?.features[featureNode.id]?.checked || false
+                        }
+                        indeterminate={
+                          selectedPermissions[moduleNode.id]?.submodules[submoduleNode.id]
+                            ?.features[featureNode.id]?.indeterminate || false
+                        }
+                        onChange={(e) =>
+                          onPermissionChange(
+                            [moduleNode.id, submoduleNode.id, featureNode.id],
+                            e.target.checked
+                          )
+                        }
                         disabled={disabled}
                       />
                     }
@@ -92,4 +120,3 @@ const PermissionTree = ({ availableModules, selectedPermissions, onPermissionCha
 };
 
 export default PermissionTree;
-                      

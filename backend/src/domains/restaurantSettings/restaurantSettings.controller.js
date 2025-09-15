@@ -205,7 +205,7 @@ exports.updateRestaurantSettings = async (req, res, next) => {
       req.context.restaurantId,
       "RESTAURANT_GENERAL_SETTINGS_UPDATED",
       `Restaurant:${req.context.restaurantId}`,
-      { updatedData },
+      { updateData },
     );
     res.json(updatedSettings);
   } catch (error) {

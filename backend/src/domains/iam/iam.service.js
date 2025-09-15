@@ -547,9 +547,10 @@ class IamService {
     });
 
     // Fetch restaurant entitlements
-    const restaurantEntitlements = await this.models.RestaurantEntitlement.findAll({
-      where: { restaurant_id: restaurantId },
-    });
+    const restaurantEntitlements =
+      await this.models.RestaurantEntitlement.findAll({
+        where: { restaurant_id: restaurantId },
+      });
 
     // Fetch all modules, submodules, and features
     const allModules = await this.models.Module.findAll({

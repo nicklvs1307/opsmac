@@ -65,9 +65,12 @@ export const useDashboardAnalytics = (restaurantId, params) => {
 };
 
 const fetchEvolutionAnalytics = async (restaurantId, params) => {
-  const response = await axiosInstance.get(`/dashboard/evolution-analytics?restaurantId=${restaurantId}`, {
-    params,
-  });
+  const response = await axiosInstance.get(
+    `/dashboard/evolution-analytics?restaurantId=${restaurantId}`,
+    {
+      params,
+    }
+  );
   return response.data;
 };
 
@@ -83,9 +86,12 @@ export const useEvolutionAnalytics = (restaurantId, params) => {
 };
 
 const fetchRatingDistribution = async (restaurantId, params) => {
-  const response = await axiosInstance.get(`/dashboard/rating-distribution?restaurantId=${restaurantId}`, {
-    params,
-  });
+  const response = await axiosInstance.get(
+    `/dashboard/rating-distribution?restaurantId=${restaurantId}`,
+    {
+      params,
+    }
+  );
   return response.data;
 };
 
@@ -101,17 +107,15 @@ export const useRatingDistribution = (restaurantId, params) => {
 };
 
 const fetchRewardsAnalytics = async (restaurantId) => {
-  const response = await axiosInstance.get(`/dashboard/rewards-analytics?restaurantId=${restaurantId}`);
+  const response = await axiosInstance.get(
+    `/dashboard/rewards-analytics?restaurantId=${restaurantId}`
+  );
   return response.data;
 };
 
 export const useRewardsAnalytics = (restaurantId) => {
   const { user } = useAuth();
-  return useQuery(
-    ['rewardsAnalytics', restaurantId],
-    () => fetchRewardsAnalytics(restaurantId),
-    {
-      enabled: !!restaurantId && !!user?.token,
-    }
-  );
+  return useQuery(['rewardsAnalytics', restaurantId], () => fetchRewardsAnalytics(restaurantId), {
+    enabled: !!restaurantId && !!user?.token,
+  });
 };

@@ -44,9 +44,13 @@ const Benchmarking = () => {
     isLoading,
     isError,
     error,
-  } = useQuery(['benchmarking', restaurantId], () => fetchBenchmarkingData({ restaurantId, token }), {
-    enabled: !!restaurantId && !!token,
-  });
+  } = useQuery(
+    ['benchmarking', restaurantId],
+    () => fetchBenchmarkingData({ restaurantId, token }),
+    {
+      enabled: !!restaurantId && !!token,
+    }
+  );
 
   if (isLoading) {
     return (
@@ -92,7 +96,10 @@ const Benchmarking = () => {
   ];
 
   const loyaltyPointsChartData = [
-    { name: t('benchmarking.your_loyalty_points'), value: yourRestaurantData.totalLoyaltyPoints || 0 },
+    {
+      name: t('benchmarking.your_loyalty_points'),
+      value: yourRestaurantData.totalLoyaltyPoints || 0,
+    },
     { name: t('benchmarking.last_month'), value: lastMonthData.totalLoyaltyPoints || 0 },
     { name: t('benchmarking.last_quarter'), value: lastQuarterData.totalLoyaltyPoints || 0 },
     { name: t('benchmarking.last_year'), value: lastYearData.totalLoyaltyPoints || 0 },
@@ -118,7 +125,6 @@ const Benchmarking = () => {
     { name: t('benchmarking.last_quarter'), value: lastQuarterData.loyaltyRate || 0 },
     { name: t('benchmarking.last_year'), value: lastYearData.loyaltyRate || 0 },
   ];
-
 
   return (
     <Box sx={{ p: 3 }}>

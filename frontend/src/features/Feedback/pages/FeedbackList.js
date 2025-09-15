@@ -39,7 +39,11 @@ import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
-import { useGetFeedbacks, useReplyFeedback, useDeleteFeedback } from '@/features/Feedback/api/feedbackService';
+import {
+  useGetFeedbacks,
+  useReplyFeedback,
+  useDeleteFeedback,
+} from '@/features/Feedback/api/feedbackService';
 import useDebounce from '@/hooks/useDebounce';
 
 const FeedbackList = () => {

@@ -28,7 +28,8 @@ module.exports = (db) => {
     try {
       const { restaurantId } = req.params; // Get restaurantId from path params
       const { status, platform, delivery_type, search } = req.query;
-      const orders = await ordersService.getAllOrders( // Reusing getAllOrders service method
+      const orders = await ordersService.getAllOrders(
+        // Reusing getAllOrders service method
         restaurantId,
         status,
         platform,

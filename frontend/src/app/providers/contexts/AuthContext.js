@@ -78,10 +78,19 @@ export const AuthProvider = ({ children }) => {
   const updateProfileMutation = useUpdateProfile();
 
   // Use useFetchMe hook for initial user data
-  const { data: userData, isLoading: isUserLoading, isError: isUserError, refetch: refetchUser } = useFetchMe();
+  const {
+    data: userData,
+    isLoading: isUserLoading,
+    isError: isUserError,
+    refetch: refetchUser,
+  } = useFetchMe();
 
   // Use useFetchPermissions hook for permissions, dependent on selectedRestaurantId
-  const { data: permissionSnapshot, isLoading: isPermissionsLoading, isError: isPermissionsError } = useFetchPermissions(state.selectedRestaurantId);
+  const {
+    data: permissionSnapshot,
+    isLoading: isPermissionsLoading,
+    isError: isPermissionsError,
+  } = useFetchPermissions(state.selectedRestaurantId);
 
   // On app start, check for token and fetch user
   useEffect(() => {
@@ -99,7 +108,8 @@ export const AuthProvider = ({ children }) => {
     console.log('AuthContext: isUserLoading', isUserLoading);
     console.log('AuthContext: isUserError', isUserError);
     if (userData) {
-      const selectedRestaurantId = userData.restaurants && userData.restaurants.length > 0 ? userData.restaurants[0].id : null;
+      const selectedRestaurantId =
+        userData.restaurants && userData.restaurants.length > 0 ? userData.restaurants[0].id : null;
       dispatch({
         type: AUTH_ACTIONS.SET_USER,
         payload: {
@@ -161,7 +171,7 @@ export const AuthProvider = ({ children }) => {
       toast.success('Perfil atualizado com sucesso!');
       return { success: true };
     } catch (error) {
-      console.error("Failed to update user. Payload sent:", payload);
+      console.error('Failed to update user. Payload sent:', payload);
       const message = error.response?.data?.message || 'Erro ao atualizar perfil';
       toast.error(message);
       return { success: false, message };

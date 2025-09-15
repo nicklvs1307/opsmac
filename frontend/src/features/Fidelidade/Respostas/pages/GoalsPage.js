@@ -26,7 +26,12 @@ import {
   LinearProgress,
   FormHelperText,
 } from '@mui/material';
-import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, Refresh as RefreshIcon } from '@mui/icons-material';
+import {
+  Add as AddIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  Refresh as RefreshIcon,
+} from '@mui/icons-material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
@@ -65,9 +70,13 @@ const deleteGoal = async ({ goalId, token }) => {
 };
 
 const updateGoalProgress = async ({ goalId, token }) => {
-  const response = await axiosInstance.post(`/goals/${goalId}/update-progress`, {}, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await axiosInstance.post(
+    `/goals/${goalId}/update-progress`,
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   return response.data;
 };
 
@@ -134,7 +143,12 @@ const GoalsPage = () => {
     },
   });
 
-  const { control, handleSubmit, reset, formState: { errors: formErrors } } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors: formErrors },
+  } = useForm({
     defaultValues: {
       name: '',
       description: '',
@@ -254,7 +268,7 @@ const GoalsPage = () => {
                       </Box>
                       <Box sx={{ minWidth: 35 }}>
                         <Typography variant="body2" color="text.secondary">{`${Math.round(
-                          (goal.currentValue / goal.targetValue) * 100,
+                          (goal.currentValue / goal.targetValue) * 100
                         )}%`}</Typography>
                       </Box>
                     </Box>
@@ -262,13 +276,17 @@ const GoalsPage = () => {
                   <TableCell>{`${format(new Date(goal.startDate), 'dd/MM/yyyy')} - ${format(new Date(goal.endDate), 'dd/MM/yyyy')}`}</TableCell>
                   <TableCell>{t(`goals.status_type.${goal.status}`)}</TableCell>
                   <TableCell align="right">
-                    <IconButton onClick={() => updateProgressMutation.mutate({ goalId: goal.id, token })}>
+                    <IconButton
+                      onClick={() => updateProgressMutation.mutate({ goalId: goal.id, token })}
+                    >
                       <RefreshIcon />
                     </IconButton>
                     <IconButton onClick={() => handleOpenEditDialog(goal)}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={() => deleteGoalMutation.mutate({ goalId: goal.id, token })}>
+                    <IconButton
+                      onClick={() => deleteGoalMutation.mutate({ goalId: goal.id, token })}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -322,7 +340,10 @@ const GoalsPage = () => {
               type="number"
               fullWidth
               variant="outlined"
-              {...control.register('targetValue', { required: t('goals.form.target_value_required'), valueAsNumber: true })}
+              {...control.register('targetValue', {
+                required: t('goals.form.target_value_required'),
+                valueAsNumber: true,
+              })}
               error={!!formErrors.targetValue}
               helperText={formErrors.targetValue?.message}
             />
@@ -334,15 +355,21 @@ const GoalsPage = () => {
                 rules={{ required: t('goals.form.metric_required') }}
                 render={({ field }) => (
                   <Select {...field} label={t('goals.form.metric')}>
-                    <MenuItem value="totalCheckins">{t('goals.metric_type.totalCheckins')}</MenuItem>
+                    <MenuItem value="totalCheckins">
+                      {t('goals.metric_type.totalCheckins')}
+                    </MenuItem>
                     <MenuItem value="newCustomers">{t('goals.metric_type.newCustomers')}</MenuItem>
                     <MenuItem value="avgNpsScore">{t('goals.metric_type.avgNpsScore')}</MenuItem>
-                    <MenuItem value="totalLoyaltyPoints">{t('goals.metric_type.totalLoyaltyPoints')}</MenuItem>
+                    <MenuItem value="totalLoyaltyPoints">
+                      {t('goals.metric_type.totalLoyaltyPoints')}
+                    </MenuItem>
                     <MenuItem value="totalSpent">{t('goals.metric_type.totalSpent')}</MenuItem>
                   </Select>
                 )}
               />
-              <FormHelperText error={!!formErrors.metric}>{formErrors.metric?.message}</FormHelperText>
+              <FormHelperText error={!!formErrors.metric}>
+                {formErrors.metric?.message}
+              </FormHelperText>
             </FormControl>
             <TextField
               margin="dense"
@@ -373,7 +400,12 @@ const GoalsPage = () => {
 
             <DialogActions>
               <Button onClick={handleCloseDialog}>{t('common.cancel')}</Button>
-              <Button type="submit" variant="contained" color="primary" disabled={createGoalMutation.isLoading || updateGoalMutation.isLoading}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={createGoalMutation.isLoading || updateGoalMutation.isLoading}
+              >
                 {editingGoal ? t('common.save_changes') : t('common.create')}
               </Button>
             </DialogActions>

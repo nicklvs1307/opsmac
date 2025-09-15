@@ -18,22 +18,36 @@ const CustomerDetail = lazy(() => import('@/features/Customers/pages/CustomerDet
 const CustomerBirthdays = lazy(() => import('@/features/Customers/pages/CustomerBirthdays'));
 const CustomerDashboard = lazy(() => import('@/features/Customers/pages/CustomerDashboard'));
 
-const CheckinAnalyticsPage = lazy(() => import('@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage'));
-const CheckinSettingsPage = lazy(() => import('@/features/Fidelidade/Checkin/pages/CheckinSettingsPage'));
-const ActiveCheckinsPage = lazy(() => import('@/features/Fidelidade/Checkin/pages/ActiveCheckinsPage'));
+const CheckinAnalyticsPage = lazy(
+  () => import('@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage')
+);
+const CheckinSettingsPage = lazy(
+  () => import('@/features/Fidelidade/Checkin/pages/CheckinSettingsPage')
+);
+const ActiveCheckinsPage = lazy(
+  () => import('@/features/Fidelidade/Checkin/pages/ActiveCheckinsPage')
+);
 const SurveyCreate = lazy(() => import('@/features/Fidelidade/Avaliacoes/pages/SurveyCreate'));
 const SurveyResults = lazy(() => import('@/features/Fidelidade/Avaliacoes/pages/SurveyResults'));
 const SurveyEdit = lazy(() => import('@/features/Fidelidade/Avaliacoes/pages/SurveyEdit'));
 const SurveyList = lazy(() => import('@/features/Fidelidade/Avaliacoes/pages/SurveyList'));
 
-const SatisfactionAnalyticsPage = lazy(() => import('@/features/Fidelidade/Avaliacoes/pages/SatisfactionAnalyticsPage'));
-const SatisfactionSettingsPage = lazy(() => import('@/features/Fidelidade/Avaliacoes/pages/SatisfactionSettingsPage'));
-const RelationshipDashboard = lazy(() => import('@/features/Relationship/pages/RelationshipDashboard'));
+const SatisfactionAnalyticsPage = lazy(
+  () => import('@/features/Fidelidade/Avaliacoes/pages/SatisfactionAnalyticsPage')
+);
+const SatisfactionSettingsPage = lazy(
+  () => import('@/features/Fidelidade/Avaliacoes/pages/SatisfactionSettingsPage')
+);
+const RelationshipDashboard = lazy(
+  () => import('@/features/Relationship/pages/RelationshipDashboard')
+);
 
 const IntegrationsPage = lazy(() => import('@/features/Integrations/pages/IntegrationsPage'));
 
 const MonthlySummary = lazy(() => import('@/features/Fidelidade/Geral/pages/MonthlySummary'));
-const SatisfactionOverview = lazy(() => import('@/features/Fidelidade/Geral/pages/SatisfactionOverview'));
+const SatisfactionOverview = lazy(
+  () => import('@/features/Fidelidade/Geral/pages/SatisfactionOverview')
+);
 const SurveysComparison = lazy(() => import('@/features/Fidelidade/Geral/pages/SurveysComparison'));
 const Evolution = lazy(() => import('@/features/Fidelidade/Geral/pages/Evolution'));
 const Benchmarking = lazy(() => import('@/features/Fidelidade/Geral/pages/Benchmarking'));
@@ -49,9 +63,10 @@ const Campaigns = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/
 const Messages = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Messages'));
 const Segmentation = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Segmentation'));
 const FidelityReports = lazy(() => import('@/features/Fidelidade/pages/Reports'));
-const GeneratedCouponsReport = lazy(() => import('@/features/Reports/pages/GeneratedCouponsReport'));
+const GeneratedCouponsReport = lazy(
+  () => import('@/features/Reports/pages/GeneratedCouponsReport')
+);
 const ComingSoon = lazy(() => import('@/features/Common/ComingSoon'));
-
 
 const fidelityRoutes = [
   {

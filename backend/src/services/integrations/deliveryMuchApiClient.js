@@ -88,7 +88,8 @@ class DeliveryMuchService {
   async getOrders(status = "pending") {
     try {
       const headers = await this.getHeaders();
-      const response = await this.apiClient.get("/orders", { // Use relative path
+      const response = await this.apiClient.get("/orders", {
+        // Use relative path
         headers,
         params: {
           status: status,

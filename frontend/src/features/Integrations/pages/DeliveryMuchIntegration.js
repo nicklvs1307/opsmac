@@ -14,7 +14,10 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useGetIntegrationSettings, useUpdateIntegrationSettings } from '@/features/Integrations/api/integrationsService';
+import {
+  useGetIntegrationSettings,
+  useUpdateIntegrationSettings,
+} from '@/features/Integrations/api/integrationsService';
 
 const DeliveryMuchIntegration = () => {
   const { user } = useAuth();

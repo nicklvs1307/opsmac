@@ -62,7 +62,8 @@ class CheckinController {
     try {
       this.handleValidationErrors(req);
       const restaurant = req.restaurant;
-      const { phoneNumber, cpf, customerName, tableNumber, couponId } = req.body;
+      const { phoneNumber, cpf, customerName, tableNumber, couponId } =
+        req.body;
 
       const result = await this.checkinService.recordPublicCheckin(
         restaurant,
@@ -94,7 +95,10 @@ class CheckinController {
     try {
       const { checkinId } = req.params;
       const userId = req.user.userId;
-      const checkin = await this.checkinService.checkoutCheckin(checkinId, userId);
+      const checkin = await this.checkinService.checkoutCheckin(
+        checkinId,
+        userId,
+      );
       await auditService.log(
         req.user,
         req.context.restaurantId,
@@ -126,7 +130,8 @@ class CheckinController {
   async getActiveCheckins(req, res, next) {
     try {
       const restaurantId = req.params.restaurantId;
-      const activeCheckins = await this.checkinService.getActiveCheckins(restaurantId);
+      const activeCheckins =
+        await this.checkinService.getActiveCheckins(restaurantId);
       res.json({ activeCheckins });
     } catch (error) {
       next(error);

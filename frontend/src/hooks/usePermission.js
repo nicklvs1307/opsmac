@@ -16,12 +16,12 @@ export const usePermission = () => {
 
     for (const module of permissionSnapshot.modules) {
       for (const submodule of module.submodules) {
-        const feature = submodule.features.find(f => f.key === featureKey);
+        const feature = submodule.features.find((f) => f.key === featureKey);
         if (feature) {
           if (feature.isLockedByEntitlement) {
             return { allowed: false, locked: true };
           }
-          const action = feature.actions.find(a => a.key === actionKey);
+          const action = feature.actions.find((a) => a.key === actionKey);
           if (action) {
             return { allowed: action.allowed, locked: action.locked };
           }

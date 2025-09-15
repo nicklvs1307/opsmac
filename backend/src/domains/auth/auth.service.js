@@ -1,4 +1,4 @@
-const { generateToken } = require("services/jwtService");
+const { generateToken, decodeToken } = require("services/jwtService");
 const {
   UnauthorizedError,
   ForbiddenError,
@@ -8,6 +8,7 @@ const {
 const iamService = require("services/iamService"); // Import the new IAM service
 const auditService = require("services/auditService"); // Import auditService
 const logger = require("utils/logger"); // Import logger
+const cacheService = require("services/cacheService"); // Import cacheService
 
 class AuthService {
   constructor(models) {
@@ -251,6 +252,37 @@ class AuthService {
       `User:${user.id}`,
       {},
     ); // Audit log for password change
+  }
+
+  async logout(token) {
+    if (!token) {
+      return; // No token to blacklist
+    }
+
+    try {
+      const decoded = decodeToken(token); // Decodifica o token para obter o payload
+      if (!decoded || !decoded.exp) {
+        logger.warn(
+          "Invalid or expired token provided for logout, cannot blacklist.",
+        );
+        return;
+      }
+
+      const now = Math.floor(Date.now() / 1000); // Current time in seconds
+      const expiresIn = decoded.exp - now; // Time remaining until expiration in seconds
+
+      if (expiresIn > 0) {
+        const blacklistKey = `jwt_blacklist:${token}`;
+        await cacheService.set(blacklistKey, "blacklisted", expiresIn);
+        logger.info(
+          `Token blacklisted: ${token.substring(0, 10)}... (expires in ${expiresIn}s)`,
+        );
+      } else {
+        logger.info("Token already expired, no need to blacklist.");
+      }
+    } catch (error) {
+      logger.error("Error blacklisting token during logout:", error);
+    }
   }
 }
 

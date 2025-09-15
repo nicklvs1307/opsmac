@@ -11,7 +11,9 @@ exports.registerValidation = [
   body("password")
     .isLength({ min: 6 })
     .withMessage("Senha deve ter no mínimo 6 caracteres"),
-  body("restaurantName").notEmpty().withMessage("Nome do restaurante é obrigatório"),
+  body("restaurantName")
+    .notEmpty()
+    .withMessage("Nome do restaurante é obrigatório"),
 ];
 
 exports.forgotPasswordValidation = [

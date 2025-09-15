@@ -8,6 +8,7 @@ const {
 const models = require("models"); // Directly import models (which is the db object)
 const authService = require("../domains/auth/auth.service")(models); // Initialize authService with models
 const logger = require("utils/logger"); // Import logger
+const cacheService = require("services/cacheService"); // Import cacheService
 
 module.exports = (db) => {
   const authMiddleware = async (req, res, next) => {
@@ -27,6 +28,12 @@ module.exports = (db) => {
         return next(
           new UnauthorizedError("Acesso negado. Formato do token inválido."),
         );
+      }
+
+      // Check if token is blacklisted
+      const isBlacklisted = await cacheService.get(`jwt_blacklist:${token}`);
+      if (isBlacklisted) {
+        return next(new UnauthorizedError("Token inválido ou revogado."));
       }
 
       const decoded = verifyToken(token);

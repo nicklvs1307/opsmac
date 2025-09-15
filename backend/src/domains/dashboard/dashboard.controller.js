@@ -35,7 +35,8 @@ class DashboardController {
   async getRewardsAnalytics(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId;
-      const data = await this.dashboardService.getRewardsAnalytics(restaurantId);
+      const data =
+        await this.dashboardService.getRewardsAnalytics(restaurantId);
       res.json(data);
     } catch (error) {
       next(error);
@@ -96,7 +97,8 @@ class DashboardController {
   async getBenchmarkingData(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId;
-      const data = await this.dashboardService.getBenchmarkingData(restaurantId);
+      const data =
+        await this.dashboardService.getBenchmarkingData(restaurantId);
       res.json(data);
     } catch (error) {
       next(error);

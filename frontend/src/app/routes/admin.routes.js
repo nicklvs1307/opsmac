@@ -9,7 +9,9 @@ const MenuManagement = lazy(() => import('@/features/Admin/MenuManagement'));
 const RestaurantCreatePage = lazy(() => import('@/features/Admin/RestaurantCreatePage'));
 const UserEditPage = lazy(() => import('@/features/Admin/UserEditPage'));
 const UserCreatePage = lazy(() => import('@/features/Admin/UserCreatePage'));
-const RolePermissionManagementPage = lazy(() => import('@/components/Admin/RolePermissionManagementPage'));
+const RolePermissionManagementPage = lazy(
+  () => import('@/components/Admin/RolePermissionManagementPage')
+);
 
 const IAMDashboard = lazy(() => import('@/features/IAM/pages/IAMDashboard'));
 const RoleManagement = lazy(() => import('@/features/IAM/pages/RoleManagement'));
@@ -23,7 +25,9 @@ const StockDashboardPage = lazy(() => import('@/features/ERP/pages/StockDashboar
 const StockProductsPage = lazy(() => import('@/features/ERP/pages/StockProductsPage'));
 const CouponListPage = lazy(() => import('@/features/Coupons/pages/CouponListPage'));
 const SurveyList = lazy(() => import('@/features/Fidelidade/Avaliacoes/pages/SurveyList'));
-const CheckinAnalyticsPage = lazy(() => import('@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage'));
+const CheckinAnalyticsPage = lazy(
+  () => import('@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage')
+);
 const Tables = lazy(() => import('@/features/ERP/pages/Tables'));
 const QRCodeManage = lazy(() => import('@/features/QRCode/pages/QRCodeManage'));
 const SuppliersPage = lazy(() => import('@/features/ERP/pages/SuppliersPage'));
@@ -31,7 +35,6 @@ const ProductionList = lazy(() => import('@/features/ValidityControl/ProductionL
 const ComingSoon = lazy(() => import('@/features/Common/ComingSoon'));
 const WaiterPage = lazy(() => import('@/features/Waiter/pages/WaiterPage'));
 const OrderPage = lazy(() => import('@/features/Waiter/pages/OrderPage'));
-
 
 const adminRoutes = [
   {
@@ -67,8 +70,7 @@ const adminRoutes = [
     element: (
       <ProtectedRoute featureKey="reports" actionKey="read">
         <Suspense fallback={<div className="loading-spinner"></div>}>
-          <ComingSoon />{' '}
-          {/* Keep ComingSoon for now if no specific report component is ready */}
+          <ComingSoon /> {/* Keep ComingSoon for now if no specific report component is ready */}
         </Suspense>
       </ProtectedRoute>
     ),

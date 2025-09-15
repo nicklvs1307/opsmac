@@ -23,9 +23,7 @@ const fetchSurvey = async (id) => {
 
 const fetchRewards = async (restaurantId) => {
   if (!restaurantId) return [];
-  const { data } = await axiosInstance.get(
-    `/rewards/restaurant/${restaurantId}?is_active=true`
-  );
+  const { data } = await axiosInstance.get(`/rewards/restaurant/${restaurantId}?is_active=true`);
   return data.rewards;
 };
 

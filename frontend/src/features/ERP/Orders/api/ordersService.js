@@ -15,10 +15,9 @@ const fetchOrders = async ({ restaurantId, filterStatus }) => {
 };
 
 const updateOrderStatus = async ({ restaurantId, orderId, status }) => {
-  const { data } = await axiosInstance.put(
-    `/orders/restaurant/${restaurantId}/${orderId}/status`,
-    { status }
-  );
+  const { data } = await axiosInstance.put(`/orders/restaurant/${restaurantId}/${orderId}/status`, {
+    status,
+  });
   return data;
 };
 

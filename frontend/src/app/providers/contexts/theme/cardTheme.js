@@ -3,11 +3,10 @@ const cardTheme = (mode) => ({
     styleOverrides: {
       root: {
         borderRadius: 16,
-        boxShadow:
-          mode === 'light' ? '0 4px 20px rgba(0,0,0,0.08)' : '0 4px 20px rgba(0,0,0,0.4)',
+        boxShadow: mode === 'light' ? '0 4px 20px rgba(0,0,0,0.08)' : '0 4px 20px rgba(0,0,0,0.4)',
         overflow: 'hidden',
         transition: 'all 0.3s ease',
-        border: `1px solid ${mode === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'}`, 
+        border: `1px solid ${mode === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'}`,
         '&:hover': {
           boxShadow:
             mode === 'light' ? '0 8px 30px rgba(0,0,0,0.12)' : '0 8px 30px rgba(0,0,0,0.5)',
@@ -23,7 +22,7 @@ const cardTheme = (mode) => ({
           mode === 'light'
             ? 'linear-gradient(to right, rgba(211, 47, 47, 0.05), transparent)'
             : 'linear-gradient(to right, rgba(211, 47, 47, 0.15), transparent)',
-        borderBottom: `1px solid ${mode === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'}`, 
+        borderBottom: `1px solid ${mode === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'}`,
       },
       title: {
         fontWeight: 600,
@@ -49,7 +48,7 @@ const cardTheme = (mode) => ({
     styleOverrides: {
       root: {
         padding: '16px 24px',
-        borderTop: `1px solid ${mode === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'}`, 
+        borderTop: `1px solid ${mode === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'}`,
       },
     },
   },

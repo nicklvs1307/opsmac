@@ -10,10 +10,11 @@ class DeliveryMuchController {
   async checkDeliveryMuchModuleEnabled(req, res, next) {
     try {
       const restaurantId = req.context?.restaurantId || req.body.restaurantId;
-      const restaurant = await this.deliveryMuchService.checkDeliveryMuchModuleEnabled(
-        restaurantId,
-        req.user?.userId,
-      );
+      const restaurant =
+        await this.deliveryMuchService.checkDeliveryMuchModuleEnabled(
+          restaurantId,
+          req.user?.userId,
+        );
       req.restaurant = restaurant;
       next();
     } catch (error) {
@@ -54,4 +55,5 @@ class DeliveryMuchController {
   }
 }
 
-module.exports = (deliveryMuchService) => new DeliveryMuchController(deliveryMuchService);
+module.exports = (deliveryMuchService) =>
+  new DeliveryMuchController(deliveryMuchService);

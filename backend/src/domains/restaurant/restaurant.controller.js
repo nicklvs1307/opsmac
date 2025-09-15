@@ -23,9 +23,10 @@ module.exports = (restaurantService) => {
       const { ids } = req.query; // Expecting comma-separated IDs
       let restaurantIds = [];
       if (ids) {
-        restaurantIds = ids.split(',');
+        restaurantIds = ids.split(",");
       }
-      const restaurants = await restaurantService.listRestaurants(restaurantIds);
+      const restaurants =
+        await restaurantService.listRestaurants(restaurantIds);
       res.json(restaurants);
     } catch (error) {
       next(error);

@@ -26,9 +26,11 @@ export const appBarDrawerTheme = (mode) => ({
     styleOverrides: {
       root: {
         '&.Mui-selected': {
-          backgroundColor: mode === 'light' ? 'rgba(0, 82, 180, 0.08)' : 'rgba(255, 255, 255, 0.08)',
+          backgroundColor:
+            mode === 'light' ? 'rgba(0, 82, 180, 0.08)' : 'rgba(255, 255, 255, 0.08)',
           '&:hover': {
-            backgroundColor: mode === 'light' ? 'rgba(0, 82, 180, 0.12)' : 'rgba(255, 255, 255, 0.12)',
+            backgroundColor:
+              mode === 'light' ? 'rgba(0, 82, 180, 0.12)' : 'rgba(255, 255, 255, 0.12)',
           },
         },
       },

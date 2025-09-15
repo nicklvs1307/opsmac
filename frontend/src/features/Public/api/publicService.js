@@ -47,9 +47,7 @@ export const useGetPublicRestaurant = (restaurantSlug) => {
 
 // Hook to validate a coupon
 export const useValidateCoupon = () => {
-  return useMutation((couponData) =>
-    axiosInstance.post('/coupons/public/validate', couponData)
-  );
+  return useMutation((couponData) => axiosInstance.post('/coupons/public/validate', couponData));
 };
 
 // Hook to perform a public check-in

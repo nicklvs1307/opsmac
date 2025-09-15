@@ -31,9 +31,21 @@ const RolePermissionManagementPage = () => {
   const [selectedRoleId, setSelectedRoleId] = useState('');
   const [selectedPermissions, setSelectedPermissions] = useState({});
 
-  const { data: roles, isLoading: isLoadingRoles, isError: isErrorRoles } = useGetRoles(selectedRestaurantId, { enabled: !!selectedRestaurantId });
-  const { data: permissionTree, isLoading: isLoadingPermissionTree, isError: isErrorPermissionTree } = useGetPermissionTree(selectedRestaurantId, { enabled: !!selectedRestaurantId });
-  const { data: fetchedRolePermissions, isLoading: isLoadingRolePermissions, isError: isErrorRolePermissions } = useGetRolePermissions(selectedRoleId, selectedRestaurantId, {
+  const {
+    data: roles,
+    isLoading: isLoadingRoles,
+    isError: isErrorRoles,
+  } = useGetRoles(selectedRestaurantId, { enabled: !!selectedRestaurantId });
+  const {
+    data: permissionTree,
+    isLoading: isLoadingPermissionTree,
+    isError: isErrorPermissionTree,
+  } = useGetPermissionTree(selectedRestaurantId, { enabled: !!selectedRestaurantId });
+  const {
+    data: fetchedRolePermissions,
+    isLoading: isLoadingRolePermissions,
+    isError: isErrorRolePermissions,
+  } = useGetRolePermissions(selectedRoleId, selectedRestaurantId, {
     enabled: !!selectedRoleId && !!selectedRestaurantId,
   });
 
@@ -43,18 +55,19 @@ const RolePermissionManagementPage = () => {
     if (!tree || !tree.modules) return permissions;
     const newSelected = JSON.parse(JSON.stringify(permissions));
 
-    tree.modules.forEach(module => {
+    tree.modules.forEach((module) => {
       let moduleChecked = true;
       let moduleIndeterminate = false;
 
-      module.submodules.forEach(submodule => {
+      module.submodules.forEach((submodule) => {
         let submoduleChecked = true;
         let submoduleIndeterminate = false;
 
-        submodule.features.forEach(feature => {
-          const featureActions = newSelected[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
+        submodule.features.forEach((feature) => {
+          const featureActions =
+            newSelected[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
           const actionKeys = Object.keys(featureActions);
-          const checkedCount = actionKeys.filter(key => featureActions[key]).length;
+          const checkedCount = actionKeys.filter((key) => featureActions[key]).length;
 
           const featureState = newSelected[module.id].submodules[submodule.id].features[feature.id];
           featureState.checked = actionKeys.length > 0 && checkedCount === actionKeys.length;
@@ -84,12 +97,12 @@ const RolePermissionManagementPage = () => {
     if (fetchedRolePermissions && permissionTree) {
       // Create a map for quick lookup of existing role permissions
       const rolePermMap = new Map();
-      fetchedRolePermissions.forEach(rp => {
+      fetchedRolePermissions.forEach((rp) => {
         rolePermMap.set(`${rp.featureId}-${rp.actionId}`, rp.allowed);
       });
 
       let initialSelected = {};
-      permissionTree.modules?.forEach(module => {
+      permissionTree.modules?.forEach((module) => {
         initialSelected[module.id] = {
           checked: false, // Will be updated by updateParentStates
           indeterminate: false, // Will be updated by updateParentStates
@@ -126,13 +139,15 @@ const RolePermissionManagementPage = () => {
     const setChildrenState = (branch, value) => {
       branch.checked = value;
       if (branch.actions) {
-        Object.keys(branch.actions).forEach(key => { branch.actions[key] = value; });
+        Object.keys(branch.actions).forEach((key) => {
+          branch.actions[key] = value;
+        });
       }
       if (branch.features) {
-        Object.values(branch.features).forEach(feat => setChildrenState(feat, value));
+        Object.values(branch.features).forEach((feat) => setChildrenState(feat, value));
       }
       if (branch.submodules) {
-        Object.values(branch.submodules).forEach(sub => setChildrenState(sub, value));
+        Object.values(branch.submodules).forEach((sub) => setChildrenState(sub, value));
       }
     };
 
@@ -157,11 +172,13 @@ const RolePermissionManagementPage = () => {
     }
 
     const permissionsToSave = [];
-    permissionTree.modules?.forEach(module => {
-      module.submodules?.forEach(submodule => {
-        submodule.features?.forEach(feature => {
-          const actions = selectedPermissions[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
-          Object.keys(actions).forEach(actionId => {
+    permissionTree.modules?.forEach((module) => {
+      module.submodules?.forEach((submodule) => {
+        submodule.features?.forEach((feature) => {
+          const actions =
+            selectedPermissions[module.id]?.submodules[submodule.id]?.features[feature.id]
+              ?.actions || {};
+          Object.keys(actions).forEach((actionId) => {
             permissionsToSave.push({ featureId: feature.id, actionId, allowed: actions[actionId] });
           });
         });
@@ -182,24 +199,38 @@ const RolePermissionManagementPage = () => {
     }
   };
 
-  if (isLoadingRoles || isLoadingPermissionTree || isLoadingRolePermissions) return <CircularProgress />;
-  if (isErrorRoles || isErrorPermissionTree || isErrorRolePermissions) return <Alert severity="error">Error loading permission data.</Alert>;
+  if (isLoadingRoles || isLoadingPermissionTree || isLoadingRolePermissions)
+    return <CircularProgress />;
+  if (isErrorRoles || isErrorPermissionTree || isErrorRolePermissions)
+    return <Alert severity="error">Error loading permission data.</Alert>;
 
   const selectedRole = roles?.find((r) => r.id === selectedRoleId);
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>Role Permission Management</Typography>
+      <Typography variant="h4" gutterBottom>
+        Role Permission Management
+      </Typography>
       <FormControl fullWidth sx={{ mb: 3 }}>
         <InputLabel>Select Role</InputLabel>
-        <Select value={selectedRoleId} label="Select Role" onChange={(e) => setSelectedRoleId(e.target.value)}>
-          {roles?.map((role) => <MenuItem key={role.id} value={role.id}>{role.name}</MenuItem>)}
+        <Select
+          value={selectedRoleId}
+          label="Select Role"
+          onChange={(e) => setSelectedRoleId(e.target.value)}
+        >
+          {roles?.map((role) => (
+            <MenuItem key={role.id} value={role.id}>
+              {role.name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 
       {selectedRoleId && permissionTree && selectedRole && (
         <Box sx={{ mt: 4 }}>
-          <Typography variant="h5" gutterBottom>Assign Permissions for {selectedRole.name}</Typography>
+          <Typography variant="h5" gutterBottom>
+            Assign Permissions for {selectedRole.name}
+          </Typography>
           <PermissionTree
             availableModules={permissionTree.modules}
             selectedPermissions={selectedPermissions}
@@ -212,7 +243,11 @@ const RolePermissionManagementPage = () => {
             disabled={setRolePermissionsMutation.isLoading || !can('role_permissions', 'update')}
             sx={{ mt: 3 }}
           >
-            {setRolePermissionsMutation.isLoading ? <CircularProgress size={24} /> : 'Save Permissions'}
+            {setRolePermissionsMutation.isLoading ? (
+              <CircularProgress size={24} />
+            ) : (
+              'Save Permissions'
+            )}
           </Button>
         </Box>
       )}

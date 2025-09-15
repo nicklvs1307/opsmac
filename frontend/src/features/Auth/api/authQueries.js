@@ -14,7 +14,8 @@ const fetchMe = async () => {
   return response.data.user; // The endpoint returns { user: ... }
 };
 
-const fetchPermissions = async ({ queryKey }) => { // New API function
+const fetchPermissions = async ({ queryKey }) => {
+  // New API function
   const [, restaurantId] = queryKey;
   if (!restaurantId) {
     return null; // Or throw an error, depending on desired behavior
@@ -40,17 +41,14 @@ export const useFetchMe = () => {
   });
 };
 
-export const useFetchPermissions = (restaurantId) => { // New hook
-  return useQuery(
-    [AUTH_QUERY_KEYS.permissions, restaurantId],
-    fetchPermissions,
-    {
-      enabled: !!restaurantId, // Only run when restaurantId is available
-      staleTime: Infinity,
-      cacheTime: Infinity,
-      retry: false,
-    }
-  );
+export const useFetchPermissions = (restaurantId) => {
+  // New hook
+  return useQuery([AUTH_QUERY_KEYS.permissions, restaurantId], fetchPermissions, {
+    enabled: !!restaurantId, // Only run when restaurantId is available
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    retry: false,
+  });
 };
 
 export const useUpdateProfile = () => {

@@ -39,7 +39,8 @@ class CouponsController {
   async expireCoupons(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
-      const updatedCount = await this.couponsService.expireCoupons(restaurantId);
+      const updatedCount =
+        await this.couponsService.expireCoupons(restaurantId);
       await auditService.log(
         req.user,
         restaurantId,
@@ -100,7 +101,8 @@ class CouponsController {
   async getCouponAnalytics(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
-      const analytics = await this.couponsService.getCouponAnalytics(restaurantId);
+      const analytics =
+        await this.couponsService.getCouponAnalytics(restaurantId);
       res.json(analytics);
     } catch (error) {
       next(error);

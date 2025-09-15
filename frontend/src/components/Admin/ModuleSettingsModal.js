@@ -37,25 +37,28 @@ const ModuleSettingsModal = ({
         const id = path[i];
         if (i === path.length - 1) {
           // This is the target item (module, submodule, or feature)
-          if (path.length === 3) { // It's a feature
+          if (path.length === 3) {
+            // It's a feature
             current[id] = checked;
-          } else { // It's a module or submodule
+          } else {
+            // It's a module or submodule
             current[id].checked = checked;
             // If a module/submodule is unchecked, uncheck all its children
             if (!checked) {
               if (current[id].submodules) {
-                Object.values(current[id].submodules).forEach(sub => {
+                Object.values(current[id].submodules).forEach((sub) => {
                   sub.checked = false;
-                  Object.values(sub.features).forEach(feat => feat = false);
+                  Object.values(sub.features).forEach((feat) => (feat = false));
                 });
               }
               if (current[id].features) {
-                Object.values(current[id].features).forEach(feat => feat = false);
+                Object.values(current[id].features).forEach((feat) => (feat = false));
               }
             }
           }
         } else {
-          if (path.length === 3 && i === 1) { // Navigating to feature within submodule
+          if (path.length === 3 && i === 1) {
+            // Navigating to feature within submodule
             current = current[id].features;
           } else {
             current = current[id].submodules || current[id].features || current[id];
@@ -82,14 +85,18 @@ const ModuleSettingsModal = ({
         let allChildrenChecked = true;
         let anyChildChecked = false;
 
-        const children = path.length === 3 && currentPath.length === 3 ? Object.values(parentNode) :
-                         path.length === 2 && currentPath.length === 2 ? Object.values(parentNode.features) :
-                         Object.values(parentNode.submodules || parentNode.features || {});
+        const children =
+          path.length === 3 && currentPath.length === 3
+            ? Object.values(parentNode)
+            : path.length === 2 && currentPath.length === 2
+              ? Object.values(parentNode.features)
+              : Object.values(parentNode.submodules || parentNode.features || {});
 
-        children.forEach(child => {
+        children.forEach((child) => {
           const childChecked = typeof child === 'boolean' ? child : child.checked;
           if (!childChecked) allChildrenChecked = false;
-          if (childChecked || (typeof child !== 'boolean' && child.indeterminate)) anyChildChecked = true;
+          if (childChecked || (typeof child !== 'boolean' && child.indeterminate))
+            anyChildChecked = true;
         });
 
         if (parentNode) {
@@ -143,12 +150,19 @@ const ModuleSettingsModal = ({
                               <Checkbox
                                 checked={submoduleState.checked || false}
                                 indeterminate={submoduleState.indeterminate || false}
-                                onChange={() => handleModuleChange([module.id, submodule.id], !submoduleState.checked)}
+                                onChange={() =>
+                                  handleModuleChange(
+                                    [module.id, submodule.id],
+                                    !submoduleState.checked
+                                  )
+                                }
                                 name={`${module.id}-${submodule.id}`}
                                 disabled={!can('modules', 'manage')}
                               />
                             }
-                            label={<Typography variant="subtitle1">{submodule.displayName}</Typography>}
+                            label={
+                              <Typography variant="subtitle1">{submodule.displayName}</Typography>
+                            }
                           />
                           <Box sx={{ pl: 4 }}>
                             {submodule.features?.map((feature) => {
@@ -159,12 +173,19 @@ const ModuleSettingsModal = ({
                                   control={
                                     <Checkbox
                                       checked={featureChecked}
-                                      onChange={() => handleModuleChange([module.id, submodule.id, feature.id], !featureChecked)}
+                                      onChange={() =>
+                                        handleModuleChange(
+                                          [module.id, submodule.id, feature.id],
+                                          !featureChecked
+                                        )
+                                      }
                                       name={`${module.id}-${submodule.id}-${feature.id}`}
                                       disabled={!can('modules', 'manage')}
                                     />
                                   }
-                                  label={<Typography variant="body2">{feature.displayName}</Typography>}
+                                  label={
+                                    <Typography variant="body2">{feature.displayName}</Typography>
+                                  }
                                 />
                               );
                             })}
@@ -172,7 +193,8 @@ const ModuleSettingsModal = ({
                         </Box>
                       );
                     })}
-                    {module.features?.map((feature) => { // Direct features under module
+                    {module.features?.map((feature) => {
+                      // Direct features under module
                       const featureChecked = moduleState.features?.[feature.id] || false;
                       return (
                         <FormControlLabel
@@ -180,7 +202,9 @@ const ModuleSettingsModal = ({
                           control={
                             <Checkbox
                               checked={featureChecked}
-                              onChange={() => handleModuleChange([module.id, feature.id], !featureChecked)}
+                              onChange={() =>
+                                handleModuleChange([module.id, feature.id], !featureChecked)
+                              }
                               name={`${module.id}-${feature.id}`}
                               disabled={!can('modules', 'manage')}
                             />

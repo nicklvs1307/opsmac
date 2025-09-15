@@ -519,8 +519,18 @@ export const menuStructure = [
     icon: <CdvIcon />,
     roles: ['admin', 'owner', 'manager'],
     submenu: [
-      { title: 'Painel', path: '/validity-control/dashboard', featureKey: 'validity-control_dashboard', actionKey: 'read' },
-      { title: 'Etiquetas', path: '/validity-control/labels', featureKey: 'validity-control_labels', actionKey: 'read' },
+      {
+        title: 'Painel',
+        path: '/validity-control/dashboard',
+        featureKey: 'validity-control_dashboard',
+        actionKey: 'read',
+      },
+      {
+        title: 'Etiquetas',
+        path: '/validity-control/labels',
+        featureKey: 'validity-control_labels',
+        actionKey: 'read',
+      },
       {
         title: 'Impressão Etiquetas',
         path: '/validity-control/labels/print',

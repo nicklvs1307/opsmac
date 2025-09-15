@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'; // Keep toast for now, might be used elsewh
 import { handleError } from '@/utils/errorHandler'; // Import the new error handler
 
 const axiosInstance = axios.create({
-  baseURL: (process.env.REACT_APP_API_URL || 'http://localhost:5000'),
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
   timeout: 10000, // 10 second timeout
   headers: {
     'Content-Type': 'application/json',
@@ -20,7 +20,8 @@ if (token) {
 axiosInstance.interceptors.request.use(
   (config) => {
     const currentToken = localStorage.getItem('token');
-    if (currentToken && !config.headers.Authorization) { // Only set if not already present
+    if (currentToken && !config.headers.Authorization) {
+      // Only set if not already present
       config.headers.Authorization = `Bearer ${currentToken}`;
     }
     return config;

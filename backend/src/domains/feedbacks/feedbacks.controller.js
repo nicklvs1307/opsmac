@@ -23,11 +23,12 @@ class FeedbacksController {
       this.handleValidation(req);
       const restaurantId = req.context.restaurantId;
       const reqInfo = { ip: req.ip, userAgent: req.get("User-Agent") };
-      const { feedback, points_earned } = await this.feedbackService.createFeedback(
-        req.body,
-        restaurantId,
-        reqInfo,
-      );
+      const { feedback, points_earned } =
+        await this.feedbackService.createFeedback(
+          req.body,
+          restaurantId,
+          reqInfo,
+        );
       await auditService.log(
         req.user,
         restaurantId,

@@ -14,7 +14,10 @@ import {
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useSatisfactionAnalytics } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService';
-import { useEvolutionAnalytics, useRatingDistribution } from '@/features/Dashboard/api/dashboardQueries';
+import {
+  useEvolutionAnalytics,
+  useRatingDistribution,
+} from '@/features/Dashboard/api/dashboardQueries';
 import {
   PieChart,
   Pie,
@@ -37,14 +40,31 @@ const SatisfactionOverview = () => {
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  
-
   const [startDate, setStartDate] = useState(format(subMonths(new Date(), 12), 'yyyy-MM-dd'));
   const [endDate, setEndDate] = useState(format(new Date(), 'yyyy-MM-dd'));
 
-  const { data: analyticsData, isLoading: isLoadingAnalytics, isError: isErrorAnalytics, error: errorAnalytics } = useSatisfactionAnalytics(restaurantId, { start_date: startDate, end_date: endDate });
-  const { data: evolutionData, isLoading: isLoadingEvolution, isError: isErrorEvolution, error: errorEvolution } = useEvolutionAnalytics(restaurantId, { start_date: startDate, end_date: endDate, granularity: 'month' });
-  const { data: ratingDistributionData, isLoading: isLoadingRating, isError: isErrorRating, error: errorRating } = useRatingDistribution(restaurantId, { start_date: startDate, end_date: endDate });
+  const {
+    data: analyticsData,
+    isLoading: isLoadingAnalytics,
+    isError: isErrorAnalytics,
+    error: errorAnalytics,
+  } = useSatisfactionAnalytics(restaurantId, { start_date: startDate, end_date: endDate });
+  const {
+    data: evolutionData,
+    isLoading: isLoadingEvolution,
+    isError: isErrorEvolution,
+    error: errorEvolution,
+  } = useEvolutionAnalytics(restaurantId, {
+    start_date: startDate,
+    end_date: endDate,
+    granularity: 'month',
+  });
+  const {
+    data: ratingDistributionData,
+    isLoading: isLoadingRating,
+    isError: isErrorRating,
+    error: errorRating,
+  } = useRatingDistribution(restaurantId, { start_date: startDate, end_date: endDate });
 
   if (isLoadingAnalytics || isLoadingEvolution || isLoadingRating) {
     return (
@@ -57,18 +77,22 @@ const SatisfactionOverview = () => {
   if (isErrorAnalytics || isErrorEvolution || isErrorRating) {
     return (
       <Alert severity="error" sx={{ mb: 2 }}>
-        {errorAnalytics?.message || errorEvolution?.message || errorRating?.message || t('common.error_loading_data')}
+        {errorAnalytics?.message ||
+          errorEvolution?.message ||
+          errorRating?.message ||
+          t('common.error_loading_data')}
       </Alert>
     );
   }
 
   const { totalResponses, averageNps, averageCsat, npsMetricsPerCriterion } = analyticsData;
 
-  const monthlySatisfactionTrend = evolutionData?.map(d => ({
+  const monthlySatisfactionTrend =
+    evolutionData?.map((d) => ({
       name: format(new Date(d.date), 'MMM/yy'),
       nps: d.nps,
       csat: d.csat,
-  })) || [];
+    })) || [];
 
   return (
     <Box sx={{ p: 3 }}>
@@ -77,33 +101,33 @@ const SatisfactionOverview = () => {
       </Typography>
 
       <Paper sx={{ p: 3, mb: 3 }}>
-          <Grid container spacing={2} alignItems="center">
-              <Grid item xs={12} md={5}>
-                  <TextField
-                      label={t('common.start_date')}
-                      type="date"
-                      fullWidth
-                      InputLabelProps={{ shrink: true }}
-                      value={startDate}
-                      onChange={(e) => setStartDate(e.target.value)}
-                  />
-              </Grid>
-              <Grid item xs={12} md={5}>
-                  <TextField
-                      label={t('common.end_date')}
-                      type="date"
-                      fullWidth
-                      InputLabelProps={{ shrink: true }}
-                      value={endDate}
-                      onChange={(e) => setEndDate(e.target.value)}
-                  />
-              </Grid>
-              <Grid item xs={12} md={2}>
-                  <Button variant="contained" fullWidth>
-                      {t('common.apply_filters')}
-                  </Button>
-              </Grid>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs={12} md={5}>
+            <TextField
+              label={t('common.start_date')}
+              type="date"
+              fullWidth
+              InputLabelProps={{ shrink: true }}
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
           </Grid>
+          <Grid item xs={12} md={5}>
+            <TextField
+              label={t('common.end_date')}
+              type="date"
+              fullWidth
+              InputLabelProps={{ shrink: true }}
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} md={2}>
+            <Button variant="contained" fullWidth>
+              {t('common.apply_filters')}
+            </Button>
+          </Grid>
+        </Grid>
       </Paper>
 
       <Grid container spacing={3} mb={4}>

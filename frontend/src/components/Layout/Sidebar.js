@@ -142,34 +142,33 @@ const Sidebar = ({ menuStructure, checkPermission, onMobileClose, isSuperadmin }
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const filterAndMapMenuItems = (items) => {
-    return items
-      .map((item) => {
-        let hasAccess = true;
-        let isLocked = false;
+    return items.map((item) => {
+      let hasAccess = true;
+      let isLocked = false;
 
-        if (isSuperadmin) {
-          hasAccess = true;
-          isLocked = false;
-        } else if (item.featureKey && item.actionKey) {
-          const perm = checkPermission(item.featureKey, item.actionKey);
-          hasAccess = perm.allowed;
-          isLocked = perm.locked;
+      if (isSuperadmin) {
+        hasAccess = true;
+        isLocked = false;
+      } else if (item.featureKey && item.actionKey) {
+        const perm = checkPermission(item.featureKey, item.actionKey);
+        hasAccess = perm.allowed;
+        isLocked = perm.locked;
+      }
+
+      const newItem = { ...item, hasAccess, isLocked };
+
+      if (item.submenu) {
+        newItem.submenu = filterAndMapMenuItems(newItem.submenu);
+        if (!hasAccess) {
+          newItem.submenu.forEach((sub) => {
+            sub.hasAccess = false;
+            sub.isLocked = true;
+          });
         }
+      }
 
-        const newItem = { ...item, hasAccess, isLocked };
-
-        if (item.submenu) {
-          newItem.submenu = filterAndMapMenuItems(newItem.submenu);
-          if (!hasAccess) {
-            newItem.submenu.forEach((sub) => {
-              sub.hasAccess = false;
-              sub.isLocked = true;
-            });
-          }
-        }
-
-        return newItem;
-      });
+      return newItem;
+    });
   };
 
   const filteredMenuItems = filterAndMapMenuItems(menuStructure);
@@ -232,7 +231,12 @@ const Sidebar = ({ menuStructure, checkPermission, onMobileClose, isSuperadmin }
           {filteredMenuItems.map((moduleItem) => (
             <React.Fragment key={moduleItem.name}>
               <ListItem disablePadding sx={{ mb: 0.5 }}>
-                <Tooltip title={moduleItem.displayName || moduleItem.title} placement="right" arrow enterDelay={500}>
+                <Tooltip
+                  title={moduleItem.displayName || moduleItem.title}
+                  placement="right"
+                  arrow
+                  enterDelay={500}
+                >
                   <ListItemButton
                     onClick={(event) => handleMenuToggle(event, moduleItem)}
                     selected={isActive(moduleItem.path)}

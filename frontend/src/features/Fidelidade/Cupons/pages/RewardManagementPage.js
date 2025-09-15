@@ -70,7 +70,7 @@ const RewardManagementPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [editingReward, setEditingReward] = useState(null); // null for create, object for edit
 
-  const { 
+  const {
     data: rewards,
     isLoading,
     isError,
@@ -143,7 +143,10 @@ const RewardManagementPage = () => {
     if (editingReward) {
       updateRewardMutation.mutate({ rewardId: editingReward.id, rewardData, token });
     } else {
-      createRewardMutation.mutate({ rewardData: { ...rewardData, restaurant_id: restaurantId }, token });
+      createRewardMutation.mutate({
+        rewardData: { ...rewardData, restaurant_id: restaurantId },
+        token,
+      });
     }
   };
 
@@ -203,7 +206,9 @@ const RewardManagementPage = () => {
                   <IconButton onClick={() => handleOpenEditDialog(reward)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton onClick={() => deleteRewardMutation.mutate({ rewardId: reward.id, token })}> 
+                  <IconButton
+                    onClick={() => deleteRewardMutation.mutate({ rewardId: reward.id, token })}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
@@ -214,7 +219,11 @@ const RewardManagementPage = () => {
       </TableContainer>
 
       <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>{editingReward ? t('reward_management.edit_reward') : t('reward_management.create_reward')}</DialogTitle>
+        <DialogTitle>
+          {editingReward
+            ? t('reward_management.edit_reward')
+            : t('reward_management.create_reward')}
+        </DialogTitle>
         <DialogContent>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
             <TextField
@@ -252,7 +261,9 @@ const RewardManagementPage = () => {
               defaultValue={editingReward?.value || 0}
             />
             <FormControl fullWidth margin="dense">
-              <InputLabel id="reward-type-label">{t('reward_management.form.reward_type')}</InputLabel>
+              <InputLabel id="reward-type-label">
+                {t('reward_management.form.reward_type')}
+              </InputLabel>
               <Select
                 labelId="reward-type-label"
                 id="reward_type"
@@ -263,7 +274,9 @@ const RewardManagementPage = () => {
               >
                 <MenuItem value="discount">{t('reward_management.form.type_discount')}</MenuItem>
                 <MenuItem value="free_item">{t('reward_management.form.type_free_item')}</MenuItem>
-                <MenuItem value="spin_the_wheel">{t('reward_management.form.type_spin_the_wheel')}</MenuItem>
+                <MenuItem value="spin_the_wheel">
+                  {t('reward_management.form.type_spin_the_wheel')}
+                </MenuItem>
                 {/* Add other reward types as needed */}
               </Select>
             </FormControl>
@@ -281,7 +294,12 @@ const RewardManagementPage = () => {
             {/* TODO: Add fields for trigger_conditions and wheel_config based on reward_type */}
             <DialogActions>
               <Button onClick={handleCloseDialog}>{t('common.cancel')}</Button>
-              <Button type="submit" variant="contained" color="primary" disabled={createRewardMutation.isLoading || updateRewardMutation.isLoading}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={createRewardMutation.isLoading || updateRewardMutation.isLoading}
+              >
                 {editingReward ? t('common.save_changes') : t('common.create')}
               </Button>
             </DialogActions>

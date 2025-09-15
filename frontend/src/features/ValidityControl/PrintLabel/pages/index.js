@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import styles from '../style.module.css';
-import { useLabelUsers, useLabelItems, usePrintLabel } from '@/features/ValidityControl/PrintLabel/api/printLabelService';
+import {
+  useLabelUsers,
+  useLabelItems,
+  usePrintLabel,
+} from '@/features/ValidityControl/PrintLabel/api/printLabelService';
 import { CircularProgress, Alert } from '@mui/material';
 
 const PrintLabel = () => {

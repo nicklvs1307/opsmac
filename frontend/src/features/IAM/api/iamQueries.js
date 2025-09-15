@@ -15,7 +15,7 @@ export const useGetPermissionTree = (restaurantId, options) => {
     },
     {
       enabled: !!restaurantId && !!user?.token && (options?.enabled ?? true), // Modify this line
-      ...options
+      ...options,
     }
   );
 };
@@ -31,7 +31,7 @@ export const useGetRoles = (restaurantId, options) => {
     },
     {
       enabled: !!restaurantId && !!user?.token && (options?.enabled ?? true),
-      ...options
+      ...options,
     }
   );
 };
@@ -82,7 +82,7 @@ export const useGetUserRoles = (userId, restaurantId, options) => {
     },
     {
       enabled: !!userId && !!restaurantId && !!user?.token && (options?.enabled ?? true),
-      ...options
+      ...options,
     }
   );
 };
@@ -90,9 +90,12 @@ export const useGetUserRoles = (userId, restaurantId, options) => {
 // Assign a role to a user
 export const useAssignUserRole = () => {
   return useMutation(async ({ userId, restaurantId, roleId }) => {
-    const { data } = await axiosInstance.post(`/iam/users/${userId}/roles?restaurantId=${restaurantId}`, {
-      roleId,
-    });
+    const { data } = await axiosInstance.post(
+      `/iam/users/${userId}/roles?restaurantId=${restaurantId}`,
+      {
+        roleId,
+      }
+    );
     return data;
   });
 };
@@ -119,7 +122,7 @@ export const useGetUserPermissionOverrides = (userId, restaurantId, options) => 
     },
     {
       enabled: !!userId && !!restaurantId && !!user?.token && (options?.enabled ?? true),
-      ...options
+      ...options,
     }
   );
 };
@@ -127,7 +130,10 @@ export const useGetUserPermissionOverrides = (userId, restaurantId, options) => 
 // Set user permission overrides
 export const useSetUserPermissionOverrides = () => {
   return useMutation(async ({ userId, restaurantId, overrides }) => {
-    const { data } = await axiosInstance.post(`/iam/users/${userId}/overrides`, { restaurantId, overrides });
+    const { data } = await axiosInstance.post(`/iam/users/${userId}/overrides`, {
+      restaurantId,
+      overrides,
+    });
     return data;
   });
 };
@@ -172,7 +178,7 @@ export const useGetRolePermissions = (roleId, restaurantId, options) => {
     },
     {
       enabled: !!roleId && !!restaurantId && !!user?.token && (options?.enabled ?? true),
-      ...options
+      ...options,
     }
   );
 };

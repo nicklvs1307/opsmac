@@ -4,6 +4,7 @@ const asyncHandler = require("utils/asyncHandler");
 
 module.exports = (db) => {
   const authController = require("domains/auth/auth.controller")(db);
+  const { auth } = require("../../middleware/authMiddleware")(db);
   const {
     loginValidation,
     registerValidation,
@@ -215,7 +216,7 @@ module.exports = (db) => {
    *       401:
    *         description: Unauthorized
    */
-  router.get("/me", asyncHandler(authController.getMe));
+  router.get("/me", auth, asyncHandler(authController.getMe));
 
   /**
    * @swagger
@@ -264,6 +265,7 @@ module.exports = (db) => {
    */
   router.put(
     "/profile",
+    auth,
     ...updateProfileValidation,
     asyncHandler(authController.updateProfile),
   );
@@ -302,6 +304,7 @@ module.exports = (db) => {
    */
   router.put(
     "/change-password",
+    auth,
     ...changePasswordValidation,
     asyncHandler(authController.changePassword),
   );
@@ -318,7 +321,7 @@ module.exports = (db) => {
    *       200:
    *         description: Logout successful
    */
-  router.post("/logout", asyncHandler(authController.logout));
+  router.post("/logout", auth, asyncHandler(authController.logout));
 
   return router;
 };

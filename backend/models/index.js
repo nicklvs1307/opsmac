@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 import { Sequelize } from "sequelize";
-import logger from "utils/logger";
-import _config from "config/config.js";
+import logger from "#utils/logger.js";
+import _config from "#config/config.js";
 import { fileURLToPath } from 'url';
 
 const basename = path.basename(import.meta.url);

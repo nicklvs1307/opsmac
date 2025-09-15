@@ -577,16 +577,22 @@ class IamService {
     // Process roles and permissions (this will be further refined)
     const rolesPermissions = {};
     userRoles.forEach((userRole) => {
-      userRole.role.permissions.forEach((rp) => {
-        if (rp.feature && rp.action) {
-          const featureKey = rp.feature.key;
-          const actionKey = rp.action.key;
-          if (!rolesPermissions[featureKey]) {
-            rolesPermissions[featureKey] = {};
+      if (userRole.role && userRole.role.permissions) {
+        userRole.role.permissions.forEach((rp) => {
+          if (rp.feature && rp.action) {
+            const featureKey = rp.feature.key;
+            const actionKey = rp.action.key;
+            if (!rolesPermissions[featureKey]) {
+              rolesPermissions[featureKey] = {};
+            }
+            rolesPermissions[featureKey][actionKey] = rp.allowed;
           }
-          rolesPermissions[featureKey][actionKey] = rp.allowed;
-        }
-      });
+        });
+      } else {
+        logger.warn(
+          `[IamService] Inconsistent data found: UserRole record with id ${userRole.id} points to a non-existent role (role_id: ${userRole.role_id}). Skipping.`,
+        );
+      }
     });
 
     // Process user overrides

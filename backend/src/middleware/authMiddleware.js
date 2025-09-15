@@ -86,7 +86,7 @@ module.exports = (db) => {
       }
 
       // Fetch the restaurant object and attach it to req for later use
-      const restaurant = await models.Restaurant.findByPk(restaurantId);
+      const restaurant = await db.Restaurant.findByPk(restaurantId);
       if (!restaurant) {
         return next(new NotFoundError("Restaurante não encontrado."));
       }

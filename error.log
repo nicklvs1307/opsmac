@@ -1,17 +1,251 @@
-> feedeliza-plus@1.0.0 start
-> node server.js
-2025-09-15 10:21:00 [info]: 	Redis Client Connected
-2025-09-15 10:21:00 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-15 10:21:00 [info]: 	Redis Subscriber Client Connected
-2025-09-15 10:21:00 [info]: 	Subscribed to perm_invalidation channel.
-2025-09-15 10:21:03 [info]: 	🚀 Servidor rodando na porta 5000
-2025-09-15 10:21:18 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:18 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-15 10:21:19 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:19 +0000] "POST /api/auth/login HTTP/1.1" 200 1958 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-15 10:21:19 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:19 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-15 10:21:19 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:19 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-15 10:21:19 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:19 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-15 10:21:19 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:19 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-15 10:21:25 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:25 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-15 10:21:25 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:25 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-15 10:21:38 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:38 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-15 10:21:38 [info]: 	170.254.46.100 - - [15/Sep/2025:10:21:38 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+fetch("https://feedelizapro.towersfy.com/login", {
+  "headers": {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0, i",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap", {
+  "headers": {
+    "accept": "text/css,*/*;q=0.1",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "style",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site",
+    "sec-fetch-storage-access": "active",
+    "x-browser-channel": "stable",
+    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
+    "x-browser-validation": "DTaAFOAcbbd2xIkIWiLdbtAAhQc=",
+    "x-browser-year": "2025",
+    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIlqHLAQiFoM0B",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.googleapis.com/icon?family=Material+Icons", {
+  "headers": {
+    "accept": "text/css,*/*;q=0.1",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "style",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site",
+    "sec-fetch-storage-access": "active",
+    "x-browser-channel": "stable",
+    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
+    "x-browser-validation": "DTaAFOAcbbd2xIkIWiLdbtAAhQc=",
+    "x-browser-year": "2025",
+    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIlqHLAQiFoM0B",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/js/main.186c9761.js", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "script",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "same-origin",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/css/main.285c14a1.css", {
+  "headers": {
+    "accept": "text/css,*/*;q=0.1",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "style",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "same-origin",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/js/4296.a86c24d6.chunk.js", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/js/7904.130fd051.chunk.js", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/js/6782.490179b6.chunk.js", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/js/2525.cf4e827b.chunk.js", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/static/js/7704.eb9c70f8.chunk.js", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "font",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "x-browser-channel": "stable",
+    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
+    "x-browser-validation": "DTaAFOAcbbd2xIkIWiLdbtAAhQc=",
+    "x-browser-year": "2025",
+    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIlqHLAQiFoM0B",
+    "Referer": "https://fonts.googleapis.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/favicon.ico", {
+  "headers": {
+    "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "image",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "same-origin",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3NjVmMDBlNC0yZTc0LTQ2ZGUtOTM1OS1lOTg0MmI5MzI1OWEiLCJpYXQiOjE3NTc5MzE2NzksImV4cCI6MTc1ODUzNjQ3OX0.iEiwd4gOxEqdMllfGFqdbN1NOUDwjb2CwXzDniOEDPY",
+    "if-none-match": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\"",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizapro.towersfy.com/manifest.json", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://feedelizapro.towersfy.com/"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://feedelizapro.towersfy.com/logo192.png", {
+  "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://feedelizapro.towersfy.com/login"
+  },
+  "body": null,
+  "method": "GET"
+});
+AuthContext.js:107 AuthContext: userData undefined
+AuthContext.js:108 AuthContext: isUserLoading true
+AuthContext.js:109 AuthContext: isUserError false
+login:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+AuthContext.js:107 AuthContext: userData undefined
+AuthContext.js:108 AuthContext: isUserLoading false
+AuthContext.js:109 AuthContext: isUserError false

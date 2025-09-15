@@ -1,20 +1,5 @@
-import path from "path";
-import { fileURLToPath } from 'url';
-import moduleAlias from 'module-alias';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// Configurar aliases baseados no jsconfig.json
-moduleAlias.addAliases({
-  '~': path.resolve(__dirname, './src'),
-  'middleware': path.resolve(__dirname, './src/middleware'),
-  'config': path.resolve(__dirname, './src/config'),
-  'domains': path.resolve(__dirname, './src/domains'),
-  'services': path.resolve(__dirname, './src/services'),
-  'utils': path.resolve(__dirname, './src/utils'),
-  'models': path.resolve(__dirname, './models')
-});
 
 
 import express from "express";
@@ -25,17 +10,14 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 dotenv.config();
 
-import db from "models/index.js";
-import { BaseError } from "utils/errors";
-import logger from "utils/logger";
-import {
-  initCacheInvalidator,
-  subscriberClient,
-} from "./src/jobs/cacheInvalidator";
+import db from "#models/index.js";
+import { BaseError } from "#utils/errors.js";
+import logger from "#utils/logger.js";
+import { initCacheInvalidator, subscriberClient, } from "#src/jobs/cacheInvalidator.js";
 
 // Importação de Rotas
-import routes from "routes";
-import errorHandler from "middleware/errorHandler";
+import routes from "./routes/index.js";
+import errorHandler from "#middleware/errorHandler.js";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -90,7 +72,7 @@ app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 // Swagger UI
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "config/swagger";
+import swaggerDocument from "#config/swagger.js";
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(errorHandler);

@@ -84,7 +84,7 @@ exports.listFeedbacksValidation = [
     .withMessage("Termo de busca deve ter no máximo 200 caracteres"),
 ];
 
-exports.respondToFeedbackValidation = [
+export const respondToFeedbackValidation = [
   body("response_text")
     .trim()
     .isLength({ min: 1, max: 1000 })

@@ -1,14 +1,16 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const {
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
+import {
   createGoalValidation,
   updateGoalValidation,
-} = require("domains/goals/goals.validation");
+} from "domains/goals/goals.validation";
 
-const requirePermission = require("middleware/requirePermission");
+import requirePermission from "middleware/requirePermission";
 
-module.exports = (db) => {
-  const goalsController = require("./goals.controller")(db);
+import goalsControllerFactory from "./goals.controller";
+
+export default (db) => {
+  const goalsController = goalsControllerFactory(db);
   const router = express.Router();
 
   router.get(

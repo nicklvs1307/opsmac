@@ -1,4 +1,4 @@
-const { models, sequelize } = require("config/config");
+const { models, sequelize } = require("config/database");
 const {
   sendWhatsAppMessage,
 } = require("~/services/integrations/whatsappApiClient");

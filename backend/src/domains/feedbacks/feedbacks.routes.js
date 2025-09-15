@@ -1,18 +1,19 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const { logUserAction } = require("middleware/logUserActionMiddleware");
-const requirePermission = require("middleware/requirePermission");
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
+import { logUserAction } from "middleware/logUserActionMiddleware";
+import requirePermission from "middleware/requirePermission";
 
-module.exports = (db) => {
-  const { auth } = require("middleware/authMiddleware")(db);
-  const feedbackController = require("./feedbacks.controller")(db);
-  const {
-    createFeedbackValidation,
-    listFeedbacksValidation,
-    updateFeedbackValidation,
-    respondToFeedbackValidation,
-  } = require("./feedbacks.validation");
+import { auth } from "middleware/authMiddleware";
+import feedbackControllerFactory from "./feedbacks.controller";
+import {
+  createFeedbackValidation,
+  listFeedbacksValidation,
+  updateFeedbackValidation,
+  respondToFeedbackValidation,
+} from "./feedbacks.validation";
 
+export default (db) => {
+  const feedbackController = feedbackControllerFactory(db);
   const router = express.Router();
 
   router.use(auth);

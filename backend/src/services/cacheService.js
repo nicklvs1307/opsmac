@@ -1,6 +1,6 @@
 "use strict";
 
-const redisClient = require("../config/redisClient");
+const redisClient = require("config/redisClient");
 const logger = require("utils/logger"); // Import logger
 
 class CacheService {

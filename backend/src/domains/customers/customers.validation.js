@@ -41,7 +41,7 @@ exports.byPhoneValidation = [
   query("phone").notEmpty().withMessage("Número de telefone é obrigatório."),
 ];
 
-exports.updateCustomerValidation = [
+export const updateCustomerValidation = [
   body("name").optional().notEmpty().withMessage("Nome não pode ser vazio"),
   body("phone")
     .optional()

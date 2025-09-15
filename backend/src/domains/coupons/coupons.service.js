@@ -1,10 +1,10 @@
-const { Op } = require("sequelize");
-const { NotFoundError, BadRequestError } = require("utils/errors");
+import { Op } from "sequelize";
+import { NotFoundError, BadRequestError } from "utils/errors";
 
-module.exports = (db) => {
+  export default (db) => {
   const models = db;
   const sequelize = db.sequelize;
-  const rewardsService = require("../rewards/rewards.service")(db);
+  import rewardsServiceFactory from "domains/rewards/rewards.service";
 
   // Helper Functions for explicit business logic
   const _isCouponValid = (coupon) => {

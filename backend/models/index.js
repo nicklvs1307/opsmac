@@ -1,11 +1,13 @@
-"use strict";
+import fs from "fs";
+import path from "path";
+import { Sequelize } from "sequelize";
+import logger from "#utils/logger";
+import _config from "../../config/config.js";
+import { fileURLToPath } from 'url';
 
-const fs = require("fs");
-const path = require("path");
-const Sequelize = require("sequelize");
-const basename = path.basename(__filename);
+const basename = path.basename(import.meta.url);
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.js")[env];
+const config = _config[env];
 const db = {};
 
 let sequelize;
@@ -20,23 +22,24 @@ if (config.use_env_variable) {
   );
 }
 
-fs.readdirSync(__dirname)
-  .filter((file) => {
-    return (
-      file.indexOf(".") !== 0 &&
-      file !== basename &&
-      file.slice(-3) === ".js" &&
-      file.indexOf(".test.js") === -1
-    );
-  })
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(
-      sequelize,
-      Sequelize.DataTypes,
-      Sequelize,
-    );
-    db[model.name] = model;
-  });
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
+const modelFiles = fs.readdirSync(currentDir).filter((file) => {
+  return (
+    file.indexOf(".") !== 0 &&
+    file !== basename &&
+    file.slice(-3) === ".js" &&
+    file.indexOf(".test.js") === -1
+  );
+});
+
+for (const file of modelFiles) {
+  const model = (await import(path.join(currentDir, file))).default(
+    sequelize,
+    Sequelize.DataTypes,
+    Sequelize,
+  );
+  db[model.name] = model;
+}
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
@@ -51,10 +54,10 @@ db.Sequelize = Sequelize;
 db.testConnection = async () => {
   try {
     await sequelize.authenticate();
-    console.log("✅ Conexão com PostgreSQL estabelecida com sucesso");
+    logger.info("✅ Conexão com PostgreSQL estabelecida com sucesso");
     return true;
   } catch (error) {
-    console.error("❌ Erro ao conectar com PostgreSQL:", error.message);
+    logger.error("❌ Erro ao conectar com PostgreSQL:", error.message);
     throw error; // Re-lança o erro para que a inicialização do servidor possa capturá-lo
   }
 };
@@ -63,12 +66,12 @@ db.testConnection = async () => {
 db.syncDatabase = async (force = false) => {
   try {
     await sequelize.sync({ force });
-    console.log("✅ Banco de dados sincronizado");
+    logger.info("✅ Banco de dados sincronizado");
     return true;
   } catch (error) {
-    console.error("❌ Erro ao sincronizar banco:", error);
+    logger.error("❌ Erro ao sincronizar banco:", error);
     throw error;
   }
 };
 
-module.exports = db;
+export default db;

@@ -1,13 +1,15 @@
-const express = require("express");
+import express from "express";
 
-const requirePermission = require("middleware/requirePermission");
-const {
+import requirePermission from "middleware/requirePermission";
+import {
   categoryValidation,
-} = require("domains/categories/categories.validation");
-const asyncHandler = require("utils/asyncHandler"); // Adicionar esta linha
+} from "domains/categories/categories.validation";
+import asyncHandler from "utils/asyncHandler";
 
-module.exports = (db) => {
-  const categoriesController = require("./categories.controller")(db);
+import categoriesControllerFactory from "./categories.controller";
+
+export default (db) => {
+  const categoriesController = categoriesControllerFactory(db);
   const router = express.Router();
 
   // Rotas de Categorias

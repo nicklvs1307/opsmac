@@ -1,7 +1,8 @@
-module.exports = (db) => {
+  export default (db) => {
   const models = db;
-  const { Op, sequelize } = require("sequelize");
-  const { BadRequestError, NotFoundError } = require("utils/errors");
+  import { Op, sequelize } from "sequelize";
+  import { BadRequestError, NotFoundError } from "utils/errors";
+  import logger from "utils/logger";
 
   const listSegments = async (restaurantId) => {
     const segments = await models.CustomerSegment.findAll({
@@ -86,7 +87,7 @@ module.exports = (db) => {
       return { message: "Regras de segmentação aplicadas com sucesso." };
     } catch (error) {
       await transaction.rollback();
-      console.error("Erro ao aplicar regras de segmentação:", error);
+      logger.error("Erro ao aplicar regras de segmentação:", error);
       throw new Error("Falha ao aplicar regras de segmentação.");
     }
   };

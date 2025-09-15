@@ -1,12 +1,12 @@
 const { body } = require("express-validator");
 
-const createSegmentValidation = [
+export const createSegmentValidation = [
   body("name").notEmpty().withMessage("O nome do segmento é obrigatório."),
   body("rules").isArray().withMessage("As regras devem ser um array."),
   // Add more specific validation for rules array elements if needed
 ];
 
-const updateSegmentValidation = [
+export const updateSegmentValidation = [
   body("name")
     .optional()
     .notEmpty()
@@ -17,7 +17,4 @@ const updateSegmentValidation = [
     .withMessage("As regras devem ser um array."),
 ];
 
-module.exports = {
-  createSegmentValidation,
-  updateSegmentValidation,
-};
+

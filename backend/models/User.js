@@ -92,7 +92,7 @@ export default (sequelize, DataTypes) => {
       modelName: "User",
       tableName: "users",
       timestamps: true,
-      underscored: true, // Even though global is false, setting here ensures mapping
+      underscored: true,
     },
   );
 

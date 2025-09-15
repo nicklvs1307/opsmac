@@ -1,6 +1,6 @@
 const { body } = require("express-validator");
 
-exports.categoryValidation = [
+export const categoryValidation = [
   body("name")
     .notEmpty()
     .withMessage("Nome da categoria é obrigatório")

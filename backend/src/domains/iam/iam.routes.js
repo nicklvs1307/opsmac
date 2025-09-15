@@ -1,13 +1,13 @@
 "use strict";
 
-const express = require("express");
-const requirePermission = require("middleware/requirePermission");
-const asyncHandler = require("utils/asyncHandler");
-const { requireSuperadmin } = require("middleware/adminAuthMiddleware");
+import express from "express";
+import requirePermission from "middleware/requirePermission";
+import asyncHandler from "utils/asyncHandler";
+import { requireSuperadmin } from "middleware/adminAuthMiddleware";
 
 module.exports = (db) => {
   const router = express.Router();
-  const IamController = require("domains/iam/iam.controller")(db);
+  import IamControllerFactory from "domains/iam/iam.controller";
 
   /**
    * @swagger

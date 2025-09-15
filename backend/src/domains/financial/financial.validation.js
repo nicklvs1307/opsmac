@@ -62,7 +62,7 @@ exports.createPaymentMethodValidation = [
   body("is_active").isBoolean().withMessage("Is active must be a boolean."),
 ];
 
-exports.updatePaymentMethodValidation = [
+export const updatePaymentMethodValidation = [
   body("name")
     .optional()
     .notEmpty()

@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-const { models } = require("config/config");
+const { models } = require("config/database");
+const logger = require("utils/logger");
 
 const optionalAuth = async (req, res, next) => {
   try {
@@ -35,7 +36,7 @@ const optionalAuth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error("Erro no middleware de autenticação opcional:", error);
+    logger.error("Erro no middleware de autenticação opcional:", error);
     next(); // Continuar mesmo com erro
   }
 };

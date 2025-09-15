@@ -1,5 +1,5 @@
 const createApiClient = require("utils/apiClientFactory");
-const { models } = require("config/config");
+const { models } = require("config/database");
 const uuid = require("uuid");
 
 const IFOOD_AUTH_URL =

@@ -1,8 +1,8 @@
-const { BadRequestError, NotFoundError } = require("utils/errors");
-const { generateUniqueSlug } = require("utils/slugGenerator");
-const bcrypt = require("bcryptjs");
+import { BadRequestError, NotFoundError } from "utils/errors";
+import { generateUniqueSlug } from "utils/slugGenerator";
+import bcrypt from "bcryptjs";
 
-module.exports = (db) => {
+export default (db) => {
   const models = db;
   const sequelize = db.sequelize;
 

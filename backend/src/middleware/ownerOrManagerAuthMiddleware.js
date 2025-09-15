@@ -1,4 +1,5 @@
-const { models } = require("config/config");
+const { models } = require("config/database");
+const logger = require("utils/logger");
 
 const isOwnerOrManager = async (req, res, next) => {
   try {
@@ -35,7 +36,7 @@ const isOwnerOrManager = async (req, res, next) => {
         "Acesso negado. Você não tem permissão para gerenciar este restaurante.",
     });
   } catch (error) {
-    console.error("Erro na verificação de permissão:", error);
+    logger.error("Erro na verificação de permissão:", error);
     res.status(500).json({ error: "Erro interno do servidor." });
   }
 };

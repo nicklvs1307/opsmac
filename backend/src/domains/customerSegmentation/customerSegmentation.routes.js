@@ -1,15 +1,17 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const {
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
+import {
   createSegmentValidation,
   updateSegmentValidation,
-} = require("domains/customerSegmentation/customerSegmentation.validation");
+} from "domains/customerSegmentation/customerSegmentation.validation";
 
-const requirePermission = require("middleware/requirePermission");
+import requirePermission from "middleware/requirePermission";
 
-module.exports = (db) => {
+import customerSegmentationControllerFactory from "./customerSegmentation.controller";
+
+export default (db) => {
   const customerSegmentationController =
-    require("./customerSegmentation.controller")(db);
+    customerSegmentationControllerFactory(db);
   const router = express.Router();
 
   router.get(

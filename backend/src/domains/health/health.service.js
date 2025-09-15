@@ -1,4 +1,4 @@
-module.exports = (db) => {
+export default (db) => {
   const getHealthStatus = () => {
     return {
       status: "OK",

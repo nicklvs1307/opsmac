@@ -1,15 +1,14 @@
-const express = require("express");
-const requirePermission = require("middleware/requirePermission");
-const asyncHandler = require("utils/asyncHandler");
-const {
-  openSessionValidation,
-  recordMovementValidation,
-  closeSessionValidation,
-} = require("domains/cashRegister/cashRegister.validation");
+import express from "express";
+import requirePermission from "middleware/requirePermission";
+import asyncHandler from "utils/asyncHandler";
+import { openSessionValidation, recordMovementValidation, closeSessionValidation, } from "domains/cashRegister/cashRegister.validation";
 
-module.exports = (db) => {
-  const cashRegisterService = require("./cashRegister.service")(db);
-  const cashRegisterController = require("./cashRegister.controller")(
+import cashRegisterServiceFactory from "./cashRegister.service";
+import cashRegisterControllerFactory from "./cashRegister.controller";
+
+export default (db) => {
+  const cashRegisterService = cashRegisterServiceFactory(db);
+  const cashRegisterController = cashRegisterControllerFactory(
     cashRegisterService,
   );
 

@@ -1,20 +1,21 @@
 const rewardsServiceFactory = require("./rewards.service");
-console.log(
+const logger = require("utils/logger");
+logger.debug(
   "DEBUG: rewards.module.js - rewardsServiceFactory:",
   rewardsServiceFactory,
 );
 const rewardsControllerFactory = require("./rewards.controller");
-console.log(
+logger.debug(
   "DEBUG: rewards.module.js - rewardsControllerFactory:",
   rewardsControllerFactory,
 );
 
 module.exports = (db) => {
-  console.log("DEBUG: rewards.module.js - received db:", db);
+  logger.debug("DEBUG: rewards.module.js - received db:", db);
   const rewardsService = rewardsServiceFactory(db); // Pass db directly
-  console.log("DEBUG: rewards.module.js - rewardsService:", rewardsService);
+  logger.debug("DEBUG: rewards.module.js - rewardsService:", rewardsService);
   const rewardsController = rewardsControllerFactory(rewardsService);
-  console.log(
+  logger.debug(
     "DEBUG: rewards.module.js - rewardsController:",
     rewardsController,
   );

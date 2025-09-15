@@ -1,18 +1,14 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
+import requirePermission from "middleware/requirePermission";
+import { requireSuperadmin } from "middleware/adminAuthMiddleware";
+import adminControllerFactory from "domains/admin/admin.controller";
 
 module.exports = (db) => {
-  const adminController = require("domains/admin/admin.controller")(db);
-  const {
-    createUserValidation,
-    updateUserValidation,
-    createRestaurantValidation,
-    updateRestaurantValidation,
-    updateRestaurantModulesValidation,
-    createRestaurantWithOwnerValidation,
-    updateRestaurantFeaturesValidation,
-  } = require("domains/admin/admin.validation");
+  import { createUserValidation, updateUserValidation, createRestaurantValidation, updateRestaurantValidation, updateRestaurantModulesValidation, createRestaurantWithOwnerValidation, updateRestaurantFeaturesValidation, } from "domains/admin/admin.validation";
+
+export default (db) => {
+  const adminController = adminControllerFactory(db);
 
   const router = express.Router();
 

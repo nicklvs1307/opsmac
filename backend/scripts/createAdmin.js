@@ -1,6 +1,6 @@
-require("../aliases");
+require("aliases");
 const { sequelize, models } = require("~/config/database");
-const { Role } = require("../models"); // Import the Role model
+const { Role } = require("models"); // Import the Role model
 require("dotenv").config();
 
 const createAdminUser = async () => {

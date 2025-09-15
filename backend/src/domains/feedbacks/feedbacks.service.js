@@ -1,13 +1,14 @@
-const { Op } = require("sequelize");
-const {
+import { Op } from "sequelize";
+import {
   BadRequestError,
   NotFoundError,
   ForbiddenError,
-} = require("utils/errors");
-const {
+} from "utils/errors";
+import {
   sendWhatsAppMessage,
-} = require("~/services/integrations/whatsappApiClient");
-const natural = require("natural"); // Added for word tokenization and stop words
+} from "~/services/integrations/whatsappApiClient";
+import natural from "natural";
+import logger from "utils/logger";
 
 const tokenizer = new natural.WordTokenizer();
 // Define Portuguese stop words. The 'natural' library's default stopwords are for English.
@@ -139,7 +140,7 @@ const portugueseStopwords = new Set([
   "vos",
 ]);
 
-module.exports = (db) => {
+  export default (db) => {
   const models = db;
 
   const _findOrCreateCustomer = async (feedbackData, restaurantId) => {
@@ -201,7 +202,7 @@ module.exports = (db) => {
           try {
             await reward.generateCoupon(customer.id);
           } catch (error) {
-            console.error("Erro ao gerar cupom automático:", error);
+            logger.error("Erro ao gerar cupom automático:", error);
           }
         }
       }
@@ -246,7 +247,7 @@ module.exports = (db) => {
         }
       }
     } catch (whatsappError) {
-      console.error(
+      logger.error(
         "Erro inesperado ao tentar enviar mensagem de agradecimento de feedback WhatsApp:",
         whatsappError,
       );

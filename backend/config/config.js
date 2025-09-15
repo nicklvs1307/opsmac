@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "production" && process.env.DB_PASSWORD_FILE) {
   }
 }
 
-module.exports = {
+export default {
   development: {
     username: process.env.DB_USER || "postgres",
     password: process.env.DB_PASSWORD || "123456789",
@@ -21,6 +21,7 @@ module.exports = {
     port: process.env.DB_PORT || 5432,
     dialect: "postgres",
     logging: false, // Changed from console.log to false
+    underscored: true,
   },
   test: {
     username: process.env.DB_USER || "postgres",
@@ -30,6 +31,7 @@ module.exports = {
     port: process.env.DB_PORT || 5432,
     dialect: "postgres",
     logging: false,
+    underscored: true,
   },
   production: {
     username: process.env.DB_USER,
@@ -39,5 +41,6 @@ module.exports = {
     port: process.env.DB_PORT,
     dialect: "postgres",
     logging: false,
+    underscored: true,
   },
 };

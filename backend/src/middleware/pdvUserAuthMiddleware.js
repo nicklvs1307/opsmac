@@ -1,4 +1,5 @@
-const { models } = require("config/config");
+const { models } = require("config/database");
+const logger = require("utils/logger");
 
 const isPdvUser = async (req, res, next) => {
   try {
@@ -19,7 +20,7 @@ const isPdvUser = async (req, res, next) => {
       .status(403)
       .json({ error: "Acesso negado. Rota exclusiva para usuários do PDV." });
   } catch (error) {
-    console.error("Erro na verificação de permissão do PDV:", error);
+    logger.error("Erro na verificação de permissão do PDV:", error);
     res.status(500).json({ error: "Erro interno do servidor." });
   }
 };

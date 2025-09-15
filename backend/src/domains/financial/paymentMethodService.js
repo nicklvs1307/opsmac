@@ -1,6 +1,6 @@
-module.exports = (db) => {
-  const { Op } = require("sequelize");
-  const { NotFoundError } = require("utils/errors");
+  export default (db) => {
+  import { Op } from "sequelize";
+  import { NotFoundError } from "utils/errors";
   const { models } = db;
 
   const _findPaymentMethod = async (id, restaurantId, transaction = null) => {

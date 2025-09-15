@@ -1,10 +1,10 @@
 "use strict";
-const { validationResult } = require("express-validator");
-const { BadRequestError, ForbiddenError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { validationResult } from "express-validator";
+import { BadRequestError, ForbiddenError } from "utils/errors";
+import auditService from "services/auditService";
 
 // Import service factory function
-const checkinServiceFactory = require("./checkin.service");
+import checkinServiceFactory from "./checkin.service";
 
 class CheckinController {
   constructor(db) {
@@ -147,4 +147,4 @@ class CheckinController {
   }
 }
 
-module.exports = (db) => new CheckinController(db);
+export default (db) => new CheckinController(db);

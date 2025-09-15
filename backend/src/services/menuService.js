@@ -1,4 +1,4 @@
-const { models } = require("../config/database");
+const { models } = require("config/database");
 
 let cachedMenuHierarchy = null;
 let lastCacheTime = 0;

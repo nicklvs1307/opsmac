@@ -19,7 +19,7 @@ exports.getDashboardAnalyticsValidation = [
     .withMessage("Granularidade deve ser: day, week ou month"),
 ];
 
-exports.generateReportValidation = [
+export const generateReportValidation = [
   query("report_type")
     .isIn(["nps", "satisfaction", "complaints", "trends", "customers"])
     .withMessage(

@@ -127,7 +127,7 @@ exports.updateRestaurantModulesValidation = [
     .withMessage("Cada item em moduleIds deve ser um inteiro."),
 ];
 
-exports.updateRestaurantFeaturesValidation = [
+export const updateRestaurantFeaturesValidation = [
   body("enabledFeatureIds")
     .isArray()
     .withMessage("enabledFeatureIds deve ser um array"),

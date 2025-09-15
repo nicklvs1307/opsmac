@@ -1,14 +1,15 @@
-const { Op, fn, col, literal } = require("sequelize");
-const {
+import { Op, fn, col, literal } from "sequelize";
+import {
   BadRequestError,
   NotFoundError,
   ForbiddenError,
-} = require("utils/errors");
+} from "utils/errors";
+import logger from "utils/logger";
 
-module.exports = (db) => {
+  export default (db) => {
   const models = db;
   const sequelize = db.sequelize;
-  const rewardsService = require("../rewards/rewards.service")(db);
+  import rewardsServiceFactory from "domains/rewards/rewards.service";
 
   const recordCheckin = async (customerId, restaurantId) => {
     const restaurant = await models.Restaurant.findByPk(restaurantId);
@@ -212,7 +213,7 @@ module.exports = (db) => {
         if (checkinTimeRestriction === "1_per_6_hours") restrictionHours = 6;
 
         if (restrictionHours > 0 && diffHours < restrictionHours) {
-          console.warn(
+          logger.warn(
             `Anti-fraude: Cliente ${customer.id} tentou check-in muito rápido. Último check-in: ${lastCheckinTime.toISOString()}`,
           );
         }
@@ -226,7 +227,7 @@ module.exports = (db) => {
           "checkin",
         );
       } else {
-        console.warn(
+        logger.warn(
           "[Public Check-in] Método addLoyaltyPoints não encontrado no modelo Customer. Pontos não adicionados.",
         );
       }
@@ -285,7 +286,7 @@ module.exports = (db) => {
               }
             }
           } catch (couponError) {
-            console.error(
+            logger.error(
               `[Public Check-in] Erro ao gerar cupom de recompensa por visita para ${customer.name}:`,
               couponError.message,
               "Stack:",
@@ -293,7 +294,7 @@ module.exports = (db) => {
             );
           }
         } else {
-          console.warn(
+          logger.warn(
             `[Public Check-in] Recompensa com ID ${rewardConfig.rewardId} não encontrada no banco de dados.`,
           );
         }
@@ -360,7 +361,7 @@ module.exports = (db) => {
       startDate = new Date();
       startDate.setDate(startDate.getDate() - days[period]);
     } else if (period && !validPeriods.includes(period)) {
-      console.warn(
+      logger.warn(
         `Invalid period provided for checkin analytics: ${period}. Defaulting to all time.`,
       );
     }

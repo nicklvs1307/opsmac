@@ -1,4 +1,4 @@
-const { sequelize, ...models } = require("../models");
+const { sequelize, ...models } = require("models");
 
 async function checkCdvModule() {
   try {

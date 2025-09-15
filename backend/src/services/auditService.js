@@ -1,6 +1,6 @@
 "use strict";
 
-const models = require("../../models");
+const models = require("models");
 import logger from "#utils/logger"; // Import logger
 
 class AuditService {

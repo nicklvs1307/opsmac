@@ -1,6 +1,6 @@
 "use strict";
 
-const models = require("../../models"); // Adjust path to models as needed
+const models = require("models");
 const { Op } = require("sequelize");
 const cacheService = require("./cacheService");
 const logger = require("utils/logger"); // Import logger

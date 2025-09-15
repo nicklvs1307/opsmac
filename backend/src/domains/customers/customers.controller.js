@@ -1,9 +1,11 @@
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService");
-const { validationResult } = require("express-validator");
+import { BadRequestError } from "utils/errors";
+import auditService from "services/auditService";
+import { validationResult } from "express-validator";
 
-module.exports = (db) => {
-  const customerService = require("./customer.service")(db);
+import customerServiceFactory from "./customer.service";
+
+export default (db) => {
+  const customerService = customerServiceFactory(db);
 
   class CustomersController {
     constructor() {

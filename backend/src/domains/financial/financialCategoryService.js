@@ -1,5 +1,5 @@
-module.exports = (db) => {
-  const { Op } = require("sequelize");
+  export default (db) => {
+  import { Op } from "sequelize";
   const { models } = db;
 
   const getFinancialCategories = async (

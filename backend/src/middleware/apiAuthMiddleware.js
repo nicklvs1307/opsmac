@@ -1,4 +1,5 @@
 const { UnauthorizedError, InternalServerError } = require("utils/errors");
+const logger = require("utils/logger");
 
 module.exports = (db) => {
   const { models } = db;
@@ -26,7 +27,7 @@ module.exports = (db) => {
       req.restaurant = restaurant; // Anexa o objeto do restaurante à requisição
       next();
     } catch (err) {
-      console.error("Erro no middleware de autenticação de API:", err);
+      logger.error("Erro no middleware de autenticação de API:", err);
       next(
         new InternalServerError("Erro do servidor na autenticação de API", err),
       );

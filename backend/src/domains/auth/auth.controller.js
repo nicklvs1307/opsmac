@@ -1,11 +1,13 @@
-const { BadRequestError } = require("utils/errors");
-const { validationResult } = require("express-validator");
+import { BadRequestError } from "utils/errors";
+import { validationResult } from "express-validator";
+
+import authServiceFactory from "./auth.service";
 
 // auth.validation is not directly used here, but its validation results are.
 // So, we don't need to require loginValidation, updateProfileValidation, changePasswordValidation here.
 
-module.exports = (db) => {
-  const authService = require("./auth.service")(db);
+export default (db) => {
+  const authService = authServiceFactory(db);
 
   class AuthController {
     constructor() {

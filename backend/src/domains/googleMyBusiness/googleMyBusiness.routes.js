@@ -1,14 +1,15 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
+import requirePermission from "middleware/requirePermission";
 
-module.exports = (db) => {
-  const googleMyBusinessController =
-    require("domains/googleMyBusiness/googleMyBusiness.controller")(db);
-  const {
+import googleMyBusinessControllerFactory from "domains/googleMyBusiness/googleMyBusiness.controller";
+import {
     createReviewReplyValidation,
     replyToReviewValidation,
-  } = require("domains/googleMyBusiness/googleMyBusiness.validation");
+  } from "domains/googleMyBusiness/googleMyBusiness.validation";
+
+export default (db) => {
+  const googleMyBusinessController = googleMyBusinessControllerFactory(db);
 
   const router = express.Router();
 

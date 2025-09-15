@@ -1,8 +1,8 @@
-const { Op } = require("sequelize");
-const { NotFoundError, BadRequestError } = require("utils/errors");
-const {
-  sendWhatsAppMessage,
-} = require("../../services/integrations/whatsappApiClient");
+import { Op } from "sequelize";
+import { NotFoundError, BadRequestError } from "utils/errors";
+import { sendWhatsAppMessage } from "#services/integrations/whatsappApiClient";
+import { generateCouponForReward } from "#domains/rewards/rewards.service";
+import logger from "utils/logger";
 
 module.exports = (db) => {
   const models = db;
@@ -246,7 +246,7 @@ module.exports = (db) => {
                       rewardMessage,
                     );
                   } catch (whatsappSendError) {
-                    console.error(
+                    logger.error(
                       `[Public Check-in] Erro inesperado ao tentar enviar recompensa de visita WhatsApp para ${customer.name}:`,
                       whatsappSendError.message,
                       "Stack:",
@@ -267,15 +267,15 @@ module.exports = (db) => {
               }
             }
           } catch (couponError) {
-            console.error(
-              `[Public Check-in] Erro ao gerar cupom de recompensa por visita para ${customer.name}:`,
+                        logger.error(
+              `Erro ao gerar cupom de recompensa por visita para ${customer.name}:`,
               couponError.message,
               "Stack:",
               couponError.stack,
             );
           }
         } else {
-          console.warn(
+          logger.warn(
             `[Public Check-in] Recompensa com ID ${rewardConfig.reward_id} não encontrada no banco de dados.`,
           );
         }
@@ -311,7 +311,7 @@ module.exports = (db) => {
           }
         }
       } catch (whatsappError) {
-        console.error(
+        logger.error(
           "[Public Check-in] Erro inesperado ao tentar enviar mensagem de agradecimento WhatsApp:",
           whatsappError,
         );

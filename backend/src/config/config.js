@@ -1,5 +1,7 @@
-require("dotenv").config();
-const fs = require("fs");
+import dotenv from "dotenv";
+dotenv.config();
+import fs from "fs";
+import logger from "utils/logger";
 
 // Adicionado para ler a senha do banco de dados a partir de um arquivo (Docker Secret)
 let dbPassword = process.env.DB_PASSWORD;
@@ -7,12 +9,12 @@ if (process.env.NODE_ENV === "production" && process.env.DB_PASSWORD_FILE) {
   try {
     dbPassword = fs.readFileSync(process.env.DB_PASSWORD_FILE, "utf8").trim();
   } catch (e) {
-    console.error("Falha ao ler o secret da senha do banco de dados:", e);
+    logger.error("Falha ao ler o secret da senha do banco de dados:", e);
     process.exit(1);
   }
 }
 
-module.exports = {
+export default {
   development: {
     username: process.env.DB_USER || "postgres",
     password: process.env.DB_PASSWORD || "123456789",

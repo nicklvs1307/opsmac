@@ -15,4 +15,4 @@ class HealthController {
   }
 }
 
-module.exports = (healthService) => new HealthController(healthService);
+export default (healthService) => new HealthController(healthService);

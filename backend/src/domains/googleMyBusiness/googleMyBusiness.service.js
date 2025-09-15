@@ -1,4 +1,4 @@
-const { google } = require("googleapis");
+import { google } from "googleapis";
 const {
   BadRequestError,
   NotFoundError,
@@ -7,7 +7,7 @@ const {
 
 const OAuth2 = google.auth.OAuth2;
 
-module.exports = (db) => {
+  export default (db) => {
   const models = db;
 
   const initializeOAuthClient = async (restaurantId) => {

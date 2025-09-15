@@ -1,5 +1,5 @@
 "use strict";
-const iamService = require("../services/iamService");
+const iamService = require("services/iamService");
 const {
   UnauthorizedError,
   ForbiddenError,

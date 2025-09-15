@@ -1,7 +1,8 @@
 "use strict";
 
-const models = require("../../models");
+const models = require("models");
 const cacheService = require("./cacheService"); // Import cacheService
+const logger = require("utils/logger");
 
 class EntitlementService {
   async setEntitlement(
@@ -69,7 +70,7 @@ class EntitlementService {
       // Explicitly clear permission snapshots for this restaurant
       await cacheService.delByPattern(`perm_snapshot:${restaurantId}:*`);
     } catch (error) {
-      console.error(
+      logger.error(
         `[EntitlementService] Error in setEntitlements: ${error.name} - ${error.message} - Details:`,
         error.errors,
         error,
@@ -79,7 +80,7 @@ class EntitlementService {
         // Defensive check
         await transaction.rollback();
       } else {
-        console.error(
+        logger.error(
           `[EntitlementService] Transaction object was undefined, cannot rollback.`,
         );
       }

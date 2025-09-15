@@ -1,10 +1,11 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
+import requirePermission from "middleware/requirePermission";
+import dashboardControllerFactory from "./dashboard.controller";
+import { checkRestaurantOwnership } from "middleware/authMiddleware";
 
-module.exports = (db) => {
-  const dashboardController = require("./dashboard.controller")(db);
-  const { checkRestaurantOwnership } = require("middleware/authMiddleware")(db);
+export default (db) => {
+  const dashboardController = dashboardControllerFactory(db);
 
   const router = express.Router({ mergeParams: true });
 

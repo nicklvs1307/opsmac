@@ -1,16 +1,18 @@
-const express = require("express");
+import express from "express";
 
-const requirePermission = require("middleware/requirePermission");
-const {
+import requirePermission from "middleware/requirePermission";
+import {
   createTransactionValidation,
   reportValidation,
   createPaymentMethodValidation,
   updatePaymentMethodValidation,
-} = require("domains/financial/financial.validation");
-const asyncHandler = require("utils/asyncHandler");
+} from "domains/financial/financial.validation";
+import asyncHandler from "utils/asyncHandler";
 
-module.exports = (db) => {
-  const financialController = require("./financial.controller")(db);
+import financialControllerFactory from "./financial.controller";
+
+export default (db) => {
+  const financialController = financialControllerFactory(db);
   const router = express.Router();
 
   // Rotas Financeiras

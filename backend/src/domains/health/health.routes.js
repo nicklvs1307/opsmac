@@ -1,9 +1,12 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
 
-module.exports = (db) => {
-  const healthService = require("./health.service")(db);
-  const healthController = require("./health.controller")(healthService);
+import healthServiceFactory from "./health.service";
+import healthControllerFactory from "./health.controller";
+
+export default (db) => {
+  const healthService = healthServiceFactory(db);
+  const healthController = healthControllerFactory(healthService);
   const router = express.Router();
 
   router.get("/", asyncHandler(healthController.getHealthStatus));

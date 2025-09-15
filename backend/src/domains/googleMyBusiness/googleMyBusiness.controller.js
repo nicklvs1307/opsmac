@@ -1,10 +1,10 @@
 "use strict";
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "utils/errors";
+import auditService from "services/auditService";
 
 // Import service factory function
-const googleMyBusinessServiceFactory = require("./googleMyBusiness.service");
+import googleMyBusinessServiceFactory from "./googleMyBusiness.service";
 
 class GoogleMyBusinessController {
   constructor(db) {
@@ -120,4 +120,4 @@ class GoogleMyBusinessController {
   }
 }
 
-module.exports = (db) => new GoogleMyBusinessController(db);
+export default (db) => new GoogleMyBusinessController(db);

@@ -1,14 +1,13 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
 
-const requirePermission = require("middleware/requirePermission");
-const {
-  addonValidation,
-  updateAddonValidation,
-} = require("domains/addons/addons.validation");
+import requirePermission from "middleware/requirePermission";
+import { addonValidation, updateAddonValidation, } from "domains/addons/addons.validation";
 
-module.exports = (db) => {
-  const addonsController = require("./addons.controller")(db);
+import addonsControllerFactory from "./addons.controller";
+
+export default (db) => {
+  const addonsController = addonsControllerFactory(db);
   const router = express.Router();
 
   // Rotas de Addons

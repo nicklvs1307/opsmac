@@ -1,9 +1,9 @@
-module.exports = (db) => {
+  export default (db) => {
   const models = db;
-  const { Op, fn, col, literal } = require("sequelize");
-  const { BadRequestError, NotFoundError } = require("utils/errors");
-  const rewardsService = require("domains/rewards/rewards.service")(db);
-  const redisClient = require("../../config/redisClient");
+  import { Op, fn, col, literal } from "sequelize";
+  import { BadRequestError, NotFoundError } from "utils/errors";
+  import rewardsServiceFactory from "domains/rewards/rewards.service";
+  import redisClient from "config/redisClient";
 
   function _getDateFilters(query) {
     const { start_date, end_date, period } = query;

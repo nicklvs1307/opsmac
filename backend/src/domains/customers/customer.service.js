@@ -1,5 +1,5 @@
-const { Op, fn, col, literal } = require("sequelize");
-const { BadRequestError, NotFoundError } = require("utils/errors");
+import { Op, fn, col, literal } from "sequelize";
+import { BadRequestError, NotFoundError } from "utils/errors";
 
 class CustomerService {
   constructor(models, sequelize) {
@@ -392,4 +392,4 @@ class CustomerService {
   }
 }
 
-module.exports = (db) => new CustomerService(db.models, db.sequelize);
+export default (db) => new CustomerService(db.models, db.sequelize);

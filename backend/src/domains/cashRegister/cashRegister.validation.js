@@ -27,7 +27,7 @@ exports.recordMovementValidation = [
     .withMessage("Observations must be a string."),
 ];
 
-exports.closeSessionValidation = [
+export const closeSessionValidation = [
   body("sessionId")
     .isUUID()
     .withMessage("Session ID is required and must be a valid UUID."),

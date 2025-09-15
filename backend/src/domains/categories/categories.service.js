@@ -1,7 +1,5 @@
-module.exports = (db) => {
+export default (db) => {
   const { models } = db;
-  const { BadRequestError, NotFoundError } = require("utils/errors");
-
   const createCategory = async (name, restaurantId) => {
     const category = await models.Category.create({
       name,

@@ -1,6 +1,6 @@
-const { BadRequestError, NotFoundError } = require("utils/errors");
+import { BadRequestError, NotFoundError } from "utils/errors";
 
-module.exports = (db) => {
+export default (db) => {
   const models = db;
 
   const listAddons = async (restaurantId) => {

@@ -1,10 +1,13 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
+import requirePermission from "middleware/requirePermission";
 
-module.exports = (db) => {
-  const deliveryMuchService = require("./deliveryMuch.service")(db);
-  const deliveryMuchController = require("./deliveryMuch.controller")(
+import deliveryMuchServiceFactory from "./deliveryMuch.service";
+import deliveryMuchControllerFactory from "./deliveryMuch.controller";
+
+export default (db) => {
+  const deliveryMuchService = deliveryMuchServiceFactory(db);
+  const deliveryMuchController = deliveryMuchControllerFactory(
     deliveryMuchService,
   );
 

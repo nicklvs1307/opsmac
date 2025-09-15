@@ -1,4 +1,5 @@
-const { models } = require("config/config");
+const { models } = require("config/database");
+const logger = require("utils/logger");
 
 const checkSubscription = async (req, res, next) => {
   try {
@@ -29,7 +30,7 @@ const checkSubscription = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error("Erro ao verificar subscription:", error);
+    logger.error("Erro ao verificar subscription:", error);
     res.status(500).json({
       error: "Erro interno do servidor",
     });

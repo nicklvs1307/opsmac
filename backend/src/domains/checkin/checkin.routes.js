@@ -1,18 +1,18 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
+import express from "express";
+import asyncHandler from "utils/asyncHandler";
+import requirePermission from "middleware/requirePermission";
+import checkinControllerFactory from "domains/checkin/checkin.controller";
+import {
+  createCheckinValidation,
+  updateCheckinValidation,
+  getCheckinsValidation,
+  recordCheckinValidation,
+  recordPublicCheckinValidation,
+  analyticsValidation,
+} from "domains/checkin/checkin.validation";
 
-module.exports = (db) => {
-  const checkinController = require("domains/checkin/checkin.controller")(db);
-  const {
-    createCheckinValidation,
-    updateCheckinValidation,
-    getCheckinsValidation,
-    recordCheckinValidation,
-    recordPublicCheckinValidation,
-    analyticsValidation,
-  } = require("domains/checkin/checkin.validation");
-
+export default (db) => {
+  const checkinController = checkinControllerFactory(db);
   const router = express.Router();
 
   router.post(

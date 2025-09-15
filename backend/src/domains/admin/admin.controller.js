@@ -222,4 +222,4 @@ class AdminController {
   }
 }
 
-module.exports = (db) => new AdminController(db);
+export default (db) => new AdminController(db);

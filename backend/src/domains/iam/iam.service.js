@@ -7,7 +7,7 @@ import {
   NotFoundError,
   InternalServerError,
 } from "#utils/errors";
-import redisClient from "../../config/redisClient";
+import redisClient from "config/redisClient";
 import logger from "#utils/logger";
 
 class IamService {
@@ -17,7 +17,7 @@ class IamService {
   }
 
   async bumpPermVersion(restaurantId) {
-    console.log(
+    logger.info(
       `[IamService] Bumping permission version for restaurantId: ${restaurantId}`,
     );
     await this.models.Restaurant.increment("permVersion", {
@@ -28,7 +28,7 @@ class IamService {
     const keys = await redisClient.keys(`permissions:${restaurantId}:*`);
     if (keys.length > 0) {
       await redisClient.del(keys);
-      console.log(
+      logger.info(
         `[IamService] Invalidated ${keys.length} permission caches for restaurantId: ${restaurantId}`,
       );
     }
@@ -488,7 +488,7 @@ class IamService {
         "Unauthorized: Missing user or restaurant context.",
       );
     }
-    console.log(
+    logger.info(
       `[IamService] Building permission snapshot for userId: ${userId}, restaurantId: ${restaurantId}`,
     );
 
@@ -717,7 +717,7 @@ class IamService {
       );
     }
 
-    console.log(
+    logger.info(
       `[IamService] Checking permission for userId: ${userId}, restaurantId: ${restaurantId}, featureKey: ${featureKey}, actionKey: ${actionKey}, isSuperadmin: ${isSuperadmin}`,
     );
 

@@ -1,10 +1,10 @@
 "use strict";
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "utils/errors";
+import auditService from "services/auditService";
 
 // Import service factory function
-const couponsServiceFactory = require("./coupons.service");
+import couponsServiceFactory from "./coupons.service";
 
 class CouponsController {
   constructor(db) {
@@ -154,4 +154,4 @@ class CouponsController {
   }
 }
 
-module.exports = (db) => new CouponsController(db);
+export default (db) => new CouponsController(db);

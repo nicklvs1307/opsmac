@@ -1,7 +1,7 @@
-module.exports = (db) => {
+  export default (db) => {
   const { models } = db;
-  const { BadRequestError, NotFoundError } = require("utils/errors");
-  const { generateEscPosCommands } = require("utils/thermalPrinterService");
+  import { BadRequestError, NotFoundError } from "utils/errors";
+  import { generateEscPosCommands } from "utils/thermalPrinterService";
 
   const openSession = async (
     restaurantId,

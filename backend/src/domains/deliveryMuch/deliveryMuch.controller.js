@@ -1,6 +1,6 @@
 "use strict";
-const { BadRequestError, ForbiddenError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { BadRequestError, ForbiddenError } from "utils/errors";
+import auditService from "services/auditService";
 
 class DeliveryMuchController {
   constructor(deliveryMuchService) {
@@ -55,5 +55,5 @@ class DeliveryMuchController {
   }
 }
 
-module.exports = (deliveryMuchService) =>
+export default (deliveryMuchService) =>
   new DeliveryMuchController(deliveryMuchService);

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Aqui serão adicionados os estilos globais existentes do index.css */
+/* Estilos globais */
 
 html,
 body {
@@ -12,8 +12,9 @@ body {
 }
 
 body {
+  zoom: 0.85; /* Ajustado para um zoom out um pouco maior */
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Cantarell',
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -26,6 +27,10 @@ code {
 
 * {
   box-sizing: border-box;
+}
+
+.App {
+  /* min-height: 100vh; Removed to allow content to dictate height */
 }
 
 /* Custom scrollbar */
@@ -46,16 +51,28 @@ code {
   background: #a8a8a8;
 }
 
-/* Loading animation - Estilo "tec" */
+/* Loading animation */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
 .loading-spinner {
   display: inline-block;
-  width: 40px; /* Aumentar o tamanho */
-  height: 40px; /* Aumentar o tamanho */
-  border: 4px solid rgba(0, 255, 255, 0.2); /* Ciano transparente */
-  border-top: 4px solid #00ffff; /* Ciano vibrante */
+  width: 50px;
+  height: 50px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
   border-radius: 50%;
-  animation: spin 1s linear infinite, pulse 1.5s ease-in-out infinite alternate; /* Adicionar animação de pulso */
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6); /* Efeito de brilho */
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -64,40 +81,5 @@ code {
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Responsive helpers (consider migrating to Tailwind's responsive variants) */
-@media (max-width: 768px) {
-  .hide-mobile {
-    display: none !important;
-  }
-}
-
-@media (min-width: 769px) {
-  .hide-desktop {
-    display: none !important;
-  }
-}
-
-/* Print styles (consider migrating to Tailwind's print variants) */
-@media print {
-  .no-print {
-    display: none !important;
-  }
-
-  .print-break {
-    page-break-after: always;
   }
 }

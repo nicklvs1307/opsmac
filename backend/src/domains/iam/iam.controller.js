@@ -1,16 +1,16 @@
 "use strict";
-module.exports = (db) => {
-  const iamService = require("domains/iam/iam.service")(db);
-  const auditService = require("services/auditService"); // Import auditService
+  export default (db) => {
+  import iamServiceFactory from "domains/iam/iam.service";
+  import auditService from "services/auditService";
 
-  const {
+  import {
     UnauthorizedError,
     BadRequestError,
     ForbiddenError,
     PaymentRequiredError,
     NotFoundError,
     InternalServerError,
-  } = require("utils/errors");
+  } from "utils/errors";
 
   class IamController {
     // --- Role Management ---

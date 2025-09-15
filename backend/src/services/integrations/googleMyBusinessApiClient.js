@@ -1,5 +1,5 @@
 const { google } = require("googleapis");
-const { models } = require("config/config");
+const { models } = require("config/database");
 
 class GoogleMyBusinessService {
   constructor(restaurantId) {

@@ -33,7 +33,7 @@ exports.validateCouponValidation = [
   body("code").notEmpty().withMessage("Código do cupom é obrigatório"),
 ];
 
-exports.publicValidateCouponValidation = [
+export const publicValidateCouponValidation = [
   body("code").notEmpty().withMessage("Código do cupom é obrigatório"),
   body("restaurantSlug")
     .notEmpty()

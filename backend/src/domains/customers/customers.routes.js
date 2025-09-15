@@ -1,18 +1,29 @@
-const safeRouter = require("utils/safeRouter");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
+import safeRouter from "utils/safeRouter";
+import asyncHandler from "utils/asyncHandler";
+import requirePermission from "middleware/requirePermission";
 
-const CustomersController = require("./customers.controller");
+import CustomersControllerFactory from "./customers.controller";
+import {
+  createCustomerValidation,
+  updateCustomerValidation,
+  publicRegisterCustomerValidation,
+  customerQueryValidation,
+  byPhoneValidation,
+} from "./customers.validation";
+
+import CustomersControllerFactory from "./customers.controller";
+import {
+  createCustomerValidation,
+  updateCustomerValidation,
+  publicRegisterCustomerValidation,
+  customerQueryValidation,
+  byPhoneValidation,
+} from "./customers.validation";
+
+import CustomersControllerFactory from "./customers.controller";
 
 module.exports = (db) => {
-  const customersController = CustomersController(db);
-  const {
-    createCustomerValidation,
-    updateCustomerValidation,
-    publicRegisterCustomerValidation,
-    customerQueryValidation,
-    byPhoneValidation,
-  } = require("./customers.validation");
+  module.exports = (db) => {
 
   const router = safeRouter();
 

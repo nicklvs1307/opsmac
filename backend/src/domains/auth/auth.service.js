@@ -1,14 +1,14 @@
-const { generateToken, decodeToken } = require("services/jwtService");
-const {
+import { generateToken, decodeToken } from "services/jwtService";
+import {
   UnauthorizedError,
   ForbiddenError,
   NotFoundError,
-} = require("utils/errors");
+} from "utils/errors";
 
-const iamService = require("services/iamService"); // Import the new IAM service
-const auditService = require("services/auditService"); // Import auditService
+import iamService from "services/iamService";
+import auditService from "services/auditService";
 import logger from "#utils/logger"; // Import logger
-const cacheService = require("services/cacheService"); // Import cacheService
+import cacheService from "services/cacheService";
 
 class AuthService {
   constructor(models) {
@@ -286,4 +286,4 @@ class AuthService {
   }
 }
 
-module.exports = (models) => new AuthService(models);
+export default (models) => new AuthService(models);

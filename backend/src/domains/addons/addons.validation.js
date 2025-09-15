@@ -1,6 +1,6 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.addonValidation = [
+export const addonValidation = [
   body("name").notEmpty().withMessage("Nome é obrigatório"),
   body("price")
     .isFloat({ min: 0 })
@@ -10,7 +10,7 @@ exports.addonValidation = [
     .withMessage("ID do restaurante é obrigatório"),
 ];
 
-exports.updateAddonValidation = [
+export const updateAddonValidation = [
   body("name").optional().notEmpty().withMessage("Nome é obrigatório"),
   body("price")
     .optional()

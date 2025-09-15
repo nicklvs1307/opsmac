@@ -1,6 +1,6 @@
 const { body } = require("express-validator");
 
-const createGoalValidation = [
+export const createGoalValidation = [
   body("name").notEmpty().withMessage("O nome da meta é obrigatório."),
   body("targetValue")
     .isNumeric()
@@ -14,7 +14,7 @@ const createGoalValidation = [
     .withMessage("A data de fim deve ser uma data válida."),
 ];
 
-const updateGoalValidation = [
+export const updateGoalValidation = [
   body("name")
     .optional()
     .notEmpty()
@@ -38,7 +38,4 @@ const updateGoalValidation = [
     .withMessage("Status inválido."),
 ];
 
-module.exports = {
-  createGoalValidation,
-  updateGoalValidation,
-};
+

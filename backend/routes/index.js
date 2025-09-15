@@ -1,11 +1,11 @@
 const path = require("path");
 const fs = require("fs");
-const safeRouter = require("../src/utils/safeRouter");
+const safeRouter = require("utils/safeRouter");
 const getRestaurantContextMiddleware = require("middleware/getRestaurantContextMiddleware");
 
 module.exports = (db) => {
   const mainRouter = safeRouter();
-  const { auth } = require("../src/middleware/authMiddleware")(db);
+  const { auth } = require("middleware/authMiddleware")(db);
   const restaurantContextMiddleware = getRestaurantContextMiddleware();
 
   // Apply restaurant context middleware after auth for private routes

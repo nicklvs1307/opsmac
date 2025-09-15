@@ -113,4 +113,4 @@ class AddonsController {
   }
 }
 
-module.exports = (db) => new AddonsController(db);
+export default (db) => new AddonsController(db);

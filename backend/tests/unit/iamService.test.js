@@ -1,5 +1,5 @@
-const IamService = require('../../src/services/iamService');
-const { models } = require('../../models'); // Adjust path to models as needed
+const IamService = require('services/iamService');
+const { models } = require('models'); // Adjust path to models as needed
 const sinon = require('sinon');
 const { expect } = require('chai'); // Assuming chai is installed, if not, will need to install
 

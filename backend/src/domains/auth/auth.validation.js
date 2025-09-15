@@ -1,11 +1,11 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.loginValidation = [
+export const loginValidation = [
   body("email").isEmail().withMessage("Email inválido"),
   body("password").notEmpty().withMessage("Senha é obrigatória"),
 ];
 
-exports.registerValidation = [
+export const registerValidation = [
   body("name").notEmpty().withMessage("Nome é obrigatório"),
   body("email").isEmail().withMessage("Email inválido"),
   body("password")
@@ -16,18 +16,18 @@ exports.registerValidation = [
     .withMessage("Nome do restaurante é obrigatório"),
 ];
 
-exports.forgotPasswordValidation = [
+export const forgotPasswordValidation = [
   body("email").isEmail().withMessage("Email inválido"),
 ];
 
-exports.resetPasswordValidation = [
+export const resetPasswordValidation = [
   body("token").notEmpty().withMessage("Token é obrigatório"),
   body("newPassword")
     .isLength({ min: 6 })
     .withMessage("Nova senha deve ter no mínimo 6 caracteres"),
 ];
 
-exports.updateProfileValidation = [
+export const updateProfileValidation = [
   body("name").optional().notEmpty().withMessage("Nome é obrigatório"),
   body("phone").optional().notEmpty().withMessage("Telefone é obrigatório"),
   body("avatar")
@@ -36,7 +36,7 @@ exports.updateProfileValidation = [
     .withMessage("Avatar deve ser uma URL válida"),
 ];
 
-exports.changePasswordValidation = [
+export const changePasswordValidation = [
   body("currentPassword").notEmpty().withMessage("Senha atual é obrigatória"),
   body("newPassword")
     .isLength({ min: 6 })

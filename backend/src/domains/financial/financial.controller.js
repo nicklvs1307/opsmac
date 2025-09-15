@@ -1,13 +1,13 @@
 "use strict";
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "utils/errors";
+import auditService from "services/auditService";
 
 // Import service factory functions
-const transactionServiceFactory = require("./transactionService");
-const financialCategoryServiceFactory = require("./financialCategoryService");
-const reportServiceFactory = require("./reportService");
-const paymentMethodServiceFactory = require("./paymentMethodService");
+import transactionServiceFactory from "./transactionService";
+import financialCategoryServiceFactory from "./financialCategoryService";
+import reportServiceFactory from "./reportService";
+import paymentMethodServiceFactory from "./paymentMethodService";
 
 class FinancialController {
   constructor(db) {
@@ -205,4 +205,4 @@ class FinancialController {
   }
 }
 
-module.exports = (db) => new FinancialController(db);
+export default (db) => new FinancialController(db);

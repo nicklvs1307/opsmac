@@ -9,7 +9,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 dotenv.config();
 
-import db from "models";
+import db from "#models";
 import { BaseError } from "utils/errors";
 import logger from "utils/logger";
 import {
@@ -18,8 +18,8 @@ import {
 } from "./src/jobs/cacheInvalidator";
 
 // Importação de Rotas
-import routes from "./routes";
-import errorHandler from "./src/middleware/errorHandler";
+import routes from "routes";
+import errorHandler from "middleware/errorHandler";
 
 const app = express();
 app.set("trust proxy", 1);

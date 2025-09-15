@@ -1,6 +1,6 @@
 const { body } = require("express-validator");
 
-exports.replyToReviewValidation = [
+export const replyToReviewValidation = [
   body("comment")
     .notEmpty()
     .withMessage("Comentário da resposta é obrigatório."),

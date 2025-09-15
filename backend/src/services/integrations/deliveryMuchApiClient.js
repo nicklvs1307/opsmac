@@ -1,5 +1,5 @@
 const createApiClient = require("utils/apiClientFactory");
-const { models } = require("config/config");
+const { models } = require("config/database");
 
 const DELIVERY_MUCH_API_BASE_URL = "https://api.deliverymuch.com.br";
 

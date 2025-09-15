@@ -1,18 +1,18 @@
-const express = require("express");
-const requirePermission = require("middleware/requirePermission");
-const asyncHandler = require("utils/asyncHandler");
+import express from "express";
+import requirePermission from "middleware/requirePermission";
+import asyncHandler from "utils/asyncHandler";
+import { checkRestaurantOwnership } from "middleware/authMiddleware";
+import couponsControllerFactory from "./coupons.controller";
+import {
+  listCouponsValidation,
+  redeemCouponValidation,
+  createCouponValidation,
+  validateCouponValidation,
+  publicValidateCouponValidation,
+} from "./coupons.validation";
 
-module.exports = (db) => {
-  const { checkRestaurantOwnership } = require("middleware/authMiddleware")(db);
-  const couponsController = require("./coupons.controller")(db);
-  const {
-    listCouponsValidation,
-    redeemCouponValidation,
-    createCouponValidation,
-    validateCouponValidation,
-    publicValidateCouponValidation,
-  } = require("./coupons.validation");
-
+export default (db) => {
+  const couponsController = couponsControllerFactory(db);
   const router = express.Router();
 
   router.get(

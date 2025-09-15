@@ -1,10 +1,10 @@
 "use strict";
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "utils/errors";
+import auditService from "services/auditService";
 
 // Import service factory function
-const dashboardServiceFactory = require("./dashboard.service");
+import dashboardServiceFactory from "./dashboard.service";
 
 class DashboardController {
   constructor(db) {
@@ -132,4 +132,4 @@ class DashboardController {
   }
 }
 
-module.exports = (db) => new DashboardController(db);
+export default (db) => new DashboardController(db);

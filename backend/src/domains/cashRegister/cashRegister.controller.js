@@ -1,7 +1,7 @@
 "use strict";
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "utils/errors";
+import auditService from "services/auditService";
 
 class CashRegisterController {
   constructor(cashRegisterService) {
@@ -183,5 +183,5 @@ class CashRegisterController {
   }
 }
 
-module.exports = (cashRegisterService) =>
+export default (cashRegisterService) =>
   new CashRegisterController(cashRegisterService);

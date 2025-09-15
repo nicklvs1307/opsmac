@@ -1,7 +1,5 @@
-module.exports = (db) => {
+export default (db) => {
   const models = db;
-  const { Op } = require("sequelize");
-  const { BadRequestError, NotFoundError } = require("utils/errors");
 
   const listGoals = async (restaurantId, query) => {
     const { page = 1, limit = 10, status, metric } = query;

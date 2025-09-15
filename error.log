@@ -1,251 +1,1047 @@
-fetch("https://feedelizapro.towersfy.com/login", {
-  "headers": {
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0, i",
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "document",
-    "sec-fetch-mode": "navigate",
-    "sec-fetch-site": "same-origin",
-    "sec-fetch-user": "?1",
-    "upgrade-insecure-requests": "1"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap", {
-  "headers": {
-    "accept": "text/css,*/*;q=0.1",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0",
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "style",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "cross-site",
-    "sec-fetch-storage-access": "active",
-    "x-browser-channel": "stable",
-    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
-    "x-browser-validation": "DTaAFOAcbbd2xIkIWiLdbtAAhQc=",
-    "x-browser-year": "2025",
-    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIlqHLAQiFoM0B",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://fonts.googleapis.com/icon?family=Material+Icons", {
-  "headers": {
-    "accept": "text/css,*/*;q=0.1",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0",
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "style",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "cross-site",
-    "sec-fetch-storage-access": "active",
-    "x-browser-channel": "stable",
-    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
-    "x-browser-validation": "DTaAFOAcbbd2xIkIWiLdbtAAhQc=",
-    "x-browser-year": "2025",
-    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIlqHLAQiFoM0B",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/static/js/main.186c9761.js", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "script",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "same-origin",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/static/css/main.285c14a1.css", {
-  "headers": {
-    "accept": "text/css,*/*;q=0.1",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0",
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "style",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "same-origin",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/static/js/4296.a86c24d6.chunk.js", {
-  "headers": {
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/static/js/7904.130fd051.chunk.js", {
-  "headers": {
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/static/js/6782.490179b6.chunk.js", {
-  "headers": {
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/static/js/2525.cf4e827b.chunk.js", {
-  "headers": {
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/static/js/7704.eb9c70f8.chunk.js", {
-  "headers": {
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=0",
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "font",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "cross-site",
-    "x-browser-channel": "stable",
-    "x-browser-copyright": "Copyright 2025 Google LLC. All rights reserved.",
-    "x-browser-validation": "DTaAFOAcbbd2xIkIWiLdbtAAhQc=",
-    "x-browser-year": "2025",
-    "x-client-data": "CJG2yQEIpbbJAQipncoBCLjiygEIlqHLAQiFoM0B",
-    "Referer": "https://fonts.googleapis.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/favicon.ico", {
-  "headers": {
-    "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "image",
-    "sec-fetch-mode": "no-cors",
-    "sec-fetch-site": "same-origin",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3NjVmMDBlNC0yZTc0LTQ2ZGUtOTM1OS1lOTg0MmI5MzI1OWEiLCJpYXQiOjE3NTc5MzE2NzksImV4cCI6MTc1ODUzNjQ3OX0.iEiwd4gOxEqdMllfGFqdbN1NOUDwjb2CwXzDniOEDPY",
-    "if-none-match": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\"",
-    "priority": "u=1, i",
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizapro.towersfy.com/manifest.json", {
-  "headers": {
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-}); ;
-fetch("https://feedelizaapi.towersfy.com/api/auth/me", {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=1, i",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://feedelizapro.towersfy.com/"
-  },
-  "body": null,
-  "method": "OPTIONS"
-}); ;
-fetch("https://feedelizapro.towersfy.com/logo192.png", {
-  "headers": {
-    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "Referer": "https://feedelizapro.towersfy.com/login"
-  },
-  "body": null,
-  "method": "GET"
-});
 AuthContext.js:107 AuthContext: userData undefined
 AuthContext.js:108 AuthContext: isUserLoading true
 AuthContext.js:109 AuthContext: isUserError false
-login:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
-AuthContext.js:107 AuthContext: userData undefined
+dashboard:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+AuthContext.js:107 AuthContext: userData {id: '765f00e4-2e74-46de-9359-e9842b93259a', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 AuthContext.js:108 AuthContext: isUserLoading false
 AuthContext.js:109 AuthContext: isUserError false
+main.186c9761.js:2 [Violation] 'message' handler took 322ms
+[Violation] Forced reflow while executing JavaScript took 55ms
+AuthContext.js:107 AuthContext: userData {id: '765f00e4-2e74-46de-9359-e9842b93259a', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
+AuthContext.js:108 AuthContext: isUserLoading false
+AuthContext.js:109 AuthContext: isUserError false
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+(anônimo) @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+(anônimo) @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+(anônimo) @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+(anônimo) @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+query.js:358 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+h @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+dashboardQueries.js:42 Error fetching dashboard data: H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ dashboardQueries.js:42
+(anônimo) @ notifyManager.js:62
+notifyFn @ notifyManager.js:10
+(anônimo) @ notifyManager.js:77
+(anônimo) @ notifyManager.js:76
+cc @ react-dom.production.min.js:273
+(anônimo) @ notifyManager.js:75
+Promise.then
+S @ utils.js:322
+t.flush @ notifyManager.js:74
+t.batch @ notifyManager.js:30
+t.dispatch @ query.js:392
+onError @ query.js:348
+h @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+Dashboard.js:94 Error fetching dashboard data: H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+O @ Dashboard.js:94
+gi @ react-dom.production.min.js:160
+Cs @ react-dom.production.min.js:196
+kl @ react-dom.production.min.js:291
+bc @ react-dom.production.min.js:279
+yc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+checkinService.js:43  GET https://feedelizaapi.towersfy.com/api/checkin/analytics/dafeb2f3-66a7-420a-84d4-afd8c2863d2a 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ checkinService.js:43
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ checkinService.js:43
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+checkinService.js:43  GET https://feedelizaapi.towersfy.com/api/checkin/analytics/dafeb2f3-66a7-420a-84d4-afd8c2863d2a 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ checkinService.js:43
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ checkinService.js:43
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+query.js:358 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+h @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+[Violation] 'click' handler levou <N> ms
+[Violation] 'click' handler levou <N> ms
+[Violation] 'click' handler levou <N> ms
+[Violation] 'click' handler levou <N> ms
+[Violation] 'click' handler levou <N> ms
+[Violation] 'click' handler levou <N> ms
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+(anônimo) @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+(anônimo) @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+dashboardQueries.js:21  GET https://feedelizaapi.towersfy.com/api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+(anônimo) @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:21
+(anônimo) @ dashboardQueries.js:36
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+query.js:358 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+h @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+dashboardQueries.js:42 Error fetching dashboard data: H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ dashboardQueries.js:42
+(anônimo) @ notifyManager.js:62
+notifyFn @ notifyManager.js:10
+(anônimo) @ notifyManager.js:77
+(anônimo) @ notifyManager.js:76
+cc @ react-dom.production.min.js:273
+(anônimo) @ notifyManager.js:75
+Promise.then
+S @ utils.js:322
+t.flush @ notifyManager.js:74
+t.batch @ notifyManager.js:30
+t.dispatch @ query.js:392
+onError @ query.js:348
+h @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:266
+Dashboard.js:94 Error fetching dashboard data: H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+O @ Dashboard.js:94
+gi @ react-dom.production.min.js:160
+Cs @ react-dom.production.min.js:196
+kl @ react-dom.production.min.js:291
+bc @ react-dom.production.min.js:279
+yc @ react-dom.production.min.js:279
+gc @ react-dom.production.min.js:279
+ac @ react-dom.production.min.js:267
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+dashboardQueries.js:68  GET https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a&start_date=2025-03-15&end_date=2025-09-15&granularity=month 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:68
+enabled @ dashboardQueries.js:81
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:68
+enabled @ dashboardQueries.js:81
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+dashboardQueries.js:68  GET https://feedelizaapi.towersfy.com/api/dashboard/evolution-analytics?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a&start_date=2025-03-15&end_date=2025-09-15&granularity=month 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:68
+enabled @ dashboardQueries.js:81
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ dashboardQueries.js:68
+enabled @ dashboardQueries.js:81
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+query.js:358 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+h @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+(anônimo) @ react-dom.production.min.js:281
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+couponQueries.js:21  GET https://feedelizaapi.towersfy.com/api/rewards/restaurant/dafeb2f3-66a7-420a-84d4-afd8c2863d2a 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ couponQueries.js:21
+enabled @ couponQueries.js:78
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ couponQueries.js:21
+enabled @ couponQueries.js:78
+fetchFn @ query.js:300
+c @ retryer.js:95
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+couponQueries.js:21  GET https://feedelizaapi.towersfy.com/api/rewards/restaurant/dafeb2f3-66a7-420a-84d4-afd8c2863d2a 500 (Internal Server Error)
+(anônimo) @ xhr.js:195
+xhr @ xhr.js:15
+gt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ couponQueries.js:21
+enabled @ couponQueries.js:78
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+errorHandler.js:47 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+(anônimo) @ errorHandler.js:47
+(anônimo) @ axiosInstance.js:38
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+wt.<computed> @ Axios.js:213
+(anônimo) @ bind.js:5
+(anônimo) @ couponQueries.js:21
+enabled @ couponQueries.js:78
+fetchFn @ query.js:300
+c @ retryer.js:95
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+query.js:358 H {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+onError @ query.js:358
+h @ retryer.js:67
+(anônimo) @ retryer.js:132
+Promise.catch
+c @ retryer.js:116
+(anônimo) @ retryer.js:149
+Promise.then
+(anônimo) @ retryer.js:145
+Promise.catch
+c @ retryer.js:116
+u @ retryer.js:156
+t.fetch @ query.js:332
+n.executeFetch @ queryObserver.js:199
+n.onSubscribe @ queryObserver.js:40
+t.subscribe @ subscribable.js:16
+(anônimo) @ useBaseQuery.js:60
+rl @ react-dom.production.min.js:243
+wc @ react-dom.production.min.js:285
+lc @ react-dom.production.min.js:272
+qa @ react-dom.production.min.js:127
+(anônimo) @ react-dom.production.min.js:282
+_c @ react-dom.production.min.js:280
+ac @ react-dom.production.min.js:269
+w @ scheduler.production.min.js:13
+R @ scheduler.production.min.js:14
+
+> feedeliza-plus@1.0.0 start
+> node server.js
+2025-09-15 11:27:03 [info]: 	Redis Client Connected
+2025-09-15 11:27:04 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-15 11:27:04 [info]: 	Redis Subscriber Client Connected
+2025-09-15 11:27:04 [info]: 	Subscribed to perm_invalidation channel.
+2025-09-15 11:27:07 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-15 11:27:23 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:23 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:23 [info]: 	Decoded userId:
+2025-09-15 11:27:23 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:23 +0000] "GET /api/auth/me HTTP/1.1" 200 1724 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:24 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:24 +0000] "OPTIONS /api/iam/tree?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:24 [info]: 	Decoded userId:
+[IamService] Building permission snapshot for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a
+2025-09-15 11:27:24 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:24 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:24 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:24 +0000] "GET /api/iam/tree?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:24 [info]: 	Decoded userId:
+[IamService] Checking permission for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a, featureKey: fidelity:general:dashboard, actionKey: read, isSuperadmin: true
+2025-09-15 11:27:24 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:24 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:26 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:26 +0000] "OPTIONS /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:26 [info]: 	Decoded userId:
+2025-09-15 11:27:26 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:26 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:27:28 [info]: 	Decoded userId:
+2025-09-15 11:27:28 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:28 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:27:43 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:43 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:44 [info]: 	Decoded userId:
+[IamService] Checking permission for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a, featureKey: fidelity:checkin:dashboard, actionKey: read, isSuperadmin: true
+2025-09-15 11:27:44 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:44 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:44 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:44 +0000] "OPTIONS /api/checkin/analytics/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:27:44 [info]: 	Decoded userId:
+2025-09-15 11:27:45 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:45 +0000] "GET /api/checkin/analytics/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:117:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:27:46 [info]: 	Decoded userId:
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:117:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:27:46 [info]: 	170.254.46.100 - - [15/Sep/2025:11:27:46 +0000] "GET /api/checkin/analytics/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:28:26 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:26 +0000] "OPTIONS /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:28:26 [info]: 	Decoded userId:
+2025-09-15 11:28:26 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:26 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:28:28 [info]: 	Decoded userId:
+2025-09-15 11:28:28 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:28 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:28:57 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:57 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:28:58 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:58 +0000] "POST /api/auth/login HTTP/1.1" 200 1958 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:28:58 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:58 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:28:58 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:58 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:28:58 [info]: 	Decoded userId:
+2025-09-15 11:28:58 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:58 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:28:59 [info]: 	Decoded userId:
+2025-09-15 11:28:59 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:59 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:28:59 [info]: 	170.254.46.100 - - [15/Sep/2025:11:28:59 +0000] "OPTIONS /api/iam/tree?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:28:59 [info]: 	Decoded userId:
+[IamService] Building permission snapshot for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a
+2025-09-15 11:29:00 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:00 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:00 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:00 +0000] "GET /api/iam/tree?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:00 [info]: 	Decoded userId:
+[IamService] Checking permission for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a, featureKey: fidelity:general:dashboard, actionKey: read, isSuperadmin: true
+2025-09-15 11:29:00 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:00 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:01 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:01 +0000] "OPTIONS /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:01 [info]: 	Decoded userId:
+2025-09-15 11:29:01 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:01 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:02 [info]: 	Decoded userId:
+2025-09-15 11:29:02 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:02 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:25 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:25 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:25 [info]: 	Decoded userId:
+2025-09-15 11:29:25 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:25 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:25 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:25 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:25 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:25 +0000] "OPTIONS /api/iam/tree?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:26 [info]: 	Decoded userId:
+[IamService] Checking permission for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a, featureKey: fidelity:general:dashboard, actionKey: read, isSuperadmin: true
+2025-09-15 11:29:26 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:26 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:26 [info]: 	Decoded userId:
+[IamService] Building permission snapshot for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a
+2025-09-15 11:29:26 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:26 +0000] "GET /api/iam/tree?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:26 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:26 +0000] "OPTIONS /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:27 [info]: 	Decoded userId:
+2025-09-15 11:29:27 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:27 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:28 [info]: 	Decoded userId:
+2025-09-15 11:29:28 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:28 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:32 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:32 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:32 [info]: 	Decoded userId:
+[IamService] Checking permission for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a, featureKey: fidelity:checkin:dashboard, actionKey: read, isSuperadmin: true
+2025-09-15 11:29:32 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:32 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:33 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:33 +0000] "OPTIONS /api/checkin/analytics/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:33 [info]: 	Decoded userId:
+2025-09-15 11:29:33 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:33 +0000] "GET /api/checkin/analytics/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:117:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:34 [info]: 	Decoded userId:
+2025-09-15 11:29:34 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:34 +0000] "GET /api/checkin/analytics/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getCheckinAnalytics (/app/src/domains/checkin/checkin.controller.js:117:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/app/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:41 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:41 +0000] "OPTIONS /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:41 [info]: 	Decoded userId:
+2025-09-15 11:29:41 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:41 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:43 [info]: 	Decoded userId:
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getDashboardAnalytics (/app/src/domains/dashboard/dashboard.controller.js:23:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:43 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:43 +0000] "GET /api/dashboard/dafeb2f3-66a7-420a-84d4-afd8c2863d2a/analytics?period=30d HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:45 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:45 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:45 [info]: 	Decoded userId:
+[IamService] Checking permission for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a, featureKey: fidelity:general:evolution, actionKey: read, isSuperadmin: true
+2025-09-15 11:29:45 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:45 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:46 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:46 +0000] "OPTIONS /api/dashboard/evolution-analytics?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a&start_date=2025-03-15&end_date=2025-09-15&granularity=month HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:46 [info]: 	Decoded userId:
+2025-09-15 11:29:46 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:46 +0000] "GET /api/dashboard/evolution-analytics?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a&start_date=2025-03-15&end_date=2025-09-15&granularity=month HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.controller.js:48:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:47 [info]: 	Decoded userId:
+2025-09-15 11:29:47 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:47 +0000] "GET /api/dashboard/evolution-analytics?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a&start_date=2025-03-15&end_date=2025-09-15&granularity=month HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+TypeError: Cannot read properties of undefined (reading 'handleValidationErrors')
+    at getEvolutionAnalytics (/app/src/domains/dashboard/dashboard.controller.js:48:12)
+    at /app/src/utils/asyncHandler.js:3:21
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at /app/src/middleware/requirePermission.js:22:14
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at checkRestaurantOwnership (/app/src/middleware/authMiddleware.js:95:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-15 11:29:48 [info]: 	Decoded userId:
+[IamService] Checking permission for userId: 765f00e4-2e74-46de-9359-e9842b93259a, restaurantId: dafeb2f3-66a7-420a-84d4-afd8c2863d2a, featureKey: fidelity:satisfaction:settings, actionKey: read, isSuperadmin: true
+2025-09-15 11:29:48 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:48 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:48 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:48 +0000] "OPTIONS /api/npsCriteria?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:48 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:48 +0000] "OPTIONS /api/settings/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:48 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:48 +0000] "OPTIONS /api/rewards/restaurant/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:49 [info]: 	Decoded userId:
+2025-09-15 11:29:49 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:49 +0000] "GET /api/npsCriteria?restaurantId=dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 200 2 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:49 [info]: 	Decoded userId:
+2025-09-15 11:29:49 [info]: 	Decoded userId:
+2025-09-15 11:29:49 [info]: 	Decoded userId:
+2025-09-15 11:29:49 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:49 +0000] "GET /api/rewards/restaurant/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async Object.listRewards (/app/src/domains/rewards/rewards.service.js:10:29)
+    at async listRewards (/app/src/domains/rewards/rewards.controller.js:19:22)
+2025-09-15 11:29:49 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:49 +0000] "GET /api/settings/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 200 2 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 11:29:50 [info]: 	Decoded userId:
+2025-09-15 11:29:50 [info]: 	170.254.46.100 - - [15/Sep/2025:11:29:50 +0000] "GET /api/rewards/restaurant/dafeb2f3-66a7-420a-84d4-afd8c2863d2a HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async Object.listRewards (/app/src/domains/rewards/rewards.service.js:10:29)
+    at async listRewards (/app/src/domains/rewards/rewards.controller.js:19:22)

@@ -9,6 +9,15 @@ const dashboardServiceFactory = require("./dashboard.service");
 class DashboardController {
   constructor(db) {
     this.dashboardService = dashboardServiceFactory(db);
+
+    // Bind methods to ensure 'this' context is correct
+    this.getDashboardAnalytics = this.getDashboardAnalytics.bind(this);
+    this.getRewardsAnalytics = this.getRewardsAnalytics.bind(this);
+    this.getEvolutionAnalytics = this.getEvolutionAnalytics.bind(this);
+    this.getRatingDistribution = this.getRatingDistribution.bind(this);
+    this.spinWheel = this.spinWheel.bind(this);
+    this.getBenchmarkingData = this.getBenchmarkingData.bind(this);
+    this.getReport = this.getReport.bind(this);
   }
 
   handleValidationErrors(req) {

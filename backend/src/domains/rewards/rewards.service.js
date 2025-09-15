@@ -11,7 +11,6 @@ module.exports = (models) => {
       where: { restaurant_id: restaurantId },
       limit: parseInt(limit),
       offset: parseInt(offset),
-      order: [["createdAt", "DESC"]],
     });
 
     return {

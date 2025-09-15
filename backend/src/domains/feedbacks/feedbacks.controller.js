@@ -9,6 +9,15 @@ const feedbackServiceFactory = require("./feedbacks.service");
 class FeedbacksController {
   constructor(db) {
     this.feedbackService = feedbackServiceFactory(db);
+
+    // Bind methods to ensure 'this' context is correct
+    this.createFeedback = this.createFeedback.bind(this);
+    this.listFeedbacks = this.listFeedbacks.bind(this);
+    this.getFeedbackById = this.getFeedbackById.bind(this);
+    this.updateFeedback = this.updateFeedback.bind(this);
+    this.deleteFeedback = this.deleteFeedback.bind(this);
+    this.respondToFeedback = this.respondToFeedback.bind(this);
+    this.getFeedbackWordFrequency = this.getFeedbackWordFrequency.bind(this);
   }
 
   handleValidation(req) {

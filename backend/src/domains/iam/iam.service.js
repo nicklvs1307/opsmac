@@ -8,7 +8,7 @@ import {
   InternalServerError,
 } from "#utils/errors";
 import redisClient from "config/redisClient";
-import logger from "#utils/logger";
+import logger from "utils/logger";
 
 class IamService {
   constructor(db) {

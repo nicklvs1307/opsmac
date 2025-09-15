@@ -4,15 +4,7 @@
   "type": "module",
   "description": "Clientes que voltam, marcas que crescem.",
   "main": "server.js",
-  "imports": {
-    "#~/*": "./src/*",
-    "#middleware/*": "./src/middleware/*",
-    "#config/*": "./src/config/*",
-    "#domains/*": "./src/domains/*",
-    "#services/*": "./src/services/*",
-    "#utils/*": "./src/utils/*",
-    "#models/*": "./models/*"
-  },
+  
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
@@ -67,7 +59,8 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "uuid": "^9.0.1",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "module-alias": "^2.2.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

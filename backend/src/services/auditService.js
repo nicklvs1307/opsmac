@@ -1,7 +1,7 @@
 "use strict";
 
 const models = require("models");
-import logger from "#utils/logger"; // Import logger
+import logger from "utils/logger"; // Import logger
 
 class AuditService {
   async log(actor, tenantId, action, resource, payload) {

@@ -7,7 +7,7 @@ import {
 
 import iamService from "services/iamService";
 import auditService from "services/auditService";
-import logger from "#utils/logger"; // Import logger
+import logger from "utils/logger"; // Import logger
 import cacheService from "services/cacheService";
 
 class AuthService {

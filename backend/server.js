@@ -1,4 +1,20 @@
 import path from "path";
+import { fileURLToPath } from 'url';
+import moduleAlias from 'module-alias';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Configurar aliases baseados no jsconfig.json
+moduleAlias.addAliases({
+  '~': path.resolve(__dirname, './src'),
+  'middleware': path.resolve(__dirname, './src/middleware'),
+  'config': path.resolve(__dirname, './src/config'),
+  'domains': path.resolve(__dirname, './src/domains'),
+  'services': path.resolve(__dirname, './src/services'),
+  'utils': path.resolve(__dirname, './src/utils'),
+  'models': path.resolve(__dirname, './models')
+});
 
 
 import express from "express";
@@ -9,7 +25,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 dotenv.config();
 
-import db from "#models/index.js";
+import db from "models/index.js";
 import { BaseError } from "utils/errors";
 import logger from "utils/logger";
 import {

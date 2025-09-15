@@ -1,7 +1,7 @@
 import { Op } from "sequelize";
 import { NotFoundError, BadRequestError } from "utils/errors";
-import { sendWhatsAppMessage } from "#services/integrations/whatsappApiClient";
-import { generateCouponForReward } from "#domains/rewards/rewards.service";
+import { sendWhatsAppMessage } from "services/integrations/whatsappApiClient";
+import { generateCouponForReward } from "domains/rewards/rewards.service";
 import logger from "utils/logger";
 
 module.exports = (db) => {

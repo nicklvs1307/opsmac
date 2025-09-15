@@ -1,4 +1,4 @@
-const { createLogger, format, transports } = require("winston");
+import { createLogger, format, transports } from "winston";
 const { combine, timestamp, printf, colorize, align, errors } = format;
 
 // Custom format to handle error stacks
@@ -28,4 +28,4 @@ const logger = createLogger({
   exitOnError: false,
 });
 
-module.exports = logger;
+export default logger;

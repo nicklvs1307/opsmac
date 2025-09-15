@@ -1,16 +1,13 @@
-const express = require("express");
+import express from "express";
+import requirePermission from "../../middleware/requirePermission";
+import { updateOrderStatusValidation } from "./orders.validation";
+import asyncHandler from "../../utils/asyncHandler";
+import ordersControllerFactory from "./orders.controller";
 
-const requirePermission = require("middleware/requirePermission");
-const {
-  updateOrderStatusValidation,
-} = require("domains/orders/orders.validation");
-const asyncHandler = require("utils/asyncHandler");
-
-module.exports = (db) => {
-  const ordersController = require("./orders.controller")(db);
+export default (db) => {
+  const ordersController = ordersControllerFactory(db);
   const router = express.Router();
 
-  // Rotas de Pedidos
   router.get(
     "/",
     requirePermission("orders", "read"),
@@ -18,13 +15,13 @@ module.exports = (db) => {
   );
   router.get(
     "/restaurant/:restaurantId",
-    requirePermission("orders", "read"), // Assuming same permission
-    asyncHandler(ordersController.getOrdersByRestaurant), // New controller method
+    requirePermission("orders", "read"),
+    asyncHandler(ordersController.getOrdersByRestaurant),
   );
   router.put(
     "/:id/status",
     requirePermission("orders", "update"),
-    ...updateOrderStatusValidation,
+    updateOrderStatusValidation,
     asyncHandler(ordersController.updateOrderStatus),
   );
 

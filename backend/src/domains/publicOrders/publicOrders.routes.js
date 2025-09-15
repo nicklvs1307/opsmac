@@ -1,20 +1,19 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const {
-  createPublicOrderValidation,
-} = require("domains/publicOrders/publicOrders.validation");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler";
+import { createPublicOrderValidation } from "./publicOrders.validation";
+import publicOrdersServiceFactory from "./publicOrders.service";
+import publicOrdersControllerFactory from "./publicOrders.controller";
 
-module.exports = (db) => {
-  const publicOrdersService = require("./publicOrders.service")(db);
-  const publicOrdersController = require("./publicOrders.controller")(
+export default (db) => {
+  const publicOrdersService = publicOrdersServiceFactory(db);
+  const publicOrdersController = publicOrdersControllerFactory(
     publicOrdersService,
   );
   const router = express.Router();
 
-  // Rotas de Pedidos Públicos
   router.post(
     "/",
-    ...createPublicOrderValidation,
+    createPublicOrderValidation,
     asyncHandler(publicOrdersController.createPublicOrder),
   );
 

@@ -1,18 +1,18 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.updateRestaurantStatusValidation = [
+export const updateRestaurantStatusValidation = [
   body("is_open")
     .isBoolean()
     .withMessage("O campo is_open deve ser um booleano."),
 ];
 
-exports.updateRestaurantPosStatusValidation = [
+export const updateRestaurantPosStatusValidation = [
   body("pos_status")
     .isIn(["open", "closed"])
     .withMessage("O campo pos_status deve ser 'open' ou 'closed'."),
 ];
 
-exports.userValidation = [
+export const userValidation = [
   body("name").notEmpty().withMessage("Nome é obrigatório"),
   body("email").isEmail().withMessage("Email inválido"),
   body("password")
@@ -23,7 +23,7 @@ exports.userValidation = [
     .withMessage("Função inválida. Permitido apenas: manager, waiter."),
 ];
 
-exports.updateUserValidation = [
+export const updateUserValidation = [
   body("name").optional().notEmpty().withMessage("Nome é obrigatório"),
   body("email").optional().isEmail().withMessage("Email inválido"),
   body("role")
@@ -36,7 +36,7 @@ exports.updateUserValidation = [
     .withMessage("is_active deve ser um booleano"),
 ];
 
-exports.addonValidation = [
+export const addonValidation = [
   body("name")
     .notEmpty()
     .withMessage("Name is required.")
@@ -52,7 +52,7 @@ exports.addonValidation = [
   body("is_active").isBoolean().withMessage("Is active must be a boolean."),
 ];
 
-exports.cashRegisterCategoryValidation = [
+export const cashRegisterCategoryValidation = [
   body("name")
     .notEmpty()
     .withMessage("Category name is required.")
@@ -64,7 +64,7 @@ exports.cashRegisterCategoryValidation = [
   body("is_active").isBoolean().withMessage("Is active must be a boolean."),
 ];
 
-exports.categoryValidation = [
+export const categoryValidation = [
   body("name")
     .notEmpty()
     .withMessage("Category name is required.")
@@ -77,7 +77,7 @@ exports.categoryValidation = [
   body("is_active").isBoolean().withMessage("Is active must be a boolean."),
 ];
 
-exports.financialCategoryValidation = [
+export const financialCategoryValidation = [
   body("name")
     .notEmpty()
     .withMessage("Category name is required.")
@@ -89,7 +89,7 @@ exports.financialCategoryValidation = [
   body("is_active").isBoolean().withMessage("Is active must be a boolean."),
 ];
 
-exports.ingredientValidation = [
+export const ingredientValidation = [
   body("name")
     .notEmpty()
     .withMessage("Ingredient name is required.")
@@ -101,7 +101,7 @@ exports.ingredientValidation = [
   body("is_active").isBoolean().withMessage("Is active must be a boolean."),
 ];
 
-exports.productValidation = [
+export const productValidation = [
   body("name")
     .notEmpty()
     .withMessage("Product name is required.")
@@ -121,7 +121,7 @@ exports.productValidation = [
   body("is_active").isBoolean().withMessage("Is active must be a boolean."),
 ];
 
-exports.supplierValidation = [
+export const supplierValidation = [
   body("name")
     .notEmpty()
     .withMessage("Supplier name is required.")
@@ -140,7 +140,7 @@ exports.supplierValidation = [
   body("is_active").isBoolean().withMessage("Is active must be a boolean."),
 ];
 
-exports.tableValidation = [
+export const tableValidation = [
   body("name")
     .notEmpty()
     .withMessage("Table name is required.")
@@ -151,7 +151,7 @@ exports.tableValidation = [
     .withMessage("Capacity must be a positive integer."),
 ];
 
-exports.technicalSpecificationValidation = [
+export const technicalSpecificationValidation = [
   body("name")
     .notEmpty()
     .withMessage("Name is required.")
@@ -164,7 +164,7 @@ exports.technicalSpecificationValidation = [
   body("is_active").isBoolean().withMessage("Is active must be a boolean."),
 ];
 
-exports.createWaiterOrderValidation = [
+export const createWaiterOrderValidation = [
   body("table_id").notEmpty().withMessage("Table ID is required."),
   body("items")
     .isArray({ min: 1 })
@@ -177,7 +177,7 @@ exports.createWaiterOrderValidation = [
     .withMessage("Quantity must be a positive integer."),
 ];
 
-exports.updateWaiterOrderValidation = [
+export const updateWaiterOrderValidation = [
   body("items")
     .isArray({ min: 1 })
     .withMessage("Order must have at least one item.")
@@ -196,20 +196,20 @@ exports.updateWaiterOrderValidation = [
     .optional(),
 ];
 
-exports.createWaiterCallValidation = [
+export const createWaiterCallValidation = [
   body("table_id").notEmpty().withMessage("Table ID is required."),
   body("call_type")
     .isIn(["service", "bill", "other"])
     .withMessage("Invalid call type."),
 ];
 
-exports.updateWaiterCallValidation = [
+export const updateWaiterCallValidation = [
   body("status")
     .isIn(["pending", "resolved", "cancelled"])
     .withMessage("Invalid call status."),
 ];
 
-exports.updateRestaurantValidation = [
+export const updateRestaurantValidation = [
   body("name")
     .optional()
     .notEmpty()
@@ -228,4 +228,5 @@ exports.updateRestaurantValidation = [
     .optional()
     .isString()
     .withMessage("Description must be a string."),
+  body("slug").optional().trim().isString().withMessage("Slug inválido"),
 ];

@@ -1,11 +1,7 @@
-const {
-  BadRequestError,
-  NotFoundError,
-  ForbiddenError,
-} = require("utils/errors");
+import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors";
 
-module.exports = (db) => {
-  const models = db;
+export default (db) => {
+  const { models } = db;
 
   const createTechnicalSpecification = async (
     product_id,

@@ -1,14 +1,13 @@
-const { NotFoundError } = require("utils/errors");
+import { NotFoundError } from "../../utils/errors";
 
-module.exports = (db) => {
-  const models = db;
+export default (db) => {
+  const { models } = db;
 
   const getLabelUsers = async (restaurantId) => {
-    const users = await models.User.findAll({
+    return models.User.findAll({
       where: { restaurant_id: restaurantId },
       attributes: ["id", "name"],
     });
-    return users;
   };
 
   const getLabelItems = async (restaurantId) => {
@@ -32,7 +31,7 @@ module.exports = (db) => {
       ],
     });
 
-    const combinedItems = [
+    return [
       ...products.map((p) => ({
         id: p.id,
         name: p.name,
@@ -48,7 +47,6 @@ module.exports = (db) => {
         default_label_status: i.default_label_status,
       })),
     ];
-    return combinedItems;
   };
 
   const printLabel = async (
@@ -60,12 +58,6 @@ module.exports = (db) => {
     restaurantId,
     printed_by_user_id,
   ) => {
-    // Optional: Check if restaurantId exists if it's critical for this operation
-    // const restaurant = await models.Restaurant.findByPk(restaurantId);
-    // if (!restaurant) {
-    //     throw new NotFoundError('Restaurante não encontrado.');
-    // }
-
     await models.PrintedLabel.create({
       labelable_id,
       labelable_type,
@@ -77,16 +69,11 @@ module.exports = (db) => {
     });
   };
 
-  // Placeholder functions for stock counts and productions, as they were in the controller but not service
   const getStockCounts = async (restaurantId) => {
-    // Implement logic to retrieve stock counts for the given restaurantId
-    // Example: return models.StockCount.findAll({ where: { restaurant_id: restaurantId } });
     return []; // Placeholder
   };
 
   const getProductions = async (restaurantId) => {
-    // Implement logic to retrieve production records for the given restaurantId
-    // Example: return models.ProductionRecord.findAll({ where: { restaurant_id: restaurantId } });
     return []; // Placeholder
   };
 

@@ -1,5 +1,5 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.npsCriterionValidation = [
+export const npsCriterionValidation = [
   body("name", "O nome do critério é obrigatório").not().isEmpty().trim(),
 ];

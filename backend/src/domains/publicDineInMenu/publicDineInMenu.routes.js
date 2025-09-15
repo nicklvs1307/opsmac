@@ -1,14 +1,15 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler";
+import publicDineInMenuServiceFactory from "./publicDineInMenu.service";
+import publicDineInMenuControllerFactory from "./publicDineInMenu.controller";
 
-module.exports = (db) => {
-  const publicDineInMenuService = require("./publicDineInMenu.service")(db);
-  const publicDineInMenuController = require("./publicDineInMenu.controller")(
+export default (db) => {
+  const publicDineInMenuService = publicDineInMenuServiceFactory(db);
+  const publicDineInMenuController = publicDineInMenuControllerFactory(
     publicDineInMenuService,
   );
   const router = express.Router();
 
-  // Rotas de Menu para Consumo no Local
   router.get(
     "/:restaurantSlug/:tableNumber",
     asyncHandler(publicDineInMenuController.getDineInMenu),

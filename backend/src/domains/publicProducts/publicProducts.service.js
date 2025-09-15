@@ -1,6 +1,7 @@
-module.exports = (db) => {
+import { NotFoundError } from "../../utils/errors";
+
+export default (db) => {
   const { models } = db;
-  const { NotFoundError } = require("utils/errors");
 
   const getProductsForPublicMenu = async (restaurantSlug, category) => {
     const restaurant = await models.Restaurant.findOne({

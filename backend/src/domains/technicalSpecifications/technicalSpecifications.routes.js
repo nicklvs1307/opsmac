@@ -1,17 +1,14 @@
-const express = require("express");
+import express from "express";
+import requirePermission from "../../middleware/requirePermission";
+import { createUpdateTechnicalSpecificationValidation } from "./technicalSpecifications.validation";
+import technicalSpecificationsControllerFactory from "./technicalSpecifications.controller";
+import authMiddlewareFactory from "../../middleware/authMiddleware";
 
-const requirePermission = require("middleware/requirePermission");
-const {
-  createUpdateTechnicalSpecificationValidation,
-} = require("domains/technicalSpecifications/technicalSpecifications.validation");
-
-module.exports = (db) => {
-  const technicalSpecificationsController =
-    require("./technicalSpecifications.controller")(db);
-  const { auth } = require("middleware/authMiddleware")(db);
+export default (db) => {
+  const technicalSpecificationsController = technicalSpecificationsControllerFactory(db);
+  const { auth } = authMiddlewareFactory(db);
   const router = express.Router();
 
-  // Rotas de Fichas Técnicas
   router.post(
     "/",
     auth,

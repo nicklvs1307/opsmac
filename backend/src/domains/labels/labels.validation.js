@@ -1,6 +1,6 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.printLabelValidation = [
+export const printLabelValidation = [
   body("labelable_id").notEmpty().withMessage("ID do item é obrigatório"),
   body("labelable_type")
     .isIn(["Product", "Ingredient"])

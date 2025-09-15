@@ -1,6 +1,6 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.createIngredientValidation = [
+export const createIngredientValidation = [
   body("name")
     .notEmpty()
     .withMessage("Nome é obrigatório")
@@ -25,7 +25,7 @@ exports.createIngredientValidation = [
     .withMessage("Custo por unidade deve ser um número positivo"),
 ];
 
-exports.updateIngredientValidation = [
+export const updateIngredientValidation = [
   body("name")
     .optional()
     .notEmpty()

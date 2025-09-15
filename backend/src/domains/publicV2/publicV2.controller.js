@@ -1,9 +1,10 @@
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService"); // Import auditService
+import { validationResult } from "express-validator";
+import { BadRequestError } from "../../utils/errors";
+import auditService from "../../services/auditService";
+import publicV2ServiceFactory from "./publicV2.service";
 
-module.exports = (db) => {
-  const publicV2Service = require("./publicV2.service")(db);
+export default (db) => {
+  const publicV2Service = publicV2ServiceFactory(db);
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
@@ -29,7 +30,6 @@ module.exports = (db) => {
         comment,
         nps_score,
       );
-      // No req.user for public routes, so pass null for user
       await auditService.log(
         null,
         restaurant_id,
@@ -48,7 +48,6 @@ module.exports = (db) => {
         restaurant_id,
         customer_id,
       );
-      // No req.user for public routes, so pass null for user
       await auditService.log(
         null,
         restaurant_id,

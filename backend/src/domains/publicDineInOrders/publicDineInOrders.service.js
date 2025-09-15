@@ -1,8 +1,8 @@
-const { BadRequestError, NotFoundError } = require("utils/errors");
-const { generateEscPosCommands } = require("utils/thermalPrinterService");
+import { BadRequestError, NotFoundError } from "../../utils/errors";
+import { generateEscPosCommands } from "../../utils/thermalPrinterService";
 
-module.exports = (db) => {
-  const models = db;
+export default (db) => {
+  const { models } = db;
 
   const createDineInOrder = async (
     cartItems,
@@ -19,7 +19,9 @@ module.exports = (db) => {
       (total, item) => total + item.price * item.quantity,
       0,
     );
-    const external_order_id = `DINEIN-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
+    const external_order_id = `DINEIN-${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2, 8)}`;
 
     const order = await models.Order.create({
       restaurant_id,

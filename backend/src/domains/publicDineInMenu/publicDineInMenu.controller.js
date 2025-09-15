@@ -1,7 +1,7 @@
-module.exports = (publicDineInMenuService) => {
-  const { validationResult } = require("express-validator");
-  const { BadRequestError } = require("utils/errors");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "../../utils/errors";
 
+export default (publicDineInMenuService) => {
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

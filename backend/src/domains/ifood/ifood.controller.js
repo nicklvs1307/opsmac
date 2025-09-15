@@ -1,8 +1,9 @@
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService"); // Import auditService
+import { BadRequestError } from "../../utils/errors";
+import auditService from "../../services/auditService";
+import ifoodServiceFactory from "./ifood.service";
 
-module.exports = (db) => {
-  const ifoodService = require("./ifood.service")(db);
+export default (db) => {
+  const ifoodService = ifoodServiceFactory(db);
 
   return {
     checkIfoodModuleEnabled: async (req, res, next) => {
@@ -10,16 +11,13 @@ module.exports = (db) => {
       if (!restaurantId) {
         throw new BadRequestError("Missing restaurant ID in webhook payload.");
       }
-      const restaurant =
-        await ifoodService.checkIfoodModuleEnabled(restaurantId);
+      const restaurant = await ifoodService.checkIfoodModuleEnabled(restaurantId);
       req.restaurant = restaurant;
       next();
     },
 
     handleWebhook: async (req, res, next) => {
       await ifoodService.handleWebhook(req.body);
-      // Webhooks don't have req.user, so pass null for user.
-      // restaurantId can be extracted from req.body if available in the webhook payload.
       const restaurantId = req.body.restaurantId || null;
       await auditService.log(
         null,

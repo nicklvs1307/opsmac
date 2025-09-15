@@ -1,14 +1,11 @@
-const express = require("express");
-const requirePermission = require("middleware/requirePermission");
-const asyncHandler = require("utils/asyncHandler");
+import express from "express";
+import requirePermission from "../../middleware/requirePermission";
+import asyncHandler from "../../utils/asyncHandler";
+import npsCriteriaControllerFactory from "./npsCriteria.controller";
+import { npsCriterionValidation } from "./npsCriteria.validation";
 
-module.exports = (db) => {
-  const npsCriteriaController =
-    require("domains/npsCriteria/npsCriteria.controller")(db);
-  const {
-    npsCriterionValidation,
-  } = require("domains/npsCriteria/npsCriteria.validation");
-
+export default (db) => {
+  const npsCriteriaController = npsCriteriaControllerFactory(db);
   const router = express.Router();
 
   router.get(
@@ -19,13 +16,13 @@ module.exports = (db) => {
   router.post(
     "/",
     requirePermission("npsCriteria:edit", "create"),
-    ...npsCriterionValidation,
+    npsCriterionValidation,
     asyncHandler(npsCriteriaController.createNpsCriterion),
   );
   router.put(
     "/:id",
     requirePermission("npsCriteria:edit", "update"),
-    ...npsCriterionValidation,
+    npsCriterionValidation,
     asyncHandler(npsCriteriaController.updateNpsCriterion),
   );
   router.delete(

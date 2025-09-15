@@ -1,1 +1,2 @@
 // PublicDineInMenu Validations (empty)
+export {};

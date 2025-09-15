@@ -1,19 +1,18 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const {
-  createDineInOrderValidation,
-} = require("domains/publicDineInOrders/publicDineInOrders.validation");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler";
+import { createDineInOrderValidation } from "./publicDineInOrders.validation";
+import publicDineInOrdersServiceFactory from "./publicDineInOrders.service";
+import publicDineInOrdersControllerFactory from "./publicDineInOrders.controller";
 
-module.exports = (db) => {
-  const publicDineInOrdersService = require("./publicDineInOrders.service")(db);
+export default (db) => {
+  const publicDineInOrdersService = publicDineInOrdersServiceFactory(db);
   const publicDineInOrdersController =
-    require("./publicDineInOrders.controller")(publicDineInOrdersService);
+    publicDineInOrdersControllerFactory(publicDineInOrdersService);
   const router = express.Router();
 
-  // Rotas de Pedidos para Consumo no Local
   router.post(
     "/order",
-    ...createDineInOrderValidation,
+    createDineInOrderValidation,
     asyncHandler(publicDineInOrdersController.createDineInOrder),
   );
 

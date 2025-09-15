@@ -3,18 +3,12 @@ import { validationResult } from "express-validator";
 import { BadRequestError } from "utils/errors";
 import auditService from "services/auditService";
 
-// Import service factory functions
-import transactionServiceFactory from "./transactionService";
-import financialCategoryServiceFactory from "./financialCategoryService";
-import reportServiceFactory from "./reportService";
-import paymentMethodServiceFactory from "./paymentMethodService";
+// Import the consolidated service factory function
+import financialServiceFactory from "./financial.service";
 
 class FinancialController {
   constructor(db) {
-    this.transactionService = transactionServiceFactory(db);
-    this.financialCategoryService = financialCategoryServiceFactory(db);
-    this.reportService = reportServiceFactory(db);
-    this.paymentMethodService = paymentMethodServiceFactory(db);
+    this.financialService = financialServiceFactory(db);
   }
 
   handleValidationErrors(req) {
@@ -28,7 +22,7 @@ class FinancialController {
     try {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const transaction = await this.transactionService.createTransaction(
+      const transaction = await this.financialService.createTransaction(
         restaurantId,
         req.user.userId,
         req.body,
@@ -50,7 +44,7 @@ class FinancialController {
     try {
       const restaurantId = req.context.restaurantId;
       const { type, category_id, start_date, end_date } = req.query;
-      const transactions = await this.transactionService.getTransactions(
+      const transactions = await this.financialService.getTransactions(
         restaurantId,
         type,
         category_id,
@@ -67,11 +61,10 @@ class FinancialController {
     try {
       const restaurantId = req.context.restaurantId;
       const { type } = req.query;
-      const categories =
-        await this.financialCategoryService.getFinancialCategories(
-          restaurantId,
-          type,
-        );
+      const categories = await this.financialService.getFinancialCategories(
+        restaurantId,
+        type,
+      );
       res.json(categories);
     } catch (error) {
       next(error);
@@ -83,7 +76,7 @@ class FinancialController {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
       const { start_date, end_date } = req.query;
-      const report = await this.reportService.getCashFlowReport(
+      const report = await this.financialService.getCashFlowReport(
         restaurantId,
         start_date,
         end_date,
@@ -99,7 +92,7 @@ class FinancialController {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
       const { start_date, end_date } = req.query;
-      const report = await this.reportService.getDreReport(
+      const report = await this.financialService.getDreReport(
         restaurantId,
         start_date,
         end_date,
@@ -114,7 +107,7 @@ class FinancialController {
     try {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const paymentMethod = await this.paymentMethodService.createPaymentMethod(
+      const paymentMethod = await this.financialService.createPaymentMethod(
         restaurantId,
         req.body,
       );
@@ -135,12 +128,11 @@ class FinancialController {
     try {
       const restaurantId = req.context.restaurantId;
       const { type, is_active } = req.query;
-      const paymentMethods =
-        await this.paymentMethodService.getAllPaymentMethods(
-          restaurantId,
-          type,
-          is_active,
-        );
+      const paymentMethods = await this.financialService.getAllPaymentMethods(
+        restaurantId,
+        type,
+        is_active,
+      );
       res.json(paymentMethods);
     } catch (error) {
       next(error);
@@ -152,7 +144,7 @@ class FinancialController {
       this.handleValidationErrors(req);
       const { id } = req.params;
       const restaurantId = req.context.restaurantId;
-      const paymentMethod = await this.paymentMethodService.updatePaymentMethod(
+      const paymentMethod = await this.financialService.updatePaymentMethod(
         id,
         restaurantId,
         req.body,
@@ -174,7 +166,7 @@ class FinancialController {
     try {
       const { id } = req.params;
       const restaurantId = req.context.restaurantId;
-      await this.paymentMethodService.deletePaymentMethod(id, restaurantId);
+      await this.financialService.deletePaymentMethod(id, restaurantId);
       await auditService.log(
         req.user,
         restaurantId,
@@ -193,7 +185,7 @@ class FinancialController {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
       const { start_date, end_date } = req.query;
-      const report = await this.reportService.getSalesByPaymentMethodReport(
+      const report = await this.financialService.getSalesByPaymentMethodReport(
         restaurantId,
         start_date,
         end_date,

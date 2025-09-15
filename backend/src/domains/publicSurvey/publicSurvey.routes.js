@@ -1,18 +1,15 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler";
+import publicSurveyControllerFactory from "./publicSurvey.controller";
+import {
+  submitResponsesValidation,
+  linkCustomerValidation,
+} from "./publicSurvey.validation";
 
-module.exports = (db) => {
-  const publicSurveyController =
-    require("domains/publicSurvey/publicSurvey.controller")(db);
-  const {
-    submitPublicSurveyValidation,
-    submitResponsesValidation,
-    linkCustomerValidation,
-  } = require("domains/publicSurvey/publicSurvey.validation");
-
+export default (db) => {
+  const publicSurveyController = publicSurveyControllerFactory(db);
   const router = express.Router();
 
-  // Rotas Públicas de Pesquisas
   router.get(
     "/next/:restaurantSlug/:customerId?",
     asyncHandler(publicSurveyController.getNextSurvey),
@@ -23,12 +20,12 @@ module.exports = (db) => {
   );
   router.post(
     "/:slug/responses",
-    ...submitResponsesValidation,
+    submitResponsesValidation,
     asyncHandler(publicSurveyController.submitSurveyResponses),
   );
   router.patch(
     "/responses/:responseId/link-customer",
-    ...linkCustomerValidation,
+    linkCustomerValidation,
     asyncHandler(publicSurveyController.linkCustomerToResponse),
   );
 

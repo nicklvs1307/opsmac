@@ -1,6 +1,6 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.createDineInOrderValidation = [
+export const createDineInOrderValidation = [
   body("sessionId").isUUID().withMessage("ID da sessão inválido."),
   body("restaurant_id").isUUID().withMessage("ID do restaurante inválido."),
   body("table_id").isUUID().withMessage("ID da mesa inválido."),

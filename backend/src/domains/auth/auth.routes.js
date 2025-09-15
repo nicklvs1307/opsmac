@@ -12,4 +12,5 @@ import {
   changePasswordValidation,
 } from "domains/auth/auth.validation";
 
-module.exports = (db) => {
+export default (db) => {
+  const authController = authControllerFactory(db);

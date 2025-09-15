@@ -1,9 +1,9 @@
-const QRCodeLib = require("qrcode");
-const { Op, fn, col } = require("sequelize");
-const { NotFoundError, BadRequestError } = require("utils/errors");
+import QRCodeLib from "qrcode";
+import { Op, fn, col } from "sequelize";
+import { NotFoundError, BadRequestError } from "../../utils/errors";
 
-module.exports = (db) => {
-  const models = db;
+export default (db) => {
+  const { models } = db;
 
   const generateQRCodeImage = async (qrCode, size, format) => {
     const qrCodeUrl = qrCode.feedback_url;
@@ -249,7 +249,6 @@ module.exports = (db) => {
         created_at: new Date().toISOString(),
       });
     } else {
-      // Default to feedback
       qrCode.feedback_url = `${baseUrl}/feedback/new?qrCodeId=${qrCode.id}`;
       qrCode.qr_code_data = JSON.stringify({
         type: "feedback",

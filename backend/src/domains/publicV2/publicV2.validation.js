@@ -1,6 +1,6 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.feedbackValidation = [
+export const feedbackValidation = [
   body("rating")
     .isInt({ min: 1, max: 5 })
     .withMessage("A avaliação deve ser um número entre 1 e 5"),
@@ -12,6 +12,6 @@ exports.feedbackValidation = [
     .withMessage("A pontuação NPS deve ser um número entre 0 e 10"),
 ];
 
-exports.checkinValidation = [
+export const checkinValidation = [
   body("customer_id").isUUID().withMessage("ID do cliente inválido"),
 ];

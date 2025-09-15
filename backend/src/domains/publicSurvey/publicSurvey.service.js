@@ -1,12 +1,8 @@
-const { Op } = require("sequelize");
-const {
-  BadRequestError,
-  NotFoundError,
-  ForbiddenError,
-} = require("utils/errors");
+import { Op } from "sequelize";
+import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors";
 
-module.exports = (db) => {
-  const models = db;
+export default (db) => {
+  const { models } = db;
 
   const getNextSurvey = async (restaurantSlug, customerId) => {
     const restaurant = await models.Restaurant.findOne({
@@ -223,7 +219,8 @@ module.exports = (db) => {
               npsScoresByCriterion[criterionId][category]++;
               npsScoresByCriterion[criterionId].total++;
             }
-          } else if (
+          }
+          else if (
             question.question_type === "ratings" ||
             question.question_type === "csat"
           ) {

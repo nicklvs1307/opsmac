@@ -1,9 +1,8 @@
-module.exports = (restaurantService) => {
-  const { validationResult } = require("express-validator");
-  const { BadRequestError } = require("utils/errors");
-  const auditService = require("services/auditService"); // Import auditService
+import { validationResult } from "express-validator";
+import { BadRequestError } from "../../utils/errors";
+import auditService from "../../services/auditService";
 
-  // Helper para tratar erros de validação
+export default (restaurantService) => {
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -11,16 +10,15 @@ module.exports = (restaurantService) => {
     }
   };
 
-  // --- GERENCIAMENTO DO RESTAURANTE ---
   const getRestaurantById = async (req, res, next) => {
-    const restaurantId = req.params.restaurantId || req.context.restaurantId; // Use param if available, else context
+    const restaurantId = req.params.restaurantId || req.context.restaurantId;
     const restaurant = await restaurantService.getRestaurantById(restaurantId);
     res.json(restaurant);
   };
 
   const listRestaurants = async (req, res, next) => {
     try {
-      const { ids } = req.query; // Expecting comma-separated IDs
+      const { ids } = req.query;
       let restaurantIds = [];
       if (ids) {
         restaurantIds = ids.split(",");
@@ -87,7 +85,6 @@ module.exports = (restaurantService) => {
     res.json(updatedRestaurant);
   };
 
-  // --- USUÁRIOS DO RESTAURANTE ---
   const listRestaurantUsers = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const users = await restaurantService.listRestaurantUsers(restaurantId);
@@ -142,7 +139,6 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- ADICIONAIS (ADDONS) ---
   const getRestaurantAddons = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const addons = await restaurantService.getRestaurantAddons(restaurantId);
@@ -197,7 +193,6 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- CATEGORIAS DE CAIXA ---
   const getRestaurantCashRegisterCategories = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const categories =
@@ -258,7 +253,6 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- CATEGORIAS ---
   const getRestaurantCategories = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const categories =
@@ -314,7 +308,6 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- CATEGORIAS FINANCEIRAS ---
   const getRestaurantFinancialCategories = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const categories =
@@ -375,7 +368,6 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- INGREDIENTES ---
   const getRestaurantIngredients = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const ingredients =
@@ -435,7 +427,6 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- PRODUTOS ---
   const getRestaurantProducts = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const products =
@@ -491,7 +482,6 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- FORNECEDORES ---
   const getRestaurantSuppliers = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const suppliers =
@@ -519,11 +509,12 @@ module.exports = (restaurantService) => {
   const updateRestaurantSupplier = async (req, res, next) => {
     handleValidationErrors(req);
     const { restaurantId, supplierId } = req.params;
-    const updatedSupplier = await restaurantService.updateRestaurantSupplier(
-      restaurantId,
-      supplierId,
-      req.body,
-    );
+    const updatedSupplier =
+      await restaurantService.updateRestaurantSupplier(
+        restaurantId,
+        supplierId,
+        req.body,
+      );
     await auditService.log(
       req.user,
       restaurantId,
@@ -547,7 +538,6 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- MESAS ---
   const getRestaurantTables = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const tables = await restaurantService.getRestaurantTables(restaurantId);
@@ -602,13 +592,10 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- FICHAS TÉCNICAS ---
   const getRestaurantTechnicalSpecifications = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const specs =
-      await restaurantService.getRestaurantTechnicalSpecifications(
-        restaurantId,
-      );
+      await restaurantService.getRestaurantTechnicalSpecifications(restaurantId);
     res.json(specs);
   };
 
@@ -665,7 +652,6 @@ module.exports = (restaurantService) => {
     res.status(204).send();
   };
 
-  // --- GARÇOM (WAITER/PDV) ---
   const getWaiterProducts = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const products = await restaurantService.getWaiterProducts(restaurantId);
@@ -787,7 +773,7 @@ module.exports = (restaurantService) => {
 
   return {
     getRestaurantById,
-    listRestaurants, // Added this line
+    listRestaurants,
     updateRestaurant,
     updateRestaurantOpenStatus,
     updateRestaurantPosStatus,

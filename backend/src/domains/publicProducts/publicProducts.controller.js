@@ -1,7 +1,7 @@
-module.exports = (publicProductsService) => {
-  const { validationResult } = require("express-validator");
-  const { NotFoundError, BadRequestError } = require("utils/errors");
+import { validationResult } from "express-validator";
+import { NotFoundError, BadRequestError } from "../../utils/errors";
 
+export default (publicProductsService) => {
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -10,8 +10,7 @@ module.exports = (publicProductsService) => {
   };
 
   const getProductsForPublicMenu = async (req, res, next) => {
-    const { restaurantSlug } = req.params;
-    const { category } = req.query;
+    const { restaurantSlug, category } = req.params;
     const { products, restaurant } =
       await publicProductsService.getProductsForPublicMenu(
         restaurantSlug,
@@ -21,8 +20,7 @@ module.exports = (publicProductsService) => {
   };
 
   const getProductsForPublicDeliveryMenu = async (req, res, next) => {
-    const { restaurantSlug } = req.params;
-    const { category } = req.query;
+    const { restaurantSlug, category } = req.params;
     const { products, restaurant } =
       await publicProductsService.getProductsForPublicDeliveryMenu(
         restaurantSlug,

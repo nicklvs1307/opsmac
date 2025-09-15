@@ -1,23 +1,22 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
-const {
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler";
+import requirePermission from "../../middleware/requirePermission";
+import {
   createIngredientValidation,
   updateIngredientValidation,
-} = require("domains/ingredients/ingredients.validation");
+} from "./ingredients.validation";
+import ingredientsServiceFactory from "./ingredients.service";
+import ingredientsControllerFactory from "./ingredients.controller";
 
-module.exports = (db) => {
-  const ingredientsService = require("./ingredients.service")(db);
-  const ingredientsController = require("./ingredients.controller")(
-    ingredientsService,
-  );
+export default (db) => {
+  const ingredientsService = ingredientsServiceFactory(db);
+  const ingredientsController = ingredientsControllerFactory(ingredientsService);
   const router = express.Router();
 
-  // Rotas de Ingredientes
   router.post(
     "/",
     requirePermission("ingredients", "create"),
-    ...createIngredientValidation,
+    createIngredientValidation,
     asyncHandler(ingredientsController.createIngredient),
   );
   router.get(
@@ -33,7 +32,7 @@ module.exports = (db) => {
   router.put(
     "/:id",
     requirePermission("ingredients", "update"),
-    ...updateIngredientValidation,
+    updateIngredientValidation,
     asyncHandler(ingredientsController.updateIngredient),
   );
   router.delete(

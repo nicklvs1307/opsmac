@@ -1,8 +1,8 @@
-module.exports = (publicOrdersService) => {
-  const { validationResult } = require("express-validator");
-  const { BadRequestError } = require("utils/errors");
-  const auditService = require("services/auditService"); // Import auditService
+import { validationResult } from "express-validator";
+import { BadRequestError } from "../../utils/errors";
+import auditService from "../../services/auditService";
 
+export default (publicOrdersService) => {
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -32,7 +32,6 @@ module.exports = (publicOrdersService) => {
       payment_method,
       notes,
     );
-    // No req.user for public routes, so pass null for user
     await auditService.log(
       null,
       restaurant_id,

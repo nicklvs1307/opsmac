@@ -11,20 +11,8 @@ import {
   byPhoneValidation,
 } from "./customers.validation";
 
-import CustomersControllerFactory from "./customers.controller";
-import {
-  createCustomerValidation,
-  updateCustomerValidation,
-  publicRegisterCustomerValidation,
-  customerQueryValidation,
-  byPhoneValidation,
-} from "./customers.validation";
-
-import CustomersControllerFactory from "./customers.controller";
-
-module.exports = (db) => {
-  module.exports = (db) => {
-
+export default (db) => {
+  const customersController = CustomersControllerFactory(db);
   const router = safeRouter();
 
   /**

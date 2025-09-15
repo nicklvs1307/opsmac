@@ -1,1 +1,2 @@
 // PublicProducts Validations (empty)
+export {};

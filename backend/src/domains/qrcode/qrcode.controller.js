@@ -1,8 +1,8 @@
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService"); // Import auditService
+import { validationResult } from "express-validator";
+import { BadRequestError } from "../../utils/errors";
+import auditService from "../../services/auditService";
 
-module.exports = (qrcodeService) => {
+export default (qrcodeService) => {
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -144,7 +144,6 @@ module.exports = (qrcodeService) => {
         user_agent: req.get("User-Agent"),
         ip_address: req.ip,
       });
-      // No req.user for public routes, so pass null for user
       await auditService.log(
         null,
         result.restaurant?.id || null,
@@ -169,8 +168,6 @@ module.exports = (qrcodeService) => {
         req.get("User-Agent"),
         req.ip,
       );
-      // No req.user for public routes, so pass null for user
-      // restaurantId is not directly available here, so pass null
       await auditService.log(
         null,
         null,

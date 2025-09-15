@@ -1,6 +1,6 @@
-const { query, body } = require("express-validator");
+import { query, body } from "express-validator";
 
-exports.customerQueryValidation = [
+export const customerQueryValidation = [
   query("page")
     .optional()
     .isInt({ min: 1 })
@@ -24,20 +24,20 @@ exports.customerQueryValidation = [
     .withMessage("Campo de ordenação inválido"),
 ];
 
-exports.createCustomerValidation = [
+export const createCustomerValidation = [
   body("name").notEmpty().withMessage("Nome é obrigatório"),
   body("phone").notEmpty().withMessage("Telefone é obrigatório"),
   body("birthDate").isISO8601().withMessage("Data de nascimento inválida"),
 ];
 
-exports.publicRegisterCustomerValidation = [
+export const publicRegisterCustomerValidation = [
   body("name").notEmpty().withMessage("Nome é obrigatório"),
   body("phone").notEmpty().withMessage("Telefone é obrigatório"),
   body("birthDate").isISO8601().withMessage("Data de nascimento inválida"),
   body("restaurantId").isUUID().withMessage("ID do restaurante inválido"),
 ];
 
-exports.byPhoneValidation = [
+export const byPhoneValidation = [
   query("phone").notEmpty().withMessage("Número de telefone é obrigatório."),
 ];
 

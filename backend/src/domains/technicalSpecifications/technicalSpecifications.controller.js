@@ -1,8 +1,9 @@
-module.exports = (db) => {
-  const technicalSpecificationsService =
-    require("./technicalSpecifications.service")(db);
-  const { validationResult } = require("express-validator");
-  const { BadRequestError } = require("utils/errors");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "../../utils/errors";
+import technicalSpecificationsServiceFactory from "./technicalSpecifications.service";
+
+export default (db) => {
+  const technicalSpecificationsService = technicalSpecificationsServiceFactory(db);
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);

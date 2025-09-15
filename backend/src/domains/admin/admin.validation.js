@@ -1,6 +1,6 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.createUserValidation = [
+export const createUserValidation = [
   body("name")
     .trim()
     .isLength({ min: 2 })
@@ -21,7 +21,7 @@ exports.createUserValidation = [
     .withMessage("ID do restaurante inválido"),
 ];
 
-exports.updateUserValidation = [
+export const updateUserValidation = [
   body("name")
     .optional()
     .trim()
@@ -46,7 +46,7 @@ exports.updateUserValidation = [
     .withMessage("ID do restaurante inválido"),
 ];
 
-exports.createRestaurantValidation = [
+export const createRestaurantValidation = [
   body("name")
     .trim()
     .notEmpty()
@@ -66,7 +66,7 @@ exports.createRestaurantValidation = [
     .withMessage("Descrição deve ser uma string."),
 ];
 
-exports.updateRestaurantValidation = [
+export const updateRestaurantValidation = [
   body("name")
     .optional()
     .trim()
@@ -90,7 +90,7 @@ exports.updateRestaurantValidation = [
     .withMessage("Descrição deve ser uma string."),
 ];
 
-exports.createRestaurantWithOwnerValidation = [
+export const createRestaurantWithOwnerValidation = [
   body("restaurantName")
     .trim()
     .notEmpty()
@@ -120,7 +120,7 @@ exports.createRestaurantWithOwnerValidation = [
     .withMessage("Senha do proprietário deve ter pelo menos 6 caracteres"),
 ];
 
-exports.updateRestaurantModulesValidation = [
+export const updateRestaurantModulesValidation = [
   body("moduleIds").isArray().withMessage("moduleIds deve ser um array"),
   body("moduleIds.*")
     .isInt()

@@ -1,5 +1,5 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.updateOrderStatusValidation = [
+export const updateOrderStatusValidation = [
   body("status").notEmpty().withMessage("Status é obrigatório."),
 ];

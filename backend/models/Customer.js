@@ -123,6 +123,11 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: 0,
         field: "loyalty_points",
       },
+      averageRatingGiven: {
+        type: DataTypes.DECIMAL(3, 2),
+        allowNull: true,
+        field: "average_rating_given",
+      },
       createdAt: {
         type: DataTypes.DATE,
         field: "created_at",

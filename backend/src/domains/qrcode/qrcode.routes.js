@@ -1,29 +1,26 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const { logUserAction } = require("middleware/logUserActionMiddleware");
-const requirePermission = require("middleware/requirePermission");
-const qrcodeServiceFactory = require("domains/qrcode/qrcode.service");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler";
+import { logUserAction } from "../../middleware/logUserActionMiddleware";
+import requirePermission from "../../middleware/requirePermission";
+import qrcodeServiceFactory from "./qrcode.service";
+import authMiddlewareFactory from "../../middleware/authMiddleware";
+import qrcodeControllerFactory from "./qrcode.controller";
+import {
+  createQRCodeValidation,
+  updateQRCodeValidation,
+  generateImageValidation,
+  generatePrintableValidation,
+  analyticsValidation,
+  cloneQRCodeValidation,
+  listQRCodesValidation,
+} from "./qrcode.validation";
 
-module.exports = (db) => {
-  const { auth, checkRestaurantOwnership } =
-    require("middleware/authMiddleware")(db);
+export default (db) => {
+  const { auth, checkRestaurantOwnership } = authMiddlewareFactory(db);
   const qrcodeService = qrcodeServiceFactory(db);
-  const qrcodeController = require("domains/qrcode/qrcode.controller")(
-    qrcodeService,
-  );
-  const {
-    createQRCodeValidation,
-    updateQRCodeValidation,
-    generateImageValidation,
-    generatePrintableValidation,
-    analyticsValidation,
-    cloneQRCodeValidation,
-    listQRCodesValidation,
-  } = require("domains/qrcode/qrcode.validation");
-
+  const qrcodeController = qrcodeControllerFactory(qrcodeService);
   const router = express.Router();
 
-  // Rotas de QR Code
   router.post(
     "/",
     auth,
@@ -36,7 +33,7 @@ module.exports = (db) => {
     "/",
     auth,
     requirePermission("qrcodes", "read"),
-    ...listQRCodesValidation,
+    listQRCodesValidation,
     asyncHandler(qrcodeController.listQRCodes),
   );
   router.get(
@@ -64,14 +61,14 @@ module.exports = (db) => {
     "/:id/image",
     auth,
     requirePermission("qrcodes", "read"),
-    ...generateImageValidation,
+    generateImageValidation,
     asyncHandler(qrcodeController.generateQRCodeImage),
   );
   router.get(
     "/:id/printable",
     auth,
     requirePermission("qrcodes", "read"),
-    ...generatePrintableValidation,
+    generatePrintableValidation,
     asyncHandler(qrcodeController.generatePrintableQRCode),
   );
   router.post(
@@ -83,7 +80,7 @@ module.exports = (db) => {
     "/:id/analytics",
     auth,
     requirePermission("qrcodes", "read"),
-    ...analyticsValidation,
+    analyticsValidation,
     asyncHandler(qrcodeController.getQRCodeAnalytics),
   );
   router.post(

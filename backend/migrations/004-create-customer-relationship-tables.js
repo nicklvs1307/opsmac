@@ -48,14 +48,6 @@ module.exports = {
       updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
-    await queryInterface.createTable('surveys', {
-      id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
-      title: { type: Sequelize.STRING, allowNull: false },
-      restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
-    });
-
     await queryInterface.createTable('questions', {
       id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
       survey_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'surveys', key: 'id' }, onDelete: 'CASCADE' },
@@ -99,7 +91,6 @@ module.exports = {
     await queryInterface.dropTable('answers');
     await queryInterface.dropTable('survey_responses');
     await queryInterface.dropTable('questions');
-    await queryInterface.dropTable('surveys');
     await queryInterface.dropTable('nps_criterions');
     await queryInterface.dropTable('rewards');
     await queryInterface.dropTable('checkins');

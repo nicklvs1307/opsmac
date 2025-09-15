@@ -1,14 +1,15 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler";
+import publicProductsServiceFactory from "./publicProducts.service";
+import publicProductsControllerFactory from "./publicProducts.controller";
 
-module.exports = (db) => {
-  const publicProductsService = require("./publicProducts.service")(db);
-  const publicProductsController = require("./publicProducts.controller")(
+export default (db) => {
+  const publicProductsService = publicProductsServiceFactory(db);
+  const publicProductsController = publicProductsControllerFactory(
     publicProductsService,
   );
   const router = express.Router();
 
-  // Rotas Públicas de Produtos
   router.get(
     "/:restaurantSlug",
     asyncHandler(publicProductsController.getProductsForPublicMenu),

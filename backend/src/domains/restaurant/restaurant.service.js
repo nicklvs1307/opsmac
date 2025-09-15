@@ -1,7 +1,8 @@
-module.exports = (db) => {
+import { Op } from "sequelize";
+import { BadRequestError, NotFoundError } from "../../utils/errors";
+
+export default (db) => {
   const { models } = db;
-  const { Op } = require("sequelize");
-  const { BadRequestError, NotFoundError } = require("utils/errors");
 
   // --- GERENCIAMENTO DO RESTAURANTE ---
   const getRestaurantById = async (restaurantId) => {
@@ -600,7 +601,7 @@ module.exports = (db) => {
 
   return {
     getRestaurantById,
-    listRestaurants, // Added this line
+    listRestaurants,
     updateRestaurant,
     updateRestaurantStatus,
     listRestaurantUsers,

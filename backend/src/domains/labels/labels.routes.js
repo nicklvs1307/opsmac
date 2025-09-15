@@ -1,17 +1,17 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler";
+import requirePermission from "../../middleware/requirePermission";
+import labelsControllerFactory from "./labels.controller";
+import { printLabelValidation } from "./labels.validation";
 
-module.exports = (db) => {
-  const labelsController = require("./labels.controller")(db);
-  const { printLabelValidation } = require("domains/labels/labels.validation");
-
+export default (db) => {
+  const labelsController = labelsControllerFactory(db);
   const router = express.Router();
 
   router.post(
     "/",
     requirePermission("labels", "create"),
-    ...printLabelValidation,
+    printLabelValidation,
     asyncHandler(labelsController.createPrintedLabel),
   );
   router.get(
@@ -27,7 +27,7 @@ module.exports = (db) => {
   router.put(
     "/:id",
     requirePermission("labels", "update"),
-    ...printLabelValidation,
+    printLabelValidation,
     asyncHandler(labelsController.updatePrintedLabel),
   );
   router.delete(

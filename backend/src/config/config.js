@@ -23,6 +23,7 @@ export default {
     port: process.env.DB_PORT || 5432,
     dialect: "postgres",
     logging: false, // Changed from console.log to false
+    underscored: true,
   },
   test: {
     username: process.env.DB_USER || "postgres",
@@ -32,6 +33,7 @@ export default {
     port: process.env.DB_PORT || 5432,
     dialect: "postgres",
     logging: false,
+    underscored: true,
   },
   production: {
     username: process.env.DB_USER,
@@ -41,5 +43,6 @@ export default {
     port: process.env.DB_PORT,
     dialect: "postgres",
     logging: false,
+    underscored: true,
   },
 };

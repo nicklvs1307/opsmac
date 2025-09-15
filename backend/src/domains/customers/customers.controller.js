@@ -2,7 +2,7 @@ import { BadRequestError } from "utils/errors";
 import auditService from "services/auditService";
 import { validationResult } from "express-validator";
 
-import customerServiceFactory from "./customer.service";
+import customerServiceFactory from "./customers.service";
 
 export default (db) => {
   const customerService = customerServiceFactory(db);
@@ -33,29 +33,20 @@ export default (db) => {
     }
 
     async getCustomerDashboardMetrics(req, res, next) {
-      try {
         const restaurantId = req.context.restaurantId;
         const metrics =
           await customerService.getCustomerDashboardMetrics(restaurantId);
         res.json(metrics);
-      } catch (error) {
-        next(error);
-      }
     }
 
     async getBirthdayCustomers(req, res, next) {
-      try {
         const restaurantId = req.context.restaurantId;
         const customers =
           await customerService.getBirthdayCustomers(restaurantId);
         res.json(customers);
-      } catch (error) {
-        next(error);
-      }
     }
 
     async listCustomers(req, res, next) {
-      try {
         this._handleValidationErrors(req);
         const restaurantId = req.context.restaurantId;
         const { count, rows } = await customerService.listCustomers(
@@ -68,13 +59,9 @@ export default (db) => {
           currentPage: parseInt(req.query.page || 1),
           totalCustomers: count,
         });
-      } catch (error) {
-        next(error);
-      }
     }
 
     async createCustomer(req, res, next) {
-      try {
         this._handleValidationErrors(req);
         const restaurantId = req.context.restaurantId;
         const customer = await customerService.createCustomer(
@@ -89,13 +76,9 @@ export default (db) => {
           { name: customer.name, email: customer.email },
         );
         res.status(201).json(customer);
-      } catch (error) {
-        next(error);
-      }
     }
 
     async getCustomerByPhone(req, res, next) {
-      try {
         this._handleValidationErrors(req);
         const restaurantId = req.context.restaurantId;
         const customer = await customerService.getCustomerByPhone(
@@ -103,26 +86,18 @@ export default (db) => {
           req.query.phone,
         );
         res.json(customer);
-      } catch (error) {
-        next(error);
-      }
     }
 
     async getCustomerById(req, res, next) {
-      try {
         const restaurantId = req.context.restaurantId;
         const customer = await customerService.getCustomerById(
           restaurantId,
           req.params.id,
         );
         res.json(customer);
-      } catch (error) {
-        next(error);
-      }
     }
 
     async updateCustomer(req, res, next) {
-      try {
         this._handleValidationErrors(req);
         const restaurantId = req.context.restaurantId;
         const customer = await customerService.updateCustomer(
@@ -138,13 +113,9 @@ export default (db) => {
           { updatedData: req.body },
         );
         res.json(customer);
-      } catch (error) {
-        next(error);
-      }
     }
 
     async deleteCustomer(req, res, next) {
-      try {
         const restaurantId = req.context.restaurantId;
         await customerService.deleteCustomer(restaurantId, req.params.id);
         await auditService.log(
@@ -155,26 +126,18 @@ export default (db) => {
           {},
         );
         res.status(200).json({ message: "Cliente excluído com sucesso." });
-      } catch (error) {
-        next(error);
-      }
     }
 
     async getCustomerDetails(req, res, next) {
-      try {
         const restaurantId = req.context.restaurantId;
         const details = await customerService.getCustomerDetails(
           restaurantId,
           req.params.id,
         );
         res.json(details);
-      } catch (error) {
-        next(error);
-      }
     }
 
     async resetCustomerVisits(req, res, next) {
-      try {
         const restaurantId = req.context.restaurantId;
         const customer = await customerService.resetCustomerVisits(
           restaurantId,
@@ -191,13 +154,9 @@ export default (db) => {
           message: "Visitas do cliente resetadas com sucesso.",
           customer,
         });
-      } catch (error) {
-        next(error);
-      }
     }
 
     async clearCustomerCheckins(req, res, next) {
-      try {
         const restaurantId = req.context.restaurantId;
         await customerService.clearCustomerCheckins(
           restaurantId,
@@ -211,13 +170,9 @@ export default (db) => {
           {},
         );
         res.json({ message: "Check-ins do cliente limpos com sucesso." });
-      } catch (error) {
-        next(error);
-      }
     }
 
     async publicRegisterCustomer(req, res, next) {
-      try {
         this._handleValidationErrors(req);
         const result = await customerService.publicRegisterCustomer(req.body);
         await auditService.log(
@@ -228,9 +183,6 @@ export default (db) => {
           { name: result.customer.name, email: result.customer.email },
         );
         res.status(result.status || 201).json(result);
-      } catch (error) {
-        next(error);
-      }
     }
   }
 

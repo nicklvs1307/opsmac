@@ -1,21 +1,14 @@
 "use strict";
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "utils/errors";
+import auditService from "services/auditService";
 
-// Import service factory functions
-const productCrudServiceFactory = require("./productCrudService");
-const productImageServiceFactory = require("./productImageService");
-const productAddonServiceFactory = require("./productAddonService");
-const productVariationServiceFactory = require("./productVariationService");
+// Import the consolidated service factory function
+import productServiceFactory from "./products.service";
 
 class ProductsController {
   constructor(db) {
-    // Initialize services, passing db where required
-    this.productCrudService = productCrudServiceFactory(db);
-    this.productImageService = productImageServiceFactory(); // No db needed
-    this.productAddonService = productAddonServiceFactory(db);
-    this.productVariationService = productVariationServiceFactory(db);
+    this.productService = productServiceFactory(db);
   }
 
   handleValidationErrors(req) {
@@ -31,7 +24,7 @@ class ProductsController {
       if (!req.file) {
         throw new BadRequestError("Nenhum arquivo de imagem enviado.");
       }
-      const imageUrl = await this.productImageService.uploadProductImage(
+      const imageUrl = await this.productService.uploadProductImage(
         req.file.filename,
       );
       await auditService.log(
@@ -51,7 +44,7 @@ class ProductsController {
     try {
       const restaurantId = req.context.restaurantId;
       const { category_id, search } = req.query;
-      const products = await this.productCrudService.listProducts(
+      const products = await this.productService.listProducts(
         restaurantId,
         category_id,
         search,
@@ -66,7 +59,7 @@ class ProductsController {
     try {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const product = await this.productCrudService.createProduct(
+      const product = await this.productService.createProduct(
         req.body,
         restaurantId,
       );
@@ -83,24 +76,10 @@ class ProductsController {
     }
   }
 
-  async listProducts(req, res, next) {
-    try {
-      const restaurantId = req.context.restaurantId;
-      const { category_id } = req.query;
-      const products = await this.productCrudService.listProducts(
-        restaurantId,
-        category_id,
-      );
-      res.json(products);
-    } catch (error) {
-      next(error);
-    }
-  }
-
   async getProductById(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId;
-      const product = await this.productCrudService.getProductById(
+      const product = await this.productService.getProductById(
         req.params.id,
         restaurantId,
       );
@@ -114,7 +93,7 @@ class ProductsController {
     try {
       this.handleValidationErrors(req);
       const restaurantId = req.context.restaurantId;
-      const product = await this.productCrudService.updateProduct(
+      const product = await this.productService.updateProduct(
         req.params.id,
         restaurantId,
         req.body,
@@ -135,7 +114,7 @@ class ProductsController {
   async deleteProduct(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId;
-      await this.productCrudService.deleteProduct(req.params.id, restaurantId);
+      await this.productService.deleteProduct(req.params.id, restaurantId);
       await auditService.log(
         req.user,
         restaurantId,
@@ -152,7 +131,7 @@ class ProductsController {
   async toggleProductStatus(req, res, next) {
     try {
       const restaurantId = req.context.restaurantId;
-      const product = await this.productCrudService.toggleProductStatus(
+      const product = await this.productService.toggleProductStatus(
         req.params.id,
         restaurantId,
       );
@@ -170,4 +149,4 @@ class ProductsController {
   }
 }
 
-module.exports = (db) => new ProductsController(db);
+export default (db) => new ProductsController(db);

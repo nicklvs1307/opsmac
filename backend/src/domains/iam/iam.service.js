@@ -13,7 +13,6 @@ import logger from "utils/logger";
 class IamService {
   constructor(db) {
     this.models = db;
-    // Initialize any other dependencies here if needed
   }
 
   async bumpPermVersion(restaurantId) {
@@ -24,7 +23,6 @@ class IamService {
       by: 1,
       where: { id: restaurantId },
     });
-    // Invalidate all permission caches for this restaurant
     const keys = await redisClient.keys(`permissions:${restaurantId}:*`);
     if (keys.length > 0) {
       await redisClient.del(keys);
@@ -42,7 +40,6 @@ class IamService {
     return role;
   }
 
-  // --- Role Management ---
   async createRole(restaurantId, key, name, is_system) {
     if (!restaurantId || !key || !name) {
       throw new BadRequestError(
@@ -63,10 +60,9 @@ class IamService {
     if (!restaurantId) {
       throw new BadRequestError("Bad Request: restaurantId is required.");
     }
-    const roles = await this.models.Role.findAll({
+    return this.models.Role.findAll({
       where: { restaurant_id: restaurantId },
     });
-    return roles;
   }
 
   async updateRole(id, restaurantId, name) {
@@ -101,7 +97,6 @@ class IamService {
     await this.bumpPermVersion(restaurantId);
   }
 
-  // --- Role Permission Management ---
   async setRolePermissions(roleId, restaurantId, permissions) {
     if (!restaurantId || !permissions || !Array.isArray(permissions)) {
       throw new BadRequestError(
@@ -130,7 +125,7 @@ class IamService {
   }
 
   async getRolePermissions(roleId) {
-    const rolePermissions = await this.models.RolePermission.findAll({
+    return this.models.RolePermission.findAll({
       where: { role_id: roleId },
       include: [
         {
@@ -141,10 +136,8 @@ class IamService {
         { model: this.models.Action, as: "action", attributes: ["id", "key"] },
       ],
     });
-    return rolePermissions;
   }
 
-  // --- User Role Management ---
   async assignUserRole(userId, restaurantId, roleId) {
     if (!restaurantId || !roleId) {
       throw new BadRequestError(
@@ -178,7 +171,7 @@ class IamService {
         "Bad Request: restaurantId and userId are required.",
       );
     }
-    const overrides = await this.models.UserPermissionOverride.findAll({
+    return this.models.UserPermissionOverride.findAll({
       where: { user_id: targetUserId, restaurant_id: restaurantId },
       include: [
         {
@@ -189,10 +182,8 @@ class IamService {
         { model: this.models.Action, as: "action", attributes: ["id", "key"] },
       ],
     });
-    return overrides;
   }
 
-  // --- User Permission Overrides ---
   async setUserPermissionOverride(userId, restaurantId, overrides) {
     if (!restaurantId || !Array.isArray(overrides)) {
       throw new BadRequestError(
@@ -246,7 +237,6 @@ class IamService {
     entityId,
     isSuperadmin = false,
   ) {
-    // This service method assumes the caller has already performed the necessary authorization.
     if (!isSuperadmin && !restaurantId) {
       throw new BadRequestError("Bad Request: restaurantId is required.");
     }
@@ -261,7 +251,6 @@ class IamService {
       entity_id: entityId,
     };
 
-    // Only scope to restaurant if not a superadmin
     if (!isSuperadmin) {
       whereClause.restaurant_id = restaurantId;
     }
@@ -270,7 +259,6 @@ class IamService {
       where: whereClause,
     });
 
-    // Only bump version if a restaurantId was provided and something was deleted
     if (result > 0 && restaurantId) {
       await this.bumpPermVersion(restaurantId);
     }
@@ -288,7 +276,6 @@ class IamService {
       let createdCount = 0;
       let updatedCount = 0;
 
-      // Pre-fetch all modules, submodules, and features for efficient validation
       const [allModules, allSubmodules, allFeatures] = await Promise.all([
         this.models.Module.findAll({ attributes: ["id"] }),
         this.models.Submodule.findAll({ attributes: ["id"] }),
@@ -300,10 +287,8 @@ class IamService {
       const featureIds = new Set(allFeatures.map((f) => f.id));
 
       for (const entitlementData of entitlements) {
-        const { entityType, entityId, status, source, metadata } =
-          entitlementData;
+        const { entityType, entityId, status, source, metadata } = entitlementData;
 
-        // Validate entity existence using pre-fetched IDs
         let entityExists = false;
         switch (entityType) {
           case "module":
@@ -325,16 +310,15 @@ class IamService {
           );
         }
 
-        const [entitlement, created] =
-          await this.models.RestaurantEntitlement.findOrCreate({
-            where: {
-              restaurant_id: restaurantId,
-              entity_type: entityType,
-              entity_id: entityId,
-            },
-            defaults: { status, source, metadata: metadata || {} },
-            transaction: t,
-          });
+        const [entitlement, created] = await this.models.RestaurantEntitlement.findOrCreate({
+          where: {
+            restaurant_id: restaurantId,
+            entity_type: entityType,
+            entity_id: entityId,
+          },
+          defaults: { status, source, metadata: metadata || {} },
+          transaction: t,
+        });
 
         if (created) {
           createdCount++;
@@ -368,30 +352,19 @@ class IamService {
   }
 
   async getRestaurantEntitlements(restaurantId) {
-    const entitlements = await this.models.RestaurantEntitlement.findAll({
+    return this.models.RestaurantEntitlement.findAll({
       where: { restaurant_id: restaurantId },
     });
-    return entitlements;
   }
 
   async setEntitlementsBulk(restaurantId, entitlements, isSuperadmin = false) {
-    // This service method assumes the caller has already performed the necessary authorization.
-    // Superadmins can bypass restaurantId checks for system-wide entitlements.
-    if (
-      !isSuperadmin &&
-      (!restaurantId || !entitlements || !Array.isArray(entitlements))
-    ) {
+    if (!isSuperadmin && (!restaurantId || !entitlements || !Array.isArray(entitlements))) {
       throw new BadRequestError(
         "Bad Request: restaurantId and entitlements array are required.",
       );
     }
-    // Assuming entitlementService.setEntitlements is a separate service
-    // If it's part of IAM, move its logic here. For now, keep it as a call to an external service.
-    // await entitlementService.setEntitlements(restaurantId, entitlements);
-    // For now, directly interact with models if entitlementService is not meant to be separate
     const t = await this.models.sequelize.transaction();
     try {
-      // Pre-fetch all modules, submodules, and features for efficient validation
       const [allModules, allSubmodules, allFeatures] = await Promise.all([
         this.models.Module.findAll({ attributes: ["id"] }),
         this.models.Submodule.findAll({ attributes: ["id"] }),
@@ -403,10 +376,8 @@ class IamService {
       const featureIds = new Set(allFeatures.map((f) => f.id));
 
       for (const entitlementData of entitlements) {
-        const { entityType, entityId, status, source, metadata } =
-          entitlementData;
+        const { entityType, entityId, status, source, metadata } = entitlementData;
 
-        // Validate entity existence using pre-fetched IDs
         let entityExists = false;
         switch (entityType) {
           case "module":
@@ -453,7 +424,7 @@ class IamService {
   }
 
   async listFeatures() {
-    const features = await this.models.Feature.findAll({
+    return this.models.Feature.findAll({
       include: [
         {
           model: this.models.Submodule,
@@ -472,14 +443,12 @@ class IamService {
         ["sort_order", "ASC"],
       ],
     });
-    return features;
   }
 
   async listActions() {
-    const actions = await this.models.Action.findAll({
+    return this.models.Action.findAll({
       order: [["id", "ASC"]],
     });
-    return actions;
   }
 
   async buildSnapshot(restaurantId, userId) {
@@ -500,10 +469,8 @@ class IamService {
       throw new NotFoundError("Restaurant not found");
     }
 
-    // Fetch all possible actions
     const allActions = await this.models.Action.findAll();
 
-    // Fetch user's roles for this restaurant
     const userRoles = await this.models.UserRole.findAll({
       where: { user_id: userId, restaurant_id: restaurantId },
       include: [
@@ -532,7 +499,6 @@ class IamService {
       ],
     });
 
-    // Fetch user permission overrides
     const userOverrides = await this.models.UserPermissionOverride.findAll({
       where: { user_id: userId, restaurant_id: restaurantId },
       include: [
@@ -545,13 +511,10 @@ class IamService {
       ],
     });
 
-    // Fetch restaurant entitlements
-    const restaurantEntitlements =
-      await this.models.RestaurantEntitlement.findAll({
-        where: { restaurant_id: restaurantId },
-      });
+    const restaurantEntitlements = await this.models.RestaurantEntitlement.findAll({
+      where: { restaurant_id: restaurantId },
+    });
 
-    // Fetch all modules, submodules, and features
     const allModules = await this.models.Module.findAll({
       include: [
         {
@@ -561,7 +524,6 @@ class IamService {
             {
               model: this.models.Feature,
               as: "features",
-              // Actions are no longer included here
             },
           ],
         },
@@ -573,7 +535,6 @@ class IamService {
       ],
     });
 
-    // Process roles and permissions (this will be further refined)
     const rolesPermissions = {};
     userRoles.forEach((userRole) => {
       if (userRole.role && userRole.role.permissions) {
@@ -594,7 +555,6 @@ class IamService {
       }
     });
 
-    // Process user overrides
     const overridesMap = {};
     userOverrides.forEach((override) => {
       if (override.feature && override.action) {
@@ -607,7 +567,6 @@ class IamService {
       }
     });
 
-    // Process restaurant entitlements
     const entitlementsMap = {};
     restaurantEntitlements.forEach((entitlement) => {
       const entityType = entitlement.entity_type;
@@ -618,38 +577,25 @@ class IamService {
       entitlementsMap[entityType][entityId] = entitlement.status;
     });
 
-    // Build the final modules structure with effective permissions
     const processedModules = allModules.map((module) => {
-      const moduleEntitlementStatus =
-        entitlementsMap.module && entitlementsMap.module[module.id];
-      const isModuleLocked =
-        moduleEntitlementStatus === "locked" ||
-        moduleEntitlementStatus === "hidden";
+      const moduleEntitlementStatus = entitlementsMap.module && entitlementsMap.module[module.id];
+      const isModuleLocked = moduleEntitlementStatus === "locked" || moduleEntitlementStatus === "hidden";
 
       const processedSubmodules = module.submodules.map((submodule) => {
-        const submoduleEntitlementStatus =
-          entitlementsMap.submodule && entitlementsMap.submodule[submodule.id];
-        const isSubmoduleLocked =
-          isModuleLocked ||
-          submoduleEntitlementStatus === "locked" ||
-          submoduleEntitlementStatus === "hidden";
+        const submoduleEntitlementStatus = entitlementsMap.submodule && entitlementsMap.submodule[submodule.id];
+        const isSubmoduleLocked = isModuleLocked || submoduleEntitlementStatus === "locked" || submoduleEntitlementStatus === "hidden";
 
         const processedFeatures = submodule.features.map((feature) => {
-          const featureEntitlementStatus =
-            entitlementsMap.feature && entitlementsMap.feature[feature.id];
-          const isFeatureLocked =
-            isSubmoduleLocked ||
-            featureEntitlementStatus === "locked" ||
-            featureEntitlementStatus === "hidden";
+          const featureEntitlementStatus = entitlementsMap.feature && entitlementsMap.feature[feature.id];
+          const isFeatureLocked = isSubmoduleLocked || featureEntitlementStatus === "locked" || featureEntitlementStatus === "hidden";
 
-          // Map over all possible actions for each feature
           const processedActions = allActions.map((action) => {
             const effectivePermission = this._getEffectivePermission(
               feature.key,
               action.key,
               rolesPermissions,
               overridesMap,
-              isFeatureLocked, // Pass the pre-calculated isFeatureLocked flag
+              isFeatureLocked,
             );
 
             return {
@@ -667,7 +613,7 @@ class IamService {
             name: feature.name,
             sort_order: feature.sort_order,
             actions: processedActions,
-            isLockedByEntitlement: isFeatureLocked, // Indicate if feature itself is locked
+            isLockedByEntitlement: isFeatureLocked,
           };
         });
 
@@ -677,7 +623,7 @@ class IamService {
           name: submodule.name,
           sort_order: submodule.sort_order,
           features: processedFeatures,
-          isLockedByEntitlement: isSubmoduleLocked, // Indicate if submodule itself is locked
+          isLockedByEntitlement: isSubmoduleLocked,
         };
       });
 
@@ -687,7 +633,7 @@ class IamService {
         name: module.name,
         sort_order: module.sort_order,
         submodules: processedSubmodules,
-        isLockedByEntitlement: isModuleLocked, // Indicate if module itself is locked
+        isLockedByEntitlement: isModuleLocked,
       };
     });
 
@@ -721,7 +667,6 @@ class IamService {
       `[IamService] Checking permission for userId: ${userId}, restaurantId: ${restaurantId}, featureKey: ${featureKey}, actionKey: ${actionKey}, isSuperadmin: ${isSuperadmin}`,
     );
 
-    // For superadmins, always allow
     if (isSuperadmin) {
       return { allowed: true, locked: false, reason: "Superadmin access" };
     }
@@ -731,7 +676,6 @@ class IamService {
 
     if (snapshot) {
       snapshot = JSON.parse(snapshot);
-      // Check if the requested feature and action exist in the snapshot
       const module = snapshot.modules.find((m) =>
         m.submodules.some((sm) =>
           sm.features.some((f) => f.key === featureKey),
@@ -755,14 +699,11 @@ class IamService {
           }
         }
       }
-      // If not found in snapshot, proceed to build it
     }
 
-    // If snapshot not found in cache or didn't contain the specific permission, build it
     snapshot = await this.buildSnapshot(restaurantId, userId);
-    await redisClient.set(cacheKey, JSON.stringify(snapshot), "EX", 3600); // Cache for 1 hour
+    await redisClient.set(cacheKey, JSON.stringify(snapshot), "EX", 3600);
 
-    // Now check the permission from the newly built snapshot
     const module = snapshot.modules.find((m) =>
       m.submodules.some((sm) => sm.features.some((f) => f.key === featureKey)),
     );
@@ -785,7 +726,6 @@ class IamService {
       }
     }
 
-    // If still not found, default to denied
     return {
       allowed: false,
       locked: false,
@@ -804,14 +744,12 @@ class IamService {
     let locked = false;
     let reason = "Default denied";
 
-    // If feature is locked by entitlement (cascaded from module/submodule or direct feature entitlement)
     if (isFeatureLocked) {
       locked = true;
       reason = "Feature locked by entitlement";
       return { allowed, locked, reason };
     }
 
-    // Apply role permissions
     if (
       rolesPermissions[featureKey] &&
       rolesPermissions[featureKey][actionKey] !== undefined
@@ -820,7 +758,6 @@ class IamService {
       reason = allowed ? "Granted by role" : "Denied by role";
     }
 
-    // Apply user overrides (take precedence)
     if (
       overridesMap[featureKey] &&
       overridesMap[featureKey][actionKey] !== undefined
@@ -833,4 +770,4 @@ class IamService {
   }
 }
 
-module.exports = (db) => new IamService(db);
+export default (db) => new IamService(db);

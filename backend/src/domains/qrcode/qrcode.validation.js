@@ -1,6 +1,6 @@
-const { body, query } = require("express-validator");
+import { body, query } from "express-validator";
 
-exports.createQRCodeValidation = [
+export const createQRCodeValidation = [
   body("table_number")
     .isInt({ min: 1 })
     .withMessage("Número da mesa deve ser um número positivo"),
@@ -20,7 +20,7 @@ exports.createQRCodeValidation = [
     .withMessage("Área deve ter no máximo 50 caracteres"),
 ];
 
-exports.updateQRCodeValidation = [
+export const updateQRCodeValidation = [
   body("location_description")
     .optional()
     .trim()
@@ -47,7 +47,7 @@ exports.updateQRCodeValidation = [
     ),
 ];
 
-exports.generateImageValidation = [
+export const generateImageValidation = [
   query("size")
     .optional()
     .isInt({ min: 100, max: 1000 })
@@ -58,7 +58,7 @@ exports.generateImageValidation = [
     .withMessage("Formato deve ser png ou svg"),
 ];
 
-exports.generatePrintableValidation = [
+export const generatePrintableValidation = [
   query("include_info")
     .optional()
     .isBoolean()
@@ -69,14 +69,14 @@ exports.generatePrintableValidation = [
     .withMessage("Tamanho deve ser: small, medium ou large"),
 ];
 
-exports.analyticsValidation = [
+export const analyticsValidation = [
   query("period")
     .optional()
     .isIn(["7d", "30d", "90d"])
     .withMessage("Período deve ser: 7d, 30d ou 90d"),
 ];
 
-exports.cloneQRCodeValidation = [
+export const cloneQRCodeValidation = [
   body("table_numbers")
     .isArray({ min: 1 })
     .withMessage("Números das mesas deve ser um array com pelo menos um item"),
@@ -85,7 +85,7 @@ exports.cloneQRCodeValidation = [
     .withMessage("Cada número de mesa deve ser um número positivo"),
 ];
 
-exports.listQRCodesValidation = [
+export const listQRCodesValidation = [
   query("page")
     .optional()
     .isInt({ min: 1 })

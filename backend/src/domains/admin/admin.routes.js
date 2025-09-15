@@ -3,9 +3,15 @@ import asyncHandler from "utils/asyncHandler";
 import requirePermission from "middleware/requirePermission";
 import { requireSuperadmin } from "middleware/adminAuthMiddleware";
 import adminControllerFactory from "domains/admin/admin.controller";
-
-module.exports = (db) => {
-  import { createUserValidation, updateUserValidation, createRestaurantValidation, updateRestaurantValidation, updateRestaurantModulesValidation, createRestaurantWithOwnerValidation, updateRestaurantFeaturesValidation, } from "domains/admin/admin.validation";
+import {
+  createUserValidation,
+  updateUserValidation,
+  createRestaurantValidation,
+  updateRestaurantValidation,
+  updateRestaurantModulesValidation,
+  createRestaurantWithOwnerValidation,
+  updateRestaurantFeaturesValidation,
+} from "domains/admin/admin.validation";
 
 export default (db) => {
   const adminController = adminControllerFactory(db);

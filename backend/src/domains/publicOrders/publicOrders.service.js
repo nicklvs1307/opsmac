@@ -1,10 +1,7 @@
-module.exports = (db) => {
+import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors";
+
+export default (db) => {
   const { models } = db;
-  const {
-    BadRequestError,
-    NotFoundError,
-    ForbiddenError,
-  } = require("utils/errors");
 
   const createPublicOrder = async (
     restaurant_id,
@@ -43,7 +40,9 @@ module.exports = (db) => {
       notes,
       platform: "other",
       status: "pending",
-      external_order_id: `WEB-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`,
+      external_order_id: `WEB-${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(2, 8)}`,
     });
 
     return order;

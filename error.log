@@ -1,16 +1,13 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-14 23:45:51 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-14 23:45:54 [error]: 	❌ Erro ao iniciar servidor: Unexpected end of input
-/app/src/domains/iam/iam.routes.js:620
-SyntaxError: Unexpected end of input
-    at wrapSafe (node:internal/modules/cjs/loader:1464:18)
-    at Module._compile (node:internal/modules/cjs/loader:1495:20)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
-    at Module.load (node:internal/modules/cjs/loader:1266:32)
-    at Module._load (node:internal/modules/cjs/loader:1091:12)
-    at Module.require (node:internal/modules/cjs/loader:1289:19)
-    at require (node:internal/modules/helpers:182:18)
-    at /app/routes/index.js:36:34
-    at Array.forEach (<anonymous>)
-    at module.exports (/app/routes/index.js:29:57)
+2025-09-15 10:05:53 [info]: 	Redis Client Connected
+2025-09-15 10:05:53 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-15 10:05:53 [info]: 	Redis Subscriber Client Connected
+2025-09-15 10:05:53 [info]: 	Subscribed to perm_invalidation channel.
+2025-09-15 10:05:58 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-15 10:08:29 [info]: 	170.254.46.100 - - [15/Sep/2025:10:08:29 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 10:08:29 [info]: 	170.254.46.100 - - [15/Sep/2025:10:08:29 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 10:08:41 [info]: 	170.254.46.100 - - [15/Sep/2025:10:08:41 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 10:08:41 [info]: 	170.254.46.100 - - [15/Sep/2025:10:08:41 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 10:09:03 [info]: 	170.254.46.100 - - [15/Sep/2025:10:09:03 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-15 10:09:03 [info]: 	170.254.46.100 - - [15/Sep/2025:10:09:03 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"

@@ -578,24 +578,28 @@ class IamService {
     const rolesPermissions = {};
     userRoles.forEach((userRole) => {
       userRole.role.permissions.forEach((rp) => {
-        const featureKey = rp.feature.key;
-        const actionKey = rp.action.key;
-        if (!rolesPermissions[featureKey]) {
-          rolesPermissions[featureKey] = {};
+        if (rp.feature && rp.action) {
+          const featureKey = rp.feature.key;
+          const actionKey = rp.action.key;
+          if (!rolesPermissions[featureKey]) {
+            rolesPermissions[featureKey] = {};
+          }
+          rolesPermissions[featureKey][actionKey] = rp.allowed;
         }
-        rolesPermissions[featureKey][actionKey] = rp.allowed;
       });
     });
 
     // Process user overrides
     const overridesMap = {};
     userOverrides.forEach((override) => {
-      const featureKey = override.feature.key;
-      const actionKey = override.action.key;
-      if (!overridesMap[featureKey]) {
-        overridesMap[featureKey] = {};
+      if (override.feature && override.action) {
+        const featureKey = override.feature.key;
+        const actionKey = override.action.key;
+        if (!overridesMap[featureKey]) {
+          overridesMap[featureKey] = {};
+        }
+        overridesMap[featureKey][actionKey] = override.allowed;
       }
-      overridesMap[featureKey][actionKey] = override.allowed;
     });
 
     // Process restaurant entitlements

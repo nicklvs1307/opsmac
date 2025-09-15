@@ -9,6 +9,17 @@ module.exports = (models) => {
 
     const { count, rows } = await models.Reward.findAndCountAll({
       where: { restaurant_id: restaurantId },
+      attributes: [
+        "id",
+        "customerId",
+        "description",
+        "isRedeemed",
+        "is_active",
+        "reward_type",
+        "restaurantId",
+        "createdAt",
+        "updatedAt",
+      ],
       limit: parseInt(limit),
       offset: parseInt(offset),
     });

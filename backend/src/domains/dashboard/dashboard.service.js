@@ -66,7 +66,7 @@ module.exports = (db) => {
     const cacheKey = `dashboard_analytics:${restaurantId}:${JSON.stringify(query)}`;
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData) {
-      return cachedData;
+      return JSON.parse(cachedData);
     }
 
     const { dateFilter, redeemedAtFilter } = _getDateFilters(query);
@@ -120,7 +120,7 @@ module.exports = (db) => {
       avgRating: avgRatingStats?.avgRating || 0,
     };
 
-    await redisClient.set(cacheKey, result, 3600); // Cache por 1 hora
+    await redisClient.set(cacheKey, JSON.stringify(result), { EX: 3600 }); // Cache por 1 hora
     return result;
   }
 
@@ -282,7 +282,7 @@ module.exports = (db) => {
     )}`;
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData) {
-      return cachedData;
+      return JSON.parse(cachedData);
     }
 
     const { granularity = "day" } = query;
@@ -467,7 +467,7 @@ module.exports = (db) => {
       };
     });
 
-    await redisClient.set(cacheKey, evolutionData, 3600); // Cache por 1 hora
+    await redisClient.set(cacheKey, JSON.stringify(evolutionData), { EX: 3600 }); // Cache por 1 hora
     return evolutionData;
   }
 
@@ -526,7 +526,7 @@ module.exports = (db) => {
     const cacheKey = `benchmarking_data:${restaurantId}`;
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData) {
-      return cachedData;
+      return JSON.parse(cachedData);
     }
 
     const today = new Date();
@@ -641,7 +641,7 @@ module.exports = (db) => {
       lastYear: lastYearData,
     };
 
-    await redisClient.set(cacheKey, result, 3600); // Cache por 1 hora
+    await redisClient.set(cacheKey, JSON.stringify(result), { EX: 3600 }); // Cache por 1 hora
     return result;
   }
 

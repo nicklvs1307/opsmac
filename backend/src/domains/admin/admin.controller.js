@@ -9,6 +9,20 @@ const adminServiceFactory = require("./admin.service");
 class AdminController {
   constructor(db) {
     this.adminService = adminServiceFactory(db);
+
+    // Bind methods to ensure 'this' context is correct
+    this.createUser = this.createUser.bind(this);
+    this.listUsers = this.listUsers.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+    this.createRestaurant = this.createRestaurant.bind(this);
+    this.createRestaurantWithOwner = this.createRestaurantWithOwner.bind(this);
+    this.listRestaurants = this.listRestaurants.bind(this);
+    this.getRestaurantById = this.getRestaurantById.bind(this);
+    this.updateRestaurant = this.updateRestaurant.bind(this);
+    this.listModules = this.listModules.bind(this);
+    this.getRestaurantModules = this.getRestaurantModules.bind(this);
+    this.updateRestaurantFeatures = this.updateRestaurantFeatures.bind(this);
+    this.getRestaurantFeatures = this.getRestaurantFeatures.bind(this);
   }
 
   handleValidationErrors(req) {

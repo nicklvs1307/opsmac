@@ -9,7 +9,7 @@ module.exports = {
       name: { type: Sequelize.STRING, allowNull: false },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('categories', { fields: ['restaurant_id', 'name'], type: 'unique', name: 'unique_category_name_per_restaurant' });
 
@@ -19,7 +19,7 @@ module.exports = {
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       table_number: { type: Sequelize.INTEGER, allowNull: false },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('tables', { fields: ['restaurant_id', 'table_number'], type: 'unique', name: 'unique_table_number_per_restaurant' });
 
@@ -29,7 +29,7 @@ module.exports = {
         url: { type: Sequelize.STRING, allowNull: false },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
         created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('table_sessions', {
@@ -40,7 +40,7 @@ module.exports = {
         end_time: { type: Sequelize.DATE },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
         created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     // Orders and related entities
@@ -53,7 +53,7 @@ module.exports = {
       items: { type: Sequelize.JSONB, allowNull: false },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('coupons', {
@@ -66,7 +66,7 @@ module.exports = {
         is_active: { type: Sequelize.BOOLEAN, defaultValue: true },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
         created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('addons', {
@@ -76,7 +76,7 @@ module.exports = {
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
         is_active: { type: Sequelize.BOOLEAN, defaultValue: true },
         created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     // Communication
@@ -86,7 +86,7 @@ module.exports = {
         status: { type: Sequelize.STRING, defaultValue: 'pending' }, // pending, acknowledged, resolved
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
         created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('whatsapp_messages', {
@@ -97,7 +97,7 @@ module.exports = {
         sent_at: { type: Sequelize.DATE },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
         created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
   },
 

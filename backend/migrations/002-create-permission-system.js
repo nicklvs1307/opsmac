@@ -11,8 +11,8 @@ module.exports = {
       description: { type: Sequelize.TEXT },
       visible: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
       sort_order: { type: Sequelize.INTEGER, defaultValue: 0 },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('submodules', {
@@ -22,8 +22,8 @@ module.exports = {
       name: { type: Sequelize.TEXT, allowNull: false },
       description: { type: Sequelize.TEXT },
       sort_order: { type: Sequelize.INTEGER, defaultValue: 0 },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('submodules', { fields: ['module_id', 'key'], type: 'unique', name: 'submodule_module_key_unique' });
 
@@ -35,16 +35,16 @@ module.exports = {
       description: { type: Sequelize.TEXT },
       sort_order: { type: Sequelize.INTEGER, defaultValue: 0 },
       flags: { type: Sequelize.JSONB, defaultValue: {} },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('features', { fields: ['submodule_id', 'key'], type: 'unique', name: 'feature_submodule_key_unique' });
 
     await queryInterface.createTable('actions', {
       id: { type: Sequelize.SMALLINT, primaryKey: true, autoIncrement: true },
       key: { type: Sequelize.TEXT, unique: true, allowNull: false },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     // Part 2: Entitlement and RBAC Tables (adapted for Restaurants as Tenants)
@@ -58,8 +58,8 @@ module.exports = {
       status: { type: 'entitlement_status', allowNull: false },
       source: { type: Sequelize.TEXT, allowNull: false },
       metadata: { type: Sequelize.JSONB, defaultValue: {} },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('restaurant_entitlements', { fields: ['restaurant_id', 'entity_type', 'entity_id'], type: 'primary key', name: 'restaurant_entitlement_pk' });
 
@@ -69,8 +69,8 @@ module.exports = {
       key: { type: Sequelize.TEXT, allowNull: false },
       name: { type: Sequelize.TEXT, allowNull: false },
       is_system: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('roles', { fields: ['restaurant_id', 'key'], type: 'unique', name: 'role_restaurant_key_unique' });
 
@@ -80,8 +80,8 @@ module.exports = {
       feature_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'features', key: 'id' }, onDelete: 'CASCADE' },
       action_id: { type: Sequelize.SMALLINT, allowNull: false, references: { model: 'actions', key: 'id' } },
       allowed: { type: Sequelize.BOOLEAN, allowNull: false },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('role_permissions', { fields: ['role_id', 'feature_id', 'action_id'], type: 'unique', name: 'role_permission_unique' });
 
@@ -89,8 +89,8 @@ module.exports = {
       user_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'users', key: 'id' }, onDelete: 'CASCADE' },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       role_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'roles', key: 'id' }, onDelete: 'CASCADE' },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('user_roles', { fields: ['user_id', 'restaurant_id', 'role_id'], type: 'primary key', name: 'user_role_pk' });
 
@@ -101,15 +101,15 @@ module.exports = {
       feature_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'features', key: 'id' }, onDelete: 'CASCADE' },
       action_id: { type: Sequelize.SMALLINT, allowNull: false, references: { model: 'actions', key: 'id' } },
       allowed: { type: Sequelize.BOOLEAN, allowNull: false },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('user_permission_overrides', { fields: ['user_id', 'restaurant_id', 'feature_id', 'action_id'], type: 'unique', name: 'user_permission_override_unique' });
 
     // Part 3: Audit Log Table
     await queryInterface.createTable('audit_logs', {
       id: { type: Sequelize.BIGINT, primaryKey: true, autoIncrement: true },
-      created_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       actor_user_id: { type: Sequelize.UUID, references: { model: 'users', key: 'id' } },
       restaurant_id: { type: Sequelize.UUID, references: { model: 'restaurants', key: 'id' } },
       action: { type: Sequelize.TEXT, allowNull: false },

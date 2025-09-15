@@ -18,7 +18,7 @@ module.exports = {
       segments: { type: Sequelize.JSONB, defaultValue: [] },
       survey_responses_count: { type: Sequelize.INTEGER, defaultValue: 0 },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('checkins', {
@@ -26,7 +26,7 @@ module.exports = {
       customer_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'customers', key: 'id' }, onDelete: 'CASCADE' },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('rewards', {
@@ -36,7 +36,7 @@ module.exports = {
       is_redeemed: { type: Sequelize.BOOLEAN, defaultValue: false },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     // Survey and Feedback ecosystem
@@ -45,7 +45,7 @@ module.exports = {
       name: { type: Sequelize.STRING, allowNull: false },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('surveys', {
@@ -53,7 +53,7 @@ module.exports = {
       title: { type: Sequelize.STRING, allowNull: false },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('questions', {
@@ -62,7 +62,7 @@ module.exports = {
       text: { type: Sequelize.TEXT, allowNull: false },
       type: { type: Sequelize.STRING, allowNull: false }, // e.g., 'rating', 'text', 'multiple_choice'
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('survey_responses', {
@@ -71,7 +71,7 @@ module.exports = {
       customer_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'customers', key: 'id' }, onDelete: 'CASCADE' },
       nps_score: { type: Sequelize.INTEGER },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('answers', {
@@ -80,7 +80,7 @@ module.exports = {
       question_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'questions', key: 'id' }, onDelete: 'CASCADE' },
       value: { type: Sequelize.TEXT, allowNull: false },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
     await queryInterface.createTable('feedbacks', {
@@ -90,7 +90,7 @@ module.exports = {
       comment: { type: Sequelize.TEXT },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
-      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
   },
 

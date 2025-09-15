@@ -100,15 +100,15 @@ module.exports = {
         defaultValue: 1,
       },
       // --- End of permission system columns ---
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('now()')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('now()')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
     });
 

@@ -20,7 +20,7 @@ module.exports = {
       { id: 5, key: "export" },
       { id: 6, key: "approve" },
       { id: 7, key: "manage_permissions" },
-    ].map((a) => ({ ...a, created_at: new Date(), updated_at: new Date() }));
+    ].map((a) => ({ ...a, created_at: Sequelize.literal('CURRENT_TIMESTAMP'), updated_at: new Date() }));
     await queryInterface.bulkInsert("actions", actionsData, {});
     const actions = await queryInterface.sequelize.query(
       'SELECT id, key FROM "actions";',
@@ -40,8 +40,8 @@ module.exports = {
       { key: "admin", name: "Admin" },
     ].map((m) => ({
       ...m,
-      id: Sequelize.literal("gen_random_uuid()"),
-      created_at: new Date(),
+      id: Sequelize.UUIDV4,
+      created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
       updated_at: new Date(),
     }));
     await queryInterface.bulkInsert("modules", modulesData, {});
@@ -114,8 +114,8 @@ module.exports = {
       { module_id: moduleMap["admin"], key: "permissions", name: "Permissões" },
     ].map((s) => ({
       ...s,
-      id: Sequelize.literal("gen_random_uuid()"),
-      created_at: new Date(),
+      id: Sequelize.UUIDV4,
+      created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
       updated_at: new Date(),
     }));
     await queryInterface.bulkInsert("submodules", submodulesData, {});
@@ -873,12 +873,12 @@ module.exports = {
     ];
 
     const featuresData = featuresToInsertRaw.map((f) => ({
-      id: Sequelize.literal("gen_random_uuid()"),
+      id: Sequelize.UUIDV4,
       key: f.key,
       name: f.name,
       description: f.name, // Using name as description for now
       submodule_id: getSubmoduleId(f.module, f.submodule),
-      created_at: new Date(),
+      created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
       updated_at: new Date(),
     }));
 
@@ -892,8 +892,8 @@ module.exports = {
       { key: "waiter", name: "waiter", is_system: true },
     ].map((r) => ({
       ...r,
-      id: Sequelize.literal("gen_random_uuid()"),
-      created_at: new Date(),
+      id: Sequelize.UUIDV4,
+      created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
       updated_at: new Date(),
     }));
     await queryInterface.bulkInsert("roles", rolesData, {});
@@ -927,7 +927,7 @@ module.exports = {
             feature_id: feature.id,
             action_id: action.id,
             allowed: true,
-            created_at: new Date(),
+            created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
             updated_at: new Date(),
           });
         }
@@ -959,7 +959,7 @@ module.exports = {
               feature_id: featureMap[featureKey],
               action_id: action.id,
               allowed: true,
-              created_at: new Date(),
+              created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
               updated_at: new Date(),
             });
           }

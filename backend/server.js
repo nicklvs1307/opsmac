@@ -9,7 +9,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 dotenv.config();
 
-import db from "#models";
+import db from "#models/index";
 import { BaseError } from "utils/errors";
 import logger from "utils/logger";
 import {

@@ -51,7 +51,7 @@ module.exports = {
       id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
       opening_balance: { type: Sequelize.DECIMAL(10, 2), allowNull: false },
       closing_balance: { type: Sequelize.DECIMAL(10, 2) },
-      opened_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('now()') },
+      opened_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       closed_at: { type: Sequelize.DATE },
       user_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'users', key: 'id' }, onDelete: 'NO ACTION' },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
@@ -79,5 +79,8 @@ module.exports = {
     await queryInterface.dropTable('financial_transactions');
     await queryInterface.dropTable('financial_categories');
     await queryInterface.dropTable('payment_methods');
+  }
+};
+  await queryInterface.dropTable('payment_methods');
   }
 };

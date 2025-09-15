@@ -4,7 +4,7 @@ import { sendWhatsAppMessage } from "services/integrations/whatsappApiClient";
 import { generateCouponForReward } from "domains/rewards/rewards.service";
 import logger from "utils/logger";
 
-module.exports = (db) => {
+export default (db) => {
   const models = db;
 
   const submitPublicFeedback = async (

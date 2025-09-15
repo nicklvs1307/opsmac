@@ -1,9 +1,11 @@
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService"); // Import auditService
+import { validationResult } from "express-validator";
+import { BadRequestError } from "#utils/errors";
+import auditService from "#services/auditService"; // Import auditService
+
+import publicServiceFactory from "./public.service";
 
 module.exports = (db) => {
-  const publicService = require("./public.service")(db);
+  const publicService = publicServiceFactory(db);
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);

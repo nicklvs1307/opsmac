@@ -1,12 +1,12 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.submitPublicFeedbackValidation = [
+export const submitPublicFeedbackValidation = [
   body("rating")
     .isInt({ min: 1, max: 5 })
     .withMessage("A avaliação deve ser um número entre 1 e 5"),
 ];
 
-exports.registerPublicCheckinValidation = [
+export const registerPublicCheckinValidation = [
   body("customer_name")
     .optional()
     .isString()

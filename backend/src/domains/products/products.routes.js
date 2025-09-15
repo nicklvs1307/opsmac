@@ -1,16 +1,18 @@
-const express = require("express");
+import express from "express";
 
-const requirePermission = require("middleware/requirePermission");
-const upload = require("middleware/uploadMiddleware");
-const asyncHandler = require("utils/asyncHandler");
+import requirePermission from "#middleware/requirePermission";
+import upload from "#middleware/uploadMiddleware";
+import asyncHandler from "#utils/asyncHandler";
 
-const {
+import {
   createProductValidation,
   updateProductValidation,
-} = require("domains/products/products.validation");
+} from "#domains/products/products.validation";
+
+import productsControllerFactory from "./products.controller";
 
 module.exports = (db) => {
-  const productsController = require("./products.controller")(db);
+  const productsController = productsControllerFactory(db);
   const router = express.Router();
 
   // Rotas de Produtos

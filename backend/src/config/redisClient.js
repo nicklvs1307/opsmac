@@ -1,5 +1,5 @@
 const redis = require("redis");
-const logger = require("utils/logger"); // Import logger
+import logger from "#utils/logger"; // Import logger
 
 const redisClient = redis.createClient({
   url: process.env.REDIS_URL || "redis://localhost:6379", // Use environment variable for Redis URL

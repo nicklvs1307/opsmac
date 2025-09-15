@@ -1,54 +1,57 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Survey extends Model {
     static associate(models) {
       Survey.belongsTo(models.Restaurant, {
-        foreignKey: 'restaurant_id',
-        as: 'restaurant',
+        foreignKey: "restaurant_id",
+        as: "restaurant",
       });
       Survey.hasMany(models.Question, {
-        foreignKey: 'survey_id',
-        as: 'questions',
+        foreignKey: "survey_id",
+        as: "questions",
       });
       Survey.hasMany(models.SurveyResponse, {
-        foreignKey: 'survey_id',
-        as: 'responses',
+        foreignKey: "survey_id",
+        as: "responses",
       });
     }
   }
 
-  Survey.init({
-    id: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+  Survey.init(
+    {
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      restaurantId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        field: "restaurant_id",
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        field: "created_at",
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        field: "updated_at",
+      },
     },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    {
+      sequelize,
+      modelName: "Survey",
+      tableName: "surveys",
+      timestamps: true,
+      underscored: true,
     },
-    restaurantId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      field: 'restaurant_id',
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      field: 'created_at',
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      field: 'updated_at',
-    },
-  }, {
-    sequelize,
-    modelName: 'Survey',
-    tableName: 'surveys',
-    timestamps: true,
-    underscored: true,
-  });
+  );
 
   return Survey;
 };

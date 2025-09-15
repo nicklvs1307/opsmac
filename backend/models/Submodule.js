@@ -1,62 +1,65 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Submodule extends Model {
     static associate(models) {
       Submodule.belongsTo(models.Module, {
-        foreignKey: 'module_id',
-        as: 'module',
+        foreignKey: "module_id",
+        as: "module",
       });
       Submodule.hasMany(models.Feature, {
-        foreignKey: 'submodule_id',
-        as: 'features',
+        foreignKey: "submodule_id",
+        as: "features",
       });
     }
   }
 
-  Submodule.init({
-    id: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+  Submodule.init(
+    {
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      moduleId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        field: "module_id",
+      },
+      key: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      name: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
+      },
+      sortOrder: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        field: "sort_order",
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        field: "created_at",
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        field: "updated_at",
+      },
     },
-    moduleId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      field: 'module_id',
+    {
+      sequelize,
+      modelName: "Submodule",
+      tableName: "submodules",
+      timestamps: true,
+      underscored: true,
     },
-    key: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    name: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.TEXT,
-    },
-    sortOrder: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      field: 'sort_order',
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      field: 'created_at',
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      field: 'updated_at',
-    },
-  }, {
-    sequelize,
-    modelName: 'Submodule',
-    tableName: 'submodules',
-    timestamps: true,
-    underscored: true,
-  });
+  );
 
   return Submodule;
 };

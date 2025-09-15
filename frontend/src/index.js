@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import '@/styles/globals.css';
-import App from './App';
-import i18n from '@/i18n'; // Importar a configuração do i18n
 import { I18nextProvider } from 'react-i18next';
+
+import i18n from '@/i18n';
+import '@/styles/globals.css';
+
+import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

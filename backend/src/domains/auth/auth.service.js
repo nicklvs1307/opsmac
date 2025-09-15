@@ -7,7 +7,7 @@ const {
 
 const iamService = require("services/iamService"); // Import the new IAM service
 const auditService = require("services/auditService"); // Import auditService
-const logger = require("utils/logger"); // Import logger
+import logger from "#utils/logger"; // Import logger
 const cacheService = require("services/cacheService"); // Import cacheService
 
 class AuthService {

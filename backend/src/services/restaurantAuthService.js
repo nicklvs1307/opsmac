@@ -1,4 +1,4 @@
-const models = require("models");
+import models from "#models";
 
 const getRestaurantIdFromUser = async (userId) => {
   const user = await models.User.findByPk(userId, {
@@ -22,6 +22,4 @@ const getRestaurantIdFromUser = async (userId) => {
   return null;
 };
 
-module.exports = {
-  getRestaurantIdFromUser,
-};
+export { getRestaurantIdFromUser };

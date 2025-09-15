@@ -1,15 +1,14 @@
-"use strict";
-
-const { Op } = require("sequelize");
-const {
+import { Op } from "sequelize";
+import {
   UnauthorizedError,
   BadRequestError,
   ForbiddenError,
   PaymentRequiredError,
   NotFoundError,
   InternalServerError,
-} = require("utils/errors");
-const redisClient = require("../../config/redisClient");
+} from "#utils/errors";
+import redisClient from "../../config/redisClient";
+import logger from "#utils/logger";
 
 class IamService {
   constructor(db) {

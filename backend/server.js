@@ -1,36 +1,44 @@
-const path = require('path');
-require('./aliases');
+import path from "path";
 
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const morgan = require('morgan'); // Import morgan
-require('dotenv').config();
 
-const db = require('models');
-const { BaseError } = require('utils/errors');
-const logger = require('utils/logger'); // Import logger
-const { initCacheInvalidator, subscriberClient } = require('./src/jobs/cacheInvalidator'); // Import cache invalidator
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import morgan from "morgan";
+import dotenv from "dotenv";
+dotenv.config();
+
+import db from "models";
+import { BaseError } from "utils/errors";
+import logger from "utils/logger";
+import {
+  initCacheInvalidator,
+  subscriberClient,
+} from "./src/jobs/cacheInvalidator";
 
 // Importação de Rotas
-const routes = require('./routes');
-const errorHandler = require('./src/middleware/errorHandler');
+import routes from "./routes";
+import errorHandler from "./src/middleware/errorHandler";
 
 const app = express();
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 const PORT = process.env.PORT || 5000;
 
 // Middlewares Globais
 app.use(helmet({ crossOriginResourcePolicy: false }));
 
 // Add Morgan for request logging
-app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
+app.use(
+  morgan("combined", {
+    stream: { write: (message) => logger.info(message.trim()) },
+  }),
+);
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  'http://localhost:3000',
-  'https://feedelizapro.towersfy.com'
+  "http://localhost:3000",
+  "https://feedelizapro.towersfy.com",
 ].filter(Boolean);
 
 // Configuração de CORS centralizada e robusta
@@ -39,35 +47,35 @@ const corsOptions = {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 204
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.options("*", cors(corsOptions));
 
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 const apiLimiter = rateLimit({
   windowMs: (process.env.RATE_LIMIT_WINDOW || 15) * 60 * 1000,
   max: process.env.RATE_LIMIT_MAX || 100,
-  message: { error: 'Muitas requisições. Tente novamente em alguns minutos.' }
+  message: { error: "Muitas requisições. Tente novamente em alguns minutos." },
 });
-app.use('/api/', apiLimiter);
+app.use("/api/", apiLimiter);
 
 // Servir arquivos estáticos
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 // Swagger UI
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('config/swagger');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "config/swagger";
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(errorHandler);
 
@@ -75,7 +83,7 @@ app.use(errorHandler);
 const startServer = async () => {
   try {
     await db.sequelize.authenticate();
-    logger.info('✅ Conexão com banco de dados estabelecida'); // Use logger
+    logger.info("✅ Conexão com banco de dados estabelecida"); // Use logger
 
     // Initialize cache invalidator
     await initCacheInvalidator();
@@ -87,7 +95,7 @@ const startServer = async () => {
       logger.info(`🚀 Servidor rodando na porta ${PORT}`); // Use logger
     });
   } catch (error) {
-    logger.error('❌ Erro ao iniciar servidor:', error); // Use logger
+    logger.error("❌ Erro ao iniciar servidor:", error); // Use logger
     process.exit(1);
   }
 };
@@ -95,18 +103,18 @@ const startServer = async () => {
 startServer();
 
 // Graceful shutdown
-process.on('SIGTERM', async () => {
-  logger.info('🔄 Encerrando servidor...'); // Use logger
+process.on("SIGTERM", async () => {
+  logger.info("🔄 Encerrando servidor..."); // Use logger
   await db.sequelize.close();
   await subscriberClient.quit(); // Close Redis subscriber client
   process.exit(0);
 });
 
-process.on('SIGINT', async () => {
-  logger.info('🔄 Encerrando servidor...'); // Use logger
+process.on("SIGINT", async () => {
+  logger.info("🔄 Encerrando servidor..."); // Use logger
   await db.sequelize.close();
   await subscriberClient.quit(); // Close Redis subscriber client
   process.exit(0);
 });
 
-module.exports = app;
+export default app;

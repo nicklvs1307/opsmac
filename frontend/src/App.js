@@ -1,12 +1,10 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { RouterProvider } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 import AppProvider from '@/app/providers';
-
-// Routes
 import { router } from '@/app/router';
-import { RouterProvider } from 'react-router-dom'; // Add this import
 
 // Create query client
 const queryClient = new QueryClient({

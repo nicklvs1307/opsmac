@@ -1,8 +1,19 @@
 {
   "name": "feedeliza-plus",
   "version": "1.0.0",
+  "type": "module",
   "description": "Clientes que voltam, marcas que crescem.",
   "main": "server.js",
+  "imports": {
+    "#root/*": "./*",
+    "#src/*": "./src/*",
+    "#middleware/*": "./src/middleware/*",
+    "#config/*": "./src/config/*",
+    "#domains/*": "./src/domains/*",
+    "#services/*": "./src/services/*",
+    "#utils/*": "./src/utils/*",
+    "#models/*": "./models/*"
+  },
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
@@ -12,7 +23,7 @@
     "install-all": "npm install && cd frontend && npm install",
     "setup-db": "node database/setup.js",
     "test:unit": "jest backend/tests/unit",
-    "lint": "eslint src --ext .js"
+    "lint": "eslint \"**/*.js\" --ignore-pattern \"node_modules/\" --ignore-pattern \"dist/\" --fix"
   },
   "keywords": [
     "feedback",
@@ -42,7 +53,7 @@
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
-    "module-alias": "^2.2.3",
+    
     "moment": "^2.29.4",
     "morgan": "^1.10.1",
     "multer": "^1.4.5-lts.1",

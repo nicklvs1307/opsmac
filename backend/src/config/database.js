@@ -1,4 +1,6 @@
-const db = require("models");
+import db from "#models";
+import { Sequelize } from "sequelize";
+import config from "./config";
 
 module.exports = {
   sequelize: db.sequelize,

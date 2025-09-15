@@ -467,7 +467,9 @@ module.exports = (db) => {
       };
     });
 
-    await redisClient.set(cacheKey, JSON.stringify(evolutionData), { EX: 3600 }); // Cache por 1 hora
+    await redisClient.set(cacheKey, JSON.stringify(evolutionData), {
+      EX: 3600,
+    }); // Cache por 1 hora
     return evolutionData;
   }
 

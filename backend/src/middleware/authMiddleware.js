@@ -5,9 +5,10 @@ const {
   BadRequestError,
   NotFoundError,
 } = require("utils/errors");
-const models = require("models"); // Directly import models (which is the db object)
-const authService = require("../domains/auth/auth.service")(models); // Initialize authService with models
-const logger = require("utils/logger"); // Import logger
+import jwt from "jsonwebtoken";
+import { UnauthorizedError } from "#utils/errors";
+import logger from "#utils/logger"; // Import logger
+import models from "#models"; // Directly import models (which is the db object)
 const cacheService = require("services/cacheService"); // Import cacheService
 
 module.exports = (db) => {

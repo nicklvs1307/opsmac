@@ -1,5 +1,5 @@
 const redis = require("redis");
-const logger = require("utils/logger");
+import logger from "#utils/logger";
 const cacheService = require("../services/cacheService");
 
 // Create a separate Redis client for subscription to avoid blocking other operations

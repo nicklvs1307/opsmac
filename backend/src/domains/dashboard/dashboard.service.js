@@ -94,7 +94,7 @@ module.exports = (db) => {
       models.SurveyResponse.findOne({
         where: {
           restaurantId,
-          npsScore: { [Op.not]: null },
+          nps_score: { [Op.not]: null },
           ...dateFilter,
         },
         attributes: [[literal('AVG("nps_score")'), "avgNpsScore"]],
@@ -324,7 +324,7 @@ module.exports = (db) => {
           [granularityFn("Customer.createdAt"), "date"],
           [fn("COUNT", col("id")), "newCustomersCount"],
           [fn("SUM", col("loyaltyPoints")), "loyaltyPointsSum"],
-          [fn("SUM", col("totalSpent")), "totalSpentSum"],
+          [fn("SUM", col("total_spent")), "totalSpentSum"],
         ],
         group: [granularityFn("Customer.createdAt")],
         order: [[granularityFn("Customer.createdAt"), "ASC"]],
@@ -358,10 +358,10 @@ module.exports = (db) => {
       }),
       // 4: nps
       models.Feedback.findAll({
-        where: { restaurantId, npsScore: { [Op.not]: null }, ...dateFilter },
+        where: { restaurantId, nps_score: { [Op.not]: null }, ...dateFilter },
         attributes: [
           [granularityFn("Feedback.createdAt"), "date"],
-          [fn("AVG", col("npsScore")), "score"],
+          [fn("AVG", col("nps_score")), "score"],
         ],
         group: [granularityFn("Feedback.createdAt")],
         order: [[granularityFn("Feedback.createdAt"), "ASC"]],
@@ -383,7 +383,7 @@ module.exports = (db) => {
         where: { restaurantId, ...dateFilter },
         attributes: [
           [granularityFn("Checkin.createdAt"), "date"],
-          [fn("COUNT", fn("DISTINCT", col("customerId"))), "count"],
+          [fn("COUNT", fn("DISTINCT", col("customer_id"))), "count"],
         ],
         group: [granularityFn("Checkin.createdAt")],
         order: [[granularityFn("Checkin.createdAt"), "ASC"]],
@@ -394,9 +394,9 @@ module.exports = (db) => {
         where: { restaurantId, ...dateFilter },
         attributes: [
           [granularityFn("Checkin.createdAt"), "date"],
-          "customerId",
+          "customer_id",
         ],
-        group: [granularityFn("Checkin.createdAt"), "customerId"],
+        group: [granularityFn("Checkin.createdAt"), "customer_id"],
         having: literal('COUNT("Checkin"."id") > 1'),
         order: [[granularityFn("Checkin.createdAt"), "ASC"]],
         raw: true,

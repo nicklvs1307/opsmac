@@ -48,7 +48,7 @@ module.exports = (db) => {
     asyncHandler(surveyController.getSurveyById),
   );
   router.get(
-    "/analytics/:restaurantId",
+    "/analytics/:id",
     requirePermission("fidelity:satisfaction:surveys", "read"),
     asyncHandler(surveyController.getSurveyAnalytics),
   );

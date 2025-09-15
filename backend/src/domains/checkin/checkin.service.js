@@ -388,7 +388,7 @@ module.exports = (db) => {
         ...dateFilter,
       },
       attributes: [
-        "customerId",
+        "customer_id",
         [fn("COUNT", col("Checkin.id")), "checkinCount"],
       ],
       include: [
@@ -399,7 +399,7 @@ module.exports = (db) => {
         },
       ],
       group: [
-        "Checkin.customerId",
+        "Checkin.customer_id",
         "customer.id",
         "customer.name",
         "customer.email",

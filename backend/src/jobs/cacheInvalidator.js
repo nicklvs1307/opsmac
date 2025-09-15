@@ -1,6 +1,6 @@
-const redis = require("redis");
-import logger from "utils/logger";
-const cacheService = require("services/cacheService");
+import redis from "redis";
+import logger from "#utils/logger.js";
+import cacheService from "#services/cacheService.js";
 
 // Create a separate Redis client for subscription to avoid blocking other operations
 const subscriberClient = redis.createClient({
@@ -41,4 +41,4 @@ const initCacheInvalidator = async () => {
   }
 };
 
-module.exports = { initCacheInvalidator, subscriberClient };
+export { initCacheInvalidator, subscriberClient };

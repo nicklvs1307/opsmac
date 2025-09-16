@@ -1,7 +1,7 @@
 import express from "express";
-import asyncHandler from "../../utils/asyncHandler";
-import publicProductsServiceFactory from "./publicProducts.service";
-import publicProductsControllerFactory from "./publicProducts.controller";
+import asyncHandler from "../../utils/asyncHandler.js";
+import publicProductsServiceFactory from "./publicProducts.service.js";
+import publicProductsControllerFactory from "./publicProducts.controller.js";
 
 export default (db) => {
   const publicProductsService = publicProductsServiceFactory(db);

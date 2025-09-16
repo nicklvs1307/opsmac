@@ -1,10 +1,10 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
+import asyncHandler from "../../utils/asyncHandler.js";
 
-import requirePermission from "middleware/requirePermission";
-import { addonValidation, updateAddonValidation, } from "domains/addons/addons.validation";
+import requirePermission from "../../middleware/requirePermission.js";
+import { addonValidation, updateAddonValidation, } from "./addons.validation.js";
 
-import addonsControllerFactory from "./addons.controller";
+import addonsControllerFactory from "./addons.controller.js";
 
 export default (db) => {
   const addonsController = addonsControllerFactory(db);

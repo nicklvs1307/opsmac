@@ -1,12 +1,12 @@
 import express from "express";
-import asyncHandler from "../../utils/asyncHandler";
-import requirePermission from "../../middleware/requirePermission";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
 import {
   createIngredientValidation,
   updateIngredientValidation,
-} from "./ingredients.validation";
-import ingredientsServiceFactory from "./ingredients.service";
-import ingredientsControllerFactory from "./ingredients.controller";
+} from "./ingredients.validation.js";
+import ingredientsServiceFactory from "./ingredients.service.js";
+import ingredientsControllerFactory from "./ingredients.controller.js";
 
 export default (db) => {
   const ingredientsService = ingredientsServiceFactory(db);

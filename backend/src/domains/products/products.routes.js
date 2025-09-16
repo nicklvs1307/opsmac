@@ -1,17 +1,17 @@
 import express from "express";
 
-import requirePermission from "#middleware/requirePermission";
-import upload from "#middleware/uploadMiddleware";
-import asyncHandler from "#utils/asyncHandler";
+import requirePermission from "../../middleware/requirePermission.js";
+import upload from "../../middleware/uploadMiddleware.js";
+import asyncHandler from "../../utils/asyncHandler.js";
 
 import {
   createProductValidation,
   updateProductValidation,
-} from "#domains/products/products.validation";
+} from "./products.validation.js";
 
-import productsControllerFactory from "./products.controller";
+import productsControllerFactory from "./products.controller.js";
 
-module.exports = (db) => {
+export default (db) => {
   const productsController = productsControllerFactory(db);
   const router = express.Router();
 

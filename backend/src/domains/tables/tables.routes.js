@@ -1,13 +1,15 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
-const {
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
+import {
   createTableValidation,
   updateTableValidation,
-} = require("domains/tables/tables.validation");
+} from "./tables.validation.js";
 
-module.exports = (db) => {
-  const tablesController = require("./tables.controller")(db);
+import tablesControllerFactory from "./tables.controller.js";
+
+export default (db) => {
+  const tablesController = tablesControllerFactory(db);
   const router = express.Router();
 
   // Rotas de Mesas

@@ -1,16 +1,16 @@
 import express from "express";
-import asyncHandler from "#utils/asyncHandler";
-import publicControllerFactory from "./public.controller";
+import asyncHandler from "../../utils/asyncHandler.js";
+import publicControllerFactory from "./public.controller.js";
 
-import { apiAuth as apiAuthMiddlewareFactory } from "#middleware/apiAuthMiddleware";
+import apiAuthMiddlewareFactory from "../../middleware/apiAuthMiddleware.js";
+import {
+  submitPublicFeedbackValidation,
+  registerPublicCheckinValidation,
+} from "./public.validation.js";
 
 export default (db) => {
   const { apiAuth } = apiAuthMiddlewareFactory(db);
   const publicController = publicControllerFactory(db);
-  import {
-  submitPublicFeedbackValidation,
-  registerPublicCheckinValidation,
-} from "#domains/public/public.validation";
 
   const router = express.Router();
 

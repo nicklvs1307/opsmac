@@ -1,10 +1,12 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission"); // Use the standardized middleware
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js"; // Use the standardized middleware
 
-module.exports = (db) => {
+import surveyRewardProgramControllerFactory from "./surveyRewardProgram.controller.js";
+
+export default (db) => {
   const surveyRewardProgramController =
-    require("./surveyRewardProgram.controller")(db);
+    surveyRewardProgramControllerFactory(db);
   const router = express.Router();
 
   router.get(

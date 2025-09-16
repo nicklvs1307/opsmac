@@ -1,15 +1,15 @@
 import express from "express";
 
-import requirePermission from "middleware/requirePermission";
+import requirePermission from "../../middleware/requirePermission.js";
 import {
   createTransactionValidation,
   reportValidation,
   createPaymentMethodValidation,
   updatePaymentMethodValidation,
-} from "domains/financial/financial.validation";
-import asyncHandler from "utils/asyncHandler";
+} from "./financial.validation.js";
+import asyncHandler from "../../utils/asyncHandler.js";
 
-import financialControllerFactory from "./financial.controller";
+import financialControllerFactory from "./financial.controller.js";
 
 export default (db) => {
   const financialController = financialControllerFactory(db);

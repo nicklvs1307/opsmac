@@ -1,11 +1,12 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
-import requirePermission from "middleware/requirePermission";
-import dashboardControllerFactory from "./dashboard.controller";
-import { checkRestaurantOwnership } from "middleware/authMiddleware";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
+import dashboardControllerFactory from "./dashboard.controller.js";
+import authMiddleware from "../../middleware/authMiddleware.js";
 
 export default (db) => {
   const dashboardController = dashboardControllerFactory(db);
+  const { checkRestaurantOwnership } = authMiddleware(db);
 
   const router = express.Router({ mergeParams: true });
 

@@ -1,12 +1,12 @@
 import express from "express";
 
-import requirePermission from "middleware/requirePermission";
+import requirePermission from "../../middleware/requirePermission.js";
 import {
   categoryValidation,
-} from "domains/categories/categories.validation";
-import asyncHandler from "utils/asyncHandler";
+} from "./categories.validation.js";
+import asyncHandler from "../../utils/asyncHandler.js";
 
-import categoriesControllerFactory from "./categories.controller";
+import categoriesControllerFactory from "./categories.controller.js";
 
 export default (db) => {
   const categoriesController = categoriesControllerFactory(db);

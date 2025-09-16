@@ -1,13 +1,16 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
-const {
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
+import {
   createStockMovementValidation,
-} = require("domains/stock/stock.validation");
+} from "./stock.validation.js";
 
-module.exports = (db) => {
-  const stockService = require("./stock.service")(db);
-  const stockController = require("./stock.controller")(stockService);
+import stockServiceFactory from "./stock.service.js";
+import stockControllerFactory from "./stock.controller.js";
+
+export default (db) => {
+  const stockService = stockServiceFactory(db);
+  const stockController = stockControllerFactory(stockService);
   const router = express.Router();
 
   // Rotas de Estoque

@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 
-module.exports = (db) => {
+export default (db) => {
   const router = express.Router();
   // No routes defined yet
   return router;

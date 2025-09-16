@@ -1,15 +1,15 @@
-import safeRouter from "utils/safeRouter";
-import asyncHandler from "utils/asyncHandler";
-import requirePermission from "middleware/requirePermission";
+import safeRouter from "../../utils/safeRouter.js";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
 
-import CustomersControllerFactory from "./customers.controller";
+import CustomersControllerFactory from "./customers.controller.js";
 import {
   createCustomerValidation,
   updateCustomerValidation,
   publicRegisterCustomerValidation,
   customerQueryValidation,
   byPhoneValidation,
-} from "./customers.validation";
+} from "./customers.validation.js";
 
 export default (db) => {
   const customersController = CustomersControllerFactory(db);
@@ -241,7 +241,7 @@ export default (db) => {
    * /customers/by-phone:
    *   get:
    *     summary: Get customer by phone number
-   *     tags: [Customers]
+   *   tags: [Customers]
    *     security:
    *       - bearerAuth: []
    *     parameters:

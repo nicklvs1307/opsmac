@@ -1,8 +1,8 @@
 import express from "express";
-import requirePermission from "../../middleware/requirePermission";
-import { createUpdateTechnicalSpecificationValidation } from "./technicalSpecifications.validation";
-import technicalSpecificationsControllerFactory from "./technicalSpecifications.controller";
-import authMiddlewareFactory from "../../middleware/authMiddleware";
+import requirePermission from "../../middleware/requirePermission.js";
+import { createUpdateTechnicalSpecificationValidation } from "./technicalSpecifications.validation.js";
+import technicalSpecificationsControllerFactory from "./technicalSpecifications.controller.js";
+import authMiddlewareFactory from "../../middleware/authMiddleware.js";
 
 export default (db) => {
   const technicalSpecificationsController = technicalSpecificationsControllerFactory(db);

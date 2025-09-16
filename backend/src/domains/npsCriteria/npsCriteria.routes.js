@@ -1,8 +1,8 @@
 import express from "express";
-import requirePermission from "../../middleware/requirePermission";
-import asyncHandler from "../../utils/asyncHandler";
-import npsCriteriaControllerFactory from "./npsCriteria.controller";
-import { npsCriterionValidation } from "./npsCriteria.validation";
+import requirePermission from "../../middleware/requirePermission.js";
+import asyncHandler from "../../utils/asyncHandler.js";
+import npsCriteriaControllerFactory from "./npsCriteria.controller.js";
+import { npsCriterionValidation } from "./npsCriteria.validation.js";
 
 export default (db) => {
   const npsCriteriaController = npsCriteriaControllerFactory(db);

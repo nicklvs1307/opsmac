@@ -1,21 +1,20 @@
-const express = require("express");
-const { logUserAction } = require("middleware/logUserActionMiddleware");
-const requirePermission = require("middleware/requirePermission");
+import express from "express";
+import { logUserAction } from "../../middleware/logUserActionMiddleware.js";
+import requirePermission from "../../middleware/requirePermission.js";
 
-module.exports = (db) => {
-  const { auth, checkRestaurantOwnership } =
-    require("middleware/authMiddleware")(db);
-  const whatsappController = require("domains/whatsapp/whatsapp.controller")(
-    db,
-  );
-  const {
-    sendWhatsappMessageValidation,
-    sendFeedbackRequestValidation,
-    sendBulkFeedbackValidation,
-    sendManualMessageValidation,
-    listMessagesValidation,
-  } = require("domains/whatsapp/whatsapp.validation");
+import authMiddleware from "../../middleware/authMiddleware.js";
+import whatsappControllerFactory from "./whatsapp.controller.js";
+import {
+  sendWhatsappMessageValidation,
+  sendFeedbackRequestValidation,
+  sendBulkFeedbackValidation,
+  sendManualMessageValidation,
+  listMessagesValidation,
+} from "./whatsapp.validation.js";
 
+export default (db) => {
+  const { auth, checkRestaurantOwnership } = authMiddleware(db);
+  const whatsappController = whatsappControllerFactory(db);
   const router = express.Router();
 
   // Webhook verification for WhatsApp

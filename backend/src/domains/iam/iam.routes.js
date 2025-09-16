@@ -1,10 +1,10 @@
 "use strict";
 
 import express from "express";
-import requirePermission from "../../middleware/requirePermission";
-import asyncHandler from "../../utils/asyncHandler";
-import { requireSuperadmin } from "../../middleware/adminAuthMiddleware";
-import IamControllerFactory from "./iam.controller";
+import requirePermission from "../../middleware/requirePermission.js";
+import asyncHandler from "../../utils/asyncHandler.js";
+import { requireSuperadmin } from "../../middleware/adminAuthMiddleware.js";
+import IamControllerFactory from "./iam.controller.js";
 
 export default (db) => {
   const IamController = IamControllerFactory(db);

@@ -1,8 +1,8 @@
 import express from "express";
-import asyncHandler from "../../utils/asyncHandler";
-import requirePermission from "../../middleware/requirePermission";
-import labelsControllerFactory from "./labels.controller";
-import { printLabelValidation } from "./labels.validation";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
+import labelsControllerFactory from "./labels.controller.js";
+import { printLabelValidation } from "./labels.validation.js";
 
 export default (db) => {
   const labelsController = labelsControllerFactory(db);

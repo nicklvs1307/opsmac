@@ -1,8 +1,8 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
-import requirePermission from "middleware/requirePermission";
-import { requireSuperadmin } from "middleware/adminAuthMiddleware";
-import adminControllerFactory from "domains/admin/admin.controller";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
+import { requireSuperadmin } from "../../middleware/adminAuthMiddleware.js";
+import adminControllerFactory from "./admin.controller.js";
 import {
   createUserValidation,
   updateUserValidation,
@@ -11,7 +11,7 @@ import {
   updateRestaurantModulesValidation,
   createRestaurantWithOwnerValidation,
   updateRestaurantFeaturesValidation,
-} from "domains/admin/admin.validation";
+} from "./admin.validation.js";
 
 export default (db) => {
   const adminController = adminControllerFactory(db);

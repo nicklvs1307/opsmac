@@ -1,19 +1,20 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
-import { logUserAction } from "middleware/logUserActionMiddleware";
-import requirePermission from "middleware/requirePermission";
+import asyncHandler from "../../utils/asyncHandler.js";
+import { logUserAction } from "../../middleware/logUserActionMiddleware.js";
+import requirePermission from "../../middleware/requirePermission.js";
 
-import { auth } from "middleware/authMiddleware";
-import feedbackControllerFactory from "./feedbacks.controller";
+import authMiddleware from "../../middleware/authMiddleware.js";
+import feedbackControllerFactory from "./feedbacks.controller.js";
 import {
   createFeedbackValidation,
   listFeedbacksValidation,
   updateFeedbackValidation,
   respondToFeedbackValidation,
-} from "./feedbacks.validation";
+} from "./feedbacks.validation.js";
 
 export default (db) => {
   const feedbackController = feedbackControllerFactory(db);
+  const { auth } = authMiddleware(db);
   const router = express.Router();
 
   router.use(auth);

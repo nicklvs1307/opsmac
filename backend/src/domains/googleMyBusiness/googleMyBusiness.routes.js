@@ -1,12 +1,12 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
-import requirePermission from "middleware/requirePermission";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
 
-import googleMyBusinessControllerFactory from "domains/googleMyBusiness/googleMyBusiness.controller";
+import googleMyBusinessControllerFactory from "./googleMyBusiness.controller.js";
 import {
     createReviewReplyValidation,
     replyToReviewValidation,
-  } from "domains/googleMyBusiness/googleMyBusiness.validation";
+  } from "./googleMyBusiness.validation.js";
 
 export default (db) => {
   const googleMyBusinessController = googleMyBusinessControllerFactory(db);

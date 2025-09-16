@@ -1,9 +1,9 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
-import requirePermission from "middleware/requirePermission";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
 
-import deliveryMuchServiceFactory from "./deliveryMuch.service";
-import deliveryMuchControllerFactory from "./deliveryMuch.controller";
+import deliveryMuchServiceFactory from "./deliveryMuch.service.js";
+import deliveryMuchControllerFactory from "./deliveryMuch.controller.js";
 
 export default (db) => {
   const deliveryMuchService = deliveryMuchServiceFactory(db);

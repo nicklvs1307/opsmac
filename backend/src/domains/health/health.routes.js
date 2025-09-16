@@ -1,8 +1,8 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
+import asyncHandler from "../../utils/asyncHandler.js";
 
-import healthServiceFactory from "./health.service";
-import healthControllerFactory from "./health.controller";
+import healthServiceFactory from "./health.service.js";
+import healthControllerFactory from "./health.controller.js";
 
 export default (db) => {
   const healthService = healthServiceFactory(db);

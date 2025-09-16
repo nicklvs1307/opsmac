@@ -1,12 +1,16 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
-const { supplierValidation } = require("./supplier.validation"); // Assuming this is an array
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
+import { supplierValidation } from "./supplier.validation.js";
 
-module.exports = (db) => {
-  const supplierService = require("./supplier.service")(db);
-  const supplierController = require("./supplier.controller")(supplierService);
-  const { auth } = require("middleware/authMiddleware")(db);
+import supplierServiceFactory from "./supplier.service.js";
+import supplierControllerFactory from "./supplier.controller.js";
+import authMiddleware from "../../middleware/authMiddleware.js";
+
+export default (db) => {
+  const supplierService = supplierServiceFactory(db);
+  const supplierController = supplierControllerFactory(supplierService);
+  const { auth } = authMiddleware(db);
   const router = express.Router();
 
   // Rotas de Fornecedores

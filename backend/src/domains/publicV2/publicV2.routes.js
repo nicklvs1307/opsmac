@@ -1,8 +1,8 @@
 import express from "express";
-import asyncHandler from "../../utils/asyncHandler";
-import apiAuthMiddlewareFactory from "../../middleware/apiAuthMiddleware";
-import publicV2ControllerFactory from "./publicV2.controller";
-import { feedbackValidation, checkinValidation } from "./publicV2.validation";
+import asyncHandler from "../../utils/asyncHandler.js";
+import apiAuthMiddlewareFactory from "../../middleware/apiAuthMiddleware.js";
+import publicV2ControllerFactory from "./publicV2.controller.js";
+import { feedbackValidation, checkinValidation } from "./publicV2.validation.js";
 
 export default (db) => {
   const { apiAuth } = apiAuthMiddlewareFactory(db);

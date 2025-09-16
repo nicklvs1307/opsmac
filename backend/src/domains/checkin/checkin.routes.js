@@ -1,7 +1,7 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
-import requirePermission from "middleware/requirePermission";
-import checkinControllerFactory from "domains/checkin/checkin.controller";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
+import checkinControllerFactory from "./checkin.controller.js";
 import {
   createCheckinValidation,
   updateCheckinValidation,
@@ -9,7 +9,7 @@ import {
   recordCheckinValidation,
   recordPublicCheckinValidation,
   analyticsValidation,
-} from "domains/checkin/checkin.validation";
+} from "./checkin.validation.js";
 
 export default (db) => {
   const checkinController = checkinControllerFactory(db);

@@ -1,10 +1,13 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
 
-module.exports = (db) => {
-  const { auth } = require("middleware/authMiddleware")(db);
-  const saiposController = require("domains/saipos/saipos.controller")(db);
+import authMiddleware from "../../middleware/authMiddleware.js";
+import saiposControllerFactory from "./saipos.controller.js";
+
+export default (db) => {
+  const { auth } = authMiddleware(db);
+  const saiposController = saiposControllerFactory(db);
 
   const router = express.Router();
 

@@ -1,10 +1,10 @@
 import express from "express";
-import requirePermission from "middleware/requirePermission";
-import asyncHandler from "utils/asyncHandler";
-import { openSessionValidation, recordMovementValidation, closeSessionValidation, } from "domains/cashRegister/cashRegister.validation";
+import requirePermission from "../../middleware/requirePermission.js";
+import asyncHandler from "../../utils/asyncHandler.js";
+import { openSessionValidation, recordMovementValidation, closeSessionValidation, } from "./cashRegister.validation.js";
 
-import cashRegisterServiceFactory from "./cashRegister.service";
-import cashRegisterControllerFactory from "./cashRegister.controller";
+import cashRegisterServiceFactory from "./cashRegister.service.js";
+import cashRegisterControllerFactory from "./cashRegister.controller.js";
 
 export default (db) => {
   const cashRegisterService = cashRegisterServiceFactory(db);

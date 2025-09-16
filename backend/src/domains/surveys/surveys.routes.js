@@ -1,17 +1,18 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler.js";
 
-const requirePermission = require("middleware/requirePermission");
+import requirePermission from "../../middleware/requirePermission.js";
 
-module.exports = (db) => {
-  const surveyController = require("./surveys.controller")(db);
-  const {
-    createSurveyValidation,
-    updateSurveyValidation,
-    getSurveyValidation,
-    updateSurveyStatusValidation,
-  } = require("./surveys.validation");
+import surveyControllerFactory from "./surveys.controller.js";
+import {
+  createSurveyValidation,
+  updateSurveyValidation,
+  getSurveyValidation,
+  updateSurveyStatusValidation,
+} from "./surveys.validation.js";
 
+export default (db) => {
+  const surveyController = surveyControllerFactory(db);
   const router = express.Router();
 
   router.get(

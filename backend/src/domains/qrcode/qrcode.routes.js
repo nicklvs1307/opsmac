@@ -1,10 +1,10 @@
 import express from "express";
-import asyncHandler from "../../utils/asyncHandler";
-import { logUserAction } from "../../middleware/logUserActionMiddleware";
-import requirePermission from "../../middleware/requirePermission";
-import qrcodeServiceFactory from "./qrcode.service";
-import authMiddlewareFactory from "../../middleware/authMiddleware";
-import qrcodeControllerFactory from "./qrcode.controller";
+import asyncHandler from "../../utils/asyncHandler.js";
+import { logUserAction } from "../../middleware/logUserActionMiddleware.js";
+import requirePermission from "../../middleware/requirePermission.js";
+import qrcodeServiceFactory from "./qrcode.service.js";
+import authMiddlewareFactory from "../../middleware/authMiddleware.js";
+import qrcodeControllerFactory from "./qrcode.controller.js";
 import {
   createQRCodeValidation,
   updateQRCodeValidation,
@@ -13,7 +13,7 @@ import {
   analyticsValidation,
   cloneQRCodeValidation,
   listQRCodesValidation,
-} from "./qrcode.validation";
+} from "./qrcode.validation.js";
 
 export default (db) => {
   const { auth, checkRestaurantOwnership } = authMiddlewareFactory(db);

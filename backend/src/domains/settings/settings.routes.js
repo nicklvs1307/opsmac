@@ -1,21 +1,21 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const requirePermission = require("middleware/requirePermission");
-const upload = require("middleware/uploadMiddleware");
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler.js";
+import requirePermission from "../../middleware/requirePermission.js";
+import upload from "../../middleware/uploadMiddleware.js";
 
-module.exports = (db) => {
-  const { auth, checkRestaurantOwnership } =
-    require("middleware/authMiddleware")(db);
-  const settingsController = require("domains/settings/settings.controller")(
-    db,
-  );
-  const {
-    updateRestaurantSettingsValidation,
-    updateWhatsappSettingsValidation,
-    testWhatsappMessageValidation,
-    updateRestaurantProfileValidation,
-    updateNpsCriteriaValidation,
-  } = require("domains/settings/settings.validation");
+import authMiddleware from "../../middleware/authMiddleware.js";
+import settingsControllerFactory from "./settings.controller.js";
+import {
+  updateRestaurantSettingsValidation,
+  updateWhatsappSettingsValidation,
+  testWhatsappMessageValidation,
+  updateRestaurantProfileValidation,
+  updateNpsCriteriaValidation,
+} from "./settings.validation.js";
+
+export default (db) => {
+  const { auth, checkRestaurantOwnership } = authMiddleware(db);
+  const settingsController = settingsControllerFactory(db);
 
   const router = express.Router();
 

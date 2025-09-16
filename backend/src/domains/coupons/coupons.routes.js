@@ -1,18 +1,19 @@
 import express from "express";
-import requirePermission from "middleware/requirePermission";
-import asyncHandler from "utils/asyncHandler";
-import { checkRestaurantOwnership } from "middleware/authMiddleware";
-import couponsControllerFactory from "./coupons.controller";
+import requirePermission from "../../middleware/requirePermission.js";
+import asyncHandler from "../../utils/asyncHandler.js";
+import authMiddleware from "../../middleware/authMiddleware.js";
+import couponsControllerFactory from "./coupons.controller.js";
 import {
   listCouponsValidation,
   redeemCouponValidation,
   createCouponValidation,
   validateCouponValidation,
   publicValidateCouponValidation,
-} from "./coupons.validation";
+} from "./coupons.validation.js";
 
 export default (db) => {
   const couponsController = couponsControllerFactory(db);
+  const { checkRestaurantOwnership } = authMiddleware(db);
   const router = express.Router();
 
   router.get(

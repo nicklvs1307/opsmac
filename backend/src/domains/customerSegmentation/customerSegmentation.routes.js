@@ -1,13 +1,13 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
+import asyncHandler from "../../utils/asyncHandler.js";
 import {
   createSegmentValidation,
   updateSegmentValidation,
-} from "domains/customerSegmentation/customerSegmentation.validation";
+} from "./customerSegmentation.validation.js";
 
-import requirePermission from "middleware/requirePermission";
+import requirePermission from "../../middleware/requirePermission.js";
 
-import customerSegmentationControllerFactory from "./customerSegmentation.controller";
+import customerSegmentationControllerFactory from "./customerSegmentation.controller.js";
 
 export default (db) => {
   const customerSegmentationController =

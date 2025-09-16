@@ -1,7 +1,7 @@
 import express from "express";
-import asyncHandler from "../../utils/asyncHandler";
-import publicDineInMenuServiceFactory from "./publicDineInMenu.service";
-import publicDineInMenuControllerFactory from "./publicDineInMenu.controller";
+import asyncHandler from "../../utils/asyncHandler.js";
+import publicDineInMenuServiceFactory from "./publicDineInMenu.service.js";
+import publicDineInMenuControllerFactory from "./publicDineInMenu.controller.js";
 
 export default (db) => {
   const publicDineInMenuService = publicDineInMenuServiceFactory(db);

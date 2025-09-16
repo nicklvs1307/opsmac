@@ -1,15 +1,17 @@
-const express = require("express");
-const asyncHandler = require("utils/asyncHandler");
-const {
+import express from "express";
+import asyncHandler from "../../utils/asyncHandler.js";
+import {
   createRewardValidation,
   updateRewardValidation,
   spinWheelValidation,
-} = require("domains/rewards/rewards.validation");
+} from "./rewards.validation.js";
 
-const requirePermission = require("middleware/requirePermission");
+import requirePermission from "../../middleware/requirePermission.js";
 
-module.exports = (db) => {
-  const rewardsController = require("./rewards.controller")(db);
+import rewardsControllerFactory from "./rewards.controller.js";
+
+export default (db) => {
+  const rewardsController = rewardsControllerFactory(db);
   const router = express.Router();
 
   router.get(

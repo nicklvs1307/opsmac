@@ -1,8 +1,8 @@
 import express from "express";
-import asyncHandler from "../../utils/asyncHandler";
-import { createDineInOrderValidation } from "./publicDineInOrders.validation";
-import publicDineInOrdersServiceFactory from "./publicDineInOrders.service";
-import publicDineInOrdersControllerFactory from "./publicDineInOrders.controller";
+import asyncHandler from "../../utils/asyncHandler.js";
+import { createDineInOrderValidation } from "./publicDineInOrders.validation.js";
+import publicDineInOrdersServiceFactory from "./publicDineInOrders.service.js";
+import publicDineInOrdersControllerFactory from "./publicDineInOrders.controller.js";
 
 export default (db) => {
   const publicDineInOrdersService = publicDineInOrdersServiceFactory(db);

@@ -1,13 +1,13 @@
 import express from "express";
-import asyncHandler from "utils/asyncHandler";
+import asyncHandler from "../../utils/asyncHandler.js";
 import {
   createGoalValidation,
   updateGoalValidation,
-} from "domains/goals/goals.validation";
+} from "./goals.validation.js";
 
-import requirePermission from "middleware/requirePermission";
+import requirePermission from "../../middleware/requirePermission.js";
 
-import goalsControllerFactory from "./goals.controller";
+import goalsControllerFactory from "./goals.controller.js";
 
 export default (db) => {
   const goalsController = goalsControllerFactory(db);

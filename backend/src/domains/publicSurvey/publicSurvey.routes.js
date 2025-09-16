@@ -1,10 +1,10 @@
 import express from "express";
-import asyncHandler from "../../utils/asyncHandler";
-import publicSurveyControllerFactory from "./publicSurvey.controller";
+import asyncHandler from "../../utils/asyncHandler.js";
+import publicSurveyControllerFactory from "./publicSurvey.controller.js";
 import {
   submitResponsesValidation,
   linkCustomerValidation,
-} from "./publicSurvey.validation";
+} from "./publicSurvey.validation.js";
 
 export default (db) => {
   const publicSurveyController = publicSurveyControllerFactory(db);

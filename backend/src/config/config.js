@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production" && process.env.DB_PASSWORD_FILE) {
   }
 }
 
-export default {
+module.exports = {
   development: {
     username: process.env.DB_USER || "postgres",
     password: process.env.DB_PASSWORD || "123456789",

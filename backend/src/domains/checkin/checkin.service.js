@@ -3,7 +3,7 @@ import NotFoundError from "../../utils/errors/NotFoundError.js";
 import { generateUniqueCode } from "../../utils/codeGenerator.js";
 import { Op } from "sequelize";
 // import { calculateAnalytics } from "../../utils/analytics.js";
-import { sendWhatsappMessage } from "../../services/whatsappService.js";
+
 import { sendEmail } from "../../services/emailService.js";
 import iamService from "../../services/iamService.js";
 import customerService from "../../services/customerService.js";

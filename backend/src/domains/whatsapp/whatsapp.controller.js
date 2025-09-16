@@ -1,8 +1,9 @@
-const { validationResult } = require("express-validator");
-const { BadRequestError, ForbiddenError } = require("utils/errors");
+import { validationResult } from "express-validator";
+import { BadRequestError, ForbiddenError } from "../../utils/errors/index.js";
 
-module.exports = (db) => {
-  const whatsappService = require("./whatsapp.service")(db);
+export default (db) => {
+  import whatsappServiceFactory from "./whatsapp.service.js";
+  const whatsappService = whatsappServiceFactory(db);
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);

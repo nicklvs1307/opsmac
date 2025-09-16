@@ -1,6 +1,6 @@
-const { NotFoundError, BadRequestError } = require("utils/errors");
+import { NotFoundError, BadRequestError } from "../../utils/errors/index.js";
 
-module.exports = (db) => {
+export default (db) => {
   const models = db;
 
   const generateQrCodeUrl = (restaurantSlug, tableNumber) => {

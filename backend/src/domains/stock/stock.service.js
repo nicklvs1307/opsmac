@@ -1,7 +1,7 @@
-const { Op, fn, col } = require("sequelize");
-const { NotFoundError, BadRequestError } = require("utils/errors");
+import { Op, fn, col } from "sequelize";
+import { NotFoundError, BadRequestError } from "../../utils/errors/index.js";
 
-module.exports = (db) => {
+export default (db) => {
   const models = db;
 
   const getDashboardData = async (restaurantId) => {

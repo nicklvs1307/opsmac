@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
 
 export default (db) => {
@@ -8,7 +9,7 @@ export default (db) => {
       where.title = { [Op.iLike]: `%${search}%` };
     }
 
-    return Survey.findAll({
+    return models.Survey.findAll({
       where,
       include: [
         {
@@ -28,7 +29,7 @@ export default (db) => {
   const createSurvey = async (surveyData, restaurantId, userId) => {
     const t = await db.sequelize.transaction(); // Start transaction
     try {
-      const survey = await Survey.create(
+      const survey = await models.Survey.create(
         { ...surveyData, restaurantId, userId },
         { transaction: t },
       );
@@ -44,7 +45,7 @@ export default (db) => {
   };
 
   const getSurveyById = async (surveyId, restaurantId) => {
-    const survey = await Survey.findOne({
+    const survey = await models.Survey.findOne({
       where: { id: surveyId, restaurantId },
       include: [
         {
@@ -103,11 +104,11 @@ export default (db) => {
   const getSurveyAnalytics = async (restaurantId, surveyId) => {
     const survey = await getSurveyById(surveyId, restaurantId);
 
-    const totalAnswers = await Answer.count({
+    const totalAnswers = await models.Answer.count({
       where: { surveyId },
     });
 
-    const answersByType = await Answer.findAll({
+    const answersByType = await models.Answer.findAll({
       attributes: [
         [db.sequelize.col("question.type"), "questionType"],
         [db.sequelize.fn("COUNT", db.sequelize.col("Answer.id")), "count"],
@@ -148,7 +149,7 @@ export default (db) => {
   ) => {
     await getSurveyById(surveyId, restaurantId); // Ensures survey belongs to restaurant
 
-    const distribution = await Answer.findAll({
+    const distribution = await models.Answer.findAll({
       where: {
         questionId: questionId, // Filter directly by questionId
       },

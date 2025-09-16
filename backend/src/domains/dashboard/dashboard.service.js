@@ -6,6 +6,7 @@ import redisClient from "../../config/redisClient.js";
 export default (db) => {
   const models = db;
   const sequelize = db.sequelize;
+  const rewardsService = rewardsServiceFactory(db);
 
   function _getDateFilters(query) {
     const { start_date, end_date, period } = query;

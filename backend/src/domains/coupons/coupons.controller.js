@@ -9,6 +9,12 @@ import couponsServiceFactory from "./coupons.service.js";
 class CouponsController {
   constructor(db) {
     this.couponsService = couponsServiceFactory(db);
+
+    this.listCoupons = this.listCoupons.bind(this);
+    this.createCoupon = this.createCoupon.bind(this);
+    this.validateCoupon = this.validateCoupon.bind(this);
+    this.publicValidateCoupon = this.publicValidateCoupon.bind(this);
+    this.getCouponAnalytics = this.getCouponAnalytics.bind(this);
   }
 
   handleValidationErrors(req) {

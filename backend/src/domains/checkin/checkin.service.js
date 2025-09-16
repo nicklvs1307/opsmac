@@ -152,6 +152,7 @@ export default (db) => {
       /*
       await couponService.redeemCoupon(couponId, restaurant.id, customer.id);
       */
+    }
 
     return { checkin, customerTotalVisits: customer.totalVisits, rewardEarned };
   };

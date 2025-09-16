@@ -1,4 +1,4 @@
-const { createLogger, format, transports } = require("winston");
+import winston from 'winston';
 const { combine, timestamp, printf, colorize, align, errors } = format;
 
 // Custom format to handle error stacks

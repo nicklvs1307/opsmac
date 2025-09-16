@@ -1,5 +1,5 @@
 const path = require('path');
-require('./backend/aliases');
+// require('./backend/aliases');
 
 module.exports = {
   'config': path.resolve('backend', 'src', 'config', 'config.js'),

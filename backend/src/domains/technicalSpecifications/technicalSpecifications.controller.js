@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator";
 import { BadRequestError } from "../../utils/errors/index.js";
-import technicalSpecificationsServiceFactory from "./technicalSpecifications.service";
+import technicalSpecificationsServiceFactory from "./technicalSpecifications.service.js";
 
 export default (db) => {
   const technicalSpecificationsService = technicalSpecificationsServiceFactory(db);

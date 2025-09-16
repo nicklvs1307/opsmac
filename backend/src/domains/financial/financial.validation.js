@@ -1,6 +1,6 @@
-const { body, query } = require("express-validator");
+import { body, query } from "express-validator";
 
-exports.createTransactionValidation = [
+export const createTransactionValidation = [
   body("type")
     .isIn(["income", "expense"])
     .withMessage("Type must be either income or expense."),
@@ -43,14 +43,14 @@ exports.createTransactionValidation = [
     .withMessage("Recurring ends at must be a valid date."),
 ];
 
-exports.reportValidation = [
+export const reportValidation = [
   query("start_date")
     .isISO8601()
     .withMessage("Start date must be a valid date."),
   query("end_date").isISO8601().withMessage("End date must be a valid date."),
 ];
 
-exports.createPaymentMethodValidation = [
+export const createPaymentMethodValidation = [
   body("name")
     .notEmpty()
     .withMessage("Name is required.")

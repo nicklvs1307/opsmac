@@ -1,6 +1,6 @@
-module.exports = (db) => {
-  const models = db;
-  const { BadRequestError, NotFoundError } = require("utils/errors");
+import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
+
+export default (db) => {
 
   const getSurveyRewardProgram = async (restaurantId) => {
     const program = await models.SurveyRewardProgram.findOne({

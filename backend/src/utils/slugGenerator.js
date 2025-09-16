@@ -1,6 +1,6 @@
-const slugify = require("slugify");
+import slugify from "slugify";
 
-const generateUniqueSlug = async (model, name, currentSlug = null) => {
+export const generateUniqueSlug = async (model, name, currentSlug = null) => {
   let baseSlug = slugify(name, { lower: true, strict: true });
   let uniqueSlug = baseSlug;
   let counter = 1;

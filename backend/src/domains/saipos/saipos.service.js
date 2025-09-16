@@ -1,10 +1,6 @@
-const {
-  BadRequestError,
-  ForbiddenError,
-  NotFoundError,
-} = require("utils/errors");
+import { BadRequestError, ForbiddenError, NotFoundError } from "../../utils/errors/index.js";
 
-module.exports = (db) => {
+export default (db) => {
   const models = db;
 
   const handleOrderCreated = async (orderData) => {

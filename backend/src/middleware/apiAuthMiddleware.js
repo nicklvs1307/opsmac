@@ -1,7 +1,7 @@
-const { UnauthorizedError, InternalServerError } = require("utils/errors");
-const logger = require("utils/logger");
+import { UnauthorizedError, InternalServerError } from "../utils/errors/index.js";
+import logger from "../utils/logger.js";
 
-module.exports = (db) => {
+export default (db) => {
   const { models } = db;
 
   const apiAuth = async (req, res, next) => {

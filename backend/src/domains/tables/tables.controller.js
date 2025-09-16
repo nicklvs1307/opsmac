@@ -1,7 +1,9 @@
-module.exports = (db) => {
-  const tablesService = require("./tables.service")(db);
-  const { validationResult } = require("express-validator");
-  const { BadRequestError } = require("utils/errors");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "../../utils/errors/index.js";
+import tablesServiceFactory from "./tables.service.js";
+
+export default (db) => {
+  const tablesService = tablesServiceFactory(db);
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);

@@ -1,4 +1,4 @@
-const BaseError = require("./BaseError");
+import BaseError from "./BaseError.js";
 
 class ApiError extends BaseError {
   constructor(message, statusCode = 500) {
@@ -6,4 +6,4 @@ class ApiError extends BaseError {
   }
 }
 
-module.exports = ApiError;
+export default ApiError;

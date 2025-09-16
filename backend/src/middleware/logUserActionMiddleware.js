@@ -17,4 +17,4 @@ const logUserAction = (action) => {
   };
 };
 
-module.exports = { logUserAction };
+export { logUserAction };

@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator";
 import { BadRequestError } from "../../utils/errors/index.js";
-import auditService from "../../services/auditService";
+import auditService from "../../services/auditService.js";
 
 export default (restaurantService) => {
   const handleValidationErrors = (req) => {

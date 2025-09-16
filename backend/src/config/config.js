@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import fs from "fs";
-import logger from "#utils/logger";
+import logger from "../utils/logger.js";
 
 // Adicionado para ler a senha do banco de dados a partir de um arquivo (Docker Secret)
 let dbPassword = process.env.DB_PASSWORD;

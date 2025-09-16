@@ -39,6 +39,7 @@ services:
       /bin/sh -c "
         echo 'Waiting for database to be ready...'
         sleep 15
+        cd backend &&
         npx sequelize-cli db:migrate &&
         npx sequelize-cli db:seed:all
       "

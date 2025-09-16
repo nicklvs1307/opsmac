@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "mypass",
+    "database": "feedback_restaurante",
+    "host": "postgres",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "mypass",
+    "database": "feedeliza",
+    "host": "postgres",
+    "dialect": "postgres"
+  }
+}

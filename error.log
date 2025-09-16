@@ -1,4 +1,19 @@
 Database is up, running migrations...
-/bin/sh: backend/scripts/wait-for-it.sh: not found
+Connection to postgres (10.0.1.131) 5432 port [tcp/postgresql] succeeded!
+Postgres is up - executing command
 Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
-ERROR: Cannot find "/app/config/config.json". Have you run "sequelize init"?
+Options:
+  --version          Show version number  [boolean]
+  --help             Show help  [boolean]
+  --env              The environment to run the command in  [string] [default: "development"]
+  --config           The path to the config file  [string]
+  --options-path     The path to a JSON file with additional options  [string]
+  --migrations-path  The path to the migrations folder  [string] [default: "migrations"]
+  --seeders-path     The path to the seeders folder  [string] [default: "seeders"]
+  --models-path      The path to the models folder  [string] [default: "models"]
+  --url              The database connection string to use. Alternative to using --config files  [string]
+  --debug            When available show various debug information  [boolean] [default: false]
+  --to               Migration name to run migrations until  [string]
+  --from             Migration name to start migrations from (excluding)  [string]
+  --name             Migration name. When specified, only this migration will be run. Mutually exclusive with --to and --from  [string]
+Unknown argument: sequelizerc

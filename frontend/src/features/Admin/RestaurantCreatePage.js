@@ -364,7 +364,7 @@ const RestaurantCreatePage = () => {
               disabled={
                 createRestaurantWithOwnerMutation.isLoading ||
                 saveRestaurantMutation.isLoading ||
-                !can('restaurants', 'create')
+                !can('admin:restaurants', 'create')
               }
             >
               {createRestaurantWithOwnerMutation.isLoading || saveRestaurantMutation.isLoading ? (

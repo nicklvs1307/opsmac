@@ -30,6 +30,7 @@ import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
+import usePermissions from '@/hooks/usePermissions';
 import {
   useSurveys,
   useDeleteSurvey,
@@ -39,8 +40,9 @@ import {
 const SurveyList = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { can } = usePermissions();
   const restaurantId = user?.restaurants?.[0]?.id;
-  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+  // const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || []; // Old logic, no longer needed
 
   const [filters, setFilters] = useState({ search: '' });
   const [qrCodeValue, setQrCodeValue] = useState(null);
@@ -95,7 +97,7 @@ const SurveyList = () => {
     }
   }, [filters, refetch, restaurantId]);
 
-  if (!enabledModules.includes('satisfaction')) {
+  if (!can('fidelity:satisfaction:surveys', 'read')) {
     return (
       <Box sx={{ p: 4 }}>
         <Alert severity="warning">

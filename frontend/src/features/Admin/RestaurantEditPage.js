@@ -320,7 +320,7 @@ const RestaurantEditPage = () => {
               disabled={
                 saveRestaurantMutation.isLoading ||
                 setEntitlementsMutation.isLoading ||
-                !can('admin:restaurants', 'edit')
+                !can('admin:restaurants', 'update')
               }
             >
               Save Changes

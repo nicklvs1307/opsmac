@@ -4,12 +4,14 @@ import { Box, Typography, Paper, CircularProgress, Alert, Grid } from '@mui/mate
 import { useSurveyResults } from '@/features/Fidelidade/Avaliacoes/api/surveyService'; // Import useSurveyResults
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useAuth
 import { useTranslation } from 'react-i18next'; // Importar useTranslation
+import usePermissions from '@/hooks/usePermissions';
 
 const SurveyResults = () => {
   const { id } = useParams();
   const { t } = useTranslation(); // Obter função de tradução
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
-  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+  const { can } = usePermissions();
+  // const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || []; // Old logic, no longer needed
 
   const { data, isLoading, error } = useSurveyResults(id, {
     onError: (err) => {
@@ -18,7 +20,7 @@ const SurveyResults = () => {
   });
 
   // Verifica se o módulo de pesquisas/feedback está habilitado
-  if (!enabledModules.includes('satisfaction')) {
+  if (!can('fidelity:satisfaction:surveys', 'read')) {
     return (
       <Box sx={{ p: 4 }}>
         <Alert severity="warning">

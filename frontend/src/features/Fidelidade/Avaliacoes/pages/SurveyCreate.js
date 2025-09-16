@@ -32,6 +32,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useAuth
+import usePermissions from '@/hooks/usePermissions';
 
 import {
   useCreateSurvey,
@@ -62,8 +63,9 @@ const SurveyCreate = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const { can } = usePermissions();
   const restaurantId = user?.restaurants?.[0]?.id;
-  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+  // const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || []; // Old logic, no longer needed
 
   const { data: rewards, isLoading: isLoadingRewards } = useSurveyRewards(restaurantId, {
     onError: (error) => {
@@ -142,7 +144,7 @@ const SurveyCreate = () => {
   }, [surveyType, npsCriteria, t]);
 
   // Verifica se o módulo de pesquisas/feedback está habilitado
-  if (!enabledModules.includes('satisfaction')) {
+  if (!can('fidelity:satisfaction:surveys', 'create')) {
     return (
       <Box sx={{ p: 4 }}>
         <Alert severity="warning">

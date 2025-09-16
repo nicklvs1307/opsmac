@@ -34,7 +34,7 @@ const ActiveCheckinsPage = () => {
     isError,
     error,
   } = useGetActiveCheckins(restaurantId, {
-    enabled: can('checkin', 'read'), // Only fetch data if the user has permission
+    enabled: can('fidelity:checkin:active', 'read'), // Only fetch data if the user has permission
   });
   const checkoutMutation = useCheckout();
 
@@ -43,7 +43,7 @@ const ActiveCheckinsPage = () => {
   };
 
   // Verifica se o usuário tem a feature para acessar a página
-  if (!can('checkin', 'read')) {
+  if (!can('fidelity:checkin:active', 'read')) {
     return (
       <Box sx={{ p: 4 }}>
         <Alert severity="warning">

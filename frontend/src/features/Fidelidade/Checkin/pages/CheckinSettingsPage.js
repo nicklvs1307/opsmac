@@ -105,7 +105,7 @@ const CheckinSettingsPage = () => {
   };
 
   // Verifica se o usuário tem a feature para acessar a página
-  if (!can('checkin_settings', 'read')) {
+  if (!can('fidelity:checkin:settings', 'read')) {
     return (
       <Box sx={{ p: 4 }}>
         <Alert severity="warning">

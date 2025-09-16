@@ -375,7 +375,7 @@ const UserCreatePage = () => {
                 saveUserMutation.isLoading ||
                 assignUserRoleMutation.isLoading ||
                 saveUserPermissionOverridesMutation.isLoading ||
-                !can('admin_users', 'create')
+                !can('admin:users', 'create')
               }
             >
               {saveUserMutation.isLoading ||

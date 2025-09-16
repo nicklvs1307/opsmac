@@ -23,6 +23,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import usePermissions from '@/hooks/usePermissions';
 // import SurveyRewardProgram from '../Pesquisas/SurveyRewardProgram'; // Componente não encontrado, importação comentada
 import {
   useNpsCriteria,
@@ -37,8 +38,9 @@ import { useRewards } from '@/features/Coupons/api/couponQueries';
 const SatisfactionSettingsPage = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
+  const { can } = usePermissions();
   const restaurantId = user?.restaurants?.[0]?.id;
-  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+  // const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || []; // Old logic, no longer needed
 
   const [newCriterionName, setNewCriterionName] = useState('');
   const [editCriterion, setEditCriterion] = useState(null);
@@ -122,7 +124,7 @@ const SatisfactionSettingsPage = () => {
     }
   };
 
-  if (!enabledModules.includes('satisfaction')) {
+  if (!can('fidelity:satisfaction:settings', 'read')) {
     return (
       <Box sx={{ p: 4 }}>
         <Alert severity="warning">

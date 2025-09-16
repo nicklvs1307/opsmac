@@ -19,6 +19,7 @@ import toast from 'react-hot-toast';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useAuth
+import usePermissions from '@/hooks/usePermissions';
 
 import {
   useSurveyDetails,
@@ -33,8 +34,9 @@ const SurveyEdit = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const { can } = usePermissions();
   const restaurantId = user?.restaurants?.[0]?.id;
-  const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || [];
+  // const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || []; // Old logic, no longer needed
 
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
@@ -88,7 +90,7 @@ const SurveyEdit = () => {
   });
 
   // Verifica se o módulo de pesquisas/feedback está habilitado
-  if (!enabledModules.includes('satisfaction')) {
+  if (!can('fidelity:satisfaction:surveys', 'update')) {
     return (
       <Box sx={{ p: 4 }}>
         <Alert severity="warning">

@@ -1,5 +1,28 @@
-Database is up, running migrations...
 Connection to postgres (10.0.1.131) 5432 port [tcp/postgresql] succeeded!
+Database is up, running migrations...
 Postgres is up - executing command
 Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
-ERROR: Cannot find "/app/config/config.json". Have you run "sequelize init"?
+Loaded configuration file "src/config/config.js".
+Using environment "production".
+== 001-create-core-infrastructure: migrating =======
+== 001-create-core-infrastructure: migrated (0.149s)
+== 002-add-settings-to-restaurants: migrating =======
+== 002-add-settings-to-restaurants: migrated (0.056s)
+== 003-create-categories-table: migrating =======
+== 003-create-categories-table: migrated (0.018s)
+== 004-create-surveys-table: migrating =======
+== 004-create-surveys-table: migrated (0.027s)
+== 005-create-permission-system: migrating =======
+== 005-create-permission-system: migrated (0.234s)
+== 006-create-stock-management-tables: migrating =======
+== 006-create-stock-management-tables: migrated (0.173s)
+== 007-add-columns-to-products: migrating =======
+== 007-add-columns-to-products: migrated (0.011s)
+== 008-create-customer-relationship-tables: migrating =======
+== 008-create-customer-relationship-tables: migrated (0.068s)
+== 009-add-columns-to-checkins: migrating =======
+== 009-add-columns-to-checkins: migrated (0.025s)
+== 010-alter-customers-table: migrating =======
+== 010-alter-customers-table: migrated (0.023s)
+== 011-alter-rewards-table: migrating =======
+ERROR: column "customer_id" of relation "rewards" already exists

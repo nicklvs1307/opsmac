@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'url';
 
 const basename = path.basename(import.meta.url);
 const env = process.env.NODE_ENV || "development";
-const config = _config[env];
+const config = _config.default[env];
 const db = {};
 
 let sequelize;

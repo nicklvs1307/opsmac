@@ -1,17 +1,12 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-file:///app/src/config/config.js:17
-module.exports = {
-^
-ReferenceError: module is not defined in ES module scope
-This file is being treated as an ES module because it has a '.js' file extension and '/app/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
-    at file:///app/src/config/config.js:17:1
+file:///app/models/index.js:14
+if (config.use_env_variable) {
+
+           ^
+TypeError: Cannot read properties of undefined (reading 'use_env_variable')
+    at file:///app/models/index.js:14:12
     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
 Node.js v20.19.5
-
-Database is up, running migrations...
-/bin/sh: backend/scripts/wait-for-it.sh: not found
-Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
-ERROR: Cannot find "/app/config/config.json". Have you run "sequelize init"?

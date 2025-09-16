@@ -1,4 +1,4 @@
-import { NotFoundError } from "../../utils/errors";
+import { NotFoundError } from "../../utils/errors.js";
 
 export default (db) => {
   const { models } = db;

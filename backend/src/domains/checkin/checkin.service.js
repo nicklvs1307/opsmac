@@ -1,71 +1,64 @@
-import { Op, fn, col, literal } from "sequelize";
-import {
-  BadRequestError,
-  NotFoundError,
-  ForbiddenError,
-} from "utils/errors";
-import logger from "utils/logger";
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import { generateUniqueCode } from "../../utils/codeGenerator.js";
+import { Op } from "sequelize";
+import { calculateAnalytics } from "../../utils/analytics.js";
+import { sendWhatsappMessage } from "../../services/whatsappService.js";
+import { sendEmail } from "../../services/emailService.js";
+import iamService from "../../services/iamService.js";
+import customerService from "../../services/customerService.js";
+import rewardService from "../../services/rewardService.js";
+import couponService from "../../services/couponService.js";
 
-  export default (db) => {
+export default (db) => {
   const models = db;
-  const sequelize = db.sequelize;
-  import rewardsServiceFactory from "domains/rewards/rewards.service";
+
+  const checkCheckinModuleEnabled = async (restaurantId, restaurantSlug) => {
+    const restaurant = await models.Restaurant.findOne({
+      where: restaurantId ? { id: restaurantId } : { slug: restaurantSlug },
+    });
+
+    if (!restaurant) {
+      throw new NotFoundError("Restaurante não encontrado.");
+    }
+
+    const isCheckinEnabled = await iamService.checkPermission(
+      restaurant.id,
+      null, // No specific user for module check
+      "checkin",
+      "access",
+      false, // Not a superadmin check
+    );
+
+    if (!isCheckinEnabled.allowed) {
+      throw new ForbiddenError("Módulo de Check-in não habilitado.");
+    }
+
+    return restaurant;
+  };
 
   const recordCheckin = async (customerId, restaurantId) => {
+    const customer = await models.Customer.findByPk(customerId);
+    if (!customer) {
+      throw new NotFoundError("Cliente não encontrado.");
+    }
+
     const restaurant = await models.Restaurant.findByPk(restaurantId);
     if (!restaurant) {
-      throw new NotFoundError("Restaurante não encontrado");
+      throw new NotFoundError("Restaurante não encontrado.");
     }
-
-    const checkinProgramSettings =
-      restaurant.settings?.checkinProgramSettings || {};
-    const checkinDurationMinutes =
-      checkinProgramSettings.checkinDurationMinutes || 1440;
-
-    const customer = await models.Customer.findOne({
-      where: {
-        id: customerId,
-        restaurantId: restaurantId,
-      },
-    });
-
-    if (!customer) {
-      throw new NotFoundError(
-        "Cliente não encontrado ou não pertence ao seu restaurante.",
-      );
-    }
-
-    const existingCheckin = await models.Checkin.findOne({
-      where: {
-        customerId,
-        restaurantId,
-        status: "active",
-        expiresAt: { [Op.gt]: new Date() },
-      },
-    });
-
-    if (existingCheckin) {
-      throw new BadRequestError(
-        "Cliente já possui um check-in ativo neste restaurante.",
-      );
-    }
-
-    const checkinTime = new Date();
-    const expiresAt = new Date(
-      checkinTime.getTime() + checkinDurationMinutes * 60 * 1000,
-    );
 
     const checkin = await models.Checkin.create({
       customerId,
       restaurantId,
-      checkinTime: checkinTime,
-      expiresAt: expiresAt,
+      checkinTime: new Date(),
       status: "active",
     });
 
-    if (customer) {
-      await customer.increment("totalVisits");
-    }
+    // Update customer's last visit and total visits
+    await customer.update({
+      lastVisit: new Date(),
+      totalVisits: (customer.totalVisits || 0) + 1,
+    });
 
     return checkin;
   };
@@ -78,401 +71,147 @@ import logger from "utils/logger";
     tableNumber,
     couponId,
   ) => {
-    const checkinProgramSettings =
-      restaurant.settings?.checkinProgramSettings || {};
-    const checkinDurationMinutes =
-      checkinProgramSettings.checkinDurationMinutes || 1440;
-    const identificationMethod =
-      checkinProgramSettings.identificationMethod || "phone";
-    const requireCouponForCheckin =
-      checkinProgramSettings.requireCouponForCheckin || false;
+    let customer = await models.Customer.findOne({
+      where: { phone: phoneNumber, restaurantId: restaurant.id },
+    });
 
-    let customer;
-    let customerSearchCriteria = {};
-    let customerCreationData = { restaurantId: restaurant.id };
-
-    if (identificationMethod === "phone") {
-      if (!phoneNumber) {
-        throw new BadRequestError(
-          "Número de telefone é obrigatório para este método de identificação.",
-        );
-      }
-      customerSearchCriteria = {
-        phone: phoneNumber,
-        restaurantId: restaurant.id,
-      };
-      customerCreationData.phone = phoneNumber;
-      customerCreationData.whatsapp = phoneNumber;
-    } else if (identificationMethod === "cpf") {
-      if (!cpf) {
-        throw new BadRequestError(
-          "CPF é obrigatório para este método de identificação.",
-        );
-      }
-      customerSearchCriteria = { cpf, restaurantId: restaurant.id };
-      customerCreationData.cpf = cpf;
-    } else {
-      throw new BadRequestError(
-        "Método de identificação inválido configurado para o restaurante.",
+    if (!customer) {
+      // Create new customer if not found
+      customer = await customerService.createCustomer(
+        restaurant.id,
+        customerName,
+        phoneNumber,
+        null, // email
+        cpf,
       );
     }
 
-    customer = await models.Customer.findOne({ where: customerSearchCriteria });
-
-    if (!customer) {
-      customerCreationData.name = customerName || "Cliente Anônimo";
-      customerCreationData.source = "checkin_qrcode";
-      customer = await models.Customer.create(customerCreationData);
-    } else {
-      if (customerName && customer.name === "Cliente Anônimo") {
-        await customer.update({ name: customerName });
-      }
-    }
-
+    // Check for existing active check-in for this customer at this restaurant
     const existingCheckin = await models.Checkin.findOne({
       where: {
         customerId: customer.id,
         restaurantId: restaurant.id,
         status: "active",
-        expiresAt: { [Op.gt]: new Date() },
       },
     });
 
     if (existingCheckin) {
-      throw new BadRequestError(
-        "Cliente já possui um check-in ativo neste restaurante.",
-      );
+      throw new BadRequestError("Cliente já possui um check-in ativo.");
     }
-
-    let validCouponId = null;
-    if (couponId) {
-      const coupon = await models.Coupon.findOne({
-        where: {
-          id: couponId,
-          restaurantId: restaurant.id,
-          status: "active",
-          expiresAt: { [Op.or]: { [Op.gte]: new Date(), [Op.eq]: null } },
-        },
-      });
-
-      if (coupon) {
-        validCouponId = couponId;
-      } else {
-        if (requireCouponForCheckin) {
-          throw new BadRequestError(
-            "ID do cupom inválido ou cupom não ativo/expirado.",
-          );
-        } else {
-          couponId = null;
-        }
-      }
-    } else if (requireCouponForCheckin) {
-      throw new BadRequestError("Cupom é obrigatório para este check-in.");
-    }
-
-    const checkinTime = new Date();
-    const expiresAt = new Date(
-      checkinTime.getTime() + checkinDurationMinutes * 60 * 1000,
-    );
 
     const checkin = await models.Checkin.create({
       customerId: customer.id,
       restaurantId: restaurant.id,
-      tableNumber,
-      couponId: validCouponId,
-      checkinTime: checkinTime,
-      expiresAt: expiresAt,
+      checkinTime: new Date(),
       status: "active",
     });
 
-    await customer.increment("totalVisits");
-    await customer.reload();
-    await customer.updateStats();
-
-    const { checkinTimeRestriction = "unlimited", pointsPerCheckin = 1 } =
-      checkinProgramSettings;
-
-    if (checkinTimeRestriction !== "unlimited") {
-      const lastCheckin = await models.Checkin.findOne({
-        where: {
-          customerId: customer.id,
-          restaurantId: restaurant.id,
-          status: "active",
-          id: { [Op.ne]: checkin.id },
-        },
-        order: [["checkinTime", "DESC"]],
-      });
-
-      if (lastCheckin) {
-        const now = new Date();
-        const lastCheckinTime = new Date(lastCheckin.checkinTime);
-        const diffHours = Math.abs(now - lastCheckinTime) / 36e5;
-
-        let restrictionHours = 0;
-        if (checkinTimeRestriction === "1_per_day") restrictionHours = 24;
-        if (checkinTimeRestriction === "1_per_6_hours") restrictionHours = 6;
-
-        if (restrictionHours > 0 && diffHours < restrictionHours) {
-          logger.warn(
-            `Anti-fraude: Cliente ${customer.id} tentou check-in muito rápido. Último check-in: ${lastCheckinTime.toISOString()}`,
-          );
-        }
-      }
-    }
-
-    if (pointsPerCheckin > 0) {
-      if (typeof customer.addLoyaltyPoints === "function") {
-        await customer.addLoyaltyPoints(
-          parseInt(pointsPerCheckin, 10),
-          "checkin",
-        );
-      } else {
-        logger.warn(
-          "[Public Check-in] Método addLoyaltyPoints não encontrado no modelo Customer. Pontos não adicionados.",
-        );
-      }
-    }
+    // Update customer's last visit and total visits
+    await customer.update({
+      lastVisit: new Date(),
+      totalVisits: (customer.totalVisits || 0) + 1,
+    });
 
     let rewardEarned = null;
-    const visitRewards =
-      restaurant.settings?.checkinProgramSettings?.rewardsPerVisit || [];
+    // Check for rewards based on check-in
+    const rewardProgram = await models.SurveyRewardProgram.findOne({
+      where: { restaurantId: restaurant.id },
+    });
 
-    for (const rewardConfig of visitRewards) {
-      const parsedVisitCount = parseInt(rewardConfig.visitCount, 10);
-
-      if (parsedVisitCount === customer.totalVisits) {
-        const existingCoupon = await models.Coupon.findOne({
-          where: {
-            customerId: customer.id,
-            rewardId: rewardConfig.rewardId,
-            visitMilestone: parsedVisitCount,
-          },
-        });
-
-        if (existingCoupon) {
-          continue;
-        }
-        const reward = await models.Reward.findByPk(rewardConfig.rewardId);
-
-        if (reward) {
-          try {
-            if (reward.rewardType === "spin_the_wheel") {
-              rewardEarned = {
-                rewardId: reward.id,
-                rewardTitle: reward.title,
-                rewardType: reward.rewardType,
-                wheelConfig: reward.wheelConfig,
-                visitCount: customer.totalVisits,
-                customerId: customer.id,
-                description: reward.description,
-              };
-            } else {
-              const { coupon: newCoupon } =
-                await rewardsService.generateCouponForReward(
-                  reward,
-                  customer.id,
-                  { visitMilestone: parsedVisitCount },
-                );
-
-              if (newCoupon) {
-                rewardEarned = {
-                  rewardTitle: newCoupon.title || "",
-                  couponCode: newCoupon.code || "",
-                  visitCount: customer.totalVisits,
-                  rewardType: reward.rewardType,
-                  value: newCoupon.value || 0,
-                  description: newCoupon.description || "",
-                };
-              }
-            }
-          } catch (couponError) {
-            logger.error(
-              `[Public Check-in] Erro ao gerar cupom de recompensa por visita para ${customer.name}:`,
-              couponError.message,
-              "Stack:",
-              couponError.stack,
-            );
-          }
-        } else {
-          logger.warn(
-            `[Public Check-in] Recompensa com ID ${rewardConfig.rewardId} não encontrada no banco de dados.`,
+    if (rewardProgram && rewardProgram.rewards_per_response) {
+      for (const rewardConfig of rewardProgram.rewards_per_response) {
+        if (rewardConfig.trigger === "checkin") {
+          const reward = await rewardService.createReward(
+            customer.id,
+            restaurant.id,
+            rewardConfig.rewardType,
+            rewardConfig.value,
+            rewardConfig.title,
+            rewardConfig.description,
+            rewardConfig.couponValidityDays,
           );
+          rewardEarned = reward;
+          // Optionally send coupon via WhatsApp/Email
+          if (reward.couponCode) {
+            const message = `Parabéns! Você ganhou um cupom: ${reward.couponCode}. Use-o em sua próxima visita!`;
+            // await sendWhatsappMessage(customer.phone, message);
+            // await sendEmail(customer.email, 'Seu Cupom de Recompensa', message);
+          }
+          break; // Assuming only one reward per check-in for now
         }
       }
     }
 
-    return {
-      checkin,
-      customerTotalVisits: customer.totalVisits,
-      rewardEarned: rewardEarned,
-    };
+    // If a couponId is provided, mark it as redeemed
+    if (couponId) {
+      await couponService.redeemCoupon(couponId, restaurant.id, customer.id);
+    }
+
+    return { checkin, customerTotalVisits: customer.totalVisits, rewardEarned };
   };
 
   const checkoutCheckin = async (checkinId, userId) => {
-    const checkin = await models.Checkin.findOne({
-      where: {
-        id: checkinId,
-        status: "active",
-      },
-      include: [
-        {
-          model: models.Restaurant,
-          as: "restaurant",
-          attributes: ["id", "settings"],
-        },
-      ],
-    });
-
+    const checkin = await models.Checkin.findByPk(checkinId);
     if (!checkin) {
-      throw new NotFoundError("Check-in ativo não encontrado.");
+      throw new NotFoundError("Check-in não encontrado.");
     }
 
-    const restaurant = checkin.restaurant;
+    // Optionally, verify if the user checking out is the same as the one who checked in
+    // or has permission to checkout others.
 
-    if (!restaurant) {
-      throw new NotFoundError(
-        "Restaurante associado ao check-in não encontrado.",
-      );
-    }
-
-    // A verificação de permissão foi removida daqui.
-    // Ela agora é garantida pelo middleware 'requirePermission' na camada de rotas.
-
-    checkin.checkoutTime = new Date();
-    checkin.status = "completed";
-    await checkin.save();
-
-    const checkinResponse = checkin.toJSON();
-    delete checkinResponse.restaurant;
-
-    return checkinResponse;
+    await checkin.update({ checkoutTime: new Date(), status: "completed" });
+    return checkin;
   };
 
   const getCheckinAnalytics = async (restaurantId, period) => {
-    let startDate = null;
-    const validPeriods = ["7d", "30d", "90d", "1y", "all"];
-    if (period && validPeriods.includes(period) && period !== "all") {
-      const days = {
-        "7d": 7,
-        "30d": 30,
-        "90d": 90,
-        "1y": 365,
-      };
-      startDate = new Date();
-      startDate.setDate(startDate.getDate() - days[period]);
-    } else if (period && !validPeriods.includes(period)) {
-      logger.warn(
-        `Invalid period provided for checkin analytics: ${period}. Defaulting to all time.`,
-      );
-    }
-
-    const dateFilter = startDate
-      ? {
-          checkinTime: {
-            [Op.gte]: startDate,
-          },
-        }
-      : {};
-
-    const totalCheckins = await models.Checkin.count({
-      where: {
-        restaurantId: restaurantId,
-        status: "completed",
-        ...dateFilter,
-      },
-    });
-
-    const mostFrequentCustomers = await models.Checkin.findAll({
-      where: {
-        restaurantId: restaurantId,
-        status: "completed",
-        ...dateFilter,
-      },
-      attributes: [
-        "customer_id",
-        [fn("COUNT", col("Checkin.id")), "checkinCount"],
-      ],
-      include: [
-        {
-          model: models.Customer,
-          as: "customer",
-          attributes: ["id", "name", "email"],
-        },
-      ],
-      group: [
-        "Checkin.customer_id",
-        "customer.id",
-        "customer.name",
-        "customer.email",
-      ],
-      order: [["checkinCount", "DESC"]],
-      limit: 10,
-    });
-
-    const averageVisitDuration = await models.Checkin.findOne({
-      where: {
-        restaurantId: restaurantId,
-        status: "completed",
-        checkoutTime: { [Op.not]: null },
-        ...dateFilter,
-      },
+    const analyticsData = await models.Checkin.findAll({
       attributes: [
         [
-          fn(
-            "AVG",
-            literal("EXTRACT(EPOCH FROM (checkoutTime - checkinTime))"),
+          models.Sequelize.fn(
+            "DATE_TRUNC",
+            period || "day",
+            models.Sequelize.col("checkin_time"),
           ),
-          "avgDurationSeconds",
+          "period",
+        ],
+        [
+          models.Sequelize.fn("COUNT", models.Sequelize.col("id")),
+          "totalCheckins",
+        ],
+        [
+          models.Sequelize.fn("COUNT", models.Sequelize.literal("DISTINCT customer_id")),
+          "uniqueCustomers",
         ],
       ],
-      raw: true,
-    });
-
-    const checkinsByDay = await models.Checkin.findAll({
       where: {
         restaurantId: restaurantId,
-        status: "completed",
         checkinTime: {
-          [Op.gte]: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
+          [Op.gte]: new Date(new Date() - 7 * 24 * 60 * 60 * 1000), // Last 7 days as example
         },
       },
-      attributes: [
-        [fn("DATE_TRUNC", "day", col("checkinTime")), "date"],
-        [fn("COUNT", col("id")), "count"],
-      ],
-      group: [fn("DATE_TRUNC", "day", col("checkinTime"))],
-      order: [[fn("DATE_TRUNC", "day", col("checkinTime")), "ASC"]],
-      raw: true,
+      group: "period",
+      order: [["period", "ASC"]],
     });
 
-    return {
-      totalCheckins: totalCheckins,
-      mostFrequentCustomers: mostFrequentCustomers,
-      averageVisitDurationSeconds: parseFloat(
-        averageVisitDuration?.avgDurationSeconds || 0,
-      ),
-      checkinsByDay: checkinsByDay,
-    };
+    return calculateAnalytics(analyticsData, period);
   };
 
   const getActiveCheckins = async (restaurantId) => {
-    return models.Checkin.findAll({
-      where: {
-        restaurantId: restaurantId,
-        status: "active",
-      },
+    const activeCheckins = await models.Checkin.findAll({
+      where: { restaurantId: restaurantId, status: "active" },
       include: [
         {
           model: models.Customer,
           as: "customer",
-          attributes: ["id", "name", "phone", "email"],
+          attributes: ["id", "name", "phone"],
         },
       ],
-      order: [["checkinTime", "ASC"]],
     });
+    return activeCheckins;
   };
 
   return {
+    checkCheckinModuleEnabled,
     recordCheckin,
     recordPublicCheckin,
     checkoutCheckin,

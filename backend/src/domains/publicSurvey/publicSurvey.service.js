@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors";
+import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors.js";
 
 export default (db) => {
   const { models } = db;
@@ -235,20 +235,6 @@ export default (db) => {
       }
     }
 
-    if (feedbackRating !== null) {
-      if (feedbackRating >= 4) {
-        feedbackType = "compliment";
-      } else if (feedbackRating <= 2) {
-        feedbackType = "complaint";
-      }
-    } else if (feedbackNpsScore !== null) {
-      if (feedbackNpsScore >= 9) {
-        feedbackType = "compliment";
-      } else if (feedbackNpsScore <= 6) {
-        feedbackType = "complaint";
-      }
-    }
-
     const feedbackData = {
       restaurant_id: survey.restaurant_id,
       customer_id: customer_id || null,
@@ -339,7 +325,6 @@ export default (db) => {
                 source: "survey_response_milestone",
                 survey_id: survey.id,
                 response_id: newSurveyResponse.id,
-                milestone: currentResponseCount,
               },
             });
             rewardData = { type: "coupon", details: coupon };

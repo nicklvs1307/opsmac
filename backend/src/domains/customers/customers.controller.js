@@ -1,8 +1,8 @@
-import { BadRequestError } from "utils/errors";
-import auditService from "services/auditService";
+import { BadRequestError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
 import { validationResult } from "express-validator";
 
-import customerServiceFactory from "./customers.service";
+import customerServiceFactory from "./customers.service.js";
 
 export default (db) => {
   const customerService = customerServiceFactory(db);

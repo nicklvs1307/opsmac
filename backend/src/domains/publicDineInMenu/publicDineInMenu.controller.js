@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import { BadRequestError } from "../../utils/errors";
+import { BadRequestError } from "../../utils/errors.js";
 
 export default (publicDineInMenuService) => {
   const handleValidationErrors = (req) => {

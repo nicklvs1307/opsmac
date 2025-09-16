@@ -1,10 +1,10 @@
 "use strict";
 import { validationResult } from "express-validator";
-import { BadRequestError } from "utils/errors";
-import auditService from "services/auditService";
+import { BadRequestError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
 
 // Import service factory function
-import goalsServiceFactory from "./goals.service";
+import goalsServiceFactory from "./goals.service.js";
 
 class GoalsController {
   constructor(db) {

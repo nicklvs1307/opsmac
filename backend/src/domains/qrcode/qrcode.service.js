@@ -1,6 +1,6 @@
 import QRCodeLib from "qrcode";
 import { Op, fn, col } from "sequelize";
-import { NotFoundError, BadRequestError } from "../../utils/errors";
+import { NotFoundError, BadRequestError } from "../../utils/errors.js";
 
 export default (db) => {
   const { models } = db;

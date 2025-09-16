@@ -2,7 +2,7 @@ import {
   BadRequestError,
   ForbiddenError,
   NotFoundError,
-} from "utils/errors";
+} from "../../utils/errors.js";
 
   export default (db) => {
   const models = db;

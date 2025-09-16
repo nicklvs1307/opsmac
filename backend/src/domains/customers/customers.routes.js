@@ -241,7 +241,7 @@ export default (db) => {
    * /customers/by-phone:
    *   get:
    *     summary: Get customer by phone number
-   *   tags: [Customers]
+   *     tags: [Customers]
    *     security:
    *       - bearerAuth: []
    *     parameters:

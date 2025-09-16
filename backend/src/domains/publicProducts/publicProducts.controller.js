@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import { NotFoundError, BadRequestError } from "../../utils/errors";
+import { NotFoundError, BadRequestError } from "../../utils/errors.js";
 
 export default (publicProductsService) => {
   const handleValidationErrors = (req) => {

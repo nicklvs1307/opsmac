@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator";
-import { BadRequestError } from "../../utils/errors";
-import auditService from "../../services/auditService";
+import { BadRequestError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
 
 export default (publicOrdersService) => {
   const handleValidationErrors = (req) => {

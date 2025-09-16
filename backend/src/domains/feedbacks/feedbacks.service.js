@@ -3,12 +3,12 @@ import {
   BadRequestError,
   NotFoundError,
   ForbiddenError,
-} from "utils/errors";
+} from "../../utils/errors.js";
 import {
   sendWhatsAppMessage,
-} from "~/services/integrations/whatsappApiClient";
+} from "../../services/integrations/whatsappApiClient.js";
 import natural from "natural";
-import logger from "utils/logger";
+import logger from "../../utils/logger.js";
 
 const tokenizer = new natural.WordTokenizer();
 // Define Portuguese stop words. The 'natural' library's default stopwords are for English.

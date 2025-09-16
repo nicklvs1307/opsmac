@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
-import { BadRequestError } from "../../utils/errors";
-import auditService from "../../services/auditService";
-import publicSurveyServiceFactory from "./publicSurvey.service";
+import { BadRequestError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
+import publicSurveyServiceFactory from "./publicSurvey.service.js";
 
 export default (db) => {
   const publicSurveyService = publicSurveyServiceFactory(db);

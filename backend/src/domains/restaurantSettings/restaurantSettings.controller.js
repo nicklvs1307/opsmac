@@ -1,7 +1,7 @@
-const restaurantSettingsService = require("./restaurantSettings.service");
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { validationResult } from "express-validator";
+import { BadRequestError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
+import restaurantSettingsServiceFactory from "./restaurantSettings.service.js";
 
 const handleValidationErrors = (req) => {
   const errors = validationResult(req);
@@ -10,9 +10,9 @@ const handleValidationErrors = (req) => {
   }
 };
 
-exports.getRestaurantById = async (req, res, next) => {
+const getRestaurantById = async (req, res, next) => {
   try {
-    const restaurant = await restaurantSettingsService.getRestaurantById(
+    const restaurant = await restaurantSettingsServiceFactory(db).getRestaurantById(
       req.context.restaurantId,
     );
     res.json(restaurant);
@@ -21,9 +21,9 @@ exports.getRestaurantById = async (req, res, next) => {
   }
 };
 
-exports.updateRestaurant = async (req, res, next) => {
+const updateRestaurant = async (req, res, next) => {
   try {
-    const restaurant = await restaurantSettingsService.updateRestaurant(
+    const restaurant = await restaurantSettingsServiceFactory(db).updateRestaurant(
       req.context.restaurantId,
       req.body,
     );
@@ -40,14 +40,14 @@ exports.updateRestaurant = async (req, res, next) => {
   }
 };
 
-exports.updateRestaurantOpenStatus = async (req, res, next) => {
+const updateRestaurantOpenStatus = async (req, res, next) => {
   try {
     const { is_open } = req.body;
     if (typeof is_open !== "boolean") {
       throw new BadRequestError("O campo is_open deve ser um booleano.");
     }
     const restaurant =
-      await restaurantSettingsService.updateRestaurantOpenStatus(
+      await restaurantSettingsServiceFactory(db).updateRestaurantOpenStatus(
         req.context.restaurantId,
         is_open,
       );
@@ -67,7 +67,7 @@ exports.updateRestaurantOpenStatus = async (req, res, next) => {
   }
 };
 
-exports.updateRestaurantPosStatus = async (req, res, next) => {
+const updateRestaurantPosStatus = async (req, res, next) => {
   try {
     const { pos_status } = req.body;
     if (!["open", "closed"].includes(pos_status)) {
@@ -76,7 +76,7 @@ exports.updateRestaurantPosStatus = async (req, res, next) => {
       );
     }
     const restaurant =
-      await restaurantSettingsService.updateRestaurantPosStatus(
+      await restaurantSettingsServiceFactory(db).updateRestaurantPosStatus(
         req.context.restaurantId,
         pos_status,
       );
@@ -96,9 +96,9 @@ exports.updateRestaurantPosStatus = async (req, res, next) => {
   }
 };
 
-exports.getRestaurantModules = async (req, res, next) => {
+const getRestaurantModules = async (req, res, next) => {
   try {
-    const modules = await restaurantSettingsService.getRestaurantModules(
+    const modules = await restaurantSettingsServiceFactory(db).getRestaurantModules(
       req.context.restaurantId,
     );
     res.json(modules);
@@ -107,11 +107,11 @@ exports.getRestaurantModules = async (req, res, next) => {
   }
 };
 
-exports.updateRestaurantModule = async (req, res, next) => {
+const updateRestaurantModule = async (req, res, next) => {
   try {
     const { is_active } = req.body;
     const updatedModule =
-      await restaurantSettingsService.updateRestaurantModule(
+      await restaurantSettingsServiceFactory(db).updateRestaurantModule(
         req.context.restaurantId,
         req.params.moduleId,
         is_active,
@@ -129,9 +129,9 @@ exports.updateRestaurantModule = async (req, res, next) => {
   }
 };
 
-exports.getRestaurantModuleById = async (req, res, next) => {
+const getRestaurantModuleById = async (req, res, next) => {
   try {
-    const module = await restaurantSettingsService.getRestaurantModuleById(
+    const module = await restaurantSettingsServiceFactory(db).getRestaurantModuleById(
       req.context.restaurantId,
       req.params.moduleId,
     );
@@ -141,10 +141,10 @@ exports.getRestaurantModuleById = async (req, res, next) => {
   }
 };
 
-exports.createRestaurantModule = async (req, res, next) => {
+const createRestaurantModule = async (req, res, next) => {
   try {
     const { module_id, is_active } = req.body;
-    const newModule = await restaurantSettingsService.createRestaurantModule(
+    const newModule = await restaurantSettingsServiceFactory(db).createRestaurantModule(
       req.context.restaurantId,
       module_id,
       is_active,
@@ -162,9 +162,9 @@ exports.createRestaurantModule = async (req, res, next) => {
   }
 };
 
-exports.deleteRestaurantModule = async (req, res, next) => {
+const deleteRestaurantModule = async (req, res, next) => {
   try {
-    await restaurantSettingsService.deleteRestaurantModule(
+    await restaurantSettingsServiceFactory(db).deleteRestaurantModule(
       req.context.restaurantId,
       req.params.moduleId,
     );
@@ -181,9 +181,9 @@ exports.deleteRestaurantModule = async (req, res, next) => {
   }
 };
 
-exports.getRestaurantSettings = async (req, res, next) => {
+const getRestaurantSettings = async (req, res, next) => {
   try {
-    const settings = await restaurantSettingsService.getRestaurantSettings(
+    const settings = await restaurantSettingsServiceFactory(db).getRestaurantSettings(
       req.context.restaurantId,
     );
     res.json(settings);
@@ -192,11 +192,11 @@ exports.getRestaurantSettings = async (req, res, next) => {
   }
 };
 
-exports.updateRestaurantSettings = async (req, res, next) => {
+const updateRestaurantSettings = async (req, res, next) => {
   try {
     const updateData = req.body;
     const updatedSettings =
-      await restaurantSettingsService.updateRestaurantSettings(
+      await restaurantSettingsServiceFactory(db).updateRestaurantSettings(
         req.context.restaurantId,
         updateData,
       );
@@ -213,10 +213,10 @@ exports.updateRestaurantSettings = async (req, res, next) => {
   }
 };
 
-exports.getRestaurantPaymentMethods = async (req, res, next) => {
+const getRestaurantPaymentMethods = async (req, res, next) => {
   try {
     const paymentMethods =
-      await restaurantSettingsService.getRestaurantPaymentMethods(
+      await restaurantSettingsServiceFactory(db).getRestaurantPaymentMethods(
         req.context.restaurantId,
       );
     res.json(paymentMethods);
@@ -225,11 +225,11 @@ exports.getRestaurantPaymentMethods = async (req, res, next) => {
   }
 };
 
-exports.createRestaurantPaymentMethod = async (req, res, next) => {
+const createRestaurantPaymentMethod = async (req, res, next) => {
   try {
     const { name, is_active } = req.body;
     const newPaymentMethod =
-      await restaurantSettingsService.createRestaurantPaymentMethod(
+      await restaurantSettingsServiceFactory(db).createRestaurantPaymentMethod(
         req.context.restaurantId,
         name,
         is_active,
@@ -247,11 +247,11 @@ exports.createRestaurantPaymentMethod = async (req, res, next) => {
   }
 };
 
-exports.updateRestaurantPaymentMethod = async (req, res, next) => {
+const updateRestaurantPaymentMethod = async (req, res, next) => {
   try {
     const { name, is_active } = req.body;
     const updatedPaymentMethod =
-      await restaurantSettingsService.updateRestaurantPaymentMethod(
+      await restaurantSettingsServiceFactory(db).updateRestaurantPaymentMethod(
         req.context.restaurantId,
         req.params.paymentMethodId,
         name,
@@ -270,9 +270,9 @@ exports.updateRestaurantPaymentMethod = async (req, res, next) => {
   }
 };
 
-exports.deleteRestaurantPaymentMethod = async (req, res, next) => {
+const deleteRestaurantPaymentMethod = async (req, res, next) => {
   try {
-    await restaurantSettingsService.deleteRestaurantPaymentMethod(
+    await restaurantSettingsServiceFactory(db).deleteRestaurantPaymentMethod(
       req.context.restaurantId,
       req.params.paymentMethodId,
     );
@@ -288,3 +288,5 @@ exports.deleteRestaurantPaymentMethod = async (req, res, next) => {
     next(error);
   }
 };
+
+export { getRestaurantById, updateRestaurant, updateRestaurantOpenStatus, updateRestaurantPosStatus, getRestaurantModules, updateRestaurantModule, getRestaurantModuleById, createRestaurantModule, deleteRestaurantModule, getRestaurantSettings, updateRestaurantSettings, getRestaurantPaymentMethods, createRestaurantPaymentMethod, updateRestaurantPaymentMethod, deleteRestaurantPaymentMethod };

@@ -1,5 +1,5 @@
-import { BadRequestError, NotFoundError } from "utils/errors";
-import { generateUniqueSlug } from "utils/slugGenerator";
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import { generateUniqueSlug } from "../../utils/slugGenerator.js";
 import bcrypt from "bcryptjs";
 
 export default (db) => {

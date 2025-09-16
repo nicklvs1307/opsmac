@@ -1,11 +1,11 @@
 "use strict";
-import iamServiceFactory from "./iam.service";
-import auditService from "../../services/auditService";
+import iamServiceFactory from "./iam.service.js";
+import auditService from "../../services/auditService.js";
 import {
   BadRequestError,
   ForbiddenError,
   NotFoundError,
-} from "../../utils/errors";
+} from "../../utils/errors.js";
 
 export default (db) => {
   const iamService = iamServiceFactory(db);

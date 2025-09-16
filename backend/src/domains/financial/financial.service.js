@@ -1,5 +1,5 @@
 import { Op, fn, col, literal } from "sequelize";
-import { BadRequestError, NotFoundError } from "utils/errors";
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
 
 export default (db) => {
   const { models } = db;
@@ -69,7 +69,7 @@ export default (db) => {
     limit = 10,
   ) => {
     const offset = (page - 1) * limit;
-    let whereClause = { restaurant_id: restaurantId };
+    let whereClause = { restaurantId: restaurantId };
 
     if (type) whereClause.type = type;
     if (category_id) whereClause.category_id = category_id;

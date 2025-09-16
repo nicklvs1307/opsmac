@@ -1,9 +1,9 @@
 import { validationResult } from "express-validator";
-import { BadRequestError, NotFoundError } from "utils/errors";
-import auditService from "services/auditService";
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
 
 // Import service factory function
-import adminServiceFactory from "./admin.service";
+import adminServiceFactory from "./admin.service.js";
 
 class AdminController {
   constructor(db) {

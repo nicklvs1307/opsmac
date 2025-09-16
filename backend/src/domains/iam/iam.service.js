@@ -6,9 +6,9 @@ import {
   PaymentRequiredError,
   NotFoundError,
   InternalServerError,
-} from "#utils/errors";
-import redisClient from "config/redisClient";
-import logger from "utils/logger";
+} from "../../utils/errors.js";
+import redisClient from "../../config/redisClient.js";
+import logger from "../../utils/logger.js";
 
 class IamService {
   constructor(db) {

@@ -1,8 +1,8 @@
 import { Op } from "sequelize";
-import { NotFoundError, BadRequestError } from "utils/errors";
-import { sendWhatsAppMessage } from "services/integrations/whatsappApiClient";
-import { generateCouponForReward } from "domains/rewards/rewards.service";
-import logger from "utils/logger";
+import { NotFoundError, BadRequestError } from "../../utils/errors.js";
+import { sendWhatsAppMessage } from "../../services/integrations/whatsappApiClient.js";
+import { generateCouponForReward } from "../../rewards/rewards.service.js";
+import logger from "../../utils/logger.js";
 
 export default (db) => {
   const models = db;

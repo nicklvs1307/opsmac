@@ -1,7 +1,7 @@
-import { BadRequestError } from "utils/errors";
+import { BadRequestError } from "../../utils/errors.js";
 import { validationResult } from "express-validator";
 
-import authServiceFactory from "./auth.service";
+import authServiceFactory from "./auth.service.js";
 
 // auth.validation is not directly used here, but its validation results are.
 // So, we don't need to require loginValidation, updateProfileValidation, changePasswordValidation here.

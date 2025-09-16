@@ -1,6 +1,6 @@
 "use strict";
-import { BadRequestError, ForbiddenError } from "utils/errors";
-import auditService from "services/auditService";
+import { BadRequestError, ForbiddenError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
 
 class DeliveryMuchController {
   constructor(deliveryMuchService) {

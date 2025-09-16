@@ -1,10 +1,10 @@
 import { Op } from "sequelize";
-import { NotFoundError, BadRequestError } from "utils/errors";
+import { NotFoundError, BadRequestError } from "../../utils/errors.js";
 
   export default (db) => {
   const models = db;
   const sequelize = db.sequelize;
-  import rewardsServiceFactory from "domains/rewards/rewards.service";
+  import rewardsServiceFactory from "../../rewards/rewards.service.js";
 
   // Helper Functions for explicit business logic
   const _isCouponValid = (coupon) => {

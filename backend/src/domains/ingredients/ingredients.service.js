@@ -1,4 +1,4 @@
-import { BadRequestError, NotFoundError } from "../../utils/errors";
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
 
 export default (db) => {
   const { Ingredient } = db.models;

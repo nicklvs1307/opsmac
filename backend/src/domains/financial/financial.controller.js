@@ -1,10 +1,10 @@
 "use strict";
 import { validationResult } from "express-validator";
-import { BadRequestError } from "utils/errors";
-import auditService from "services/auditService";
+import { BadRequestError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
 
 // Import the consolidated service factory function
-import financialServiceFactory from "./financial.service";
+import financialServiceFactory from "./financial.service.js";
 
 class FinancialController {
   constructor(db) {

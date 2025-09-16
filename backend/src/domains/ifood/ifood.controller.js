@@ -1,6 +1,6 @@
-import { BadRequestError } from "../../utils/errors";
-import auditService from "../../services/auditService";
-import ifoodServiceFactory from "./ifood.service";
+import { BadRequestError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
+import ifoodServiceFactory from "./ifood.service.js";
 
 export default (db) => {
   const ifoodService = ifoodServiceFactory(db);

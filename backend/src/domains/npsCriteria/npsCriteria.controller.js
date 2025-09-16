@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
-import { BadRequestError, ForbiddenError } from "../../utils/errors";
-import auditService from "../../services/auditService";
-import npsCriteriaServiceFactory from "./npsCriteria.service";
+import { BadRequestError, ForbiddenError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
+import npsCriteriaServiceFactory from "./npsCriteria.service.js";
 
 export default (db) => {
   const npsCriteriaService = npsCriteriaServiceFactory(db);

@@ -1,9 +1,9 @@
 import { google } from "googleapis";
-const {
+import {
   BadRequestError,
   NotFoundError,
   ForbiddenError,
-} = require("utils/errors");
+} from "../../utils/errors.js";
 
 const OAuth2 = google.auth.OAuth2;
 

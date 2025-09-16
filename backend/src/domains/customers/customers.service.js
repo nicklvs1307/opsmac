@@ -1,5 +1,5 @@
 import { Op, fn, col, literal } from "sequelize";
-import { BadRequestError, NotFoundError } from "utils/errors";
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
 
 class CustomerService {
   constructor(models, sequelize) {
@@ -18,7 +18,10 @@ class CustomerService {
         attributes: [
           [fn("COUNT", col("Customer.id")), "totalCustomers"],
           [
-            fn("COUNT", fn("DISTINCT", col("checkins.customerId"))),
+            fn(
+              "COUNT",
+              fn("DISTINCT", col("checkins.customerId")),
+            ),
             "engagedCustomersCount",
           ],
           [

@@ -1,10 +1,10 @@
 import { validationResult } from "express-validator";
-import { BadRequestError } from "#utils/errors";
-import auditService from "#services/auditService"; // Import auditService
+import { BadRequestError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js"; // Import auditService
 
-import publicServiceFactory from "./public.service";
+import publicServiceFactory from "./public.service.js";
 
-module.exports = (db) => {
+export default (db) => {
   const publicService = publicServiceFactory(db);
 
   const handleValidationErrors = (req) => {

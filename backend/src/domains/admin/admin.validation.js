@@ -69,6 +69,7 @@ export const createRestaurantValidation = [
 export const updateRestaurantValidation = [
   body("name")
     .optional()
+    .isString().withMessage("Nome deve ser uma string.")
     .trim()
     .notEmpty()
     .withMessage("Nome do restaurante é obrigatório"),

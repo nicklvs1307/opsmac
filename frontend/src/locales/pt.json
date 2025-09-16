@@ -1064,6 +1064,7 @@
       "modules_updated_success": "Módulos atualizados com sucesso!",
       "modules_updated_error": "Erro ao atualizar módulos.",
       "title": "Painel Administrativo",
+      "restaurants_title": "Restaurantes",
       "list_users_tab": "Usuários",
       "list_restaurants_tab": "Restaurantes",
       "create_user_tab": "Criar Usuário",

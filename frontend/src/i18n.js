@@ -6,6 +6,9 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import enTranslation from '@/locales/en.json';
 import ptTranslation from '@/locales/pt.json';
 
+console.log('enTranslation carregado:', enTranslation);
+console.log('ptTranslation carregado:', ptTranslation);
+
 i18n
   .use(LanguageDetector) // Detecta o idioma do navegador
   .use(initReactI18next) // Passa i18n para react-i18next

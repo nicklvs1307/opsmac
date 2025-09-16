@@ -8,7 +8,7 @@ import { Op } from "sequelize";
 import iamService from "../../services/iamService.js";
 // import customerService from "../../services/customerService.js";
 // import rewardService from "../../services/rewardService.js";
-import couponService from "../../services/couponService.js";
+// import couponService from "../../services/couponService.js";
 
 export default (db) => {
   const models = db;
@@ -149,8 +149,9 @@ export default (db) => {
 
     // If a couponId is provided, mark it as redeemed
     if (couponId) {
+      /*
       await couponService.redeemCoupon(couponId, restaurant.id, customer.id);
-    }
+      */
 
     return { checkin, customerTotalVisits: customer.totalVisits, rewardEarned };
   };

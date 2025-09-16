@@ -1,10 +1,10 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-16 14:02:51 [info]: 	Redis Client Connected
-2025-09-16 14:02:51 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-16 14:02:51 [info]: 	Redis Subscriber Client Connected
-2025-09-16 14:02:51 [info]: 	Subscribed to perm_invalidation channel.
-Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/services/rewardService.js' imported from /app/src/domains/checkin/checkin.service.js
+2025-09-16 14:09:59 [info]: 	Redis Client Connected
+2025-09-16 14:10:00 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-16 14:10:00 [info]: 	Redis Subscriber Client Connected
+2025-09-16 14:10:00 [info]: 	Subscribed to perm_invalidation channel.
+Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/services/couponService.js' imported from /app/src/domains/checkin/checkin.service.js
     at finalizeResolution (node:internal/modules/esm/resolve:283:11)
     at moduleResolve (node:internal/modules/esm/resolve:952:10)
     at defaultResolve (node:internal/modules/esm/resolve:1188:11)
@@ -14,17 +14,6 @@ Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot 
     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
     at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
   code: 'ERR_MODULE_NOT_FOUND',
-  url: 'file:///app/src/services/rewardService.js'
+  url: 'file:///app/src/services/couponService.js'
 }
-Error loading routes for domain 'public': file:///app/src/domains/public/public.service.js:4
-import { generateCouponForReward } from "../../domains/rewards/rewards.service.js";
-         ^^^^^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module '../../domains/rewards/rewards.service.js' does not provide an export named 'generateCouponForReward'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 23)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-2025-09-16 14:02:55 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-16 14:10:05 [info]: 	🚀 Servidor rodando na porta 5000

@@ -9,7 +9,7 @@ export default (db) => {
       where.title = { [Op.iLike]: `%${search}%` };
     }
 
-    return models.Survey.findAll({
+    return db.Survey.findAll({
       where,
       include: [
         {
@@ -29,7 +29,7 @@ export default (db) => {
   const createSurvey = async (surveyData, restaurantId, userId) => {
     const t = await db.sequelize.transaction(); // Start transaction
     try {
-      const survey = await models.Survey.create(
+      const survey = await db.Survey.create(
         { ...surveyData, restaurantId, userId },
         { transaction: t },
       );
@@ -45,7 +45,7 @@ export default (db) => {
   };
 
   const getSurveyById = async (surveyId, restaurantId) => {
-    const survey = await models.Survey.findOne({
+    const survey = await db.Survey.findOne({
       where: { id: surveyId, restaurantId },
       include: [
         {
@@ -104,11 +104,11 @@ export default (db) => {
   const getSurveyAnalytics = async (restaurantId, surveyId) => {
     const survey = await getSurveyById(surveyId, restaurantId);
 
-    const totalAnswers = await models.Answer.count({
+    const totalAnswers = await db.Answer.count({
       where: { surveyId },
     });
 
-    const answersByType = await models.Answer.findAll({
+    const answersByType = await db.Answer.findAll({
       attributes: [
         [db.sequelize.col("question.type"), "questionType"],
         [db.sequelize.fn("COUNT", db.sequelize.col("Answer.id")), "count"],
@@ -149,7 +149,7 @@ export default (db) => {
   ) => {
     await getSurveyById(surveyId, restaurantId); // Ensures survey belongs to restaurant
 
-    const distribution = await models.Answer.findAll({
+    const distribution = await db.Answer.findAll({
       where: {
         questionId: questionId, // Filter directly by questionId
       },

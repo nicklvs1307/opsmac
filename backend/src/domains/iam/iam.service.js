@@ -1,12 +1,11 @@
 import { Op } from "sequelize";
 import {
-  UnauthorizedError,
-  BadRequestError,
-  ForbiddenError,
-  PaymentRequiredError,
-  NotFoundError,
   InternalServerError,
-} from "../../utils/errors.js";
+  NotFoundError,
+  UnauthorizedError,
+  ForbiddenError,
+  BadRequestError,
+} from "../../utils/errors/index.js";
 import redisClient from "../../config/redisClient.js";
 import logger from "../../utils/logger.js";
 

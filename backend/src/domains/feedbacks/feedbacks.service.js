@@ -3,7 +3,7 @@ import {
   BadRequestError,
   NotFoundError,
   ForbiddenError,
-} from "../../utils/errors.js";
+} from "../../utils/errors/index.js";
 import {
   sendWhatsAppMessage,
 } from "../../services/integrations/whatsappApiClient.js";

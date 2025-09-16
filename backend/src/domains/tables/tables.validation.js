@@ -1,5 +1,5 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.createTableValidation = [
+export const createTableValidation = [
   body("table_number").notEmpty().withMessage("Table number is required."),
 ];

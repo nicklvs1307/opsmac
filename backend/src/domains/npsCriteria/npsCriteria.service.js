@@ -1,7 +1,7 @@
-import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
 
 export default (db) => {
-  const { NpsCriterion } = db.models;
+  const { NpsCriterion } = db;
 
   const listNpsCriteria = async (restaurantId) => {
     return NpsCriterion.findAll({

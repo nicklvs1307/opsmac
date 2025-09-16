@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import { BadRequestError } from "../../utils/errors";
+import { BadRequestError } from "../../utils/errors/index.js";
 import auditService from "../../services/auditService";
 
 export default (restaurantService) => {

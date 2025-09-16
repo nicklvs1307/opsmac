@@ -1,6 +1,6 @@
 "use strict";
 import { validationResult } from "express-validator";
-import { BadRequestError } from "../../utils/errors.js";
+import { BadRequestError } from "../../utils/errors/index.js";
 import auditService from "../../services/auditService.js";
 
 // Import service factory function

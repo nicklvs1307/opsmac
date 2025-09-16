@@ -1,7 +1,8 @@
-const { BadRequestError } = require("utils/errors");
+import BadRequestError from "../../utils/errors/BadRequestError.js";
+import uaiRangoServiceFactory from "./uaiRango.service.js";
 
-module.exports = (db) => {
-  const uaiRangoService = require("./uaiRango.service")(db);
+export default (db) => {
+  const uaiRangoService = uaiRangoServiceFactory(db);
 
   return {
     checkUaiRangoModuleEnabled: async (req, res, next) => {

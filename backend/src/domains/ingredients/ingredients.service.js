@@ -1,7 +1,7 @@
-import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
 
 export default (db) => {
-  const { Ingredient } = db.models;
+  const { Ingredient } = db;
 
   const createIngredient = async (
     name,

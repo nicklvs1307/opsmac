@@ -7,7 +7,6 @@ import surveyControllerFactory from "./surveys.controller.js";
 import {
   createSurveyValidation,
   updateSurveyValidation,
-  getSurveyValidation,
   updateSurveyStatusValidation,
 } from "./surveys.validation.js";
 

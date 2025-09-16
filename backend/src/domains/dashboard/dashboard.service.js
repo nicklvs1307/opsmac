@@ -1,6 +1,6 @@
 import { Op, fn, col, literal } from "sequelize";
-import { BadRequestError, NotFoundError } from "../../utils/errors.js";
-import rewardsServiceFactory from "../../rewards/rewards.service.js";
+import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
+import rewardsServiceFactory from "../../domains/rewards/rewards.service.js";
 import redisClient from "../../config/redisClient.js";
 
 export default (db) => {

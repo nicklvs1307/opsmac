@@ -1,7 +1,7 @@
 import { Op } from "sequelize";
-import { NotFoundError, BadRequestError } from "../../utils/errors.js";
+import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
 import { sendWhatsAppMessage } from "../../services/integrations/whatsappApiClient.js";
-import { generateCouponForReward } from "../../rewards/rewards.service.js";
+import { generateCouponForReward } from "../../domains/rewards/rewards.service.js";
 import logger from "../../utils/logger.js";
 
 export default (db) => {

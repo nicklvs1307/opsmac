@@ -1,9 +1,10 @@
-const { validationResult } = require("express-validator");
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService");
+import { validationResult } from "express-validator";
+import BadRequestError from "../../utils/errors/BadRequestError.js";
+import auditService from "../../services/auditService.js";
+import rewardsServiceFactory from "./rewards.service.js";
 
-module.exports = (db) => {
-  const rewardsService = require("./rewards.service")(db);
+export default (db) => {
+  const rewardsService = rewardsServiceFactory(db);
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);

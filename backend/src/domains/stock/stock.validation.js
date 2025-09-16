@@ -1,6 +1,6 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.createStockMovementValidation = [
+export const createStockMovementValidation = [
   body("quantity")
     .isInt({ min: 1 })
     .withMessage("Quantidade deve ser um número positivo"),

@@ -1,7 +1,8 @@
-import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import BadRequestError from "../../utils/errors/BadRequestError.js";
+import NotFoundError from "../../utils/errors/NotFoundError.js";
 import { generateUniqueCode } from "../../utils/codeGenerator.js";
 import { Op } from "sequelize";
-import { calculateAnalytics } from "../../utils/analytics.js";
+// import { calculateAnalytics } from "../../utils/analytics.js";
 import { sendWhatsappMessage } from "../../services/whatsappService.js";
 import { sendEmail } from "../../services/emailService.js";
 import iamService from "../../services/iamService.js";
@@ -193,7 +194,7 @@ export default (db) => {
       order: [["period", "ASC"]],
     });
 
-    return calculateAnalytics(analyticsData, period);
+    return analyticsData; // return calculateAnalytics(analyticsData, period);
   };
 
   const getActiveCheckins = async (restaurantId) => {

@@ -1,6 +1,7 @@
 import { Op } from "sequelize";
-import { NotFoundError, BadRequestError } from "../../utils/errors.js";
-import rewardsServiceFactory from "../../rewards/rewards.service.js";
+import BadRequestError from "../../utils/errors/BadRequestError.js";
+import NotFoundError from "../../utils/errors/NotFoundError.js";
+import rewardsServiceFactory from "../../domains/rewards/rewards.service.js";
 
   export default (db) => {
 

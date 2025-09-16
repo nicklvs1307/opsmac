@@ -1,6 +1,6 @@
-const { body, query } = require("express-validator");
+import { body, query } from "express-validator";
 
-exports.sendFeedbackRequestValidation = [
+export const sendFeedbackRequestValidation = [
   body("phone_number")
     .matches(/^\+?[1-9]\d{1,14}$/)
     .withMessage("Número de telefone inválido (formato internacional)"),
@@ -18,7 +18,7 @@ exports.sendFeedbackRequestValidation = [
     .withMessage("Número da mesa deve ser positivo"),
 ];
 
-exports.sendBulkFeedbackValidation = [
+export const sendBulkFeedbackValidation = [
   body("recipients")
     .isArray({ min: 1, max: 50 })
     .withMessage("Destinatários deve ser um array com 1-50 itens"),
@@ -30,7 +30,7 @@ exports.sendBulkFeedbackValidation = [
     .withMessage("ID do restaurante deve ser um UUID válido"),
 ];
 
-exports.sendManualMessageValidation = [
+export const sendManualMessageValidation = [
   body("recipient_phone_number")
     .matches(/^\+?[1-9]\d{1,14}$/)
     .withMessage(
@@ -42,7 +42,7 @@ exports.sendManualMessageValidation = [
     .withMessage("ID do restaurante deve ser um UUID válido"),
 ];
 
-exports.listMessagesValidation = [
+export const listMessagesValidation = [
   query("page").optional().isInt({ min: 1 }),
   query("limit").optional().isInt({ min: 1, max: 100 }),
   query("status").optional().isIn(["sent", "delivered", "read", "failed"]),

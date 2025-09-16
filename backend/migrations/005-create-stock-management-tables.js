@@ -32,6 +32,8 @@ export async function up(queryInterface, Sequelize) {
       min_stock_level: { type: Sequelize.DECIMAL(10, 3) },
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
       updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      addons: { type: Sequelize.JSONB, defaultValue: [] },
+      variations: { type: Sequelize.JSONB, defaultValue: [] },
     });
 
     // Polymorphic Stock Table

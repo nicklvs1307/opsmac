@@ -35,6 +35,24 @@ export async function up(queryInterface, Sequelize) {
           type: Sequelize.DATE,
           defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         },
+        login_attempts: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: 0,
+        },
+        lock_until: {
+          type: Sequelize.DATE,
+          allowNull: true,
+        },
+        is_active: {
+          type: Sequelize.BOOLEAN,
+          allowNull: false,
+          defaultValue: true,
+        },
+        phone: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
       }, { transaction });
 
     // 2. Create consolidated 'restaurants' table (the "tenant")
@@ -95,6 +113,11 @@ export async function up(queryInterface, Sequelize) {
           type: Sequelize.BIGINT,
           allowNull: false,
           defaultValue: 1,
+        },
+        settings: {
+          type: Sequelize.JSONB,
+          allowNull: false,
+          defaultValue: {},
         },
         // --- End of permission system columns ---
         created_at: {

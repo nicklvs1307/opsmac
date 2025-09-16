@@ -1,48 +1,13 @@
 export async function up(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
       // 1. Clean up existing data
-      await queryInterface.bulkDelete("role_permissions", null, { transaction });
-      await queryInterface.bulkDelete("user_roles", null, { transaction });
       await queryInterface.bulkDelete("features", null, { transaction });
-      await queryInterface.bulkDelete("submodules", null, { transaction });
-      await queryInterface.bulkDelete("modules", null, { transaction });
-      await queryInterface.bulkDelete("roles", null, { transaction });
-      await queryInterface.bulkDelete("actions", null, { transaction });
 
-      // 2. Seed Actions
-      const actionsData = [
-        { id: 1, key: "create" },
-        { id: 2, key: "read" },
-        { id: 3, key: "update" },
-        { id: 4, key: "delete" },
-        { id: 5, key: "export" },
-        { id: 6, key: "approve" },
-        { id: 7, key: "manage_permissions" },
-      ].map((a) => ({ ...a, created_at: Sequelize.literal('CURRENT_TIMESTAMP'), updated_at: Sequelize.literal('CURRENT_TIMESTAMP') }));
-      await queryInterface.bulkInsert("actions", actionsData, { transaction });
-      const actions = await queryInterface.sequelize.query(
-        'SELECT id, key FROM "actions";',
+      // 2. Get submodules and modules
+      const submodules = await queryInterface.sequelize.query(
+        'SELECT id, key, module_id FROM "submodules";',
         { type: Sequelize.QueryTypes.SELECT, transaction },
       );
-
-      // 3. Seed Modules
-      const modulesData = [
-        { key: "dashboard", name: "Dashboard" },
-        { key: "fidelity", name: "Fidelidade" },
-        { key: "stock", name: "Estoque" },
-        { key: "orders", name: "Pedidos" },
-        { key: "management", name: "Gestão" },
-        { key: "cdv", name: "CDV" },
-        { key: "financial", name: "Financeiro" },
-        { key: "settings", name: "Configurações" },
-        { key: "admin", name: "Admin" },
-      ].map((m) => ({
-        ...m,
-        id: Sequelize.literal('gen_random_uuid()'),
-        created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-        updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-      }));
-      await queryInterface.bulkInsert("modules", modulesData, { transaction });
       const modules = await queryInterface.sequelize.query(
         'SELECT id, key FROM "modules";',
         { type: Sequelize.QueryTypes.SELECT, transaction },
@@ -52,75 +17,6 @@ export async function up(queryInterface, Sequelize) {
         return acc;
       }, {});
 
-      // 4. Seed Submodules
-      const submodulesData = [
-        { module_id: moduleMap["dashboard"], key: "general", name: "Geral" },
-        { module_id: moduleMap["fidelity"], key: "general", name: "Geral" },
-        { module_id: moduleMap["fidelity"], key: "checkin", name: "Check in" },
-        {
-          module_id: moduleMap["fidelity"],
-          key: "satisfaction",
-          name: "Satisfação",
-        },
-        { module_id: moduleMap["fidelity"], key: "responses", name: "Respostas" },
-        {
-          module_id: moduleMap["fidelity"],
-          key: "relationship",
-          name: "Relacionamento",
-        },
-        { module_id: moduleMap["fidelity"], key: "coupons", name: "Cupons" },
-        {
-          module_id: moduleMap["fidelity"],
-          key: "automation",
-          name: "Automação",
-        },
-        { module_id: moduleMap["stock"], key: "general", name: "Geral" },
-        {
-          module_id: moduleMap["stock"],
-          key: "technical-sheet",
-          name: "Ficha Tecnica",
-        },
-        { module_id: moduleMap["orders"], key: "general", name: "Geral" },
-        { module_id: moduleMap["orders"], key: "hall", name: "Salão" },
-        { module_id: moduleMap["management"], key: "general", name: "Geral" },
-        { module_id: moduleMap["cdv"], key: "general", name: "Geral" },
-        { module_id: moduleMap["financial"], key: "general", name: "Geral" },
-        {
-          module_id: moduleMap["financial"],
-          key: "payables",
-          name: "Contas a Pagar",
-        },
-        {
-          module_id: moduleMap["financial"],
-          key: "cash-flow",
-          name: "Fluxo de Caixa",
-        },
-        { module_id: moduleMap["financial"], key: "dre", name: "DRE" },
-        {
-          module_id: moduleMap["financial"],
-          key: "payments",
-          name: "Pagamentos",
-        },
-        { module_id: moduleMap["financial"], key: "fiscal", name: "Fiscal" },
-        { module_id: moduleMap["settings"], key: "general", name: "Geral" },
-        { module_id: moduleMap["admin"], key: "users", name: "Usuários" },
-        {
-          module_id: moduleMap["admin"],
-          key: "restaurants",
-          name: "Restaurantes",
-        },
-        { module_id: moduleMap["admin"], key: "permissions", name: "Permissões" },
-      ].map((s) => ({
-        ...s,
-        id: Sequelize.literal('gen_random_uuid()'),
-        created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-        updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-      }));
-      await queryInterface.bulkInsert("submodules", submodulesData, { transaction });
-      const submodules = await queryInterface.sequelize.query(
-        'SELECT id, key, module_id FROM "submodules";',
-        { type: Sequelize.QueryTypes.SELECT, transaction },
-      );
       const getSubmoduleId = (moduleKey, submoduleKey) => {
         const moduleId = moduleMap[moduleKey];
         const submodule = submodules.find(
@@ -129,7 +25,7 @@ export async function up(queryInterface, Sequelize) {
         return submodule ? submodule.id : null;
       };
 
-      // 5. Seed Features
+      // 3. Seed Features
       const featuresToInsertRaw = [
         // Dashboard Module
         {
@@ -881,102 +777,10 @@ export async function up(queryInterface, Sequelize) {
       }));
 
       await queryInterface.bulkInsert("features", featuresData, { transaction });
-
-      // 6. Seed Roles
-      const rolesData = [
-        { key: "super_admin", name: "super_admin", is_system: true },
-        { key: "owner", name: "owner", is_system: true },
-        { key: "manager", name: "manager", is_system: true },
-        { key: "waiter", name: "waiter", is_system: true },
-      ].map((r) => ({
-        ...r,
-        id: Sequelize.literal('gen_random_uuid()'),
-        created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-        updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-      }));
-      await queryInterface.bulkInsert("roles", rolesData, { transaction });
-      const allRoles = await queryInterface.sequelize.query(
-        'SELECT id, key FROM "roles";',
-        { type: Sequelize.QueryTypes.SELECT, transaction },
-      );
-      const roleMap = allRoles.reduce((acc, role) => {
-        acc[role.key] = role.id;
-        return acc;
-      }, {});
-
-      // 7. Seed Role Permissions
-      const allFeatures = await queryInterface.sequelize.query(
-        'SELECT id, key FROM "features";',
-        { type: Sequelize.QueryTypes.SELECT, transaction },
-      );
-      const featureMap = allFeatures.reduce((acc, f) => {
-        acc[f.key] = f.id;
-        return acc;
-      }, {});
-
-      const rolePermissions = [];
-
-      // Super admin gets all permissions
-      if (roleMap.super_admin) {
-        for (const feature of allFeatures) {
-          for (const action of actions) {
-            rolePermissions.push({
-              role_id: roleMap.super_admin,
-              feature_id: feature.id,
-              action_id: action.id,
-              allowed: true,
-              created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-              updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-            });
-          }
-        }
-      }
-
-      // Owner permissions
-      const ownerFeatures = [
-        "dashboard:general:view",
-        "fidelity:general:dashboard",
-        "settings:general:view",
-        "settings:general:profile",
-        "settings:general:business",
-        "settings:general:security",
-        "settings:general:whatsapp",
-        "settings:general:notifications",
-        "settings:general:appearance",
-        "fidelity:coupons:list",
-        "fidelity:coupons:rewards",
-      ];
-
-      if (roleMap.owner) {
-        for (const featureKey of ownerFeatures) {
-          if (featureMap[featureKey]) {
-            // Owners get all actions for their allowed features
-            for (const action of actions) {
-              rolePermissions.push({
-                role_id: roleMap.owner,
-                feature_id: featureMap[featureKey],
-                action_id: action.id,
-                allowed: true,
-                created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-                updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-              });
-            }
-          }
-        }
-      }
-
-      await queryInterface.bulkInsert("role_permissions", rolePermissions, { transaction });
     });
   }
 export async function down(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
-      // This is a destructive migration, so the down method will just clear everything.
-      await queryInterface.bulkDelete("role_permissions", null, { transaction });
-      await queryInterface.bulkDelete("user_roles", null, { transaction });
       await queryInterface.bulkDelete("features", null, { transaction });
-      await queryInterface.bulkDelete("submodules", null, { transaction });
-      await queryInterface.bulkDelete("modules", null, { transaction });
-      await queryInterface.bulkDelete("roles", null, { transaction });
-      await queryInterface.bulkDelete("actions", null, { transaction });
     });
   }

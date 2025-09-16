@@ -1,8 +1,48 @@
-Connection to postgres (10.0.1.131) 5432 port [tcp/postgresql] succeeded!
-Postgres is up - executing command
-Database is up, running migrations...
-Sequelize CLI [Node: 20.19.5, CLI: 6.6.3, ORM: 6.37.7]
-Loaded configuration file "src/config/config.js".
-Using environment "production".
-== 001-create-core-infrastructure: migrating =======
-ERROR: relation "user_restaurants" does not exist
+> feedeliza-plus@1.0.0 start
+> node server.js
+2025-09-16 22:38:58 [info]: 	Redis Client Connected
+2025-09-16 22:38:58 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-16 22:38:58 [info]: 	Redis Subscriber Client Connected
+2025-09-16 22:38:58 [info]: 	Subscribed to perm_invalidation channel.
+2025-09-16 22:39:01 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-16 22:39:59 [info]: 	170.254.46.100 - - [16/Sep/2025:22:39:59 +0000] "OPTIONS /api/auth/login HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 22:39:59 [error]: 	Error during User.findOne in login: column restaurants->restaurant.createdAt does not exist
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async AuthService.login (file:///app/src/domains/auth/auth.service.js:60:14)
+    at async AuthController.login (file:///app/src/domains/auth/auth.controller.js:32:22)
+2025-09-16 22:39:59 [info]: 	170.254.46.100 - - [16/Sep/2025:22:39:59 +0000] "POST /api/auth/login HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async AuthService.login (file:///app/src/domains/auth/auth.service.js:60:14)
+    at async AuthController.login (file:///app/src/domains/auth/auth.controller.js:32:22)
+2025-09-16 22:40:02 [error]: 	Error during User.findOne in login: column restaurants->restaurant.createdAt does not exist
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async AuthService.login (file:///app/src/domains/auth/auth.service.js:60:14)
+    at async AuthController.login (file:///app/src/domains/auth/auth.controller.js:32:22)
+2025-09-16 22:40:02 [info]: 	170.254.46.100 - - [16/Sep/2025:22:40:02 +0000] "POST /api/auth/login HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async User.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async User.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async AuthService.login (file:///app/src/domains/auth/auth.service.js:60:14)
+    at async AuthController.login (file:///app/src/domains/auth/auth.controller.js:32:22)

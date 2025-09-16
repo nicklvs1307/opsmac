@@ -91,11 +91,11 @@ export default (sequelize, DataTypes, Sequelize) => {
       },
       createdAt: {
         type: DataTypes.DATE,
-        field: "createdAt",
+        field: "created_at",
       },
       updatedAt: {
         type: DataTypes.DATE,
-        field: "updatedAt",
+        field: "updated_at",
       },
     },
     {

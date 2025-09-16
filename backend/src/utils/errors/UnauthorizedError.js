@@ -1,4 +1,4 @@
-const ApiError = require("./ApiError");
+import ApiError from "./ApiError.js";
 
 class UnauthorizedError extends ApiError {
   constructor(message = "Unauthorized", details = null) {
@@ -8,4 +8,4 @@ class UnauthorizedError extends ApiError {
   }
 }
 
-module.exports = UnauthorizedError;
+export default UnauthorizedError;

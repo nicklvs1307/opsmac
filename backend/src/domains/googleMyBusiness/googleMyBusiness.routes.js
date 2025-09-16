@@ -4,7 +4,6 @@ import requirePermission from "../../middleware/requirePermission.js";
 
 import googleMyBusinessControllerFactory from "./googleMyBusiness.controller.js";
 import {
-    createReviewReplyValidation,
     replyToReviewValidation,
   } from "./googleMyBusiness.validation.js";
 

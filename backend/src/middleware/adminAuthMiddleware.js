@@ -1,6 +1,6 @@
-const { ForbiddenError } = require("utils/errors"); // Importar ForbiddenError
+import { ForbiddenError } from "../utils/errors/index.js"; // Importar ForbiddenError
 
-const requireAdminOrSuperadmin = (req, res, next) => {
+export const requireAdminOrSuperadmin = (req, res, next) => {
   if (!req.user) {
     return next(new ForbiddenError("Acesso negado. Usuário não autenticado."));
   }
@@ -20,7 +20,7 @@ const requireAdminOrSuperadmin = (req, res, next) => {
   }
 };
 
-const requireSuperadmin = (req, res, next) => {
+export const requireSuperadmin = (req, res, next) => {
   if (!req.user) {
     return next(new ForbiddenError("Acesso negado. Usuário não autenticado."));
   }
@@ -33,9 +33,4 @@ const requireSuperadmin = (req, res, next) => {
       ),
     );
   }
-};
-
-module.exports = {
-  requireAdminOrSuperadmin,
-  requireSuperadmin,
 };

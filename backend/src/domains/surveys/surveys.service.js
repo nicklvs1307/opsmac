@@ -1,7 +1,6 @@
-module.exports = (db) => {
-  const { Survey, Answer, NpsCriterion } = db;
-  const { Op } = require("sequelize");
-  const { NotFoundError } = require("utils/errors");
+import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
+
+export default (db) => {
 
   const listSurveys = async (restaurantId, search) => {
     const where = { restaurantId };

@@ -1,4 +1,4 @@
-const ApiError = require("./ApiError");
+import ApiError from "./ApiError.js";
 
 class PaymentRequiredError extends ApiError {
   constructor(message = "Payment Required", details = null) {
@@ -8,4 +8,4 @@ class PaymentRequiredError extends ApiError {
   }
 }
 
-module.exports = PaymentRequiredError;
+export default PaymentRequiredError;

@@ -1,8 +1,8 @@
-const { NotFoundError } = require("utils/errors");
-const lodash = require("lodash");
-const crypto = require("crypto");
+import { NotFoundError } from "../../utils/errors/index.js";
+import lodash from "lodash";
+import crypto from "crypto";
 
-module.exports = (db) => {
+export default (db) => {
   const models = db;
 
   const getRestaurantSettings = async (restaurantId) => {

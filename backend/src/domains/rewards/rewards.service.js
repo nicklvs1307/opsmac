@@ -1,7 +1,8 @@
-module.exports = (models) => {
-  const { Op, fn, col } = require("sequelize");
-  const { BadRequestError, NotFoundError } = require("utils/errors");
-  const { spinWheel: spinWheelService } = require("services/wheelService");
+import { Op, fn, col } from "sequelize";
+import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
+import { spinWheel as spinWheelService } from "../../services/wheelService.js";
+
+export default (models) => {
 
   const listRewards = async (restaurantId, query) => {
     const { page = 1, limit = 12 } = query;

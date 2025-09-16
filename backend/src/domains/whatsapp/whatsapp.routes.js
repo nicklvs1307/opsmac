@@ -5,7 +5,6 @@ import requirePermission from "../../middleware/requirePermission.js";
 import authMiddleware from "../../middleware/authMiddleware.js";
 import whatsappControllerFactory from "./whatsapp.controller.js";
 import {
-  sendWhatsappMessageValidation,
   sendFeedbackRequestValidation,
   sendBulkFeedbackValidation,
   sendManualMessageValidation,

@@ -1,6 +1,5 @@
-const multer = require("multer");
-const path = require("path");
-require("dotenv").config();
+import multer from "multer";
+import path from "path";
 
 // Configuração de armazenamento
 const storage = multer.diskStorage({
@@ -42,4 +41,4 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
-module.exports = upload;
+export default upload;

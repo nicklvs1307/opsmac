@@ -1,4 +1,4 @@
-const ApiError = require("./ApiError");
+import ApiError from "./ApiError.js";
 
 class ForbiddenError extends ApiError {
   constructor(message = "Forbidden", details = null) {
@@ -8,4 +8,4 @@ class ForbiddenError extends ApiError {
   }
 }
 
-module.exports = ForbiddenError;
+export default ForbiddenError;

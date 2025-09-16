@@ -1,10 +1,10 @@
-const { body, query } = require("express-validator");
+import { body, query } from "express-validator";
 
-exports.recordCheckinValidation = [
+export const recordCheckinValidation = [
   body("customerId").isUUID().withMessage("ID do cliente inválido"),
 ];
 
-exports.recordPublicCheckinValidation = [
+export const recordPublicCheckinValidation = [
   body("customerName")
     .optional()
     .isString()

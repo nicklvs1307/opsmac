@@ -1,6 +1,6 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.createSurveyValidation = [
+export const createSurveyValidation = [
   body("type", "O tipo da pesquisa é obrigatório").not().isEmpty(),
   body("title", "O título é obrigatório para pesquisas personalizadas")
     .if(body("type").equals("custom"))
@@ -15,7 +15,7 @@ exports.createSurveyValidation = [
   body("slug", "Slug é obrigatório e deve ser único").not().isEmpty(),
 ];
 
-exports.updateSurveyValidation = [
+export const updateSurveyValidation = [
   body("title", "O título é obrigatório").not().isEmpty(),
   body("description", "A descrição é obrigatória").not().isEmpty(),
   body("questions", "Perguntas são obrigatórias").isArray({ min: 1 }),
@@ -25,7 +25,7 @@ exports.updateSurveyValidation = [
   body("slug", "Slug é obrigatório e deve ser único").not().isEmpty(),
 ];
 
-exports.updateSurveyStatusValidation = [
+export const updateSurveyStatusValidation = [
   body("status", "Status é obrigatório")
     .isIn(["active", "draft"])
     .not()

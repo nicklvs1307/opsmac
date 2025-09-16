@@ -1,10 +1,11 @@
+import { Op, fn, col, literal } from "sequelize";
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import rewardsServiceFactory from "../../rewards/rewards.service.js";
+import redisClient from "../../config/redisClient.js";
+
 export default (db) => {
   const models = db;
   const sequelize = db.sequelize;
-  import { Op, fn, col, literal } from "sequelize";
-  import { BadRequestError, NotFoundError } from "../../utils/errors.js";
-  import rewardsServiceFactory from "../../rewards/rewards.service.js";
-  import redisClient from "../../config/redisClient.js";
 
   function _getDateFilters(query) {
     const { start_date, end_date, period } = query;

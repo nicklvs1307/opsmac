@@ -1,6 +1,6 @@
-const { body, query } = require("express-validator");
+import { body, query } from "express-validator";
 
-exports.listCouponsValidation = [
+export const listCouponsValidation = [
   query("page")
     .optional()
     .isInt({ min: 1 })
@@ -16,11 +16,11 @@ exports.listCouponsValidation = [
   query("search").optional().isString().trim(),
 ];
 
-exports.redeemCouponValidation = [
+export const redeemCouponValidation = [
   // No body validation needed for redeem, only ID in params
 ];
 
-exports.createCouponValidation = [
+export const createCouponValidation = [
   body("rewardId").notEmpty().withMessage("ID da recompensa é obrigatório"),
   body("customerId").notEmpty().withMessage("ID do cliente é obrigatório"),
   body("expiresAt")
@@ -29,7 +29,7 @@ exports.createCouponValidation = [
     .withMessage("Data de expiração inválida"),
 ];
 
-exports.validateCouponValidation = [
+export const validateCouponValidation = [
   body("code").notEmpty().withMessage("Código do cupom é obrigatório"),
 ];
 

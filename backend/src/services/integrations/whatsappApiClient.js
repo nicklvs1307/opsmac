@@ -1,4 +1,4 @@
-const createApiClient = require("utils/apiClientFactory");
+import createApiClient from "../../utils/apiClientFactory.js";
 
 const sendWhatsAppMessage = async (
   instanceUrl,
@@ -30,6 +30,4 @@ const sendWhatsAppMessage = async (
   }
 };
 
-module.exports = {
-  sendWhatsAppMessage,
-};
+export { sendWhatsAppMessage };

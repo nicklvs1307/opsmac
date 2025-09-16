@@ -1,7 +1,8 @@
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import { generateEscPosCommands } from "../../utils/thermalPrinterService.js";
+
 export default (db) => {
   const { models } = db;
-  import { BadRequestError, NotFoundError } from "../../utils/errors.js";
-  import { generateEscPosCommands } from "../../utils/thermalPrinterService.js";
 
   const openSession = async (
     restaurantId,

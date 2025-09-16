@@ -1,6 +1,6 @@
-const { body, query } = require("express-validator");
+import { body, query } from "express-validator";
 
-exports.openSessionValidation = [
+export const openSessionValidation = [
   body("openingCash")
     .isFloat({ min: 0 })
     .withMessage("Opening cash must be a positive number."),
@@ -10,7 +10,7 @@ exports.openSessionValidation = [
     .withMessage("Observations must be a string."),
 ];
 
-exports.recordMovementValidation = [
+export const recordMovementValidation = [
   body("sessionId")
     .isUUID()
     .withMessage("Session ID is required and must be a valid UUID."),

@@ -1,8 +1,10 @@
-const { BadRequestError } = require("utils/errors");
-const auditService = require("services/auditService"); // Import auditService
+import { BadRequestError } from "../../utils/errors.js";
+import auditService from "../../services/auditService.js";
 
-module.exports = (db) => {
-  const saiposService = require("./saipos.service")(db);
+import saiposServiceFactory from "./saipos.service.js";
+
+export default (db) => {
+  const saiposService = saiposServiceFactory(db);
 
   return {
     checkSaiposModuleEnabled: async (req, res, next) => {

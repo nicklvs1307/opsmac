@@ -1,9 +1,10 @@
+import { Op } from "sequelize";
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import logger from "../../utils/logger.js";
+
 export default (db) => {
   const models = db;
   const sequelize = db.sequelize;
-  import { Op } from "sequelize";
-  import { BadRequestError, NotFoundError } from "../../utils/errors.js";
-  import logger from "../../utils/logger.js";
 
   const listSegments = async (restaurantId) => {
     const segments = await models.CustomerSegment.findAll({

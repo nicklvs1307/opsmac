@@ -1,6 +1,6 @@
-const { body, query } = require("express-validator");
+import { body, query } from "express-validator";
 
-exports.createRewardValidation = [
+export const createRewardValidation = [
   body("title", "Título da recompensa é obrigatório").not().isEmpty(),
   body("reward_type", "Tipo de recompensa inválido").isIn([
     "discount_percentage",
@@ -33,7 +33,7 @@ exports.createRewardValidation = [
     .isFloat({ min: 0 }),
 ];
 
-exports.updateRewardValidation = [
+export const updateRewardValidation = [
   body("title", "Título da recompensa é obrigatório")
     .optional()
     .not()
@@ -75,7 +75,7 @@ exports.updateRewardValidation = [
     .isFloat({ min: 0 }),
 ];
 
-exports.spinWheelValidation = [
+export const spinWheelValidation = [
   body("reward_id").isUUID().withMessage("ID da recompensa inválido"),
   body("customer_id").isUUID().withMessage("ID do cliente inválido"),
 ];

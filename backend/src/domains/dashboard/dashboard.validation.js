@@ -1,13 +1,13 @@
-const { query } = require("express-validator");
+import { query } from "express-validator";
 
-exports.getDashboardOverviewValidation = [
+export const getDashboardOverviewValidation = [
   query("period")
     .optional()
     .isIn(["7d", "30d", "90d", "1y", "all"])
     .withMessage("Período deve ser: 7d, 30d, 90d, 1y ou all"),
 ];
 
-exports.getDashboardAnalyticsValidation = [
+export const getDashboardAnalyticsValidation = [
   query("start_date")
     .optional()
     .isISO8601()

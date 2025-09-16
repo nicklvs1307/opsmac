@@ -3,9 +3,6 @@ import asyncHandler from "../../utils/asyncHandler.js";
 import requirePermission from "../../middleware/requirePermission.js";
 import checkinControllerFactory from "./checkin.controller.js";
 import {
-  createCheckinValidation,
-  updateCheckinValidation,
-  getCheckinsValidation,
   recordCheckinValidation,
   recordPublicCheckinValidation,
   analyticsValidation,

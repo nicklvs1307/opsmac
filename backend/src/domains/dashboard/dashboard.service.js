@@ -71,6 +71,8 @@ export default (db) => {
       return JSON.parse(cachedData);
     }
 
+    const { dateFilter, redeemedAtFilter } = _getDateFilters(query);
+
     const [
       totalCheckins,
       newCustomers,

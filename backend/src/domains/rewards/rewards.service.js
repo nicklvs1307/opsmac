@@ -9,7 +9,7 @@ export default (models) => {
     const offset = (page - 1) * limit;
 
     const { count, rows } = await models.Reward.findAndCountAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId },
       attributes: [
         "id",
         'customerId',
@@ -37,7 +37,7 @@ export default (models) => {
 
   const getRewardById = async (id, restaurantId) => {
     const whereClause = restaurantId
-      ? { id, restaurant_id: restaurantId }
+      ? { id, restaurantId }
       : { id };
     const reward = await models.Reward.findOne({ where: whereClause });
     if (!reward) {
@@ -52,7 +52,7 @@ export default (models) => {
     }
     return models.Reward.create({
       ...rewardData,
-      restaurant_id: restaurantId,
+      restaurantId: restaurantId,
       created_by: userId,
     });
   };
@@ -179,7 +179,7 @@ export default (models) => {
       code: couponCode,
       reward_id: couponRewardId,
       customer_id: customerId,
-      restaurant_id: reward.restaurant_id,
+      restaurantId: reward.restaurantId,
       expires_at: expiresAt,
       status: "active",
       title: couponTitle,
@@ -240,24 +240,24 @@ export default (models) => {
     }
 
     const totalRewards = await models.Reward.count({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId },
     });
     const activeRewards = await models.Reward.count({
-      where: { restaurant_id: restaurantId, is_active: true },
+      where: { restaurantId, is_active: true },
     });
 
     const rewardsByType = await models.Reward.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId },
       attributes: ["reward_type", [fn("COUNT", col("id")), "count"]],
       group: ["reward_type"],
       raw: true,
     });
 
     const totalCoupons = await models.Coupon.count({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId },
     });
     const redeemedCoupons = await models.Coupon.count({
-      where: { restaurant_id: restaurantId, status: "redeemed" },
+      where: { restaurantId, status: "redeemed" },
     });
     const redemptionRate =
       totalCoupons > 0 ? (redeemedCoupons / totalCoupons) * 100 : 0;

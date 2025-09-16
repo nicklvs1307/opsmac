@@ -1,8 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class Feature extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class Feature extends Sequelize.Model {
     static associate(models) {
       Feature.belongsTo(models.Submodule, {
         foreignKey: "submodule_id",

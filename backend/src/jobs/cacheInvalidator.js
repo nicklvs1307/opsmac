@@ -1,6 +1,6 @@
 import redis from "redis";
-import logger from "#utils/logger.js";
-import cacheService from "#services/cacheService.js";
+import logger from "../utils/logger.js";
+import cacheService from "../services/cacheService.js";
 
 // Create a separate Redis client for subscription to avoid blocking other operations
 const subscriberClient = redis.createClient({

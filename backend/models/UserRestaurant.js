@@ -1,8 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class UserRestaurant extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class UserRestaurant extends Sequelize.Model {
     static associate(models) {
       UserRestaurant.belongsTo(models.User, {
         foreignKey: "user_id",

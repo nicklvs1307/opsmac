@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const fs = require("fs");
-const { UnauthorizedError } = require("utils/errors");
-const logger = require("utils/logger"); // Import logger
+import jwt from "jsonwebtoken";
+import fs from "fs";
+import { UnauthorizedError } from "../utils/errors.js";
+import logger from "../utils/logger.js";
 
 let cachedSecret = null;
 
@@ -37,34 +37,22 @@ const _getJwtSecret = () => {
   return secret;
 };
 
-/**
- * Gera um token JWT para um ID de usuário.
- * @param {string} userId - O ID do usuário a ser incluído no token.
- * @returns {string} O token JWT gerado.
- */
-const generateToken = (userId) => {
+export const generateToken = (userId) => {
   const secret = _getJwtSecret();
   return jwt.sign({ userId }, secret, {
     expiresIn: process.env.JWT_EXPIRES_IN || "7d",
   });
 };
 
-/**
- * Verifica um token JWT e retorna o payload decodificado.
- * @param {string} token - O token JWT a ser verificado.
- * @returns {object} O payload decodificado do token.
- */
-const verifyToken = (token) => {
+export const verifyToken = (token) => {
   const secret = _getJwtSecret();
   try {
     return jwt.verify(token, secret);
   } catch (error) {
-    // Lança UnauthorizedError para falhas de verificação de token
     throw new UnauthorizedError("Token inválido ou expirado.");
   }
 };
 
-module.exports = {
-  generateToken,
-  verifyToken,
+export const decodeToken = (token) => {
+  return jwt.decode(token);
 };

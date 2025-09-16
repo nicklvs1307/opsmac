@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { Sequelize } from "sequelize";
-import logger from "#utils/logger.js";
-import _config from "#config/config.js";
-import { fileURLToPath } from 'url';
+import logger from "../src/utils/logger.js";
+import _config from "../src/config/config.js";
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const basename = path.basename(import.meta.url);
 const env = process.env.NODE_ENV || "development";
@@ -33,7 +33,8 @@ const modelFiles = fs.readdirSync(currentDir).filter((file) => {
 });
 
 for (const file of modelFiles) {
-  const model = (await import(path.join(currentDir, file))).default(
+  const routeURL = pathToFileURL(path.join(currentDir, file)).href;
+  const model = (await import(routeURL)).default(
     sequelize,
     Sequelize.DataTypes,
     Sequelize,

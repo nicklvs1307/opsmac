@@ -1,19 +1,18 @@
-import { Model } from "sequelize";
 import bcrypt from "bcryptjs";
-import {
-  LOGIN_ATTEMPTS_LIMIT,
-  LOGIN_LOCK_DURATION_HOURS,
-} from "../config/security";
+import { LOGIN_ATTEMPTS_LIMIT, LOGIN_LOCK_DURATION_HOURS } from "../src/config/security.js";
 
-export default (sequelize, DataTypes) => {
-  class User extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class User extends Sequelize.Model {
     static associate(models) {
       User.hasMany(models.UserRestaurant, {
         foreignKey: "user_id",
         as: "restaurants",
       });
       // Associations for permissions
-      User.hasMany(models.UserRole, { foreignKey: "user_id", as: "userRoles" });
+      User.hasMany(models.UserRole, {
+        foreignKey: "user_id",
+        as: "userRoles",
+      });
       User.hasMany(models.UserPermissionOverride, {
         foreignKey: "user_id",
         as: "permissionOverrides",

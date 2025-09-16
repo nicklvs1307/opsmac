@@ -1,5 +1,5 @@
-export default (sequelize, DataTypes) => {
-  class Action extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class Action extends Sequelize.Model {
     static associate(models) {
       Action.hasMany(models.RolePermission, {
         foreignKey: "action_id",

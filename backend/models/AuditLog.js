@@ -1,5 +1,5 @@
-export default (sequelize, DataTypes) => {
-  class AuditLog extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class AuditLog extends Sequelize.Model {
     static associate(models) {
       AuditLog.belongsTo(models.User, {
         foreignKey: "actor_user_id",

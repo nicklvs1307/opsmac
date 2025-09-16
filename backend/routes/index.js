@@ -1,17 +1,18 @@
-const path = require("path");
-const fs = require("fs");
-const safeRouter = require("utils/safeRouter");
-const getRestaurantContextMiddleware = require("middleware/getRestaurantContextMiddleware");
+import path from "path";
+import fs from "fs/promises";
+import { fileURLToPath, pathToFileURL } from "url";
+import safeRouter from "../src/utils/safeRouter.js";
+import getRestaurantContextMiddleware from "../src/middleware/getRestaurantContextMiddleware.js";
+import authMiddleware from "../src/middleware/authMiddleware.js";
 
-module.exports = (db) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default async (db) => {
   const mainRouter = safeRouter();
-  const { auth } = require("middleware/authMiddleware")(db);
+  const { auth } = authMiddleware(db);
   const restaurantContextMiddleware = getRestaurantContextMiddleware();
 
-  // Apply restaurant context middleware after auth for private routes
-  // mainRouter.use(restaurantContextMiddleware);
-
-  // Define which domains are public and should not have the auth middleware applied
   const publicDomains = [
     "auth",
     "public",
@@ -26,33 +27,46 @@ module.exports = (db) => {
 
   const domainsDir = path.join(__dirname, "..", "src", "domains");
 
-  fs.readdirSync(domainsDir, { withFileTypes: true }).forEach((entry) => {
-    if (!entry.isDirectory()) return;
+  const entries = await fs.readdir(domainsDir, { withFileTypes: true });
 
-    const domainName = entry.name;
-    const routeFile = path.join(
-      domainsDir,
-      domainName,
-      `${domainName}.routes.js`,
-    );
+  await Promise.all(
+    entries.map(async (entry) => {
+      if (!entry.isDirectory()) return;
 
-    if (fs.existsSync(routeFile)) {
-      const domainRouter = require(routeFile)(db);
+      const domainName = entry.name;
+      const routeFile = path.join(
+        domainsDir,
+        domainName,
+        `${domainName}.routes.js`,
+      );
 
-      if (publicDomains.includes(domainName)) {
-        // Public routes: no auth middleware
-        mainRouter.use(`/${domainName}`, domainRouter);
-      } else {
-        // Private routes: apply auth middleware
-        mainRouter.use(
-          `/${domainName}`,
-          auth,
-          restaurantContextMiddleware,
-          domainRouter,
-        );
+      try {
+        await fs.access(routeFile);
+        const routeURL = pathToFileURL(routeFile).href;
+        const { default: domainRouterFactory } = await import(routeURL);
+        const domainRouter = domainRouterFactory(db);
+
+        if (publicDomains.includes(domainName)) {
+          mainRouter.use(`/${domainName}`, domainRouter);
+        } else {
+          mainRouter.use(
+            `/${domainName}`,
+            auth,
+            restaurantContextMiddleware,
+            domainRouter,
+          );
+        }
+      } catch (error) {
+        // If the route file doesn't exist, we can just ignore it.
+        if (error.code !== "ENOENT") {
+          console.error(
+            `Error loading routes for domain '${domainName}':`,
+            error,
+          );
+        }
       }
-    }
-  });
+    }),
+  );
 
   return mainRouter;
 };

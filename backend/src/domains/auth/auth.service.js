@@ -1,14 +1,14 @@
-import { generateToken, decodeToken } from "services/jwtService";
+import { generateToken, decodeToken } from "../../services/jwtService.js";
 import {
   UnauthorizedError,
   ForbiddenError,
   NotFoundError,
-} from "utils/errors";
+} from "../../utils/errors.js";
 
-import iamService from "services/iamService";
-import auditService from "services/auditService";
-import logger from "utils/logger"; // Import logger
-import cacheService from "services/cacheService";
+import iamService from "../../services/iamService.js";
+import auditService from "../../services/auditService.js";
+import logger from "../../utils/logger.js";
+import cacheService from "../../services/cacheService.js";
 
 class AuthService {
   constructor(models) {

@@ -1,8 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class Role extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class Role extends Sequelize.Model {
     static associate(models) {
       Role.belongsTo(models.Restaurant, {
         foreignKey: "restaurant_id",
@@ -12,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "role_id",
         as: "permissions",
       });
-      Role.hasMany(models.UserRole, { foreignKey: "role_id", as: "userRoles" });
+      Role.hasMany(models.UserRole, {
+        foreignKey: "role_id",
+        as: "userRoles",
+      });
 
       Role.belongsToMany(models.User, {
         through: models.UserRole,

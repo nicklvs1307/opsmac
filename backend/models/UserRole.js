@@ -1,15 +1,20 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class UserRole extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class UserRole extends Sequelize.Model {
     static associate(models) {
-      UserRole.belongsTo(models.User, { foreignKey: "user_id", as: "user" });
+      UserRole.belongsTo(models.User, {
+        foreignKey: "user_id",
+        as: "user",
+      });
       UserRole.belongsTo(models.Restaurant, {
         foreignKey: "restaurant_id",
         as: "restaurant",
       });
-      UserRole.belongsTo(models.Role, { foreignKey: "role_id", as: "role" });
+      UserRole.belongsTo(models.Role, {
+        foreignKey: "role_id",
+        as: "role",
+      });
     }
   }
 

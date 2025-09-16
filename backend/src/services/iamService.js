@@ -1,9 +1,9 @@
 "use strict";
 
-const models = require("models");
-const { Op } = require("sequelize");
-const cacheService = require("./cacheService");
-const logger = require("utils/logger"); // Import logger
+import models from "../../models/index.js";
+import { Op } from "sequelize";
+import cacheService from "./cacheService.js";
+import logger from "../utils/logger.js";
 
 class IamService {
   /**
@@ -340,4 +340,4 @@ class IamService {
   }
 }
 
-module.exports = new IamService();
+export default new IamService();

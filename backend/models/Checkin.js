@@ -1,5 +1,5 @@
-export default (sequelize, DataTypes) => {
-  class Checkin extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class Checkin extends Sequelize.Model {
     static associate(models) {
       Checkin.belongsTo(models.Customer, {
         foreignKey: "customer_id",

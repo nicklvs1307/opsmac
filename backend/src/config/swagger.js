@@ -1,7 +1,12 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import path from "path";
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const options = {
   definition: {
@@ -168,7 +173,7 @@ const options = {
       },
     },
   },
-  apis: [path.join(__dirname, "../routes/*.js")], // Path to the API docs
+  apis: [path.join(__dirname, "../domains/**/*.routes.js")], // Path to the API docs
 };
 
 const specs = swaggerJsdoc(options);

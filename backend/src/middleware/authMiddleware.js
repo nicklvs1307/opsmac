@@ -1,22 +1,18 @@
-const { verifyToken } = require("services/jwtService");
-const {
-  UnauthorizedError,
-  ForbiddenError,
-  BadRequestError,
-  NotFoundError,
-} = require("utils/errors");
 import jwt from "jsonwebtoken";
-import { UnauthorizedError } from "#utils/errors";
-import logger from "utils/logger"; // Import logger
-import models from "#models"; // Directly import models (which is the db object)
-const cacheService = require("services/cacheService"); // Import cacheService
+import { UnauthorizedError, ForbiddenError, BadRequestError, NotFoundError } from "../utils/errors.js";
+import logger from "../utils/logger.js";
+import models from "../../models/index.js";
+import cacheService from "../services/cacheService.js";
+import { verifyToken } from "../services/jwtService.js";
+import authServiceFactory from "../domains/auth/auth.service.js";
 
-module.exports = (db) => {
+export default (db) => {
+  const authService = authServiceFactory(db);
+
   const authMiddleware = async (req, res, next) => {
     try {
       const authHeader = req.header("Authorization");
       if (!authHeader) {
-        // Usar next(error) permite que um error handler centralizado formate a resposta.
         return next(
           new UnauthorizedError("Acesso negado. Token não fornecido."),
         );
@@ -31,7 +27,6 @@ module.exports = (db) => {
         );
       }
 
-      // Check if token is blacklisted
       const isBlacklisted = await cacheService.get(`jwt_blacklist:${token}`);
       if (isBlacklisted) {
         return next(new UnauthorizedError("Token inválido ou revogado."));
@@ -57,13 +52,11 @@ module.exports = (db) => {
         );
       }
 
-      // Anexa um objeto de usuário limpo e seguro à requisição.
       req.user = user;
 
       next();
     } catch (error) {
       logger.error("DEBUG: authMiddleware - error:", error);
-      // Passa qualquer erro inesperado para o error handler central.
       next(error);
     }
   };
@@ -76,7 +69,7 @@ module.exports = (db) => {
       }
 
       const userRestaurantIds = req.user.restaurants.map((r) => r.id);
-      const isOwner = req.user.isOwner; // Assuming isOwner is set in req.user by authService.getMe
+      const isOwner = req.user.isOwner;
 
       if (!userRestaurantIds.includes(restaurantId) && !isOwner) {
         return next(
@@ -86,7 +79,6 @@ module.exports = (db) => {
         );
       }
 
-      // Fetch the restaurant object and attach it to req for later use
       const restaurant = await db.Restaurant.findByPk(restaurantId);
       if (!restaurant) {
         return next(new NotFoundError("Restaurante não encontrado."));

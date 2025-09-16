@@ -1,5 +1,5 @@
-export default (sequelize, DataTypes) => {
-  class Campaign extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class Campaign extends Sequelize.Model {
     static associate(models) {
       Campaign.belongsTo(models.Restaurant, {
         foreignKey: "restaurant_id",

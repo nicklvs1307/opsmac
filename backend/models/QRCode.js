@@ -1,8 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class QRCode extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class QRCode extends Sequelize.Model {
     static associate(models) {
       QRCode.belongsTo(models.Table, {
         foreignKey: "table_id",

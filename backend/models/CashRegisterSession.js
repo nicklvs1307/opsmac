@@ -1,5 +1,5 @@
-export default (sequelize, DataTypes) => {
-  class CashRegisterSession extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class CashRegisterSession extends Sequelize.Model {
     static associate(models) {
       CashRegisterSession.belongsTo(models.User, {
         foreignKey: "user_id",

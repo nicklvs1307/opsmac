@@ -1,4 +1,2 @@
-module.exports = {
-  LOGIN_ATTEMPTS_LIMIT: 5,
-  LOGIN_LOCK_DURATION_HOURS: 2,
-};
+export const LOGIN_ATTEMPTS_LIMIT = 5;
+export const LOGIN_LOCK_DURATION_HOURS = 2;

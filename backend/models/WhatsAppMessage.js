@@ -1,8 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class WhatsappMessage extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class WhatsappMessage extends Sequelize.Model {
     static associate(models) {
       WhatsappMessage.belongsTo(models.Customer, {
         foreignKey: "customer_id",

@@ -1,8 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class RolePermission extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class RolePermission extends Sequelize.Model {
     static associate(models) {
       RolePermission.belongsTo(models.Role, {
         foreignKey: "role_id",

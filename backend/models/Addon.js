@@ -1,5 +1,5 @@
-export default (sequelize, DataTypes) => {
-  class Addon extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class Addon extends Sequelize.Model {
     static associate(models) {
       Addon.belongsTo(models.Restaurant, {
         foreignKey: "restaurant_id",

@@ -1,4 +1,4 @@
-module.exports = () => {
+export default () => {
   return (req, res, next) => {
     req.context = req.context || {};
     // Attempt to get restaurantId from various sources

@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const METHODS = ["get", "post", "put", "patch", "delete", "all"];
 
 function safeRouter() {
@@ -19,4 +19,4 @@ function safeRouter() {
   return router;
 }
 
-module.exports = safeRouter;
+export default safeRouter;

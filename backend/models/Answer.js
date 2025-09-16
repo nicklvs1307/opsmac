@@ -1,5 +1,5 @@
-export default (sequelize, DataTypes) => {
-  class Answer extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class Answer extends Sequelize.Model {
     static associate(models) {
       Answer.belongsTo(models.SurveyResponse, {
         foreignKey: "survey_response_id",

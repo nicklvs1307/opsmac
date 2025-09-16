@@ -1,7 +1,7 @@
 "use strict";
 
-const models = require("models");
-import logger from "utils/logger"; // Import logger
+import models from "../../models/index.js";
+import logger from "../utils/logger.js";
 
 class AuditService {
   async log(actor, tenantId, action, resource, payload) {
@@ -19,4 +19,4 @@ class AuditService {
   }
 }
 
-module.exports = new AuditService();
+export default new AuditService();

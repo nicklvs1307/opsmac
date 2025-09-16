@@ -1,7 +1,5 @@
-"use strict";
-
-const redisClient = require("config/redisClient");
-const logger = require("utils/logger"); // Import logger
+import redisClient from "../config/redisClient.js";
+import logger from "../utils/logger.js";
 
 class CacheService {
   constructor() {
@@ -24,14 +22,13 @@ class CacheService {
   async set(key, value, ttlSeconds = 86400) {
     if (!redisClient) return;
     try {
-      await redisClient.set(key, JSON.stringify(value), "EX", ttlSeconds);
+      await redisClient.set(key, JSON.stringify(value), { EX: ttlSeconds });
     } catch (error) {
       logger.error(`Error setting key ${key} in Redis:`, error);
     }
   }
 
   async delExact(key) {
-    // Renamed from del to delExact for clarity
     if (!redisClient) return 0;
     try {
       const result = await redisClient.del(key);
@@ -73,4 +70,4 @@ class CacheService {
   }
 }
 
-module.exports = new CacheService();
+export default new CacheService();

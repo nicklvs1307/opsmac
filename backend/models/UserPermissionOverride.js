@@ -1,8 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class UserPermissionOverride extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class UserPermissionOverride extends Sequelize.Model {
     static associate(models) {
       UserPermissionOverride.belongsTo(models.User, {
         foreignKey: "user_id",

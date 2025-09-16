@@ -1,8 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class StockCountItem extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class StockCountItem extends Sequelize.Model {
     static associate(models) {
       StockCountItem.belongsTo(models.StockCount, {
         foreignKey: "stock_count_id",

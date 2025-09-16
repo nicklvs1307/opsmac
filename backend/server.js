@@ -1,7 +1,3 @@
-
-
-
-
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -10,14 +6,20 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 dotenv.config();
 
-import db from "#models/index.js";
-import { BaseError } from "#utils/errors.js";
-import logger from "#utils/logger.js";
-import { initCacheInvalidator, subscriberClient, } from "#src/jobs/cacheInvalidator.js";
+import path from "path";
+import { fileURLToPath } from "url";
+
+import db from "./models/index.js";
+import { BaseError } from "./src/utils/errors.js";
+import logger from "./src/utils/logger.js";
+import { initCacheInvalidator, subscriberClient, } from "./src/jobs/cacheInvalidator.js";
 
 // Importação de Rotas
 import routes from "./routes/index.js";
-import errorHandler from "#middleware/errorHandler.js";
+import errorHandler from "./src/middleware/errorHandler.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.set("trust proxy", 1);
@@ -72,7 +74,7 @@ app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 // Swagger UI
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "#config/swagger.js";
+import swaggerDocument from "./src/config/swagger.js";
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(errorHandler);
@@ -87,7 +89,8 @@ const startServer = async () => {
     await initCacheInvalidator();
 
     // Configuração das Rotas
-    app.use("/api", routes(db));
+    const apiRoutes = await routes(db);
+    app.use("/api", apiRoutes);
 
     app.listen(PORT, () => {
       logger.info(`🚀 Servidor rodando na porta ${PORT}`); // Use logger

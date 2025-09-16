@@ -1,8 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
-  class ProductionRecord extends Model {
+export default (sequelize, DataTypes, Sequelize) => {
+  class ProductionRecord extends Sequelize.Model {
     static associate(models) {
       ProductionRecord.belongsTo(models.User, {
         foreignKey: "user_id",

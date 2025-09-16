@@ -1,5 +1,5 @@
-const { BaseError } = require("../utils/errors/BaseError"); // Corrected import path
-const logger = require("../utils/logger"); // Import logger
+import { BaseError } from "../utils/errors.js";
+import logger from "../utils/logger.js";
 
 /**
  * Middleware de tratamento de erros centralizado.
@@ -39,4 +39,4 @@ const errorHandler = (error, req, res, next) => {
   });
 };
 
-module.exports = errorHandler;
+export default errorHandler;

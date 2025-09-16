@@ -781,6 +781,7 @@ export async function up(queryInterface, Sequelize) {
   }
 export async function down(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
+      await queryInterface.bulkDelete("role_permissions", null, { transaction });
       await queryInterface.bulkDelete("features", null, { transaction });
     });
   }

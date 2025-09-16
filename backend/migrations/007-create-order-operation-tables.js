@@ -1,7 +1,4 @@
 export async function up(queryInterface, Sequelize) {
-    await queryInterface.sequelize.transaction(async (transaction) => {
-    
-
     // Tables and Operations
     await queryInterface.createTable('tables', {
       id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },

@@ -142,6 +142,7 @@ export async function up(queryInterface, Sequelize) {
         type: 'primary key',
         name: 'user_restaurant_pk'
       }, { transaction });
+      
     });
   }
 

@@ -5,7 +5,7 @@ export default (db) => {
 
   const listNpsCriteria = async (restaurantId) => {
     return NpsCriterion.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId },
       order: [["name", "ASC"]],
     });
   };
@@ -20,13 +20,13 @@ export default (db) => {
 
     return NpsCriterion.create({
       name,
-      restaurant_id: restaurantId,
+      restaurantId,
     });
   };
 
   const updateNpsCriterion = async (id, name, restaurantId) => {
     const criterion = await NpsCriterion.findOne({
-      where: { id, restaurant_id: restaurantId },
+      where: { id, restaurantId },
     });
 
     if (!criterion) {
@@ -41,7 +41,7 @@ export default (db) => {
 
   const deleteNpsCriterion = async (id, restaurantId) => {
     const criterion = await NpsCriterion.findOne({
-      where: { id, restaurant_id: restaurantId },
+      where: { id, restaurantId },
     });
 
     if (!criterion) {

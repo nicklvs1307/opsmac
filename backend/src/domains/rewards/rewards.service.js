@@ -2,13 +2,13 @@ import { Op, fn, col } from "sequelize";
 import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
 import { spinWheel as spinWheelService } from "../../services/wheelService.js";
 
-export default (models) => {
+export default (db) => {
 
   const listRewards = async (restaurantId, query) => {
     const { page = 1, limit = 12 } = query;
     const offset = (page - 1) * limit;
 
-    const { count, rows } = await models.Reward.findAndCountAll({
+    const { count, rows } = await db.Reward.findAndCountAll({
       where: { restaurantId },
       attributes: [
         "id",
@@ -39,7 +39,7 @@ export default (models) => {
     const whereClause = restaurantId
       ? { id, restaurantId }
       : { id };
-    const reward = await models.Reward.findOne({ where: whereClause });
+    const reward = await db.Reward.findOne({ where: whereClause });
     if (!reward) {
       throw new NotFoundError("Recompensa não encontrada.");
     }
@@ -50,7 +50,7 @@ export default (models) => {
     if (!restaurantId) {
       throw new BadRequestError("Restaurante não encontrado para o usuário.");
     }
-    return models.Reward.create({
+    return db.Reward.create({
       ...rewardData,
       restaurantId: restaurantId,
       created_by: userId,
@@ -101,7 +101,7 @@ export default (models) => {
     if (extraData && extraData.visit_milestone) return true;
 
     if (reward.max_uses_per_customer) {
-      const usageCount = await models.Coupon.count({
+      const usageCount = await db.Coupon.count({
         where: {
           reward_id: reward.id,
           customer_id: customerId,
@@ -122,7 +122,7 @@ export default (models) => {
       throw new BadRequestError("Cliente não pode usar esta recompensa");
     }
 
-    const customer = await models.Customer.findByPk(customerId);
+    const customer = await db.Customer.findByPk(customerId);
     if (!customer) {
       throw new NotFoundError("Cliente não encontrado.");
     }
@@ -175,7 +175,7 @@ export default (models) => {
       expiresAt = reward.valid_until;
     }
 
-    const coupon = await models.Coupon.create({
+    const coupon = await db.Coupon.create({
       code: couponCode,
       reward_id: couponRewardId,
       customer_id: customerId,
@@ -208,7 +208,7 @@ export default (models) => {
       );
     }
 
-    const customer = await models.Customer.findByPk(customer_id);
+    const customer = await db.Customer.findByPk(customer_id);
     if (!customer) {
       throw new NotFoundError("Cliente não encontrado.");
     }
@@ -239,24 +239,24 @@ export default (models) => {
       );
     }
 
-    const totalRewards = await models.Reward.count({
+    const totalRewards = await db.Reward.count({
       where: { restaurantId },
     });
-    const activeRewards = await models.Reward.count({
+    const activeRewards = await db.Reward.count({
       where: { restaurantId, is_active: true },
     });
 
-    const rewardsByType = await models.Reward.findAll({
+    const rewardsByType = await db.Reward.findAll({
       where: { restaurantId },
       attributes: ["reward_type", [fn("COUNT", col("id")), "count"]],
       group: ["reward_type"],
       raw: true,
     });
 
-    const totalCoupons = await models.Coupon.count({
+    const totalCoupons = await db.Coupon.count({
       where: { restaurantId },
     });
-    const redeemedCoupons = await models.Coupon.count({
+    const redeemedCoupons = await db.Coupon.count({
       where: { restaurantId, status: "redeemed" },
     });
     const redemptionRate =

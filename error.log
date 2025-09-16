@@ -1,59 +1,24 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-16 16:20:17 [info]: 	Redis Client Connected
-2025-09-16 16:20:17 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-16 16:20:17 [info]: 	Redis Subscriber Client Connected
-2025-09-16 16:20:17 [info]: 	Subscribed to perm_invalidation channel.
-2025-09-16 16:20:21 [info]: 	🚀 Servidor rodando na porta 5000
-2025-09-16 16:20:47 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:47 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:47 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:47 +0000] "OPTIONS /api/dashboard/6400c206-1c39-40ff-a10e-1c515e7944da/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:47 [info]: 	Decoded userId:
-2025-09-16 16:20:47 [info]: 	Decoded userId:
-2025-09-16 16:20:47 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:general:dashboard, actionKey: read, isSuperadmin: true
-2025-09-16 16:20:47 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:47 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:47 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:47 +0000] "GET /api/dashboard/6400c206-1c39-40ff-a10e-1c515e7944da/analytics?period=30d HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:49 [info]: 	Decoded userId:
-2025-09-16 16:20:49 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:settings, actionKey: read, isSuperadmin: true
-2025-09-16 16:20:49 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:49 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:50 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:50 +0000] "OPTIONS /api/npsCriteria?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:50 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:50 +0000] "OPTIONS /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:50 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:50 +0000] "OPTIONS /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:50 [info]: 	Decoded userId:
-2025-09-16 16:20:50 [info]: 	Decoded userId:
-2025-09-16 16:20:50 [info]: 	Decoded userId:
-2025-09-16 16:20:50 [info]: 	Decoded userId:
-2025-09-16 16:20:50 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:50 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:50 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:50 +0000] "GET /api/npsCriteria?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Promise.all (index 1)
-    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
-    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
-    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-16 16:20:50 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:50 +0000] "GET /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:20:51 [info]: 	Decoded userId:
-2025-09-16 16:20:51 [info]: 	170.254.46.100 - - [16/Sep/2025:16:20:51 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Promise.all (index 1)
-    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
-    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
-    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-16 16:21:05 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:05 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:05 [info]: 	Decoded userId:
-2025-09-16 16:21:05 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:surveys, actionKey: read, isSuperadmin: true
-2025-09-16 16:21:05 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:05 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:05 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:05 +0000] "OPTIONS /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:05 [info]: 	Decoded userId:
-2025-09-16 16:21:05 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:05 +0000] "GET /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:51:29 [info]: 	Redis Client Connected
+2025-09-16 16:51:30 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-16 16:51:30 [info]: 	Redis Subscriber Client Connected
+2025-09-16 16:51:30 [info]: 	Subscribed to perm_invalidation channel.
+2025-09-16 16:51:35 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-16 16:52:35 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:35 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:35 [info]: 	Decoded userId:
+2025-09-16 16:52:35 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:35 +0000] "GET /api/auth/me HTTP/1.1" 200 2140 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:36 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:36 +0000] "OPTIONS /api/iam/tree?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:36 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:36 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:36 [info]: 	Decoded userId:
+2025-09-16 16:52:36 [info]: 	[IamService] Building permission snapshot for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da
+2025-09-16 16:52:36 [info]: 	Decoded userId:
+2025-09-16 16:52:36 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:surveys, actionKey: read, isSuperadmin: true
+2025-09-16 16:52:36 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:36 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:36 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:36 +0000] "GET /api/iam/tree?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:36 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:36 +0000] "OPTIONS /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:37 [info]: 	Decoded userId:
+2025-09-16 16:52:37 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:37 +0000] "GET /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 ReferenceError: models is not defined
     at Object.listSurveys (file:///app/src/domains/surveys/surveys.service.js:12:5)
     at listSurveys (file:///app/src/domains/surveys/surveys.controller.js:21:45)
@@ -65,7 +30,8 @@ ReferenceError: models is not defined
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-2025-09-16 16:21:07 [info]: 	Decoded userId:
+2025-09-16 16:52:38 [info]: 	Decoded userId:
+2025-09-16 16:52:38 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:38 +0000] "GET /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 ReferenceError: models is not defined
     at Object.listSurveys (file:///app/src/domains/surveys/surveys.service.js:12:5)
     at listSurveys (file:///app/src/domains/surveys/surveys.controller.js:21:45)
@@ -77,48 +43,19 @@ ReferenceError: models is not defined
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-2025-09-16 16:21:07 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:07 +0000] "GET /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:11 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:11 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:12 [info]: 	Decoded userId:
-2025-09-16 16:21:12 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:dashboard, actionKey: read, isSuperadmin: true
-2025-09-16 16:21:12 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:12 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:12 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:12 +0000] "OPTIONS /api/surveys/analytics/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:12 [info]: 	Decoded userId:
-2025-09-16 16:21:12 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:12 +0000] "GET /api/surveys/analytics/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-ReferenceError: models is not defined
-    at getSurveyById (file:///app/src/domains/surveys/surveys.service.js:48:20)
-    at Object.getSurveyAnalytics (file:///app/src/domains/surveys/surveys.service.js:105:26)
-    at getSurveyAnalytics (file:///app/src/domains/surveys/surveys.controller.js:130:47)
-    at file:///app/src/utils/asyncHandler.js:3:21
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at file:///app/src/middleware/requirePermission.js:18:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-2025-09-16 16:21:13 [info]: 	Decoded userId:
-2025-09-16 16:21:13 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:13 +0000] "GET /api/surveys/analytics/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-ReferenceError: models is not defined
-    at getSurveyById (file:///app/src/domains/surveys/surveys.service.js:48:20)
-    at Object.getSurveyAnalytics (file:///app/src/domains/surveys/surveys.service.js:105:26)
-    at getSurveyAnalytics (file:///app/src/domains/surveys/surveys.controller.js:130:47)
-    at file:///app/src/utils/asyncHandler.js:3:21
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at file:///app/src/middleware/requirePermission.js:18:14
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-2025-09-16 16:21:17 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:17 +0000] "OPTIONS /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:18 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:18 +0000] "OPTIONS /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:18 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:18 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:18 [info]: 	Decoded userId:
-2025-09-16 16:21:18 [info]: 	Decoded userId:
-2025-09-16 16:21:18 [info]: 	Decoded userId:
-2025-09-16 16:21:18 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:checkin:settings, actionKey: read, isSuperadmin: true
-2025-09-16 16:21:18 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:18 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:18 [info]: 	Decoded userId:
-2025-09-16 16:21:18 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:18 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:43 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:43 [info]: 	Decoded userId:
+2025-09-16 16:52:43 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:settings, actionKey: read, isSuperadmin: true
+2025-09-16 16:52:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:43 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:43 +0000] "OPTIONS /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:43 +0000] "OPTIONS /api/npsCriteria?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:43 +0000] "OPTIONS /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:43 [info]: 	Decoded userId:
+2025-09-16 16:52:43 [info]: 	Decoded userId:
+2025-09-16 16:52:43 [info]: 	Decoded userId:
+2025-09-16 16:52:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:43 +0000] "GET /api/npsCriteria?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:43 [info]: 	Decoded userId:
+2025-09-16 16:52:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:43 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Error
     at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
     at /app/node_modules/sequelize/lib/sequelize.js:315:28
@@ -129,9 +66,9 @@ Error
     at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
     at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
     at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-16 16:21:18 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:18 +0000] "GET /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:19 [info]: 	Decoded userId:
-2025-09-16 16:21:19 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:19 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:43 +0000] "GET /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:45 [info]: 	Decoded userId:
+2025-09-16 16:52:45 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:45 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Error
     at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
     at /app/node_modules/sequelize/lib/sequelize.js:315:28
@@ -142,110 +79,20 @@ Error
     at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
     at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
     at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-16 16:21:22 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:22 +0000] "OPTIONS /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da/profile HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:22 [info]: 	Decoded userId:
-2025-09-16 16:21:22 [info]: 	Decoded userId:
-2025-09-16 16:21:22 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:22 +0000] "PUT /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 200 96 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:22 [info]: 	Decoded userId:
-2025-09-16 16:21:22 [info]: 	Decoded userId:
-2025-09-16 16:21:22 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:22 +0000] "PUT /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da/profile HTTP/1.1" 200 496 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:21:22 [info]: 	Decoded userId:
-2025-09-16 16:21:22 [info]: 	Decoded userId:
-2025-09-16 16:21:22 [info]: 	170.254.46.100 - - [16/Sep/2025:16:21:22 +0000] "GET /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 200 31 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:00 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:00 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:00 [info]: 	Decoded userId:
-2025-09-16 16:36:00 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:00 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:01 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:01 +0000] "OPTIONS /api/iam/tree?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:01 [info]: 	Decoded userId:
-2025-09-16 16:36:01 [info]: 	Decoded userId:
-2025-09-16 16:36:01 [info]: 	[IamService] Building permission snapshot for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da
-2025-09-16 16:36:01 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:checkin:settings, actionKey: read, isSuperadmin: true
-2025-09-16 16:36:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:01 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:01 +0000] "GET /api/iam/tree?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:01 +0000] "OPTIONS /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:01 +0000] "OPTIONS /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:02 [info]: 	Decoded userId:
-2025-09-16 16:36:02 [info]: 	Decoded userId:
-2025-09-16 16:36:02 [info]: 	Decoded userId:
-2025-09-16 16:36:02 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:02 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+2025-09-16 16:52:53 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:53 +0000] "OPTIONS /api/npsCriteria HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:53 [info]: 	Decoded userId:
+2025-09-16 16:52:53 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:53 +0000] "POST /api/npsCriteria HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+SequelizeValidationError: notNull Violation: NpsCriterion.restaurantId cannot be null
+    at InstanceValidator._validate (/app/node_modules/sequelize/lib/instance-validator.js:50:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Promise.all (index 1)
-    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
-    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
-    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-16 16:36:02 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:02 +0000] "GET /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:36:03 [info]: 	Decoded userId:
-2025-09-16 16:36:03 [info]: 	170.254.46.100 - - [16/Sep/2025:16:36:03 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Promise.all (index 1)
-    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
-    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
-    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-16 16:37:15 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:15 +0000] "OPTIONS /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:15 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:15 +0000] "OPTIONS /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da/profile HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:15 [info]: 	Decoded userId:
-2025-09-16 16:37:15 [info]: 	Decoded userId:
-2025-09-16 16:37:15 [info]: 	Decoded userId:
-2025-09-16 16:37:15 [info]: 	Decoded userId:
-2025-09-16 16:37:15 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:15 +0000] "PUT /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 200 286 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:15 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:15 +0000] "PUT /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da/profile HTTP/1.1" 200 496 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:15 [info]: 	Decoded userId:
-2025-09-16 16:37:15 [info]: 	Decoded userId:
-2025-09-16 16:37:15 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:15 +0000] "GET /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 200 221 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:42 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:42 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:43 [info]: 	Decoded userId:
-2025-09-16 16:37:43 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:settings, actionKey: read, isSuperadmin: true
-2025-09-16 16:37:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:43 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:43 +0000] "OPTIONS /api/npsCriteria?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:43 +0000] "OPTIONS /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:43 +0000] "OPTIONS /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:43 [info]: 	Decoded userId:
-2025-09-16 16:37:43 [info]: 	Decoded userId:
-2025-09-16 16:37:43 [info]: 	Decoded userId:
-2025-09-16 16:37:43 [info]: 	Decoded userId:
-2025-09-16 16:37:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:43 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:43 +0000] "GET /api/npsCriteria?restaurantId=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Promise.all (index 1)
-    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
-    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
-    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-16 16:37:43 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:43 +0000] "GET /api/settings/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:37:45 [info]: 	Decoded userId:
-2025-09-16 16:37:45 [info]: 	170.254.46.100 - - [16/Sep/2025:16:37:45 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Promise.all (index 1)
-    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
-    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
-    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-16 16:38:06 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:06 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:38:06 [info]: 	Decoded userId:
-2025-09-16 16:38:06 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:surveys, actionKey: read, isSuperadmin: true
-2025-09-16 16:38:06 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:06 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:38:07 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:07 +0000] "OPTIONS /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:38:07 [info]: 	Decoded userId:
-2025-09-16 16:38:07 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:07 +0000] "GET /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    at async InstanceValidator._validateAndRunHooks (/app/node_modules/sequelize/lib/instance-validator.js:60:7)
+    at async InstanceValidator.validate (/app/node_modules/sequelize/lib/instance-validator.js:54:12)
+    at async NpsCriterion.save (/app/node_modules/sequelize/lib/model.js:2426:7)
+    at async NpsCriterion.create (/app/node_modules/sequelize/lib/model.js:1362:12)
+    at async createNpsCriterion (file:///app/src/domains/npsCriteria/npsCriteria.controller.js:29:26)
+2025-09-16 16:52:58 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:58 +0000] "OPTIONS /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:58 [info]: 	Decoded userId:
+2025-09-16 16:52:58 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:58 +0000] "GET /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 ReferenceError: models is not defined
     at Object.listSurveys (file:///app/src/domains/surveys/surveys.service.js:12:5)
     at listSurveys (file:///app/src/domains/surveys/surveys.controller.js:21:45)
@@ -257,8 +104,8 @@ ReferenceError: models is not defined
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-2025-09-16 16:38:08 [info]: 	Decoded userId:
-2025-09-16 16:38:08 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:08 +0000] "GET /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:52:59 [info]: 	Decoded userId:
+2025-09-16 16:52:59 [info]: 	170.254.46.100 - - [16/Sep/2025:16:52:59 +0000] "GET /api/surveys?search=&restaurant_id=6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 ReferenceError: models is not defined
     at Object.listSurveys (file:///app/src/domains/surveys/surveys.service.js:12:5)
     at listSurveys (file:///app/src/domains/surveys/surveys.controller.js:21:45)
@@ -270,14 +117,15 @@ ReferenceError: models is not defined
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-2025-09-16 16:38:09 [info]: 	Decoded userId:
-2025-09-16 16:38:09 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:surveys, actionKey: create, isSuperadmin: true
-2025-09-16 16:38:09 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:09 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:38:09 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:09 +0000] "OPTIONS /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da?is_active=true HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:38:09 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:09 +0000] "OPTIONS /api/nps-criteria HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:38:10 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:10 +0000] "GET /api/nps-criteria HTTP/1.1" 404 155 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:38:10 [info]: 	Decoded userId:
-2025-09-16 16:38:10 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:10 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da?is_active=true HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:00 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:00 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:00 [info]: 	Decoded userId:
+2025-09-16 16:53:00 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:surveys, actionKey: create, isSuperadmin: true
+2025-09-16 16:53:00 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:00 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:01 +0000] "OPTIONS /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da?is_active=true HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:01 +0000] "OPTIONS /api/nps-criteria HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:01 +0000] "GET /api/nps-criteria HTTP/1.1" 404 155 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:01 [info]: 	Decoded userId:
+2025-09-16 16:53:01 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:01 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da?is_active=true HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Error
     at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
     at /app/node_modules/sequelize/lib/sequelize.js:315:28
@@ -288,9 +136,9 @@ Error
     at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
     at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
     at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-16 16:38:11 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:11 +0000] "GET /api/nps-criteria HTTP/1.1" 404 155 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-16 16:38:11 [info]: 	Decoded userId:
-2025-09-16 16:38:11 [info]: 	170.254.46.100 - - [16/Sep/2025:16:38:11 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da?is_active=true HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:02 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:02 +0000] "GET /api/nps-criteria HTTP/1.1" 404 155 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:02 [info]: 	Decoded userId:
+2025-09-16 16:53:02 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:02 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da?is_active=true HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 Error
     at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
     at /app/node_modules/sequelize/lib/sequelize.js:315:28
@@ -301,5 +149,63 @@ Error
     at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
     at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
     at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-
-    
+2025-09-16 16:53:16 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:16 +0000] "OPTIONS /api/surveys HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:16 [info]: 	Decoded userId:
+2025-09-16 16:53:16 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:16 +0000] "POST /api/surveys HTTP/1.1" 201 191 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:21 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:21 +0000] "OPTIONS /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da?is_active=true HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:21 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:21 +0000] "OPTIONS /api/nps-criteria HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:21 [info]: 	Decoded userId:
+2025-09-16 16:53:21 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:21 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da?is_active=true HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
+    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
+2025-09-16 16:53:21 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:21 +0000] "GET /api/nps-criteria HTTP/1.1" 404 155 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:23 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:23 +0000] "GET /api/nps-criteria HTTP/1.1" 404 155 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:23 [info]: 	Decoded userId:
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:11:29)
+    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
+2025-09-16 16:53:23 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:23 +0000] "GET /api/rewards/restaurant/6400c206-1c39-40ff-a10e-1c515e7944da?is_active=true HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:29 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:29 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:29 [info]: 	Decoded userId:
+2025-09-16 16:53:29 [info]: 	[IamService] Checking permission for userId: 3ca698b3-e543-4a83-a026-eded678a388f, restaurantId: 6400c206-1c39-40ff-a10e-1c515e7944da, featureKey: fidelity:satisfaction:dashboard, actionKey: read, isSuperadmin: true
+2025-09-16 16:53:29 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:29 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:29 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:29 +0000] "OPTIONS /api/surveys/analytics/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-16 16:53:30 [info]: 	Decoded userId:
+2025-09-16 16:53:30 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:30 +0000] "GET /api/surveys/analytics/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Survey.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async getSurveyById (file:///app/src/domains/surveys/surveys.service.js:48:20)
+    at async Object.getSurveyAnalytics (file:///app/src/domains/surveys/surveys.service.js:105:20)
+    at async getSurveyAnalytics (file:///app/src/domains/surveys/surveys.controller.js:130:27)
+2025-09-16 16:53:31 [info]: 	Decoded userId:
+2025-09-16 16:53:31 [info]: 	170.254.46.100 - - [16/Sep/2025:16:53:31 +0000] "GET /api/surveys/analytics/6400c206-1c39-40ff-a10e-1c515e7944da HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Survey.findOne (/app/node_modules/sequelize/lib/model.js:1240:12)
+    at async getSurveyById (file:///app/src/domains/surveys/surveys.service.js:48:20)
+    at async Object.getSurveyAnalytics (file:///app/src/domains/surveys/surveys.service.js:105:20)
+    at async getSurveyAnalytics (file:///app/src/domains/surveys/surveys.controller.js:130:27)

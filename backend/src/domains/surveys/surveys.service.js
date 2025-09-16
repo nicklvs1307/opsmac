@@ -9,7 +9,7 @@ export default (db) => {
       where.title = { [Op.iLike]: `%${search}%` };
     }
 
-    return models.Survey.findAll({
+    return db.Survey.findAll({
       where,
       include: [
         {

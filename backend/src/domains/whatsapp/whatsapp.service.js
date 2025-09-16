@@ -1,14 +1,8 @@
-const {
-  BadRequestError,
-  NotFoundError,
-  ForbiddenError,
-} = require("utils/errors");
-const {
-  sendWhatsAppMessage,
-} = require("services/integrations/whatsappApiClient");
-const { Op } = require("sequelize");
+import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors/index.js";
+import { sendWhatsAppMessage } from "../../services/integrations/whatsappApiClient.js";
+import { Op } from "sequelize";
 
-module.exports = (db) => {
+export default (db) => {
   const models = db;
 
   const processIncomingMessageInternal = async (message, restaurant) => {

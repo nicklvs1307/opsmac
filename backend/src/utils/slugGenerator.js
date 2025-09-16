@@ -21,4 +21,4 @@ export const generateUniqueSlug = async (model, name, currentSlug = null) => {
   }
 };
 
-module.exports = { generateUniqueSlug };
+

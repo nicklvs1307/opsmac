@@ -1,10 +1,15 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-16 13:41:29 [info]: 	Redis Client Connected
-2025-09-16 13:41:30 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-16 13:41:30 [info]: 	Redis Subscriber Client Connected
-2025-09-16 13:41:30 [info]: 	Subscribed to perm_invalidation channel.
-Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/services/whatsappService.js' imported from /app/src/domains/checkin/checkin.service.js
+2025-09-16 13:51:56 [info]: 	Redis Client Connected
+2025-09-16 13:51:56 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-16 13:51:56 [info]: 	Redis Subscriber Client Connected
+2025-09-16 13:51:56 [info]: 	Subscribed to perm_invalidation channel.
+Error loading routes for domain 'whatsapp': SyntaxError: Unexpected identifier 'whatsappServiceFactory'
+    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:146:18)
+    at #translate (node:internal/modules/esm/loader:497:12)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:544:27)
+Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/services/emailService.js' imported from /app/src/domains/checkin/checkin.service.js
     at finalizeResolution (node:internal/modules/esm/resolve:283:11)
     at moduleResolve (node:internal/modules/esm/resolve:952:10)
     at defaultResolve (node:internal/modules/esm/resolve:1188:11)
@@ -14,23 +19,12 @@ Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot 
     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
     at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
   code: 'ERR_MODULE_NOT_FOUND',
-  url: 'file:///app/src/services/whatsappService.js'
+  url: 'file:///app/src/services/emailService.js'
 }
-Error loading routes for domain 'whatsapp': file:///app/src/domains/whatsapp/whatsapp.routes.js:6
-import whatsappControllerFactory from "./whatsapp.controller.js";
-       ^^^^^^^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module './whatsapp.controller.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 43)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'iam': file:///app/src/domains/iam/iam.service.js:3
-  InternalServerError,
-  ^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'InternalServerError'
+Error loading routes for domain 'iam': file:///app/src/domains/iam/iam.service.js:4
+  NotFoundError,
+  ^^^^^^^^^^^^^
+SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -49,21 +43,10 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 18)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'publicV2': file:///app/src/middleware/apiAuthMiddleware.js:1
-import { UnauthorizedError, InternalServerError } from "../utils/errors/index.js";
-                            ^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module '../utils/errors/index.js' does not provide an export named 'InternalServerError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 29)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'stock': file:///app/src/domains/stock/stock.routes.js:8
-import stockServiceFactory from "./stock.service.js";
-       ^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module './stock.service.js' does not provide an export named 'default'
+Error loading routes for domain 'stock': file:///app/src/domains/stock/stock.service.js:2
+import { NotFoundError, BadRequestError } from "../../utils/errors/index.js";
+         ^^^^^^^^^^^^^
+SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -82,10 +65,10 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 37)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'tables': file:///app/src/domains/tables/tables.controller.js:3
-import tablesServiceFactory from "./tables.service.js";
-       ^^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module './tables.service.js' does not provide an export named 'default'
+Error loading routes for domain 'tables': file:///app/src/domains/tables/tables.service.js:1
+import { NotFoundError, BadRequestError } from "../../utils/errors/index.js";
+         ^^^^^^^^^^^^^
+SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -234,4 +217,4 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 11)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-2025-09-16 13:41:32 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-16 13:51:59 [info]: 	🚀 Servidor rodando na porta 5000

@@ -4,7 +4,7 @@ import { generateUniqueCode } from "../../utils/codeGenerator.js";
 import { Op } from "sequelize";
 // import { calculateAnalytics } from "../../utils/analytics.js";
 
-import { sendEmail } from "../../services/emailService.js";
+
 import iamService from "../../services/iamService.js";
 import customerService from "../../services/customerService.js";
 import rewardService from "../../services/rewardService.js";

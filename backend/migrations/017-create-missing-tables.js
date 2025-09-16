@@ -2,7 +2,7 @@ export async function up(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
       // Create customer_segments table
       await queryInterface.createTable('customer_segments', {
-        id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
+        id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
         name: { type: Sequelize.STRING, allowNull: false },
         description: { type: Sequelize.TEXT },
         rules: { type: Sequelize.JSONB, defaultValue: [] },
@@ -13,7 +13,7 @@ export async function up(queryInterface, Sequelize) {
 
       // Create campaigns table
       await queryInterface.createTable('campaigns', {
-        id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
+        id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
         name: { type: Sequelize.STRING, allowNull: false },
         description: { type: Sequelize.TEXT },
@@ -31,7 +31,7 @@ export async function up(queryInterface, Sequelize) {
 
       // Create goals table
       await queryInterface.createTable('goals', {
-        id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
+        id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
         name: { type: Sequelize.STRING, allowNull: false },
         description: { type: Sequelize.TEXT },
@@ -47,7 +47,7 @@ export async function up(queryInterface, Sequelize) {
 
       // Create survey_reward_programs table
       await queryInterface.createTable('survey_reward_programs', {
-        id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
+        id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
         rewards_per_response: { type: Sequelize.JSONB, defaultValue: [] },
         created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },

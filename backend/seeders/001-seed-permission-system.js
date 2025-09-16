@@ -18,7 +18,7 @@ export async function up(queryInterface, Sequelize) {
         { id: 5, key: "export" },
         { id: 6, key: "approve" },
         { id: 7, key: "manage_permissions" },
-      ].map((a) => ({ ...a, created_at: Sequelize.literal('CURRENT_TIMESTAMP'), updated_at: new Date() }));
+      ].map((a) => ({ ...a, created_at: Sequelize.literal('CURRENT_TIMESTAMP'), updated_at: Sequelize.literal('CURRENT_TIMESTAMP') }));
       await queryInterface.bulkInsert("actions", actionsData, { transaction });
       const actions = await queryInterface.sequelize.query(
         'SELECT id, key FROM "actions";',
@@ -38,9 +38,9 @@ export async function up(queryInterface, Sequelize) {
         { key: "admin", name: "Admin" },
       ].map((m) => ({
         ...m,
-        id: Sequelize.UUIDV4,
+        id: Sequelize.literal('gen_random_uuid()'),
         created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-        updated_at: new Date(),
+        updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
       }));
       await queryInterface.bulkInsert("modules", modulesData, { transaction });
       const modules = await queryInterface.sequelize.query(
@@ -112,9 +112,9 @@ export async function up(queryInterface, Sequelize) {
         { module_id: moduleMap["admin"], key: "permissions", name: "Permissões" },
       ].map((s) => ({
         ...s,
-        id: Sequelize.UUIDV4,
+        id: Sequelize.literal('gen_random_uuid()'),
         created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-        updated_at: new Date(),
+        updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
       }));
       await queryInterface.bulkInsert("submodules", submodulesData, { transaction });
       const submodules = await queryInterface.sequelize.query(
@@ -871,13 +871,13 @@ export async function up(queryInterface, Sequelize) {
       ];
 
       const featuresData = featuresToInsertRaw.map((f) => ({
-        id: Sequelize.UUIDV4,
+        id: Sequelize.literal('gen_random_uuid()'),
         key: f.key,
         name: f.name,
         description: f.name, // Using name as description for now
         submodule_id: getSubmoduleId(f.module, f.submodule),
         created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-        updated_at: new Date(),
+        updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
       }));
 
       await queryInterface.bulkInsert("features", featuresData, { transaction });
@@ -890,9 +890,9 @@ export async function up(queryInterface, Sequelize) {
         { key: "waiter", name: "waiter", is_system: true },
       ].map((r) => ({
         ...r,
-        id: Sequelize.UUIDV4,
+        id: Sequelize.literal('gen_random_uuid()'),
         created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-        updated_at: new Date(),
+        updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
       }));
       await queryInterface.bulkInsert("roles", rolesData, { transaction });
       const allRoles = await queryInterface.sequelize.query(
@@ -926,7 +926,7 @@ export async function up(queryInterface, Sequelize) {
               action_id: action.id,
               allowed: true,
               created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-              updated_at: new Date(),
+              updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
             });
           }
         }
@@ -958,7 +958,7 @@ export async function up(queryInterface, Sequelize) {
                 action_id: action.id,
                 allowed: true,
                 created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
-                updated_at: new Date(),
+                updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
               });
             }
           }

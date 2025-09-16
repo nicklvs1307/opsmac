@@ -1,4 +1,5 @@
 export async function up(queryInterface, Sequelize) {
+    await queryInterface.sequelize.transaction(async (transaction) => {
     
 
     // Tables and Operations
@@ -6,7 +7,7 @@ export async function up(queryInterface, Sequelize) {
       id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
       table_number: { type: Sequelize.INTEGER, allowNull: false },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
     await queryInterface.addConstraint('tables', { fields: ['restaurant_id', 'table_number'], type: 'unique', name: 'unique_table_number_per_restaurant' });
@@ -16,7 +17,7 @@ export async function up(queryInterface, Sequelize) {
         table_id: { type: Sequelize.UUID, references: { model: 'tables', key: 'id' }, onDelete: 'CASCADE' },
         url: { type: Sequelize.STRING, allowNull: false },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
-        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
@@ -24,10 +25,10 @@ export async function up(queryInterface, Sequelize) {
         id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
         table_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'tables', key: 'id' }, onDelete: 'CASCADE' },
         customer_id: { type: Sequelize.UUID, references: { model: 'customers', key: 'id' } },
-        start_time: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('now()') },
+        start_time: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
         end_time: { type: Sequelize.DATE },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
-        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
@@ -40,7 +41,7 @@ export async function up(queryInterface, Sequelize) {
       status: { type: Sequelize.STRING, allowNull: false, defaultValue: 'pending' }, // e.g., pending, confirmed, preparing, ready, delivered, canceled
       items: { type: Sequelize.JSONB, allowNull: false },
       restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
-      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+      created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
@@ -53,7 +54,7 @@ export async function up(queryInterface, Sequelize) {
         expiration_date: { type: Sequelize.DATE },
         is_active: { type: Sequelize.BOOLEAN, defaultValue: true },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
-        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
@@ -63,7 +64,7 @@ export async function up(queryInterface, Sequelize) {
         price: { type: Sequelize.DECIMAL(10, 2), allowNull: false },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
         is_active: { type: Sequelize.BOOLEAN, defaultValue: true },
-        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
@@ -73,7 +74,7 @@ export async function up(queryInterface, Sequelize) {
         table_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'tables', key: 'id' } },
         status: { type: Sequelize.STRING, defaultValue: 'pending' }, // pending, acknowledged, resolved
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
-        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
 
@@ -84,7 +85,7 @@ export async function up(queryInterface, Sequelize) {
         status: { type: Sequelize.STRING, allowNull: false }, // e.g., 'sent', 'delivered', 'failed'
         sent_at: { type: Sequelize.DATE },
         restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' } },
-        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
+        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
   }

@@ -1,15 +1,10 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-16 12:07:21 [info]: 	Redis Client Connected
-2025-09-16 12:07:21 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-16 12:07:21 [info]: 	Redis Subscriber Client Connected
-2025-09-16 12:07:21 [info]: 	Subscribed to perm_invalidation channel.
-Error loading routes for domain 'cashRegister': SyntaxError: Unexpected token '{'
-    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)
-    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:146:18)
-    at #translate (node:internal/modules/esm/loader:497:12)
-    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:544:27)
-Error loading routes for domain 'restaurant': Error [ERR_UNSUPPORTED_DIR_IMPORT]: Directory import '/app/src/utils/errors' is not supported resolving ES modules imported from /app/src/domains/restaurant/restaurant.service.js
+2025-09-16 12:48:15 [info]: 	Redis Client Connected
+2025-09-16 12:48:15 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-16 12:48:15 [info]: 	Redis Subscriber Client Connected
+2025-09-16 12:48:15 [info]: 	Subscribed to perm_invalidation channel.
+Error loading routes for domain 'restaurant': Error [ERR_UNSUPPORTED_DIR_IMPORT]: Directory import '/app/src/utils/errors' is not supported resolving ES modules imported from /app/src/domains/restaurant/restaurant.controller.js
     at finalizeResolution (node:internal/modules/esm/resolve:271:11)
     at moduleResolve (node:internal/modules/esm/resolve:952:10)
     at defaultResolve (node:internal/modules/esm/resolve:1188:11)
@@ -33,7 +28,14 @@ Error loading routes for domain 'technicalSpecifications': Error [ERR_UNSUPPORTE
   code: 'ERR_UNSUPPORTED_DIR_IMPORT',
   url: 'file:///app/src/utils/errors'
 }
-Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/utils/codeGenerator.js' imported from /app/src/domains/checkin/checkin.service.js
+Error loading routes for domain 'ingredients': TypeError: Cannot destructure property 'Ingredient' of 'db.models' as it is undefined.
+    at default (file:///app/src/domains/ingredients/ingredients.service.js:4:11)
+    at default (file:///app/src/domains/ingredients/ingredients.routes.js:12:30)
+    at file:///app/routes/index.js:47:30
+    at async Promise.all (index 18)
+    at async default (file:///app/routes/index.js:32:3)
+    at async startServer (file:///app/server.js:92:23)
+Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/utils/analytics.js' imported from /app/src/domains/checkin/checkin.service.js
     at finalizeResolution (node:internal/modules/esm/resolve:283:11)
     at moduleResolve (node:internal/modules/esm/resolve:952:10)
     at defaultResolve (node:internal/modules/esm/resolve:1188:11)
@@ -43,43 +45,47 @@ Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot 
     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
     at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
   code: 'ERR_MODULE_NOT_FOUND',
-  url: 'file:///app/src/utils/codeGenerator.js'
+  url: 'file:///app/src/utils/analytics.js'
 }
-Error loading routes for domain 'coupons': SyntaxError: Unexpected identifier 'rewardsServiceFactory'
-    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)
-    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:146:18)
-    at #translate (node:internal/modules/esm/loader:497:12)
-    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:544:27)
-Error loading routes for domain 'customerSegmentation': SyntaxError: Unexpected token '{'
-    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)
-    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:146:18)
-    at #translate (node:internal/modules/esm/loader:497:12)
-    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:544:27)
-Error loading routes for domain 'dashboard': SyntaxError: Unexpected token '{'
-    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)
-    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:146:18)
-    at #translate (node:internal/modules/esm/loader:497:12)
-    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:544:27)
-Error loading routes for domain 'deliveryMuch': file:///app/src/domains/deliveryMuch/deliveryMuch.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
+Error loading routes for domain 'coupons': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/rewards/rewards.service.js' imported from /app/src/domains/coupons/coupons.service.js
+    at finalizeResolution (node:internal/modules/esm/resolve:283:11)
+    at moduleResolve (node:internal/modules/esm/resolve:952:10)
+    at defaultResolve (node:internal/modules/esm/resolve:1188:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///app/src/rewards/rewards.service.js'
+}
+Error loading routes for domain 'dashboard': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/rewards/rewards.service.js' imported from /app/src/domains/dashboard/dashboard.service.js
+    at finalizeResolution (node:internal/modules/esm/resolve:283:11)
+    at moduleResolve (node:internal/modules/esm/resolve:952:10)
+    at defaultResolve (node:internal/modules/esm/resolve:1188:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///app/src/rewards/rewards.service.js'
+}
+Error loading routes for domain 'goals': ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and '/app/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+    at file:///app/src/domains/goals/goals.validation.js:1:18
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
     at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 10)
+    at async Promise.all (index 13)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'health': file:///app/src/domains/health/health.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 15)
+Error loading routes for domain 'npsCriteria': TypeError: Cannot destructure property 'NpsCriterion' of 'db.models' as it is undefined.
+    at default (file:///app/src/domains/npsCriteria/npsCriteria.service.js:4:11)
+    at default (file:///app/src/domains/npsCriteria/npsCriteria.controller.js:7:30)
+    at default (file:///app/src/domains/npsCriteria/npsCriteria.routes.js:8:33)
+    at file:///app/routes/index.js:47:30
+    at async Promise.all (index 20)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
 Error loading routes for domain 'public': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/rewards/rewards.service.js' imported from /app/src/domains/public/public.service.js
@@ -94,32 +100,10 @@ Error loading routes for domain 'public': Error [ERR_MODULE_NOT_FOUND]: Cannot f
   code: 'ERR_MODULE_NOT_FOUND',
   url: 'file:///app/src/rewards/rewards.service.js'
 }
-Error loading routes for domain 'rewards': file:///app/src/domains/rewards/rewards.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 33)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'saipos': file:///app/src/domains/saipos/saipos.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 34)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'settings': file:///app/src/domains/settings/settings.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
+Error loading routes for domain 'settings': file:///app/src/domains/settings/settings.routes.js:7
+import settingsControllerFactory from "./settings.controller.js";
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './settings.controller.js' does not provide an export named 'default'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -127,10 +111,10 @@ SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide
     at async Promise.all (index 35)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'stock': file:///app/src/domains/stock/stock.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
+Error loading routes for domain 'stock': file:///app/src/domains/stock/stock.routes.js:5
+  createStockMovementValidation,
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './stock.validation.js' does not provide an export named 'createStockMovementValidation'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -138,10 +122,10 @@ SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide
     at async Promise.all (index 36)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'supplier': file:///app/src/domains/supplier/supplier.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
+Error loading routes for domain 'supplier': file:///app/src/domains/supplier/supplier.routes.js:7
+import supplierControllerFactory from "./supplier.controller.js";
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './supplier.controller.js' does not provide an export named 'default'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -149,32 +133,10 @@ SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide
     at async Promise.all (index 37)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'surveyRewardProgram': file:///app/src/domains/surveyRewardProgram/surveyRewardProgram.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 38)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'surveys': file:///app/src/domains/surveys/surveys.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 39)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'tables': file:///app/src/domains/tables/tables.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
+Error loading routes for domain 'tables': file:///app/src/domains/tables/tables.routes.js:5
+  createTableValidation,
+  ^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './tables.validation.js' does not provide an export named 'createTableValidation'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -182,10 +144,10 @@ SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide
     at async Promise.all (index 40)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'uaiRango': file:///app/src/domains/uaiRango/uaiRango.routes.js:2
-import requirePermission from "../../middleware/requirePermission.js";
-       ^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module '../../middleware/requirePermission.js' does not provide an export named 'default'
+Error loading routes for domain 'uaiRango': file:///app/src/domains/uaiRango/uaiRango.routes.js:5
+import uaiRangoControllerFactory from "./uaiRango.controller.js";
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './uaiRango.controller.js' does not provide an export named 'default'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -204,158 +166,37 @@ SyntaxError: The requested module './whatsapp.validation.js' does not provide an
     at async Promise.all (index 43)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'publicDineInMenu': file:///app/src/domains/publicDineInMenu/publicDineInMenu.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
+Error loading routes for domain 'rewards': file:///app/src/domains/rewards/rewards.routes.js:11
+import rewardsControllerFactory from "./rewards.controller.js";
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './rewards.controller.js' does not provide an export named 'default'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
     at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 24)
+    at async Promise.all (index 33)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'publicProducts': file:///app/src/domains/publicProducts/publicProducts.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 27)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'ingredients': file:///app/src/domains/ingredients/ingredients.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 18)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'labels': file:///app/src/domains/labels/labels.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 19)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'publicOrders': file:///app/src/domains/publicOrders/publicOrders.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 26)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'auth': file:///app/src/domains/auth/auth.routes.js:3
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 2)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'addons': file:///app/src/domains/addons/addons.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 0)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'categories': file:///app/src/domains/categories/categories.routes.js:7
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 4)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'customers': file:///app/src/domains/customers/customers.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 8)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'goals': file:///app/src/domains/goals/goals.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 13)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'iam': file:///app/src/domains/iam/iam.service.js:8
-  InternalServerError,
+Error loading routes for domain 'surveys': file:///app/src/domains/surveys/surveys.routes.js:10
+  getSurveyValidation,
   ^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors.js' does not provide an export named 'InternalServerError'
+SyntaxError: The requested module './surveys.validation.js' does not provide an export named 'getSurveyValidation'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
     at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 16)
+    at async Promise.all (index 39)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'ifood': file:///app/src/domains/ifood/ifood.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
+Error loading routes for domain 'cashRegister': file:///app/src/domains/cashRegister/cashRegister.service.js:2
+import { generateEscPosCommands } from "../../utils/thermalPrinterService.js";
+         ^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module '../../utils/thermalPrinterService.js' does not provide an export named 'generateEscPosCommands'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
     at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 17)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'orders': file:///app/src/domains/orders/orders.routes.js:4
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 21)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'products': file:///app/src/domains/products/products.routes.js:5
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 22)
+    at async Promise.all (index 3)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
 Error loading routes for domain 'publicDineInOrders': file:///app/src/domains/publicDineInOrders/publicDineInOrders.service.js:2
@@ -369,48 +210,37 @@ SyntaxError: The requested module '../../utils/thermalPrinterService.js' does no
     at async Promise.all (index 25)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'publicSurvey': file:///app/src/domains/publicSurvey/publicSurvey.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 28)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'npsCriteria': file:///app/src/domains/npsCriteria/npsCriteria.routes.js:3
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 20)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'qrcode': file:///app/src/domains/qrcode/qrcode.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 30)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'financial': file:///app/src/domains/financial/financial.routes.js:10
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
+Error loading routes for domain 'financial': file:///app/src/domains/financial/financial.routes.js:7
+  createPaymentMethodValidation,
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './financial.validation.js' does not provide an export named 'createPaymentMethodValidation'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
     at async file:///app/routes/index.js:46:50
     at async Promise.all (index 12)
+    at async default (file:///app/routes/index.js:32:3)
+    at async startServer (file:///app/server.js:92:23)
+Error loading routes for domain 'iam': file:///app/src/domains/iam/iam.service.js:8
+  InternalServerError,
+  ^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module '../../utils/errors.js' does not provide an export named 'InternalServerError'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async file:///app/routes/index.js:46:50
+    at async Promise.all (index 16)
+    at async default (file:///app/routes/index.js:32:3)
+    at async startServer (file:///app/server.js:92:23)
+Error loading routes for domain 'products': file:///app/src/domains/products/products.routes.js:8
+  createProductValidation,
+  ^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './products.validation.js' does not provide an export named 'createProductValidation'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async file:///app/routes/index.js:46:50
+    at async Promise.all (index 22)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
 Error loading routes for domain 'publicV2': file:///app/src/domains/publicV2/publicV2.routes.js:3
@@ -424,6 +254,39 @@ SyntaxError: The requested module '../../middleware/apiAuthMiddleware.js' does n
     at async Promise.all (index 29)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
+Error loading routes for domain 'qrcode': file:///app/src/domains/qrcode/qrcode.routes.js:3
+import { logUserAction } from "../../middleware/logUserActionMiddleware.js";
+         ^^^^^^^^^^^^^
+SyntaxError: The requested module '../../middleware/logUserActionMiddleware.js' does not provide an export named 'logUserAction'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async file:///app/routes/index.js:46:50
+    at async Promise.all (index 30)
+    at async default (file:///app/routes/index.js:32:3)
+    at async startServer (file:///app/server.js:92:23)
+Error loading routes for domain 'saipos': file:///app/src/domains/saipos/saipos.controller.js:4
+import saiposServiceFactory from "./saipos.service.js";
+       ^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './saipos.service.js' does not provide an export named 'default'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async file:///app/routes/index.js:46:50
+    at async Promise.all (index 34)
+    at async default (file:///app/routes/index.js:32:3)
+    at async startServer (file:///app/server.js:92:23)
+Error loading routes for domain 'surveyRewardProgram': file:///app/src/domains/surveyRewardProgram/surveyRewardProgram.controller.js:4
+import surveyRewardProgramServiceFactory from "./surveyRewardProgram.service.js";
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './surveyRewardProgram.service.js' does not provide an export named 'default'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async file:///app/routes/index.js:46:50
+    at async Promise.all (index 38)
+    at async default (file:///app/routes/index.js:32:3)
+    at async startServer (file:///app/server.js:92:23)
 Error loading routes for domain 'admin': file:///app/src/domains/admin/admin.service.js:2
 import { generateUniqueSlug } from "../../utils/slugGenerator.js";
          ^^^^^^^^^^^^^^^^^^
@@ -435,10 +298,21 @@ SyntaxError: The requested module '../../utils/slugGenerator.js' does not provid
     at async Promise.all (index 1)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'googleMyBusiness': file:///app/src/domains/googleMyBusiness/googleMyBusiness.routes.js:2
-import asyncHandler from "../../utils/asyncHandler.js";
-       ^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide an export named 'default'
+Error loading routes for domain 'feedbacks': Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'utils' imported from /app/src/utils/apiClientFactory.js
+    at packageResolve (node:internal/modules/esm/resolve:873:9)
+    at moduleResolve (node:internal/modules/esm/resolve:946:18)
+    at defaultResolve (node:internal/modules/esm/resolve:1188:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+Error loading routes for domain 'googleMyBusiness': file:///app/src/domains/googleMyBusiness/googleMyBusiness.routes.js:7
+    createReviewReplyValidation,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './googleMyBusiness.validation.js' does not provide an export named 'createReviewReplyValidation'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -446,15 +320,4 @@ SyntaxError: The requested module '../../utils/asyncHandler.js' does not provide
     at async Promise.all (index 14)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'feedbacks': file:///app/src/domains/feedbacks/feedbacks.service.js:8
-  sendWhatsAppMessage,
-  ^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module '../../services/integrations/whatsappApiClient.js' does not provide an export named 'sendWhatsAppMessage'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 11)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-2025-09-16 12:07:21 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-16 12:48:16 [info]: 	🚀 Servidor rodando na porta 5000

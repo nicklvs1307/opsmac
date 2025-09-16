@@ -5,21 +5,31 @@ import { spinWheel as spinWheelService } from "../../services/wheelService.js";
 export default (db) => {
 
   const listRewards = async (restaurantId, query) => {
-    const { page = 1, limit = 12 } = query;
+    const { page = 1, limit = 12, search } = query;
     const offset = (page - 1) * limit;
 
+    const where = { restaurant_id: restaurantId };
+
+    if (search) {
+      where[Op.or] = [
+        { title: { [Op.iLike]: `%${search}%` } },
+        { description: { [Op.iLike]: `%${search}%` } },
+      ];
+    }
+
     const { count, rows } = await db.Reward.findAndCountAll({
-      where: { restaurantId },
+      where,
       attributes: [
         "id",
-        'customerId',
+        "customer_id",
         "description",
-        'isRedeemed',
+        "is_redeemed",
         "is_active",
         "reward_type",
-        'restaurantId',
-        'createdAt',
-        'updatedAt',
+        "restaurant_id",
+        "createdAt",
+        "updatedAt",
+        "title",
       ],
       limit: parseInt(limit),
       offset: parseInt(offset),
@@ -37,7 +47,7 @@ export default (db) => {
 
   const getRewardById = async (id, restaurantId) => {
     const whereClause = restaurantId
-      ? { id, restaurantId }
+      ? { id, restaurant_id: restaurantId }
       : { id };
     const reward = await db.Reward.findOne({ where: whereClause });
     if (!reward) {
@@ -52,7 +62,7 @@ export default (db) => {
     }
     return db.Reward.create({
       ...rewardData,
-      restaurantId: restaurantId,
+      restaurant_id: restaurantId,
       created_by: userId,
     });
   };
@@ -104,7 +114,7 @@ export default (db) => {
       const usageCount = await db.Coupon.count({
         where: {
           reward_id: reward.id,
-          customer_id: customerId,
+          customer_id: customer_id,
         },
       });
       if (usageCount >= reward.max_uses_per_customer) return false;
@@ -117,7 +127,7 @@ export default (db) => {
     customerId,
     extraData = {},
   ) => {
-    const canUse = await canCustomerUseReward(reward, customerId, extraData);
+    const canUse = await canCustomerUseReward(reward, customer_id, extraData);
     if (!canUse) {
       throw new BadRequestError("Cliente não pode usar esta recompensa");
     }
@@ -178,8 +188,8 @@ export default (db) => {
     const coupon = await db.Coupon.create({
       code: couponCode,
       reward_id: couponRewardId,
-      customer_id: customerId,
-      restaurantId: reward.restaurantId,
+      customer_id: customer_id,
+      restaurant_id: reward.restaurantId,
       expires_at: expiresAt,
       status: "active",
       title: couponTitle,
@@ -240,7 +250,7 @@ export default (db) => {
     }
 
     const totalRewards = await db.Reward.count({
-      where: { restaurantId },
+      where: { restaurant_id: restaurantId },
     });
     const activeRewards = await db.Reward.count({
       where: { restaurantId, is_active: true },
@@ -257,7 +267,7 @@ export default (db) => {
       where: { restaurantId },
     });
     const redeemedCoupons = await db.Coupon.count({
-      where: { restaurantId, status: "redeemed" },
+      where: { restaurant_id: restaurantId, status: "redeemed" },
     });
     const redemptionRate =
       totalCoupons > 0 ? (redeemedCoupons / totalCoupons) * 100 : 0;

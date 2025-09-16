@@ -1,7 +1,4 @@
-"use strict";
-
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
       // 1. Clean up existing data
       await queryInterface.bulkDelete("role_permissions", null, { transaction });
@@ -970,9 +967,8 @@ module.exports = {
 
       await queryInterface.bulkInsert("role_permissions", rolePermissions, { transaction });
     });
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
       // This is a destructive migration, so the down method will just clear everything.
       await queryInterface.bulkDelete("role_permissions", null, { transaction });
@@ -983,5 +979,4 @@ module.exports = {
       await queryInterface.bulkDelete("roles", null, { transaction });
       await queryInterface.bulkDelete("actions", null, { transaction });
     });
-  },
-};
+  }

@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { Sequelize } from "sequelize";
 import logger from "../src/utils/logger.js";
-import _config from "../src/config/config.js";
+import * as _config from "../src/config/config.js";
 import { fileURLToPath, pathToFileURL } from 'url';
 
 const basename = path.basename(import.meta.url);

@@ -1,15 +1,15 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-16 13:51:56 [info]: 	Redis Client Connected
-2025-09-16 13:51:56 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-16 13:51:56 [info]: 	Redis Subscriber Client Connected
-2025-09-16 13:51:56 [info]: 	Subscribed to perm_invalidation channel.
+2025-09-16 13:56:02 [info]: 	Redis Client Connected
+2025-09-16 13:56:02 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-16 13:56:02 [info]: 	Redis Subscriber Client Connected
+2025-09-16 13:56:02 [info]: 	Subscribed to perm_invalidation channel.
 Error loading routes for domain 'whatsapp': SyntaxError: Unexpected identifier 'whatsappServiceFactory'
     at compileSourceTextModule (node:internal/modules/esm/utils:346:16)
     at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:146:18)
     at #translate (node:internal/modules/esm/loader:497:12)
     at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:544:27)
-Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/services/emailService.js' imported from /app/src/domains/checkin/checkin.service.js
+Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/services/customerService.js' imported from /app/src/domains/checkin/checkin.service.js
     at finalizeResolution (node:internal/modules/esm/resolve:283:11)
     at moduleResolve (node:internal/modules/esm/resolve:952:10)
     at defaultResolve (node:internal/modules/esm/resolve:1188:11)
@@ -19,45 +19,12 @@ Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot 
     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
     at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
   code: 'ERR_MODULE_NOT_FOUND',
-  url: 'file:///app/src/services/emailService.js'
+  url: 'file:///app/src/services/customerService.js'
 }
-Error loading routes for domain 'iam': file:///app/src/domains/iam/iam.service.js:4
-  NotFoundError,
-  ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 16)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'ingredients': file:///app/src/domains/ingredients/ingredients.service.js:1
-import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 18)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'stock': file:///app/src/domains/stock/stock.service.js:2
-import { NotFoundError, BadRequestError } from "../../utils/errors/index.js";
-         ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 36)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'supplier': file:///app/src/domains/supplier/supplier.service.js:1
-import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
+Error loading routes for domain 'supplier': file:///app/src/domains/supplier/supplier.routes.js:4
+import { supplierValidation } from "./supplier.validation.js";
+         ^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './supplier.validation.js' does not provide an export named 'supplierValidation'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -65,10 +32,10 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 37)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'tables': file:///app/src/domains/tables/tables.service.js:1
-import { NotFoundError, BadRequestError } from "../../utils/errors/index.js";
-         ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
+Error loading routes for domain 'tables': file:///app/src/domains/tables/tables.routes.js:6
+  updateTableValidation,
+  ^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './tables.validation.js' does not provide an export named 'updateTableValidation'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -76,85 +43,10 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 40)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'technicalSpecifications': file:///app/src/domains/technicalSpecifications/technicalSpecifications.service.js:1
-import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 41)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'npsCriteria': file:///app/src/domains/npsCriteria/npsCriteria.service.js:1
-import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 20)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'saipos': file:///app/src/domains/saipos/saipos.service.js:1
-import { BadRequestError, ForbiddenError, NotFoundError } from "../../utils/errors/index.js";
-                                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 34)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'surveyRewardProgram': file:///app/src/domains/surveyRewardProgram/surveyRewardProgram.service.js:1
-import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 38)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'surveys': file:///app/src/domains/surveys/surveys.service.js:1
-import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 39)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'uaiRango': file:///app/src/domains/uaiRango/uaiRango.service.js:1
-import { BadRequestError, ForbiddenError, NotFoundError } from "../../utils/errors/index.js";
-                                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 42)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'admin': ReferenceError: module is not defined in ES module scope
-This file is being treated as an ES module because it has a '.js' file extension and '/app/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
-    at file:///app/src/utils/slugGenerator.js:24:1
-    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 1)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'dashboard': file:///app/src/domains/rewards/rewards.service.js:2
-import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
+Error loading routes for domain 'dashboard': file:///app/src/domains/rewards/rewards.service.js:3
+import { spinWheel as spinWheelService } from "../../services/wheelService.js";
+         ^^^^^^^^^
+SyntaxError: The requested module '../../services/wheelService.js' does not provide an export named 'spinWheel'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -162,10 +54,10 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 9)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'rewards': file:///app/src/domains/rewards/rewards.service.js:2
-import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
+Error loading routes for domain 'rewards': file:///app/src/domains/rewards/rewards.service.js:3
+import { spinWheel as spinWheelService } from "../../services/wheelService.js";
+         ^^^^^^^^^
+SyntaxError: The requested module '../../services/wheelService.js' does not provide an export named 'spinWheel'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -173,10 +65,10 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 33)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'coupons': file:///app/src/domains/rewards/rewards.service.js:2
-import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
+Error loading routes for domain 'coupons': file:///app/src/domains/rewards/rewards.service.js:3
+import { spinWheel as spinWheelService } from "../../services/wheelService.js";
+         ^^^^^^^^^
+SyntaxError: The requested module '../../services/wheelService.js' does not provide an export named 'spinWheel'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -184,10 +76,10 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 6)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'settings': file:///app/src/domains/settings/settings.service.js:1
-import { NotFoundError } from "../../utils/errors/index.js";
-         ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
+Error loading routes for domain 'settings': file:///app/src/domains/settings/settings.routes.js:11
+  testWhatsappMessageValidation,
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './settings.validation.js' does not provide an export named 'testWhatsappMessageValidation'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -195,10 +87,10 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 35)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'public': file:///app/src/domains/rewards/rewards.service.js:2
-import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
-                          ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
+Error loading routes for domain 'public': file:///app/src/domains/rewards/rewards.service.js:3
+import { spinWheel as spinWheelService } from "../../services/wheelService.js";
+         ^^^^^^^^^
+SyntaxError: The requested module '../../services/wheelService.js' does not provide an export named 'spinWheel'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -206,10 +98,10 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 23)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'feedbacks': file:///app/src/domains/feedbacks/feedbacks.service.js:4
-  NotFoundError,
-  ^^^^^^^^^^^^^
-SyntaxError: The requested module '../../utils/errors/index.js' does not provide an export named 'NotFoundError'
+Error loading routes for domain 'feedbacks': file:///app/src/domains/feedbacks/feedbacks.routes.js:9
+  createFeedbackValidation,
+  ^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './feedbacks.validation.js' does not provide an export named 'createFeedbackValidation'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -217,4 +109,4 @@ SyntaxError: The requested module '../../utils/errors/index.js' does not provide
     at async Promise.all (index 11)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-2025-09-16 13:51:59 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-16 13:56:05 [info]: 	🚀 Servidor rodando na porta 5000

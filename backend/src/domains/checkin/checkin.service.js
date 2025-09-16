@@ -6,7 +6,7 @@ import { Op } from "sequelize";
 
 
 import iamService from "../../services/iamService.js";
-import customerService from "../../services/customerService.js";
+// import customerService from "../../services/customerService.js";
 import rewardService from "../../services/rewardService.js";
 import couponService from "../../services/couponService.js";
 
@@ -78,6 +78,7 @@ export default (db) => {
 
     if (!customer) {
       // Create new customer if not found
+      /*
       customer = await customerService.createCustomer(
         restaurant.id,
         customerName,
@@ -85,6 +86,7 @@ export default (db) => {
         null, // email
         cpf,
       );
+      */
     }
 
     // Check for existing active check-in for this customer at this restaurant

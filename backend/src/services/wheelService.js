@@ -1,4 +1,4 @@
-const spinWheel = (wheelConfig) => {
+export const spinWheel = (wheelConfig) => {
   if (
     !wheelConfig ||
     !Array.isArray(wheelConfig.items) ||
@@ -34,4 +34,4 @@ const spinWheel = (wheelConfig) => {
   return { winningItem: fallbackItem, winningIndex: fallbackIndex };
 };
 
-module.exports = { spinWheel };
+

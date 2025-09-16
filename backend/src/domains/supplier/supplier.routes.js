@@ -1,7 +1,7 @@
 import express from "express";
 import asyncHandler from "../../utils/asyncHandler.js";
 import requirePermission from "../../middleware/requirePermission.js";
-import { supplierValidation } from "./supplier.validation.js";
+
 
 import supplierServiceFactory from "./supplier.service.js";
 import supplierControllerFactory from "./supplier.controller.js";

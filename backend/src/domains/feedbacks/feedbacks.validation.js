@@ -1,6 +1,6 @@
-const { body, query } = require("express-validator");
+import { body, query } from "express-validator";
 
-exports.createFeedbackValidation = [
+export const createFeedbackValidation = [
   body("rating")
     .isInt({ min: 1, max: 5 })
     .withMessage("Avaliação deve ser entre 1 e 5"),
@@ -26,7 +26,7 @@ exports.createFeedbackValidation = [
     .withMessage("Número da mesa deve ser positivo"),
 ];
 
-exports.updateFeedbackValidation = [
+export const updateFeedbackValidation = [
   body("status")
     .optional()
     .isIn(["pending", "reviewed", "responded", "resolved", "archived"])
@@ -47,7 +47,7 @@ exports.updateFeedbackValidation = [
     .withMessage("Notas internas devem ter no máximo 500 caracteres"),
 ];
 
-exports.listFeedbacksValidation = [
+export const listFeedbacksValidation = [
   query("page")
     .optional()
     .isInt({ min: 1 })

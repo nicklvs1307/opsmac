@@ -1,6 +1,6 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
 
-exports.updateRestaurantSettingsValidation = [
+export const updateRestaurantSettingsValidation = [
   body("settings").isObject().withMessage("Configurações devem ser um objeto"),
   body("settings.primary_color").optional().isString(),
   body("settings.secondary_color").optional().isString(),
@@ -84,7 +84,7 @@ exports.updateRestaurantSettingsValidation = [
     .withMessage("ID da recompensa inválido"),
 ];
 
-exports.updateWhatsappSettingsValidation = [
+export const updateWhatsappSettingsValidation = [
   body("whatsapp_enabled").optional().isBoolean(),
   body("whatsapp_api_url")
     .optional()
@@ -95,12 +95,12 @@ exports.updateWhatsappSettingsValidation = [
   body("whatsapp_phone_number").optional().isString(),
 ];
 
-exports.testWhatsappMessageValidation = [
+export const testWhatsappMessageValidation = [
   body("recipient", "Número do destinatário é obrigatório").not().isEmpty(),
   body("message", "Mensagem é obrigatória").notEmpty(),
 ];
 
-exports.updateRestaurantProfileValidation = [
+export const updateRestaurantProfileValidation = [
   body("name")
     .optional()
     .trim()
@@ -120,7 +120,7 @@ exports.updateRestaurantProfileValidation = [
   body("slug").optional().trim().isString().withMessage("Slug inválido"),
 ];
 
-exports.updateNpsCriteriaValidation = [
+export const updateNpsCriteriaValidation = [
   body("nps_criteria")
     .isArray()
     .withMessage("Critérios de NPS devem ser um array"),

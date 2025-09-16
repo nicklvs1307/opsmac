@@ -22,6 +22,7 @@ export async function up(queryInterface, Sequelize) {
       WHERE NOT (settings ? 'enabled_modules') OR (settings->'enabled_modules')::jsonb IS NULL;
     `);
   }
+
 export async function down(queryInterface, Sequelize) {
     await queryInterface.removeColumn('restaurants', 'settings');
   }

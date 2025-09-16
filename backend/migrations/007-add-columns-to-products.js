@@ -11,6 +11,7 @@ export async function up(queryInterface, Sequelize) {
       allowNull: true, // or false depending on requirements
     });
   }
+
 export async function down(queryInterface, Sequelize) {
     await queryInterface.removeColumn('products', 'variations');
     await queryInterface.removeColumn('products', 'addons');

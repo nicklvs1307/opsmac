@@ -40,6 +40,8 @@ services:
         echo 'Waiting for database to be ready...'
         sleep 15
         cd backend &&
+        pwd &&
+        ls -la &&
         npx sequelize-cli db:migrate &&
         npx sequelize-cli db:seed:all
       "

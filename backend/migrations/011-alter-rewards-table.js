@@ -59,8 +59,40 @@ export async function up(queryInterface, Sequelize) {
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',
     });
+
+    await queryInterface.addColumn('rewards', 'reward_type', {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: 'default',
+    });
+
+    await queryInterface.addColumn('rewards', 'customer_id', {
+      type: Sequelize.UUID,
+      allowNull: true,
+      references: {
+        model: 'customers',
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+    });
+
+    await queryInterface.addColumn('rewards', 'restaurant_id', {
+      type: Sequelize.UUID,
+      allowNull: false,
+      references: {
+        model: 'restaurants',
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    });
   }
+
 export async function down(queryInterface, Sequelize) {
+    await queryInterface.removeColumn('rewards', 'restaurant_id');
+    await queryInterface.removeColumn('rewards', 'customer_id');
+    await queryInterface.removeColumn('rewards', 'reward_type');
     await queryInterface.removeColumn('rewards', 'created_by');
     await queryInterface.removeColumn('rewards', 'days_valid');
     await queryInterface.removeColumn('rewards', 'coupon_validity_days');

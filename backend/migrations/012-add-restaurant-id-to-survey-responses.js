@@ -6,6 +6,7 @@ export async function up(queryInterface, Sequelize) {
       onDelete: 'CASCADE',
     });
   }
+
 export async function down(queryInterface, Sequelize) {
     await queryInterface.removeColumn('survey_responses', 'restaurant_id');
   }

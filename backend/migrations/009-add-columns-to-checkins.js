@@ -1,4 +1,10 @@
 export async function up(queryInterface, Sequelize) {
+    await queryInterface.addColumn('checkins', 'status', {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: 'active',
+    });
+
     await queryInterface.addColumn('checkins', 'checkin_time', {
       type: Sequelize.DATE,
       allowNull: false,
@@ -13,7 +19,9 @@ export async function up(queryInterface, Sequelize) {
       allowNull: true,
     });
   }
+
 export async function down(queryInterface, Sequelize) {
+    await queryInterface.removeColumn('checkins', 'status');
     await queryInterface.removeColumn('checkins', 'expires_at');
     await queryInterface.removeColumn('checkins', 'checkout_time');
     await queryInterface.removeColumn('checkins', 'checkin_time');

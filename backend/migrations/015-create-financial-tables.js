@@ -75,6 +75,3 @@ export async function down(queryInterface, Sequelize) {
     await queryInterface.dropTable('financial_categories');
     await queryInterface.dropTable('payment_methods');
   }
-  await queryInterface.dropTable('payment_methods');
-  }
-};

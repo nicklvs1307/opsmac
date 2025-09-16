@@ -1,8 +1,4 @@
-'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     // Main entities: Suppliers, Ingredients, Products
     await queryInterface.createTable('suppliers', {
       id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
@@ -142,9 +138,8 @@ module.exports = {
         created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.dropTable('production_record_items');
     await queryInterface.dropTable('production_records');
     await queryInterface.dropTable('stock_count_items');
@@ -159,4 +154,3 @@ module.exports = {
     await queryInterface.dropTable('ingredients');
     await queryInterface.dropTable('suppliers');
   }
-};

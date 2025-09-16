@@ -1,9 +1,7 @@
-"use strict";
-const { v4: uuidv4 } = require("uuid");
-const bcrypt = require("bcryptjs");
+import { v4 as uuidv4 } from "uuid";
+import bcrypt from "bcryptjs";
 
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
       // --- Get Super Admin Role ---
       const roles = await queryInterface.sequelize.query(
@@ -89,9 +87,8 @@ module.exports = {
         { transaction },
       );
     });
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
       await queryInterface.bulkDelete("user_roles", null, { transaction });
       await queryInterface.bulkDelete("user_restaurants", null, { transaction });
@@ -102,5 +99,4 @@ module.exports = {
         { transaction },
       );
     });
-  },
-};
+  }

@@ -1,7 +1,4 @@
-'use strict';
-
-module.exports = {
-  up: async (queryInterface, Sequelize) => {
+export async function up(queryInterface, Sequelize) {
     await queryInterface.createTable('surveys', {
       id: {
         type: Sequelize.UUID,
@@ -33,9 +30,7 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
     });
-  },
-
-  down: async (queryInterface, Sequelize) => {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.dropTable('surveys');
-  },
-};
+  }

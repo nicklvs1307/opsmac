@@ -1,8 +1,4 @@
-'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     // Product Categories
     await queryInterface.createTable('categories', {
       id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
@@ -99,9 +95,8 @@ module.exports = {
         created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.dropTable('whatsapp_messages');
     await queryInterface.dropTable('waiter_calls');
     await queryInterface.dropTable('addons');
@@ -112,4 +107,3 @@ module.exports = {
     await queryInterface.dropTable('tables');
     await queryInterface.dropTable('categories');
   }
-};

@@ -1,7 +1,4 @@
-'use strict';
-
-module.exports = {
-  up: async (queryInterface, Sequelize) => {
+export async function up(queryInterface, Sequelize) {
     await queryInterface.addColumn('rewards', 'title', {
       type: Sequelize.STRING,
       allowNull: true,
@@ -62,9 +59,8 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',
     });
-  },
-
-  down: async (queryInterface, Sequelize) => {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.removeColumn('rewards', 'created_by');
     await queryInterface.removeColumn('rewards', 'days_valid');
     await queryInterface.removeColumn('rewards', 'coupon_validity_days');
@@ -78,5 +74,4 @@ module.exports = {
     await queryInterface.removeColumn('rewards', 'valid_from');
     await queryInterface.removeColumn('rewards', 'value');
     await queryInterface.removeColumn('rewards', 'title');
-  },
-};
+  }

@@ -1,8 +1,4 @@
-'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     // Payment Methods
     await queryInterface.createTable('payment_methods', {
       id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
@@ -70,9 +66,8 @@ module.exports = {
       created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
       updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('now()') },
     });
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.dropTable('cash_register_movements');
     await queryInterface.dropTable('cash_register_sessions');
     await queryInterface.dropTable('cash_register_categories');
@@ -80,7 +75,6 @@ module.exports = {
     await queryInterface.dropTable('financial_categories');
     await queryInterface.dropTable('payment_methods');
   }
-};
   await queryInterface.dropTable('payment_methods');
   }
 };

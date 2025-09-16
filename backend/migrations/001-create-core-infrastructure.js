@@ -1,8 +1,4 @@
-'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     // Enable pgcrypto extension for UUID generation
     await queryInterface.sequelize.query('CREATE EXTENSION IF NOT EXISTS pgcrypto;');
 
@@ -82,7 +78,7 @@ module.exports = {
       website: {
         type: Sequelize.STRING(255)
       },
-      logo: {
+logo: {
         type: Sequelize.STRING(500)
       },
       // --- Columns from permission system spec ---
@@ -145,11 +141,9 @@ module.exports = {
       type: 'primary key',
       name: 'user_restaurant_pk'
     });
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.dropTable('user_restaurants');
     await queryInterface.dropTable('restaurants');
     await queryInterface.dropTable('users');
   }
-};

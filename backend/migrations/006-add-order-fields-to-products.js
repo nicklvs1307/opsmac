@@ -1,8 +1,4 @@
-'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     await queryInterface.addColumn('products', 'addons', {
       type: Sequelize.JSONB,
       defaultValue: [],
@@ -14,10 +10,8 @@ module.exports = {
       defaultValue: [],
       allowNull: true, // or false depending on requirements
     });
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.removeColumn('products', 'variations');
     await queryInterface.removeColumn('products', 'addons');
   }
-};

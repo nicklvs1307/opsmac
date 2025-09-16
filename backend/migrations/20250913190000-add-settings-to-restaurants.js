@@ -1,8 +1,4 @@
-'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     // 1. Add the 'settings' column if it doesn't exist
     const tableDefinition = await queryInterface.describeTable('restaurants');
     if (!tableDefinition.settings) {
@@ -25,9 +21,7 @@ module.exports = {
       )
       WHERE NOT (settings ? 'enabled_modules') OR (settings->'enabled_modules')::jsonb IS NULL;
     `);
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.removeColumn('restaurants', 'settings');
   }
-};

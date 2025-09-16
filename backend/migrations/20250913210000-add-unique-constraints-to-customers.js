@@ -1,7 +1,4 @@
-'use strict';
-
-module.exports = {
-  async up (queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     await queryInterface.addConstraint('customers', {
       fields: ['restaurant_id', 'email'],
       type: 'unique',
@@ -13,10 +10,8 @@ module.exports = {
       type: 'unique',
       name: 'unique_customer_phone_per_restaurant'
     });
-  },
-
-  async down (queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.removeConstraint('customers', 'unique_customer_email_per_restaurant');
     await queryInterface.removeConstraint('customers', 'unique_customer_phone_per_restaurant');
   }
-};

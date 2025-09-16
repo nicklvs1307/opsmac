@@ -1,8 +1,4 @@
-'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
       // Create customer_segments table
       await queryInterface.createTable('customer_segments', {
@@ -58,9 +54,8 @@ module.exports = {
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       }, { transaction });
     });
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
       await queryInterface.dropTable('campaigns', { transaction });
       await queryInterface.dropTable('customer_segments', { transaction });
@@ -68,4 +63,3 @@ module.exports = {
       await queryInterface.dropTable('survey_reward_programs', { transaction });
     });
   }
-};

@@ -1,8 +1,4 @@
-'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
     // Part 1: Catalog Tables (modules, submodules, features, actions)
     await queryInterface.createTable('modules', {
       id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
@@ -122,9 +118,8 @@ module.exports = {
     await queryInterface.addIndex('role_permissions', ['role_id'], { name: 'idx_role_permissions_role' });
     await queryInterface.addIndex('user_roles', ['user_id'], { name: 'idx_user_roles_user' });
     await queryInterface.addIndex('user_permission_overrides', ['user_id'], { name: 'idx_user_overrides_user' });
-  },
-
-  async down(queryInterface, Sequelize) {
+  }
+export async function down(queryInterface, Sequelize) {
     await queryInterface.dropTable('audit_logs');
     await queryInterface.dropTable('user_permission_overrides');
     await queryInterface.dropTable('user_roles');
@@ -139,4 +134,3 @@ module.exports = {
     await queryInterface.sequelize.query('DROP TYPE IF EXISTS entitlement_status;');
     await queryInterface.sequelize.query('DROP TYPE IF EXISTS entitlement_entity;');
   }
-};

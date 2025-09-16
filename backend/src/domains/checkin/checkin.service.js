@@ -7,7 +7,7 @@ import { Op } from "sequelize";
 
 import iamService from "../../services/iamService.js";
 // import customerService from "../../services/customerService.js";
-import rewardService from "../../services/rewardService.js";
+// import rewardService from "../../services/rewardService.js";
 import couponService from "../../services/couponService.js";
 
 export default (db) => {
@@ -124,6 +124,7 @@ export default (db) => {
     if (rewardProgram && rewardProgram.rewards_per_response) {
       for (const rewardConfig of rewardProgram.rewards_per_response) {
         if (rewardConfig.trigger === "checkin") {
+          /*
           const reward = await rewardService.createReward(
             customer.id,
             restaurant.id,
@@ -140,6 +141,7 @@ export default (db) => {
             // await sendWhatsappMessage(customer.phone, message);
             // await sendEmail(customer.email, 'Seu Cupom de Recompensa', message);
           }
+          */
           break; // Assuming only one reward per check-in for now
         }
       }

@@ -1,15 +1,10 @@
 > feedeliza-plus@1.0.0 start
 > node server.js
-2025-09-16 13:56:02 [info]: 	Redis Client Connected
-2025-09-16 13:56:02 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-16 13:56:02 [info]: 	Redis Subscriber Client Connected
-2025-09-16 13:56:02 [info]: 	Subscribed to perm_invalidation channel.
-Error loading routes for domain 'whatsapp': SyntaxError: Unexpected identifier 'whatsappServiceFactory'
-    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)
-    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:146:18)
-    at #translate (node:internal/modules/esm/loader:497:12)
-    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:544:27)
-Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/services/customerService.js' imported from /app/src/domains/checkin/checkin.service.js
+2025-09-16 14:02:51 [info]: 	Redis Client Connected
+2025-09-16 14:02:51 [info]: 	✅ Conexão com banco de dados estabelecida
+2025-09-16 14:02:51 [info]: 	Redis Subscriber Client Connected
+2025-09-16 14:02:51 [info]: 	Subscribed to perm_invalidation channel.
+Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/src/services/rewardService.js' imported from /app/src/domains/checkin/checkin.service.js
     at finalizeResolution (node:internal/modules/esm/resolve:283:11)
     at moduleResolve (node:internal/modules/esm/resolve:952:10)
     at defaultResolve (node:internal/modules/esm/resolve:1188:11)
@@ -19,78 +14,12 @@ Error loading routes for domain 'checkin': Error [ERR_MODULE_NOT_FOUND]: Cannot 
     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
     at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
   code: 'ERR_MODULE_NOT_FOUND',
-  url: 'file:///app/src/services/customerService.js'
+  url: 'file:///app/src/services/rewardService.js'
 }
-Error loading routes for domain 'supplier': file:///app/src/domains/supplier/supplier.routes.js:4
-import { supplierValidation } from "./supplier.validation.js";
-         ^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module './supplier.validation.js' does not provide an export named 'supplierValidation'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 37)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'tables': file:///app/src/domains/tables/tables.routes.js:6
-  updateTableValidation,
-  ^^^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module './tables.validation.js' does not provide an export named 'updateTableValidation'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 40)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'dashboard': file:///app/src/domains/rewards/rewards.service.js:3
-import { spinWheel as spinWheelService } from "../../services/wheelService.js";
-         ^^^^^^^^^
-SyntaxError: The requested module '../../services/wheelService.js' does not provide an export named 'spinWheel'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 9)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'rewards': file:///app/src/domains/rewards/rewards.service.js:3
-import { spinWheel as spinWheelService } from "../../services/wheelService.js";
-         ^^^^^^^^^
-SyntaxError: The requested module '../../services/wheelService.js' does not provide an export named 'spinWheel'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 33)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'coupons': file:///app/src/domains/rewards/rewards.service.js:3
-import { spinWheel as spinWheelService } from "../../services/wheelService.js";
-         ^^^^^^^^^
-SyntaxError: The requested module '../../services/wheelService.js' does not provide an export named 'spinWheel'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 6)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'settings': file:///app/src/domains/settings/settings.routes.js:11
-  testWhatsappMessageValidation,
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module './settings.validation.js' does not provide an export named 'testWhatsappMessageValidation'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 35)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'public': file:///app/src/domains/rewards/rewards.service.js:3
-import { spinWheel as spinWheelService } from "../../services/wheelService.js";
-         ^^^^^^^^^
-SyntaxError: The requested module '../../services/wheelService.js' does not provide an export named 'spinWheel'
+Error loading routes for domain 'public': file:///app/src/domains/public/public.service.js:4
+import { generateCouponForReward } from "../../domains/rewards/rewards.service.js";
+         ^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module '../../domains/rewards/rewards.service.js' does not provide an export named 'generateCouponForReward'
     at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
     at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
@@ -98,15 +27,4 @@ SyntaxError: The requested module '../../services/wheelService.js' does not prov
     at async Promise.all (index 23)
     at async default (file:///app/routes/index.js:32:3)
     at async startServer (file:///app/server.js:92:23)
-Error loading routes for domain 'feedbacks': file:///app/src/domains/feedbacks/feedbacks.routes.js:9
-  createFeedbackValidation,
-  ^^^^^^^^^^^^^^^^^^^^^^^^
-SyntaxError: The requested module './feedbacks.validation.js' does not provide an export named 'createFeedbackValidation'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:213:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:320:5)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
-    at async file:///app/routes/index.js:46:50
-    at async Promise.all (index 11)
-    at async default (file:///app/routes/index.js:32:3)
-    at async startServer (file:///app/server.js:92:23)
-2025-09-16 13:56:05 [info]: 	🚀 Servidor rodando na porta 5000
+2025-09-16 14:02:55 [info]: 	🚀 Servidor rodando na porta 5000

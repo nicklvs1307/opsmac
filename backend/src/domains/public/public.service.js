@@ -1,11 +1,12 @@
 import { Op } from "sequelize";
 import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
 import { sendWhatsAppMessage } from "../../services/integrations/whatsappApiClient.js";
-import { generateCouponForReward } from "../../domains/rewards/rewards.service.js";
+import rewardsServiceFactory from "../../domains/rewards/rewards.service.js";
 import logger from "../../utils/logger.js";
 
 export default (db) => {
   const models = db;
+  const rewardsService = rewardsServiceFactory(db);
 
   const submitPublicFeedback = async (
     restaurant_id,

@@ -104,7 +104,7 @@ export const useSurveyResults = (surveyId, options) => {
 };
 
 const fetchSurveys = async (restaurantId, filters) => {
-  const params = { ...filters, restaurant_id: restaurantId };
+  const params = { ...filters, restaurantId: restaurantId };
   const { data } = await axiosInstance.get('/surveys', { params });
   return data;
 };

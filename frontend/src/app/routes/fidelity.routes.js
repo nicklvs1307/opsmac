@@ -62,7 +62,7 @@ const Dispatches = lazy(() => import('@/features/Fidelidade/Relacionamento/pages
 const Campaigns = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Campaigns'));
 const Messages = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Messages'));
 const Segmentation = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Segmentation'));
-const FidelityReports = lazy(() => import('@/features/Loyalty/pages/Reports'));
+
 const GeneratedCouponsReport = lazy(
   () => import('@/features/Reports/pages/GeneratedCouponsReport')
 );
@@ -529,16 +529,7 @@ const fidelityRoutes = [
       </ProtectedRoute>
     ),
   },
-  {
-    path: 'fidelity/reports',
-    element: (
-      <ProtectedRoute featureKey="fidelity:reports" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <FidelityReports />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
+  
   {
     path: 'fidelity/coupons/redemption-reports',
     element: (

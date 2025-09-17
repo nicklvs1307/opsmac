@@ -1,40 +1,24 @@
-{
-    "message": "Request failed with status code 404",
-    "name": "AxiosError",
-    "stack": "AxiosError: Request failed with status code 404\n    at Re (https://feedelizapro.towersfy.com/static/js/main.56ef2d25.js:2:311150)\n    at XMLHttpRequest.g (https://feedelizapro.towersfy.com/static/js/main.56ef2d25.js:2:315728)\n    at wt.request (https://feedelizapro.towersfy.com/static/js/main.56ef2d25.js:2:326862)\n    at async login (https://feedelizapro.towersfy.com/static/js/main.56ef2d25.js:2:2884)\n    at async onSubmit (https://feedelizapro.towersfy.com/static/js/7533.fdc8b6ba.chunk.js:1:8389)\n    at async push.24858.Te.ve (https://feedelizapro.towersfy.com/static/js/4858.2a152e1f.chunk.js:1:21216)",
-    "config": {
-        "transitional": {
-            "silentJSONParsing": true,
-            "forcedJSONParsing": true,
-            "clarifyTimeoutError": false
-        },
-        "adapter": [
-            "xhr",
-            "http",
-            "fetch"
-        ],
-        "transformRequest": [
-            null
-        ],
-        "transformResponse": [
-            null
-        ],
-        "timeout": 10000,
-        "xsrfCookieName": "XSRF-TOKEN",
-        "xsrfHeaderName": "X-XSRF-TOKEN",
-        "maxContentLength": -1,
-        "maxBodyLength": -1,
-        "env": {},
-        "headers": {
-            "Accept": "application/json, text/plain, */*",
-            "Content-Type": "application/json"
-        },
-        "baseURL": "https://feedelizaapi.towersfy.com/api",
-        "method": "post",
-        "url": "/auth/login",
-        "data": "{\"email\":\"superadmin@example.com\",\"password\":\"superadmin@123\"}",
-        "allowAbsoluteUrls": true
-    },
-    "code": "ERR_BAD_REQUEST",
-    "status": 404
-}
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           14.1s
+------
+ > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
+0.318 + npm run build
+1.012
+1.012 > feedeliza-plus@1.0.0 build
+1.012 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+1.012
+4.792 Creating an optimized production build...
+13.93 Failed to compile.
+13.93
+13.93 Module not found: Error: Can't resolve '@/features/Loyalty/pages/Reports' in '/app/frontend/src/app/routes'
+13.93
+13.93
+------
+Dockerfile.frontend:27
+--------------------
+  25 |     RUN if [ -z "$REACT_APP_API_URL" ]; then echo "Error: Build argument REACT_APP_API_URL is required." && exit 1; fi
+  26 |     ENV REACT_APP_API_URL=$REACT_APP_API_URL
+  27 | >>> RUN set -x && npm run build && ls -la /app/frontend/build
+  28 |
+  29 |     # Estágio final para servir os arquivos com NGINX
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1

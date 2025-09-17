@@ -50,7 +50,7 @@ export default async (db) => {
           mainRouter.use(`/api/${domainName}`, domainRouter);
         } else {
           mainRouter.use(
-            `/api/${domainName}`,
+            `/${domainName}`,
             auth,
             restaurantContextMiddleware,
             domainRouter,

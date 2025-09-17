@@ -8,6 +8,7 @@ import {
 } from "../../utils/errors/index.js";
 import redisClient from "../../config/redisClient.js";
 import logger from "../../utils/logger.js";
+import auditService from "../../services/auditService.js";
 
 class IamService {
   constructor(db) {
@@ -39,7 +40,7 @@ class IamService {
     return role;
   }
 
-  async createRole(restaurantId, key, name, isSystem) {
+  async createRole(user, restaurantId, key, name, isSystem) {
     if (!restaurantId || !key || !name) {
       throw new BadRequestError(
         "Bad Request: restaurantId, key, and name are required.",
@@ -52,6 +53,13 @@ class IamService {
       isSystem,
     });
     await this.bumpPermVersion(restaurantId);
+    await auditService.log(
+      user,
+      restaurantId,
+      "ROLE_CREATED",
+      `Role:${role.id}`,
+      { key, name, isSystem },
+    );
     return role;
   }
 
@@ -64,7 +72,7 @@ class IamService {
     });
   }
 
-  async updateRole(id, restaurantId, name) {
+  async updateRole(user, id, restaurantId, name) {
     const role = await this.models.Role.findByPk(id);
     if (!role) {
       throw new NotFoundError("Role not found");
@@ -74,12 +82,20 @@ class IamService {
         "Forbidden: Role does not belong to the specified restaurant.",
       );
     }
+    const oldName = role.name;
     await role.update({ name });
     await this.bumpPermVersion(role.restaurantId);
+    await auditService.log(
+      user,
+      restaurantId,
+      "ROLE_UPDATED",
+      `Role:${role.id}`,
+      { oldName, newName: name },
+    );
     return role;
   }
 
-  async deleteRole(id, restaurantId) {
+  async deleteRole(user, id, restaurantId) {
     if (!restaurantId) {
       throw new BadRequestError("Bad Request: restaurantId is required.");
     }
@@ -94,13 +110,36 @@ class IamService {
     }
     await role.destroy();
     await this.bumpPermVersion(restaurantId);
+    await auditService.log(
+      user,
+      restaurantId,
+      "ROLE_DELETED",
+      `Role:${id}`,
+      { roleId: id, roleName: role.name },
+    );
   }
 
-  async setRolePermissions(roleId, restaurantId, permissions) {
+  async setRolePermissions(user, roleId, restaurantId, permissions) {
     if (!restaurantId || !permissions || !Array.isArray(permissions)) {
       throw new BadRequestError(
         "Bad Request: restaurantId and permissions array are required.",
       );
+    }
+
+    const [allFeatures, allActions] = await Promise.all([
+      this.models.Feature.findAll({ attributes: ["id"] }),
+      this.models.Action.findAll({ attributes: ["id"] }),
+    ]);
+    const existingFeatureIds = new Set(allFeatures.map((f) => f.id));
+    const existingActionIds = new Set(allActions.map((a) => a.id));
+
+    for (const p of permissions) {
+      if (!existingFeatureIds.has(p.featureId)) {
+        throw new BadRequestError(`Feature with ID ${p.featureId} not found.`);
+      }
+      if (!existingActionIds.has(p.actionId)) {
+        throw new BadRequestError(`Action with ID ${p.actionId} not found.`);
+      }
     }
 
     await this.models.RolePermission.destroy({ where: { roleId: roleId } });
@@ -119,6 +158,13 @@ class IamService {
     const role = await this.models.Role.findByPk(roleId);
     if (role) {
       await this.bumpPermVersion(restaurantId);
+      await auditService.log(
+        user,
+        restaurantId,
+        "ROLE_PERMISSIONS_UPDATED",
+        `Role:${roleId}`,
+        { permissions: newPermissions },
+      );
     }
     return { message: "Role permissions updated successfully" };
   }
@@ -137,7 +183,7 @@ class IamService {
     });
   }
 
-  async assignUserRole(userId, restaurantId, roleId) {
+  async assignUserRole(user, userId, restaurantId, roleId) {
     if (!restaurantId || !roleId) {
       throw new BadRequestError(
         "Bad Request: restaurantId and roleId are required.",
@@ -149,10 +195,17 @@ class IamService {
       roleId: roleId,
     });
     await this.bumpPermVersion(restaurantId);
+    await auditService.log(
+      user,
+      restaurantId,
+      "USER_ROLE_ASSIGNED",
+      `UserRole:${userId}:${restaurantId}:${roleId}`,
+      { userId, restaurantId, roleId },
+    );
     return userRole;
   }
 
-  async removeUserRole(userId, restaurantId, roleId) {
+  async removeUserRole(user, userId, restaurantId, roleId) {
     if (!restaurantId || !roleId) {
       throw new BadRequestError(
         "Bad Request: restaurantId and roleId are required.",
@@ -162,6 +215,13 @@ class IamService {
       where: { userId: userId, restaurantId: restaurantId, roleId: roleId },
     });
     await this.bumpPermVersion(restaurantId);
+    await auditService.log(
+      user,
+      restaurantId,
+      "USER_ROLE_REMOVED",
+      `UserRole:${userId}:${restaurantId}:${roleId}`,
+      { userId, restaurantId, roleId },
+    );
   }
 
   async getUserPermissionOverrides(targetUserId, restaurantId) {
@@ -183,11 +243,27 @@ class IamService {
     });
   }
 
-  async setUserPermissionOverride(userId, restaurantId, overrides) {
+  async setUserPermissionOverride(user, userId, restaurantId, overrides) {
     if (!restaurantId || !Array.isArray(overrides)) {
       throw new BadRequestError(
         "Bad Request: restaurantId and overrides array are required.",
       );
+    }
+
+    const [allFeatures, allActions] = await Promise.all([
+      this.models.Feature.findAll({ attributes: ["id"] }),
+      this.models.Action.findAll({ attributes: ["id"] }),
+    ]);
+    const existingFeatureIds = new Set(allFeatures.map((f) => f.id));
+    const existingActionIds = new Set(allActions.map((a) => a.id));
+
+    for (const o of overrides) {
+      if (!existingFeatureIds.has(o.featureId)) {
+        throw new BadRequestError(`Feature with ID ${o.featureId} not found.`);
+      }
+      if (!existingActionIds.has(o.actionId)) {
+        throw new BadRequestError(`Action with ID ${o.actionId} not found.`);
+      }
     }
 
     await this.models.UserPermissionOverride.destroy({
@@ -209,10 +285,18 @@ class IamService {
     }
 
     await this.bumpPermVersion(restaurantId);
+    await auditService.log(
+      user,
+      restaurantId,
+      "USER_PERMISSION_OVERRIDES_UPDATED",
+      `User:${userId}:${restaurantId}`,
+      { overrides: newOverrides },
+    );
     return { message: "User permission overrides updated successfully" };
   }
 
   async deleteUserPermissionOverride(
+    user,
     userId,
     restaurantId,
     featureId,
@@ -227,10 +311,17 @@ class IamService {
       },
     });
     await this.bumpPermVersion(restaurantId);
+    await auditService.log(
+      user,
+      restaurantId,
+      "USER_PERMISSION_OVERRIDE_DELETED",
+      `User:${userId}:${restaurantId}:${featureId}:${actionId}`,
+      { userId, restaurantId, featureId, actionId },
+    );
   }
 
   async removeEntitlement(
-    userId,
+    user,
     restaurantId,
     entityType,
     entityId,
@@ -260,10 +351,17 @@ class IamService {
 
     if (result > 0 && restaurantId) {
       await this.bumpPermVersion(restaurantId);
+      await auditService.log(
+        user,
+        restaurantId,
+        "RESTAURANT_ENTITLEMENT_REMOVED",
+        `Restaurant:${restaurantId}:${entityType}:${entityId}`,
+        { entityType, entityId },
+      );
     }
   }
 
-  async setRestaurantEntitlements(restaurantId, entitlements) {
+  async setRestaurantEntitlements(user, restaurantId, entitlements) {
     if (!restaurantId || !Array.isArray(entitlements)) {
       throw new BadRequestError(
         "Bad Request: restaurantId and entitlements array are required.",
@@ -336,6 +434,13 @@ class IamService {
 
       if (createdCount > 0 || updatedCount > 0) {
         await this.bumpPermVersion(restaurantId);
+        await auditService.log(
+          user,
+          restaurantId,
+          "RESTAURANT_ENTITLEMENTS_UPDATED",
+          `Restaurant:${restaurantId}`,
+          { entitlements },
+        );
       }
 
       return {
@@ -358,7 +463,7 @@ class IamService {
     });
   }
 
-  async setEntitlementsBulk(restaurantId, entitlements, isSuperadmin = false) {
+  async setEntitlementsBulk(user, restaurantId, entitlements, isSuperadmin = false) {
     if (
       !isSuperadmin &&
       (!restaurantId || !entitlements || !Array.isArray(entitlements))
@@ -418,6 +523,13 @@ class IamService {
       }
       await t.commit();
       await this.bumpPermVersion(restaurantId);
+      await auditService.log(
+        user,
+        restaurantId,
+        "RESTAURANT_ENTITLEMENTS_UPDATED",
+        `Restaurant:${restaurantId}`,
+        { entitlements },
+      );
       return { message: "Entitlements set successfully." };
     } catch (error) {
       await t.rollback();

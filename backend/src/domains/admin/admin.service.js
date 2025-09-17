@@ -1,12 +1,13 @@
 import { BadRequestError, NotFoundError } from "../../utils/errors.js";
 import { generateUniqueSlug } from "../../utils/slugGenerator.js";
 import bcrypt from "bcryptjs";
+import auditService from "../../services/auditService.js";
 
 export default (db) => {
   const models = db;
   const sequelize = db.sequelize;
 
-  const createUser = async (userData, creatorUser) => {
+  const createUser = async (actorUser, userData) => {
     const { name, email, password, phone, roleName, restaurantId } = userData;
 
     const existingUser = await models.User.findOne({ where: { email } });
@@ -21,13 +22,13 @@ export default (db) => {
 
     let finalRestaurantId = restaurantId;
 
-    if (creatorUser && creatorUser.role.name !== "super_admin") {
-      if (!creatorUser.restaurantId) {
+    if (actorUser && actorUser.role.name !== "super_admin") {
+      if (!actorUser.restaurantId) {
         throw new BadRequestError(
           "O usuário criador não está associado a um restaurante.",
         );
       }
-      finalRestaurantId = creatorUser.restaurantId;
+      finalRestaurantId = actorUser.restaurantId;
     } else {
       if (!restaurantId) {
         throw new BadRequestError(
@@ -61,10 +62,18 @@ export default (db) => {
       restaurantId: finalRestaurantId,
     });
 
+    await auditService.log(
+      actorUser,
+      finalRestaurantId,
+      "USER_CREATED",
+      `User:${user.id}`,
+      { name, email, phone, roleName, restaurantId: finalRestaurantId },
+    );
+
     return user;
   };
 
-  const createRestaurantWithOwner = async (data) => {
+  const createRestaurantWithOwner = async (actorUser, data) => {
     const { restaurantName, ownerName, ownerEmail, ownerPassword } = data;
 
     return sequelize.transaction(async (t) => {
@@ -122,6 +131,14 @@ export default (db) => {
         { transaction: t },
       );
 
+      await auditService.log(
+        actorUser,
+        restaurant.id,
+        "RESTAURANT_CREATED_WITH_OWNER",
+        `Restaurant:${restaurant.id}`,
+        { restaurantName, ownerEmail },
+      );
+
       return { restaurant, owner };
     });
   };
@@ -136,11 +153,13 @@ export default (db) => {
     });
   };
 
-  const updateUser = async (userId, updateData) => {
+  const updateUser = async (actorUser, userId, updateData) => {
     const user = await models.User.findByPk(userId);
     if (!user) {
       throw new NotFoundError("Usuário não encontrado");
     }
+
+    const oldUserData = { ...user.toJSON() }; // Capture old data for audit
 
     if (updateData.roleName) {
       const role = await models.Role.findOne({
@@ -151,15 +170,25 @@ export default (db) => {
           `Função '${updateData.roleName}' não encontrada.`,
         );
       }
-      updateData.roleId = role.id;
+      // Assuming role update logic is handled elsewhere or needs to be added here
+      // For now, just remove roleName from updateData if it's not a direct user field
       delete updateData.roleName;
     }
 
     await user.update(updateData);
+
+    await auditService.log(
+      actorUser,
+      null, // User update might not be tied to a specific restaurant context directly here
+      "USER_UPDATED",
+      `User:${userId}`,
+      { oldData: oldUserData, newData: updateData },
+    );
+
     return user;
   };
 
-  const createRestaurant = async (restaurantData) => {
+  const createRestaurant = async (actorUser, restaurantData) => {
     const { name } = restaurantData;
     let { ownerId } = restaurantData;
 
@@ -198,6 +227,14 @@ export default (db) => {
       { where: { id: ownerId } },
     );
 
+    await auditService.log(
+      actorUser,
+      restaurant.id,
+      "RESTAURANT_CREATED",
+      `Restaurant:${restaurant.id}`,
+      { name, ownerId },
+    );
+
     return restaurant;
   };
 
@@ -233,11 +270,13 @@ export default (db) => {
     return models.Restaurant.findByPk(restaurantId);
   };
 
-  const updateRestaurant = async (restaurantId, updateData) => {
+  const updateRestaurant = async (actorUser, restaurantId, updateData) => {
     const restaurant = await models.Restaurant.findByPk(restaurantId);
     if (!restaurant) {
       throw new NotFoundError("Restaurante não encontrado");
     }
+
+    const oldRestaurantData = { ...restaurant.toJSON() }; // Capture old data for audit
 
     if (updateData.ownerId) {
       const newOwner = await models.User.findByPk(updateData.ownerId);
@@ -247,6 +286,15 @@ export default (db) => {
     }
 
     await restaurant.update(updateData);
+
+    await auditService.log(
+      actorUser,
+      restaurantId,
+      "RESTAURANT_UPDATED",
+      `Restaurant:${restaurantId}`,
+      { oldData: oldRestaurantData, newData: updateData },
+    );
+
     return restaurant;
   };
 
@@ -314,6 +362,40 @@ export default (db) => {
     return enabledFeatureIds;
   };
 
+  const deleteRestaurant = async (actorUser, restaurantId) => {
+    const restaurant = await models.Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      throw new NotFoundError("Restaurante não encontrado.");
+    }
+
+    await restaurant.destroy();
+
+    await auditService.log(
+      actorUser,
+      restaurantId,
+      "RESTAURANT_DELETED",
+      `Restaurant:${restaurantId}`,
+      { restaurantName: restaurant.name },
+    );
+  };
+
+  const deleteUser = async (actorUser, userId) => {
+    const user = await models.User.findByPk(userId);
+    if (!user) {
+      throw new NotFoundError("Usuário não encontrado.");
+    }
+
+    await user.destroy();
+
+    await auditService.log(
+      actorUser,
+      null, // User deletion might not be tied to a specific restaurant context directly here
+      "USER_DELETED",
+      `User:${userId}`,
+      { userName: user.name, userEmail: user.email },
+    );
+  };
+
   return {
     createUser,
     createRestaurantWithOwner,
@@ -326,5 +408,7 @@ export default (db) => {
     listModules,
     getRestaurantFeatures,
     updateRestaurantFeatures,
+    deleteRestaurant,
+    deleteUser,
   };
 };

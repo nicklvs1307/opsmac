@@ -76,13 +76,7 @@ export default (db) => {
   );
 
   // Rotas de Usuários do Restaurante
-  router.post(
-    "/users",
-    auth,
-    requirePermission("restaurant_users", "create"),
-    ...userValidation,
-    asyncHandler(restaurantController.createRestaurantUser),
-  );
+  
   router.put(
     "/users/:userId",
     auth,

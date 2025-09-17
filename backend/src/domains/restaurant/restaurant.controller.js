@@ -91,22 +91,7 @@ export default (restaurantService) => {
     res.json(users);
   };
 
-  const createRestaurantUser = async (req, res, next) => {
-    handleValidationErrors(req);
-    const restaurantId = req.context.restaurantId;
-    const newUser = await restaurantService.createRestaurantUser(
-      restaurantId,
-      req.body,
-    );
-    await auditService.log(
-      req.user,
-      restaurantId,
-      "RESTAURANT_USER_CREATED",
-      `User:${newUser.id}`,
-      { email: newUser.email },
-    );
-    res.status(201).json(newUser);
-  };
+  
 
   const updateRestaurantUser = async (req, res, next) => {
     handleValidationErrors(req);
@@ -779,7 +764,7 @@ export default (restaurantService) => {
     updateRestaurantOpenStatus,
     updateRestaurantPosStatus,
     listRestaurantUsers,
-    createRestaurantUser,
+    
     updateRestaurantUser,
     deleteRestaurantUser,
     getRestaurantAddons,

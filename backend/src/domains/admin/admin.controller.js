@@ -22,6 +22,8 @@ class AdminController {
     this.getRestaurantModules = this.getRestaurantModules.bind(this);
     this.updateRestaurantFeatures = this.updateRestaurantFeatures.bind(this);
     this.getRestaurantFeatures = this.getRestaurantFeatures.bind(this);
+    this.deleteRestaurant = this.deleteRestaurant.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   _handleValidationErrors(req) {
@@ -34,7 +36,7 @@ class AdminController {
   // User Management
   async createUser(req, res, next) {
     this._handleValidationErrors(req);
-    const user = await this.adminService.createUser(req.body, req.user); // Pass req.user
+    const user = await this.adminService.createUser(req.user, req.body); // Pass req.user
     await auditService.log(req.user, null, "USER_CREATED", `User:${user.id}`, {
       email: user.email,
     });
@@ -48,17 +50,30 @@ class AdminController {
 
   async updateUser(req, res, next) {
     this._handleValidationErrors(req);
-    const user = await this.adminService.updateUser(req.params.id, req.body);
+    const user = await this.adminService.updateUser(req.user, req.params.id, req.body);
     await auditService.log(req.user, null, "USER_UPDATED", `User:${user.id}`, {
       updatedData: req.body,
     });
     res.status(200).json({ message: "Usuário atualizado com sucesso", user });
   }
 
+  async deleteUser(req, res, next) {
+    const userId = req.params.id;
+    await this.adminService.deleteUser(req.user, userId);
+    await auditService.log(
+      req.user,
+      null, // User deletion might not be tied to a specific restaurant context directly here
+      "USER_DELETED",
+      `User:${userId}`,
+      {},
+    );
+    res.status(204).send();
+  }
+
   // Restaurant Management
   async createRestaurant(req, res, next) {
     this._handleValidationErrors(req);
-    const restaurant = await this.adminService.createRestaurant(req.body);
+    const restaurant = await this.adminService.createRestaurant(req.user, req.body);
     await auditService.log(
       req.user,
       restaurant.id,
@@ -74,7 +89,7 @@ class AdminController {
   async createRestaurantWithOwner(req, res, next) {
     this._handleValidationErrors(req);
     const { restaurant, owner } =
-      await this.adminService.createRestaurantWithOwner(req.body);
+      await this.adminService.createRestaurantWithOwner(req.user, req.body);
     await auditService.log(
       req.user,
       restaurant.id,
@@ -105,6 +120,7 @@ class AdminController {
   async updateRestaurant(req, res, next) {
     this._handleValidationErrors(req);
     const restaurant = await this.adminService.updateRestaurant(
+      req.user,
       req.params.id,
       req.body,
     );
@@ -118,6 +134,19 @@ class AdminController {
     res
       .status(200)
       .json({ message: "Restaurante atualizado com sucesso", restaurant });
+  }
+
+  async deleteRestaurant(req, res, next) {
+    const restaurantId = req.params.id;
+    await this.adminService.deleteRestaurant(req.user, restaurantId);
+    await auditService.log(
+      req.user,
+      restaurantId,
+      "RESTAURANT_DELETED",
+      `Restaurant:${restaurantId}`,
+      {},
+    );
+    res.status(204).send();
   }
 
   // Module Management
@@ -135,6 +164,7 @@ class AdminController {
     this._handleValidationErrors(req);
     const restaurantId = req.params.id; // Use req.params.id to match route
     const features = await this.adminService.updateRestaurantFeatures(
+      req.user,
       restaurantId,
       req.body.enabledFeatureIds,
     );

@@ -51,13 +51,7 @@ export default (db) => {
     return users;
   };
 
-  const createRestaurantUser = async (restaurantId, userData) => {
-    const user = await models.User.create({
-      ...userData,
-      restaurant_id: restaurantId,
-    });
-    return user;
-  };
+  
 
   const updateRestaurantUser = async (restaurantId, userId, userData) => {
     const user = await models.User.findOne({
@@ -605,7 +599,7 @@ export default (db) => {
     updateRestaurant,
     updateRestaurantStatus,
     listRestaurantUsers,
-    createRestaurantUser,
+    
     updateRestaurantUser,
     deleteRestaurantUser,
     getRestaurantAddons,

@@ -36,6 +36,11 @@ export default (db) => {
     ...updateUserValidation,
     asyncHandler(adminController.updateUser),
   );
+  router.delete(
+    "/users/:id",
+    requirePermission("admin:users", "delete"),
+    asyncHandler(adminController.deleteUser),
+  );
 
   // Restaurant Management
   router.post(
@@ -65,6 +70,11 @@ export default (db) => {
     requirePermission("admin:restaurants", "update"),
     ...updateRestaurantValidation,
     asyncHandler(adminController.updateRestaurant),
+  );
+  router.delete(
+    "/restaurants/:id",
+    requirePermission("admin:restaurants", "delete"),
+    asyncHandler(adminController.deleteRestaurant),
   );
 
   // Module Management

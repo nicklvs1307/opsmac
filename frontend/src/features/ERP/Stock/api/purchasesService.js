@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const PURCHASES_QUERY_KEYS = {
   products: 'purchasesProducts',
@@ -24,14 +25,16 @@ const createPurchase = ({ restaurantId, purchaseData }) => {
 
 // React Query Hooks
 export const useProductsForPurchases = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(PURCHASES_QUERY_KEYS.products, () => fetchProducts(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
   });
 };
 
 export const useSuppliersForPurchases = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(PURCHASES_QUERY_KEYS.suppliers, () => fetchSuppliers(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
   });
 };
 

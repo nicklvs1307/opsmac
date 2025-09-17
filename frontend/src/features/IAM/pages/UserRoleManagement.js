@@ -5,7 +5,7 @@ import usePermissions from '@/hooks/usePermissions';
 import { useQueryClient } from 'react-query';
 import { toast } from 'react-hot-toast';
 import { useGetRoles, useAssignUserRole, useRemoveUserRole } from '@/features/IAM/api/iamQueries';
-import { fetchUsers } from '@/services/adminService'; // To fetch users with their roles
+import { fetchUsers } from '@/features/Admin/services/adminService'; // To fetch users with their roles
 
 const UserRoleManagement = () => {
   const { selectedRestaurantId } = useAuth(); // Use selectedRestaurantId from AuthContext

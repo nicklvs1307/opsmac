@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
@@ -29,22 +29,17 @@ const AdminRestaurantsPage = () => {
 
   const [isModuleModalOpen, setIsModuleModalOpen] = useState(false);
   const [selectedRestaurantForModules, setSelectedRestaurantForModules] = useState(null);
-  const [selectedModuleStates, setSelectedModuleStates] = useState({}); // New state for module states (checked/indeterminate)
+  const [selectedModuleStates, setSelectedModuleStates] = useState({});
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [restaurantToDelete, setRestaurantToDelete] = useState(null);
 
-  // Fetch permission tree for the selected restaurant (when modal is open)
-  const {
-    data: permissionTree,
-    isLoading: isLoadingPermissionTree,
-    isError: isErrorPermissionTree,
-    error: errorPermissionTree,
-  } = useGetPermissionTree(selectedRestaurantForModules?.id, {
+  const { data: permissionTree, isLoading: isLoadingPermissionTree } = useGetPermissionTree(selectedRestaurantForModules?.id, {
     enabled: isModuleModalOpen && !!selectedRestaurantForModules?.id,
   });
 
   const handleOpenModuleModal = (restaurant) => {
     setSelectedRestaurantForModules(restaurant);
     setIsModuleModalOpen(true);
-    // Initialize selectedModuleStates based on the fetched permissionTree
     if (permissionTree) {
       const initialSelected = {};
       permissionTree.modules.forEach((module) => {
@@ -66,7 +61,6 @@ const AdminRestaurantsPage = () => {
           });
         });
         module.features.forEach((feature) => {
-          // Direct features under module
           initialSelected[module.id].features[feature.id] = feature.status === 'active';
         });
       });
@@ -77,7 +71,7 @@ const AdminRestaurantsPage = () => {
   const handleCloseModuleModal = () => {
     setIsModuleModalOpen(false);
     setSelectedRestaurantForModules(null);
-    setSelectedModuleStates({}); // Clear selected states on close
+    setSelectedModuleStates({});
   };
 
   const handleSaveModules = async (updatedModuleStates) => {
@@ -85,8 +79,6 @@ const AdminRestaurantsPage = () => {
 
     const entitlementsToUpdate = [];
 
-    // Iterate through the updatedModuleStates to build the entitlements array
-    // This logic should mirror the structure of permissionTree
     permissionTree?.modules.forEach((module) => {
       const currentModuleState = updatedModuleStates[module.id];
       if (currentModuleState) {
@@ -145,8 +137,8 @@ const AdminRestaurantsPage = () => {
         entitlements: entitlementsToUpdate,
       });
       toast.success('Funcionalidades do restaurante atualizadas com sucesso!');
-      queryClient.invalidateQueries(['permissionTree', selectedRestaurantForModules.id]); // Invalidate permission tree
-      handleCloseModuleModal(); // Close modal after saving
+      queryClient.invalidateQueries(['permissionTree', selectedRestaurantForModules.id]);
+      handleCloseModuleModal();
     } catch (err) {
       console.error('Failed to update entitlements:', err);
       toast.error(
@@ -155,25 +147,29 @@ const AdminRestaurantsPage = () => {
     }
   };
 
-  // Use the refactored useAdminData hook for restaurants
   const { restaurants, loading } = useAdminData();
 
-  // React Query Mutations
   const saveRestaurantMutation = useSaveAdminRestaurant();
   const createRestaurantWithOwnerMutation = useCreateRestaurantWithOwner();
   const setEntitlementsMutation = useSetEntitlements();
 
-  const handleDeleteRestaurant = async (restaurantId) => {
-    if (window.confirm(t('admin_dashboard.confirm_delete_restaurant'))) {
+  const handleDeleteClick = (restaurantId) => {
+    setRestaurantToDelete(restaurantId);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (restaurantToDelete) {
       try {
-        await deleteRestaurant(restaurantId);
-        queryClient.invalidateQueries('adminRestaurants'); // Invalidate cache to refetch restaurants
+        await deleteRestaurant(restaurantToDelete);
+        queryClient.invalidateQueries('adminRestaurants');
         toast.success('Restaurante excluído com sucesso!');
       } catch (error) {
-        console.error("Failed to delete restaurant:", error);
-        toast.error(
-          error.response?.data?.message || 'Erro ao excluir restaurante.'
-        );
+        console.error('Failed to delete restaurant:', error);
+        toast.error(error.response?.data?.message || 'Erro ao excluir restaurante.');
+      } finally {
+        setDeleteDialogOpen(false);
+        setRestaurantToDelete(null);
       }
     }
   };
@@ -207,7 +203,7 @@ const AdminRestaurantsPage = () => {
         canEditRestaurant={can('admin:restaurants', 'update')}
         canManageRestaurantModules={can('entitlements', 'update')}
         canDeleteRestaurant={can('admin:restaurants', 'delete')}
-        onDeleteRestaurant={handleDeleteRestaurant}
+        onDeleteRestaurant={handleDeleteClick}
         handleOpenModuleModal={handleOpenModuleModal}
       />
 
@@ -223,6 +219,24 @@ const AdminRestaurantsPage = () => {
           loading={setEntitlementsMutation.isLoading || isLoadingPermissionTree}
         />
       )}
+
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+      >
+        <DialogTitle>{t('admin_dashboard.confirm_delete_restaurant_title')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t('admin_dashboard.confirm_delete_restaurant')}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteDialogOpen(false)}>{t('common.cancel')}</Button>
+          <Button onClick={confirmDelete} color="error">
+            {t('common.delete')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

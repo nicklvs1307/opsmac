@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const SUPPLIER_QUERY_KEYS = {
   suppliers: 'suppliers',
@@ -26,8 +27,9 @@ const deleteSupplier = (id) => {
 
 // React Query Hooks
 export const useSuppliers = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(SUPPLIER_QUERY_KEYS.suppliers, () => fetchSuppliers(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
   });
 };
 

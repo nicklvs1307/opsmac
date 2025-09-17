@@ -35,9 +35,9 @@ const CouponEditPage = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
 
   const validationSchema = yup.object().shape({
-    reward_id: yup.string().required(t('coupon_create_form.reward_required')),
-    customer_id: yup.string().required(t('coupon_create_form.customer_required')),
-    expires_at: yup.date().nullable(),
+    rewardId: yup.string().required(t('coupon_create_form.reward_required')),
+    customerId: yup.string().required(t('coupon_create_form.customer_required')),
+    expiresAt: yup.date().nullable(),
   });
 
   const {
@@ -68,19 +68,19 @@ const CouponEditPage = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      reward_id: '',
-      customer_id: '',
-      expires_at: '',
+      rewardId: '',
+      customerId: '',
+      expiresAt: '',
     },
   });
 
   useEffect(() => {
     if (couponData) {
       reset({
-        reward_id: couponData.reward_id,
-        customer_id: couponData.customer_id,
-        expires_at: couponData.expires_at
-          ? new Date(couponData.expires_at).toISOString().slice(0, 16)
+        rewardId: couponData.rewardId,
+        customerId: couponData.customerId,
+        expiresAt: couponData.expiresAt
+          ? new Date(couponData.expiresAt).toISOString().slice(0, 16)
           : '',
       });
     }
@@ -126,10 +126,10 @@ const CouponEditPage = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Controller
-                name="reward_id"
+                name="rewardId"
                 control={control}
                 render={({ field }) => (
-                  <FormControl fullWidth error={!!errors.reward_id}>
+                  <FormControl fullWidth error={!!errors.rewardId}>
                     <InputLabel>{t('coupon_create_form.reward_label')}</InputLabel>
                     <Select {...field} label={t('coupon_create_form.reward_label')}>
                       {rewards.map((reward) => (
@@ -144,10 +144,10 @@ const CouponEditPage = () => {
             </Grid>
             <Grid item xs={12}>
               <Controller
-                name="customer_id"
+                name="customerId"
                 control={control}
                 render={({ field }) => (
-                  <FormControl fullWidth error={!!errors.customer_id}>
+                  <FormControl fullWidth error={!!errors.customerId}>
                     <InputLabel>{t('coupon_create_form.customer_label')}</InputLabel>
                     <Select {...field} label={t('coupon_create_form.customer_label')}>
                       {customers.map((customer) => (
@@ -162,7 +162,7 @@ const CouponEditPage = () => {
             </Grid>
             <Grid item xs={12}>
               <Controller
-                name="expires_at"
+                name="expiresAt"
                 control={control}
                 render={({ field }) => (
                   <TextField

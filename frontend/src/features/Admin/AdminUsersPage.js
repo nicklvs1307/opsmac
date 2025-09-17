@@ -1,8 +1,9 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useQueryClient } from 'react-query'; // Import useQueryClient
+import { useQueryClient } from 'react-query';
+import toast from 'react-hot-toast';
 
 // React Query Hooks
 import { useSaveAdminUser } from '@/features/Admin/api/adminQueries';
@@ -21,22 +22,31 @@ const AdminUsersPage = () => {
   const { t } = useTranslation();
   const { can } = usePermissions();
   const navigate = useNavigate();
-  const queryClient = useQueryClient(); // Initialize useQueryClient
+  const queryClient = useQueryClient();
 
   const { users, loading } = useAdminData();
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
 
-  // React Query Mutations
   const saveUserMutation = useSaveAdminUser();
 
-  const handleDeleteUser = async (userId) => {
-    if (window.confirm(t('admin_dashboard.confirm_delete_user'))) {
+  const handleDeleteClick = (userId) => {
+    setUserToDelete(userId);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (userToDelete) {
       try {
-        await deleteUser(userId);
-        queryClient.invalidateQueries('adminUsers'); // Invalidate cache to refetch users
-        // Optionally show a success message
+        await deleteUser(userToDelete);
+        queryClient.invalidateQueries('adminUsers');
+        toast.success('Usuário excluído com sucesso!');
       } catch (error) {
-        // Optionally show an error message
-        console.error("Failed to delete user:", error);
+        console.error('Failed to delete user:', error);
+        toast.error(error.response?.data?.message || 'Erro ao excluir usuário.');
+      } finally {
+        setDeleteDialogOpen(false);
+        setUserToDelete(null);
       }
     }
   };
@@ -64,8 +74,26 @@ const AdminUsersPage = () => {
         canAddUser={can('admin:users', 'create')}
         canEditUser={can('admin:users', 'update')}
         canDeleteUser={can('admin:users', 'delete')}
-        onDeleteUser={handleDeleteUser}
+        onDeleteUser={handleDeleteClick}
       />
+
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+      >
+        <DialogTitle>{t('admin_dashboard.confirm_delete_user_title')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t('admin_dashboard.confirm_delete_user')}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteDialogOpen(false)}>{t('common.cancel')}</Button>
+          <Button onClick={confirmDelete} color="error">
+            {t('common.delete')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

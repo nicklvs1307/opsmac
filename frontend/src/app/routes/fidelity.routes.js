@@ -62,7 +62,7 @@ const Dispatches = lazy(() => import('@/features/Fidelidade/Relacionamento/pages
 const Campaigns = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Campaigns'));
 const Messages = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Messages'));
 const Segmentation = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Segmentation'));
-const FidelityReports = lazy(() => import('@/features/Fidelidade/pages/Reports'));
+const FidelityReports = lazy(() => import('@/features/Loyalty/pages/Reports'));
 const GeneratedCouponsReport = lazy(
   () => import('@/features/Reports/pages/GeneratedCouponsReport')
 );
@@ -210,9 +210,9 @@ const fidelityRoutes = [
     ),
   },
   {
-    path: 'fidelity/coupons/rewards-create',
+    path: 'fidelity/coupons/create',
     element: (
-      <ProtectedRoute featureKey="fidelity:coupons:rewards-create" actionKey="create">
+      <ProtectedRoute featureKey="fidelity:coupons:create" actionKey="create">
         <Suspense fallback={<div className="loading-spinner"></div>}>
           <CouponCreatePage />
         </Suspense>

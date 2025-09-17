@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const STOCK_PRODUCTS_QUERY_KEYS = {
   allStocks: 'allStocks',
@@ -13,7 +14,8 @@ const fetchAllStocks = async (restaurantId) => {
 
 // React Query Hooks
 export const useAllStocks = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(STOCK_PRODUCTS_QUERY_KEYS.allStocks, () => fetchAllStocks(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
   });
 };

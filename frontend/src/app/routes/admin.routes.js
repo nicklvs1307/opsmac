@@ -24,7 +24,7 @@ const Settings = lazy(() => import('@/features/Settings/pages/Settings'));
 const StockDashboardPage = lazy(() => import('@/features/ERP/pages/StockDashboardPage'));
 const StockProductsPage = lazy(() => import('@/features/ERP/pages/StockProductsPage'));
 const CouponListPage = lazy(() => import('@/features/Coupons/pages/CouponListPage'));
-const SurveyList = lazy(() => import('@/features/Fidelidade/Avaliacoes/pages/SurveyList'));
+const SurveyList = lazy(() => import('@/features/Satisfaction/pages/SurveyList'));
 const CheckinAnalyticsPage = lazy(
   () => import('@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage')
 );

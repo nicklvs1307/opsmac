@@ -4,53 +4,28 @@ import { Box, Typography, Button, Paper, Container, CircularProgress, Alert } fr
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import SpinTheWheel from '@/components/UI/SpinTheWheel';
-// import { useGetPublicReward, useClaimReward } from '../api/publicService'; // Commented out due to missing exports
+import { useGetPublicReward, useSpinWheel } from '../api/publicService';
 
 const GirarRoleta = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const { responseId } = location.state || {};
+  const { responseId, rewardId } = location.state || {}; // Obter rewardId do state
 
   const [winningItem, setWinningItem] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [winningIndex, setWinningIndex] = useState(-1);
 
-  // Temporarily mock rewardData and claimRewardMutation
-  const rewardData = {
-    reward_earned: {
-      reward_title: t('girar_roleta.mock_title'),
-      description: t('girar_roleta.mock_description'),
-      wheel_config: {
-        items: [
-          { option: t('girar_roleta.mock_item_1'), color: '#FFD700' },
-          { option: t('girar_roleta.mock_item_2'), color: '#ADFF2F' },
-          { option: t('girar_roleta.mock_item_3'), color: '#87CEEB' },
-          { option: t('girar_roleta.mock_item_4'), color: '#FF6347' },
-        ],
-      },
-    },
-  };
-  const isLoadingReward = false;
-  const isErrorReward = false;
-  const rewardError = null;
+  const {
+    data: rewardData,
+    isLoading: isLoadingReward,
+    isError: isErrorReward,
+    error: rewardError,
+  } = useGetPublicReward(rewardId); // Usar o hook real
 
-  const claimRewardMutation = {
-    isLoading: false,
-    mutate: ({ response_id }, { onSuccess, onError }) => {
-      // Simulate API call
-      setTimeout(() => {
-        const randomIndex = Math.floor(
-          Math.random() * rewardData.reward_earned.wheel_config.items.length
-        );
-        const wonItem = rewardData.reward_earned.wheel_config.items[randomIndex];
-        onSuccess({ wonItem, winningIndex: randomIndex });
-      }, 1000);
-    },
-    data: { reward_earned: rewardData.reward_earned }, // Mock data for navigation
-  };
+  const spinWheelMutation = useSpinWheel(); // Usar o hook real
 
-  const reward_earned = rewardData?.reward_earned;
+  const reward_earned = rewardData?.reward; // Ajustar para o formato da resposta do backend
 
   useEffect(() => {
     if (rewardError) {
@@ -84,12 +59,16 @@ const GirarRoleta = () => {
 
   const handleSpinClick = () => {
     setIsSpinning(true);
-    claimRewardMutation.mutate(
-      { response_id: responseId },
+    spinWheelMutation.mutate( // Usar a mutação real
+      { response_id: responseId, reward_id: rewardId }, // Passar reward_id
       {
         onSuccess: (data) => {
-          setWinningItem(data.wonItem);
-          setWinningIndex(data.winningIndex);
+          const wonItem = data.wonItem; // Assumindo que o backend retorna o item vencedor
+          const winningIndex = reward_earned.wheel_config.items.findIndex(
+            (item) => item.id === wonItem.id
+          ); // Encontrar o índice do item vencedor
+          setWinningItem(wonItem);
+          setWinningIndex(winningIndex);
         },
         onError: (error) => {
           toast.error(error.response?.data?.msg || t('girar_roleta.error_claiming_reward'));
@@ -102,7 +81,7 @@ const GirarRoleta = () => {
   const handleAnimationComplete = () => {
     toast.success(t('girar_roleta.win_message'));
     navigate('/recompensa-ganha', {
-      state: { reward_earned: claimRewardMutation.data?.reward_earned },
+      state: { reward_earned: spinWheelMutation.data?.reward_earned }, // Usar dados da mutação real
     });
     setIsSpinning(false);
   };

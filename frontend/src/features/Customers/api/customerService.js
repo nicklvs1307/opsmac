@@ -37,6 +37,8 @@ const clearCustomerCheckins = async (id) => {
 
 const updateCustomer = async ({ id, data }) => {
   const response = await axiosInstance.put(`/customers/${id}`, data || {});
+  return response.data;
+};
 
 const fetchCustomers = async (params) => {
   const response = await axiosInstance.get('/customers', { params: params || {} });

@@ -9,8 +9,8 @@ import {
   useGetUserPermissionOverrides,
   useSetUserPermissionOverrides,
 } from '../api/iamQueries';
-import { fetchUsers } from '@/services/adminService';
-import PermissionTree from '@/components/Admin/PermissionTree';
+import { fetchUsers } from '@/features/Admin/services/adminService';
+import PermissionTree from '@/features/Admin/components/PermissionTree';
 
 const UserPermissionOverridesPage = () => {
   const { restaurantId, userId } = useParams();

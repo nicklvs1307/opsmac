@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const PDV_QUERY_KEYS = {
   orders: 'pdvOrders',
@@ -115,11 +116,12 @@ const createReinforcement = async (reinforcementData) => {
 
 // React Query Hooks
 export const usePdvOrders = (restaurantId, filterStatus, options) => {
+  const { user } = useAuth();
   return useQuery(
     [PDV_QUERY_KEYS.orders, restaurantId, filterStatus],
     () => fetchOrders({ restaurantId, filterStatus }),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
       refetchInterval: 10000,
       ...options,
     }
@@ -127,11 +129,12 @@ export const usePdvOrders = (restaurantId, filterStatus, options) => {
 };
 
 export const usePdvRestaurantStatus = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery(
     [PDV_QUERY_KEYS.restaurantStatus, restaurantId],
     () => fetchRestaurantStatus(restaurantId),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
       refetchInterval: 300000,
       ...options,
     }
@@ -139,36 +142,40 @@ export const usePdvRestaurantStatus = (restaurantId, options) => {
 };
 
 export const usePdvProducts = (restaurantId, categoryId, searchTerm, options) => {
+  const { user } = useAuth();
   return useQuery(
     [PDV_QUERY_KEYS.products, restaurantId, categoryId, searchTerm],
     () => fetchProducts({ restaurantId, categoryId, searchTerm }),
     {
-      enabled: !!restaurantId,
+      enabled: !!restaurantId && !!user?.token,
       ...options,
     }
   );
 };
 
 export const usePdvCategories = (restaurantId, options) => {
+  const { user } = useAuth();
   return useQuery([PDV_QUERY_KEYS.categories, restaurantId], () => fetchCategories(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
     ...options,
   });
 };
 
 export const usePdvTables = (restaurantId, orderType, options) => {
+  const { user } = useAuth();
   return useQuery([PDV_QUERY_KEYS.tables, restaurantId], () => fetchTables(restaurantId), {
-    enabled: !!restaurantId && orderType === 'dine_in',
+    enabled: !!restaurantId && orderType === 'dine_in' && !!user?.token,
     ...options,
   });
 };
 
 export const usePdvCashRegisterSession = (restaurantId, userId, options) => {
+  const { user } = useAuth();
   return useQuery(
     [PDV_QUERY_KEYS.cashRegisterSession, restaurantId, userId],
     () => fetchCashRegisterSession({ restaurantId, userId }),
     {
-      enabled: !!restaurantId && !!userId,
+      enabled: !!restaurantId && !!userId && !!user?.token,
       refetchInterval: 10000,
       ...options,
     }
@@ -176,19 +183,21 @@ export const usePdvCashRegisterSession = (restaurantId, userId, options) => {
 };
 
 export const usePdvCashOrders = (sessionId, options) => {
+  const { user } = useAuth();
   return useQuery([PDV_QUERY_KEYS.cashOrders, sessionId], () => fetchCashOrders(sessionId), {
-    enabled: !!sessionId,
+    enabled: !!sessionId && !!user?.token,
     refetchInterval: 10000,
     ...options,
   });
 };
 
 export const usePdvCustomers = (restaurantId, searchTerm, options) => {
+  const { user } = useAuth();
   return useQuery(
     [PDV_QUERY_KEYS.customers, restaurantId, searchTerm],
     () => fetchCustomers({ restaurantId, searchTerm }),
     {
-      enabled: !!restaurantId && searchTerm.length > 2,
+      enabled: !!restaurantId && searchTerm.length > 2 && !!user?.token,
       ...options,
     }
   );

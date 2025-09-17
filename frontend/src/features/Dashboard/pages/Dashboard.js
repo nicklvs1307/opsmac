@@ -10,7 +10,7 @@ import {
   CheckCircle as CheckCircleIcon,
 } from '@mui/icons-material';
 // Importando o componente MetricCard reutilizável
-import MetricCard from '@/components/UI/MetricCard';
+import MetricCard from '@/shared/components/MetricCard';
 import CustomerCard from '@/components/UI/CustomerCard';
 import {
   LineChart,

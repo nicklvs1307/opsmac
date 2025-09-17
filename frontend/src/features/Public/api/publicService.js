@@ -127,6 +127,20 @@ export const useStartTableSession = () => {
   );
 };
 
+// Hook to fetch a public reward by ID
+export const useGetPublicReward = (rewardId) => {
+  return useQuery(
+    ['publicReward', rewardId],
+    async () => {
+      const { data } = await axiosInstance.get(`/rewards/${rewardId}`);
+      return data;
+    },
+    {
+      enabled: !!rewardId,
+    }
+  );
+};
+
 // Hook to fetch public menu
 export const useGetPublicMenu = (restaurantSlug) => {
   return useQuery(

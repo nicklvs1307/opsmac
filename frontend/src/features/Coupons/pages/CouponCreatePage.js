@@ -27,9 +27,9 @@ const CouponCreatePage = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
 
   const validationSchema = yup.object().shape({
-    reward_id: yup.string().required(t('coupon_create_form.reward_required')),
-    customer_id: yup.string().required(t('coupon_create_form.customer_required')),
-    expires_at: yup.date().nullable(),
+    rewardId: yup.string().required(t('coupon_create_form.reward_required')),
+    customerId: yup.string().required(t('coupon_create_form.customer_required')),
+    expiresAt: yup.date().nullable(),
   });
 
   const {
@@ -54,9 +54,9 @@ const CouponCreatePage = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      reward_id: '',
-      customer_id: '',
-      expires_at: '',
+      rewardId: '',
+      customerId: '',
+      expiresAt: '',
     },
   });
 
@@ -100,10 +100,10 @@ const CouponCreatePage = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Controller
-                name="reward_id"
+                name="rewardId"
                 control={control}
                 render={({ field }) => (
-                  <FormControl fullWidth error={!!errors.reward_id}>
+                  <FormControl fullWidth error={!!errors.rewardId}>
                     <InputLabel>{t('coupon_create_form.reward_label')}</InputLabel>
                     <Select {...field} label={t('coupon_create_form.reward_label')}>
                       {rewards.map((reward) => (
@@ -118,10 +118,10 @@ const CouponCreatePage = () => {
             </Grid>
             <Grid item xs={12}>
               <Controller
-                name="customer_id"
+                name="customerId"
                 control={control}
                 render={({ field }) => (
-                  <FormControl fullWidth error={!!errors.customer_id}>
+                  <FormControl fullWidth error={!!errors.customerId}>
                     <InputLabel>{t('coupon_create_form.customer_label')}</InputLabel>
                     <Select {...field} label={t('coupon_create_form.customer_label')}>
                       {customers.map((customer) => (

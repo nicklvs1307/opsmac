@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const STOCK_QUERY_KEYS = {
   stocks: 'stocks',
@@ -26,8 +27,9 @@ const fetchStockHistory = async ({ restaurantId, productId }) => {
 
 // React Query Hooks
 export const useStocks = (restaurantId) => {
+  const { user } = useAuth();
   return useQuery(STOCK_QUERY_KEYS.stocks, () => fetchStocks(restaurantId), {
-    enabled: !!restaurantId,
+    enabled: !!restaurantId && !!user?.token,
   });
 };
 
@@ -46,11 +48,12 @@ export const useCreateStockMovement = () => {
 };
 
 export const useStockHistory = (restaurantId, productId) => {
+  const { user } = useAuth();
   return useQuery(
     [STOCK_QUERY_KEYS.stockHistory, restaurantId, productId],
     () => fetchStockHistory({ restaurantId, productId }),
     {
-      enabled: !!restaurantId && !!productId,
+      enabled: !!restaurantId && !!productId && !!user?.token,
     }
   );
 };

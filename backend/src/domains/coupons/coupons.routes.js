@@ -54,7 +54,7 @@ export default (db) => {
   );
   router.post(
     "/guest-validate",
-    ...publicValidateCouponValidation,
+    ...guestValidateCouponValidation,
     asyncHandler(couponsController.publicValidateCoupon),
   );
 

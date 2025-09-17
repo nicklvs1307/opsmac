@@ -52,7 +52,7 @@ export default (db) => {
    */
   router.post(
     "/guest-register",
-    ...publicRegisterCustomerValidation,
+    ...guestRegisterCustomerValidation,
     asyncHandler(customersController.publicRegisterCustomer),
   );
 

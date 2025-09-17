@@ -20,7 +20,7 @@ export default (db) => {
   );
   router.post(
     "/guest-record/:restaurantSlug",
-    ...recordPublicCheckinValidation,
+    ...recordGuestCheckinValidation,
     asyncHandler(checkinController.recordPublicCheckin),
   );
   router.put(

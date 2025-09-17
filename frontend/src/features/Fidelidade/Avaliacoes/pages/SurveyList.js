@@ -170,8 +170,6 @@ const SurveyList = () => {
             updateStatusMutation={updateStatusMutation}
           />
         )}
-          
-        )}
       </Paper>
 
       

@@ -1,24 +1,19 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          205.3s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          205.0s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.298 + npm run build
-0.820
-0.820 > feedeliza-plus@1.0.0 build
-0.820 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.820
-4.649 Creating an optimized production build...
-204.8 Failed to compile.
-204.8
-204.9 [eslint]
-204.9 src/features/Fidelidade/Avaliacoes/components/SurveyTable.js
-204.9 Syntax error: Unterminated regular expression. (113:10) (113:10)
-204.9
-204.9 src/features/Fidelidade/Avaliacoes/pages/SurveyCreate.js
-204.9   Line 71:27:  'surveySchema' is not defined  no-undef
-204.9
-204.9 Search for the keywords to learn more about each error.
-204.9
-204.9
+0.363 + npm run build
+0.857
+0.857 > feedeliza-plus@1.0.0 build
+0.857 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.857
+4.627 Creating an optimized production build...
+204.6 Failed to compile.
+204.6
+204.6 [eslint]
+204.6 src/features/Fidelidade/Avaliacoes/components/SurveyTable.js
+204.6 Syntax error: Unterminated regular expression. (113:10) (113:10)
+204.6
+204.6
 ------
 Dockerfile.frontend:27
 --------------------

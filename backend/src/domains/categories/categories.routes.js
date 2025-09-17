@@ -1,9 +1,7 @@
 import express from "express";
 
 import requirePermission from "../../middleware/requirePermission.js";
-import {
-  categoryValidation,
-} from "./categories.validation.js";
+import { categoryValidation } from "./categories.validation.js";
 import asyncHandler from "../../utils/asyncHandler.js";
 
 import categoriesControllerFactory from "./categories.controller.js";

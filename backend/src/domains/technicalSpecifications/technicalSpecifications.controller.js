@@ -3,7 +3,8 @@ import { BadRequestError } from "../../utils/errors/index.js";
 import technicalSpecificationsServiceFactory from "./technicalSpecifications.service.js";
 
 export default (db) => {
-  const technicalSpecificationsService = technicalSpecificationsServiceFactory(db);
+  const technicalSpecificationsService =
+    technicalSpecificationsServiceFactory(db);
 
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);

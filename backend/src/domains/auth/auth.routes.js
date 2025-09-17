@@ -20,7 +20,8 @@ export default (db) => {
   const loginLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 5, // 5 requests per 15 minutes
-    message: "Too many login attempts from this IP, please try again after 15 minutes",
+    message:
+      "Too many login attempts from this IP, please try again after 15 minutes",
   });
 
   router.post(

@@ -37,5 +37,3 @@ export const updateGoalValidation = [
     .isIn(["active", "completed", "achieved", "failed"])
     .withMessage("Status inválido."),
 ];
-
-

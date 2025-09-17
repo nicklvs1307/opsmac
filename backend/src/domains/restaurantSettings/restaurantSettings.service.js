@@ -10,7 +10,8 @@ export default (db) => {
   // Proxies to existing services
   const getRestaurantById = restaurantService.getRestaurantById;
   const updateRestaurant = restaurantService.updateRestaurant;
-  const updateRestaurantOpenStatus = restaurantService.updateRestaurantOpenStatus;
+  const updateRestaurantOpenStatus =
+    restaurantService.updateRestaurantOpenStatus;
   const updateRestaurantPosStatus = restaurantService.updateRestaurantPosStatus;
   const getRestaurantModules = restaurantService.getRestaurantModules;
   const updateRestaurantModule = restaurantService.updateRestaurantModule;

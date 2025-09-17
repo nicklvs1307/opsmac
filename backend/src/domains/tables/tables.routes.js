@@ -1,9 +1,7 @@
 import express from "express";
 import asyncHandler from "../../utils/asyncHandler.js";
 import requirePermission from "../../middleware/requirePermission.js";
-import {
-  createTableValidation,
-} from "./tables.validation.js";
+import { createTableValidation } from "./tables.validation.js";
 
 import tablesControllerFactory from "./tables.controller.js";
 

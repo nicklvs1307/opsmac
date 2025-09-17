@@ -4,7 +4,7 @@ import {
   NotFoundError,
 } from "../../utils/errors.js";
 
-  export default (db) => {
+export default (db) => {
   const models = db;
 
   const handleOrderCreated = async (orderData) => {

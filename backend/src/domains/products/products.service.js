@@ -66,7 +66,9 @@ export default (db) => {
   const updateProduct = async (id, restaurantId, updateData) => {
     const t = await db.sequelize.transaction();
     try {
-      const product = await _findProductById(id, restaurantId, { transaction: t });
+      const product = await _findProductById(id, restaurantId, {
+        transaction: t,
+      });
       await product.update(updateData, { transaction: t });
       await t.commit();
       return product;
@@ -79,7 +81,9 @@ export default (db) => {
   const deleteProduct = async (id, restaurantId) => {
     const t = await db.sequelize.transaction();
     try {
-      const product = await _findProductById(id, restaurantId, { transaction: t });
+      const product = await _findProductById(id, restaurantId, {
+        transaction: t,
+      });
       await product.destroy({ transaction: t });
       await t.commit();
     } catch (error) {
@@ -91,7 +95,9 @@ export default (db) => {
   const toggleProductStatus = async (id, restaurantId) => {
     const t = await db.sequelize.transaction();
     try {
-      const product = await _findProductById(id, restaurantId, { transaction: t });
+      const product = await _findProductById(id, restaurantId, {
+        transaction: t,
+      });
       product.is_active = !product.is_active;
       await product.save({ transaction: t });
       await t.commit();
@@ -158,11 +164,14 @@ export default (db) => {
       throw new NotFoundError("Produto não encontrado.");
     }
     const variations = product.variations || [];
-    const variationIndex = variations.findIndex(v => v.id === variationId);
+    const variationIndex = variations.findIndex((v) => v.id === variationId);
     if (variationIndex === -1) {
-        throw new NotFoundError("Variação de produto não encontrada.");
+      throw new NotFoundError("Variação de produto não encontrada.");
     }
-    variations[variationIndex] = { ...variations[variationIndex], ...updateData };
+    variations[variationIndex] = {
+      ...variations[variationIndex],
+      ...updateData,
+    };
     await product.update({ variations });
     return product;
   };
@@ -173,9 +182,9 @@ export default (db) => {
       throw new NotFoundError("Produto não encontrado.");
     }
     const variations = product.variations || [];
-    const updatedVariations = variations.filter(v => v.id !== variationId);
+    const updatedVariations = variations.filter((v) => v.id !== variationId);
     if (variations.length === updatedVariations.length) {
-        throw new NotFoundError("Variação de produto não encontrada.");
+      throw new NotFoundError("Variação de produto não encontrada.");
     }
     await product.update({ variations: updatedVariations });
   };

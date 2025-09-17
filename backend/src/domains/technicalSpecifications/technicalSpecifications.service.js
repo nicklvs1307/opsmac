@@ -1,4 +1,8 @@
-import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors/index.js";
+import {
+  BadRequestError,
+  NotFoundError,
+  ForbiddenError,
+} from "../../utils/errors/index.js";
 
 export default (db) => {
   const { models } = db;

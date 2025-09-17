@@ -1,4 +1,8 @@
-import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors/index.js";
+import {
+  BadRequestError,
+  NotFoundError,
+  ForbiddenError,
+} from "../../utils/errors/index.js";
 import { sendWhatsAppMessage } from "../../services/integrations/whatsappApiClient.js";
 import { Op } from "sequelize";
 

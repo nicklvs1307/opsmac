@@ -1,6 +1,10 @@
 "use strict";
 import iamService from "../services/iamService.js";
-import { UnauthorizedError, ForbiddenError, PaymentRequiredError } from "../utils/errors.js"; // Importar erros customizados
+import {
+  UnauthorizedError,
+  ForbiddenError,
+  PaymentRequiredError,
+} from "../utils/errors.js"; // Importar erros customizados
 // const models = require('models'); // Remover esta linha, não é mais necessária aqui
 
 const requirePermission = (featureKey, actionKey) => {

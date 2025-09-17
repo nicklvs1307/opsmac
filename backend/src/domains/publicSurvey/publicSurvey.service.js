@@ -1,8 +1,10 @@
 import { Op } from "sequelize";
 import { BadRequestError, NotFoundError, ForbiddenError } from "../../utils/errors.js";
+import SurveyRewardProgramService from "../surveyRewardProgram/surveyRewardProgram.service.js";
 
 export default (db) => {
   const { models } = db;
+  const surveyRewardProgramService = SurveyRewardProgramService(db);
 
   const getNextSurvey = async (restaurantSlug, customerId) => {
     const restaurant = await models.Restaurant.findOne({
@@ -179,6 +181,7 @@ export default (db) => {
     const newSurveyResponse = await models.SurveyResponse.create({
       survey_id: survey.id,
       customer_id: customer_id || null,
+      restaurantId: survey.restaurantId,
     });
 
     let feedbackRating = null;
@@ -250,6 +253,7 @@ export default (db) => {
       await models.Feedback.create(feedbackData);
     }
 
+    let rewardData = null;
     if (customer_id) {
       const customer = await models.Customer.findByPk(customer_id);
       if (customer) {
@@ -260,6 +264,11 @@ export default (db) => {
           last_survey_id: survey.id,
           last_survey_completed_at: new Date(),
         });
+
+        rewardData = await surveyRewardProgramService.grantRewardForSurveyResponse(
+          newSurveyResponse,
+          customer,
+        );
       }
     }
 
@@ -292,74 +301,6 @@ export default (db) => {
       await restaurant.update({ npsCriteriaScores: currentNpsScores });
     }
 
-    let rewardData = null;
-    if (customer_id && restaurant) {
-      const surveyRewardSettings =
-        restaurant.settings?.survey_reward_settings || {};
-      const rewardsPerResponse =
-        surveyRewardSettings.rewards_per_response || [];
-      const customer = await models.Customer.findByPk(customer_id);
-      const currentResponseCount = customer.survey_responses_count;
-
-      for (const rewardConfig of rewardsPerResponse) {
-        const responseMilestone = parseInt(rewardConfig.response_count, 10);
-        if (responseMilestone === currentResponseCount) {
-          const existingCoupon = await models.Coupon.findOne({
-            where: {
-              customer_id: customer.id,
-              reward_id: rewardConfig.reward_id,
-              visit_milestone: responseMilestone,
-            },
-          });
-
-          if (existingCoupon) {
-            continue;
-          }
-
-          const reward = await models.Reward.findByPk(rewardConfig.reward_id);
-          if (reward) {
-            const { coupon } = await reward.generateCoupon(customer.id, {
-              coupon_validity_days:
-                reward.validity_days || survey.coupon_validity_days,
-              metadata: {
-                source: "survey_response_milestone",
-                survey_id: survey.id,
-                response_id: newSurveyResponse.id,
-              },
-            });
-            rewardData = { type: "coupon", details: coupon };
-            break;
-          }
-        }
-      }
-    }
-
-    if (!rewardData && survey.reward_id && customer_id) {
-      const reward = await models.Reward.findByPk(survey.reward_id);
-      const customer = await models.Customer.findByPk(customer_id);
-      if (
-        reward &&
-        (!reward.canCustomerUse || (await reward.canCustomerUse(customer_id)))
-      ) {
-        if (reward.type === "coupon") {
-          const { coupon } = await reward.generateCoupon(customer_id, {
-            coupon_validity_days: survey.coupon_validity_days,
-            metadata: {
-              source: "survey_response",
-              survey_id: survey.id,
-              response_id: newSurveyResponse.id,
-            },
-          });
-          rewardData = { type: "coupon", details: coupon };
-        } else if (reward.type === "wheel_spin") {
-          rewardData = {
-            type: "wheel_spin",
-            details: { message: "Você ganhou um giro na roleta!" },
-          };
-        }
-      }
-    }
-
     return { responseId: newSurveyResponse.id, reward: rewardData };
   };
 
@@ -378,61 +319,13 @@ export default (db) => {
       throw new NotFoundError("Resposta da pesquisa não encontrada.");
     }
 
-        if (surveyResponse.customer_id) {
+    if (surveyResponse.customer_id) {
       throw new BadRequestError(
         "Esta resposta já está vinculada a um cliente.",
       );
     }
 
     await surveyResponse.update({ customer_id });
-
-    const { survey } = surveyResponse;
-    let rewardData = null;
-
-    if (survey && survey.reward_id) {
-      const reward = survey.reward;
-      if (
-        reward &&
-        (!reward.canCustomerUse || (await reward.canCustomerUse(customer_id)))
-      ) {
-        if (reward.type === "coupon") {
-          const { coupon } = await reward.generateCoupon(customer_id, {
-            coupon_validity_days: survey.coupon_validity_days,
-            metadata: {
-              source: "survey_response_linked",
-              survey_id: survey.id,
-              response_id: surveyResponse.id,
-            },
-          });
-          rewardData = { type: "coupon", details: coupon };
-        } else if (reward.type === "wheel_spin") {
-          rewardData = {
-            type: "wheel_spin",
-            details: { message: "Você ganhou um giro na roleta!" },
-          };
-        }
-      }
-    }
-
-    const customer = await models.Customer.findByPk(customer_id);
-    if (customer) {
-      await customer.updateStats();
-      await customer.update({
-        last_survey_id: survey.id,
-        last_survey_completed_at: new Date(),
-      });
-    }
-
-    return { reward: rewardData };
-  };
-
-  return {
-    getNextSurvey,
-    getPublicSurveyBySlugs,
-    submitSurveyResponses,
-    linkCustomerToResponse,
-  };
-};
 
     const { survey } = surveyResponse;
     let rewardData = null;

@@ -12,7 +12,7 @@ export const createSurveyValidation = [
   body("status", "Status inválido")
     .optional()
     .isIn(["draft", "active", "inactive", "archived"]),
-  body("slug", "Slug é obrigatório e deve ser único").not().isEmpty(),
+  body("slug", "Slug é obrigatório").not().isEmpty(),
 ];
 
 export const updateSurveyValidation = [
@@ -22,7 +22,7 @@ export const updateSurveyValidation = [
   body("status", "Status inválido")
     .optional()
     .isIn(["draft", "active", "inactive", "archived"]),
-  body("slug", "Slug é obrigatório e deve ser único").not().isEmpty(),
+  body("slug", "Slug é obrigatório").not().isEmpty(),
 ];
 
 export const updateSurveyStatusValidation = [

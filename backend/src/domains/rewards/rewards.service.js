@@ -3,7 +3,6 @@ import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
 import { spinWheel as spinWheelService } from "../../services/wheelService.js";
 
 export default (db) => {
-
   const listRewards = async (restaurantId, query) => {
     const { page = 1, limit = 12, search } = query;
     const offset = (page - 1) * limit;

@@ -7,9 +7,8 @@ import deliveryMuchControllerFactory from "./deliveryMuch.controller.js";
 
 export default (db) => {
   const deliveryMuchService = deliveryMuchServiceFactory(db);
-  const deliveryMuchController = deliveryMuchControllerFactory(
-    deliveryMuchService,
-  );
+  const deliveryMuchController =
+    deliveryMuchControllerFactory(deliveryMuchService);
 
   const router = express.Router();
 

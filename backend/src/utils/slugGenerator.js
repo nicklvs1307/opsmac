@@ -20,5 +20,3 @@ export const generateUniqueSlug = async (model, name, currentSlug = null) => {
     counter++;
   }
 };
-
-

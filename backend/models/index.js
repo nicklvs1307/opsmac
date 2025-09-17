@@ -3,7 +3,7 @@ import path from "path";
 import { Sequelize } from "sequelize";
 import logger from "../src/utils/logger.js";
 import * as _config from "../src/config/config.js";
-import { fileURLToPath, pathToFileURL } from 'url';
+import { fileURLToPath, pathToFileURL } from "url";
 
 const basename = path.basename(import.meta.url);
 const env = process.env.NODE_ENV || "development";

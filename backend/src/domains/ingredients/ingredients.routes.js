@@ -10,7 +10,8 @@ import ingredientsControllerFactory from "./ingredients.controller.js";
 
 export default (db) => {
   const ingredientsService = ingredientsServiceFactory(db);
-  const ingredientsController = ingredientsControllerFactory(ingredientsService);
+  const ingredientsController =
+    ingredientsControllerFactory(ingredientsService);
   const router = express.Router();
 
   router.post(

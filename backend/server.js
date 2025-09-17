@@ -12,7 +12,10 @@ import { fileURLToPath } from "url";
 import db from "./models/index.js";
 import { BaseError } from "./src/utils/errors.js";
 import logger from "./src/utils/logger.js";
-import { initCacheInvalidator, subscriberClient, } from "./src/jobs/cacheInvalidator.js";
+import {
+  initCacheInvalidator,
+  subscriberClient,
+} from "./src/jobs/cacheInvalidator.js";
 
 // Importação de Rotas
 import routes from "./routes/index.js";

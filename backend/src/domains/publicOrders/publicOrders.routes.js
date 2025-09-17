@@ -6,9 +6,8 @@ import publicOrdersControllerFactory from "./publicOrders.controller.js";
 
 export default (db) => {
   const publicOrdersService = publicOrdersServiceFactory(db);
-  const publicOrdersController = publicOrdersControllerFactory(
-    publicOrdersService,
-  );
+  const publicOrdersController =
+    publicOrdersControllerFactory(publicOrdersService);
   const router = express.Router();
 
   router.post(

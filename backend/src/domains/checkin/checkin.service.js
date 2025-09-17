@@ -4,7 +4,6 @@ import { generateUniqueCode } from "../../utils/codeGenerator.js";
 import { Op } from "sequelize";
 // import { calculateAnalytics } from "../../utils/analytics.js";
 
-
 import iamService from "../../services/iamService.js";
 // import customerService from "../../services/customerService.js";
 // import rewardService from "../../services/rewardService.js";
@@ -186,7 +185,10 @@ export default (db) => {
           "totalCheckins",
         ],
         [
-          models.Sequelize.fn("COUNT", models.Sequelize.literal("DISTINCT customer_id")),
+          models.Sequelize.fn(
+            "COUNT",
+            models.Sequelize.literal("DISTINCT customer_id"),
+          ),
           "uniqueCustomers",
         ],
       ],

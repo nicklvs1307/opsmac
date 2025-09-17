@@ -1,16 +1,34 @@
-import { BadRequestError, ForbiddenError, NotFoundError } from "../../utils/errors.js";
+import {
+  BadRequestError,
+  ForbiddenError,
+  NotFoundError,
+} from "../../utils/errors.js";
 
 export default (db) => {
   const { models } = db;
 
   const handleOrderPlaced = async (payload, correlationId) => {
-    const { orderId, restaurantId, createdAt, totalAmount, deliveryFee, customer, items, deliveryAddress, paymentMethod, orderType, notes } = payload;
+    const {
+      orderId,
+      restaurantId,
+      createdAt,
+      totalAmount,
+      deliveryFee,
+      customer,
+      items,
+      deliveryAddress,
+      paymentMethod,
+      orderType,
+      notes,
+    } = payload;
 
     const localRestaurant = await models.Restaurant.findOne({
       where: { id: restaurantId },
     });
     if (!localRestaurant) {
-      console.warn(`Restaurante com ID ${restaurantId} do iFood não encontrado no sistema.`);
+      console.warn(
+        `Restaurante com ID ${restaurantId} do iFood não encontrado no sistema.`,
+      );
       return;
     }
 
@@ -54,20 +72,29 @@ export default (db) => {
     if (order) {
       await order.update({ status: newStatus });
     } else {
-      console.warn(`Pedido iFood ${orderId} não encontrado para atualização de status.`);
+      console.warn(
+        `Pedido iFood ${orderId} não encontrado para atualização de status.`,
+      );
     }
   };
 
   const processWebhookEventInternal = async (event) => {
     const eventHandlers = {
       ORDER_PLACED: () => handleOrderPlaced(event.payload, event.correlationId),
-      ORDER_CONFIRMED: () => handleOrderStatusUpdate(event.payload.orderId, "accepted"),
-      ORDER_READY_FOR_DELIVERY: () => handleOrderStatusUpdate(event.payload.orderId, "preparing"),
-      ORDER_DISPATCHED: () => handleOrderStatusUpdate(event.payload.orderId, "on_the_way"),
-      ORDER_DELIVERED: () => handleOrderStatusUpdate(event.payload.orderId, "delivered"),
-      ORDER_CANCELLED: () => handleOrderStatusUpdate(event.payload.orderId, "cancelled"),
-      ORDER_CONCLUDED: () => handleOrderStatusUpdate(event.payload.orderId, "concluded"),
-      ORDER_REJECTED: () => handleOrderStatusUpdate(event.payload.orderId, "rejected"),
+      ORDER_CONFIRMED: () =>
+        handleOrderStatusUpdate(event.payload.orderId, "accepted"),
+      ORDER_READY_FOR_DELIVERY: () =>
+        handleOrderStatusUpdate(event.payload.orderId, "preparing"),
+      ORDER_DISPATCHED: () =>
+        handleOrderStatusUpdate(event.payload.orderId, "on_the_way"),
+      ORDER_DELIVERED: () =>
+        handleOrderStatusUpdate(event.payload.orderId, "delivered"),
+      ORDER_CANCELLED: () =>
+        handleOrderStatusUpdate(event.payload.orderId, "cancelled"),
+      ORDER_CONCLUDED: () =>
+        handleOrderStatusUpdate(event.payload.orderId, "concluded"),
+      ORDER_REJECTED: () =>
+        handleOrderStatusUpdate(event.payload.orderId, "rejected"),
     };
 
     const handler = eventHandlers[event.code];
@@ -77,7 +104,9 @@ export default (db) => {
   };
 
   const checkIfoodModuleEnabled = async (restaurantIdFromPayload) => {
-    const restaurant = await models.Restaurant.findByPk(restaurantIdFromPayload);
+    const restaurant = await models.Restaurant.findByPk(
+      restaurantIdFromPayload,
+    );
     if (!restaurant) {
       throw new NotFoundError("Restaurante não encontrado.");
     }

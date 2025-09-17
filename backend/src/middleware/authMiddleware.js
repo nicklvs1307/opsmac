@@ -1,5 +1,10 @@
 import jwt from "jsonwebtoken";
-import { UnauthorizedError, ForbiddenError, BadRequestError, NotFoundError } from "../utils/errors.js";
+import {
+  UnauthorizedError,
+  ForbiddenError,
+  BadRequestError,
+  NotFoundError,
+} from "../utils/errors.js";
 import logger from "../utils/logger.js";
 import models from "../../models/index.js";
 import cacheService from "../services/cacheService.js";

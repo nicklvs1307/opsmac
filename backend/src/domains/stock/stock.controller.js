@@ -3,7 +3,6 @@ import { BadRequestError } from "../../utils/errors/index.js";
 import auditService from "../../services/auditService.js"; // Import auditService
 
 export default (stockService) => {
-
   const handleValidationErrors = (req) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

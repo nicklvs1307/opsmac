@@ -12,9 +12,9 @@ const handleValidationErrors = (req) => {
 
 const getRestaurantById = async (req, res, next) => {
   try {
-    const restaurant = await restaurantSettingsServiceFactory(db).getRestaurantById(
-      req.context.restaurantId,
-    );
+    const restaurant = await restaurantSettingsServiceFactory(
+      db,
+    ).getRestaurantById(req.context.restaurantId);
     res.json(restaurant);
   } catch (error) {
     next(error);
@@ -23,10 +23,9 @@ const getRestaurantById = async (req, res, next) => {
 
 const updateRestaurant = async (req, res, next) => {
   try {
-    const restaurant = await restaurantSettingsServiceFactory(db).updateRestaurant(
-      req.context.restaurantId,
-      req.body,
-    );
+    const restaurant = await restaurantSettingsServiceFactory(
+      db,
+    ).updateRestaurant(req.context.restaurantId, req.body);
     await auditService.log(
       req.user,
       req.context.restaurantId,
@@ -46,11 +45,9 @@ const updateRestaurantOpenStatus = async (req, res, next) => {
     if (typeof is_open !== "boolean") {
       throw new BadRequestError("O campo is_open deve ser um booleano.");
     }
-    const restaurant =
-      await restaurantSettingsServiceFactory(db).updateRestaurantOpenStatus(
-        req.context.restaurantId,
-        is_open,
-      );
+    const restaurant = await restaurantSettingsServiceFactory(
+      db,
+    ).updateRestaurantOpenStatus(req.context.restaurantId, is_open);
     await auditService.log(
       req.user,
       req.context.restaurantId,
@@ -75,11 +72,9 @@ const updateRestaurantPosStatus = async (req, res, next) => {
         `O campo pos_status deve ser 'open' ou 'closed'.`,
       );
     }
-    const restaurant =
-      await restaurantSettingsServiceFactory(db).updateRestaurantPosStatus(
-        req.context.restaurantId,
-        pos_status,
-      );
+    const restaurant = await restaurantSettingsServiceFactory(
+      db,
+    ).updateRestaurantPosStatus(req.context.restaurantId, pos_status);
     await auditService.log(
       req.user,
       req.context.restaurantId,
@@ -98,9 +93,9 @@ const updateRestaurantPosStatus = async (req, res, next) => {
 
 const getRestaurantModules = async (req, res, next) => {
   try {
-    const modules = await restaurantSettingsServiceFactory(db).getRestaurantModules(
-      req.context.restaurantId,
-    );
+    const modules = await restaurantSettingsServiceFactory(
+      db,
+    ).getRestaurantModules(req.context.restaurantId);
     res.json(modules);
   } catch (error) {
     next(error);
@@ -110,12 +105,13 @@ const getRestaurantModules = async (req, res, next) => {
 const updateRestaurantModule = async (req, res, next) => {
   try {
     const { is_active } = req.body;
-    const updatedModule =
-      await restaurantSettingsServiceFactory(db).updateRestaurantModule(
-        req.context.restaurantId,
-        req.params.moduleId,
-        is_active,
-      );
+    const updatedModule = await restaurantSettingsServiceFactory(
+      db,
+    ).updateRestaurantModule(
+      req.context.restaurantId,
+      req.params.moduleId,
+      is_active,
+    );
     await auditService.log(
       req.user,
       req.context.restaurantId,
@@ -131,10 +127,9 @@ const updateRestaurantModule = async (req, res, next) => {
 
 const getRestaurantModuleById = async (req, res, next) => {
   try {
-    const module = await restaurantSettingsServiceFactory(db).getRestaurantModuleById(
-      req.context.restaurantId,
-      req.params.moduleId,
-    );
+    const module = await restaurantSettingsServiceFactory(
+      db,
+    ).getRestaurantModuleById(req.context.restaurantId, req.params.moduleId);
     res.json(module);
   } catch (error) {
     next(error);
@@ -144,11 +139,9 @@ const getRestaurantModuleById = async (req, res, next) => {
 const createRestaurantModule = async (req, res, next) => {
   try {
     const { module_id, is_active } = req.body;
-    const newModule = await restaurantSettingsServiceFactory(db).createRestaurantModule(
-      req.context.restaurantId,
-      module_id,
-      is_active,
-    );
+    const newModule = await restaurantSettingsServiceFactory(
+      db,
+    ).createRestaurantModule(req.context.restaurantId, module_id, is_active);
     await auditService.log(
       req.user,
       req.context.restaurantId,
@@ -183,9 +176,9 @@ const deleteRestaurantModule = async (req, res, next) => {
 
 const getRestaurantSettings = async (req, res, next) => {
   try {
-    const settings = await restaurantSettingsServiceFactory(db).getRestaurantSettings(
-      req.context.restaurantId,
-    );
+    const settings = await restaurantSettingsServiceFactory(
+      db,
+    ).getRestaurantSettings(req.context.restaurantId);
     res.json(settings);
   } catch (error) {
     next(error);
@@ -195,11 +188,9 @@ const getRestaurantSettings = async (req, res, next) => {
 const updateRestaurantSettings = async (req, res, next) => {
   try {
     const updateData = req.body;
-    const updatedSettings =
-      await restaurantSettingsServiceFactory(db).updateRestaurantSettings(
-        req.context.restaurantId,
-        updateData,
-      );
+    const updatedSettings = await restaurantSettingsServiceFactory(
+      db,
+    ).updateRestaurantSettings(req.context.restaurantId, updateData);
     await auditService.log(
       req.user,
       req.context.restaurantId,
@@ -215,10 +206,9 @@ const updateRestaurantSettings = async (req, res, next) => {
 
 const getRestaurantPaymentMethods = async (req, res, next) => {
   try {
-    const paymentMethods =
-      await restaurantSettingsServiceFactory(db).getRestaurantPaymentMethods(
-        req.context.restaurantId,
-      );
+    const paymentMethods = await restaurantSettingsServiceFactory(
+      db,
+    ).getRestaurantPaymentMethods(req.context.restaurantId);
     res.json(paymentMethods);
   } catch (error) {
     next(error);
@@ -228,12 +218,9 @@ const getRestaurantPaymentMethods = async (req, res, next) => {
 const createRestaurantPaymentMethod = async (req, res, next) => {
   try {
     const { name, is_active } = req.body;
-    const newPaymentMethod =
-      await restaurantSettingsServiceFactory(db).createRestaurantPaymentMethod(
-        req.context.restaurantId,
-        name,
-        is_active,
-      );
+    const newPaymentMethod = await restaurantSettingsServiceFactory(
+      db,
+    ).createRestaurantPaymentMethod(req.context.restaurantId, name, is_active);
     await auditService.log(
       req.user,
       req.context.restaurantId,
@@ -250,13 +237,14 @@ const createRestaurantPaymentMethod = async (req, res, next) => {
 const updateRestaurantPaymentMethod = async (req, res, next) => {
   try {
     const { name, is_active } = req.body;
-    const updatedPaymentMethod =
-      await restaurantSettingsServiceFactory(db).updateRestaurantPaymentMethod(
-        req.context.restaurantId,
-        req.params.paymentMethodId,
-        name,
-        is_active,
-      );
+    const updatedPaymentMethod = await restaurantSettingsServiceFactory(
+      db,
+    ).updateRestaurantPaymentMethod(
+      req.context.restaurantId,
+      req.params.paymentMethodId,
+      name,
+      is_active,
+    );
     await auditService.log(
       req.user,
       req.context.restaurantId,
@@ -289,4 +277,20 @@ const deleteRestaurantPaymentMethod = async (req, res, next) => {
   }
 };
 
-export { getRestaurantById, updateRestaurant, updateRestaurantOpenStatus, updateRestaurantPosStatus, getRestaurantModules, updateRestaurantModule, getRestaurantModuleById, createRestaurantModule, deleteRestaurantModule, getRestaurantSettings, updateRestaurantSettings, getRestaurantPaymentMethods, createRestaurantPaymentMethod, updateRestaurantPaymentMethod, deleteRestaurantPaymentMethod };
+export {
+  getRestaurantById,
+  updateRestaurant,
+  updateRestaurantOpenStatus,
+  updateRestaurantPosStatus,
+  getRestaurantModules,
+  updateRestaurantModule,
+  getRestaurantModuleById,
+  createRestaurantModule,
+  deleteRestaurantModule,
+  getRestaurantSettings,
+  updateRestaurantSettings,
+  getRestaurantPaymentMethods,
+  createRestaurantPaymentMethod,
+  updateRestaurantPaymentMethod,
+  deleteRestaurantPaymentMethod,
+};

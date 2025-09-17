@@ -1,5 +1,8 @@
 import bcrypt from "bcryptjs";
-import { LOGIN_ATTEMPTS_LIMIT, LOGIN_LOCK_DURATION_HOURS } from "../src/config/security.js";
+import {
+  LOGIN_ATTEMPTS_LIMIT,
+  LOGIN_LOCK_DURATION_HOURS,
+} from "../src/config/security.js";
 
 export default (sequelize, DataTypes, Sequelize) => {
   class User extends Sequelize.Model {

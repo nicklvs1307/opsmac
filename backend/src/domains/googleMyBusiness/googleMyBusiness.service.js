@@ -7,7 +7,7 @@ import {
 
 const OAuth2 = google.auth.OAuth2;
 
-  export default (db) => {
+export default (db) => {
   const models = db;
 
   const initializeOAuthClient = async (restaurantId) => {

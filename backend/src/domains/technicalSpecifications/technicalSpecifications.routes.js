@@ -5,7 +5,8 @@ import technicalSpecificationsControllerFactory from "./technicalSpecifications.
 import authMiddlewareFactory from "../../middleware/authMiddleware.js";
 
 export default (db) => {
-  const technicalSpecificationsController = technicalSpecificationsControllerFactory(db);
+  const technicalSpecificationsController =
+    technicalSpecificationsControllerFactory(db);
   const { auth } = authMiddlewareFactory(db);
   const router = express.Router();
 

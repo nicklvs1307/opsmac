@@ -6,8 +6,9 @@ import publicDineInOrdersControllerFactory from "./publicDineInOrders.controller
 
 export default (db) => {
   const publicDineInOrdersService = publicDineInOrdersServiceFactory(db);
-  const publicDineInOrdersController =
-    publicDineInOrdersControllerFactory(publicDineInOrdersService);
+  const publicDineInOrdersController = publicDineInOrdersControllerFactory(
+    publicDineInOrdersService,
+  );
   const router = express.Router();
 
   router.post(

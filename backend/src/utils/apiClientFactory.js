@@ -15,7 +15,7 @@ const createApiClient = (baseURL, defaultHeaders = {}) => {
   instance.interceptors.request.use(
     (config) => {
       // Do something before request is sent
-      logger.debug('Request sent:', config.url);
+      logger.debug("Request sent:", config.url);
       return config;
     },
     (error) => {

@@ -1,9 +1,7 @@
 import express from "express";
 import asyncHandler from "../../utils/asyncHandler.js";
 import requirePermission from "../../middleware/requirePermission.js";
-import {
-  createStockMovementValidation,
-} from "./stock.validation.js";
+import { createStockMovementValidation } from "./stock.validation.js";
 
 import stockServiceFactory from "./stock.service.js";
 import stockControllerFactory from "./stock.controller.js";

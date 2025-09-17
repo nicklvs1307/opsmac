@@ -2,6 +2,31 @@ import { Op } from "sequelize";
 import { BadRequestError, NotFoundError } from "../../utils/errors/index.js";
 
 export default (db) => {
+  const _getSurveyIncludes = (db) => {
+    return [
+      {
+        model: db.Question,
+        as: "questions",
+        include: [
+          {
+            model: db.NpsCriterion,
+            as: "npsCriterion",
+          },
+        ],
+      },
+    ];
+  };
+
+  const _checkSlugUniqueness = async (slug, restaurantId, excludeSurveyId = null) => {
+    const where = { slug, restaurantId };
+    if (excludeSurveyId) {
+      where.id = { [Op.ne]: excludeSurveyId };
+    }
+    const existingSurvey = await db.Survey.findOne({ where });
+    if (existingSurvey) {
+      throw new BadRequestError("O slug fornecido já está em uso por outra pesquisa.");
+    }
+  };
 
   const listSurveys = async (restaurantId, search) => {
     const where = { restaurantId };
@@ -11,24 +36,14 @@ export default (db) => {
 
     return db.Survey.findAll({
       where,
-      include: [
-        {
-          model: db.Question,
-          as: "questions",
-          include: [
-            {
-              model: db.NpsCriterion,
-              as: "npsCriterion",
-            },
-          ],
-        },
-      ],
+      include: _getSurveyIncludes(db),
     });
   };
 
   const createSurvey = async (surveyData, restaurantId, userId) => {
     const t = await db.sequelize.transaction(); // Start transaction
     try {
+      await _checkSlugUniqueness(surveyData.slug, restaurantId);
       const survey = await db.Survey.create(
         { ...surveyData, restaurantId, userId },
         { transaction: t },
@@ -44,21 +59,11 @@ export default (db) => {
     }
   };
 
-  const getSurveyById = async (surveyId, restaurantId) => {
+  const getSurveyById = async (surveyId, restaurantId, t = null) => {
     const survey = await db.Survey.findOne({
       where: { id: surveyId, restaurantId },
-      include: [
-        {
-          model: db.Question,
-          as: "questions",
-          include: [
-            {
-              model: db.NpsCriterion,
-              as: "npsCriterion",
-            },
-          ],
-        },
-      ],
+      include: _getSurveyIncludes(db),
+      ...(t && { transaction: t }), // Pass transaction if provided
     });
     if (!survey) {
       throw new NotFoundError("Pesquisa não encontrada.");
@@ -69,7 +74,10 @@ export default (db) => {
   const updateSurvey = async (surveyId, surveyData, restaurantId) => {
     const t = await db.sequelize.transaction(); // Start transaction
     try {
-      const survey = await getSurveyById(surveyId, restaurantId); // getSurveyById does not use transaction
+      const survey = await getSurveyById(surveyId, restaurantId, t); // Pass transaction
+      if (surveyData.slug && surveyData.slug !== survey.slug) {
+        await _checkSlugUniqueness(surveyData.slug, restaurantId, surveyId);
+      }
       await survey.update(surveyData, { transaction: t });
       if (surveyData.npsCriteria) {
         await survey.setNpsCriteria(surveyData.npsCriteria, { transaction: t });
@@ -91,7 +99,7 @@ export default (db) => {
   const deleteSurvey = async (surveyId, restaurantId) => {
     const t = await db.sequelize.transaction(); // Start transaction
     try {
-      const survey = await getSurveyById(surveyId, restaurantId); // getSurveyById does not use transaction
+      const survey = await getSurveyById(surveyId, restaurantId, t); // Pass transaction
       await survey.destroy({ transaction: t });
       await t.commit(); // Commit transaction
       return true;

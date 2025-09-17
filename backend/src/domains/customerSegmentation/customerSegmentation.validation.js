@@ -16,5 +16,3 @@ export const updateSegmentValidation = [
     .isArray()
     .withMessage("As regras devem ser um array."),
 ];
-
-

@@ -268,7 +268,8 @@ export default (db) => {
     async getRestaurantEntitlements(req, res, next) {
       const { restaurantId } = req.params;
       try {
-        const entitlements = await iamService.getRestaurantEntitlements(restaurantId);
+        const entitlements =
+          await iamService.getRestaurantEntitlements(restaurantId);
         return res.json(entitlements);
       } catch (error) {
         next(error);

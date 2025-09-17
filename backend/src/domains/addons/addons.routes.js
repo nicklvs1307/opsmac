@@ -2,7 +2,7 @@ import express from "express";
 import asyncHandler from "../../utils/asyncHandler.js";
 
 import requirePermission from "../../middleware/requirePermission.js";
-import { addonValidation, updateAddonValidation, } from "./addons.validation.js";
+import { addonValidation, updateAddonValidation } from "./addons.validation.js";
 
 import addonsControllerFactory from "./addons.controller.js";
 

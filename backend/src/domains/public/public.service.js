@@ -268,7 +268,7 @@ export default (db) => {
               }
             }
           } catch (couponError) {
-                        logger.error(
+            logger.error(
               `Erro ao gerar cupom de recompensa por visita para ${customer.name}:`,
               couponError.message,
               "Stack:",

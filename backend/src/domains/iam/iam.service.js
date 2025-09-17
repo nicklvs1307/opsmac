@@ -286,7 +286,8 @@ class IamService {
       const featureIds = new Set(allFeatures.map((f) => f.id));
 
       for (const entitlementData of entitlements) {
-        const { entityType, entityId, status, source, metadata } = entitlementData;
+        const { entityType, entityId, status, source, metadata } =
+          entitlementData;
 
         let entityExists = false;
         switch (entityType) {
@@ -309,15 +310,16 @@ class IamService {
           );
         }
 
-        const [entitlement, created] = await this.models.RestaurantEntitlement.findOrCreate({
-          where: {
-            restaurant_id: restaurantId,
-            entity_type: entityType,
-            entity_id: entityId,
-          },
-          defaults: { status, source, metadata: metadata || {} },
-          transaction: t,
-        });
+        const [entitlement, created] =
+          await this.models.RestaurantEntitlement.findOrCreate({
+            where: {
+              restaurant_id: restaurantId,
+              entity_type: entityType,
+              entity_id: entityId,
+            },
+            defaults: { status, source, metadata: metadata || {} },
+            transaction: t,
+          });
 
         if (created) {
           createdCount++;
@@ -357,7 +359,10 @@ class IamService {
   }
 
   async setEntitlementsBulk(restaurantId, entitlements, isSuperadmin = false) {
-    if (!isSuperadmin && (!restaurantId || !entitlements || !Array.isArray(entitlements))) {
+    if (
+      !isSuperadmin &&
+      (!restaurantId || !entitlements || !Array.isArray(entitlements))
+    ) {
       throw new BadRequestError(
         "Bad Request: restaurantId and entitlements array are required.",
       );
@@ -375,7 +380,8 @@ class IamService {
       const featureIds = new Set(allFeatures.map((f) => f.id));
 
       for (const entitlementData of entitlements) {
-        const { entityType, entityId, status, source, metadata } = entitlementData;
+        const { entityType, entityId, status, source, metadata } =
+          entitlementData;
 
         let entityExists = false;
         switch (entityType) {
@@ -510,9 +516,10 @@ class IamService {
       ],
     });
 
-    const restaurantEntitlements = await this.models.RestaurantEntitlement.findAll({
-      where: { restaurant_id: restaurantId },
-    });
+    const restaurantEntitlements =
+      await this.models.RestaurantEntitlement.findAll({
+        where: { restaurant_id: restaurantId },
+      });
 
     const allModules = await this.models.Module.findAll({
       include: [
@@ -577,16 +584,27 @@ class IamService {
     });
 
     const processedModules = allModules.map((module) => {
-      const moduleEntitlementStatus = entitlementsMap.module && entitlementsMap.module[module.id];
-      const isModuleLocked = moduleEntitlementStatus === "locked" || moduleEntitlementStatus === "hidden";
+      const moduleEntitlementStatus =
+        entitlementsMap.module && entitlementsMap.module[module.id];
+      const isModuleLocked =
+        moduleEntitlementStatus === "locked" ||
+        moduleEntitlementStatus === "hidden";
 
       const processedSubmodules = module.submodules.map((submodule) => {
-        const submoduleEntitlementStatus = entitlementsMap.submodule && entitlementsMap.submodule[submodule.id];
-        const isSubmoduleLocked = isModuleLocked || submoduleEntitlementStatus === "locked" || submoduleEntitlementStatus === "hidden";
+        const submoduleEntitlementStatus =
+          entitlementsMap.submodule && entitlementsMap.submodule[submodule.id];
+        const isSubmoduleLocked =
+          isModuleLocked ||
+          submoduleEntitlementStatus === "locked" ||
+          submoduleEntitlementStatus === "hidden";
 
         const processedFeatures = submodule.features.map((feature) => {
-          const featureEntitlementStatus = entitlementsMap.feature && entitlementsMap.feature[feature.id];
-          const isFeatureLocked = isSubmoduleLocked || featureEntitlementStatus === "locked" || featureEntitlementStatus === "hidden";
+          const featureEntitlementStatus =
+            entitlementsMap.feature && entitlementsMap.feature[feature.id];
+          const isFeatureLocked =
+            isSubmoduleLocked ||
+            featureEntitlementStatus === "locked" ||
+            featureEntitlementStatus === "hidden";
 
           const processedActions = allActions.map((action) => {
             const effectivePermission = this._getEffectivePermission(

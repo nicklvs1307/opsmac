@@ -11,7 +11,8 @@ export default (db) => {
       if (!restaurantId) {
         throw new BadRequestError("Missing restaurant ID in webhook payload.");
       }
-      const restaurant = await ifoodService.checkIfoodModuleEnabled(restaurantId);
+      const restaurant =
+        await ifoodService.checkIfoodModuleEnabled(restaurantId);
       req.restaurant = restaurant;
       next();
     },

@@ -509,12 +509,11 @@ export default (restaurantService) => {
   const updateRestaurantSupplier = async (req, res, next) => {
     handleValidationErrors(req);
     const { restaurantId, supplierId } = req.params;
-    const updatedSupplier =
-      await restaurantService.updateRestaurantSupplier(
-        restaurantId,
-        supplierId,
-        req.body,
-      );
+    const updatedSupplier = await restaurantService.updateRestaurantSupplier(
+      restaurantId,
+      supplierId,
+      req.body,
+    );
     await auditService.log(
       req.user,
       restaurantId,
@@ -595,7 +594,9 @@ export default (restaurantService) => {
   const getRestaurantTechnicalSpecifications = async (req, res, next) => {
     const restaurantId = req.context.restaurantId;
     const specs =
-      await restaurantService.getRestaurantTechnicalSpecifications(restaurantId);
+      await restaurantService.getRestaurantTechnicalSpecifications(
+        restaurantId,
+      );
     res.json(specs);
   };
 

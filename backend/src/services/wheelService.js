@@ -33,5 +33,3 @@ export const spinWheel = (wheelConfig) => {
   const fallbackIndex = wheelConfig.items.length - 1;
   return { winningItem: fallbackItem, winningIndex: fallbackIndex };
 };
-
-

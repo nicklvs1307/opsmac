@@ -1,4 +1,7 @@
-import { UnauthorizedError, InternalServerError } from "../utils/errors/index.js";
+import {
+  UnauthorizedError,
+  InternalServerError,
+} from "../utils/errors/index.js";
 import logger from "../utils/logger.js";
 
 export default (db) => {

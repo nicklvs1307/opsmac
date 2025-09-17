@@ -3,9 +3,7 @@ import asyncHandler from "../../utils/asyncHandler.js";
 import requirePermission from "../../middleware/requirePermission.js";
 
 import googleMyBusinessControllerFactory from "./googleMyBusiness.controller.js";
-import {
-    replyToReviewValidation,
-  } from "./googleMyBusiness.validation.js";
+import { replyToReviewValidation } from "./googleMyBusiness.validation.js";
 
 export default (db) => {
   const googleMyBusinessController = googleMyBusinessControllerFactory(db);

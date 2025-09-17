@@ -18,10 +18,7 @@ class CustomerService {
         attributes: [
           [fn("COUNT", col("Customer.id")), "totalCustomers"],
           [
-            fn(
-              "COUNT",
-              fn("DISTINCT", col("checkins.customerId")),
-            ),
+            fn("COUNT", fn("DISTINCT", col("checkins.customerId"))),
             "engagedCustomersCount",
           ],
           [

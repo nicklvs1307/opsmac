@@ -4,11 +4,9 @@ import {
   NotFoundError,
   ForbiddenError,
 } from "../../utils/errors/index.js";
-import {
-  sendWhatsAppMessage,
-} from "../../services/integrations/whatsappApiClient.js";
 import natural from "natural";
-import logger from "../../utils/logger.js";
+import logger from "../../utils/logger.js"; // Re-add logger as it's used elsewhere
+import notificationServiceFactory from "../../services/notificationService.js";
 
 const tokenizer = new natural.WordTokenizer();
 // Define Portuguese stop words. The 'natural' library's default stopwords are for English.
@@ -140,8 +138,32 @@ const portugueseStopwords = new Set([
   "vos",
 ]);
 
-  export default (db) => {
+  const _getFeedbackIncludes = (models) => {
+    return [
+      {
+        model: models.Customer,
+        as: "customer",
+        attributes: [
+          "id",
+          "name",
+          "email",
+          "phone",
+          "customerSegment",
+          "total_visits",
+          "loyaltyPoints",
+        ],
+      },
+      {
+        model: models.Restaurant,
+        as: "restaurant",
+        attributes: ["id", "name"],
+      },
+    ];
+  };
+
+export default (db) => {
   const models = db;
+  const notificationService = notificationServiceFactory(db);
 
   const _findOrCreateCustomer = async (feedbackData, restaurantId) => {
     const { customerId, is_anonymous, customerData, source } = feedbackData;
@@ -210,49 +232,7 @@ const portugueseStopwords = new Set([
     return { pointsEarned: pointsToAdd };
   };
 
-  const handleWhatsAppNotification = async (feedback) => {
-    try {
-      if (feedback.customer && feedback.customer.phone && feedback.restaurant) {
-        const { restaurant, customer } = feedback;
-        const thankYouEnabled =
-          restaurant.settings?.whatsappMessages?.feedbackThankYouEnabled;
-        const customMessage =
-          restaurant.settings?.whatsappMessages?.feedbackThankYouText;
-
-        if (thankYouEnabled) {
-          let messageText =
-            customMessage ||
-            `Olá {{customer_name}}! 👋\n\nObrigado pelo seu feedback no *{{restaurant_name}}*!\n\nSua opinião é muito importante para nós. 😉`;
-          messageText = messageText
-            .replace(/\{\{customer_name\}\}/g, customer.name || "")
-            .replace(/\{\{restaurant_name\}\}/g, restaurant.name || "");
-
-          const whatsappResponse = await sendWhatsAppMessage(
-            restaurant.whatsappApiUrl,
-            restaurant.whatsappApiKey,
-            restaurant.whatsappInstanceId,
-            customer.phone,
-            messageText,
-          );
-
-          await models.WhatsappMessage.create({
-            phoneNumber: customer.phone,
-            messageText: messageText,
-            messageType: "feedback_thank_you",
-            status: whatsappResponse.success ? "sent" : "failed",
-            whatsappMessageId: whatsappResponse.data?.id || null,
-            restaurantId: restaurant.id,
-            customerId: customer.id,
-          });
-        }
-      }
-    } catch (whatsappError) {
-      logger.error(
-        "Erro inesperado ao tentar enviar mensagem de agradecimento de feedback WhatsApp:",
-        whatsappError,
-      );
-    }
-  };
+  
 
   const createFeedback = async (feedbackData, restaurantId, reqInfo) => {
     const restaurant = await models.Restaurant.findByPk(restaurantId);
@@ -284,17 +264,12 @@ const portugueseStopwords = new Set([
     );
 
     const fullFeedback = await models.Feedback.findByPk(feedback.id, {
-      include: [
-        {
-          model: models.Customer,
-          as: "customer",
-          attributes: ["id", "name", "email", "loyaltyPoints", "phone"],
-        },
-        { model: models.Restaurant, as: "restaurant" },
-      ],
+      include: _getFeedbackIncludes(models),
     });
 
     await handleWhatsAppNotification(fullFeedback);
+
+    await notificationService.sendFeedbackThankYouWhatsApp(fullFeedback);
 
     return { feedback: fullFeedback, pointsEarned };
   };
@@ -331,18 +306,7 @@ const portugueseStopwords = new Set([
 
     return await models.Feedback.findAndCountAll({
       where,
-      include: [
-        {
-          model: models.Customer,
-          as: "customer",
-          attributes: ["id", "name", "email", "phone", "customerSegment"],
-        },
-        {
-          model: models.Restaurant,
-          as: "restaurant",
-          attributes: ["id", "name"],
-        },
-      ],
+      include: _getFeedbackIncludes(models),
       order: [["createdAt", "DESC"]],
       limit: parseInt(limit),
       offset: (page - 1) * limit,
@@ -352,26 +316,7 @@ const portugueseStopwords = new Set([
   const getFeedbackForRestaurant = async (feedbackId, restaurantId) => {
     const feedback = await models.Feedback.findOne({
       where: { id: feedbackId, restaurant_id: restaurantId },
-      include: [
-        {
-          model: models.Customer,
-          as: "customer",
-          attributes: [
-            "id",
-            "name",
-            "email",
-            "phone",
-            "customer_segment",
-            "total_visits",
-          ],
-        },
-        {
-          model: models.Restaurant,
-          as: "restaurant",
-          attributes: ["id", "name"],
-        },
-      ],
-    });
+      include: _getFeedbackIncludes(models),
     if (!feedback)
       throw new NotFoundError(
         "Feedback não encontrado ou não pertence ao seu restaurante.",

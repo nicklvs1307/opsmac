@@ -11,9 +11,7 @@ const CHANNEL = "perm_invalidation";
 if (redisClient) {
   const subscriber = redisClient.duplicate();
 
-  subscriber.on("error", (err) =>
-    logger.error("Redis Subscriber Error:", err),
-  );
+  subscriber.on("error", (err) => logger.error("Redis Subscriber Error:", err));
 
   subscriber.on("message", (channel, message) => {
     if (channel === CHANNEL) {

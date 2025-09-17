@@ -28,9 +28,7 @@ import authMiddleware from "../../middleware/authMiddleware.js";
 
 export default (db) => {
   const restaurantService = restaurantServiceFactory(db);
-  const restaurantController = restaurantControllerFactory(
-    restaurantService,
-  );
+  const restaurantController = restaurantControllerFactory(restaurantService);
   const { auth } = authMiddleware(db);
   const router = express.Router();
 

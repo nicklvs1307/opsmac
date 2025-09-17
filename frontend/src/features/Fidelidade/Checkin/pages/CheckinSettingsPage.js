@@ -32,6 +32,13 @@ import {
 } from '../api/checkinService';
 import { useRewards } from '@/features/Coupons/api/couponQueries';
 import toast from 'react-hot-toast';
+import CheckinVisualCustomization from '../components/CheckinVisualCustomization';
+import CheckinCycleSettings from '../components/CheckinCycleSettings';
+import CheckinRewardsPerVisit from '../components/CheckinRewardsPerVisit';
+import CheckinAntiFraudControl from '../components/CheckinAntiFraudControl';
+import CheckinPointsAndRanking from '../components/CheckinPointsAndRanking';
+import CheckinLimitPerCycle from '../components/CheckinLimitPerCycle';
+import useQRCodeDownload from '../hooks/useQRCodeDownload';
 
 const CheckinSettingsPage = () => {
   const { user } = useAuth();
@@ -75,6 +82,8 @@ const CheckinSettingsPage = () => {
     control,
     name: 'rewards_per_visit',
   });
+
+  const { downloadQRCode } = useQRCodeDownload();
 
   useEffect(() => {
     if (settingsData) {
@@ -162,460 +171,34 @@ const CheckinSettingsPage = () => {
                 />
               </Box>
 
-              {/* Personalização Visual */}
-              <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>
-                  {t('checkin_program.visual_customization_title')}
-                </Typography>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <Controller
-                      name="primary_color"
-                      control={control}
-                      render={({ field }) => (
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                          <TextField
-                            {...field}
-                            label={t('checkin_program.primary_color_label')}
-                            fullWidth
-                            margin="normal"
-                            type="color"
-                            helperText={t('checkin_program.color_helper')}
-                            InputLabelProps={{ shrink: true }}
-                            sx={{ flexGrow: 1 }}
-                          />
-                          <Box
-                            sx={{
-                              width: 40,
-                              height: 40,
-                              borderRadius: '4px',
-                              backgroundColor: field.value || 'transparent',
-                              border: '1px solid #ccc',
-                            }}
-                          />
-                        </Box>
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Controller
-                      name="secondary_color"
-                      control={control}
-                      render={({ field }) => (
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                          <TextField
-                            {...field}
-                            label={t('checkin_program.secondary_color_label')}
-                            fullWidth
-                            margin="normal"
-                            type="color"
-                            helperText={t('checkin_program.color_helper_secondary')}
-                            InputLabelProps={{ shrink: true }}
-                            sx={{ flexGrow: 1 }}
-                          />
-                          <Box
-                            sx={{
-                              width: 40,
-                              height: 40,
-                              borderRadius: '4px',
-                              backgroundColor: field.value || 'transparent',
-                              border: '1px solid #ccc',
-                            }}
-                          />
-                        </Box>
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Controller
-                      name="text_color"
-                      control={control}
-                      render={({ field }) => (
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                          <TextField
-                            {...field}
-                            label={t('checkin_program.text_color_label')}
-                            fullWidth
-                            margin="normal"
-                            type="color"
-                            helperText={t('checkin_program.color_helper_text')}
-                            InputLabelProps={{ shrink: true }}
-                            sx={{ flexGrow: 1 }}
-                          />
-                          <Box
-                            sx={{
-                              width: 40,
-                              height: 40,
-                              borderRadius: '4px',
-                              backgroundColor: field.value || 'transparent',
-                              border: '1px solid #ccc',
-                            }}
-                          />
-                        </Box>
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Controller
-                      name="background_color"
-                      control={control}
-                      render={({ field }) => (
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                          <TextField
-                            {...field}
-                            label={t('checkin_program.background_color_label')}
-                            fullWidth
-                            margin="normal"
-                            type="color"
-                            helperText={t('checkin_program.color_helper_background')}
-                            InputLabelProps={{ shrink: true }}
-                            sx={{ flexGrow: 1 }}
-                          />
-                          <Box
-                            sx={{
-                              width: 40,
-                              height: 40,
-                              borderRadius: '4px',
-                              backgroundColor: field.value || 'transparent',
-                              border: '1px solid #ccc',
-                            }}
-                          />
-                        </Box>
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Controller
-                      name="background_image_url"
-                      control={control}
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('checkin_program.background_image_url_label')}
-                          fullWidth
-                          margin="normal"
-                          helperText={t('checkin_program.background_image_url_helper')}
-                        />
-                      )}
-                    />
-                  </Grid>
-                </Grid>
-              </Box>
+              
 
-              {/* Ciclo de Check-in */}
-              <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>
-                  {t('checkin_program.checkin_cycle')}
-                </Typography>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <Controller
-                      name="checkin_cycle_length"
-                      control={control}
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('checkin_program.cycle_length')}
-                          type="number"
-                          fullWidth
-                          margin="normal"
-                          helperText={t('checkin_program.cycle_length_helper')}
-                        />
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Controller
-                      name="checkin_cycle_name"
-                      control={control}
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('checkin_program.cycle_name')}
-                          fullWidth
-                          margin="normal"
-                          helperText={t('checkin_program.cycle_name_helper')}
-                        />
-                      )}
-                    />
-                  </Grid>
-                </Grid>
-                <FormControlLabel
-                  control={
-                    <Controller
-                      name="enable_ranking"
-                      control={control}
-                      render={({ field }) => (
-                        <Switch
-                          {...field}
-                          checked={field.value}
-                          onChange={(e) => field.onChange(e.target.checked)}
-                        />
-                      )}
-                    />
-                  }
-                  label={t('checkin_program.enable_ranking')}
-                />
-                <FormControlLabel
-                  control={
-                    <Controller
-                      name="enable_level_progression"
-                      control={control}
-                      render={({ field }) => (
-                        <Switch
-                          {...field}
-                          checked={field.value}
-                          onChange={(e) => field.onChange(e.target.checked)}
-                        />
-                      )}
-                    />
-                  }
-                  label={t('checkin_program.enable_level_progression')}
-                />
-              </Box>
+              <CheckinVisualCustomization control={control} />
 
-              {/* Recompensas por Visita */}
-              <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>
-                  {t('checkin_program.rewards_per_visit')}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                  {t('checkin_program.rewards_per_visit_helper')}
-                </Typography>
-                {fields.map((item, index) => (
-                  <Paper key={item.id} sx={{ p: 2, mb: 2, border: '1px solid #eee' }}>
-                    <Grid container spacing={2} alignItems="center">
-                      <Grid item xs={12} sm={4}>
-                        <Controller
-                          name={`rewards_per_visit.${index}.visit_count`}
-                          control={control}
-                          rules={{
-                            required: t('checkin_program.visit_count_required'),
-                            setValueAs: (value) => (value === '' ? undefined : Number(value)),
-                          }}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label={t('checkin_program.visit_count')}
-                              type="number"
-                              fullWidth
-                              error={!!errors.rewards_per_visit?.[index]?.visit_count}
-                              helperText={errors.rewards_per_visit?.[index]?.visit_count?.message}
-                            />
-                          )}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <Controller
-                          name={`rewards_per_visit.${index}.reward_id`}
-                          control={control}
-                          rules={{ required: t('checkin_program.reward_required') }}
-                          render={({ field }) => (
-                            <FormControl
-                              fullWidth
-                              error={!!errors.rewards_per_visit?.[index]?.reward_id}
-                            >
-                              <InputLabel>{t('checkin_program.select_reward')}</InputLabel>
-                              <Select {...field} label={t('checkin_program.select_reward')}>
-                                {rewards &&
-                                  rewards.map((reward) => (
-                                    <MenuItem key={reward.id} value={reward.id}>
-                                      {reward.title}
-                                    </MenuItem>
-                                  ))}
-                              </Select>
-                              <FormHelperText>
-                                {errors.rewards_per_visit?.[index]?.reward_id?.message}
-                              </FormHelperText>
-                            </FormControl>
-                          )}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                        <Button
-                          variant="outlined"
-                          color="error"
-                          onClick={() => remove(index)}
-                          startIcon={<DeleteIcon />}
-                        >
-                          {t('checkin_program.remove')}
-                        </Button>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Controller
-                          name={`rewards_per_visit.${index}.message_template`}
-                          control={control}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label={t('checkin_program.message_template')}
-                              fullWidth
-                              multiline
-                              rows={3}
-                              helperText={t('checkin_program.reward_message_variables')}
-                            />
-                          )}
-                        />
-                      </Grid>
-                    </Grid>
-                  </Paper>
-                ))}
-                <Button
-                  variant="outlined"
-                  startIcon={<AddIcon />}
-                  onClick={() => append({ visit_count: '', reward_id: '', message_template: '' })}
-                >
-                  {t('checkin_program.add_reward')}
-                </Button>
-              </Box>
+              <CheckinCycleSettings control={control} />
 
-              {/* Controle Anti-Fraude */}
-              <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>
-                  {t('checkin_program.anti_fraud_control')}
-                </Typography>
-                <FormControlLabel
-                  control={
-                    <Controller
-                      name="checkin_requires_table"
-                      control={control}
-                      render={({ field }) => (
-                        <Switch
-                          {...field}
-                          checked={!!field.value} // Garante que o valor seja booleano
-                          onChange={(e) => field.onChange(e.target.checked)}
-                        />
-                      )}
-                    />
-                  }
-                  label={t('checkin_program.require_table_number')}
-                />
-                <FormControlLabel
-                  control={
-                    <Controller
-                      name="require_coupon_for_checkin"
-                      control={control}
-                      render={({ field }) => (
-                        <Switch
-                          {...field}
-                          checked={!!field.value}
-                          onChange={(e) => field.onChange(e.target.checked)}
-                        />
-                      )}
-                    />
-                  }
-                  label={t('checkin_program.require_coupon_for_checkin')}
-                />
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <Controller
-                      name="checkin_time_restriction"
-                      control={control}
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('checkin_program.time_restriction')}
-                          fullWidth
-                          margin="normal"
-                          helperText={t('checkin_program.time_restriction_helper')}
-                        />
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Controller
-                      name="checkin_duration_minutes"
-                      control={control}
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={t('checkin_program.checkin_duration_minutes')}
-                          type="number"
-                          fullWidth
-                          margin="normal"
-                          helperText={t('checkin_program.checkin_duration_minutes_helper')}
-                        />
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Controller
-                      name="identification_method"
-                      control={control}
-                      render={({ field }) => (
-                        <FormControl fullWidth margin="normal">
-                          <InputLabel>{t('checkin_program.identification_method')}</InputLabel>
-                          <Select {...field} label={t('checkin_program.identification_method')}>
-                            <MenuItem value="phone">{t('checkin_program.method_phone')}</MenuItem>
-                            <MenuItem value="cpf">{t('checkin_program.method_cpf')}</MenuItem>
-                            <MenuItem value="unique_link">
-                              {t('checkin_program.method_unique_link')}
-                            </MenuItem>
-                          </Select>
-                        </FormControl>
-                      )}
-                    />
-                  </Grid>
-                </Grid>
-              </Box>
+              <CheckinRewardsPerVisit
+                control={control}
+                errors={errors}
+                rewards={rewards}
+                isLoadingRewards={isLoadingRewards}
+              />
 
-              {/* Sistema de Pontuação e Ranking */}
-              <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>
-                  {t('checkin_program.points_and_ranking')}
-                </Typography>
-                <Controller
-                  name="points_per_checkin"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={t('checkin_program.points_per_checkin')}
-                      type="number"
-                      fullWidth
-                      margin="normal"
-                      helperText={t('checkin_program.points_per_checkin_helper')}
-                    />
-                  )}
-                />
-              </Box>
+              <CheckinAntiFraudControl control={control} />
 
-              {/* Limite de Check-ins por Ciclo */}
-              <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" gutterBottom>
-                  {t('checkin_program.checkin_limit')}
-                </Typography>
-                <Controller
-                  name="checkin_limit_per_cycle"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={t('checkin_program.limit_per_cycle')}
-                      type="number"
-                      fullWidth
-                      margin="normal"
-                      helperText={t('checkin_program.limit_per_cycle_helper')}
-                    />
-                  )}
-                />
-                <FormControlLabel
-                  control={
-                    <Controller
-                      name="allow_multiple_cycles"
-                      control={control}
-                      render={({ field }) => (
-                        <Switch
-                          {...field}
-                          checked={field.value}
-                          onChange={(e) => field.onChange(e.target.checked)}
-                        />
-                      )}
-                    />
-                  }
-                  label={t('checkin_program.allow_multiple_cycles')}
-                />
-              </Box>
+              <CheckinPointsAndRanking control={control} />
+
+              <CheckinLimitPerCycle control={control} />
+
+              
+
+              
+
+              
+
+              
+
+              
 
               <Button
                 variant="contained"
@@ -652,18 +235,7 @@ const CheckinSettingsPage = () => {
                     </Button>
                     <Button
                       variant="contained"
-                      onClick={() => {
-                        const canvas = document.querySelector('canvas');
-                        const pngUrl = canvas
-                          .toDataURL('image/png')
-                          .replace('image/png', 'image/octet-stream');
-                        let downloadLink = document.createElement('a');
-                        downloadLink.href = pngUrl;
-                        downloadLink.download = 'checkin-qrcode.png';
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-                        document.body.removeChild(downloadLink);
-                      }}
+                      onClick={() => downloadQRCode(checkinQRCode.url)}
                     >
                       {t('checkin_program.download_qr_code_button')}
                     </Button>

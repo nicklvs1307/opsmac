@@ -75,7 +75,8 @@ export default (db) => {
     if (category_id) whereClause.category_id = category_id;
     if (start_date || end_date) {
       whereClause.transaction_date = {};
-      if (start_date) whereClause.transaction_date[Op.gte] = new Date(start_date);
+      if (start_date)
+        whereClause.transaction_date[Op.gte] = new Date(start_date);
       if (end_date) whereClause.transaction_date[Op.lte] = new Date(end_date);
     }
 
@@ -102,13 +103,15 @@ export default (db) => {
   };
 
   // --- Financial Category Service Methods ---
-  const getFinancialCategories = async (restaurantId, type, page = 1, limit = 10) => {
+  const getFinancialCategories = async (
+    restaurantId,
+    type,
+    page = 1,
+    limit = 10,
+  ) => {
     const offset = (page - 1) * limit;
     let whereClause = {
-      [Op.or]: [
-        { restaurant_id: restaurantId },
-        { restaurant_id: null },
-      ],
+      [Op.or]: [{ restaurant_id: restaurantId }, { restaurant_id: null }],
     };
 
     if (type) whereClause.type = type;
@@ -150,13 +153,16 @@ export default (db) => {
     }
   };
 
-  const getAllPaymentMethods = async (restaurantId, type, is_active, page = 1, limit = 10) => {
+  const getAllPaymentMethods = async (
+    restaurantId,
+    type,
+    is_active,
+    page = 1,
+    limit = 10,
+  ) => {
     const offset = (page - 1) * limit;
     let whereClause = {
-      [Op.or]: [
-        { restaurant_id: restaurantId },
-        { restaurant_id: null },
-      ],
+      [Op.or]: [{ restaurant_id: restaurantId }, { restaurant_id: null }],
     };
 
     if (type) whereClause.type = type;
@@ -207,7 +213,10 @@ export default (db) => {
 
   // --- Report Service Methods ---
   const getCashFlowReport = async (restaurantId, start_date, end_date) => {
-    const { startDate, endDate, dateFilter } = _getDateRangeFilter(start_date, end_date);
+    const { startDate, endDate, dateFilter } = _getDateRangeFilter(
+      start_date,
+      end_date,
+    );
 
     const transactions = await models.FinancialTransaction.findAll({
       where: {
@@ -222,7 +231,9 @@ export default (db) => {
         "$session.restaurant_id$": restaurantId,
         createdAt: dateFilter,
       },
-      include: [{ model: models.CashRegisterSession, as: "session", attributes: [] }],
+      include: [
+        { model: models.CashRegisterSession, as: "session", attributes: [] },
+      ],
       attributes: ["type", "amount"],
     });
 
@@ -245,14 +256,18 @@ export default (db) => {
       totalExpense,
       totalReinforcement,
       totalWithdrawal,
-      netCashFlow: totalIncome + totalReinforcement - (totalExpense + totalWithdrawal),
+      netCashFlow:
+        totalIncome + totalReinforcement - (totalExpense + totalWithdrawal),
       startDate: startDate.toISOString().split("T")[0],
       endDate: endDate.toISOString().split("T")[0],
     };
   };
 
   const getDreReport = async (restaurantId, start_date, end_date) => {
-    const { startDate, endDate, dateFilter } = _getDateRangeFilter(start_date, end_date);
+    const { startDate, endDate, dateFilter } = _getDateRangeFilter(
+      start_date,
+      end_date,
+    );
 
     const totalSales = await models.Order.sum("total_amount", {
       where: {
@@ -265,24 +280,33 @@ export default (db) => {
     const cmv = 0; // TODO: Implement logic to calculate Cost of Goods Sold (CMV)
     const grossProfit = (totalSales || 0) - cmv;
 
-    const operationalExpenses = await models.FinancialTransaction.sum("amount", {
-      where: {
-        restaurant_id: restaurantId,
-        type: "expense",
-        transaction_date: dateFilter,
+    const operationalExpenses = await models.FinancialTransaction.sum(
+      "amount",
+      {
+        where: {
+          restaurant_id: restaurantId,
+          type: "expense",
+          transaction_date: dateFilter,
+        },
       },
-    });
+    );
 
-    const cashWithdrawalExpenses = await models.CashRegisterMovement.sum("amount", {
-      where: {
-        type: "withdrawal",
-        "$session.restaurant_id$": restaurantId,
-        createdAt: dateFilter,
+    const cashWithdrawalExpenses = await models.CashRegisterMovement.sum(
+      "amount",
+      {
+        where: {
+          type: "withdrawal",
+          "$session.restaurant_id$": restaurantId,
+          createdAt: dateFilter,
+        },
+        include: [
+          { model: models.CashRegisterSession, as: "session", attributes: [] },
+        ],
       },
-      include: [{ model: models.CashRegisterSession, as: "session", attributes: [] }],
-    });
+    );
 
-    const totalOperationalExpenses = (operationalExpenses || 0) + (cashWithdrawalExpenses || 0);
+    const totalOperationalExpenses =
+      (operationalExpenses || 0) + (cashWithdrawalExpenses || 0);
     const operatingProfit = grossProfit - totalOperationalExpenses;
     const otherIncome = 0;
     const otherExpenses = 0;
@@ -302,7 +326,11 @@ export default (db) => {
     };
   };
 
-  const getSalesByPaymentMethodReport = async (restaurantId, start_date, end_date) => {
+  const getSalesByPaymentMethodReport = async (
+    restaurantId,
+    start_date,
+    end_date,
+  ) => {
     const { dateFilter } = _getDateRangeFilter(start_date, end_date);
 
     const salesData = await models.Order.findAll({

@@ -114,7 +114,7 @@ const SurveyTable = ({
                 </Box>
               </TableCell>
             </TableRow>
-          ))
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

@@ -17,7 +17,7 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { saveUser } from '@/features/Admin/services/adminService';
+import { saveUser } from '../services/adminService';
 import {
   useGetPermissionTree,
   useGetRoles,
@@ -25,8 +25,8 @@ import {
   useAssignUserRole,
 } from '@/features/IAM/api/iamQueries';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
-import usePermissions from '@/hooks/usePermissions';
-import PermissionTree from '@/features/Admin/components/PermissionTree';
+import { usePermissions } from '../../hooks/usePermissions';
+import PermissionTree from '../components/PermissionTree';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 

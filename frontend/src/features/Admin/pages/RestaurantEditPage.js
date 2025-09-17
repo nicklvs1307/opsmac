@@ -14,14 +14,14 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { useMutation, useQueryClient, useQuery } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { fetchRestaurants, saveRestaurant } from '@/features/Admin/services/adminService';
+import { fetchRestaurants, saveRestaurant } from '../services/adminService';
 import {
   useGetPermissionTree,
   useSetEntitlements, // Changed from useSetEntitlement
   useGetRestaurantEntitlements, // Added this hook
 } from '@/features/IAM/api/iamQueries';
-import usePermissions from '@/hooks/usePermissions';
-import PermissionTree from '@/features/Admin/components/PermissionTree';
+import { usePermissions } from '../../hooks/usePermissions';
+import PermissionTree from '../components/PermissionTree';
 
 const RestaurantEditPage = () => {
   const { restaurantId } = useParams();
@@ -156,7 +156,7 @@ const RestaurantEditPage = () => {
     };
 
     if (featureId) {
-      newSelected[moduleId].submodules[submoduleId].features[featureId].checked = checked;
+      newSelected[moduleId].submodules[submoduleId].features[feature.id].checked = checked;
     } else if (submoduleId) {
       setChildren(newSelected[moduleId].submodules[submoduleId], checked);
     } else if (moduleId) {

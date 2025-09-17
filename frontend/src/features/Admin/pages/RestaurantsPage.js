@@ -10,18 +10,18 @@ import {
 } from '@/features/Admin/api/adminQueries';
 
 // Hooks
-import usePermissions from '@/hooks/usePermissions';
-import useAdminData from '@/hooks/useAdminData';
+import { usePermissions } from '../../hooks/usePermissions';
+import useAdminData from '../hooks/useAdminData';
 import { useGetPermissionTree, useSetEntitlements } from '@/features/IAM/api/iamQueries';
 
 // Components
-import RestaurantTable from '@/components/Admin/RestaurantTable';
-import ModuleSettingsModal from '@/components/Admin/ModuleSettingsModal';
+import RestaurantTable from '../components/RestaurantTable';
+import ModuleSettingsModal from '../components/ModuleSettingsModal';
 
 // Services
-import { deleteRestaurant } from '@/services/adminService'; // Import deleteRestaurant service
+import { deleteRestaurant } from '../services/adminService'; // Import deleteRestaurant service
 
-const AdminRestaurantsPage = () => {
+const RestaurantsPage = () => {
   const { t } = useTranslation();
   const { can } = usePermissions();
   const navigate = useNavigate();
@@ -241,4 +241,4 @@ const AdminRestaurantsPage = () => {
   );
 };
 
-export default AdminRestaurantsPage;
+export default RestaurantsPage;

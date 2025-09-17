@@ -26,7 +26,7 @@ function TabPanel(props) {
   );
 }
 
-const MenuManagement = () => {
+const ProductMenuManagementPage = () => {
   const { t } = useTranslation();
   const [value, setValue] = useState(0);
 
@@ -63,4 +63,4 @@ const MenuManagement = () => {
   );
 };
 
-export default MenuManagement;
+export default ProductMenuManagementPage;

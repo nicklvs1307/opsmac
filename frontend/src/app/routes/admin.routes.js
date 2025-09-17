@@ -2,15 +2,15 @@ import React, { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 
-const AdminUsersPage = lazy(() => import('@/features/Admin/AdminUsersPage'));
-const AdminRestaurantsPage = lazy(() => import('@/features/Admin/AdminRestaurantsPage'));
-const RestaurantEditPage = lazy(() => import('@/features/Admin/RestaurantEditPage'));
-const MenuManagement = lazy(() => import('@/features/Admin/MenuManagement'));
-const RestaurantCreatePage = lazy(() => import('@/features/Admin/RestaurantCreatePage'));
-const UserEditPage = lazy(() => import('@/features/Admin/UserEditPage'));
-const UserCreatePage = lazy(() => import('@/features/Admin/UserCreatePage'));
+const UsersPage = lazy(() => import('@/features/Admin/pages/UsersPage'));
+const RestaurantsPage = lazy(() => import('@/features/Admin/pages/RestaurantsPage'));
+const RestaurantEditPage = lazy(() => import('@/features/Admin/pages/RestaurantEditPage'));
+const ProductMenuManagementPage = lazy(() => import('@/features/Admin/pages/ProductMenuManagementPage'));
+const RestaurantCreatePage = lazy(() => import('@/features/Admin/pages/RestaurantCreatePage'));
+const UserEditPage = lazy(() => import('@/features/Admin/pages/UserEditPage'));
+const UserCreatePage = lazy(() => import('@/features/Admin/pages/UserCreatePage'));
 const RolePermissionManagementPage = lazy(
-  () => import('@/components/Admin/RolePermissionManagementPage')
+  () => import('@/features/Admin/components/RolePermissionManagementPage')
 );
 
 const IAMDashboard = lazy(() => import('@/features/IAM/pages/IAMDashboard'));
@@ -58,9 +58,7 @@ const adminRoutes = [
   {
     path: 'admin/modules',
     element: (
-      <ProtectedRoute featureKey="modules" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <MenuManagement />
+          <ProductMenuManagementPage />
         </Suspense>
       </ProtectedRoute>
     ),
@@ -218,7 +216,7 @@ const adminRoutes = [
     element: (
       <ProtectedRoute featureKey="modules" actionKey="manage">
         <Suspense fallback={<div className="loading-spinner"></div>}>
-          <MenuManagement />
+          <ProductMenuManagementPage />
         </Suspense>
       </ProtectedRoute>
     ),
@@ -236,7 +234,7 @@ const adminRoutes = [
     element: (
       <ProtectedRoute featureKey="users" actionKey="read">
         <Suspense fallback={<div className="loading-spinner"></div>}>
-          <AdminUsersPage />
+          <UsersPage />
         </Suspense>
       </ProtectedRoute>
     ),
@@ -266,7 +264,7 @@ const adminRoutes = [
     element: (
       <ProtectedRoute featureKey="restaurants" actionKey="read">
         <Suspense fallback={<div className="loading-spinner"></div>}>
-          <AdminRestaurantsPage />
+          <RestaurantsPage />
         </Suspense>
       </ProtectedRoute>
     ),

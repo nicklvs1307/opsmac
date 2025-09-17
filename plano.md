@@ -1,103 +1,230 @@
-# Análise e Plano de Refatoração do Sistema de Permissionamento
+# Plano de Refatoração: Estrutura do Diretório `frontend/src/features`
 
-## 1. Visão Geral do Sistema
+## 1. Objetivo
 
-*   **Objetivo:** Entender a arquitetura, fluxos e mecanismos do sistema de permissionamento, criação de usuários e empresas (restaurantes), e gestão de permissões.
-*   **Contexto:** Sistema multi-tenant com controle de acesso baseado em papéis (RBAC), sobrescritas de permissão por usuário e entitlements de restaurante.
+O objetivo desta refatoração é organizar e padronizar o diretório `frontend/src/features` com base em princípios de design orientado a domínio. Isso visa melhorar a manutenibilidade, escalabilidade e clareza do código, alinhando a estrutura do frontend com os domínios de negócio da aplicação e o sistema de permissões existente.
 
-## 2. Análise Detalhada (Etapas Concluídas)
+## 2. Estrutura Proposta para `frontend/src/features`
 
-### 2.1. Etapa 1: Análise da Estrutura do Banco de Dados e Modelos
+A nova estrutura será organizada por domínios de negócio principais, com subdiretórios para funcionalidades específicas dentro de cada domínio.
 
-*   **Resumo:** O sistema utiliza um modelo multi-tenant robusto, onde cada `Restaurant` é um inquilino isolado. As permissões são definidas em uma hierarquia de 4 níveis: `Modules` -> `Submodules` -> `Features` -> `Actions`.
-*   **Tabelas Chave:**
-    *   `users`: Usuários do sistema.
-    *   `restaurants`: Entidades de negócio (inquilinos).
-    *   `user_restaurants`: Tabela de junção para associar usuários a restaurantes (um usuário pode ter acesso a múltiplos restaurantes).
-    *   `modules`, `submodules`, `features`, `actions`: Definem a granularidade das permissões.
-    *   `roles`: Papéis que agrupam permissões, específicos por `restaurant_id`.
-    *   `role_permissions`: Associa `Roles` a `Features` e `Actions`.
-    *   `user_roles`: Associa `Users` a `Roles` dentro de um `Restaurant`.
-    *   `user_permission_overrides`: Permissões específicas para um usuário que sobrescrevem as do seu papel.
-    *   `restaurant_entitlements`: Controla o acesso de um restaurante a módulos/funcionalidades de alto nível.
-*   **Observações:** Estrutura bem pensada, flexível e escalável para um ambiente multi-empresa.
+```
+frontend/src/features/
+├── Admin/                  // Funcionalidades relacionadas à administração geral do sistema
+│   ├── Users/
+│   ├── Restaurants/
+│   ├── RolesAndPermissions/
+│   └── ...
+├── Common/                 // Componentes, hooks, utilitários compartilhados
+│   ├── Components/
+│   ├── Hooks/
+│   ├── Utils/
+│   └── ...
+├── Customers/              // Todas as funcionalidades relacionadas ao cliente
+│   ├── List/               // Gestão de Clientes
+│   ├── Segmentation/       // Segmentação de Clientes
+│   ├── Profile/
+│   ├── Ranking/            // Ranking de Clientes
+│   ├── Communication/      // Disparos, Campanhas Automaticas, Mensagens, Aniversariantes
+│   └── ...
+├── Financial/              // Todas as funcionalidades de gestão financeira
+│   ├── AccountsPayable/
+│   ├── AccountsReceivable/
+│   ├── CashFlow/
+│   ├── DRE/
+│   ├── Payments/
+│   ├── Fiscal/
+│   └── ...
+├── Integrations/           // Funcionalidades relacionadas a integrações de sistemas externos
+│   ├── Ifood/
+│   ├── DeliveryMuch/
+│   ├── GoogleMyBusiness/
+│   ├── Saipos/
+│   ├── General/            // Integrações não específicas de um domínio
+│   └── ...
+├── Loyalty/                // Módulo de Fidelidade Consolidado
+│   ├── Dashboard/          // Dashboards de Fidelidade (Geral, Check-in, Satisfação, Respostas, Relacionamento, Cupons)
+│   ├── MonthlySummary/     // Resumo do mês
+│   ├── SatisfactionOverview/ // Visão Geral da Satisfação
+│   ├── SurveysComparison/  // Comparativo de Pesquisas
+│   ├── Evolution/          // Evolução
+│   ├── Benchmarking/       // Benchmarking
+│   ├── MultipleChoice/     // Múltipla Escolha
+│   ├── WordClouds/         // Nuvens de Palavras
+│   ├── Checkin/
+│   │   ├── Settings/
+│   │   ├── Active/
+│   │   └── ...
+│   ├── Satisfaction/
+│   │   ├── Settings/
+│   │   ├── Surveys/
+│   │   └── ...
+│   ├── Responses/
+│   │   ├── Management/
+│   │   ├── Replicas/
+│   │   ├── Goals/
+│   │   ├── Import/
+│   │   └── ...
+│   ├── Coupons/
+│   │   ├── List/
+│   │   ├── Management/
+│   │   ├── Validation/
+│   │   ├── Raffle/
+│   │   ├── Rewards/
+│   │   ├── RewardsManagement/
+│   │   ├── RewardsCreate/
+│   │   ├── RedemptionReports/
+│   │   └── ...
+│   ├── Automation/
+│   │   ├── Flows/
+│   │   └── ...
+│   └── Reports/            // Relatórios específicos de fidelidade
+├── Management/             // Funcionalidades de gestão geral
+│   ├── Team/
+│   ├── Schedules/
+│   ├── Commissions/
+│   ├── Production/
+│   └── ...
+├── Orders/                 // Todas as funcionalidades de gerenciamento de pedidos
+│   ├── Dashboard/
+│   ├── POS/
+│   ├── List/
+│   ├── DigitalMenus/
+│   ├── Delivery/
+│   ├── DineIn/
+│   └── ...
+├── Public/                 // Funcionalidades voltadas para o público
+│   ├── Menus/
+│   ├── SurveyForms/
+│   └── ...
+├── QRCode/                 // Geração e gerenciamento de QR Code
+├── Reports/                // Relatórios gerais (não específicos de um domínio)
+│   ├── FinancialReports/
+│   ├── SalesReports/
+│   ├── StockReports/
+│   └── ...
+├── Settings/               // Configurações de toda a aplicação
+│   ├── Profile/
+│   ├── Business/
+│   ├── Security/
+│   ├── Notifications/
+│   ├── Appearance/
+│   ├── Whatsapp/
+│   └── ...
+├── Stock/                  // Todas as funcionalidades de gerenciamento de estoque
+│   ├── Dashboard/
+│   ├── Products/
+│   ├── Ingredients/
+│   ├── Suppliers/
+│   ├── Movements/
+│   ├── Inventory/
+│   ├── TechnicalSheets/
+│   ├── Adjustments/
+│   ├── LotsAndValidity/
+│   └── ...
+├── ValidityControl/        // Funcionalidades específicas para controle de validade
+│   ├── Labels/
+│   ├── StockCounts/
+│   ├── Expirations/
+│   └── ...
+└── IAM/                    // Gerenciamento de Identidade e Acesso
+```
 
-### 2.2. Etapa 2: Análise do Fluxo de Criação de Entidades
+## 3. Guia de Implementação Passo a Passo
 
-*   **Criação de Usuários e Restaurantes:**
-    *   `admin.service.js`: Contém funções robustas como `createRestaurantWithOwner` (cria restaurante, usuário proprietário, associa via `UserRestaurant` e atribui `Role` de "owner") e `createUser` (cria usuário, associa a restaurante e papel existentes).
-    *   `iam.service.js`: Lida com a criação de `Roles` (`createRole`) e a atribuição de `Roles` a `Users` (`assignUserRole`).
-    *   **Inconsistência Crítica:** `restaurant.service.js` possui `createRestaurantUser`. Esta função cria um `User` mas **não o associa a nenhum restaurante** via `UserRestaurant` nem atribui um `Role` via `UserRole`. A tentativa de atribuir `restaurant_id` diretamente ao modelo `User` é ineficaz, pois o campo não existe. Usuários criados por este método são "órfãos" no sistema de permissões multi-tenant.
+Este plano deve ser executado de forma incremental, com testes e verificações a cada etapa.
 
-### 2.3. Etapa 3: Análise da Atribuição e Atualização de Permissões
+### Fase 1: Preparação e Criação de Estrutura Base
 
-*   **Serviço Central:** `iam.service.js` é o principal responsável.
-*   **Mecanismos:**
-    *   **Atribuição/Remoção de Papéis:** `assignUserRole` e `removeUserRole` gerenciam a tabela `user_roles`.
-    *   **Definição de Permissões de Papel:** `setRolePermissions` substitui o conjunto completo de `RolePermissions` para um `Role`.
-    *   **Sobrescritas de Usuário:** `setUserPermissionOverride` e `deleteUserPermissionOverride` gerenciam `UserPermissionOverrides`.
-    *   **Entitlements de Restaurante:** `setRestaurantEntitlements` e `setEntitlementsBulk` controlam o acesso de alto nível.
-*   **Invalidação de Cache:** Todas as operações de modificação chamam `bumpPermVersion(restaurantId)` para invalidar o cache Redis, garantindo consistência.
+1.  **Criação de Novos Diretórios de Domínio:**
+    *   Crie os diretórios de nível superior que ainda não existem em `frontend/src/features/`:
+        *   `Customers/`
+        *   `Financial/`
+        *   `Loyalty/`
+        *   `Stock/`
+        *   `IAM/` (se não for parte de `Admin/`)
+    *   Crie os subdiretórios iniciais dentro desses novos domínios conforme a estrutura proposta (ex: `Loyalty/Dashboard/`, `Customers/List/`).
 
-### 2.4. Etapa 4: Análise da Verificação de Permissões (Enforcement)
+2.  **Configuração de Aliases de Importação (se necessário):**
+    *   Verifique se o sistema de aliases de importação (ex: `@/features/`) está configurado para lidar com a nova estrutura. Se não, configure-o para facilitar as importações.
 
-*   **Função Principal:** `checkPermission(restaurantId, userId, featureKey, actionKey, isSuperadmin)` em `iam.service.js`.
-*   **Fluxo:**
-    1.  Superadmin tem acesso irrestrito.
-    2.  Verifica cache Redis para snapshot de permissões do usuário.
-    3.  Se não em cache, `buildSnapshot` é chamado para compilar todas as permissões:
-        *   Coleta `UserRoles`, `RolePermissions`, `UserPermissionOverrides`, `RestaurantEntitlements` e a hierarquia de `Modules`/`Submodules`/`Features`.
-        *   `_getEffectivePermission` resolve a permissão final com a seguinte precedência: **Entitlement (bloqueio) > Sobrescrita de Usuário > Permissão de Papel**.
-    4.  Snapshot é salvo no cache Redis.
-    5.  Permissão específica é retornada.
-*   **Observações:** Sistema eficiente, granular e performático devido ao uso de cache e lógica de resolução clara.
+### Fase 2: Movimentação e Refatoração de Funcionalidades Existentes
 
-## 3. Pontos Fortes do Sistema
+Para cada item abaixo, siga o processo: **Mover arquivos -> Atualizar imports -> Testar.**
 
-*   **Granularidade:** Controle de permissões em nível de ação para cada funcionalidade.
-*   **Multi-Tenant:** Isolamento robusto de permissões por restaurante.
-*   **Flexibilidade:** Suporte a RBAC, sobrescritas de usuário e entitlements de alto nível.
-*   **Performance:** Uso inteligente de cache Redis para verificações rápidas.
-*   **Consistência:** Mecanismo `bumpPermVersion` para garantir que as alterações de permissão sejam refletidas.
+1.  **Refatorar `ERP/`:**
+    *   Analise o conteúdo de `frontend/src/features/ERP/`.
+    *   Mova as funcionalidades relacionadas a **Estoque** para `frontend/src/features/Stock/` (ex: `Menu` pode ser `Stock/Products/Menu` ou `Orders/DigitalMenus/Menu` dependendo do contexto).
+    *   Mova as funcionalidades relacionadas a **Pedidos** para `frontend/src/features/Orders/`.
+    *   Mova as funcionalidades relacionadas a **Financeiro** para `frontend/src/features/Financial/`.
+    *   Após mover todo o conteúdo relevante, remova o diretório `frontend/src/features/ERP/`.
 
-## 4. Plano de Refatoração Proposto
+2.  **Refatorar `Owner/` e `Waiter/`:**
+    *   Analise o conteúdo de `frontend/src/features/Owner/`. Mova suas funcionalidades para os domínios apropriados:
+        *   Configurações específicas do proprietário: `Settings/Business/` ou `Admin/OwnerSpecificSettings/`.
+        *   Dashboards/relatórios específicos: `Admin/Dashboard/` ou `Reports/OwnerReports/`.
+    *   Analise o conteúdo de `frontend/src/features/Waiter/`. Mova suas funcionalidades para os domínios apropriados:
+        *   Chamadas de garçom, gerenciamento de mesas: `Orders/DineIn/`.
+        *   Gerenciamento de equipe de garçons: `Management/Team/`.
+    *   Após mover todo o conteúdo, remova os diretórios `frontend/src/features/Owner/` e `frontend/src/features/Waiter/`.
 
-### 4.1. Fase 1: Correção da Inconsistência `createRestaurantUser`
+3.  **Mover Funcionalidades para `Loyalty/`:**
+    *   Mova os diretórios existentes: `Checkin/`, `Coupons/`, `Feedback/`, `Goals/`, `Loyalty/` (se for um agrupador), `Satisfaction/`, `Surveys/` para dentro de `frontend/src/features/Loyalty/`.
+    *   Crie os subdiretórios necessários dentro de `Loyalty/` (ex: `Loyalty/Checkin/Settings/`, `Loyalty/Coupons/List/`) e mova os arquivos para lá.
+    *   Consolide os dashboards relacionados à fidelidade em `Loyalty/Dashboard/`.
+    *   Mova as funcionalidades de `Fidelity/Geral` (MonthlySummary, SatisfactionOverview, etc.) para `Loyalty/` como subdiretórios.
+    *   Mova as funcionalidades de `Fidelity/Respostas` para `Loyalty/Responses/`.
+    *   Mova as funcionalidades de `Fidelity/Automação` para `Loyalty/Automation/`.
+    *   Mova os relatórios específicos de fidelidade para `Loyalty/Reports/`.
 
-*   **Problema:** A função `createRestaurantUser` em `backend/src/domains/restaurant/restaurant.service.js` cria usuários sem associá-los corretamente a restaurantes ou papéis, e tenta atribuir um campo inexistente (`restaurant_id`) ao modelo `User`.
-*   **Ações:**
-    1.  **Remover/Depreciar:**
-        *   Remover a função `createRestaurantUser` de `backend/src/domains/restaurant/restaurant.service.js`.
-        *   Remover a chamada a `createRestaurantUser` de `backend/src/domains/restaurant/restaurant.controller.js`.
-        *   Remover a rota associada a `createRestaurantUser` de `backend/src/domains/restaurant/restaurant.routes.js`.
-    2.  **Consolidar Criação de Usuários:**
-        *   Direcionar todas as chamadas de criação de usuário para as funções existentes e corretas em `admin.service.js` (`createUser` ou `createRestaurantWithOwner`), que garantem a correta associação com `UserRestaurant` e `UserRole`.
+4.  **Mover Funcionalidades para `Customers/`:**
+    *   Mova o diretório existente `Customers/` para `frontend/src/features/Customers/List/`.
+    *   Mova as funcionalidades de `Fidelity/Relacionamento` (Ranking de Clientes, Segmentação de Clientes, Disparos, Campanhas Automaticas, Mensagens, Aniversariantes) para `frontend/src/features/Customers/` em subdiretórios lógicos (ex: `Customers/Ranking/`, `Customers/Segmentation/`, `Customers/Communication/`).
 
-### 4.2. Fase 2: Melhorias Gerais no Sistema de Permissões
+5.  **Mover Funcionalidades para `Stock/`:**
+    *   Mova as funcionalidades relacionadas a estoque que estavam em `ERP/` ou em outros locais para `frontend/src/features/Stock/`.
+    *   Crie subdiretórios como `Products/`, `Ingredients/`, `Suppliers/`, `Movements/`, `Inventory/`, `TechnicalSheets/`, `Adjustments/`, `LotsAndValidity/` e organize os arquivos.
 
-*   **Objetivo:** Aumentar a robustez e a manutenibilidade.
-*   **Ações:**
-    1.  **Validação de Tipos/Esquemas:**
-        *   Implementar validação mais robusta (ex: Joi ou similar) para dados de permissão (chaves de módulos, submódulos, funcionalidades, ações) nas camadas de API e serviço. Isso evitará erros por chaves inválidas ou inexistentes.
-    2.  **Registro de Auditoria para Alterações de Permissão:**
-        *   Garantir que todas as operações de modificação de permissões (criação/atualização de papéis, atribuição de papéis, sobrescritas, entitlements) gerem eventos de auditoria detalhados na tabela `audit_logs`.
+6.  **Mover Funcionalidades para `Management/`:**
+    *   Mova o diretório existente `Team/` para `frontend/src/features/Management/Team/`.
+    *   Mova o diretório existente `Permission/` para `frontend/src/features/Admin/RolesAndPermissions/` ou `frontend/src/features/IAM/Permissions/`.
+    *   Organize outras funcionalidades de gestão (escalas, comissões, produção) em subdiretórios.
 
-### 4.3. Fase 3: Aprimoramento de Funcionalidades (Considerações Futuras)
+7.  **Mover Funcionalidades para `ValidityControl/`:**
+    *   Mova o diretório existente `Labels/` para `frontend/src/features/ValidityControl/Labels/`.
+    *   Organize outras funcionalidades de controle de validade (contagens de estoque, vencimentos) em subdiretórios.
 
-*   **Objetivo:** Melhorar a usabilidade e a capacidade de gerenciamento do sistema.
-*   **Ações:**
-    1.  **Interface de Usuário para Gerenciamento de Permissões:**
-        *   Desenvolver uma UI dedicada que permita a super-administradores e administradores de restaurante gerenciar visualmente:
-            *   Criação, edição e exclusão de papéis.
-            *   Atribuição/revogação de permissões a papéis.
-            *   Atribuição/revogação de papéis a usuários dentro de um restaurante.
-            *   Gerenciamento de sobrescritas de permissão por usuário.
-            *   Gerenciamento de entitlements de restaurante.
-    2.  **Ferramenta de Simulação/Teste de Permissões:**
-        *   Criar uma ferramenta interna ou endpoint de API que, dado um `userId`, `restaurantId`, `featureKey` e `actionKey`, retorne a permissão efetiva e a razão (ex: "concedido pelo papel 'Gerente'", "negado por entitlement", "concedido por sobrescrita").
-    3.  **Modelos/Herança de Papéis:**
-        *   Explorar a implementação de modelos de papéis base que possam ser herdados ou personalizados por cada restaurante, ou um mecanismo para papéis herdarem permissões de um papel pai.
+8.  **Mover Funcionalidades para `Settings/`:**
+    *   Organize as funcionalidades de configurações (Perfil, Empresa, Segurança, WhatsApp, Notificações, Aparência) em subdiretórios dentro de `frontend/src/features/Settings/`.
 
-## 5. Próximos Passos
+9.  **Mover Funcionalidades para `Integrations/`:**
+    *   Organize as integrações existentes (Ifood, DeliveryMuch, GoogleMyBusiness, Saipos) em subdiretórios. Crie um `General/` para integrações mais genéricas.
 
-*   Iniciar a **Fase 1 do plano de refatoração** para corrigir a inconsistência crítica da função `createRestaurantUser`.
+10. **Mover Funcionalidades para `Reports/`:**
+    *   Crie subdiretórios para relatórios gerais (ex: `FinancialReports/`, `SalesReports/`, `StockReports/`).
+
+11. **Atualização de Imports:**
+    *   Após cada movimentação, utilize ferramentas de refatoração da IDE (se disponíveis) ou faça uma busca global e substituição para atualizar todos os caminhos de importação (`import ... from '...'`) nos arquivos afetados.
+
+### Fase 3: Verificação e Testes
+
+1.  **Executar Linter e Formatador:**
+    *   `npm run lint` (ou comando equivalente) para garantir que as convenções de código sejam mantidas.
+    *   `npm run format` (ou comando equivalente) para padronizar a formatação.
+2.  **Executar Testes Unitários e de Integração:**
+    *   `npm test` (ou comando equivalente) para verificar se as funcionalidades continuam operacionais.
+3.  **Testes Manuais:**
+    *   Navegue pela aplicação para garantir que todas as páginas e funcionalidades do menu (conforme `menuStructure.js`) estejam funcionando corretamente.
+4.  **Verificação de Permissões:**
+    *   Teste diferentes perfis de usuário (admin, owner, manager, employee) para garantir que o sistema de permissões esteja funcionando como esperado com a nova estrutura.
+
+## 4. Considerações e Melhores Práticas
+
+*   **Incrementalidade:** Realize as mudanças em pequenos passos, commitando frequentemente. Isso facilita a identificação e correção de problemas.
+*   **Controle de Versão:** Utilize o Git para gerenciar as mudanças. Crie uma branch específica para esta refatoração.
+*   **Comunicação:** Mantenha a equipe informada sobre o progresso e quaisquer desafios.
+*   **Documentação:** Atualize a documentação interna (se houver) para refletir a nova estrutura.
+*   **Testes:** Priorize a criação ou atualização de testes para as funcionalidades refatoradas.
+*   **Backend:** Embora este plano foque no frontend, considere um alinhamento similar para o `backend/src/domains` no futuro, se ainda não estiver perfeitamente alinhado.
+
+Este plano detalhado deve guiá-lo através do processo de refatoração. Por favor, me avise se tiver alguma dúvida ou se quiser ajustar algum ponto.

@@ -17,7 +17,7 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { useMutation, useQueryClient, useQuery } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { fetchUsers, saveUser } from '@/features/Admin/services/adminService';
+import { fetchUsers, saveUser } from '../services/adminService';
 import {
   useGetPermissionTree,
   useGetRoles,
@@ -27,8 +27,9 @@ import {
   useRemoveUserRole,
 } from '@/features/IAM/api/iamQueries';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
-import usePermissions from '@/hooks/usePermissions';
-import PermissionTree from '@/features/Admin/components/PermissionTree';
+import { usePermissions } from '../../hooks/usePermissions';
+import PermissionTree from '../components/PermissionTree';
+import { usePermissionTreeLogic } from '../hooks/usePermissionTreeLogic';
 
 const UserEditPage = () => {
   const { userId } = useParams();
@@ -75,7 +76,7 @@ const UserEditPage = () => {
   const removeUserRoleMutation = useRemoveUserRole();
   const saveUserPermissionOverridesMutation = useSetUserPermissionOverrides();
 
-  const [selectedPermissions, setSelectedPermissions] = useState({});
+  const { selectedPermissions, handlePermissionChange } = usePermissionTreeLogic(permissionTree, fetchedUserOverrides);
 
   useEffect(() => {
     if (targetUser) {
@@ -88,115 +89,7 @@ const UserEditPage = () => {
     }
   }, [targetUser, reset]);
 
-  const updateParentStates = useCallback((permissions, tree) => {
-    if (!tree || !tree.modules) return permissions;
-    const newSelected = JSON.parse(JSON.stringify(permissions));
 
-    tree.modules.forEach((module) => {
-      let moduleChecked = true;
-      let moduleIndeterminate = false;
-
-      module.submodules.forEach((submodule) => {
-        let submoduleChecked = true;
-        let submoduleIndeterminate = false;
-
-        submodule.features.forEach((feature) => {
-          const featureActions =
-            newSelected[module.id]?.submodules[submodule.id]?.features[feature.id]?.actions || {};
-          const actionKeys = Object.keys(featureActions);
-          const checkedCount = actionKeys.filter((key) => featureActions[key]).length;
-
-          const featureState = newSelected[module.id].submodules[submodule.id].features[feature.id];
-          featureState.checked = actionKeys.length > 0 && checkedCount === actionKeys.length;
-          featureState.indeterminate = checkedCount > 0 && checkedCount < actionKeys.length;
-
-          if (!featureState.checked) submoduleChecked = false;
-          if (featureState.indeterminate || featureState.checked) submoduleIndeterminate = true;
-        });
-
-        const subState = newSelected[module.id].submodules[submodule.id];
-        subState.checked = submoduleChecked;
-        subState.indeterminate = !submoduleChecked && submoduleIndeterminate;
-
-        if (!subState.checked) moduleChecked = false;
-        if (subState.indeterminate || subState.checked) moduleIndeterminate = true;
-      });
-
-      const modState = newSelected[module.id];
-      modState.checked = moduleChecked;
-      modState.indeterminate = !moduleChecked && moduleIndeterminate;
-    });
-
-    return newSelected;
-  }, []);
-
-  useEffect(() => {
-    if (fetchedUserOverrides && permissionTree) {
-      let initialSelected = {};
-      permissionTree.modules?.forEach((module) => {
-        initialSelected[module.id] = {
-          checked: false,
-          indeterminate: false,
-          submodules: module.submodules?.reduce((accSub, submodule) => {
-            accSub[submodule.id] = {
-              checked: false,
-              indeterminate: false,
-              features: submodule.features?.reduce((accFeat, feature) => {
-                accFeat[feature.id] = {
-                  checked: false,
-                  indeterminate: false,
-                  actions: feature.actions?.reduce((accAct, action) => {
-                    const override = fetchedUserOverrides.find(
-                      (o) => o.featureId === feature.id && o.actionId === action.id
-                    );
-                    accAct[action.id] = override ? override.allowed : false;
-                    return accAct;
-                  }, {}),
-                };
-                return accFeat;
-              }, {}),
-            };
-            return accSub;
-          }, {}),
-        };
-      });
-      const updatedState = updateParentStates(initialSelected, permissionTree);
-      setSelectedPermissions(updatedState);
-    }
-  }, [fetchedUserOverrides, permissionTree, updateParentStates]);
-
-  const handlePermissionChange = (path, checked) => {
-    let newSelected = JSON.parse(JSON.stringify(selectedPermissions));
-    const [moduleId, submoduleId, featureId, actionId] = path;
-
-    const setChildrenState = (branch, value) => {
-      branch.checked = value;
-      if (branch.actions) {
-        Object.keys(branch.actions).forEach((key) => {
-          branch.actions[key] = value;
-        });
-      }
-      if (branch.features) {
-        Object.values(branch.features).forEach((feat) => setChildrenState(feat, value));
-      }
-      if (branch.submodules) {
-        Object.values(branch.submodules).forEach((sub) => setChildrenState(sub, value));
-      }
-    };
-
-    if (actionId) {
-      newSelected[moduleId].submodules[submoduleId].features[featureId].actions[actionId] = checked;
-    } else if (featureId) {
-      setChildrenState(newSelected[moduleId].submodules[submoduleId].features[featureId], checked);
-    } else if (submoduleId) {
-      setChildrenState(newSelected[moduleId].submodules[submoduleId], checked);
-    } else if (moduleId) {
-      setChildrenState(newSelected[moduleId], checked);
-    }
-
-    const updatedState = updateParentStates(newSelected, permissionTree);
-    setSelectedPermissions(updatedState);
-  };
 
   const onSubmit = async (data) => {
     try {

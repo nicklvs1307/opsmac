@@ -19,9 +19,9 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { createRestaurantWithOwner, saveRestaurant, fetchUsers } from '@/features/Admin/services/adminService'; // Assuming these are correctly implemented
+import { createRestaurantWithOwner, saveRestaurant, fetchUsers } from '../services/adminService'; // Assuming these are correctly implemented
 import { useQueryClient, useQuery } from 'react-query';
-import usePermissions from '@/hooks/usePermissions';
+import { usePermissions } from '../../hooks/usePermissions';
 
 const RestaurantCreatePage = () => {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const RestaurantCreatePage = () => {
   const createNewOwner = watch('create_new_owner');
 
   // Fetch existing users to allow assigning an existing owner
-  const { 
+  const {
     data: users,
     isLoading: isLoadingUsers,
     isError: isErrorUsers,
@@ -135,7 +135,7 @@ const RestaurantCreatePage = () => {
       <Paper sx={{ p: 3, mb: 4 }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Typography variant="h5" gutterBottom sx={{ mt: 2 }}>
-            Dados do Proprietário
+            Dados do Restaurante
           </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
@@ -373,7 +373,7 @@ const RestaurantCreatePage = () => {
                 'Criar Restaurante'
               )}
             </Button>
-            <Button variant="outlined" onClick={() => navigate('/admin/restaurants')}> 
+            <Button variant="outlined" onClick={() => navigate('/admin/restaurants')}>
               Cancelar
             </Button>
           </Box>

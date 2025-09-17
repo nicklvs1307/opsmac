@@ -9,16 +9,16 @@ import toast from 'react-hot-toast';
 import { useSaveAdminUser } from '@/features/Admin/api/adminQueries';
 
 // Hooks
-import usePermissions from '@/hooks/usePermissions';
-import useAdminData from '@/hooks/useAdminData';
+import { usePermissions } from '../../hooks/usePermissions';
+import useAdminData from '../hooks/useAdminData';
 
 // Components
-import UserTable from '@/components/Admin/UserTable';
+import UserTable from '../components/UserTable';
 
 // Services
-import { deleteUser } from '@/services/adminService'; // Import deleteUser service
+import { deleteUser } from '../services/adminService'; // Import deleteUser service
 
-const AdminUsersPage = () => {
+const UsersPage = () => {
   const { t } = useTranslation();
   const { can } = usePermissions();
   const navigate = useNavigate();
@@ -98,4 +98,4 @@ const AdminUsersPage = () => {
   );
 };
 
-export default AdminUsersPage;
+export default UsersPage;

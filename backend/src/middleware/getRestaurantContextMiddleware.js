@@ -6,7 +6,9 @@ export default () => {
       req.params.restaurantId ||
       req.query.restaurantId ||
       req.body.restaurantId ||
-      req.user?.restaurantId;
+      (req.user && req.user.restaurants && req.user.restaurants.length > 0
+        ? req.user.restaurants[0].id
+        : undefined);
     next();
   };
 };

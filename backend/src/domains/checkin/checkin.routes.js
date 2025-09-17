@@ -4,7 +4,7 @@ import requirePermission from "../../middleware/requirePermission.js";
 import checkinControllerFactory from "./checkin.controller.js";
 import {
   recordCheckinValidation,
-  recordPublicCheckinValidation,
+  recordGuestCheckinValidation,
   analyticsValidation,
 } from "./checkin.validation.js";
 

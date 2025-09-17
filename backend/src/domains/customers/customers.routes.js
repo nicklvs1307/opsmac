@@ -6,7 +6,7 @@ import CustomersControllerFactory from "./customers.controller.js";
 import {
   createCustomerValidation,
   updateCustomerValidation,
-  publicRegisterCustomerValidation,
+  guestRegisterCustomerValidation,
   customerQueryValidation,
   byPhoneValidation,
 } from "./customers.validation.js";

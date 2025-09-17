@@ -11,6 +11,7 @@ export default (db) => {
           {
             model: db.NpsCriterion,
             as: "npsCriterion",
+          required: false,
           },
         ],
       },

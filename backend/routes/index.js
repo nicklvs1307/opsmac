@@ -47,10 +47,10 @@ export default async (db) => {
         const domainRouter = domainRouterFactory(db);
 
         if (publicDomains.includes(domainName)) {
-          mainRouter.use(`/${domainName}`, domainRouter);
+          mainRouter.use(`/api/${domainName}`, domainRouter);
         } else {
           mainRouter.use(
-            `/${domainName}`,
+            `/api/${domainName}`,
             auth,
             restaurantContextMiddleware,
             domainRouter,

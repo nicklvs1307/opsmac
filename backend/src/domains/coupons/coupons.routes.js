@@ -8,7 +8,7 @@ import {
   redeemCouponValidation,
   createCouponValidation,
   validateCouponValidation,
-  publicValidateCouponValidation,
+  guestValidateCouponValidation,
 } from "./coupons.validation.js";
 
 export default (db) => {

@@ -11,7 +11,7 @@ export const useGetIntegrationSettings = (restaurantId) => {
   return useQuery(
     ['integrationSettings', restaurantId],
     async () => {
-      const { data } = await axiosInstance.get(`/api/settings/${restaurantId}`);
+      const { data } = await axiosInstance.get(`/settings/${restaurantId}`);
       return data;
     },
     {
@@ -24,7 +24,7 @@ export const useGetIntegrationSettings = (restaurantId) => {
 export const useUpdateIntegrationSettings = (restaurantId) => {
   const queryClient = useQueryClient();
   return useMutation(
-    (settings) => axiosInstance.put(`/api/settings/${restaurantId}`, { settings }),
+    (settings) => axiosInstance.put(`/settings/${restaurantId}`, { settings }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(['integrationSettings', restaurantId]);

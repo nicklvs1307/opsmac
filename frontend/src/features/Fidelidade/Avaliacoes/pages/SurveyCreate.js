@@ -23,6 +23,7 @@ import {
   ListItem,
   ListItemText,
   Alert,
+  FormHelperText,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import QRCode from 'qrcode.react';
@@ -37,31 +38,8 @@ import { useForm, FormProvider, Controller, useFieldArray } from 'react-hook-for
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-const surveySchema = yup.object().shape({
-  surveyType: yup.string().required('Selecione o tipo de pesquisa.'),
-  title: yup.string().required('O título é obrigatório.'),
-  slug: yup.string().optional(),
-  description: yup.string().optional(),
-  rewardId: yup.string().optional().nullable(),
-  couponValidityDays: yup.number().min(1, 'Mínimo de 1 dia.').optional().nullable(),
-  questions: yup.array().of(
-    yup.object().shape({
-      question_text: yup.string().required('O texto da pergunta é obrigatório.'),
-      question_type: yup.string().required('O tipo da pergunta é obrigatório.'),
-      nps_criterion_id: yup.string().when('question_type', {
-        is: 'nps',
-        then: (schema) => schema.required('O critério NPS é obrigatório para perguntas NPS.'),
-        otherwise: (schema) => schema.optional().nullable(),
-      }),
-    })
-  ).min(1, 'Adicione pelo menos uma pergunta.').required('Adicione pelo menos uma pergunta.'),
-});
-
-import {
-  useCreateSurvey,
-  useSurveyRewards,
-  useSurveyNpsCriteria,
-} from '@/features/Fidelidade/Avaliacoes/api/surveyService';
+import { useCreateSurvey, useSurveyRewards, useSurveyNpsCriteria, } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
+import SurveyQuestionField from '../components/SurveyQuestionField'; // Adicionado
 
 const SurveyCreate = () => {
   const [activeStep, setActiveStep] = useState(0);

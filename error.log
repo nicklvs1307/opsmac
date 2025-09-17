@@ -1,19 +1,75 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          205.0s
+olhei seu arquivo SurveyTable.js e no geral ele está bem estruturado, mas encontrei um detalhe que pode dar erro de renderização:
+
+Na parte onde você renderiza quando não existem surveys:
+
+if (!surveys || surveys.length === 0) {
+  return (
+    <TableRow>
+      <TableCell colSpan={4} align="center">
+        {t('survey_list.no_surveys_found')}
+      </TableCell>
+    </TableRow>
+  );
+}
+
+
+⚠️ Esse trecho está retornando apenas <TableRow> e <TableCell> fora de um <Table>.
+No Material UI, qualquer <TableRow> precisa estar dentro de <TableHead> ou <TableBody>.
+Do jeito que está, pode quebrar o layout ou nem renderizar corretamente.
+
+👉 Solução: envolver dentro de um <Table> com <TableBody>:
+
+if (!surveys || surveys.length === 0) {
+  return (
+    <TableContainer sx={{ overflowX: 'auto' }}>
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell colSpan={4} align="center">
+              {t('survey_list.no_surveys_found')}
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
+
+Além disso, algumas observações menores:
+
+O color="default" no <IconButton> não existe mais em algumas versões do MUI v5. O valor padrão já é “inherit”. Se você estiver em versão nova, pode dar warning.
+
+Se updateStatusMutation ou deleteMutation vierem undefined, o isLoading vai quebrar. Talvez valha proteger:
+
+disabled={updateStatusMutation?.isLoading}
+
+
+e
+
+disabled={deleteMutation?.isLoading}
+
+
+Quer que eu refatore o componente para garantir que não dê erro nenhum e fique mais resiliente (com safe optional chaining, tratamento do caso sem surveys e organização das actions)?
+
+Dito por si:
+por isso que estou recebendo essa mensagem ?
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          202.7s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.363 + npm run build
-0.857
-0.857 > feedeliza-plus@1.0.0 build
-0.857 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.857
-4.627 Creating an optimized production build...
-204.6 Failed to compile.
-204.6
-204.6 [eslint]
-204.6 src/features/Fidelidade/Avaliacoes/components/SurveyTable.js
-204.6 Syntax error: Unterminated regular expression. (113:10) (113:10)
-204.6
-204.6
+0.287 + npm run build
+0.599
+0.599 > feedeliza-plus@1.0.0 build
+0.599 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.599
+3.306 Creating an optimized production build...
+201.7 Failed to compile.
+201.7
+201.7 [eslint]
+201.7 src/features/Fidelidade/Avaliacoes/components/SurveyTable.js
+201.7 Syntax error: Unterminated regular expression. (113:10) (113:10)
+201.7
+201.7
 ------
 Dockerfile.frontend:27
 --------------------
@@ -24,3 +80,54 @@ Dockerfile.frontend:27
   29 |     # Estágio final para servir os arquivos com NGINX
 --------------------
 ERROR: failed to build: failed to solve: process "/bin/sh -c set -x && npm run build && ls -la /app/frontend/build" did not complete successfully: exit code: 1
+Dito pelo ChatGPT:
+
+Exato, mestre 🚨
+
+Essa mensagem do build está batendo com o que vimos no seu SurveyTable.js.
+O erro é este:
+
+Syntax error: Unterminated regular expression. (113:10)
+
+
+Isso acontece porque dentro do seu componente você tem este trecho:
+
+{surveys.map((survey) => (
+  <TableRow key={survey.id}>
+    ...
+  </TableRow>
+))}
+
+
+👉 Só que no seu arquivo, pelo que vi, o fechamento está assim:
+
+          ))
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
+
+
+Ou seja: você abriu surveys.map((survey) => ( ... )) mas não fechou corretamente o map.
+O compilador do React/ESLint lê o )) no final e entende que você está tentando abrir/fechar uma expressão regular (/.../) e não um JSX map, por isso acusa "Unterminated regular expression".
+
+✅ Como corrigir
+
+Basta fechar o map corretamente dentro do TableBody:
+
+<TableBody>
+  {surveys.map((survey) => (
+    <TableRow key={survey.id}>
+      <TableCell>{survey.title}</TableCell>
+      <TableCell>{survey.type}</TableCell>
+      <TableCell>{survey.status}</TableCell>
+      <TableCell align="right">
+        {/* ...suas ações */}
+      </TableCell>
+    </TableRow>
+  ))}   {/* <-- aqui fecha o map corretamente */}
+</TableBody>
+
+
+👉 Além disso, aproveita e já corrige o retorno quando não há surveys, colocando dentro de <Table><TableBody>...</TableBody></Table> (como te falei antes).

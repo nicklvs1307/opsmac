@@ -33,11 +33,17 @@ const SurveyTable = ({
 
   if (!surveys || surveys.length === 0) {
     return (
-      <TableRow>
-        <TableCell colSpan={4} align="center">
-          {t('survey_list.no_surveys_found')}
-        </TableCell>
-      </TableRow>
+      <TableContainer sx={{ overflowX: 'auto' }}>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell colSpan={4} align="center">
+                {t('survey_list.no_surveys_found')}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
     );
   }
 
@@ -80,7 +86,7 @@ const SurveyTable = ({
                     color={survey.status === 'active' ? 'success' : 'default'}
                     aria-label={t('survey_list.toggle_status_aria_label')}
                     onClick={() => handleToggleStatus(survey.id, survey.status)}
-                    disabled={updateStatusMutation.isLoading}
+                    disabled={updateStatusMutation?.isLoading}
                   >
                     {survey.status === 'active' ? <ToggleOnIcon /> : <ToggleOffIcon />}
                   </IconButton>
@@ -92,7 +98,6 @@ const SurveyTable = ({
                     <QrCodeIcon />
                   </IconButton>
                   <IconButton
-                    color="default"
                     aria-label={t('survey_list.copy_link_aria_label')}
                     onClick={() => handleCopyLink(survey.slug)}
                   >
@@ -102,7 +107,7 @@ const SurveyTable = ({
                     color="error"
                     aria-label={t('survey_list.delete_survey_aria_label')}
                     onClick={() => handleDelete(survey.id)}
-                    disabled={deleteMutation.isLoading}
+                    disabled={deleteMutation?.isLoading}
                   >
                     <DeleteIcon />
                   </IconButton>

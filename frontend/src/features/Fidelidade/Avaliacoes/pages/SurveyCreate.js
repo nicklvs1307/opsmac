@@ -41,6 +41,16 @@ import * as yup from 'yup';
 import { useCreateSurvey, useSurveyRewards, useSurveyNpsCriteria, } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
 import SurveyQuestionField from '../components/SurveyQuestionField'; // Adicionado
 
+const surveySchema = yup.object().shape({
+  surveyType: yup.string().required('O tipo de pesquisa é obrigatório'),
+  title: yup.string().required('O título é obrigatório'),
+  slug: yup.string(),
+  description: yup.string(),
+  rewardId: yup.string(),
+  couponValidityDays: yup.number(),
+  questions: yup.array(),
+});
+
 const SurveyCreate = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [createdSurveyId, setCreatedSurveyId] = useState(null);

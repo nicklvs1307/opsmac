@@ -1,54 +1,24 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          204.4s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build          205.3s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.306 + npm run build
-0.837
-0.837 > feedeliza-plus@1.0.0 build
-0.837 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.837
-4.286 Creating an optimized production build...
-204.0 Failed to compile.
-204.0
-204.0 [eslint]
-204.0 src/features/Fidelidade/Avaliacoes/components/SurveyTable.js
-204.0 Syntax error: Unterminated regular expression. (113:10) (113:10)
-204.0
-204.0 src/features/Fidelidade/Avaliacoes/pages/SurveyCreate.js
-204.0   Line 60:1:    Import in body of module; reorder to top  import/first
-204.0   Line 242:18:  'FormHelperText' is not defined           react/jsx-no-undef
-204.0   Line 320:20:  'FormHelperText' is not defined           react/jsx-no-undef
-204.0   Line 344:18:  'SurveyQuestionField' is not defined      react/jsx-no-undef
-204.0
-204.0 src/features/Fidelidade/Avaliacoes/pages/SurveyEdit.js
-204.0   Line 48:1:    Import in body of module; reorder to top  import/first
-204.0   Line 244:18:  'FormHelperText' is not defined           react/jsx-no-undef
-204.0
-204.0 src/features/Fidelidade/Cupons/pages/Raffle.js
-204.0   Line 37:7:  'toast' is not defined  no-undef
-204.0
-204.0 src/features/Fidelidade/Geral/pages/Evolution.js
-204.0 Syntax error: 'return' outside of function. (93:4) (93:4)
-204.0
-204.0 src/features/Fidelidade/Geral/pages/MultipleChoice.js
-204.0   Line 27:19:  'useForm' is not defined       no-undef
-204.0   Line 101:6:  'FormProvider' is not defined  react/jsx-no-undef
-204.0
-204.0 src/features/Fidelidade/Geral/pages/SurveysComparison.js
-204.0   Line 44:19:  'useForm' is not defined       no-undef
-204.0   Line 88:6:   'FormProvider' is not defined  react/jsx-no-undef
-204.0
-204.0 src/features/Fidelidade/Geral/pages/WordClouds.js
-204.0   Line 28:19:  'useForm' is not defined       no-undef
-204.0   Line 54:5:   'reset' is not defined         no-undef
-204.0   Line 87:6:   'FormProvider' is not defined  react/jsx-no-undef
-204.0
-204.0 src/features/Fidelidade/Relacionamento/pages/Ranking.js
-204.0   Line 34:19:  'useForm' is not defined       no-undef
-204.0   Line 81:6:   'FormProvider' is not defined  react/jsx-no-undef
-204.0
-204.0 Search for the keywords to learn more about each error.
-204.0
-204.0
+0.298 + npm run build
+0.820
+0.820 > feedeliza-plus@1.0.0 build
+0.820 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.820
+4.649 Creating an optimized production build...
+204.8 Failed to compile.
+204.8
+204.9 [eslint]
+204.9 src/features/Fidelidade/Avaliacoes/components/SurveyTable.js
+204.9 Syntax error: Unterminated regular expression. (113:10) (113:10)
+204.9
+204.9 src/features/Fidelidade/Avaliacoes/pages/SurveyCreate.js
+204.9   Line 71:27:  'surveySchema' is not defined  no-undef
+204.9
+204.9 Search for the keywords to learn more about each error.
+204.9
+204.9
 ------
 Dockerfile.frontend:27
 --------------------

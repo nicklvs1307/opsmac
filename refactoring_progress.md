@@ -1,26 +1,27 @@
-## Refatoração do Módulo de Fidelidade
+## Refatoração do Módulo de Fidelidade - Segunda Iteração
 
 ### Visão Geral
 
-O objetivo desta refatoração foi corrigir uma série de erros 500 e outros problemas que estavam afetando o módulo de fidelidade e outras áreas relacionadas do sistema. A análise inicial do `error.log` revelou problemas de sintaxe, inconsistências nos nomes de campos do banco de dados e chamadas de função incorretas.
+Após a primeira rodada de correções, uma nova análise do `error.log` revelou um conjunto diferente de erros, principalmente relacionados a sintaxe JavaScript moderna não suportada pelo ambiente Node.js, referências a variáveis indefinidas (`models`, `handleWhatsAppNotification`) e problemas na injeção de dependências (`db` object) em serviços e controladores. O foco permaneceu em garantir a funcionalidade do módulo de fidelidade e a estabilidade geral do backend.
 
 ### Alterações Realizadas
 
-1.  **Correção de Erro de Sintaxe em `feedbacks.service.js`**:
-    *   Um erro de sintaxe (`SyntaxError: Unexpected token '!'`) estava impedindo o carregamento das rotas do domínio `feedbacks`. O erro foi causado por um parêntese e uma chave de fechamento ausentes em uma chamada de função `findOne` do Sequelize.
-    *   Uma chamada para uma função `handleWhatsAppNotification` indefinida também foi comentada para evitar um `ReferenceError`.
+1.  **Correção de `SyntaxError: Unexpected token '.'` no Domínio `dashboard`**:
+    *   O erro foi identificado em `backend/src/domains/dashboard/dashboard.service.js`, onde o operador de encadeamento opcional (`?.`) estava sendo utilizado. Este recurso JavaScript moderno não era compatível com a versão do Node.js no ambiente.
+    *   Todas as instâncias de `?.` foram substituídas por operadores ternários equivalentes para garantir a compatibilidade e resolver o erro de sintaxe.
 
-2.  **Padronização do Campo `restaurantId`**:
-    *   A causa principal da maioria dos erros 500 nos módulos `rewards`, `surveys` e `dashboard` foi a inconsistência no nome do campo que armazena o ID do restaurante. Nos modelos Sequelize, o campo era definido como `restaurant_id`, mas nas consultas, `restaurantId` era usado.
-    *   Todas as ocorrências de `restaurantId` nas cláusulas `where` das consultas do Sequelize foram alteradas para `restaurant_id` nos seguintes arquivos:
-        *   `backend/src/domains/rewards/rewards.service.js`
-        *   `backend/src/domains/surveys/surveys.service.js`
-        *   `backend/src/domains/dashboard/dashboard.service.js`
+2.  **Correção de `ReferenceError: handleWhatsAppNotification is not defined` no Domínio `feedbacks`**:
+    *   Embora a chamada para `handleWhatsAppNotification` tivesse sido comentada na função `createFeedback` em `backend/src/domains/feedbacks/feedbacks.service.js` na iteração anterior, a função ainda estava sendo exportada pelo serviço, causando um `ReferenceError` quando o controlador tentava acessá-la.
+    *   A referência a `handleWhatsAppNotification` foi removida do objeto retornado pelo serviço em `backend/src/domains/feedbacks/feedbacks.service.js`.
 
-3.  **Correções no Módulo `rewards`**:
-    *   Além da padronização do `restaurantId`, o nome do campo `customerId` também foi corrigido em algumas partes do `rewards.service.js` para garantir consistência.
-    *   A função `canCustomerUseReward` foi aprimorada para receber o `restaurantId` como parâmetro, adicionando uma camada extra de segurança para evitar que clientes de um restaurante usem recompensas de outro.
+3.  **Correção de `ReferenceError: models is not defined` no Domínio `coupons`**:
+    *   O serviço `coupons` (`backend/src/domains/coupons/coupons.service.js`) estava tentando acessar modelos do banco de dados através de uma variável `models` indefinida.
+    *   A causa raiz foi que o objeto `db` (que contém os modelos) não estava sendo corretamente utilizado dentro do serviço. Todas as ocorrências de `models` foram substituídas por `db` para garantir que os modelos fossem acessados corretamente.
+
+4.  **Correção de `TypeError: Cannot read properties of undefined (reading 'Customer')` no Domínio `customers`**:
+    *   Este erro ocorreu em `backend/src/domains/customers/customers.service.js` e foi causado por um problema na forma como o objeto `db` estava sendo passado e acessado pelo `CustomersController` e `customerServiceFactory`.
+    *   O construtor de `CustomersController` em `backend/src/domains/customers/customers.controller.js` foi modificado para aceitar o objeto `db` como parâmetro. A inicialização de `this.customerService` dentro do construtor foi ajustada para usar este `db` passado, garantindo que o `customerServiceFactory` receba o objeto `db` completo e funcional.
 
 ### Resultados
 
-Com essas correções, os erros 500 que estavam ocorrendo nas listagens e análises dos módulos de recompensas, pesquisas e no painel principal foram resolvidos. O módulo de fidelidade deve agora estar funcional e as rotas de feedback devem carregar corretamente.
+Com a implementação dessas correções, espera-se que todos os erros reportados no `error.log` tenham sido resolvidos, incluindo os erros 500 e 404 que estavam afetando as rotas do dashboard e outros módulos. O sistema deve agora operar de forma mais estável e o módulo de fidelidade deve estar totalmente funcional.

@@ -30,16 +30,16 @@ export default (db) => {
       where.code = { [Op.iLike]: `%${search}%` };
     }
 
-    const { count, rows: coupons } = await models.Coupon.findAndCountAll({
+    const { count, rows: coupons } = await db.Coupon.findAndCountAll({
       where,
       include: [
         {
-          model: models.Reward,
+          model: db.Reward,
           as: "reward",
           attributes: ["id", "title", "rewardType"],
         },
         {
-          model: models.Customer,
+          model: db.Customer,
           as: "customer",
           attributes: ["id", "name", "email"],
         },
@@ -61,7 +61,7 @@ export default (db) => {
   };
 
   const expireCoupons = async (restaurantId) => {
-    const [updatedCount] = await models.Coupon.update(
+    const [updatedCount] = await db.Coupon.update(
       { status: "expired" },
       {
         where: {
@@ -80,7 +80,7 @@ export default (db) => {
   const redeemCoupon = async (id, restaurantId, orderValue) => {
     const t = await sequelize.transaction(); // Start transaction
     try {
-      const coupon = await models.Coupon.findOne({
+      const coupon = await db.Coupon.findOne({
         where: { id, restaurantId: restaurantId },
         transaction: t, // Pass transaction
       });
@@ -114,7 +114,7 @@ export default (db) => {
   ) => {
     const t = await sequelize.transaction(); // Start transaction
     try {
-      const reward = await models.Reward.findOne({
+      const reward = await db.Reward.findOne({
         where: { id: rewardId, restaurantId: restaurantId },
         transaction: t, // Pass transaction
       });
@@ -124,7 +124,7 @@ export default (db) => {
         );
       }
 
-      const customer = await models.Customer.findOne({
+      const customer = await db.Customer.findOne({
         where: { id: customerId, restaurantId: restaurantId },
         transaction: t, // Pass transaction
       });
@@ -148,7 +148,7 @@ export default (db) => {
   };
 
   const getCouponAnalytics = async (restaurantId) => {
-    const couponCounts = await models.Coupon.findOne({
+    const couponCounts = await db.Coupon.findOne({
       where: { restaurantId: restaurantId },
       attributes: [
         [sequelize.fn("COUNT", sequelize.col("id")), "totalCoupons"],
@@ -179,7 +179,7 @@ export default (db) => {
       raw: true,
     });
 
-    const couponsByType = await models.Coupon.findAll({
+    const couponsByType = await db.Coupon.findAll({
       where: { restaurantId: restaurantId },
       attributes: [
         [sequelize.fn("COUNT", sequelize.col("Coupon.id")), "count"],
@@ -195,7 +195,7 @@ export default (db) => {
       group: ["reward.rewardType"],
     });
 
-    const redeemedByDay = await models.Coupon.findAll({
+    const redeemedByDay = await db.Coupon.findAll({
       where: {
         restaurantId: restaurantId,
         status: "redeemed",
@@ -219,7 +219,7 @@ export default (db) => {
   };
 
   const _validateCoupon = async (where) => {
-    const coupon = await models.Coupon.findOne({
+    const coupon = await db.Coupon.findOne({
       where,
       include: [
         { model: models.Reward, as: "reward" },
@@ -242,7 +242,7 @@ export default (db) => {
   };
 
   const publicValidateCoupon = async (code, restaurantSlug) => {
-    const restaurant = await models.Restaurant.findOne({
+    const restaurant = await db.Restaurant.findOne({
       where: { slug: restaurantSlug },
     });
     if (!restaurant) {

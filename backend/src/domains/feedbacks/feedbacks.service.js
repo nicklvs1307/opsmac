@@ -443,7 +443,6 @@ export default (db) => {
 
   return {
     handleLoyaltyAndRewards,
-    handleWhatsAppNotification,
     createFeedback,
     listFeedbacks,
     getFeedbackById,

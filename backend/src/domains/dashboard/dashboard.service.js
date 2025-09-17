@@ -119,8 +119,8 @@ export default (db) => {
       newCustomers,
       totalSurveyResponses,
       redeemedCoupons,
-      avgNpsScore: avgNpsScoreStats?.avgNpsScore || 0,
-      avgRating: avgRatingStats?.avgRating || 0,
+      avgNpsScore: avgNpsScoreStats ? avgNpsScoreStats.avgNpsScore : 0,
+      avgRating: avgRatingStats ? avgRatingStats.avgRating : 0,
     };
 
     await redisClient.set(cacheKey, JSON.stringify(result), { EX: 3600 }); // Cache por 1 hora
@@ -622,8 +622,8 @@ export default (db) => {
         newCustomers,
         totalSurveyResponses,
         redeemedCoupons,
-        avgNpsScore: feedbackStats?.avgNpsScore || 0,
-        avgRating: feedbackStats?.avgRating || 0,
+        avgNpsScore: feedbackStats ? feedbackStats.avgNpsScore : 0,
+        avgRating: feedbackStats ? feedbackStats.avgRating : 0,
         totalLoyaltyPoints: totalLoyaltyPoints || 0,
         totalSpentOverall: totalSpentOverall || 0,
         engagementRate: engagementRate.toFixed(2),

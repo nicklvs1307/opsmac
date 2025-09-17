@@ -8,7 +8,8 @@ export default (db) => {
   const customerService = customerServiceFactory(db);
 
   class CustomersController {
-    constructor() {
+    constructor(db) {
+      this.customerService = customerServiceFactory(db);
       // Bind methods to the instance to ensure 'this' context is correct when used as Express middleware
       this.getCustomerDashboardMetrics =
         this.getCustomerDashboardMetrics.bind(this);
@@ -183,5 +184,5 @@ export default (db) => {
     }
   }
 
-  return new CustomersController();
+  return new CustomersController(db);
 };

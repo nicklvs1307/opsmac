@@ -63,7 +63,7 @@ export default (db) => {
     return checkin;
   };
 
-  const recordPublicCheckin = async (
+  const recordGuestCheckin = async (
     restaurant,
     phoneNumber,
     cpf,
@@ -222,7 +222,7 @@ export default (db) => {
   return {
     checkCheckinModuleEnabled,
     recordCheckin,
-    recordPublicCheckin,
+    recordGuestCheckin,
     checkoutCheckin,
     getCheckinAnalytics,
     getActiveCheckins,

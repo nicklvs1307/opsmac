@@ -241,7 +241,7 @@ export default (db) => {
     return _validateCoupon({ code, restaurantId });
   };
 
-  const publicValidateCoupon = async (code, restaurantSlug) => {
+    const guestValidateCoupon = async (code, restaurantSlug) {
     const restaurant = await db.Restaurant.findOne({
       where: { slug: restaurantSlug },
     });
@@ -275,7 +275,7 @@ export default (db) => {
     createCoupon,
     getCouponAnalytics,
     validateCoupon,
-    publicValidateCoupon,
+    guestValidateCoupon,
   };
 };
 

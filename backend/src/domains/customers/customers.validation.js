@@ -30,7 +30,7 @@ export const createCustomerValidation = [
   body("birthDate").isISO8601().withMessage("Data de nascimento inválida"),
 ];
 
-export const publicRegisterCustomerValidation = [
+export const guestRegisterCustomerValidation = [
   body("name").notEmpty().withMessage("Nome é obrigatório"),
   body("phone").notEmpty().withMessage("Telefone é obrigatório"),
   body("birthDate").isISO8601().withMessage("Data de nascimento inválida"),

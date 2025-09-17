@@ -23,7 +23,7 @@ export default (db) => {
       this.getCustomerDetails = this.getCustomerDetails.bind(this);
       this.resetCustomerVisits = this.resetCustomerVisits.bind(this);
       this.clearCustomerCheckins = this.clearCustomerCheckins.bind(this);
-      this.publicRegisterCustomer = this.publicRegisterCustomer.bind(this);
+      this.guestRegisterCustomer = this.guestRegisterCustomer.bind(this);
     }
 
     _handleValidationErrors(req) {
@@ -170,7 +170,7 @@ export default (db) => {
       res.json({ message: "Check-ins do cliente limpos com sucesso." });
     }
 
-    async publicRegisterCustomer(req, res, next) {
+    async guestRegisterCustomer(req, res, next) {
       this._handleValidationErrors(req);
       const result = await customerService.publicRegisterCustomer(req.body);
       await auditService.log(

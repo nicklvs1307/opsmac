@@ -13,7 +13,7 @@ class CheckinController {
     // Bind methods to ensure 'this' context is correct
     this.checkCheckinModuleEnabled = this.checkCheckinModuleEnabled.bind(this);
     this.recordCheckin = this.recordCheckin.bind(this);
-    this.recordPublicCheckin = this.recordPublicCheckin.bind(this);
+    this.recordGuestCheckin = this.recordGuestCheckin.bind(this);
     this.checkoutCheckin = this.checkoutCheckin.bind(this);
     this.getCheckinAnalytics = this.getCheckinAnalytics.bind(this);
     this.getActiveCheckins = this.getActiveCheckins.bind(this);
@@ -66,7 +66,7 @@ class CheckinController {
     }
   }
 
-  async recordPublicCheckin(req, res, next) {
+  async recordGuestCheckin(req, res, next) {
     try {
       this.handleValidationErrors(req);
       const restaurant = req.restaurant;

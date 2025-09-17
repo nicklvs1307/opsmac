@@ -355,7 +355,7 @@ class CustomerService {
     }
   }
 
-  async publicRegisterCustomer(customerData) {
+  async guestRegisterCustomer(customerData) {
     const { name, phone, birthDate, restaurantId } = customerData;
 
     const t = await this.sequelize.transaction(); // Start transaction

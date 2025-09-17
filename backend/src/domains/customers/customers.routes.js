@@ -51,7 +51,7 @@ export default (db) => {
    *         description: Invalid data
    */
   router.post(
-    "/public/register",
+    "/guest-register",
     ...publicRegisterCustomerValidation,
     asyncHandler(customersController.publicRegisterCustomer),
   );

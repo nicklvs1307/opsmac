@@ -11,7 +11,7 @@ class CouponsController {
     this.listCoupons = this.listCoupons.bind(this);
     this.createCoupon = this.createCoupon.bind(this);
     this.validateCoupon = this.validateCoupon.bind(this);
-    this.publicValidateCoupon = this.publicValidateCoupon.bind(this);
+    this.guestValidateCoupon = this.guestValidateCoupon.bind(this);
     this.getCouponAnalytics = this.getCouponAnalytics.bind(this);
   }
 
@@ -130,7 +130,7 @@ class CouponsController {
     }
   }
 
-  async publicValidateCoupon(req, res, next) {
+  async guestValidateCoupon(req, res, next) {
     try {
       // this.handleValidationErrors(req); // Removido
       const { code, restaurantSlug } = req.body;

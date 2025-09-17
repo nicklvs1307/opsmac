@@ -4,7 +4,7 @@ export const recordCheckinValidation = [
   body("customerId").isUUID().withMessage("ID do cliente inválido"),
 ];
 
-export const recordPublicCheckinValidation = [
+export const recordGuestCheckinValidation = [
   body("customerName")
     .optional()
     .isString()

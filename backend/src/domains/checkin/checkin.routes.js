@@ -19,7 +19,7 @@ export default (db) => {
     asyncHandler(checkinController.recordCheckin),
   );
   router.post(
-    "/public/:restaurantSlug",
+    "/guest-record/:restaurantSlug",
     ...recordPublicCheckinValidation,
     asyncHandler(checkinController.recordPublicCheckin),
   );

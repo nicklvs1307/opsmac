@@ -4,6 +4,8 @@ import requirePermission from "../../middleware/requirePermission.js"; // Use th
 
 import surveyRewardProgramControllerFactory from "./surveyRewardProgram.controller.js";
 
+import { saveSurveyRewardProgramValidation } from "./surveyRewardProgram.validation.js";
+
 export default (db) => {
   const surveyRewardProgramController =
     surveyRewardProgramControllerFactory(db);
@@ -17,6 +19,7 @@ export default (db) => {
   router.post(
     "/",
     requirePermission("fidelity:surveys:reward_program", "write"),
+    ...saveSurveyRewardProgramValidation,
     asyncHandler(surveyRewardProgramController.saveSurveyRewardProgram),
   );
 

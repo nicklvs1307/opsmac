@@ -53,7 +53,7 @@ export default (db) => {
     asyncHandler(couponsController.validateCoupon),
   );
   router.post(
-    "/public/validate",
+    "/guest-validate",
     ...publicValidateCouponValidation,
     asyncHandler(couponsController.publicValidateCoupon),
   );

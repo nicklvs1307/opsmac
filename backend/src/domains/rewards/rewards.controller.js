@@ -1,17 +1,8 @@
-import { validationResult } from "express-validator";
-import BadRequestError from "../../utils/errors/BadRequestError.js";
 import auditService from "../../services/auditService.js";
 import rewardsServiceFactory from "./rewards.service.js";
 
 export default (db) => {
   const rewardsService = rewardsServiceFactory(db);
-
-  const handleValidationErrors = (req) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      throw new BadRequestError("Dados inválidos", errors.array());
-    }
-  };
 
   return {
     listRewards: async (req, res, next) => {
@@ -39,7 +30,7 @@ export default (db) => {
 
     createReward: async (req, res, next) => {
       try {
-        handleValidationErrors(req);
+        // handleValidationErrors(req); // Removido
         const restaurantId = req.context.restaurantId;
         const userId = req.user.id;
         const reward = await rewardsService.createReward(
@@ -62,7 +53,7 @@ export default (db) => {
 
     updateReward: async (req, res, next) => {
       try {
-        handleValidationErrors(req);
+        // handleValidationErrors(req); // Removido
         const restaurantId = req.context.restaurantId;
         const reward = await rewardsService.updateReward(
           req.params.id,
@@ -101,7 +92,7 @@ export default (db) => {
 
     spinWheel: async (req, res, next) => {
       try {
-        handleValidationErrors(req);
+        // handleValidationErrors(req); // Removido
         const restaurantId = req.context.restaurantId;
         const { rewardId } = req.params; // Get rewardId from params
         const { customerId } = req.body; // customerId from body

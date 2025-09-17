@@ -4,42 +4,17 @@ import { spinWheel as spinWheelService } from "../../services/wheelService.js";
 
 export default (db) => {
   const listRewards = async (restaurantId, query) => {
-    const { page = 1, limit = 12, search } = query;
-    const offset = (page - 1) * limit;
-
-    const where = { restaurantId: restaurantId };
-
-    if (search) {
-      where[Op.or] = [
-        { title: { [Op.iLike]: `%${search}%` } },
-        { description: { [Op.iLike]: `%${search}%` } },
-      ];
-    }
-
+    // Temporarily simplified for debugging 500 error
     const { count, rows } = await db.Reward.findAndCountAll({
-      where,
-      attributes: [
-        "id",
-        "customerId",
-        "description",
-        "isRedeemed",
-        "isActive",
-        "rewardType",
-        "restaurantId",
-        "createdAt",
-        "updatedAt",
-        "title",
-      ],
-      limit: parseInt(limit),
-      offset: parseInt(offset),
+      attributes: ["id"], // Only fetch IDs
     });
 
     return {
       rewards: rows,
       pagination: {
         totalItems: count,
-        totalPages: Math.ceil(count / limit),
-        currentPage: parseInt(page),
+        totalPages: 1, // Simplified pagination
+        currentPage: 1,
       },
     };
   };

@@ -1,6 +1,4 @@
 "use strict";
-import { validationResult } from "express-validator";
-import { BadRequestError } from "../../utils/errors.js";
 import auditService from "../../services/auditService.js";
 
 // Import service factory function
@@ -17,16 +15,11 @@ class CouponsController {
     this.getCouponAnalytics = this.getCouponAnalytics.bind(this);
   }
 
-  handleValidationErrors(req) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      throw new BadRequestError("Dados inválidos", errors.array());
-    }
-  }
+  // handleValidationErrors removido daqui
 
   async listCoupons(req, res, next) {
     try {
-      this.handleValidationErrors(req);
+      // this.handleValidationErrors(req); // Removido
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
       const { page, limit, status, search } = req.query;
       const { coupons, pagination } = await this.couponsService.listCoupons(
@@ -82,7 +75,7 @@ class CouponsController {
 
   async createCoupon(req, res, next) {
     try {
-      this.handleValidationErrors(req);
+      // this.handleValidationErrors(req); // Removido
       const { rewardId, customerId, expiresAt } = req.body;
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
       const coupon = await this.couponsService.createCoupon(
@@ -117,7 +110,7 @@ class CouponsController {
 
   async validateCoupon(req, res, next) {
     try {
-      this.handleValidationErrors(req);
+      // this.handleValidationErrors(req); // Removido
       const { code } = req.body;
       const restaurantId = req.context.restaurantId; // Use req.context.restaurantId
       const validationResult = await this.couponsService.validateCoupon(
@@ -139,7 +132,7 @@ class CouponsController {
 
   async publicValidateCoupon(req, res, next) {
     try {
-      this.handleValidationErrors(req);
+      // this.handleValidationErrors(req); // Removido
       const { code, restaurantSlug } = req.body;
       const validationResult = await this.couponsService.publicValidateCoupon(
         code,

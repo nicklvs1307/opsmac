@@ -7,6 +7,7 @@ import {
 } from "./rewards.validation.js";
 
 import requirePermission from "../../middleware/requirePermission.js";
+import validationHandler from "../../middleware/validationHandler.js"; // <-- Nova importação
 
 import rewardsControllerFactory from "./rewards.controller.js";
 
@@ -22,6 +23,7 @@ export default (db) => {
   router.post(
     "/spin-wheel",
     ...spinWheelValidation,
+    validationHandler, // <-- Adicionado
     asyncHandler(rewardsController.spinWheel),
   );
 
@@ -40,12 +42,14 @@ export default (db) => {
     "/",
     requirePermission("fidelity:rewards:create", "create"),
     ...createRewardValidation,
+    validationHandler, // <-- Adicionado
     asyncHandler(rewardsController.createReward),
   );
   router.put(
     "/:id",
     requirePermission("fidelity:rewards:update", "update"),
     ...updateRewardValidation,
+    validationHandler, // <-- Adicionado
     asyncHandler(rewardsController.updateReward),
   );
   router.delete(

@@ -586,7 +586,7 @@ export default (db) => {
         models.Feedback.findOne({
           where: { restaurantId, ...dateFilter },
           attributes: [
-            [fn("AVG", col("npsScore")), "avgNpsScore"],
+            [fn("AVG", col("nps_score")), "avgNpsScore"],
             [fn("AVG", col("rating")), "avgRating"],
           ],
           raw: true,

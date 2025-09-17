@@ -18,7 +18,7 @@ export default (db) => {
   };
 
   const _checkSlugUniqueness = async (slug, restaurantId, excludeSurveyId = null) => {
-    const where = { slug, restaurant_id: restaurantId };
+    const where = { slug, restaurantId: restaurantId };
     if (excludeSurveyId) {
       where.id = { [Op.ne]: excludeSurveyId };
     }
@@ -29,7 +29,7 @@ export default (db) => {
   };
 
   const listSurveys = async (restaurantId, search) => {
-    const where = { restaurant_id: restaurantId };
+    const where = { restaurantId: restaurantId };
     if (search) {
       where.title = { [Op.iLike]: `%${search}%` };
     }
@@ -45,7 +45,7 @@ export default (db) => {
     try {
       await _checkSlugUniqueness(surveyData.slug, restaurantId);
       const survey = await db.Survey.create(
-        { ...surveyData, restaurant_id: restaurantId, userId },
+        { ...surveyData, restaurantId: restaurantId, userId },
         { transaction: t },
       );
       if (surveyData.npsCriteria && surveyData.npsCriteria.length > 0) {
@@ -61,7 +61,7 @@ export default (db) => {
 
   const getSurveyById = async (surveyId, restaurantId, t = null) => {
     const survey = await db.Survey.findOne({
-      where: { id: surveyId, restaurant_id: restaurantId },
+      where: { id: surveyId, restaurantId: restaurantId },
       include: _getSurveyIncludes(db),
       ...(t && { transaction: t }), // Pass transaction if provided
     });

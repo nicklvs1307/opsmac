@@ -23,8 +23,8 @@ export default (db) => {
         "customerId",
         "description",
         "isRedeemed",
-        "is_active",
-        "reward_type",
+        "isActive",
+        "rewardType",
         "restaurantId",
         "createdAt",
         "updatedAt",
@@ -37,9 +37,9 @@ export default (db) => {
     return {
       rewards: rows,
       pagination: {
-        total_items: count,
-        total_pages: Math.ceil(count / limit),
-        current_page: parseInt(page),
+        totalItems: count,
+        totalPages: Math.ceil(count / limit),
+        currentPage: parseInt(page),
       },
     };
   };
@@ -93,7 +93,7 @@ export default (db) => {
 
   const isValidReward = (reward) => {
     const now = new Date();
-    if (!reward.is_active) return false;
+    if (!reward.isActive) return false;
     if (reward.validFrom && now < reward.validFrom) return false;
     if (reward.validUntil && now > reward.validUntil) return false;
     if (
@@ -107,7 +107,7 @@ export default (db) => {
   const canCustomerUseReward = async (reward, customerId, restaurantId, extraData = {}) => {
     if (!isValidReward(reward)) return false;
     if (reward.customerId && reward.customerId !== customerId) return false;
-    if (extraData && extraData.visit_milestone) return true;
+    if (extraData && extraData.visitMilestone) return true;
 
     if (reward.maxUsesPerCustomer) {
       const usageCount = await db.Coupon.count({
@@ -142,11 +142,11 @@ export default (db) => {
     let couponTitle = reward.title;
     let couponDescription = reward.description;
     let couponValue = reward.value;
-    let couponRewardType = reward.reward_type;
+    let couponRewardType = reward.rewardType;
     let winningItem = null;
     let winningIndex = null;
 
-    if (reward.reward_type === "spin_the_wheel") {
+    if (reward.rewardType === "spin_the_wheel") {
       if (
         !reward.wheelConfig ||
         !reward.wheelConfig.items ||
@@ -166,8 +166,8 @@ export default (db) => {
       couponTitle = winningItem.title;
       couponDescription = winningItem.description || winningItem.title;
       couponValue = winningItem.value !== undefined ? winningItem.value : 0;
-      couponRewardType = winningItem.reward_type || "free_item";
-      couponRewardId = winningItem.reward_id || reward.id;
+      couponRewardType = winningItem.rewardType || "free_item";
+      couponRewardId = winningItem.rewardId || reward.id;
     }
 
     const couponCode = generateRewardCouponCode(customerName);
@@ -203,22 +203,22 @@ export default (db) => {
 
     const analytics = {
       ...reward.analytics,
-      total_generated: (reward.analytics.total_generated || 0) + 1,
+      totalGenerated: (reward.analytics.totalGenerated || 0) + 1,
     };
     await reward.update({ analytics });
 
     return { coupon, winningItem, winningIndex };
   };
 
-  const spinWheel = async (reward_id, customer_id, restaurantId) => {
-    const reward = await getRewardById(reward_id, restaurantId); // Pass restaurantId
-    if (reward.reward_type !== "spin_the_wheel") {
+  const spinWheel = async (rewardId, customerId, restaurantId) => {
+    const reward = await getRewardById(rewardId, restaurantId); // Pass restaurantId
+    if (reward.rewardType !== "spin_the_wheel") {
       throw new NotFoundError(
         "Recompensa da roleta não encontrada ou não é do tipo roleta.",
       );
     }
 
-    const customer = await db.Customer.findByPk(customer_id);
+    const customer = await db.Customer.findByPk(customerId);
     if (!customer) {
       throw new NotFoundError("Cliente não encontrado.");
     }
@@ -230,14 +230,14 @@ export default (db) => {
 
     return {
       message: "Você ganhou um prêmio!",
-      wonItem: winningItem,
+      winningItem: winningItem,
       winningIndex: winningIndex,
-      reward_earned: {
-        reward_title: coupon.title,
-        coupon_code: coupon.code,
+      rewardEarned: {
+        rewardTitle: coupon.title,
+        couponCode: coupon.code,
         description: coupon.description,
         value: coupon.value,
-        reward_type: coupon.reward_type,
+        rewardType: coupon.rewardType,
       },
     };
   };
@@ -253,13 +253,13 @@ export default (db) => {
       where: { restaurantId: restaurantId },
     });
     const activeRewards = await db.Reward.count({
-      where: { restaurantId: restaurantId, is_active: true },
+      where: { restaurantId: restaurantId, isActive: true },
     });
 
     const rewardsByType = await db.Reward.findAll({
       where: { restaurantId: restaurantId },
-      attributes: ["reward_type", [fn("COUNT", col("id")), "count"]],
-      group: ["reward_type"],
+      attributes: ["rewardType", [fn("COUNT", col("id")), "count"]],
+      group: ["rewardType"],
       raw: true,
     });
 
@@ -273,12 +273,12 @@ export default (db) => {
       totalCoupons > 0 ? (redeemedCoupons / totalCoupons) * 100 : 0;
 
     return {
-      total_rewards: totalRewards,
-      active_rewards: activeRewards,
-      rewards_by_type: rewardsByType,
-      total_coupons_generated: totalCoupons,
-      total_coupons_redeemed: redeemedCoupons,
-      redemption_rate: redemptionRate.toFixed(2),
+      totalRewards: totalRewards,
+      activeRewards: activeRewards,
+      rewardsByType: rewardsByType,
+      totalCouponsGenerated: totalCoupons,
+      totalCouponsRedeemed: redeemedCoupons,
+      redemptionRate: redemptionRate.toFixed(2),
     };
   };
 
@@ -286,44 +286,44 @@ export default (db) => {
     const analytics = { ...reward.analytics };
 
     if (action === "redeemed") {
-      analytics.total_redeemed = (analytics.total_redeemed || 0) + 1;
+      analytics.totalRedeemed = (analytics.totalRedeemed || 0) + 1;
       if (orderValue > 0) {
-        const currentAvg = analytics.average_order_value || 0;
-        const totalRedeemed = analytics.total_redeemed;
-        analytics.average_order_value =
+        const currentAvg = analytics.averageOrderValue || 0;
+        const totalRedeemed = analytics.totalRedeemed;
+        analytics.averageOrderValue =
           (currentAvg * (totalRedeemed - 1) + orderValue) / totalRedeemed;
       }
     }
 
-    if (analytics.total_generated > 0) {
-      analytics.redemption_rate =
-        (analytics.total_redeemed / analytics.total_generated) * 100;
+    if (analytics.totalGenerated > 0) {
+      analytics.redemptionRate =
+        (analytics.totalRedeemed / analytics.totalGenerated) * 100;
     }
 
     await reward.update({ analytics });
   };
 
   const checkRewardTriggerConditions = (reward, feedback, customer) => {
-    const conditions = reward.trigger_conditions;
+    const conditions = reward.triggerConditions;
     if (!conditions) return true;
 
-    if (conditions.min_rating && feedback.rating < conditions.min_rating)
+    if (conditions.minRating && feedback.rating < conditions.minRating)
       return false;
     if (
-      conditions.feedback_type &&
-      feedback.feedback_type !== conditions.feedback_type
+      conditions.feedbackType &&
+      feedback.feedbackType !== conditions.feedbackType
     )
       return false;
     if (
-      conditions.visit_count &&
-      customer.total_visits < conditions.visit_count
+      conditions.visitCount &&
+      customer.totalVisits < conditions.visitCount
     )
       return false;
-    if (conditions.total_spent && customer.total_spent < conditions.total_spent)
+    if (conditions.totalSpent && customer.totalSpent < conditions.totalSpent)
       return false;
     if (
-      conditions.customer_segment &&
-      customer.customer_segment !== conditions.customer_segment
+      conditions.customerSegment &&
+      customer.customerSegment !== conditions.customerSegment
     )
       return false;
 

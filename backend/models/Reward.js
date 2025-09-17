@@ -40,13 +40,13 @@ export default (sequelize, DataTypes, Sequelize) => {
         defaultValue: false,
         field: "is_redeemed",
       },
-      is_active: {
+      isActive: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true,
         field: "is_active",
       },
-      reward_type: {
+      rewardType: {
         type: DataTypes.STRING,
         allowNull: false,
         field: "reward_type",

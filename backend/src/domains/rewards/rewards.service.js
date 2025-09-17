@@ -7,7 +7,7 @@ export default (db) => {
     const { page = 1, limit = 12, search } = query;
     const offset = (page - 1) * limit;
 
-    const where = { restaurant_id: restaurantId };
+    const where = { restaurantId: restaurantId };
 
     if (search) {
       where[Op.or] = [

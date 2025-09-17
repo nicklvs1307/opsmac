@@ -3,21 +3,9 @@ import { Box, Typography, Paper, Button, CircularProgress, Alert } from '@mui/ma
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useMutation } from 'react-query';
-import axiosInstance from '@/services/axiosInstance';
+import { spinWheelApi } from '../api/raffleService';
 
-// API function to spin the wheel
-const spinWheelApi = async ({ rewardId, restaurantId, token }) => {
-  const response = await axiosInstance.post(
-    `/dashboard/rewards/${rewardId}/spin-wheel`,
-    { restaurantId },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return response.data;
-};
+
 
 const Raffle = () => {
   const { t } = useTranslation();
@@ -46,7 +34,7 @@ const Raffle = () => {
     if (restaurantId && user?.token && wheelRewardId) {
       spinTheWheel({ rewardId: wheelRewardId, restaurantId, token: user.token });
     } else {
-      alert(t('raffle.config_error')); // Or use a more sophisticated notification
+      toast.error(t('raffle.config_error')); // Or use a more sophisticated notification
     }
   };
 

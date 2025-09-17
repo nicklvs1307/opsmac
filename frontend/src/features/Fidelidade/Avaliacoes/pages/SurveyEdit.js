@@ -20,6 +20,30 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useAuth
 import usePermissions from '@/hooks/usePermissions';
+import { useForm, FormProvider, Controller, useFieldArray } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import SurveyQuestionField from '../components/SurveyQuestionField'; // Importar o componente de pergunta
+
+const surveySchema = yup.object().shape({
+  title: yup.string().required('O título é obrigatório.'),
+  slug: yup.string().optional(),
+  description: yup.string().optional(),
+  rewardId: yup.string().optional().nullable(),
+  couponValidityDays: yup.number().min(1, 'Mínimo de 1 dia.').optional().nullable(),
+  questions: yup.array().of(
+    yup.object().shape({
+      question_text: yup.string().required('O texto da pergunta é obrigatório.'),
+      question_type: yup.string().required('O tipo da pergunta é obrigatório.'),
+      nps_criterion_id: yup.string().when('question_type', {
+        is: 'nps',
+        then: (schema) => schema.required('O critério NPS é obrigatório para perguntas NPS.'),
+        otherwise: (schema) => schema.optional().nullable(),
+      }),
+      options: yup.array().of(yup.object().shape({ text: yup.string().required('A opção é obrigatória.') })).optional(),
+    })
+  ).min(1, 'Adicione pelo menos uma pergunta.').required('Adicione pelo menos uma pergunta.'),
+});
 
 import {
   useSurveyDetails,
@@ -33,26 +57,39 @@ const SurveyEdit = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { t } = useTranslation();
-  const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const { user } = useAuth();
   const { can } = usePermissions();
   const restaurantId = user?.restaurants?.[0]?.id;
-  // const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || []; // Old logic, no longer needed
 
-  const [title, setTitle] = useState('');
-  const [slug, setSlug] = useState('');
-  const [description, setDescription] = useState('');
-  const [rewardId, setRewardId] = useState('');
-  const [couponValidityDays, setCouponValidityDays] = useState('');
-  const [questions, setQuestions] = useState([]);
+  const methods = useForm({
+    resolver: yupResolver(surveySchema),
+    defaultValues: {
+      title: '',
+      slug: '',
+      description: '',
+      rewardId: '',
+      couponValidityDays: '',
+      questions: [],
+    },
+  });
+
+  const { handleSubmit, control, watch, setValue, formState: { errors } } = methods;
+
+  const questions = watch('questions');
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'questions',
+  });
 
   const { isLoading, isError, error } = useSurveyDetails(id, {
     onSuccess: (data) => {
-      setTitle(data.title);
-      setSlug(data.slug);
-      setDescription(data.description);
-      setRewardId(data.reward_id || '');
-      setCouponValidityDays(data.coupon_validity_days || '');
-      setQuestions(data.questions || []); // Populate questions
+      setValue('title', data.title);
+      setValue('slug', data.slug);
+      setValue('description', data.description);
+      setValue('rewardId', data.reward_id || '');
+      setValue('couponValidityDays', data.coupon_validity_days || '');
+      setValue('questions', data.questions || []);
     },
     onError: (err) => {
       toast.error(t('survey_edit.load_error', { message: err.response?.data?.msg || err.message }));
@@ -100,56 +137,20 @@ const SurveyEdit = () => {
     );
   }
 
-  const handleAddQuestion = () => {
-    setQuestions([
-      ...questions,
-      {
-        id: Math.random().toString(36).substring(7), // Temporary ID
-        question_text: '',
-        question_type: 'text',
-        options: [],
-        order: questions.length + 1,
-      },
-    ]);
-  };
+  
 
-  const handleQuestionChange = (index, field, value) => {
-    const newQuestions = [...questions];
-    newQuestions[index][field] = value;
-    setQuestions(newQuestions);
-  };
-
-  const handleOptionChange = (qIndex, optIndex, value) => {
-    const newQuestions = [...questions];
-    newQuestions[qIndex].options[optIndex] = value;
-    setQuestions(newQuestions);
-  };
-
-  const handleAddOption = (qIndex) => {
-    const newQuestions = [...questions];
-    newQuestions[qIndex].options.push('');
-    setQuestions(newQuestions);
-  };
-
-  const handleRemoveOption = (qIndex, optIndex) => {
-    const newQuestions = [...questions];
-    newQuestions[qIndex].options.splice(optIndex, 1);
-    setQuestions(newQuestions);
-  };
-
-  const handleRemoveQuestion = (index) => {
-    const newQuestions = questions.filter((_, i) => i !== index);
-    setQuestions(newQuestions);
-  };
-
-  const handleSubmit = () => {
+  const handleUpdate = (data) => {
     const surveyData = {
-      title,
-      slug,
-      description,
-      reward_id: rewardId || null,
-      coupon_validity_days: couponValidityDays ? parseInt(couponValidityDays, 10) : null,
-      questions: questions.map((q, index) => ({ ...q, order: index + 1 })), // Ensure order is correct
+      title: data.title,
+      slug: data.slug,
+      description: data.description,
+      reward_id: data.rewardId || null,
+      coupon_validity_days: data.couponValidityDays ? parseInt(data.couponValidityDays, 10) : null,
+      questions: data.questions.map((q, index) => ({
+        ...q,
+        order: index + 1,
+        options: q.options || [],
+      })),
     };
     updateSurveyMutation.mutate({ id, surveyData });
   };
@@ -163,191 +164,148 @@ const SurveyEdit = () => {
     );
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        {t('survey_edit.title')}
-      </Typography>
-      <Paper elevation={3} sx={{ p: 4 }}>
-        <TextField
-          fullWidth
-          label={t('survey_edit.title_label')}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          sx={{ mb: 2 }}
-        />
-        <TextField
-          fullWidth
-          label={t('survey_edit.slug_label')}
-          value={slug}
-          onChange={(e) => setSlug(e.target.value)}
-          sx={{ mb: 2 }}
-          helperText={t('survey_edit.slug_helper')}
-        />
-        <TextField
-          fullWidth
-          label={t('survey_edit.description_label')}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          multiline
-          rows={3}
-          sx={{ mb: 2 }}
-        />
-
-        <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel>{t('survey_edit.reward_label')}</InputLabel>
-          <Select
-            value={rewardId}
-            label={t('survey_edit.reward_label')}
-            onChange={(e) => setRewardId(e.target.value)}
-          >
-            <MenuItem value="">
-              <em>{t('common.none')}</em>
-            </MenuItem>
-            {isLoadingRewards ? (
-              <MenuItem disabled>{t('survey_edit.loading_rewards')}</MenuItem>
-            ) : (
-              rewards?.map((reward) => (
-                <MenuItem key={reward.id} value={reward.id}>
-                  {reward.name}
-                </MenuItem>
-              ))
-            )}
-          </Select>
-        </FormControl>
-
-        <TextField
-          fullWidth
-          label={t('survey_edit.coupon_validity_days_label')}
-          type="number"
-          value={couponValidityDays}
-          onChange={(e) => setCouponValidityDays(e.target.value)}
-          sx={{ mb: 2 }}
-          InputProps={{
-            inputProps: { min: 1 },
-          }}
-        />
-
-        <Typography variant="h5" sx={{ mt: 3, mb: 2 }}>
-          {t('survey_edit.questions_title')}
+    <FormProvider {...methods}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h4" gutterBottom>
+          {t('survey_edit.title')}
         </Typography>
-        {questions.map((question, qIndex) => (
-          <Paper key={question.id} elevation={1} sx={{ p: 3, mb: 3 }}>
-            <Box
-              sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}
-            >
-              <Typography variant="h6">
-                {t('survey_edit.question_number', { number: qIndex + 1 })}
-              </Typography>
-              <IconButton color="error" onClick={() => handleRemoveQuestion(qIndex)}>
-                <DeleteIcon />
-              </IconButton>
-            </Box>
-            <TextField
-              fullWidth
-              label={t('survey_edit.question_text_label')}
-              value={question.question_text}
-              onChange={(e) => handleQuestionChange(qIndex, 'question_text', e.target.value)}
-              sx={{ mb: 2 }}
-            />
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>{t('survey_edit.question_type_label')}</InputLabel>
-              <Select
-                value={question.question_type}
-                label={t('survey_edit.question_type_label')}
-                onChange={(e) => handleQuestionChange(qIndex, 'question_type', e.target.value)}
-              >
-                <MenuItem value="text">{t('survey_edit.question_type_text')}</MenuItem>
-                <MenuItem value="textarea">{t('survey_edit.question_type_textarea')}</MenuItem>
-                <MenuItem value="radio">{t('survey_edit.question_type_radio')}</MenuItem>
-                <MenuItem value="checkboxes">{t('survey_edit.question_type_checkboxes')}</MenuItem>
-                <MenuItem value="dropdown">{t('survey_edit.question_type_dropdown')}</MenuItem>
-                <MenuItem value="nps">{t('survey_edit.question_type_nps')}</MenuItem>
-                <MenuItem value="csat">{t('survey_edit.question_type_csat')}</MenuItem>
-                <MenuItem value="ratings">{t('survey_edit.question_type_ratings')}</MenuItem>
-                <MenuItem value="like_dislike">
-                  {t('survey_edit.question_type_like_dislike')}
-                </MenuItem>
-              </Select>
-            </FormControl>
+        <Paper elevation={3} sx={{ p: 4 }}>
+          <Controller
+            name="title"
+            control={control}
+            rules={{ required: t('survey_edit.title_required_error') }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                label={t('survey_edit.title_label')}
+                variant="outlined"
+                margin="normal"
+                error={!!errors.title}
+                helperText={errors.title?.message}
+              />
+            )}
+          />
+          <Controller
+            name="slug"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                label={t('survey_edit.slug_label')}
+                variant="outlined"
+                margin="normal"
+                helperText={t('survey_edit.slug_helper')}
+                error={!!errors.slug}
+              />
+            )}
+          />
+          <Controller
+            name="description"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                label={t('survey_edit.description_label')}
+                variant="outlined"
+                margin="normal"
+                multiline
+                rows={3}
+                error={!!errors.description}
+              />
+            )}
+          />
 
-            {question.question_type === 'nps' && (
-              <FormControl fullWidth sx={{ mb: 2 }}>
-                <InputLabel>{t('survey_edit.nps_criterion_label')}</InputLabel>
+          <Controller
+            name="rewardId"
+            control={control}
+            render={({ field }) => (
+              <FormControl fullWidth margin="normal" error={!!errors.rewardId}>
+                <InputLabel>{t('survey_edit.reward_label')}</InputLabel>
                 <Select
-                  value={question.nps_criterion_id || ''}
-                  label={t('survey_edit.nps_criterion_label')}
-                  onChange={(e) => handleQuestionChange(qIndex, 'nps_criterion_id', e.target.value)}
+                  {...field}
+                  label={t('survey_edit.reward_label')}
                 >
-                  {isLoadingNpsCriteria ? (
-                    <MenuItem disabled>{t('survey_edit.loading_criteria')}</MenuItem>
+                  <MenuItem value="">
+                    <em>{t('common.none')}</em>
+                  </MenuItem>
+                  {isLoadingRewards ? (
+                    <MenuItem disabled>{t('survey_edit.loading_rewards')}</MenuItem>
                   ) : (
-                    npsCriteria?.map((criterion) => (
-                      <MenuItem key={criterion.id} value={criterion.id}>
-                        {criterion.name}
+                    rewards?.map((reward) => (
+                      <MenuItem key={reward.id} value={reward.id}>
+                        {reward.name}
                       </MenuItem>
                     ))
                   )}
                 </Select>
+                <FormHelperText>{errors.rewardId?.message}</FormHelperText>
               </FormControl>
             )}
+          />
 
-            {(question.question_type === 'radio' ||
-              question.question_type === 'checkboxes' ||
-              question.question_type === 'dropdown') && (
-              <Box sx={{ mt: 2 }}>
-                <Typography variant="subtitle1" gutterBottom>
-                  {t('survey_edit.options_title')}
-                </Typography>
-                {question.options.map((option, optIndex) => (
-                  <Box key={optIndex} sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                    <TextField
-                      fullWidth
-                      label={t('survey_edit.option_label', { number: optIndex + 1 })}
-                      value={option}
-                      onChange={(e) => handleOptionChange(qIndex, optIndex, e.target.value)}
-                    />
-                    <IconButton
-                      color="error"
-                      onClick={() => handleRemoveOption(qIndex, optIndex)}
-                      sx={{ ml: 1 }}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </Box>
-                ))}
-                <Button variant="outlined" onClick={() => handleAddOption(qIndex)} sx={{ mt: 1 }}>
-                  {t('survey_edit.add_option_button')}
-                </Button>
-              </Box>
+          <Controller
+            name="couponValidityDays"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                label={t('survey_edit.coupon_validity_days_label')}
+                type="number"
+                variant="outlined"
+                margin="normal"
+                InputProps={{ inputProps: { min: 1 } }}
+                error={!!errors.couponValidityDays}
+                helperText={errors.couponValidityDays?.message}
+              />
             )}
-          </Paper>
-        ))}
-        <Button variant="contained" onClick={handleAddQuestion} sx={{ mb: 2 }}>
-          {t('survey_edit.add_question_button')}
-        </Button>
+          />
 
-        <Box sx={{ mt: 3 }}>
+          <Typography variant="h5" sx={{ mt: 3, mb: 2 }}>
+            {t('survey_edit.questions_title')}
+          </Typography>
+          {fields.map((field, index) => (
+            <SurveyQuestionField key={field.id} questionIndex={index} onRemoveQuestion={() => remove(index)} />
+          ))}
           <Button
             variant="contained"
-            onClick={handleSubmit}
-            disabled={updateSurveyMutation.isLoading}
+            onClick={() => append({ question_text: '', question_type: 'text', nps_criterion_id: null, options: [] })}
+            sx={{ mb: 2 }}
           >
-            {updateSurveyMutation.isLoading ? (
-              <CircularProgress size={24} />
-            ) : (
-              t('survey_edit.save_changes_button')
-            )}
+            {t('survey_edit.add_question_button')}
           </Button>
-          <Button
-            variant="outlined"
-            onClick={() => navigate('/satisfaction/surveys')}
-            sx={{ ml: 2 }}
-          >
-            {t('common.cancel')}
-          </Button>
-        </Box>
-      </Paper>
-    </Box>
+          {errors.questions && (
+            <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+              {errors.questions.message}
+            </Typography>
+          )}
+
+          <Box sx={{ mt: 3 }}>
+            <Button
+              variant="contained"
+              onClick={handleSubmit(handleUpdate)} // Alterado para handleSubmit(handleUpdate)
+              disabled={updateSurveyMutation.isLoading}
+            >
+              {updateSurveyMutation.isLoading ? (
+                <CircularProgress size={24} />
+              ) : (
+                t('survey_edit.save_changes_button')
+              )}
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => navigate('/satisfaction/surveys')}
+              sx={{ ml: 2 }}
+            >
+              {t('common.cancel')}
+            </Button>
+          </Box>
+        </Paper>
+      </Box>
+    </FormProvider>
   );
 };
 

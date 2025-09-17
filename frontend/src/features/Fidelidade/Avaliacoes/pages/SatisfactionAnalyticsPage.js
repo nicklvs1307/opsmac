@@ -21,6 +21,7 @@ import { format, subMonths } from 'date-fns';
 import SatisfactionDateFilters from '../components/SatisfactionDateFilters';
 import SatisfactionMetricCards from '../components/SatisfactionMetricCards';
 import NpsScoresByCriterion from '../components/NpsScoresByCriterion';
+import FeedbackTable from '../components/FeedbackTable';
 
 // A simple card for displaying a metric
 const MetricCard = ({ title, value, icon, bgColor }) => (
@@ -107,6 +108,21 @@ const SatisfactionAnalyticsPage = () => {
       
 
       
+
+      <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
+        {t('satisfaction_analytics.feedbacks_title')}
+      </Typography>
+      {isLoading ? ( // Usar isLoading do useSatisfactionAnalytics para feedbacks também
+        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100px">
+          <CircularProgress />
+        </Box>
+      ) : error ? ( // Usar error do useSatisfactionAnalytics para feedbacks também
+        <Alert severity="error">
+          {t('common.error_loading_feedbacks')}: {error.message}
+        </Alert>
+      ) : (
+        <FeedbackTable feedbacks={data?.feedbacks} />
+      )}
 
       {/* More charts and data visualizations can be added here */}
     </Box>

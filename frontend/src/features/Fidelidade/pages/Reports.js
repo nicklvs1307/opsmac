@@ -18,6 +18,11 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import NpsReportTable from '../components/Reports/NpsReportTable';
+import SatisfactionReportTable from '../components/Reports/SatisfactionReportTable';
+import ComplaintsReportTable from '../components/Reports/ComplaintsReportTable';
+import TrendsReportTable from '../components/Reports/TrendsReportTable';
+import CustomersReportTable from '../components/Reports/CustomersReportTable';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
@@ -68,154 +73,15 @@ const FidelityReports = () => {
 
     switch (reportType) {
       case 'nps':
-        return (
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>{t('reports.table_header.date')}</TableCell>
-                  <TableCell>{t('reports.table_header.total_responses')}</TableCell>
-                  <TableCell>{t('reports.table_header.promoters')}</TableCell>
-                  <TableCell>{t('reports.table_header.passives')}</TableCell>
-                  <TableCell>{t('reports.table_header.detractors')}</TableCell>
-                  <TableCell>{t('reports.table_header.nps_score')}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {reportData.map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{format(new Date(row.date), 'dd/MM/yyyy')}</TableCell>
-                    <TableCell>{row.totalResponses}</TableCell>
-                    <TableCell>{row.promoters}</TableCell>
-                    <TableCell>{row.passives}</TableCell>
-                    <TableCell>{row.detractors}</TableCell>
-                    <TableCell>{row.npsScore?.toFixed(0)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        );
+        return <NpsReportTable reportData={reportData} />;
       case 'satisfaction':
-        return (
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>{t('reports.table_header.date')}</TableCell>
-                  <TableCell>{t('reports.table_header.total_feedbacks')}</TableCell>
-                  <TableCell>{t('reports.table_header.avg_rating')}</TableCell>
-                  <TableCell>{t('reports.table_header.excellent')}</TableCell>
-                  <TableCell>{t('reports.table_header.good')}</TableCell>
-                  <TableCell>{t('reports.table_header.average')}</TableCell>
-                  <TableCell>{t('reports.table_header.poor')}</TableCell>
-                  <TableCell>{t('reports.table_header.terrible')}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {reportData.map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{format(new Date(row.date), 'dd/MM/yyyy')}</TableCell>
-                    <TableCell>{row.totalFeedbacks}</TableCell>
-                    <TableCell>{row.avgRating?.toFixed(2)}</TableCell>
-                    <TableCell>{row.excellent}</TableCell>
-                    <TableCell>{row.good}</TableCell>
-                    <TableCell>{row.average}</TableCell>
-                    <TableCell>{row.poor}</TableCell>
-                    <TableCell>{row.terrible}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        );
+        return <SatisfactionReportTable reportData={reportData} />;
       case 'complaints':
-        return (
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>{t('reports.table_header.date')}</TableCell>
-                  <TableCell>{t('reports.table_header.customer_name')}</TableCell>
-                  <TableCell>{t('reports.table_header.rating')}</TableCell>
-                  <TableCell>{t('reports.table_header.comment')}</TableCell>
-                  <TableCell>{t('reports.table_header.status')}</TableCell>
-                  <TableCell>{t('reports.table_header.priority')}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {reportData.map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{format(new Date(row.createdAt), 'dd/MM/yyyy')}</TableCell>
-                    <TableCell>{row.customer?.name || t('common.anonymous')}</TableCell>
-                    <TableCell>{row.rating}</TableCell>
-                    <TableCell>{row.comment}</TableCell>
-                    <TableCell>{row.status}</TableCell>
-                    <TableCell>{row.priority}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        );
+        return <ComplaintsReportTable reportData={reportData} />;
       case 'trends':
-        return (
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>{t('reports.table_header.week')}</TableCell>
-                  <TableCell>{t('reports.table_header.total_feedbacks')}</TableCell>
-                  <TableCell>{t('reports.table_header.avg_rating')}</TableCell>
-                  <TableCell>{t('reports.table_header.positive_feedbacks')}</TableCell>
-                  <TableCell>{t('reports.table_header.negative_feedbacks')}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {reportData.map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{format(new Date(row.week), 'dd/MM/yyyy')}</TableCell>
-                    <TableCell>{row.totalFeedbacks}</TableCell>
-                    <TableCell>{row.avgRating?.toFixed(2)}</TableCell>
-                    <TableCell>{row.positiveFeedbacks}</TableCell>
-                    <TableCell>{row.negativeFeedbacks}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        );
+        return <TrendsReportTable reportData={reportData} />;
       case 'customers':
-        return (
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>{t('reports.table_header.customer_name')}</TableCell>
-                  <TableCell>{t('reports.table_header.email')}</TableCell>
-                  <TableCell>{t('reports.table_header.segment')}</TableCell>
-                  <TableCell>{t('reports.table_header.total_visits')}</TableCell>
-                  <TableCell>{t('reports.table_header.loyalty_points')}</TableCell>
-                  <TableCell>{t('reports.table_header.feedback_count')}</TableCell>
-                  <TableCell>{t('reports.table_header.avg_feedback_rating')}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {reportData.map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.email}</TableCell>
-                    <TableCell>{row.customerSegment}</TableCell>
-                    <TableCell>{row.totalVisits}</TableCell>
-                    <TableCell>{row.loyaltyPoints}</TableCell>
-                    <TableCell>{row.feedbackCount}</TableCell>
-                    <TableCell>{row.avgFeedbackRating?.toFixed(2)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        );
+        return <CustomersReportTable reportData={reportData} />;
       default:
         return <Typography>{t('reports.select_report_type')}</Typography>;
     }

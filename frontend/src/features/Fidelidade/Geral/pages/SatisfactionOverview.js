@@ -32,6 +32,8 @@ import {
   CartesianGrid,
 } from 'recharts';
 import { format, subMonths } from 'date-fns';
+import SatisfactionDateFilters from '../../Avaliacoes/components/SatisfactionDateFilters';
+import MetricCard from '../../Avaliacoes/components/MetricCard';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF'];
 
@@ -87,12 +89,15 @@ const SatisfactionOverview = () => {
 
   const { totalResponses, averageNps, averageCsat, npsMetricsPerCriterion } = analyticsData;
 
-  const monthlySatisfactionTrend =
-    evolutionData?.map((d) => ({
+  const getMonthlySatisfactionTrend = (data) => {
+    return data?.map((d) => ({
       name: format(new Date(d.date), 'MMM/yy'),
       nps: d.nps,
       csat: d.csat,
     })) || [];
+  };
+
+  const monthlySatisfactionTrend = getMonthlySatisfactionTrend(evolutionData);
 
   return (
     <Box sx={{ p: 3 }}>
@@ -100,72 +105,23 @@ const SatisfactionOverview = () => {
         {t('fidelity_general.satisfaction_overview_title')}
       </Typography>
 
-      <Paper sx={{ p: 3, mb: 3 }}>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} md={5}>
-            <TextField
-              label={t('common.start_date')}
-              type="date"
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <TextField
-              label={t('common.end_date')}
-              type="date"
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <Button variant="contained" fullWidth>
-              {t('common.apply_filters')}
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
+      <SatisfactionDateFilters
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+        onApplyFilters={() => { /* Lógica de aplicação de filtros já está no useSatisfactionAnalytics */ }}
+      />
 
       <Grid container spacing={3} mb={4}>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('satisfaction_overview.total_responses')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {totalResponses || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('satisfaction_overview.total_responses')} value={totalResponses || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('satisfaction_overview.average_nps')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {averageNps?.toFixed(1) || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('satisfaction_overview.average_nps')} value={averageNps?.toFixed(1) || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('satisfaction_overview.average_csat')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {averageCsat?.toFixed(1) || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('satisfaction_overview.average_csat')} value={averageCsat?.toFixed(1) || 0} />
         </Grid>
       </Grid>
 

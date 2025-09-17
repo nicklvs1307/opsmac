@@ -33,6 +33,29 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useAuth
 import usePermissions from '@/hooks/usePermissions';
+import { useForm, FormProvider, Controller, useFieldArray } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const surveySchema = yup.object().shape({
+  surveyType: yup.string().required('Selecione o tipo de pesquisa.'),
+  title: yup.string().required('O título é obrigatório.'),
+  slug: yup.string().optional(),
+  description: yup.string().optional(),
+  rewardId: yup.string().optional().nullable(),
+  couponValidityDays: yup.number().min(1, 'Mínimo de 1 dia.').optional().nullable(),
+  questions: yup.array().of(
+    yup.object().shape({
+      question_text: yup.string().required('O texto da pergunta é obrigatório.'),
+      question_type: yup.string().required('O tipo da pergunta é obrigatório.'),
+      nps_criterion_id: yup.string().when('question_type', {
+        is: 'nps',
+        then: (schema) => schema.required('O critério NPS é obrigatório para perguntas NPS.'),
+        otherwise: (schema) => schema.optional().nullable(),
+      }),
+    })
+  ).min(1, 'Adicione pelo menos uma pergunta.').required('Adicione pelo menos uma pergunta.'),
+});
 
 import {
   useCreateSurvey,
@@ -42,13 +65,6 @@ import {
 
 const SurveyCreate = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [surveyType, setSurveyType] = useState('');
-  const [title, setTitle] = useState('');
-  const [slug, setSlug] = useState('');
-  const [description, setDescription] = useState('');
-  const [rewardId, setRewardId] = useState('');
-  const [couponValidityDays, setCouponValidityDays] = useState('');
-  const [questions, setQuestions] = useState([]);
   const [createdSurveyId, setCreatedSurveyId] = useState(null);
   const [createdSurveySlug, setCreatedSurveySlug] = useState(null);
   const [openQrCodeDialog, setOpenQrCodeDialog] = useState(false);
@@ -62,10 +78,39 @@ const SurveyCreate = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { t } = useTranslation();
-  const { user } = useAuth(); // Obter usuário para acessar enabled_modules
+  const { user } = useAuth();
   const { can } = usePermissions();
   const restaurantId = user?.restaurants?.[0]?.id;
-  // const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || []; // Old logic, no longer needed
+
+  const getPublicSurveyLink = (restaurantSlug, surveySlug) => {
+    if (!restaurantSlug) {
+      return null;
+    }
+    return `${window.location.origin}/public/surveys/${restaurantSlug}/${surveySlug}`;
+  };
+
+  const methods = useForm({
+    resolver: yupResolver(surveySchema),
+    defaultValues: {
+      surveyType: '',
+      title: '',
+      slug: '',
+      description: '',
+      rewardId: '',
+      couponValidityDays: '',
+      questions: [],
+    },
+  });
+
+  const { handleSubmit, control, watch, setValue, formState: { errors } } = methods;
+
+  const surveyType = watch('surveyType');
+  const questions = watch('questions');
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'questions',
+  });
 
   const { data: rewards, isLoading: isLoadingRewards } = useSurveyRewards(restaurantId, {
     onError: (error) => {
@@ -97,32 +142,7 @@ const SurveyCreate = () => {
     },
   });
 
-  const handleOpenQuestionDialog = () => {
-    setCurrentQuestion({ question_text: '', question_type: 'text', nps_criterion_id: null });
-    setOpenQuestionDialog(true);
-  };
-
-  const handleCloseQuestionDialog = () => {
-    setOpenQuestionDialog(false);
-  };
-
-  const handleSaveQuestion = () => {
-    if (!currentQuestion.question_text.trim()) {
-      toast.error(t('survey_create.question_text_required_error'));
-      return;
-    }
-    if (currentQuestion.question_type === 'nps' && !currentQuestion.nps_criterion_id) {
-      toast.error(t('survey_create.nps_criterion_required_error'));
-      return;
-    }
-    setQuestions([...questions, { ...currentQuestion, order: questions.length + 1 }]);
-    handleCloseQuestionDialog();
-  };
-
-  const handleRemoveQuestion = (index) => {
-    const newQuestions = questions.filter((_, i) => i !== index);
-    setQuestions(newQuestions);
-  };
+  
 
   // Efeito para pré-popular as perguntas com base no tipo de pesquisa
   useEffect(() => {
@@ -133,15 +153,16 @@ const SurveyCreate = () => {
           question_type: 'nps',
           order: index + 1,
           nps_criterion_id: criterion.id,
+          options: [], // Adicionar options vazias para consistência
         }));
-        setQuestions(npsQuestions);
+        setValue('questions', npsQuestions);
       } else {
-        setQuestions([]);
+        setValue('questions', []);
       }
     } else {
-      setQuestions([]); // Limpa para outros tipos de pesquisa
+      setValue('questions', []); // Limpa para outros tipos de pesquisa
     }
-  }, [surveyType, npsCriteria, t]);
+  }, [surveyType, npsCriteria, t, setValue]);
 
   // Verifica se o módulo de pesquisas/feedback está habilitado
   if (!can('fidelity:satisfaction:surveys', 'create')) {
@@ -154,35 +175,39 @@ const SurveyCreate = () => {
     );
   }
 
-  const handleNext = () => {
-    if (activeStep === 0 && !surveyType) {
-      toast.error(t('survey_create.select_type_error'));
-      return;
+  const handleNext = async () => {
+    let isValid = true;
+    if (activeStep === 0) {
+      isValid = await methods.trigger('surveyType');
+    } else if (activeStep === 1) {
+      isValid = await methods.trigger(['title', 'slug', 'description', 'rewardId', 'couponValidityDays', 'questions']);
     }
-    setActiveStep((prev) => prev + 1);
+
+    if (isValid) {
+      setActiveStep((prev) => prev + 1);
+    } else {
+      toast.error(t('common.form_validation_error'));
+    }
   };
 
   const handleBack = () => {
     setActiveStep((prev) => prev - 1);
   };
 
-  const handleCreate = () => {
-    if (!title.trim()) {
-      toast.error(t('survey_create.title_required_error'));
-      return;
-    }
-    if (surveyType === 'nps_only' && questions.length === 0) {
-      toast.error(t('survey_create.no_nps_criteria_error'));
-      return;
-    }
+  const handleCreate = (data) => {
     const surveyData = {
-      type: surveyType,
-      title,
-      slug,
-      description,
-      reward_id: rewardId || null,
-      coupon_validity_days: couponValidityDays ? parseInt(couponValidityDays, 10) : null,
-      questions,
+      type: data.surveyType,
+      title: data.title,
+      slug: data.slug,
+      description: data.description,
+      reward_id: data.rewardId || null,
+      coupon_validity_days: data.couponValidityDays ? parseInt(data.couponValidityDays, 10) : null,
+      questions: data.questions.map(q => ({
+        question_text: q.question_text,
+        question_type: q.question_type,
+        nps_criterion_id: q.nps_criterion_id || null,
+        options: q.options || [],
+      })),
     };
     createSurveyMutation.mutate(surveyData);
   };
@@ -191,110 +216,146 @@ const SurveyCreate = () => {
     switch (step) {
       case 0:
         return (
-          <FormControl fullWidth sx={{ mb: 3 }}>
-            <InputLabel>{t('survey_create.survey_type_label')}</InputLabel>
-            <Select
-              value={surveyType}
-              label={t('survey_create.survey_type_label')}
-              onChange={(e) => setSurveyType(e.target.value)}
-            >
-              <MenuItem value="nps_only">{t('survey_create.type_nps_dynamic')}</MenuItem>
-              <MenuItem value="custom">{t('survey_create.type_custom_soon')}</MenuItem>
-              <MenuItem value="delivery_csat">{t('survey_create.type_delivery_csat')}</MenuItem>
-              <MenuItem value="menu_feedback">{t('survey_create.type_menu_feedback')}</MenuItem>
-              <MenuItem value="customer_profile">
-                {t('survey_create.type_customer_profile')}
-              </MenuItem>
-              <MenuItem value="salon_ratings">{t('survey_create.type_salon_ratings')}</MenuItem>
-              <MenuItem value="salon_like_dislike">
-                {t('survey_create.type_salon_like_dislike')}
-              </MenuItem>
-            </Select>
-          </FormControl>
+          <Controller
+            name="surveyType"
+            control={control}
+            rules={{ required: t('survey_create.select_type_error') }}
+            render={({ field }) => (
+              <FormControl fullWidth sx={{ mb: 3 }} error={!!errors.surveyType}>
+                <InputLabel>{t('survey_create.survey_type_label')}</InputLabel>
+                <Select
+                  {...field}
+                  label={t('survey_create.survey_type_label')}
+                >
+                  <MenuItem value="nps_only">{t('survey_create.type_nps_dynamic')}</MenuItem>
+                  <MenuItem value="custom">{t('survey_create.type_custom_soon')}</MenuItem>
+                  <MenuItem value="delivery_csat">{t('survey_create.type_delivery_csat')}</MenuItem>
+                  <MenuItem value="menu_feedback">{t('survey_create.type_menu_feedback')}</MenuItem>
+                  <MenuItem value="customer_profile">
+                    {t('survey_create.type_customer_profile')}
+                  </MenuItem>
+                  <MenuItem value="salon_ratings">{t('survey_create.type_salon_ratings')}</MenuItem>
+                  <MenuItem value="salon_like_dislike">
+                    {t('survey_create.type_salon_like_dislike')}
+                  </MenuItem>
+                </Select>
+                <FormHelperText>{errors.surveyType?.message}</FormHelperText>
+              </FormControl>
+            )}
+          />
         );
       case 1:
         return (
           <Box sx={{ mb: 3 }}>
-            <TextField
-              fullWidth
-              label={t('survey_create.title_label')}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              sx={{ mb: 2 }}
+            <Controller
+              name="title"
+              control={control}
+              rules={{ required: t('survey_create.title_required_error') }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label={t('survey_create.title_label')}
+                  variant="outlined"
+                  margin="normal"
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
+                />
+              )}
             />
-            <TextField
-              fullWidth
-              label={t('survey_create.slug_label')}
-              value={slug}
-              onChange={(e) => setSlug(e.target.value)}
-              sx={{ mb: 2 }}
-              helperText={t('survey_create.slug_helper')}
+            <Controller
+              name="slug"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label={t('survey_create.slug_label')}
+                  variant="outlined"
+                  margin="normal"
+                  helperText={t('survey_create.slug_helper')}
+                  error={!!errors.slug}
+                />
+              )}
             />
-            <TextField
-              fullWidth
-              label={t('survey_create.description_label')}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              multiline
-              rows={3}
-              sx={{ mb: 2 }}
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label={t('survey_create.description_label')}
+                  variant="outlined"
+                  margin="normal"
+                  multiline
+                  rows={3}
+                  error={!!errors.description}
+                />
+              )}
             />
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>{t('survey_create.reward_label')}</InputLabel>
-              <Select
-                value={rewardId}
-                label={t('survey_create.reward_label')}
-                onChange={(e) => setRewardId(e.target.value)}
-              >
-                <MenuItem value="">
-                  <em>{t('common.none')}</em>
-                </MenuItem>
-                {isLoadingRewards ? (
-                  <MenuItem disabled>{t('survey_create.loading_rewards')}</MenuItem>
-                ) : (
-                  rewards?.map((reward) => (
-                    <MenuItem key={reward.id} value={reward.id}>
-                      {reward.name}
+            <Controller
+              name="rewardId"
+              control={control}
+              render={({ field }) => (
+                <FormControl fullWidth margin="normal" error={!!errors.rewardId}>
+                  <InputLabel>{t('survey_create.reward_label')}</InputLabel>
+                  <Select
+                    {...field}
+                    label={t('survey_create.reward_label')}
+                  >
+                    <MenuItem value="">
+                      <em>{t('common.none')}</em>
                     </MenuItem>
-                  ))
-                )}
-              </Select>
-            </FormControl>
-            <TextField
-              fullWidth
-              label={t('survey_create.coupon_validity_days_label')}
-              type="number"
-              value={couponValidityDays}
-              onChange={(e) => setCouponValidityDays(e.target.value)}
-              sx={{ mb: 2 }}
-              InputProps={{ inputProps: { min: 1 } }}
+                    {isLoadingRewards ? (
+                      <MenuItem disabled>{t('survey_create.loading_rewards')}</MenuItem>
+                    ) : (
+                      rewards?.map((reward) => (
+                        <MenuItem key={reward.id} value={reward.id}>
+                          {reward.name}
+                        </MenuItem>
+                      ))
+                    )}
+                  </Select>
+                  <FormHelperText>{errors.rewardId?.message}</FormHelperText>
+                </FormControl>
+              )}
+            />
+            <Controller
+              name="couponValidityDays"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label={t('survey_create.coupon_validity_days_label')}
+                  type="number"
+                  variant="outlined"
+                  margin="normal"
+                  InputProps={{ inputProps: { min: 1 } }}
+                  error={!!errors.couponValidityDays}
+                  helperText={errors.couponValidityDays?.message}
+                />
+              )}
             />
             <Box mt={4}>
               <Typography variant="h6">{t('survey_create.questions_title')}</Typography>
-              <List>
-                {questions.map((q, index) => (
-                  <ListItem
-                    key={index}
-                    secondaryAction={
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => handleRemoveQuestion(index)}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    }
-                  >
-                    <ListItemText
-                      primary={q.question_text}
-                      secondary={`${t('survey_create.question_type_label')}: ${q.question_type}`}
-                    />
-                  </ListItem>
-                ))}
-              </List>
-              <Button startIcon={<AddCircleOutlineIcon />} onClick={handleOpenQuestionDialog}>
+              {fields.map((field, index) => (
+                <SurveyQuestionField key={field.id} questionIndex={index} onRemoveQuestion={() => remove(index)} />
+              ))}
+              <Button
+                startIcon={<AddCircleOutlineIcon />}
+                onClick={() => append({ question_text: '', question_type: 'text', nps_criterion_id: null, options: [] })}
+                variant="outlined"
+                sx={{ mt: 2 }}
+              >
                 {t('survey_create.add_question_button')}
               </Button>
+              {errors.questions && (
+                <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+                  {errors.questions.message}
+                </Typography>
+              )}
             </Box>
           </Box>
         );
@@ -402,112 +463,50 @@ const SurveyCreate = () => {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        {t('survey_create.main_title')}
-      </Typography>
-      <Paper elevation={3} sx={{ p: 4 }}>
-        <Stepper activeStep={activeStep} orientation="vertical" sx={{ mt: 2 }}>
-          {[
-            t('survey_create.step_choose_type'),
-            t('survey_create.step_configure_details'),
-            t('survey_create.step_review_and_create'),
-            t('survey_create.step_actions'),
-          ].map((label, index) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-              <StepContent>
-                {renderStepContent(index)}
-                <Box sx={{ mt: 2 }}>
-                  <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-                    {t('common.back')}
-                  </Button>
-                  <Button
-                    variant="contained"
-                    onClick={activeStep === 2 ? handleCreate : handleNext}
-                    disabled={createSurveyMutation.isLoading}
-                  >
-                    {createSurveyMutation.isLoading ? (
-                      <CircularProgress size={24} />
-                    ) : activeStep === 2 ? (
-                      t('survey_create.create_survey_button')
-                    ) : (
-                      t('common.next')
-                    )}
-                  </Button>
-                </Box>
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
-      </Paper>
+    <FormProvider {...methods}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h4" gutterBottom>
+          {t('survey_create.main_title')}
+        </Typography>
+        <Paper elevation={3} sx={{ p: 4 }}>
+          <Stepper activeStep={activeStep} orientation="vertical" sx={{ mt: 2 }}>
+            {[
+              t('survey_create.step_choose_type'),
+              t('survey_create.step_configure_details'),
+              t('survey_create.step_review_and_create'),
+              t('survey_create.step_actions'),
+            ].map((label, index) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+                <StepContent>
+                  {renderStepContent(index)}
+                  <Box sx={{ mt: 2 }}>
+                    <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+                      {t('common.back')}
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={activeStep === 2 ? handleSubmit(handleCreate) : handleNext}
+                      disabled={createSurveyMutation.isLoading}
+                    >
+                      {createSurveyMutation.isLoading ? (
+                        <CircularProgress size={24} />
+                      ) : activeStep === 2 ? (
+                        t('survey_create.create_survey_button')
+                      ) : (
+                        t('common.next')
+                      )}
+                    </Button>
+                  </Box>
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+        </Paper>
 
-      {/* Dialog for adding/editing questions */}
-      <Dialog open={openQuestionDialog} onClose={handleCloseQuestionDialog} fullWidth maxWidth="sm">
-        <DialogTitle>{t('survey_create.add_question_dialog_title')}</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            label={t('survey_create.question_text_label')}
-            fullWidth
-            value={currentQuestion.question_text}
-            onChange={(e) =>
-              setCurrentQuestion({ ...currentQuestion, question_text: e.target.value })
-            }
-            sx={{ mb: 2 }}
-          />
-          <FormControl fullWidth sx={{ mb: 2 }}>
-            <InputLabel>{t('survey_create.question_type_label')}</InputLabel>
-            <Select
-              value={currentQuestion.question_type}
-              label={t('survey_create.question_type_label')}
-              onChange={(e) =>
-                setCurrentQuestion({
-                  ...currentQuestion,
-                  question_type: e.target.value,
-                  nps_criterion_id: null,
-                })
-              }
-            >
-              <MenuItem value="text">{t('survey_create.question_type_text')}</MenuItem>
-              <MenuItem value="textarea">{t('survey_create.question_type_textarea')}</MenuItem>
-              <MenuItem value="ratings">{t('survey_create.question_type_ratings')}</MenuItem>
-              <MenuItem value="nps">{t('survey_create.question_type_nps')}</MenuItem>
-              <MenuItem value="csat">{t('survey_create.question_type_csat')}</MenuItem>
-            </Select>
-          </FormControl>
-          {currentQuestion.question_type === 'nps' && (
-            <FormControl fullWidth>
-              <InputLabel>{t('survey_create.nps_criterion_label')}</InputLabel>
-              <Select
-                value={currentQuestion.nps_criterion_id}
-                label={t('survey_create.nps_criterion_label')}
-                onChange={(e) =>
-                  setCurrentQuestion({ ...currentQuestion, nps_criterion_id: e.target.value })
-                }
-              >
-                {isLoadingNpsCriteria ? (
-                  <MenuItem disabled>{t('survey_create.loading_criteria')}</MenuItem>
-                ) : (
-                  npsCriteria?.map((criterion) => (
-                    <MenuItem key={criterion.id} value={criterion.id}>
-                      {criterion.name}
-                    </MenuItem>
-                  ))
-                )}
-              </Select>
-            </FormControl>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseQuestionDialog}>{t('common.cancel')}</Button>
-          <Button onClick={handleSaveQuestion} variant="contained">
-            {t('common.save')}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      
     </Box>
+    </FormProvider>
   );
 };
 

@@ -20,10 +20,12 @@ import {
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import usePermissions from '@/hooks/usePermissions';
+import NpsCriterionFormDialog from '../components/NpsCriterionFormDialog'; // Importar o novo componente
 // import SurveyRewardProgram from '../Pesquisas/SurveyRewardProgram'; // Componente não encontrado, importação comentada
 import {
   useNpsCriteria,
@@ -42,8 +44,10 @@ const SatisfactionSettingsPage = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
   // const enabledModules = user?.restaurants?.[0]?.settings?.enabled_modules || []; // Old logic, no longer needed
 
-  const [newCriterionName, setNewCriterionName] = useState('');
-  const [editCriterion, setEditCriterion] = useState(null);
+  const [openCriterionDialog, setOpenCriterionDialog] = useState(false);
+  const [currentCriterion, setCurrentCriterion] = useState(null);
+
+  
 
   const {
     data: criteria,
@@ -98,31 +102,7 @@ const SatisfactionSettingsPage = () => {
     updateSettingsMutation.mutate({ restaurantId, settings: { survey_program_settings: data } });
   };
 
-  const handleCriterionSubmit = (e) => {
-    e.preventDefault();
-    if (!newCriterionName.trim()) {
-      toast.error(t('satisfaction_settings.criterion_name_empty_error'));
-      return;
-    }
-    createMutation.mutate(newCriterionName, { onSuccess: () => setNewCriterionName('') });
-  };
-
-  const handleUpdate = () => {
-    if (!editCriterion || !editCriterion.name.trim()) {
-      toast.error(t('satisfaction_settings.criterion_name_empty_error'));
-      return;
-    }
-    updateMutation.mutate(
-      { id: editCriterion.id, name: editCriterion.name },
-      { onSuccess: () => setEditCriterion(null) }
-    );
-  };
-
-  const handleDelete = (id) => {
-    if (window.confirm(t('satisfaction_settings.confirm_delete_criterion'))) {
-      deleteMutation.mutate(id);
-    }
-  };
+  
 
   if (!can('fidelity:satisfaction:settings', 'read')) {
     return (
@@ -279,37 +259,24 @@ const SatisfactionSettingsPage = () => {
           {t('satisfaction_settings.nps_criteria_description')}
         </Typography>
 
-        <Box
-          component="form"
-          onSubmit={handleCriterionSubmit}
-          sx={{ display: 'flex', gap: 2, mb: 4 }}
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => {
+            setCurrentCriterion(null);
+            setOpenCriterionDialog(true);
+          }}
+          sx={{ mb: 2 }}
         >
-          <TextField
-            fullWidth
-            label={t('satisfaction_settings.new_nps_criterion_label')}
-            value={newCriterionName}
-            onChange={(e) => setNewCriterionName(e.target.value)}
-            variant="outlined"
-            disabled={createMutation.isLoading}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={createMutation.isLoading}
-          >
-            {createMutation.isLoading ? (
-              <CircularProgress size={24} />
-            ) : (
-              t('satisfaction_settings.add_button')
-            )}
-          </Button>
-        </Box>
+          {t('satisfaction_settings.add_criterion_button')}
+        </Button>
 
         {isLoadingCriteria ? (
           <CircularProgress />
         ) : isCriteriaError ? (
-          <Typography color="error">{t('satisfaction_settings.error_loading_criteria')}</Typography>
+          <Typography color="error">
+            {t('satisfaction_settings.error_loading_criteria')}
+          </Typography>
         ) : (
           <List>
             {criteria?.map((criterion) => (
@@ -320,14 +287,21 @@ const SatisfactionSettingsPage = () => {
                     <IconButton
                       edge="end"
                       aria-label="edit"
-                      onClick={() => setEditCriterion(criterion)}
+                      onClick={() => {
+                        setCurrentCriterion(criterion);
+                        setOpenCriterionDialog(true);
+                      }}
                     >
                       <EditIcon />
                     </IconButton>
                     <IconButton
                       edge="end"
                       aria-label="delete"
-                      onClick={() => handleDelete(criterion.id)}
+                      onClick={() => {
+                        if (window.confirm(t('satisfaction_settings.confirm_delete_criterion'))) {
+                          deleteMutation.mutate(criterion.id);
+                        }
+                      }}
                       sx={{ ml: 1 }}
                     >
                       <DeleteIcon />
@@ -342,33 +316,17 @@ const SatisfactionSettingsPage = () => {
         )}
       </Paper>
 
-      <Dialog open={!!editCriterion} onClose={() => setEditCriterion(null)} fullWidth maxWidth="sm">
-        <DialogTitle>{t('satisfaction_settings.edit_criterion_title')}</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            label={t('satisfaction_settings.criterion_name_label')}
-            type="text"
-            fullWidth
-            variant="standard"
-            value={editCriterion?.name || ''}
-            onChange={(e) => setEditCriterion({ ...editCriterion, name: e.target.value })}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setEditCriterion(null)}>
-            {t('satisfaction_settings.cancel_button')}
-          </Button>
-          <Button onClick={handleUpdate} disabled={updateMutation.isLoading}>
-            {updateMutation.isLoading ? (
-              <CircularProgress size={24} />
-            ) : (
-              t('satisfaction_settings.save_button')
-            )}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      
+    <NpsCriterionFormDialog
+        open={openCriterionDialog}
+        onClose={() => {
+          setOpenCriterionDialog(false);
+          setCurrentCriterion(null);
+        }}
+        criterion={currentCriterion}
+        createMutation={createMutation}
+        updateMutation={updateMutation}
+      />
     </Box>
   );
 };

@@ -22,16 +22,10 @@ import {
 } from 'recharts';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useQuery } from 'react-query';
-import axiosInstance from '@/services/axiosInstance';
+import { fetchBenchmarkingData } from '../api/benchmarkingService';
+import MetricCard from '../../Avaliacoes/components/MetricCard';
 
-// API function to fetch benchmarking data
-const fetchBenchmarkingData = async ({ restaurantId, token }) => {
-  const response = await axiosInstance.get(`/dashboard/benchmarking`, {
-    params: { restaurantId },
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
-};
+
 
 const Benchmarking = () => {
   const { t } = useTranslation();
@@ -74,57 +68,22 @@ const Benchmarking = () => {
   const lastYearData = benchmarkingData?.lastYear || {};
 
   // Prepare data for charts
-  const npsChartData = [
-    { name: t('benchmarking.your_nps'), value: yourRestaurantData.avgNpsScore?.toFixed(0) || 0 },
-    { name: t('benchmarking.last_month'), value: lastMonthData.avgNpsScore?.toFixed(0) || 0 },
-    { name: t('benchmarking.last_quarter'), value: lastQuarterData.avgNpsScore?.toFixed(0) || 0 },
-    { name: t('benchmarking.last_year'), value: lastYearData.avgNpsScore?.toFixed(0) || 0 },
-  ];
+  const prepareChartData = (metricKey, formatFn = (val) => val) => {
+    return [
+      { name: t('benchmarking.your_data'), value: formatFn(yourRestaurantData[metricKey]) },
+      { name: t('benchmarking.last_month'), value: formatFn(lastMonthData[metricKey]) },
+      { name: t('benchmarking.last_quarter'), value: formatFn(lastQuarterData[metricKey]) },
+      { name: t('benchmarking.last_year'), value: formatFn(lastYearData[metricKey]) },
+    ];
+  };
 
-  const csatChartData = [
-    { name: t('benchmarking.your_csat'), value: yourRestaurantData.avgRating?.toFixed(2) || 0 },
-    { name: t('benchmarking.last_month'), value: lastMonthData.avgRating?.toFixed(2) || 0 },
-    { name: t('benchmarking.last_quarter'), value: lastQuarterData.avgRating?.toFixed(2) || 0 },
-    { name: t('benchmarking.last_year'), value: lastYearData.avgRating?.toFixed(2) || 0 },
-  ];
-
-  const checkinsChartData = [
-    { name: t('benchmarking.your_checkins'), value: yourRestaurantData.totalCheckins || 0 },
-    { name: t('benchmarking.last_month'), value: lastMonthData.totalCheckins || 0 },
-    { name: t('benchmarking.last_quarter'), value: lastQuarterData.totalCheckins || 0 },
-    { name: t('benchmarking.last_year'), value: lastYearData.totalCheckins || 0 },
-  ];
-
-  const loyaltyPointsChartData = [
-    {
-      name: t('benchmarking.your_loyalty_points'),
-      value: yourRestaurantData.totalLoyaltyPoints || 0,
-    },
-    { name: t('benchmarking.last_month'), value: lastMonthData.totalLoyaltyPoints || 0 },
-    { name: t('benchmarking.last_quarter'), value: lastQuarterData.totalLoyaltyPoints || 0 },
-    { name: t('benchmarking.last_year'), value: lastYearData.totalLoyaltyPoints || 0 },
-  ];
-
-  const totalSpentChartData = [
-    { name: t('benchmarking.your_total_spent'), value: yourRestaurantData.totalSpentOverall || 0 },
-    { name: t('benchmarking.last_month'), value: lastMonthData.totalSpentOverall || 0 },
-    { name: t('benchmarking.last_quarter'), value: lastQuarterData.totalSpentOverall || 0 },
-    { name: t('benchmarking.last_year'), value: lastYearData.totalSpentOverall || 0 },
-  ];
-
-  const engagementRateChartData = [
-    { name: t('benchmarking.your_engagement_rate'), value: yourRestaurantData.engagementRate || 0 },
-    { name: t('benchmarking.last_month'), value: lastMonthData.engagementRate || 0 },
-    { name: t('benchmarking.last_quarter'), value: lastQuarterData.engagementRate || 0 },
-    { name: t('benchmarking.last_year'), value: lastYearData.engagementRate || 0 },
-  ];
-
-  const loyaltyRateChartData = [
-    { name: t('benchmarking.your_loyalty_rate'), value: yourRestaurantData.loyaltyRate || 0 },
-    { name: t('benchmarking.last_month'), value: lastMonthData.loyaltyRate || 0 },
-    { name: t('benchmarking.last_quarter'), value: lastQuarterData.loyaltyRate || 0 },
-    { name: t('benchmarking.last_year'), value: lastYearData.loyaltyRate || 0 },
-  ];
+  const npsChartData = prepareChartData('avgNpsScore', (val) => val?.toFixed(0) || 0);
+  const csatChartData = prepareChartData('avgRating', (val) => val?.toFixed(2) || 0);
+  const checkinsChartData = prepareChartData('totalCheckins', (val) => val || 0);
+  const loyaltyPointsChartData = prepareChartData('totalLoyaltyPoints', (val) => val || 0);
+  const totalSpentChartData = prepareChartData('totalSpentOverall', (val) => val?.toFixed(2) || 0);
+  const engagementRateChartData = prepareChartData('engagementRate', (val) => val?.toFixed(2) || 0);
+  const loyaltyRateChartData = prepareChartData('loyaltyRate', (val) => val?.toFixed(2) || 0);
 
   return (
     <Box sx={{ p: 3 }}>
@@ -134,89 +93,26 @@ const Benchmarking = () => {
 
       <Grid container spacing={3} mb={4}>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('benchmarking.your_nps')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {yourRestaurantData.avgNpsScore?.toFixed(0) || 'N/A'}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('benchmarking.your_nps')} value={yourRestaurantData.avgNpsScore?.toFixed(0) || 'N/A'} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('benchmarking.your_csat')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {yourRestaurantData.avgRating?.toFixed(2) || 'N/A'}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('benchmarking.your_csat')} value={yourRestaurantData.avgRating?.toFixed(2) || 'N/A'} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('benchmarking.your_checkins')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {yourRestaurantData.totalCheckins || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('benchmarking.your_checkins')} value={yourRestaurantData.totalCheckins || 0} />
         </Grid>
         {/* New Loyalty Benchmarking Cards */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('benchmarking.your_loyalty_points')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {yourRestaurantData.totalLoyaltyPoints || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('benchmarking.your_loyalty_points')} value={yourRestaurantData.totalLoyaltyPoints || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('benchmarking.your_total_spent')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {yourRestaurantData.totalSpentOverall?.toFixed(2) || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('benchmarking.your_total_spent')} value={yourRestaurantData.totalSpentOverall?.toFixed(2) || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('benchmarking.your_engagement_rate')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {yourRestaurantData.engagementRate?.toFixed(2) || 0}%
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('benchmarking.your_engagement_rate')} value={`${yourRestaurantData.engagementRate?.toFixed(2) || 0}%`} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('benchmarking.your_loyalty_rate')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {yourRestaurantData.loyaltyRate?.toFixed(2) || 0}%
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('benchmarking.your_loyalty_rate')} value={`${yourRestaurantData.loyaltyRate?.toFixed(2) || 0}%`} />
         </Grid>
       </Grid>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, TextField, FormControlLabel, Switch } from '@mui/material';
 import { Controller } from 'react-hook-form';
+import ToggleSwitchField from './ToggleSwitchField';
 import { useTranslation } from 'react-i18next';
 
 const CheckinLimitPerCycle = ({ control }) => {
@@ -25,20 +26,9 @@ const CheckinLimitPerCycle = ({ control }) => {
           />
         )}
       />
-      <FormControlLabel
-        control={
-          <Controller
-            name="allow_multiple_cycles"
-            control={control}
-            render={({ field }) => (
-              <Switch
-                {...field}
-                checked={field.value}
-                onChange={(e) => field.onChange(e.target.checked)}
-              />
-            )}
-          />
-        }
+      <ToggleSwitchField
+        control={control}
+        name="allow_multiple_cycles"
         label={t('checkin_program.allow_multiple_cycles')}
       />
     </Box>

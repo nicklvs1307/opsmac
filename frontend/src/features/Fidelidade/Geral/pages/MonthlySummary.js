@@ -30,6 +30,8 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { format, subMonths } from 'date-fns';
+import MetricCard from '../../Avaliacoes/components/MetricCard';
+import MetricSelector from '../components/MetricSelector';
 
 const MonthlySummary = () => {
   const { user } = useAuth();
@@ -85,11 +87,14 @@ const MonthlySummary = () => {
     );
   }
 
-  const monthlyTrendData =
-    evolutionData?.map((d) => ({
+  const getMonthlyTrendData = (data, metric, t) => {
+    return data?.map((d) => ({
       name: format(new Date(d.date), 'MMM/yy'),
-      value: d[selectedMetric], // Use selectedMetric here
+      value: d[metric], // Use selectedMetric here
     })) || [];
+  };
+
+  const monthlyTrendData = getMonthlyTrendData(evolutionData, selectedMetric, t);
 
   return (
     <Box sx={{ p: 3 }}>
@@ -99,125 +104,35 @@ const MonthlySummary = () => {
 
       <Grid container spacing={3} mb={4}>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.total_checkins')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.totalCheckins || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.total_checkins')} value={overviewData?.totalCheckins || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.new_customers')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.newCustomers || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.new_customers')} value={overviewData?.newCustomers || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.total_survey_responses')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.totalSurveyResponses || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.total_survey_responses')} value={overviewData?.totalSurveyResponses || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.redeemed_coupons')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.redeemedCoupons || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.redeemed_coupons')} value={overviewData?.redeemedCoupons || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.avg_nps_score')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.avgNpsScore?.toFixed(1) || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.avg_nps_score')} value={overviewData?.avgNpsScore?.toFixed(1) || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.avg_rating')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.avgRating?.toFixed(1) || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.avg_rating')} value={overviewData?.avgRating?.toFixed(1) || 0} />
         </Grid>
         {/* New Loyalty Metrics Cards */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.total_loyalty_points')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.totalLoyaltyPoints?.toFixed(0) || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.total_loyalty_points')} value={overviewData?.totalLoyaltyPoints?.toFixed(0) || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.total_spent_overall')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.totalSpentOverall?.toFixed(2) || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.total_spent_overall')} value={overviewData?.totalSpentOverall?.toFixed(2) || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.engagement_rate')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.engagementRate?.toFixed(2) || 0}%
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.engagement_rate')} value={`${overviewData?.engagementRate?.toFixed(2) || 0}%`} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.loyalty_rate')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {overviewData?.loyaltyRate?.toFixed(2) || 0}%
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.loyalty_rate')} value={`${overviewData?.loyaltyRate?.toFixed(2) || 0}%`} />
         </Grid>
       </Grid>
 
@@ -229,64 +144,19 @@ const MonthlySummary = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.total_rewards')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {rewardsAnalyticsData?.total_rewards || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.total_rewards')} value={rewardsAnalyticsData?.total_rewards || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.active_rewards')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {rewardsAnalyticsData?.active_rewards || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.active_rewards')} value={rewardsAnalyticsData?.active_rewards || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.total_coupons_generated')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {rewardsAnalyticsData?.total_coupons_generated || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.total_coupons_generated')} value={rewardsAnalyticsData?.total_coupons_generated || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.total_coupons_redeemed')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {rewardsAnalyticsData?.total_coupons_redeemed || 0}
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.total_coupons_redeemed')} value={rewardsAnalyticsData?.total_coupons_redeemed || 0} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
-            <CardContent>
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {t('monthly_summary.redemption_rate')}
-              </Typography>
-              <Typography variant="h4" component="div">
-                {rewardsAnalyticsData?.redemption_rate?.toFixed(2) || 0}%
-              </Typography>
-            </CardContent>
-          </Card>
+          <MetricCard title={t('monthly_summary.redemption_rate')} value={`${rewardsAnalyticsData?.redemption_rate?.toFixed(2) || 0}%`} />
         </Grid>
         {/* Rewards by Type (example, can be a chart) */}
         <Grid item xs={12}>
@@ -315,25 +185,10 @@ const MonthlySummary = () => {
         <Typography variant="h6" gutterBottom>
           {t('monthly_summary.monthly_trend')}
         </Typography>
-        <FormControl fullWidth sx={{ mb: 3 }}>
-          <InputLabel>{t('monthly_summary.select_metric')}</InputLabel>
-          <Select
-            value={selectedMetric}
-            label={t('monthly_summary.select_metric')}
-            onChange={(e) => setSelectedMetric(e.target.value)}
-          >
-            <MenuItem value="checkins">{t('monthly_summary.total_checkins')}</MenuItem>
-            <MenuItem value="newCustomers">{t('monthly_summary.new_customers')}</MenuItem>
-            <MenuItem value="surveys">{t('monthly_summary.total_survey_responses')}</MenuItem>
-            <MenuItem value="coupons">{t('monthly_summary.redeemed_coupons')}</MenuItem>
-            <MenuItem value="nps">{t('monthly_summary.avg_nps_score')}</MenuItem>
-            <MenuItem value="csat">{t('monthly_summary.avg_rating')}</MenuItem>
-            <MenuItem value="loyaltyPoints">{t('monthly_summary.total_loyalty_points')}</MenuItem>
-            <MenuItem value="totalSpent">{t('monthly_summary.total_spent_overall')}</MenuItem>
-            <MenuItem value="engagementRate">{t('monthly_summary.engagement_rate')}</MenuItem>
-            <MenuItem value="loyaltyRate">{t('monthly_summary.loyalty_rate')}</MenuItem>
-          </Select>
-        </FormControl>
+        <MetricSelector
+          selectedMetric={selectedMetric}
+          onMetricChange={(e) => setSelectedMetric(e.target.value)}
+        />
         <ResponsiveContainer width="100%" height={300}>
           <LineChart
             data={monthlyTrendData}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Grid, TextField, FormControlLabel, Switch } from '@mui/material';
 import { Controller } from 'react-hook-form';
+import ToggleSwitchField from './ToggleSwitchField';
 import { useTranslation } from 'react-i18next';
 
 const CheckinCycleSettings = ({ control }) => {
@@ -44,36 +45,14 @@ const CheckinCycleSettings = ({ control }) => {
           />
         </Grid>
       </Grid>
-      <FormControlLabel
-        control={
-          <Controller
-            name="enable_ranking"
-            control={control}
-            render={({ field }) => (
-              <Switch
-                {...field}
-                checked={field.value}
-                onChange={(e) => field.onChange(e.target.checked)}
-              />
-            )}
-          />
-        }
+      <ToggleSwitchField
+        control={control}
+        name="enable_ranking"
         label={t('checkin_program.enable_ranking')}
       />
-      <FormControlLabel
-        control={
-          <Controller
-            name="enable_level_progression"
-            control={control}
-            render={({ field }) => (
-              <Switch
-                {...field}
-                checked={field.value}
-                onChange={(e) => field.onChange(e.target.checked)}
-              />
-            )}
-          />
-        }
+      <ToggleSwitchField
+        control={control}
+        name="enable_level_progression"
         label={t('checkin_program.enable_level_progression')}
       />
     </Box>

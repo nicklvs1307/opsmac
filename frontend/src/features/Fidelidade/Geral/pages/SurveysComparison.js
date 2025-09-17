@@ -33,13 +33,23 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import SurveyMultiSelect from '../components/SurveyMultiSelect';
+import ComparisonMetricsTable from '../components/ComparisonMetricsTable';
 
 const SurveysComparison = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const [selectedSurveyIds, setSelectedSurveyIds] = useState([]);
+  const methods = useForm({
+    defaultValues: {
+      selectedSurveyIds: [],
+    },
+  });
+
+  const { control, watch, setValue } = methods;
+
+  const selectedSurveyIds = watch('selectedSurveyIds');
 
   const {
     data: surveysData,
@@ -53,7 +63,7 @@ const SurveysComparison = () => {
   } = useSurveysComparisonAnalytics(restaurantId, selectedSurveyIds);
 
   const handleSurveySelect = (event) => {
-    setSelectedSurveyIds(event.target.value);
+    setValue('selectedSurveyIds', event.target.value);
   };
 
   if (isLoadingSurveys || isLoadingComparison) {
@@ -75,43 +85,17 @@ const SurveysComparison = () => {
   const surveys = surveysData || [];
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        {t('fidelity_general.surveys_comparison_title')}
-      </Typography>
+    <FormProvider {...methods}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          {t('fidelity_general.surveys_comparison_title')}
+        </Typography>
 
-      <Paper sx={{ p: 3, mb: 3 }}>
-        <FormControl fullWidth>
-          <InputLabel id="select-surveys-label">
-            {t('surveys_comparison.select_surveys')}
-          </InputLabel>
-          <Select
-            labelId="select-surveys-label"
-            multiple
-            value={selectedSurveyIds}
-            onChange={handleSurveySelect}
-            input={
-              <OutlinedInput
-                id="select-multiple-chip"
-                label={t('surveys_comparison.select_surveys')}
-              />
-            }
-            renderValue={(selected) => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                {selected.map((value) => (
-                  <Chip key={value} label={surveys.find((s) => s.id === value)?.title || value} />
-                ))}
-              </Box>
-            )}
-          >
-            {surveys.map((survey) => (
-              <MenuItem key={survey.id} value={survey.id}>
-                {survey.title}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Paper>
+      <SurveyMultiSelect
+        control={control}
+        surveys={surveys}
+        handleSurveySelect={handleSurveySelect}
+      />
 
       {selectedSurveyIds.length > 0 && comparisonData && comparisonData.length > 0 ? (
         <Grid container spacing={3}>
@@ -150,33 +134,7 @@ const SurveysComparison = () => {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <Paper elevation={3} sx={{ p: 3 }}>
-              <Typography variant="h6" gutterBottom>
-                {t('surveys_comparison.metrics_table')}
-              </Typography>
-              <TableContainer>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>{t('surveys_comparison.survey_title')}</TableCell>
-                      <TableCell>{t('surveys_comparison.total_responses')}</TableCell>
-                      <TableCell>{t('surveys_comparison.average_nps')}</TableCell>
-                      <TableCell>{t('surveys_comparison.average_csat')}</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {comparisonData.map((data) => (
-                      <TableRow key={data.surveyId}>
-                        <TableCell>{data.title}</TableCell>
-                        <TableCell>{data.totalResponses}</TableCell>
-                        <TableCell>{data.averageNps?.toFixed(1) || 'N/A'}</TableCell>
-                        <TableCell>{data.averageCsat?.toFixed(1) || 'N/A'}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Paper>
+            <ComparisonMetricsTable comparisonData={comparisonData} />
           </Grid>
         </Grid>
       ) : selectedSurveyIds.length > 0 && comparisonData && comparisonData.length === 0 ? (
@@ -185,6 +143,7 @@ const SurveysComparison = () => {
         <Alert severity="info">{t('surveys_comparison.select_surveys_to_compare')}</Alert>
       )}
     </Box>
+    </FormProvider>
   );
 };
 

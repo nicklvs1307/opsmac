@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { useSurveys } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
 import { useQuestionAnswersDistribution } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import SurveyQuestionSelector from '../components/SurveyQuestionSelector';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF1957'];
 
@@ -23,8 +24,17 @@ const MultipleChoice = () => {
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const [selectedSurveyId, setSelectedSurveyId] = useState('');
-  const [selectedQuestionId, setSelectedQuestionId] = useState('');
+  const methods = useForm({
+    defaultValues: {
+      selectedSurveyId: '',
+      selectedQuestionId: '',
+    },
+  });
+
+  const { control, watch, setValue } = methods;
+
+  const selectedSurveyId = watch('selectedSurveyId');
+  const selectedQuestionId = watch('selectedQuestionId');
 
   const {
     data: surveysData,
@@ -52,12 +62,12 @@ const MultipleChoice = () => {
   } = useQuestionAnswersDistribution(selectedSurveyId, selectedQuestionId);
 
   const handleSurveyChange = (event) => {
-    setSelectedSurveyId(event.target.value);
-    setSelectedQuestionId(''); // Reset question when survey changes
+    setValue('selectedSurveyId', event.target.value);
+    setValue('selectedQuestionId', ''); // Reset question when survey changes
   };
 
   const handleQuestionChange = (event) => {
-    setSelectedQuestionId(event.target.value);
+    setValue('selectedQuestionId', event.target.value);
   };
 
   if (isLoadingSurveys) {
@@ -76,61 +86,33 @@ const MultipleChoice = () => {
     );
   }
 
-  const chartData = distributionData?.distribution
-    ? Object.entries(distributionData.distribution).map(([name, value]) => ({
-        name,
-        value,
-      }))
-    : [];
+  const prepareChartData = (distribution) => {
+    return distribution
+      ? Object.entries(distribution).map(([name, value]) => ({
+          name,
+          value,
+        }))
+      : [];
+  };
+
+  const chartData = prepareChartData(distributionData?.distribution);
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        {t('fidelity_general.multiple_choice_analysis_title')}
-      </Typography>
+    <FormProvider {...methods}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          {t('fidelity_general.multiple_choice_analysis_title')}
+        </Typography>
 
-      <Paper sx={{ p: 3, mb: 3 }}>
-        <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel id="select-survey-label">{t('multiple_choice.select_survey')}</InputLabel>
-          <Select
-            labelId="select-survey-label"
-            value={selectedSurveyId}
-            onChange={handleSurveyChange}
-            label={t('multiple_choice.select_survey')}
-          >
-            {surveysData?.map((survey) => (
-              <MenuItem key={survey.id} value={survey.id}>
-                {survey.title}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        {selectedSurveyId && (
-          <FormControl fullWidth>
-            <InputLabel id="select-question-label">
-              {t('multiple_choice.select_question')}
-            </InputLabel>
-            <Select
-              labelId="select-question-label"
-              value={selectedQuestionId}
-              onChange={handleQuestionChange}
-              label={t('multiple_choice.select_question')}
-              disabled={multipleChoiceQuestions.length === 0}
-            >
-              {multipleChoiceQuestions.length > 0 ? (
-                multipleChoiceQuestions.map((question) => (
-                  <MenuItem key={question.id} value={question.id}>
-                    {question.question_text}
-                  </MenuItem>
-                ))
-              ) : (
-                <MenuItem disabled>{t('multiple_choice.no_multiple_choice_questions')}</MenuItem>
-              )}
-            </Select>
-          </FormControl>
-        )}
-      </Paper>
+      <SurveyQuestionSelector
+        control={control}
+        surveysData={surveysData}
+        isLoadingSurveys={isLoadingSurveys}
+        selectedSurveyId={selectedSurveyId}
+        multipleChoiceQuestions={multipleChoiceQuestions}
+        handleSurveyChange={handleSurveyChange}
+        handleQuestionChange={handleQuestionChange}
+      />
 
       {selectedQuestionId && isLoadingDistribution ? (
         <Box display="flex" justifyContent="center" alignItems="center" minHeight="300px">
@@ -172,6 +154,7 @@ const MultipleChoice = () => {
         <Alert severity="info">{t('multiple_choice.select_question_to_view_distribution')}</Alert>
       )}
     </Box>
+    </FormProvider>
   );
 };
 

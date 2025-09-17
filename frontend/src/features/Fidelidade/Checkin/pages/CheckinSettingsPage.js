@@ -56,7 +56,7 @@ const CheckinSettingsPage = () => {
   const updateSettingsMutation = useUpdateCheckinSettings();
   const updateProfileMutation = useUpdateRestaurantProfile();
 
-  const [checkinQRCode, setCheckinQRCode] = useState(null);
+  
 
   const {
     control,
@@ -85,20 +85,7 @@ const CheckinSettingsPage = () => {
 
   const { downloadQRCode } = useQRCodeDownload();
 
-  useEffect(() => {
-    if (settingsData) {
-      const { settings, slug } = settingsData;
-      const checkinProgramSettings = settings?.checkin_program_settings || {};
-      reset({ ...checkinProgramSettings, restaurant_slug: slug });
-
-      if (slug) {
-        const checkinUrl = `${window.location.origin}/checkin/public/${slug}`;
-        setCheckinQRCode({ url: checkinUrl });
-      } else {
-        setCheckinQRCode(null);
-      }
-    }
-  }, [settingsData, reset]);
+  
 
   const onSave = (data) => {
     if (!restaurantId) {
@@ -220,22 +207,22 @@ const CheckinSettingsPage = () => {
           <Card>
             <CardHeader title={t('checkin_program.qr_code_title')} />
             <CardContent>
-              {checkinQRCode ? (
+              {settingsData?.slug ? (
                 <Box textAlign="center">
-                  <QRCode value={checkinQRCode.url} size={200} />
+                  <QRCode value={`${window.location.origin}/checkin/public/${settingsData.slug}`} size={200} />
                   <Typography variant="caption" display="block" mt={2}>
-                    {checkinQRCode.url}
+                    {`${window.location.origin}/checkin/public/${settingsData.slug}`}
                   </Typography>
                   <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center', gap: 1 }}>
                     <Button
                       variant="outlined"
-                      onClick={() => navigator.clipboard.writeText(checkinQRCode.url)}
+                      onClick={() => navigator.clipboard.writeText(`${window.location.origin}/checkin/public/${settingsData.slug}`)}
                     >
                       {t('checkin_program.copy_link_button')}
                     </Button>
                     <Button
                       variant="contained"
-                      onClick={() => downloadQRCode(checkinQRCode.url)}
+                      onClick={() => downloadQRCode(`${window.location.origin}/checkin/public/${settingsData.slug}`)}
                     >
                       {t('checkin_program.download_qr_code_button')}
                     </Button>

@@ -36,6 +36,8 @@ import {
   useDeleteSurvey,
   useUpdateSurveyStatus,
 } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
+import QrCodeModal from '../components/QrCodeModal';
+import SurveyTable from '../components/SurveyTable';
 
 const SurveyList = () => {
   const { t } = useTranslation();
@@ -63,13 +65,20 @@ const SurveyList = () => {
     }
   };
 
+  const getPublicSurveyLink = (restaurantSlug, surveySlug) => {
+    if (!restaurantSlug) {
+      return null;
+    }
+    return `${window.location.origin}/public/surveys/${restaurantSlug}/${surveySlug}`;
+  };
+
   const handleCopyLink = (surveySlug) => {
     const restaurantSlug = user?.restaurants?.[0]?.slug;
-    if (!restaurantSlug) {
+    const publicLink = getPublicSurveyLink(restaurantSlug, surveySlug);
+    if (!publicLink) {
       toast.error(t('survey_list.restaurant_slug_not_found'));
       return;
     }
-    const publicLink = `${window.location.origin}/public/surveys/${restaurantSlug}/${surveySlug}`;
     navigator.clipboard
       .writeText(publicLink)
       .then(() => toast.success(t('survey_list.copy_link_success')))
@@ -78,11 +87,11 @@ const SurveyList = () => {
 
   const handleGenerateQrCode = (surveySlug) => {
     const restaurantSlug = user?.restaurants?.[0]?.slug;
-    if (!restaurantSlug) {
+    const publicLink = getPublicSurveyLink(restaurantSlug, surveySlug);
+    if (!publicLink) {
       toast.error(t('survey_list.restaurant_slug_not_found'));
       return;
     }
-    const publicLink = `${window.location.origin}/public/surveys/${restaurantSlug}/${surveySlug}`;
     setQrCodeValue(publicLink);
     setQrModalOpen(true);
   };
@@ -151,115 +160,22 @@ const SurveyList = () => {
             {t('common.error_loading_surveys')}: {error.message}
           </Alert>
         ) : (
-          <TableContainer sx={{ overflowX: 'auto' }}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>{t('survey_list.table_header_title')}</TableCell>
-                  <TableCell>{t('survey_list.table_header_type')}</TableCell>
-                  <TableCell>{t('survey_list.table_header_status')}</TableCell>
-                  <TableCell align="right">{t('survey_list.table_header_actions')}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {surveys?.length === 0 ? (
-                  <TableRow>
-                    <TableCell colSpan={4} align="center">
-                      {t('survey_list.no_surveys_found')}
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  surveys?.map((survey) => (
-                    <TableRow key={survey.id}>
-                      <TableCell>{survey.title}</TableCell>
-                      <TableCell>{survey.type}</TableCell>
-                      <TableCell>{survey.status}</TableCell>
-                      <TableCell align="right">
-                        <Box sx={{ display: 'flex', gap: 0.5, justifyContent: 'flex-end' }}>
-                          <IconButton
-                            component={RouterLink}
-                            to={`/fidelity/surveys/${survey.id}/results`}
-                            color="primary"
-                            aria-label={t('survey_list.view_results_aria_label')}
-                          >
-                            <BarChartIcon />
-                          </IconButton>
-                          <IconButton
-                            component={RouterLink}
-                            to={`/fidelity/surveys/edit/${survey.id}`}
-                            color="info"
-                            aria-label={t('survey_list.edit_survey_aria_label')}
-                          >
-                            <EditIcon />
-                          </IconButton>
-                          <IconButton
-                            color={survey.status === 'active' ? 'success' : 'default'}
-                            aria-label={t('survey_list.toggle_status_aria_label')}
-                            onClick={() => handleToggleStatus(survey.id, survey.status)}
-                            disabled={updateStatusMutation.isLoading}
-                          >
-                            {survey.status === 'active' ? <ToggleOnIcon /> : <ToggleOffIcon />}
-                          </IconButton>
-                          <IconButton
-                            color="secondary"
-                            aria-label={t('survey_list.generate_qr_code_aria_label')}
-                            onClick={() => handleGenerateQrCode(survey.slug)}
-                          >
-                            <QrCodeIcon />
-                          </IconButton>
-                          <IconButton
-                            color="default"
-                            aria-label={t('survey_list.copy_link_aria_label')}
-                            onClick={() => handleCopyLink(survey.slug)}
-                          >
-                            <ContentCopyIcon />
-                          </IconButton>
-                          <IconButton
-                            color="error"
-                            aria-label={t('survey_list.delete_survey_aria_label')}
-                            onClick={() => handleDelete(survey.id)}
-                            disabled={deleteMutation.isLoading}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <SurveyTable
+            surveys={surveys}
+            handleToggleStatus={handleToggleStatus}
+            handleDelete={handleDelete}
+            handleGenerateQrCode={handleGenerateQrCode}
+            handleCopyLink={handleCopyLink}
+            deleteMutation={deleteMutation}
+            updateStatusMutation={updateStatusMutation}
+          />
+        )}
+          
         )}
       </Paper>
 
-      {isQrModalOpen && (
-        <Box
-          sx={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 1300,
-          }}
-          onClick={() => setQrModalOpen(false)}
-        >
-          <Paper
-            sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
-          >
-            <Typography variant="h6">{t('survey_list.qr_code_modal_title')}</Typography>
-            <QRCode value={qrCodeValue} size={256} />
-            <Button variant="contained" onClick={() => setQrModalOpen(false)}>
-              {t('common.close')}
-            </Button>
-          </Paper>
-        </Box>
-      )}
+      
+    <QrCodeModal isOpen={isQrModalOpen} onClose={() => setQrModalOpen(false)} qrCodeValue={qrCodeValue} />
     </Box>
   );
 };

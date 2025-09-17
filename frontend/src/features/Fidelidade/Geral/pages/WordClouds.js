@@ -18,18 +18,25 @@ import { useTranslation } from 'react-i18next';
 import { useFeedbackWordFrequency } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService';
 import { useSurveys } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
 import { WordCloud } from '@isoterik/react-word-cloud'; // Changed import
+import WordCloudFilters from '../components/WordCloudFilters';
 
 const WordClouds = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const [filters, setFilters] = useState({
-    startDate: '',
-    endDate: '',
-    feedbackType: '',
-    surveyId: '',
+  const methods = useForm({
+    defaultValues: {
+      startDate: '',
+      endDate: '',
+      feedbackType: '',
+      surveyId: '',
+    },
   });
+
+  const { control, watch, setValue } = methods;
+
+  const filters = watch(); // Watch all fields to pass to useFeedbackWordFrequency
 
   const { data: surveysData, isLoading: isLoadingSurveys } = useSurveys(restaurantId);
 
@@ -40,14 +47,11 @@ const WordClouds = () => {
   } = useFeedbackWordFrequency(restaurantId, filters);
 
   const handleFilterChange = (event) => {
-    setFilters({
-      ...filters,
-      [event.target.name]: event.target.value,
-    });
+    setValue(event.target.name, event.target.value);
   };
 
   const handleClearFilters = () => {
-    setFilters({
+    reset({
       startDate: '',
       endDate: '',
       feedbackType: '',
@@ -73,89 +77,25 @@ const WordClouds = () => {
     );
   }
 
-  const words =
-    wordFrequencyData?.map((item) => ({ text: item.word, value: item.frequency })) || [];
+  const prepareWordCloudData = (data) => {
+    return data?.map((item) => ({ text: item.word, value: item.frequency })) || [];
+  };
+
+  const words = prepareWordCloudData(wordFrequencyData);
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        {t('fidelity_general.word_clouds_title')}
-      </Typography>
-
-      <Paper sx={{ p: 3, mb: 3 }}>
-        <Typography variant="h6" gutterBottom>
-          {t('common.filters')}
+    <FormProvider {...methods}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          {t('fidelity_general.word_clouds_title')}
         </Typography>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              label={t('feedback_list.visit_date_label') + ' (Início)'}
-              type="date"
-              name="startDate"
-              value={filters.startDate}
-              onChange={handleFilterChange}
-              fullWidth
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              label={t('feedback_list.visit_date_label') + ' (Fim)'}
-              type="date"
-              name="endDate"
-              value={filters.endDate}
-              onChange={handleFilterChange}
-              fullWidth
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <FormControl fullWidth>
-              <InputLabel>{t('feedback_list.type_label')}</InputLabel>
-              <Select
-                name="feedbackType"
-                value={filters.feedbackType}
-                onChange={handleFilterChange}
-                label={t('feedback_list.type_label')}
-              >
-                <MenuItem value="">{t('feedback_list.all_types')}</MenuItem>
-                {feedbackTypes.map((type) => (
-                  <MenuItem key={type.value} value={type.value}>
-                    {type.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <FormControl fullWidth>
-              <InputLabel>{t('survey_list.title')}</InputLabel>
-              <Select
-                name="surveyId"
-                value={filters.surveyId}
-                onChange={handleFilterChange}
-                label={t('survey_list.title')}
-              >
-                <MenuItem value="">{t('common.all')}</MenuItem>
-                {surveysData?.map((survey) => (
-                  <MenuItem key={survey.id} value={survey.id}>
-                    {survey.title}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} display="flex" justifyContent="flex-end">
-            <Button variant="outlined" onClick={handleClearFilters}>
-              {t('common.clear_filters')}
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
+
+      <WordCloudFilters
+        control={control}
+        surveysData={surveysData}
+        handleFilterChange={handleFilterChange}
+        handleClearFilters={handleClearFilters}
+      />
 
       {isLoadingWordFrequency ? (
         <Box display="flex" justifyContent="center" alignItems="center" minHeight="300px">
@@ -180,6 +120,7 @@ const WordClouds = () => {
         <Alert severity="info">{t('word_clouds.no_data_to_display')}</Alert>
       )}
     </Box>
+    </FormProvider>
   );
 };
 

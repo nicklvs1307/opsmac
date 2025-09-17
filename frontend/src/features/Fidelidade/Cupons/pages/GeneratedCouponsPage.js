@@ -23,16 +23,12 @@ import { Search as SearchIcon } from '@mui/icons-material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
-import axiosInstance from '@/services/axiosInstance';
+import { fetchCoupons } from '../api/couponService';
+import { useForm, FormProvider } from 'react-hook-form';
+import CouponFilters from '../components/CouponFilters';
+import CouponTable from '../components/CouponTable';
 
-// API Functions
-const fetchCoupons = async ({ restaurantId, page, limit, search, status, rewardType, token }) => {
-  const response = await axiosInstance.get(`/rewards/coupons`, {
-    params: { restaurantId, page, limit, search, status, rewardType },
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data; // Assuming the API returns { coupons: [...], pagination: {...} }
-};
+
 
 const GeneratedCouponsPage = () => {
   const { t } = useTranslation();
@@ -40,11 +36,23 @@ const GeneratedCouponsPage = () => {
   const restaurantId = user?.restaurants?.[0]?.id;
   const token = user?.token;
 
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [search, setSearch] = useState('');
-  const [status, setStatus] = useState('');
-  const [rewardType, setRewardType] = useState('');
+  const methods = useForm({
+    defaultValues: {
+      page: 1,
+      limit: 10,
+      search: '',
+      status: '',
+      rewardType: '',
+    },
+  });
+
+  const { control, watch, setValue } = methods;
+
+  const page = watch('page');
+  const limit = watch('limit');
+  const search = watch('search');
+  const status = watch('status');
+  const rewardType = watch('rewardType');
 
   const {
     data: couponsData,
@@ -61,22 +69,22 @@ const GeneratedCouponsPage = () => {
   );
 
   const handlePageChange = (event, value) => {
-    setPage(value);
+    setValue('page', value);
   };
 
   const handleSearchChange = (event) => {
-    setSearch(event.target.value);
-    setPage(1); // Reset page when search changes
+    setValue('search', event.target.value);
+    setValue('page', 1); // Reset page when search changes
   };
 
   const handleStatusChange = (event) => {
-    setStatus(event.target.value);
-    setPage(1);
+    setValue('status', event.target.value);
+    setValue('page', 1);
   };
 
   const handleRewardTypeChange = (event) => {
-    setRewardType(event.target.value);
-    setPage(1);
+    setValue('rewardType', event.target.value);
+    setValue('page', 1);
   };
 
   if (isLoading) {
@@ -99,106 +107,20 @@ const GeneratedCouponsPage = () => {
   const pagination = couponsData?.pagination || {};
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        {t('generated_coupons.title')}
-      </Typography>
+    <FormProvider {...methods}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          {t('generated_coupons.title')}
+        </Typography>
 
-      <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
-        <Box display="flex" gap={2} flexWrap="wrap">
-          <TextField
-            label={t('generated_coupons.search_placeholder')}
-            variant="outlined"
-            size="small"
-            value={search}
-            onChange={handleSearchChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <FormControl size="small" sx={{ minWidth: 120 }}>
-            <InputLabel>{t('generated_coupons.status_filter')}</InputLabel>
-            <Select
-              value={status}
-              label={t('generated_coupons.status_filter')}
-              onChange={handleStatusChange}
-            >
-              <MenuItem value="">{t('common.all')}</MenuItem>
-              <MenuItem value="active">{t('generated_coupons.status_active')}</MenuItem>
-              <MenuItem value="used">{t('generated_coupons.status_used')}</MenuItem>
-              <MenuItem value="expired">{t('generated_coupons.status_expired')}</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl size="small" sx={{ minWidth: 150 }}>
-            <InputLabel>{t('generated_coupons.reward_type_filter')}</InputLabel>
-            <Select
-              value={rewardType}
-              label={t('generated_coupons.reward_type_filter')}
-              onChange={handleRewardTypeChange}
-            >
-              <MenuItem value="">{t('common.all')}</MenuItem>
-              <MenuItem value="discount">{t('reward_management.form.type_discount')}</MenuItem>
-              <MenuItem value="free_item">{t('reward_management.form.type_free_item')}</MenuItem>
-              <MenuItem value="spin_the_wheel">
-                {t('reward_management.form.type_spin_the_wheel')}
-              </MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Paper>
+      <CouponFilters
+        control={control}
+        onSearchChange={handleSearchChange}
+        onStatusChange={handleStatusChange}
+        onRewardTypeChange={handleRewardTypeChange}
+      />
 
-      <TableContainer component={Paper} elevation={3}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>{t('generated_coupons.table_header.code')}</TableCell>
-              <TableCell>{t('generated_coupons.table_header.customer')}</TableCell>
-              <TableCell>{t('generated_coupons.table_header.reward_title')}</TableCell>
-              <TableCell>{t('generated_coupons.table_header.value')}</TableCell>
-              <TableCell>{t('generated_coupons.table_header.type')}</TableCell>
-              <TableCell>{t('generated_coupons.table_header.status')}</TableCell>
-              <TableCell>{t('generated_coupons.table_header.expires_at')}</TableCell>
-              <TableCell>{t('generated_coupons.table_header.generated_at')}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {coupons.length > 0 ? (
-              coupons.map((coupon) => (
-                <TableRow key={coupon.id}>
-                  <TableCell>
-                    <strong>{coupon.code}</strong>
-                  </TableCell>
-                  <TableCell>
-                    {coupon.customer ? coupon.customer.name : t('common.anonymous')}
-                  </TableCell>
-                  <TableCell>
-                    {coupon.reward ? coupon.reward.title : t('generated_coupons.no_reward_title')}
-                  </TableCell>
-                  <TableCell>{coupon.value}</TableCell>
-                  <TableCell>{coupon.reward_type}</TableCell>
-                  <TableCell>{t(`generated_coupons.status_${coupon.status}`)}</TableCell>
-                  <TableCell>
-                    {coupon.expires_at
-                      ? new Date(coupon.expires_at).toLocaleDateString()
-                      : t('common.never')}
-                  </TableCell>
-                  <TableCell>{new Date(coupon.createdAt).toLocaleDateString()}</TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={8} align="center">
-                  {t('generated_coupons.no_coupons_found')}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <CouponTable coupons={coupons} />
 
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
         <Pagination
@@ -209,6 +131,7 @@ const GeneratedCouponsPage = () => {
         />
       </Box>
     </Box>
+    </FormProvider>
   );
 };
 

@@ -27,16 +27,28 @@ import {
   Legend,
 } from 'recharts';
 import { format, subMonths } from 'date-fns';
+import EvolutionFilters from '../components/EvolutionFilters';
 
 const Evolution = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const restaurantId = user?.restaurants?.[0]?.id;
 
-  const [startDate, setStartDate] = useState(format(subMonths(new Date(), 6), 'yyyy-MM-dd'));
-  const [endDate, setEndDate] = useState(format(new Date(), 'yyyy-MM-dd'));
-  const [granularity, setGranularity] = useState('month'); // Default to month
-  const [selectedMetrics, setSelectedMetrics] = useState(['checkins']);
+  const methods = useForm({
+    defaultValues: {
+      startDate: format(subMonths(new Date(), 6), 'yyyy-MM-dd'),
+      endDate: format(new Date(), 'yyyy-MM-dd'),
+      granularity: 'month',
+      selectedMetrics: ['checkins'],
+    },
+  });
+
+  const { control, watch, setValue } = methods;
+
+  const startDate = watch('startDate');
+  const endDate = watch('endDate');
+  const granularity = watch('granularity');
+  const selectedMetrics = watch('selectedMetrics');
 
   const {
     data: evolutionData,
@@ -48,6 +60,34 @@ const Evolution = () => {
     end_date: endDate,
     granularity,
   });
+};
+
+const renderMetricLines = (selectedMetrics, t) => {
+  const metricsConfig = [
+    { key: 'checkins', color: '#8884d8', name: t('evolution.checkins') },
+    { key: 'newCustomers', color: '#82ca9d', name: t('evolution.new_customers') },
+    { key: 'surveys', color: '#ffc658', name: t('evolution.total_survey_responses') },
+    { key: 'coupons', color: '#ff7300', name: t('evolution.redeemed_coupons') },
+    { key: 'nps', color: '#0088FE', name: t('evolution.nps_score') },
+    { key: 'csat', color: '#00C49F', name: t('evolution.csat_score') },
+    { key: 'loyaltyPoints', color: '#FFBB28', name: t('evolution.total_loyalty_points') },
+    { key: 'totalSpent', color: '#FF8042', name: t('evolution.total_spent_overall') },
+    { key: 'engagementRate', color: '#AF19FF', name: t('evolution.engagement_rate') },
+    { key: 'loyaltyRate', color: '#FF19FF', name: t('evolution.loyalty_rate') },
+  ];
+
+  return metricsConfig
+    .filter((metric) => selectedMetrics.includes(metric.key))
+    .map((metric) => (
+      <Line
+        key={metric.key}
+        type="monotone"
+        dataKey={metric.key}
+        stroke={metric.color}
+        name={metric.name}
+      />
+    ));
+};
 
   if (isLoading) {
     return (
@@ -68,87 +108,13 @@ const Evolution = () => {
   const transformedData = evolutionData || [];
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        {t('fidelity_general.evolution_title')}
-      </Typography>
+    <FormProvider {...methods}>
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          {t('fidelity_general.evolution_title')}
+        </Typography>
 
-      <Paper sx={{ p: 3, mb: 3 }}>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} md={3}>
-            {' '}
-            {/* Changed md from 4 to 3 to make space for granularity */}
-            <TextField
-              label={t('evolution.start_date')}
-              type="date"
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            {' '}
-            {/* Changed md from 4 to 3 */}
-            <TextField
-              label={t('evolution.end_date')}
-              type="date"
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            {' '}
-            {/* New Grid item for granularity */}
-            <FormControl fullWidth>
-              <InputLabel>{t('evolution.granularity')}</InputLabel>
-              <Select
-                value={granularity}
-                label={t('evolution.granularity')}
-                onChange={(e) => setGranularity(e.target.value)}
-              >
-                <MenuItem value="day">{t('evolution.day')}</MenuItem>
-                <MenuItem value="week">{t('evolution.week')}</MenuItem>
-                <MenuItem value="month">{t('evolution.month')}</MenuItem>
-                <MenuItem value="year">{t('evolution.year')}</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            {' '}
-            {/* Changed md from 4 to 3 */}
-            <Button variant="contained" fullWidth>
-              {t('evolution.apply_filters')}
-            </Button>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: 2 }}>
-            <InputLabel>{t('evolution.select_metrics')}</InputLabel>
-            <Select
-              multiple
-              value={selectedMetrics}
-              onChange={(e) => setSelectedMetrics(e.target.value)}
-              renderValue={(selected) =>
-                selected.map((metric) => t(`evolution.${metric}`)).join(', ')
-              }
-            >
-              <MenuItem value="checkins">{t('evolution.checkins')}</MenuItem>
-              <MenuItem value="newCustomers">{t('evolution.new_customers')}</MenuItem>
-              <MenuItem value="surveys">{t('evolution.total_survey_responses')}</MenuItem>
-              <MenuItem value="coupons">{t('evolution.redeemed_coupons')}</MenuItem>
-              <MenuItem value="nps">{t('evolution.nps_score')}</MenuItem>
-              <MenuItem value="csat">{t('evolution.csat_score')}</MenuItem>
-              <MenuItem value="loyaltyPoints">{t('evolution.total_loyalty_points')}</MenuItem>
-              <MenuItem value="totalSpent">{t('evolution.total_spent_overall')}</MenuItem>
-              <MenuItem value="engagementRate">{t('evolution.engagement_rate')}</MenuItem>
-              <MenuItem value="loyaltyRate">{t('evolution.loyalty_rate')}</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-      </Paper>
+      <EvolutionFilters control={control} onApplyFilters={() => { /* Lógica de aplicação de filtros já está no useEvolutionAnalytics */ }} />
 
       <Grid container spacing={3}>
         <Grid item xs={12}>
@@ -163,92 +129,14 @@ const Evolution = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                {selectedMetrics.includes('checkins') && (
-                  <Line
-                    type="monotone"
-                    dataKey="checkins"
-                    stroke="#8884d8"
-                    name={t('evolution.checkins')}
-                  />
-                )}
-                {selectedMetrics.includes('newCustomers') && (
-                  <Line
-                    type="monotone"
-                    dataKey="newCustomers"
-                    stroke="#82ca9d"
-                    name={t('evolution.new_customers')}
-                  />
-                )}
-                {selectedMetrics.includes('surveys') && (
-                  <Line
-                    type="monotone"
-                    dataKey="surveys"
-                    stroke="#ffc658"
-                    name={t('evolution.total_survey_responses')}
-                  />
-                )}
-                {selectedMetrics.includes('coupons') && (
-                  <Line
-                    type="monotone"
-                    dataKey="coupons"
-                    stroke="#ff7300"
-                    name={t('evolution.redeemed_coupons')}
-                  />
-                )}
-                {selectedMetrics.includes('nps') && (
-                  <Line
-                    type="monotone"
-                    dataKey="nps"
-                    stroke="#0088FE"
-                    name={t('evolution.nps_score')}
-                  />
-                )}
-                {selectedMetrics.includes('csat') && (
-                  <Line
-                    type="monotone"
-                    dataKey="csat"
-                    stroke="#00C49F"
-                    name={t('evolution.csat_score')}
-                  />
-                )}
-                {selectedMetrics.includes('loyaltyPoints') && (
-                  <Line
-                    type="monotone"
-                    dataKey="loyaltyPoints"
-                    stroke="#FFBB28"
-                    name={t('evolution.total_loyalty_points')}
-                  />
-                )}
-                {selectedMetrics.includes('totalSpent') && (
-                  <Line
-                    type="monotone"
-                    dataKey="totalSpent"
-                    stroke="#FF8042"
-                    name={t('evolution.total_spent_overall')}
-                  />
-                )}
-                {selectedMetrics.includes('engagementRate') && (
-                  <Line
-                    type="monotone"
-                    dataKey="engagementRate"
-                    stroke="#AF19FF"
-                    name={t('evolution.engagement_rate')}
-                  />
-                )}
-                {selectedMetrics.includes('loyaltyRate') && (
-                  <Line
-                    type="monotone"
-                    dataKey="loyaltyRate"
-                    stroke="#FF19FF"
-                    name={t('evolution.loyalty_rate')}
-                  />
-                )}
+                {renderMetricLines(selectedMetrics, t)}
               </LineChart>
             </ResponsiveContainer>
           </Paper>
         </Grid>
       </Grid>
     </Box>
+    </FormProvider>
   );
 };
 

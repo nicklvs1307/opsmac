@@ -3,31 +3,11 @@ import { Box, CircularProgress, Alert } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '@/services/axiosInstance';
+import { fetchRewards, fetchSurveyRewardProgram, saveSurveyRewardProgram } from '../api/surveyRewardProgramService';
 import { useForm, useFieldArray } from 'react-hook-form';
 import SurveyRewardProgram from '@/features/Fidelidade/Pesquisas/pages/SurveyRewardProgram'; // Import the component
 
-// API Functions
-const fetchRewards = async ({ restaurantId, token }) => {
-  const response = await axiosInstance.get(`/rewards/restaurant/${restaurantId}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data.rewards; // Assuming the API returns { rewards: [...] }
-};
 
-const fetchSurveyRewardProgram = async ({ restaurantId, token }) => {
-  const response = await axiosInstance.get(`/survey-reward-programs/${restaurantId}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
-};
-
-const saveSurveyRewardProgram = async ({ programData, token }) => {
-  const response = await axiosInstance.post('/survey-reward-programs', programData, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
-};
 
 const SurveyRewardProgramPage = () => {
   const { t } = useTranslation();
@@ -78,10 +58,10 @@ const SurveyRewardProgramPage = () => {
   const saveProgramMutation = useMutation(saveSurveyRewardProgram, {
     onSuccess: () => {
       queryClient.invalidateQueries('surveyRewardProgram');
-      alert(t('survey_reward_program.save_success'));
+      toast.success(t('survey_reward_program.save_success'));
     },
     onError: (err) => {
-      alert(err.message || t('survey_reward_program.save_error'));
+      toast.error(err.message || t('survey_reward_program.save_error'));
     },
   });
 

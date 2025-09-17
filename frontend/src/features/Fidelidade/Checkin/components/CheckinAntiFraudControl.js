@@ -12,6 +12,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import { Controller } from 'react-hook-form';
+import ToggleSwitchField from './ToggleSwitchField';
 import { useTranslation } from 'react-i18next';
 
 const CheckinAntiFraudControl = ({ control }) => {
@@ -22,36 +23,14 @@ const CheckinAntiFraudControl = ({ control }) => {
       <Typography variant="h6" gutterBottom>
         {t('checkin_program.anti_fraud_control')}
       </Typography>
-      <FormControlLabel
-        control={
-          <Controller
-            name="checkin_requires_table"
-            control={control}
-            render={({ field }) => (
-              <Switch
-                {...field}
-                checked={!!field.value} // Garante que o valor seja booleano
-                onChange={(e) => field.onChange(e.target.checked)}
-              />
-            )}
-          />
-        }
+      <ToggleSwitchField
+        control={control}
+        name="checkin_requires_table"
         label={t('checkin_program.require_table_number')}
       />
-      <FormControlLabel
-        control={
-          <Controller
-            name="require_coupon_for_checkin"
-            control={control}
-            render={({ field }) => (
-              <Switch
-                {...field}
-                checked={!!field.value}
-                onChange={(e) => field.onChange(e.target.checked)}
-              />
-            )}
-          />
-        }
+      <ToggleSwitchField
+        control={control}
+        name="require_coupon_for_checkin"
         label={t('checkin_program.require_coupon_for_checkin')}
       />
       <Grid container spacing={2}>

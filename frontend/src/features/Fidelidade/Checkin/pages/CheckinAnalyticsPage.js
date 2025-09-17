@@ -18,6 +18,7 @@ import {
   People as PeopleIcon,
   CheckCircleOutline as CheckinIcon,
 } from '@mui/icons-material';
+import MetricCard from '../../Avaliacoes/components/MetricCard'; // Importar o MetricCard genérico
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import {
   LineChart,
@@ -31,62 +32,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import usePermissions from '@/hooks/usePermissions';
 import { useGetCheckinAnalytics } from '@/features/Fidelidade/Checkin/api/checkinService';
+import { formatDuration } from '../../../../utils/timeFormatters';
+import FrequentCustomersList from '../components/FrequentCustomersList';
 
-const MetricCard = ({ title, value, icon, bgColor, iconColor }) => (
-  <Card
-    sx={{
-      height: '100%',
-      background: bgColor,
-      color: 'white',
-      position: 'relative',
-      overflow: 'visible',
-    }}
-  >
-    <CardContent sx={{ pb: 2 }}>
-      <Box display="flex" justifyContent="space-between" alignItems="flex-start">
-        <Box>
-          <Typography
-            variant="body2"
-            sx={{
-              color: 'rgba(255,255,255,0.8)',
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              mb: 1,
-            }}
-          >
-            {title}
-          </Typography>
-          <Typography
-            variant="h3"
-            component="div"
-            sx={{
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: '2.5rem',
-              lineHeight: 1,
-            }}
-          >
-            {value}
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            bgcolor: iconColor,
-            width: 48,
-            height: 48,
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-          }}
-        >
-          {icon}
-        </Box>
-      </Box>
-    </CardContent>
-  </Card>
-);
+
 
 const CheckinAnalyticsPage = () => {
   const { user } = useAuth();
@@ -101,17 +50,7 @@ const CheckinAnalyticsPage = () => {
     error,
   } = useGetCheckinAnalytics(restaurantId, { enabled: can('fidelity:checkin:dashboard', 'read') });
 
-  const formatDuration = (seconds) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = Math.floor(seconds % 60);
-
-    let result = '';
-    if (hours > 0) result += `${hours}h `;
-    if (minutes > 0) result += `${minutes}m `;
-    if (remainingSeconds > 0 || result === '') result += `${remainingSeconds}s`;
-    return result.trim();
-  };
+  
 
   // Verifica se o usuário tem a feature para acessar a página
   if (!can('fidelity:checkin:dashboard', 'read')) {
@@ -251,28 +190,7 @@ const CheckinAnalyticsPage = () => {
             >
               {t('checkin_dashboard.most_frequent_customers_title')}
             </Typography>
-            {checkinData?.most_frequent_customers &&
-            checkinData.most_frequent_customers.length > 0 ? (
-              <List>
-                {checkinData.most_frequent_customers.map((customer) => (
-                  <ListItem key={customer.customer_id}>
-                    <ListItemIcon>
-                      <PeopleIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={customer.customer.name}
-                      secondary={t('checkin_dashboard.checkins_count', {
-                        count: customer.checkin_count,
-                      })}
-                    />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <Typography variant="body2" color="text.secondary">
-                {t('checkin_dashboard.no_frequent_customers')}
-              </Typography>
-            )}
+            <FrequentCustomersList customers={checkinData?.most_frequent_customers} />
           </Paper>
         </Grid>
       </Grid>

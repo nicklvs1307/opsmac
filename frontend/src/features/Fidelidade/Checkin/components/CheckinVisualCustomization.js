@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Grid, TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
+import ColorPickerField from './ColorPickerField';
 import { useTranslation } from 'react-i18next';
 
 const CheckinVisualCustomization = ({ control }) => {
@@ -13,119 +14,35 @@ const CheckinVisualCustomization = ({ control }) => {
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <Controller
+          <ColorPickerField
+            control={control}
             name="primary_color"
-            control={control}
-            render={({ field }) => (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <TextField
-                  {...field}
-                  label={t('checkin_program.primary_color_label')}
-                  fullWidth
-                  margin="normal"
-                  type="color"
-                  helperText={t('checkin_program.color_helper')}
-                  InputLabelProps={{ shrink: true }}
-                  sx={{ flexGrow: 1 }}
-                />
-                <Box
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: '4px',
-                    backgroundColor: field.value || 'transparent',
-                    border: '1px solid #ccc',
-                  }}
-                />
-              </Box>
-            )}
+            label={t('checkin_program.primary_color_label')}
+            helperText={t('checkin_program.color_helper')}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Controller
+          <ColorPickerField
+            control={control}
             name="secondary_color"
-            control={control}
-            render={({ field }) => (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <TextField
-                  {...field}
-                  label={t('checkin_program.secondary_color_label')}
-                  fullWidth
-                  margin="normal"
-                  type="color"
-                  helperText={t('checkin_program.color_helper_secondary')}
-                  InputLabelProps={{ shrink: true }}
-                  sx={{ flexGrow: 1 }}
-                />
-                <Box
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: '4px',
-                    backgroundColor: field.value || 'transparent',
-                    border: '1px solid #ccc',
-                  }}
-                />
-              </Box>
-            )}
+            label={t('checkin_program.secondary_color_label')}
+            helperText={t('checkin_program.color_helper_secondary')}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Controller
+          <ColorPickerField
+            control={control}
             name="text_color"
-            control={control}
-            render={({ field }) => (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <TextField
-                  {...field}
-                  label={t('checkin_program.text_color_label')}
-                  fullWidth
-                  margin="normal"
-                  type="color"
-                  helperText={t('checkin_program.color_helper_text')}
-                  InputLabelProps={{ shrink: true }}
-                  sx={{ flexGrow: 1 }}
-                />
-                <Box
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: '4px',
-                    backgroundColor: field.value || 'transparent',
-                    border: '1px solid #ccc',
-                  }}
-                />
-              </Box>
-            )}
+            label={t('checkin_program.text_color_label')}
+            helperText={t('checkin_program.color_helper_text')}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Controller
-            name="background_color"
+          <ColorPickerField
             control={control}
-            render={({ field }) => (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <TextField
-                  {...field}
-                  label={t('checkin_program.background_color_label')}
-                  fullWidth
-                  margin="normal"
-                  type="color"
-                  helperText={t('checkin_program.color_helper_background')}
-                  InputLabelProps={{ shrink: true }}
-                  sx={{ flexGrow: 1 }}
-                />
-                <Box
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: '4px',
-                    backgroundColor: field.value || 'transparent',
-                    border: '1px solid #ccc',
-                  }}
-                />
-              </Box>
-            )}
+            name="background_color"
+            label={t('checkin_program.background_color_label')}
+            helperText={t('checkin_program.color_helper_background')}
           />
         </Grid>
         <Grid item xs={12}>

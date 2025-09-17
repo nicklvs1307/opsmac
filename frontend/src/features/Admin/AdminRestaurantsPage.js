@@ -18,6 +18,9 @@ import { useGetPermissionTree, useSetEntitlements } from '@/features/IAM/api/iam
 import RestaurantTable from '@/components/Admin/RestaurantTable';
 import ModuleSettingsModal from '@/components/Admin/ModuleSettingsModal';
 
+// Services
+import { deleteRestaurant } from '@/services/adminService'; // Import deleteRestaurant service
+
 const AdminRestaurantsPage = () => {
   const { t } = useTranslation();
   const { can } = usePermissions();
@@ -160,6 +163,21 @@ const AdminRestaurantsPage = () => {
   const createRestaurantWithOwnerMutation = useCreateRestaurantWithOwner();
   const setEntitlementsMutation = useSetEntitlements();
 
+  const handleDeleteRestaurant = async (restaurantId) => {
+    if (window.confirm(t('admin_dashboard.confirm_delete_restaurant'))) {
+      try {
+        await deleteRestaurant(restaurantId);
+        queryClient.invalidateQueries('adminRestaurants'); // Invalidate cache to refetch restaurants
+        toast.success('Restaurante excluído com sucesso!');
+      } catch (error) {
+        console.error("Failed to delete restaurant:", error);
+        toast.error(
+          error.response?.data?.message || 'Erro ao excluir restaurante.'
+        );
+      }
+    }
+  };
+
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>
@@ -188,6 +206,8 @@ const AdminRestaurantsPage = () => {
         canAddRestaurant={can('admin:restaurants', 'create')}
         canEditRestaurant={can('admin:restaurants', 'update')}
         canManageRestaurantModules={can('entitlements', 'update')}
+        canDeleteRestaurant={can('admin:restaurants', 'delete')}
+        onDeleteRestaurant={handleDeleteRestaurant}
         handleOpenModuleModal={handleOpenModuleModal}
       />
 

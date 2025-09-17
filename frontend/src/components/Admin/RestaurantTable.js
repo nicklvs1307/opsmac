@@ -12,6 +12,7 @@ import {
   IconButton,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -22,6 +23,8 @@ const RestaurantTable = ({
   canAddRestaurant,
   canEditRestaurant,
   canManageRestaurantModules,
+  canDeleteRestaurant,
+  onDeleteRestaurant,
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -72,6 +75,11 @@ const RestaurantTable = ({
                     <Button variant="outlined" onClick={() => handleOpenModuleModal(restaurant)}>
                       {t('admin_dashboard.manage_modules_button')}
                     </Button>
+                  )}
+                  {canDeleteRestaurant && (
+                    <IconButton onClick={() => onDeleteRestaurant(restaurant.id)} color="error">
+                      <DeleteIcon />
+                    </IconButton>
                   )}
                 </TableCell>
               </TableRow>

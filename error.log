@@ -1,103 +1,140 @@
-> feedeliza-plus@1.0.0 start
-> node server.js
-2025-09-17 12:59:43 [info]: 	Redis Client Connected
-2025-09-17 12:59:43 [info]: 	✅ Conexão com banco de dados estabelecida
-2025-09-17 12:59:43 [info]: 	Redis Subscriber Client Connected
-2025-09-17 12:59:43 [info]: 	Subscribed to perm_invalidation channel.
-2025-09-17 12:59:47 [info]: 	🚀 Servidor rodando na porta 5000
-2025-09-17 12:59:58 [info]: 	170.254.46.100 - - [17/Sep/2025:12:59:58 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 12:59:58 [info]: 	Decoded userId:
-2025-09-17 12:59:58 [info]: 	170.254.46.100 - - [17/Sep/2025:12:59:58 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 12:59:59 [info]: 	170.254.46.100 - - [17/Sep/2025:12:59:59 +0000] "OPTIONS /api/iam/tree?restaurantId=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 12:59:59 [info]: 	170.254.46.100 - - [17/Sep/2025:12:59:59 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 12:59:59 [info]: 	Decoded userId:
-2025-09-17 12:59:59 [info]: 	[IamService] Building permission snapshot for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917
-2025-09-17 12:59:59 [info]: 	170.254.46.100 - - [17/Sep/2025:12:59:59 +0000] "GET /api/iam/tree?restaurantId=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 12:59:59 [info]: 	Decoded userId:
-2025-09-17 12:59:59 [info]: 	[IamService] Checking permission for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917, featureKey: fidelity:general:dashboard, actionKey: read, isSuperadmin: true
-2025-09-17 12:59:59 [info]: 	170.254.46.100 - - [17/Sep/2025:12:59:59 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:00 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:00 +0000] "OPTIONS /api/dashboard/f88e9146-f139-4dac-9241-8367cc65f917/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:00 [info]: 	Decoded userId:
-2025-09-17 13:00:00 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:00 +0000] "GET /api/dashboard/f88e9146-f139-4dac-9241-8367cc65f917/analytics?period=30d HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:04 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:04 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:05 [info]: 	Decoded userId:
-2025-09-17 13:00:05 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:05 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:05 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:05 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:05 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:05 +0000] "OPTIONS /api/iam/tree?restaurantId=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:05 [info]: 	Decoded userId:
-2025-09-17 13:00:05 [info]: 	[IamService] Checking permission for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917, featureKey: fidelity:general:dashboard, actionKey: read, isSuperadmin: true
-2025-09-17 13:00:05 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:05 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:05 [info]: 	Decoded userId:
-2025-09-17 13:00:05 [info]: 	[IamService] Building permission snapshot for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917
-2025-09-17 13:00:05 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:05 +0000] "GET /api/iam/tree?restaurantId=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:06 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:06 +0000] "OPTIONS /api/dashboard/f88e9146-f139-4dac-9241-8367cc65f917/analytics?period=30d HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:06 [info]: 	Decoded userId:
-2025-09-17 13:00:06 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:06 +0000] "GET /api/dashboard/f88e9146-f139-4dac-9241-8367cc65f917/analytics?period=30d HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:11 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:11 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:11 [info]: 	Decoded userId:
-2025-09-17 13:00:11 [info]: 	[IamService] Checking permission for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917, featureKey: fidelity:checkin:settings, actionKey: read, isSuperadmin: true
-2025-09-17 13:00:11 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:11 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:11 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:11 +0000] "OPTIONS /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:11 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:11 +0000] "OPTIONS /api/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:12 [info]: 	Decoded userId:
-2025-09-17 13:00:12 [info]: 	Decoded userId:
-2025-09-17 13:00:12 [info]: 	Decoded userId:
-2025-09-17 13:00:12 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:12 +0000] "GET /api/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Promise.all (index 1)
-    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
-    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:19:29)
-    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-17 13:00:12 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:12 +0000] "GET /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:13 [info]: 	Decoded userId:
-2025-09-17 13:00:13 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:13 +0000] "GET /api/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-Error
-    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
-    at /app/node_modules/sequelize/lib/sequelize.js:315:28
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
-    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
-    at async Promise.all (index 1)
-    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
-    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:19:29)
-    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
-2025-09-17 13:00:17 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:17 +0000] "OPTIONS /api/settings/f88e9146-f139-4dac-9241-8367cc65f917/profile HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:17 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:17 +0000] "OPTIONS /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:17 [info]: 	Decoded userId:
-2025-09-17 13:00:17 [info]: 	Decoded userId:
-2025-09-17 13:00:17 [info]: 	Decoded userId:
-2025-09-17 13:00:17 [info]: 	Decoded userId:
-2025-09-17 13:00:18 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:18 +0000] "PUT /api/settings/f88e9146-f139-4dac-9241-8367cc65f917/profile HTTP/1.1" 200 478 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:18 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:18 +0000] "PUT /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 200 375 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:18 [info]: 	Decoded userId:
-2025-09-17 13:00:18 [info]: 	Decoded userId:
-2025-09-17 13:00:18 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:18 +0000] "GET /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 200 310 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:30 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:30 +0000] "OPTIONS /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:30 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:30 +0000] "OPTIONS /api/settings/f88e9146-f139-4dac-9241-8367cc65f917/profile HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:30 [info]: 	Decoded userId:
-2025-09-17 13:00:30 [info]: 	Decoded userId:
-2025-09-17 13:00:30 [info]: 	Decoded userId:
-2025-09-17 13:00:30 [info]: 	Decoded userId:
-2025-09-17 13:00:30 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:30 +0000] "PUT /api/settings/f88e9146-f139-4dac-9241-8367cc65f917/profile HTTP/1.1" 200 775 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:30 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:30 +0000] "PUT /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 200 437 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-2025-09-17 13:00:30 [info]: 	Decoded userId:
-2025-09-17 13:00:30 [info]: 	Decoded userId:
-2025-09-17 13:00:30 [info]: 	170.254.46.100 - - [17/Sep/2025:13:00:30 +0000] "GET /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 200 372 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+{
+    "message": "Request failed with status code 500",
+    "name": "AxiosError",
+    "stack": "AxiosError: Request failed with status code 500\n    at Re (https://feedelizapro.towersfy.com/static/js/main.bf7844dc.js:2:311150)\n    at XMLHttpRequest.g (https://feedelizapro.towersfy.com/static/js/main.bf7844dc.js:2:315728)\n    at wt.request (https://feedelizapro.towersfy.com/static/js/main.bf7844dc.js:2:326862)\n    at async https://feedelizapro.towersfy.com/static/js/9396.a95a17b8.chunk.js:1:919",
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "adapter": [
+            "xhr",
+            "http",
+            "fetch"
+        ],
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 10000,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {},
+        "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2YzOTk5My1mNzQ5LTRjOWEtYWQxNi04MWViMTc0YzJiMmMiLCJpYXQiOjE3NTgwNjgwMjQsImV4cCI6MTc1ODY3MjgyNH0.ZF_aY4QDT7ALW97awhCiX8cFxZCv8_Ho_ehlqwv14t8"
+        },
+        "baseURL": "https://feedelizaapi.towersfy.com/api",
+        "method": "get",
+        "url": "/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917",
+        "allowAbsoluteUrls": true
+    },
+    "code": "ERR_BAD_RESPONSE",
+    "status": 500
+}
+{
+    "message": "Request failed with status code 500",
+    "name": "AxiosError",
+    "stack": "AxiosError: Request failed with status code 500\n    at Re (https://feedelizapro.towersfy.com/static/js/main.bf7844dc.js:2:311150)\n    at XMLHttpRequest.g (https://feedelizapro.towersfy.com/static/js/main.bf7844dc.js:2:315728)\n    at wt.request (https://feedelizapro.towersfy.com/static/js/main.bf7844dc.js:2:326862)\n    at async https://feedelizapro.towersfy.com/static/js/9396.a95a17b8.chunk.js:1:919",
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "adapter": [
+            "xhr",
+            "http",
+            "fetch"
+        ],
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 10000,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {},
+        "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2YzOTk5My1mNzQ5LTRjOWEtYWQxNi04MWViMTc0YzJiMmMiLCJpYXQiOjE3NTgwNjgwMjQsImV4cCI6MTc1ODY3MjgyNH0.ZF_aY4QDT7ALW97awhCiX8cFxZCv8_Ho_ehlqwv14t8"
+        },
+        "baseURL": "https://feedelizaapi.towersfy.com/api",
+        "method": "get",
+        "url": "/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917",
+        "allowAbsoluteUrls": true
+    },
+    "code": "ERR_BAD_RESPONSE",
+    "status": 500
+}
+
+{
+    "message": "Request failed with status code 500",
+    "name": "AxiosError",
+    "stack": "AxiosError: Request failed with status code 500\n    at Re (https://feedelizapro.towersfy.com/static/js/main.bf7844dc.js:2:311150)\n    at XMLHttpRequest.g (https://feedelizapro.towersfy.com/static/js/main.bf7844dc.js:2:315728)\n    at wt.request (https://feedelizapro.towersfy.com/static/js/main.bf7844dc.js:2:326862)\n    at async https://feedelizapro.towersfy.com/static/js/9396.a95a17b8.chunk.js:1:919",
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "adapter": [
+            "xhr",
+            "http",
+            "fetch"
+        ],
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 10000,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {},
+        "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2YzOTk5My1mNzQ5LTRjOWEtYWQxNi04MWViMTc0YzJiMmMiLCJpYXQiOjE3NTgwNjgwMjQsImV4cCI6MTc1ODY3MjgyNH0.ZF_aY4QDT7ALW97awhCiX8cFxZCv8_Ho_ehlqwv14t8"
+        },
+        "baseURL": "https://feedelizaapi.towersfy.com/api",
+        "method": "get",
+        "url": "/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917",
+        "allowAbsoluteUrls": true
+    },
+    "code": "ERR_BAD_RESPONSE",
+    "status": 500
+}
+
 i18n.js:9 enTranslation carregado: {pdv.open_cash_register_title: 'Open Cash Register', pdv.initial_cash: 'Initial Cash', pdv.observations: 'Observations', pdv.cancel: 'Cancel', pdv.save: 'Save', …}
 i18n.js:10 ptTranslation carregado: {modules: {…}, monthly_summary: {…}, category_management: {…}, checkin_dashboard: {…}, checkin_program: {…}, …}
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
+[Violation] 'message' handler levou <N> ms
 AuthContext.js:107 AuthContext: userData undefined
 AuthContext.js:108 AuthContext: isUserLoading true
 AuthContext.js:109 AuthContext: isUserError false
-dashboard:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
+settings:1 Error while trying to use the following icon from the Manifest: https://feedelizapro.towersfy.com/logo192.png (Download error or resource isn't a valid image)
 AuthContext.js:107 AuthContext: userData {id: 'd7f39993-f749-4c9a-ad16-81eb174c2b2c', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 AuthContext.js:108 AuthContext: isUserLoading false
 AuthContext.js:109 AuthContext: isUserError false
-main.bf7844dc.js:2 [Violation] 'message' handler took 165ms
 AuthContext.js:107 AuthContext: userData {id: 'd7f39993-f749-4c9a-ad16-81eb174c2b2c', name: 'Super Admin', email: 'superadmin@example.com', phone: null, roles: Array(1), …}
 AuthContext.js:108 AuthContext: isUserLoading false
 AuthContext.js:109 AuthContext: isUserError false
@@ -247,49 +284,909 @@ _c @ react-dom.production.min.js:280
 ac @ react-dom.production.min.js:269
 w @ scheduler.production.min.js:13
 R @ scheduler.production.min.js:14
-main.bf7844dc.js:2 [Violation] 'message' handler took 214ms
-[Violation] Forced reflow while executing JavaScript took 69ms
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+[Violation] Forced reflow while executing JavaScript took 355ms
+react-dom.production.min.js:40 The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+ee @ react-dom.production.min.js:40
+J @ react-dom.production.min.js:38
+gl @ react-dom.production.min.js:253
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:255
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:254
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+react-dom.production.min.js:40 The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+ee @ react-dom.production.min.js:40
+J @ react-dom.production.min.js:38
+gl @ react-dom.production.min.js:253
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:255
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:254
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+react-dom.production.min.js:40 The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+ee @ react-dom.production.min.js:40
+J @ react-dom.production.min.js:38
+gl @ react-dom.production.min.js:253
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:255
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:254
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+react-dom.production.min.js:40 The specified value "" does not conform to the required format.  The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+ee @ react-dom.production.min.js:40
+J @ react-dom.production.min.js:38
+gl @ react-dom.production.min.js:253
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:255
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:254
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:257
+ml @ react-dom.production.min.js:251
+gl @ react-dom.production.min.js:252
+ml @ react-dom.production.min.js:251
+
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async listSurveys (file:///app/src/domains/surveys/surveys.controller.js:21:25)
+2025-09-17 14:01:24 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:24 +0000] "GET /api/surveys?search=&restaurant_id=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:01:25 [info]: 	Decoded userId:
+2025-09-17 14:01:25 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:25 +0000] "GET /api/surveys?search=&restaurant_id=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Survey.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async listSurveys (file:///app/src/domains/surveys/surveys.controller.js:21:25)
+2025-09-17 14:01:30 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:30 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:01:30 [info]: 	Decoded userId:
+2025-09-17 14:01:30 [info]: 	[IamService] Checking permission for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917, featureKey: fidelity:responses:dashboard, actionKey: read, isSuperadmin: true
+2025-09-17 14:01:30 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:30 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:01:31 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:31 +0000] "OPTIONS /api/feedback/restaurant/f88e9146-f139-4dac-9241-8367cc65f917?page=1&limit=10&search=&rating=&type=&status=&source= HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:01:31 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:31 +0000] "GET /api/feedback/restaurant/f88e9146-f139-4dac-9241-8367cc65f917?page=1&limit=10&search=&rating=&type=&status=&source= HTTP/1.1" 404 199 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:01:32 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:32 +0000] "GET /api/feedback/restaurant/f88e9146-f139-4dac-9241-8367cc65f917?page=1&limit=10&search=&rating=&type=&status=&source= HTTP/1.1" 404 199 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:01:34 [info]: 	Decoded userId:
+2025-09-17 14:01:34 [info]: 	[IamService] Checking permission for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917, featureKey: fidelity:responses:management, actionKey: read, isSuperadmin: true
+2025-09-17 14:01:34 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:34 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:01:34 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:34 +0000] "GET /api/feedback/restaurant/f88e9146-f139-4dac-9241-8367cc65f917?page=1&limit=10&search=&rating=&type=&status=&source= HTTP/1.1" 404 199 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:01:35 [info]: 	170.254.46.100 - - [17/Sep/2025:14:01:35 +0000] "GET /api/feedback/restaurant/f88e9146-f139-4dac-9241-8367cc65f917?page=1&limit=10&search=&rating=&type=&status=&source= HTTP/1.1" 404 199 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:05:44 [info]: 	170.254.46.100 - - [17/Sep/2025:14:05:44 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:05:44 [info]: 	Decoded userId:
+2025-09-17 14:05:44 [info]: 	170.254.46.100 - - [17/Sep/2025:14:05:44 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:05:46 [info]: 	170.254.46.100 - - [17/Sep/2025:14:05:46 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:05:46 [info]: 	170.254.46.100 - - [17/Sep/2025:14:05:46 +0000] "OPTIONS /api/iam/tree?restaurantId=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:05:47 [info]: 	Decoded userId:
+2025-09-17 14:05:47 [info]: 	Decoded userId:
+2025-09-17 14:05:47 [info]: 	[IamService] Checking permission for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917, featureKey: fidelity:responses:management, actionKey: read, isSuperadmin: true
+2025-09-17 14:05:47 [info]: 	170.254.46.100 - - [17/Sep/2025:14:05:47 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:05:47 [info]: 	[IamService] Building permission snapshot for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917
+2025-09-17 14:05:47 [info]: 	170.254.46.100 - - [17/Sep/2025:14:05:47 +0000] "GET /api/iam/tree?restaurantId=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:05:48 [info]: 	170.254.46.100 - - [17/Sep/2025:14:05:48 +0000] "OPTIONS /api/feedback/restaurant/f88e9146-f139-4dac-9241-8367cc65f917?page=1&limit=10&search=&rating=&type=&status=&source= HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:05:51 [info]: 	170.254.46.100 - - [17/Sep/2025:14:05:51 +0000] "GET /api/feedback/restaurant/f88e9146-f139-4dac-9241-8367cc65f917?page=1&limit=10&search=&rating=&type=&status=&source= HTTP/1.1" 404 199 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:05:53 [info]: 	170.254.46.100 - - [17/Sep/2025:14:05:53 +0000] "GET /api/feedback/restaurant/f88e9146-f139-4dac-9241-8367cc65f917?page=1&limit=10&search=&rating=&type=&status=&source= HTTP/1.1" 404 199 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:15 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:15 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:15 [info]: 	Decoded userId:
+2025-09-17 14:06:15 [info]: 	[IamService] Checking permission for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917, featureKey: fidelity:checkin:settings, actionKey: read, isSuperadmin: true
+2025-09-17 14:06:15 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:15 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:16 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:16 +0000] "OPTIONS /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:16 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:16 +0000] "OPTIONS /api/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:16 [info]: 	Decoded userId:
+2025-09-17 14:06:16 [info]: 	Decoded userId:
+2025-09-17 14:06:16 [info]: 	Decoded userId:
+2025-09-17 14:06:16 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:16 +0000] "GET /api/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:19:29)
+    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
+2025-09-17 14:06:16 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:16 +0000] "GET /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:21 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:21 +0000] "OPTIONS /api/auth/me HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:22 [info]: 	Decoded userId:
+2025-09-17 14:06:22 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:22 +0000] "GET /api/auth/me HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:23 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:23 +0000] "OPTIONS /api/iam/check HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:23 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:23 +0000] "OPTIONS /api/iam/tree?restaurantId=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:23 [info]: 	Decoded userId:
+2025-09-17 14:06:23 [info]: 	[IamService] Checking permission for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917, featureKey: fidelity:checkin:settings, actionKey: read, isSuperadmin: true
+2025-09-17 14:06:23 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:23 +0000] "POST /api/iam/check HTTP/1.1" 200 60 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:24 [info]: 	Decoded userId:
+2025-09-17 14:06:24 [info]: 	[IamService] Building permission snapshot for userId: d7f39993-f749-4c9a-ad16-81eb174c2b2c, restaurantId: f88e9146-f139-4dac-9241-8367cc65f917
+2025-09-17 14:06:24 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:24 +0000] "GET /api/iam/tree?restaurantId=f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 200 91225 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:24 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:24 +0000] "OPTIONS /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:24 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:24 +0000] "OPTIONS /api/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 204 0 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:25 [info]: 	Decoded userId:
+2025-09-17 14:06:25 [info]: 	Decoded userId:
+2025-09-17 14:06:25 [info]: 	Decoded userId:
+2025-09-17 14:06:25 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:25 +0000] "GET /api/settings/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 304 - "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+2025-09-17 14:06:25 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:25 +0000] "GET /api/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:19:29)
+    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)
+2025-09-17 14:06:27 [info]: 	Decoded userId:
+2025-09-17 14:06:27 [info]: 	170.254.46.100 - - [17/Sep/2025:14:06:27 +0000] "GET /api/rewards/restaurant/f88e9146-f139-4dac-9241-8367cc65f917 HTTP/1.1" 500 148 "https://feedelizapro.towersfy.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+Error
+    at Query.run (/app/node_modules/sequelize/lib/dialects/postgres/query.js:50:25)
+    at /app/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async PostgresQueryInterface.select (/app/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Reward.findAll (/app/node_modules/sequelize/lib/model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Reward.findAndCountAll (/app/node_modules/sequelize/lib/model.js:1322:27)
+    at async Object.listRewards (file:///app/src/domains/rewards/rewards.service.js:19:29)
+    at async listRewards (file:///app/src/domains/rewards/rewards.controller.js:20:22)

@@ -12,10 +12,11 @@ import {
   IconButton,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const UserTable = ({ users, loading, canAddUser, canEditUser }) => {
+const UserTable = ({ users, loading, canAddUser, canEditUser, canDeleteUser, onDeleteUser }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -56,6 +57,11 @@ const UserTable = ({ users, loading, canAddUser, canEditUser }) => {
                   {canEditUser && (
                     <IconButton onClick={() => handleEditClick(user.id)}>
                       <EditIcon />
+                    </IconButton>
+                  )}
+                  {canDeleteUser && (
+                    <IconButton onClick={() => onDeleteUser(user.id)} color="error">
+                      <DeleteIcon />
                     </IconButton>
                   )}
                 </TableCell>

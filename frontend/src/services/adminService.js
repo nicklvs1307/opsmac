@@ -41,3 +41,13 @@ export const createRestaurantWithOwner = async (data) => {
   const response = await axiosInstance.post('/admin/restaurants/create-with-owner', data);
   return response.data;
 };
+
+export const deleteUser = async (userId) => {
+  const response = await axiosInstance.delete(`/admin/users/${userId}`);
+  return response.data;
+};
+
+export const deleteRestaurant = async (restaurantId) => {
+  const response = await axiosInstance.delete(`/admin/restaurants/${restaurantId}`);
+  return response.data;
+};

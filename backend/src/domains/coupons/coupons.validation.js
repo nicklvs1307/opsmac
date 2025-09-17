@@ -23,10 +23,6 @@ export const redeemCouponValidation = [
 export const createCouponValidation = [
   body("rewardId").notEmpty().withMessage("ID da recompensa é obrigatório"),
   body("customerId").notEmpty().withMessage("ID do cliente é obrigatório"),
-  body("expiresAt")
-    .optional()
-    .isISO8601()
-    .withMessage("Data de expiração inválida"),
 ];
 
 export const validateCouponValidation = [

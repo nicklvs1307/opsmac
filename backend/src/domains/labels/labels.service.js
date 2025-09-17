@@ -5,29 +5,29 @@ export default (db) => {
 
   const getLabelUsers = async (restaurantId) => {
     return models.User.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId: restaurantId },
       attributes: ["id", "name"],
     });
   };
 
   const getLabelItems = async (restaurantId) => {
     const products = await models.Product.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId: restaurantId },
       attributes: [
         "id",
         "name",
-        "default_expiration_days",
-        "default_label_status",
+        "defaultExpirationDays",
+        "defaultLabelStatus",
       ],
     });
 
     const ingredients = await models.Ingredient.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId: restaurantId },
       attributes: [
         "id",
         "name",
-        "default_expiration_days",
-        "default_label_status",
+        "defaultExpirationDays",
+        "defaultLabelStatus",
       ],
     });
 
@@ -36,36 +36,36 @@ export default (db) => {
         id: p.id,
         name: p.name,
         type: "Product",
-        default_expiration_days: p.default_expiration_days,
-        default_label_status: p.default_label_status,
+        defaultExpirationDays: p.defaultExpirationDays,
+        defaultLabelStatus: p.defaultLabelStatus,
       })),
       ...ingredients.map((i) => ({
         id: i.id,
         name: i.name,
         type: "Ingredient",
-        default_expiration_days: i.default_expiration_days,
-        default_label_status: i.default_label_status,
+        defaultExpirationDays: i.defaultExpirationDays,
+        defaultLabelStatus: i.defaultLabelStatus,
       })),
     ];
   };
 
   const printLabel = async (
-    labelable_id,
-    labelable_type,
-    expiration_date,
-    quantity_printed,
-    lot_number,
+    labelableId,
+    labelableType,
+    expirationDate,
+    quantityPrinted,
+    lotNumber,
     restaurantId,
-    printed_by_user_id,
+    printedByUserId,
   ) => {
     await models.PrintedLabel.create({
-      labelable_id,
-      labelable_type,
-      expiration_date,
-      quantity_printed,
-      lot_number,
-      restaurant_id: restaurantId,
-      printed_by_user_id,
+      labelableId,
+      labelableType,
+      expirationDate,
+      quantityPrinted,
+      lotNumber,
+      restaurantId: restaurantId,
+      printedByUserId,
     });
   };
 

@@ -315,7 +315,7 @@ export default (db) => {
 
   const getFeedbackForRestaurant = async (feedbackId, restaurantId) => {
     const feedback = await models.Feedback.findOne({
-      where: { id: feedbackId, restaurant_id: restaurantId },
+      where: { id: feedbackId, restaurantId: restaurantId },
       include: _getFeedbackIncludes(models),
     });
     if (!feedback)

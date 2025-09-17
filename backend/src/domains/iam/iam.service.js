@@ -39,17 +39,17 @@ class IamService {
     return role;
   }
 
-  async createRole(restaurantId, key, name, is_system) {
+  async createRole(restaurantId, key, name, isSystem) {
     if (!restaurantId || !key || !name) {
       throw new BadRequestError(
         "Bad Request: restaurantId, key, and name are required.",
       );
     }
     const role = await this.models.Role.create({
-      restaurant_id: restaurantId,
+      restaurantId: restaurantId,
       key,
       name,
-      is_system,
+      isSystem,
     });
     await this.bumpPermVersion(restaurantId);
     return role;
@@ -60,7 +60,7 @@ class IamService {
       throw new BadRequestError("Bad Request: restaurantId is required.");
     }
     return this.models.Role.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId: restaurantId },
     });
   }
 
@@ -69,13 +69,13 @@ class IamService {
     if (!role) {
       throw new NotFoundError("Role not found");
     }
-    if (role.restaurant_id !== restaurantId) {
+    if (role.restaurantId !== restaurantId) {
       throw new ForbiddenError(
         "Forbidden: Role does not belong to the specified restaurant.",
       );
     }
     await role.update({ name });
-    await this.bumpPermVersion(role.restaurant_id);
+    await this.bumpPermVersion(role.restaurantId);
     return role;
   }
 
@@ -87,7 +87,7 @@ class IamService {
     if (!role) {
       throw new NotFoundError("Role not found");
     }
-    if (role.restaurant_id !== restaurantId) {
+    if (role.restaurantId !== restaurantId) {
       throw new ForbiddenError(
         "Forbidden: Role does not belong to the specified restaurant.",
       );
@@ -103,15 +103,15 @@ class IamService {
       );
     }
 
-    await this.models.RolePermission.destroy({ where: { role_id: roleId } });
+    await this.models.RolePermission.destroy({ where: { roleId: roleId } });
 
     const newPermissions = permissions.map((p) => ({
-      role_id: roleId,
-      feature_id: p.featureId,
-      action_id: p.actionId,
+      roleId: roleId,
+      featureId: p.featureId,
+      actionId: p.actionId,
       allowed: p.allowed,
-      created_at: new Date(),
-      updated_at: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }));
     if (newPermissions.length > 0) {
       await this.models.RolePermission.bulkCreate(newPermissions);
@@ -125,7 +125,7 @@ class IamService {
 
   async getRolePermissions(roleId) {
     return this.models.RolePermission.findAll({
-      where: { role_id: roleId },
+      where: { roleId: roleId },
       include: [
         {
           model: this.models.Feature,
@@ -144,9 +144,9 @@ class IamService {
       );
     }
     const userRole = await this.models.UserRole.create({
-      user_id: userId,
-      restaurant_id: restaurantId,
-      role_id: roleId,
+      userId: userId,
+      restaurantId: restaurantId,
+      roleId: roleId,
     });
     await this.bumpPermVersion(restaurantId);
     return userRole;
@@ -159,7 +159,7 @@ class IamService {
       );
     }
     await this.models.UserRole.destroy({
-      where: { user_id: userId, restaurant_id: restaurantId, role_id: roleId },
+      where: { userId: userId, restaurantId: restaurantId, roleId: roleId },
     });
     await this.bumpPermVersion(restaurantId);
   }
@@ -171,7 +171,7 @@ class IamService {
       );
     }
     return this.models.UserPermissionOverride.findAll({
-      where: { user_id: targetUserId, restaurant_id: restaurantId },
+      where: { userId: targetUserId, restaurantId: restaurantId },
       include: [
         {
           model: this.models.Feature,
@@ -191,17 +191,17 @@ class IamService {
     }
 
     await this.models.UserPermissionOverride.destroy({
-      where: { user_id: userId, restaurant_id: restaurantId },
+      where: { userId: userId, restaurantId: restaurantId },
     });
 
     const newOverrides = overrides.map((o) => ({
-      user_id: userId,
-      restaurant_id: restaurantId,
-      feature_id: o.featureId,
-      action_id: o.actionId,
+      userId: userId,
+      restaurantId: restaurantId,
+      featureId: o.featureId,
+      actionId: o.actionId,
       allowed: o.allowed,
-      created_at: new Date(),
-      updated_at: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }));
 
     if (newOverrides.length > 0) {
@@ -220,10 +220,10 @@ class IamService {
   ) {
     await this.models.UserPermissionOverride.destroy({
       where: {
-        user_id: userId,
-        restaurant_id: restaurantId,
-        feature_id: featureId,
-        action_id: actionId,
+        userId: userId,
+        restaurantId: restaurantId,
+        featureId: featureId,
+        actionId: actionId,
       },
     });
     await this.bumpPermVersion(restaurantId);
@@ -246,12 +246,12 @@ class IamService {
     }
 
     const whereClause = {
-      entity_type: entityType,
-      entity_id: entityId,
+      entityType: entityType,
+      entityId: entityId,
     };
 
     if (!isSuperadmin) {
-      whereClause.restaurant_id = restaurantId;
+      whereClause.restaurantId = restaurantId;
     }
 
     const result = await this.models.RestaurantEntitlement.destroy({
@@ -313,9 +313,9 @@ class IamService {
         const [entitlement, created] =
           await this.models.RestaurantEntitlement.findOrCreate({
             where: {
-              restaurant_id: restaurantId,
-              entity_type: entityType,
-              entity_id: entityId,
+              restaurantId: restaurantId,
+              entityType: entityType,
+              entityId: entityId,
             },
             defaults: { status, source, metadata: metadata || {} },
             transaction: t,
@@ -354,7 +354,7 @@ class IamService {
 
   async getRestaurantEntitlements(restaurantId) {
     return this.models.RestaurantEntitlement.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId: restaurantId },
     });
   }
 
@@ -406,9 +406,9 @@ class IamService {
 
         await this.models.RestaurantEntitlement.upsert(
           {
-            restaurant_id: restaurantId,
-            entity_type: entityType,
-            entity_id: entityId,
+            restaurantId: restaurantId,
+            entityType: entityType,
+            entityId: entityId,
             status,
             source,
             metadata: metadata || {},
@@ -443,9 +443,9 @@ class IamService {
         },
       ],
       order: [
-        [this.models.Submodule, this.models.Module, "sort_order", "ASC"],
-        [this.models.Submodule, "sort_order", "ASC"],
-        ["sort_order", "ASC"],
+        [this.models.Submodule, this.models.Module, "sortOrder", "ASC"],
+        [this.models.Submodule, "sortOrder", "ASC"],
+        ["sortOrder", "ASC"],
       ],
     });
   }
@@ -477,7 +477,7 @@ class IamService {
     const allActions = await this.models.Action.findAll();
 
     const userRoles = await this.models.UserRole.findAll({
-      where: { user_id: userId, restaurant_id: restaurantId },
+      where: { userId: userId, restaurantId: restaurantId },
       include: [
         {
           model: this.models.Role,
@@ -505,7 +505,7 @@ class IamService {
     });
 
     const userOverrides = await this.models.UserPermissionOverride.findAll({
-      where: { user_id: userId, restaurant_id: restaurantId },
+      where: { userId: userId, restaurantId: restaurantId },
       include: [
         {
           model: this.models.Feature,
@@ -518,7 +518,7 @@ class IamService {
 
     const restaurantEntitlements =
       await this.models.RestaurantEntitlement.findAll({
-        where: { restaurant_id: restaurantId },
+        where: { restaurantId: restaurantId },
       });
 
     const allModules = await this.models.Module.findAll({
@@ -535,9 +535,9 @@ class IamService {
         },
       ],
       order: [
-        ["sort_order", "ASC"],
-        ["submodules", "sort_order", "ASC"],
-        ["submodules", "features", "sort_order", "ASC"],
+        ["sortOrder", "ASC"],
+        ["submodules", "sortOrder", "ASC"],
+        ["submodules", "features", "sortOrder", "ASC"],
       ],
     });
 
@@ -556,7 +556,7 @@ class IamService {
         });
       } else {
         logger.warn(
-          `[IamService] Inconsistent data found: UserRole record with id ${userRole.id} points to a non-existent role (role_id: ${userRole.role_id}). Skipping.`,
+          `[IamService] Inconsistent data found: UserRole record with id ${userRole.id} points to a non-existent role (roleId: ${userRole.roleId}). Skipping.`,
         );
       }
     });
@@ -575,8 +575,8 @@ class IamService {
 
     const entitlementsMap = {};
     restaurantEntitlements.forEach((entitlement) => {
-      const entityType = entitlement.entity_type;
-      const entityId = entitlement.entity_id;
+      const entityType = entitlement.entityType;
+      const entityId = entitlement.entityId;
       if (!entitlementsMap[entityType]) {
         entitlementsMap[entityType] = {};
       }

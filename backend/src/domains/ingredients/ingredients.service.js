@@ -5,28 +5,28 @@ export default (db) => {
 
   const createIngredient = async (
     name,
-    unit_of_measure,
-    cost_per_unit,
+    unitOfMeasure,
+    costPerUnit,
     restaurantId,
   ) => {
     return Ingredient.create({
       name,
-      unit_of_measure,
-      cost_per_unit,
-      restaurant_id: restaurantId,
+      unitOfMeasure,
+      costPerUnit,
+      restaurantId: restaurantId,
     });
   };
 
   const listIngredients = async (restaurantId) => {
     return Ingredient.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId: restaurantId },
       order: [["name", "ASC"]],
     });
   };
 
   const getIngredientById = async (id, restaurantId) => {
     const ingredient = await Ingredient.findOne({
-      where: { id, restaurant_id: restaurantId },
+      where: { id, restaurantId: restaurantId },
     });
     if (!ingredient) {
       throw new NotFoundError("Ingrediente não encontrado.");
@@ -37,12 +37,12 @@ export default (db) => {
   const updateIngredient = async (
     id,
     name,
-    unit_of_measure,
-    cost_per_unit,
+    unitOfMeasure,
+    costPerUnit,
     restaurantId,
   ) => {
     const ingredient = await getIngredientById(id, restaurantId);
-    await ingredient.update({ name, unit_of_measure, cost_per_unit });
+    await ingredient.update({ name, unitOfMeasure, costPerUnit });
     return ingredient;
   };
 

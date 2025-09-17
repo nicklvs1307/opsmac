@@ -9,7 +9,7 @@ export default (db) => {
     const paymentMethod = await models.PaymentMethod.findOne({
       where: {
         id,
-        [Op.or]: [{ restaurant_id: restaurantId }, { restaurant_id: null }],
+        [Op.or]: [{ restaurantId: restaurantId }, { restaurantId: null }],
       },
       transaction,
     });
@@ -45,8 +45,8 @@ export default (db) => {
     try {
       const transaction = await models.FinancialTransaction.create(
         {
-          restaurant_id: restaurantId,
-          user_id: userId,
+          restaurantId: restaurantId,
+          userId: userId,
           ...transactionData,
         },
         { transaction: t },
@@ -72,12 +72,12 @@ export default (db) => {
     let whereClause = { restaurantId: restaurantId };
 
     if (type) whereClause.type = type;
-    if (category_id) whereClause.category_id = category_id;
+    if (category_id) whereClause.categoryId = category_id;
     if (start_date || end_date) {
-      whereClause.transaction_date = {};
+      whereClause.transactionDate = {};
       if (start_date)
-        whereClause.transaction_date[Op.gte] = new Date(start_date);
-      if (end_date) whereClause.transaction_date[Op.lte] = new Date(end_date);
+        whereClause.transactionDate[Op.gte] = new Date(start_date);
+      if (end_date) whereClause.transactionDate[Op.lte] = new Date(end_date);
     }
 
     const { count, rows } = await models.FinancialTransaction.findAndCountAll({
@@ -86,7 +86,7 @@ export default (db) => {
         { model: models.FinancialCategory, as: "category" },
         { model: models.User, as: "user", attributes: ["id", "name"] },
       ],
-      order: [["transaction_date", "DESC"]],
+      order: [["transactionDate", "DESC"]],
       limit: parseInt(limit),
       offset: parseInt(offset),
     });
@@ -111,7 +111,7 @@ export default (db) => {
   ) => {
     const offset = (page - 1) * limit;
     let whereClause = {
-      [Op.or]: [{ restaurant_id: restaurantId }, { restaurant_id: null }],
+      [Op.or]: [{ restaurantId: restaurantId }, { restaurantId: null }],
     };
 
     if (type) whereClause.type = type;
@@ -140,7 +140,7 @@ export default (db) => {
     try {
       const paymentMethod = await models.PaymentMethod.create(
         {
-          restaurant_id: restaurantId,
+          restaurantId: restaurantId,
           ...paymentMethodData,
         },
         { transaction: t },
@@ -162,11 +162,11 @@ export default (db) => {
   ) => {
     const offset = (page - 1) * limit;
     let whereClause = {
-      [Op.or]: [{ restaurant_id: restaurantId }, { restaurant_id: null }],
+      [Op.or]: [{ restaurantId: restaurantId }, { restaurantId: null }],
     };
 
     if (type) whereClause.type = type;
-    if (is_active !== undefined) whereClause.is_active = is_active;
+    if (is_active !== undefined) whereClause.isActive = is_active;
 
     const { count, rows } = await models.PaymentMethod.findAndCountAll({
       where: whereClause,
@@ -220,15 +220,15 @@ export default (db) => {
 
     const transactions = await models.FinancialTransaction.findAll({
       where: {
-        restaurant_id: restaurantId,
-        transaction_date: dateFilter,
+        restaurantId: restaurantId,
+        transactionDate: dateFilter,
       },
       attributes: ["type", "amount"],
     });
 
     const cashMovements = await models.CashRegisterMovement.findAll({
       where: {
-        "$session.restaurant_id$": restaurantId,
+        "$session.restaurantId$": restaurantId,
         createdAt: dateFilter,
       },
       include: [
@@ -269,10 +269,10 @@ export default (db) => {
       end_date,
     );
 
-    const totalSales = await models.Order.sum("total_amount", {
+    const totalSales = await models.Order.sum("totalAmount", {
       where: {
-        restaurant_id: restaurantId,
-        order_date: dateFilter,
+        restaurantId: restaurantId,
+        orderDate: dateFilter,
         status: { [Op.in]: ["delivered", "concluded"] },
       },
     });
@@ -284,9 +284,9 @@ export default (db) => {
       "amount",
       {
         where: {
-          restaurant_id: restaurantId,
+          restaurantId: restaurantId,
           type: "expense",
-          transaction_date: dateFilter,
+          transactionDate: dateFilter,
         },
       },
     );
@@ -296,7 +296,7 @@ export default (db) => {
       {
         where: {
           type: "withdrawal",
-          "$session.restaurant_id$": restaurantId,
+          "$session.restaurantId$": restaurantId,
           createdAt: dateFilter,
         },
         include: [
@@ -335,17 +335,17 @@ export default (db) => {
 
     const salesData = await models.Order.findAll({
       where: {
-        restaurant_id: restaurantId,
-        order_date: dateFilter,
+        restaurantId: restaurantId,
+        orderDate: dateFilter,
         status: { [Op.in]: ["delivered", "concluded"] },
       },
       attributes: [
-        "payment_method",
-        [fn("SUM", col("total_amount")), "total_sales"],
+        "paymentMethod",
+        [fn("SUM", col("totalAmount")), "total_sales"],
         [fn("COUNT", col("id")), "total_orders"],
       ],
-      group: ["payment_method"],
-      order: [["payment_method", "ASC"]],
+      group: ["paymentMethod"],
+      order: [["paymentMethod", "ASC"]],
     });
 
     return salesData;

@@ -35,39 +35,39 @@ export default (db) => {
     let customerInstance = null;
     if (customer && customer.phone) {
       [customerInstance] = await models.Customer.findOrCreate({
-        where: { phone: customer.phone, restaurant_id: localRestaurant.id },
+        where: { phone: customer.phone, restaurantId: localRestaurant.id },
         defaults: {
           name: customer.name || "Cliente iFood",
           email: customer.email || null,
           whatsapp: customer.phone,
-          restaurant_id: localRestaurant.id,
+          restaurantId: localRestaurant.id,
           source: "ifood",
         },
       });
     }
 
     await models.Order.create({
-      restaurant_id: localRestaurant.id,
-      customer_id: customerInstance ? customerInstance.id : null,
-      external_order_id: orderId,
+      restaurantId: localRestaurant.id,
+      customerId: customerInstance ? customerInstance.id : null,
+      externalOrderId: orderId,
       platform: "ifood",
       status: "pending",
-      total_amount: totalAmount,
-      delivery_fee: deliveryFee,
+      totalAmount: totalAmount,
+      deliveryFee: deliveryFee,
       items: items,
-      customer_details: customer,
-      order_details: payload,
-      order_date: createdAt,
-      delivery_address: deliveryAddress,
-      payment_method: paymentMethod,
-      delivery_type: orderType,
+      customerDetails: customer,
+      orderDetails: payload,
+      orderDate: createdAt,
+      deliveryAddress: deliveryAddress,
+      paymentMethod: paymentMethod,
+      deliveryType: orderType,
       notes: notes,
     });
   };
 
   const handleOrderStatusUpdate = async (orderId, newStatus) => {
     const order = await models.Order.findOne({
-      where: { external_order_id: orderId, platform: "ifood" },
+      where: { externalOrderId: orderId, platform: "ifood" },
     });
     if (order) {
       await order.update({ status: newStatus });

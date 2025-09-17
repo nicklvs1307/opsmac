@@ -8,7 +8,7 @@ export default (db) => {
     const order = await models.Order.findOne({
       where: {
         id,
-        restaurant_id: restaurantId,
+        restaurantId: restaurantId,
       },
       transaction,
     });
@@ -24,28 +24,28 @@ export default (db) => {
     restaurantId,
     status,
     platform,
-    delivery_type,
+    deliveryType,
     search,
     page = 1,
     limit = 10,
   ) => {
     const offset = (page - 1) * limit;
-    const whereClause = { restaurant_id: restaurantId };
+    const whereClause = { restaurantId: restaurantId };
 
     if (status) whereClause.status = status;
     if (platform) whereClause.platform = platform;
-    if (delivery_type) whereClause.delivery_type = delivery_type;
+    if (deliveryType) whereClause.deliveryType = deliveryType;
     if (search) {
       whereClause[Op.or] = [
-        { "customer_details.name": { [Op.iLike]: `%${search}%` } },
-        { "customer_details.phone": { [Op.iLike]: `%${search}%` } },
-        { external_order_id: { [Op.iLike]: `%${search}%` } },
+        { "customerDetails.name": { [Op.iLike]: `%${search}%` } },
+        { "customerDetails.phone": { [Op.iLike]: `%${search}%` } },
+        { externalOrderId: { [Op.iLike]: `%${search}%` } },
       ];
     }
 
     const { count, rows } = await models.Order.findAndCountAll({
       where: whereClause,
-      order: [["order_date", "DESC"]],
+      order: [["orderDate", "DESC"]],
       limit: parseInt(limit),
       offset: parseInt(offset),
     });

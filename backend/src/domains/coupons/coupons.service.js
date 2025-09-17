@@ -4,6 +4,7 @@ import NotFoundError from "../../utils/errors/NotFoundError.js";
 import rewardsServiceFactory from "../../domains/rewards/rewards.service.js";
 
 export default (db) => {
+  const rewardsService = rewardsServiceFactory(db);
   // Helper Functions for explicit business logic
   const _isCouponValid = (coupon) => {
     if (!coupon) return false;
@@ -19,8 +20,8 @@ export default (db) => {
     return coupon.update({ status: "redeemed" }, { transaction });
   };
 
-  const listCoupons = async (restaurantId, page, limit, status, search) => {
-    const offset = (page - 1) * limit;
+  const listCoupons = async (restaurantId, page = 1, limit = 10, status, search) => {
+    const offset = (parseInt(page) - 1) * parseInt(limit);
 
     const where = { restaurantId: restaurantId };
     if (status) {
@@ -78,7 +79,7 @@ export default (db) => {
   };
 
   const redeemCoupon = async (id, restaurantId, orderValue) => {
-    const t = await sequelize.transaction(); // Start transaction
+    const t = await db.sequelize.transaction(); // Start transaction
     try {
       const coupon = await db.Coupon.findOne({
         where: { id, restaurantId: restaurantId },
@@ -110,9 +111,8 @@ export default (db) => {
     rewardId,
     customerId,
     restaurantId,
-    expiresAt,
   ) => {
-    const t = await sequelize.transaction(); // Start transaction
+    const t = await db.sequelize.transaction(); // Start transaction
     try {
       const reward = await db.Reward.findOne({
         where: { id: rewardId, restaurantId: restaurantId },
@@ -137,7 +137,7 @@ export default (db) => {
       const { coupon } = await rewardsService.generateCouponForReward(
         reward,
         customerId,
-        { expiresAt, transaction: t },
+        { transaction: t },
       ); // Pass transaction
       await t.commit(); // Commit transaction
       return coupon;
@@ -151,25 +151,25 @@ export default (db) => {
     const couponCounts = await db.Coupon.findOne({
       where: { restaurantId: restaurantId },
       attributes: [
-        [sequelize.fn("COUNT", sequelize.col("id")), "totalCoupons"],
+        [db.sequelize.fn("COUNT", db.sequelize.col("id")), "totalCoupons"],
         [
-          sequelize.fn(
+          db.sequelize.fn(
             "COUNT",
-            sequelize.literal("CASE WHEN status = 'redeemed' THEN 1 END"),
+            db.sequelize.literal("CASE WHEN status = 'redeemed' THEN 1 END"),
           ),
           "redeemedCoupons",
         ],
         [
-          sequelize.fn(
+          db.sequelize.fn(
             "COUNT",
-            sequelize.literal("CASE WHEN status = 'expired' THEN 1 END"),
+            db.sequelize.literal("CASE WHEN status = 'expired' THEN 1 END"),
           ),
           "expiredCoupons",
         ],
         [
-          sequelize.fn(
+          db.sequelize.fn(
             "COUNT",
-            sequelize.literal(
+            db.sequelize.literal(
               "CASE WHEN status = 'active' AND \"expiresAt\" >= NOW() AND \"expiresAt\" <= NOW() + INTERVAL '7 day' THEN 1 END",
             ),
           ),
@@ -182,12 +182,12 @@ export default (db) => {
     const couponsByType = await db.Coupon.findAll({
       where: { restaurantId: restaurantId },
       attributes: [
-        [sequelize.fn("COUNT", sequelize.col("Coupon.id")), "count"],
-        [sequelize.col("reward.rewardType"), "type"],
+        [db.sequelize.fn("COUNT", db.sequelize.col("Coupon.id")), "count"],
+        [db.sequelize.col("reward.rewardType"), "type"],
       ],
       include: [
         {
-          model: models.Reward,
+          model: db.Reward,
           as: "reward",
           attributes: [],
         },
@@ -201,8 +201,8 @@ export default (db) => {
         status: "redeemed",
       },
       attributes: [
-        [sequelize.fn("DATE", sequelize.col("redeemedAt")), "date"],
-        [sequelize.fn("COUNT", sequelize.col("id")), "count"],
+        [db.sequelize.fn("DATE", db.sequelize.col("redeemedAt")), "date"],
+        [db.sequelize.fn("COUNT", db.sequelize.col("id")), "count"],
       ],
       group: ["date"],
       order: [["date", "ASC"]],
@@ -222,8 +222,8 @@ export default (db) => {
     const coupon = await db.Coupon.findOne({
       where,
       include: [
-        { model: models.Reward, as: "reward" },
-        { model: models.Customer, as: "customer" },
+        { model: db.Reward, as: "reward" },
+        { model: db.Customer, as: "customer" },
       ],
     });
 
@@ -278,3 +278,4 @@ export default (db) => {
     publicValidateCoupon,
   };
 };
+

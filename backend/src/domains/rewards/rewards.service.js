@@ -7,7 +7,7 @@ export default (db) => {
     const { page = 1, limit = 12, search } = query;
     const offset = (page - 1) * limit;
 
-    const where = { restaurant_id: restaurantId };
+    const where = { restaurantId: restaurantId };
 
     if (search) {
       where[Op.or] = [
@@ -20,12 +20,12 @@ export default (db) => {
       where,
       attributes: [
         "id",
-        "customer_id",
+        "customerId",
         "description",
-        "is_redeemed",
+        "isRedeemed",
         "is_active",
         "reward_type",
-        "restaurant_id",
+        "restaurantId",
         "createdAt",
         "updatedAt",
         "title",
@@ -46,7 +46,7 @@ export default (db) => {
 
   const getRewardById = async (id, restaurantId) => {
     const whereClause = restaurantId
-      ? { id, restaurant_id: restaurantId }
+      ? { id, restaurantId: restaurantId }
       : { id };
     const reward = await db.Reward.findOne({ where: whereClause });
     if (!reward) {
@@ -61,8 +61,8 @@ export default (db) => {
     }
     return db.Reward.create({
       ...rewardData,
-      restaurant_id: restaurantId,
-      created_by: userId,
+      restaurantId: restaurantId,
+      createdBy: userId,
     });
   };
 
@@ -94,11 +94,11 @@ export default (db) => {
   const isValidReward = (reward) => {
     const now = new Date();
     if (!reward.is_active) return false;
-    if (reward.valid_from && now < reward.valid_from) return false;
-    if (reward.valid_until && now > reward.valid_until) return false;
+    if (reward.validFrom && now < reward.validFrom) return false;
+    if (reward.validUntil && now > reward.validUntil) return false;
     if (
-      reward.total_uses_limit &&
-      reward.current_uses >= reward.total_uses_limit
+      reward.totalUsesLimit &&
+      reward.currentUses >= reward.totalUsesLimit
     )
       return false;
     return true;
@@ -106,18 +106,18 @@ export default (db) => {
 
   const canCustomerUseReward = async (reward, customerId, restaurantId, extraData = {}) => {
     if (!isValidReward(reward)) return false;
-    if (reward.customer_id && reward.customer_id !== customerId) return false;
+    if (reward.customerId && reward.customerId !== customerId) return false;
     if (extraData && extraData.visit_milestone) return true;
 
-    if (reward.max_uses_per_customer) {
+    if (reward.maxUsesPerCustomer) {
       const usageCount = await db.Coupon.count({
         where: {
-          reward_id: reward.id,
-          customer_id: customerId,
-          restaurant_id: restaurantId,
+          rewardId: reward.id,
+          customerId: customerId,
+          restaurantId: restaurantId,
         },
       });
-      if (usageCount >= reward.max_uses_per_customer) return false;
+      if (usageCount >= reward.maxUsesPerCustomer) return false;
     }
     return true;
   };
@@ -127,7 +127,7 @@ export default (db) => {
     customerId,
     extraData = {},
   ) => {
-    const canUse = await canCustomerUseReward(reward, customerId, reward.restaurant_id, extraData);
+    const canUse = await canCustomerUseReward(reward, customerId, reward.restaurantId, extraData);
     if (!canUse) {
       throw new BadRequestError("Cliente não pode usar esta recompensa");
     }
@@ -148,14 +148,14 @@ export default (db) => {
 
     if (reward.reward_type === "spin_the_wheel") {
       if (
-        !reward.wheel_config ||
-        !reward.wheel_config.items ||
-        reward.wheel_config.items.length === 0
+        !reward.wheelConfig ||
+        !reward.wheelConfig.items ||
+        reward.wheelConfig.items.length === 0
       ) {
         throw new BadRequestError("Configuração da roleta inválida ou vazia.");
       }
       const { winningItem: spunItem, winningIndex: spunIndex } =
-        spinWheelService(reward.wheel_config);
+        spinWheelService(reward.wheelConfig);
       winningItem = spunItem;
       winningIndex = spunIndex;
       if (!winningItem) {
@@ -174,32 +174,32 @@ export default (db) => {
 
     let expiresAt = null;
     const validityDays =
-      extraData?.coupon_validity_days ||
-      reward.coupon_validity_days ||
-      reward.days_valid;
+      extraData?.couponValidityDays ||
+      reward.couponValidityDays ||
+      reward.daysValid;
 
     if (validityDays) {
       expiresAt = new Date();
       expiresAt.setDate(expiresAt.getDate() + validityDays);
-    } else if (reward.valid_until) {
-      expiresAt = reward.valid_until;
+    } else if (reward.validUntil) {
+      expiresAt = reward.validUntil;
     }
 
     const coupon = await db.Coupon.create({
       code: couponCode,
-      reward_id: couponRewardId,
-      customer_id: customer_id,
-      restaurant_id: reward.restaurantId,
-      expires_at: expiresAt,
+      rewardId: couponRewardId,
+      customerId: customerId,
+      restaurantId: reward.restaurantId,
+      expirationDate: expiresAt,
       status: "active",
       title: couponTitle,
       description: couponDescription,
       value: couponValue,
-      reward_type: couponRewardType,
+      discountType: couponRewardType,
       ...extraData,
     });
 
-    await reward.increment("current_uses");
+    await reward.increment("currentUses");
 
     const analytics = {
       ...reward.analytics,
@@ -250,24 +250,24 @@ export default (db) => {
     }
 
     const totalRewards = await db.Reward.count({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId: restaurantId },
     });
     const activeRewards = await db.Reward.count({
-      where: { restaurant_id: restaurantId, is_active: true },
+      where: { restaurantId: restaurantId, is_active: true },
     });
 
     const rewardsByType = await db.Reward.findAll({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId: restaurantId },
       attributes: ["reward_type", [fn("COUNT", col("id")), "count"]],
       group: ["reward_type"],
       raw: true,
     });
 
     const totalCoupons = await db.Coupon.count({
-      where: { restaurant_id: restaurantId },
+      where: { restaurantId: restaurantId },
     });
     const redeemedCoupons = await db.Coupon.count({
-      where: { restaurant_id: restaurantId, status: "redeemed" },
+      where: { restaurantId: restaurantId, status: "redeemed" },
     });
     const redemptionRate =
       totalCoupons > 0 ? (redeemedCoupons / totalCoupons) * 100 : 0;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Paper, Typography } from '@mui/material';
 import {
   BarChart as BarChartIcon,
   Star as StarIcon,

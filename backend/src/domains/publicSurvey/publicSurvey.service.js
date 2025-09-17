@@ -378,13 +378,61 @@ export default (db) => {
       throw new NotFoundError("Resposta da pesquisa não encontrada.");
     }
 
-    if (surveyResponse.customer_id) {
+        if (surveyResponse.customer_id) {
       throw new BadRequestError(
         "Esta resposta já está vinculada a um cliente.",
       );
     }
 
     await surveyResponse.update({ customer_id });
+
+    const { survey } = surveyResponse;
+    let rewardData = null;
+
+    if (survey && survey.reward_id) {
+      const reward = survey.reward;
+      if (
+        reward &&
+        (!reward.canCustomerUse || (await reward.canCustomerUse(customer_id)))
+      ) {
+        if (reward.type === "coupon") {
+          const { coupon } = await reward.generateCoupon(customer_id, {
+            coupon_validity_days: survey.coupon_validity_days,
+            metadata: {
+              source: "survey_response_linked",
+              survey_id: survey.id,
+              response_id: surveyResponse.id,
+            },
+          });
+          rewardData = { type: "coupon", details: coupon };
+        } else if (reward.type === "wheel_spin") {
+          rewardData = {
+            type: "wheel_spin",
+            details: { message: "Você ganhou um giro na roleta!" },
+          };
+        }
+      }
+    }
+
+    const customer = await models.Customer.findByPk(customer_id);
+    if (customer) {
+      await customer.updateStats();
+      await customer.update({
+        last_survey_id: survey.id,
+        last_survey_completed_at: new Date(),
+      });
+    }
+
+    return { reward: rewardData };
+  };
+
+  return {
+    getNextSurvey,
+    getPublicSurveyBySlugs,
+    submitSurveyResponses,
+    linkCustomerToResponse,
+  };
+};
 
     const { survey } = surveyResponse;
     let rewardData = null;

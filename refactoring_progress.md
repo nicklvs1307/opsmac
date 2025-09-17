@@ -83,5 +83,20 @@ Este documento detalha o progresso da refatoração do backend, incluindo as aç
 ### O que não foi feito (e onde parou):
 - Nenhuma tarefa pendente nesta fase. A "Fase 2.5. Implementação de Cache para Permissões" está completa.
 
+## 8. Refatoração do Sistema de Pesquisa de Satisfação e Cupons
+
+### O que foi feito:
+- **Análise do Backend**:
+    - Mapeados os domínios `surveys`, `publicSurvey`, `surveyRewardProgram` e `coupons`.
+    - Analisados os modelos `Survey`, `SurveyResponse`, `Coupon`, `SurveyRewardProgram`, `Customer` e `Reward` para entender o esquema de dados.
+    - Analisados os serviços `publicSurvey.service.js`, `surveyRewardProgram.service.js` e `rewards.service.js` para entender a lógica de negócio.
+- **Refatoração do Backend**:
+    - Criado um novo método `grantRewardForSurveyResponse` em `surveyRewardProgram.service.js` para centralizar a lógica de concessão de recompensas por respostas de pesquisa.
+    - Modificado `publicSurvey.service.js` para utilizar o novo serviço centralizado, removendo a lógica de recompensa duplicada e simplificando o método `submitSurveyResponses`.
+- **Análise do Frontend**:
+    - Identificado o componente `PublicSurveyForm.js` como o principal responsável por submeter as respostas da pesquisa.
+    - Verificado que o frontend já estava preparado para receber e exibir as informações do cupom de recompensa na tela de agradecimento.
+- **Conclusão**: A refatoração foi concluída com sucesso, centralizando a lógica de recompensa no backend e garantindo que o frontend funcione corretamente sem a necessidade de modificações.
+
 ## Próximos Passos:
 1.  **Fase 2.6. Auditoria e Logs de Acesso**: Este é o **ponto de parada atual**.

@@ -1,26 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Typography,
   Paper,
   CircularProgress,
   Alert,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Chip,
   Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  OutlinedInput,
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useSurveys } from '@/features/Fidelidade/Avaliacoes/api/surveyService'; // To get list of surveys
 import { useSurveysComparisonAnalytics } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService'; // New hook
 import {

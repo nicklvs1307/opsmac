@@ -1,28 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Typography,
-  Paper,
   CircularProgress,
   Alert,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Avatar,
-  Chip,
   Pagination,
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useCustomersList } from '@/features/Customers/api/customerQueries';
-import { getSegmentColor, getSegmentLabel } from '../../../../utils/segmentUtils';
 import RankingFilters from '../components/RankingFilters';
 import RankingTable from '../components/RankingTable';
 

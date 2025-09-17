@@ -1,23 +1,17 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import {
   Box,
   Typography,
   Paper,
   CircularProgress,
   Alert,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  TextField,
-  Button,
-  Grid,
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useFeedbackWordFrequency } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService';
 import { useSurveys } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
-import { WordCloud } from '@isoterik/react-word-cloud'; // Changed import
+import { WordCloud } from '@isoterik/react-word-cloud';
 import WordCloudFilters from '../components/WordCloudFilters';
 
 const WordClouds = () => {
@@ -34,9 +28,9 @@ const WordClouds = () => {
     },
   });
 
-  const { control, watch, setValue } = methods;
+  const { control, watch, setValue, reset } = methods;
 
-  const filters = watch(); // Watch all fields to pass to useFeedbackWordFrequency
+  const filters = watch();
 
   const { data: surveysData, isLoading: isLoadingSurveys } = useSurveys(restaurantId);
 
@@ -90,38 +84,36 @@ const WordClouds = () => {
           {t('fidelity_general.word_clouds_title')}
         </Typography>
 
-      <WordCloudFilters
-        control={control}
-        surveysData={surveysData}
-        handleFilterChange={handleFilterChange}
-        handleClearFilters={handleClearFilters}
-      />
+        <WordCloudFilters
+          control={control}
+          surveysData={surveysData}
+          handleFilterChange={handleFilterChange}
+          handleClearFilters={handleClearFilters}
+        />
 
-      {isLoadingWordFrequency ? (
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="300px">
-          <CircularProgress size={50} />
-        </Box>
-      ) : isErrorWordFrequency ? (
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {t('word_clouds.error_loading_word_cloud')}
-        </Alert>
-      ) : words.length > 0 ? (
-        <Paper elevation={3} sx={{ p: 3, height: 500 }}>
-          <WordCloud
-            words={words}
-            options={{
-              rotations: 2,
-              rotationAngles: [-90, 0],
-              fontSizes: [20, 60],
-            }}
-          />
-        </Paper>
-      ) : (
-        <Alert severity="info">{t('word_clouds.no_data_to_display')}</Alert>
-      )}
-    </Box>
+        {isLoadingWordFrequency ? (
+          <Box display="flex" justifyContent="center" alignItems="center" minHeight="300px">
+            <CircularProgress size={50} />
+          </Box>
+        ) : isErrorWordFrequency ? (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {t('word_clouds.error_loading_word_cloud')}
+          </Alert>
+        ) : words.length > 0 ? (
+          <Paper elevation={3} sx={{ p: 3, height: 500 }}>
+            <WordCloud
+              words={words}
+              options={{
+                rotations: 2,
+                rotationAngles: [-90, 0],
+                fontSizes: [20, 60],
+              }}
+            />
+          </Paper>
+        ) : (
+          <Alert severity="info">{t('word_clouds.no_data_to_display')}</Alert>
+        )}
+      </Box>
     </FormProvider>
   );
 };
-
-export default WordClouds;

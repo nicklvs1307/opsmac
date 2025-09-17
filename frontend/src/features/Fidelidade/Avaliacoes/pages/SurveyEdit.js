@@ -12,6 +12,7 @@ import {
   MenuItem,
   IconButton,
   Alert,
+  FormHelperText,
 } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
@@ -24,6 +25,12 @@ import { useForm, FormProvider, Controller, useFieldArray } from 'react-hook-for
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import SurveyQuestionField from '../components/SurveyQuestionField'; // Importar o componente de pergunta
+import {
+  useSurveyDetails,
+  useSurveyRewards,
+  useSurveyNpsCriteria,
+  useUpdateSurvey,
+} from '../api/surveyService';
 
 const surveySchema = yup.object().shape({
   title: yup.string().required('O título é obrigatório.'),
@@ -44,13 +51,6 @@ const surveySchema = yup.object().shape({
     })
   ).min(1, 'Adicione pelo menos uma pergunta.').required('Adicione pelo menos uma pergunta.'),
 });
-
-import {
-  useSurveyDetails,
-  useSurveyRewards,
-  useSurveyNpsCriteria,
-  useUpdateSurvey,
-} from '../api/surveyService';
 
 const SurveyEdit = () => {
   const { id } = useParams();

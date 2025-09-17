@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Typography,
@@ -6,12 +6,6 @@ import {
   Grid,
   CircularProgress,
   Alert,
-  TextField,
-  Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
@@ -27,6 +21,7 @@ import {
   Legend,
 } from 'recharts';
 import { format, subMonths } from 'date-fns';
+import { useForm, FormProvider } from 'react-hook-form';
 import EvolutionFilters from '../components/EvolutionFilters';
 
 const Evolution = () => {
@@ -43,7 +38,7 @@ const Evolution = () => {
     },
   });
 
-  const { control, watch, setValue } = methods;
+  const { control, watch } = methods;
 
   const startDate = watch('startDate');
   const endDate = watch('endDate');
@@ -60,34 +55,33 @@ const Evolution = () => {
     end_date: endDate,
     granularity,
   });
-};
 
-const renderMetricLines = (selectedMetrics, t) => {
-  const metricsConfig = [
-    { key: 'checkins', color: '#8884d8', name: t('evolution.checkins') },
-    { key: 'newCustomers', color: '#82ca9d', name: t('evolution.new_customers') },
-    { key: 'surveys', color: '#ffc658', name: t('evolution.total_survey_responses') },
-    { key: 'coupons', color: '#ff7300', name: t('evolution.redeemed_coupons') },
-    { key: 'nps', color: '#0088FE', name: t('evolution.nps_score') },
-    { key: 'csat', color: '#00C49F', name: t('evolution.csat_score') },
-    { key: 'loyaltyPoints', color: '#FFBB28', name: t('evolution.total_loyalty_points') },
-    { key: 'totalSpent', color: '#FF8042', name: t('evolution.total_spent_overall') },
-    { key: 'engagementRate', color: '#AF19FF', name: t('evolution.engagement_rate') },
-    { key: 'loyaltyRate', color: '#FF19FF', name: t('evolution.loyalty_rate') },
-  ];
+  const renderMetricLines = (metrics, t) => {
+    const metricsConfig = [
+      { key: 'checkins', color: '#8884d8', name: t('evolution.checkins') },
+      { key: 'newCustomers', color: '#82ca9d', name: t('evolution.new_customers') },
+      { key: 'surveys', color: '#ffc658', name: t('evolution.total_survey_responses') },
+      { key: 'coupons', color: '#ff7300', name: t('evolution.redeemed_coupons') },
+      { key: 'nps', color: '#0088FE', name: t('evolution.nps_score') },
+      { key: 'csat', color: '#00C49F', name: t('evolution.csat_score') },
+      { key: 'loyaltyPoints', color: '#FFBB28', name: t('evolution.total_loyalty_points') },
+      { key: 'totalSpent', color: '#FF8042', name: t('evolution.total_spent_overall') },
+      { key: 'engagementRate', color: '#AF19FF', name: t('evolution.engagement_rate') },
+      { key: 'loyaltyRate', color: '#FF19FF', name: t('evolution.loyalty_rate') },
+    ];
 
-  return metricsConfig
-    .filter((metric) => selectedMetrics.includes(metric.key))
-    .map((metric) => (
-      <Line
-        key={metric.key}
-        type="monotone"
-        dataKey={metric.key}
-        stroke={metric.color}
-        name={metric.name}
-      />
-    ));
-};
+    return metricsConfig
+      .filter((metric) => metrics.includes(metric.key))
+      .map((metric) => (
+        <Line
+          key={metric.key}
+          type="monotone"
+          dataKey={metric.key}
+          stroke={metric.color}
+          name={metric.name}
+        />
+      ));
+  };
 
   if (isLoading) {
     return (
@@ -114,28 +108,28 @@ const renderMetricLines = (selectedMetrics, t) => {
           {t('fidelity_general.evolution_title')}
         </Typography>
 
-      <EvolutionFilters control={control} onApplyFilters={() => { /* Lógica de aplicação de filtros já está no useEvolutionAnalytics */ }} />
+        <EvolutionFilters control={control} onApplyFilters={() => { /* Filter logic is handled by watch */ }} />
 
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper elevation={3} sx={{ p: 3 }}>
-            <Typography variant="h6" gutterBottom>
-              {t('evolution.metrics_trend')}
-            </Typography>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={transformedData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                {renderMetricLines(selectedMetrics, t)}
-              </LineChart>
-            </ResponsiveContainer>
-          </Paper>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Typography variant="h6" gutterBottom>
+                {t('evolution.metrics_trend')}
+              </Typography>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={transformedData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  {renderMetricLines(selectedMetrics, t)}
+                </LineChart>
+              </ResponsiveContainer>
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
     </FormProvider>
   );
 };

@@ -1,17 +1,14 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import {
   Box,
   Typography,
   Paper,
   CircularProgress,
   Alert,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useSurveys } from '@/features/Fidelidade/Avaliacoes/api/surveyService';
 import { useQuestionAnswersDistribution } from '@/features/Fidelidade/Avaliacoes/api/satisfactionService';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';

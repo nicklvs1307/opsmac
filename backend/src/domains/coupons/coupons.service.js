@@ -268,6 +268,34 @@ export default (db) => {
     };
   };
 
+  const updateCoupon = async (id, restaurantId, data) => {
+    const coupon = await db.Coupon.findOne({
+      where: { id, restaurantId },
+    });
+
+    if (!coupon) {
+      throw new NotFoundError(
+        "Cupom não encontrado ou não pertence ao seu restaurante.",
+      );
+    }
+
+    // Only allow updating specific fields
+    const allowedUpdates = ["status", "expiresAt"];
+    const updates = {};
+    for (const key of allowedUpdates) {
+      if (data[key] !== undefined) {
+        updates[key] = data[key];
+      }
+    }
+
+    if (Object.keys(updates).length === 0) {
+      throw new BadRequestError("Nenhum dado válido para atualização fornecido.");
+    }
+
+    await coupon.update(updates);
+    return coupon;
+  };
+
   return {
     listCoupons,
     expireCoupons,
@@ -276,6 +304,7 @@ export default (db) => {
     getCouponAnalytics,
     validateCoupon,
     guestValidateCoupon,
+    updateCoupon,
   };
 };
 

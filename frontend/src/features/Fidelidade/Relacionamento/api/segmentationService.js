@@ -22,20 +22,14 @@ export const updateSegment = async ({ segmentId, segmentData, token }) => {
   return response.data;
 };
 
-export const deleteSegment = async ({ segmentId, token }) => {
-  const response = await axiosInstance.delete(`/customerSegmentation/${segmentId}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+export const deleteSegment = async ({ segmentId }) => {
+  const response = await axiosInstance.delete(`/customerSegmentation/${segmentId}`);
   return response.data;
 };
 
-export const applySegmentationRules = async ({ restaurantId, token }) => {
+export const applySegmentationRules = async ({ restaurantId }) => {
   const response = await axiosInstance.post(
     `/customerSegmentation/apply-rules`,
     { restaurantId },
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
+  );},
   );
-  return response.data;
-};

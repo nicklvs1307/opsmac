@@ -18,11 +18,11 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import NpsReportTable from '../components/Reports/NpsReportTable';
-import SatisfactionReportTable from '../components/Reports/SatisfactionReportTable';
-import ComplaintsReportTable from '../components/Reports/ComplaintsReportTable';
-import TrendsReportTable from '../components/Reports/TrendsReportTable';
-import CustomersReportTable from '../components/Reports/CustomersReportTable';
+import NpsReportTable from '../components/NpsReportTable';
+import SatisfactionReportTable from '../components/SatisfactionReportTable';
+import ComplaintsReportTable from '../components/ComplaintsReportTable';
+import TrendsReportTable from '../components/TrendsReportTable';
+import CustomersReportTable from '../components/CustomersReportTable';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';

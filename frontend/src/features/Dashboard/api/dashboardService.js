@@ -104,14 +104,11 @@ export const useRatingDistribution = (restaurantId, params) => {
       enabled: !!restaurantId && !!user?.token,
     }
   );
-};
 
 const fetchRewardsAnalytics = async (restaurantId) => {
   const response = await axiosInstance.get(
     `/dashboard/rewards-analytics?restaurantId=${restaurantId}`
   );
-  return response.data;
-};
 
 export const useRewardsAnalytics = (restaurantId) => {
   const { user } = useAuth();

@@ -7,7 +7,8 @@ import toast from 'react-hot-toast';
 //================================================================================================
 
 // Hook to fetch integration settings
-export const useGetIntegrationSettings = (restaurantId) => {
+export const useGetIntegrationSettings = (options) => {
+  const restaurantId = getRestaurantIdFromAuth();
   return useQuery(
     ['integrationSettings', restaurantId],
     async () => {
@@ -16,9 +17,9 @@ export const useGetIntegrationSettings = (restaurantId) => {
     },
     {
       enabled: !!restaurantId,
+      ...options,
     }
   );
-};
 
 // Hook to update integration settings
 export const useUpdateIntegrationSettings = (restaurantId) => {
@@ -32,6 +33,11 @@ export const useUpdateIntegrationSettings = (restaurantId) => {
       },
       onError: (error) => {
         toast.error(error.response?.data?.message || 'Erro ao salvar configurações de integração.');
+      },
+    }
+  );
+};
+rror.response?.data?.message || 'Erro ao salvar configurações de integração.');
       },
     }
   );

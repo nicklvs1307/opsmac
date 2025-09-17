@@ -109,10 +109,11 @@ const fetchSurveys = async (restaurantId, filters) => {
   return data;
 };
 
-export const useSurveys = (restaurantId, filters, options) => {
+export const useSurveys = (filters, options) => {
+  const restaurantId = getRestaurantIdFromAuth();
   return useQuery(
     [SURVEY_QUERY_KEYS.surveys, restaurantId, filters],
-    () => fetchSurveys(restaurantId, filters),
+    () => fetchSurveys(filters),
     {
       enabled: !!restaurantId,
       ...options,
@@ -157,6 +158,12 @@ export const useUpdateSurveyStatus = (options) => {
     onError: (error, variables, context) => {
       toast.error(error.response?.data?.msg || 'Erro ao atualizar status da pesquisa.');
       options?.onError?.(error, variables, context);
+    },
+    ...options,
+  });
+};
+;
+   options?.onError?.(error, variables, context);
     },
     ...options,
   });

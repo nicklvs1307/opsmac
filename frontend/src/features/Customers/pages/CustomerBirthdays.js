@@ -9,7 +9,7 @@ import {
   ListItem,
   ListItemText,
 } from '@mui/material';
-import { useCustomerBirthdays } from '@/features/Customers/api/customerQueries';
+import { useCustomerBirthdays } from '@/features/Customers/api/customerService';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const CustomerBirthdays = () => {

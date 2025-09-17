@@ -93,8 +93,9 @@ export const useSatisfactionSettings = (restaurantId) => {
   );
 };
 
-export const useUpdateSatisfactionSettings = (restaurantId) => {
+export const useUpdateSatisfactionSettings = () => {
   const queryClient = useQueryClient();
+  const restaurantId = getRestaurantIdFromAuth();
   return useMutation(updateSatisfactionSettings, {
     onSuccess: () => {
       queryClient.invalidateQueries(['satisfactionSettings', restaurantId]);
@@ -102,6 +103,10 @@ export const useUpdateSatisfactionSettings = (restaurantId) => {
     },
     onError: (error) => {
       toast.error(error.response?.data?.msg || 'Erro ao salvar configurações de satisfação.');
+    },
+  });
+};
+.msg || 'Erro ao salvar configurações de satisfação.');
     },
   });
 };

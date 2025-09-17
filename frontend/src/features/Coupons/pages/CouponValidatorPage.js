@@ -1,7 +1,7 @@
 import { Box, Typography, Container, useTheme } from '@mui/material';
 import CouponValidatorCard from '@/components/UI/CouponValidatorCard';
 import { useTranslation } from 'react-i18next';
-import { useValidateCoupon, useRedeemCoupon } from '@/features/Coupons/api/couponQueries';
+import { useValidateCoupon, useRedeemCoupon } from '@/features/Coupons/api/couponService';
 
 const CouponValidatorPage = () => {
   const theme = useTheme();

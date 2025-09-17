@@ -87,16 +87,20 @@ export const useUpdateCheckinSettings = () => {
 // Hook to update restaurant profile (slug)
 export const useUpdateRestaurantProfile = () => {
   const queryClient = useQueryClient();
+  const restaurantId = getRestaurantIdFromAuth();
   return useMutation(
-    ({ restaurantId, profile }) => axiosInstance.put(`/settings/${restaurantId}/profile`, profile),
+    ({ profile }) => axiosInstance.put(`/settings/${restaurantId}/profile`, profile),
     {
       onSuccess: (data, variables) => {
-        queryClient.invalidateQueries(['checkinSettings', variables.restaurantId]);
+        queryClient.invalidateQueries(['checkinSettings', restaurantId]);
         toast.success('Perfil do restaurante atualizado com sucesso!');
       },
       onError: (error) => {
         toast.error(error.response?.data?.message || 'Erro ao atualizar perfil do restaurante.');
       },
     }
+  );
+};
+  }
   );
 };

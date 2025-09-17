@@ -14,9 +14,5 @@ export const fetchSurveyRewardProgram = async ({ restaurantId, token }) => {
   return response.data;
 };
 
-export const saveSurveyRewardProgram = async ({ programData, token }) => {
-  const response = await axiosInstance.post('/survey-reward-programs', programData, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
-};
+export const saveSurveyRewardProgram = async ({ programData }) => {
+  const response = await axiosInstance.post('/survey-reward-programs', programData);

@@ -19,7 +19,7 @@ import {
   useDashboardOverview,
   useEvolutionAnalytics,
   useRewardsAnalytics,
-} from '@/features/Dashboard/api/dashboardQueries';
+} from '@/features/Dashboard/api/dashboardService';
 import {
   LineChart,
   Line,

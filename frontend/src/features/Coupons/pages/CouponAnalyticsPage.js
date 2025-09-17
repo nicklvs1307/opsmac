@@ -13,7 +13,7 @@ import {
   ComposedChart,
 } from 'recharts';
 import { useTranslation } from 'react-i18next';
-import { useCouponAnalytics } from '@/features/Coupons/api/couponQueries';
+import { useCouponAnalytics } from '@/features/Coupons/api/couponService';
 
 const CouponAnalyticsPage = () => {
   const { t } = useTranslation();

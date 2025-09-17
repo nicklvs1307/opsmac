@@ -24,8 +24,6 @@ const fetchRewards = async (restaurantId) => {
 
 const fetchCustomers = async () => {
   const response = await axiosInstance.get('/customers');
-  return response.data;
-};
 
 const fetchCouponDetails = async (id) => {
   const response = await axiosInstance.get(`/coupons/${id}`);
@@ -129,10 +127,11 @@ export const useRedeemCoupon = () => {
   });
 };
 
-export const useCoupons = (restaurantId, params) => {
+export const useCoupons = (params) => {
+  const restaurantId = getRestaurantIdFromAuth();
   return useQuery(
     [COUPON_QUERY_KEYS.coupons, restaurantId, params],
-    () => fetchCoupons({ restaurantId, params }),
+    () => fetchCoupons({ params }),
     {
       enabled: !!restaurantId,
     }
@@ -142,3 +141,9 @@ export const useCoupons = (restaurantId, params) => {
 export const useValidateCoupon = () => {
   return useMutation(validateCoupon);
 };
+
+};
+port const useValidateCoupon = () => {
+  return useMutation(validateCoupon);
+};
+;

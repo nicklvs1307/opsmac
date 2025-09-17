@@ -30,8 +30,18 @@ export const validateCouponValidation = [
 ];
 
 export const guestValidateCouponValidation = [
-  body("code").notEmpty().withMessage("Código do cupom é obrigatório"),
-  body("restaurantSlug")
-    .notEmpty()
-    .withMessage("Slug do restaurante é obrigatório"),
+  body("code").isString().notEmpty(),
+  body("restaurantSlug").isString().notEmpty(),
+];
+
+export const updateCouponValidation = [
+  body("status")
+    .optional()
+    .isIn(["active", "cancelled"])
+    .withMessage("Status inválido."),
+  body("expiresAt")
+    .optional({ checkFalsy: true })
+    .isISO8601()
+    .toDate()
+    .withMessage("Data de expiração inválida."),
 ];

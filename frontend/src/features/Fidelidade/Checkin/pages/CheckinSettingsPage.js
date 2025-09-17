@@ -30,7 +30,7 @@ import {
   useUpdateCheckinSettings,
   useUpdateRestaurantProfile,
 } from '../api/checkinService';
-import { useRewards } from '@/features/Coupons/api/couponQueries';
+import { useRewards } from '@/features/Coupons/api/couponService';
 import toast from 'react-hot-toast';
 import CheckinVisualCustomization from '../components/CheckinVisualCustomization';
 import CheckinCycleSettings from '../components/CheckinCycleSettings';

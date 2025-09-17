@@ -36,7 +36,7 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import usePagination from '@/hooks/usePagination';
 import useDebounce from '@/hooks/useDebounce'; // Import useDebounce
-import { useCoupons, useRedeemCoupon, useExpireCoupon } from '@/features/Coupons/api/couponQueries'; // Import useExpireCoupon
+import { useCoupons, useRedeemCoupon, useExpireCoupon } from '@/features/Coupons/api/couponService';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const CouponListPage = () => {

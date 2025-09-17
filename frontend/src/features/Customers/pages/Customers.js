@@ -52,7 +52,7 @@ import {
   useDeleteCustomer,
   useCreateCustomer,
   useUpdateCustomer,
-} from '@/features/Customers/api/customerQueries';
+} from '@/features/Customers/api/customerService';
 
 const Customers = () => {
   const [page, setPage] = useState(1);

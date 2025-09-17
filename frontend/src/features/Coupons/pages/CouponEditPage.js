@@ -22,7 +22,7 @@ import {
   useRewards,
   useCouponDetails,
   useUpdateCoupon,
-} from '@/features/Coupons/api/couponQueries';
+} from '@/features/Coupons/api/couponService';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useParams, useNavigate } from 'react-router-dom';

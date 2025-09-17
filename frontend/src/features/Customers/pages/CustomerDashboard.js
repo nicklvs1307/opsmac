@@ -10,7 +10,7 @@ import {
   ListItem,
   ListItemText,
 } from '@mui/material';
-import { useCustomerDashboardMetrics } from '@/features/Customers/api/customerQueries';
+import { useCustomerDashboardMetrics } from '@/features/Customers/api/customerService';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const CustomerDashboard = () => {

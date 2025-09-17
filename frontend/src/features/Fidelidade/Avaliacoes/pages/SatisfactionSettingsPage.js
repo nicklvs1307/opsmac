@@ -35,7 +35,7 @@ import {
   useSatisfactionSettings,
   useUpdateSatisfactionSettings,
 } from '@/features/Fidelidade/Avaliacoes/api/satisfactionSettingsService';
-import { useRewards } from '@/features/Coupons/api/couponQueries';
+import { useRewards } from '@/features/Coupons/api/couponService';
 
 const SatisfactionSettingsPage = () => {
   const { user } = useAuth();

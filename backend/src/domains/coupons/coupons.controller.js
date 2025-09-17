@@ -13,6 +13,7 @@ class CouponsController {
     this.validateCoupon = this.validateCoupon.bind(this);
     this.guestValidateCoupon = this.guestValidateCoupon.bind(this);
     this.getCouponAnalytics = this.getCouponAnalytics.bind(this);
+    this.updateCoupon = this.updateCoupon.bind(this);
   }
 
   // handleValidationErrors removido daqui
@@ -147,6 +148,28 @@ class CouponsController {
         { validationResult },
       );
       res.json(validationResult);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateCoupon(req, res, next) {
+    try {
+      const { id } = req.params;
+      const restaurantId = req.context.restaurantId;
+      const coupon = await this.couponsService.updateCoupon(
+        id,
+        restaurantId,
+        req.body,
+      );
+      await auditService.log(
+        req.user,
+        restaurantId,
+        "COUPON_UPDATED",
+        `Coupon:${coupon.id}`,
+        { changes: req.body },
+      );
+      res.json(coupon);
     } catch (error) {
       next(error);
     }

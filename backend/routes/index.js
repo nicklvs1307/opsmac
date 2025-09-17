@@ -47,7 +47,7 @@ export default async (db) => {
         const domainRouter = domainRouterFactory(db);
 
         if (publicDomains.includes(domainName)) {
-          mainRouter.use(`/api/${domainName}`, domainRouter);
+          mainRouter.use(`/${domainName}`, domainRouter);
         } else {
           mainRouter.use(
             `/${domainName}`,

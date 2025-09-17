@@ -42,7 +42,7 @@ import {
   useResetCustomerVisits,
   useClearCustomerCheckins,
   useUpdateCustomer,
-} from '@/features/Customers/api/customerQueries';
+} from '@/features/Customers/api/customerService';
 
 const CustomerDetail = () => {
   const { id } = useParams();

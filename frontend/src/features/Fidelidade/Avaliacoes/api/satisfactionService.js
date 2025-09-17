@@ -66,12 +66,23 @@ const fetchFeedbackWordFrequency = async (restaurantId, queryParams) => {
   return data;
 };
 
-export const useFeedbackWordFrequency = (restaurantId, queryParams) => {
+export const useFeedbackWordFrequency = (queryParams) => {
+  const restaurantId = getRestaurantIdFromAuth();
   return useQuery(
     ['feedbackWordFrequency', restaurantId, queryParams],
-    () => fetchFeedbackWordFrequency(restaurantId, queryParams),
+    () => fetchFeedbackWordFrequency(queryParams),
     {
       enabled: !!restaurantId,
+    }
+  );
+};
+ency(restaurantId, queryParams),
+    {
+      enabled: !!restaurantId,
+    }
+  );
+};
+antId,
     }
   );
 };

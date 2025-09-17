@@ -21,9 +21,5 @@ export const updateReward = async ({ rewardId, rewardData, token }) => {
   return response.data;
 };
 
-export const deleteReward = async ({ rewardId, token }) => {
-  const response = await axiosInstance.delete(`/rewards/${rewardId}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
-};
+export const deleteReward = async ({ rewardId }) => {
+  const response = await axiosInstance.delete(`/rewards/${rewardId}`);

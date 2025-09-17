@@ -17,7 +17,7 @@ import { useForm, Controller } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useCustomers, useRewards, useCreateCoupon } from '@/features/Coupons/api/couponQueries';
+import { useCustomers, useRewards, useCreateCoupon } from '@/features/Coupons/api/couponService';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 

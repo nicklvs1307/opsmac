@@ -273,19 +273,12 @@ export const useUpdateGeneralSetting = (options) => {
   });
 };
 
-export const useSendTestWhatsappMessage = (options) => {
-  return useMutation(sendTestWhatsappMessage, {
-    onSuccess: (data, variables, context) => {
+export const useTestWhatsappMessage = () => {
+  const restaurantId = getRestaurantIdFromAuth();
+  return useMutation(testWhatsappMessage, {
+    onSuccess: () => {
       toast.success('Mensagem de teste enviada com sucesso!');
-      options?.onSuccess?.(data, variables, context);
     },
-    onError: (error, variables, context) => {
-      toast.error(error.response?.data?.message || 'Erro ao enviar mensagem de teste.');
-      options?.onError?.(error, variables, context);
-    },
-    ...options,
-  });
-};
 
 export const useWhatsappSettings = (restaurantId, options) => {
   const { user } = useAuth();

@@ -1,6 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
+
+const getRestaurantIdFromAuth = () => {
+  const { user } = useAuth();
+  return user?.restaurantId;
+};
 
 const RELATIONSHIP_QUERY_KEYS = {
   customers: 'relationshipCustomers',
@@ -8,17 +14,23 @@ const RELATIONSHIP_QUERY_KEYS = {
 };
 
 // API Functions
-const fetchCustomers = async (restaurantId) => {
-  const { data } = await axiosInstance.get(`/customers/restaurant/${restaurantId}`);
+const fetchCustomers = async (params) => {
+  const restaurantId = getRestaurantIdFromAuth();
+  if (!restaurantId) throw new Error('Restaurant ID not available.');
+  const { data } = await axiosInstance.get(`/customers/restaurant/${restaurantId}`, { params });
   return data;
 };
 
-const fetchWhatsappSettings = async (restaurantId) => {
+const fetchWhatsappSettings = async () => {
+  const restaurantId = getRestaurantIdFromAuth();
+  if (!restaurantId) throw new Error('Restaurant ID not available.');
   const { data } = await axiosInstance.get(`/settings/${restaurantId}/whatsapp`);
   return data;
 };
 
-const sendManualMessage = async ({ restaurantId, recipientPhoneNumber, messageText }) => {
+const sendManualMessage = async ({ recipientPhoneNumber, messageText }) => {
+  const restaurantId = getRestaurantIdFromAuth();
+  if (!restaurantId) throw new Error('Restaurant ID not available.');
   const { data } = await axiosInstance.post(`/whatsapp/send-manual`, {
     restaurant_id: restaurantId,
     recipient_phone_number: recipientPhoneNumber,
@@ -27,7 +39,9 @@ const sendManualMessage = async ({ restaurantId, recipientPhoneNumber, messageTe
   return data;
 };
 
-const saveAutomaticCampaigns = async ({ restaurantId, settings }) => {
+const saveAutomaticCampaigns = async ({ settings }) => {
+  const restaurantId = getRestaurantIdFromAuth();
+  if (!restaurantId) throw new Error('Restaurant ID not available.');
   const { data } = await axiosInstance.put(`/settings/${restaurantId}`, {
     settings: {
       whatsapp_messages: settings,
@@ -37,20 +51,22 @@ const saveAutomaticCampaigns = async ({ restaurantId, settings }) => {
 };
 
 // React Query Hooks
-export const useFetchCustomers = (restaurantId) => {
+export const useFetchCustomers = (params) => {
+  const restaurantId = getRestaurantIdFromAuth();
   return useQuery(
-    [RELATIONSHIP_QUERY_KEYS.customers, restaurantId],
-    () => fetchCustomers(restaurantId),
+    [RELATIONSHIP_QUERY_KEYS.customers, restaurantId, params],
+    () => fetchCustomers(params),
     {
       enabled: !!restaurantId,
     }
   );
 };
 
-export const useFetchWhatsappSettings = (restaurantId) => {
+export const useFetchWhatsappSettings = () => {
+  const restaurantId = getRestaurantIdFromAuth();
   return useQuery(
     [RELATIONSHIP_QUERY_KEYS.whatsappSettings, restaurantId],
-    () => fetchWhatsappSettings(restaurantId),
+    () => fetchWhatsappSettings(),
     {
       enabled: !!restaurantId,
     }
@@ -70,6 +86,7 @@ export const useSendManualMessage = () => {
 
 export const useSaveAutomaticCampaigns = () => {
   const queryClient = useQueryClient();
+  const restaurantId = getRestaurantIdFromAuth();
   return useMutation(saveAutomaticCampaigns, {
     onSuccess: () => {
       queryClient.invalidateQueries(RELATIONSHIP_QUERY_KEYS.whatsappSettings); // Invalidate settings to refetch

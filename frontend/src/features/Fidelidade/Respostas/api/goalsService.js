@@ -8,12 +8,8 @@ export const fetchGoals = async ({ restaurantId, token }) => {
   return response.data;
 };
 
-export const createGoal = async ({ goalData, token }) => {
-  const response = await axiosInstance.post('/goals', goalData, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
-};
+export const createGoal = async ({ goalData }) => {
+  const response = await axiosInstance.post('/goals', goalData);
 
 export const updateGoal = async ({ goalId, goalData, token }) => {
   const response = await axiosInstance.put(`/goals/${goalId}`, goalData, {
@@ -29,13 +25,8 @@ export const deleteGoal = async ({ goalId, token }) => {
   return response.data;
 };
 
-export const updateGoalProgress = async ({ goalId, token }) => {
+export const updateGoalProgress = async ({ goalId }) => {
   const response = await axiosInstance.post(
     `/goals/${goalId}/update-progress`,
     {},
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
   );
-  return response.data;
-};

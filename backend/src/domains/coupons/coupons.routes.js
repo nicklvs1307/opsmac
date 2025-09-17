@@ -9,6 +9,7 @@ import {
   createCouponValidation,
   validateCouponValidation,
   guestValidateCouponValidation,
+  updateCouponValidation,
 } from "./coupons.validation.js";
 
 export default (db) => {
@@ -56,6 +57,13 @@ export default (db) => {
     "/guest-validate",
     ...guestValidateCouponValidation,
     asyncHandler(couponsController.publicValidateCoupon),
+  );
+
+  router.put(
+    "/:id",
+    requirePermission("fidelity:coupons:management", "update"),
+    ...updateCouponValidation,
+    asyncHandler(couponsController.updateCoupon),
   );
 
   return router;

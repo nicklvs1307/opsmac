@@ -7,7 +7,7 @@ export default (db) => {
     const { page = 1, limit = 12, search } = query;
     const offset = (page - 1) * limit;
 
-    const where = { restaurantId: restaurantId };
+    const where = { restaurant_id: restaurantId };
 
     if (search) {
       where[Op.or] = [
@@ -104,7 +104,7 @@ export default (db) => {
     return true;
   };
 
-  const canCustomerUseReward = async (reward, customerId, extraData = {}) => {
+  const canCustomerUseReward = async (reward, customerId, restaurantId, extraData = {}) => {
     if (!isValidReward(reward)) return false;
     if (reward.customer_id && reward.customer_id !== customerId) return false;
     if (extraData && extraData.visit_milestone) return true;
@@ -113,7 +113,8 @@ export default (db) => {
       const usageCount = await db.Coupon.count({
         where: {
           reward_id: reward.id,
-          customer_id: customer_id,
+          customer_id: customerId,
+          restaurant_id: restaurantId,
         },
       });
       if (usageCount >= reward.max_uses_per_customer) return false;
@@ -126,7 +127,7 @@ export default (db) => {
     customerId,
     extraData = {},
   ) => {
-    const canUse = await canCustomerUseReward(reward, customer_id, extraData);
+    const canUse = await canCustomerUseReward(reward, customerId, reward.restaurant_id, extraData);
     if (!canUse) {
       throw new BadRequestError("Cliente não pode usar esta recompensa");
     }
@@ -252,18 +253,18 @@ export default (db) => {
       where: { restaurant_id: restaurantId },
     });
     const activeRewards = await db.Reward.count({
-      where: { restaurantId, is_active: true },
+      where: { restaurant_id: restaurantId, is_active: true },
     });
 
     const rewardsByType = await db.Reward.findAll({
-      where: { restaurantId },
+      where: { restaurant_id: restaurantId },
       attributes: ["reward_type", [fn("COUNT", col("id")), "count"]],
       group: ["reward_type"],
       raw: true,
     });
 
     const totalCoupons = await db.Coupon.count({
-      where: { restaurantId },
+      where: { restaurant_id: restaurantId },
     });
     const redeemedCoupons = await db.Coupon.count({
       where: { restaurant_id: restaurantId, status: "redeemed" },

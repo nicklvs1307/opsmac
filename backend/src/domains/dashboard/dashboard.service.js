@@ -82,21 +82,21 @@ export default (db) => {
       avgNpsScoreStats,
       avgRatingStats,
     ] = await Promise.all([
-      models.Checkin.count({ where: { restaurantId, ...dateFilter } }),
-      models.Customer.count({ where: { restaurantId, ...dateFilter } }),
+      models.Checkin.count({ where: { restaurant_id: restaurantId, ...dateFilter } }),
+      models.Customer.count({ where: { restaurant_id: restaurantId, ...dateFilter } }),
       models.SurveyResponse.count({
-        where: { restaurantId, ...dateFilter },
+        where: { restaurant_id: restaurantId, ...dateFilter },
       }),
       models.Coupon.count({
         where: {
-          restaurantId,
+          restaurant_id: restaurantId,
           status: "used",
           ...redeemedAtFilter,
         },
       }),
       models.SurveyResponse.findOne({
         where: {
-          restaurantId,
+          restaurant_id: restaurantId,
           nps_score: { [Op.not]: null },
           ...dateFilter,
         },
@@ -105,7 +105,7 @@ export default (db) => {
       }),
       models.Feedback.findOne({
         where: {
-          restaurantId,
+          restaurant_id: restaurantId,
           rating: { [Op.not]: null },
           ...dateFilter,
         },
@@ -311,7 +311,7 @@ export default (db) => {
     ] = await Promise.all([
       // 0: checkins
       models.Checkin.findAll({
-        where: { restaurantId, ...dateFilter },
+        where: { restaurant_id: restaurantId, ...dateFilter },
         attributes: [
           [granularityFn("Checkin.createdAt"), "date"],
           [fn("COUNT", col("id")), "count"],
@@ -322,7 +322,7 @@ export default (db) => {
       }),
       // 1: customerAggregations
       models.Customer.findAll({
-        where: { restaurantId, ...dateFilter },
+        where: { restaurant_id: restaurantId, ...dateFilter },
         attributes: [
           [granularityFn("Customer.createdAt"), "date"],
           [fn("COUNT", col("id")), "newCustomersCount"],
@@ -335,7 +335,7 @@ export default (db) => {
       }),
       // 2: surveys
       models.SurveyResponse.findAll({
-        where: { restaurantId, ...dateFilter },
+        where: { restaurant_id: restaurantId, ...dateFilter },
         attributes: [
           [granularityFn("SurveyResponse.createdAt"), "date"],
           [fn("COUNT", col("id")), "count"],
@@ -347,7 +347,7 @@ export default (db) => {
       // 3: coupons
       models.Coupon.findAll({
         where: {
-          restaurantId,
+          restaurant_id: restaurantId,
           status: "used",
           ...redeemedAtFilter,
         },
@@ -361,7 +361,7 @@ export default (db) => {
       }),
       // 4: nps
       models.Feedback.findAll({
-        where: { restaurantId, nps_score: { [Op.not]: null }, ...dateFilter },
+        where: { restaurant_id: restaurantId, nps_score: { [Op.not]: null }, ...dateFilter },
         attributes: [
           [granularityFn("Feedback.createdAt"), "date"],
           [fn("AVG", col("nps_score")), "score"],
@@ -372,7 +372,7 @@ export default (db) => {
       }),
       // 5: csat
       models.Feedback.findAll({
-        where: { restaurantId, rating: { [Op.not]: null }, ...dateFilter },
+        where: { restaurant_id: restaurantId, rating: { [Op.not]: null }, ...dateFilter },
         attributes: [
           [granularityFn("Feedback.createdAt"), "date"],
           [fn("AVG", col("rating")), "score"],
@@ -383,7 +383,7 @@ export default (db) => {
       }),
       // 6: engagedCustomersEvolution
       models.Checkin.findAll({
-        where: { restaurantId, ...dateFilter },
+        where: { restaurant_id: restaurantId, ...dateFilter },
         attributes: [
           [granularityFn("Checkin.createdAt"), "date"],
           [fn("COUNT", fn("DISTINCT", col("customer_id"))), "count"],
@@ -394,7 +394,7 @@ export default (db) => {
       }),
       // 7: loyalCustomersEvolution
       models.Checkin.findAll({
-        where: { restaurantId, ...dateFilter },
+        where: { restaurant_id: restaurantId, ...dateFilter },
         attributes: [
           [granularityFn("Checkin.createdAt"), "date"],
           "customer_id",
@@ -485,7 +485,7 @@ export default (db) => {
 
     const ratings = await models.Feedback.findAll({
       where: {
-        restaurantId,
+        restaurant_id: restaurantId,
         rating: { [Op.not]: null },
         ...dateFilter,
       },
@@ -573,35 +573,35 @@ export default (db) => {
         engagedCustomersCount,
         loyalCustomers,
       ] = await Promise.all([
-        models.Checkin.count({ where: { restaurantId, ...dateFilter } }),
-        models.Customer.count({ where: { restaurantId, ...dateFilter } }),
-        models.SurveyResponse.count({ where: { restaurantId, ...dateFilter } }),
+        models.Checkin.count({ where: { restaurant_id: restaurantId, ...dateFilter } }),
+        models.Customer.count({ where: { restaurant_id: restaurantId, ...dateFilter } }),
+        models.SurveyResponse.count({ where: { restaurant_id: restaurantId, ...dateFilter } }),
         models.Coupon.count({
           where: {
-            restaurantId,
+            restaurant_id: restaurantId,
             status: "used",
             redeemed_at: { [Op.between]: [start, end] },
           },
         }),
         models.Feedback.findOne({
-          where: { restaurantId, ...dateFilter },
+          where: { restaurant_id: restaurantId, ...dateFilter },
           attributes: [
             [fn("AVG", col("npsScore")), "avgNpsScore"],
             [fn("AVG", col("rating")), "avgRating"],
           ],
           raw: true,
         }),
-        models.Customer.sum("loyaltyPoints", { where: { restaurantId } }),
-        models.Customer.sum("totalSpent", { where: { restaurantId } }),
-        models.Customer.count({ where: { restaurantId } }),
+        models.Customer.sum("loyaltyPoints", { where: { restaurant_id: restaurantId } }),
+        models.Customer.sum("totalSpent", { where: { restaurant_id: restaurantId } }),
+        models.Customer.count({ where:.restaurant_id: restaurantId } }),
         models.Checkin.count({
           distinct: true,
           col: "customerId",
-          where: { restaurantId },
+          where: { restaurant_id: restaurantId },
         }),
         models.Checkin.findAll({
           attributes: ["customerId"],
-          where: { restaurantId },
+          where: { restaurant_id: restaurantId },
           group: ["customerId"],
           having: literal('COUNT("id") > 1'),
         }),

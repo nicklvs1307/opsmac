@@ -267,7 +267,7 @@ export default (db) => {
       include: _getFeedbackIncludes(models),
     });
 
-    await handleWhatsAppNotification(fullFeedback);
+    // await handleWhatsAppNotification(fullFeedback);
 
     await notificationService.sendFeedbackThankYouWhatsApp(fullFeedback);
 
@@ -317,6 +317,7 @@ export default (db) => {
     const feedback = await models.Feedback.findOne({
       where: { id: feedbackId, restaurant_id: restaurantId },
       include: _getFeedbackIncludes(models),
+    });
     if (!feedback)
       throw new NotFoundError(
         "Feedback não encontrado ou não pertence ao seu restaurante.",

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 
 const SettingsPage = () => {
   const { can } = usePermissions();

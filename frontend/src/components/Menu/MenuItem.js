@@ -11,7 +11,7 @@ import {
 import { ExpandLess, ExpandMore, ChevronRight, Lock } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { usePermissions } from '../../hooks/usePermissions'; // Importar o hook de permissões
+import { usePermissions } from '../hooks/usePermissions'; // Importar o hook de permissões
 
 const MenuItem = ({ item, level = 0, onMobileClose }) => {
   const navigate = useNavigate();

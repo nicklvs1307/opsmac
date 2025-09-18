@@ -10,7 +10,7 @@ import {
 } from '@/features/Admin/api/adminQueries';
 
 // Hooks
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 import useAdminData from '../hooks/useAdminData';
 import { useGetPermissionTree, useSetEntitlements } from '@/features/IAM/api/iamQueries';
 

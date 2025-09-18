@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert } from '@mui/material';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 import {
   Box,
   Typography,

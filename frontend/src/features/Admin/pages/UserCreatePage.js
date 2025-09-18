@@ -25,7 +25,7 @@ import {
   useAssignUserRole,
 } from '@/features/IAM/api/iamQueries';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 import PermissionTree from '../components/PermissionTree';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';

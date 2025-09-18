@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { useQueryClient } from 'react-query';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 import toast from 'react-hot-toast';
 
 import {

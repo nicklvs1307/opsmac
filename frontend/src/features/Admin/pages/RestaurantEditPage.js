@@ -20,7 +20,7 @@ import {
   useSetEntitlements, // Changed from useSetEntitlement
   useGetRestaurantEntitlements, // Added this hook
 } from '@/features/IAM/api/iamQueries';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 import PermissionTree from '../components/PermissionTree';
 
 const RestaurantEditPage = () => {

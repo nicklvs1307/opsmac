@@ -21,7 +21,7 @@ import { useMutation } from 'react-query';
 import { toast } from 'react-hot-toast';
 import { createRestaurantWithOwner, saveRestaurant, fetchUsers } from '../services/adminService'; // Assuming these are correctly implemented
 import { useQueryClient, useQuery } from 'react-query';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 
 const RestaurantCreatePage = () => {
   const navigate = useNavigate();

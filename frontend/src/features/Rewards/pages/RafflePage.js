@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 import { Box, Typography, Paper, Button, CircularProgress, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/app/providers/contexts/AuthContext';

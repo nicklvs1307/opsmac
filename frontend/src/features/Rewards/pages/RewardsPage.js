@@ -1,5 +1,5 @@
 import RewardFormDialog from '../components/RewardFormDialog';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 
 const RewardsPage = () => {
   const { can } = usePermissions();

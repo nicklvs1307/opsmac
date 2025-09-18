@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import { useSaveAdminUser } from '@/features/Admin/api/adminQueries';
 
 // Hooks
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 import useAdminData from '../hooks/useAdminData';
 
 // Components

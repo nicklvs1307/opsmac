@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography, CircularProgress, Alert, Paper, Grid, Button } from '@mui/material';
 import { useCustomerDetail } from '../api/customerService';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 
 const DetailPage = () => {
   const { id } = useParams();

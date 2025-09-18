@@ -36,8 +36,8 @@ import {
   useDeleteSurvey,
   useUpdateSurveyStatus,
 } from '../api/surveyService';
-import QrCodeModal from '../components/QrCodeModal';
-import SurveyTable from '../components/SurveyTable';
+// import QrCodeModal from '../components/QrCodeModal';
+// import SurveyTable from '../components/SurveyTable';
 
 const SurveyListPage = () => {
   const { t } = useTranslation();
@@ -160,7 +160,7 @@ const SurveyListPage = () => {
             {t('common.error_loading_surveys')}: {error.message}
           </Alert>
         ) : (
-          <SurveyTable
+          {/* <SurveyTable
             surveys={surveys}
             handleToggleStatus={handleToggleStatus}
             handleDelete={handleDelete}
@@ -168,15 +168,15 @@ const SurveyListPage = () => {
             handleCopyLink={handleCopyLink}
             deleteMutation={deleteMutation}
             updateStatusMutation={updateStatusMutation}
-          />
+          /> */}
         )}
       </Paper>
 
-      <QrCodeModal
+      {/* <QrCodeModal
         isOpen={isQrModalOpen}
         onClose={() => setQrModalOpen(false)}
         qrCodeValue={qrCodeValue}
-      />
+      /> */}
     </Box>
   );
 };

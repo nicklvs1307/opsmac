@@ -1,4 +1,4 @@
-import RewardFormDialog from '../components/RewardFormDialog';
+// import RewardFormDialog from '../components/RewardFormDialog';
 import { usePermissions } from '../../../hooks/usePermissions';
 
 const RewardsPage = () => {
@@ -307,7 +307,7 @@ const RewardsPage = () => {
         </Box>
       )}
 
-      <RewardFormDialog
+      {/* <RewardFormDialog
         open={createDialog || detailsModalOpen}
         onClose={() => {
           setCreateDialog(false);
@@ -320,7 +320,7 @@ const RewardsPage = () => {
         control={control}
         errors={errors}
         watch={watch}
-      />
+      /> */}
 
       <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)}>
         <DialogTitle>Confirmar Exclusão</DialogTitle>

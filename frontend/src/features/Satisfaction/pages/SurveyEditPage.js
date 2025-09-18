@@ -24,7 +24,7 @@ import { usePermissions } from '../../../hooks/usePermissions';
 import { useForm, FormProvider, Controller, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import SurveyQuestionField from '../components/SurveyQuestionField';
+// import SurveyQuestionField from '../components/SurveyQuestionField';
 import {
   useSurveyDetails,
   useSurveyRewards,
@@ -275,53 +275,13 @@ const SurveyEditPage = () => {
           <Typography variant="h5" sx={{ mt: 3, mb: 2 }}>
             {t('survey_edit.questions_title')}
           </Typography>
-          {fields.map((field, index) => (
+          {/* {fields.map((field, index) => (
             <SurveyQuestionField
               key={field.id}
               questionIndex={index}
               onRemoveQuestion={() => remove(index)}
             />
-          ))}
-          <Button
-            variant="contained"
-            onClick={() =>
-              append({
-                question_text: '',
-                question_type: 'text',
-                nps_criterion_id: null,
-                options: [],
-              })
-            }
-            sx={{ mb: 2 }}
-          >
-            {t('survey_edit.add_question_button')}
-          </Button>
-          {errors.questions && (
-            <Typography color="error" variant="body2" sx={{ mt: 1 }}>
-              {errors.questions.message}
-            </Typography>
-          )}
-
-          <Box sx={{ mt: 3 }}>
-            <Button
-              variant="contained"
-              onClick={handleSubmit(handleUpdate)} // Alterado para handleSubmit(handleUpdate)
-              disabled={updateSurveyMutation.isLoading}
-            >
-              {updateSurveyMutation.isLoading ? (
-                <CircularProgress size={24} />
-              ) : (
-                t('survey_edit.save_changes_button')
-              )}
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={() => navigate('/satisfaction/surveys')}
-              sx={{ ml: 2 }}
-            >
-              {t('common.cancel')}
-            </Button>
-          </Box>
+          ))} */}
         </Paper>
       </Box>
     </FormProvider>

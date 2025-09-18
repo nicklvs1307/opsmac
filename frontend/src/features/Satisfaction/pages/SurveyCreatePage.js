@@ -43,7 +43,7 @@ import {
   useSurveyRewards,
   useSurveyNpsCriteria,
 } from '../api/surveyService';
-import SurveyQuestionField from '../components/SurveyQuestionField';
+// import SurveyQuestionField from '../components/SurveyQuestionField';
 
 const surveySchema = yup.object().shape({
   surveyType: yup.string().required('O tipo de pesquisa é obrigatório'),
@@ -337,34 +337,13 @@ const SurveyCreatePage = () => {
             />
             <Box mt={4}>
               <Typography variant="h6">{t('survey_create.questions_title')}</Typography>
-              {fields.map((field, index) => (
+              {/* {fields.map((field, index) => (
                 <SurveyQuestionField
                   key={field.id}
                   questionIndex={index}
                   onRemoveQuestion={() => remove(index)}
                 />
-              ))}
-              <Button
-                startIcon={<AddCircleOutlineIcon />}
-                onClick={() =>
-                  append({
-                    question_text: '',
-                    question_type: 'text',
-                    nps_criterion_id: null,
-                    options: [],
-                  })
-                }
-                variant="outlined"
-                sx={{ mt: 2 }}
-              >
-                {t('survey_create.add_question_button')}
-              </Button>
-              {errors.questions && (
-                <Typography color="error" variant="body2" sx={{ mt: 1 }}>
-                  {errors.questions.message}
-                </Typography>
-              )}
-            </Box>
+              ))} */}
           </Box>
         );
       case 2:

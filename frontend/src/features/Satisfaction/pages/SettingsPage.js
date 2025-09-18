@@ -25,7 +25,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { usePermissions } from '../../../hooks/usePermissions';
-import NpsCriterionFormDialog from '../components/NpsCriterionFormDialog'; // Importar o novo componente
+// import NpsCriterionFormDialog from '../components/NpsCriterionFormDialog'; // Importar o novo componente
 import {
   useNpsCriteria,
   useCreateNpsCriterion,
@@ -298,7 +298,7 @@ const SettingsPage = () => {
         )}
       </Paper>
 
-      <NpsCriterionFormDialog
+      {/* <NpsCriterionFormDialog
         open={openCriterionDialog}
         onClose={() => {
           setOpenCriterionDialog(false);
@@ -307,7 +307,7 @@ const SettingsPage = () => {
         criterion={currentCriterion}
         createMutation={createMutation}
         updateMutation={updateMutation}
-      />
+      /> */}
     </Box>
   );
 };

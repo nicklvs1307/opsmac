@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePermissions } from '../../hooks/usePermissions';
+import { usePermissions } from '../hooks/usePermissions';
 import { Box, CircularProgress, Alert } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';

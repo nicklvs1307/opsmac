@@ -29,15 +29,7 @@ const RelationshipDashboard = lazy(() => import('@/features/Relationship/pages/S
 
 const IntegrationsPage = lazy(() => import('@/features/Integrations/pages/IntegrationsDashboardPage'));
 
-const MonthlySummary = lazy(() => import('@/features/Fidelidade/Geral/pages/MonthlySummary'));
-const SatisfactionOverview = lazy(
-  () => import('@/features/Fidelidade/Geral/pages/SatisfactionOverview')
-);
-const SurveysComparison = lazy(() => import('@/features/Fidelidade/Geral/pages/SurveysComparison'));
-const Evolution = lazy(() => import('@/features/Fidelidade/Geral/pages/Evolution'));
-const Benchmarking = lazy(() => import('@/features/Fidelidade/Geral/pages/Benchmarking'));
-const MultipleChoice = lazy(() => import('@/features/Fidelidade/Geral/pages/MultipleChoice'));
-const WordClouds = lazy(() => import('@/features/Fidelidade/Geral/pages/WordClouds'));
+
 
 const Replicas = lazy(() => import('@/features/Goals/pages/ReplicasPage'));
 const Goals = lazy(() => import('@/features/Goals/pages/GoalsManagementPage'));
@@ -62,76 +54,7 @@ const fidelityRoutes = [
       </ProtectedRoute>
     ),
   },
-  {
-    path: 'fidelity/monthly-summary',
-    element: (
-      <ProtectedRoute featureKey="fidelity:general:monthly-summary" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <MonthlySummary />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'fidelity/satisfaction-overview',
-    element: (
-      <ProtectedRoute featureKey="fidelity:general:satisfaction-overview" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <SatisfactionOverview />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'fidelity/surveys-comparison',
-    element: (
-      <ProtectedRoute featureKey="fidelity:general:surveys-comparison" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <SurveysComparison />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'fidelity/evolution',
-    element: (
-      <ProtectedRoute featureKey="fidelity:general:evolution" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <Evolution />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'fidelity/benchmarking',
-    element: (
-      <ProtectedRoute featureKey="fidelity:general:benchmarking" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <Benchmarking />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'fidelity/multiple-choice',
-    element: (
-      <ProtectedRoute featureKey="fidelity:general:multiple-choice" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <MultipleChoice />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'fidelity/word-clouds',
-    element: (
-      <ProtectedRoute featureKey="fidelity:general:word-clouds" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <WordClouds />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
+
 
   {
     path: 'qrcodes',

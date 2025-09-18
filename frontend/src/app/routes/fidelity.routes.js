@@ -51,7 +51,7 @@ const Campaigns = lazy(() => import('@/features/Relationship/pages/CampaignsPage
 const Messages = lazy(() => import('@/features/Relationship/pages/MessagesPage'));
 const Segmentation = lazy(() => import('@/features/Relationship/pages/SegmentationManagementPage'));
 
-const GeneratedCouponsReport = lazy(() => import('@/features/Reports/pages/GeneratedCouponsReportPage'));
+const GeneratedCouponsReport = lazy(() => import('@/features/old/Reports/pages/GeneratedCouponsReport'));
 const ComingSoon = lazy(() => import('@/features/Common/pages/ComingSoonPage'));
 
 const fidelityRoutes = [

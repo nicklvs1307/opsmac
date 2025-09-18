@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           11.0s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           10.9s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.317 + npm run build
-0.604
-0.604 > feedeliza-plus@1.0.0 build
-0.604 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.604
-2.904 Creating an optimized production build...
-10.82 Failed to compile.
-10.82
-10.82 Module not found: Error: Can't resolve '@/features/Public/pages/DineInMenu' in '/app/frontend/src/app/routes'
-10.82
-10.82
+0.268 + npm run build
+0.581
+0.581 > feedeliza-plus@1.0.0 build
+0.581 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.581
+2.735 Creating an optimized production build...
+10.70 Failed to compile.
+10.70
+10.70 Module not found: Error: Can't resolve '@/features/Reports/pages/GeneratedCouponsReportPage' in '/app/frontend/src/app/routes'
+10.70
+10.70
 ------
 Dockerfile.frontend:27
 --------------------

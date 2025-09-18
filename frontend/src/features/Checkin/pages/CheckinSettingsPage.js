@@ -31,7 +31,7 @@ import {
   useUpdateCheckinSettings,
   useUpdateRestaurantProfile,
 } from '../api/checkinQueries';
-import { useRewards } from '@/features/Coupons/api/couponService'; // Keeping this external dependency for now
+import { useRewards } from '@/features/Coupons/api/couponQueries';
 import toast from 'react-hot-toast';
 // Assuming these components will be moved to the new components folder
 import CheckinVisualCustomization from '../components/CheckinVisualCustomization';

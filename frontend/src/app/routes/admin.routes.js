@@ -20,18 +20,16 @@ const UserPermissionOverrides = lazy(() => import('@/features/IAM/pages/UserPerm
 const EntitlementManagement = lazy(() => import('@/features/IAM/pages/EntitlementManagement'));
 const UserRoleManagement = lazy(() => import('@/features/IAM/pages/UserRoleManagement'));
 
-const Settings = lazy(() => import('@/features/Settings/pages/Settings'));
-const StockDashboardPage = lazy(() => import('@/features/ERP/pages/StockDashboardPage'));
-const StockProductsPage = lazy(() => import('@/features/ERP/pages/StockProductsPage'));
+const Settings = lazy(() => import('@/features/Settings/pages/SettingsPage'));
+const StockDashboardPage = lazy(() => import('@/features/ERP/Stock/pages/StockDashboardPage'));
+const StockProductsPage = lazy(() => import('@/features/ERP/Stock/pages/StockProductsPage'));
 const CouponListPage = lazy(() => import('@/features/Coupons/pages/CouponListPage'));
-const SurveyList = lazy(() => import('@/features/Satisfaction/pages/SurveyList'));
-const CheckinAnalyticsPage = lazy(
-  () => import('@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage')
-);
-const Tables = lazy(() => import('@/features/ERP/pages/Tables'));
-const QRCodeManage = lazy(() => import('@/features/QRCode/pages/QRCodeManage'));
-const SuppliersPage = lazy(() => import('@/features/ERP/pages/SuppliersPage'));
-const ProductionList = lazy(() => import('@/features/ValidityControl/ProductionList'));
+const SurveyList = lazy(() => import('@/features/Satisfaction/pages/SurveyListPage'));
+const CheckinAnalyticsPage = lazy(() => import('@/features/Checkin/pages/CheckinAnalyticsPage'));
+const Tables = lazy(() => import('@/features/ERP/Tables/pages/TablesManagementPage'));
+const QRCodeManage = lazy(() => import('@/features/QRCode/pages/QRCodeManagePage'));
+const SuppliersPage = lazy(() => import('@/features/ERP/Stock/pages/SuppliersManagementPage'));
+const ProductionList = lazy(() => import('@/features/ValidityControl/Production/pages'));
 const ComingSoon = lazy(() => import('@/features/Common/pages/ComingSoonPage'));
 const WaiterPage = lazy(() => import('@/features/Waiter/pages/WaiterPage'));
 const OrderPage = lazy(() => import('@/features/Waiter/pages/OrderPage'));

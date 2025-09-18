@@ -1,12 +1,12 @@
 import React, { Suspense, lazy } from 'react';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 
-const Dashboard = lazy(() => import('@/features/Dashboard/pages/Dashboard'));
-const FeedbackList = lazy(() => import('@/features/Feedback/pages/FeedbackList'));
-const NewFeedback = lazy(() => import('@/features/Feedback/pages/NewFeedback'));
-const FeedbackDetail = lazy(() => import('@/features/Feedback/pages/FeedbackDetail'));
-const QRCodeManage = lazy(() => import('@/features/QRCode/pages/QRCodeManage'));
-const QRCodeGenerate = lazy(() => import('@/features/QRCode/pages/QRCodeGenerate'));
+const Dashboard = lazy(() => import('@/features/Relationship/pages/SegmentationDashboardPage'));
+const FeedbackList = lazy(() => import('@/features/Feedback/pages/FeedbackListPage'));
+const NewFeedback = lazy(() => import('@/features/Feedback/pages/NewFeedbackPage'));
+const FeedbackDetail = lazy(() => import('@/features/Feedback/pages/FeedbackDetailPage'));
+const QRCodeManage = lazy(() => import('@/features/QRCode/pages/QRCodeManagePage'));
+const QRCodeGenerate = lazy(() => import('@/features/QRCode/pages/QRCodeGeneratePage'));
 
 
 const CouponListPage = lazy(() => import('@/features/Coupons/pages/CouponListPage'));
@@ -18,15 +18,9 @@ const CouponDashboardPage = lazy(() => import('@/features/Coupons/pages/CouponDa
 
 
 
-const CheckinAnalyticsPage = lazy(
-  () => import('@/features/Fidelidade/Checkin/pages/CheckinAnalyticsPage')
-);
-const CheckinSettingsPage = lazy(
-  () => import('@/features/Fidelidade/Checkin/pages/CheckinSettingsPage')
-);
-const ActiveCheckinsPage = lazy(
-  () => import('@/features/Fidelidade/Checkin/pages/ActiveCheckinsPage')
-);
+const CheckinAnalyticsPage = lazy(() => import('@/features/Checkin/pages/CheckinAnalyticsPage'));
+const CheckinSettingsPage = lazy(() => import('@/features/Checkin/pages/CheckinSettingsPage'));
+const ActiveCheckinsPage = lazy(() => import('@/features/Checkin/pages/ActiveCheckinsPage'));
 
 
 
@@ -34,9 +28,7 @@ const ActiveCheckinsPage = lazy(
 
 
 
-const RelationshipDashboard = lazy(
-  () => import('@/features/Relationship/pages/RelationshipDashboard')
-);
+const RelationshipDashboard = lazy(() => import('@/features/Relationship/pages/SegmentationDashboardPage'));
 
 const IntegrationsPage = lazy(() => import('@/features/Integrations/pages/IntegrationsPage'));
 
@@ -50,18 +42,16 @@ const Benchmarking = lazy(() => import('@/features/Fidelidade/Geral/pages/Benchm
 const MultipleChoice = lazy(() => import('@/features/Fidelidade/Geral/pages/MultipleChoice'));
 const WordClouds = lazy(() => import('@/features/Fidelidade/Geral/pages/WordClouds'));
 
-const Replicas = lazy(() => import('@/features/Fidelidade/Respostas/pages/Replicas'));
-const Goals = lazy(() => import('@/features/Fidelidade/Respostas/pages/Goals'));
-const Import = lazy(() => import('@/features/Fidelidade/Respostas/pages/Import'));
-const Ranking = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Ranking'));
-const Dispatches = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Dispatches'));
-const Campaigns = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Campaigns'));
-const Messages = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Messages'));
-const Segmentation = lazy(() => import('@/features/Fidelidade/Relacionamento/pages/Segmentation'));
+const Replicas = lazy(() => import('@/features/Goals/pages/ReplicasPage'));
+const Goals = lazy(() => import('@/features/Goals/pages/GoalsManagementPage'));
+const Import = lazy(() => import('@/features/Goals/pages/ImportPage'));
+const Ranking = lazy(() => import('@/features/Relationship/pages/RankingPage'));
+const Dispatches = lazy(() => import('@/features/Relationship/pages/DispatchesPage'));
+const Campaigns = lazy(() => import('@/features/Relationship/pages/CampaignsPage'));
+const Messages = lazy(() => import('@/features/Relationship/pages/MessagesPage'));
+const Segmentation = lazy(() => import('@/features/Relationship/pages/SegmentationManagementPage'));
 
-const GeneratedCouponsReport = lazy(
-  () => import('@/features/Reports/pages/GeneratedCouponsReport')
-);
+const GeneratedCouponsReport = lazy(() => import('@/features/Reports/pages/GeneratedCouponsReportPage'));
 const ComingSoon = lazy(() => import('@/features/Common/pages/ComingSoonPage'));
 
 const fidelityRoutes = [

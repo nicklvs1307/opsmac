@@ -2,65 +2,59 @@ import React, { Suspense, lazy } from 'react';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 import { Navigate } from 'react-router-dom';
 
-const Tables = lazy(() => import('@/features/ERP/pages/Tables'));
+const Tables = lazy(() => import('@/features/ERP/Tables/pages/TablesManagementPage'));
 const TechnicalSpecificationManagement = lazy(
   () => import('@/components/ERP/TechnicalSpecificationManagement')
 );
-const StockDashboardPage = lazy(() => import('@/features/ERP/pages/StockDashboardPage'));
-const StockMovementsPage = lazy(() => import('@/features/ERP/pages/StockMovementsPage'));
-const SuppliersPage = lazy(() => import('@/features/ERP/pages/SuppliersPage'));
-const PurchasesPage = lazy(() => import('@/features/ERP/pages/PurchasesPage'));
-const StockProductsPage = lazy(() => import('@/features/ERP/pages/StockProductsPage'));
+const StockDashboardPage = lazy(() => import('@/features/ERP/Stock/pages/StockDashboardPage'));
+const StockMovementsPage = lazy(() => import('@/features/ERP/Stock/pages/StockMovementsPage'));
+const SuppliersPage = lazy(() => import('@/features/ERP/Stock/pages/SuppliersManagementPage'));
+const PurchasesPage = lazy(() => import('@/features/ERP/Purchases/pages/PurchasesManagementPage'));
+const StockProductsPage = lazy(() => import('@/features/ERP/Stock/pages/StockProductsPage'));
 const Orders = lazy(() => import('@/features/ERP/pages/Orders'));
-const Pdv = lazy(() => import('@/features/ERP/pages/Pdv'));
-const Ingredients = lazy(() => import('@/features/ERP/pages/Ingredients'));
-const Menu = lazy(() => import('@/features/ERP/pages/Menu'));
+const Pdv = lazy(() => import('@/features/ERP/Pdv/pages/PdvManagementPage'));
+const Ingredients = lazy(() => import('@/features/ERP/Ingredients/pages/IngredientsManagementPage'));
+const Menu = lazy(() => import('@/features/ERP/Menu/pages/MenuManagementPage'));
 const LabelsDashboard = lazy(() => import('@/features/ValidityControl/Dashboard/pages'));
 const PrintLabel = lazy(() => import('@/features/ValidityControl/PrintLabel/pages'));
 const LabelsAdmin = lazy(() => import('@/features/ValidityControl/Admin/pages'));
-const StockCountList = lazy(() => import('@/features/ValidityControl/StockCountList'));
-const StockCountDetail = lazy(() => import('@/features/ValidityControl/StockCountDetail'));
-const ProductionList = lazy(() => import('@/features/ValidityControl/ProductionList'));
+const StockCountList = lazy(() => import('@/features/ValidityControl/CountProducts/pages'));
+const StockCountDetail = lazy(() => import('@/features/ValidityControl/CountHistory/pages'));
+const ProductionList = lazy(() => import('@/features/ValidityControl/Production/pages'));
 const ProductionCreate = lazy(() => import('@/features/ValidityControl/ProductionCreate'));
 const DeleteLabels = lazy(() => import('@/features/ValidityControl/DeleteLabels/pages'));
 const Production = lazy(() => import('@/features/ValidityControl/Production/pages'));
 const CountProducts = lazy(() => import('@/features/ValidityControl/CountProducts/pages'));
 const CountHistory = lazy(() => import('@/features/ValidityControl/CountHistory/pages'));
 
-const CashFlowReport = lazy(() => import('@/features/Reports/pages/CashFlowReport'));
-const DREReport = lazy(() => import('@/features/Reports/pages/DREReport'));
-const SalesByPaymentMethodReport = lazy(
-  () => import('@/features/Reports/pages/SalesByPaymentMethodReport')
-);
-const ListOfAccountsReport = lazy(() => import('@/features/Reports/pages/ListOfAccountsReport'));
-const CurrentStockPositionReport = lazy(
-  () => import('@/features/Reports/pages/CurrentStockPositionReport')
-);
-const StockPositionHistoryReport = lazy(
-  () => import('@/features/Reports/pages/StockPositionHistoryReport')
-);
-const PaymentMethods = lazy(() => import('@/features/ERP/pages/PaymentMethods'));
+const CashFlowReport = lazy(() => import('@/features/Reports/pages/CashFlowReportPage'));
+const DREReport = lazy(() => import('@/features/Reports/pages/DREReportPage'));
+const SalesByPaymentMethodReport = lazy(() => import('@/features/Reports/pages/SalesByPaymentMethodReportPage'));
+const ListOfAccountsReport = lazy(() => import('@/features/Reports/pages/ListOfAccountsReportPage'));
+const CurrentStockPositionReport = lazy(() => import('@/features/Reports/pages/CurrentStockPositionReportPage'));
+const StockPositionHistoryReport = lazy(() => import('@/features/Reports/pages/StockPositionHistoryReportPage'));
+const PaymentMethods = lazy(() => import('@/features/ERP/PaymentMethods/pages/PaymentMethodsManagementPage'));
 const FinancialCategoriesPage = lazy(() => import('@/features/ERP/pages/FinancialCategoriesPage'));
 const TeamManagementPage = lazy(() => import('@/features/Team/pages/TeamManagementPage'));
 const ComingSoon = lazy(() => import('@/features/Common/pages/ComingSoonPage'));
 
-const ProductsCreate = lazy(() => import('@/features/ERP/Stock/pages/ProductsCreate'));
-const StockSettings = lazy(() => import('@/features/ERP/Stock/pages/Settings'));
-const StockReports = lazy(() => import('@/features/ERP/Stock/pages/Reports'));
-const Inventory = lazy(() => import('@/features/ERP/Stock/pages/Inventory'));
-const TechnicalSheetCreate = lazy(() => import('@/features/ERP/Stock/pages/TechnicalSheetCreate'));
-const CMV = lazy(() => import('@/features/ERP/Stock/pages/CMV'));
-const Adjustments = lazy(() => import('@/features/ERP/Stock/pages/Adjustments'));
-const Lots = lazy(() => import('@/features/ERP/Stock/pages/Lots'));
-const Alerts = lazy(() => import('@/features/ERP/Stock/pages/Alerts'));
-const Integrations = lazy(() => import('@/features/ERP/Orders/pages/Integrations'));
-const Delivery = lazy(() => import('@/features/ERP/Orders/pages/Delivery'));
-const SalesReport = lazy(() => import('@/features/ERP/Orders/pages/SalesReport'));
-const ManagementDashboard = lazy(() => import('@/features/Management/pages/Dashboard'));
-const Schedule = lazy(() => import('@/features/Management/pages/Schedule'));
-const Commissions = lazy(() => import('@/features/Management/pages/Commissions'));
-const Costs = lazy(() => import('@/features/Management/pages/Costs'));
-const ManagementPermissions = lazy(() => import('@/features/Management/pages/Permissions'));
+const ProductsCreate = lazy(() => import('@/features/ERP/Stock/pages/ProductsCreatePage'));
+const StockSettings = lazy(() => import('@/features/ERP/Stock/pages/SettingsPage'));
+const StockReports = lazy(() => import('@/features/ERP/Stock/pages/ReportsPage'));
+const Inventory = lazy(() => import('@/features/ERP/Stock/pages/InventoryPage'));
+const TechnicalSheetCreate = lazy(() => import('@/features/ERP/Stock/pages/TechnicalSheetCreatePage'));
+const CMV = lazy(() => import('@/features/ERP/Stock/pages/CMVPage'));
+const Adjustments = lazy(() => import('@/features/ERP/Stock/pages/AdjustmentsPage'));
+const Lots = lazy(() => import('@/features/ERP/Stock/pages/LotsPage'));
+const Alerts = lazy(() => import('@/features/ERP/Stock/pages/AlertsPage'));
+const Integrations = lazy(() => import('@/features/Orders/pages/IntegrationsPage'));
+const Delivery = lazy(() => import('@/features/Orders/pages/DeliveryPage'));
+const SalesReport = lazy(() => import('@/features/Orders/pages/SalesReportPage'));
+const ManagementDashboard = lazy(() => import('@/features/Management/pages/ManagementDashboardPage'));
+const Schedule = lazy(() => import('@/features/Management/pages/SchedulePage'));
+const Commissions = lazy(() => import('@/features/Management/pages/CommissionsPage'));
+const Costs = lazy(() => import('@/features/Management/pages/CostsPage'));
+const ManagementPermissions = lazy(() => import('@/features/Management/pages/PermissionsPage'));
 const DeliveryMenuPage = lazy(
   () => import('@/features/Orders/DigitalMenus/pages/DeliveryMenuPage')
 );

@@ -1,15 +1,15 @@
 import React, { Suspense, lazy } from 'react';
 
 const LoginPage = lazy(() => import('@/features/Auth/pages/LoginPage'));
-const PublicFeedback = lazy(() => import('@/features/Public/pages/PublicFeedback'));
-const ThankYou = lazy(() => import('@/features/Public/pages/ThankYou'));
-const PublicSurveyForm = lazy(() => import('@/features/Public/pages/PublicSurveyForm'));
-const PublicCheckin = lazy(() => import('@/features/Public/pages/PublicCheckin'));
-const PublicReward = lazy(() => import('@/features/Public/pages/PublicReward'));
-const GirarRoleta = lazy(() => import('@/features/Public/pages/GirarRoleta'));
-const PublicMenu = lazy(() => import('@/features/Public/pages/PublicMenu'));
-const PublicDeliveryMenu = lazy(() => import('@/features/Public/pages/PublicDeliveryMenu'));
-const PublicDineInMenu = lazy(() => import('@/features/Public/pages/DineInMenu'));
+const PublicFeedback = lazy(() => import('@/features/Public/pages/PublicFeedbackPage'));
+const ThankYou = lazy(() => import('@/features/Public/pages/ThankYouPage'));
+const PublicSurveyForm = lazy(() => import('@/features/Public/pages/PublicSurveyFormPage'));
+const PublicCheckin = lazy(() => import('@/features/Public/pages/PublicCheckinPage'));
+const PublicReward = lazy(() => import('@/features/Public/pages/PublicRewardPage'));
+const GirarRoleta = lazy(() => import('@/features/Public/pages/SpinTheWheelPage'));
+const PublicMenu = lazy(() => import('@/features/Public/pages/PublicMenuPage'));
+const PublicDeliveryMenu = lazy(() => import('@/features/Public/pages/PublicDeliveryMenuPage'));
+const PublicDineInMenu = lazy(() => import('@/features/Public/pages/DineInMenuPage'));
 const CustomerRegistration = lazy(() => import('@/features/Public/pages/CustomerRegistrationPage'));
 const UnauthorizedPage = lazy(() => import('@/features/Common/pages/UnauthorizedPage'));
 const FeatureLockedPage = lazy(() => import('@/features/Common/pages/FeatureLockedPage'));

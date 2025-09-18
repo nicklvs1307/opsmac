@@ -18,7 +18,7 @@ const settingsRoutes = {
   element: (
     <Suspense fallback={<div className="loading-spinner"></div>}>
       {/* Settings component now acts as a redirect */}
-      <Settings />
+      <SettingsPage />
     </Suspense>
   ),
   children: [

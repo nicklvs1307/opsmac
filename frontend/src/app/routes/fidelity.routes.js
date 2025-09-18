@@ -30,7 +30,7 @@ const ActiveCheckinsPage = lazy(() => import('@/features/Checkin/pages/ActiveChe
 
 const RelationshipDashboard = lazy(() => import('@/features/Relationship/pages/SegmentationDashboardPage'));
 
-const IntegrationsPage = lazy(() => import('@/features/Integrations/pages/IntegrationsPage'));
+const IntegrationsPage = lazy(() => import('@/features/Integrations/pages/IntegrationsDashboardPage'));
 
 const MonthlySummary = lazy(() => import('@/features/Fidelidade/Geral/pages/MonthlySummary'));
 const SatisfactionOverview = lazy(

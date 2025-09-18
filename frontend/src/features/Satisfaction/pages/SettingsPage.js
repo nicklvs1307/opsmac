@@ -34,7 +34,7 @@ import {
   useSatisfactionSettings,
   useUpdateSatisfactionSettings,
 } from '../api/satisfactionSettingsService';
-import { useRewards } from '@/features/Coupons/api/couponService';
+import { useRewards } from '@/features/Coupons/api/couponQueries';
 
 const SettingsPage = () => {
   const { user } = useAuth();

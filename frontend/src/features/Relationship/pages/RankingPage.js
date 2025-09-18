@@ -3,7 +3,7 @@ import { Box, Typography, CircularProgress, Alert, Pagination } from '@mui/mater
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useForm, FormProvider } from 'react-hook-form';
-import { useCustomersList } from '@/features/Customers/api/customerQueries';
+import { useCustomersList } from '@/features/Customers/api/customerService';
 import RankingFilters from '../components/RankingFilters';
 import RankingTable from '../components/RankingTable';
 

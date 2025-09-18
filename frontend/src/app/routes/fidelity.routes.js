@@ -62,7 +62,7 @@ const Segmentation = lazy(() => import('@/features/Fidelidade/Relacionamento/pag
 const GeneratedCouponsReport = lazy(
   () => import('@/features/Reports/pages/GeneratedCouponsReport')
 );
-const ComingSoon = lazy(() => import('@/features/Common/ComingSoon'));
+const ComingSoon = lazy(() => import('@/features/Common/pages/ComingSoonPage'));
 
 const fidelityRoutes = [
   {

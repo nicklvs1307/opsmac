@@ -32,7 +32,7 @@ const Tables = lazy(() => import('@/features/ERP/pages/Tables'));
 const QRCodeManage = lazy(() => import('@/features/QRCode/pages/QRCodeManage'));
 const SuppliersPage = lazy(() => import('@/features/ERP/pages/SuppliersPage'));
 const ProductionList = lazy(() => import('@/features/ValidityControl/ProductionList'));
-const ComingSoon = lazy(() => import('@/features/Common/ComingSoon'));
+const ComingSoon = lazy(() => import('@/features/Common/pages/ComingSoonPage'));
 const WaiterPage = lazy(() => import('@/features/Waiter/pages/WaiterPage'));
 const OrderPage = lazy(() => import('@/features/Waiter/pages/OrderPage'));
 

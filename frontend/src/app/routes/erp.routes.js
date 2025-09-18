@@ -42,7 +42,7 @@ const StockPositionHistoryReport = lazy(
 const PaymentMethods = lazy(() => import('@/features/ERP/pages/PaymentMethods'));
 const FinancialCategoriesPage = lazy(() => import('@/features/ERP/pages/FinancialCategoriesPage'));
 const TeamManagementPage = lazy(() => import('@/features/Team/pages/TeamManagementPage'));
-const ComingSoon = lazy(() => import('@/features/Common/ComingSoon'));
+const ComingSoon = lazy(() => import('@/features/Common/pages/ComingSoonPage'));
 
 const ProductsCreate = lazy(() => import('@/features/ERP/Stock/pages/ProductsCreate'));
 const StockSettings = lazy(() => import('@/features/ERP/Stock/pages/Settings'));

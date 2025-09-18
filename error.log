@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build              10.5s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           11.3s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.262 + npm run build
-0.561
-0.561 > feedeliza-plus@1.0.0 build
-0.561 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.561
-2.496 Creating an optimized production build...
-10.34 Failed to compile.
-10.34
-10.34 Module not found: Error: Can't resolve '@/features/Common/FeatureLockedPage' in '/app/frontend/src/app/routes'
-10.34
-10.34
+0.297 + npm run build
+0.590
+0.590 > feedeliza-plus@1.0.0 build
+0.590 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.590
+2.725 Creating an optimized production build...
+11.08 Failed to compile.
+11.08
+11.08 Module not found: Error: Can't resolve '@/features/Common/UnauthorizedPage' in '/app/frontend/src/app/routes'
+11.08
+11.08
 ------
 Dockerfile.frontend:27
 --------------------

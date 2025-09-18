@@ -107,6 +107,7 @@ const adminRoutes = [
   {
     path: 'admin/restaurant-modules',
     element: createProtectedRouteElement(ProductMenuManagementPage, "modules", "manage"),
+  },
 
   {
     path: 'admin/users',

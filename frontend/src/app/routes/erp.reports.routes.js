@@ -6,7 +6,6 @@ const DREReport = lazy(() => import('@/features/Reports/pages/DREReportPage'));
 const SalesByPaymentMethodReport = lazy(() => import('@/features/Reports/pages/SalesByPaymentMethodReportPage'));
 const ListOfAccountsReport = lazy(() => import('@/features/Reports/pages/ListOfAccountsReportPage'));
 const CurrentStockPositionReport = lazy(() => import('@/features/Reports/pages/CurrentStockPositionReportPage'));
-const StockPositionHistoryReport = lazy(() => import('@/features/Reports/pages/StockPositionHistoryReportPage'));
 
 const erpReportsRoutes = [
   {
@@ -46,14 +45,6 @@ const erpReportsRoutes = [
     element: (
       <Suspense fallback={<div className="loading-spinner"></div>}>
         <CurrentStockPositionReport />
-      </Suspense>
-    ),
-  },
-  {
-    path: 'reports/stock-position-history',
-    element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <StockPositionHistoryReport />
       </Suspense>
     ),
   },

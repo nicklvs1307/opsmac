@@ -8,7 +8,7 @@ import { usePermissions } from '../../../hooks/usePermissions';
 import MetricCard from '@/shared/components/MetricCard';
 // import NpsScoresByCriterion from '../components/NpsScoresByCriterion';
 // import QuestionResultCard from '../components/QuestionResultCard';
-import { calculateNPS } from '../../utils/npsCalculations';
+import { calculateNPS } from '../../../utils/npsCalculations';
 
 const SurveyResultsPage = () => {
   const { id } = useParams();

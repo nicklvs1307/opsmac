@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 
 const PaymentMethods = lazy(() => import('@/features/ERP/PaymentMethods/pages/PaymentMethodsManagementPage'));
-const FinancialCategoriesPage = lazy(() => import('@/features/ERP/pages/FinancialCategoriesPage'));
+const FinancialCategoriesPage = lazy(() => import('@/features/ERP/Financial/pages/FinancialCategoriesPage'));
 const ComingSoon = lazy(() => import('@/features/Common/pages/ComingSoonPage'));
 
 const erpFinancialRoutes = [

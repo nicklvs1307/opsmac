@@ -2,9 +2,6 @@ import React, { Suspense, lazy } from 'react';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 
 const Dashboard = lazy(() => import('@/features/Relationship/pages/SegmentationDashboardPage'));
-const FeedbackList = lazy(() => import('@/features/Feedback/pages/FeedbackListPage'));
-const NewFeedback = lazy(() => import('@/features/Feedback/pages/NewFeedbackPage'));
-const FeedbackDetail = lazy(() => import('@/features/Feedback/pages/FeedbackDetailPage'));
 const QRCodeManage = lazy(() => import('@/features/QRCode/pages/QRCodeManagePage'));
 const QRCodeGenerate = lazy(() => import('@/features/QRCode/pages/QRCodeGeneratePage'));
 
@@ -135,26 +132,7 @@ const fidelityRoutes = [
       </ProtectedRoute>
     ),
   },
-  {
-    path: 'feedback/new',
-    element: (
-      <ProtectedRoute featureKey="feedback_management" actionKey="create">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <NewFeedback />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'feedback/:id',
-    element: (
-      <ProtectedRoute featureKey="feedback_management" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <FeedbackDetail />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
+
   {
     path: 'qrcodes',
     element: (
@@ -266,16 +244,7 @@ const fidelityRoutes = [
 
 
 
-  {
-    path: 'fidelity/responses/management',
-    element: (
-      <ProtectedRoute featureKey="fidelity:responses:management" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <FeedbackList />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
+
 
   {
     path: 'fidelity/responses/replicas',

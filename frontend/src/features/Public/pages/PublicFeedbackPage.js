@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { useGetPublicQRCode, useCreatePublicFeedback } from '@/features/Feedback/api/feedbackQueries'; // Corrected import
+import { useGetPublicQRCode, useCreatePublicFeedback } from '@/features/Public/api/feedbackQueries';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';

@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           10.9s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           14.7s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.268 + npm run build
-0.581
-0.581 > feedeliza-plus@1.0.0 build
-0.581 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.581
-2.735 Creating an optimized production build...
-10.70 Failed to compile.
-10.70
-10.70 Module not found: Error: Can't resolve '@/features/Reports/pages/GeneratedCouponsReportPage' in '/app/frontend/src/app/routes'
-10.70
-10.70
+0.292 + npm run build
+0.669
+0.669 > feedeliza-plus@1.0.0 build
+0.669 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.669
+3.903 Creating an optimized production build...
+14.53 Failed to compile.
+14.53
+14.53 Module not found: Error: Can't resolve '@/features/Feedback/pages/FeedbackDetailPage' in '/app/frontend/src/app/routes'
+14.53
+14.53
 ------
 Dockerfile.frontend:27
 --------------------

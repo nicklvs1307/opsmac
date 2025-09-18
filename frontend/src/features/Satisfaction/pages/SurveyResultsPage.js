@@ -4,7 +4,7 @@ import { Box, Typography, Paper, CircularProgress, Alert, Grid } from '@mui/mate
 import { useSurveyResults } from '../api/surveyService'; // Import useSurveyResults
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useAuth
 import { useTranslation } from 'react-i18next'; // Importar useTranslation
-import { usePermissions } from '../hooks/usePermissions';
+import { usePermissions } from '../../../hooks/usePermissions';
 import MetricCard from '@/shared/components/MetricCard';
 import NpsScoresByCriterion from '../components/NpsScoresByCriterion';
 import QuestionResultCard from '../components/QuestionResultCard';

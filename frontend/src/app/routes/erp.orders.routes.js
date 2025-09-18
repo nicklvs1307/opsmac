@@ -6,10 +6,6 @@ const Pdv = lazy(() => import('@/features/ERP/Pdv/pages/PdvManagementPage'));
 const Integrations = lazy(() => import('@/features/Orders/pages/IntegrationsPage'));
 const Delivery = lazy(() => import('@/features/Orders/pages/DeliveryPage'));
 const SalesReport = lazy(() => import('@/features/Orders/pages/SalesReportPage'));
-const DeliveryMenuPage = lazy(
-  () => import('@/features/Orders/DigitalMenus/pages/DeliveryMenuPage')
-);
-
 const erpOrdersRoutes = [
   {
     path: 'integrations',
@@ -32,14 +28,6 @@ const erpOrdersRoutes = [
     element: (
       <Suspense fallback={<div className="loading-spinner"></div>}>
         <SalesReport />
-      </Suspense>
-    ),
-  },
-  {
-    path: 'digital-menus/delivery',
-    element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <DeliveryMenuPage />
       </Suspense>
     ),
   },

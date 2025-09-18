@@ -33,7 +33,7 @@ import { useTranslation } from 'react-i18next';
 import usePermissions from '@/hooks/usePermissions';
 // Updated import path for checkinQueries
 import { useGetCheckinAnalytics } from '@/features/Checkin/api/checkinQueries';
-import { formatDuration } from '../../../../utils/timeFormatters';
+import { formatDuration } from '../../../utils/timeFormatters';
 // Assuming FrequentCustomersList will be moved to the new components folder
 import FrequentCustomersList from '../components/FrequentCustomersList';
 

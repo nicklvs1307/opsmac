@@ -98,7 +98,7 @@ const AddonsTab = () => {
   const handleToggleStatus = (id) => {
     toggleStatusMutation.mutate(id, {
         onSuccess: () => { toast.success(t('menu_management.addon_status_updated')); },
-        onError: () => { toast.error(t('menu_management.addon_status_update_error')); }S
+        onError: () => { toast.error(t('menu_management.addon_status_update_error')); }
     });
   };
 

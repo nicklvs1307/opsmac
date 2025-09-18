@@ -109,8 +109,11 @@ const fetchSurveys = async (restaurantId, filters) => {
   return data;
 };
 
+import { useAuth } from '@/app/providers/contexts/AuthContext';
+
 export const useSurveys = (filters, options) => {
-  const restaurantId = getRestaurantIdFromAuth();
+  const { user } = useAuth();
+  const restaurantId = user?.restaurants?.[0]?.id;
   return useQuery(
     [SURVEY_QUERY_KEYS.surveys, restaurantId, filters],
     () => fetchSurveys(restaurantId, filters),

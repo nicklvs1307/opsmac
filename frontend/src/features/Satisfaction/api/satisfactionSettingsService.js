@@ -93,9 +93,12 @@ export const useSatisfactionSettings = (restaurantId) => {
   );
 };
 
+import { useAuth } from '@/app/providers/contexts/AuthContext';
+
 export const useUpdateSatisfactionSettings = () => {
   const queryClient = useQueryClient();
-  const restaurantId = getRestaurantIdFromAuth();
+  const { user } = useAuth();
+  const restaurantId = user?.restaurants?.[0]?.id;
   return useMutation(updateSatisfactionSettings, {
     onSuccess: () => {
       queryClient.invalidateQueries(['satisfactionSettings', restaurantId]);

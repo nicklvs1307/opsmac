@@ -288,4 +288,4 @@ const SurveyEditPage = () => {
   );
 };
 
-export default SurveyEdit;
+export default SurveyEditPage;

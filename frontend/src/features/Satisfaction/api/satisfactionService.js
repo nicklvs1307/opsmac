@@ -66,8 +66,11 @@ const fetchFeedbackWordFrequency = async (restaurantId, queryParams) => {
   return data;
 };
 
+import { useAuth } from '@/app/providers/contexts/AuthContext';
+
 export const useFeedbackWordFrequency = (queryParams) => {
-  const restaurantId = getRestaurantIdFromAuth();
+  const { user } = useAuth();
+  const restaurantId = user?.restaurants?.[0]?.id;
   return useQuery(
     ['feedbackWordFrequency', restaurantId, queryParams],
     () => fetchFeedbackWordFrequency(restaurantId, queryParams),

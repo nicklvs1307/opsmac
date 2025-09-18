@@ -112,6 +112,7 @@ const SurveyResultsPage = () => {
         {/* {survey.questions.map((question) => (
           <QuestionResultCard key={question.id} question={question} />
         ))} */}
+      </Box>
     </Box>
   );
 };

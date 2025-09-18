@@ -35,6 +35,7 @@ import {
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import toast from 'react-hot-toast';
 import { fetchGoals, createGoal, updateGoal, deleteGoal, updateGoalProgress, } from '../api/goalsQueries';
 import { useForm, Controller } from 'react-hook-form';
 import { format } from 'date-fns';

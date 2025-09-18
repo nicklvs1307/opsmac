@@ -277,7 +277,7 @@ const RewardsPage = () => {
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Typography variant="h4" component="h1">Sistema de Recompensas</Typography>
         {tabValue === 0 && (
-          {can('fidelity:coupons:rewards', 'create') && (
+          can('fidelity:coupons:rewards', 'create') && (
             <Button variant="contained" startIcon={<AddIcon />} onClick={handleCreate}>
               Nova Recompensa
             </Button>

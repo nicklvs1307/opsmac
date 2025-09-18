@@ -22,6 +22,7 @@ import {
 } from '@/features/IAM/api/iamQueries';
 import { usePermissions } from '../../../hooks/usePermissions';
 import PermissionTree from '../components/PermissionTree';
+import { usePermissionTreeLogic } from '../hooks/usePermissionTreeLogic';
 
 const RestaurantEditPage = () => {
   const { restaurantId } = useParams();

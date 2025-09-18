@@ -72,7 +72,7 @@ const LoginPage = () => {
         <Typography sx={{ ml: 2 }}>{t('login.loading')}</Typography>
       </Box>
     );
-  );
+  }
 };
 
 export default LoginPage;

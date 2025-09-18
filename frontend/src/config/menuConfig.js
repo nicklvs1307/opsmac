@@ -306,7 +306,6 @@ export const menuConfig = [
       },
     ],
   },
-  },
   {
     module: 'admin',
     title: 'Admin',
@@ -339,7 +338,6 @@ export const menuConfig = [
       },
     ],
   },
-  },
   {
     module: 'customers',
     title: 'Clientes',
@@ -365,7 +363,6 @@ export const menuConfig = [
         actionKey: 'read',
       },
     ],
-  },
   },
   {
     module: 'settings',

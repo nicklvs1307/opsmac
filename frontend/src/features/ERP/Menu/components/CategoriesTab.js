@@ -23,7 +23,7 @@ import {
 } from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useQueryClient } from 'react-query';
-import { useAuth } '@/app/providers/contexts/AuthContext';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory, useToggleCategoryStatus } from '../api/menuQueries';

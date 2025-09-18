@@ -10,6 +10,8 @@ export const fetchGoals = async ({ restaurantId, token }) => {
 
 export const createGoal = async ({ goalData }) => {
   const response = await axiosInstance.post('/goals', goalData);
+  return response.data;
+};
 
 export const updateGoal = async ({ goalId, goalData, token }) => {
   const response = await axiosInstance.put(`/goals/${goalId}`, goalData, {

@@ -3,6 +3,7 @@ import { Box, Typography, Paper } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const Dispatches = () => {
+  const { t } = useTranslation();
   return (
     <Box sx={{ p: 3 }}>
       <Paper elevation={3} sx={{ p: 4, textAlign: 'center' }}>

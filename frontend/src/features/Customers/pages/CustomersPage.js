@@ -564,4 +564,4 @@ const CustomersPage = () => {
   );
 };
 
-export default Customers;
+export default CustomersPage;

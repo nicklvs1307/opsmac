@@ -16,8 +16,11 @@ const erpRoutes = [
   ...erpValidityControlRoutes,
   ...erpFinancialRoutes,
   ...erpReportsRoutes,
+];
 
 const Tables = lazy(() => import('@/features/ERP/Tables/pages/TablesManagementPage'));
 const TechnicalSpecificationManagement = lazy(
   () => import('@/components/ERP/TechnicalSpecificationManagement')
 );
+
+export default erpRoutes;

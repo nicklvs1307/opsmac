@@ -31,5 +31,6 @@ export const applySegmentationRules = async ({ restaurantId }) => {
   const response = await axiosInstance.post(
     `/customerSegmentation/apply-rules`,
     { restaurantId },
-  );},
   );
+  return response.data;
+};

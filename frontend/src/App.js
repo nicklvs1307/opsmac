@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { RouterProvider } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
-import AppProvider from '@/app/providers';
+import AppProvider from '@/app/providers/index.js';
 import { router } from '@/app/router';
 
 // Create query client

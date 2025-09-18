@@ -1192,9 +1192,7 @@
     "delete_survey_aria_label": "Excluir pesquisa",
     "qr_code_modal_title": "QR Code da Pesquisa"
   },
-  "fidelity_general": {
-    "multiple_choice_analysis_title": "Análise de Múltipla Escolha"
-  },
+
   "multiple_choice": {
     "select_survey": "Selecionar Pesquisa",
     "select_question": "Selecionar Pergunta",

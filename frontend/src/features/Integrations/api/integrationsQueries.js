@@ -20,6 +20,7 @@ export const useGetIntegrationSettings = (options) => {
       ...options,
     }
   );
+};
 
 // Hook to update integration settings
 export const useUpdateIntegrationSettings = (restaurantId) => {
@@ -33,11 +34,6 @@ export const useUpdateIntegrationSettings = (restaurantId) => {
       },
       onError: (error) => {
         toast.error(error.response?.data?.message || 'Erro ao salvar configurações de integração.');
-      },
-    }
-  );
-};
-rror.response?.data?.message || 'Erro ao salvar configurações de integração.');
       },
     }
   );

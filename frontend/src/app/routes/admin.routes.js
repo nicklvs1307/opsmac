@@ -9,9 +9,13 @@ const ProductMenuManagementPage = lazy(() => import('@/features/Admin/pages/Prod
 const RestaurantCreatePage = lazy(() => import('@/features/Admin/pages/RestaurantCreatePage'));
 const UserEditPage = lazy(() => import('@/features/Admin/pages/UserEditPage'));
 const UserCreatePage = lazy(() => import('@/features/Admin/pages/UserCreatePage'));
-const RolePermissionManagementPage = lazy(
+const AdminRolePermissionManagementPage = lazy(
   () => import('@/features/Admin/components/RolePermissionManagementPage')
 );
+
+// ... (restante do arquivo)
+
+    element: createProtectedRouteElement(AdminRolePermissionManagementPage, "role_management", "read"),
 
 const IAMDashboard = lazy(() => import('@/features/IAM/pages/IAMDashboard'));
 const RoleManagement = lazy(() => import('@/features/IAM/pages/RoleManagement'));
@@ -37,11 +41,7 @@ const OrderPage = lazy(() => import('@/features/Waiter/pages/OrderPage'));
 const adminRoutes = [
   {
     path: 'admin/dashboard',
-    element: (
-      <ProtectedRoute featureKey="admin_panel" actionKey="access">
-        <Navigate to="/admin/users" replace />
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(<Navigate to="/admin/users" replace />, "admin_panel", "access"),
   },
   {
     path: 'admin/restaurant-settings',

@@ -68,7 +68,7 @@ export const usePermissionTreeLogic = (permissionTree, fetchedPermissions) => {
       if (actionId) {
         newSelected[moduleId].submodules[submoduleId].features[featureId].actions[actionId] = checked;
       } else if (featureId) {
-        setChildrenState(newSelected[moduleId].submodules[submoduleId].features[feature.id], checked);
+        setChildrenState(newSelected[moduleId].submodules[submoduleId].features[featureId], checked);
       } else if (submoduleId) {
         setChildrenState(newSelected[moduleId].submodules[submoduleId], checked);
       } else if (moduleId) {

@@ -344,6 +344,7 @@ const SurveyCreatePage = () => {
                   onRemoveQuestion={() => remove(index)}
                 />
               ))} */}
+            </Box>
           </Box>
         );
       case 2:

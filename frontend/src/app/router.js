@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
       ...satisfactionRoutes,
       ...rewardsRoutes,
       ...erpRoutes,
-      settingsRoutes, // settingsRoutes is an object, not an array
+      ...settingsRoutes,
       ...adminRoutes,
     ],
   },

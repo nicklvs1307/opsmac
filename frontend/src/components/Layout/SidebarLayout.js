@@ -14,7 +14,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import MenuItem from '../Menu/MenuItem'; // Importar o novo MenuItem
 import { menuConfig } from '../../config/menuConfig'; // Importar a nova configuração do menu
-import { usePermissions } from '../hooks/usePermissions'; // Importar o hook de permissões
+import { usePermissions } from '../../hooks/usePermissions'; // Importar o hook de permissões
 
 const SidebarLayout = ({ onMobileClose }) => {
   const { t } = useTranslation();

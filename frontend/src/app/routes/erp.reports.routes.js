@@ -3,7 +3,6 @@ import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 
 const CashFlowReport = lazy(() => import('@/features/Reports/pages/CashFlowReportPage'));
 const DREReport = lazy(() => import('@/features/Reports/pages/DREReportPage'));
-const SalesByPaymentMethodReport = lazy(() => import('@/features/Reports/pages/SalesByPaymentMethodReportPage'));
 const CurrentStockPositionReport = lazy(() => import('@/features/Reports/pages/CurrentStockPositionReportPage'));
 
 const erpReportsRoutes = [
@@ -20,14 +19,6 @@ const erpReportsRoutes = [
     element: (
       <Suspense fallback={<div className="loading-spinner"></div>}>
         <DREReport />
-      </Suspense>
-    ),
-  },
-  {
-    path: 'reports/sales-by-payment-method',
-    element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <SalesByPaymentMethodReport />
       </Suspense>
     ),
   },

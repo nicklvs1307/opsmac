@@ -10,7 +10,7 @@ const GirarRoleta = lazy(() => import('@/features/Public/pages/GirarRoleta'));
 const PublicMenu = lazy(() => import('@/features/Public/pages/PublicMenu'));
 const PublicDeliveryMenu = lazy(() => import('@/features/Public/pages/PublicDeliveryMenu'));
 const PublicDineInMenu = lazy(() => import('@/features/Public/pages/DineInMenu'));
-const CustomerRegistration = lazy(() => import('@/features/Public/pages/CustomerRegistration'));
+const CustomerRegistration = lazy(() => import('@/features/Public/pages/CustomerRegistrationPage'));
 const UnauthorizedPage = lazy(() => import('@/features/Common/pages/UnauthorizedPage'));
 const FeatureLockedPage = lazy(() => import('@/features/Common/pages/FeatureLockedPage'));
 

@@ -1,17 +1,17 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           11.0s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           11.3s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.304 + npm run build
-0.590
-0.590 > feedeliza-plus@1.0.0 build
-0.590 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.590
-2.664 Creating an optimized production build...
-10.90 Failed to compile.
-10.90
-10.90 Module not found: Error: Can't resolve '@/features/Common/ComingSoon' in '/app/frontend/src/app/routes'
-10.90
-10.90
+0.277 + npm run build
+0.587
+0.587 > feedeliza-plus@1.0.0 build
+0.587 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.587
+3.069 Creating an optimized production build...
+11.17 Failed to compile.
+11.17
+11.17 Module not found: Error: Can't resolve '@/features/Public/pages/CustomerRegistration' in '/app/frontend/src/app/routes'
+11.17
+11.17
 ------
 Dockerfile.frontend:27
 --------------------

@@ -496,4 +496,4 @@ const SurveyCreatePage = () => {
   );
 };
 
-export default SurveyCreate;
+export default SurveyCreatePage;

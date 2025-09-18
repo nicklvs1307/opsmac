@@ -83,8 +83,6 @@ const erpOrdersRoutes = [
           </Suspense>
         ),
       },
-    ],
-  },
 ];
 
 export default erpOrdersRoutes;

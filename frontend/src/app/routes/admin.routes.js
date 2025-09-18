@@ -13,10 +13,6 @@ const AdminRolePermissionManagementPage = lazy(
   () => import('@/features/Admin/components/RolePermissionManagementPage')
 );
 
-// ... (restante do arquivo)
-
-    element: createProtectedRouteElement(AdminRolePermissionManagementPage, "role_management", "read"),
-
 const IAMDashboard = lazy(() => import('@/features/IAM/pages/IAMDashboard'));
 const RoleManagement = lazy(() => import('@/features/IAM/pages/RoleManagement'));
 const RolePermissions = lazy(() => import('@/features/IAM/pages/RolePermissions'));
@@ -102,7 +98,7 @@ const adminRoutes = [
   },
   {
     path: 'admin/roles-permissions',
-    element: createProtectedRouteElement(RolePermissionManagementPage, "role_management", "read"),
+
   },
   {
     path: 'admin/restaurant-modules',

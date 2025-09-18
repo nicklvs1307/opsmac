@@ -32,3 +32,5 @@ export const updateGoalProgress = async ({ goalId }) => {
     `/goals/${goalId}/update-progress`,
     {},
   );
+  return response.data;
+};

@@ -87,7 +87,7 @@ const settingsRoutes = [{
       ),
     },
     // NPS Criteria route is intentionally omitted
-  }]
+  ]
 }];
 
 export default settingsRoutes;

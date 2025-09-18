@@ -281,7 +281,7 @@ const RewardsPage = () => {
             <Button variant="contained" startIcon={<AddIcon />} onClick={handleCreate}>
               Nova Recompensa
             </Button>
-          )}
+          )
         )}
       </Box>
 

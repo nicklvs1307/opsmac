@@ -7,8 +7,11 @@ import toast from 'react-hot-toast';
 //================================================================================================
 
 // Hook to fetch integration settings
+import { useAuth } from '@/app/providers/contexts/AuthContext';
+
 export const useGetIntegrationSettings = (options) => {
-  const restaurantId = getRestaurantIdFromAuth();
+  const { user } = useAuth();
+  const restaurantId = user?.restaurants?.[0]?.id;
   return useQuery(
     ['integrationSettings', restaurantId],
     async () => {

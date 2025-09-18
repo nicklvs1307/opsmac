@@ -22,7 +22,7 @@ import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
-import { useFinancialCategoriesReport } from '@/features/Reports/api/financialReportsService';
+import { useFinancialCategoriesReport } from '@/features/Reports/api/financialReportsQueries';
 
 const ListOfAccountsReport = () => {
   const { t } = useTranslation();

@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next';
 import { Refresh as RefreshIcon } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
-import { useSalesByPaymentMethodReport } from '@/features/Reports/api/financialReportsService';
+import { useSalesByPaymentMethodReport } from '@/features/Reports/api/financialReportsQueries';
 
 const SalesByPaymentMethodReport = () => {
   const { t } = useTranslation();

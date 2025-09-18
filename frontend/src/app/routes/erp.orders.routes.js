@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from 'react';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 import { Navigate } from 'react-router-dom';
 
-const Orders = lazy(() => import('@/features/ERP/pages/Orders'));
 const Pdv = lazy(() => import('@/features/ERP/Pdv/pages/PdvManagementPage'));
 const Integrations = lazy(() => import('@/features/Orders/pages/IntegrationsPage'));
 const Delivery = lazy(() => import('@/features/Orders/pages/DeliveryPage'));
@@ -44,21 +43,6 @@ const erpOrdersRoutes = [
       </Suspense>
     ),
   },
-  {
-    path: 'orders',
-    children: [
-      {
-        index: true,
-        element: <Navigate to="dashboard" replace />,
-      },
-      {
-        path: 'dashboard',
-        element: (
-          <Suspense fallback={<div className="loading-spinner"></div>}>
-            <Orders />
-          </Suspense>
-        ),
-      },
       {
         path: 'pdv',
         element: (

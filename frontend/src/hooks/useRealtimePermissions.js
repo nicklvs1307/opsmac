@@ -1,23 +1,4 @@
-import { useQuery } from 'react-query';
-import axiosInstance from '@/services/axiosInstance';
-
-const checkPermission = async (featureKey, actionKey) => {
-  const { data } = await axiosInstance.post('/iam/check', { featureKey, actionKey });
-  return data;
-};
-
-export const useCheckPermission = (featureKey, actionKey) => {
-  const query = useQuery(
-    ['permission', featureKey, actionKey], // Query key
-    () => checkPermission(featureKey, actionKey),
-    {
-      enabled: !!featureKey && !!actionKey, // Only run if featureKey and actionKey are provided
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      cacheTime: 15 * 60 * 1000, // 15 minutes
-      retry: 1,
-      refetchOnWindowFocus: false,
-    }
-  );
-
-  return { ...query, refetch: query.refetch };
+// This hook is deprecated. The primary permission hook is now usePermissions, which uses a local snapshot for performance.
+export const useCheckPermission = () => {
+  return { data: { allowed: false, locked: true }, isLoading: false, isError: true, error: new Error('This hook is deprecated.') };
 };

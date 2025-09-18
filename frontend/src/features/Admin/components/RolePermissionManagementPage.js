@@ -30,7 +30,7 @@ const RolePermissionManagementPage = () => {
   const queryClient = useQueryClient();
 
   const [selectedRoleId, setSelectedRoleId] = useState('');
-  const { selectedPermissions, handlePermissionChange } = usePermissionTreeLogic(permissionTree, fetchedRolePermissions);
+  const { selectedPermissions, handlePermissionChange } = usePermissionTreeLogic(permissionTree, fetchedRolePermissions, 'role_permissions');
 
   const {
     data: roles,

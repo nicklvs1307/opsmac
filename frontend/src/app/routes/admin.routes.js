@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
-import ProtectedRoute from '@/components/Auth/ProtectedRoute';
+import { createProtectedRouteElement, createSuspenseElement } from '@/app/utils/routeHelpers';
 
 const UsersPage = lazy(() => import('@/features/Admin/pages/UsersPage'));
 const RestaurantsPage = lazy(() => import('@/features/Admin/pages/RestaurantsPage'));
@@ -45,319 +45,124 @@ const adminRoutes = [
   },
   {
     path: 'admin/restaurant-settings',
-    element: (
-      <ProtectedRoute featureKey="restaurant_management" actionKey="update">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <Settings />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(Settings, "restaurant_management", "update"),
   },
   {
     path: 'admin/modules',
-    element: (
-          <ProductMenuManagementPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(ProductMenuManagementPage, "modules", "manage"),
   },
   {
     path: 'admin/reports',
-    element: (
-      <ProtectedRoute featureKey="reports" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <ComingSoon /> {/* Keep ComingSoon for now if no specific report component is ready */}
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(ComingSoon, "reports", "read"),
   },
   {
     path: 'admin/financial',
-    element: (
-      <ProtectedRoute featureKey="financial" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <ComingSoon /> {/* Placeholder for FinancialTransactionsPage */}
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(ComingSoon, "financial", "read"),
   },
   {
     path: 'admin/stock',
-    element: (
-      <ProtectedRoute featureKey="stock" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <StockDashboardPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(StockDashboardPage, "stock", "read"),
   },
   {
     path: 'admin/products',
-    element: (
-      <ProtectedRoute featureKey="products" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <StockProductsPage /> {/* Assuming this is the main products page */}
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(StockProductsPage, "products", "read"),
   },
   {
     path: 'admin/coupons',
-    element: (
-      <ProtectedRoute featureKey="coupons" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <CouponListPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(CouponListPage, "coupons", "read"),
   },
   {
     path: 'admin/surveys',
-    element: (
-      <ProtectedRoute featureKey="surveys" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <SurveyList />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(SurveyList, "surveys", "read"),
   },
-  {
-    path: 'fidelity/checkin/analytics',
-    element: (
-      <ProtectedRoute featureKey="checkin_dashboard" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <CheckinAnalyticsPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
+
   {
     path: 'erp/tables',
-    element: (
-      <ProtectedRoute featureKey="tables" actionKey="manage">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <Tables />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(Tables, "tables", "manage"),
   },
   {
     path: 'qrcodes/manage',
-    element: (
-      <ProtectedRoute featureKey="qrcodes" actionKey="manage">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <QRCodeManage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(QRCodeManage, "qrcodes", "manage"),
   },
   {
     path: 'waiter/calls',
-    element: (
-      <ProtectedRoute featureKey="waiter_calls" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <ComingSoon />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(ComingSoon, "waiter_calls", "read"),
   },
   {
     path: 'whatsapp/messages',
-    element: (
-      <ProtectedRoute featureKey="whatsapp_messages" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <ComingSoon />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(ComingSoon, "whatsapp_messages", "read"),
   },
   {
     path: 'admin/losses',
-    element: (
-      <ProtectedRoute featureKey="losses" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <ComingSoon />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(ComingSoon, "losses", "read"),
   },
   {
     path: 'admin/suppliers',
-    element: (
-      <ProtectedRoute featureKey="suppliers" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <SuppliersPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(SuppliersPage, "suppliers", "read"),
   },
   {
     path: 'admin/roles-permissions',
-    element: (
-      <ProtectedRoute featureKey="role_management" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <RolePermissionManagementPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(RolePermissionManagementPage, "role_management", "read"),
   },
   {
     path: 'admin/restaurant-modules',
-    element: (
-      <ProtectedRoute featureKey="modules" actionKey="manage">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <ProductMenuManagementPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'admin/dashboard',
-    element: (
-      <ProtectedRoute featureKey="admin_panel" actionKey="access">
-        <Navigate to="/admin/users" replace />
-      </ProtectedRoute>
-    ),
-  },
+    element: createProtectedRouteElement(ProductMenuManagementPage, "modules", "manage"),
+
   {
     path: 'admin/users',
-    element: (
-      <ProtectedRoute featureKey="users" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <UsersPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(UsersPage, "users", "read"),
   },
   {
     path: 'admin/users/:userId/edit',
-    element: (
-      <ProtectedRoute featureKey="users" actionKey="update">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <UserEditPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(UserEditPage, "users", "update"),
   },
   {
     path: 'admin/users/new',
-    element: (
-      <ProtectedRoute featureKey="users" actionKey="create">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <UserCreatePage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(UserCreatePage, "users", "create"),
   },
   {
     path: 'admin/restaurants',
-    element: (
-      <ProtectedRoute featureKey="restaurants" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <RestaurantsPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(RestaurantsPage, "restaurants", "read"),
   },
   {
     path: 'admin/restaurants/:restaurantId/edit',
-    element: (
-      <ProtectedRoute featureKey="admin:restaurants" actionKey="update">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <RestaurantEditPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(RestaurantEditPage, "admin:restaurants", "update"),
   },
   {
     path: 'admin/restaurants/new',
-    element: (
-      <ProtectedRoute featureKey="restaurants" actionKey="create">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <RestaurantCreatePage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(RestaurantCreatePage, "restaurants", "create"),
   },
   {
     path: '/waiter',
-    element: (
-      <ProtectedRoute featureKey="waiter_app" actionKey="access">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <WaiterPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(WaiterPage, "waiter_app", "access"),
   },
   {
     path: '/waiter/order/:tableId',
-    element: (
-      <ProtectedRoute featureKey="waiter_app" actionKey="access">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <OrderPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(OrderPage, "waiter_app", "access"),
   },
   {
     path: '/admin/iam/:restaurantId',
-    element: (
-      <ProtectedRoute featureKey="iam_admin" actionKey="access">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <IAMDashboard />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(IAMDashboard, "iam_admin", "access"),
   },
   {
     path: '/admin/iam/:restaurantId/roles',
-    element: (
-      <ProtectedRoute featureKey="roles" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <RoleManagement />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(RoleManagement, "roles", "read"),
   },
   {
     path: '/admin/iam/:restaurantId/roles/:roleId/permissions',
-    element: (
-      <ProtectedRoute featureKey="role_permissions" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <RolePermissions />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(RolePermissions, "role_permissions", "read"),
   },
   {
     path: '/admin/iam/:restaurantId/users/:userId/overrides',
-    element: (
-      <ProtectedRoute featureKey="user_overrides" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <UserPermissionOverrides />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(UserPermissionOverrides, "user_overrides", "read"),
   },
   {
     path: '/admin/iam/:restaurantId/entitlements',
-    element: (
-      <ProtectedRoute featureKey="entitlements" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <EntitlementManagement />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(EntitlementManagement, "entitlements", "read"),
   },
   {
     path: '/admin/iam/:restaurantId/users',
-    element: (
-      <ProtectedRoute featureKey="user_roles" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <UserRoleManagement />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(UserRoleManagement, "user_roles", "read"),
   },
 ];
 

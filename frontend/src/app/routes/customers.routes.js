@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import ProtectedRoute from '@/components/Auth/ProtectedRoute';
+import { createProtectedRouteElement } from '@/app/utils/routeHelpers';
 
 const CustomersPage = lazy(() => import('@/features/Customers/pages/CustomersPage'));
 const DetailPage = lazy(() => import('@/features/Customers/pages/DetailPage'));
@@ -9,43 +9,19 @@ const DashboardPage = lazy(() => import('@/features/Customers/pages/DashboardPag
 const customersRoutes = [
   {
     path: 'fidelity/relationship/customers',
-    element: (
-      <ProtectedRoute featureKey="fidelity:relationship:customers" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <CustomersPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(CustomersPage, "fidelity:relationship:customers", "read"),
   },
   {
     path: 'customers/:id/details',
-    element: (
-      <ProtectedRoute featureKey="fidelity:relationship:customers" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <DetailPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(DetailPage, "fidelity:relationship:customers", "read"),
   },
   {
     path: 'fidelity/relationship/birthdays',
-    element: (
-      <ProtectedRoute featureKey="fidelity:relationship:birthdays" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <BirthdaysPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(BirthdaysPage, "fidelity:relationship:birthdays", "read"),
   },
   {
     path: 'customers/dashboard',
-    element: (
-      <ProtectedRoute featureKey="fidelity:relationship:dashboard" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <DashboardPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
+    element: createProtectedRouteElement(DashboardPage, "fidelity:relationship:dashboard", "read"),
   },
 ];
 

@@ -13,7 +13,7 @@ const AppearancePage = lazy(
 );
 const WhatsappPage = lazy(() => import('@/features/Settings/pages/WhatsappPage'));
 
-const settingsRoutes = {
+const settingsRoutes = [{
   path: 'settings',
   element: (
     <Suspense fallback={<div className="loading-spinner"></div>}>
@@ -24,7 +24,7 @@ const settingsRoutes = {
   children: [
     {
       index: true, // Default child route for /settings
-      element: <SettingsPage />,
+      element: <ProfilePage />, // Assuming ProfilePage is the default for settings
     },
     {
       path: 'profile',

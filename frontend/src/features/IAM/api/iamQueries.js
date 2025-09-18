@@ -63,6 +63,7 @@ export const useDeleteRole = () => {
 export const useSetRolePermissions = () => {
   return useMutation(async ({ roleId, restaurantId, permissions }) => {
     const { data } = await axiosInstance.post(`/iam/roles/${roleId}/permissions`, {
+      restaurantId,
       permissions,
     });
     return data;

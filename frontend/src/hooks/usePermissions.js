@@ -1,21 +1,36 @@
-import { useSelector } from 'react-redux'; // Assumindo que você usa Redux para gerenciar o estado do usuário e permissões
+import { useAuth } from '@/app/providers/contexts/AuthContext';
 
+// This hook provides a function to check user permissions against the snapshot.
 export const usePermissions = () => {
-  // TODO: Substituir por lógica real de obtenção de permissões do usuário
-  const userRoles = useSelector(state => state.auth.user?.roles || []); // Exemplo: obter roles do Redux
-  const isSuperadmin = userRoles.includes('super_admin'); // Exemplo: verificar se é superadmin
+  const { user } = useAuth();
+  const permissionSnapshot = user?.permissionSnapshot;
 
-  const checkPermission = (featureKey, actionKey) => {
-    // TODO: Implementar lógica real de verificação de permissões
-    // Por enquanto, um mock simples:
-    if (isSuperadmin) {
-      return { allowed: true, locked: false };
+  const can = (featureKey, actionKey) => {
+    if (user?.isSuperadmin) {
+      return true;
     }
 
-    // Lógica de permissão baseada em featureKey e actionKey
-    // Exemplo: Permitir tudo por enquanto para fins de desenvolvimento
-    return { allowed: true, locked: false };
+    if (!permissionSnapshot || !permissionSnapshot.modules) {
+      return false; // Default to not allowed if no snapshot
+    }
+
+    for (const module of permissionSnapshot.modules) {
+      for (const submodule of module.submodules) {
+        const feature = submodule.features.find((f) => f.key === featureKey);
+        if (feature) {
+          if (feature.isLockedByEntitlement) {
+            return false;
+          }
+          const action = feature.actions.find((a) => a.key === actionKey);
+          if (action) {
+            return action.allowed;
+          }
+        }
+      }
+    }
+
+    return false; // Default deny if not found
   };
 
-  return { checkPermission, isSuperadmin };
+  return { can, isSuperadmin: user?.isSuperadmin || false };
 };

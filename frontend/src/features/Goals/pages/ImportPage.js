@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Paper } from '@mui/material';
-import { useTranslation } 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const Import = () => {
   const { t } = useTranslation();

@@ -76,7 +76,7 @@ const UserEditPage = () => {
   const removeUserRoleMutation = useRemoveUserRole();
   const saveUserPermissionOverridesMutation = useSetUserPermissionOverrides();
 
-  const { selectedPermissions, handlePermissionChange } = usePermissionTreeLogic(permissionTree, fetchedUserOverrides);
+    const { selectedPermissions, handlePermissionChange } = usePermissionTreeLogic(permissionTree, fetchedUserOverrides, 'overrides');
 
   useEffect(() => {
     if (targetUser) {

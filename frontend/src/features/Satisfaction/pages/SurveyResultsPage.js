@@ -5,7 +5,7 @@ import { useSurveyResults } from '../api/surveyService'; // Import useSurveyResu
 import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useAuth
 import { useTranslation } from 'react-i18next'; // Importar useTranslation
 import { usePermissions } from '../../hooks/usePermissions';
-import MetricCard from '../components/MetricCard';
+import MetricCard from '@/shared/components/MetricCard';
 import NpsScoresByCriterion from '../components/NpsScoresByCriterion';
 import QuestionResultCard from '../components/QuestionResultCard';
 import { calculateNPS } from '../../utils/npsCalculations';

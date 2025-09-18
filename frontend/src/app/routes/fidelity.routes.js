@@ -207,16 +207,7 @@ const fidelityRoutes = [
       </ProtectedRoute>
     ),
   },
-  {
-    path: 'fidelity/coupons/list',
-    element: (
-      <ProtectedRoute featureKey="fidelity:coupons:list" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <CouponListPage />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
+
   {
     path: 'fidelity/coupons/management',
     element: (
@@ -285,16 +276,7 @@ const fidelityRoutes = [
       </ProtectedRoute>
     ),
   },
-  {
-    path: 'fidelity/responses/dashboard',
-    element: (
-      <ProtectedRoute featureKey="fidelity:responses:dashboard" actionKey="read">
-        <Suspense fallback={<div className="loading-spinner"></div>}>
-          <FeedbackList />
-        </Suspense>
-      </ProtectedRoute>
-    ),
-  },
+
   {
     path: 'fidelity/responses/replicas',
     element: (

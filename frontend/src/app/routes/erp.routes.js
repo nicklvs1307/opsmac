@@ -69,57 +69,71 @@ const erpRoutes = [
   {
     path: 'erp/menu',
     element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <Menu />
-      </Suspense>
+      <ProtectedRoute featureKey="erp_module" actionKey="access">
+        <Suspense fallback={<div className="loading-spinner"></div>}>
+          <Menu />
+        </Suspense>
+      </ProtectedRoute>
     ),
   },
   {
     path: 'stock/dashboard',
     element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <StockDashboardPage />
-      </Suspense>
+      <ProtectedRoute featureKey="erp_module" actionKey="access">
+        <Suspense fallback={<div className="loading-spinner"></div>}>
+          <StockDashboardPage />
+        </Suspense>
+      </ProtectedRoute>
     ),
   },
   {
     path: 'stock/movements',
     element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <StockMovementsPage />
-      </Suspense>
+      <ProtectedRoute featureKey="erp_module" actionKey="access">
+        <Suspense fallback={<div className="loading-spinner"></div>}>
+          <StockMovementsPage />
+        </Suspense>
+      </ProtectedRoute>
     ),
   },
   {
     path: 'stock/suppliers',
     element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <SuppliersPage />
-      </Suspense>
+      <ProtectedRoute featureKey="erp_module" actionKey="access">
+        <Suspense fallback={<div className="loading-spinner"></div>}>
+          <SuppliersPage />
+        </Suspense>
+      </ProtectedRoute>
     ),
   },
   {
     path: 'stock/purchases',
     element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <PurchasesPage />
-      </Suspense>
+      <ProtectedRoute featureKey="erp_module" actionKey="access">
+        <Suspense fallback={<div className="loading-spinner"></div>}>
+          <PurchasesPage />
+        </Suspense>
+      </ProtectedRoute>
     ),
   },
   {
     path: 'stock/products',
     element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <StockProductsPage />
-      </Suspense>
+      <ProtectedRoute featureKey="erp_module" actionKey="access">
+        <Suspense fallback={<div className="loading-spinner"></div>}>
+          <StockProductsPage />
+        </Suspense>
+      </ProtectedRoute>
     ),
   },
   {
     path: 'stock/technical-sheet/list',
     element: (
-      <Suspense fallback={<div className="loading-spinner"></div>}>
-        <TechnicalSpecificationManagement />
-      </Suspense>
+      <ProtectedRoute featureKey="erp_module" actionKey="access">
+        <Suspense fallback={<div className="loading-spinner"></div>}>
+          <TechnicalSpecificationManagement />
+        </Suspense>
+      </ProtectedRoute>
     ),
   },
   {

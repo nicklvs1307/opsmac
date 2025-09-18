@@ -183,14 +183,6 @@ const adminRoutes = [
       </ProtectedRoute>
     ),
   },
-  // {
-  //   path: 'admin/production',
-  //   element: (
-  //     <Suspense fallback={<div className="loading-spinner"></div>}>
-  //       <ProductionList />
-  //     </Suspense>
-  //   ),
-  // },
   {
     path: 'admin/suppliers',
     element: (

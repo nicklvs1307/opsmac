@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 
-const Login = lazy(() => import('@/features/Auth/pages/Login'));
+const LoginPage = lazy(() => import('@/features/Auth/pages/LoginPage'));
 const PublicFeedback = lazy(() => import('@/features/Public/pages/PublicFeedback'));
 const ThankYou = lazy(() => import('@/features/Public/pages/ThankYou'));
 const PublicSurveyForm = lazy(() => import('@/features/Public/pages/PublicSurveyForm'));
@@ -12,14 +12,14 @@ const PublicDeliveryMenu = lazy(() => import('@/features/Public/pages/PublicDeli
 const PublicDineInMenu = lazy(() => import('@/features/Public/pages/DineInMenu'));
 const CustomerRegistration = lazy(() => import('@/features/Public/pages/CustomerRegistration'));
 const UnauthorizedPage = lazy(() => import('@/features/Common/UnauthorizedPage'));
-const FeatureLockedPage = lazy(() => import('@/features/Common/FeatureLockedPage'));
+const FeatureLockedPage = lazy(() => import('@/features/Common/pages/FeatureLockedPage'));
 
 const publicRoutes = [
   {
     path: '/login',
     element: (
       <Suspense fallback={<div className="loading-spinner"></div>}>
-        <Login />
+        <LoginPage />
       </Suspense>
     ),
   },

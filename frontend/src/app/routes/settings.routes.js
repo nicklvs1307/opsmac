@@ -1,17 +1,17 @@
 import React, { Suspense, lazy } from 'react';
 import ProtectedRoute from '@/components/Auth/ProtectedRoute';
 
-const Settings = lazy(() => import('@/features/Settings/pages/Settings'));
-const ProfileSettingsPage = lazy(() => import('@/features/Settings/pages/ProfileSettingsPage'));
-const BusinessSettingsPage = lazy(() => import('@/features/Settings/pages/BusinessSettingsPage'));
-const NotificationsSettingsPage = lazy(
-  () => import('@/features/Settings/pages/NotificationsSettingsPage')
+const SettingsPage = lazy(() => import('@/features/Settings/pages/SettingsPage'));
+const ProfilePage = lazy(() => import('@/features/Settings/pages/ProfilePage'));
+const BusinessPage = lazy(() => import('@/features/Settings/pages/BusinessPage'));
+const NotificationsPage = lazy(
+  () => import('@/features/Settings/pages/NotificationsPage')
 );
-const SecuritySettingsPage = lazy(() => import('@/features/Settings/pages/SecuritySettingsPage'));
-const AppearanceSettingsPage = lazy(
-  () => import('@/features/Settings/pages/AppearanceSettingsPage')
+const SecurityPage = lazy(() => import('@/features/Settings/pages/SecurityPage'));
+const AppearancePage = lazy(
+  () => import('@/features/Settings/pages/AppearancePage')
 );
-const WhatsappSettingsPage = lazy(() => import('@/features/Settings/pages/WhatsappSettingsPage'));
+const WhatsappPage = lazy(() => import('@/features/Settings/pages/WhatsappPage'));
 
 const settingsRoutes = {
   path: 'settings',
@@ -24,14 +24,14 @@ const settingsRoutes = {
   children: [
     {
       index: true, // Default child route for /settings
-      element: <Settings />,
+      element: <SettingsPage />,
     },
     {
       path: 'profile',
       element: (
         <ProtectedRoute featureKey="user_profile" actionKey="update">
           <Suspense fallback={<div className="loading-spinner"></div>}>
-            <ProfileSettingsPage />
+            <ProfilePage />
           </Suspense>
         </ProtectedRoute>
       ),
@@ -41,7 +41,7 @@ const settingsRoutes = {
       element: (
         <ProtectedRoute featureKey="business_settings" actionKey="update">
           <Suspense fallback={<div className="loading-spinner"></div>}>
-            <BusinessSettingsPage />
+            <BusinessPage />
           </Suspense>
         </ProtectedRoute>
       ),
@@ -51,7 +51,7 @@ const settingsRoutes = {
       element: (
         <ProtectedRoute featureKey="notification_settings" actionKey="update">
           <Suspense fallback={<div className="loading-spinner"></div>}>
-            <NotificationsSettingsPage />
+            <NotificationsPage />
           </Suspense>
         </ProtectedRoute>
       ),
@@ -61,7 +61,7 @@ const settingsRoutes = {
       element: (
         <ProtectedRoute featureKey="security_settings" actionKey="update">
           <Suspense fallback={<div className="loading-spinner"></div>}>
-            <SecuritySettingsPage />
+            <SecurityPage />
           </Suspense>
         </ProtectedRoute>
       ),
@@ -71,7 +71,7 @@ const settingsRoutes = {
       element: (
         <ProtectedRoute featureKey="appearance_settings" actionKey="update">
           <Suspense fallback={<div className="loading-spinner"></div>}>
-            <AppearanceSettingsPage />
+            <AppearancePage />
           </Suspense>
         </ProtectedRoute>
       ),
@@ -81,7 +81,7 @@ const settingsRoutes = {
       element: (
         <ProtectedRoute featureKey="whatsapp_integration" actionKey="update">
           <Suspense fallback={<div className="loading-spinner"></div>}>
-            <WhatsappSettingsPage />
+            <WhatsappPage />
           </Suspense>
         </ProtectedRoute>
       ),

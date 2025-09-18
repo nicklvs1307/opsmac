@@ -11,6 +11,9 @@ import fidelityRoutes from '@/app/routes/fidelity.routes';
 import erpRoutes from '@/app/routes/erp.routes';
 import adminRoutes from '@/app/routes/admin.routes';
 import settingsRoutes from '@/app/routes/settings.routes';
+import customersRoutes from '@/app/routes/customers.routes';
+import satisfactionRoutes from '@/app/routes/satisfaction.routes';
+import rewardsRoutes from '@/app/routes/rewards.routes';
 
 const NotFound = () => {
   return (
@@ -42,6 +45,9 @@ export const router = createBrowserRouter([
         ),
       },
       ...fidelityRoutes,
+      ...customersRoutes,
+      ...satisfactionRoutes,
+      ...rewardsRoutes,
       ...erpRoutes,
       settingsRoutes, // settingsRoutes is an object, not an array
       ...adminRoutes,

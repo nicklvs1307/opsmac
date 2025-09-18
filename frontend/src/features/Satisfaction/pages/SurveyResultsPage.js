@@ -6,7 +6,7 @@ import { useAuth } from '@/app/providers/contexts/AuthContext'; // Importar useA
 import { useTranslation } from 'react-i18next'; // Importar useTranslation
 import { usePermissions } from '../../../hooks/usePermissions';
 import MetricCard from '@/shared/components/MetricCard';
-import NpsScoresByCriterion from '../components/NpsScoresByCriterion';
+// import NpsScoresByCriterion from '../components/NpsScoresByCriterion';
 import QuestionResultCard from '../components/QuestionResultCard';
 import { calculateNPS } from '../../utils/npsCalculations';
 
@@ -86,7 +86,7 @@ const SurveyResultsPage = () => {
         )}
       </Grid>
 
-      {Object.keys(npsCriteriaScores).length > 0 && (
+      {/* {Object.keys(npsCriteriaScores).length > 0 && (
         <Box sx={{ mt: 5 }}>
           <NpsScoresByCriterion
             npsMetricsPerCriterion={Object.values(npsCriteriaScores).map((scores, index) => ({
@@ -103,7 +103,7 @@ const SurveyResultsPage = () => {
             }))}
           />
         </Box>
-      )}
+      )} */}
 
       <Box sx={{ mt: 5 }}>
         <Typography variant="h5" gutterBottom>

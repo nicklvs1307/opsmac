@@ -21,7 +21,7 @@ import { useSatisfactionAnalytics } from '../api/satisfactionService';
 import { format, subMonths } from 'date-fns';
 import SatisfactionDateFilters from '../components/SatisfactionDateFilters';
 import SatisfactionMetricCards from '../components/SatisfactionMetricCards';
-import NpsScoresByCriterion from '../components/NpsScoresByCriterion';
+// import NpsScoresByCriterion from '../components/NpsScoresByCriterion';
 import FeedbackTable from '../components/FeedbackTable';
 
 // A simple card for displaying a metric
@@ -113,7 +113,7 @@ const AnalyticsPage = () => {
 
       <SatisfactionMetricCards data={data} />
 
-      <NpsScoresByCriterion npsMetricsPerCriterion={data?.npsMetricsPerCriterion} />
+      {/* <NpsScoresByCriterion npsMetricsPerCriterion={data?.npsMetricsPerCriterion} /> */}
 
       <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
         {t('satisfaction_analytics.feedbacks_title')}

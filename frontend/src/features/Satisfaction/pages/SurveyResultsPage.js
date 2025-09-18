@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'; // Importar useTranslation
 import { usePermissions } from '../../../hooks/usePermissions';
 import MetricCard from '@/shared/components/MetricCard';
 // import NpsScoresByCriterion from '../components/NpsScoresByCriterion';
-import QuestionResultCard from '../components/QuestionResultCard';
+// import QuestionResultCard from '../components/QuestionResultCard';
 import { calculateNPS } from '../../utils/npsCalculations';
 
 const SurveyResultsPage = () => {
@@ -109,10 +109,9 @@ const SurveyResultsPage = () => {
         <Typography variant="h5" gutterBottom>
           Detalhes das Perguntas
         </Typography>
-        {survey.questions.map((question) => (
+        {/* {survey.questions.map((question) => (
           <QuestionResultCard key={question.id} question={question} />
-        ))}
-      </Box>
+        ))} */}
     </Box>
   );
 };

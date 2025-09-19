@@ -37,8 +37,8 @@ import {
   useDeleteReward,
 } from '../api/rewardsService';
 
-import RewardFilters from '../components/RewardFilters';
-import RewardCard from '../components/RewardCard';
+// import RewardFilters from '../components/RewardFilters';
+// import RewardCard from '../components/RewardCard';
 
 import { usePermissions } from '../../../hooks/usePermissions';
 
@@ -223,22 +223,22 @@ const RewardsPage = () => {
 
   const renderRewardsTab = () => (
     <Box>
-      <RewardFilters filters={filters} onFilterChange={handleFilterChange} />
+      {/* <RewardFilters filters={filters} onFilterChange={handleFilterChange} /> */}
 
-      <Grid container spacing={3}>
+      {/* <Grid container spacing={3}>
         {rewards?.rewards?.map((reward) => (
           <Grid item xs={12} sm={6} md={4} key={reward.id}>
-            <RewardCard 
-              reward={reward} 
-              onClick={handleCardClick} 
-              getTypeLabel={getTypeLabel} 
-              getStatusLabel={getStatusLabel} 
-              getTypeColor={getTypeColor} 
-              getStatusColor={getStatusColor} 
+            <RewardCard
+              reward={reward}
+              onClick={handleCardClick}
+              getTypeLabel={getTypeLabel}
+              getStatusLabel={getStatusLabel}
+              getTypeColor={getTypeColor}
+              getStatusColor={getStatusColor}
             />
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
 
       {rewards?.rewards?.length === 0 && !isLoadingRewards && (
         <Box textAlign="center" py={4}>

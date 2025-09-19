@@ -29,21 +29,7 @@ export async function up(queryInterface, Sequelize) {
         updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       }, { transaction });
 
-      // Create goals table
-      await queryInterface.createTable('goals', {
-        id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.literal('gen_random_uuid()') },
-        restaurant_id: { type: Sequelize.UUID, allowNull: false, references: { model: 'restaurants', key: 'id' }, onDelete: 'CASCADE' },
-        name: { type: Sequelize.STRING, allowNull: false },
-        description: { type: Sequelize.TEXT },
-        target_value: { type: Sequelize.DECIMAL(10, 2), allowNull: false },
-        current_value: { type: Sequelize.DECIMAL(10, 2), defaultValue: 0 },
-        metric: { type: Sequelize.STRING, allowNull: false },
-        start_date: { type: Sequelize.DATEONLY, allowNull: false },
-        end_date: { type: Sequelize.DATEONLY, allowNull: false },
-        status: { type: Sequelize.STRING, defaultValue: 'active' },
-        created_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
-        updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
-      }, { transaction });
+
 
       // Create survey_reward_programs table
       await queryInterface.createTable('survey_reward_programs', {
@@ -59,7 +45,7 @@ export async function down(queryInterface, Sequelize) {
     await queryInterface.sequelize.transaction(async (transaction) => {
       await queryInterface.dropTable('campaigns', { transaction });
       await queryInterface.dropTable('customer_segments', { transaction });
-      await queryInterface.dropTable('goals', { transaction });
+
       await queryInterface.dropTable('survey_reward_programs', { transaction });
     });
   }

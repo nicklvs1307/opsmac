@@ -1,1 +1,0 @@
-// RestaurantSettings Validations

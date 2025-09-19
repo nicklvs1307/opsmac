@@ -9,7 +9,6 @@ import {
   ConnectWithoutContact as RelationshipIcon,
   CardGiftcard as CouponsIcon,
   Sync as AutomationIcon,
-  Settings as IntegrationsIcon,
   Assessment as ReportsIcon,
 } from '@mui/icons-material';
 
@@ -147,18 +146,6 @@ export const menuConfig = [
             featureKey: 'fidelity:responses:replicas',
             actionKey: 'read',
           },
-          {
-            title: 'Metas',
-            path: '/fidelity/responses/goals',
-            featureKey: 'fidelity:responses:goals',
-            actionKey: 'read',
-          },
-          {
-            title: 'Importar',
-            path: '/fidelity/responses/import',
-            featureKey: 'fidelity:responses:import',
-            actionKey: 'read',
-          },
         ],
       },
       {
@@ -289,13 +276,6 @@ export const menuConfig = [
             actionKey: 'read',
           },
         ],
-      },
-      {
-        title: 'Integrações',
-        icon: <IntegrationsIcon />,
-        path: '/fidelity/integrations',
-        featureKey: 'fidelity:integrations',
-        actionKey: 'read',
       },
       {
         title: 'Relatorios',

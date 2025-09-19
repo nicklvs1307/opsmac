@@ -14,10 +14,6 @@ export default (db) => {
     }
   };
 
-  const testEndpoint = async (req, res, next) => {
-    const result = publicService.testEndpoint();
-    res.json(result);
-  };
 
   const submitPublicFeedback = async (req, res, next) => {
     handleValidationErrors(req);
@@ -40,23 +36,6 @@ export default (db) => {
     res.status(201).json(newFeedback);
   };
 
-  const createPublicOrder = async (req, res, next) => {
-    handleValidationErrors(req);
-    const restaurant = req.restaurant;
-    const orderData = req.body;
-    const newOrder = await publicService.createPublicOrder(
-      restaurant,
-      orderData,
-    );
-    await auditService.log(
-      null,
-      restaurant.id,
-      "PUBLIC_ORDER_CREATED",
-      `Order:${newOrder.id}`,
-      { total: newOrder.total, items: newOrder.items.length },
-    );
-    res.status(201).json(newOrder);
-  };
 
   const getRestaurantInfoBySlug = async (req, res, next) => {
     const { restaurantSlug } = req.params;
@@ -72,9 +51,7 @@ export default (db) => {
   };
 
   return {
-    testEndpoint,
     submitPublicFeedback,
-    createPublicOrder,
     getRestaurantInfoBySlug,
     getPublicSurveyByIdentifier,
   };

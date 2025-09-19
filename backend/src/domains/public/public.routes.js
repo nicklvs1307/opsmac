@@ -15,11 +15,9 @@ export default (db) => {
   const router = express.Router();
 
   // Rotas Públicas
-  router.get("/test-endpoint", (req, res, next) =>
-    asyncHandler(publicController.testEndpoint)(req, res, next),
-  );
+
   router.post("/feedback", asyncHandler(publicController.submitPublicFeedback));
-  router.post("/orders", asyncHandler(publicController.createPublicOrder));
+
   router.post(
     "/checkin/:restaurantSlug",
     asyncHandler(publicController.registerPublicCheckin),

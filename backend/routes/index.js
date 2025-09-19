@@ -17,10 +17,6 @@ export default async (db) => {
     "auth",
     "public",
     "publicV2",
-    "publicDineInMenu",
-    "publicDineInOrders",
-    "publicOrders",
-    "publicProducts",
     "publicSurvey",
     "health",
   ];

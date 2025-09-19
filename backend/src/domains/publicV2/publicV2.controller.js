@@ -14,10 +14,6 @@ export default (db) => {
   };
 
   return {
-    testEndpoint: (req, res, next) => {
-      const result = publicV2Service.testEndpoint();
-      res.json(result);
-    },
 
     submitFeedback: async (req, res, next) => {
       handleValidationErrors(req);

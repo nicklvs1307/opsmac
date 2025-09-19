@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Tabs, Tab, Paper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import CategoriesTab from '@/features/ERP/Menu/components/CategoriesTab';
-import ProductsTab from '@/features/ERP/Menu/components/ProductsTab';
-import AddonsTab from '@/features/ERP/Menu/components/AddonsTab';
-import VariationsTab from '@/features/ERP/Menu/components/VariationsTab';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,24 +37,10 @@ const ProductMenuManagementPage = () => {
       </Typography>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="menu management tabs">
-          <Tab label={t('menu_management.tabs.categories')} />
-          <Tab label={t('menu_management.tabs.products')} />
-          <Tab label={t('menu_management.tabs.addons')} />
-          <Tab label={t('menu_management.tabs.variations')} />
+
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        <CategoriesTab />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ProductsTab />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <AddonsTab />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <VariationsTab />
-      </TabPanel>
+
     </Paper>
   );
 };

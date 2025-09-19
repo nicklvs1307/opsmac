@@ -1,2 +1,0 @@
-// PublicDineInMenu Validations (empty)
-export {};

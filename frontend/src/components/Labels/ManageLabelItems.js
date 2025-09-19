@@ -13,7 +13,6 @@ import {
   Typography,
 } from '@mui/material';
 import EditLabelItemModal from '@/components/Labels/EditLabelItemModal';
-import { useLabelItems, useUpdateLabelItem } from '@/features/ValidityControl/api/labelQueries';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 

@@ -12,7 +12,7 @@ export default (db) => {
   const publicV2Controller = publicV2ControllerFactory(db);
   const router = express.Router();
 
-  router.get("/test-endpoint", asyncHandler(publicV2Controller.testEndpoint));
+
   router.post(
     "/feedback",
     feedbackValidation,

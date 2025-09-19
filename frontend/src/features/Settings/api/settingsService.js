@@ -274,7 +274,8 @@ export const useUpdateGeneralSetting = (options) => {
 };
 
 export const useTestWhatsappMessage = () => {
-  const restaurantId = getRestaurantIdFromAuth();
+  const { user } = useAuth();
+  const restaurantId = user?.restaurants?.[0]?.id;
   return useMutation(sendTestWhatsappMessage, {
     onSuccess: () => {
       toast.success('Mensagem de teste enviada com sucesso!');

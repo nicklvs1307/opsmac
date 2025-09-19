@@ -203,7 +203,7 @@ const SecurityPage = () => {
               <Button
                 variant="outlined"
                 color="error"
-                startIcon={<DeleteIcon />})
+                startIcon={<DeleteIcon />}
                 onClick={handleRevokeApiToken}
                 disabled={revokeApiTokenMutation.isLoading}
               >

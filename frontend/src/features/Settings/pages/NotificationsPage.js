@@ -12,7 +12,7 @@ import {
   ListItemSecondaryAction,
 } from '@mui/material';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
-import { useTranslation } 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
 import {

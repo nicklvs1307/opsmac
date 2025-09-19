@@ -1,17 +1,127 @@
- => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build           14.7s
+ => ERROR [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build       184.8s
 ------
  > [builder 10/10] RUN set -x && npm run build && ls -la /app/frontend/build:
-0.292 + npm run build
-0.669
-0.669 > feedeliza-plus@1.0.0 build
-0.669 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
-0.669
-3.903 Creating an optimized production build...
-14.53 Failed to compile.
-14.53
-14.53 Module not found: Error: Can't resolve '@/features/Feedback/pages/FeedbackDetailPage' in '/app/frontend/src/app/routes'
-14.53
-14.53
+0.327 + npm run build
+0.619
+0.619 > feedeliza-plus@1.0.0 build
+0.619 > set REACT_APP_API_URL=https://feedelizaapi.towersfy.com && react-app-rewired build
+0.619
+2.822 Creating an optimized production build...
+184.4 Failed to compile.
+184.4
+184.4 [eslint]
+184.4 src/app/routes/erp.orders.routes.js
+184.4   Line 70:14:  'DeliveryMenuPage' is not defined  react/jsx-no-undef
+184.4
+184.4 src/features/ERP/Pdv/pages/PdvManagementPage.js
+184.4   Line 260:7:   'resetOrderForm' is not defined  no-undef
+184.4   Line 273:7:   'resetOrderForm' is not defined  no-undef
+184.4   Line 313:37:  'PDV_QUERY_KEYS' is not defined  no-undef
+184.4   Line 314:37:  'PDV_QUERY_KEYS' is not defined  no-undef
+184.4   Line 316:7:   'options' is not defined         no-undef
+184.4   Line 320:7:   'options' is not defined         no-undef
+184.4   Line 322:8:   'options' is not defined         no-undef
+184.4
+184.4 src/features/Rewards/pages/RewardsPage.js
+184.4   Line 6:20:    'useAuth' is not defined                     no-undef
+184.4   Line 8:35:    'useState' is not defined                    no-undef
+184.4   Line 10:43:   'useState' is not defined                    no-undef
+184.4   Line 11:33:   'useState' is not defined                    no-undef
+184.4   Line 17:43:   'useState' is not defined                    no-undef
+184.4   Line 18:43:   'useState' is not defined                    no-undef
+184.4   Line 20:51:   'useState' is not defined                    no-undef
+184.4   Line 21:49:   'useState' is not defined                    no-undef
+184.4   Line 23:19:   'useForm' is not defined                     no-undef
+184.4   Line 40:27:   'useState' is not defined                    no-undef
+184.4   Line 42:104:  'useRewards' is not defined                  no-undef
+184.4   Line 44:7:    'toast' is not defined                       no-undef
+184.4   Line 48:112:  'useRewardsAnalytics' is not defined         no-undef
+184.4   Line 51:7:    'toast' is not defined                       no-undef
+184.4   Line 55:168:  'useSelectedRewardAnalytics' is not defined  no-undef
+184.4   Line 58:7:    'toast' is not defined                       no-undef
+184.4   Line 62:26:   'useCreateReward' is not defined             no-undef
+184.4   Line 69:26:   'useUpdateReward' is not defined             no-undef
+184.4   Line 76:26:   'useDeleteReward' is not defined             no-undef
+184.4   Line 82:3:    'useEffect' is not defined                   no-undef
+184.4   Line 85:3:    'useEffect' is not defined                   no-undef
+184.4   Line 184:6:   'Box' is not defined                         react/jsx-no-undef
+184.4   Line 185:8:   'RewardFilters' is not defined               react/jsx-no-undef
+184.4   Line 187:8:   'Grid' is not defined                        react/jsx-no-undef
+184.4   Line 189:12:  'Grid' is not defined                        react/jsx-no-undef
+184.4   Line 190:14:  'RewardCard' is not defined                  react/jsx-no-undef
+184.4   Line 203:10:  'Box' is not defined                         react/jsx-no-undef
+184.4   Line 204:12:  'EmojiEventsIcon' is not defined             react/jsx-no-undef
+184.4   Line 205:12:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 208:12:  'Button' is not defined                      react/jsx-no-undef
+184.4   Line 208:51:  'AddIcon' is not defined                     react/jsx-no-undef
+184.4   Line 217:6:   'Grid' is not defined                        react/jsx-no-undef
+184.4   Line 220:12:  'Grid' is not defined                        react/jsx-no-undef
+184.4   Line 221:14:  'Paper' is not defined                       react/jsx-no-undef
+184.4   Line 222:16:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 223:16:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 226:12:  'Grid' is not defined                        react/jsx-no-undef
+184.4   Line 227:14:  'Paper' is not defined                       react/jsx-no-undef
+184.4   Line 228:16:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 229:16:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 232:12:  'Grid' is not defined                        react/jsx-no-undef
+184.4   Line 233:14:  'Paper' is not defined                       react/jsx-no-undef
+184.4   Line 234:16:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 235:16:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 238:12:  'Grid' is not defined                        react/jsx-no-undef
+184.4   Line 239:14:  'Paper' is not defined                       react/jsx-no-undef
+184.4   Line 240:16:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 241:16:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 251:8:   'Box' is not defined                         react/jsx-no-undef
+184.4   Line 252:10:  'Alert' is not defined                       react/jsx-no-undef
+184.4   Line 253:12:  't' is not defined                           no-undef
+184.4   Line 253:57:  't' is not defined                           no-undef
+184.4   Line 261:8:   'Box' is not defined                         react/jsx-no-undef
+184.4   Line 262:10:  'CircularProgress' is not defined            react/jsx-no-undef
+184.4   Line 269:8:   'Box' is not defined                         react/jsx-no-undef
+184.4   Line 270:10:  'Alert' is not defined                       react/jsx-no-undef
+184.4   Line 276:6:   'Box' is not defined                         react/jsx-no-undef
+184.4   Line 277:8:   'Box' is not defined                         react/jsx-no-undef
+184.4   Line 278:10:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 281:14:  'Button' is not defined                      react/jsx-no-undef
+184.4   Line 281:53:  'AddIcon' is not defined                     react/jsx-no-undef
+184.4   Line 288:8:   'Paper' is not defined                       react/jsx-no-undef
+184.4   Line 289:10:  'Tabs' is not defined                        react/jsx-no-undef
+184.4   Line 290:12:  'Tab' is not defined                         react/jsx-no-undef
+184.4   Line 290:43:  'StarIcon' is not defined                    react/jsx-no-undef
+184.4   Line 291:12:  'Tab' is not defined                         react/jsx-no-undef
+184.4   Line 291:41:  'AnalyticsIcon' is not defined               react/jsx-no-undef
+184.4   Line 296:10:  'Alert' is not defined                       react/jsx-no-undef
+184.4   Line 305:10:  'Box' is not defined                         react/jsx-no-undef
+184.4   Line 306:12:  'Pagination' is not defined                  react/jsx-no-undef
+184.4   Line 325:8:   'Dialog' is not defined                      react/jsx-no-undef
+184.4   Line 326:10:  'DialogTitle' is not defined                 react/jsx-no-undef
+184.4   Line 327:10:  'DialogContent' is not defined               react/jsx-no-undef
+184.4   Line 328:12:  'Typography' is not defined                  react/jsx-no-undef
+184.4   Line 330:10:  'DialogActions' is not defined               react/jsx-no-undef
+184.4   Line 331:12:  'Button' is not defined                      react/jsx-no-undef
+184.4   Line 333:14:  'Button' is not defined                      react/jsx-no-undef
+184.4
+184.4 src/features/Satisfaction/api/satisfactionService.js
+184.4 Syntax error: Identifier 'restaurantId' has already been declared. (5:42) (5:42)
+184.4
+184.4 src/features/Satisfaction/api/satisfactionSettingsService.js
+184.4 Syntax error: Unexpected keyword 'const'. (7:2) (7:2)
+184.4
+184.4 src/features/Satisfaction/api/surveyService.js
+184.4 Syntax error: Unexpected keyword 'const'. (7:2) (7:2)
+184.4
+184.4 src/features/Settings/api/settingsService.js
+184.4   Line 277:24:  'getRestaurantIdFromAuth' is not defined  no-undef
+184.4
+184.4 src/features/Settings/pages/NotificationsPage.js
+184.4 Syntax error: Unexpected token, expected "from" (15:26) (15:26)
+184.4
+184.4 src/features/Settings/pages/SecurityPage.js
+184.4 Syntax error: Unexpected token (206:42) (206:42)
+184.4
+184.4 Search for the keywords to learn more about each error.
+184.4
+184.4
 ------
 Dockerfile.frontend:27
 --------------------

@@ -1,4 +1,45 @@
-// import RewardFormDialog from '../components/RewardFormDialog';
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useAuth } from '@/app/providers/contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
+
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Button,
+  Paper,
+  Tabs,
+  Tab,
+  Pagination,
+  Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from '@mui/material';
+
+import {
+  EmojiEvents as EmojiEventsIcon,
+  Add as AddIcon,
+  Star as StarIcon,
+  Analytics as AnalyticsIcon,
+} from '@mui/icons-material';
+
+import {
+  useRewards,
+  useRewardsAnalytics,
+  useSelectedRewardAnalytics,
+  useCreateReward,
+  useUpdateReward,
+  useDeleteReward,
+} from '../api/rewardsService';
+
+import RewardFilters from '../components/RewardFilters';
+import RewardCard from '../components/RewardCard';
+
 import { usePermissions } from '../../../hooks/usePermissions';
 
 const RewardsPage = () => {

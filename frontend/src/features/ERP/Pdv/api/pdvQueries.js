@@ -3,7 +3,7 @@ import axiosInstance from '@/services/axiosInstance';
 import toast from 'react-hot-toast';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 
-const PDV_QUERY_KEYS = {
+export const PDV_QUERY_KEYS = {
   orders: 'pdvOrders',
   restaurantStatus: 'pdvRestaurantStatus',
   products: 'pdvProducts',

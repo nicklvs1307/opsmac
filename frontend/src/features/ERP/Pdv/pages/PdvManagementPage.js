@@ -72,6 +72,7 @@ import {
   useCreatePdvWithdrawal,
   useCreatePdvReinforcement,
 } from '../api/pdvQueries';
+import { PDV_QUERY_KEYS } from '../api/pdvQueries';
 
 const Pdv = () => {
   const { t } = useTranslation();
@@ -108,6 +109,16 @@ const Pdv = () => {
   const [, setCloseCashRegisterModalOpen] = useState(false);
   const [showTableOptionsModal, setShowTableOptionsModal] = useState(false); // New state for table options modal
   const [tableToActOn, setTableToActOn] = useState(null); // New state to store table for actions
+
+  const resetOrderForm = () => {
+    setCartItems([]);
+    setSelectedTable(null);
+    setCustomerName('');
+    setCustomerPhone('');
+    setPaymentMethod('');
+    setNotes('');
+    setSelectedCustomer(null);
+  };
 
   // Fetch Data using react-query hooks
   const {
@@ -309,16 +320,13 @@ const Pdv = () => {
   });
 
   const createReinforcementMutation = useCreatePdvReinforcement({
-    onSuccess: (data, variables, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(PDV_QUERY_KEYS.cashRegisterSession);
       queryClient.invalidateQueries(PDV_QUERY_KEYS.cashOrders); // Invalidate cash orders to update balance
       toast.success('Reforço registrado com sucesso!');
-      options?.onSuccess?.(data, variables, context);
     },
-    onError: (error, variables, context) => {
+    onError: (error) => {
       toast.error(error.response?.data?.message || 'Erro ao registrar reforço.');
-      options?.onError?.(error, variables, context);
     },
-    ...options,
   });
 };

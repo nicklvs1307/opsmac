@@ -4,8 +4,19 @@ import toast from 'react-hot-toast';
 import { useAuth } from '@/app/providers/contexts/AuthContext';
 
 const SURVEY_QUERY_KEYS = {
+  surveys: 'surveys',
+  surveyDetails: 'surveyDetails',
+};
+
+const fetchSurveys = async (restaurantId, filters) => {
+  console.log('Placeholder for fetchSurveys', restaurantId, filters);
+  return Promise.resolve([]);
+};
+
+const useSurveys = (filters, options) => {
   const { user } = useAuth();
   const restaurantId = user?.restaurants?.[0]?.id;
+
   return useQuery(
     [SURVEY_QUERY_KEYS.surveys, restaurantId, filters],
     () => fetchSurveys(restaurantId, filters),

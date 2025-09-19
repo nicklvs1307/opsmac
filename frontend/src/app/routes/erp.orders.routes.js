@@ -63,6 +63,7 @@ const erpOrdersRoutes = [
           </Suspense>
         ),
       },
+      /*
       {
         path: 'digital-menus/delivery',
         element: (
@@ -71,6 +72,6 @@ const erpOrdersRoutes = [
           </Suspense>
         ),
       },
-];
+      */];
 
 export default erpOrdersRoutes;
